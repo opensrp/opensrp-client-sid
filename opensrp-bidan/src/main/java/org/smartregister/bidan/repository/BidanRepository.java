@@ -14,6 +14,7 @@ import org.smartregister.repository.Repository;
  */
 
 public class BidanRepository extends Repository {
+
     public BidanRepository(Context context, org.smartregister.Context opensrpContext) {
         super(context, BidanConstants.DATABASE_NAME, BidanConstants.DATABASE_VERSION, opensrpContext.session(), BidanApplication.createCommonFtsObject(), opensrpContext.sharedRepositoriesArray());
     }
@@ -31,5 +32,7 @@ public class BidanRepository extends Repository {
         onUpgrade(database, 1, BidanConstants.DATABASE_VERSION);
 
     }
+
+
 
 }

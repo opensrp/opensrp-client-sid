@@ -22,9 +22,14 @@ public class BidanApplication extends DrishtiApplication {
     private static final String TAG = BidanApplication.class.getSimpleName();
     private static CommonFtsObject commonFtsObject;
     private static Map<String, Pair<String, Boolean>> alertScheduleMap;
+    private static Context crashlyticsUser;
 
     public static Map<String,Pair<String,Boolean>> getAlertScheduleMap() {
         return alertScheduleMap;
+    }
+
+    public static void setCrashlyticsUser(Context crashlyticsUser) {
+        BidanApplication.crashlyticsUser = crashlyticsUser;
     }
 
     @Override

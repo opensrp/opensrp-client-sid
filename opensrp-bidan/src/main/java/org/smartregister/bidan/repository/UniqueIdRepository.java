@@ -34,8 +34,8 @@ public class UniqueIdRepository extends BaseRepository {
     private final SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 
 
-    public UniqueIdRepository(BidanRepository pathRepository) {
-        super(pathRepository);
+    public UniqueIdRepository(BidanRepository bidanRepository) {
+        super(bidanRepository);
     }
 
     protected static void createTable(SQLiteDatabase database) {
@@ -189,6 +189,45 @@ public class UniqueIdRepository extends BaseRepository {
         }
         return UniqueIds;
     }
+
+    // TODO: By Marwan
+    public List<Long> getAllUniqueId() {
+//        android.database.sqlite.SQLiteDatabase database = this.getReadableDatabase();
+//        Cursor cursor = database.rawQuery("SELECT id, " + ID_COLUMN +
+//                " FROM " + UniqueIds_TABLE_NAME, new String[]{});
+//        cursor.moveToFirst();
+        List<Long> uids = new ArrayList<>();
+//        while(!cursor.isAfterLast()) {
+//            uids.add(cursor.getLong(1));
+//            cursor.moveToNext();
+//        }
+//        cursor.close();
+        return uids;
+    }
+
+    public List<String> getAllUniqueIdString() {
+//        Cursor cursor = database.rawQuery("SELECT id, " + ID_COLUMN +
+//                " FROM " + UniqueIds_TABLE_NAME, new String[]{});
+//        cursor.moveToFirst();
+        List<String> uids = new ArrayList<>();
+//        while(!cursor.isAfterLast()) {
+//            uids.add(cursor.getString(1));
+//            cursor.moveToNext();
+//        }
+//        cursor.close();
+        return uids;
+    }
+
+    public void saveUniqueId(String uniqueId) {
+//        System.out.println("uniqueId on saveUniqueId method = "+uniqueId);
+//        if(Long.parseLong(uniqueId.substring(0,8))>Long.parseLong("20000000"))
+//            uniqueId = "10000000";
+//        android.database.sqlite.SQLiteDatabase database = this.getWritableDatabase();
+//        ContentValues values = new ContentValues();
+//        values.put(ID_COLUMN, uniqueId);
+//        database.insert(UniqueIds_TABLE_NAME, null, values);
+    }
+
 
 
 }

@@ -1,4 +1,4 @@
-package org.smartregister.bidan;
+package org.smartregister.bidan.activity;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -10,6 +10,8 @@ import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
+
+import org.smartregister.bidan.R;
 
 
 /**
@@ -25,11 +27,11 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(org.smartregister.facialrecognition.sample.R.layout.activity_main);
-        Toolbar toolbar = (Toolbar) findViewById(org.smartregister.facialrecognition.sample.R.id.toolbar);
+        setContentView(R.layout.activity_main);
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        FloatingActionButton fab = (FloatingActionButton) findViewById(org.smartregister.facialrecognition.sample.R.id.fab);
+        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -38,7 +40,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        FloatingActionButton fab_camera = (FloatingActionButton) findViewById(org.smartregister.facialrecognition.sample.R.id.fab_cam);
+        FloatingActionButton fab_camera = (FloatingActionButton) findViewById(R.id.fab_cam);
 
         fab_camera.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -68,7 +70,7 @@ public class MainActivity extends AppCompatActivity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(org.smartregister.facialrecognition.sample.R.menu.menu_main, menu);
+        getMenuInflater().inflate(R.menu.menu_main, menu);
         return true;
     }
 
@@ -80,7 +82,7 @@ public class MainActivity extends AppCompatActivity {
         int id = item.getItemId();
 
         //noinspection SimplifiableIfStatement
-        if (id == org.smartregister.facialrecognition.sample.R.id.action_settings) {
+        if (id == R.id.action_settings) {
             return true;
         }
 
