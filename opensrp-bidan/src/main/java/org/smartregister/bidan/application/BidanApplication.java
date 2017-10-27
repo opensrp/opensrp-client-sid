@@ -13,19 +13,13 @@ import org.smartregister.view.activity.DrishtiApplication;
 
 import java.util.Map;
 
+import static org.smartregister.util.Log.logError;
+
 /**
  * Created by wildan on 10/2/17.
  */
 
 public class BidanApplication extends DrishtiApplication {
-
-    private static final String TAG = BidanApplication.class.getSimpleName();
-    private static CommonFtsObject commonFtsObject;
-    private static Map<String, Pair<String, Boolean>> alertScheduleMap;
-
-    public static Map<String,Pair<String,Boolean>> getAlertScheduleMap() {
-        return alertScheduleMap;
-    }
 
     @Override
     public void onCreate() {
@@ -36,9 +30,25 @@ public class BidanApplication extends DrishtiApplication {
 
         context.updateApplicationContext(getApplicationContext());
 
-        // Init Module
+        //Initialize Modules
         CoreLibrary.init(context);
+    }
 
+    public static synchronized BidanApplication getInstance() {
+        return (BidanApplication) mInstance;
+    }
+
+    @Override
+    public Repository getRepository() {
+        try {
+            if (repository == null) {
+                repository = new BidanRepository(getInstance().getApplicationContext(), context);
+            }
+        } catch (UnsatisfiedLinkError e) {
+            logError("Error on getRepository: " + e);
+
+        }
+        return repository;
     }
 
     @Override
@@ -46,46 +56,7 @@ public class BidanApplication extends DrishtiApplication {
 
     }
 
-    public static synchronized BidanApplication getInstance(){
-        return (BidanApplication) mInstance;
-    }
-
-    @Override
-    public Repository getRepository() {
-        try {
-            if (repository == null)
-                repository = new BidanRepository(getInstance().getApplicationContext(), context);
-        } catch (UnsatisfiedLinkError e){
-            Log.e(TAG, "Error on getRepository: "+ e.getMessage() );
-        }
-        return repository;
-    }
-
-    private static String[] getFtsTables() {
-        return new String[]{BidanConstants.CHILD_TABLE_NAME, BidanConstants.MOTHER_TABLE_NAME};
-    }
-
-    public static CommonFtsObject createCommonFtsObject() {
-        if (commonFtsObject == null) {
-            commonFtsObject = new CommonFtsObject(getFtsTables());
-            for (String ftsTable : commonFtsObject.getTables()) {
-                commonFtsObject.updateSearchFields(ftsTable, getFtsSearchFields(ftsTable));
-                commonFtsObject.updateSortFields(ftsTable, getFtsSortFields(ftsTable));
-            }
-        }
-        commonFtsObject.updateAlertScheduleMap(getAlertScheduleMap());
-        return commonFtsObject;
-    }
-
-    private static String[] getFtsSortFields(String ftsTable) {
-        return new String[0];
-    }
-
-    private static String[] getFtsSearchFields(String ftsTable) {
-        return new String[0];
-    }
-
-    public Context context() {
+    public Context getContext(){
         return context;
     }
 }

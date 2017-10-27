@@ -48,12 +48,12 @@ public class UniqueIdRepository extends BaseRepository {
         //database.close();
     }
 
-    /**
+   /* *//**
      * inserts ids in bulk to the db in a transaction since normally, each time db.insert() is used, SQLite creates a transaction (and resulting journal file in the filesystem), which slows things down.
      *
-     * @param ids
-     */
-    public void bulkInserOpenmrsIds(List<String> ids) {
+    // * @param ids
+     *//*
+   */ /*public void bulkInserOpenmrsIds(List<String> ids) {
         SQLiteDatabase database = getWritableDatabase();
 
         try {
@@ -75,7 +75,7 @@ public class UniqueIdRepository extends BaseRepository {
             database.endTransaction();
         }
     }
-
+*/
     public Long countUnUsedIds() {
         long count = 0;
         Cursor cursor = null;
@@ -123,7 +123,7 @@ public class UniqueIdRepository extends BaseRepository {
      *
      * @param openmrsId
      */
-    public void close(String openmrsId) {
+    /*public void close(String openmrsId) {
         try {
             String id;
             String userName = BidanApplication.getInstance().context().allSharedPreferences().fetchRegisteredANM();
@@ -140,7 +140,7 @@ public class UniqueIdRepository extends BaseRepository {
             Log.e(TAG, e.getMessage(), e);
         }
     }
-
+*/
     /**
      * mark and openmrsid as NOT used
      *

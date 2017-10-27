@@ -18,18 +18,14 @@ import android.view.MenuItem;
 
 public class MainActivity extends AppCompatActivity {
 
-    private static final String TAG = MainActivity.class.getSimpleName();
-    private static final String DIALOG_TAG = "DIALOG_TAG_BLA";
-    Long latestId;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(org.smartregister.facialrecognition.sample.R.layout.activity_main);
-        Toolbar toolbar = (Toolbar) findViewById(org.smartregister.facialrecognition.sample.R.id.toolbar);
+        setContentView(R.layout.activity_main);
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        FloatingActionButton fab = (FloatingActionButton) findViewById(org.smartregister.facialrecognition.sample.R.id.fab);
+        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -37,38 +33,12 @@ public class MainActivity extends AppCompatActivity {
                         .setAction("Action", null).show();
             }
         });
-
-        FloatingActionButton fab_camera = (FloatingActionButton) findViewById(org.smartregister.facialrecognition.sample.R.id.fab_cam);
-
-        fab_camera.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                // Use SNAPDRAGON SDK
-//                SampleUtil.showCameraDialog(MainActivity.this, view, DIALOG_TAG);
-
-            }
-        });
     }
-
-    @Override
-    protected void onResume() {
-        super.onResume();
-    }
-
-    View.OnClickListener onclicklistener = new View.OnClickListener() {
-
-        @Override
-        public void onClick(View v) {
-//                SampleUtil.showEditWeightDialog(MainActivity.this, finalI, DIALOG_TAG);
-            // Use SNAPDRAGON SDK
-        }
-    };
-
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(org.smartregister.facialrecognition.sample.R.menu.menu_main, menu);
+        getMenuInflater().inflate(R.menu.menu_main, menu);
         return true;
     }
 
@@ -80,26 +50,11 @@ public class MainActivity extends AppCompatActivity {
         int id = item.getItemId();
 
         //noinspection SimplifiableIfStatement
-        if (id == org.smartregister.facialrecognition.sample.R.id.action_settings) {
+        if (id == R.id.action_settings) {
             return true;
         }
 
         return super.onOptionsItemSelected(item);
     }
-
-
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-        if (requestCode==0 && resultCode== Activity.RESULT_OK){
-
-        }
-    }
-
-
-
-    @Override
-    public boolean onSearchRequested() {
-        return super.onSearchRequested();
-    }
 }
+
