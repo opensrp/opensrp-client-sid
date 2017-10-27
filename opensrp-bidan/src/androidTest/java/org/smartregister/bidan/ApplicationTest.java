@@ -1,4 +1,4 @@
-package org.smartregister.facialrecognition.sample;
+package org.smartregister.bidan;
 
 import android.app.Application;
 import android.test.ApplicationTestCase;
