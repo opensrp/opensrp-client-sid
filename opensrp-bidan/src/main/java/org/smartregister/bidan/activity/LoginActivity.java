@@ -24,11 +24,10 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.flurry.android.FlurryAgent;
-
 import org.smartregister.Context;
 import org.smartregister.bidan.R;
 import org.smartregister.bidan.application.BidanApplication;
+import org.smartregister.bidan.util.Config;
 import org.smartregister.domain.LoginResponse;
 import org.smartregister.domain.Response;
 import org.smartregister.domain.ResponseStatus;
@@ -48,6 +47,7 @@ import java.util.Locale;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipFile;
 
+import io.fabric.sdk.android.Fabric;
 import util.uniqueIdGenerator.Generator;
 
 import static android.preference.PreferenceManager.getDefaultSharedPreferences;
@@ -60,6 +60,7 @@ import static org.smartregister.util.Log.logError;
 import static org.smartregister.util.Log.logVerbose;
 
 public class LoginActivity extends AppCompatActivity {
+    private static final String TAG = LoginActivity.class.getSimpleName();
     private Context context;
     private EditText userNameEditText;
     private EditText passwordEditText;
@@ -79,6 +80,7 @@ public class LoginActivity extends AppCompatActivity {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         logVerbose("Initializing ...");
+
         try{
             AllSharedPreferences allSharedPreferences = new AllSharedPreferences(getDefaultSharedPreferences(this));
             String preferredLocale = allSharedPreferences.fetchLanguagePreference();
@@ -101,8 +103,27 @@ public class LoginActivity extends AppCompatActivity {
         initializeProgressDialog();
         setLanguage();
 
-//        debugApp();
+        debugApp();
 
+    }
+
+    private void debugApp() {
+        Config config = new Config();
+        String uname = null, pwd = null;
+        try {
+            uname =  config.getCredential("uname", getApplicationContext());
+            pwd =  config.getCredential("pwd", getApplicationContext());
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        LayoutInflater layoutInflater = getLayoutInflater();
+        View view = layoutInflater.inflate(R.layout.login, null);
+        if (context.userService().hasARegisteredUser()){
+            localLogin(view, uname, pwd);
+        } else {
+            remoteLogin(view, uname, pwd);
+        }
     }
 
     private void positionViews() {
@@ -198,9 +219,10 @@ public class LoginActivity extends AppCompatActivity {
     private void localLogin(View view, String userName, String password) {
         if (context.userService().isValidLocalLogin(userName, password)) {
             localLoginWith(userName, password);
+
             // Tracking Error
-            ErrorReportingFacade.setUsername("", userName);
-            FlurryAgent.setUserId(userName);
+//            ErrorReportingFacade.setUsername("", userName);
+//            FlurryAgent.setUserId(userName);
         } else {
             showErrorDialog(getString(org.smartregister.R.string.login_failed_dialog_message));
             view.setClickable(true);
@@ -210,8 +232,8 @@ public class LoginActivity extends AppCompatActivity {
     private void remoteLogin(final View view, final String userName, final String password) {
         tryRemoteLogin(userName, password, new Listener<LoginResponse>() {
             public void onEvent(LoginResponse loginResponse) {
-                ErrorReportingFacade.setUsername("", userName);
-                FlurryAgent.setUserId(userName);
+//                ErrorReportingFacade.setUsername("", userName);
+//                FlurryAgent.setUserId(userName);
                 if (loginResponse == SUCCESS) {
                     remoteLoginWith(userName, password, loginResponse.payload());
                 } else {

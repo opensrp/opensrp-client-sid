@@ -21,19 +21,21 @@
             </intent-filter>
         </activity>
         <activity
+            android:name=".activity.BidanHomeActivity"
+            android:screenOrientation="landscape" />
+        <activity
             android:name=".activity.SettingsActivity"
-            android:screenOrientation="portrait" />
+            android:screenOrientation="landscape" />
         <!-- local key -->
-        <!--
-            <meta-data
-            android:name="io.fabric.ApiKey"
-            android:value="" />
-        -->
+            <!--<meta-data-->
+            <!--android:name="io.fabric.ApiKey"-->
+            <!--android:value="b74c58c94d8965151212e8ecf1f4fdfbf5b7f4e4" />-->
         <!-- sid key -->
-        <meta-data
-            android:name="io.fabric.ApiKey"
-            android:value="" />
+        <!--<meta-data-->
+            <!--android:name="io.fabric.ApiKey"-->
+            <!--android:value="b74c58c94d8965151212e8ecf1f4fdfbf5b7f4e4" />-->
 
     </application>
 
+    <uses-permission android:name="android.permission.INTERNET" />
 </manifest>

@@ -3,8 +3,12 @@ package org.smartregister.bidan.application;
 import android.util.Log;
 import android.util.Pair;
 
+import com.crashlytics.android.Crashlytics;
+import io.fabric.sdk.android.Fabric;
 import org.smartregister.Context;
 import org.smartregister.CoreLibrary;
+import org.smartregister.bidan.lib.ErrorReportingFacade;
+import org.smartregister.bidan.lib.FlurryFacade;
 import org.smartregister.bidan.repository.BidanRepository;
 import org.smartregister.bidan.util.BidanConstants;
 import org.smartregister.commonregistry.CommonFtsObject;
@@ -35,6 +39,11 @@ public class BidanApplication extends DrishtiApplication {
     @Override
     public void onCreate() {
         super.onCreate();
+        Fabric.with(this, new Crashlytics());
+
+        //Init Tracker
+//        ErrorReportingFacade.initErrorHandler(getApplicationContext());
+//        FlurryFacade.init(this);
 
         mInstance = this;
         context = Context.getInstance();
@@ -43,6 +52,8 @@ public class BidanApplication extends DrishtiApplication {
 
         // Init Module
         CoreLibrary.init(context);
+
+
 
     }
 

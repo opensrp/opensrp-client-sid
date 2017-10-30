@@ -70,3 +70,5 @@ tmp/
 project.properties
 .DS_Store
 .settings
+/opensrp-bidan/src/main/assets/config.properties
+/**/config.properties

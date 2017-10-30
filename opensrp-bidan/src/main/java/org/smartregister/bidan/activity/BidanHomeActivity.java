@@ -1,7 +1,6 @@
 package org.smartregister.bidan.activity;
 
 import org.smartregister.bidan.R;
-import org.smartregister.bidan.lib.FlurryAgent;
 import org.smartregister.view.activity.SecuredActivity;
 import org.smartregister.view.fragment.DisplayFormFragment;
 

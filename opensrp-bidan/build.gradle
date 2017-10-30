@@ -98,7 +98,7 @@ dependencies {
     compile 'com.android.support:appcompat-v7:22.1.1'
     testCompile 'junit:junit:4.12'
 
-    compile('com.crashlytics.sdk.android:crashlytics:2.5.3@aar') {
+    compile('com.crashlytics.sdk.android:crashlytics:2.7.1@aar') {
         transitive = true;
     }
 //    compile (name : 'opensrp-facial-recognition-debug', ext:'aar')
