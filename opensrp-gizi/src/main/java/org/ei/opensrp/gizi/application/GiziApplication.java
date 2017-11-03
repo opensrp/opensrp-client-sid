@@ -6,6 +6,7 @@ import android.content.res.Configuration;
 import org.acra.ACRA;
 import org.acra.ReportingInteractionMode;
 import org.acra.annotation.ReportsCrashes;
+import org.ei.opensrp.gizi.repository.GiziRepository;
 import org.smartregister.Context;
 import org.smartregister.CoreLibrary;
 import org.smartregister.commonregistry.CommonFtsObject;
@@ -31,25 +32,34 @@ public class GiziApplication extends DrishtiApplication {
 
     @Override
     public void onCreate() {
+
+        mInstance = this;
+        context = Context.getInstance();
+
+        context.updateApplicationContext(getApplicationContext());
+
+        //Initialize Modules
+        CoreLibrary.init(context);
+
+
         DrishtiSyncScheduler.setReceiverClass(SyncBroadcastReceiver.class);
         super.onCreate();
         //  ACRA.init(this);
-
         DrishtiSyncScheduler.setReceiverClass(SyncBroadcastReceiver.class);
-        ErrorReportingFacade.initErrorHandler(getApplicationContext());
+        //  ErrorReportingFacade.initErrorHandler(getApplicationContext());
         /**
          * ENABLE THIS AGAIN AFTER FINISH TESTING*/
         FlurryFacade.init(this);
-        context = Context.getInstance();
+        // context = Context.getInstance();
         context.updateApplicationContext(getApplicationContext());
         context.updateCommonFtsObject(createCommonFtsObject());
         applyUserLanguagePreference();
         cleanUpSyncState();
     }
-
     public static synchronized GiziApplication getInstance() {
         return (GiziApplication) mInstance;
     }
+
     public Context getContext(){
         return context;
     }
@@ -57,6 +67,19 @@ public class GiziApplication extends DrishtiApplication {
         return context;
     }
 
+    @Override
+    public Repository getRepository() {
+        try {
+            if (repository == null) {
+                repository = new GiziRepository(getInstance().getApplicationContext(), context());
+
+            }
+        } catch (UnsatisfiedLinkError e) {
+            logError("Error on getRepository: " + e);
+
+        }
+        return repository;
+    }
     @Override
     public void logoutCurrentUser(){
         Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
@@ -94,18 +117,18 @@ public class GiziApplication extends DrishtiApplication {
                 getBaseContext().getResources().getDisplayMetrics());
     }
 
-    private String[] getFtsSearchFields(String tableName){
+    private static String[] getFtsSearchFields(String tableName){
         if(tableName.equals("ec_anak")){
-            String[] ftsSearchFields =  { "namaBayi","tanggalLahirAnak" };
-            return ftsSearchFields;
+            return new String[]{ "namaBayi","tanggalLahirAnak" };
+            // return ftsSearchFields;
         } else if (tableName.equals("ec_kartu_ibu")){
-            String[] ftsSearchFields =  { "namalengkap", "namaSuami" };
-            return ftsSearchFields;
+            return new String[]{ "namalengkap", "namaSuami" };
+            // return ftsSearchFields;
         }
         return null;
     }
 
-    private String[] getFtsSortFields(String tableName){
+    private static String[] getFtsSortFields(String tableName){
         if(tableName.equals("ec_anak")){
             String[] sortFields = { "namaBayi","tanggalLahirAnak"};
             return sortFields;
@@ -116,7 +139,7 @@ public class GiziApplication extends DrishtiApplication {
         return null;
     }
 
-    private String[] getFtsMainConditions(String tableName){
+    private  static String[] getFtsMainConditions(String tableName){
         if(tableName.equals("ec_anak")){
             String[] mainConditions = {"is_closed", "details" , "namaBayi"};
             return mainConditions;
@@ -126,11 +149,16 @@ public class GiziApplication extends DrishtiApplication {
         }
         return null;
     }
-    private String[] getFtsTables(){
+
+/*    private String[] getFtsTables(){
         String[] ftsTables = { "ec_anak", "ec_kartu_ibu" };
         return ftsTables;
+    }*/
+
+    private static String[] getFtsTables() {
+        return new String[]{"ec_anak", "ec_kartu_ibu" };
     }
-    private CommonFtsObject createCommonFtsObject(){
+    public static CommonFtsObject createCommonFtsObject(){
         CommonFtsObject commonFtsObject = new CommonFtsObject(getFtsTables());
         for(String ftsTable: commonFtsObject.getTables()){
             commonFtsObject.updateSearchFields(ftsTable, getFtsSearchFields(ftsTable));
@@ -139,4 +167,6 @@ public class GiziApplication extends DrishtiApplication {
         }
         return commonFtsObject;
     }
+
+
 }
