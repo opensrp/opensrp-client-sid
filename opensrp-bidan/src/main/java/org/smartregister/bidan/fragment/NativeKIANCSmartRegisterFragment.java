@@ -1,11 +1,8 @@
 package org.smartregister.bidan.fragment;
 
 import android.annotation.TargetApi;
-import android.app.AlertDialog;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Build;
-import android.os.Parcelable;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
@@ -14,7 +11,19 @@ import android.widget.EditText;
 
 import com.flurry.android.FlurryAgent;
 
+import org.opensrp.api.domain.Location;
+import org.opensrp.api.util.EntityUtils;
+import org.opensrp.api.util.LocationTree;
+import org.opensrp.api.util.TreeNode;
 import org.smartregister.Context;
+import org.smartregister.bidan.LoginActivity;
+import org.smartregister.bidan.R;
+import org.smartregister.bidan.anc.ANCDetailActivity;
+import org.smartregister.bidan.anc.KIANCClientsProvider;
+import org.smartregister.bidan.anc.KIANCOverviewServiceMode;
+import org.smartregister.bidan.anc.NativeKIANCSmartRegisterActivity;
+import org.smartregister.bidan.kartu_ibu.KICommonObjectFilterOption;
+import org.smartregister.bidan.lib.FlurryFacade;
 import org.smartregister.commonregistry.CommonPersonObjectClient;
 import org.smartregister.commonregistry.CommonPersonObjectController;
 import org.smartregister.commonregistry.CommonRepository;
@@ -23,15 +32,6 @@ import org.smartregister.cursoradapter.CursorCommonObjectSort;
 import org.smartregister.cursoradapter.SecuredNativeSmartRegisterCursorAdapterFragment;
 import org.smartregister.cursoradapter.SmartRegisterPaginatedCursorAdapter;
 import org.smartregister.cursoradapter.SmartRegisterQueryBuilder;
-import org.smartregister.bidan.LoginActivity;
-import org.smartregister.bidan.R;
-import org.smartregister.bidan.anc.ANCDetailActivity;
-import org.smartregister.bidan.anc.KIANCClientsProvider;
-import org.smartregister.bidan.anc.KIANCOverviewServiceMode;
-import org.smartregister.bidan.anc.NativeKIANCSmartRegisterActivity;
-import org.smartregister.bidan.kartu_ibu.KICommonObjectFilterOption;
-import org.smartregister.bidan.kartu_ibu.NativeKISmartRegisterActivity;
-import org.smartregister.bidan.lib.FlurryFacade;
 import org.smartregister.provider.SmartRegisterClientsProvider;
 import org.smartregister.util.StringUtil;
 import org.smartregister.view.activity.SecuredNativeSmartRegisterActivity;
@@ -47,10 +47,6 @@ import org.smartregister.view.dialog.FilterOption;
 import org.smartregister.view.dialog.NameSort;
 import org.smartregister.view.dialog.ServiceModeOption;
 import org.smartregister.view.dialog.SortOption;
-import org.opensrp.api.domain.Location;
-import org.opensrp.api.util.EntityUtils;
-import org.opensrp.api.util.LocationTree;
-import org.opensrp.api.util.TreeNode;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -92,11 +88,6 @@ public class NativeKIANCSmartRegisterFragment extends SecuredNativeSmartRegister
     protected void onCreation() {
     }
 
-   /* @Override
-    protected SmartRegisterPaginatedAdapter adapter() {
-        return new SmartRegisterPaginatedAdapter(clientsProvider());
-    }*/
-
     @Override
     protected SecuredNativeSmartRegisterActivity.DefaultOptionsProvider getDefaultOptionsProvider() {
         return new SecuredNativeSmartRegisterActivity.DefaultOptionsProvider() {
@@ -134,8 +125,6 @@ public class NativeKIANCSmartRegisterFragment extends SecuredNativeSmartRegister
                 ArrayList<DialogOption> dialogOptionslist = new ArrayList<DialogOption>();
 
                 dialogOptionslist.add(new CursorCommonObjectFilterOption(getString(R.string.filter_by_all_label),filterStringForAll()));
-                //     dialogOptionslist.add(new CursorCommonObjectFilterOption(getString(R.string.hh_no_mwra),filterStringForNoElco()));
-                //      dialogOptionslist.add(new CursorCommonObjectFilterOption(getString(R.string.hh_has_mwra),filterStringForOneOrMoreElco()));
 
                 String locationjson = context().anmLocationController().get();
                 LocationTree locationTree = EntityUtils.fromJson(locationjson, LocationTree.class);
@@ -179,10 +168,6 @@ public class NativeKIANCSmartRegisterFragment extends SecuredNativeSmartRegister
 
     @Override
     protected SmartRegisterClientsProvider clientsProvider() {
-//        if (clientProvider == null) {
-//            clientProvider = new HouseHoldSmartClientsProvider(
-//                    getActivity(),clientActionHandler , context.alertService());
-//        }
         return null;
     }
 
@@ -192,7 +177,6 @@ public class NativeKIANCSmartRegisterFragment extends SecuredNativeSmartRegister
 
     @Override
     protected void onInitialization() {
-        //  context.formSubmissionRouter().getHandlerMap().put("census_enrollment_form", new CensusEnrollmentHandler());
     }
 
     @Override
@@ -205,7 +189,6 @@ public class NativeKIANCSmartRegisterFragment extends SecuredNativeSmartRegister
         view.findViewById(R.id.service_mode_selection).setVisibility(View.GONE);
         clientsView.setVisibility(View.VISIBLE);
         clientsProgressView.setVisibility(View.INVISIBLE);
-//        list.setBackgroundColor(Color.RED);
         initializeQueries(getCriteria());
     }
 
@@ -228,44 +211,7 @@ public class NativeKIANCSmartRegisterFragment extends SecuredNativeSmartRegister
         return "Select Count(*) \n" +
                 "from ec_ibu Left Join ec_kartu_ibu on  ec_ibu.id = ec_kartu_ibu.id ";
     }
-    /*public void initializeQueries(){
-         try {
-        KIANCClientsProvider kiscp = new KIANCClientsProvider(getActivity(),clientActionHandler,context.alertService());
-        clientAdapter = new SmartRegisterPaginatedCursorAdapter(getActivity(), null, kiscp, new CommonRepository("ec_ibu",new String []{"ec_ibu.isClosed", "ec_ibu.ancDate", "ec_ibu.ancKe","ec_ibu.namalengkap","ec_ibu.namaSuami"}));
 
-        clientsView.setAdapter(clientAdapter);
-
-        setTablename("ec_ibu");
-        SmartRegisterQueryBuilder countqueryBUilder = new SmartRegisterQueryBuilder();
-        countqueryBUilder.SelectInitiateMainTableCounts("ec_ibu");
-     //   countqueryBUilder.customJoin("LEFT JOIN kartu_ibu ON ibu.id = kartu_ibu.id");
-        mainCondition = " isClosed !=0 and pptest = 'Positive'";
-             joinTable = "";
-             countSelect = countqueryBUilder.mainCondition(mainCondition);
-             super.CountExecute();
-
-
-        SmartRegisterQueryBuilder queryBUilder = new SmartRegisterQueryBuilder();
-        queryBUilder.SelectInitiateMainTable("ec_ibu", new String[]{"ec_ibu.isClosed", "ec_ibu.details", "ec_ibu.ancDate", "ec_ibu.ancKe","ec_ibu.namalengkap","ec_ibu.namaSuami"});
-         //    countqueryBUilder.customJoin("LEFT JOIN kartu_ibu ON ibu.id = kartu_ibu.id");
-             mainSelect = queryBUilder.mainCondition(mainCondition);
-     //   Sortqueries = KiSortByNameAZ();
-
-
-             currentlimit = 20;
-             currentoffset = 0;
-
-             super.filterandSortInInitializeQueries();
-
-             updateSearchView();
-             refresh();
-
-         } catch (Exception e){
-             e.printStackTrace();
-         }
-         finally {
-         }
-    }*/
     @TargetApi(Build.VERSION_CODES.KITKAT)
     public void initializeQueries(String s){
         try {
@@ -314,15 +260,6 @@ public class NativeKIANCSmartRegisterFragment extends SecuredNativeSmartRegister
 
     @Override
     public void startRegistration() {
-     //   FragmentTransaction ft = getActivity().getFragmentManager().beginTransaction();
-     //   Fragment prev = getActivity().getFragmentManager().findFragmentByTag(locationDialogTAG);
-     //   if (prev != null) {
-    //        ft.remove(prev);
-    //    }
-    //    ft.addToBackStack(null);
-    //    BidanLocationSelectorDialogFragment
-    //            .newInstance((NativeKIAnakSmartRegisterActivity) getActivity(), new EditDialogOptionModel(), context.anmLocationController().get(), KOHORT_KB_REGISTER)
-   //             .show(ft, locationDialogTAG);
     }
 
     private class ClientActionHandler implements View.OnClickListener {

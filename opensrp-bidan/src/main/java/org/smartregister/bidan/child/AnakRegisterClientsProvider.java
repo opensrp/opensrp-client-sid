@@ -2,25 +2,29 @@ package org.smartregister.bidan.child;
 
 import android.app.Activity;
 import android.content.Context;
+import android.database.Cursor;
 import android.graphics.drawable.Drawable;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.AbsListView;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import org.joda.time.LocalDate;
+import org.joda.time.Months;
+import org.joda.time.format.DateTimeFormat;
+import org.joda.time.format.DateTimeFormatter;
+import org.smartregister.bidan.R;
+import org.smartregister.bidan.application.BidanApplication;
+import org.smartregister.bidan.kartu_ibu.KIDetailActivity;
 import org.smartregister.commonregistry.AllCommonsRepository;
 import org.smartregister.commonregistry.CommonPersonObject;
 import org.smartregister.commonregistry.CommonPersonObjectClient;
 import org.smartregister.commonregistry.CommonPersonObjectController;
 import org.smartregister.cursoradapter.SmartRegisterCLientsProviderForCursorAdapter;
-import org.smartregister.bidan.R;
-import org.smartregister.bidan.application.BidanApplication;
-import org.smartregister.bidan.kartu_ibu.KIDetailActivity;
 import org.smartregister.repository.DetailsRepository;
 import org.smartregister.service.AlertService;
 import org.smartregister.util.OpenSRPImageLoader;
@@ -30,18 +34,13 @@ import org.smartregister.view.contract.SmartRegisterClients;
 import org.smartregister.view.dialog.FilterOption;
 import org.smartregister.view.dialog.ServiceModeOption;
 import org.smartregister.view.dialog.SortOption;
-import org.smartregister.view.viewHolder.OnClickFormLauncher;
-import org.joda.time.LocalDate;
-import org.joda.time.Months;
-import org.joda.time.format.DateTimeFormat;
-import org.joda.time.format.DateTimeFormatter;
+import org.smartregister.view.viewholder.OnClickFormLauncher;
 
 import java.io.File;
-import java.text.SimpleDateFormat;
 
 import static android.view.ViewGroup.LayoutParams.MATCH_PARENT;
-import static org.smartregister.util.StringUtil.humanize;
 import static org.joda.time.LocalDateTime.parse;
+import static org.smartregister.util.StringUtil.humanize;
 
 public class AnakRegisterClientsProvider implements SmartRegisterCLientsProviderForCursorAdapter {
     private static final String TAG = AnakRegisterClientsProvider.class.getSimpleName();
@@ -61,7 +60,6 @@ public class AnakRegisterClientsProvider implements SmartRegisterCLientsProvider
                                        View.OnClickListener onClickListener,
                                        AlertService alertService) {
         this.onClickListener = onClickListener;
-//        this.controller = controller;
         this.context = context;
         this.alertService = alertService;
         this.inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
@@ -74,7 +72,6 @@ public class AnakRegisterClientsProvider implements SmartRegisterCLientsProvider
 
     }
 
-    @Override
     public void getView(SmartRegisterClient smartRegisterClient, View convertView) {
 
         ViewHolder viewHolder;
@@ -244,6 +241,11 @@ public class AnakRegisterClientsProvider implements SmartRegisterCLientsProvider
     }
 
     @Override
+    public void getView(Cursor cursor, SmartRegisterClient smartRegisterClient, View view) {
+
+    }
+
+    @Override
     public SmartRegisterClients updateClients(FilterOption villageFilter, ServiceModeOption serviceModeOption,
                                               FilterOption searchFilter, SortOption sortOption) {
         return getClients().applyFilter(villageFilter, serviceModeOption, searchFilter, sortOption);
@@ -252,6 +254,11 @@ public class AnakRegisterClientsProvider implements SmartRegisterCLientsProvider
     @Override
     public void onServiceModeSelected(ServiceModeOption serviceModeOption) {
         // do nothing.
+    }
+
+    @Override
+    public OnClickFormLauncher newFormLauncher(String s, String s1, String s2) {
+        return null;
     }
 
     void checkVisibility(String immunization1, String immunization2, ImageView no, ImageView yes) {
@@ -282,11 +289,6 @@ public class AnakRegisterClientsProvider implements SmartRegisterCLientsProvider
         } else {
             birth.setText("-");
         }
-    }
-
-    @Override
-    public OnClickFormLauncher newFormLauncher(String formName, String entityId, String metaData) {
-        return null;
     }
 
     public LayoutInflater inflater() {

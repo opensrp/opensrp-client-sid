@@ -15,17 +15,20 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import org.apache.commons.lang3.StringUtils;
-
+import org.joda.time.LocalDate;
+import org.joda.time.Months;
+import org.joda.time.format.DateTimeFormat;
+import org.joda.time.format.DateTimeFormatter;
+import org.smartregister.bidan.AllConstantsINA;
+import org.smartregister.bidan.R;
+import org.smartregister.bidan.application.BidanApplication;
+import org.smartregister.bidan.kartu_ibu.KIDetailActivity;
 import org.smartregister.commonregistry.AllCommonsRepository;
 import org.smartregister.commonregistry.CommonPersonObject;
 import org.smartregister.commonregistry.CommonPersonObjectClient;
 import org.smartregister.commonregistry.CommonPersonObjectController;
 import org.smartregister.cursoradapter.SmartRegisterCLientsProviderForCursorAdapter;
 import org.smartregister.domain.Alert;
-import org.smartregister.bidan.AllConstantsINA;
-import org.smartregister.bidan.R;
-import org.smartregister.bidan.application.BidanApplication;
-import org.smartregister.bidan.kartu_ibu.KIDetailActivity;
 import org.smartregister.repository.DetailsRepository;
 import org.smartregister.service.AlertService;
 import org.smartregister.util.OpenSRPImageLoader;
@@ -36,10 +39,6 @@ import org.smartregister.view.dialog.FilterOption;
 import org.smartregister.view.dialog.ServiceModeOption;
 import org.smartregister.view.dialog.SortOption;
 import org.smartregister.view.viewholder.OnClickFormLauncher;
-import org.joda.time.LocalDate;
-import org.joda.time.Months;
-import org.joda.time.format.DateTimeFormat;
-import org.joda.time.format.DateTimeFormatter;
 
 import java.io.File;
 import java.util.List;

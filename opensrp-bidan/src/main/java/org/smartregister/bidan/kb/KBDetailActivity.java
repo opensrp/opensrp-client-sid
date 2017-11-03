@@ -3,24 +3,21 @@ package org.smartregister.bidan.kb;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-//import org.opensrp.bpm.MainBPM;
 import com.flurry.android.FlurryAgent;
 
 import org.smartregister.Context;
-import org.smartregister.commonregistry.AllCommonsRepository;
-import org.smartregister.commonregistry.CommonPersonObject;
-import org.smartregister.commonregistry.CommonPersonObjectClient;
 import org.smartregister.bidan.R;
 import org.smartregister.bidan.kartu_ibu.KIDetailActivity;
 import org.smartregister.bidan.lib.FlurryFacade;
+import org.smartregister.commonregistry.AllCommonsRepository;
+import org.smartregister.commonregistry.CommonPersonObject;
+import org.smartregister.commonregistry.CommonPersonObjectClient;
 import org.smartregister.repository.DetailsRepository;
-import org.smartregister.util.OpenSRPImageLoader;
 import org.smartregister.view.activity.DrishtiApplication;
 
 import java.io.File;

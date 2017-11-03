@@ -1,10 +1,11 @@
 package org.smartregister.bidan;
+
 import android.app.Activity;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.net.Uri;
 
-
+import org.json.JSONObject;
 import org.smartregister.Context;
 import org.smartregister.bidan.anc.NativeKIANCSmartRegisterActivity;
 import org.smartregister.bidan.child.NativeKIAnakSmartRegisterActivity;
@@ -12,8 +13,6 @@ import org.smartregister.bidan.kartu_ibu.NativeKISmartRegisterActivity;
 import org.smartregister.bidan.kb.NativeKBSmartRegisterActivity;
 import org.smartregister.bidan.pnc.NativeKIPNCSmartRegisterActivity;
 import org.smartregister.view.controller.ANMController;
-import org.json.JSONObject;
-
 
 import static android.preference.PreferenceManager.getDefaultSharedPreferences;
 

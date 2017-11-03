@@ -12,20 +12,15 @@ import android.widget.TextView;
 
 import com.flurry.android.FlurryAgent;
 
+import org.json.JSONObject;
 import org.smartregister.Context;
-import org.smartregister.commonregistry.CommonPersonObjectClient;
-import org.smartregister.domain.form.FormSubmission;
 import org.smartregister.bidan.R;
 import org.smartregister.bidan.kartu_ibu.KIDetailActivity;
 import org.smartregister.bidan.lib.FlurryFacade;
+import org.smartregister.commonregistry.CommonPersonObjectClient;
 import org.smartregister.repository.DetailsRepository;
 import org.smartregister.util.FormUtils;
-import org.smartregister.util.OpenSRPImageLoader;
 import org.smartregister.view.activity.DrishtiApplication;
-import org.smartregister.view.contract.ANCDetail;
-import org.joda.time.LocalDate;
-import org.joda.time.LocalDateTime;
-import org.json.JSONObject;
 
 import java.io.File;
 import java.text.DateFormat;

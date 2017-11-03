@@ -1,4 +1,4 @@
-package org.smartregister.bidan2;
+package org.smartregister.bidan;
 
 import org.junit.Test;
 

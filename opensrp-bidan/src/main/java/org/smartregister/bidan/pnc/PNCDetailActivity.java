@@ -2,12 +2,7 @@ package org.smartregister.bidan.pnc;
 
 import android.app.Activity;
 import android.content.Intent;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.net.Uri;
 import android.os.Bundle;
-import android.os.Environment;
-import android.provider.MediaStore;
 import android.util.Log;
 import android.view.View;
 import android.widget.ImageButton;
@@ -16,35 +11,25 @@ import android.widget.TextView;
 
 import com.flurry.android.FlurryAgent;
 
+import org.json.JSONObject;
 import org.smartregister.Context;
+import org.smartregister.bidan.R;
+import org.smartregister.bidan.kartu_ibu.KIDetailActivity;
+import org.smartregister.bidan.lib.FlurryFacade;
 import org.smartregister.commonregistry.AllCommonsRepository;
 import org.smartregister.commonregistry.CommonPersonObject;
 import org.smartregister.commonregistry.CommonPersonObjectClient;
-import org.smartregister.domain.ProfileImage;
-import org.smartregister.bidan.R;
-import org.smartregister.bidan.anc.ANCDetailActivity;
-import org.smartregister.bidan.anc.NativeKIANCSmartRegisterActivity;
-import org.smartregister.bidan.device.MainBPM;
-import org.smartregister.bidan.face.camera.SmartShutterActivity;
-import org.smartregister.bidan.kartu_ibu.KIDetailActivity;
-import org.smartregister.bidan.kartu_ibu.NativeKISmartRegisterActivity;
-import org.smartregister.bidan.lib.FlurryFacade;
 import org.smartregister.repository.DetailsRepository;
-import org.smartregister.repository.ImageRepository;
 import org.smartregister.util.FormUtils;
-import org.smartregister.util.OpenSRPImageLoader;
 import org.smartregister.view.activity.DrishtiApplication;
-import org.json.JSONObject;
 
 import java.io.File;
-import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.UUID;
 
-import util.ImageCache;
 import util.ImageFetcher;
 
 import static org.smartregister.util.StringUtil.humanize;
@@ -96,11 +81,6 @@ public class PNCDetailActivity extends Activity {
         TextView risk2 = (TextView) findViewById(R.id.txt_risk2);
         TextView risk3 = (TextView) findViewById(R.id.txt_risk3);
         TextView risk4 = (TextView) findViewById(R.id.txt_risk4);
-//        TextView risk5 = (TextView) findViewById(R.id.txt_risk5);
-//        TextView risk6 = (TextView) findViewById(R.id.txt_risk6);
-//        TextView risk7 = (TextView) findViewById(R.id.txt_risk7);
-//        TextView risk8 = (TextView) findViewById(R.id.txt_risk8);
-
 //        ImageView heart_bpm = (ImageView) findViewById(R.id.icon_device);
         ImageView device = (ImageView) findViewById(R.id.icon_device);
         device.setVisibility(View.VISIBLE);
@@ -341,35 +321,23 @@ public class PNCDetailActivity extends Activity {
         @Override
         public void onClick(View v) {
 //            Intent intent = new Intent(ANCDetailActivity.this, MainBPM.class);
-//            Intent intent = new Intent(ANCDetailActivity.this, MainBPMActivity.class);
-//            Intent intent = new Intent(ANCDetailActivity.this, MainActivity.class);
-//            Intent intent = new Intent(ANCDetailActivity.this, BpmMainActivity.class);
-//            Intent intent = new Intent(ANCDetailActivity.this, MainBPM.class);
 //            startActivity(intent);
             bpmAction();
         }
     };
 
     private void bpmAction() {
-        Intent i = new Intent(PNCDetailActivity.this, MainBPM.class);
-//        Intent i = new Intent(ANCDetailActivity.this, TestBPM.class);
-        fta = new SimpleDateFormat ("yyyy-MM-dd");
-        ftb = new SimpleDateFormat ("yyyy-MM-dd");
+//        Intent i = new Intent(PNCDetailActivity.this, MainBPM.class);
+//        fta = new SimpleDateFormat ("yyyy-MM-dd");
+//        ftb = new SimpleDateFormat ("yyyy-MM-dd");
 
-        startActivityForResult(i, 2);
+//        startActivityForResult(i, 2);
     }
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data){
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == 2 && resultCode!=RESULT_CANCELED ){
-//            Log.e(
-//                    TAG, "onActivityResult: "+
-//                    data.getStringExtra("HIGH") +
-//                    data.getStringExtra("LOW") +
-//                    data.getStringExtra("AHR") +
-//                    data.getStringExtra("PULSE")
-//            );
             DetailsRepository detailsRepository = org.smartregister.Context.getInstance().detailsRepository();
             Long tsLong = System.currentTimeMillis()/1000;
             detailsRepository.add(pncclient.entityId(), "tandaVitalTDSistolik", data.getStringExtra("HIGH"), tsLong);

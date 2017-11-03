@@ -12,12 +12,14 @@ import android.widget.Toast;
 
 import com.flurry.android.FlurryAgent;
 
-import org.smartregister.domain.form.FieldOverrides;
-import org.smartregister.domain.form.FormSubmission;
+import org.json.JSONException;
+import org.json.JSONObject;
 import org.smartregister.bidan.LoginActivity;
 import org.smartregister.bidan.R;
 import org.smartregister.bidan.fragment.NativeKIPNCSmartRegisterFragment;
 import org.smartregister.bidan.pageradapter.BaseRegisterActivityPagerAdapter;
+import org.smartregister.domain.form.FieldOverrides;
+import org.smartregister.domain.form.FormSubmission;
 import org.smartregister.provider.SmartRegisterClientsProvider;
 import org.smartregister.service.ZiggyService;
 import org.smartregister.sync.ClientProcessor;
@@ -26,11 +28,8 @@ import org.smartregister.view.activity.SecuredNativeSmartRegisterActivity;
 import org.smartregister.view.dialog.DialogOption;
 import org.smartregister.view.dialog.LocationSelectorDialogFragment;
 import org.smartregister.view.dialog.OpenFormOption;
-import org.smartregister.view.fragment.DisplayFormFragment;
 import org.smartregister.view.fragment.SecuredNativeSmartRegisterFragment;
 import org.smartregister.view.viewpager.OpenSRPViewPager;
-import org.json.JSONException;
-import org.json.JSONObject;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -224,10 +223,10 @@ public class NativeKIPNCSmartRegisterActivity extends SecuredNativeSmartRegister
 
         }catch (Exception e){
             // TODO: show error dialog on the formfragment if the submission fails
-            DisplayFormFragment displayFormFragment = getDisplayFormFragmentAtIndex(currentPage);
-            if (displayFormFragment != null) {
-                displayFormFragment.hideTranslucentProgressDialog();
-            }
+//            DisplayFormFragment displayFormFragment = getDisplayFormFragmentAtIndex(currentPage);
+//            if (displayFormFragment != null) {
+//                displayFormFragment.hideTranslucentProgressDialog();
+//            }
             e.printStackTrace();
         }
         //end capture flurry log for FS
@@ -288,12 +287,12 @@ public class NativeKIPNCSmartRegisterActivity extends SecuredNativeSmartRegister
                     data = FormUtils.getInstance(getApplicationContext()).generateXMLInputForFormWithEntityId(entityId, formName, metaData);
                 }
 
-                DisplayFormFragment displayFormFragment = getDisplayFormFragmentAtIndex(formIndex);
-                if (displayFormFragment != null) {
-                    displayFormFragment.setFormData(data);
-                    displayFormFragment.setRecordId(entityId);
-                    displayFormFragment.setFieldOverides(metaData);
-                }
+//                DisplayFormFragment displayFormFragment = getDisplayFormFragmentAtIndex(formIndex);
+//                if (displayFormFragment != null) {
+//                    displayFormFragment.setFormData(data);
+//                    displayFormFragment.setRecordId(entityId);
+//                    displayFormFragment.setFieldOverides(metaData);
+//                }
             }
 
             mPager.setCurrentItem(formIndex, false); //Don't animate the view on orientation change the view disapears
@@ -316,14 +315,13 @@ public class NativeKIPNCSmartRegisterActivity extends SecuredNativeSmartRegister
                 }
 
                 //hack reset the form
-                DisplayFormFragment displayFormFragment = getDisplayFormFragmentAtIndex(prevPageIndex);
-                if (displayFormFragment != null) {
-                    displayFormFragment.hideTranslucentProgressDialog();
-                    displayFormFragment.setFormData(null);
-
-                }
-
-                displayFormFragment.setRecordId(null);
+//                DisplayFormFragment displayFormFragment = getDisplayFormFragmentAtIndex(prevPageIndex);
+//                if (displayFormFragment != null) {
+//                    displayFormFragment.hideTranslucentProgressDialog();
+//                    displayFormFragment.setFormData(null);
+//
+//                }
+//                displayFormFragment.setRecordId(null);
             }
         });
 
@@ -334,9 +332,9 @@ public class NativeKIPNCSmartRegisterActivity extends SecuredNativeSmartRegister
         return getSupportFragmentManager().findFragmentByTag("android:switcher:" + mPager.getId() + ":" + fragmentPagerAdapter.getItemId(position));
     }
 
-    public DisplayFormFragment getDisplayFormFragmentAtIndex(int index) {
-        return  (DisplayFormFragment)findFragmentByPosition(index);
-    }
+//    public DisplayFormFragment getDisplayFormFragmentAtIndex(int index) {
+//        return  (DisplayFormFragment)findFragmentByPosition(index);
+//    }
 
     @Override
     public void onBackPressed() {
@@ -377,8 +375,8 @@ public class NativeKIPNCSmartRegisterActivity extends SecuredNativeSmartRegister
 
     public void retrieveAndSaveUnsubmittedFormData(){
         if (currentActivityIsShowingForm()){
-            DisplayFormFragment formFragment = getDisplayFormFragmentAtIndex(currentPage);
-            formFragment.saveCurrentFormData();
+//            DisplayFormFragment formFragment = getDisplayFormFragmentAtIndex(currentPage);
+//            formFragment.saveCurrentFormData();
         }
     }
 

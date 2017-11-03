@@ -2,8 +2,6 @@ package org.smartregister.bidan.fragment;
 
 import android.annotation.TargetApi;
 import android.app.AlertDialog;
-import android.app.Fragment;
-import android.app.FragmentTransaction;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Build;
@@ -16,7 +14,19 @@ import android.widget.EditText;
 
 import com.flurry.android.FlurryAgent;
 
+import org.opensrp.api.domain.Location;
+import org.opensrp.api.util.EntityUtils;
+import org.opensrp.api.util.LocationTree;
+import org.opensrp.api.util.TreeNode;
 import org.smartregister.Context;
+import org.smartregister.bidan.LoginActivity;
+import org.smartregister.bidan.R;
+import org.smartregister.bidan.kartu_ibu.KICommonObjectFilterOption;
+import org.smartregister.bidan.lib.FlurryFacade;
+import org.smartregister.bidan.pnc.KIPNCClientsProvider;
+import org.smartregister.bidan.pnc.KIPNCOverviewServiceMode;
+import org.smartregister.bidan.pnc.NativeKIPNCSmartRegisterActivity;
+import org.smartregister.bidan.pnc.PNCDetailActivity;
 import org.smartregister.commonregistry.CommonPersonObjectClient;
 import org.smartregister.commonregistry.CommonPersonObjectController;
 import org.smartregister.commonregistry.CommonRepository;
@@ -25,16 +35,6 @@ import org.smartregister.cursoradapter.CursorCommonObjectSort;
 import org.smartregister.cursoradapter.SecuredNativeSmartRegisterCursorAdapterFragment;
 import org.smartregister.cursoradapter.SmartRegisterPaginatedCursorAdapter;
 import org.smartregister.cursoradapter.SmartRegisterQueryBuilder;
-import org.smartregister.bidan.LoginActivity;
-import org.smartregister.bidan.R;
-import org.smartregister.bidan.face.camera.SmartShutterActivity;
-import org.smartregister.bidan.kartu_ibu.KICommonObjectFilterOption;
-import org.smartregister.bidan.kartu_ibu.NativeKISmartRegisterActivity;
-import org.smartregister.bidan.lib.FlurryFacade;
-import org.smartregister.bidan.pnc.KIPNCClientsProvider;
-import org.smartregister.bidan.pnc.KIPNCOverviewServiceMode;
-import org.smartregister.bidan.pnc.NativeKIPNCSmartRegisterActivity;
-import org.smartregister.bidan.pnc.PNCDetailActivity;
 import org.smartregister.provider.SmartRegisterClientsProvider;
 import org.smartregister.util.StringUtil;
 import org.smartregister.view.activity.SecuredNativeSmartRegisterActivity;
@@ -47,14 +47,9 @@ import org.smartregister.view.dialog.DialogOptionMapper;
 import org.smartregister.view.dialog.DialogOptionModel;
 import org.smartregister.view.dialog.EditOption;
 import org.smartregister.view.dialog.FilterOption;
-import org.smartregister.view.dialog.LocationSelectorDialogFragment;
 import org.smartregister.view.dialog.NameSort;
 import org.smartregister.view.dialog.ServiceModeOption;
 import org.smartregister.view.dialog.SortOption;
-import org.opensrp.api.domain.Location;
-import org.opensrp.api.util.EntityUtils;
-import org.opensrp.api.util.LocationTree;
-import org.opensrp.api.util.TreeNode;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -445,21 +440,21 @@ public class NativeKIPNCSmartRegisterFragment extends SecuredNativeSmartRegister
         searchView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (SmartShutterActivity.isDevCompat) {
-                    CharSequence selections[] = new CharSequence[]{"Name", "Photo"};
-                    final AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
-                    builder.setTitle("Please Choose one, Search by");
-                    builder.setItems(selections, new DialogInterface.OnClickListener() {
-                        @Override
-                        public void onClick(DialogInterface dialog, int opt) {
-                            if (opt == 0) searchTextChangeListener("");
-                            else getFacialRecord(view);
-                        }
-                    });
-                    builder.show();
-                } else {
+//                if (SmartShutterActivity.isDevCompat) {
+//                    CharSequence selections[] = new CharSequence[]{"Name", "Photo"};
+//                    final AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+//                    builder.setTitle("Please Choose one, Search by");
+//                    builder.setItems(selections, new DialogInterface.OnClickListener() {
+//                        @Override
+//                        public void onClick(DialogInterface dialog, int opt) {
+//                            if (opt == 0) searchTextChangeListener("");
+//                            else getFacialRecord(view);
+//                        }
+//                    });
+//                    builder.show();
+//                } else {
                     searchTextChangeListener("");
-                }
+//                }
             }
         });
 
@@ -475,14 +470,14 @@ public class NativeKIPNCSmartRegisterFragment extends SecuredNativeSmartRegister
         String face_start = sdf.format(date);
         FS.put("face_start", face_start);
 
-        SmartShutterActivity.kidetail = (CommonPersonObjectClient) view.getTag();
-        FlurryAgent.logEvent(TAG + "search_by_face", FS, true);
+//        SmartShutterActivity.kidetail = (CommonPersonObjectClient) view.getTag();
+//        FlurryAgent.logEvent(TAG + "search_by_face", FS, true);
 
-        Intent intent = new Intent(getActivity(), SmartShutterActivity.class);
-        intent.putExtra("org.sid.sidface.ImageConfirmation.origin", TAG);
-        intent.putExtra("org.sid.sidface.ImageConfirmation.identify", true);
-        intent.putExtra("org.sid.sidface.ImageConfirmation.kidetail", (Parcelable) SmartShutterActivity.kidetail);
-        startActivityForResult(intent, 2);
+//        Intent intent = new Intent(getActivity(), SmartShutterActivity.class);
+//        intent.putExtra("org.sid.sidface.ImageConfirmation.origin", TAG);
+//        intent.putExtra("org.sid.sidface.ImageConfirmation.identify", true);
+//        intent.putExtra("org.sid.sidface.ImageConfirmation.kidetail", (Parcelable) SmartShutterActivity.kidetail);
+//        startActivityForResult(intent, 2);
     }
 
     public void searchTextChangeListener(String s) {
@@ -504,17 +499,7 @@ public class NativeKIPNCSmartRegisterFragment extends SecuredNativeSmartRegister
 
                         @Override
                         protected Object doInBackground(Object[] params) {
-//                        currentSearchFilter =
-//                        setCurrentSearchFilter(new HHSearchOption(cs.toString()));
-//                        filteredClients = getClientsAdapter().getListItemProvider()
-//                                .updateClients(getCurrentVillageFilter(), getCurrentServiceModeOption(),
-//                                        getCurrentSearchFilter(), getCurrentSortOption());
-//
-
                             filters = cs.toString();
-//                        joinTable = "";
-//                        mainCondition = " is_closed = 0 and jenisKontrasepsi != '0' ";
-                            Log.e(TAG, "doInBackground: " + filters);
                             return null;
                         }
 //

@@ -12,12 +12,12 @@ import android.widget.Toast;
 
 import com.flurry.android.FlurryAgent;
 
-import org.smartregister.domain.form.FormSubmission;
+import org.json.JSONObject;
 import org.smartregister.bidan.LoginActivity;
 import org.smartregister.bidan.R;
 import org.smartregister.bidan.fragment.NativeKIAnakSmartRegisterFragment;
-import org.smartregister.bidan.lib.FlurryFacade;
 import org.smartregister.bidan.pageradapter.BaseRegisterActivityPagerAdapter;
+import org.smartregister.domain.form.FormSubmission;
 import org.smartregister.provider.SmartRegisterClientsProvider;
 import org.smartregister.service.ZiggyService;
 import org.smartregister.sync.ClientProcessor;
@@ -25,10 +25,8 @@ import org.smartregister.util.FormUtils;
 import org.smartregister.view.activity.SecuredNativeSmartRegisterActivity;
 import org.smartregister.view.dialog.DialogOption;
 import org.smartregister.view.dialog.OpenFormOption;
-import org.smartregister.view.fragment.DisplayFormFragment;
 import org.smartregister.view.fragment.SecuredNativeSmartRegisterFragment;
 import org.smartregister.view.viewpager.OpenSRPViewPager;
-import org.json.JSONObject;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -42,14 +40,9 @@ import butterknife.ButterKnife;
 import util.formula.Support;
 
 import static org.smartregister.bidan.AllConstantsINA.FormNames.BALITA_KUNJUNGAN;
+import static org.smartregister.bidan.AllConstantsINA.FormNames.BAYI_IMUNISASI;
 import static org.smartregister.bidan.AllConstantsINA.FormNames.BAYI_NEONATAL_PERIOD;
 import static org.smartregister.bidan.AllConstantsINA.FormNames.KARTU_IBU_ANAK_CLOSE;
-import static org.smartregister.bidan.AllConstantsINA.FormNames.BAYI_IMUNISASI;
-import static org.smartregister.bidan.AllConstantsINA.FormNames.KARTU_IBU_PNC_CLOSE;
-import static org.smartregister.bidan.AllConstantsINA.FormNames.KARTU_IBU_PNC_EDIT;
-import static org.smartregister.bidan.AllConstantsINA.FormNames.KARTU_IBU_PNC_POSPARTUM_KB;
-import static org.smartregister.bidan.AllConstantsINA.FormNames.KARTU_IBU_PNC_VISIT;
-import static org.smartregister.bidan.AllConstantsINA.FormNames.KOHORT_BAYI_EDIT;
 import static org.smartregister.bidan.AllConstantsINA.FormNames.KOHORT_BAYI_KUNJUNGAN;
 
 /**
@@ -209,10 +202,10 @@ public class NativeKIAnakSmartRegisterActivity extends SecuredNativeSmartRegiste
 
         }catch (Exception e){
             // TODO: show error dialog on the formfragment if the submission fails
-            DisplayFormFragment displayFormFragment = getDisplayFormFragmentAtIndex(currentPage);
-            if (displayFormFragment != null) {
-                displayFormFragment.hideTranslucentProgressDialog();
-            }
+//            DisplayFormFragment displayFormFragment = getDisplayFormFragmentAtIndex(currentPage);
+//            if (displayFormFragment != null) {
+//                displayFormFragment.hideTranslucentProgressDialog();
+//            }
             e.printStackTrace();
         }
         //end capture flurry log for FS
@@ -245,12 +238,12 @@ public class NativeKIAnakSmartRegisterActivity extends SecuredNativeSmartRegiste
                     data = FormUtils.getInstance(getApplicationContext()).generateXMLInputForFormWithEntityId(entityId, formName, metaData);
                 }
 
-                DisplayFormFragment displayFormFragment = getDisplayFormFragmentAtIndex(formIndex);
-                if (displayFormFragment != null) {
-                    displayFormFragment.setFormData(data);
-                    displayFormFragment.setRecordId(entityId);
-                    displayFormFragment.setFieldOverides(metaData);
-                }
+//                DisplayFormFragment displayFormFragment = getDisplayFormFragmentAtIndex(formIndex);
+//                if (displayFormFragment != null) {
+//                    displayFormFragment.setFormData(data);
+//                    displayFormFragment.setRecordId(entityId);
+//                    displayFormFragment.setFieldOverides(metaData);
+//                }
             }
 
             mPager.setCurrentItem(formIndex, false); //Don't animate the view on orientation change the view disapears
@@ -273,14 +266,14 @@ public class NativeKIAnakSmartRegisterActivity extends SecuredNativeSmartRegiste
                 }
 
                 //hack reset the form
-                DisplayFormFragment displayFormFragment = getDisplayFormFragmentAtIndex(prevPageIndex);
-                if (displayFormFragment != null) {
-                    displayFormFragment.hideTranslucentProgressDialog();
-                    displayFormFragment.setFormData(null);
+//                DisplayFormFragment displayFormFragment = getDisplayFormFragmentAtIndex(prevPageIndex);
+//                if (displayFormFragment != null) {
+//                    displayFormFragment.hideTranslucentProgressDialog();
+//                    displayFormFragment.setFormData(null);
+//
+//                }
 
-                }
-
-                displayFormFragment.setRecordId(null);
+//                displayFormFragment.setRecordId(null);
             }
         });
 
@@ -291,9 +284,9 @@ public class NativeKIAnakSmartRegisterActivity extends SecuredNativeSmartRegiste
         return getSupportFragmentManager().findFragmentByTag("android:switcher:" + mPager.getId() + ":" + fragmentPagerAdapter.getItemId(position));
     }
 
-    public DisplayFormFragment getDisplayFormFragmentAtIndex(int index) {
-        return  (DisplayFormFragment)findFragmentByPosition(index);
-    }
+//    public DisplayFormFragment getDisplayFormFragmentAtIndex(int index) {
+//        return  (DisplayFormFragment)findFragmentByPosition(index);
+//    }
 
     @Override
     public void onBackPressed() {
@@ -331,8 +324,8 @@ public class NativeKIAnakSmartRegisterActivity extends SecuredNativeSmartRegiste
 
     public void retrieveAndSaveUnsubmittedFormData(){
         if (currentActivityIsShowingForm()){
-            DisplayFormFragment formFragment = getDisplayFormFragmentAtIndex(currentPage);
-            formFragment.saveCurrentFormData();
+//            DisplayFormFragment formFragment = getDisplayFormFragmentAtIndex(currentPage);
+//            formFragment.saveCurrentFormData();
         }
     }
 

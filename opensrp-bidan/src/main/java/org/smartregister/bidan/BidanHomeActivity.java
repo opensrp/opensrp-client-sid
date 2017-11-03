@@ -1,7 +1,7 @@
 package org.smartregister.bidan;
+
 import android.database.Cursor;
 import android.os.StrictMode;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -11,10 +11,13 @@ import android.widget.Toast;
 
 import com.flurry.android.FlurryAgent;
 
+import org.json.JSONObject;
+import org.opensrp.api.util.EntityUtils;
+import org.opensrp.api.util.LocationTree;
 import org.smartregister.Context;
+import org.smartregister.bidan.lib.FlurryFacade;
 import org.smartregister.cursoradapter.SmartRegisterQueryBuilder;
 import org.smartregister.event.Listener;
-import org.smartregister.bidan.lib.FlurryFacade;
 import org.smartregister.service.PendingFormSubmissionService;
 import org.smartregister.sync.SyncAfterFetchListener;
 import org.smartregister.sync.SyncProgressIndicator;
@@ -23,18 +26,14 @@ import org.smartregister.view.activity.SecuredActivity;
 import org.smartregister.view.contract.HomeContext;
 import org.smartregister.view.controller.NativeAfterANMDetailsFetchListener;
 import org.smartregister.view.controller.NativeUpdateANMDetailsTask;
-//import org.smartregister.view.fragment.DisplayFormFragment;
-import org.json.JSONObject;
-import org.opensrp.api.domain.Location;
-import org.opensrp.api.util.EntityUtils;
-import org.opensrp.api.util.LocationTree;
-import org.opensrp.api.util.TreeNode;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
+import butterknife.Bind;
+import butterknife.BindDrawable;
 import util.formula.Support;
 
 import static android.widget.Toast.LENGTH_SHORT;
@@ -153,12 +152,12 @@ public class BidanHomeActivity extends SecuredActivity {
     }
 
     private void setupViews() {
+
         findViewById(R.id.btn_kartu_ibu_register).setOnClickListener(onRegisterStartListener);
         findViewById(R.id.btn_kartu_ibu_anc_register).setOnClickListener(onRegisterStartListener);
         findViewById(R.id.btn_kartu_ibu_pnc_register).setOnClickListener(onRegisterStartListener);
         findViewById(R.id.btn_anak_register).setOnClickListener(onRegisterStartListener);
         findViewById(R.id.btn_kohort_kb_register).setOnClickListener(onRegisterStartListener);
-
 
         findViewById(R.id.btn_reporting).setOnClickListener(onButtonsClickListener);
 //        findViewById(R.id.btn_videos).setOnClickListener(onButtonsClickListener);

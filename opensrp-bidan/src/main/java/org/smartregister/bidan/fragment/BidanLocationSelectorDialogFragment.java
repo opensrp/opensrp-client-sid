@@ -1,5 +1,6 @@
 package org.smartregister.bidan.fragment;
 
+import android.annotation.SuppressLint;
 import android.app.DialogFragment;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -9,14 +10,15 @@ import android.widget.LinearLayout;
 
 import com.google.common.base.Strings;
 
-import org.smartregister.domain.form.FieldOverrides;
-import org.smartregister.view.activity.SecuredNativeSmartRegisterActivity;
-import org.smartregister.view.dialog.DialogOption;
-import org.smartregister.view.dialog.DialogOptionModel;
 import org.json.JSONObject;
 import org.opensrp.api.domain.Location;
 import org.opensrp.api.util.EntityUtils;
 import org.opensrp.api.util.LocationTree;
+import org.smartregister.bidan.R;
+import org.smartregister.domain.form.FieldOverrides;
+import org.smartregister.view.activity.SecuredNativeSmartRegisterActivity;
+import org.smartregister.view.dialog.DialogOption;
+import org.smartregister.view.dialog.DialogOptionModel;
 
 import java.util.Map;
 
@@ -29,6 +31,7 @@ import static org.smartregister.util.StringUtil.humanize;
 /**
  * Created by koros on 2/25/16.
  */
+@SuppressLint("ValidFragment")
 public class BidanLocationSelectorDialogFragment extends DialogFragment {
 
     private final SecuredNativeSmartRegisterActivity parentActivity;

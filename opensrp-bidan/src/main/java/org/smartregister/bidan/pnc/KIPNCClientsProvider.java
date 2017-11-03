@@ -2,6 +2,7 @@ package org.smartregister.bidan.pnc;
 
 import android.app.Activity;
 import android.content.Context;
+import android.database.Cursor;
 import android.graphics.drawable.Drawable;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -14,13 +15,13 @@ import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import org.smartregister.bidan.R;
+import org.smartregister.bidan.kartu_ibu.KIDetailActivity;
 import org.smartregister.commonregistry.AllCommonsRepository;
 import org.smartregister.commonregistry.CommonPersonObject;
 import org.smartregister.commonregistry.CommonPersonObjectClient;
 import org.smartregister.commonregistry.CommonPersonObjectController;
 import org.smartregister.cursoradapter.SmartRegisterCLientsProviderForCursorAdapter;
-import org.smartregister.bidan.R;
-import org.smartregister.bidan.kartu_ibu.KIDetailActivity;
 import org.smartregister.repository.DetailsRepository;
 import org.smartregister.service.AlertService;
 import org.smartregister.util.OpenSRPImageLoader;
@@ -30,7 +31,7 @@ import org.smartregister.view.contract.SmartRegisterClients;
 import org.smartregister.view.dialog.FilterOption;
 import org.smartregister.view.dialog.ServiceModeOption;
 import org.smartregister.view.dialog.SortOption;
-import org.smartregister.view.viewHolder.OnClickFormLauncher;
+import org.smartregister.view.viewholder.OnClickFormLauncher;
 
 import java.io.File;
 import java.util.Map;
@@ -59,7 +60,6 @@ public class KIPNCClientsProvider implements SmartRegisterCLientsProviderForCurs
                                 View.OnClickListener onClickListener,
                                 AlertService alertService) {
         this.onClickListener = onClickListener;
-//        this.controller = controller;
         this.context = context;
         this.alertService = alertService;
         this.inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
@@ -72,7 +72,6 @@ public class KIPNCClientsProvider implements SmartRegisterCLientsProviderForCurs
 
     }
 
-    @Override
     public void getView(SmartRegisterClient smartRegisterClient, View convertView) {
 
         ViewHolder viewHolder;
@@ -220,12 +219,14 @@ public class KIPNCClientsProvider implements SmartRegisterCLientsProviderForCurs
         convertView.setLayoutParams(clientViewLayoutParams);
         //   return convertView;
     }
-    // CommonPersonObjectController householdelcocontroller;
 
-
-    //    @Override
     public SmartRegisterClients getClients() {
         return controller.getClients();
+    }
+
+    @Override
+    public void getView(Cursor cursor, SmartRegisterClient smartRegisterClient, View view) {
+        getView(smartRegisterClient, view);
     }
 
     @Override

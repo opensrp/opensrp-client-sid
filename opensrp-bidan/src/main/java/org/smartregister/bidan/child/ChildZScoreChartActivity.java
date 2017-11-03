@@ -13,8 +13,8 @@ import com.flurry.android.FlurryAgent;
 import com.jjoe64.graphview.GraphView;
 
 import org.smartregister.Context;
-import org.smartregister.commonregistry.CommonPersonObjectClient;
 import org.smartregister.bidan.R;
+import org.smartregister.commonregistry.CommonPersonObjectClient;
 import org.smartregister.repository.DetailsRepository;
 
 import util.ZScore.ZScoreSystemCalculation;

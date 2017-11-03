@@ -1,4 +1,5 @@
 package org.smartregister.bidan.kartu_ibu;
+
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.pm.ActivityInfo;
@@ -10,12 +11,14 @@ import android.widget.Toast;
 
 import com.flurry.android.FlurryAgent;
 
-import org.smartregister.domain.form.FieldOverrides;
-import org.smartregister.domain.form.FormSubmission;
+import org.json.JSONException;
+import org.json.JSONObject;
 import org.smartregister.bidan.LoginActivity;
 import org.smartregister.bidan.R;
 import org.smartregister.bidan.fragment.NativeKISmartRegisterFragment;
 import org.smartregister.bidan.pageradapter.BaseRegisterActivityPagerAdapter;
+import org.smartregister.domain.form.FieldOverrides;
+import org.smartregister.domain.form.FormSubmission;
 import org.smartregister.provider.SmartRegisterClientsProvider;
 import org.smartregister.service.ZiggyService;
 import org.smartregister.sync.ClientProcessor;
@@ -27,8 +30,6 @@ import org.smartregister.view.dialog.OpenFormOption;
 import org.smartregister.view.fragment.DisplayFormFragment;
 import org.smartregister.view.fragment.SecuredNativeSmartRegisterFragment;
 import org.smartregister.view.viewpager.OpenSRPViewPager;
-import org.json.JSONException;
-import org.json.JSONObject;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;

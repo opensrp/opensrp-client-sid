@@ -13,13 +13,10 @@ import android.widget.TextView;
 import com.flurry.android.FlurryAgent;
 
 import org.smartregister.Context;
-import org.smartregister.commonregistry.CommonPersonObjectClient;
 import org.smartregister.bidan.R;
-import org.smartregister.bidan.face.camera.SmartShutterActivity;
-import org.smartregister.bidan.face.camera.utils.Tools;
 import org.smartregister.bidan.lib.FlurryFacade;
+import org.smartregister.commonregistry.CommonPersonObjectClient;
 import org.smartregister.repository.DetailsRepository;
-import org.smartregister.util.OpenSRPImageLoader;
 import org.smartregister.view.activity.DrishtiApplication;
 
 import java.io.File;
@@ -28,7 +25,6 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.Locale;
 import java.util.Map;
-
 
 import static org.smartregister.util.StringUtil.humanize;
 
@@ -234,7 +230,7 @@ public class KIDetailActivity extends Activity {
             }
         });
 
-        hash = Tools.retrieveHash(context.applicationContext());
+//        hash = Tools.retrieveHash(context.applicationContext());
 
         kiview.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -246,12 +242,12 @@ public class KIDetailActivity extends Activity {
                     updateMode = true;
                 }
 
-                Intent takePictureIntent = new Intent(KIDetailActivity.this, SmartShutterActivity.class);
-                takePictureIntent.putExtra("org.sid.sidface.SmartShutterActivity.updated", updateMode);
-                takePictureIntent.putExtra("IdentifyPerson", false);
-                takePictureIntent.putExtra("org.sid.sidface.ImageConfirmation.id", entityid);
-                takePictureIntent.putExtra("org.sid.sidface.ImageConfirmation.origin", TAG); // send Class Name
-                startActivityForResult(takePictureIntent, 2);
+//                Intent takePictureIntent = new Intent(KIDetailActivity.this, SmartShutterActivity.class);
+//                takePictureIntent.putExtra("org.sid.sidface.SmartShutterActivity.updated", updateMode);
+//                takePictureIntent.putExtra("IdentifyPerson", false);
+//                takePictureIntent.putExtra("org.sid.sidface.ImageConfirmation.id", entityid);
+//                takePictureIntent.putExtra("org.sid.sidface.ImageConfirmation.origin", TAG); // send Class Name
+//                startActivityForResult(takePictureIntent, 2);
 
             }
         });

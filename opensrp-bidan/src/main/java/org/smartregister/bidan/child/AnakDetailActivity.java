@@ -10,17 +10,13 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import org.smartregister.Context;
+import org.smartregister.bidan.R;
+import org.smartregister.bidan.kartu_ibu.KIDetailActivity;
+import org.smartregister.bidan.lib.FlurryFacade;
 import org.smartregister.commonregistry.AllCommonsRepository;
 import org.smartregister.commonregistry.CommonPersonObject;
 import org.smartregister.commonregistry.CommonPersonObjectClient;
-import org.smartregister.bidan.R;
-import org.smartregister.bidan.face.camera.SmartShutterActivity;
-import org.smartregister.bidan.face.camera.utils.Tools;
-import org.smartregister.bidan.kartu_ibu.KIDetailActivity;
-import org.smartregister.bidan.lib.FlurryFacade;
 import org.smartregister.repository.DetailsRepository;
-import org.smartregister.util.OpenSRPImageLoader;
-import org.smartregister.view.activity.ChildDetailActivity;
 import org.smartregister.view.activity.DrishtiApplication;
 
 import java.io.File;
@@ -156,7 +152,7 @@ public class AnakDetailActivity extends Activity {
         campak.setText(String.format(": %s", humanize(childclient.getDetails().get("campak") != null ? childclient.getDetails().get("campak") : "-")));
         vita.setText(String.format(": %s", humanize(childclient.getDetails().get("pelayananVita") != null ? childclient.getDetails().get("pelayananVita") : "-")));
 
-        hash = Tools.retrieveHash(context.applicationContext());
+//        hash = Tools.retrieveHash(context.applicationContext());
 
         childview.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -167,12 +163,12 @@ public class AnakDetailActivity extends Activity {
                 if (hash.containsValue(entityid)) {
                     updateMode = true;
                 }
-                Intent takePictureIntent = new Intent(AnakDetailActivity.this, SmartShutterActivity.class);
-                takePictureIntent.putExtra("org.sid.sidface.SmartShutterActivity.updated", updateMode);
-                takePictureIntent.putExtra("IdentifyPerson", false);
-                takePictureIntent.putExtra("org.sid.sidface.ImageConfirmation.id", entityid);
-                takePictureIntent.putExtra("org.sid.sidface.ImageConfirmation.origin", TAG); // send Class Name
-                startActivityForResult(takePictureIntent, 2);
+//                Intent takePictureIntent = new Intent(AnakDetailActivity.this, SmartShutterActivity.class);
+//                takePictureIntent.putExtra("org.sid.sidface.SmartShutterActivity.updated", updateMode);
+//                takePictureIntent.putExtra("IdentifyPerson", false);
+//                takePictureIntent.putExtra("org.sid.sidface.ImageConfirmation.id", entityid);
+//                takePictureIntent.putExtra("org.sid.sidface.ImageConfirmation.origin", TAG); // send Class Name
+//                startActivityForResult(takePictureIntent, 2);
 
             }
         });

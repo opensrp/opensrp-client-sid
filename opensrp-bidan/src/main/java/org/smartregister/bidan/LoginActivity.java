@@ -26,13 +26,12 @@ import android.widget.TextView;
 import com.flurry.android.FlurryAgent;
 
 import org.smartregister.Context;
+import org.smartregister.bidan.lib.ErrorReportingFacade;
 import org.smartregister.bidan.utils.Config;
 import org.smartregister.domain.LoginResponse;
 import org.smartregister.domain.Response;
 import org.smartregister.domain.ResponseStatus;
 import org.smartregister.event.Listener;
-import org.smartregister.bidan.lib.ErrorReportingFacade;
-import org.smartregister.bidan.lib.FlurryFacade;
 import org.smartregister.repository.AllSharedPreferences;
 import org.smartregister.sync.DrishtiSyncScheduler;
 import org.smartregister.util.Log;

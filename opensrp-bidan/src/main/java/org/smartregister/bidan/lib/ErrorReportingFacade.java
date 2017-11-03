@@ -3,6 +3,7 @@ package org.smartregister.bidan.lib;
 import android.content.Context;
 
 import com.crashlytics.android.Crashlytics;
+
 import io.fabric.sdk.android.Fabric;
 
 /**

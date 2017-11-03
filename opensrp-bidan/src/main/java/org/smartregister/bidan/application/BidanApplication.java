@@ -1,21 +1,23 @@
 package org.smartregister.bidan.application;
+
 import android.content.Intent;
 import android.content.res.Configuration;
 
-import org.acra.ACRA;
 import org.acra.ReportingInteractionMode;
 import org.acra.annotation.ReportsCrashes;
 import org.smartregister.Context;
-import org.smartregister.commonregistry.CommonFtsObject;
 import org.smartregister.bidan.LoginActivity;
 import org.smartregister.bidan.lib.ErrorReportingFacade;
 import org.smartregister.bidan.lib.FlurryFacade;
+import org.smartregister.commonregistry.CommonFtsObject;
 import org.smartregister.sync.DrishtiSyncScheduler;
 import org.smartregister.view.activity.DrishtiApplication;
 import org.smartregister.view.receiver.SyncBroadcastReceiver;
-import static org.smartregister.util.Log.logInfo;
 
 import java.util.Locale;
+
+import static org.smartregister.util.Log.logInfo;
+
 @ReportsCrashes(
         formKey = "",
         formUri = "https://drishtiapp.cloudant.com/acra-drishtiapp/_design/acra-storage/_update/report",

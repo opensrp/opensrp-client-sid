@@ -2,10 +2,10 @@ package org.smartregister.bidan.kb;
 
 import android.app.Activity;
 import android.content.Context;
+import android.database.Cursor;
 import android.graphics.drawable.Drawable;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.AbsListView;
 import android.widget.Button;
 import android.widget.ImageButton;
@@ -13,13 +13,12 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import org.smartregister.bidan.R;
+import org.smartregister.bidan.kartu_ibu.KIDetailActivity;
 import org.smartregister.commonregistry.CommonPersonObjectClient;
 import org.smartregister.commonregistry.CommonPersonObjectController;
 import org.smartregister.cursoradapter.SmartRegisterCLientsProviderForCursorAdapter;
 import org.smartregister.domain.Alert;
-import org.smartregister.bidan.R;
-import org.smartregister.bidan.application.BidanApplication;
-import org.smartregister.bidan.kartu_ibu.KIDetailActivity;
 import org.smartregister.repository.DetailsRepository;
 import org.smartregister.service.AlertService;
 import org.smartregister.util.OpenSRPImageLoader;
@@ -29,7 +28,7 @@ import org.smartregister.view.contract.SmartRegisterClients;
 import org.smartregister.view.dialog.FilterOption;
 import org.smartregister.view.dialog.ServiceModeOption;
 import org.smartregister.view.dialog.SortOption;
-import org.smartregister.view.viewHolder.OnClickFormLauncher;
+import org.smartregister.view.viewholder.OnClickFormLauncher;
 
 import java.io.File;
 import java.util.List;
@@ -67,7 +66,6 @@ public class KBClientsProvider implements SmartRegisterCLientsProviderForCursorA
 
     }
 
-    @Override
     public void getView(SmartRegisterClient smartRegisterClient, View convertView) {
 
         ViewHolder viewHolder;
@@ -108,7 +106,7 @@ public class KBClientsProvider implements SmartRegisterCLientsProviderForCursorA
             viewHolder.profilepic =(ImageView) convertView.findViewById(R.id.img_profile);
             viewHolder.follow_up = (ImageButton) convertView.findViewById(R.id.btn_edit);
             convertView.setTag(viewHolder);
-        }else{
+        } else {
             viewHolder = (ViewHolder) convertView.getTag();
         }
 
@@ -137,14 +135,8 @@ public class KBClientsProvider implements SmartRegisterCLientsProviderForCursorA
                 pc.getDetails().get("highRiskPregnancyOldMaternalAge"),viewHolder.hr_badge);
 
 
-        //set image
-//        final ImageView kiview = (ImageView)convertView.findViewById(R.id.img_profile);
         //start profile image
         viewHolder.profilepic.setTag(R.id.entity_id, pc.getColumnmaps().get("_id"));//required when saving file to disk
-//        if(pc.getCaseId()!=null){//image already in local storage most likey ):
-//            set profile image by passing the client id.If the image doesn't exist in the image repository then download and save locally
-//            DrishtiApplication.getCachedImageLoaderInstance().getImageByClientId(pc.getCaseId(), OpenSRPImageLoader.getStaticImageListener(viewHolder.profilepic, R.mipmap.woman_placeholder, R.mipmap.woman_placeholder));
-//        }
 
         KIDetailActivity.setImagetoHolderFromUri((Activity) context,
                 DrishtiApplication.getAppDir() + File.separator + pc.getDetails().get("base_entity_id") + ".JPEG",
@@ -173,28 +165,6 @@ public class KBClientsProvider implements SmartRegisterCLientsProviderForCursorA
 
         viewHolder.hrp_badge.setVisibility(View.INVISIBLE);
         viewHolder.img_hrl_badge.setVisibility(View.INVISIBLE);
-
-/*        AllCommonsRepository iburep = org.smartregister.Context.getInstance().allCommonsRepositoryobjects("ibu");
-        if(pc.getColumnmaps().get("ibu.id") != null) {
-            final CommonPersonObject ibuparent = iburep.findByCaseID(pc.getColumnmaps().get("ibu.id"));*//*
-
-            //Risk flag
-            if (ibuparent.getDetails().get("highRiskPregnancyPIH") != null && ibuparent.getDetails().get("highRiskPregnancyPIH").equals("yes")
-                    || pc.getDetails().get("highRiskPregnancyPIH") != null && pc.getDetails().get("highRiskPregnancyPIH").equals("yes")
-                    || ibuparent.getDetails().get("highRiskPregnancyProteinEnergyMalnutrition") != null && ibuparent.getDetails().get("highRiskPregnancyProteinEnergyMalnutrition").equals("yes")
-                    || pc.getDetails().get("HighRiskPregnancyTooManyChildren") != null && pc.getDetails().get("HighRiskPregnancyTooManyChildren").equals("yes")
-                    || ibuparent.getDetails().get("highRiskPregnancyDiabetes") != null && ibuparent.getDetails().get("highRiskPregnancyDiabetes").equals("yes")
-                    || ibuparent.getDetails().get("highRiskPregnancyAnemia") != null && ibuparent.getDetails().get("highRiskPregnancyAnemia").equals("yes")) {
-                viewHolder.hrp_badge.setVisibility(View.VISIBLE);
-            }
-            if (ibuparent.getDetails().get("highRiskLabourFetusMalpresentation") != null && ibuparent.getDetails().get("highRiskLabourFetusMalpresentation").equals("yes")
-                    || ibuparent.getDetails().get("highRiskLabourFetusSize") != null && ibuparent.getDetails().get("highRiskLabourFetusSize").equals("yes")
-                    || ibuparent.getDetails().get("highRisklabourFetusNumber") != null && ibuparent.getDetails().get("highRisklabourFetusNumber").equals("yes")
-                    || pc.getDetails().get("HighRiskLabourSectionCesareaRecord") != null && pc.getDetails().get("HighRiskLabourSectionCesareaRecord").equals("yes")
-                    || ibuparent.getDetails().get("highRiskLabourTBRisk") != null && ibuparent.getDetails().get("highRiskLabourTBRisk").equals("yes")) {
-                viewHolder.img_hrl_badge.setVisibility(View.VISIBLE);
-            }
-        }*/
 
         viewHolder.follow_due.setText("");
         viewHolder.follow_up_due.setText("");
@@ -241,14 +211,15 @@ public class KBClientsProvider implements SmartRegisterCLientsProviderForCursorA
         }
 
         convertView.setLayoutParams(clientViewLayoutParams);
-     //   return convertView;
     }
-    CommonPersonObjectController householdelcocontroller;
 
-
-    //    @Override
     public SmartRegisterClients getClients() {
         return controller.getClients();
+    }
+
+    @Override
+    public void getView(Cursor cursor, SmartRegisterClient smartRegisterClient, View view) {
+        getView(smartRegisterClient, view);
     }
 
     @Override
@@ -289,8 +260,7 @@ public class KBClientsProvider implements SmartRegisterCLientsProviderForCursorA
 
     @Override
     public View inflatelayoutForCursorAdapter() {
-        View View = (ViewGroup) inflater().inflate(R.layout.smart_register_kb_client, null);
-        return View;
+        return inflater().inflate(R.layout.smart_register_kb_client, null);
     }
 
     class ViewHolder {
