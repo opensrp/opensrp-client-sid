@@ -15,43 +15,42 @@ import android.widget.Toast;
 
 import com.flurry.android.FlurryAgent;
 
-import org.ei.opensrp.Context;
-import org.ei.opensrp.commonregistry.CommonPersonObjectClient;
-import org.ei.opensrp.commonregistry.CommonPersonObjectController;
-import org.ei.opensrp.commonregistry.CommonRepository;
-import org.ei.opensrp.cursoradapter.CursorCommonObjectFilterOption;
-import org.ei.opensrp.cursoradapter.CursorCommonObjectSort;
-import org.ei.opensrp.cursoradapter.SecuredNativeSmartRegisterCursorAdapterFragment;
-import org.ei.opensrp.cursoradapter.SmartRegisterPaginatedCursorAdapter;
-import org.ei.opensrp.cursoradapter.SmartRegisterQueryBuilder;
+import org.smartregister.Context;
+import org.smartregister.commonregistry.CommonPersonObjectClient;
+import org.smartregister.commonregistry.CommonPersonObjectController;
+import org.smartregister.commonregistry.CommonRepository;
+import org.smartregister.cursoradapter.CursorCommonObjectFilterOption;
+import org.smartregister.cursoradapter.CursorCommonObjectSort;
+import org.smartregister.cursoradapter.SecuredNativeSmartRegisterCursorAdapterFragment;
+import org.smartregister.cursoradapter.SmartRegisterPaginatedCursorAdapter;
+import org.smartregister.cursoradapter.SmartRegisterQueryBuilder;
 import org.ei.opensrp.gizi.LoginActivity;
-import org.ei.opensrp.gizi.face.camera.SmartShutterActivity;
 import org.ei.opensrp.gizi.gizi.GiziDetailActivity;
 import org.ei.opensrp.gizi.gizi.GiziGrowthChartActivity;
 import org.ei.opensrp.gizi.gizi.GiziServiceModeOption;
 import org.ei.opensrp.gizi.gizi.GiziSmartClientsProvider;
 import org.ei.opensrp.gizi.gizi.GiziSmartRegisterActivity;
 import org.ei.opensrp.gizi.gizi.KICommonObjectFilterOption;
-import org.ei.opensrp.provider.SmartRegisterClientsProvider;
+import org.smartregister.provider.SmartRegisterClientsProvider;
 import org.ei.opensrp.gizi.R;
 
-import org.ei.opensrp.sync.ClientProcessor;
-import org.ei.opensrp.util.StringUtil;
-import org.ei.opensrp.view.activity.SecuredNativeSmartRegisterActivity;
-import org.ei.opensrp.view.contract.ECClient;
-import org.ei.opensrp.view.contract.SmartRegisterClient;
-import org.ei.opensrp.view.contract.SmartRegisterClients;
-import org.ei.opensrp.view.controller.VillageController;
-import org.ei.opensrp.view.dialog.AllClientsFilter;
-import org.ei.opensrp.view.dialog.DialogOption;
-import org.ei.opensrp.view.dialog.DialogOptionMapper;
-import org.ei.opensrp.view.dialog.DialogOptionModel;
-import org.ei.opensrp.view.dialog.EditOption;
-import org.ei.opensrp.view.dialog.FilterOption;
-import org.ei.opensrp.view.dialog.LocationSelectorDialogFragment;
-import org.ei.opensrp.view.dialog.NameSort;
-import org.ei.opensrp.view.dialog.ServiceModeOption;
-import org.ei.opensrp.view.dialog.SortOption;
+import org.smartregister.sync.ClientProcessor;
+import org.smartregister.util.StringUtil;
+import org.smartregister.view.activity.SecuredNativeSmartRegisterActivity;
+import org.smartregister.view.contract.ECClient;
+import org.smartregister.view.contract.SmartRegisterClient;
+import org.smartregister.view.contract.SmartRegisterClients;
+import org.smartregister.view.controller.VillageController;
+import org.smartregister.view.dialog.AllClientsFilter;
+import org.smartregister.view.dialog.DialogOption;
+import org.smartregister.view.dialog.DialogOptionMapper;
+import org.smartregister.view.dialog.DialogOptionModel;
+import org.smartregister.view.dialog.EditOption;
+import org.smartregister.view.dialog.FilterOption;
+import org.smartregister.view.dialog.LocationSelectorDialogFragment;
+import org.smartregister.view.dialog.NameSort;
+import org.smartregister.view.dialog.ServiceModeOption;
+import org.smartregister.view.dialog.SortOption;
 import org.opensrp.api.domain.Location;
 import org.opensrp.api.util.EntityUtils;
 import org.opensrp.api.util.LocationTree;
@@ -272,11 +271,11 @@ public class GiziSmartRegisterFragment extends SecuredNativeSmartRegisterCursorA
             ft.remove(prev);
         }
 
-        String uniqueIdJson = LoginActivity.generator.uniqueIdController().getUniqueIdJson();
-        if(uniqueIdJson == null || uniqueIdJson.isEmpty()){
+       // String uniqueIdJson = LoginActivity.generator.uniqueIdController().getUniqueIdJson();
+       /* if(uniqueIdJson == null || uniqueIdJson.isEmpty()){
             Toast.makeText(getActivity(),"No unique id",Toast.LENGTH_LONG).show();
             return;
-        }
+        }*/
 
         ft.addToBackStack(null);
         LocationSelectorDialogFragment
@@ -527,7 +526,7 @@ public class GiziSmartRegisterFragment extends SecuredNativeSmartRegisterCursorA
     //    WD
     @Override
     public void setupSearchView(final View view) {
-        searchView = (EditText) view.findViewById(org.ei.opensrp.R.id.edt_search);
+        searchView = (EditText) view.findViewById(org.smartregister.R.id.edt_search);
         searchView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -538,18 +537,18 @@ public class GiziSmartRegisterFragment extends SecuredNativeSmartRegisterCursorA
                     @Override
                     public void onClick(DialogInterface dialog, int opt) {
                         if (opt == 0) searchTextChangeListener("");
-                        else getFacialRecord(view);
+                       // else getFacialRecord(view);
                     }
                 });
                 builder.show();
             }
         });
 
-        searchCancelView = view.findViewById(org.ei.opensrp.R.id.btn_search_cancel);
+        searchCancelView = view.findViewById(org.smartregister.R.id.btn_search_cancel);
         searchCancelView.setOnClickListener(searchCancelHandler);
     }
 
-    public void getFacialRecord(View view) {
+    /*public void getFacialRecord(View view) {
         FlurryAgent.logEvent(TAG+" search_by_face", true);
         Log.e(TAG, "getFacialRecord: start ");
         SmartShutterActivity.kidetail = (CommonPersonObjectClient) view.getTag();
@@ -562,7 +561,7 @@ public class GiziSmartRegisterFragment extends SecuredNativeSmartRegisterCursorA
         startActivityForResult(intent, 2);
 
 
-    }
+    }*/
 
     public void searchTextChangeListener(String s) {
         Log.e(TAG, "searchTextChangeListener: " + s);

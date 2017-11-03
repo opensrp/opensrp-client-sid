@@ -4,11 +4,11 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 
-import org.ei.opensrp.sync.SyncAfterFetchListener;
-import org.ei.opensrp.sync.SyncProgressIndicator;
-import org.ei.opensrp.sync.UpdateActionsTask;
+import org.smartregister.sync.SyncAfterFetchListener;
+import org.smartregister.sync.SyncProgressIndicator;
+import org.smartregister.sync.UpdateActionsTask;
 
-import static org.ei.opensrp.util.Log.logInfo;
+import static org.smartregister.util.Log.logInfo;
 
 /**
  + * Created by Dimas on 9/17/2015.
@@ -19,10 +19,10 @@ public class SyncGiziBroadcastReceiver extends BroadcastReceiver {
         logInfo("Sync alarm triggered. Trying to Sync.");
         UpdateActionsTask updateActionsTask = new UpdateActionsTask(
                 context,
-                org.ei.opensrp.Context.getInstance().actionService(),
-                org.ei.opensrp.Context.getInstance().formSubmissionSyncService(),
+                org.smartregister.Context.getInstance().actionService(),
+                org.smartregister.Context.getInstance().formSubmissionSyncService(),
                 new SyncProgressIndicator(),
-                org.ei.opensrp.Context.getInstance().allFormVersionSyncService());
+                org.smartregister.Context.getInstance().allFormVersionSyncService());
 
       //  updateActionsTask.setAdditionalSyncService(org.ei.opensrp.Context.getInstance().uniqueIdService());
 

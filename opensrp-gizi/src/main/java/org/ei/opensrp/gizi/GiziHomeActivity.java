@@ -14,24 +14,23 @@ import android.widget.Toast;
 
 import com.flurry.android.FlurryAgent;
 
-import org.ei.opensrp.AllConstants;
-import org.ei.opensrp.Context;
-import org.ei.opensrp.commonregistry.CommonPersonObjectController;
-import org.ei.opensrp.cursoradapter.SmartRegisterQueryBuilder;
-import org.ei.opensrp.event.Listener;
+import org.smartregister.AllConstants;
+import org.smartregister.Context;
+import org.smartregister.commonregistry.CommonPersonObjectController;
+import org.smartregister.cursoradapter.SmartRegisterQueryBuilder;
+import org.smartregister.event.Listener;
 
-import org.ei.opensrp.gizi.face.camera.util.Tools;
-import org.ei.opensrp.repository.AllSharedPreferences;
-import org.ei.opensrp.service.PendingFormSubmissionService;
-import org.ei.opensrp.sync.SyncAfterFetchListener;
-import org.ei.opensrp.sync.SyncProgressIndicator;
-import org.ei.opensrp.sync.UpdateActionsTask;
+import org.smartregister.repository.AllSharedPreferences;
+import org.smartregister.service.PendingFormSubmissionService;
+import org.smartregister.sync.SyncAfterFetchListener;
+import org.smartregister.sync.SyncProgressIndicator;
+import org.smartregister.sync.UpdateActionsTask;
 import org.ei.opensrp.gizi.gizi.FlurryFacade;
-import org.ei.opensrp.view.activity.SecuredActivity;
-import org.ei.opensrp.view.contract.HomeContext;
-import org.ei.opensrp.view.controller.NativeAfterANMDetailsFetchListener;
-import org.ei.opensrp.view.controller.NativeUpdateANMDetailsTask;
-import org.ei.opensrp.view.fragment.DisplayFormFragment;
+import org.smartregister.view.activity.SecuredActivity;
+import org.smartregister.view.contract.HomeContext;
+import org.smartregister.view.controller.NativeAfterANMDetailsFetchListener;
+import org.smartregister.view.controller.NativeUpdateANMDetailsTask;
+import org.smartregister.view.fragment.DisplayFormFragment;
 import org.json.JSONObject;
 import org.opensrp.api.domain.Location;
 import org.opensrp.api.util.EntityUtils;
@@ -47,10 +46,10 @@ import util.formula.Support;
 
 import static android.widget.Toast.LENGTH_SHORT;
 import static java.lang.String.valueOf;
-import static org.ei.opensrp.event.Event.ACTION_HANDLED;
-import static org.ei.opensrp.event.Event.FORM_SUBMITTED;
-import static org.ei.opensrp.event.Event.SYNC_COMPLETED;
-import static org.ei.opensrp.event.Event.SYNC_STARTED;
+import static org.smartregister.event.Event.ACTION_HANDLED;
+import static org.smartregister.event.Event.FORM_SUBMITTED;
+import static org.smartregister.event.Event.SYNC_COMPLETED;
+import static org.smartregister.event.Event.SYNC_STARTED;
 
 public class GiziHomeActivity extends SecuredActivity {
     SimpleDateFormat timer = new SimpleDateFormat("hh:mm:ss");
@@ -62,7 +61,7 @@ public class GiziHomeActivity extends SecuredActivity {
         @Override
         public void onEvent(Boolean data) {
             Support.ONSYNC = true;
-            AllConstants.SLEEP_TIME = 15000;
+            //AllConstants.SLEEP_TIME = 15000;
             if (updateMenuItem != null) {
                 updateMenuItem.setActionView(R.layout.progress);
             }
@@ -80,16 +79,16 @@ public class GiziHomeActivity extends SecuredActivity {
             }
             updateRegisterCounts();
 
-            new Tools(context());
+          //  new Tools(context());
 //            Tools.download_images();
-            Tools.setVectorfromAPI(getApplicationContext());
+         //   Tools.setVectorfromAPI(getApplicationContext());
 //            AllConstants.SLEEP_TIME = AllConstants.WAITING_TIME;
 //            Tools.setVectorsBuffered();
-            flagActivator();
+         //   flagActivator();
         }
     };
 
-    private void flagActivator(){
+   /* private void flagActivator(){
         new Thread(){
             public void run(){
                 try{
@@ -104,7 +103,7 @@ public class GiziHomeActivity extends SecuredActivity {
                 }
             }
         }.start();
-    }
+    }*/
 
     private Listener<String> onFormSubmittedListener = new Listener<String>() {
         @Override
@@ -161,7 +160,7 @@ public class GiziHomeActivity extends SecuredActivity {
 
     private void setupViews() {
         findViewById(R.id.btn_gizi_register).setOnClickListener(onRegisterStartListener);
-        findViewById(R.id.btn_gizi_ibu_register).setOnClickListener(onRegisterStartListener);
+       // findViewById(R.id.btn_gizi_ibu_register).setOnClickListener(onRegisterStartListener);
         // findViewById(R.id.btn_test2_register).setOnClickListener(onRegisterStartListener);
         // findViewById(R.id.btn_tt_register).setVisibility(View.INVISIBLE);
 
@@ -169,7 +168,7 @@ public class GiziHomeActivity extends SecuredActivity {
 //        findViewById(R.id.btn_videos).setOnClickListener(onButtonsClickListener);
 
         anakRegisterClientCountView = (TextView) findViewById(R.id.txt_child_register_client_count);
-        ibuRegisterClientCountView = (TextView) findViewById(R.id.txt_mother_register_client_count);
+      //  ibuRegisterClientCountView = (TextView) findViewById(R.id.txt_mother_register_client_count);
 
     }
 
@@ -196,13 +195,13 @@ public class GiziHomeActivity extends SecuredActivity {
         updateSyncIndicator();
         updateRemainingFormsToSyncCount();
 
-        initFR();
+       // initFR();
     }
 
-    private void initFR() {
+   /* private void initFR() {
         new Tools(context());
         Log.e("TAG", "initFR: "+ Tools.getAppContext() );
-    }
+    }*/
 
     private void updateRegisterCounts() {
         NativeUpdateANMDetailsTask task = new NativeUpdateANMDetailsTask(Context.getInstance().anmController());
@@ -216,20 +215,19 @@ public class GiziHomeActivity extends SecuredActivity {
 
     private void updateRegisterCounts(HomeContext homeContext) {
         SmartRegisterQueryBuilder sqb = new SmartRegisterQueryBuilder();
-        Cursor childcountcursor = context().commonrepository("anak").RawCustomQueryForAdapter(sqb.queryForCountOnRegisters("ec_anak_search", "ec_anak_search.is_closed=0"));
+        Cursor childcountcursor = context().commonrepository("anak").rawCustomQueryForAdapter(sqb.queryForCountOnRegisters("ec_anak_search", "ec_anak_search.is_closed=0"));
         childcountcursor.moveToFirst();
         childcount = childcountcursor.getInt(0);
         childcountcursor.close();
 
         anakRegisterClientCountView.setText(valueOf(childcount));
 
-        Cursor ibucountcursor = context().commonrepository("ec_ibu").RawCustomQueryForAdapter(sqb.queryForCountOnRegisters("ec_ibu", "ec_ibu.is_closed=0 and ec_ibu.pptest ='Positive'"));
+      /*  Cursor ibucountcursor = context().commonrepository("ec_ibu").rawCustomQueryForAdapter(sqb.queryForCountOnRegisters("ec_ibu", "ec_ibu.is_closed=0 and ec_ibu.pptest ='Positive'"));
         ibucountcursor.moveToFirst();
         ibucount = ibucountcursor.getInt(0);
         ibucountcursor.close();
 
-        ibuRegisterClientCountView.setText(valueOf(ibucount));
-
+        ibuRegisterClientCountView.setText(valueOf(ibucount));*/
 
        /* CommonPersonObjectController hhcontroller = new CommonPersonObjectController(context.allCommonsRepositoryobjects("anak"),
                 context.allBeneficiaries(), context.listCache(),
@@ -293,8 +291,8 @@ public class GiziHomeActivity extends SecuredActivity {
         Map<String, TreeNode<String, Location>> locationMap =
                 locationTree.getLocationsHierarchy();
 
-        if (LoginActivity.generator.uniqueIdController().needToRefillUniqueId(LoginActivity.generator.UNIQUE_ID_LIMIT))  // unique id part
-            LoginActivity.generator.requestUniqueId();                                                                  // unique id part
+     /*   if (LoginActivity.generator.uniqueIdController().needToRefillUniqueId(LoginActivity.generator.UNIQUE_ID_LIMIT))  // unique id part
+            LoginActivity.generator.requestUniqueId();     */                                                             // unique id part
     }
 
     @Override
@@ -339,9 +337,9 @@ public class GiziHomeActivity extends SecuredActivity {
                     navigationController.startChildSmartRegistry();
                     break;
 
-                case R.id.btn_gizi_ibu_register:
+              /*  case R.id.btn_gizi_ibu_register:
                     navigationController.startANCSmartRegistry();
-                    break;
+                    break;*/
 /*
                 case R.id.btn_pnc_register:
 //                    navigationController.startPNCSmartRegistry();

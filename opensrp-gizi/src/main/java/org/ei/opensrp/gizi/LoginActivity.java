@@ -201,7 +201,7 @@ public class LoginActivity extends Activity {
     private void localLogin(View view, String userName, String password) {
         if (getOpenSRPContext().userService().isUserInValidGroup(userName, password)) {
             localLoginWith(userName, password);
-            //  ErrorReportingFacade.setUsername("", userName);
+          //  ErrorReportingFacade.setUsername("", userName);
             FlurryAgent.setUserId(userName);
         } else {
             showErrorDialog(getString(org.smartregister.R.string.login_failed_dialog_message));
@@ -212,7 +212,7 @@ public class LoginActivity extends Activity {
     private void remoteLogin(final View view, final String userName, final String password) {
         tryRemoteLogin(userName, password, new Listener<LoginResponse>() {
             public void onEvent(LoginResponse loginResponse) {
-                //  ErrorReportingFacade.setUsername("", userName);
+              //  ErrorReportingFacade.setUsername("", userName);
                 FlurryAgent.setUserId(userName);
                 if (loginResponse == SUCCESS) {
                     remoteLoginWith(userName, password, loginResponse.payload());
@@ -329,14 +329,14 @@ public class LoginActivity extends Activity {
 
     private void localLoginWith(String userName, String password) {
         context.userService().localLogin(userName, password);
-        // LoginActivity.generator = new Generator(context,userName,password);
+       // LoginActivity.generator = new Generator(context,userName,password);
         goToHome();
         DrishtiSyncScheduler.startOnlyIfConnectedToNetwork(getApplicationContext());
     }
 
     private void remoteLoginWith(String userName, String password, String userInfo) {
         context.userService().remoteLogin(userName, password, userInfo);
-        //  LoginActivity.generator = new Generator(context,userName,password);
+      //  LoginActivity.generator = new Generator(context,userName,password);
         goToHome();
         DrishtiSyncScheduler.startOnlyIfConnectedToNetwork(getApplicationContext());
     }

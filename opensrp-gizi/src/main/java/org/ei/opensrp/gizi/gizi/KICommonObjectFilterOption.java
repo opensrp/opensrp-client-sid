@@ -1,7 +1,7 @@
 package org.ei.opensrp.gizi.gizi;
 
-import org.ei.opensrp.cursoradapter.CursorFilterOption;
-import org.ei.opensrp.view.contract.SmartRegisterClient;
+import org.smartregister.cursoradapter.CursorFilterOption;
+import org.smartregister.view.contract.SmartRegisterClient;
 
 public class KICommonObjectFilterOption implements CursorFilterOption {
     public final String criteria;

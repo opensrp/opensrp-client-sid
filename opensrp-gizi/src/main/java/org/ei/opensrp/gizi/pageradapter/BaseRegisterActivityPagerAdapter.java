@@ -4,7 +4,7 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 
-import org.ei.opensrp.view.fragment.DisplayFormFragment;
+import org.smartregister.view.fragment.DisplayFormFragment;
 
 
 

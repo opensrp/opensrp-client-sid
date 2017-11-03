@@ -13,32 +13,32 @@ import android.widget.Toast;
 
 import com.flurry.android.FlurryAgent;
 
-import org.ei.opensrp.Context;
-import org.ei.opensrp.commonregistry.AllCommonsRepository;
-import org.ei.opensrp.commonregistry.CommonPersonObject;
-import org.ei.opensrp.commonregistry.CommonPersonObjectClient;
-import org.ei.opensrp.cursoradapter.SmartRegisterQueryBuilder;
-import org.ei.opensrp.domain.Alert;
-import org.ei.opensrp.domain.form.FieldOverrides;
-import org.ei.opensrp.domain.form.FormSubmission;
+import org.smartregister.Context;
+import org.smartregister.commonregistry.AllCommonsRepository;
+import org.smartregister.commonregistry.CommonPersonObject;
+import org.smartregister.commonregistry.CommonPersonObjectClient;
+import org.smartregister.cursoradapter.SmartRegisterQueryBuilder;
+import org.smartregister.domain.Alert;
+import org.smartregister.domain.form.FieldOverrides;
+import org.smartregister.domain.form.FormSubmission;
 import org.ei.opensrp.gizi.LoginActivity;
 import org.ei.opensrp.gizi.fragment.GiziSmartRegisterFragment;
 import org.ei.opensrp.gizi.pageradapter.BaseRegisterActivityPagerAdapter;
-import org.ei.opensrp.provider.SmartRegisterClientsProvider;
-import org.ei.opensrp.service.ZiggyService;
+import org.smartregister.provider.SmartRegisterClientsProvider;
+import org.smartregister.service.ZiggyService;
 import org.ei.opensrp.gizi.LoginActivity;
 import org.ei.opensrp.gizi.R;
 import org.ei.opensrp.gizi.fragment.GiziSmartRegisterFragment;
 import org.ei.opensrp.gizi.pageradapter.BaseRegisterActivityPagerAdapter;
-import org.ei.opensrp.sync.ClientProcessor;
-import org.ei.opensrp.util.FormUtils;
-import org.ei.opensrp.view.activity.SecuredNativeSmartRegisterActivity;
-import org.ei.opensrp.view.dialog.DialogOption;
-import org.ei.opensrp.view.dialog.LocationSelectorDialogFragment;
-import org.ei.opensrp.view.dialog.OpenFormOption;
-import org.ei.opensrp.view.fragment.DisplayFormFragment;
-import org.ei.opensrp.view.fragment.SecuredNativeSmartRegisterFragment;
-import org.ei.opensrp.view.viewpager.OpenSRPViewPager;
+import org.smartregister.sync.ClientProcessor;
+import org.smartregister.util.FormUtils;
+import org.smartregister.view.activity.SecuredNativeSmartRegisterActivity;
+import org.smartregister.view.dialog.DialogOption;
+import org.smartregister.view.dialog.LocationSelectorDialogFragment;
+import org.smartregister.view.dialog.OpenFormOption;
+import org.smartregister.view.fragment.DisplayFormFragment;
+import org.smartregister.view.fragment.SecuredNativeSmartRegisterFragment;
+import org.smartregister.view.viewpager.OpenSRPViewPager;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -125,11 +125,11 @@ public class GiziSmartRegisterActivity extends SecuredNativeSmartRegisterActivit
             }
         });
 
-        if(LoginActivity.generator.uniqueIdController().needToRefillUniqueId(LoginActivity.generator.UNIQUE_ID_LIMIT)) {
+       /* if(LoginActivity.generator.uniqueIdController().needToRefillUniqueId(LoginActivity.generator.UNIQUE_ID_LIMIT)) {
             String toastMessage =  String.format("need to refill unique id, its only %s remaining",
                                    LoginActivity.generator.uniqueIdController().countRemainingUniqueId());
             Toast.makeText(context().applicationContext(), toastMessage, Toast.LENGTH_LONG).show();
-        }
+        }*/
         ziggyService = context().ziggyService();
     }
     public void onPageChanged(int page){
@@ -187,7 +187,7 @@ public class GiziSmartRegisterActivity extends SecuredNativeSmartRegisterActivit
             switchToBaseFragment(formSubmission); // Unnecessary!! passing on data
 
             if(formName.equals("registrasi_gizi")) {
-                saveuniqueid();
+            //    saveuniqueid();
             }
             //end capture flurry log for FS
             String end = timer.format(new Date());
@@ -211,15 +211,15 @@ public class GiziSmartRegisterActivity extends SecuredNativeSmartRegisterActivit
 
         try {
             JSONObject locationJSON = new JSONObject(locationJSONString);
-            JSONObject uniqueId = new JSONObject(LoginActivity.generator.uniqueIdController().getUniqueIdJson());
+           // JSONObject uniqueId = new JSONObject(LoginActivity.generator.uniqueIdController().getUniqueIdJson());
 
             combined = locationJSON;
-            Iterator<String> iter = uniqueId.keys();
+          //  Iterator<String> iter = uniqueId.keys();
 
-            while (iter.hasNext()) {
+           /* while (iter.hasNext()) {
                 String key = iter.next();
                 combined.put(key, uniqueId.get(key));
-            }
+            }*/
 
             System.out.println("injection string: " + combined.toString());
         } catch (JSONException e) {
@@ -232,7 +232,7 @@ public class GiziSmartRegisterActivity extends SecuredNativeSmartRegisterActivit
         }
     }
 
-    public void saveuniqueid() {
+   /* public void saveuniqueid() {
         try {
             JSONObject uniqueId = new JSONObject(LoginActivity.generator.uniqueIdController().getUniqueIdJson());
             String uniq = uniqueId.getString("unique_id");
@@ -241,7 +241,7 @@ public class GiziSmartRegisterActivity extends SecuredNativeSmartRegisterActivit
         } catch (JSONException e) {
             e.printStackTrace();
         }
-    }
+    }*/
 
     public static boolean out;
 
@@ -316,14 +316,14 @@ public class GiziSmartRegisterActivity extends SecuredNativeSmartRegisterActivit
      * @return
      */
     private CharSequence[] selections(int choice, String entityId){
-        String name = org.ei.opensrp.Context.getInstance().allCommonsRepositoryobjects("ec_anak").findByCaseID(entityId).getColumnmaps().get("namaBayi");
+        String name = org.smartregister.Context.getInstance().allCommonsRepositoryobjects("ec_anak").findByCaseID(entityId).getColumnmaps().get("namaBayi");
         System.out.println("start form activity / nama = " + name);
         CharSequence selections[] = new CharSequence[]{name, name, name};
 
         selections[choice] = (CharSequence) name;
 
         String query = "SELECT namaBayi FROM ec_anak where ec_anak.is_closed = 0";
-        Cursor cursor = context().commonrepository("ec_anak").RawCustomQueryForAdapter(query);
+        Cursor cursor = context().commonrepository("ec_anak").rawCustomQueryForAdapter(query);
         cursor.moveToFirst();
 
         for (int i = 0; i < selections.length; i++) {
@@ -416,7 +416,7 @@ public class GiziSmartRegisterActivity extends SecuredNativeSmartRegisterActivit
     }
 
     private int getNumOfChild(){
-        Cursor childcountcursor = context().commonrepository("ec_anak").RawCustomQueryForAdapter(new SmartRegisterQueryBuilder().queryForCountOnRegisters("ec_anak_search", "ec_anak_search.is_closed=0"));
+        Cursor childcountcursor = context().commonrepository("ec_anak").rawCustomQueryForAdapter(new SmartRegisterQueryBuilder().queryForCountOnRegisters("ec_anak_search", "ec_anak_search.is_closed=0"));
         childcountcursor.moveToFirst();
         int childcount= childcountcursor.getInt(0);
         childcountcursor.close();

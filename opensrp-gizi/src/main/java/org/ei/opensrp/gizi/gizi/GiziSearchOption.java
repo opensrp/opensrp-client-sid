@@ -1,10 +1,10 @@
 package org.ei.opensrp.gizi.gizi;
 
-import org.ei.opensrp.Context;
-import org.ei.opensrp.commonregistry.CommonPersonObjectClient;
+import org.smartregister.Context;
+import org.smartregister.commonregistry.CommonPersonObjectClient;
 import org.ei.opensrp.gizi.R;
-import org.ei.opensrp.view.contract.SmartRegisterClient;
-import org.ei.opensrp.view.dialog.FilterOption;
+import org.smartregister.view.contract.SmartRegisterClient;
+import org.smartregister.view.dialog.FilterOption;
 
 public class GiziSearchOption implements FilterOption {
     private final String criteria;

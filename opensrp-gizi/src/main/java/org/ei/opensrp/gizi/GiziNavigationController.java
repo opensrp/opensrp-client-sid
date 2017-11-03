@@ -8,18 +8,17 @@ import android.net.Uri;
 
 //import org.ei.opensrp.gizi.test.TestSmartRegisterActivity;
 import org.ei.opensrp.gizi.gizi.GiziSmartRegisterActivity;
-import org.ei.opensrp.gizi.giziIbu.IbuSmartRegisterActivity;
-import org.ei.opensrp.view.activity.ReportsActivity;
-import org.ei.opensrp.view.controller.ANMController;
+import org.smartregister.view.activity.ReportsActivity;
+import org.smartregister.view.controller.ANMController;
 import org.json.JSONObject;
 
 
 import static android.preference.PreferenceManager.getDefaultSharedPreferences;
 
-public class GiziNavigationController extends org.ei.opensrp.view.controller.NavigationController {
+public class GiziNavigationController extends org.smartregister.view.controller.NavigationController {
     private Activity activity;
     private ANMController anmController;
-    private org.ei.opensrp.Context context;
+    private org.smartregister.Context context;
 
     public GiziNavigationController(Activity activity, ANMController anmController) {
         super(activity,anmController);
@@ -27,7 +26,7 @@ public class GiziNavigationController extends org.ei.opensrp.view.controller.Nav
         this.anmController = anmController;
     }
 
-    public GiziNavigationController(Activity activity, ANMController anmController, org.ei.opensrp.Context context) {
+    public GiziNavigationController(Activity activity, ANMController anmController, org.smartregister.Context context) {
         this(activity,anmController);
         this.context=context;
     }
@@ -50,7 +49,7 @@ public class GiziNavigationController extends org.ei.opensrp.view.controller.Nav
     }
     @Override
     public void startANCSmartRegistry() {
-        activity.startActivity(new Intent(activity, IbuSmartRegisterActivity.class));
+   //     activity.startActivity(new Intent(activity, IbuSmartRegisterActivity.class));
     }
 
     @Override

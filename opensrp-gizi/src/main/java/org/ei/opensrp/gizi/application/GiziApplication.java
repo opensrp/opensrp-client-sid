@@ -46,11 +46,11 @@ public class GiziApplication extends DrishtiApplication {
         super.onCreate();
         //  ACRA.init(this);
         DrishtiSyncScheduler.setReceiverClass(SyncBroadcastReceiver.class);
-        //  ErrorReportingFacade.initErrorHandler(getApplicationContext());
+      //  ErrorReportingFacade.initErrorHandler(getApplicationContext());
         /**
          * ENABLE THIS AGAIN AFTER FINISH TESTING*/
         FlurryFacade.init(this);
-        // context = Context.getInstance();
+       // context = Context.getInstance();
         context.updateApplicationContext(getApplicationContext());
         context.updateCommonFtsObject(createCommonFtsObject());
         applyUserLanguagePreference();
@@ -120,10 +120,10 @@ public class GiziApplication extends DrishtiApplication {
     private static String[] getFtsSearchFields(String tableName){
         if(tableName.equals("ec_anak")){
             return new String[]{ "namaBayi","tanggalLahirAnak" };
-            // return ftsSearchFields;
+           // return ftsSearchFields;
         } else if (tableName.equals("ec_kartu_ibu")){
-            return new String[]{ "namalengkap", "namaSuami" };
-            // return ftsSearchFields;
+                return new String[]{ "namalengkap", "namaSuami" };
+           // return ftsSearchFields;
         }
         return null;
     }

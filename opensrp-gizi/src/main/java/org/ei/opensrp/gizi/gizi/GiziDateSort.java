@@ -1,9 +1,9 @@
 package org.ei.opensrp.gizi.gizi;
 
-import org.ei.opensrp.commonregistry.CommonPersonObjectClient;
-import org.ei.opensrp.view.contract.SmartRegisterClient;
-import org.ei.opensrp.view.contract.SmartRegisterClients;
-import org.ei.opensrp.view.dialog.SortOption;
+import org.smartregister.commonregistry.CommonPersonObjectClient;
+import org.smartregister.view.contract.SmartRegisterClient;
+import org.smartregister.view.contract.SmartRegisterClients;
+import org.smartregister.view.dialog.SortOption;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;

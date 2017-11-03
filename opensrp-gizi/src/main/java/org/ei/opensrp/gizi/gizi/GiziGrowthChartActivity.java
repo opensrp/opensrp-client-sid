@@ -11,8 +11,8 @@ import com.flurry.android.FlurryAgent;
 import com.jjoe64.graphview.DefaultLabelFormatter;
 import com.jjoe64.graphview.GraphView;
 
-import org.ei.opensrp.Context;
-import org.ei.opensrp.commonregistry.CommonPersonObjectClient;
+import org.smartregister.Context;
+import org.smartregister.commonregistry.CommonPersonObjectClient;
 import org.ei.opensrp.gizi.R;
 
 import java.text.SimpleDateFormat;
@@ -47,7 +47,7 @@ public class GiziGrowthChartActivity extends Activity{
 
         TextView navBarDetails = (TextView)findViewById(R.id.chart_navbar_details);
         TextView navBarZScore = (TextView)findViewById(R.id.chart_navbar_z_score);
-        ImageButton back = (ImageButton) findViewById(org.ei.opensrp.R.id.btn_back_to_home);
+        ImageButton back = (ImageButton) findViewById(org.smartregister.R.id.btn_back_to_home);
 
         back.setOnClickListener(new View.OnClickListener() {
             @Override

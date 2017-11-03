@@ -1,10 +1,10 @@
 package org.ei.opensrp.gizi.gizi;
 
-import org.ei.opensrp.commonregistry.AllCommonsRepository;
-import org.ei.opensrp.commonregistry.CommonPersonObject;
-import org.ei.opensrp.domain.form.FormSubmission;
-import org.ei.opensrp.repository.DetailsRepository;
-import org.ei.opensrp.service.formSubmissionHandler.FormSubmissionHandler;
+import org.smartregister.commonregistry.AllCommonsRepository;
+import org.smartregister.commonregistry.CommonPersonObject;
+import org.smartregister.domain.form.FormSubmission;
+import org.smartregister.repository.DetailsRepository;
+import  org.smartregister.service.formsubmissionhandler.FormSubmissionHandler;
 
 import util.KMS.KmsCalc;
 import util.KMS.KmsPerson;
@@ -28,11 +28,11 @@ public class KmsHandler  implements FormSubmissionHandler {
     @Override
     public void handle(FormSubmission submission){
         String entityID = submission.entityId();
-        AllCommonsRepository childRepository = org.ei.opensrp.Context.getInstance().allCommonsRepositoryobjects("ec_anak");
+        AllCommonsRepository childRepository = org.smartregister.Context.getInstance().allCommonsRepositoryobjects("ec_anak");
         CommonPersonObject childobject = childRepository.findByCaseID(entityID);
         Long tsLong = System.currentTimeMillis()/1000;
 
-        DetailsRepository detailsRepository = org.ei.opensrp.Context.getInstance().detailsRepository();
+        DetailsRepository detailsRepository = org.smartregister.Context.getInstance().detailsRepository();
 
         String[]history = submission.getFieldValue("history_berat")!= null ? split(Support.fixHistory(submission.getFieldValue("history_berat"))) : new String []{"0","0"};
         String[]history2 = submission.getFieldValue("history_tinggi")!= null ? split(Support.fixHistory(submission.getFieldValue("history_tinggi"))) : new String []{"0","0"};

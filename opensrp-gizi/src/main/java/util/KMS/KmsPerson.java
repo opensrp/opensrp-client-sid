@@ -1,6 +1,6 @@
 package util.KMS;
 
-import org.ei.opensrp.commonregistry.CommonPersonObjectClient;
+import org.smartregister.commonregistry.CommonPersonObjectClient;
 
 import util.formula.Support;
 

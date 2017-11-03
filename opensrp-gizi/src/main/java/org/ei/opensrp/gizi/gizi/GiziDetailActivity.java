@@ -16,17 +16,15 @@ import com.flurry.android.FlurryAgent;
 import com.jjoe64.graphview.DefaultLabelFormatter;
 import com.jjoe64.graphview.GraphView;
 
-import org.ei.opensrp.Context;
-import org.ei.opensrp.commonregistry.AllCommonsRepository;
-import org.ei.opensrp.commonregistry.CommonPersonObject;
-import org.ei.opensrp.commonregistry.CommonPersonObjectClient;
+import org.smartregister.Context;
+import org.smartregister.commonregistry.AllCommonsRepository;
+import org.smartregister.commonregistry.CommonPersonObject;
+import org.smartregister.commonregistry.CommonPersonObjectClient;
 import org.ei.opensrp.gizi.R;
-import org.ei.opensrp.gizi.face.camera.SmartShutterActivity;
-import org.ei.opensrp.gizi.face.camera.util.Tools;
-import org.ei.opensrp.repository.DetailsRepository;
-import org.ei.opensrp.util.Log;
-import org.ei.opensrp.util.OpenSRPImageLoader;
-import org.ei.opensrp.view.activity.DrishtiApplication;
+import org.smartregister.repository.DetailsRepository;
+import org.smartregister.util.Log;
+import org.smartregister.util.OpenSRPImageLoader;
+import org.smartregister.view.activity.DrishtiApplication;
 
 import java.io.File;
 import java.io.IOException;
@@ -111,7 +109,7 @@ public class GiziDetailActivity extends Activity {
         TextView lastVitA = (TextView) findViewById(R.id.txt_profile_last_vitA);
         TextView lastAnthelmintic = (TextView) findViewById(R.id.txt_profile_last_anthelmintic);
 
-        ImageButton back = (ImageButton) findViewById(org.ei.opensrp.R.id.btn_back_to_home);
+        ImageButton back = (ImageButton) findViewById(org.smartregister.R.id.btn_back_to_home);
 
         back.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -126,7 +124,7 @@ public class GiziDetailActivity extends Activity {
                 FlurryAgent.logEvent("gizi_detail_view", Detail, true);
             }
         });
-        DetailsRepository detailsRepository = org.ei.opensrp.Context.getInstance().detailsRepository();
+        DetailsRepository detailsRepository = org.smartregister.Context.getInstance().detailsRepository();
         detailsRepository.updateDetails(childclient);
 
         System.out.println("columnmaps: " + childclient.getColumnmaps().toString());
@@ -148,10 +146,10 @@ public class GiziDetailActivity extends Activity {
         uniqueId.setText(String.format("%s %s",getString(R.string.unique_id),Support.getDetails(childclient,"UniqueId")));
         nama.setText(String.format("%s %s",getString(R.string.child_name) , Support.getDetails(childclient,"namaBayi")));
 
-        AllCommonsRepository childRepository = org.ei.opensrp.Context.getInstance().allCommonsRepositoryobjects("ec_anak");
+        AllCommonsRepository childRepository = org.smartregister.Context.getInstance().allCommonsRepositoryobjects("ec_anak");
         CommonPersonObject childobject = childRepository.findByCaseID(childclient.entityId());
 
-        AllCommonsRepository kirep = org.ei.opensrp.Context.getInstance().allCommonsRepositoryobjects("ec_kartu_ibu");
+        AllCommonsRepository kirep = org.smartregister.Context.getInstance().allCommonsRepositoryobjects("ec_kartu_ibu");
         final CommonPersonObject kiparent = kirep.findByCaseID(childobject.getColumnmaps().get("relational_id"));
 
         if(kiparent != null) {
@@ -206,7 +204,7 @@ public class GiziDetailActivity extends Activity {
         String umurs=arrayToString(history_umur,",");
 
         generateGrowthChart(umurs,data[1]);
-        hash = Tools.retrieveHash(context.applicationContext());
+       // hash = Tools.retrieveHash(context.applicationContext());
         childview.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -221,11 +219,11 @@ public class GiziDetailActivity extends Activity {
 
                 }
 
-                Intent takePictureIntent = new Intent(GiziDetailActivity.this, SmartShutterActivity.class);
+              /*  Intent takePictureIntent = new Intent(GiziDetailActivity.this, SmartShutterActivity.class);
                 takePictureIntent.putExtra("IdentifyPerson", false);
                 takePictureIntent.putExtra("org.sid.sidface.ImageConfirmation.id", entityid);
                 takePictureIntent.putExtra("org.sid.sidface.ImageConfirmation.origin", TAG); // send Class Name
-                startActivityForResult(takePictureIntent, 2);
+                startActivityForResult(takePictureIntent, 2);*/
 
 
             }

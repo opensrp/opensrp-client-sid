@@ -2,20 +2,20 @@ package org.ei.opensrp.gizi.gizi;
 
 import android.view.View;
 
-import org.ei.opensrp.Context;
-import org.ei.opensrp.provider.SmartRegisterClientsProvider;
+import org.smartregister.Context;
+import org.smartregister.provider.SmartRegisterClientsProvider;
 import org.ei.opensrp.gizi.R;
-import org.ei.opensrp.view.contract.ANCSmartRegisterClient;
-import org.ei.opensrp.view.contract.ChildSmartRegisterClient;
-import org.ei.opensrp.view.contract.FPSmartRegisterClient;
-import org.ei.opensrp.view.contract.pnc.PNCSmartRegisterClient;
-import org.ei.opensrp.view.dialog.ServiceModeOption;
-import org.ei.opensrp.view.viewHolder.NativeANCSmartRegisterViewHolder;
-import org.ei.opensrp.view.viewHolder.NativeChildSmartRegisterViewHolder;
-import org.ei.opensrp.view.viewHolder.NativeFPSmartRegisterViewHolder;
-import org.ei.opensrp.view.viewHolder.NativePNCSmartRegisterViewHolder;
+import org.smartregister.view.contract.ANCSmartRegisterClient;
+import org.smartregister.view.contract.ChildSmartRegisterClient;
+import org.smartregister.view.contract.FPSmartRegisterClient;
+import org.smartregister.view.contract.pnc.PNCSmartRegisterClient;
+import org.smartregister.view.dialog.ServiceModeOption;
+import org.smartregister.view.viewholder.NativeANCSmartRegisterViewHolder;
+import org.smartregister.view.viewholder.NativeChildSmartRegisterViewHolder;
+import org.smartregister.view.viewholder.NativeFPSmartRegisterViewHolder;
+import org.smartregister.view.viewholder.NativePNCSmartRegisterViewHolder;
 
-import static org.ei.opensrp.view.activity.SecuredNativeSmartRegisterActivity.ClientsHeaderProvider;
+import static org.smartregister.view.activity.SecuredNativeSmartRegisterActivity.ClientsHeaderProvider;
 
 public class GiziServiceModeOption extends ServiceModeOption {
 

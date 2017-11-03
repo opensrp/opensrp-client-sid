@@ -12,10 +12,10 @@ import android.widget.TextView;
 import com.flurry.android.FlurryAgent;
 import com.jjoe64.graphview.GraphView;
 
-import org.ei.opensrp.Context;
-import org.ei.opensrp.commonregistry.CommonPersonObjectClient;
+import org.smartregister.Context;
+import org.smartregister.commonregistry.CommonPersonObjectClient;
 import org.ei.opensrp.gizi.R;
-import org.ei.opensrp.repository.DetailsRepository;
+import org.smartregister.repository.DetailsRepository;
 
 import util.ZScore.ZScoreSystemCalculation;
 import util.formula.Support;
@@ -38,7 +38,7 @@ public class GiziZScoreChartActivity extends Activity{
         FlurryAgent.logEvent("ZScore_chart_view");
 
         if(client == null){
-            DetailsRepository detailsRepository = org.ei.opensrp.Context.getInstance().detailsRepository();
+            DetailsRepository detailsRepository = org.smartregister.Context.getInstance().detailsRepository();
             detailsRepository.updateDetails(client);
         }
 

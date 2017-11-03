@@ -9,10 +9,10 @@ import android.widget.LinearLayout;
 
 import com.google.common.base.Strings;
 
-import org.ei.opensrp.domain.form.FieldOverrides;
-import org.ei.opensrp.view.activity.SecuredNativeSmartRegisterActivity;
-import org.ei.opensrp.view.dialog.DialogOption;
-import org.ei.opensrp.view.dialog.DialogOptionModel;
+import org.smartregister.domain.form.FieldOverrides;
+import org.smartregister.view.activity.SecuredNativeSmartRegisterActivity;
+import org.smartregister.view.dialog.DialogOption;
+import org.smartregister.view.dialog.DialogOptionModel;
 import org.json.JSONObject;
 import org.opensrp.api.domain.Location;
 import org.opensrp.api.util.EntityUtils;
@@ -24,7 +24,7 @@ import atv.holder.SelectableItemHolder;
 import atv.model.TreeNode;
 import atv.view.AndroidTreeView;
 
-import static org.ei.opensrp.util.StringUtil.humanize;
+import static org.smartregister.util.StringUtil.humanize;
 
 /**
  * Created by koros on 2/25/16.
@@ -80,7 +80,7 @@ public class GiziLocationSelectorDialogFragment extends DialogFragment {
         locationTreeToTreNode(root, locationMap);
 
         tView = new AndroidTreeView(getActivity(), root);
-        tView.setDefaultContainerStyle(org.ei.opensrp.R.style.TreeNodeStyle);
+        tView.setDefaultContainerStyle(org.smartregister.R.style.TreeNodeStyle);
         tView.setSelectionModeEnabled(false);
 
         if(savestate != null){

@@ -14,21 +14,21 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import org.ei.opensrp.commonregistry.AllCommonsRepository;
-import org.ei.opensrp.commonregistry.CommonPersonObject;
-import org.ei.opensrp.commonregistry.CommonPersonObjectClient;
-import org.ei.opensrp.commonregistry.CommonPersonObjectController;
-import org.ei.opensrp.cursoradapter.SmartRegisterCLientsProviderForCursorAdapter;
-import org.ei.opensrp.repository.DetailsRepository;
-import org.ei.opensrp.service.AlertService;
+import org.smartregister.commonregistry.AllCommonsRepository;
+import org.smartregister.commonregistry.CommonPersonObject;
+import org.smartregister.commonregistry.CommonPersonObjectClient;
+import org.smartregister.commonregistry.CommonPersonObjectController;
+import org.smartregister.cursoradapter.SmartRegisterCLientsProviderForCursorAdapter;
+import org.smartregister.repository.DetailsRepository;
+import org.smartregister.service.AlertService;
 import org.ei.opensrp.gizi.R;
-import org.ei.opensrp.view.activity.DrishtiApplication;
-import org.ei.opensrp.view.contract.SmartRegisterClient;
-import org.ei.opensrp.view.contract.SmartRegisterClients;
-import org.ei.opensrp.view.dialog.FilterOption;
-import org.ei.opensrp.view.dialog.ServiceModeOption;
-import org.ei.opensrp.view.dialog.SortOption;
-import org.ei.opensrp.view.viewHolder.OnClickFormLauncher;
+import org.smartregister.view.activity.DrishtiApplication;
+import org.smartregister.view.contract.SmartRegisterClient;
+import org.smartregister.view.contract.SmartRegisterClients;
+import org.smartregister.view.dialog.FilterOption;
+import org.smartregister.view.dialog.ServiceModeOption;
+import org.smartregister.view.dialog.SortOption;
+import org.smartregister.view.viewholder.OnClickFormLauncher;
 
 import java.io.File;
 import java.text.SimpleDateFormat;
@@ -62,8 +62,8 @@ public class GiziSmartClientsProvider implements SmartRegisterCLientsProviderFor
         this.inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 
         clientViewLayoutParams = new AbsListView.LayoutParams(MATCH_PARENT,
-                (int) context.getResources().getDimension(org.ei.opensrp.R.dimen.list_item_height));
-        txtColorBlack = context.getResources().getColor(org.ei.opensrp.R.color.text_black);
+                (int) context.getResources().getDimension(org.smartregister.R.dimen.list_item_height));
+        txtColorBlack = context.getResources().getColor(org.smartregister.R.color.text_black);
 
     }
 
@@ -117,7 +117,7 @@ public class GiziSmartClientsProvider implements SmartRegisterCLientsProviderFor
         viewHolder.follow_up.setImageDrawable(iconPencilDrawable);
         viewHolder.follow_up.setOnClickListener(onClickListener);
 
-        DetailsRepository detailsRepository = org.ei.opensrp.Context.getInstance().detailsRepository();
+        DetailsRepository detailsRepository = org.smartregister.Context.getInstance().detailsRepository();
         detailsRepository.updateDetails(pc);
 
         //start profile image
@@ -136,10 +136,10 @@ public class GiziSmartClientsProvider implements SmartRegisterCLientsProviderFor
         String ages = pc.getColumnmaps().get("tanggalLahirAnak").substring(0, pc.getColumnmaps().get("tanggalLahirAnak").indexOf("T"));
         viewHolder.age.setVisibility(View.INVISIBLE);//.setText(pc.getDetails().get("tanggalLahirAnak")!= null ? Integer.toString(monthRangeToToday(ages))+" bln" : "");
 
-        AllCommonsRepository childRepository = org.ei.opensrp.Context.getInstance().allCommonsRepositoryobjects("ec_anak");
+        AllCommonsRepository childRepository = org.smartregister.Context.getInstance().allCommonsRepositoryobjects("ec_anak");
         CommonPersonObject childobject = childRepository.findByCaseID(pc.entityId());
 
-        AllCommonsRepository kirep = org.ei.opensrp.Context.getInstance().allCommonsRepositoryobjects("ec_kartu_ibu");
+        AllCommonsRepository kirep = org.smartregister.Context.getInstance().allCommonsRepositoryobjects("ec_kartu_ibu");
         final CommonPersonObject kiparent = kirep.findByCaseID(Support.getColumnmaps(childobject,"relational_id"));
 
         if(kiparent != null) {
