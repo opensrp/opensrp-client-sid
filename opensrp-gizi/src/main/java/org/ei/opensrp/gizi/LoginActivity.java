@@ -25,19 +25,20 @@ import android.widget.TextView;
 
 import com.flurry.android.FlurryAgent;
 
-import org.ei.opensrp.Context;
-import org.ei.opensrp.domain.LoginResponse;
-import org.ei.opensrp.domain.Response;
-import org.ei.opensrp.domain.ResponseStatus;
-import org.ei.opensrp.event.Listener;
-import org.ei.opensrp.repository.AllSharedPreferences;
-import org.ei.opensrp.sync.DrishtiSyncScheduler;
+import org.ei.opensrp.gizi.application.GiziApplication;
+import org.smartregister.Context;
+import org.smartregister.domain.LoginResponse;
+import org.smartregister.domain.Response;
+import org.smartregister.domain.ResponseStatus;
+import org.smartregister.event.Listener;
+import org.smartregister.repository.AllSharedPreferences;
+import org.smartregister.sync.DrishtiSyncScheduler;
 import org.ei.opensrp.gizi.gizi.ErrorReportingFacade;
-import org.ei.opensrp.util.Log;
-import org.ei.opensrp.view.BackgroundAction;
-import org.ei.opensrp.view.LockingBackgroundTask;
-import org.ei.opensrp.view.ProgressIndicator;
-import org.ei.opensrp.view.activity.SettingsActivity;
+import org.smartregister.util.Log;
+import org.smartregister.view.BackgroundAction;
+import org.smartregister.view.LockingBackgroundTask;
+import org.smartregister.view.ProgressIndicator;
+import org.ei.opensrp.gizi.SettingsActivity;
 
 import java.io.IOException;
 import java.text.SimpleDateFormat;
@@ -45,16 +46,15 @@ import java.util.Locale;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipFile;
 
-import util.uniqueIdGenerator.Generator;
 
 import static android.preference.PreferenceManager.getDefaultSharedPreferences;
 import static android.view.inputmethod.InputMethodManager.HIDE_NOT_ALWAYS;
-import static org.ei.opensrp.domain.LoginResponse.NO_INTERNET_CONNECTIVITY;
-import static org.ei.opensrp.domain.LoginResponse.SUCCESS;
-import static org.ei.opensrp.domain.LoginResponse.UNAUTHORIZED;
-import static org.ei.opensrp.domain.LoginResponse.UNKNOWN_RESPONSE;
-import static org.ei.opensrp.util.Log.logError;
-import static org.ei.opensrp.util.Log.logVerbose;
+import static org.smartregister.domain.LoginResponse.NO_INTERNET_CONNECTIVITY;
+import static org.smartregister.domain.LoginResponse.SUCCESS;
+import static org.smartregister.domain.LoginResponse.UNAUTHORIZED;
+import static org.smartregister.domain.LoginResponse.UNKNOWN_RESPONSE;
+import static org.smartregister.util.Log.logError;
+import static org.smartregister.util.Log.logVerbose;
 
 public class LoginActivity extends Activity {
     private Context context;
@@ -70,7 +70,7 @@ public class LoginActivity extends Activity {
     public static final String Bengali_LANGUAGE = "Bengali";
     public static final String Bahasa_LANGUAGE = "Bahasa";
 
-    public static Generator generator;
+
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -88,7 +88,7 @@ public class LoginActivity extends Activity {
         } catch (Exception e) {
 
         }
-        setContentView(org.ei.opensrp.R.layout.login);
+        setContentView(org.smartregister.R.layout.login);
         ImageView loginglogo = (ImageView) findViewById(R.id.login_logo);
         loginglogo.setImageDrawable(getResources().getDrawable(R.mipmap.gizilogin));
         context = Context.getInstance().updateApplicationContext(this.getApplicationContext());
@@ -135,12 +135,16 @@ public class LoginActivity extends Activity {
     }
 
     private void initializeBuildDetails() {
-        TextView buildDetailsTextView = (TextView) findViewById(org.ei.opensrp.R.id.login_build);
+        TextView buildDetailsTextView = (TextView) findViewById(org.smartregister.R.id.login_build);
         try {
             buildDetailsTextView.setText("Version " + getVersion() + ", Built on: " + getBuildDate());
         } catch (Exception e) {
             logError("Error fetching build details: " + e);
         }
+    }
+
+    public static Context getOpenSRPContext() {
+        return GiziApplication.getInstance().getContext();
     }
 
     @Override
@@ -169,9 +173,9 @@ public class LoginActivity extends Activity {
     }
 
     private void initializeLoginFields() {
-        userNameEditText = ((EditText) findViewById(org.ei.opensrp.R.id.login_userNameText));
+        userNameEditText = ((EditText) findViewById(org.smartregister.R.id.login_userNameText));
         userNameEditText.setRawInputType(InputType.TYPE_CLASS_TEXT);
-        passwordEditText = ((EditText) findViewById(org.ei.opensrp.R.id.login_passwordText));
+        passwordEditText = ((EditText) findViewById(org.smartregister.R.id.login_passwordText));
         passwordEditText.setRawInputType(InputType.TYPE_CLASS_TEXT);
     }
 
@@ -180,7 +184,7 @@ public class LoginActivity extends Activity {
             @Override
             public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
                 if (actionId == EditorInfo.IME_ACTION_DONE) {
-                    login(findViewById(org.ei.opensrp.R.id.login_loginButton));
+                    login(findViewById(org.smartregister.R.id.login_loginButton));
                 }
                 return false;
             }
@@ -190,17 +194,17 @@ public class LoginActivity extends Activity {
     private void initializeProgressDialog() {
         progressDialog = new ProgressDialog(this);
         progressDialog.setCancelable(false);
-        progressDialog.setTitle(getString(org.ei.opensrp.R.string.loggin_in_dialog_title));
-        progressDialog.setMessage(getString(org.ei.opensrp.R.string.loggin_in_dialog_message));
+        progressDialog.setTitle(getString(org.smartregister.R.string.loggin_in_dialog_title));
+        progressDialog.setMessage(getString(org.smartregister.R.string.loggin_in_dialog_message));
     }
 
     private void localLogin(View view, String userName, String password) {
-        if (context.userService().isValidLocalLogin(userName, password)) {
+        if (getOpenSRPContext().userService().isUserInValidGroup(userName, password)) {
             localLoginWith(userName, password);
-            ErrorReportingFacade.setUsername("", userName);
+            //  ErrorReportingFacade.setUsername("", userName);
             FlurryAgent.setUserId(userName);
         } else {
-            showErrorDialog(getString(org.ei.opensrp.R.string.login_failed_dialog_message));
+            showErrorDialog(getString(org.smartregister.R.string.login_failed_dialog_message));
             view.setClickable(true);
         }
     }
@@ -208,7 +212,7 @@ public class LoginActivity extends Activity {
     private void remoteLogin(final View view, final String userName, final String password) {
         tryRemoteLogin(userName, password, new Listener<LoginResponse>() {
             public void onEvent(LoginResponse loginResponse) {
-                ErrorReportingFacade.setUsername("", userName);
+                //  ErrorReportingFacade.setUsername("", userName);
                 FlurryAgent.setUserId(userName);
                 if (loginResponse == SUCCESS) {
                     remoteLoginWith(userName, password, loginResponse.payload());
@@ -325,14 +329,14 @@ public class LoginActivity extends Activity {
 
     private void localLoginWith(String userName, String password) {
         context.userService().localLogin(userName, password);
-        LoginActivity.generator = new Generator(context,userName,password);
+        // LoginActivity.generator = new Generator(context,userName,password);
         goToHome();
         DrishtiSyncScheduler.startOnlyIfConnectedToNetwork(getApplicationContext());
     }
 
     private void remoteLoginWith(String userName, String password, String userInfo) {
         context.userService().remoteLogin(userName, password, userInfo);
-        LoginActivity.generator = new Generator(context,userName,password);
+        //  LoginActivity.generator = new Generator(context,userName,password);
         goToHome();
         DrishtiSyncScheduler.startOnlyIfConnectedToNetwork(getApplicationContext());
     }
@@ -390,7 +394,7 @@ public class LoginActivity extends Activity {
         }
     }
 
-    private void tryGetUniqueId(final String username, final String password, final Listener<ResponseStatus> afterGetUniqueId) {
+   /* private void tryGetUniqueId(final String username, final String password, final Listener<ResponseStatus> afterGetUniqueId) {
         LockingBackgroundTask task = new LockingBackgroundTask(new ProgressIndicator() {
             @Override
             public void setVisible() {
@@ -415,6 +419,6 @@ public class LoginActivity extends Activity {
                 afterGetUniqueId.onEvent(result);
             }
         });
-    }
+    }*/
 
 }

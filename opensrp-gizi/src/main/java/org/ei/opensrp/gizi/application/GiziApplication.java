@@ -6,15 +6,19 @@ import android.content.res.Configuration;
 import org.acra.ACRA;
 import org.acra.ReportingInteractionMode;
 import org.acra.annotation.ReportsCrashes;
-import org.ei.opensrp.Context;
-import org.ei.opensrp.commonregistry.CommonFtsObject;
+import org.smartregister.Context;
+import org.smartregister.CoreLibrary;
+import org.smartregister.commonregistry.CommonFtsObject;
 import org.ei.opensrp.gizi.LoginActivity;
 import org.ei.opensrp.gizi.gizi.ErrorReportingFacade;
 import org.ei.opensrp.gizi.gizi.FlurryFacade;
-import org.ei.opensrp.sync.DrishtiSyncScheduler;
-import org.ei.opensrp.view.activity.DrishtiApplication;
-import org.ei.opensrp.view.receiver.SyncBroadcastReceiver;
-import static org.ei.opensrp.util.Log.logInfo;
+import org.smartregister.repository.Repository;
+import org.smartregister.sync.DrishtiSyncScheduler;
+import org.smartregister.view.activity.DrishtiApplication;
+import org.smartregister.view.receiver.SyncBroadcastReceiver;
+
+import static org.smartregister.util.Log.logError;
+import static org.smartregister.util.Log.logInfo;
 import org.ei.opensrp.gizi.application.SyncGiziBroadcastReceiver;
 
 import java.util.Locale;
@@ -41,6 +45,16 @@ public class GiziApplication extends DrishtiApplication {
         context.updateCommonFtsObject(createCommonFtsObject());
         applyUserLanguagePreference();
         cleanUpSyncState();
+    }
+
+    public static synchronized GiziApplication getInstance() {
+        return (GiziApplication) mInstance;
+    }
+    public Context getContext(){
+        return context;
+    }
+    public Context context() {
+        return context;
     }
 
     @Override
