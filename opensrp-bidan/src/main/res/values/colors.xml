@@ -1,11 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#3F51B5</color>
-    <color name="colorPrimaryDark">#303F9F</color>
-    <color name="colorAccent">#FF4081</color>
-
-    <color name="white">#FFF</color>
-
     <color name="light_blue">#1a93d2</color>
 
     <color name="smart_register_client_divider_color">#d9d9d9</color>
@@ -42,4 +36,13 @@
     <color name="action_bar_background">#2b475e</color>
 
     <color name="alert_complete_green_mcare">#4fb45b</color>
+
+    <!-- FaceR-->
+    <color name="green">#a3c639</color>
+    <color name="dark_green">#85a71d</color>
+    <color name="yellow">#ff0</color>
+    <color name="gray">#ccc</color>
+    <color name="pink">#e91e63</color>
+    <color name="white">#fff</color>
+
 </resources>

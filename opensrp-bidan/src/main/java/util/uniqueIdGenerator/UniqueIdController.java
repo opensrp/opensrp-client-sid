@@ -2,14 +2,6 @@ package util.uniqueIdGenerator;
 
 import android.support.annotation.Nullable;
 
-import org.json.JSONException;
-import org.json.JSONObject;
-
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.List;
-
-import org.smartregister.bidan.repository.UniqueIdRepository;
 import org.smartregister.util.Cache;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -126,4 +118,3 @@ public class UniqueIdController {
     }
 
 }
-

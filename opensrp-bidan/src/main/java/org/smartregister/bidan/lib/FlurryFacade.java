@@ -3,40 +3,39 @@ package org.smartregister.bidan.lib;
 import android.content.Context;
 import android.util.Log;
 
-import com.flurry.android.*;
+import com.flurry.android.FlurryAgent;
 
-import org.smartregister.bidan.util.AllConstantsINA;
+import org.smartregister.bidan.AllConstantsINA;
 
 import java.util.Map;
 
 /**
- * Created by sid on 10/30/17.
+ * Created by Dimas on 9/22/2015.
  */
-
 public class FlurryFacade {
 
 
     public static void logEvent(String event) {
-        com.flurry.android.FlurryAgent.logEvent(event);
+        FlurryAgent.logEvent(event);
     }
 
     public static void logEvent(String event,
                                 Map<String, String> map) {
-        com.flurry.android.FlurryAgent.logEvent(event, map);
+        FlurryAgent.logEvent(event, map);
     }
 
     public static void setUserId(String userId) {
-        com.flurry.android.FlurryAgent.setUserId(userId);
+        FlurryAgent.setUserId(userId);
     }
 
     public static void init(Context context) {
         // Configure Flurry
-        com.flurry.android.FlurryAgent.setLogEnabled(true);
-        com.flurry.android.FlurryAgent.setLogEvents(true);
-        com.flurry.android.FlurryAgent.setLogLevel(Log.VERBOSE);
+        FlurryAgent.setLogEnabled(true);
+        FlurryAgent.setLogEvents(true);
+        FlurryAgent.setLogLevel(Log.VERBOSE);
 
         // init Flurry
-        com.flurry.android.FlurryAgent.init(context, AllConstantsINA.FLURRY_KEY);
+        FlurryAgent.init(context, AllConstantsINA.FLURRY_KEY);
     }
 
 

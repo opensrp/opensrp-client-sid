@@ -11,11 +11,7 @@ import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.smartregister.Context;
-import org.smartregister.bidan.activity.LoginActivity;
-import org.smartregister.bidan.application.BidanApplication;
-import org.smartregister.bidan.repository.BidanRepository;
-import org.smartregister.bidan.repository.UniqueIdRepository;
-import org.smartregister.repository.SettingsRepository;
+import org.smartregister.bidan.LoginActivity;
 import org.smartregister.util.Cache;
 
 import java.io.BufferedReader;
@@ -35,16 +31,16 @@ public class Generator {
     private UniqueIdController uniqueIdController;
     private UniqueIdService uniqueIdService;
     private Context context;
-    BidanApplication bidanApplication;
 
     private String url;
     private String result;
+
     public static final int UNIQUE_ID_LIMIT = 5;
     public static final int UNIQUE_ID_LENGTH_REQUEST = 15;
 
 
     public Generator(Context context, String username, String password){
-        this.context = context;
+        this.context=context;
         // TODO
         String  DRISTHI_BASE_URL = context.configuration().dristhiBaseURL().replaceFirst("[^/]*$", "openmrs");
         url =   DRISTHI_BASE_URL+
@@ -54,10 +50,9 @@ public class Generator {
                 "&password="+password;
     }
     public AllSettingsINA allSettingsINA() {
-        context.initRepository();
+        context.initializeRepositoryForUniqueId();
         if(allSettingsINA == null)
-            // TODO: check getSettingsRepository
-            allSettingsINA = new AllSettingsINA(context.allSharedPreferences(), new SettingsRepository());
+            allSettingsINA = new AllSettingsINA(context.allSharedPreferences(), context.getSettingsRepositoryforUniqueId());
 
         return allSettingsINA;
     }
@@ -68,7 +63,7 @@ public class Generator {
     }
     public UniqueIdRepository uniqueIdRepository() {
         if(uniqueIdRepository==null)
-            uniqueIdRepository = new UniqueIdRepository((BidanRepository) bidanApplication.getRepository());
+            uniqueIdRepository = new UniqueIdRepository(context.applicationContext());
         return uniqueIdRepository;
     }
     public UniqueIdController uniqueIdController() {

@@ -4,10 +4,10 @@ import android.content.Context;
 
 import com.crashlytics.android.Crashlytics;
 import io.fabric.sdk.android.Fabric;
-/**
- * Created by sid on 10/15/17.
- */
 
+/**
+ * Created by Dimas on 9/22/2015.
+ */
 public class ErrorReportingFacade {
 
     public static void initErrorHandler(Context context) {
@@ -18,4 +18,8 @@ public class ErrorReportingFacade {
         Crashlytics.setUserIdentifier(userName);
         Crashlytics.setUserName(userName);
     }
+
 }
+
+
+

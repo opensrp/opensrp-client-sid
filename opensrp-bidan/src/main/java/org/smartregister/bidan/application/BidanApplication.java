@@ -1,107 +1,168 @@
 package org.smartregister.bidan.application;
+import android.content.Intent;
+import android.content.res.Configuration;
 
-import android.util.Log;
-import android.util.Pair;
-
-import com.crashlytics.android.Crashlytics;
-import io.fabric.sdk.android.Fabric;
+import org.acra.ACRA;
+import org.acra.ReportingInteractionMode;
+import org.acra.annotation.ReportsCrashes;
 import org.smartregister.Context;
-import org.smartregister.CoreLibrary;
+import org.smartregister.commonregistry.CommonFtsObject;
+import org.smartregister.bidan.LoginActivity;
 import org.smartregister.bidan.lib.ErrorReportingFacade;
 import org.smartregister.bidan.lib.FlurryFacade;
-import org.smartregister.bidan.repository.BidanRepository;
-import org.smartregister.bidan.util.BidanConstants;
-import org.smartregister.commonregistry.CommonFtsObject;
-import org.smartregister.repository.Repository;
+import org.smartregister.sync.DrishtiSyncScheduler;
 import org.smartregister.view.activity.DrishtiApplication;
+import org.smartregister.view.receiver.SyncBroadcastReceiver;
+import static org.smartregister.util.Log.logInfo;
 
-import java.util.Map;
-
-/**
- * Created by wildan on 10/2/17.
- */
+import java.util.Locale;
+@ReportsCrashes(
+        formKey = "",
+        formUri = "https://drishtiapp.cloudant.com/acra-drishtiapp/_design/acra-storage/_update/report",
+        reportType = org.acra.sender.HttpSender.Type.JSON,
+        httpMethod = org.acra.sender.HttpSender.Method.POST,
+        formUriBasicAuthLogin = "sompleakereepeavoldiftle",
+        formUriBasicAuthPassword = "ecUMrMeTKf1X1ODxHqo3b43W",
+        mode = ReportingInteractionMode.SILENT
+)
 
 public class BidanApplication extends DrishtiApplication {
 
-    private static final String TAG = BidanApplication.class.getSimpleName();
-    private static CommonFtsObject commonFtsObject;
-    private static Map<String, Pair<String, Boolean>> alertScheduleMap;
-    private static Context crashlyticsUser;
-
-    public static Map<String,Pair<String,Boolean>> getAlertScheduleMap() {
-        return alertScheduleMap;
-    }
-
-    public static void setCrashlyticsUser(Context crashlyticsUser) {
-        BidanApplication.crashlyticsUser = crashlyticsUser;
-    }
-
     @Override
     public void onCreate() {
+        DrishtiSyncScheduler.setReceiverClass(SyncBroadcastReceiver.class);
         super.onCreate();
-        Fabric.with(this, new Crashlytics());
 
-        //Init Tracker
-//        ErrorReportingFacade.initErrorHandler(getApplicationContext());
-//        FlurryFacade.init(this);
+        //  ACRA.init(this);
 
-        mInstance = this;
+        DrishtiSyncScheduler.setReceiverClass(SyncBroadcastReceiver.class);
+        ErrorReportingFacade.initErrorHandler(getApplicationContext());
+        FlurryFacade.init(this);
+
         context = Context.getInstance();
-
         context.updateApplicationContext(getApplicationContext());
+        context.updateCommonFtsObject(createCommonFtsObject());
 
-        // Init Module
-        CoreLibrary.init(context);
-
-
+        applyUserLanguagePreference();
+        cleanUpSyncState();
 
     }
 
     @Override
-    public void logoutCurrentUser() {
-
+    public void logoutCurrentUser(){
+        Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        getApplicationContext().startActivity(intent);
+        context.userService().logoutSession();
     }
 
-    public static synchronized BidanApplication getInstance(){
-        return (BidanApplication) mInstance;
+    private void cleanUpSyncState() {
+        DrishtiSyncScheduler.stop(getApplicationContext());
+        context.allSharedPreferences().saveIsSyncInProgress(false);
     }
 
     @Override
-    public Repository getRepository() {
-        try {
-            if (repository == null)
-                repository = new BidanRepository(getInstance().getApplicationContext(), context);
-        } catch (UnsatisfiedLinkError e){
-            Log.e(TAG, "Error on getRepository: "+ e.getMessage() );
-        }
-        return repository;
+    public void onTerminate() {
+        super.onTerminate();
+        logInfo("Application is terminating. Stopping Dristhi Sync scheduler and resetting isSyncInProgress setting.");
+        cleanUpSyncState();
     }
 
-    private static String[] getFtsTables() {
-        return new String[]{BidanConstants.CHILD_TABLE_NAME, BidanConstants.MOTHER_TABLE_NAME};
+    private void applyUserLanguagePreference() {
+        Configuration config = getBaseContext().getResources().getConfiguration();
+
+        String lang = context.allSharedPreferences().fetchLanguagePreference();
+        if (!"".equals(lang) && !config.locale.getLanguage().equals(lang)) {
+            locale = new Locale(lang);
+            updateConfiguration(config);
+        }
     }
 
-    public static CommonFtsObject createCommonFtsObject() {
-        if (commonFtsObject == null) {
-            commonFtsObject = new CommonFtsObject(getFtsTables());
-            for (String ftsTable : commonFtsObject.getTables()) {
-                commonFtsObject.updateSearchFields(ftsTable, getFtsSearchFields(ftsTable));
-                commonFtsObject.updateSortFields(ftsTable, getFtsSortFields(ftsTable));
-            }
+    private void updateConfiguration(Configuration config) {
+        config.locale = locale;
+        Locale.setDefault(locale);
+        getBaseContext().getResources().updateConfiguration(config,
+                getBaseContext().getResources().getDisplayMetrics());
+    }
+
+    private String[] getFtsSearchFields(String tableName){
+        if(tableName.equals("ec_kartu_ibu")){
+            String[] ftsSearchFields =  { "namalengkap", "namaSuami" };
+            return ftsSearchFields;
+        } else if(tableName.equals("ec_anak")){
+            String[] ftsSearchFields =  { "namaBayi" };
+            return ftsSearchFields;
+        } else if (tableName.equals("ec_ibu")){
+            String[] ftsSearchFields =  { "namalengkap", "namaSuami"};
+            return ftsSearchFields;
         }
-        commonFtsObject.updateAlertScheduleMap(getAlertScheduleMap());
+        else if (tableName.equals("ec_pnc")) {
+            String[] ftsSearchFields = {"namalengkap", "namaSuami"};
+            return ftsSearchFields;
+        }
+        return null;
+    }
+
+    private String[] getFtsSortFields(String tableName){
+        if(tableName.equals("ec_kartu_ibu")) {
+            String[] sortFields = { "namalengkap", "umur",  "noIbu", "htp"};
+            return sortFields;
+        } else if(tableName.equals("ec_anak")){
+            String[] sortFields = { "namaBayi", "tanggalLahirAnak" };
+            return sortFields;
+        } else if(tableName.equals("ec_ibu")){
+            String[] sortFields = { "namalengkap", "umur", "noIbu", "pptest" , "htp" };
+            return sortFields;
+        } else if(tableName.equals("ec_pnc")){
+            String[] sortFields = { "namalengkap", "umur", "noIbu", "keadaanIbu"};
+            return sortFields;
+        }
+        return null;
+    }
+
+    private String[] getFtsMainConditions(String tableName){
+        if(tableName.equals("ec_kartu_ibu")) {
+            String[] mainConditions = { "is_closed", "jenisKontrasepsi" };
+            return mainConditions;
+        } else if(tableName.equals("ec_anak")){
+            String[] mainConditions = { "is_closed", "relational_id" };
+            return mainConditions;
+        } else if(tableName.equals("ec_ibu")){
+            String[] mainConditions = { "is_closed", "type", "pptest" , "kartuIbuId" };
+            return mainConditions;
+        } else if(tableName.equals("ec_pnc")){
+            String[] mainConditions = { "is_closed","keadaanIbu" , "type"};
+            return mainConditions;
+        }
+        return null;
+    }
+
+    private String getFtsCustomRelationalId(String tableName){
+        if(tableName.equals("ec_anak")){
+            String customRelationalId = "relational_id";
+            return customRelationalId;
+        } else if(tableName.equals("ec_ibu")){
+            String customRelationalId =  "kartuIbuId" ;
+            return customRelationalId;
+        }
+        return null;
+    }
+
+
+    private String[] getFtsTables(){
+        String[] ftsTables = { "ec_kartu_ibu", "ec_anak", "ec_ibu", "ec_pnc" };
+        return ftsTables;
+    }
+
+    private CommonFtsObject createCommonFtsObject(){
+        CommonFtsObject commonFtsObject = new CommonFtsObject(getFtsTables());
+        for(String ftsTable: commonFtsObject.getTables()){
+            commonFtsObject.updateSearchFields(ftsTable, getFtsSearchFields(ftsTable));
+            commonFtsObject.updateSortFields(ftsTable, getFtsSortFields(ftsTable));
+            commonFtsObject.updateMainConditions(ftsTable, getFtsMainConditions(ftsTable));
+          //  commonFtsObject.updateCustomRelationalId(ftsTable, getFtsCustomRelationalId(ftsTable));
+        }
         return commonFtsObject;
     }
 
-    private static String[] getFtsSortFields(String ftsTable) {
-        return new String[0];
-    }
-
-    private static String[] getFtsSearchFields(String ftsTable) {
-        return new String[0];
-    }
-
-    public Context context() {
-        return context;
-    }
 }
