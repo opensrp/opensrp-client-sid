@@ -1,7 +1,7 @@
 package util;
 
 import org.smartregister.AllConstants;
-import org.ei.opensrp.gizi.BuildConfig;
+import org.smartregister.gizi.BuildConfig;
 
 /**
  * Created by coder on 2/14/17.

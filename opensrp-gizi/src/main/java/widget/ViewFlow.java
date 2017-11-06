@@ -32,7 +32,7 @@ import android.widget.AdapterView;
 import android.widget.Scroller;
 
 
-import org.ei.opensrp.gizi.R;
+import org.smartregister.gizi.R;
 
 import java.util.EnumSet;
 import java.util.LinkedList;

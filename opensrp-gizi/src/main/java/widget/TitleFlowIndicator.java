@@ -27,7 +27,7 @@ import android.view.View;
 import android.widget.TextView;
 
 
-import org.ei.opensrp.gizi.R;
+import org.smartregister.gizi.R;
 
 import java.util.ArrayList;
 

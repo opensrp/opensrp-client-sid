@@ -25,7 +25,7 @@ android {
     buildToolsVersion "26.0.1"
 
     defaultConfig {
-        applicationId "org.ei.opensrp.gizi"
+        applicationId "org.smartregister.gizi"
         minSdkVersion 18
         targetSdkVersion 21
         versionCode 1
