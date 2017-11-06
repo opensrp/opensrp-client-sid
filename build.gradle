@@ -1,5 +1,4 @@
 configure(allprojects) { project ->
-
     buildscript {
         repositories {
             jcenter()
@@ -36,10 +35,10 @@ subprojects {
         maven { url "http://repo.maven.apache.org/maven2" }
         maven { url "http://cloudant.github.io/cloudant-sync-eap/repository" }
         maven {
-            url "${projectDir}/opensrp-facial-recognition/../libs/"
+            url "${projectDir}/opensrp-path/../libs/"
         }
         maven {
-            url "${projectDir}/opensrp-facial-recognition-it/../libs/"
+            url "${projectDir}/opensrp-path-it/../libs/"
         }
         mavenLocal()
     }

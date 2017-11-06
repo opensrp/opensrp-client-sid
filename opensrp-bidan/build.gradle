@@ -4,7 +4,7 @@ buildscript {
         maven { url 'https://maven.fabric.io/public' }
     }
     dependencies {
-        classpath "com.android.tools.build:gradle:2.3.2"
+        classpath "com.android.tools.build:gradle:1.2.3"
         classpath 'org.apache.commons:commons-lang3:3.3.2'
         classpath 'org.robolectric:robolectric-gradle-plugin:1.1.0'
         classpath 'io.fabric.tools:gradle:1.+'
@@ -41,9 +41,6 @@ android {
         versionCode 10
         versionName "1.3.1"
         multiDexEnabled true
-        ndk{
-            abiFilters "armeabi"
-        }
     }
 
     dexOptions {
@@ -70,7 +67,7 @@ android {
         }
 
         debug {
-            resValue "string", 'opensrp_url', '"http://46.101.51.199:8080/opensrp"'
+            resValue "string", 'opensrp_url', '"http://192.168.1.253:8080/opensrp"'
             buildConfigField "int", "OPENMRS_UNIQUE_ID_INITIAL_BATCH_SIZE", '250'
             buildConfigField "int", "OPENMRS_UNIQUE_ID_BATCH_SIZE", '100'
             buildConfigField "int", "OPENMRS_UNIQUE_ID_SOURCE", '2'
@@ -110,6 +107,12 @@ dependencies {
         transitive = true
         exclude group: 'com.github.bmelnychuk', module: 'atv'
     }
+    compile('org.smartregister:opensrp-client-immunization:1.1.4-SNAPSHOT@aar') {
+        transitive = true
+    }
+    compile('org.smartregister:opensrp-client-growth-monitoring:1.0.3-SNAPSHOT@aar') {
+        transitive = true
+    }
 
     compile('com.android.support:design:22.2.1') {
         exclude group: 'com.android.support', module: 'recyclerview-v7'
@@ -127,8 +130,6 @@ dependencies {
     compile 'com.twotoasters.SectionCursorAdapter:library:1.0.+'
     compile 'com.github.ybq:Android-SpinKit:1.1.0'
     compile 'junit:junit:4.12'
-
-    compile 'com.flurry.android:analytics:7.2.3'
 
     testCompile('org.robolectric:robolectric:3.4.2') {
 
@@ -158,18 +159,6 @@ dependencies {
     }
 
     testCompile 'org.apache.maven:maven-ant-tasks:2.1.3'
-}
-
-// Local dependencies
-repositories {
-    mavenCentral()
-    flatDir {
-        dirs 'libs'
-    }
-}
-
-dependencies {
-    //compile (name : 'opensrp-facial-recognition-debug', ext:'aar')
 }
 
 //Testing and coveralls
