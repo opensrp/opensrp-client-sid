@@ -52,6 +52,9 @@ public class Generator {
                 "&numberToGenerate="+Integer.toString(UNIQUE_ID_LENGTH_REQUEST)+
                 "&username="+username+
                 "&password="+password;
+        if(bidanApplication==null){
+            bidanApplication = VaksinatorApplication.getInstance();
+        }
     }
     public AllSettingsINA allSettingsINA() {
         context.initRepository();
@@ -68,7 +71,7 @@ public class Generator {
     }
     public UniqueIdRepository uniqueIdRepository() {
         if(uniqueIdRepository==null)
-            uniqueIdRepository = new UniqueIdRepository((VaksinatorRepository) bidanApplication.getRepository());
+            uniqueIdRepository = new UniqueIdRepository(bidanApplication.getRepository());
         return uniqueIdRepository;
     }
     public UniqueIdController uniqueIdController() {
