@@ -24,6 +24,26 @@
             android:name=".activity.VaksinatorHomeActivity"
             android:theme="@style/BidanAppTheme"
             android:screenOrientation="landscape" />
+        <activity android:name="org.smartregister.vaksinator.vaksinator.VaksinatorSmartRegisterActivity"
+            android:configChanges="keyboardHidden|orientation|screenSize"
+            android:theme="@style/AppThemeNoActionBarAndTitle"
+            android:windowSoftInputMode="adjustResize"
+            android:screenOrientation="landscape"/>
+        <activity android:name="org.smartregister.vaksinator.vaksinator.VaksinatorDetailActivity"
+            android:configChanges="keyboardHidden|orientation|screenSize"
+            android:theme="@style/AppThemeNoActionBarAndTitle"
+            android:windowSoftInputMode="adjustResize"
+            android:screenOrientation="landscape"/>
+        <activity android:name="org.smartregister.vaksinator.vaksinator.VaksinatorRecapitulationActivity"
+            android:configChanges="keyboardHidden|orientation|screenSize"
+            android:theme="@style/AppThemeNoActionBarAndTitle"
+            android:windowSoftInputMode="adjustResize"
+            android:screenOrientation="landscape"/>
+        <activity android:name="org.smartregister.vaksinator.imunisasiTT.TTSmartRegisterActivity"
+            android:configChanges="keyboardHidden|orientation|screenSize"
+            android:theme="@style/AppThemeNoActionBarAndTitle"
+            android:windowSoftInputMode="adjustResize"
+            android:screenOrientation="landscape"/>
         <activity
             android:name=".activity.SettingsActivity"
             android:theme="@style/BidanAppTheme"

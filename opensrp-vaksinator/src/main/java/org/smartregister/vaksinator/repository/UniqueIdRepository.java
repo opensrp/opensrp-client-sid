@@ -7,6 +7,8 @@ import android.util.Log;
 
 import net.sqlcipher.database.SQLiteDatabase;
 
+import org.smartregister.domain.Report;
+import org.smartregister.repository.Repository;
 import org.smartregister.vaksinator.application.VaksinatorApplication;
 import org.smartregister.vaksinator.domain.UniqueId;
 import org.smartregister.repository.BaseRepository;
@@ -34,7 +36,7 @@ public class UniqueIdRepository extends BaseRepository {
     private final SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 
 
-    public UniqueIdRepository(VaksinatorRepository vaksinatorRepository) {
+    public UniqueIdRepository(Repository vaksinatorRepository) {
         super(vaksinatorRepository);
     }
 

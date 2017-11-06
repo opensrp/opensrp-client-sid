@@ -16,7 +16,7 @@ import org.smartregister.repository.Repository;
 public class VaksinatorRepository extends Repository {
 
     public VaksinatorRepository(Context context, org.smartregister.Context opensrpContext) {
-        super(context, VaksinatorConstants.DATABASE_NAME, VaksinatorConstants.DATABASE_VERSION, opensrpContext.session(), VaksinatorApplication.createCommonFtsObject(), opensrpContext.sharedRepositoriesArray());
+        super(context, VaksinatorConstants.DATABASE_NAME, VaksinatorConstants.DATABASE_VERSION, opensrpContext.session(), VaksinatorApplication.getInstance().createCommonFtsObject(), opensrpContext.sharedRepositoriesArray());
     }
 
     @Override
