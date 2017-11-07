@@ -43,18 +43,18 @@ import util.MoveToMyCatchmentUtils;
 import util.PathConstants;
 import util.Utils;
 
-public class PathClientProcessor extends ClientProcessor {
+public class BidanClientProcessor extends ClientProcessor {
 
     private static final String TAG = "PathClientProcessor";
-    private static PathClientProcessor instance;
+    private static BidanClientProcessor instance;
 
-    private PathClientProcessor(Context context) {
+    private BidanClientProcessor(Context context) {
         super(context);
     }
 
-    public static PathClientProcessor getInstance(Context context) {
+    public static BidanClientProcessor getInstance(Context context) {
         if (instance == null) {
-            instance = new PathClientProcessor(context);
+            instance = new BidanClientProcessor(context);
         }
         return instance;
     }
@@ -334,30 +334,30 @@ public class PathClientProcessor extends ClientProcessor {
 
                 }
 
-                RecurringServiceTypeRepository recurringServiceTypeRepository = VaccinatorApplication.getInstance().recurringServiceTypeRepository();
-                List<ServiceType> serviceTypeList = recurringServiceTypeRepository.searchByName(name);
-                if (serviceTypeList == null || serviceTypeList.isEmpty()) {
-                    return false;
-                }
+//                RecurringServiceTypeRepository recurringServiceTypeRepository = BidanApplication.getInstance().recurringServiceTypeRepository();
+//                List<ServiceType> serviceTypeList = recurringServiceTypeRepository.searchByName(name);
+//                if (serviceTypeList == null || serviceTypeList.isEmpty()) {
+//                    return false;
+//                }
 
                 if (date == null) {
                     return false;
                 }
 
-                RecurringServiceRecordRepository recurringServiceRecordRepository = VaccinatorApplication.getInstance().recurringServiceRecordRepository();
-                ServiceRecord serviceObj = new ServiceRecord();
-                serviceObj.setBaseEntityId(contentValues.getAsString(RecurringServiceRecordRepository.BASE_ENTITY_ID));
-                serviceObj.setName(name);
-                serviceObj.setDate(date);
-                serviceObj.setAnmId(contentValues.getAsString(RecurringServiceRecordRepository.ANMID));
-                serviceObj.setLocationId(contentValues.getAsString(RecurringServiceRecordRepository.LOCATIONID));
-                serviceObj.setSyncStatus(RecurringServiceRecordRepository.TYPE_Synced);
-                serviceObj.setFormSubmissionId(service.has(RecurringServiceRecordRepository.FORMSUBMISSION_ID) ? service.getString(RecurringServiceRecordRepository.FORMSUBMISSION_ID) : null);
-                serviceObj.setEventId(service.getString("id")); //FIXME hard coded id
-                serviceObj.setValue(value);
-                serviceObj.setRecurringServiceId(serviceTypeList.get(0).getId());
-
-                recurringServiceRecordRepository.add(serviceObj);
+//                RecurringServiceRecordRepository recurringServiceRecordRepository = BidanApplication.getInstance().recurringServiceRecordRepository();
+//                ServiceRecord serviceObj = new ServiceRecord();
+//                serviceObj.setBaseEntityId(contentValues.getAsString(RecurringServiceRecordRepository.BASE_ENTITY_ID));
+//                serviceObj.setName(name);
+//                serviceObj.setDate(date);
+//                serviceObj.setAnmId(contentValues.getAsString(RecurringServiceRecordRepository.ANMID));
+//                serviceObj.setLocationId(contentValues.getAsString(RecurringServiceRecordRepository.LOCATIONID));
+//                serviceObj.setSyncStatus(RecurringServiceRecordRepository.TYPE_Synced);
+//                serviceObj.setFormSubmissionId(service.has(RecurringServiceRecordRepository.FORMSUBMISSION_ID) ? service.getString(RecurringServiceRecordRepository.FORMSUBMISSION_ID) : null);
+//                serviceObj.setEventId(service.getString("id")); //FIXME hard coded id
+//                serviceObj.setValue(value);
+//                serviceObj.setRecurringServiceId(serviceTypeList.get(0).getId());
+//
+//                recurringServiceRecordRepository.add(serviceObj);
             }
             return true;
 

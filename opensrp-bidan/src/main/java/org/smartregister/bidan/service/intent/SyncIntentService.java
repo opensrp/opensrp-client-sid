@@ -15,12 +15,12 @@ import org.smartregister.AllConstants;
 import org.smartregister.bidan.application.BidanApplication;
 import org.smartregister.bidan.domain.Stock;
 import org.smartregister.bidan.repository.StockRepository;
-import org.smartregister.bidan.sync.PathAfterFetchListener;
-import org.smartregister.bidan.sync.PathClientProcessor;
+import org.smartregister.bidan.sync.BidanAfterFetchListener;
+import org.smartregister.bidan.sync.BidanClientProcessor;
 import org.smartregister.domain.DownloadStatus;
 import org.smartregister.domain.FetchStatus;
 import org.smartregister.domain.Response;
-import org.smartregister.growthmonitoring.service.intent.ZScoreRefreshIntentService;
+//import org.smartregister.growthmonitoring.service.intent.ZScoreRefreshIntentService;
 import org.smartregister.bidan.R;
 import org.smartregister.bidan.receiver.SyncStatusBroadcastReceiver;
 import org.smartregister.bidan.sync.ECSyncUpdater;
@@ -51,7 +51,7 @@ public class SyncIntentService extends IntentService {
     private ActionService actionService;
     private AllFormVersionSyncService allFormVersionSyncService;
     private HTTPAgent httpAgent;
-    private PathAfterFetchListener pathAfterFetchListener;
+    private BidanAfterFetchListener BidanAfterFetchListener;
     private static final int EVENT_FETCH_LIMIT = 50;
 
     public SyncIntentService() {
@@ -64,7 +64,7 @@ public class SyncIntentService extends IntentService {
         actionService = BidanApplication.getInstance().context().actionService();
         allFormVersionSyncService = BidanApplication.getInstance().context().allFormVersionSyncService();
         httpAgent = BidanApplication.getInstance().context().getHttpAgent();
-        pathAfterFetchListener = new PathAfterFetchListener();
+        BidanAfterFetchListener = new BidanAfterFetchListener();
         return super.onStartCommand(intent, flags, startId);
     }
 
@@ -79,13 +79,13 @@ public class SyncIntentService extends IntentService {
 
         FetchStatus fetchStatus = doSync();
 
-        Intent intent = new Intent(context, ZScoreRefreshIntentService.class);
-        context.startService(intent);
+//        Intent intent = new Intent(context, ZScoreRefreshIntentService.class);
+//        context.startService(intent);
         if (fetchStatus.equals(FetchStatus.nothingFetched) || fetchStatus.equals(FetchStatus.fetched)) {
             ECSyncUpdater ecSyncUpdater = ECSyncUpdater.getInstance(context);
             ecSyncUpdater.updateLastCheckTimeStamp(Calendar.getInstance().getTimeInMillis());
         }
-        pathAfterFetchListener.afterFetch(fetchStatus);
+        BidanAfterFetchListener.afterFetch(fetchStatus);
         sendSyncStatusBroadcastMessage(context, fetchStatus);
 
 
@@ -95,7 +95,7 @@ public class SyncIntentService extends IntentService {
         if (NetworkUtils.isNetworkAvailable()) {
             FetchStatus fetchStatusForForms = sync();
             FetchStatus fetchStatusForActions = actionService.fetchNewActions();
-            pathAfterFetchListener.partialFetch(fetchStatusForActions);
+            BidanAfterFetchListener.partialFetch(fetchStatusForActions);
 
             if (BidanApplication.getInstance().context().configuration().shouldSyncForm()) {
 
@@ -132,6 +132,7 @@ public class SyncIntentService extends IntentService {
 
             pushToServer();
             FetchStatus formActionsFetctStatus = pullFormAndActionsFromServer(locations);
+
             pullStockFromServer();
 
             return formActionsFetctStatus;
@@ -157,9 +158,9 @@ public class SyncIntentService extends IntentService {
             }
 
             long lastSyncTimeStamp = ecUpdater.getLastSyncTimeStamp();
-            PathClientProcessor.getInstance(context).processClient(ecUpdater.allEvents(startSyncTimeStamp, lastSyncTimeStamp));
+            BidanClientProcessor.getInstance(context).processClient(ecUpdater.allEvents(startSyncTimeStamp, lastSyncTimeStamp));
             Log.i(getClass().getName(), "Sync count:  " + eCount);
-            pathAfterFetchListener.partialFetch(FetchStatus.fetched);
+            BidanAfterFetchListener.partialFetch(FetchStatus.fetched);
         }
 
 
@@ -255,10 +256,12 @@ public class SyncIntentService extends IntentService {
             SharedPreferences.Editor editor = preferences.edit();
             editor.putLong(LAST_STOCK_SYNC, highestTimestamp);
             editor.commit();
+
             if (Stock_arrayList.isEmpty()) {
                 return;
             } else {
-                StockRepository stockRepository = BidanApplication.getInstance().stockRepository();
+//                StockRepository stockRepository = BidanApplication.getInstance().stockRepository();
+                StockRepository stockRepository = null;
                 for (int j = 0; j < Stock_arrayList.size(); j++) {
                     Stock fromServer = Stock_arrayList.get(j);
                     List<Stock> existingStock = stockRepository.findUniqueStock(fromServer.getVaccineTypeId(), fromServer.getTransactionType(), fromServer.getProviderid(),
@@ -329,7 +332,8 @@ public class SyncIntentService extends IntentService {
         try {
 
             while (keepSyncing) {
-                StockRepository stockRepository = BidanApplication.getInstance().stockRepository();
+//                StockRepository stockRepository = BidanApplication.getInstance().stockRepository();
+                StockRepository stockRepository = null;
                 ArrayList<Stock> stocks = (ArrayList<Stock>) stockRepository.findUnSyncedWithLimit(limit);
                 JSONArray stocksarray = createJsonArrayFromStockArray(stocks);
                 if (stocks.isEmpty()) {

@@ -23,6 +23,7 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.smartregister.bidan.application.BidanApplication;
+import org.smartregister.bidan.application.VaccinatorApplication;
 import org.smartregister.immunization.util.VaccinatorUtils;
 import org.smartregister.bidan.R;
 import org.smartregister.bidan.activity.StockControlActivity;
@@ -155,7 +156,7 @@ public class PlanningStockFragment extends Fragment {
 
     private void wasteRateCalculate(View view) {
         double wastepercent = 0.0;
-        StockRepository stockRepository = BidanApplication.getInstance().stockRepository();
+        StockRepository stockRepository = VaccinatorApplication.getInstance().stockRepository();
         int vaccinegiven = stockRepository.getVaccineUsedUntildate(System.currentTimeMillis(), ((StockControlActivity) getActivity()).vaccineType.getName().toLowerCase().trim());
         int vaccineissued = -1 * getStockIssuedIntimeFrame(DateTime.now().yearOfEra().withMinimumValue(), DateTime.now()) * (((StockControlActivity) getActivity()).vaccineType.getDoses());
         if (vaccinegiven == 0 || vaccinegiven > vaccineissued) {

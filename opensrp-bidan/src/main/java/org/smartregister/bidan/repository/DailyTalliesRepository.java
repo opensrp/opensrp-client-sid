@@ -8,7 +8,7 @@ import android.util.Log;
 
 import net.sqlcipher.database.SQLiteDatabase;
 
-import org.smartregister.bidan.application.BidanApplication;
+import org.smartregister.bidan.application.VaccinatorApplication;
 import org.smartregister.bidan.domain.DailyTally;
 import org.smartregister.bidan.domain.Hia2Indicator;
 import org.smartregister.bidan.service.HIA2Service;
@@ -88,12 +88,12 @@ public class DailyTalliesRepository extends BaseRepository {
         SQLiteDatabase database = getWritableDatabase();
         try {
             database.beginTransaction();
-            String userName = BidanApplication.getInstance().context().allSharedPreferences().fetchRegisteredANM();
+            String userName = VaccinatorApplication.getInstance().context().allSharedPreferences().fetchRegisteredANM();
             for (String indicatorCode : hia2Report.keySet()) {
                 Integer indicatorValue = (Integer) hia2Report.get(indicatorCode);
 
                 // Get the HIA2 Indicator corresponding to the current tally
-                Hia2Indicator indicator = BidanApplication.getInstance()
+                Hia2Indicator indicator = VaccinatorApplication.getInstance()
                         .hIA2IndicatorsRepository()
                         .findByIndicatorCode(indicatorCode);
 
@@ -186,7 +186,7 @@ public class DailyTalliesRepository extends BaseRepository {
         Map<Long, List<DailyTally>> talliesFromMonth = new HashMap<>();
         Cursor cursor = null;
         try {
-            HashMap<Long, Hia2Indicator> indicatorMap = BidanApplication.getInstance()
+            HashMap<Long, Hia2Indicator> indicatorMap = VaccinatorApplication.getInstance()
                     .hIA2IndicatorsRepository().findAll();
 
             Calendar startDate = Calendar.getInstance();
@@ -257,7 +257,7 @@ public class DailyTalliesRepository extends BaseRepository {
         HashMap<String, ArrayList<DailyTally>> tallies = new HashMap<>();
         Cursor cursor = null;
         try {
-            HashMap<Long, Hia2Indicator> indicatorMap = BidanApplication.getInstance()
+            HashMap<Long, Hia2Indicator> indicatorMap = VaccinatorApplication.getInstance()
                     .hIA2IndicatorsRepository().findAll();
             cursor = getReadableDatabase()
                     .query(TABLE_NAME, TABLE_COLUMNS,
@@ -297,7 +297,7 @@ public class DailyTalliesRepository extends BaseRepository {
     private List<DailyTally> readAllDataElements(Cursor cursor) {
         List<DailyTally> tallies = new ArrayList<>();
         try {
-            HashMap<Long, Hia2Indicator> indicatorMap = BidanApplication.getInstance()
+            HashMap<Long, Hia2Indicator> indicatorMap = VaccinatorApplication.getInstance()
                     .hIA2IndicatorsRepository().findAll();
             if (cursor != null && cursor.getCount() > 0) {
                 for (cursor.moveToFirst(); !cursor.isAfterLast(); cursor.moveToNext()) {

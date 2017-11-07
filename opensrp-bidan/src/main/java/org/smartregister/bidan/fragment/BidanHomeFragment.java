@@ -18,22 +18,11 @@ import android.widget.TextView;
 
 import com.github.ybq.android.spinkit.style.Circle;
 
-import org.smartregister.bidan.activity.ChildImmunizationActivity;
-import org.smartregister.bidan.application.BidanApplication;
-import org.smartregister.bidan.application.VaccinatorApplication;
-import org.smartregister.commonregistry.CommonPersonObjectClient;
-import org.smartregister.commonregistry.CommonRepository;
-import org.smartregister.cursoradapter.CursorCommonObjectFilterOption;
-import org.smartregister.cursoradapter.CursorCommonObjectSort;
-import org.smartregister.cursoradapter.CursorSortOption;
-import org.smartregister.cursoradapter.SmartRegisterPaginatedCursorAdapter;
-import org.smartregister.cursoradapter.SmartRegisterQueryBuilder;
-import org.smartregister.domain.FetchStatus;
-import org.smartregister.immunization.db.VaccineRepo;
-import org.smartregister.immunization.util.VaccinateActionUtils;
 import org.smartregister.bidan.R;
-import org.smartregister.bidan.activity.ChildSmartRegisterActivity;
+//import org.smartregister.bidan.activity.ChildImmunizationActivity;
+//import org.smartregister.bidan.activity.ChildSmartRegisterActivity;
 import org.smartregister.bidan.activity.LoginActivity;
+//import org.smartregister.bidan.application.VaccinatorApplication;
 import org.smartregister.bidan.domain.RegisterClickables;
 import org.smartregister.bidan.option.BasicSearchOption;
 import org.smartregister.bidan.option.DateSort;
@@ -42,6 +31,16 @@ import org.smartregister.bidan.provider.ChildSmartClientsProvider;
 import org.smartregister.bidan.receiver.SyncStatusBroadcastReceiver;
 import org.smartregister.bidan.servicemode.VaccinationServiceModeOption;
 import org.smartregister.bidan.view.LocationPickerView;
+import org.smartregister.commonregistry.CommonPersonObjectClient;
+import org.smartregister.commonregistry.CommonRepository;
+import org.smartregister.cursoradapter.CursorCommonObjectFilterOption;
+import org.smartregister.cursoradapter.CursorCommonObjectSort;
+import org.smartregister.cursoradapter.CursorSortOption;
+import org.smartregister.cursoradapter.SmartRegisterPaginatedCursorAdapter;
+import org.smartregister.cursoradapter.SmartRegisterQueryBuilder;
+import org.smartregister.domain.FetchStatus;
+//import org.smartregister.immunization.db.VaccineRepo;
+//import org.smartregister.immunization.util.VaccinateActionUtils;
 import org.smartregister.provider.SmartRegisterClientsProvider;
 import org.smartregister.repository.AllSharedPreferences;
 import org.smartregister.view.activity.SecuredNativeSmartRegisterActivity;
@@ -55,7 +54,7 @@ import java.util.List;
 
 import util.PathConstants;
 
-public class ChildSmartRegisterFragment extends BaseSmartRegisterFragment implements SyncStatusBroadcastReceiver.SyncStatusListener {
+public class BidanHomeFragment extends BaseSmartRegisterFragment implements SyncStatusBroadcastReceiver.SyncStatusListener {
     private final ClientActionHandler clientActionHandler = new ClientActionHandler();
     private LocationPickerView clinicSelection;
     private static final long NO_RESULT_SHOW_DIALOG_DELAY = 1000l;
@@ -147,7 +146,7 @@ public class ChildSmartRegisterFragment extends BaseSmartRegisterFragment implem
 
     @Override
     protected void startRegistration() {
-        ((ChildSmartRegisterActivity) getActivity()).startFormActivity("child_enrollment", null, null);
+//        ((ChildSmartRegisterActivity) getActivity()).startFormActivity("child_enrollment", null, null);
     }
 
     @Override
@@ -280,58 +279,58 @@ public class ChildSmartRegisterFragment extends BaseSmartRegisterFragment implem
         String tableName = PathConstants.CHILD_TABLE_NAME;
         String parentTableName = PathConstants.MOTHER_TABLE_NAME;
 
-        ChildSmartClientsProvider hhscp = new ChildSmartClientsProvider(getActivity(),
-                clientActionHandler, context().alertService(), VaccinatorApplication.getInstance().vaccineRepository(), VaccinatorApplication.getInstance().weightRepository(), context().commonrepository(tableName));
-        clientAdapter = new SmartRegisterPaginatedCursorAdapter(getActivity(), null, hhscp, context().commonrepository(tableName));
-        clientsView.setAdapter(clientAdapter);
-
-        setTablename(tableName);
-        SmartRegisterQueryBuilder countqueryBUilder = new SmartRegisterQueryBuilder();
-        countqueryBUilder.SelectInitiateMainTableCounts(tableName);
-        mainCondition = " dod is NULL OR dod = '' ";
-        countSelect = countqueryBUilder.mainCondition(mainCondition);
-        super.CountExecute();
-        countOverDue();
-        countDueOverDue();
-
-        SmartRegisterQueryBuilder queryBUilder = new SmartRegisterQueryBuilder();
-        queryBUilder.SelectInitiateMainTable(tableName, new String[]{
-                tableName + ".relationalid",
-                tableName + ".details",
-                tableName + ".zeir_id",
-                tableName + ".relational_id",
-                tableName + ".first_name",
-                tableName + ".last_name",
-                tableName + ".gender",
-                parentTableName + ".first_name as mother_first_name",
-                parentTableName + ".last_name as mother_last_name",
-                parentTableName + ".dob as mother_dob",
-                parentTableName + ".nrc_number as mother_nrc_number",
-                tableName + ".father_name",
-                tableName + ".dob",
-                tableName + ".epi_card_number",
-                tableName + ".contact_phone_number",
-                tableName + ".pmtct_status",
-                tableName + ".provider_uc",
-                tableName + ".provider_town",
-                tableName + ".provider_id",
-                tableName + ".provider_location_id",
-                tableName + ".client_reg_date",
-                tableName + ".last_interacted_with",
-                tableName + ".inactive",
-                tableName + ".lost_to_follow_up"
-        });
-        queryBUilder.customJoin("LEFT JOIN " + parentTableName + " ON  " + tableName + ".relational_id =  " + parentTableName + ".id");
-        mainSelect = queryBUilder.mainCondition(mainCondition);
-        Sortqueries = ((CursorSortOption) getDefaultOptionsProvider().sortOption()).sort();
-
-        currentlimit = 20;
-        currentoffset = 0;
-
-        super.filterandSortInInitializeQueries();
-
-        updateSearchView();
-        refresh();
+//        ChildSmartClientsProvider hhscp = new ChildSmartClientsProvider(getActivity(),
+//                clientActionHandler, context().alertService(), VaccinatorApplication.getInstance().vaccineRepository(), VaccinatorApplication.getInstance().weightRepository(), context().commonrepository(tableName));
+//        clientAdapter = new SmartRegisterPaginatedCursorAdapter(getActivity(), null, hhscp, context().commonrepository(tableName));
+//        clientsView.setAdapter(clientAdapter);
+//
+//        setTablename(tableName);
+//        SmartRegisterQueryBuilder countqueryBUilder = new SmartRegisterQueryBuilder();
+//        countqueryBUilder.SelectInitiateMainTableCounts(tableName);
+//        mainCondition = " dod is NULL OR dod = '' ";
+//        countSelect = countqueryBUilder.mainCondition(mainCondition);
+//        super.CountExecute();
+//        countOverDue();
+//        countDueOverDue();
+//
+//        SmartRegisterQueryBuilder queryBUilder = new SmartRegisterQueryBuilder();
+//        queryBUilder.SelectInitiateMainTable(tableName, new String[]{
+//                tableName + ".relationalid",
+//                tableName + ".details",
+//                tableName + ".zeir_id",
+//                tableName + ".relational_id",
+//                tableName + ".first_name",
+//                tableName + ".last_name",
+//                tableName + ".gender",
+//                parentTableName + ".first_name as mother_first_name",
+//                parentTableName + ".last_name as mother_last_name",
+//                parentTableName + ".dob as mother_dob",
+//                parentTableName + ".nrc_number as mother_nrc_number",
+//                tableName + ".father_name",
+//                tableName + ".dob",
+//                tableName + ".epi_card_number",
+//                tableName + ".contact_phone_number",
+//                tableName + ".pmtct_status",
+//                tableName + ".provider_uc",
+//                tableName + ".provider_town",
+//                tableName + ".provider_id",
+//                tableName + ".provider_location_id",
+//                tableName + ".client_reg_date",
+//                tableName + ".last_interacted_with",
+//                tableName + ".inactive",
+//                tableName + ".lost_to_follow_up"
+//        });
+//        queryBUilder.customJoin("LEFT JOIN " + parentTableName + " ON  " + tableName + ".relational_id =  " + parentTableName + ".id");
+//        mainSelect = queryBUilder.mainCondition(mainCondition);
+//        Sortqueries = ((CursorSortOption) getDefaultOptionsProvider().sortOption()).sort();
+//
+//        currentlimit = 20;
+//        currentoffset = 0;
+//
+//        super.filterandSortInInitializeQueries();
+//
+//        updateSearchView();
+//        refresh();
     }
 
     private void refreshSyncStatusViews() {
@@ -376,81 +375,41 @@ public class ChildSmartRegisterFragment extends BaseSmartRegisterFragment implem
 
     }
 
-    /*@Override
-    public void onLoadFinished(Loader<Cursor> loader, Cursor cursor) {
-        super.onLoadFinished(loader, cursor);
-        // Check if query was issued
-        if (searchView != null && searchView.getText().toString().length() > 0) {
-            if (cursor.getCount() == 0) { // No search result found
-                if (showNoResultDialogHandler != null) {
-                    showNoResultDialogHandler.removeCallbacksAndMessages(null);
-                    showNoResultDialogHandler = null;
-                }
-
-                showNoResultDialogHandler = new Handler();
-                showNoResultDialogHandler.postDelayed(new Runnable() {
-                    @Override
-                    public void run() {
-                        if (notInCatchmentDialogFragment == null) {
-                            notInCatchmentDialogFragment = new NotInCatchmentDialogFragment();
-                        }
-
-                        FragmentTransaction ft = getActivity().getFragmentManager().beginTransaction();
-                        Fragment prev = getActivity().getFragmentManager().findFragmentByTag(DIALOG_TAG);
-                        if (prev != null) {
-                            ft.remove(prev);
-                        }
-                        ft.addToBackStack(null);
-                        if(!notInCatchmentDialogFragment.isVisible()) {
-                            notInCatchmentDialogFragment.show(ft, DIALOG_TAG);
-                        }
-                    }
-                }, NO_RESULT_SHOW_DIALOG_DELAY);
-            } else {
-                if (showNoResultDialogHandler != null) {
-                    showNoResultDialogHandler.removeCallbacksAndMessages(null);
-                    showNoResultDialogHandler = null;
-                }
-            }
-        }
-    }*/
-
     private String filterSelectionCondition(boolean urgentOnly) {
         String mainCondition = " (inactive != 'true' and lost_to_follow_up != 'true') AND ( ";
-        ArrayList<VaccineRepo.Vaccine> vaccines = VaccineRepo.getVaccines("child");
-
-        if (vaccines.contains(VaccineRepo.Vaccine.bcg2)) {
-            vaccines.remove(VaccineRepo.Vaccine.bcg2);
-        }
-        if (vaccines.contains(VaccineRepo.Vaccine.ipv)) {
-            vaccines.remove(VaccineRepo.Vaccine.ipv);
-        }
-        for (int i = 0; i < vaccines.size(); i++) {
-            VaccineRepo.Vaccine vaccine = vaccines.get(i);
-            if (i == vaccines.size() - 1) {
-                mainCondition += " " + VaccinateActionUtils.addHyphen(vaccine.display()) + " = 'urgent' ";
-            } else {
-                mainCondition += " " + VaccinateActionUtils.addHyphen(vaccine.display()) + " = 'urgent' or ";
-            }
-        }
-
-        if (urgentOnly) {
-            return mainCondition + " ) ";
-        }
-
-        mainCondition += " or ";
-        for (int i = 0; i < vaccines.size(); i++) {
-            VaccineRepo.Vaccine vaccine = vaccines.get(i);
-            if (i == vaccines.size() - 1) {
-                mainCondition += " " + VaccinateActionUtils.addHyphen(vaccine.display()) + " = 'normal' ";
-            } else {
-                mainCondition += " " + VaccinateActionUtils.addHyphen(vaccine.display()) + " = 'normal' or ";
-            }
-        }
+//        ArrayList<VaccineRepo.Vaccine> vaccines = VaccineRepo.getVaccines("child");
+//
+//        if (vaccines.contains(VaccineRepo.Vaccine.bcg2)) {
+//            vaccines.remove(VaccineRepo.Vaccine.bcg2);
+//        }
+//        if (vaccines.contains(VaccineRepo.Vaccine.ipv)) {
+//            vaccines.remove(VaccineRepo.Vaccine.ipv);
+//        }
+//        for (int i = 0; i < vaccines.size(); i++) {
+//            VaccineRepo.Vaccine vaccine = vaccines.get(i);
+//            if (i == vaccines.size() - 1) {
+//                mainCondition += " " + VaccinateActionUtils.addHyphen(vaccine.display()) + " = 'urgent' ";
+//            } else {
+//                mainCondition += " " + VaccinateActionUtils.addHyphen(vaccine.display()) + " = 'urgent' or ";
+//            }
+//        }
+//
+//        if (urgentOnly) {
+//            return mainCondition + " ) ";
+//        }
+//
+//        mainCondition += " or ";
+//        for (int i = 0; i < vaccines.size(); i++) {
+//            VaccineRepo.Vaccine vaccine = vaccines.get(i);
+//            if (i == vaccines.size() - 1) {
+//                mainCondition += " " + VaccinateActionUtils.addHyphen(vaccine.display()) + " = 'normal' ";
+//            } else {
+//                mainCondition += " " + VaccinateActionUtils.addHyphen(vaccine.display()) + " = 'normal' or ";
+//            }
+//        }
 
         return mainCondition + " ) ";
     }
-
 
     private void countOverDue() {
         String mainCondition = filterSelectionCondition(true);
@@ -467,7 +426,7 @@ public class ChildSmartRegisterFragment extends BaseSmartRegisterFragment implem
             }
         }
 
-        ((ChildSmartRegisterActivity) getActivity()).updateAdvancedSearchFilterCount(count);
+//        ((ChildSmartRegisterActivity) getActivity()).updateAdvancedSearchFilterCount(count);
     }
 
     private void countDueOverDue() {
@@ -566,27 +525,27 @@ public class ChildSmartRegisterFragment extends BaseSmartRegisterFragment implem
             switch (view.getId()) {
                 case R.id.child_profile_info_layout:
 
-                    ChildImmunizationActivity.launchActivity(getActivity(), client, null);
+//                    ChildImmunizationActivity.launchActivity(getActivity(), client, null);
                     break;
                 case R.id.record_weight:
                     registerClickables.setRecordWeight(true);
-                    ChildImmunizationActivity.launchActivity(getActivity(), client, registerClickables);
+//                    ChildImmunizationActivity.launchActivity(getActivity(), client, registerClickables);
                     break;
 
                 case R.id.record_vaccination:
                     registerClickables.setRecordAll(true);
-                    ChildImmunizationActivity.launchActivity(getActivity(), client, registerClickables);
+//                    ChildImmunizationActivity.launchActivity(getActivity(), client, registerClickables);
                     break;
                 case R.id.filter_selection:
                     toggleFilterSelection();
                     break;
 
                 case R.id.global_search:
-                    ((ChildSmartRegisterActivity) getActivity()).startAdvancedSearch();
+//                    ((ChildSmartRegisterActivity) getActivity()).startAdvancedSearch();
                     break;
 
                 case R.id.scan_qr_code:
-                    ((ChildSmartRegisterActivity) getActivity()).startQrCodeScanner();
+//                    ((ChildSmartRegisterActivity) getActivity()).startQrCodeScanner();
                     break;
                 default:
                     break;

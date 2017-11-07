@@ -42,7 +42,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 import org.opensrp.api.constants.Gender;
 import org.smartregister.Context;
-import org.smartregister.bidan.application.BidanApplication;
+import org.smartregister.bidan.application.VaccinatorApplication;
 import org.smartregister.bidan.sync.PathClientProcessor;
 import org.smartregister.bidan.tabfragments.ChildUnderFiveFragment;
 import org.smartregister.bidan.toolbar.ChildDetailsToolbar;
@@ -309,7 +309,7 @@ public class ChildDetailTabbedActivity extends BaseActivity implements Vaccinati
         for (int i = 0; i < weightlist.size(); i++) {
             Weight weight = weightlist.get(i);
             org.smartregister.domain.db.Event event = null;
-            EventClientRepository db = BidanApplication.getInstance().eventClientRepository();
+            EventClientRepository db = VaccinatorApplication.getInstance().eventClientRepository();
             if (weight.getEventId() != null) {
                 event = ecUpdater.convert(db.getEventsByEventId(weight.getEventId()), org.smartregister.domain.db.Event.class);
             } else if (weight.getFormSubmissionId() != null) {
@@ -939,7 +939,7 @@ public class ChildDetailTabbedActivity extends BaseActivity implements Vaccinati
     @Override
     public void onUndoVaccination(VaccineWrapper tag, View view) {
         if (tag != null && tag.getDbKey() != null) {
-            final VaccineRepository vaccineRepository = BidanApplication.getInstance().vaccineRepository();
+            final VaccineRepository vaccineRepository = VaccinatorApplication.getInstance().vaccineRepository();
             Long dbKey = tag.getDbKey();
             vaccineRepository.deleteVaccine(dbKey);
 
@@ -960,7 +960,7 @@ public class ChildDetailTabbedActivity extends BaseActivity implements Vaccinati
     @Override
     public void onWeightTaken(WeightWrapper tag) {
         if (tag != null) {
-            WeightRepository weightRepository = BidanApplication.getInstance().weightRepository();
+            WeightRepository weightRepository = VaccinatorApplication.getInstance().weightRepository();
             Weight weight = new Weight();
             if (tag.getDbKey() != null) {
                 weight = weightRepository.find(tag.getDbKey());
@@ -1125,7 +1125,7 @@ public class ChildDetailTabbedActivity extends BaseActivity implements Vaccinati
     }
 
     private void saveVaccine(VaccineWrapper tag) {
-        VaccineRepository vaccineRepository = BidanApplication.getInstance().vaccineRepository();
+        VaccineRepository vaccineRepository = VaccinatorApplication.getInstance().vaccineRepository();
 
         Vaccine vaccine = new Vaccine();
         if (tag.getDbKey() != null) {
@@ -1182,7 +1182,7 @@ public class ChildDetailTabbedActivity extends BaseActivity implements Vaccinati
     }
 
     private boolean insertVaccinesGivenAsOptions(JSONObject question) throws JSONException {
-        VaccineRepository vaccineRepository = BidanApplication.getInstance().vaccineRepository();
+        VaccineRepository vaccineRepository = VaccinatorApplication.getInstance().vaccineRepository();
         JSONObject omrsChoicesTemplate = question.getJSONObject("openmrs_choice_ids");
         JSONObject omrsChoices = new JSONObject();
         JSONArray choices = new JSONArray();
@@ -1311,7 +1311,7 @@ public class ChildDetailTabbedActivity extends BaseActivity implements Vaccinati
     private boolean showVaccineListCheck(String eventId, String formSubmissionId) {
         ECSyncUpdater ecUpdater = ECSyncUpdater.getInstance(ChildDetailTabbedActivity.this);
 
-        EventClientRepository db = BidanApplication.getInstance().eventClientRepository();
+        EventClientRepository db = VaccinatorApplication.getInstance().eventClientRepository();
         org.smartregister.domain.db.Event event = null;
         if (eventId != null) {
             event = ecUpdater.convert(db.getEventsByEventId(eventId), org.smartregister.domain.db.Event.class);
@@ -1331,8 +1331,8 @@ public class ChildDetailTabbedActivity extends BaseActivity implements Vaccinati
     }
 
 
-    public BidanApplication getVaccinatorApplicationInstance() {
-        return BidanApplication.getInstance();
+    public VaccinatorApplication getVaccinatorApplicationInstance() {
+        return VaccinatorApplication.getInstance();
     }
 
     public CommonPersonObjectClient getChildDetails() {
@@ -1403,7 +1403,7 @@ public class ChildDetailTabbedActivity extends BaseActivity implements Vaccinati
         ArrayList<VaccineWrapper> vaccineWrappers = new ArrayList<>();
         vaccineWrappers.add(vaccineWrapper);
 
-        List<Vaccine> vaccineList = BidanApplication.getInstance().vaccineRepository()
+        List<Vaccine> vaccineList = VaccinatorApplication.getInstance().vaccineRepository()
                 .findByEntityId(childDetails.entityId());
         if (vaccineList == null) {
             vaccineList = new ArrayList<>();
@@ -1456,10 +1456,10 @@ public class ChildDetailTabbedActivity extends BaseActivity implements Vaccinati
                 ServiceSchedule.updateOfflineAlerts(tag.getType(), childDetails.entityId(), Utils.dobToDateTime(childDetails));
             }
 
-            RecurringServiceRecordRepository recurringServiceRecordRepository = BidanApplication.getInstance().recurringServiceRecordRepository();
+            RecurringServiceRecordRepository recurringServiceRecordRepository = VaccinatorApplication.getInstance().recurringServiceRecordRepository();
             List<ServiceRecord> serviceRecordList = recurringServiceRecordRepository.findByEntityId(childDetails.entityId());
 
-            RecurringServiceTypeRepository recurringServiceTypeRepository = BidanApplication.getInstance().recurringServiceTypeRepository();
+            RecurringServiceTypeRepository recurringServiceTypeRepository = VaccinatorApplication.getInstance().recurringServiceTypeRepository();
             List<ServiceType> serviceTypes = recurringServiceTypeRepository.fetchAll();
             String[] alertArray = VaccinateActionUtils.allAlertNames(serviceTypes);
 
@@ -1535,7 +1535,7 @@ public class ChildDetailTabbedActivity extends BaseActivity implements Vaccinati
             if (tag != null) {
 
                 if (tag.getDbKey() != null) {
-                    RecurringServiceRecordRepository recurringServiceRecordRepository = BidanApplication.getInstance().recurringServiceRecordRepository();
+                    RecurringServiceRecordRepository recurringServiceRecordRepository = VaccinatorApplication.getInstance().recurringServiceRecordRepository();
                     Long dbKey = tag.getDbKey();
                     recurringServiceRecordRepository.deleteServiceRecord(dbKey);
 
@@ -1546,7 +1546,7 @@ public class ChildDetailTabbedActivity extends BaseActivity implements Vaccinati
 
                     ServiceSchedule.updateOfflineAlerts(tag.getType(), childDetails.entityId(), Utils.dobToDateTime(childDetails));
 
-                    RecurringServiceTypeRepository recurringServiceTypeRepository = BidanApplication.getInstance().recurringServiceTypeRepository();
+                    RecurringServiceTypeRepository recurringServiceTypeRepository = VaccinatorApplication.getInstance().recurringServiceTypeRepository();
                     List<ServiceType> serviceTypes = recurringServiceTypeRepository.fetchAll();
                     String[] alertArray = VaccinateActionUtils.allAlertNames(serviceTypes);
 

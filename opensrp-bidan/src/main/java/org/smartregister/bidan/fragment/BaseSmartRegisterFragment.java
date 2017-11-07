@@ -31,6 +31,7 @@ import static org.apache.commons.lang3.StringUtils.isEmpty;
 
 public class BaseSmartRegisterFragment extends SecuredNativeSmartRegisterCursorAdapterFragment {
 
+    private static final String TAG = BaseSmartRegisterFragment.class.getName();
     private LocationPickerView clinicSelection;
 
     @Override
@@ -99,6 +100,7 @@ public class BaseSmartRegisterFragment extends SecuredNativeSmartRegisterCursorA
         joinTable = joinTableString;
         mainCondition = mainConditionString;
         getSearchCancelView().setVisibility(isEmpty(filterString) ? INVISIBLE : VISIBLE);
+        Log.e(TAG, "filter: "+mainConditionString );
         CountExecute();
         filterandSortExecute();
     }

@@ -24,6 +24,7 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.smartregister.bidan.application.BidanApplication;
+import org.smartregister.bidan.application.VaccinatorApplication;
 import org.smartregister.bidan.repository.HIA2IndicatorsRepository;
 import org.smartregister.domain.FetchStatus;
 import org.smartregister.bidan.R;
@@ -180,7 +181,7 @@ public class HIA2ReportsActivity extends BaseActivity {
                 } else {
                     saveClicked = false;
                 }
-                BidanApplication.getInstance().monthlyTalliesRepository().save(result, month);
+                VaccinatorApplication.getInstance().monthlyTalliesRepository().save(result, month);
                 if (saveClicked && !skipValidationSet) {
                     sendReport(month);
                 }
@@ -337,10 +338,10 @@ public class HIA2ReportsActivity extends BaseActivity {
         @Override
         protected Intent doInBackground(Void... params) {
             try {
-                MonthlyTalliesRepository monthlyTalliesRepository = BidanApplication.getInstance().monthlyTalliesRepository();
+                MonthlyTalliesRepository monthlyTalliesRepository = VaccinatorApplication.getInstance().monthlyTalliesRepository();
                 List<MonthlyTally> monthlyTallies = monthlyTalliesRepository.findDrafts(MonthlyTalliesRepository.DF_YYYYMM.format(date));
 
-                HIA2IndicatorsRepository hIA2IndicatorsRepository = BidanApplication.getInstance().hIA2IndicatorsRepository();
+                HIA2IndicatorsRepository hIA2IndicatorsRepository = VaccinatorApplication.getInstance().hIA2IndicatorsRepository();
                 List<Hia2Indicator> hia2Indicators = hIA2IndicatorsRepository.fetchAll();
                 if (hia2Indicators == null || hia2Indicators.isEmpty()) {
                     return null;
@@ -463,7 +464,7 @@ public class HIA2ReportsActivity extends BaseActivity {
 
         @Override
         protected List<MonthlyTally> doInBackground(Void... params) {
-            MonthlyTalliesRepository monthlyTalliesRepository = BidanApplication.getInstance().monthlyTalliesRepository();
+            MonthlyTalliesRepository monthlyTalliesRepository = VaccinatorApplication.getInstance().monthlyTalliesRepository();
             Calendar endDate = Calendar.getInstance();
             endDate.set(Calendar.DAY_OF_MONTH, 1); // Set date to first day of this month
             endDate.set(Calendar.HOUR_OF_DAY, 23);

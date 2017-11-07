@@ -20,6 +20,7 @@ import android.widget.TextView;
 
 import org.smartregister.bidan.activity.HIA2ReportsActivity;
 import org.smartregister.bidan.application.BidanApplication;
+import org.smartregister.bidan.application.VaccinatorApplication;
 import org.smartregister.bidan.receiver.Hia2ServiceBroadcastReceiver;
 import org.smartregister.bidan.R;
 import org.smartregister.bidan.domain.MonthlyTally;
@@ -118,7 +119,7 @@ public class DraftMonthlyFragment extends Fragment
         Utils.startAsyncTask(new AsyncTask<Void, Void, List<Date>>() {
             @Override
             protected List<Date> doInBackground(Void... params) {
-                MonthlyTalliesRepository monthlyTalliesRepository = BidanApplication
+                MonthlyTalliesRepository monthlyTalliesRepository = VaccinatorApplication
                         .getInstance().monthlyTalliesRepository();
                 Calendar startDate = Calendar.getInstance();
                 startDate.set(Calendar.DAY_OF_MONTH, 1);

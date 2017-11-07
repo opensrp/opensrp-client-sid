@@ -23,6 +23,7 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.smartregister.bidan.application.BidanApplication;
+import org.smartregister.bidan.repos.UniqueIdBidanRepository;
 import org.smartregister.clientandeventmodel.Address;
 import org.smartregister.clientandeventmodel.Client;
 import org.smartregister.clientandeventmodel.Event;
@@ -1421,7 +1422,7 @@ public class JsonFormUtils extends org.smartregister.util.JsonFormUtils {
 
             if ("child_enrollment".equals(formName)) {
                 if (StringUtils.isBlank(entityId)) {
-                    UniqueIdRepository uniqueIdRepo = BidanApplication.getInstance().uniqueIdRepository();
+                    UniqueIdBidanRepository uniqueIdRepo = BidanApplication.getInstance().uniqueIdRepository();
                     entityId = uniqueIdRepo.getNextUniqueId() != null ? uniqueIdRepo.getNextUniqueId().getOpenmrsId() : "";
                     if (entityId.isEmpty()) {
                         Toast.makeText(context, context.getString(R.string.no_openmrs_id), Toast.LENGTH_SHORT).show();
@@ -1715,20 +1716,20 @@ public class JsonFormUtils extends org.smartregister.util.JsonFormUtils {
                 JSONObject form = new JSONObject(formString);
 
                 // Create a weight object if weight was recorded
-                Weight weight = getWeightObject(openSrpContext, form);
-                if (weight != null) {
-                    WeightRepository weightRepository = BidanApplication.getInstance().weightRepository();
-                    weightRepository.add(weight);
-                }
+//                Weight weight = getWeightObject(openSrpContext, form);
+//                if (weight != null) {
+//                    WeightRepository weightRepository = BidanApplication.getInstance().weightRepository();
+//                    weightRepository.add(weight);
+//                }
 
                 // Create a vaccine object for all recorded vaccines
-                ArrayList<Vaccine> vaccines = getVaccineObjects(context, openSrpContext, form);
-                if (vaccines.size() > 0) {
-                    VaccineRepository vaccineRepository = BidanApplication.getInstance().vaccineRepository();
-                    for (Vaccine curVaccine : vaccines) {
-                        Utils.addVaccine(vaccineRepository, curVaccine);
-                    }
-                }
+//                ArrayList<Vaccine> vaccines = getVaccineObjects(context, openSrpContext, form);
+//                if (vaccines.size() > 0) {
+//                    VaccineRepository vaccineRepository = BidanApplication.getInstance().vaccineRepository();
+//                    for (Vaccine curVaccine : vaccines) {
+//                        Utils.addVaccine(vaccineRepository, curVaccine);
+//                    }
+//                }
             } catch (Exception e) {
                 Log.e(TAG, Log.getStackTraceString(e));
             }

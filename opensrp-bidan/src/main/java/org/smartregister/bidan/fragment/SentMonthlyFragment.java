@@ -13,6 +13,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ExpandableListView;
 
+import org.smartregister.bidan.application.VaccinatorApplication;
 import org.smartregister.bidan.receiver.Hia2ServiceBroadcastReceiver;
 import org.smartregister.bidan.R;
 import org.smartregister.bidan.activity.ReportSummaryActivity;
@@ -230,7 +231,7 @@ public class SentMonthlyFragment extends Fragment
 
         @Override
         protected HashMap<String, ArrayList<MonthlyTally>> doInBackground(Void... params) {
-            return BidanApplication.getInstance().monthlyTalliesRepository().findAllSent(MONTH_YEAR_FORMAT);
+            return VaccinatorApplication.getInstance().monthlyTalliesRepository().findAllSent(MONTH_YEAR_FORMAT);
         }
 
         @Override

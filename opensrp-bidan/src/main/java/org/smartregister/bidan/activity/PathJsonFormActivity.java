@@ -13,7 +13,7 @@ import org.apache.commons.lang3.StringUtils;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
-import org.smartregister.bidan.application.BidanApplication;
+import org.smartregister.bidan.application.VaccinatorApplication;
 import org.smartregister.bidan.repository.StockRepository;
 import org.smartregister.immunization.repository.VaccineTypeRepository;
 import org.smartregister.bidan.fragment.PathJsonFormFragment;
@@ -70,7 +70,7 @@ public class PathJsonFormActivity extends JsonFormActivity {
         JSONObject object = getStep("step1");
         try {
             if (object.getString("title").contains("Stock Issued")) {
-                StockRepository str = BidanApplication.getInstance().stockRepository();
+                StockRepository str = VaccinatorApplication.getInstance().stockRepository();
                 if (key.equalsIgnoreCase("Date_Stock_Issued") && value != null && !value.equalsIgnoreCase("")) {
                     if (balancetextview == null) {
                         ArrayList<View> views = getFormDataViews();
@@ -137,7 +137,7 @@ public class PathJsonFormActivity extends JsonFormActivity {
 
                     int DosesPerVial = 0;
                     int vialsused = 0;
-                    VaccineTypeRepository vaccineTypeRepository = BidanApplication.getInstance().vaccineTypeRepository();
+                    VaccineTypeRepository vaccineTypeRepository = VaccinatorApplication.getInstance().vaccineTypeRepository();
                     int dosesPerVial = vaccineTypeRepository.getDosesPerVial(vaccineName);
                     if (currentBalance % dosesPerVial == 0) {
                         vialsused = currentBalance / dosesPerVial;
@@ -169,7 +169,7 @@ public class PathJsonFormActivity extends JsonFormActivity {
         JSONObject object = getStep("step1");
         try {
             if (object.getString("title").contains("Stock Issued")) {
-                StockRepository str = BidanApplication.getInstance().stockRepository();
+                StockRepository str = VaccinatorApplication.getInstance().stockRepository();
                 if (key.equalsIgnoreCase("Vials_Issued")) {
                     if (balancetextview == null) {
                         ArrayList<View> views = getFormDataViews();
@@ -233,7 +233,7 @@ public class PathJsonFormActivity extends JsonFormActivity {
                     }
                     int DosesPerVial = 0;
                     int vialsused = 0;
-                    VaccineTypeRepository vaccineTypeRepository = BidanApplication.getInstance().vaccineTypeRepository();
+                    VaccineTypeRepository vaccineTypeRepository = VaccinatorApplication.getInstance().vaccineTypeRepository();
                     int dosesPerVial = vaccineTypeRepository.getDosesPerVial(vaccineName);
                     if (currentBalanceVaccineUsed % dosesPerVial == 0) {
                         vialsused = currentBalanceVaccineUsed / dosesPerVial;
@@ -252,7 +252,7 @@ public class PathJsonFormActivity extends JsonFormActivity {
         JSONObject object = getStep("step1");
         try {
             if (object.getString("title").contains("Stock Issued")) {
-                StockRepository str = BidanApplication.getInstance().stockRepository();
+                StockRepository str = VaccinatorApplication.getInstance().stockRepository();
                 if (key.equalsIgnoreCase("Vials_Wasted")) {
                     if (balancetextview == null) {
                         ArrayList<View> views = getFormDataViews();
@@ -316,7 +316,7 @@ public class PathJsonFormActivity extends JsonFormActivity {
                     }
                     int DosesPerVial = 0;
                     int vialsused = 0;
-                    VaccineTypeRepository vaccine_typesRepository = BidanApplication.getInstance().vaccineTypeRepository();
+                    VaccineTypeRepository vaccine_typesRepository = VaccinatorApplication.getInstance().vaccineTypeRepository();
                     int dosesPerVial = vaccine_typesRepository.getDosesPerVial(vaccineName);
                     if (currentBalanceVaccineUsed % dosesPerVial == 0) {
                         vialsused = currentBalanceVaccineUsed / dosesPerVial;
@@ -366,7 +366,7 @@ public class PathJsonFormActivity extends JsonFormActivity {
                                     }
 
                                     String vaccineName = object.getString("title").replace("Stock Received", "").trim();
-                                    StockRepository str = BidanApplication.getInstance().stockRepository();
+                                    StockRepository str = VaccinatorApplication.getInstance().stockRepository();
                                     currentBalance = str.getBalanceFromNameAndDate(vaccineName, encounterDate.getTime());
                                 }
                             }
@@ -432,7 +432,7 @@ public class PathJsonFormActivity extends JsonFormActivity {
                                     }
 
                                     String vaccineName = object.getString("title").replace("Stock Received", "").trim();
-                                    StockRepository str = BidanApplication.getInstance().stockRepository();
+                                    StockRepository str = VaccinatorApplication.getInstance().stockRepository();
                                     currentBalance = str.getBalanceFromNameAndDate(vaccineName, encounterDate.getTime());
                                 }
                             }
@@ -495,7 +495,7 @@ public class PathJsonFormActivity extends JsonFormActivity {
                                     }
 
                                     String vaccineName = object.getString("title").replace("Stock Loss/Adjustment", "").trim();
-                                    StockRepository str = BidanApplication.getInstance().stockRepository();
+                                    StockRepository str = VaccinatorApplication.getInstance().stockRepository();
                                     currentBalance = str.getBalanceFromNameAndDate(vaccineName, encounterDate.getTime());
                                 }
                             }
@@ -560,7 +560,7 @@ public class PathJsonFormActivity extends JsonFormActivity {
                                     }
 
                                     String vaccineName = object.getString("title").replace("Stock Loss/Adjustment", "").trim();
-                                    StockRepository str = BidanApplication.getInstance().stockRepository();
+                                    StockRepository str = VaccinatorApplication.getInstance().stockRepository();
                                     currentBalance = str.getBalanceFromNameAndDate(vaccineName, encounterDate.getTime());
                                 }
                             }

@@ -18,7 +18,7 @@ import org.joda.time.DateTime;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
-import org.smartregister.bidan.application.BidanApplication;
+import org.smartregister.bidan.application.VaccinatorApplication;
 import org.smartregister.bidan.viewComponents.WidgetFactory;
 import org.smartregister.commonregistry.CommonPersonObjectClient;
 import org.smartregister.domain.Alert;
@@ -95,7 +95,7 @@ public class ChildUnderFiveFragment extends Fragment {
         View underFiveFragment = inflater.inflate(R.layout.child_under_five_fragment, container, false);
         fragmentContainer = (LinearLayout) underFiveFragment.findViewById(R.id.container);
 
-        alertService = BidanApplication.getInstance().context().alertService();
+        alertService = VaccinatorApplication.getInstance().context().alertService();
 
         DetailsRepository detailsRepository = ((ChildDetailTabbedActivity) getActivity()).getDetailsRepository();
         childDetails = childDetails != null ? childDetails : ((ChildDetailTabbedActivity) getActivity()).getChildDetails();
@@ -133,7 +133,7 @@ public class ChildUnderFiveFragment extends Fragment {
         ArrayList<Boolean> weighteditmode = new ArrayList<>();
         ArrayList<View.OnClickListener> listeners = new ArrayList<>();
 
-        WeightRepository wp = BidanApplication.getInstance().weightRepository();
+        WeightRepository wp = VaccinatorApplication.getInstance().weightRepository();
         List<Weight> weightlist = wp.findLast5(childDetails.entityId());
         ECSyncUpdater ecUpdater = ECSyncUpdater.getInstance(getActivity());
 
@@ -161,7 +161,7 @@ public class ChildUnderFiveFragment extends Fragment {
                 boolean less_than_three_months_event_created = false;
 
                 org.smartregister.domain.db.Event event = null;
-                EventClientRepository db = BidanApplication.getInstance().eventClientRepository();
+                EventClientRepository db = VaccinatorApplication.getInstance().eventClientRepository();
                 if (weight.getEventId() != null) {
                     event = ecUpdater.convert(db.getEventsByEventId(weight.getEventId()), org.smartregister.domain.db.Event.class);
                 } else if (weight.getFormSubmissionId() != null) {
@@ -216,7 +216,7 @@ public class ChildUnderFiveFragment extends Fragment {
     }
 
     private void updateVaccinationViews(LinearLayout fragmentContainer, boolean editmode) {
-        VaccineRepository vaccineRepository = BidanApplication.getInstance().vaccineRepository();
+        VaccineRepository vaccineRepository = VaccinatorApplication.getInstance().vaccineRepository();
         List<Vaccine> vaccineList = vaccineRepository.findByEntityId(childDetails.entityId());
         LinearLayout vaccineGroupCanvasLL = (LinearLayout) fragmentContainer.findViewById(R.id.immunizations);
         vaccineGroupCanvasLL.removeAllViews();
@@ -347,7 +347,7 @@ public class ChildUnderFiveFragment extends Fragment {
             dob = dateTime.toDate();
         }
 
-        List<Vaccine> vaccineList = BidanApplication.getInstance().vaccineRepository()
+        List<Vaccine> vaccineList = VaccinatorApplication.getInstance().vaccineRepository()
                 .findByEntityId(childDetails.entityId());
         if (vaccineList == null) vaccineList = new ArrayList<>();
 
@@ -370,7 +370,7 @@ public class ChildUnderFiveFragment extends Fragment {
         }
 
 
-        List<ServiceRecord> serviceRecordList = BidanApplication.getInstance().recurringServiceRecordRepository()
+        List<ServiceRecord> serviceRecordList = VaccinatorApplication.getInstance().recurringServiceRecordRepository()
                 .findByEntityId(childDetails.entityId());
 
         ServiceEditDialogFragment serviceEditDialogFragment = ServiceEditDialogFragment.newInstance(dob, serviceRecordList, serviceWrapper, serviceRowGroup, true);

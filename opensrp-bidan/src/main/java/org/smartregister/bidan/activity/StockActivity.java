@@ -16,6 +16,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import org.smartregister.bidan.application.BidanApplication;
+import org.smartregister.bidan.application.VaccinatorApplication;
 import org.smartregister.bidan.repository.StockRepository;
 import org.smartregister.bidan.toolbar.LocationSwitcherToolbar;
 import org.smartregister.immunization.domain.VaccineType;
@@ -93,7 +94,7 @@ public class StockActivity extends BaseActivity {
 
     @SuppressWarnings("unchecked")
     private void refreshadapter() {
-        ArrayList<VaccineType> allVaccineTypes = (ArrayList) BidanApplication.getInstance().vaccineTypeRepository().getAllVaccineTypes(null);
+        ArrayList<VaccineType> allVaccineTypes = (ArrayList) VaccinatorApplication.getInstance().vaccineTypeRepository().getAllVaccineTypes(null);
         VaccineType[] allVaccineTypesarray = allVaccineTypes.toArray(new VaccineType[allVaccineTypes.size()]);
         stockGridAdapter adapter = new stockGridAdapter(this, allVaccineTypesarray);
         stockGrid.setAdapter(adapter);
@@ -186,7 +187,7 @@ public class StockActivity extends BaseActivity {
 
 
                 final VaccineType vaccineType = vaccineTypes[position];
-                StockRepository stockRepository = BidanApplication.getInstance().stockRepository();
+                StockRepository stockRepository = VaccinatorApplication.getInstance().stockRepository();
                 int currentvials = stockRepository.getBalanceFromNameAndDate(vaccineType.getName(), System.currentTimeMillis());
                 name.setText(vaccineType.getName());
 

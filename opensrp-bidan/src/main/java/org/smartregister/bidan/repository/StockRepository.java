@@ -10,7 +10,7 @@ import org.apache.commons.lang3.StringUtils;
 import org.joda.time.DateTime;
 import org.smartregister.immunization.domain.VaccineType;
 import org.smartregister.immunization.repository.VaccineTypeRepository;
-import org.smartregister.bidan.application.BidanApplication;
+import org.smartregister.bidan.application.VaccinatorApplication;
 import org.smartregister.bidan.domain.Stock;
 import org.smartregister.repository.BaseRepository;
 
@@ -326,7 +326,7 @@ public class StockRepository extends BaseRepository {
     public int getBalanceFromNameAndDate(String Name, Long updatedat) {
         SQLiteDatabase database = getReadableDatabase();
 //      Cursor c = getReadableDatabase().query(stock_TABLE_NAME, stock_TABLE_COLUMNS, DATE_UPDATED + " < ?", new String[]{""+updatedAt.longValue()}, null, null, null, null);
-        VaccineTypeRepository vtr = BidanApplication.getInstance().vaccineTypeRepository();
+        VaccineTypeRepository vtr = VaccinatorApplication.getInstance().vaccineTypeRepository();
         ArrayList<VaccineType> allvaccinetypes = (ArrayList) vtr.findIDByName(Name);
         String id_for_vaccine = "";
         if (allvaccinetypes.size() > 0) {

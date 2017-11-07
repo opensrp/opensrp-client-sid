@@ -60,8 +60,7 @@ public class ServiceLocationsAdapter extends BaseAdapter {
             views.put(locationNames.get(position), view);
         }
 
-        refreshView(views.get(locationNames.get(position)),
-                locationNames.get(position).equals(selectedLocation));
+        refreshView(views.get(locationNames.get(position)), locationNames.get(position).equals(selectedLocation));
 
         return views.get(locationNames.get(position));
     }

@@ -22,7 +22,7 @@ public class OnBootReceiver extends BroadcastReceiver {
     }
 
     private void restartAlarms(Context context) {
-        BidanApplication.setAlarms(context);
+//        BidanApplication.setAlarms(context);
     }
 
 }

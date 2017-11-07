@@ -25,6 +25,7 @@ import android.view.ViewTreeObserver;
 import android.view.inputmethod.EditorInfo;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.ScrollView;
@@ -35,6 +36,7 @@ import org.joda.time.DateTime;
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.smartregister.Context;
+import org.smartregister.bidan.BuildConfig;
 import org.smartregister.bidan.application.BidanApplication;
 import org.smartregister.bidan.view.LocationPickerView;
 import org.smartregister.domain.LoginResponse;
@@ -42,7 +44,7 @@ import org.smartregister.domain.Response;
 import org.smartregister.domain.ResponseStatus;
 import org.smartregister.domain.TimeStatus;
 import org.smartregister.event.Listener;
-import org.smartregister.growthmonitoring.service.intent.ZScoreRefreshIntentService;
+//import org.smartregister.growthmonitoring.service.intent.ZScoreRefreshIntentService;
 import org.smartregister.immunization.util.IMDatabaseUtils;
 import org.smartregister.bidan.R;
 import org.smartregister.bidan.service.intent.PullUniqueIdsIntentService;
@@ -77,6 +79,7 @@ import static org.smartregister.util.Log.logError;
 import static org.smartregister.util.Log.logVerbose;
 
 public class LoginActivity extends AppCompatActivity {
+    private static final String TAG = LoginActivity.class.getName();
     private EditText userNameEditText;
     private EditText passwordEditText;
     private ProgressDialog progressDialog;
@@ -101,11 +104,13 @@ public class LoginActivity extends AppCompatActivity {
             conf.locale = new Locale(preferredLocale);
             res.updateConfiguration(conf, dm);
         } catch (Exception e) {
-            logError("Error onCreate: " + e);
+            logError("Error onCreate: " + e.getMessage());
 
         }
 
         setContentView(R.layout.login);
+        ImageView loginglogo = (ImageView)findViewById(R.id.login_logo);
+        loginglogo.setImageDrawable(getResources().getDrawable(R.drawable.login_logo_bidan));
 
         getSupportActionBar().setDisplayShowTitleEnabled(false);
         getSupportActionBar().setBackgroundDrawable(new ColorDrawable(getResources().getColor(android.R.color.black)));
@@ -122,7 +127,10 @@ public class LoginActivity extends AppCompatActivity {
 
         setLanguage();
 
-        debugApp();
+        if (BuildConfig.DEBUG){
+            debugApp();
+        }
+
 
     }
 
@@ -380,7 +388,7 @@ public class LoginActivity extends AppCompatActivity {
     private void localLoginWith(String userName, String password) {
         getOpenSRPContext().userService().localLogin(userName, password);
         goToHome(false);
-        startZScoreIntentService();
+//        startZScoreIntentService();
         new Thread(new Runnable() {
             @Override
             public void run() {
@@ -391,10 +399,10 @@ public class LoginActivity extends AppCompatActivity {
         }).start();
     }
 
-    private void startZScoreIntentService() {
-        Intent intent = new Intent(this, ZScoreRefreshIntentService.class);
-        startService(intent);
-    }
+//    private void startZScoreIntentService() {
+//        Intent intent = new Intent(this, ZScoreRefreshIntentService.class);
+//        startService(intent);
+//    }
 
     private void remoteLoginWith(String userName, String password, String userInfo) {
         getOpenSRPContext().userService().remoteLogin(userName, password, userInfo);
@@ -404,16 +412,18 @@ public class LoginActivity extends AppCompatActivity {
 
     private void goToHome(boolean remote) {
         if (!remote) {
-            startZScoreIntentService();
+//            startZScoreIntentService();
         } else {
             Utils.startAsyncTask(new SaveTeamLocationsTask(), null);
         }
         BidanApplication.setCrashlyticsUser(getOpenSRPContext());
 //        Intent intent = new Intent(this, ChildSmartRegisterActivity.class);
-        Intent intent = new Intent(this, BidanHomeActivity.class);
+//        Intent intent = new Intent(this, BidanHomeActivity.class);
+        Intent intent = new Intent(this, BidanLandingActivity.class);
         intent.putExtra(BaseRegisterActivity.IS_REMOTE_LOGIN, remote);
         startActivity(intent);
-        IMDatabaseUtils.accessAssetsAndFillDataBaseForVaccineTypes(this, null);
+
+//        IMDatabaseUtils.accessAssetsAndFillDataBaseForVaccineTypes(this, null);
 
         finish();
     }

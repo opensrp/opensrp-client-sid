@@ -7,6 +7,7 @@ import net.sqlcipher.database.SQLiteDatabase;
 
 import org.apache.commons.lang3.StringUtils;
 import org.smartregister.bidan.application.BidanApplication;
+import org.smartregister.bidan.application.VaccinatorApplication;
 import org.smartregister.commonregistry.CommonFtsObject;
 import org.smartregister.growthmonitoring.repository.WeightRepository;
 import org.smartregister.growthmonitoring.repository.ZScoreRepository;
@@ -207,7 +208,7 @@ public class PathRepository extends Repository {
             RecurringServiceTypeRepository.createTable(db);
             RecurringServiceRecordRepository.createTable(db);
 
-            RecurringServiceTypeRepository recurringServiceTypeRepository = BidanApplication.getInstance().recurringServiceTypeRepository();
+            RecurringServiceTypeRepository recurringServiceTypeRepository = VaccinatorApplication.getInstance().recurringServiceTypeRepository();
             IMDatabaseUtils.populateRecurringServices(context, db, recurringServiceTypeRepository);
         } catch (Exception e) {
             Log.e(TAG, "upgradeToVersion5 " + Log.getStackTraceString(e));
@@ -247,7 +248,7 @@ public class PathRepository extends Repository {
             dumpHIA2IndicatorsCSV(db);
 
             // Recurring service json changed. update
-            RecurringServiceTypeRepository recurringServiceTypeRepository = BidanApplication.getInstance().recurringServiceTypeRepository();
+            RecurringServiceTypeRepository recurringServiceTypeRepository = VaccinatorApplication.getInstance().recurringServiceTypeRepository();
             IMDatabaseUtils.populateRecurringServices(context, db, recurringServiceTypeRepository);
 
         } catch (Exception e) {
@@ -374,9 +375,9 @@ public class PathRepository extends Repository {
                 context,
                 HIA2IndicatorsRepository.INDICATORS_CSV_FILE,
                 HIA2IndicatorsRepository.CSV_COLUMN_MAPPING);
-        HIA2IndicatorsRepository hIA2IndicatorsRepository = BidanApplication.getInstance()
-                .hIA2IndicatorsRepository();
-        hIA2IndicatorsRepository.save(db, csvData);
+//        HIA2IndicatorsRepository hIA2IndicatorsRepository = BidanApplication.getInstance()
+//                .hIA2IndicatorsRepository();
+//        hIA2IndicatorsRepository.save(db, csvData);
     }
 
 }

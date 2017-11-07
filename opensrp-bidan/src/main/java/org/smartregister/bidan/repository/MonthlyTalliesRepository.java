@@ -8,7 +8,7 @@ import android.util.Log;
 import net.sqlcipher.SQLException;
 import net.sqlcipher.database.SQLiteDatabase;
 
-import org.smartregister.bidan.application.BidanApplication;
+import org.smartregister.bidan.application.VaccinatorApplication;
 import org.smartregister.bidan.domain.DailyTally;
 import org.smartregister.bidan.domain.Hia2Indicator;
 import org.smartregister.bidan.domain.MonthlyTally;
@@ -97,7 +97,7 @@ public class MonthlyTalliesRepository extends BaseRepository {
      * @return List of months with unsent monthly tallies
      */
     public List<Date> findUneditedDraftMonths(Date startDate, Date endDate) {
-        List<String> allTallyMonths = BidanApplication.getInstance().dailyTalliesRepository()
+        List<String> allTallyMonths = VaccinatorApplication.getInstance().dailyTalliesRepository()
                 .findAllDistinctMonths(DF_YYYYMM, startDate, endDate);
         Cursor cursor = null;
         try {
@@ -167,7 +167,7 @@ public class MonthlyTalliesRepository extends BaseRepository {
 
             if (monthlyTallies.size() == 0) { // No tallies generated yet
                 Log.w(TAG, "Using daily tallies instead of monthly");
-                Map<Long, List<DailyTally>> dailyTallies = BidanApplication.getInstance()
+                Map<Long, List<DailyTally>> dailyTallies = VaccinatorApplication.getInstance()
                         .dailyTalliesRepository().findTalliesInMonth(DF_YYYYMM.parse(month));
                 for (List<DailyTally> curList : dailyTallies.values()) {
                     MonthlyTally curTally = addUpDailyTallies(curList);
@@ -216,7 +216,7 @@ public class MonthlyTalliesRepository extends BaseRepository {
     }
 
     private MonthlyTally addUpDailyTallies(List<DailyTally> dailyTallies) {
-        String userName = BidanApplication.getInstance().context().allSharedPreferences().fetchRegisteredANM();
+        String userName = VaccinatorApplication.getInstance().context().allSharedPreferences().fetchRegisteredANM();
         MonthlyTally monthlyTally = null;
         double value = 0d;
         for (int i = 0; i < dailyTallies.size(); i++) {
@@ -244,7 +244,7 @@ public class MonthlyTalliesRepository extends BaseRepository {
         HashMap<String, ArrayList<MonthlyTally>> tallies = new HashMap<>();
         Cursor cursor = null;
         try {
-            HashMap<Long, Hia2Indicator> indicatorMap = BidanApplication.getInstance()
+            HashMap<Long, Hia2Indicator> indicatorMap = VaccinatorApplication.getInstance()
                     .hIA2IndicatorsRepository().findAll();
             cursor = getReadableDatabase()
                     .query(TABLE_NAME, TABLE_COLUMNS,
@@ -320,7 +320,7 @@ public class MonthlyTalliesRepository extends BaseRepository {
         try {
             database.beginTransaction();
             if (draftFormValues != null && !draftFormValues.isEmpty() && month != null) {
-                String userName = BidanApplication.getInstance().context().allSharedPreferences().fetchRegisteredANM();
+                String userName = VaccinatorApplication.getInstance().context().allSharedPreferences().fetchRegisteredANM();
 
                 for (String key : draftFormValues.keySet()) {
                     String value = draftFormValues.get(key);
@@ -352,7 +352,7 @@ public class MonthlyTalliesRepository extends BaseRepository {
 
     private List<MonthlyTally> readAllDataElements(Cursor cursor) {
         List<MonthlyTally> tallies = new ArrayList<>();
-        HashMap<Long, Hia2Indicator> indicatorMap = BidanApplication.getInstance()
+        HashMap<Long, Hia2Indicator> indicatorMap = VaccinatorApplication.getInstance()
                 .hIA2IndicatorsRepository().findAll();
 
         try {

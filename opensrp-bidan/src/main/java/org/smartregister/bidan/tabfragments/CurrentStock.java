@@ -29,6 +29,7 @@ import org.json.JSONObject;
 import org.smartregister.Context;
 import org.smartregister.bidan.adapter.StockPaginatedCursorAdapter;
 import org.smartregister.bidan.application.BidanApplication;
+import org.smartregister.bidan.application.VaccinatorApplication;
 import org.smartregister.bidan.repository.StockRepository;
 import org.smartregister.commonregistry.CommonRepository;
 import org.smartregister.cursoradapter.SmartRegisterQueryBuilder;
@@ -151,7 +152,7 @@ public class CurrentStock extends Fragment implements
         clientsView = (ListView) view.findViewById(R.id.list);
         paginationViewHandler.addPagination(clientsView);
 
-        stockRepository = BidanApplication.getInstance().stockRepository();
+        stockRepository = VaccinatorApplication.getInstance().stockRepository();
 
         Button received = (Button) view.findViewById(R.id.received);
         Button issued = (Button) view.findViewById(R.id.issued);
@@ -327,7 +328,7 @@ public class CurrentStock extends Fragment implements
                 Received_Stock_From = JsonFormUtils.getFieldValue(fields, "Reason_for_adjustment");
             }
 
-            StockRepository str = BidanApplication.getInstance().stockRepository();
+            StockRepository str = VaccinatorApplication.getInstance().stockRepository();
             SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(getActivity());
             AllSharedPreferences allSharedPreferences = new AllSharedPreferences(preferences);
 
@@ -360,7 +361,7 @@ public class CurrentStock extends Fragment implements
             }
             String vials_received = JsonFormUtils.getFieldValue(fields, "Vials_Received");
 
-            StockRepository str = BidanApplication.getInstance().stockRepository();
+            StockRepository str = VaccinatorApplication.getInstance().stockRepository();
             SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(getActivity());
             AllSharedPreferences allSharedPreferences = new AllSharedPreferences(preferences);
 
@@ -397,7 +398,7 @@ public class CurrentStock extends Fragment implements
                 vials_received = "" + (Integer.parseInt(vials_received) + Integer.parseInt(vials_wasted));
             }
 
-            StockRepository str = BidanApplication.getInstance().stockRepository();
+            StockRepository str = VaccinatorApplication.getInstance().stockRepository();
             SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(getActivity());
             AllSharedPreferences allSharedPreferences = new AllSharedPreferences(preferences);
 

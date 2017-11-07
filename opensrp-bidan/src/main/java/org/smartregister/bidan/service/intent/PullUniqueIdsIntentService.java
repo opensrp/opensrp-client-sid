@@ -7,6 +7,7 @@ import android.util.Log;
 import org.json.JSONArray;
 import org.json.JSONObject;
 import org.smartregister.bidan.application.BidanApplication;
+import org.smartregister.bidan.repos.UniqueIdBidanRepository;
 import org.smartregister.bidan.repository.UniqueIdRepository;
 import org.smartregister.domain.Response;
 import org.smartregister.service.HTTPAgent;
@@ -20,6 +21,7 @@ import java.net.HttpURLConnection;
 import java.util.ArrayList;
 import java.util.List;
 
+import util.BidanConstants;
 import util.PathConstants;
 
 
@@ -30,7 +32,7 @@ public class PullUniqueIdsIntentService extends IntentService {
     public static final String ID_URL = "/uniqueids/get";
     public static final String IDENTIFIERS = "identifiers";
     private static final String TAG = PullUniqueIdsIntentService.class.getCanonicalName();
-    private UniqueIdRepository uniqueIdRepo;
+    private UniqueIdBidanRepository uniqueIdRepo;
 
 
     public PullUniqueIdsIntentService() {
@@ -42,9 +44,9 @@ public class PullUniqueIdsIntentService extends IntentService {
         try {
             int numberToGenerate;
             if (uniqueIdRepo.countUnUsedIds() == 0) { // first time pull no ids at all
-                numberToGenerate = PathConstants.OPENMRS_UNIQUE_ID_INITIAL_BATCH_SIZE;
+                numberToGenerate = BidanConstants.OPENMRS_UNIQUE_ID_INITIAL_BATCH_SIZE;
             } else if (uniqueIdRepo.countUnUsedIds() <= 250) { //maintain a minimum of 250 else skip this pull
-                numberToGenerate = PathConstants.OPENMRS_UNIQUE_ID_BATCH_SIZE;
+                numberToGenerate = BidanConstants.OPENMRS_UNIQUE_ID_BATCH_SIZE;
             } else {
                 return;
             }
@@ -67,11 +69,19 @@ public class PullUniqueIdsIntentService extends IntentService {
         }
 
         String url = baseUrl + ID_URL + "?source=" + source + "&numberToGenerate=" + numberToGenerate;
+        String  DRISTHI_BASE_URL = baseUrl.replaceFirst("[^/]*$", "openmrs");
+        url =   DRISTHI_BASE_URL+
+                "/module/idgen/exportIdentifiers.form?source=1"+
+                "&numberToGenerate="+Integer.toString(numberToGenerate);
+//                "&username="+username+
+//                "&password="+password;
+
         Log.i(PullUniqueIdsIntentService.class.getName(), "URL: " + url);
 
         if (httpAgent == null) {
             throw new Exception(ID_URL + " http agent is null");
         }
+
 
         Response resp = httpAgent.fetch(url);
         if (resp.isFailure()) {

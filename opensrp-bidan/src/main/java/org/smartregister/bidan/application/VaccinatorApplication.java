@@ -14,34 +14,33 @@ import com.crashlytics.android.Crashlytics;
 import org.json.JSONArray;
 import org.smartregister.Context;
 import org.smartregister.CoreLibrary;
-import org.smartregister.bidan.receiver.SyncStatusBroadcastReceiver;
-import org.smartregister.bidan.repos.BidanRepository;
-import org.smartregister.bidan.repos.UniqueIdBidanRepository;
-import org.smartregister.bidan.repository.HIA2IndicatorsRepository;
-import org.smartregister.bidan.repository.MonthlyTalliesRepository;
-import org.smartregister.bidan.repository.StockRepository;
 import org.smartregister.commonregistry.CommonFtsObject;
 import org.smartregister.growthmonitoring.GrowthMonitoringLibrary;
 import org.smartregister.growthmonitoring.repository.WeightRepository;
 import org.smartregister.growthmonitoring.repository.ZScoreRepository;
-//import org.smartregister.immunization.ImmunizationLibrary;
-//import org.smartregister.immunization.db.VaccineRepo;
-//import org.smartregister.immunization.domain.VaccineSchedule;
-//import org.smartregister.immunization.repository.RecurringServiceRecordRepository;
-//import org.smartregister.immunization.repository.RecurringServiceTypeRepository;
+import org.smartregister.immunization.ImmunizationLibrary;
+import org.smartregister.immunization.db.VaccineRepo;
+import org.smartregister.immunization.domain.VaccineSchedule;
+import org.smartregister.immunization.repository.RecurringServiceRecordRepository;
+import org.smartregister.immunization.repository.RecurringServiceTypeRepository;
 import org.smartregister.immunization.repository.VaccineNameRepository;
 import org.smartregister.immunization.repository.VaccineRepository;
 import org.smartregister.immunization.repository.VaccineTypeRepository;
-//import org.smartregister.immunization.util.VaccinateActionUtils;
-//import org.smartregister.immunization.util.VaccinatorUtils;
+import org.smartregister.immunization.util.VaccinateActionUtils;
+import org.smartregister.immunization.util.VaccinatorUtils;
 import org.smartregister.bidan.BuildConfig;
 import org.smartregister.bidan.R;
 import org.smartregister.bidan.activity.LoginActivity;
-import org.smartregister.bidan.receiver.BidanSyncBroadcastReceiver;
-//import org.smartregister.bidan.receiver.VaccinatorAlarmReceiver;
-//import org.smartregister.bidan.repository.DailyTalliesRepository;
-//import org.smartregister.bidan.repository.PathRepository;
-//import org.smartregister.bidan.repository.UniqueIdRepository;
+import org.smartregister.bidan.receiver.Hia2ServiceBroadcastReceiver;
+import org.smartregister.bidan.receiver.PathSyncBroadcastReceiver;
+import org.smartregister.bidan.receiver.SyncStatusBroadcastReceiver;
+import org.smartregister.bidan.receiver.VaccinatorAlarmReceiver;
+import org.smartregister.bidan.repository.DailyTalliesRepository;
+import org.smartregister.bidan.repository.HIA2IndicatorsRepository;
+import org.smartregister.bidan.repository.MonthlyTalliesRepository;
+import org.smartregister.bidan.repository.PathRepository;
+import org.smartregister.bidan.repository.StockRepository;
+import org.smartregister.bidan.repository.UniqueIdRepository;
 import org.smartregister.repository.EventClientRepository;
 import org.smartregister.repository.Repository;
 import org.smartregister.sync.DrishtiSyncScheduler;
@@ -55,7 +54,6 @@ import java.util.Locale;
 import java.util.Map;
 
 import io.fabric.sdk.android.Fabric;
-import util.BidanConstants;
 import util.PathConstants;
 
 import static org.smartregister.util.Log.logError;
@@ -64,18 +62,17 @@ import static org.smartregister.util.Log.logInfo;
 /**
  * Created by koros on 2/3/16.
  */
-public class BidanApplication extends DrishtiApplication
+public class VaccinatorApplication extends DrishtiApplication
         implements TimeChangedBroadcastReceiver.OnTimeChangedListener {
 
-    private static final String TAG = "BidanApplication";
+    private static final String TAG = "VaccinatorApplication";
     private static CommonFtsObject commonFtsObject;
+    private UniqueIdRepository uniqueIdRepository;
+    private DailyTalliesRepository dailyTalliesRepository;
+    private MonthlyTalliesRepository monthlyTalliesRepository;
+    private HIA2IndicatorsRepository hIA2IndicatorsRepository;
     private EventClientRepository eventClientRepository;
-    private UniqueIdBidanRepository uniqueIdRepository;
-//    private UniqueIdRepository uniqueIdRepository;
-//    private DailyTalliesRepository dailyTalliesRepository;
-//    private MonthlyTalliesRepository monthlyTalliesRepository;
-//    private HIA2IndicatorsRepository hIA2IndicatorsRepository;
-//    private StockRepository stockRepository;
+    private StockRepository stockRepository;
     private boolean lastModified;
 
     @Override
@@ -90,16 +87,15 @@ public class BidanApplication extends DrishtiApplication
 
         //Initialize Modules
         CoreLibrary.init(context());
-
-//        GrowthMonitoringLibrary.init(context(), getRepository());
-//        ImmunizationLibrary.init(context(), getRepository(), createCommonFtsObject());
+        GrowthMonitoringLibrary.init(context(), getRepository());
+        ImmunizationLibrary.init(context(), getRepository(), createCommonFtsObject());
 
         if (!BuildConfig.DEBUG) {
             Fabric.with(this, new Crashlytics());
         }
-        DrishtiSyncScheduler.setReceiverClass(BidanSyncBroadcastReceiver.class);
+        DrishtiSyncScheduler.setReceiverClass(PathSyncBroadcastReceiver.class);
 
-//        Hia2ServiceBroadcastReceiver.init(this);
+        Hia2ServiceBroadcastReceiver.init(this);
         SyncStatusBroadcastReceiver.init(this);
         TimeChangedBroadcastReceiver.init(this);
         TimeChangedBroadcastReceiver.getInstance().addOnTimeChangedListener(this);
@@ -108,12 +104,12 @@ public class BidanApplication extends DrishtiApplication
         cleanUpSyncState();
         initOfflineSchedules();
         setCrashlyticsUser(context);
-//        setAlarms(this);
+        setAlarms(this);
 
     }
 
-    public static synchronized BidanApplication getInstance() {
-        return (BidanApplication) mInstance;
+    public static synchronized VaccinatorApplication getInstance() {
+        return (VaccinatorApplication) mInstance;
     }
 
     @Override
@@ -172,23 +168,22 @@ public class BidanApplication extends DrishtiApplication
     private static String[] getFtsSortFields(String tableName) {
 
 
-        if (tableName.equals(BidanConstants.CHILD_TABLE_NAME)) {
+        if (tableName.equals(PathConstants.CHILD_TABLE_NAME)) {
+            ArrayList<VaccineRepo.Vaccine> vaccines = VaccineRepo.getVaccines("child");
             List<String> names = new ArrayList<>();
-//            ArrayList<VaccineRepo.Vaccine> vaccines = VaccineRepo.getVaccines("child");
-//            names.add("first_name");
-//            names.add("dob");
-//            names.add("zeir_id");
-//            names.add("last_interacted_with");
-//            names.add("inactive");
-//            names.add("lost_to_follow_up");
-//            names.add(PathConstants.EC_CHILD_TABLE.DOD);
-//
-//            for (VaccineRepo.Vaccine vaccine : vaccines) {
-//                names.add("alerts." + VaccinateActionUtils.addHyphen(vaccine.display()));
-//            }
+            names.add("first_name");
+            names.add("dob");
+            names.add("zeir_id");
+            names.add("last_interacted_with");
+            names.add("inactive");
+            names.add("lost_to_follow_up");
+            names.add(PathConstants.EC_CHILD_TABLE.DOD);
+
+            for (VaccineRepo.Vaccine vaccine : vaccines) {
+                names.add("alerts." + VaccinateActionUtils.addHyphen(vaccine.display()));
+            }
 
             return names.toArray(new String[names.size()]);
-
         } else if (tableName.equals(PathConstants.MOTHER_TABLE_NAME)) {
             return new String[]{"first_name", "dob", "zeir_id", "last_interacted_with"};
         }
@@ -200,11 +195,11 @@ public class BidanApplication extends DrishtiApplication
     }
 
     private static Map<String, Pair<String, Boolean>> getAlertScheduleMap() {
+        ArrayList<VaccineRepo.Vaccine> vaccines = VaccineRepo.getVaccines("child");
         Map<String, Pair<String, Boolean>> map = new HashMap<>();
-//        ArrayList<VaccineRepo.Vaccine> vaccines = VaccineRepo.getVaccines("child");
-//        for (VaccineRepo.Vaccine vaccine : vaccines) {
-//            map.put(vaccine.display(), Pair.create(PathConstants.CHILD_TABLE_NAME, false));
-//        }
+        for (VaccineRepo.Vaccine vaccine : vaccines) {
+            map.put(vaccine.display(), Pair.create(PathConstants.CHILD_TABLE_NAME, false));
+        }
         return map;
     }
 
@@ -244,17 +239,15 @@ public class BidanApplication extends DrishtiApplication
 
     @Override
     public Repository getRepository() {
-        Log.e(TAG, "getRepository: " );
         try {
             if (repository == null) {
-                repository = new BidanRepository(getInstance().getApplicationContext(), context());
+                repository = new PathRepository(getInstance().getApplicationContext(), context());
                 uniqueIdRepository();
+                dailyTalliesRepository();
+                monthlyTalliesRepository();
+                hIA2IndicatorsRepository();
                 eventClientRepository();
-
-//                dailyTalliesRepository();
-//                monthlyTalliesRepository();
-//                hIA2IndicatorsRepository();
-//                stockRepository();
+                stockRepository();
             }
         } catch (UnsatisfiedLinkError e) {
             logError("Error on getRepository: " + e);
@@ -264,42 +257,79 @@ public class BidanApplication extends DrishtiApplication
     }
 
 
-//    public WeightRepository weightRepository() {
-//        return GrowthMonitoringLibrary.getInstance().weightRepository();
-//    }
+    public WeightRepository weightRepository() {
+        return GrowthMonitoringLibrary.getInstance().weightRepository();
+    }
 
     public Context context() {
         return context;
     }
 
-//    public VaccineRepository vaccineRepository() {
-//        return ImmunizationLibrary.getInstance().vaccineRepository();
-//    }
+    public VaccineRepository vaccineRepository() {
+        return ImmunizationLibrary.getInstance().vaccineRepository();
+    }
 
-//    public ZScoreRepository zScoreRepository() {
-//        return GrowthMonitoringLibrary.getInstance().zScoreRepository();
-//    }
+    public ZScoreRepository zScoreRepository() {
+        return GrowthMonitoringLibrary.getInstance().zScoreRepository();
+    }
 
-    public UniqueIdBidanRepository uniqueIdRepository() {
+    public UniqueIdRepository uniqueIdRepository() {
         if (uniqueIdRepository == null) {
-            uniqueIdRepository = new UniqueIdBidanRepository((BidanRepository) getRepository());
+            uniqueIdRepository = new UniqueIdRepository((PathRepository) getRepository());
         }
         return uniqueIdRepository;
     }
 
-//    public RecurringServiceTypeRepository recurringServiceTypeRepository() {
-//        return ImmunizationLibrary.getInstance().recurringServiceTypeRepository();
-//    }
-//
-//    public RecurringServiceRecordRepository recurringServiceRecordRepository() {
-//        return ImmunizationLibrary.getInstance().recurringServiceRecordRepository();
-//    }
+    public DailyTalliesRepository dailyTalliesRepository() {
+        if (dailyTalliesRepository == null) {
+            dailyTalliesRepository = new DailyTalliesRepository((PathRepository) getRepository());
+        }
+        return dailyTalliesRepository;
+    }
+
+    public MonthlyTalliesRepository monthlyTalliesRepository() {
+        if (monthlyTalliesRepository == null) {
+            monthlyTalliesRepository = new MonthlyTalliesRepository((PathRepository) getRepository());
+        }
+
+        return monthlyTalliesRepository;
+    }
+
+    public HIA2IndicatorsRepository hIA2IndicatorsRepository() {
+        if (hIA2IndicatorsRepository == null) {
+            hIA2IndicatorsRepository = new HIA2IndicatorsRepository((PathRepository) getRepository());
+        }
+        return hIA2IndicatorsRepository;
+    }
+
+    public RecurringServiceTypeRepository recurringServiceTypeRepository() {
+        return ImmunizationLibrary.getInstance().recurringServiceTypeRepository();
+    }
+
+    public RecurringServiceRecordRepository recurringServiceRecordRepository() {
+        return ImmunizationLibrary.getInstance().recurringServiceRecordRepository();
+    }
 
     public EventClientRepository eventClientRepository() {
         if (eventClientRepository == null) {
             eventClientRepository = new EventClientRepository(getRepository());
         }
         return eventClientRepository;
+    }
+
+    public StockRepository stockRepository() {
+        if (stockRepository == null) {
+            stockRepository = new StockRepository((PathRepository) getRepository());
+        }
+        return stockRepository;
+    }
+
+    public VaccineTypeRepository vaccineTypeRepository() {
+        return ImmunizationLibrary.getInstance().vaccineTypeRepository();
+    }
+
+    public VaccineNameRepository vaccineNameRepository() {
+        return ImmunizationLibrary.getInstance().vaccineNameRepository();
     }
 
     public boolean isLastModified() {
@@ -326,9 +356,9 @@ public class BidanApplication extends DrishtiApplication
 
     private void initOfflineSchedules() {
         try {
-//            JSONArray childVaccines = new JSONArray(VaccinatorUtils.getSupportedVaccines(this));
-//            JSONArray specialVaccines = new JSONArray(VaccinatorUtils.getSpecialVaccines(this));
-//            VaccineSchedule.init(childVaccines, specialVaccines, "child");
+            JSONArray childVaccines = new JSONArray(VaccinatorUtils.getSupportedVaccines(this));
+            JSONArray specialVaccines = new JSONArray(VaccinatorUtils.getSpecialVaccines(this));
+            VaccineSchedule.init(childVaccines, specialVaccines, "child");
         } catch (Exception e) {
             Log.e(TAG, Log.getStackTraceString(e));
         }
@@ -338,12 +368,12 @@ public class BidanApplication extends DrishtiApplication
         final int TRIGGER_ITERATION_TWO_MINUTES = 2;
         final int TRIGGER_ITERATION_FIVE_MINUTES = 5;
 
-//        VaccinatorAlarmReceiver.setAlarm(context, TRIGGER_ITERATION_TWO_MINUTES, PathConstants.ServiceType.DAILY_TALLIES_GENERATION);
-//        VaccinatorAlarmReceiver.setAlarm(context, TRIGGER_ITERATION_TWO_MINUTES, PathConstants.ServiceType.WEIGHT_SYNC_PROCESSING);
-//        VaccinatorAlarmReceiver.setAlarm(context, TRIGGER_ITERATION_TWO_MINUTES, PathConstants.ServiceType.VACCINE_SYNC_PROCESSING);
-//        VaccinatorAlarmReceiver.setAlarm(context, TRIGGER_ITERATION_TWO_MINUTES, PathConstants.ServiceType.RECURRING_SERVICES_SYNC_PROCESSING);
-//        VaccinatorAlarmReceiver.setAlarm(context, TRIGGER_ITERATION_TWO_MINUTES, PathConstants.ServiceType.IMAGE_UPLOAD);
-//        VaccinatorAlarmReceiver.setAlarm(context, TRIGGER_ITERATION_FIVE_MINUTES, PathConstants.ServiceType.PULL_UNIQUE_IDS);
+        VaccinatorAlarmReceiver.setAlarm(context, TRIGGER_ITERATION_TWO_MINUTES, PathConstants.ServiceType.DAILY_TALLIES_GENERATION);
+        VaccinatorAlarmReceiver.setAlarm(context, TRIGGER_ITERATION_TWO_MINUTES, PathConstants.ServiceType.WEIGHT_SYNC_PROCESSING);
+        VaccinatorAlarmReceiver.setAlarm(context, TRIGGER_ITERATION_TWO_MINUTES, PathConstants.ServiceType.VACCINE_SYNC_PROCESSING);
+        VaccinatorAlarmReceiver.setAlarm(context, TRIGGER_ITERATION_TWO_MINUTES, PathConstants.ServiceType.RECURRING_SERVICES_SYNC_PROCESSING);
+        VaccinatorAlarmReceiver.setAlarm(context, TRIGGER_ITERATION_TWO_MINUTES, PathConstants.ServiceType.IMAGE_UPLOAD);
+        VaccinatorAlarmReceiver.setAlarm(context, TRIGGER_ITERATION_FIVE_MINUTES, PathConstants.ServiceType.PULL_UNIQUE_IDS);
 
     }
 

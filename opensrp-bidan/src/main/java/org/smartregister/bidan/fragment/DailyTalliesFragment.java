@@ -16,6 +16,7 @@ import org.smartregister.bidan.activity.HIA2ReportsActivity;
 import org.smartregister.bidan.activity.ReportSummaryActivity;
 import org.smartregister.bidan.adapter.ExpandedListAdapter;
 import org.smartregister.bidan.application.BidanApplication;
+import org.smartregister.bidan.application.VaccinatorApplication;
 import org.smartregister.bidan.domain.DailyTally;
 import org.smartregister.bidan.domain.Hia2Indicator;
 import org.smartregister.bidan.receiver.Hia2ServiceBroadcastReceiver;
@@ -255,7 +256,7 @@ public class DailyTalliesFragment extends Fragment
         protected HashMap<String, ArrayList<DailyTally>> doInBackground(Void... params) {
             Calendar startDate = Calendar.getInstance();
 
-            List<Hia2Indicator> indicators = BidanApplication.getInstance()
+            List<Hia2Indicator> indicators = VaccinatorApplication.getInstance()
                     .hIA2IndicatorsRepository().fetchAll();
             for (Hia2Indicator curIndicator : indicators) {
                 if (curIndicator != null) {
@@ -269,7 +270,7 @@ public class DailyTalliesFragment extends Fragment
             startDate.set(Calendar.SECOND, 0);
             startDate.set(Calendar.MILLISECOND, 0);
             startDate.add(Calendar.MONTH, -1 * HIA2ReportsActivity.MONTH_SUGGESTION_LIMIT);
-            return BidanApplication.getInstance().dailyTalliesRepository()
+            return VaccinatorApplication.getInstance().dailyTalliesRepository()
                     .findAll(DAY_FORMAT, startDate.getTime(), Calendar.getInstance().getTime());
         }
 

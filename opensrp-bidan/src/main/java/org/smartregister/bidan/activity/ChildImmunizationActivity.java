@@ -28,7 +28,7 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.opensrp.api.constants.Gender;
-import org.smartregister.bidan.application.BidanApplication;
+import org.smartregister.bidan.application.VaccinatorApplication;
 import org.smartregister.bidan.toolbar.LocationSwitcherToolbar;
 import org.smartregister.commonregistry.AllCommonsRepository;
 import org.smartregister.commonregistry.CommonPersonObject;
@@ -235,13 +235,13 @@ public class ChildImmunizationActivity extends BaseActivity
         updateAgeViews();
         updateChildIdViews();
 
-        WeightRepository weightRepository = BidanApplication.getInstance().weightRepository();
+        WeightRepository weightRepository = VaccinatorApplication.getInstance().weightRepository();
 
-        VaccineRepository vaccineRepository = BidanApplication.getInstance().vaccineRepository();
+        VaccineRepository vaccineRepository = VaccinatorApplication.getInstance().vaccineRepository();
 
-        RecurringServiceTypeRepository recurringServiceTypeRepository = BidanApplication.getInstance().recurringServiceTypeRepository();
+        RecurringServiceTypeRepository recurringServiceTypeRepository = VaccinatorApplication.getInstance().recurringServiceTypeRepository();
 
-        RecurringServiceRecordRepository recurringServiceRecordRepository = BidanApplication.getInstance().recurringServiceRecordRepository();
+        RecurringServiceRecordRepository recurringServiceRecordRepository = VaccinatorApplication.getInstance().recurringServiceRecordRepository();
 
         AlertService alertService = getOpenSRPContext().alertService();
 
@@ -432,7 +432,7 @@ public class ChildImmunizationActivity extends BaseActivity
 
     private void showVaccineNotifications(List<Vaccine> vaccineList, List<Alert> alerts) {
 
-        DetailsRepository detailsRepository = BidanApplication.getInstance().context().detailsRepository();
+        DetailsRepository detailsRepository = VaccinatorApplication.getInstance().context().detailsRepository();
         Map<String, String> details = detailsRepository.getAllDetailsForClient(childDetails.entityId());
 
         if (details.containsKey(BCG2_NOTIFICATION_DONE)) {
@@ -742,7 +742,7 @@ public class ChildImmunizationActivity extends BaseActivity
     @Override
     public void onWeightTaken(WeightWrapper tag) {
         if (tag != null) {
-            final WeightRepository weightRepository = BidanApplication.getInstance().weightRepository();
+            final WeightRepository weightRepository = VaccinatorApplication.getInstance().weightRepository();
             Weight weight = new Weight();
             if (tag.getDbKey() != null) {
                 weight = weightRepository.find(tag.getDbKey());
@@ -824,7 +824,7 @@ public class ChildImmunizationActivity extends BaseActivity
             dob = dateTime.toDate();
         }
 
-        List<Vaccine> vaccineList = BidanApplication.getInstance().vaccineRepository()
+        List<Vaccine> vaccineList = VaccinatorApplication.getInstance().vaccineRepository()
                 .findByEntityId(childDetails.entityId());
         if (vaccineList == null) vaccineList = new ArrayList<>();
 
@@ -855,7 +855,7 @@ public class ChildImmunizationActivity extends BaseActivity
             dob = new DateTime(dobString);
         }
 
-        List<ServiceRecord> serviceRecordList = BidanApplication.getInstance().recurringServiceRecordRepository()
+        List<ServiceRecord> serviceRecordList = VaccinatorApplication.getInstance().recurringServiceRecordRepository()
                 .findByEntityId(childDetails.entityId());
 
         ServiceDialogFragment serviceDialogFragment = ServiceDialogFragment.newInstance(dob, serviceRecordList, serviceWrapper, true);
@@ -916,7 +916,7 @@ public class ChildImmunizationActivity extends BaseActivity
             return;
         }
 
-        VaccineRepository vaccineRepository = BidanApplication.getInstance().vaccineRepository();
+        VaccineRepository vaccineRepository = VaccinatorApplication.getInstance().vaccineRepository();
 
         VaccineWrapper[] arrayTags = tags.toArray(new VaccineWrapper[tags.size()]);
         SaveVaccinesTask backgroundTask = new SaveVaccinesTask();
@@ -1049,12 +1049,12 @@ public class ChildImmunizationActivity extends BaseActivity
     }
 
     private boolean isLastModified() {
-        BidanApplication application = (BidanApplication) getApplication();
+        VaccinatorApplication application = (VaccinatorApplication) getApplication();
         return application.isLastModified();
     }
 
     private void setLastModified(boolean lastModified) {
-        BidanApplication application = (BidanApplication) getApplication();
+        VaccinatorApplication application = (VaccinatorApplication) getApplication();
         if (lastModified != application.isLastModified()) {
             application.setLastModified(lastModified);
         }
@@ -1375,10 +1375,10 @@ public class ChildImmunizationActivity extends BaseActivity
                 ServiceSchedule.updateOfflineAlerts(tag.getType(), childDetails.entityId(), Utils.dobToDateTime(childDetails));
             }
 
-            RecurringServiceRecordRepository recurringServiceRecordRepository = BidanApplication.getInstance().recurringServiceRecordRepository();
+            RecurringServiceRecordRepository recurringServiceRecordRepository = VaccinatorApplication.getInstance().recurringServiceRecordRepository();
             List<ServiceRecord> serviceRecordList = recurringServiceRecordRepository.findByEntityId(childDetails.entityId());
 
-            RecurringServiceTypeRepository recurringServiceTypeRepository = BidanApplication.getInstance().recurringServiceTypeRepository();
+            RecurringServiceTypeRepository recurringServiceTypeRepository = VaccinatorApplication.getInstance().recurringServiceTypeRepository();
             List<ServiceType> serviceTypes = recurringServiceTypeRepository.fetchAll();
             String[] alertArray = VaccinateActionUtils.allAlertNames(serviceTypes);
 
@@ -1411,7 +1411,7 @@ public class ChildImmunizationActivity extends BaseActivity
         @Override
         protected Void doInBackground(Void... params) {
             if (tag != null && tag.getDbKey() != null) {
-                RecurringServiceRecordRepository recurringServiceRecordRepository = BidanApplication.getInstance().recurringServiceRecordRepository();
+                RecurringServiceRecordRepository recurringServiceRecordRepository = VaccinatorApplication.getInstance().recurringServiceRecordRepository();
                 Long dbKey = tag.getDbKey();
                 recurringServiceRecordRepository.deleteServiceRecord(dbKey);
 
@@ -1422,7 +1422,7 @@ public class ChildImmunizationActivity extends BaseActivity
 
                 ServiceSchedule.updateOfflineAlerts(tag.getType(), childDetails.entityId(), Utils.dobToDateTime(childDetails));
 
-                RecurringServiceTypeRepository recurringServiceTypeRepository = BidanApplication.getInstance().recurringServiceTypeRepository();
+                RecurringServiceTypeRepository recurringServiceTypeRepository = VaccinatorApplication.getInstance().recurringServiceTypeRepository();
                 List<ServiceType> serviceTypes = recurringServiceTypeRepository.fetchAll();
                 String[] alertArray = VaccinateActionUtils.allAlertNames(serviceTypes);
 
@@ -1454,7 +1454,7 @@ public class ChildImmunizationActivity extends BaseActivity
 
         @Override
         protected List<Weight> doInBackground(Void... params) {
-            WeightRepository weightRepository = BidanApplication.getInstance().weightRepository();
+            WeightRepository weightRepository = VaccinatorApplication.getInstance().weightRepository();
             List<Weight> allWeights = weightRepository.findByEntityId(childDetails.entityId());
             try {
                 String dobString = Utils.getValue(childDetails.getColumnmaps(), PathConstants.KEY.DOB, false);
@@ -1493,7 +1493,7 @@ public class ChildImmunizationActivity extends BaseActivity
     private class MarkBcgTwoAsDoneTask extends AsyncTask<Void, Void, Void> {
         @Override
         protected Void doInBackground(Void... params) {
-            DetailsRepository detailsRepository = BidanApplication.getInstance().context().detailsRepository();
+            DetailsRepository detailsRepository = VaccinatorApplication.getInstance().context().detailsRepository();
             detailsRepository.add(childDetails.entityId(), BCG2_NOTIFICATION_DONE, Boolean.TRUE.toString(), new Date().getTime());
             return null;
         }
@@ -1577,7 +1577,7 @@ public class ChildImmunizationActivity extends BaseActivity
         public UndoVaccineTask(VaccineWrapper tag, View v) {
             this.tag = tag;
             this.v = v;
-            vaccineRepository = BidanApplication.getInstance().vaccineRepository();
+            vaccineRepository = VaccinatorApplication.getInstance().vaccineRepository();
             alertService = getOpenSRPContext().alertService();
         }
 

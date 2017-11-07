@@ -9,6 +9,7 @@ import net.sqlcipher.database.SQLiteDatabase;
 
 import org.joda.time.DateTime;
 import org.smartregister.bidan.application.BidanApplication;
+import org.smartregister.bidan.application.VaccinatorApplication;
 import org.smartregister.bidan.receiver.Hia2ServiceBroadcastReceiver;
 import org.smartregister.commonregistry.CommonPersonObject;
 import org.smartregister.commonregistry.CommonPersonObjectClient;
@@ -98,12 +99,12 @@ public class HIA2IntentService extends IntentService {
 
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
-        dailyTalliesRepository = BidanApplication.getInstance().dailyTalliesRepository();
-        monthlyTalliesRepository = BidanApplication.getInstance().monthlyTalliesRepository();
+//        dailyTalliesRepository = BidanApplication.getInstance().dailyTalliesRepository();
+//        monthlyTalliesRepository = BidanApplication.getInstance().monthlyTalliesRepository();
         eventClientRepository = BidanApplication.getInstance().eventClientRepository();
         hia2Service = new HIA2Service();
 
-        vaccineRepository = BidanApplication.getInstance().vaccineRepository();
+        vaccineRepository = VaccinatorApplication.getInstance().vaccineRepository();
 
         return super.onStartCommand(intent, flags, startId);
     }
