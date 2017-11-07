@@ -118,7 +118,7 @@
         </activity>
         <activity android:name=".activity.BidanHomeActivity"
             android:screenOrientation="landscape"
-            android:theme="@style/AppTheme"
+            android:theme="@style/BidanAppTheme"
             />
         <activity android:name=".activity.NativeKISmartRegisterActivity"
             android:configChanges="keyboardHidden|orientation|screenSize"

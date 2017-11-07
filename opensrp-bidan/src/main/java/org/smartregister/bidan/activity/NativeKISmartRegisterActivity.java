@@ -92,8 +92,6 @@ public class NativeKISmartRegisterActivity extends BaseRegisterActivity {
 
     }
 
-
-
     private final Listener<FetchStatus> onDataFetchedListener = new Listener<FetchStatus>() {
         @Override
         public void onEvent(FetchStatus fetchStatus) {

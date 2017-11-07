@@ -82,6 +82,7 @@ public class LoginActivity extends AppCompatActivity {
     private EditText passwordEditText;
     private ProgressDialog progressDialog;
     public static final String ENGLISH_LOCALE = "en";
+    private static final String BAHASA_LOCALE = "in";
     private static final String URDU_LOCALE = "ur";
     private static final String ENGLISH_LANGUAGE = "English";
     private static final String URDU_LANGUAGE = "Urdu";
@@ -454,15 +455,15 @@ public class LoginActivity extends AppCompatActivity {
         AllSharedPreferences allSharedPreferences = new AllSharedPreferences(getDefaultSharedPreferences(getOpenSRPContext().applicationContext()));
 
         String preferredLocale = allSharedPreferences.fetchLanguagePreference();
-        if (URDU_LOCALE.equals(preferredLocale)) {
-            allSharedPreferences.saveLanguagePreference(URDU_LOCALE);
+        if (BAHASA_LOCALE.equals(preferredLocale)) {
+            allSharedPreferences.saveLanguagePreference(BAHASA_LOCALE);
             Resources res = getOpenSRPContext().applicationContext().getResources();
             // Change locale settings in the app.
             DisplayMetrics dm = res.getDisplayMetrics();
             android.content.res.Configuration conf = res.getConfiguration();
-            conf.locale = new Locale(URDU_LOCALE);
+            conf.locale = new Locale(BAHASA_LOCALE);
             res.updateConfiguration(conf, dm);
-            return URDU_LANGUAGE;
+            return BAHASA_LOCALE;
         } else {
             allSharedPreferences.saveLanguagePreference(ENGLISH_LOCALE);
             Resources res = getOpenSRPContext().applicationContext().getResources();

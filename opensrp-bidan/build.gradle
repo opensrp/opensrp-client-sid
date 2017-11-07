@@ -107,6 +107,7 @@ dependencies {
         transitive = true
         exclude group: 'com.github.bmelnychuk', module: 'atv'
     }
+
     compile('org.smartregister:opensrp-client-immunization:1.1.4-SNAPSHOT@aar') {
         transitive = true
     }

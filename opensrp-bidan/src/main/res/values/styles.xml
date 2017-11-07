@@ -4,6 +4,8 @@
 
     <style name="PathAppTheme" parent="Theme.AppCompat.Light.DarkActionBar" />
 
+    <style name="BidanAppTheme" parent="Theme.AppCompat.Light.DarkActionBar" />
+
     <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
         <!-- Customize your theme here. -->
         <item name="colorPrimary">@color/primary</item>

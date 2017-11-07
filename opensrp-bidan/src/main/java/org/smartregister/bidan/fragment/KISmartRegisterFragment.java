@@ -29,6 +29,7 @@ import org.smartregister.bidan.option.StatusSort;
 //import org.smartregister.bidan.provider.ChildSmartClientsProvider;
 import org.smartregister.bidan.receiver.SyncStatusBroadcastReceiver;
 //import org.smartregister.bidan.servicemode.VaccinationServiceModeOption;
+import org.smartregister.bidan.servicemode.VaccinationServiceModeOption;
 import org.smartregister.bidan.view.LocationPickerView;
 import org.smartregister.commonregistry.CommonPersonObjectClient;
 import org.smartregister.commonregistry.CommonRepository;
@@ -78,11 +79,10 @@ public class KISmartRegisterFragment extends BaseSmartRegisterFragment implement
 
             @Override
             public ServiceModeOption serviceMode() {
-//                return new VaccinationServiceModeOption(null, "Linda Clinic", new int[]{
-//                        R.string.child_profile, R.string.birthdate_age, R.string.epi_number, R.string.child_contact_number,
-//                        R.string.child_next_vaccine
-//                }, new int[]{5, 2, 2, 3, 3});
-                return null;
+                return new VaccinationServiceModeOption(null, "Linda Clinic", new int[]{
+                        R.string.child_profile, R.string.birthdate_age, R.string.epi_number, R.string.child_contact_number,
+                        R.string.child_next_vaccine
+                }, new int[]{5, 2, 2, 3, 3});
             }
 
             @Override
