@@ -120,10 +120,32 @@
             android:screenOrientation="landscape"
             android:theme="@style/AppTheme"
             />
-        <activity android:name=".activity.BidanLandingActivity"
+        <activity android:name=".activity.NativeKISmartRegisterActivity"
+            android:configChanges="keyboardHidden|orientation|screenSize"
             android:screenOrientation="landscape"
-            android:theme="@style/AppTheme"
-            />
+            android:theme="@style/AppThemeNoActionBarAndTitle"
+            android:windowSoftInputMode="adjustResize" />
+        <activity android:name=".activity.NativeKIAnakSmartRegisterActivity"
+            android:configChanges="keyboardHidden|orientation|screenSize"
+            android:screenOrientation="landscape"
+            android:theme="@style/AppThemeNoActionBarAndTitle"
+            android:windowSoftInputMode="adjustResize" />
+        <activity android:name=".activity.NativeKIANCSmartRegisterActivity"
+            android:configChanges="keyboardHidden|orientation|screenSize"
+            android:screenOrientation="landscape"
+            android:theme="@style/AppThemeNoActionBarAndTitle"
+            android:windowSoftInputMode="adjustResize" />
+        <activity android:name=".activity.NativeKIPNCSmartRegisterActivity"
+            android:configChanges="keyboardHidden|orientation|screenSize"
+            android:screenOrientation="landscape"
+            android:theme="@style/AppThemeNoActionBarAndTitle"
+            android:windowSoftInputMode="adjustResize" />
+        <activity android:name=".activity.NativeKBSmartRegisterActivity"
+            android:configChanges="keyboardHidden|orientation|screenSize"
+            android:screenOrientation="landscape"
+            android:theme="@style/AppThemeNoActionBarAndTitle"
+            android:windowSoftInputMode="adjustResize" />
+
     </application>
 
 </manifest>

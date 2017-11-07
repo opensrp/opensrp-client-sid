@@ -45,7 +45,6 @@ import org.smartregister.domain.ResponseStatus;
 import org.smartregister.domain.TimeStatus;
 import org.smartregister.event.Listener;
 //import org.smartregister.growthmonitoring.service.intent.ZScoreRefreshIntentService;
-import org.smartregister.immunization.util.IMDatabaseUtils;
 import org.smartregister.bidan.R;
 import org.smartregister.bidan.service.intent.PullUniqueIdsIntentService;
 import org.smartregister.repository.AllSharedPreferences;
@@ -55,7 +54,6 @@ import org.smartregister.util.Utils;
 import org.smartregister.view.BackgroundAction;
 import org.smartregister.view.LockingBackgroundTask;
 import org.smartregister.view.ProgressIndicator;
-import org.smartregister.view.activity.SmartRegisterActivity;
 
 import java.io.IOException;
 import java.text.SimpleDateFormat;
@@ -419,7 +417,7 @@ public class LoginActivity extends AppCompatActivity {
         BidanApplication.setCrashlyticsUser(getOpenSRPContext());
 //        Intent intent = new Intent(this, ChildSmartRegisterActivity.class);
 //        Intent intent = new Intent(this, BidanHomeActivity.class);
-        Intent intent = new Intent(this, BidanLandingActivity.class);
+        Intent intent = new Intent(this, BidanHomeActivity.class);
         intent.putExtra(BaseRegisterActivity.IS_REMOTE_LOGIN, remote);
         startActivity(intent);
 

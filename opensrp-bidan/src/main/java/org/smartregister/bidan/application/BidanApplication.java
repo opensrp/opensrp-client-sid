@@ -314,7 +314,7 @@ public class BidanApplication extends DrishtiApplication
     public void onTimeChanged() {
         Toast.makeText(this, R.string.device_time_changed, Toast.LENGTH_LONG).show();
         context.userService().forceRemoteLogin();
-        logoutCurrentUser();
+//        logoutCurrentUser();
     }
 
     @Override
