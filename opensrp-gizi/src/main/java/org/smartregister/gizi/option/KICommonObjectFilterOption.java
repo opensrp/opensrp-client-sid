@@ -1,4 +1,4 @@
-package org.smartregister.gizi.child;
+package org.smartregister.gizi.option;
 
 import org.smartregister.cursoradapter.CursorFilterOption;
 import org.smartregister.view.contract.SmartRegisterClient;

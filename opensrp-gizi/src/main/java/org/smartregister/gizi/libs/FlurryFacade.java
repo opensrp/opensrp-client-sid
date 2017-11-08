@@ -1,4 +1,4 @@
-package org.smartregister.gizi.child;
+package org.smartregister.gizi.libs;
 
 
 import android.content.Context;

@@ -1,4 +1,4 @@
-package org.smartregister.gizi.child;
+package org.smartregister.gizi.utils;
 
 import org.smartregister.commonregistry.AllCommonsRepository;
 import org.smartregister.commonregistry.CommonPersonObject;

@@ -1,4 +1,4 @@
-package org.smartregister.gizi;
+package org.smartregister.gizi.controller;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -7,7 +7,8 @@ import android.net.Uri;
 
 
 //import org.ei.opensrp.gizi.test.TestSmartRegisterActivity;
-import org.smartregister.gizi.child.GiziSmartRegisterActivity;
+import org.smartregister.gizi.R;
+import org.smartregister.gizi.activity.GiziSmartRegisterActivity;
 import org.smartregister.view.controller.ANMController;
 import org.json.JSONObject;
 

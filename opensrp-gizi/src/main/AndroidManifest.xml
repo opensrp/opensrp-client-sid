@@ -20,7 +20,7 @@
             android:value="b74c58c94d8965151212e8ecf1f4fdfbf5b7f4e4" />
 
         <activity
-            android:name=".LoginActivity"
+            android:name=".activity.LoginActivity"
             android:theme="@android:style/Theme.Holo"
             android:windowSoftInputMode="adjustResize|stateHidden"
             android:screenOrientation="landscape"
@@ -31,25 +31,25 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".GiziHomeActivity"
+        <activity android:name=".activity.GiziHomeActivity"
             android:theme="@style/AppTheme"
             android:screenOrientation="landscape"/>
-        <activity android:name=".child.GiziSmartRegisterActivity"
+        <activity android:name=".activity.GiziSmartRegisterActivity"
             android:configChanges="keyboardHidden|orientation|screenSize"
             android:theme="@style/AppThemeNoActionBarAndTitle"
             android:windowSoftInputMode="adjustResize"
             android:screenOrientation="landscape"/>
-        <activity android:name=".child.GiziDetailActivity"
+        <activity android:name=".activity.GiziDetailActivity"
             android:configChanges="keyboardHidden|orientation|screenSize"
             android:theme="@style/AppThemeNoActionBarAndTitle"
             android:windowSoftInputMode="adjustResize"
             android:screenOrientation="landscape"/>
-        <activity android:name=".child.GiziGrowthChartActivity"
+        <activity android:name=".activity.GiziGrowthChartActivity"
             android:configChanges="keyboardHidden|orientation|screenSize"
             android:theme="@style/AppThemeNoActionBarAndTitle"
             android:windowSoftInputMode="adjustResize"
             android:screenOrientation="landscape"/>
-        <activity android:name=".child.GiziZScoreChartActivity"
+        <activity android:name=".activity.GiziZScoreChartActivity"
             android:configChanges="keyboardHidden|orientation|screenSize"
             android:theme="@style/AppThemeNoActionBarAndTitle"
             android:windowSoftInputMode="adjustResize"
@@ -60,7 +60,7 @@
             android:windowSoftInputMode="adjustResize"
             android:screenOrientation="landscape"/>
 -->
-        <activity android:name=".SettingsActivity" android:label="@string/action_settings"/>
+        <activity android:name=".activity.SettingsActivity" android:label="@string/action_settings"/>
       <!--  <activity android:name=".face.camera.SmartShutterActivity" android:noHistory="true" />
         <activity android:name=".face.camera.ImageConfirmation" android:noHistory="true" />
 

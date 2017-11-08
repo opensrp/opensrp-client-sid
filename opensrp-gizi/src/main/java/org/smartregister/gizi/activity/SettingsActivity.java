@@ -1,4 +1,4 @@
-package org.smartregister.gizi;
+package org.smartregister.gizi.activity;
 
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -8,6 +8,7 @@ import android.preference.PreferenceActivity;
 import android.preference.PreferenceFragment;
 import android.preference.PreferenceManager;
 
+import org.smartregister.gizi.R;
 import org.smartregister.repository.AllSharedPreferences;
 
 import java.net.MalformedURLException;

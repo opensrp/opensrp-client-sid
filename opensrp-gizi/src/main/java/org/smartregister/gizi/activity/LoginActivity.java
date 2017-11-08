@@ -1,4 +1,4 @@
-package org.smartregister.gizi;
+package org.smartregister.gizi.activity;
 
 import android.app.Activity;
 import android.app.AlertDialog;
@@ -25,6 +25,7 @@ import android.widget.TextView;
 
 import com.flurry.android.FlurryAgent;
 
+import org.smartregister.gizi.R;
 import org.smartregister.gizi.application.GiziApplication;
 import org.smartregister.Context;
 import org.smartregister.domain.LoginResponse;

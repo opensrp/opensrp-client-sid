@@ -1,4 +1,4 @@
-package org.smartregister.gizi.child;
+package org.smartregister.gizi.option;
 
 import android.view.View;
 

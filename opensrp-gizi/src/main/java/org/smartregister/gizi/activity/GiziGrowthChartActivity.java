@@ -1,4 +1,4 @@
-package org.smartregister.gizi.child;
+package org.smartregister.gizi.activity;
 
 import android.app.Activity;
 import android.content.Intent;

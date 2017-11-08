@@ -1,4 +1,4 @@
-package org.smartregister.gizi.child;
+package org.smartregister.gizi.libs;
 
 /**
   * Created by Dimas on 9/22/2015.

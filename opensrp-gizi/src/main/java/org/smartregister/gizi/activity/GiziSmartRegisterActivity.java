@@ -1,4 +1,4 @@
-package org.smartregister.gizi.child;
+package org.smartregister.gizi.activity;
 
 import android.app.AlertDialog;
 import android.content.DialogInterface;
@@ -16,7 +16,7 @@ import com.flurry.android.FlurryAgent;
 import org.smartregister.cursoradapter.SmartRegisterQueryBuilder;
 import org.smartregister.domain.form.FieldOverrides;
 import org.smartregister.domain.form.FormSubmission;
-import org.smartregister.gizi.LoginActivity;
+import org.smartregister.gizi.utils.KmsHandler;
 import org.smartregister.gizi.fragment.GiziSmartRegisterFragment;
 import org.smartregister.gizi.pageradapter.BaseRegisterActivityPagerAdapter;
 import org.smartregister.provider.SmartRegisterClientsProvider;

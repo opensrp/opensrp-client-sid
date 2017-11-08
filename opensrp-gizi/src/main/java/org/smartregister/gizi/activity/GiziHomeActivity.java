@@ -1,4 +1,4 @@
-package org.smartregister.gizi;
+package org.smartregister.gizi.activity;
 
 import android.database.Cursor;
 import android.os.StrictMode;
@@ -16,11 +16,13 @@ import org.smartregister.commonregistry.CommonPersonObjectController;
 import org.smartregister.cursoradapter.SmartRegisterQueryBuilder;
 import org.smartregister.event.Listener;
 
+import org.smartregister.gizi.R;
+import org.smartregister.gizi.controller.GiziNavigationController;
 import org.smartregister.service.PendingFormSubmissionService;
 import org.smartregister.sync.SyncAfterFetchListener;
 import org.smartregister.sync.SyncProgressIndicator;
 import org.smartregister.sync.UpdateActionsTask;
-import org.smartregister.gizi.child.FlurryFacade;
+import org.smartregister.gizi.libs.FlurryFacade;
 import org.smartregister.view.activity.SecuredActivity;
 import org.smartregister.view.contract.HomeContext;
 import org.smartregister.view.controller.NativeAfterANMDetailsFetchListener;
@@ -129,7 +131,7 @@ public class GiziHomeActivity extends SecuredActivity {
         //home dashboard
         setContentView(R.layout.smart_registers_gizi_home);
         //  FlurryFacade.logEvent("gizi_home_dashboard");
-        navigationController = new org.smartregister.gizi.GiziNavigationController(this,anmController,context());
+        navigationController = new GiziNavigationController(this,anmController,context());
         setupViews();
         initialize();
         DisplayFormFragment.formInputErrorMessage = getResources().getString(R.string.forminputerror);
