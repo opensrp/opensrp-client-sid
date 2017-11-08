@@ -77,17 +77,51 @@ import static org.smartregister.util.Log.logError;
 import static org.smartregister.util.Log.logVerbose;
 
 public class LoginActivity extends AppCompatActivity {
-    private static final String TAG = LoginActivity.class.getName();
-    private EditText userNameEditText;
-    private EditText passwordEditText;
-    private ProgressDialog progressDialog;
     public static final String ENGLISH_LOCALE = "en";
+    private static final String TAG = LoginActivity.class.getName();
     private static final String BAHASA_LOCALE = "in";
     private static final String URDU_LOCALE = "ur";
     private static final String ENGLISH_LANGUAGE = "English";
     private static final String URDU_LANGUAGE = "Urdu";
+    private EditText userNameEditText;
+    private EditText passwordEditText;
+    private ProgressDialog progressDialog;
     private android.content.Context appContext;
     private RemoteLoginTask remoteLoginTask;
+
+    public static void setLanguage() {
+        AllSharedPreferences allSharedPreferences = new AllSharedPreferences(getDefaultSharedPreferences(getOpenSRPContext().applicationContext()));
+        String preferredLocale = allSharedPreferences.fetchLanguagePreference();
+        Resources res = getOpenSRPContext().applicationContext().getResources();
+        // Change locale settings in the app.
+        DisplayMetrics dm = res.getDisplayMetrics();
+        Configuration conf = res.getConfiguration();
+        conf.locale = new Locale(preferredLocale);
+        res.updateConfiguration(conf, dm);
+
+    }
+
+    public static String switchLanguagePreference() {
+        AllSharedPreferences allSharedPreferences = new AllSharedPreferences(getDefaultSharedPreferences(getOpenSRPContext().applicationContext()));
+
+        String preferredLocale = allSharedPreferences.fetchLanguagePreference();
+        if (!BAHASA_LOCALE.equals(preferredLocale)) {
+            allSharedPreferences.saveLanguagePreference(BAHASA_LOCALE);
+        } else {
+            allSharedPreferences.saveLanguagePreference(ENGLISH_LOCALE);
+        }
+        Resources res = getOpenSRPContext().applicationContext().getResources();
+        // Change locale settings in the app.
+        DisplayMetrics dm = res.getDisplayMetrics();
+        android.content.res.Configuration conf = res.getConfiguration();
+        conf.locale = new Locale(preferredLocale);
+        res.updateConfiguration(conf, dm);
+        return preferredLocale;
+    }
+
+    public static Context getOpenSRPContext() {
+        return BidanApplication.getInstance().context();
+    }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -108,7 +142,7 @@ public class LoginActivity extends AppCompatActivity {
         }
 
         setContentView(R.layout.login);
-        ImageView loginglogo = (ImageView)findViewById(R.id.login_logo);
+        ImageView loginglogo = (ImageView) findViewById(R.id.login_logo);
         loginglogo.setImageDrawable(getResources().getDrawable(R.drawable.login_logo_bidan));
 
         getSupportActionBar().setDisplayShowTitleEnabled(false);
@@ -126,7 +160,7 @@ public class LoginActivity extends AppCompatActivity {
 
         setLanguage();
 
-        if (BuildConfig.DEBUG){
+        if (BuildConfig.DEBUG) {
             debugApp();
         }
 
@@ -153,15 +187,15 @@ public class LoginActivity extends AppCompatActivity {
         Config config = new Config();
         String uname = null, pwd = null;
         try {
-            uname =  config.getCredential("uname", getApplicationContext());
-            pwd =  config.getCredential("pwd", getApplicationContext());
+            uname = config.getCredential("uname", getApplicationContext());
+            pwd = config.getCredential("pwd", getApplicationContext());
         } catch (IOException e) {
             e.printStackTrace();
         }
 
         LayoutInflater layoutInflater = getLayoutInflater();
         View view = layoutInflater.inflate(R.layout.login, null);
-        if (BidanApplication.getInstance().context().userService().hasARegisteredUser()){
+        if (BidanApplication.getInstance().context().userService().hasARegisteredUser()) {
             localLogin(view, uname, pwd);
         } else {
             remoteLogin(view, uname, pwd);
@@ -246,7 +280,6 @@ public class LoginActivity extends AppCompatActivity {
             login(findViewById(org.smartregister.R.id.login_loginButton), false);
         }
     }
-
 
     private void remoteLogin(final View view, final String userName, final String password) {
 
@@ -368,6 +401,11 @@ public class LoginActivity extends AppCompatActivity {
         remoteLoginTask.execute();
     }
 
+//    private void startZScoreIntentService() {
+//        Intent intent = new Intent(this, ZScoreRefreshIntentService.class);
+//        startService(intent);
+//    }
+
     private void fillUserIfExists() {
         if (getOpenSRPContext().userService().hasARegisteredUser()) {
             userNameEditText.setText(getOpenSRPContext().allSharedPreferences().fetchRegisteredANM());
@@ -398,11 +436,6 @@ public class LoginActivity extends AppCompatActivity {
         }).start();
     }
 
-//    private void startZScoreIntentService() {
-//        Intent intent = new Intent(this, ZScoreRefreshIntentService.class);
-//        startService(intent);
-//    }
-
     private void remoteLoginWith(String userName, String password, String userInfo) {
         getOpenSRPContext().userService().remoteLogin(userName, password, userInfo);
         goToHome(true);
@@ -417,7 +450,6 @@ public class LoginActivity extends AppCompatActivity {
         }
         BidanApplication.setCrashlyticsUser(getOpenSRPContext());
 //        Intent intent = new Intent(this, ChildSmartRegisterActivity.class);
-//        Intent intent = new Intent(this, BidanHomeActivity.class);
         Intent intent = new Intent(this, BidanHomeActivity.class);
         intent.putExtra(BaseRegisterActivity.IS_REMOTE_LOGIN, remote);
         startActivity(intent);
@@ -437,43 +469,6 @@ public class LoginActivity extends AppCompatActivity {
         ZipFile zf = new ZipFile(applicationInfo.sourceDir);
         ZipEntry ze = zf.getEntry("classes.dex");
         return new SimpleDateFormat("dd MMM yyyy", Locale.getDefault()).format(new java.util.Date(ze.getTime()));
-    }
-
-    public static void setLanguage() {
-        AllSharedPreferences allSharedPreferences = new AllSharedPreferences(getDefaultSharedPreferences(getOpenSRPContext().applicationContext()));
-        String preferredLocale = allSharedPreferences.fetchLanguagePreference();
-        Resources res = getOpenSRPContext().applicationContext().getResources();
-        // Change locale settings in the app.
-        DisplayMetrics dm = res.getDisplayMetrics();
-        Configuration conf = res.getConfiguration();
-        conf.locale = new Locale(preferredLocale);
-        res.updateConfiguration(conf, dm);
-
-    }
-
-    public static String switchLanguagePreference() {
-        AllSharedPreferences allSharedPreferences = new AllSharedPreferences(getDefaultSharedPreferences(getOpenSRPContext().applicationContext()));
-
-        String preferredLocale = allSharedPreferences.fetchLanguagePreference();
-        if (BAHASA_LOCALE.equals(preferredLocale)) {
-            allSharedPreferences.saveLanguagePreference(BAHASA_LOCALE);
-            Resources res = getOpenSRPContext().applicationContext().getResources();
-            // Change locale settings in the app.
-            DisplayMetrics dm = res.getDisplayMetrics();
-            android.content.res.Configuration conf = res.getConfiguration();
-            conf.locale = new Locale(BAHASA_LOCALE);
-            res.updateConfiguration(conf, dm);
-            return BAHASA_LOCALE;
-        } else {
-            allSharedPreferences.saveLanguagePreference(ENGLISH_LOCALE);
-            Resources res = getOpenSRPContext().applicationContext().getResources();
-            // Change locale settings in the app.
-            DisplayMetrics dm = res.getDisplayMetrics();
-            android.content.res.Configuration conf = res.getConfiguration();
-            conf.locale = new Locale(ENGLISH_LOCALE);
-            res.updateConfiguration(conf, dm);
-            return ENGLISH_LANGUAGE;
-        }
     }
 
     private void positionViews() {
@@ -505,10 +500,6 @@ public class LoginActivity extends AppCompatActivity {
                 canvasRL.setMinimumHeight(windowHeight);
             }
         });
-    }
-
-    public static Context getOpenSRPContext() {
-        return BidanApplication.getInstance().context();
     }
 
     private void extractLocations(ArrayList<String> locationList, JSONObject rawLocationData)
