@@ -20,6 +20,7 @@ import org.smartregister.commonregistry.CommonPersonObjectController;
 import org.smartregister.commonregistry.CommonRepository;
 import org.smartregister.cursoradapter.CursorCommonObjectFilterOption;
 import org.smartregister.cursoradapter.CursorCommonObjectSort;
+import org.smartregister.cursoradapter.CursorSortOption;
 import org.smartregister.cursoradapter.SecuredNativeSmartRegisterCursorAdapterFragment;
 import org.smartregister.cursoradapter.SmartRegisterPaginatedCursorAdapter;
 import org.smartregister.cursoradapter.SmartRegisterQueryBuilder;
@@ -27,7 +28,7 @@ import org.smartregister.gizi.activity.LoginActivity;
 import org.smartregister.gizi.activity.GiziDetailActivity;
 import org.smartregister.gizi.activity.GiziGrowthChartActivity;
 import org.smartregister.gizi.option.GiziServiceModeOption;
-import org.smartregister.gizi.provider.GiziSmartClientsProvider;
+import org.smartregister.gizi.provider.ChildSmartClientsProvider;
 import org.smartregister.gizi.activity.GiziSmartRegisterActivity;
 import org.smartregister.gizi.option.KICommonObjectFilterOption;
 import org.smartregister.provider.SmartRegisterClientsProvider;
@@ -108,7 +109,8 @@ public class GiziSmartRegisterFragment extends SecuredNativeSmartRegisterCursorA
 
             @Override
             public SortOption sortOption() {
-                return new NameSort();
+
+                return new CursorCommonObjectSort("A-Z", "namaBayi desc");
 
             }
 
@@ -202,7 +204,7 @@ public class GiziSmartRegisterFragment extends SecuredNativeSmartRegisterCursorA
         clientsView.setVisibility(View.VISIBLE);
         clientsProgressView.setVisibility(View.INVISIBLE);
 //        list.setBackgroundColor(Color.RED);
-        initializeQueries(getCriteria());
+        initializeQueries();
     }
 
     private String filterStringForAll(){
@@ -218,7 +220,7 @@ public class GiziSmartRegisterFragment extends SecuredNativeSmartRegisterCursorA
                 "WHEN alerts.status is Null THEN '5'\n" +
                 "Else alerts.status END ASC";
     }
-    public void initializeQueries(String s){
+    /*public void initializeQueries(String s){
         GiziSmartClientsProvider kiscp = new GiziSmartClientsProvider(getActivity(),clientActionHandler,context().alertService());
         clientAdapter = new SmartRegisterPaginatedCursorAdapter(getActivity(), null, kiscp, new CommonRepository("ec_anak",new String []{"tanggalLahirAnak","namaBayi"}));
         clientsView.setAdapter(clientAdapter);
@@ -254,15 +256,54 @@ public class GiziSmartRegisterFragment extends SecuredNativeSmartRegisterCursorA
         refresh();
 
 
+    }*/
+    private void initializeQueries() {
+        String tableName = "ec_anak";
+      //  String parentTableName = PathConstants.MOTHER_TABLE_NAME;
+
+        ChildSmartClientsProvider hhscp = new ChildSmartClientsProvider(getActivity(),
+                clientActionHandler, context().alertService(), context().commonrepository(tableName));
+        clientAdapter = new SmartRegisterPaginatedCursorAdapter(getActivity(), null, hhscp, context().commonrepository(tableName));
+        clientsView.setAdapter(clientAdapter);
+
+        setTablename(tableName);
+        SmartRegisterQueryBuilder countqueryBUilder = new SmartRegisterQueryBuilder();
+        countqueryBUilder.SelectInitiateMainTableCounts(tableName);
+        mainCondition = " is_closed = 0 ";
+        countSelect = countqueryBUilder.mainCondition(mainCondition);
+        super.CountExecute();
+
+        SmartRegisterQueryBuilder queryBUilder = new SmartRegisterQueryBuilder();
+        queryBUilder.SelectInitiateMainTable(tableName, new String[]{
+                tableName + ".relationalid",
+                tableName + ".details",
+                tableName + ".is_closed",
+                tableName + ".relational_id",
+                tableName + ".details",
+                tableName + ".tanggalLahirAnak",
+                tableName + ".namaBayi",
+
+        });
+    //    queryBUilder.customJoin("LEFT JOIN " + parentTableName + " ON  " + tableName + ".relational_id =  " + parentTableName + ".id");
+        mainSelect = queryBUilder.mainCondition(mainCondition);
+        Sortqueries = ((CursorSortOption) getDefaultOptionsProvider().sortOption()).sort();
+
+        currentlimit = 20;
+        currentoffset = 0;
+
+        super.filterandSortInInitializeQueries();
+
+        updateSearchView();
+        refresh();
     }
 
 
     @Override
     public void startRegistration() {
-        if(Support.ONSYNC) {
+       /* if(Support.ONSYNC) {
             Toast.makeText(getActivity(), "Data still Synchronizing, please wait", Toast.LENGTH_SHORT).show();
             return;
-        }
+        }*/
 
         FragmentTransaction ft = getActivity().getFragmentManager().beginTransaction();
         Fragment prev = getActivity().getFragmentManager().findFragmentByTag(locationDialogTAG);
@@ -379,7 +420,7 @@ public class GiziSmartRegisterFragment extends SecuredNativeSmartRegisterCursorA
 //        super.onResumption();
         getDefaultOptionsProvider();
         if(isPausedOrRefreshList()) {
-            initializeQueries("!");
+            initializeQueries();
         }
         //     updateSearchView();
 //

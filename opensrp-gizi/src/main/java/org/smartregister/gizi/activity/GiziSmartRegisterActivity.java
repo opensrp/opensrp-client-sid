@@ -16,6 +16,7 @@ import com.flurry.android.FlurryAgent;
 import org.smartregister.cursoradapter.SmartRegisterQueryBuilder;
 import org.smartregister.domain.form.FieldOverrides;
 import org.smartregister.domain.form.FormSubmission;
+import org.smartregister.enketo.listener.DisplayFormListener;
 import org.smartregister.gizi.utils.KmsHandler;
 import org.smartregister.gizi.fragment.GiziSmartRegisterFragment;
 import org.smartregister.gizi.pageradapter.BaseRegisterActivityPagerAdapter;
@@ -28,7 +29,7 @@ import org.smartregister.view.activity.SecuredNativeSmartRegisterActivity;
 import org.smartregister.view.dialog.DialogOption;
 import org.smartregister.view.dialog.LocationSelectorDialogFragment;
 import org.smartregister.view.dialog.OpenFormOption;
-import org.smartregister.view.fragment.DisplayFormFragment;
+import org.smartregister.enketo.view.fragment.DisplayFormFragment;
 import org.smartregister.view.fragment.SecuredNativeSmartRegisterFragment;
 import org.smartregister.view.viewpager.OpenSRPViewPager;
 import org.json.JSONException;
@@ -46,7 +47,7 @@ import butterknife.ButterKnife;
 import util.formula.Support;
 
 public class GiziSmartRegisterActivity extends SecuredNativeSmartRegisterActivity implements
-        LocationSelectorDialogFragment.OnLocationSelectedListener{
+        LocationSelectorDialogFragment.OnLocationSelectedListener, DisplayFormListener{
 
     SimpleDateFormat timer = new SimpleDateFormat("hh:mm:ss");
 
@@ -237,10 +238,10 @@ public class GiziSmartRegisterActivity extends SecuredNativeSmartRegisterActivit
 
     @Override
     public void startFormActivity(final String formName, final String entityId, final String metaData) {
-        if(Support.ONSYNC) {
+       /* if(Support.ONSYNC) {
             Toast.makeText(this, "Data still Synchronizing, please wait", Toast.LENGTH_SHORT).show();
             return;
-        }
+        }*/
 
         String start = timer.format(new Date());
         Map<String, String> FS = new HashMap<String, String>();
@@ -287,6 +288,7 @@ public class GiziSmartRegisterActivity extends SecuredNativeSmartRegisterActivit
                 if (displayFormFragment != null) {
                     displayFormFragment.setFormData(data);
                     displayFormFragment.setRecordId(entityId);
+                    displayFormFragment.setListener(this);
                     displayFormFragment.setFieldOverides(metaData);
                 }
             }

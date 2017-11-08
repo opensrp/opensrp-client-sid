@@ -9,11 +9,11 @@ import org.smartregister.view.contract.ANCSmartRegisterClient;
 import org.smartregister.view.contract.ChildSmartRegisterClient;
 import org.smartregister.view.contract.FPSmartRegisterClient;
 import org.smartregister.view.contract.pnc.PNCSmartRegisterClient;
-import org.smartregister.view.dialog.ServiceModeOption;
+import org.smartregister.view.dialog.ServiceModeOption;/*
 import org.smartregister.view.viewholder.NativeANCSmartRegisterViewHolder;
 import org.smartregister.view.viewholder.NativeChildSmartRegisterViewHolder;
 import org.smartregister.view.viewholder.NativeFPSmartRegisterViewHolder;
-import org.smartregister.view.viewholder.NativePNCSmartRegisterViewHolder;
+import org.smartregister.view.viewholder.NativePNCSmartRegisterViewHolder;*/
 
 import static org.smartregister.view.activity.SecuredNativeSmartRegisterActivity.ClientsHeaderProvider;
 
@@ -55,7 +55,7 @@ public class GiziServiceModeOption extends ServiceModeOption {
         };
     }
 
-    @Override
+    /*@Override
     public void setupListView(ChildSmartRegisterClient client,
                               NativeChildSmartRegisterViewHolder viewHolder,
                               View.OnClickListener clientSectionClickListener) {
@@ -75,7 +75,7 @@ public class GiziServiceModeOption extends ServiceModeOption {
     @Override
     public void setupListView(PNCSmartRegisterClient client, NativePNCSmartRegisterViewHolder viewHolder, View.OnClickListener clientSectionClickListener) {
 
-    }
+    }*/
 
 
 }

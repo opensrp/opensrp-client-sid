@@ -1,5 +1,7 @@
 package org.smartregister.gizi.provider;
 
+
+
 import android.app.Activity;
 import android.content.Context;
 import android.graphics.drawable.Drawable;
@@ -40,6 +42,8 @@ import static android.view.ViewGroup.LayoutParams.MATCH_PARENT;
 /**
  * Created by user on 2/12/15.
  */
+/*
+
 public class GiziSmartClientsProvider implements SmartRegisterCLientsProviderForCursorAdapter {
     private static final String TAG = GiziSmartClientsProvider.class.getSimpleName();
     private final LayoutInflater inflater;
@@ -169,8 +173,10 @@ public class GiziSmartClientsProvider implements SmartRegisterCLientsProviderFor
         viewHolder.gender.setText(pc.getDetails().get("tanggalLahirAnak") != null
                 ? age/12 + " " + context.getString(R.string.years_unit)+" "+age%12+" "+context.getString(R.string.month_unit) : "-");
 
+*/
 /** collect history data and clean latest history data which contains no specific date or value,
- */
+ *//*
+
         if(!Support.getDetails(pc,"umur").toLowerCase().equals("nan")) {
             String[] history1 = pc.getDetails().get("history_berat") != null ? Support.insertionSort(pc.getDetails().get("history_berat")) : new String[]{"0:0"};
             if (history1[history1.length - 1].charAt(history1[history1.length - 1].length() - 1) == ':')
@@ -187,8 +193,10 @@ public class GiziSmartClientsProvider implements SmartRegisterCLientsProviderFor
             System.out.println("history1 : " + history1[history1.length - 1]);
             System.out.println("history2 : " + history2[history2.length - 1]);
             System.out.println("newest : " + newestDateonHistory);
+*/
 /**
- */
+ *//*
+
 
             if (newestDateonHistory.equals(pc.getDetails().get("tanggalPenimbangan") != null ? pc.getDetails().get("tanggalPenimbangan") : "-")) {
                 System.out.println("history = tglPenimbangan");
@@ -326,10 +334,12 @@ public class GiziSmartClientsProvider implements SmartRegisterCLientsProviderFor
                 (Integer.parseInt(currentDate[1]) - Integer.parseInt(lastVisitDate.substring(5,7))));
     }
 
-    /**
+    */
+/**
      *  The part of method that using to check is the last visit date was in the same region as the
      *  current vitamin A period
-    **/
+    **//*
+
     private boolean inTheSameRegion(String date){
         if(date==null || date.length()<6)
             return false;
@@ -459,5 +469,9 @@ public class GiziSmartClientsProvider implements SmartRegisterCLientsProviderFor
     }
 
 
+}
+*/
+public class GiziSmartClientsProvider{
+    
 }
 
