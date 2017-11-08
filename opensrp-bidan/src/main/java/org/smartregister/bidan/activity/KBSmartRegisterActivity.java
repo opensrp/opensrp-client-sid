@@ -6,7 +6,7 @@ import org.smartregister.provider.SmartRegisterClientsProvider;
  * Created by sid-tech on 11/7/17.
  */
 
-public class NativeKBSmartRegisterActivity extends BaseRegisterActivity {
+public class KBSmartRegisterActivity extends BaseRegisterActivity {
 
     @Override
     protected DefaultOptionsProvider getDefaultOptionsProvider() {

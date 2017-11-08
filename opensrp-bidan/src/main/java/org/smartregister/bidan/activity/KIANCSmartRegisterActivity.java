@@ -7,7 +7,7 @@ import org.smartregister.view.activity.SecuredNativeSmartRegisterActivity;
  * Created by sid-tech on 11/7/17.
  */
 
-public class NativeKIAnakSmartRegisterActivity extends BaseRegisterActivity {
+public class KIANCSmartRegisterActivity extends BaseRegisterActivity {
     @Override
     protected DefaultOptionsProvider getDefaultOptionsProvider() {
         return null;

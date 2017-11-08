@@ -29,7 +29,7 @@ import butterknife.ButterKnife;
  * Created by sid-tech on 11/7/17.
  */
 
-public class NativeKISmartRegisterActivity extends BaseRegisterActivity {
+public class KISmartRegisterActivity extends BaseRegisterActivity {
 
     @Bind(R.id.view_pager)
     protected OpenSRPViewPager mPager;

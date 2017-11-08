@@ -52,8 +52,6 @@ public class BidanHomeActivity extends SecuredActivity {
 
     SimpleDateFormat timer = new SimpleDateFormat("hh:mm:ss");
 
-
-
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

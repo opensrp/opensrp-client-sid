@@ -7,11 +7,11 @@ import android.net.Uri;
 
 import org.json.JSONObject;
 import org.smartregister.Context;
-import org.smartregister.bidan.activity.NativeKBSmartRegisterActivity;
-import org.smartregister.bidan.activity.NativeKIANCSmartRegisterActivity;
-import org.smartregister.bidan.activity.NativeKIAnakSmartRegisterActivity;
-import org.smartregister.bidan.activity.NativeKIPNCSmartRegisterActivity;
-import org.smartregister.bidan.activity.NativeKISmartRegisterActivity;
+import org.smartregister.bidan.activity.KBSmartRegisterActivity;
+import org.smartregister.bidan.activity.KIANCSmartRegisterActivity;
+import org.smartregister.bidan.activity.KIAnakSmartRegisterActivity;
+import org.smartregister.bidan.activity.KIPNCSmartRegisterActivity;
+import org.smartregister.bidan.activity.KISmartRegisterActivity;
 import org.smartregister.view.controller.ANMController;
 import org.smartregister.view.controller.NavigationController;
 
@@ -35,7 +35,7 @@ public class NavigationControllerINA extends NavigationController {
 
     @Override
     public void startECSmartRegistry() {
-        activity.startActivity(new Intent(activity, NativeKISmartRegisterActivity.class));
+        activity.startActivity(new Intent(activity, KISmartRegisterActivity.class));
         SharedPreferences sharedPreferences = getDefaultSharedPreferences(this.activity);
 
         if(sharedPreferences.getBoolean("firstlauch",true)) {
@@ -45,22 +45,22 @@ public class NavigationControllerINA extends NavigationController {
 
     @Override
     public void startFPSmartRegistry() {
-        activity.startActivity(new Intent(activity, NativeKBSmartRegisterActivity.class));
+        activity.startActivity(new Intent(activity, KBSmartRegisterActivity.class));
     }
 
     @Override
     public void startANCSmartRegistry() {
-        activity.startActivity(new Intent(activity, NativeKIANCSmartRegisterActivity.class));
+        activity.startActivity(new Intent(activity, KIANCSmartRegisterActivity.class));
     }
 
     @Override
     public void startPNCSmartRegistry() {
-        activity.startActivity(new Intent(activity, NativeKIPNCSmartRegisterActivity.class));
+        activity.startActivity(new Intent(activity, KIPNCSmartRegisterActivity.class));
     }
 
     @Override
     public void startChildSmartRegistry() {
-        activity.startActivity(new Intent(activity, NativeKIAnakSmartRegisterActivity.class));
+        activity.startActivity(new Intent(activity, KIAnakSmartRegisterActivity.class));
     }
 
     @Override
