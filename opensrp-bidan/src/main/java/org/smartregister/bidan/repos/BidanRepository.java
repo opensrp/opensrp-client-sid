@@ -30,8 +30,8 @@ public class BidanRepository extends Repository {
     public void onCreate(SQLiteDatabase database) {
         super.onCreate(database);
         EventClientRepository.createTable(database, EventClientRepository.Table.client, EventClientRepository.client_column.values());
-//        EventClientRepository.createTable(database, EventClientRepository.Table.address, EventClientRepository.address_column.values());
-//        EventClientRepository.createTable(database, EventClientRepository.Table.event, EventClientRepository.event_column.values());
+        EventClientRepository.createTable(database, EventClientRepository.Table.address, EventClientRepository.address_column.values());
+        EventClientRepository.createTable(database, EventClientRepository.Table.event, EventClientRepository.event_column.values());
 //        EventClientRepository.createTable(database, EventClientRepository.Table.obs, EventClientRepository.obs_column.values());
         UniqueIdBidanRepository.createTable(database);
 

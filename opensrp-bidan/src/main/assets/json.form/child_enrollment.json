@@ -86,7 +86,7 @@
         "openmrs_entity_id": "ZEIR_ID",
         "type": "barcode",
         "barcode_type": "qrcode",
-        "hint": "Child's ZEIR ID *",
+        "hint": "Child's BIDAN ID *",
         "scanButtonText": "Scan QR Code",
         "value": "0",
         "v_numeric": {
@@ -95,7 +95,7 @@
         },
         "v_required": {
           "value": "true",
-          "err": "Please enter the Child's ZEIR ID"
+          "err": "Please enter the Child's BIDAN ID"
         }
       },
       {

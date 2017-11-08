@@ -24,7 +24,7 @@
             style="@style/CustomFontTextViewStyle.ClientList.Light"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:text="ZEIR ID"
+            android:text="BIDAN ID"
             android:textColor="@color/client_list_grey"
             android:textSize="18sp"
             android:layout_weight="2.5" />
@@ -34,7 +34,7 @@
             style="@style/CustomFontTextViewStyle.ClientList.Light.twoline"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:text="ZEIR ID"
+            android:text="BIDAN ID"
             android:textColor="@color/client_list_grey"
             android:textSize="18sp"
             android:layout_weight="2" />
@@ -44,7 +44,7 @@
             style="@style/CustomFontTextViewStyle.ClientList.Light"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:text="ZEIR ID"
+            android:text="BIDAN ID"
             android:textColor="@color/client_list_grey"
             android:textSize="18sp"
             android:layout_weight="2.5" />
@@ -54,7 +54,7 @@
             style="@style/CustomFontTextViewStyle.ClientList.Light"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:text="ZEIR ID"
+            android:text="BIDAN ID"
             android:textColor="@color/client_list_grey"
             android:textSize="18sp"
             android:layout_weight="2" />
@@ -64,7 +64,7 @@
             style="@style/CustomFontTextViewStyle.ClientList.Light"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:text="ZEIR ID"
+            android:text="BIDAN ID"
             android:textColor="@color/client_list_grey"
             android:textSize="18sp"
             android:layout_weight="2.25" />
@@ -74,7 +74,7 @@
             style="@style/CustomFontTextViewStyle.ClientList.Light"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:text="ZEIR ID"
+            android:text="BIDAN ID"
             android:textColor="@color/client_list_grey"
             android:textSize="18sp"
             android:layout_weight="1.75"

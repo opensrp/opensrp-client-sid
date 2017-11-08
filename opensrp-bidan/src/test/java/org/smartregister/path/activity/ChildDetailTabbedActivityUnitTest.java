@@ -193,7 +193,7 @@ public class ChildDetailTabbedActivityUnitTest extends BaseUnitTest {
     @Test
     public void shouldRenderChildsZeirIdRow() {
         final ArrayList<View> outViews = new ArrayList<>();
-        activity.getViewPagerAdapter().getItem(0).getView().findViewById(R.id.rowholder).findViewsWithText(outViews, "Child\'s ZEIR ID",
+        activity.getViewPagerAdapter().getItem(0).getView().findViewById(R.id.rowholder).findViewsWithText(outViews, "Child\'s BIDAN ID",
                 View.FIND_VIEWS_WITH_TEXT);
         assertFalse(outViews.isEmpty());
 
@@ -436,7 +436,7 @@ public class ChildDetailTabbedActivityUnitTest extends BaseUnitTest {
         assertFalse(outViews.isEmpty());
 
         outViews = new ArrayList<>();
-        activity.getViewPagerAdapter().getItem(0).getView().findViewById(R.id.scrollView2).findViewsWithText(outViews, "Child's ZEIR ID",
+        activity.getViewPagerAdapter().getItem(0).getView().findViewById(R.id.scrollView2).findViewsWithText(outViews, "Child's BIDAN ID",
                 View.FIND_VIEWS_WITH_TEXT);
         assertFalse(outViews.isEmpty());
 

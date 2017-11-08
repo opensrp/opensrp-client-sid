@@ -19,15 +19,14 @@ import android.widget.TextView;
 import com.github.ybq.android.spinkit.style.Circle;
 
 import org.smartregister.bidan.R;
-//import org.smartregister.bidan.activity.ChildImmunizationActivity;
-//import org.smartregister.bidan.activity.ChildSmartRegisterActivity;
+import org.smartregister.bidan.activity.ChildImmunizationActivity;
+import org.smartregister.bidan.activity.KAnakSmartRegisterActivity;
 import org.smartregister.bidan.activity.LoginActivity;
-//import org.smartregister.bidan.application.VaccinatorApplication;
 import org.smartregister.bidan.domain.RegisterClickables;
 import org.smartregister.bidan.option.BasicSearchOption;
 import org.smartregister.bidan.option.DateSort;
 import org.smartregister.bidan.option.StatusSort;
-import org.smartregister.bidan.provider.ChildSmartClientsProvider;
+import org.smartregister.bidan.provider.AnakSmartClientsProvider;
 import org.smartregister.bidan.receiver.SyncStatusBroadcastReceiver;
 import org.smartregister.bidan.servicemode.VaccinationServiceModeOption;
 import org.smartregister.bidan.view.LocationPickerView;
@@ -51,10 +50,11 @@ import org.smartregister.view.dialog.SortOption;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
-import util.PathConstants;
+import util.BidanConstants;
 
-public class BidanHomeFragment extends BaseSmartRegisterFragment implements SyncStatusBroadcastReceiver.SyncStatusListener {
+public class KAnakSmartRegisterFragment extends BaseSmartRegisterFragment implements SyncStatusBroadcastReceiver.SyncStatusListener {
     private final ClientActionHandler clientActionHandler = new ClientActionHandler();
     private LocationPickerView clinicSelection;
     private static final long NO_RESULT_SHOW_DIALOG_DELAY = 1000l;
@@ -123,7 +123,7 @@ public class BidanHomeFragment extends BaseSmartRegisterFragment implements Sync
                         new CursorCommonObjectSort(getResources().getString(R.string.woman_alphabetical_sort), "first_name"),
                         new DateSort("Age", "dob"),
                         new StatusSort("Due Status"),
-                        new CursorCommonObjectSort(getResources().getString(R.string.id_sort), "zeir_id")
+                        new CursorCommonObjectSort(getResources().getString(R.string.id_sort), "bidan_id")
                 };
             }
 
@@ -146,7 +146,7 @@ public class BidanHomeFragment extends BaseSmartRegisterFragment implements Sync
 
     @Override
     protected void startRegistration() {
-//        ((ChildSmartRegisterActivity) getActivity()).startFormActivity("child_enrollment", null, null);
+        ((KAnakSmartRegisterActivity) getActivity()).startFormActivity("child_enrollment", null, null);
     }
 
     @Override
@@ -276,61 +276,73 @@ public class BidanHomeFragment extends BaseSmartRegisterFragment implements Sync
     }
 
     private void initializeQueries() {
-        String tableName = PathConstants.CHILD_TABLE_NAME;
-        String parentTableName = PathConstants.MOTHER_TABLE_NAME;
+        String tableName = BidanConstants.CHILD_TABLE_NAME;
+        String parentTableName = BidanConstants.MOTHER_TABLE_NAME;
 
 //        ChildSmartClientsProvider hhscp = new ChildSmartClientsProvider(getActivity(),
-//                clientActionHandler, context().alertService(), VaccinatorApplication.getInstance().vaccineRepository(), VaccinatorApplication.getInstance().weightRepository(), context().commonrepository(tableName));
+//                clientActionHandler, context().alertService(), BidanApplication.getInstance().vaccineRepository(), 
+//                BidanApplication.getInstance().weightRepository(), context().commonrepository(tableName));
 //        clientAdapter = new SmartRegisterPaginatedCursorAdapter(getActivity(), null, hhscp, context().commonrepository(tableName));
-//        clientsView.setAdapter(clientAdapter);
-//
-//        setTablename(tableName);
-//        SmartRegisterQueryBuilder countqueryBUilder = new SmartRegisterQueryBuilder();
-//        countqueryBUilder.SelectInitiateMainTableCounts(tableName);
-//        mainCondition = " dod is NULL OR dod = '' ";
-//        countSelect = countqueryBUilder.mainCondition(mainCondition);
-//        super.CountExecute();
-//        countOverDue();
-//        countDueOverDue();
-//
-//        SmartRegisterQueryBuilder queryBUilder = new SmartRegisterQueryBuilder();
-//        queryBUilder.SelectInitiateMainTable(tableName, new String[]{
-//                tableName + ".relationalid",
-//                tableName + ".details",
-//                tableName + ".zeir_id",
-//                tableName + ".relational_id",
-//                tableName + ".first_name",
-//                tableName + ".last_name",
-//                tableName + ".gender",
-//                parentTableName + ".first_name as mother_first_name",
-//                parentTableName + ".last_name as mother_last_name",
-//                parentTableName + ".dob as mother_dob",
-//                parentTableName + ".nrc_number as mother_nrc_number",
-//                tableName + ".father_name",
-//                tableName + ".dob",
-//                tableName + ".epi_card_number",
-//                tableName + ".contact_phone_number",
-//                tableName + ".pmtct_status",
-//                tableName + ".provider_uc",
-//                tableName + ".provider_town",
-//                tableName + ".provider_id",
-//                tableName + ".provider_location_id",
-//                tableName + ".client_reg_date",
-//                tableName + ".last_interacted_with",
-//                tableName + ".inactive",
-//                tableName + ".lost_to_follow_up"
-//        });
-//        queryBUilder.customJoin("LEFT JOIN " + parentTableName + " ON  " + tableName + ".relational_id =  " + parentTableName + ".id");
-//        mainSelect = queryBUilder.mainCondition(mainCondition);
-//        Sortqueries = ((CursorSortOption) getDefaultOptionsProvider().sortOption()).sort();
-//
-//        currentlimit = 20;
-//        currentoffset = 0;
-//
-//        super.filterandSortInInitializeQueries();
-//
-//        updateSearchView();
-//        refresh();
+        AnakSmartClientsProvider anakscp = new AnakSmartClientsProvider(getActivity(), 
+                clientActionHandler, context().alertService());
+        clientAdapter = new SmartRegisterPaginatedCursorAdapter(getActivity(), null, anakscp, new CommonRepository("ec_anak", new String[]{"namaBayi", "tanggalLahirAnak", "ec_anak.is_closed"}));
+        clientsView.setAdapter(clientAdapter);
+
+        setTablename(tableName);
+        SmartRegisterQueryBuilder countqueryBUilder = new SmartRegisterQueryBuilder();
+        countqueryBUilder.SelectInitiateMainTableCounts(tableName);
+        mainCondition = " dod is NULL OR dod = '' ";
+        //FR
+//        if (s == null || Objects.equals(s, "!")) {
+//            Log.e(TAG, "initializeQueries: "+"Not Initialized" );
+//            mainCondition = " is_closed = 0  and relational_id != ''";
+//        } else {
+//            Log.e(TAG, "initializeQueries: " + s);
+//            mainCondition = "is_closed = 0 AND relational_id !='' AND object_id LIKE '%" + s + "%'";
+//        }
+        countSelect = countqueryBUilder.mainCondition(mainCondition);
+        super.CountExecute();
+        countOverDue();
+        countDueOverDue();
+
+        SmartRegisterQueryBuilder queryBUilder = new SmartRegisterQueryBuilder();
+        queryBUilder.SelectInitiateMainTable(tableName, new String[]{
+                tableName + ".relationalid",
+                tableName + ".details",
+                tableName + ".zeir_id",
+                tableName + ".relational_id",
+                tableName + ".first_name",
+                tableName + ".last_name",
+                tableName + ".gender",
+                parentTableName + ".first_name as mother_first_name",
+                parentTableName + ".last_name as mother_last_name",
+                parentTableName + ".dob as mother_dob",
+                parentTableName + ".nrc_number as mother_nrc_number",
+                tableName + ".father_name",
+                tableName + ".dob",
+                tableName + ".epi_card_number",
+                tableName + ".contact_phone_number",
+                tableName + ".pmtct_status",
+                tableName + ".provider_uc",
+                tableName + ".provider_town",
+                tableName + ".provider_id",
+                tableName + ".provider_location_id",
+                tableName + ".client_reg_date",
+                tableName + ".last_interacted_with",
+                tableName + ".inactive",
+                tableName + ".lost_to_follow_up"
+        });
+        queryBUilder.customJoin("LEFT JOIN " + parentTableName + " ON  " + tableName + ".relational_id =  " + parentTableName + ".id");
+        mainSelect = queryBUilder.mainCondition(mainCondition);
+        Sortqueries = ((CursorSortOption) getDefaultOptionsProvider().sortOption()).sort();
+
+        currentlimit = 20;
+        currentoffset = 0;
+
+        super.filterandSortInInitializeQueries();
+
+        updateSearchView();
+        refresh();
     }
 
     private void refreshSyncStatusViews() {
@@ -378,7 +390,6 @@ public class BidanHomeFragment extends BaseSmartRegisterFragment implements Sync
     private String filterSelectionCondition(boolean urgentOnly) {
         String mainCondition = " (inactive != 'true' and lost_to_follow_up != 'true') AND ( ";
 //        ArrayList<VaccineRepo.Vaccine> vaccines = VaccineRepo.getVaccines("child");
-//
 //        if (vaccines.contains(VaccineRepo.Vaccine.bcg2)) {
 //            vaccines.remove(VaccineRepo.Vaccine.bcg2);
 //        }
@@ -393,12 +404,12 @@ public class BidanHomeFragment extends BaseSmartRegisterFragment implements Sync
 //                mainCondition += " " + VaccinateActionUtils.addHyphen(vaccine.display()) + " = 'urgent' or ";
 //            }
 //        }
-//
-//        if (urgentOnly) {
-//            return mainCondition + " ) ";
-//        }
-//
-//        mainCondition += " or ";
+
+        if (urgentOnly) {
+            return mainCondition + " ) ";
+        }
+
+        mainCondition += " or ";
 //        for (int i = 0; i < vaccines.size(); i++) {
 //            VaccineRepo.Vaccine vaccine = vaccines.get(i);
 //            if (i == vaccines.size() - 1) {
@@ -410,6 +421,7 @@ public class BidanHomeFragment extends BaseSmartRegisterFragment implements Sync
 
         return mainCondition + " ) ";
     }
+
 
     private void countOverDue() {
         String mainCondition = filterSelectionCondition(true);
@@ -426,7 +438,7 @@ public class BidanHomeFragment extends BaseSmartRegisterFragment implements Sync
             }
         }
 
-//        ((ChildSmartRegisterActivity) getActivity()).updateAdvancedSearchFilterCount(count);
+        ((KAnakSmartRegisterActivity) getActivity()).updateAdvancedSearchFilterCount(count);
     }
 
     private void countDueOverDue() {
@@ -525,27 +537,27 @@ public class BidanHomeFragment extends BaseSmartRegisterFragment implements Sync
             switch (view.getId()) {
                 case R.id.child_profile_info_layout:
 
-//                    ChildImmunizationActivity.launchActivity(getActivity(), client, null);
+                    ChildImmunizationActivity.launchActivity(getActivity(), client, null);
                     break;
                 case R.id.record_weight:
                     registerClickables.setRecordWeight(true);
-//                    ChildImmunizationActivity.launchActivity(getActivity(), client, registerClickables);
+                    ChildImmunizationActivity.launchActivity(getActivity(), client, registerClickables);
                     break;
 
                 case R.id.record_vaccination:
                     registerClickables.setRecordAll(true);
-//                    ChildImmunizationActivity.launchActivity(getActivity(), client, registerClickables);
+                    ChildImmunizationActivity.launchActivity(getActivity(), client, registerClickables);
                     break;
                 case R.id.filter_selection:
                     toggleFilterSelection();
                     break;
 
                 case R.id.global_search:
-//                    ((ChildSmartRegisterActivity) getActivity()).startAdvancedSearch();
+                    ((KAnakSmartRegisterActivity) getActivity()).startAdvancedSearch();
                     break;
 
                 case R.id.scan_qr_code:
-//                    ((ChildSmartRegisterActivity) getActivity()).startQrCodeScanner();
+                    ((KAnakSmartRegisterActivity) getActivity()).startQrCodeScanner();
                     break;
                 default:
                     break;

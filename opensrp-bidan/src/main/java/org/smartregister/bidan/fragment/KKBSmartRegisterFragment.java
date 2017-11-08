@@ -19,16 +19,15 @@ import android.widget.TextView;
 import com.github.ybq.android.spinkit.style.Circle;
 
 import org.smartregister.bidan.R;
-import org.smartregister.bidan.activity.KISmartRegisterActivity;
+import org.smartregister.bidan.activity.ChildImmunizationActivity;
+import org.smartregister.bidan.activity.KKBSmartRegisterActivity;
 import org.smartregister.bidan.activity.LoginActivity;
 import org.smartregister.bidan.domain.RegisterClickables;
 import org.smartregister.bidan.option.BasicSearchOption;
 import org.smartregister.bidan.option.DateSort;
 import org.smartregister.bidan.option.StatusSort;
-//import org.smartregister.bidan.provider.ChildSmartClientsProvider;
-import org.smartregister.bidan.provider.KISmartClientsProvider;
+import org.smartregister.bidan.provider.AnakSmartClientsProvider;
 import org.smartregister.bidan.receiver.SyncStatusBroadcastReceiver;
-//import org.smartregister.bidan.servicemode.VaccinationServiceModeOption;
 import org.smartregister.bidan.servicemode.VaccinationServiceModeOption;
 import org.smartregister.bidan.view.LocationPickerView;
 import org.smartregister.commonregistry.CommonPersonObjectClient;
@@ -39,8 +38,6 @@ import org.smartregister.cursoradapter.CursorSortOption;
 import org.smartregister.cursoradapter.SmartRegisterPaginatedCursorAdapter;
 import org.smartregister.cursoradapter.SmartRegisterQueryBuilder;
 import org.smartregister.domain.FetchStatus;
-//import org.smartregister.immunization.db.VaccineRepo;
-//import org.smartregister.immunization.util.VaccinateActionUtils;
 import org.smartregister.provider.SmartRegisterClientsProvider;
 import org.smartregister.repository.AllSharedPreferences;
 import org.smartregister.view.activity.SecuredNativeSmartRegisterActivity;
@@ -53,7 +50,10 @@ import java.util.List;
 
 import util.BidanConstants;
 
-public class KISmartRegisterFragment extends BaseSmartRegisterFragment implements SyncStatusBroadcastReceiver.SyncStatusListener {
+//import org.smartregister.immunization.db.VaccineRepo;
+//import org.smartregister.immunization.util.VaccinateActionUtils;
+
+public class KKBSmartRegisterFragment extends BaseSmartRegisterFragment implements SyncStatusBroadcastReceiver.SyncStatusListener {
     private final ClientActionHandler clientActionHandler = new ClientActionHandler();
     private LocationPickerView clinicSelection;
     private static final long NO_RESULT_SHOW_DIALOG_DELAY = 1000l;
@@ -122,7 +122,7 @@ public class KISmartRegisterFragment extends BaseSmartRegisterFragment implement
                         new CursorCommonObjectSort(getResources().getString(R.string.woman_alphabetical_sort), "first_name"),
                         new DateSort("Age", "dob"),
                         new StatusSort("Due Status"),
-                        new CursorCommonObjectSort(getResources().getString(R.string.id_sort), "zeir_id")
+                        new CursorCommonObjectSort(getResources().getString(R.string.id_sort), "bidan_id")
                 };
             }
 
@@ -145,7 +145,7 @@ public class KISmartRegisterFragment extends BaseSmartRegisterFragment implement
 
     @Override
     protected void startRegistration() {
-        ((KISmartRegisterActivity) getActivity()).startFormActivity("child_enrollment", null, null);
+        ((KKBSmartRegisterActivity) getActivity()).startFormActivity("child_enrollment", null, null);
     }
 
     @Override
@@ -183,7 +183,7 @@ public class KISmartRegisterFragment extends BaseSmartRegisterFragment implement
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        getActivity().setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
+        getActivity().setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
         this.getActivity().getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
 
         View view = inflater.inflate(R.layout.smart_register_activity_customized, container, false);
@@ -278,16 +278,27 @@ public class KISmartRegisterFragment extends BaseSmartRegisterFragment implement
         String tableName = BidanConstants.CHILD_TABLE_NAME;
         String parentTableName = BidanConstants.MOTHER_TABLE_NAME;
 
-        KISmartClientsProvider hhscp = new KISmartClientsProvider(getActivity(),
-                clientActionHandler, context().alertService(), 
-                context().commonrepository(tableName));
-        clientAdapter = new SmartRegisterPaginatedCursorAdapter(getActivity(), null, hhscp, context().commonrepository(tableName));
+//        ChildSmartClientsProvider hhscp = new ChildSmartClientsProvider(getActivity(),
+//                clientActionHandler, context().alertService(), BidanApplication.getInstance().vaccineRepository(), 
+//                BidanApplication.getInstance().weightRepository(), context().commonrepository(tableName));
+//        clientAdapter = new SmartRegisterPaginatedCursorAdapter(getActivity(), null, hhscp, context().commonrepository(tableName));
+        AnakSmartClientsProvider anakscp = new AnakSmartClientsProvider(getActivity(), 
+                clientActionHandler, context().alertService());
+        clientAdapter = new SmartRegisterPaginatedCursorAdapter(getActivity(), null, anakscp, new CommonRepository("ec_anak", new String[]{"namaBayi", "tanggalLahirAnak", "ec_anak.is_closed"}));
         clientsView.setAdapter(clientAdapter);
 
         setTablename(tableName);
         SmartRegisterQueryBuilder countqueryBUilder = new SmartRegisterQueryBuilder();
         countqueryBUilder.SelectInitiateMainTableCounts(tableName);
         mainCondition = " dod is NULL OR dod = '' ";
+        //FR
+//        if (s == null || Objects.equals(s, "!")) {
+//            Log.e(TAG, "initializeQueries: "+"Not Initialized" );
+//            mainCondition = " is_closed = 0  and relational_id != ''";
+//        } else {
+//            Log.e(TAG, "initializeQueries: " + s);
+//            mainCondition = "is_closed = 0 AND relational_id !='' AND object_id LIKE '%" + s + "%'";
+//        }
         countSelect = countqueryBUilder.mainCondition(mainCondition);
         super.CountExecute();
         countOverDue();
@@ -378,7 +389,6 @@ public class KISmartRegisterFragment extends BaseSmartRegisterFragment implement
     private String filterSelectionCondition(boolean urgentOnly) {
         String mainCondition = " (inactive != 'true' and lost_to_follow_up != 'true') AND ( ";
 //        ArrayList<VaccineRepo.Vaccine> vaccines = VaccineRepo.getVaccines("child");
-
 //        if (vaccines.contains(VaccineRepo.Vaccine.bcg2)) {
 //            vaccines.remove(VaccineRepo.Vaccine.bcg2);
 //        }
@@ -427,7 +437,7 @@ public class KISmartRegisterFragment extends BaseSmartRegisterFragment implement
             }
         }
 
-        ((KISmartRegisterActivity) getActivity()).updateAdvancedSearchFilterCount(count);
+        ((KKBSmartRegisterActivity) getActivity()).updateAdvancedSearchFilterCount(count);
     }
 
     private void countDueOverDue() {
@@ -526,27 +536,27 @@ public class KISmartRegisterFragment extends BaseSmartRegisterFragment implement
             switch (view.getId()) {
                 case R.id.child_profile_info_layout:
 
-//                    KIMasterActivity.launchActivity(getActivity(), client, null);
+                    ChildImmunizationActivity.launchActivity(getActivity(), client, null);
                     break;
                 case R.id.record_weight:
                     registerClickables.setRecordWeight(true);
-//                    KIMasterActivity.launchActivity(getActivity(), client, registerClickables);
+                    ChildImmunizationActivity.launchActivity(getActivity(), client, registerClickables);
                     break;
 
                 case R.id.record_vaccination:
                     registerClickables.setRecordAll(true);
-//                    KIMasterActivity.launchActivity(getActivity(), client, registerClickables);
+                    ChildImmunizationActivity.launchActivity(getActivity(), client, registerClickables);
                     break;
                 case R.id.filter_selection:
                     toggleFilterSelection();
                     break;
 
                 case R.id.global_search:
-//                    ((NativeKISmartRegisterActivity) getActivity()).startAdvancedSearch();
+                    ((KKBSmartRegisterActivity) getActivity()).startAdvancedSearch();
                     break;
 
                 case R.id.scan_qr_code:
-//                    ((NativeKISmartRegisterActivity) getActivity()).startQrCodeScanner();
+                    ((KKBSmartRegisterActivity) getActivity()).startQrCodeScanner();
                     break;
                 default:
                     break;

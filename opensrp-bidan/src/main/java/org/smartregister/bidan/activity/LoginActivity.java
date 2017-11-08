@@ -77,8 +77,8 @@ import static org.smartregister.util.Log.logError;
 import static org.smartregister.util.Log.logVerbose;
 
 public class LoginActivity extends AppCompatActivity {
-    public static final String ENGLISH_LOCALE = "en";
     private static final String TAG = LoginActivity.class.getName();
+    public static final String ENGLISH_LOCALE = "en";
     private static final String BAHASA_LOCALE = "in";
     private static final String URDU_LOCALE = "ur";
     private static final String ENGLISH_LANGUAGE = "English";
@@ -449,8 +449,10 @@ public class LoginActivity extends AppCompatActivity {
             Utils.startAsyncTask(new SaveTeamLocationsTask(), null);
         }
         BidanApplication.setCrashlyticsUser(getOpenSRPContext());
-//        Intent intent = new Intent(this, ChildSmartRegisterActivity.class);
         Intent intent = new Intent(this, BidanHomeActivity.class);
+//        Intent intent = new Intent(this, KIbuSmartRegisterActivity.class);
+//        Intent intent = new Intent(this, ChildSmartRegisterActivity.class);
+//        Intent intent = new Intent(this, KIAnakSmartRegisterActivity.class);
         intent.putExtra(BaseRegisterActivity.IS_REMOTE_LOGIN, remote);
         startActivity(intent);
 

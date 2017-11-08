@@ -7,11 +7,7 @@ import android.net.Uri;
 
 import org.json.JSONObject;
 import org.smartregister.Context;
-import org.smartregister.bidan.activity.KBSmartRegisterActivity;
-import org.smartregister.bidan.activity.KIANCSmartRegisterActivity;
-import org.smartregister.bidan.activity.KIAnakSmartRegisterActivity;
-import org.smartregister.bidan.activity.KIPNCSmartRegisterActivity;
-import org.smartregister.bidan.activity.KISmartRegisterActivity;
+import org.smartregister.bidan.activity.KIbuSmartRegisterActivity;
 import org.smartregister.view.controller.ANMController;
 import org.smartregister.view.controller.NavigationController;
 
@@ -33,34 +29,39 @@ public class NavigationControllerINA extends NavigationController {
         this.context = context;
     }
 
+    /**
+     * Activity for KOHORT IBU
+     */
     @Override
     public void startECSmartRegistry() {
-        activity.startActivity(new Intent(activity, KISmartRegisterActivity.class));
-        SharedPreferences sharedPreferences = getDefaultSharedPreferences(this.activity);
+        openActivity(KIbuSmartRegisterActivity.class);
+//        activity.startActivity(new Intent(activity, KIbuSmartRegisterActivity.class));
+//
+//        SharedPreferences sp = getDefaultSharedPreferences(this.activity);
+//        if(sp.getBoolean("firstlaunch", true))
+//            sp.edit().putBoolean("firstlaunch", false).apply();
 
-        if(sharedPreferences.getBoolean("firstlauch",true)) {
-            sharedPreferences.edit().putBoolean("firstlauch",false).commit();
-        }
     }
+
 
     @Override
     public void startFPSmartRegistry() {
-        activity.startActivity(new Intent(activity, KBSmartRegisterActivity.class));
+        openActivity(KIbuSmartRegisterActivity.class);
     }
 
     @Override
     public void startANCSmartRegistry() {
-        activity.startActivity(new Intent(activity, KIANCSmartRegisterActivity.class));
+        openActivity(KIbuSmartRegisterActivity.class);
     }
 
     @Override
     public void startPNCSmartRegistry() {
-        activity.startActivity(new Intent(activity, KIPNCSmartRegisterActivity.class));
+        openActivity(KIbuSmartRegisterActivity.class);
     }
 
     @Override
     public void startChildSmartRegistry() {
-        activity.startActivity(new Intent(activity, KIAnakSmartRegisterActivity.class));
+        openActivity(KIbuSmartRegisterActivity.class);
     }
 
     @Override
@@ -76,5 +77,15 @@ public class NavigationControllerINA extends NavigationController {
         String uri = "http://"+id+":"+pass+"@kia-report.sid-indonesia.org/login/auth";
         activity.startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(uri)));
     }
+
+    private void openActivity(Class<?> targetClass) {
+        activity.startActivity(new Intent(activity, targetClass));
+
+        SharedPreferences sp = getDefaultSharedPreferences(this.activity);
+        if(sp.getBoolean("firstlaunch", true))
+            sp.edit().putBoolean("firstlaunch", false).apply();
+
+    }
+
 
 }

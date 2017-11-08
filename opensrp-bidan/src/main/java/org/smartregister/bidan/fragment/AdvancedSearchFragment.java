@@ -61,7 +61,7 @@ import java.util.Map;
 import util.GlobalSearchUtils;
 import util.JsonFormUtils;
 import util.MoveToMyCatchmentUtils;
-import util.PathConstants;
+import util.BidanConstants;
 
 public class AdvancedSearchFragment extends BaseSmartRegisterFragment {
     private static final String TAG = AdvancedSearchFragment.class.getCanonicalName();
@@ -122,7 +122,7 @@ public class AdvancedSearchFragment extends BaseSmartRegisterFragment {
 
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        getActivity().setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
+        getActivity().setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
 
         View view = inflater.inflate(R.layout.smart_register_activity_advanced_search, container, false);
         setupViews(view);
@@ -186,6 +186,7 @@ public class AdvancedSearchFragment extends BaseSmartRegisterFragment {
 
     @Override
     public void setupSearchView(View view) {
+        Log.e(TAG, "setupSearchView: " );
     }
 
     @Override
@@ -321,8 +322,8 @@ public class AdvancedSearchFragment extends BaseSmartRegisterFragment {
             return;
         }
 
-        String tableName = PathConstants.CHILD_TABLE_NAME;
-        String parentTableName = PathConstants.MOTHER_TABLE_NAME;
+        String tableName = BidanConstants.CHILD_TABLE_NAME;
+        String parentTableName = BidanConstants.MOTHER_TABLE_NAME;
 
         editMap.clear();
 
@@ -419,7 +420,7 @@ public class AdvancedSearchFragment extends BaseSmartRegisterFragment {
 
         String zeirIdString = zeirId.getText().toString();
         if (StringUtils.isNotBlank(zeirIdString)) {
-            searchCriteriaString += " ZEIR ID: \"" + bold(zeirIdString) + "\",";
+            searchCriteriaString += " BIDAN ID: \"" + bold(zeirIdString) + "\",";
             String key = ZEIR_ID;
             if (!outOfArea) {
                 key = tableName + "." + ZEIR_ID;
@@ -525,9 +526,9 @@ public class AdvancedSearchFragment extends BaseSmartRegisterFragment {
     private void initListMode() {
         switchViews(true);
 
-        String tableName = PathConstants.CHILD_TABLE_NAME;
+        String tableName = BidanConstants.CHILD_TABLE_NAME;
         setTablename(tableName);
-        String parentTableName = PathConstants.MOTHER_TABLE_NAME;
+        String parentTableName = BidanConstants.MOTHER_TABLE_NAME;
 
         AdvancedSearchClientsProvider hhscp = new AdvancedSearchClientsProvider(getActivity(),
                 clientActionHandler, context().alertService(), VaccinatorApplication.getInstance().vaccineRepository(), VaccinatorApplication.getInstance().weightRepository(), commonRepository());
@@ -612,7 +613,7 @@ public class AdvancedSearchFragment extends BaseSmartRegisterFragment {
 
     private String filterandSortQuery() {
         String tableName = getTablename();
-        String parentTableName = PathConstants.MOTHER_TABLE_NAME;
+        String parentTableName = BidanConstants.MOTHER_TABLE_NAME;
 
         SmartRegisterQueryBuilder queryBUilder = new SmartRegisterQueryBuilder();
         queryBUilder.SelectInitiateMainTable(tableName, new String[]{
@@ -647,9 +648,9 @@ public class AdvancedSearchFragment extends BaseSmartRegisterFragment {
     }
 
     private String sortByStatus() {
-        return " CASE WHEN " + PathConstants.CHILD_TABLE_NAME + ".inactive  != 'true' is null and " + PathConstants.CHILD_TABLE_NAME + ".lost_to_follow_up != 'true' THEN 1 "
-                + " WHEN " + PathConstants.CHILD_TABLE_NAME + ".inactive = 'true' THEN 2 "
-                + " WHEN " + PathConstants.CHILD_TABLE_NAME + ".lost_to_follow_up = 'true' THEN 3 END ";
+        return " CASE WHEN " + BidanConstants.CHILD_TABLE_NAME + ".inactive  != 'true' is null and " + BidanConstants.CHILD_TABLE_NAME + ".lost_to_follow_up != 'true' THEN 1 "
+                + " WHEN " + BidanConstants.CHILD_TABLE_NAME + ".inactive = 'true' THEN 2 "
+                + " WHEN " + BidanConstants.CHILD_TABLE_NAME + ".lost_to_follow_up = 'true' THEN 3 END ";
     }
 
     @Override
@@ -672,7 +673,7 @@ public class AdvancedSearchFragment extends BaseSmartRegisterFragment {
 
     private String getMainConditionString(String tableName) {
 
-        final String parentTableName = PathConstants.MOTHER_TABLE_NAME;
+        final String parentTableName = BidanConstants.MOTHER_TABLE_NAME;
 
         final String startDateKey = START_DATE;
         final String endDateKey = END_DATE;
