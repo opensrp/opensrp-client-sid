@@ -666,5 +666,10 @@
     <string name="Nutrition_status">Nutrition Status:</string>
     <string name="mother_already_registered_in_fp">Mother already registered</string>
     <string name="dho_site">kia-report.sid-indonesia.org/login/auth</string>
+    <string name="header_nama">NAMA</string>
+    <string name="header_tgl_periksa">Tgl Periksa</string>
+    <string name="header_kunjungan">Kunjungan</string>
+    <string name="bidan_profile">BIDAN</string>
+    <string name="bidan_contact_number">Phone Number:</string>
 
 </resources>

@@ -1,32 +1,35 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:background="@color/client_list_header_dark_grey"
     android:orientation="horizontal"
-    android:weightSum="10">
+    android:weightSum="10"
+    tools:ignore="DisableBaselineAlignment">
 
     <RelativeLayout
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginRight="1dp"
         android:layout_weight="4.4"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        tools:ignore="RtlHardcoded">
 
         <org.smartregister.view.customcontrols.CustomFontTextView
-            android:id="@+id/child_header"
+            android:id="@+id/bidan_header"
             style="@style/CustomFontTextViewStyle.ClientList.Medium"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/child_profile"
+            android:text="@string/bidan_profile"
             android:textAllCaps="true"
             android:textColor="@color/client_list_grey"
             android:textSize="16sp" />
 
 
         <org.smartregister.view.customcontrols.CustomFontTextView
-            android:id="@+id/child_age_header"
+            android:id="@+id/bidan_age_header"
             style="@style/CustomFontTextViewStyle.ClientList.Medium"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -35,7 +38,8 @@
             android:text="@string/birthdate_age"
             android:textAllCaps="true"
             android:textColor="@color/client_list_grey"
-            android:textSize="16sp" />
+            android:textSize="16sp"
+            tools:ignore="RelativeOverlap,RtlHardcoded" />
 
     </RelativeLayout>
 
@@ -43,10 +47,11 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginRight="1dp"
-        android:layout_weight="1.8">
+        android:layout_weight="1.8"
+        tools:ignore="RtlHardcoded">
 
         <org.smartregister.view.customcontrols.CustomFontTextView
-            android:id="@+id/child_zeir_id_header"
+            android:id="@+id/bidan_id_header"
             style="@style/CustomFontTextViewStyle.ClientList.Medium"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -62,15 +67,16 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginRight="1dp"
-        android:layout_weight="1.7">
+        android:layout_weight="1.7"
+        tools:ignore="RtlHardcoded">
 
         <org.smartregister.view.customcontrols.CustomFontTextView
-            android:id="@+id/child_weight_header"
+            android:id="@+id/bidan_weight_header"
             style="@style/CustomFontTextViewStyle.ClientList.Medium"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerHorizontal="true"
-            android:text="@string/child_contact_number"
+            android:text="@string/bidan_contact_number"
             android:textAllCaps="true"
             android:textColor="@color/client_list_grey"
             android:textSize="16sp" />
@@ -83,7 +89,7 @@
         android:layout_weight="2">
 
         <org.smartregister.view.customcontrols.CustomFontTextView
-            android:id="@+id/child_due_header"
+            android:id="@+id/bidan_due_header"
             style="@style/CustomFontTextViewStyle.ClientList.Medium"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -91,6 +97,7 @@
             android:text="HOI"
             android:textAllCaps="true"
             android:textColor="@color/client_list_grey"
-            android:textSize="16sp" />
+            android:textSize="16sp"
+            tools:ignore="HardcodedText" />
     </RelativeLayout>
 </LinearLayout>

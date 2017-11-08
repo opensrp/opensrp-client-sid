@@ -34,8 +34,6 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.smartregister.bidan.activity.ChildImmunizationActivity;
-import org.smartregister.bidan.application.BidanApplication;
-import org.smartregister.bidan.application.VaccinatorApplication;
 import org.smartregister.clientandeventmodel.DateUtil;
 import org.smartregister.commonregistry.CommonPersonObjectClient;
 import org.smartregister.cursoradapter.SmartRegisterQueryBuilder;
@@ -530,8 +528,11 @@ public class AdvancedSearchFragment extends BaseSmartRegisterFragment {
         setTablename(tableName);
         String parentTableName = BidanConstants.MOTHER_TABLE_NAME;
 
+//        AdvancedSearchClientsProvider hhscp = new AdvancedSearchClientsProvider(getActivity(),
+//                clientActionHandler, context().alertService(), BidanApplication.getInstance().vaccineRepository(),
+//                BidanApplication.getInstance().weightRepository(), commonRepository());
         AdvancedSearchClientsProvider hhscp = new AdvancedSearchClientsProvider(getActivity(),
-                clientActionHandler, context().alertService(), VaccinatorApplication.getInstance().vaccineRepository(), VaccinatorApplication.getInstance().weightRepository(), commonRepository());
+                clientActionHandler, context().alertService(), commonRepository());
         clientAdapter = new AdvancedSearchPaginatedCursorAdapter(getActivity(), null, hhscp, context().commonrepository(tableName));
         clientsView.setAdapter(clientAdapter);
 

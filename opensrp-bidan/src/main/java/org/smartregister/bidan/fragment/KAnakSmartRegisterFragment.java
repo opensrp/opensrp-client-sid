@@ -28,6 +28,7 @@ import org.smartregister.bidan.option.DateSort;
 import org.smartregister.bidan.option.StatusSort;
 import org.smartregister.bidan.provider.AnakSmartClientsProvider;
 import org.smartregister.bidan.receiver.SyncStatusBroadcastReceiver;
+import org.smartregister.bidan.servicemode.BidanServiceModeOption;
 import org.smartregister.bidan.servicemode.VaccinationServiceModeOption;
 import org.smartregister.bidan.view.LocationPickerView;
 import org.smartregister.commonregistry.CommonPersonObjectClient;
@@ -71,7 +72,6 @@ public class KAnakSmartRegisterFragment extends BaseSmartRegisterFragment implem
     @Override
     protected SecuredNativeSmartRegisterActivity.DefaultOptionsProvider getDefaultOptionsProvider() {
         return new SecuredNativeSmartRegisterActivity.DefaultOptionsProvider() {
-            // FIXME path_conflict
             //@Override
             public FilterOption searchFilterOption() {
                 return new BasicSearchOption("");
@@ -79,7 +79,7 @@ public class KAnakSmartRegisterFragment extends BaseSmartRegisterFragment implem
 
             @Override
             public ServiceModeOption serviceMode() {
-                return new VaccinationServiceModeOption(null, "Linda Clinic", new int[]{
+                return new BidanServiceModeOption(null, "Bidan Ayu", new int[]{
                         R.string.child_profile, R.string.birthdate_age, R.string.epi_number, R.string.child_contact_number,
                         R.string.child_next_vaccine
                 }, new int[]{5, 2, 2, 3, 3});

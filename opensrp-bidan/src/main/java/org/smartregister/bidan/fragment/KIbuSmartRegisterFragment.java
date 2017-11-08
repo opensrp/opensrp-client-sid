@@ -28,7 +28,7 @@ import org.smartregister.bidan.option.DateSort;
 import org.smartregister.bidan.option.StatusSort;
 import org.smartregister.bidan.provider.AnakSmartClientsProvider;
 import org.smartregister.bidan.receiver.SyncStatusBroadcastReceiver;
-import org.smartregister.bidan.servicemode.VaccinationServiceModeOption;
+import org.smartregister.bidan.servicemode.BidanServiceModeOption;
 import org.smartregister.bidan.view.LocationPickerView;
 import org.smartregister.commonregistry.CommonPersonObjectClient;
 import org.smartregister.commonregistry.CommonRepository;
@@ -54,6 +54,7 @@ import util.BidanConstants;
 //import org.smartregister.immunization.util.VaccinateActionUtils;
 
 public class KIbuSmartRegisterFragment extends BaseSmartRegisterFragment implements SyncStatusBroadcastReceiver.SyncStatusListener {
+    private static final String TAG = KIbuSmartRegisterFragment.class.getName();
     private final ClientActionHandler clientActionHandler = new ClientActionHandler();
     private LocationPickerView clinicSelection;
     private static final long NO_RESULT_SHOW_DIALOG_DELAY = 1000l;
@@ -70,7 +71,6 @@ public class KIbuSmartRegisterFragment extends BaseSmartRegisterFragment impleme
     @Override
     protected SecuredNativeSmartRegisterActivity.DefaultOptionsProvider getDefaultOptionsProvider() {
         return new SecuredNativeSmartRegisterActivity.DefaultOptionsProvider() {
-            // FIXME path_conflict
             //@Override
             public FilterOption searchFilterOption() {
                 return new BasicSearchOption("");
@@ -78,10 +78,11 @@ public class KIbuSmartRegisterFragment extends BaseSmartRegisterFragment impleme
 
             @Override
             public ServiceModeOption serviceMode() {
-                return new VaccinationServiceModeOption(null, "Linda Clinic", new int[]{
-                        R.string.child_profile, R.string.birthdate_age, R.string.epi_number, R.string.child_contact_number,
-                        R.string.child_next_vaccine
-                }, new int[]{5, 2, 2, 3, 3});
+                return new BidanServiceModeOption(null, "Bidan Ayu", new int[]{
+                        R.string.header_nama, R.string.header_id, R.string.header_obsetri,
+                        R.string.header_edd, R.string.header_anak, R.string.header_status_b,
+                        R.string.header_edit
+                }, new int[]{244, 75, 110, 125, 160, 205, 75});
             }
 
             @Override
@@ -220,6 +221,7 @@ public class KIbuSmartRegisterFragment extends BaseSmartRegisterFragment impleme
         setServiceModeViewDrawableRight(null);
         initializeQueries();
         updateSearchView();
+        // Override ServiceMode
         populateClientListHeaderView(view);
 
         View qrCode = view.findViewById(R.id.scan_qr_code);
@@ -308,6 +310,7 @@ public class KIbuSmartRegisterFragment extends BaseSmartRegisterFragment impleme
         queryBUilder.SelectInitiateMainTable(tableName, new String[]{
                 tableName + ".relationalid",
                 tableName + ".details",
+                // TODO change "zeir_id"
                 tableName + ".zeir_id",
                 tableName + ".relational_id",
                 tableName + ".first_name",
@@ -380,9 +383,11 @@ public class KIbuSmartRegisterFragment extends BaseSmartRegisterFragment impleme
         LinearLayout clientsHeaderLayout = (LinearLayout) view.findViewById(org.smartregister.R.id.clients_header_layout);
         clientsHeaderLayout.setVisibility(View.GONE);
 
-        LinearLayout headerLayout = (LinearLayout) getLayoutInflater(null).inflate(R.layout.smart_register_child_header, null);
+        LinearLayout headerLayout = (LinearLayout) getLayoutInflater(null).inflate(R.layout.smart_register_header, null);
         clientsView.addHeaderView(headerLayout);
         clientsView.setEmptyView(getActivity().findViewById(R.id.empty_view));
+
+//        clientsView.setVisibility(View.GONE);
 
     }
 

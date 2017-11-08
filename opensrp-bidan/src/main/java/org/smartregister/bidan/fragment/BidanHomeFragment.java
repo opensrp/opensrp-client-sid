@@ -156,11 +156,11 @@ public class BidanHomeFragment extends BaseSmartRegisterFragment implements Sync
     @Override
     protected void onResumption() {
         super.onResumption();
-        getDefaultOptionsProvider();
-        if (isPausedOrRefreshList()) {
-            initializeQueries();
-        }
-        updateSearchView();
+//        getDefaultOptionsProvider();
+//        if (isPausedOrRefreshList()) {
+//            initializeQueries();
+//        }
+//        updateSearchView();
         try {
             LoginActivity.setLanguage();
         } catch (Exception e) {
@@ -219,9 +219,9 @@ public class BidanHomeFragment extends BaseSmartRegisterFragment implements Sync
         clientsView.setVisibility(View.VISIBLE);
         clientsProgressView.setVisibility(View.INVISIBLE);
         setServiceModeViewDrawableRight(null);
-        initializeQueries();
-        updateSearchView();
-        populateClientListHeaderView(view);
+//        initializeQueries();
+//        updateSearchView();
+//        populateClientListHeaderView(view);
 
         View qrCode = view.findViewById(R.id.scan_qr_code);
         qrCode.setOnClickListener(clientActionHandler);
@@ -369,8 +369,8 @@ public class BidanHomeFragment extends BaseSmartRegisterFragment implements Sync
         LinearLayout clientsHeaderLayout = (LinearLayout) view.findViewById(org.smartregister.R.id.clients_header_layout);
         clientsHeaderLayout.setVisibility(View.GONE);
 
-        LinearLayout headerLayout = (LinearLayout) getLayoutInflater(null).inflate(R.layout.smart_register_child_header, null);
-        clientsView.addHeaderView(headerLayout);
+//        LinearLayout headerLayout = (LinearLayout) getLayoutInflater(null).inflate(R.layout.smart_register_child_header, null);
+//        clientsView.addHeaderView(headerLayout);
         clientsView.setEmptyView(getActivity().findViewById(R.id.empty_view));
 
     }
@@ -507,7 +507,6 @@ public class BidanHomeFragment extends BaseSmartRegisterFragment implements Sync
     private boolean filterMode() {
         return filterSection != null && filterSection.getTag() != null;
     }
-
 
     ////////////////////////////////////////////////////////////////
     // Inner classes

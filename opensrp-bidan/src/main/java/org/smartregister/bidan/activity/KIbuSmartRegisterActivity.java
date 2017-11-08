@@ -71,7 +71,8 @@ public class KIbuSmartRegisterActivity extends BaseRegisterActivity {
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
 
         mBaseFragment = new KIbuSmartRegisterFragment();
-        Fragment[] otherFragments = {new AdvancedSearchFragment()};
+//        Fragment[] otherFragments = {new AdvancedSearchFragment()};
+        Fragment[] otherFragments = {};
 
         // Instantiate a ViewPager and a PagerAdapter.
         mPagerAdapter = new BidanRegisterActivityPagerAdapter(getSupportFragmentManager(), mBaseFragment, otherFragments);

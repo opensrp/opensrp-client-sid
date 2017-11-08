@@ -12,7 +12,6 @@ import org.joda.time.DateTime;
 import org.json.JSONArray;
 import org.json.JSONObject;
 import org.smartregister.bidan.application.BidanApplication;
-import org.smartregister.bidan.application.VaccinatorApplication;
 import org.smartregister.clientandeventmodel.DateUtil;
 import org.smartregister.growthmonitoring.domain.Weight;
 import org.smartregister.growthmonitoring.repository.WeightRepository;
@@ -205,22 +204,21 @@ public class BidanClientProcessor extends ClientProcessor {
                 SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
                 Date date = simpleDateFormat.parse(contentValues.getAsString(VaccineRepository.DATE));
 
-                VaccineRepository vaccineRepository = VaccinatorApplication.getInstance().vaccineRepository();
-                Vaccine vaccineObj = new Vaccine();
-                vaccineObj.setBaseEntityId(contentValues.getAsString(VaccineRepository.BASE_ENTITY_ID));
-                vaccineObj.setName(contentValues.getAsString(VaccineRepository.NAME));
-                if (contentValues.containsKey(VaccineRepository.CALCULATION)) {
-                    vaccineObj.setCalculation(parseInt(contentValues.getAsString(VaccineRepository.CALCULATION)));
-                }
-                vaccineObj.setDate(date);
-                vaccineObj.setAnmId(contentValues.getAsString(VaccineRepository.ANMID));
-                vaccineObj.setLocationId(contentValues.getAsString(VaccineRepository.LOCATIONID));
-                vaccineObj.setSyncStatus(VaccineRepository.TYPE_Synced);
-                vaccineObj.setFormSubmissionId(vaccine.has(VaccineRepository.FORMSUBMISSION_ID) ? vaccine.getString(VaccineRepository.FORMSUBMISSION_ID) : null);
-                vaccineObj.setEventId(vaccine.getString("id")); //FIXME hard coded id
-                vaccineObj.setOutOfCatchment(outOfCatchment ? 1 : 0);
-
-                Utils.addVaccine(vaccineRepository, vaccineObj);
+//                VaccineRepository vaccineRepository = BidanApplication.getInstance().vaccineRepository();
+//                Vaccine vaccineObj = new Vaccine();
+//                vaccineObj.setBaseEntityId(contentValues.getAsString(VaccineRepository.BASE_ENTITY_ID));
+//                vaccineObj.setName(contentValues.getAsString(VaccineRepository.NAME));
+//                if (contentValues.containsKey(VaccineRepository.CALCULATION)) {
+//                    vaccineObj.setCalculation(parseInt(contentValues.getAsString(VaccineRepository.CALCULATION)));
+//                }
+//                vaccineObj.setDate(date);
+//                vaccineObj.setAnmId(contentValues.getAsString(VaccineRepository.ANMID));
+//                vaccineObj.setLocationId(contentValues.getAsString(VaccineRepository.LOCATIONID));
+//                vaccineObj.setSyncStatus(VaccineRepository.TYPE_Synced);
+//                vaccineObj.setFormSubmissionId(vaccine.has(VaccineRepository.FORMSUBMISSION_ID) ? vaccine.getString(VaccineRepository.FORMSUBMISSION_ID) : null);
+//                vaccineObj.setEventId(vaccine.getString("id")); //FIXME hard coded id
+//                vaccineObj.setOutOfCatchment(outOfCatchment ? 1 : 0);
+//                Utils.addVaccine(vaccineRepository, vaccineObj);
             }
             return true;
 
@@ -257,22 +255,20 @@ public class BidanClientProcessor extends ClientProcessor {
                     }
                 }
 
-                WeightRepository weightRepository = VaccinatorApplication.getInstance().weightRepository();
-                Weight weightObj = new Weight();
-                weightObj.setBaseEntityId(contentValues.getAsString(WeightRepository.BASE_ENTITY_ID));
-                if (contentValues.containsKey(WeightRepository.KG)) {
-                    weightObj.setKg(parseFloat(contentValues.getAsString(WeightRepository.KG)));
-                }
-                weightObj.setDate(date);
-                weightObj.setAnmId(contentValues.getAsString(WeightRepository.ANMID));
-                weightObj.setLocationId(contentValues.getAsString(WeightRepository.LOCATIONID));
-                weightObj.setSyncStatus(WeightRepository.TYPE_Synced);
-                weightObj.setFormSubmissionId(weight.has(WeightRepository.FORMSUBMISSION_ID) ? weight.getString(WeightRepository.FORMSUBMISSION_ID) : null);
-                weightObj.setEventId(weight.getString(PathConstants.ID));
-                weightObj.setOutOfCatchment(outOfCatchment ? 1 : 0);
-
-
-                weightRepository.add(weightObj);
+//                WeightRepository weightRepository = BidanApplication.getInstance().weightRepository();
+//                Weight weightObj = new Weight();
+//                weightObj.setBaseEntityId(contentValues.getAsString(WeightRepository.BASE_ENTITY_ID));
+//                if (contentValues.containsKey(WeightRepository.KG)) {
+//                    weightObj.setKg(parseFloat(contentValues.getAsString(WeightRepository.KG)));
+//                }
+//                weightObj.setDate(date);
+//                weightObj.setAnmId(contentValues.getAsString(WeightRepository.ANMID));
+//                weightObj.setLocationId(contentValues.getAsString(WeightRepository.LOCATIONID));
+//                weightObj.setSyncStatus(WeightRepository.TYPE_Synced);
+//                weightObj.setFormSubmissionId(weight.has(WeightRepository.FORMSUBMISSION_ID) ? weight.getString(WeightRepository.FORMSUBMISSION_ID) : null);
+//                weightObj.setEventId(weight.getString(PathConstants.ID));
+//                weightObj.setOutOfCatchment(outOfCatchment ? 1 : 0);
+//                weightRepository.add(weightObj);
             }
             return true;
 

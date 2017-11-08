@@ -42,6 +42,7 @@ import java.util.Map;
 import util.NetworkUtils;
 
 public class SyncIntentService extends IntentService {
+    private static final String TAG = SyncIntentService.class.getName();
     private static final String EVENTS_SYNC_PATH = "/rest/event/add";
     private static final String REPORTS_SYNC_PATH = "/rest/report/add";
     private static final String STOCK_Add_PATH = "/rest/stockresource/add/";
@@ -125,6 +126,7 @@ public class SyncIntentService extends IntentService {
         try {
             // Fetch locations
             String locations = Utils.getPreference(context, LocationPickerView.PREF_TEAM_LOCATIONS, "");
+            Log.e(TAG, "sync: "+ locations );
 
             if (StringUtils.isBlank(locations)) {
                 return FetchStatus.fetchedFailed;
@@ -133,7 +135,7 @@ public class SyncIntentService extends IntentService {
             pushToServer();
             FetchStatus formActionsFetctStatus = pullFormAndActionsFromServer(locations);
 
-            pullStockFromServer();
+//            pullStockFromServer();
 
             return formActionsFetctStatus;
         } catch (Exception e) {

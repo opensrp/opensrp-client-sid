@@ -18,7 +18,8 @@
             android:id="@+id/btn_back_to_home"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:layout_centerInParent="true">
+            android:layout_centerInParent="true"
+            tools:ignore="UseCompoundDrawables">
 
             <TextView
                 android:id="@+id/name_inits"
@@ -30,7 +31,8 @@
                 android:text="RW"
                 android:textAllCaps="true"
                 android:textColor="@color/actionbar"
-                android:textSize="25sp" />
+                android:textSize="25sp"
+                tools:ignore="HardcodedText" />
 
             <ImageView
                 android:id="@+id/back_button"
@@ -38,7 +40,8 @@
                 android:layout_height="match_parent"
                 android:gravity="center"
                 android:src="@drawable/abc_ic_ab_back_mtrl_am_alpha"
-                android:visibility="gone" />
+                android:visibility="gone"
+                tools:ignore="ContentDescription" />
         </LinearLayout>
 
         <ProgressBar
@@ -58,7 +61,8 @@
         android:background="@android:color/transparent"
         android:orientation="horizontal"
         android:paddingLeft="2.5dp"
-        android:visibility="visible">
+        android:visibility="visible"
+        tools:ignore="RelativeOverlap,RtlHardcoded,RtlSymmetry">
 
         <org.smartregister.view.customcontrols.CustomFontTextView
             android:id="@+id/txt_title_label"
@@ -69,7 +73,8 @@
             android:ellipsize="end"
             android:singleLine="true"
             android:maxWidth="@dimen/title_label_text_max_width"
-            android:text="APP"/>
+            android:text="APP"
+            tools:ignore="Deprecated,HardcodedText" />
 
         <org.smartregister.view.customcontrols.CustomFontTextView
             android:id="@+id/btn_report_month"
@@ -91,7 +96,8 @@
         android:gravity="center"
         android:paddingLeft="22dp"
         android:paddingRight="22dp"
-        android:src="@drawable/ic_icon_search" />
+        android:src="@drawable/ic_icon_search"
+        tools:ignore="ContentDescription,RtlHardcoded" />
 
     <ImageButton
         android:id="@+id/filter_selection"
@@ -102,7 +108,8 @@
         android:gravity="center"
         android:paddingLeft="22dp"
         android:paddingRight="22dp"
-        android:src="@drawable/ic_icon_bell" />
+        android:src="@drawable/ic_icon_bell"
+        tools:ignore="ContentDescription,RtlHardcoded" />
 
     <TextView
         android:id="@+id/filter_count"
@@ -115,14 +122,16 @@
         android:layout_marginTop="0dp"
         android:gravity="center"
         android:text="1"
-        android:textColor="@color/white" />
+        android:textColor="@color/white"
+        tools:ignore="HardcodedText,RtlHardcoded" />
 
     <ImageView
         android:layout_width="@dimen/smart_register_nav_bar_separator"
         android:layout_height="fill_parent"
         android:layout_toRightOf="@+id/filter_selection"
         android:scaleType="fitXY"
-        android:src="@drawable/separator" />
+        android:src="@drawable/separator"
+        tools:ignore="ContentDescription,RtlHardcoded" />
 
     <ImageButton
         android:id="@+id/register_client"
@@ -133,14 +142,16 @@
         android:gravity="center"
         android:paddingLeft="22dp"
         android:paddingRight="22dp"
-        android:src="@drawable/ic_icon_add" />
+        android:src="@drawable/ic_icon_add"
+        tools:ignore="ContentDescription,RtlHardcoded" />
 
     <ImageView
         android:layout_width="@dimen/smart_register_nav_bar_separator"
         android:layout_height="fill_parent"
         android:layout_toRightOf="@+id/register_client"
         android:scaleType="fitXY"
-        android:src="@drawable/separator" />
+        android:src="@drawable/separator"
+        tools:ignore="ContentDescription,RtlHardcoded" />
 
 
     <ImageButton
@@ -153,7 +164,8 @@
         android:paddingLeft="22dp"
         android:paddingRight="22dp"
         android:src="@drawable/ic_sort"
-        android:visibility="gone" />
+        android:visibility="gone"
+        tools:ignore="ContentDescription,RtlHardcoded" />
 
     <ImageView
         android:layout_width="@dimen/smart_register_nav_bar_separator"
@@ -161,7 +173,8 @@
         android:layout_toRightOf="@+id/sort_selection"
         android:scaleType="fitXY"
         android:src="@drawable/separator"
-        android:visibility="gone" />
+        android:visibility="gone"
+        tools:ignore="ContentDescription,RtlHardcoded" />
 
     <org.smartregister.bidan.view.LocationPickerView
         android:id="@+id/clinic_selection"
@@ -176,21 +189,24 @@
         android:maxWidth="@dimen/loc_picker_text_max_width"
         android:paddingLeft="5dp"
         android:paddingRight="5dp"
-        android:textSize="21sp" />
+        android:textSize="21sp"
+        tools:ignore="RtlHardcoded" />
 
     <ImageView
         android:layout_width="@dimen/smart_register_nav_bar_separator"
         android:layout_height="fill_parent"
         android:layout_toRightOf="@+id/clinic_selection"
         android:scaleType="fitXY"
-        android:src="@drawable/separator" />
+        android:src="@drawable/separator"
+        tools:ignore="ContentDescription,RtlHardcoded" />
 
     <ImageView
         android:layout_width="@dimen/smart_register_nav_bar_separator"
         android:layout_height="fill_parent"
         android:layout_toLeftOf="@+id/clinic_selection"
         android:scaleType="fitXY"
-        android:src="@drawable/separator" />
+        android:src="@drawable/separator"
+        tools:ignore="ContentDescription,RtlHardcoded" />
 
     <org.smartregister.view.customcontrols.CustomFontTextView
         android:id="@+id/service_mode_selection"
@@ -204,7 +220,8 @@
         android:paddingLeft="15dp"
         android:paddingRight="15dp"
         android:text="Linda Clinic"
-        android:visibility="gone" />
+        android:visibility="gone"
+        tools:ignore="HardcodedText,RtlHardcoded" />
 
     <ImageView
         android:layout_width="@dimen/smart_register_nav_bar_separator"
@@ -212,7 +229,8 @@
         android:layout_toRightOf="@+id/service_mode_selection"
         android:scaleType="fitXY"
         android:src="@drawable/separator"
-        android:visibility="gone" />
+        android:visibility="gone"
+        tools:ignore="ContentDescription,RtlHardcoded" />
 
     <ImageView
         android:layout_width="@dimen/smart_register_nav_bar_separator"
@@ -220,5 +238,6 @@
         android:layout_toLeftOf="@+id/service_mode_selection"
         android:scaleType="fitXY"
         android:src="@drawable/separator"
-        android:visibility="gone" />
+        android:visibility="gone"
+        tools:ignore="ContentDescription,RtlHardcoded" />
 </RelativeLayout>
