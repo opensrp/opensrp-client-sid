@@ -1,4 +1,4 @@
-package org.smartregister.bidan;
+package org.smartregister.vaksinator;
 
 import org.junit.Test;
 
