@@ -107,7 +107,7 @@ public class VaksinatorApplication extends DrishtiApplication {
         if(tableName.equals("ec_anak")){
             String[] ftsSearchFields =  { "namaBayi","tanggalLahirAnak" };
             return ftsSearchFields;
-        } else if (tableName.equals("ec_ibu")){
+        } else if (tableName.equals("ec_kartu_ibu")){
             String[] ftsSearchFields =  { "namalengkap", "namaSuami" };
             return ftsSearchFields;
         }
@@ -118,7 +118,7 @@ public class VaksinatorApplication extends DrishtiApplication {
         if(tableName.equals("ec_anak")){
             String[] sortFields = { "namaBayi","tanggalLahirAnak"};
             return sortFields;
-        } else if(tableName.equals("ec_ibu")){
+        } else if(tableName.equals("ec_kartu_ibu")){
             String[] sortFields = { "namalengkap", "namaSuami"};
             return sortFields;
         }
@@ -129,14 +129,14 @@ public class VaksinatorApplication extends DrishtiApplication {
         if(tableName.equals("ec_anak")){
             String[] mainConditions = {"is_closed", "details" , "namaBayi"};
             return mainConditions;
-        } else if(tableName.equals("ec_ibu")){
+        } else if(tableName.equals("ec_kartu_ibu")){
             String[] mainConditions = { "is_closed", "namalengkap"};
             return mainConditions;
         }
         return null;
     }
     private String[] getFtsTables(){
-        String[] ftsTables = { "ec_anak", "ec_ibu"};
+        String[] ftsTables = { "ec_anak", "ec_kartu_ibu"};
         return ftsTables;
     }
 

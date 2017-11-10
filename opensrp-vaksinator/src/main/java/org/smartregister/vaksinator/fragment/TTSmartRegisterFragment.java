@@ -203,13 +203,13 @@ public class TTSmartRegisterFragment extends SecuredNativeSmartRegisterCursorAda
    public void initializeQueries(String s){
        try {
            TTSmartClientsProvider kiscp = new TTSmartClientsProvider(getActivity(),clientActionHandler,context().alertService());
-           clientAdapter = new SmartRegisterPaginatedCursorAdapter(getActivity(), null, kiscp, new CommonRepository("ec_ibu",new String []{"ec_ibu.is_closed", "ec_ibu.namalengkap", "ec_ibu.namaSuami"}));
+           clientAdapter = new SmartRegisterPaginatedCursorAdapter(getActivity(), null, kiscp, new CommonRepository("ec_ibu",new String []{"ec_ibu.is_closed", "ec_kartu_ibu.namalengkap", "ec_kartu_ibu.namaSuami"}));
            clientsView.setAdapter(clientAdapter);
 
            setTablename("ec_ibu");
            SmartRegisterQueryBuilder countqueryBUilder = new SmartRegisterQueryBuilder();
            countqueryBUilder.SelectInitiateMainTableCounts("ec_ibu");
-           countqueryBUilder.customJoin("LEFT JOIN ec_ibu on ec_ibu.id = ec_ibu.id");
+           countqueryBUilder.customJoin("LEFT JOIN ec_kartu_ibu on ec_ibu.id = ec_ibu.id");
            if (s == null || s.equals("!")) {
                Log.e(TAG, "initializeQueries: "+"Not Initialized" );
                mainCondition = "ec_ibu.is_closed = 0 and pptest ='Positive' ";
@@ -223,8 +223,8 @@ public class TTSmartRegisterFragment extends SecuredNativeSmartRegisterCursorAda
            super.CountExecute();
 
            SmartRegisterQueryBuilder queryBUilder = new SmartRegisterQueryBuilder();
-           queryBUilder.SelectInitiateMainTable("ec_ibu", new String[]{"ec_ibu.relationalid","ec_ibu.is_closed", "ec_ibu.details",  "ec_ibu.namalengkap","ec_ibu.namaSuami"});
-           queryBUilder.customJoin("LEFT JOIN ec_ibu on ec_ibu.id = ec_ibu.id");
+           queryBUilder.SelectInitiateMainTable("ec_ibu", new String[]{"ec_ibu.relationalid","ec_ibu.is_closed", "ec_ibu.details",  "ec_kartu_ibu.namalengkap","ec_kartu_ibu.namaSuami"});
+           queryBUilder.customJoin("LEFT JOIN ec_ibu on ec_kartu_ibu.id = ec_ibu.id");
            mainSelect = queryBUilder.mainCondition(mainCondition);
            Sortqueries = KiSortByNameAZ();
 

@@ -268,7 +268,7 @@ public class ImageConfirmation extends Activity {
 
     public void showDetailUser(String selectedPersonName) {
 
-        AllCommonsRepository ibuRepository = org.smartregister.Context.getInstance().allCommonsRepositoryobjects("ec_ibu");
+        AllCommonsRepository ibuRepository = org.smartregister.Context.getInstance().allCommonsRepositoryobjects("ec_kartu_ibu");
         CommonPersonObject kiclient = ibuRepository.findByCaseID(selectedPersonName);
 
 //        Log.e(TAG, "onCreate: IbuRepo "+ibuRepository );
