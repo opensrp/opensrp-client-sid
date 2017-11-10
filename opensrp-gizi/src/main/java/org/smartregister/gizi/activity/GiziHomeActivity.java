@@ -76,31 +76,10 @@ public class GiziHomeActivity extends SecuredActivity {
             }
             updateRegisterCounts();
 
-          //  new Tools(context());
-//            Tools.download_images();
-         //   Tools.setVectorfromAPI(getApplicationContext());
-//            AllConstants.SLEEP_TIME = AllConstants.WAITING_TIME;
-//            Tools.setVectorsBuffered();
-         //   flagActivator();
         }
     };
 
-   /* private void flagActivator(){
-        new Thread(){
-            public void run(){
-                try{
-                    while(AllConstants.SLEEP_TIME>0){
-                        sleep(1000);
-                        if(AllConstants.IDLE)
-                            AllConstants.SLEEP_TIME-=1000;
-                    }
-                    Support.ONSYNC=false;
-                }catch (InterruptedException ie){
 
-                }
-            }
-        }.start();
-    }*/
 
     private Listener<String> onFormSubmittedListener = new Listener<String>() {
         @Override
@@ -157,15 +136,13 @@ public class GiziHomeActivity extends SecuredActivity {
 
     private void setupViews() {
         findViewById(R.id.btn_gizi_register).setOnClickListener(onRegisterStartListener);
-       // findViewById(R.id.btn_gizi_ibu_register).setOnClickListener(onRegisterStartListener);
-        // findViewById(R.id.btn_test2_register).setOnClickListener(onRegisterStartListener);
-        // findViewById(R.id.btn_tt_register).setVisibility(View.INVISIBLE);
+
 
         findViewById(R.id.btn_reporting).setOnClickListener(onButtonsClickListener);
-//        findViewById(R.id.btn_videos).setOnClickListener(onButtonsClickListener);
+
 
         anakRegisterClientCountView = (TextView) findViewById(R.id.txt_child_register_client_count);
-      //  ibuRegisterClientCountView = (TextView) findViewById(R.id.txt_mother_register_client_count);
+
 
     }
 
@@ -181,8 +158,7 @@ public class GiziHomeActivity extends SecuredActivity {
         getSupportActionBar().setDisplayUseLogoEnabled(true);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
         LoginActivity.setLanguage();
-//        getActionBar().setBackgroundDrawable(getReso
-// urces().getDrawable(R.color.action_bar_background));
+
     }
 
     @Override
@@ -195,10 +171,7 @@ public class GiziHomeActivity extends SecuredActivity {
        // initFR();
     }
 
-   /* private void initFR() {
-        new Tools(context());
-        Log.e("TAG", "initFR: "+ Tools.getAppContext() );
-    }*/
+
 
     private void updateRegisterCounts() {
         NativeUpdateANMDetailsTask task = new NativeUpdateANMDetailsTask(Context.getInstance().anmController());
@@ -219,18 +192,7 @@ public class GiziHomeActivity extends SecuredActivity {
 
         anakRegisterClientCountView.setText(valueOf(childcount));
 
-      /*  Cursor ibucountcursor = context().commonrepository("ec_ibu").rawCustomQueryForAdapter(sqb.queryForCountOnRegisters("ec_ibu", "ec_ibu.is_closed=0 and ec_ibu.pptest ='Positive'"));
-        ibucountcursor.moveToFirst();
-        ibucount = ibucountcursor.getInt(0);
-        ibucountcursor.close();
 
-        ibuRegisterClientCountView.setText(valueOf(ibucount));*/
-
-       /* CommonPersonObjectController hhcontroller = new CommonPersonObjectController(context.allCommonsRepositoryobjects("anak"),
-                context.allBeneficiaries(), context.listCache(),
-                context.personObjectClientsCache(),"nama_bayi","anak","tanggal_lahir", CommonPersonObjectController.ByColumnAndByDetails.byDetails);
-
-        anakRegisterClientCountView.setText(valueOf(hhcontroller.getClients("form_ditutup","true").size()));*/
     }
 
     @Override
@@ -288,8 +250,7 @@ public class GiziHomeActivity extends SecuredActivity {
         Map<String, TreeNode<String, Location>> locationMap =
                 locationTree.getLocationsHierarchy();
 
-     /*   if (LoginActivity.generator.uniqueIdController().needToRefillUniqueId(LoginActivity.generator.UNIQUE_ID_LIMIT))  // unique id part
-            LoginActivity.generator.requestUniqueId();     */                                                             // unique id part
+
     }
 
     @Override
@@ -334,21 +295,7 @@ public class GiziHomeActivity extends SecuredActivity {
                     navigationController.startChildSmartRegistry();
                     break;
 
-              /*  case R.id.btn_gizi_ibu_register:
-                    navigationController.startANCSmartRegistry();
-                    break;*/
-/*
-                case R.id.btn_pnc_register:
-//                    navigationController.startPNCSmartRegistry();
-                    break;
 
-                case R.id.btn_child_register:
-//                    navigationController.startChildSmartRegistry();
-                    break;
-
-                case R.id.btn_fp_register:
-                 //   navigationController.startFPSmartRegistry();
-                    break; */
 
             }
             String HomeEnd = timer.format(new Date());

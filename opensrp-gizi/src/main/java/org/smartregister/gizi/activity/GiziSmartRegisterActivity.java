@@ -178,8 +178,14 @@ public class GiziSmartRegisterActivity extends SecuredNativeSmartRegisterActivit
             switchToBaseFragment(formSubmission); // Unnecessary!! passing on data
 
             if(formName.equals("registrasi_gizi")) {
-            //    saveuniqueid();
+                Log.d(TAG, "saveFormSubmission: it was registrasi_jurim form");
+                //  FieldOverrides fieldOverrides = new FieldOverrides(combined.toString());
+
+                fieldOverrides.put("ibuCaseId",submission.entityId());
+                FieldOverrides fo = new FieldOverrides(fieldOverrides.toString());
+                activatingForm("registrasi_anak", null, fo.getJSONString());
             }
+
             //end capture flurry log for FS
             String end = timer.format(new Date());
             Map<String, String> FS = new HashMap<String, String>();
@@ -193,6 +199,8 @@ public class GiziSmartRegisterActivity extends SecuredNativeSmartRegisterActivit
             }
             e.printStackTrace();
         }
+
+       
 
     }
 
@@ -248,30 +256,8 @@ public class GiziSmartRegisterActivity extends SecuredNativeSmartRegisterActivit
         FS.put("start", start);
         FlurryAgent.logEvent(formName, FS, true);
 
-        /*if(formName.equals("kunjungan_gizi")) {
-            if(getNumOfChild()<4)
-                activatingForm(formName,entityId,metaData);
-            else {
-                final int choice = new java.util.Random().nextInt(3);
-                CharSequence[] selections = selections(choice, entityId);
-
-                final AlertDialog.Builder builder = new AlertDialog.Builder(GiziSmartRegisterActivity.this);
-                builder.setTitle(context().getStringResource(R.string.reconfirmChildName));
-                builder.setItems(selections, new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        // the user clicked on colors[which]
-                        if (which == choice) {
-                            activatingForm(formName, entityId, metaData);
-                        }
-                    }
-                });
-                builder.show();
-            }
-        }
-        else{*/
             activatingForm(formName,entityId,metaData);
-        //}
+
     }
 
     private void activatingForm(String formName, String entityId, String metaData){
