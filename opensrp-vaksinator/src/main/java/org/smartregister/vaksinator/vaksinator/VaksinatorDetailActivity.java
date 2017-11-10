@@ -59,7 +59,7 @@ public class VaksinatorDetailActivity extends Activity {
         AllCommonsRepository childRepository = org.smartregister.Context.getInstance().allCommonsRepositoryobjects("ec_anak");
         final CommonPersonObject controllers = childRepository.findByCaseID(controller.entityId());
 
-        AllCommonsRepository kirep = org.smartregister.Context.getInstance().allCommonsRepositoryobjects("ec_ibu");
+        AllCommonsRepository kirep = org.smartregister.Context.getInstance().allCommonsRepositoryobjects("ec_kartu_ibu");
         final CommonPersonObject kiparent = kirep.findByCaseID(Support.getColumnmaps(controllers, "relational_id"));
 
         String DetailStart = timer.format(new Date());
