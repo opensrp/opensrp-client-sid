@@ -16,6 +16,7 @@ import com.flurry.android.FlurryAgent;
 import org.smartregister.cursoradapter.SmartRegisterQueryBuilder;
 import org.smartregister.domain.form.FieldOverrides;
 import org.smartregister.domain.form.FormSubmission;
+import org.smartregister.enketo.listener.DisplayFormListener;
 import org.smartregister.provider.SmartRegisterClientsProvider;
 import org.smartregister.service.ZiggyService;
 import org.smartregister.sync.ClientProcessor;
@@ -28,7 +29,7 @@ import org.smartregister.view.activity.SecuredNativeSmartRegisterActivity;
 import org.smartregister.view.dialog.DialogOption;
 import org.smartregister.view.dialog.LocationSelectorDialogFragment;
 import org.smartregister.view.dialog.OpenFormOption;
-import org.smartregister.view.fragment.DisplayFormFragment;
+import org.smartregister.enketo.view.fragment.DisplayFormFragment;
 import org.smartregister.view.fragment.SecuredNativeSmartRegisterFragment;
 import org.smartregister.view.viewpager.OpenSRPViewPager;
 import org.json.JSONException;
@@ -49,7 +50,7 @@ import util.formula.Support;
 //import org.smartregister.test.fragment.HouseHoldSmartRegisterFragment;
 
 public class VaksinatorSmartRegisterActivity extends SecuredNativeSmartRegisterActivity implements
-        LocationSelectorDialogFragment.OnLocationSelectedListener{
+        LocationSelectorDialogFragment.OnLocationSelectedListener, DisplayFormListener {
     SimpleDateFormat timer = new SimpleDateFormat("hh:mm:ss");
 
     public static final String TAG = "Vaksinator";
@@ -320,6 +321,7 @@ public class VaksinatorSmartRegisterActivity extends SecuredNativeSmartRegisterA
                 if (displayFormFragment != null) {
                     displayFormFragment.setFormData(data);
                     displayFormFragment.setRecordId(entityId);
+                    displayFormFragment.setListener(this);
                     displayFormFragment.setFieldOverides(metaData);
                 }
             }

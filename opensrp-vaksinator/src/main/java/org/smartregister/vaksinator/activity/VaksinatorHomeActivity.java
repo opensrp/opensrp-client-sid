@@ -33,7 +33,7 @@ import org.smartregister.view.activity.SecuredActivity;
 import org.smartregister.view.contract.HomeContext;
 import org.smartregister.view.controller.NativeAfterANMDetailsFetchListener;
 import org.smartregister.view.controller.NativeUpdateANMDetailsTask;
-import org.smartregister.view.fragment.DisplayFormFragment;
+import org.smartregister.enketo.view.fragment.DisplayFormFragment;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;

@@ -25,7 +25,7 @@ import org.smartregister.vaksinator.vaksinator.FlurryFacade;
 import org.smartregister.view.activity.SecuredNativeSmartRegisterActivity;
 import org.smartregister.view.dialog.DialogOption;
 import org.smartregister.view.dialog.LocationSelectorDialogFragment;
-import org.smartregister.view.fragment.DisplayFormFragment;
+import org.smartregister.enketo.view.fragment.DisplayFormFragment;
 import org.smartregister.view.fragment.SecuredNativeSmartRegisterFragment;
 import org.smartregister.view.viewpager.OpenSRPViewPager;
 import org.json.JSONException;
