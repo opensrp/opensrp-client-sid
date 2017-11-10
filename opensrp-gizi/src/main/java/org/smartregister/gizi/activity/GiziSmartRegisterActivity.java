@@ -44,6 +44,7 @@ import java.util.Map;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
+import util.VaksinatorFormUtils;
 import util.formula.Support;
 
 public class GiziSmartRegisterActivity extends SecuredNativeSmartRegisterActivity implements
@@ -168,7 +169,8 @@ public class GiziSmartRegisterActivity extends SecuredNativeSmartRegisterActivit
         Log.v("fieldoverride", fieldOverrides.toString());
         // save the form
         try{
-            FormUtils formUtils = FormUtils.getInstance(getApplicationContext());
+            VaksinatorFormUtils formUtils = VaksinatorFormUtils.getInstance(getApplicationContext());
+          //  FormUtils formUtils = FormUtils.getInstance(getApplicationContext());
             FormSubmission submission = formUtils.generateFormSubmisionFromXMLString(id, formSubmission, formName, fieldOverrides);
 
             ClientProcessor.getInstance(getApplicationContext()).processClient();
@@ -177,13 +179,15 @@ public class GiziSmartRegisterActivity extends SecuredNativeSmartRegisterActivit
             context().formSubmissionRouter().handleSubmission(submission, formName);
             switchToBaseFragment(formSubmission); // Unnecessary!! passing on data
 
-            if(formName.equals("registrasi_gizi")) {
-                Log.d(TAG, "saveFormSubmission: it was registrasi_jurim form");
+            if(formName.equals("registrasi_ibu")) {
+                Log.d(TAG, "saveFormSubmission: it was registrasi_ibu form");
                 //  FieldOverrides fieldOverrides = new FieldOverrides(combined.toString());
 
                 fieldOverrides.put("ibuCaseId",submission.entityId());
                 FieldOverrides fo = new FieldOverrides(fieldOverrides.toString());
-                activatingForm("registrasi_anak", null, fo.getJSONString());
+
+                activatingOtherForm("registrasi_anak", null, fo.getJSONString());
+        ///        activatingForm("registrasi_anak", null, fo.getJSONString());
             }
 
             //end capture flurry log for FS
@@ -203,6 +207,26 @@ public class GiziSmartRegisterActivity extends SecuredNativeSmartRegisterActivit
        
 
     }
+
+    public void activatingOtherForm(final String formName, final String entityId, final String metaData){
+               final int prevPageIndex = currentPage;
+                runOnUiThread(new Runnable() {
+             @Override
+             public void run() {
+                                //hack reset the form
+                                        DisplayFormFragment displayFormFragment = getDisplayFormFragmentAtIndex(prevPageIndex);
+                               if (displayFormFragment != null) {
+                                        displayFormFragment.hideTranslucentProgressDialog();
+                                        displayFormFragment.setFormData(null);
+
+                                            }
+
+                                displayFormFragment.setRecordId(null);
+                                activatingForm(formName,entityId,metaData);
+                            }
+         });
+
+                    }
 
     @Override
     public void OnLocationSelected(String locationJSONString) {
@@ -227,7 +251,7 @@ public class GiziSmartRegisterActivity extends SecuredNativeSmartRegisterActivit
 
         if (combined != null) {
             FieldOverrides fieldOverrides = new FieldOverrides(combined.toString());
-            startFormActivity("registrasi_gizi", null, fieldOverrides.getJSONString());
+            startFormActivity("registrasi_ibu", null, fieldOverrides.getJSONString());
         }
     }
 
@@ -262,12 +286,13 @@ public class GiziSmartRegisterActivity extends SecuredNativeSmartRegisterActivit
 
     private void activatingForm(String formName, String entityId, String metaData){
         try {
-            int formIndex = FormUtils.getIndexForFormName(formName, formNames) + 1; // add the offset
+            int formIndex = VaksinatorFormUtils.getIndexForFormName(formName, formNames) + 1; // add the offset
             if (entityId != null || metaData != null){
                 String data = null;
+                //check if there is previously saved data for the form
                 data = getPreviouslySavedDataForForm(formName, metaData, entityId);
                 if (data == null){
-                    data = FormUtils.getInstance(getApplicationContext()).generateXMLInputForFormWithEntityId(entityId, formName, metaData);
+                    data = VaksinatorFormUtils.getInstance(getApplicationContext()).generateXMLInputForFormWithEntityId(entityId, formName, metaData);
                 }
 
                 DisplayFormFragment displayFormFragment = getDisplayFormFragmentAtIndex(formIndex);
@@ -371,8 +396,12 @@ public class GiziSmartRegisterActivity extends SecuredNativeSmartRegisterActivit
     private String[] buildFormNameList(){
         List<String> formNames = new ArrayList<String>();
         formNames.add("registrasi_gizi");
+        formNames.add("registrasi_ibu");
+        formNames.add("registrasi_anak");
         formNames.add("kunjungan_gizi");
         formNames.add("close_form");
+
+        formNames.add("kartu_ibu_registration");
         return formNames.toArray(new String[formNames.size()]);
     }
 
