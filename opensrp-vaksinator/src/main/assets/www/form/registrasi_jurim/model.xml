@@ -31,17 +31,6 @@
     <nik openmrs_entity="person_identifier" openmrs_entity_id="nik"/>
     <umur openmrs_entity="concept" openmrs_entity_id="1532AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA">0</umur>
     <jenis_kontrasepsi openmrs_entity="concept" openmrs_entity_id="374AAAAAAAAAAAAAAAAAAAAAAAAAAAAA">0</jenis_kontrasepsi>
-    <child_registration openmrs_entity="person" openmrs_entity_id="Child Registration">
-      <desa_anak openmrs_entity="Concept" openmrs_entity_id="160632AAAAAAAAAAAAAAAAAAAAAAAAAA" openmrs_entity_parent="cityVillage"/>
-      <generated_note_name_45/>
-      <generated_note_name_46/>
-      <child_existing_location openmrs_entity="encounter" openmrs_entity_id="location_id"/>
-      <nama_bayi openmrs_entity="Concept" openmrs_entity_id="1586AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"/>
-      <jenis_kelamin openmrs_entity="person" openmrs_entity_id="gender"/>
-      <tanggal_lahir openmrs_entity="person" openmrs_entity_id="birthdate"/>
-      <berat_badan_saat_lahir openmrs_entity="concept" openmrs_entity_id="5916AAAAAAAAAAAAAAAAAAAAAAAAAAAA"/>
-      <ibu_entity_id openmrs_entity="person_relationship" openmrs_entity_id="ibuCaseId"/>
-    </child_registration>
     <end openmrs_entity="encounter" openmrs_entity_id="encounter_end"/>
     <meta>
       <instanceID/>

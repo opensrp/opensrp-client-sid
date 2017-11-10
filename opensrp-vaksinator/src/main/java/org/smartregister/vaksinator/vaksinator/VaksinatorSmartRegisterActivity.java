@@ -13,6 +13,7 @@ import android.widget.Toast;
 
 import com.flurry.android.FlurryAgent;
 
+import org.json.XML;
 import org.smartregister.cursoradapter.SmartRegisterQueryBuilder;
 import org.smartregister.domain.form.FieldOverrides;
 import org.smartregister.domain.form.FormSubmission;
@@ -25,6 +26,7 @@ import org.smartregister.vaksinator.activity.LoginActivity;
 import org.smartregister.vaksinator.R;
 import org.smartregister.vaksinator.fragment.VaksinatorSmartRegisterFragment;
 import org.smartregister.vaksinator.pageradapter.BaseRegisterActivityPagerAdapter;
+import org.smartregister.vaksinator.service.SaveService;
 import org.smartregister.view.activity.SecuredNativeSmartRegisterActivity;
 import org.smartregister.view.dialog.DialogOption;
 import org.smartregister.view.dialog.LocationSelectorDialogFragment;
@@ -37,6 +39,7 @@ import org.json.JSONObject;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Iterator;
@@ -46,6 +49,7 @@ import java.util.Map;
 import butterknife.Bind;
 import butterknife.ButterKnife;
 import util.formula.Support;
+import util.VaksinatorFormUtils;
 
 //import org.smartregister.test.fragment.HouseHoldSmartRegisterFragment;
 
@@ -64,6 +68,7 @@ public class VaksinatorSmartRegisterActivity extends SecuredNativeSmartRegisterA
 
 
     ZiggyService ziggyService;
+    SaveService saveService;
 
     VaksinatorSmartRegisterFragment nf = new VaksinatorSmartRegisterFragment();
 
@@ -136,6 +141,8 @@ public class VaksinatorSmartRegisterActivity extends SecuredNativeSmartRegisterA
 //        }
 
         ziggyService = context().ziggyService();
+        saveService = new SaveService(context().ziggyFileLoader(), context().formDataRepository(),
+                context().formSubmissionRouter());
     }
     public void onPageChanged(int page){
         setRequestedOrientation(page == 0 ? ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE : ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
@@ -172,39 +179,15 @@ public class VaksinatorSmartRegisterActivity extends SecuredNativeSmartRegisterA
         };
     }
 
-
-    /*@Override
-    public void saveFormSubmission(String formSubmission, String id, String formName, JSONObject fieldOverrides){
-        Log.v("fieldoverride", fieldOverrides.toString());
-        // save the form
-        try{
-            FormUtils formUtils = FormUtils.getInstance(getApplicationContext());
-            FormSubmission submission = formUtils.generateFormSubmisionFromXMLString(id, formSubmission, formName, fieldOverrides);
-
-            ziggyService.saveForm(getParams(submission), submission.instance());
-
-            context.formSubmissionService().updateFTSsearch(submission);
-
-            //switch to forms list fragment
-            switchToBaseFragment(formSubmission); // Unnecessary!! passing on data
-
-        }catch (Exception e){
-            // TODO: show error dialog on the formfragment if the submission fails
-            DisplayFormFragment displayFormFragment = getDisplayFormFragmentAtIndex(currentPage);
-            if (displayFormFragment != null) {
-                displayFormFragment.hideTranslucentProgressDialog();
-            }
-            e.printStackTrace();
-        }
-    }*/
     @Override
     public void saveFormSubmission(String formSubmission, String id, String formName, JSONObject fieldOverrides){
         Log.v("fieldoverride", fieldOverrides.toString());
         // save the form
+        Log.d(TAG, "saveFormSubmission: saving form");
         try{
-            FormUtils formUtils = FormUtils.getInstance(getApplicationContext());
+            VaksinatorFormUtils formUtils = VaksinatorFormUtils.getInstance(getApplicationContext());
             FormSubmission submission = formUtils.generateFormSubmisionFromXMLString(id, formSubmission, formName, fieldOverrides);
-            ziggyService.saveForm(getParams(submission), submission.instance());
+            saveService.saveForm(getParams(submission), submission.instance());
             ClientProcessor.getInstance(getApplicationContext()).processClient();
 
             context().formSubmissionService().updateFTSsearch(submission);
@@ -215,10 +198,18 @@ public class VaksinatorSmartRegisterActivity extends SecuredNativeSmartRegisterA
 //                saveuniqueid();
 //            }
 
-            switchToBaseFragment(formSubmission); // Unnecessary!! passing on data
+            if(formName=="registrasi_jurim"){
+                Log.d(TAG, "saveFormSubmission: it was registrasi_jurim form");
+                fieldOverrides.put("ibuCaseId",submission.entityId());
+                FieldOverrides fo = new FieldOverrides(fieldOverrides.toString());
+                activatingOtherForm("registrasi_anak", null, fo.getJSONString());
+            }else{
+                switchToBaseFragment(formSubmission); // Unnecessary!! passing on data
+            }
 
         }catch (Exception e){
             // TODO: show error dialog on the formfragment if the submission fails
+            Log.d(TAG, "saveFormSubmission: error saving form");
             DisplayFormFragment displayFormFragment = getDisplayFormFragmentAtIndex(currentPage);
             if (displayFormFragment != null) {
                 displayFormFragment.hideTranslucentProgressDialog();
@@ -308,13 +299,13 @@ public class VaksinatorSmartRegisterActivity extends SecuredNativeSmartRegisterA
 
     private void activatingForm(String formName, String entityId, String metaData){
         try {
-            int formIndex = FormUtils.getIndexForFormName(formName, formNames) + 1; // add the offset
+            int formIndex = VaksinatorFormUtils.getIndexForFormName(formName, formNames) + 1; // add the offset
             if (entityId != null || metaData != null){
                 String data = null;
                 //check if there is previously saved data for the form
                 data = getPreviouslySavedDataForForm(formName, metaData, entityId);
                 if (data == null){
-                    data = FormUtils.getInstance(getApplicationContext()).generateXMLInputForFormWithEntityId(entityId, formName, metaData);
+                    data = VaksinatorFormUtils.getInstance(getApplicationContext()).generateXMLInputForFormWithEntityId(entityId, formName, metaData);
                 }
 
                 DisplayFormFragment displayFormFragment = getDisplayFormFragmentAtIndex(formIndex);
@@ -392,6 +383,26 @@ public class VaksinatorSmartRegisterActivity extends SecuredNativeSmartRegisterA
 
     }
 
+    public void activatingOtherForm(final String formName, final String entityId, final String metaData){
+        final int prevPageIndex = currentPage;
+        runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                //hack reset the form
+                DisplayFormFragment displayFormFragment = getDisplayFormFragmentAtIndex(prevPageIndex);
+                if (displayFormFragment != null) {
+                    displayFormFragment.hideTranslucentProgressDialog();
+                    displayFormFragment.setFormData(null);
+
+                }
+
+                displayFormFragment.setRecordId(null);
+                activatingForm(formName,entityId,metaData);
+            }
+        });
+
+    }
+
 
     public android.support.v4.app.Fragment findFragmentByPosition(int position) {
         FragmentPagerAdapter fragmentPagerAdapter = mPagerAdapter;
@@ -415,6 +426,7 @@ public class VaksinatorSmartRegisterActivity extends SecuredNativeSmartRegisterA
     private String[] buildFormNameList(){
         List<String> formNames = new ArrayList<String>();
         formNames.add("registrasi_jurim");
+        formNames.add("registrasi_anak");
        formNames.add("close_form");
         formNames.add("kohort_bayi_immunization");
 //        DialogOption[] options = getEditOptions();

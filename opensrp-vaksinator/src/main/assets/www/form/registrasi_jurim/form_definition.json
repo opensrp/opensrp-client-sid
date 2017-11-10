@@ -115,63 +115,6 @@
         "name": "submissionDate",
         "bind": "/model/instance/registrasi_vaksinator/today"
       }
-    ],
-    "sub_forms": [
-      {
-        "name": "child_registration",
-        "bind_type": "anak",
-        "ec_bind_type": "ec_anak",
-        "default_bind_path": "/model/instance/registrasi_vaksinator/child_registration/",
-        "fields": [
-          {
-            "name": "id",
-            "shouldLoadValue": true
-          },
-
-          {
-            "name": "relationalid",
-            "shouldLoadValue": true
-          },
-          {
-            "name": "injectedBaseEntityId",
-            "shouldLoadValue": true
-          },
-          {
-            "name": "ibu_entity_id",
-            "source": "kartu_ibu.id",
-            "shouldLoadValue": true
-          },
-          {
-            "name": "unique_id",
-            "bind": "/model/instance/registrasi_vaksinator/unique_id",
-            "shouldLoadValue": true
-          },
-          {
-            "name": "namaBayi",
-            "bind": "/model/instance/registrasi_vaksinator/child_registration/nama_bayi"
-          },
-          {
-            "name": "jenisKelamin",
-            "bind": "/model/instance/registrasi_vaksinator/child_registration/jenis_kelamin"
-          },
-          {
-            "name": "tanggalLahirAnak",
-            "bind": "/model/instance/registrasi_vaksinator/child_registration/tanggal_lahir"
-          },
-          {
-            "name": "desa_anak",
-            "bind": "/model/instance/registrasi_vaksinator/child_registration/desa_anak"
-          },
-          {
-            "name": "child_existing_location",
-            "bind": "/model/instance/registrasi_vaksinator/child_registration/child_existing_location"
-          },
-          {
-            "name": "beratLahir",
-            "bind": "/model/instance/registrasi_vaksinator/child_registration/berat_badan_saat_lahir"
-          }
-        ]
-      }
     ]
   }
 }
