@@ -1,6 +1,7 @@
 package org.smartregister.vaksinator.activity;
 
 import android.database.Cursor;
+import android.os.StrictMode;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -24,11 +25,9 @@ import org.smartregister.service.PendingFormSubmissionService;
 import org.smartregister.sync.SyncAfterFetchListener;
 import org.smartregister.sync.SyncProgressIndicator;
 import org.smartregister.sync.UpdateActionsTask;
-import org.smartregister.vaksinator.NavigationControllerINA;
+import org.smartregister.vaksinator.controller.VaksinatorNavigationController;
 import org.smartregister.vaksinator.R;
-import org.smartregister.vaksinator.face.camera.util.Tools;
-import org.smartregister.vaksinator.lib.FlurryFacade;
-import org.smartregister.vaksinator.util.AllConstantsINA;
+import org.smartregister.vaksinator.utils.AllConstantsINA;
 import org.smartregister.view.activity.SecuredActivity;
 import org.smartregister.view.contract.HomeContext;
 import org.smartregister.view.controller.NativeAfterANMDetailsFetchListener;
@@ -82,7 +81,7 @@ public class VaksinatorHomeActivity extends SecuredActivity {
             }
             updateRegisterCounts();
 
-            new Tools(context());
+//            new Tools(context());
 //            Tools.download_images();
 //            Tools.setVectorfromAPI(getApplicationContext());
 //            Tools.setVectorsBuffered();
@@ -143,12 +142,23 @@ public class VaksinatorHomeActivity extends SecuredActivity {
 
         setContentView(R.layout.smart_registers_jurim_home);
 
-        navigationController = new NavigationControllerINA(this, anmController, context());
+        navigationController = new VaksinatorNavigationController(this, anmController, context());
         setupViews();
         initialize();
 
         DisplayFormFragment.formInputErrorMessage = getResources().getString(R.string.forminputerror);
         DisplayFormFragment.okMessage = getResources().getString(R.string.okforminputerror);
+
+        // Require for okhttp
+        int SDK_INT = android.os.Build.VERSION.SDK_INT;
+        if (SDK_INT > 8)
+        {
+            StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder()
+                    .permitAll().build();
+            StrictMode.setThreadPolicy(policy);
+            //your codes here
+
+        }
 
     }
 
@@ -188,11 +198,11 @@ public class VaksinatorHomeActivity extends SecuredActivity {
         updateRegisterCounts();
         updateSyncIndicator();
         updateRemainingFormsToSyncCount();
-        initFR();
+//        initFR();
     }
 
     private void initFR() {
-        new Tools(context());
+//        new Tools(context());
     }
 
     private void updateRegisterCounts() {
@@ -207,7 +217,7 @@ public class VaksinatorHomeActivity extends SecuredActivity {
 
     private void updateRegisterCounts(HomeContext homeContext) {
         SmartRegisterQueryBuilder sqb = new SmartRegisterQueryBuilder();
-        Cursor childcountcursor = context().commonrepository("ec_anak").rawCustomQueryForAdapter(sqb.queryForCountOnRegisters("ec_anak", "ec_anak.is_closed=0"));
+        Cursor childcountcursor = context().commonrepository("ec_anak").rawCustomQueryForAdapter(sqb.queryForCountOnRegisters("ec_anak_search", "ec_anak_search.is_closed=0"));
         childcountcursor.moveToFirst();
         childcount = childcountcursor.getInt(0);
         childcountcursor.close();
@@ -287,18 +297,69 @@ public class VaksinatorHomeActivity extends SecuredActivity {
 //
 //        Map<String, TreeNode<String, Location>> locationMap =
 //                locationTree.getLocationsHierarchy();
-        String query  = "INSERT INTO ec_anak VALUES('1','2','xx',0,'asdf','zxxv','',3200,'bayi','2017-02-02')";
+
+
+//        String query  = "INSERT INTO ec_anak VALUES('1','2','xx',0,'asdf','zxxv','',3200,'bayi','2017-02-02')";
+
+//        Cursor x = context().initRepository().getWritableDatabase().rawQuery("SELECT COUNT(*) FROM ec_anak  WHERE ec_anak.id IN ()", null);
+//        x.moveToFirst();
+//        Log.d("testanak", "itung(*): " + x.getCount());
+//        String a ="";
+//        for(String str: x.getColumnNames())
+//            a=a+", "+str;
+//        Log.d("testanak", "getColumnNames: " + a);
+
+
+        String query  = "SELECT name FROM sqlite_master WHERE type='table'";
         String db = context().initRepository().getWritableDatabase().getPath();
-        context().initRepository().getWritableDatabase().execSQL(query);
-        Log.d("testanak", "db: "+db);
-        Cursor childcountcursor = context().commonrepository("ec_anak").rawCustomQueryForAdapter("SELECT * FROM ec_anak");
-        childcountcursor.moveToFirst();
-        Log.d("testanak", "getCount: "+childcountcursor.getCount());
-        Log.d("testanak", "getColumnCount: "+childcountcursor.getColumnCount());
-        String output ="";
-        for(String str: childcountcursor.getColumnNames())
-            output=output+", "+str;
-        Log.d("testanak", "getColumnNames: "+output);
+        Cursor dbs = context().initRepository().getWritableDatabase().rawQuery(query, null);
+        Log.d("testanak", "db: " + db);
+        if (dbs.moveToFirst()){
+            do{
+                String data = dbs.getString(dbs.getColumnIndex("name"));
+                Log.d("testanak", "table name: " + data);
+                Cursor temp = context().initRepository().getWritableDatabase().rawQuery("SELECT * FROM "+data, null);
+                temp.moveToFirst();
+                Log.d("testanak", data+": " + temp.getCount());
+                String output ="";
+                for(String str: temp.getColumnNames())
+                    output=output+", "+str;
+                Log.d("testanak", "getColumnNames: " + output);
+                String output2 ="";
+                if(temp.getCount()>0){
+                    if (temp.moveToFirst()){
+                        do{
+                            for(String d:temp.getColumnNames()){
+                                String value = "";
+                                if(d!=""){
+                                    if(temp.getType(temp.getColumnIndex(d))== temp.FIELD_TYPE_BLOB){
+                                        value = "blob";
+                                    }else{
+                                        value = temp.getString(temp.getColumnIndex(d));
+                                    }
+                                }
+                                output2=output2+", "+value;
+                            }
+                        }while(temp.moveToNext());
+                    }
+                    Log.d("testanak", "getColumnNames: " + output2);
+                }
+
+                temp.close();
+            }while(dbs.moveToNext());
+        }
+        Log.d("testanak", "getCount: " + dbs.getCount());
+        dbs.close();
+
+
+//        Cursor childcountcursor = context().commonrepository("ec_anak").rawCustomQueryForAdapter("SELECT * FROM ec_anak");
+//        childcountcursor.moveToFirst();
+//        Log.d("testanak", "getCount: "+childcountcursor.getCount());
+//        Log.d("testanak", "getColumnCount: "+childcountcursor.getColumnCount());
+//        String output ="";
+//        for(String str: childcountcursor.getColumnNames())
+//            output=output+", "+str;
+//        Log.d("testanak", "getColumnNames: "+output);
     }
 
     @Override
@@ -340,24 +401,12 @@ public class VaksinatorHomeActivity extends SecuredActivity {
         public void onClick(View view) {
             switch (view.getId()) {
                 case R.id.btn_vaksinator_register:
-                    navigationController.startECSmartRegistry();
+                    navigationController.startChildSmartRegistry();
                     break;
 
                 case R.id.btn_TT_vaksinator_register:
                     navigationController.startFPSmartRegistry();
                     break;
-/*
-                case R.id.btn_pnc_register:
-//                    navigationController.startPNCSmartRegistry();
-                    break;
-
-                case R.id.btn_child_register:
-//                    navigationController.startChildSmartRegistry();
-                    break;
-
-                case R.id.btn_fp_register:
-                 //   navigationController.startFPSmartRegistry();
-                    break; */
 
             }
             String HomeEnd = timer.format(new Date());

@@ -4,85 +4,105 @@
     android:orientation="horizontal"
     android:layout_width="fill_parent"
     android:layout_height="@dimen/list_item_height"
-    android:weightSum="10"
-    android:gravity="left">
+    android:weightSum="10">
 
     <LinearLayout
         android:orientation="horizontal"
         android:layout_width="170dp"
         android:layout_height="fill_parent"
         android:id="@+id/profile_info_layout"
-        android:weightSum="5"
-        android:layout_weight="5"
-        android:gravity="fill_vertical">
+        android:layout_weight="3">
 
-        <FrameLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content">
-
-            <ImageView
-                android:layout_width="80dp"
-                android:layout_height="80dp"
-                android:id="@+id/profilepic"
-                android:src="@drawable/child_boy_infant"
-                android:scaleType="fitXY"
-                android:layout_marginLeft="5dp" />
-
-        </FrameLayout>
+        <ImageView
+            android:layout_width="@dimen/client_profile_pic_width"
+            android:layout_height="80dp"
+            android:id="@+id/profilepic"
+            android:src="@mipmap/child_boy"
+            android:layout_margin="2dp"
+            android:layout_gravity="center_vertical"
+            android:scaleType="fitXY" />
 
         <LinearLayout
             android:orientation="vertical"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="fill_parent"
-            android:layout_marginLeft="5dp">
+            android:layout_marginLeft="5dp"
+            android:layout_marginTop="1dp"
+            android:layout_marginBottom="1dp"
+            android:layout_weight="1">
 
-            <org.ei.opensrp.view.customControls.CustomFontTextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                style="@style/CustomFontTextViewStyle.ListView.Medium"
-                android:text="Medium Text"
-                android:id="@+id/name"
-                android:textSize="12sp" />
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
 
-            <org.ei.opensrp.view.customControls.CustomFontTextView
+                <org.smartregister.view.customcontrols.CustomFontTextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="?android:attr/textAppearanceMedium"
+                    android:text="Medium Text"
+                    android:layout_alignParentLeft="true"
+                    style="@style/CustomFontTextViewStyle.ListView.Medium"
+                    android:id="@+id/txt_child_name"
+                    android:textStyle="bold"
+                    android:textColor="#000000"
+                    android:textSize="14sp" />
+
+                <org.smartregister.view.customcontrols.CustomFontTextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="?android:attr/textAppearanceMedium"
+                    android:text="Age"
+                    android:layout_alignParentRight="true"
+                    android:gravity="right"
+                    style="@style/CustomFontTextViewStyle.ListView.Medium"
+                    android:id="@+id/txt_child_age"
+                    android:textStyle="bold"
+                    android:textColor="#000000"
+                    android:textSize="10sp"
+                    android:paddingRight="7dp" />
+
+            </LinearLayout>
+
+            <org.smartregister.view.customcontrols.CustomFontTextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textAppearance="?android:attr/textAppearanceSmall"
                 style="@style/CustomFontTextViewStyle.ListView.Medium"
                 android:text="Medium Text"
-                android:textSize="12sp"
-                android:id="@+id/motherName" />
+                android:id="@+id/ParentName"
+                android:textColor="@color/light_blue"
+                android:textSize="14sp" />
 
-            <org.ei.opensrp.view.customControls.CustomFontTextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textAppearance="?android:attr/textAppearanceSmall"
-                style="@style/CustomFontTextViewStyle.ListView.Medium"
-                android:text="Medium Text"
-                android:textSize="12sp"
-                android:id="@+id/village" />
-
-            <org.ei.opensrp.view.customControls.CustomFontTextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textAppearance="?android:attr/textAppearanceSmall"
-                style="@style/CustomFontTextViewStyle.ListView.Medium"
-                android:text="yyyy-mm-dd"
-                android:textSize="12sp"
-                android:id="@+id/age"
-                android:layout_marginRight="1dp"
-                android:gravity="left" />
-
-            <org.ei.opensrp.view.customControls.CustomFontTextView
+            <org.smartregister.view.customcontrols.CustomFontTextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textAppearance="?android:attr/textAppearanceMedium"
                 style="@style/CustomFontTextViewStyle.ListView.Medium"
-                android:text="laki-laki"
-                android:id="@+id/gender"
+                android:text="Medium Text"
+                android:id="@+id/txt_child_subVillage"
+                android:textSize="12sp" />
+
+            <org.smartregister.view.customcontrols.CustomFontTextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Medium Text"
+                android:textAppearance="?android:attr/textAppearanceSmall"
+                style="@style/CustomFontTextViewStyle.ListView.Medium"
+                android:id="@+id/txt_child_date_of_birth"
                 android:textSize="12sp"
-                android:gravity="left"
-                android:layout_marginRight="1dp" />
+                android:textStyle="bold"
+                android:textColor="#000000" />
+
+            <org.smartregister.view.customcontrols.CustomFontTextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                style="@style/CustomFontTextViewStyle.ListView.Medium"
+                android:text="Medium Text"
+                android:id="@+id/txt_child_gender"
+                android:textSize="12sp" />
+
         </LinearLayout>
 
     </LinearLayout>

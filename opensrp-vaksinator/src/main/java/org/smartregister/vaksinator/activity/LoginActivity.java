@@ -27,7 +27,7 @@ import android.widget.TextView;
 import org.smartregister.Context;
 import org.smartregister.vaksinator.R;
 import org.smartregister.vaksinator.application.VaksinatorApplication;
-import org.smartregister.vaksinator.util.Config;
+import org.smartregister.vaksinator.utils.Config;
 import org.smartregister.domain.LoginResponse;
 import org.smartregister.domain.Response;
 import org.smartregister.domain.ResponseStatus;
@@ -47,7 +47,7 @@ import java.util.Locale;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipFile;
 
-import io.fabric.sdk.android.Fabric;
+//import io.fabric.sdk.android.Fabric;
 import util.uniqueIdGenerator.Generator;
 
 import static android.preference.PreferenceManager.getDefaultSharedPreferences;
@@ -111,7 +111,7 @@ public class LoginActivity extends AppCompatActivity {
         Config config = new Config();
         String uname = "demo1", pwd = "Satu2345";
         try {
-            uname =  config.getCredential("uname", getApplicationContext());
+            uname = config.getCredential("uname", getApplicationContext());
             pwd =  config.getCredential("pwd", getApplicationContext());
         } catch (IOException e) {
             e.printStackTrace();
@@ -120,7 +120,8 @@ public class LoginActivity extends AppCompatActivity {
         LayoutInflater layoutInflater = getLayoutInflater();
         View view = layoutInflater.inflate(R.layout.login, null);
         if (context.userService().hasARegisteredUser()){
-            localLogin(view, uname, pwd);
+            localLoginWith(uname, pwd);
+            //localLogin(view, uname, pwd);
         } else {
             remoteLogin(view, uname, pwd);
         }

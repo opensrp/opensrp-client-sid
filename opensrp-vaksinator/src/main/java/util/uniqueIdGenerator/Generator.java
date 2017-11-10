@@ -6,10 +6,10 @@ import android.util.Log;
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
 import org.apache.http.StatusLine;
-import org.apache.http.client.ClientProtocolException;
-import org.apache.http.client.HttpClient;
-import org.apache.http.client.methods.HttpGet;
-import org.apache.http.impl.client.DefaultHttpClient;
+//import org.apache.http.client.ClientProtocolException;
+//import org.apache.http.client.HttpClient;
+//import org.apache.http.client.methods.HttpGet;
+//import org.apache.http.impl.client.DefaultHttpClient;
 import org.smartregister.Context;
 import org.smartregister.vaksinator.activity.LoginActivity;
 import org.smartregister.vaksinator.application.VaksinatorApplication;
@@ -97,40 +97,40 @@ public class Generator {
     }
 
     private String connectToOpenMRS() {
-        try {
-            StringBuilder builder = new StringBuilder();
-            HttpClient client = new DefaultHttpClient();
-            HttpGet httpGet = new HttpGet(url);
-
-            httpGet.setHeader("Content-Type", "application/json");
-            try {
-                HttpResponse response = client.execute(httpGet);
-                StatusLine statusLine = response.getStatusLine();
-                int statusCode = statusLine.getStatusCode();
-                if (statusCode == 200) {
-                    HttpEntity entity = response.getEntity();
-                    InputStream content = entity.getContent();
-                    BufferedReader reader = new BufferedReader(new InputStreamReader(content));
-                    String line;
-                    while ((line = reader.readLine()) != null) {
-                        builder.append(line);
-                    }
-                    System.out.println("builder string = "+builder.toString());
-                    return builder.toString();
-                } else {
-                    Log.e("", "Failed to download file");
-                }
-            } catch (ClientProtocolException e) {
-                System.out.println("failed !!! ClientProtocolException ");
-                e.printStackTrace();
-            } catch (IOException e) {
-                System.out.println("Failed !!! IOException");
-                e.printStackTrace();
-            }
-        } catch (Exception e) {
-            Log.e("", e.getMessage());
-            System.out.println("Failed !!!, Exception");
-        }
+//        try {
+//            StringBuilder builder = new StringBuilder();
+//            HttpClient client = new DefaultHttpClient();
+//            HttpGet httpGet = new HttpGet(url);
+//
+//            httpGet.setHeader("Content-Type", "application/json");
+//            try {
+//                HttpResponse response = client.execute(httpGet);
+//                StatusLine statusLine = response.getStatusLine();
+//                int statusCode = statusLine.getStatusCode();
+//                if (statusCode == 200) {
+//                    HttpEntity entity = response.getEntity();
+//                    InputStream content = entity.getContent();
+//                    BufferedReader reader = new BufferedReader(new InputStreamReader(content));
+//                    String line;
+//                    while ((line = reader.readLine()) != null) {
+//                        builder.append(line);
+//                    }
+//                    System.out.println("builder string = "+builder.toString());
+//                    return builder.toString();
+//                } else {
+//                    Log.e("", "Failed to download file");
+//                }
+//            } catch (ClientProtocolException e) {
+//                System.out.println("failed !!! ClientProtocolException ");
+//                e.printStackTrace();
+//            } catch (IOException e) {
+//                System.out.println("Failed !!! IOException");
+//                e.printStackTrace();
+//            }
+//        } catch (Exception e) {
+//            Log.e("", e.getMessage());
+//            System.out.println("Failed !!!, Exception");
+//        }
         return "";
     }
 
@@ -139,8 +139,8 @@ public class Generator {
         @Override
         protected String doInBackground(String... params) {
             result = connectToOpenMRS();
-            if(result.length()>1)
-                LoginActivity.generator.uniqueIdService().saveJsonResponseToUniqueId(result);
+//            if(result.length()>1)
+//                LoginActivity.generator.uniqueIdService().saveJsonResponseToUniqueId(result);
 
             return "Executed";
         }

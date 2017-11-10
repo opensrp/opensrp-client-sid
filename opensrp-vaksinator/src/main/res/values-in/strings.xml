@@ -154,7 +154,7 @@
     <string name="header_dob">Tgl Lahir</string>
     <string name="header_dok_persalinan">Dok Prsalinan</string>
 
-    <string name="app_name">Bidan</string>
+    <string name="app_name">Vaksinator</string>
 
     <string name="home_ec_label">Eligible Couple</string>
     <string name="home_fp_label">FP</string>

@@ -5,36 +5,35 @@ import android.app.Fragment;
 import android.app.FragmentTransaction;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.os.Parcelable;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
-import android.widget.Toast;
 
 import com.flurry.android.FlurryAgent;
 
 import org.smartregister.Context;
-import org.smartregister.commonregistry.CommonRepository;
+import org.smartregister.commonregistry.CommonPersonObjectClient;
+import org.smartregister.commonregistry.CommonPersonObjectController;
 import org.smartregister.cursoradapter.CursorCommonObjectFilterOption;
 import org.smartregister.cursoradapter.CursorCommonObjectSort;
+import org.smartregister.cursoradapter.CursorSortOption;
 import org.smartregister.cursoradapter.SecuredNativeSmartRegisterCursorAdapterFragment;
 import org.smartregister.cursoradapter.SmartRegisterPaginatedCursorAdapter;
 import org.smartregister.cursoradapter.SmartRegisterQueryBuilder;
-import org.smartregister.commonregistry.CommonPersonObjectClient;
-import org.smartregister.commonregistry.CommonPersonObjectController;
-import org.smartregister.provider.SmartRegisterClientsProvider;
 import org.smartregister.vaksinator.activity.LoginActivity;
+import org.smartregister.vaksinator.activity.VaksinatorDetailActivity;
+import org.smartregister.vaksinator.libs.FlurryFacade;
+import org.smartregister.vaksinator.option.VaksinatorServiceModeOption;
+import org.smartregister.vaksinator.provider.ChildSmartClientsProvider;
+import org.smartregister.vaksinator.activity.VaksinatorSmartRegisterActivity;
+import org.smartregister.vaksinator.option.KICommonObjectFilterOption;
+import org.smartregister.provider.SmartRegisterClientsProvider;
 import org.smartregister.vaksinator.R;
+
+import org.smartregister.sync.ClientProcessor;
 import org.smartregister.util.StringUtil;
-import org.smartregister.vaksinator.face.camera.SmartShutterActivity;
-import org.smartregister.vaksinator.lib.FlurryFacade;
-import org.smartregister.vaksinator.vaksinator.KICommonObjectFilterOption;
-import org.smartregister.vaksinator.vaksinator.VaksinatorClientsProvider;
-import org.smartregister.vaksinator.vaksinator.VaksinatorDetailActivity;
-import org.smartregister.vaksinator.vaksinator.VaksinatorServiceModeOption;
-import org.smartregister.vaksinator.vaksinator.VaksinatorSmartRegisterActivity;
 import org.smartregister.view.activity.SecuredNativeSmartRegisterActivity;
 import org.smartregister.view.contract.ECClient;
 import org.smartregister.view.contract.SmartRegisterClient;
@@ -47,7 +46,6 @@ import org.smartregister.view.dialog.DialogOptionModel;
 import org.smartregister.view.dialog.EditOption;
 import org.smartregister.view.dialog.FilterOption;
 import org.smartregister.view.dialog.LocationSelectorDialogFragment;
-import org.smartregister.view.dialog.NameSort;
 import org.smartregister.view.dialog.ServiceModeOption;
 import org.smartregister.view.dialog.SortOption;
 import org.opensrp.api.domain.Location;
@@ -58,11 +56,7 @@ import org.opensrp.api.util.TreeNode;
 import java.util.ArrayList;
 import java.util.Map;
 
-//import util.AsyncTask;
-//import util.formula.Support;
-
 import util.AsyncTask;
-import util.formula.Support;
 
 import static android.view.View.INVISIBLE;
 import static android.view.View.VISIBLE;
@@ -79,7 +73,7 @@ public class VaksinatorSmartRegisterFragment extends SecuredNativeSmartRegisterC
     private CommonPersonObjectController controller;
     private VillageController villageController;
     private DialogOptionMapper dialogOptionMapper;
-
+    private ClientProcessor clientProcessor;
     private final ClientActionHandler clientActionHandler = new ClientActionHandler();
     private String locationDialogTAG = "locationDialogTAG";
 
@@ -111,7 +105,8 @@ public class VaksinatorSmartRegisterFragment extends SecuredNativeSmartRegisterC
 
             @Override
             public SortOption sortOption() {
-                return new NameSort();
+
+                return new CursorCommonObjectSort("A-Z", "namaBayi desc");
 
             }
 
@@ -128,10 +123,12 @@ public class VaksinatorSmartRegisterFragment extends SecuredNativeSmartRegisterC
 
             @Override
             public DialogOption[] filterOptions() {
-                FlurryFacade.logEvent("click_filter_option_on_vaksinator_dashboard");
+                FlurryAgent.logEvent("click_filter_option_on_kohort_ibu_dashboard");
                 ArrayList<DialogOption> dialogOptionslist = new ArrayList<DialogOption>();
 
                 dialogOptionslist.add(new CursorCommonObjectFilterOption(getString(R.string.filter_by_all_label),filterStringForAll()));
+                //     dialogOptionslist.add(new CursorCommonObjectFilterOption(getString(R.string.hh_no_mwra),filterStringForNoElco()));
+                //      dialogOptionslist.add(new CursorCommonObjectFilterOption(getString(R.string.hh_has_mwra),filterStringForOneOrMoreElco()));
 
                 String locationjson = context().anmLocationController().get();
                 LocationTree locationTree = EntityUtils.fromJson(locationjson, LocationTree.class);
@@ -154,15 +151,15 @@ public class VaksinatorSmartRegisterFragment extends SecuredNativeSmartRegisterC
 
             @Override
             public DialogOption[] sortingOptions() {
-                FlurryFacade.logEvent("click_sorting_option_on_vaksinator_dashboard");
+               // FlurryFacade.logEvent("click_sorting_option_on_kohort_ibu_dashboard");
                 return new DialogOption[]{
 //                        new HouseholdCensusDueDateSort(),
 
 
                         new CursorCommonObjectSort(getResources().getString(R.string.sort_by_name_label),KiSortByNameAZ()),
                         new CursorCommonObjectSort(getResources().getString(R.string.sort_by_name_label_reverse),KiSortByNameZA()),
-                        new CursorCommonObjectSort(getResources().getString(R.string.sort_by_child_age),KiSortByAge()),
-                        new CursorCommonObjectSort(getResources().getString(R.string.sort_by_child_age_desc),KiSortByAgeDesc()),
+                        new CursorCommonObjectSort(getResources().getString(R.string.sort_by_child_age),KiSortByAgeASC()),
+                        new CursorCommonObjectSort(getResources().getString(R.string.sort_by_child_age_desc),KiSortByAgeDESC()),
                 };
             }
 
@@ -177,6 +174,10 @@ public class VaksinatorSmartRegisterFragment extends SecuredNativeSmartRegisterC
 
     @Override
     protected SmartRegisterClientsProvider clientsProvider() {
+//        if (clientProvider == null) {
+//            clientProvider = new HouseHoldSmartClientsProvider(
+//                    getActivity(),clientActionHandler , context().alertService());
+//        }
         return null;
     }
 
@@ -186,6 +187,7 @@ public class VaksinatorSmartRegisterFragment extends SecuredNativeSmartRegisterC
 
     @Override
     protected void onInitialization() {
+         //  context().formSubmissionRouter().getHandlerMap().put("census_enrollment_form", new CensusEnrollmentHandler());
     }
 
     @Override
@@ -197,22 +199,25 @@ public class VaksinatorSmartRegisterFragment extends SecuredNativeSmartRegisterC
         view.findViewById(R.id.service_mode_selection).setVisibility(View.GONE);
         clientsView.setVisibility(View.VISIBLE);
         clientsProgressView.setVisibility(View.INVISIBLE);
-        initializeQueries(getCriteria());
+//        list.setBackgroundColor(Color.RED);
+        initializeQueries();
     }
+
     private String filterStringForAll(){
         return "";
     }
 
     private String sortByAlertmethod() {
-        return " CASE WHEN alerts.status = 'urgent' THEN '1'" +
+        return " CASE WHEN alerts.status = 'urgent' THEN '1'"
+                +
                 "WHEN alerts.status = 'upcoming' THEN '2'\n" +
                 "WHEN alerts.status = 'normal' THEN '3'\n" +
                 "WHEN alerts.status = 'expired' THEN '4'\n" +
                 "WHEN alerts.status is Null THEN '5'\n" +
                 "Else alerts.status END ASC";
     }
-    public void initializeQueries(String s){
-        VaksinatorClientsProvider kiscp = new VaksinatorClientsProvider(getActivity(),clientActionHandler,context().alertService());
+    /*public void initializeQueries(String s){
+        VaksinatorSmartClientsProvider kiscp = new VaksinatorSmartClientsProvider(getActivity(),clientActionHandler,context().alertService());
         clientAdapter = new SmartRegisterPaginatedCursorAdapter(getActivity(), null, kiscp, new CommonRepository("ec_anak",new String []{"tanggalLahirAnak","namaBayi"}));
         clientsView.setAdapter(clientAdapter);
 
@@ -220,20 +225,64 @@ public class VaksinatorSmartRegisterFragment extends SecuredNativeSmartRegisterC
         SmartRegisterQueryBuilder countqueryBUilder = new SmartRegisterQueryBuilder();
         countqueryBUilder.SelectInitiateMainTableCounts("ec_anak");
 
-        if (s == null || s.equals("!")) {
+        if (s == null || s.equals("!") || s.equals("")) {
             Log.e(TAG, "initializeQueries: "+"Not Initialized" );
-            mainCondition = " is_closed = 0 ";
+            mainCondition = "is_closed = 0 ";
         } else {
             Log.e(TAG, "initializeQueries: " + s);
-            mainCondition = " is_closed = 0 AND object_id LIKE '%" + s + "%'";
+            mainCondition = "is_closed = 0 AND object_id LIKE '%" + s + "%'";
         }
 
-        countSelect = countqueryBUilder.mainCondition(" is_closed = 0 ");
+        countSelect = countqueryBUilder.mainCondition("is_closed = 0 ");
+        //  mainCondition = " isClosed !='true' ";
         super.CountExecute();
 
         SmartRegisterQueryBuilder queryBUilder = new SmartRegisterQueryBuilder();
         queryBUilder.SelectInitiateMainTable("ec_anak", new String[]{"ec_anak.relationalid","ec_anak.is_closed","ec_anak.details","tanggalLahirAnak","namaBayi"});
-        mainSelect = queryBUilder.mainCondition(" is_closed = 0 ");
+        mainSelect = queryBUilder.mainCondition("is_closed = 0 ");
+        //   Sortqueries = KiSortByNameAZ();
+
+        currentlimit = 20;
+        currentoffset = 0;
+
+        super.filterandSortInInitializeQueries();
+
+//        setServiceModeViewDrawableRight(null);
+        updateSearchView();
+        refresh();
+
+
+    }*/
+    private void initializeQueries() {
+        String tableName = "ec_anak";
+      //  String parentTableName = PathConstants.MOTHER_TABLE_NAME;
+
+        ChildSmartClientsProvider hhscp = new ChildSmartClientsProvider(getActivity(),
+                clientActionHandler, context().alertService(), context().commonrepository(tableName));
+        clientAdapter = new SmartRegisterPaginatedCursorAdapter(getActivity(), null, hhscp, context().commonrepository(tableName));
+        clientsView.setAdapter(clientAdapter);
+
+        setTablename(tableName);
+        SmartRegisterQueryBuilder countqueryBUilder = new SmartRegisterQueryBuilder();
+        countqueryBUilder.SelectInitiateMainTableCounts(tableName);
+        mainCondition = " is_closed = 0 ";
+        countSelect = countqueryBUilder.mainCondition(mainCondition);
+        super.CountExecute();
+
+        SmartRegisterQueryBuilder queryBUilder = new SmartRegisterQueryBuilder();
+        queryBUilder.SelectInitiateMainTable(tableName, new String[]{
+                tableName + ".relationalid",
+                tableName + ".details",
+                tableName + ".is_closed",
+                tableName + ".relational_id",
+                tableName + ".details",
+                tableName + ".tanggalLahirAnak",
+                tableName + ".namaBayi",
+
+        });
+    //    queryBUilder.customJoin("LEFT JOIN " + parentTableName + " ON  " + tableName + ".relational_id =  " + parentTableName + ".id");
+        mainSelect = queryBUilder.mainCondition(mainCondition);
+        Sortqueries = ((CursorSortOption) getDefaultOptionsProvider().sortOption()).sort();
 
         currentlimit = 20;
         currentoffset = 0;
@@ -242,31 +291,31 @@ public class VaksinatorSmartRegisterFragment extends SecuredNativeSmartRegisterC
 
         updateSearchView();
         refresh();
-
-
     }
 
 
     @Override
     public void startRegistration() {
-        if(Support.ONSYNC) {
+       /* if(Support.ONSYNC) {
             Toast.makeText(getActivity(), "Data still Synchronizing, please wait", Toast.LENGTH_SHORT).show();
             return;
-        }
+        }*/
 
-//        String uniqueIdJson = LoginActivity.generator.uniqueIdController().getUniqueIdJson();
-//        if(uniqueIdJson == null || uniqueIdJson.isEmpty()){
-//            Toast.makeText(getActivity(), "no unique id", Toast.LENGTH_LONG).show();
-//            return;
-//        }
         FragmentTransaction ft = getActivity().getFragmentManager().beginTransaction();
         Fragment prev = getActivity().getFragmentManager().findFragmentByTag(locationDialogTAG);
         if (prev != null) {
             ft.remove(prev);
         }
+
+       // String uniqueIdJson = LoginActivity.generator.uniqueIdController().getUniqueIdJson();
+       /* if(uniqueIdJson == null || uniqueIdJson.isEmpty()){
+            Toast.makeText(getActivity(),"No unique id",Toast.LENGTH_LONG).show();
+            return;
+        }*/
+
         ft.addToBackStack(null);
         LocationSelectorDialogFragment
-                .newInstance((VaksinatorSmartRegisterActivity) getActivity(), new EditDialogOptionModel(), context().anmLocationController().get(), "registrasi_jurim")
+                .newInstance((VaksinatorSmartRegisterActivity) getActivity(), new EditDialogOptionModel(), context().anmLocationController().get(), "registrasi_ibu")
                 .show(ft, locationDialogTAG);
     }
 
@@ -302,12 +351,16 @@ public class VaksinatorSmartRegisterFragment extends SecuredNativeSmartRegisterC
     private String KiSortByNameZA() {
         return " namaBayi DESC";
     }
+    private String KiSortByAgeASC() {
+        return " tanggalLahirAnak DESC";
+    }
+    private String KiSortByAgeDESC() {
+        return " tanggalLahirAnak ASC";
+    }
 
     private String KiSortByAge() {
-        return " tanggalLahirAnak DESC ";
+        return " umur DESC";
     }
-    private String KiSortByAgeDesc(){ return " tanggalLahirAnak ASC ";}
-
     private String KiSortByNoIbu() {
         return " noIbu ASC";
     }
@@ -324,16 +377,30 @@ public class VaksinatorSmartRegisterFragment extends SecuredNativeSmartRegisterC
         }
         @Override
         public void onDialogOptionSelection(DialogOption option, Object tag) {
+
+
+            /*if(option.name().equalsIgnoreCase(getString(R.string.str_register_anc_form)) ) {
+                CommonPersonObjectClient pc = KIDetailActivity.kiclient;
+                if(pc.getDetails().get("ibu.type")!= null) {
+                    if (pc.getDetails().get("ibu.type").equals("anc") || pc.getDetails().get("ibu.type").equals("pnc")) {
+                        Toast.makeText(getActivity().getApplicationContext(), getString(R.string.mother_already_registered), Toast.LENGTH_SHORT).show();
+                        return;
+                    }
+                }
+            }*/
             onEditSelection((EditOption) option, (SmartRegisterClient) tag);
         }
     }
 
     @Override
     protected void onResumption() {
+//        super.onResumption();
         getDefaultOptionsProvider();
         if(isPausedOrRefreshList()) {
-            initializeQueries("!");
+            initializeQueries();
         }
+        //     updateSearchView();
+//
         try{
             LoginActivity.setLanguage();
         }catch (Exception e){
@@ -341,7 +408,58 @@ public class VaksinatorSmartRegisterFragment extends SecuredNativeSmartRegisterC
         }
 
     }
-
+//    @Override
+//    public void setupSearchView(View view) {
+//        searchView = (EditText) view.findViewById(org.ei.opensrp.R.id.edt_search);
+//        searchView.setHint(getNavBarOptionsProvider().searchHint());
+//        searchView.addTextChangedListener(new TextWatcher() {
+//            @Override
+//            public void beforeTextChanged(CharSequence charSequence, int i, int i2, int i3) {
+//            }
+//
+//            @Override
+//            public void onTextChanged(final CharSequence cs, int start, int before, int count) {
+//
+//                (new AsyncTask() {
+//                    SmartRegisterClients filteredClients;
+//
+//                    @Override
+//                    protected Object doInBackground(Object[] params) {
+////                        currentSearchFilter =
+////                        setCurrentSearchFilter(new HHSearchOption(cs.toString()));
+////                        filteredClients = getClientsAdapter().getListItemProvider()
+////                                .updateClients(getCurrentVillageFilter(), getCurrentServiceModeOption(),
+////                                        getCurrentSearchFilter(), getCurrentSortOption());
+////
+//                        filters = cs.toString();
+//                        joinTable = "";
+//                        mainCondition = " is_closed = 0 AND namaBayi !='' ";
+//                        return null;
+//                    }
+//
+//                    @Override
+//                    protected void onPostExecute(Object o) {
+////                        clientsAdapter
+////                                .refreshList(currentVillageFilter, currentServiceModeOption,
+////                                        currentSearchFilter, currentSortOption);
+////                        getClientsAdapter().refreshClients(filteredClients);
+////                        getClientsAdapter().notifyDataSetChanged();
+//                        getSearchCancelView().setVisibility(isEmpty(cs) ? INVISIBLE : VISIBLE);
+//                        CountExecute();
+//                        filterandSortExecute();
+//                        super.onPostExecute(o);
+//                    }
+//                }).execute();
+//            }
+//
+//            @Override
+//            public void afterTextChanged(Editable editable) {
+//            }
+//        });
+//        searchCancelView = view.findViewById(org.ei.opensrp.R.id.btn_search_cancel);
+//        searchCancelView.setOnClickListener(searchCancelHandler);
+//    }
+//
     public void updateSearchView(){
         getSearchView().addTextChangedListener(new TextWatcher() {
             @Override
@@ -355,20 +473,38 @@ public class VaksinatorSmartRegisterFragment extends SecuredNativeSmartRegisterC
 
                     @Override
                     protected Object doInBackground(Object[] params) {
+//                        currentSearchFilter =
+//                        setCurrentSearchFilter(new HHSearchOption(cs.toString()));
+//                        filteredClients = getClientsAdapter().getListItemProvider()
+//                                .updateClients(getCurrentVillageFilter(), getCurrentServiceModeOption(),
+//                                        getCurrentSearchFilter(), getCurrentSortOption());
+//
 
                         filters = cs.toString();
                         joinTable = "";
-                        mainCondition = " namaBayi !='' AND is_closed = 0";
+                        mainCondition = " is_closed = 0 AND namaBayi !='' ";
                         return null;
                     }
 
                     @Override
                     protected void onPostExecute(Object o) {
+//                        clientsAdapter
+//                                .refreshList(currentVillageFilter, currentServiceModeOption,
+//                                        currentSearchFilter, currentSortOption);
+//                        getClientsAdapter().refreshClients(filteredClients);
+//                        getClientsAdapter().notifyDataSetChanged();
                         getSearchCancelView().setVisibility(isEmpty(cs) ? INVISIBLE : VISIBLE);
                         filterandSortExecute();
                         super.onPostExecute(o);
                     }
                 }).execute();
+//                currentSearchFilter = new HHSearchOption(cs.toString());
+//                clientsAdapter
+//                        .refreshList(currentVillageFilter, currentServiceModeOption,
+//                                currentSearchFilter, currentSortOption);
+//
+//                searchCancelView.setVisibility(isEmpty(cs) ? INVISIBLE : VISIBLE);
+
 
             }
 
@@ -394,9 +530,10 @@ public class VaksinatorSmartRegisterFragment extends SecuredNativeSmartRegisterC
     }
 
 
+
     //    WD
     public void setCriteria(String criteria) {
-        VaksinatorSmartRegisterFragment.criteria = criteria;
+        this.criteria = criteria;
     }
 
     public static String getCriteria() {
@@ -410,21 +547,17 @@ public class VaksinatorSmartRegisterFragment extends SecuredNativeSmartRegisterC
         searchView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (SmartShutterActivity.isDevCompat) {
-                    CharSequence selections[] = new CharSequence[]{"Name", "Photo"};
-                    final AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
-                    builder.setTitle("Please Choose one, Search by");
-                    builder.setItems(selections, new DialogInterface.OnClickListener() {
-                        @Override
-                        public void onClick(DialogInterface dialog, int opt) {
-                            if (opt == 0) searchTextChangeListener("");
-                            else getFacialRecord(view);
-                        }
-                    });
-                    builder.show();
-                } else {
-                    searchTextChangeListener("");
-                }
+                CharSequence selections[] = new CharSequence[]{"Name", "Photo"};
+                final AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+                builder.setTitle("Please Choose one, Search by");
+                builder.setItems(selections, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int opt) {
+                        if (opt == 0) searchTextChangeListener("");
+                       // else getFacialRecord(view);
+                    }
+                });
+                builder.show();
             }
         });
 
@@ -432,9 +565,9 @@ public class VaksinatorSmartRegisterFragment extends SecuredNativeSmartRegisterC
         searchCancelView.setOnClickListener(searchCancelHandler);
     }
 
-    public void getFacialRecord(View view) {
+    /*public void getFacialRecord(View view) {
         FlurryAgent.logEvent(TAG+" search_by_face", true);
-        Log.e(TAG, "getFacialRecord: ");
+        Log.e(TAG, "getFacialRecord: start ");
         SmartShutterActivity.kidetail = (CommonPersonObjectClient) view.getTag();
         FlurryAgent.logEvent(TAG + " search_by_face", true);
 
@@ -444,7 +577,8 @@ public class VaksinatorSmartRegisterFragment extends SecuredNativeSmartRegisterC
         intent.putExtra("org.sid.sidface.ImageConfirmation.kidetail", (Parcelable) SmartShutterActivity.kidetail);
         startActivityForResult(intent, 2);
 
-    }
+
+    }*/
 
     public void searchTextChangeListener(String s) {
         Log.e(TAG, "searchTextChangeListener: " + s);
@@ -459,26 +593,38 @@ public class VaksinatorSmartRegisterFragment extends SecuredNativeSmartRegisterC
                 @Override
                 public void onTextChanged(final CharSequence cs, int start, int before, int count) {
 
-                    Log.e(TAG, "onTextChanged: " + searchView.getText());
                     (new AsyncTask() {
+//                    SmartRegisterClients filteredClients;
 
                         @Override
                         protected Object doInBackground(Object[] params) {
+//                        currentSearchFilter =
+//                        setCurrentSearchFilter(new HHSearchOption(cs.toString()));
+//                        filteredClients = getClientsAdapter().getListItemProvider()
+//                                .updateClients(getCurrentVillageFilter(), getCurrentServiceModeOption(),
+//                                        getCurrentSearchFilter(), getCurrentSortOption());
+//
 
                             filters = cs.toString();
                             joinTable = "";
-                            mainCondition = " namaBayi !='' AND is_closed = 0";
+                            mainCondition = "nama_bayi !=''";
+                            Log.e(TAG, "doInBackground: " + filters);
                             return null;
                         }
-
-                        @Override
-                        protected void onPostExecute(Object o) {
-                            getSearchCancelView().setVisibility(isEmpty(cs) ? INVISIBLE : VISIBLE);
-                            filterandSortExecute();
-                            super.onPostExecute(o);
-                        }
+//
+//                    @Override
+//                    protected void onPostExecute(Object o) {
+////                        clientsAdapter
+////                                .refreshList(currentVillageFilter, currentServiceModeOption,
+////                                        currentSearchFilter, currentSortOption);
+////                        getClientsAdapter().refreshClients(filteredClients);
+////                        getClientsAdapter().notifyDataSetChanged();
+//                        getSearchCancelView().setVisibility(isEmpty(cs) ? INVISIBLE : VISIBLE);
+//                        CountExecute();
+//                        filterandSortExecute();
+//                        super.onPostExecute(o);
+//                    }
                     }).execute();
-
                 }
 
                 @Override
@@ -507,4 +653,6 @@ public class VaksinatorSmartRegisterFragment extends SecuredNativeSmartRegisterC
         }
 
     }
+
+
 }
