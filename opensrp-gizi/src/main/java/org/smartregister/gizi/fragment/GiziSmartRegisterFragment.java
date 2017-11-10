@@ -319,7 +319,7 @@ public class GiziSmartRegisterFragment extends SecuredNativeSmartRegisterCursorA
 
         ft.addToBackStack(null);
         LocationSelectorDialogFragment
-                .newInstance((GiziSmartRegisterActivity) getActivity(), new EditDialogOptionModel(), context().anmLocationController().get(), "registrasi_gizi")
+                .newInstance((GiziSmartRegisterActivity) getActivity(), new EditDialogOptionModel(), context().anmLocationController().get(), "registrasi_ibu")
                 .show(ft, locationDialogTAG);
     }
 

@@ -13,12 +13,14 @@ import android.widget.TextView;
 
 import org.apache.commons.lang3.StringUtils;
 import org.joda.time.DateTime;
+import org.smartregister.commonregistry.AllCommonsRepository;
 import org.smartregister.commonregistry.CommonPersonObject;
 import org.smartregister.commonregistry.CommonPersonObjectClient;
 import org.smartregister.commonregistry.CommonRepository;
 import org.smartregister.cursoradapter.SmartRegisterCLientsProviderForCursorAdapter;
 import org.smartregister.domain.Alert;
 import org.smartregister.gizi.R;
+import org.smartregister.repository.DetailsRepository;
 import org.smartregister.service.AlertService;
 import org.smartregister.util.DateUtil;
 import org.smartregister.util.OpenSRPImageLoader;
@@ -40,6 +42,7 @@ import java.util.Map;
 import java.util.concurrent.TimeUnit;
 
 import util.GiziConstants;
+import util.formula.Support;
 
 import static android.view.ViewGroup.LayoutParams.MATCH_PARENT;
 import static org.smartregister.util.Utils.fillValue;
@@ -73,15 +76,26 @@ public class ChildSmartClientsProvider implements SmartRegisterCLientsProviderFo
     public void getView(Cursor cursor, SmartRegisterClient client, final View convertView) {
         CommonPersonObjectClient pc = (CommonPersonObjectClient) client;
 
-/*        viewHolder.name = (TextView)convertView.findViewById(R.id.txt_child_name);
-        viewHolder.fatherName = (TextView) convertView.findViewById(R.id.ParentName);
-        viewHolder.subVillage = (TextView) convertView.findViewById(R.id.txt_child_subVillage);*/
-
-        //fillValue((TextView) convertView.findViewById(R.id.child_zeir_id), getValue(pc.getColumnmaps(), GiziConstants.KEY.ZEIR_ID, false));
+        DetailsRepository detailsRepository = org.smartregister.Context.getInstance().detailsRepository();
+        detailsRepository.updateDetails(pc);
 
         String firstName = getValue(pc.getColumnmaps(), "namaBayi", true);
-
         fillValue((TextView) convertView.findViewById(R.id.txt_child_name), firstName);
+
+        // get parent
+        AllCommonsRepository childRepository = org.smartregister.Context.getInstance().allCommonsRepositoryobjects("ec_anak");
+        CommonPersonObject childobject = childRepository.findByCaseID(pc.entityId());
+        Log.d("IDssssssssssssss",pc.entityId());
+        AllCommonsRepository kirep = org.smartregister.Context.getInstance().allCommonsRepositoryobjects("ec_kartu_ibu");
+        final CommonPersonObject kiparent = kirep.findByCaseID(getValue(pc.getColumnmaps(), "relational_id", true));
+        Log.d("22222222222222",getValue(pc.getColumnmaps(), "relational_id", true));
+        if(kiparent != null) {
+            detailsRepository.updateDetails(kiparent);
+            String namaayah = getValue(kiparent.getColumnmaps(), "namaSuami", true);
+            String namaibu = getValue(kiparent.getColumnmaps(), "namalengkap", true);
+            fillValue((TextView) convertView.findViewById(R.id.ParentName), namaibu+","+namaayah);
+
+        }
 
         /*String lastName = getValue(pc.getColumnmaps(), GiziConstants.KEY.LAST_NAME, true);
         String childName = getName(firstName, lastName);
