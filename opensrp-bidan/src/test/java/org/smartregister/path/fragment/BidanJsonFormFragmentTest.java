@@ -8,10 +8,7 @@ import shared.BaseUnitTest;
 
 import junit.framework.Assert;
 
-/**
- * Created by ona on 28/08/2017.
- */
-public class PathJsonFormFragmentTest extends BaseUnitTest {
+public class BidanJsonFormFragmentTest extends BaseUnitTest {
 
     protected PathJsonFormFragment pathJsonFormFragment;
 

@@ -41,6 +41,8 @@ public class LocationPickerView extends CustomFontTextView implements View.OnCli
     private OnLocationChangeListener onLocationChangeListener;
 
     public static final String PREF_TEAM_LOCATIONS = "PREF_TEAM_LOCATIONS";
+    public static final String PREF_VILLAGE_LOCATIONS = "PREF_VILLAGE_LOCATIONS";
+    public static final String PREF_TYPE_LOCATIONS = "VILLAGE"; // VILLAGE or TEAM
     public static final ArrayList<String> ALLOWED_LEVELS;
     private static final String DEFAULT_LOCATION_LEVEL = "Health Facility";
 
@@ -48,6 +50,7 @@ public class LocationPickerView extends CustomFontTextView implements View.OnCli
         ALLOWED_LEVELS = new ArrayList<>();
         ALLOWED_LEVELS.add("Health Facility");
         ALLOWED_LEVELS.add("Zone");
+        ALLOWED_LEVELS.add("Village");
     }
 
     public LocationPickerView(Context context) {
@@ -181,8 +184,8 @@ public class LocationPickerView extends CustomFontTextView implements View.OnCli
     private void showDialog() {
         serviceLocationsAdapter.setSelectedLocation(getSelectedItem());
 
-
         Window window = locationPickerDialog.getWindow();
+        assert window != null;
         WindowManager.LayoutParams wlp = window.getAttributes();
         wlp.gravity = Gravity.TOP;
         int[] coords = new int[2];

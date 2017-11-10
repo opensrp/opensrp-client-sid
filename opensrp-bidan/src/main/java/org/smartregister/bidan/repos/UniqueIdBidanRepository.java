@@ -9,7 +9,6 @@ import net.sqlcipher.database.SQLiteDatabase;
 
 import org.smartregister.bidan.application.BidanApplication;
 import org.smartregister.bidan.domain.UniqueId;
-import org.smartregister.bidan.repository.PathRepository;
 import org.smartregister.repository.BaseRepository;
 
 import java.text.SimpleDateFormat;

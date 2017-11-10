@@ -35,6 +35,11 @@ import org.apache.commons.lang3.StringUtils;
 import org.joda.time.DateTime;
 import org.json.JSONException;
 import org.json.JSONObject;
+import org.opensrp.api.domain.Location;
+import org.opensrp.api.util.EntityUtils;
+import org.opensrp.api.util.LocationTree;
+import org.opensrp.api.util.TreeNode;
+import org.smartregister.AllConstants;
 import org.smartregister.Context;
 import org.smartregister.bidan.BuildConfig;
 import org.smartregister.bidan.application.BidanApplication;
@@ -50,6 +55,7 @@ import org.smartregister.bidan.service.intent.PullUniqueIdsIntentService;
 import org.smartregister.repository.AllSharedPreferences;
 import org.smartregister.sync.DrishtiSyncScheduler;
 import org.smartregister.util.Log;
+import org.smartregister.util.StringUtil;
 import org.smartregister.util.Utils;
 import org.smartregister.view.BackgroundAction;
 import org.smartregister.view.LockingBackgroundTask;
@@ -60,12 +66,13 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.Locale;
+import java.util.Map;
 import java.util.TimeZone;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipFile;
 
 import util.Config;
-import util.PathConstants;
+import util.BidanConstants;
 
 import static android.preference.PreferenceManager.getDefaultSharedPreferences;
 import static android.view.inputmethod.InputMethodManager.HIDE_NOT_ALWAYS;
@@ -273,7 +280,7 @@ public class LoginActivity extends AppCompatActivity {
     private void localLogin(View view, String userName, String password) {
         view.setClickable(true);
         if (getOpenSRPContext().userService().isUserInValidGroup(userName, password)
-                && (!PathConstants.TIME_CHECK || TimeStatus.OK.equals(getOpenSRPContext().userService().validateStoredServerTimeZone()))) {
+                && (!BidanConstants.TIME_CHECK || TimeStatus.OK.equals(getOpenSRPContext().userService().validateStoredServerTimeZone()))) {
             localLoginWith(userName, password);
         } else {
 
@@ -290,8 +297,8 @@ public class LoginActivity extends AppCompatActivity {
                     if (loginResponse == SUCCESS) {
                         if (getOpenSRPContext().userService().isUserInPioneerGroup(userName)) {
                             TimeStatus timeStatus = getOpenSRPContext().userService().validateDeviceTime(
-                                    loginResponse.payload(), PathConstants.MAX_SERVER_TIME_DIFFERENCE);
-                            if (!PathConstants.TIME_CHECK || timeStatus.equals(TimeStatus.OK)) {
+                                    loginResponse.payload(), BidanConstants.MAX_SERVER_TIME_DIFFERENCE);
+                            if (!BidanConstants.TIME_CHECK || timeStatus.equals(TimeStatus.OK)) {
                                 remoteLoginWith(userName, password, loginResponse.payload());
                                 Intent intent = new Intent(appContext, PullUniqueIdsIntentService.class);
                                 appContext.startService(intent);
@@ -443,6 +450,7 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     private void goToHome(boolean remote) {
+        android.util.Log.e(TAG, "goToHome: from "+ (remote? "remote" : "lokal") );
         if (!remote) {
 //            startZScoreIntentService();
         } else {
@@ -451,8 +459,6 @@ public class LoginActivity extends AppCompatActivity {
         BidanApplication.setCrashlyticsUser(getOpenSRPContext());
         Intent intent = new Intent(this, BidanHomeActivity.class);
 //        Intent intent = new Intent(this, KIbuSmartRegisterActivity.class);
-//        Intent intent = new Intent(this, ChildSmartRegisterActivity.class);
-//        Intent intent = new Intent(this, KIAnakSmartRegisterActivity.class);
         intent.putExtra(BaseRegisterActivity.IS_REMOTE_LOGIN, remote);
         startActivity(intent);
 
@@ -504,29 +510,37 @@ public class LoginActivity extends AppCompatActivity {
         });
     }
 
-    private void extractLocations(ArrayList<String> locationList, JSONObject rawLocationData)
-            throws JSONException {
+    private void extractLocations(ArrayList<String> locationList, JSONObject rawLocationData) throws JSONException {
+
         final String NODE = "node";
         final String CHILDREN = "children";
         String name = rawLocationData.getJSONObject(NODE).getString("locationId");
         String level = rawLocationData.getJSONObject(NODE).getJSONArray("tags").getString(0);
 
+        // Get Village Name
+//        if (level.equals("Village")){
+//            locationList.add(rawLocationData.getJSONObject(NODE).getJSONArray("tags").toString());
+//            return;
+//        }
+
         if (LocationPickerView.ALLOWED_LEVELS.contains(level)) {
             locationList.add(name);
         }
-        if (rawLocationData.has(CHILDREN)) {
+
+        if (rawLocationData.has(CHILDREN)) { 
             Iterator<String> childIterator = rawLocationData.getJSONObject(CHILDREN).keys();
             while (childIterator.hasNext()) {
+
                 String curChildKey = childIterator.next();
                 extractLocations(locationList, rawLocationData.getJSONObject(CHILDREN).getJSONObject(curChildKey));
             }
+        } else {
+            android.util.Log.e(TAG, "extractLocations: NO CHILDREN " );
         }
 
     }
 
-    ////////////////////////////////////////////////////////////////
-// Inner classes
-////////////////////////////////////////////////////////////////
+
     private class RemoteLoginTask extends AsyncTask<Void, Void, LoginResponse> {
         private final String userName;
         private final String password;
@@ -565,19 +579,26 @@ public class LoginActivity extends AppCompatActivity {
         protected Void doInBackground(Void... params) {
             ArrayList<String> locationsCSV = locationsCSV();
 
+            android.util.Log.e(TAG, "doInBackground: "+ locationsCSV.toString() );
             if (locationsCSV.isEmpty()) {
+                android.util.Log.e(TAG, "doInBackground: locationCSV empty" );
                 return null;
             }
 
-            Utils.writePreference(BidanApplication.getInstance().getApplicationContext(), LocationPickerView.PREF_TEAM_LOCATIONS, StringUtils.join(locationsCSV, ","));
+            android.util.Log.e(TAG, "doInBackground: write "+ LocationPickerView.PREF_VILLAGE_LOCATIONS );
+            android.util.Log.e(TAG, "doInBackground: value "+ StringUtils.join(locationsCSV, ",") );
+
+            Utils.writePreference(BidanApplication.getInstance().getApplicationContext(), LocationPickerView.PREF_VILLAGE_LOCATIONS, StringUtils.join(locationsCSV, ","));
             return null;
         }
 
+        // TODO Solve Get Location failed
         public ArrayList<String> locationsCSV() {
             final String LOCATIONS_HIERARCHY = "locationsHierarchy";
             final String MAP = "map";
             JSONObject locationData;
             ArrayList<String> locations = new ArrayList<>();
+
             try {
                 locationData = new JSONObject(BidanApplication.getInstance().context().anmLocationController().get());
                 if (locationData.has(LOCATIONS_HIERARCHY) && locationData.getJSONObject(LOCATIONS_HIERARCHY).has(MAP)) {
@@ -587,10 +608,13 @@ public class LoginActivity extends AppCompatActivity {
                         String curKey = keys.next();
                         extractLocations(locations, map.getJSONObject(curKey));
                     }
+                } else {
+                    android.util.Log.e(TAG, "locationsCSV: Not Found" );
                 }
             } catch (Exception e) {
                 android.util.Log.e(getClass().getCanonicalName(), android.util.Log.getStackTraceString(e));
             }
+            android.util.Log.e(TAG, "locationsCSV: "+ locations );
             return locations;
         }
     }

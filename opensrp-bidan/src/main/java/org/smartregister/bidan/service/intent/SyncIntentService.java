@@ -125,10 +125,12 @@ public class SyncIntentService extends IntentService {
 
         try {
             // Fetch locations
-            String locations = Utils.getPreference(context, LocationPickerView.PREF_TEAM_LOCATIONS, "");
+            String locations = Utils.getPreference(context, LocationPickerView.PREF_VILLAGE_LOCATIONS, "");
             Log.e(TAG, "sync: "+ locations );
+            // TODO: IF locations.empty THEN re-check.location.
 
             if (StringUtils.isBlank(locations)) {
+                Log.e(TAG, "sync: fail " + FetchStatus.fetchedFailed );
                 return FetchStatus.fetchedFailed;
             }
 
@@ -178,7 +180,7 @@ public class SyncIntentService extends IntentService {
     private void pushToServer() {
         pushECToServer();
         pushReportsToServer();
-        pushStockToServer();
+//        pushStockToServer();
 
         startSyncValidation();
     }
