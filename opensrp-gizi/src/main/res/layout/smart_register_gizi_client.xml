@@ -340,6 +340,7 @@
             android:layout_margin="5dp"
             android:clickable="true"
             android:focusable="true"
+            android:src="@drawable/ic_pencil"
             android:background="@drawable/edit_button_background"/>
     </LinearLayout>
     <ImageView

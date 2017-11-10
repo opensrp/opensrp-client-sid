@@ -3,6 +3,7 @@ package org.smartregister.gizi.provider;
 import android.content.Context;
 import android.database.Cursor;
 import android.graphics.drawable.ColorDrawable;
+import android.graphics.drawable.Drawable;
 import android.os.AsyncTask;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -58,6 +59,8 @@ public class ChildSmartClientsProvider implements SmartRegisterCLientsProviderFo
     private final Context context;
     private final View.OnClickListener onClickListener;
     private final AlertService alertService;
+
+    private Drawable iconPencilDrawable;
     private final AbsListView.LayoutParams clientViewLayoutParams;
     private final CommonRepository commonRepository;
 
@@ -75,6 +78,12 @@ public class ChildSmartClientsProvider implements SmartRegisterCLientsProviderFo
     @Override
     public void getView(Cursor cursor, SmartRegisterClient client, final View convertView) {
         CommonPersonObjectClient pc = (CommonPersonObjectClient) client;
+        if (iconPencilDrawable == null) {
+            iconPencilDrawable = context.getResources().getDrawable(R.drawable.ic_pencil);
+        }
+        //convertView.findViewById(R.id.btn_edit).setBackgroundDrawable(iconPencilDrawable);
+        convertView.findViewById(R.id.btn_edit).setTag(client);
+        convertView.findViewById(R.id.btn_edit).setOnClickListener(onClickListener);
 
         DetailsRepository detailsRepository = org.smartregister.Context.getInstance().detailsRepository();
         detailsRepository.updateDetails(pc);
@@ -96,6 +105,48 @@ public class ChildSmartClientsProvider implements SmartRegisterCLientsProviderFo
             fillValue((TextView) convertView.findViewById(R.id.ParentName), namaibu+","+namaayah);
 
         }
+      String dob=  pc.getColumnmaps().get("tanggalLahirAnak").substring(0, pc.getColumnmaps().get("tanggalLahirAnak").indexOf("T"));
+
+        //get child detail value
+        String subVillages = getValue(kiparent.getColumnmaps(), "address1", true);
+        String ages = getValue(pc.getColumnmaps(), "namaBayi", true);
+        String dateOfBirth = getValue(pc.getColumnmaps(), "tanggalLahirAnak", true);
+        String gender = getValue(pc.getDetails(), "gender", true);
+        String visitDate = getValue(pc.getDetails(), "tanggalPenimbangan", true);
+        String height = getValue(pc.getDetails(), "tinggiBadan", true);
+
+        String weight = getValue(pc.getDetails(), "beratBadan", true);
+        String underweight = getValue(pc.getDetails(), "underweight", true);
+        String stunting_status = getValue(pc.getDetails(), "stunting", true);
+        String wasting_status = getValue(pc.getDetails(), "wasting", true);
+
+        //set child detail value
+        fillValue((TextView) convertView.findViewById(R.id.txt_child_subVillage), subVillages);
+      //  fillValue((TextView) convertView.findViewById(R.id.txt_child_age), firstName);
+        fillValue((TextView) convertView.findViewById(R.id.txt_child_date_of_birth), dob);
+        fillValue((TextView) convertView.findViewById(R.id.txt_child_gender), gender);
+        fillValue((TextView) convertView.findViewById(R.id.txt_child_visit_date),context.getString(R.string.tanggal)+ visitDate);
+        fillValue((TextView) convertView.findViewById(R.id.txt_child_height),context.getString(R.string.height)+ height);
+        fillValue((TextView) convertView.findViewById(R.id.txt_child_weight),context.getString(R.string.weight)+ weight);
+        fillValue((TextView) convertView.findViewById(R.id.txt_child_underweight), context.getString(R.string.wfa)+setStatus(underweight));
+        fillValue((TextView) convertView.findViewById(R.id.txt_child_stunting), context.getString(R.string.stunting)+setStatus(stunting_status));
+        fillValue((TextView) convertView.findViewById(R.id.txt_child_wasting), context.getString(R.string.wasting)+setStatus(wasting_status));
+
+
+
+
+    /*        viewHolder.absentAlert = (TextView)convertView.findViewById(R.id.absen);
+            viewHolder.weightText = (TextView)convertView.findViewById(R.id.weightSchedule);
+            viewHolder.weightLogo = (ImageView)convertView.findViewById(R.id.weightSymbol);
+            viewHolder.heightText = (TextView)convertView.findViewById(R.id.heightSchedule);
+            viewHolder.heightLogo = (ImageView)convertView.findViewById(R.id.heightSymbol);
+            viewHolder.vitALogo = (ImageView)convertView.findViewById(R.id.vitASymbol);
+            viewHolder.vitAText = (TextView)convertView.findViewById(R.id.vitASchedule);
+            viewHolder.antihelminticLogo = (ImageView)convertView.findViewById(R.id.antihelminticSymbol);
+            viewHolder.antihelminticText = (TextView)convertView.findViewById(R.id.antihelminticText);
+*/
+
+
 
         /*String lastName = getValue(pc.getColumnmaps(), GiziConstants.KEY.LAST_NAME, true);
         String childName = getName(firstName, lastName);
@@ -115,8 +166,31 @@ public class ChildSmartClientsProvider implements SmartRegisterCLientsProviderFo
 
     }
 
-    
 
+    private String setStatus(String status){
+        switch (status.toLowerCase()){
+            case "underweight" :
+                return context.getString(R.string.underweight);
+            case "severely underweight" :
+                return context.getString(R.string.s_underweight);
+            case "normal":
+                return context.getString(R.string.normal);
+            case "overweight":
+                return context.getString(R.string.overweight);
+            case "severely stunted" :
+                return context.getString(R.string.s_stunted);
+            case "stunted" :
+                return context.getString(R.string.stunted);
+            case "tall" :
+                return context.getString(R.string.tall);
+            case "severely wasted" :
+                return context.getString(R.string.s_wasted);
+            case "wasted" :
+                return context.getString(R.string.wasted);
+            default:
+                return "";
+        }
+    }
     @Override
     public SmartRegisterClients updateClients(FilterOption villageFilter, ServiceModeOption
             serviceModeOption, FilterOption searchFilter, SortOption sortOption) {
