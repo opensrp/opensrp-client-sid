@@ -1,19 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/client_list_header_dark_grey"
     android:orientation="vertical">
 
-    <include layout="@layout/smart_register_nav_bar_customized" />
+    <include layout="@layout/smart_register_nav_bar_customized" android:layout_width="match_parent" android:layout_height="wrap_content"/>
 
-    <include
-        layout="@layout/smart_register_status_bar_customized"
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/ec_main_header_nav_layout_height" />
+    <include layout="@layout/smart_register_status_bar_customized" android:layout_width="match_parent" android:layout_height="@dimen/ec_main_header_nav_layout_height" />
 
-    <include layout="@layout/smart_register_status_bar" />
+    <include layout="@layout/smart_register_status_bar" android:layout_width="match_parent" android:layout_height="wrap_content"/>
 
     <LinearLayout
         android:id="@+id/clients_upper_header_layout"
@@ -45,7 +43,8 @@
     <ImageView
         android:layout_width="match_parent"
         android:layout_height="@dimen/smart_register_client_divider_height"
-        android:src="@color/smart_register_client_divider_color" />
+        android:src="@color/smart_register_client_divider_color"
+        tools:ignore="ContentDescription" />
 
     <FrameLayout
         android:layout_width="fill_parent"

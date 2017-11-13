@@ -183,10 +183,10 @@ public class BidanHomeFragment extends BaseSmartRegisterFragment implements Sync
         getActivity().setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
         this.getActivity().getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
 
-        View view = inflater.inflate(R.layout.smart_register_activity_customized, container, false);
+        View view = inflater.inflate(R.layout.smart_registers_home_bidan, container, false);
         mView = view;
         onInitialization();
-        setupViews(view);
+//        setupViews(view);
         onResumption();
         return view;
     }
