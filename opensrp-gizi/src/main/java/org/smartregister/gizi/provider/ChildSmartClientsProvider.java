@@ -34,6 +34,7 @@ import org.smartregister.view.dialog.ServiceModeOption;
 import org.smartregister.view.dialog.SortOption;
 import org.smartregister.view.viewholder.OnClickFormLauncher;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Calendar;
@@ -94,10 +95,10 @@ public class ChildSmartClientsProvider implements SmartRegisterCLientsProviderFo
         // get parent
         AllCommonsRepository childRepository = org.smartregister.Context.getInstance().allCommonsRepositoryobjects("ec_anak");
         CommonPersonObject childobject = childRepository.findByCaseID(pc.entityId());
-        Log.d("IDssssssssssssss",pc.entityId());
+    //    Log.d("IDssssssssssssss",pc.entityId());
         AllCommonsRepository kirep = org.smartregister.Context.getInstance().allCommonsRepositoryobjects("ec_kartu_ibu");
         final CommonPersonObject kiparent = kirep.findByCaseID(getValue(pc.getColumnmaps(), "relational_id", true));
-        Log.d("22222222222222",getValue(pc.getColumnmaps(), "relational_id", true));
+
         if(kiparent != null) {
             detailsRepository.updateDetails(kiparent);
             String namaayah = getValue(kiparent.getColumnmaps(), "namaSuami", true);
@@ -106,10 +107,10 @@ public class ChildSmartClientsProvider implements SmartRegisterCLientsProviderFo
 
         }
       String dob=  pc.getColumnmaps().get("tanggalLahirAnak").substring(0, pc.getColumnmaps().get("tanggalLahirAnak").indexOf("T"));
-
+        String age = ""+monthRangeToToday(dob);
         //get child detail value
-        String subVillages = getValue(kiparent.getColumnmaps(), "address1", true);
-        String ages = getValue(pc.getColumnmaps(), "namaBayi", true);
+        String subVillages = getValue(kiparent.getDetails(), "address1", true);
+      //  String ages = getValue(pc.getColumnmaps(), "namaBayi", true);
         String dateOfBirth = getValue(pc.getColumnmaps(), "tanggalLahirAnak", true);
         String gender = getValue(pc.getDetails(), "gender", true);
         String visitDate = getValue(pc.getDetails(), "tanggalPenimbangan", true);
@@ -122,47 +123,25 @@ public class ChildSmartClientsProvider implements SmartRegisterCLientsProviderFo
 
         //set child detail value
         fillValue((TextView) convertView.findViewById(R.id.txt_child_subVillage), subVillages);
-      //  fillValue((TextView) convertView.findViewById(R.id.txt_child_age), firstName);
-        fillValue((TextView) convertView.findViewById(R.id.txt_child_date_of_birth), dob);
+        fillValue((TextView) convertView.findViewById(R.id.txt_child_age), age);
+        fillValue((TextView) convertView.findViewById(R.id.txt_child_date_of_birth), "DOB :"+dob);
         fillValue((TextView) convertView.findViewById(R.id.txt_child_gender), gender);
+
+
         fillValue((TextView) convertView.findViewById(R.id.txt_child_visit_date),context.getString(R.string.tanggal)+ visitDate);
         fillValue((TextView) convertView.findViewById(R.id.txt_child_height),context.getString(R.string.height)+ height);
         fillValue((TextView) convertView.findViewById(R.id.txt_child_weight),context.getString(R.string.weight)+ weight);
-        fillValue((TextView) convertView.findViewById(R.id.txt_child_underweight), context.getString(R.string.wfa)+setStatus(underweight));
-        fillValue((TextView) convertView.findViewById(R.id.txt_child_stunting), context.getString(R.string.stunting)+setStatus(stunting_status));
-        fillValue((TextView) convertView.findViewById(R.id.txt_child_wasting), context.getString(R.string.wasting)+setStatus(wasting_status));
 
-
-
-
-    /*        viewHolder.absentAlert = (TextView)convertView.findViewById(R.id.absen);
-            viewHolder.weightText = (TextView)convertView.findViewById(R.id.weightSchedule);
-            viewHolder.weightLogo = (ImageView)convertView.findViewById(R.id.weightSymbol);
-            viewHolder.heightText = (TextView)convertView.findViewById(R.id.heightSchedule);
-            viewHolder.heightLogo = (ImageView)convertView.findViewById(R.id.heightSymbol);
-            viewHolder.vitALogo = (ImageView)convertView.findViewById(R.id.vitASymbol);
-            viewHolder.vitAText = (TextView)convertView.findViewById(R.id.vitASchedule);
-            viewHolder.antihelminticLogo = (ImageView)convertView.findViewById(R.id.antihelminticSymbol);
-            viewHolder.antihelminticText = (TextView)convertView.findViewById(R.id.antihelminticText);
-*/
-
-
-
-        /*String lastName = getValue(pc.getColumnmaps(), GiziConstants.KEY.LAST_NAME, true);
-        String childName = getName(firstName, lastName);
-
-        String motherFirstName = getValue(pc.getColumnmaps(), GiziConstants.KEY.MOTHER_FIRST_NAME, true);
-        if (StringUtils.isBlank(childName) && StringUtils.isNotBlank(motherFirstName)) {
-            childName = "B/o " + motherFirstName.trim();
+        if (pc.getDetails().get("tanggalPenimbangan") != null) {
+            fillValue((TextView) convertView.findViewById(R.id.txt_child_underweight), context.getString(R.string.wfa) + setStatus(underweight));
+            fillValue((TextView) convertView.findViewById(R.id.txt_child_stunting), context.getString(R.string.stunting) + setStatus(stunting_status));
+            fillValue((TextView) convertView.findViewById(R.id.txt_child_wasting), context.getString(R.string.wasting) + setStatus(wasting_status));
         }
-        fillValue((TextView) convertView.findViewById(R.id.child_name), childName);
-
-        String motherName = getValue(pc.getColumnmaps(), GiziConstants.KEY.MOTHER_FIRST_NAME, true) + " " + getValue(pc, GiziConstants.KEY.MOTHER_LAST_NAME, true);
-        if (!StringUtils.isNotBlank(motherName)) {
-            motherName = "M/G: " + motherName.trim();
+        else{
+            fillValue((TextView) convertView.findViewById(R.id.txt_child_underweight), context.getString(R.string.wfa));
+            fillValue((TextView) convertView.findViewById(R.id.txt_child_stunting), context.getString(R.string.stunting));
+            fillValue((TextView) convertView.findViewById(R.id.txt_child_wasting), context.getString(R.string.wasting));
         }
-        fillValue((TextView) convertView.findViewById(R.id.child_mothername), motherName);*/
-        
 
     }
 
@@ -191,6 +170,19 @@ public class ChildSmartClientsProvider implements SmartRegisterCLientsProviderFo
                 return "";
         }
     }
+    public void setVitAVisibility(){
+        int month = Integer.parseInt(new SimpleDateFormat("MM").format(new java.util.Date()));
+        int visibility = month == 2 || month == 8 ? View.VISIBLE : View.INVISIBLE;
+//             vitALogo.setVisibility(visibility);
+//             vitAText.setVisibility(visibility);
+    }
+
+    private int monthRangeToToday(String lastVisitDate){
+        String currentDate[] = new SimpleDateFormat("yyyy-MM").format(new java.util.Date()).substring(0,7).split("-");
+        return ((Integer.parseInt(currentDate[0]) - Integer.parseInt(lastVisitDate.substring(0,4)))*12 +
+                (Integer.parseInt(currentDate[1]) - Integer.parseInt(lastVisitDate.substring(5,7))));
+    }
+
     @Override
     public SmartRegisterClients updateClients(FilterOption villageFilter, ServiceModeOption
             serviceModeOption, FilterOption searchFilter, SortOption sortOption) {
