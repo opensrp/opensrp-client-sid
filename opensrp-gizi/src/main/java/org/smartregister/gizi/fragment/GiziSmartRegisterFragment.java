@@ -220,43 +220,7 @@ public class GiziSmartRegisterFragment extends SecuredNativeSmartRegisterCursorA
                 "WHEN alerts.status is Null THEN '5'\n" +
                 "Else alerts.status END ASC";
     }
-    /*public void initializeQueries(String s){
-        GiziSmartClientsProvider kiscp = new GiziSmartClientsProvider(getActivity(),clientActionHandler,context().alertService());
-        clientAdapter = new SmartRegisterPaginatedCursorAdapter(getActivity(), null, kiscp, new CommonRepository("ec_anak",new String []{"tanggalLahirAnak","namaBayi"}));
-        clientsView.setAdapter(clientAdapter);
 
-        setTablename("ec_anak");
-        SmartRegisterQueryBuilder countqueryBUilder = new SmartRegisterQueryBuilder();
-        countqueryBUilder.SelectInitiateMainTableCounts("ec_anak");
-
-        if (s == null || s.equals("!") || s.equals("")) {
-            Log.e(TAG, "initializeQueries: "+"Not Initialized" );
-            mainCondition = "is_closed = 0 ";
-        } else {
-            Log.e(TAG, "initializeQueries: " + s);
-            mainCondition = "is_closed = 0 AND object_id LIKE '%" + s + "%'";
-        }
-
-        countSelect = countqueryBUilder.mainCondition("is_closed = 0 ");
-        //  mainCondition = " isClosed !='true' ";
-        super.CountExecute();
-
-        SmartRegisterQueryBuilder queryBUilder = new SmartRegisterQueryBuilder();
-        queryBUilder.SelectInitiateMainTable("ec_anak", new String[]{"ec_anak.relationalid","ec_anak.is_closed","ec_anak.details","tanggalLahirAnak","namaBayi"});
-        mainSelect = queryBUilder.mainCondition("is_closed = 0 ");
-        //   Sortqueries = KiSortByNameAZ();
-
-        currentlimit = 20;
-        currentoffset = 0;
-
-        super.filterandSortInInitializeQueries();
-
-//        setServiceModeViewDrawableRight(null);
-        updateSearchView();
-        refresh();
-
-
-    }*/
     private void initializeQueries() {
         String tableName = "ec_anak";
       //  String parentTableName = PathConstants.MOTHER_TABLE_NAME;

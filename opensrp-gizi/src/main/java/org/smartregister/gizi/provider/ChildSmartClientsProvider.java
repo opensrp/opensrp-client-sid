@@ -86,6 +86,9 @@ public class ChildSmartClientsProvider implements SmartRegisterCLientsProviderFo
         convertView.findViewById(R.id.btn_edit).setTag(client);
         convertView.findViewById(R.id.btn_edit).setOnClickListener(onClickListener);
 
+        convertView.findViewById(R.id.profile_info_layout).setTag(client);
+        convertView.findViewById(R.id.profile_info_layout).setOnClickListener(onClickListener);
+
         DetailsRepository detailsRepository = org.smartregister.Context.getInstance().detailsRepository();
         detailsRepository.updateDetails(pc);
 
