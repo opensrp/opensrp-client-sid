@@ -1,4 +1,4 @@
-package org.smartregister.facialrecognition.sample;
+package org.smartregister.opensrpbidan2;
 
 import org.junit.Test;
 
