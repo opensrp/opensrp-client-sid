@@ -73,4 +73,13 @@ public class SyncStatusBroadcastReceiver extends BroadcastReceiver {
             logError("Error on destroy: " + e);
         }
     }
+
+    public static SyncStatusBroadcastReceiver getInstance() {
+        return singleton;
+    }
+
+    public boolean isSyncing() {
+        return isSyncing;
+    }
+
 }

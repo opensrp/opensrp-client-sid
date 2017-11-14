@@ -47,4 +47,7 @@ public class LocationPickerView extends CustomFontTextView implements View.OnCli
         ALLOWED_LEVELS.add("Village");
     }
 
+    public void init(org.smartregister.Context context) {
+
+    }
 }

@@ -3,4 +3,103 @@
     <color name="colorPrimary">#3F51B5</color>
     <color name="colorPrimaryDark">#303F9F</color>
     <color name="colorAccent">#FF4081</color>
-</resources>
+
+        <color name="white">#ffffff</color>
+        <color name="black">#000000</color>
+        <color name="silver">#A9A9A9</color>
+        <color name="light_grey">#CCCCCC</color>
+        <color name="dark_grey">#999999</color>
+        <color name="transparent_dark_grey">#EE999999</color>
+        <color name="inactive_grey">#B5B5B5</color>
+
+        <color name="actionbar">#208CC5</color>
+        <color name="client_list_grey">#737373</color>
+        <color name="transparent_dark_blue">#ff196d99</color>
+
+        <!-- Gender identity colors -->
+        <color name="gender_neutral_dark_green">#219e05</color>
+        <color name="gender_neutral_green">#29C606</color>
+        <color name="gender_neutral_light_green">#b8f5b2</color>
+        <color name="male_dark_blue">#2b84c1</color>
+        <color name="male_blue">#35a6e2</color>
+        <color name="male_light_blue">#d4edfa</color>
+        <color name="female_dark_pink">#b73bb6</color>
+        <color name="female_pink">#de47dc</color>
+        <color name="female_light_pink">#f7dbf7</color>
+
+        <color name="primary">#358CB7</color>
+        <color name="primary_background">#ddf0fa</color>
+        <color name="primary_dark">#276C91</color>
+        <color name="accent">#358CB7</color>
+        <color name="text_color_primary">#737373</color>
+
+        <color name="status_bar_bg_dark_grey">#494949</color>
+        <color name="search_edit_bg_grey">#616161</color>
+
+        <color name="scan_qr_code_bg_st_grey">#585858</color>
+        <color name="scan_qr_code_bg_end_grey">#3e3e3e</color>
+        <color name="scan_qr_code_bg_stk_grey">#212121</color>
+
+        <color name="snackbar_background_yellow">#FFED18</color>
+        <color name="bluetext">#3D9EC9</color>
+
+        <color name="translucent_client_list_grey">#aa737373</color>
+        <color name="toolbar_grey">#494949</color>
+        <color name="snackbar_action_color">#eeff1c</color>
+
+    <color name="light_blue">#1a93d2</color>
+
+    <color name="smart_register_client_divider_color">#d9d9d9</color>
+    <color name="status_bar_background_dark_grey">#494949</color>
+    <color name="status_bar_text_almost_white">#f5f5f5</color>
+    <color name="text_black">#333333</color>
+    <color name="text_blue">#389cc8</color>
+    <color name="client_list_header_dark_grey">#e6e6e6</color>
+    <color name="smart_register_blue">#389cc8</color>
+    <color name="dark_blue">#004C99</color>
+    <color name="light_pink">#EEB4B4</color>
+    <color name="transparent_gray">#44ffffff</color>
+    <color name="transparent_blue">#44389cc8</color>
+    <color name="transparent_blue_for_edit_button">#bb389cc8</color>
+    <color name="dialog_option_color">#1a1a1a</color>
+    <color name="client_list_header_text_color">#494949</color>
+
+    <color name="alert_upcoming_light_blue">#cae2ed</color>
+    <color name="alert_urgent_red">#F04646</color>
+    <color name="alert_in_progress_blue">#389cc8</color>
+    <color name="alert_complete_green">#25aa4a</color>
+    <color name="alert_upcoming_yellow">#FFBB04</color>
+
+    <color name="pnc_pp_fp_grey">#f5f5f5</color>
+
+    <color name="pnc_circle_yellow">#EDCA00</color>
+    <color name="pnc_circle_red">#d13f3f</color>
+    <color name="pnc_circle_green">#25aa4a</color>
+
+    <color name="hb_level_normal">#43ae23</color>
+    <color name="hb_level_dangerous">#d13f3f</color>
+    <color name="hb_level_high">#edca00</color>
+
+    <color name="action_bar_background">#2b475e</color>
+
+    <color name="alert_complete_green_mcare">#4fb45b</color>
+
+    <!-- FaceR-->
+    <color name="green">#a3c639</color>
+    <color name="dark_green">#85a71d</color>
+    <color name="yellow">#ff0</color>
+    <color name="gray">#ccc</color>
+    <color name="pink">#e91e63</color>
+
+
+    <color name="growth_today_color">#008be6</color>
+    <color name="record_weight_blue_bg_end">#3495bf</color>
+    <color name="record_weight_blue_bg_st">#389cc8</color>
+    <color name="record_weight_blue_bg_stk">#267ea5</color>
+    <color name="record_weight_grey_bg_end">#ebebeb</color>
+    <color name="record_weight_grey_bg_st">#f4f4f4</color>
+    <color name="record_weight_grey_bg_stk">#d8d8d8</color>
+    <color name="z_score_0">#227532</color>
+    <color name="z_score_2">#b1312c</color>
+    <color name="z_score_3">#222539</color>
+    </resources>

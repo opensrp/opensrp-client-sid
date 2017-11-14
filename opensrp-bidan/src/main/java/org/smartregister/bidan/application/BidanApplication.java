@@ -27,9 +27,6 @@ import io.fabric.sdk.android.Fabric;
 
 import static org.smartregister.util.Log.logInfo;
 
-//import io.fabric.sdk.android.Fabric;
-//import com.crashlytics.android.Crashlytics;
-
 /**
  * Created by sid-tech on 11/13/17.
  */

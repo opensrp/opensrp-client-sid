@@ -15,6 +15,7 @@
     <application
         android:name=".application.BidanApplication"
         android:allowBackup="true"
+        android:icon="@drawable/opensrp_logo"
         >
         <activity
             android:name=".activity.LoginActivity"
@@ -28,6 +29,20 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity
+            android:name=".activity.SettingsActivity"
+            android:screenOrientation="landscape" />
+
+        <activity android:name=".activity.BidanHomeActivity"
+            android:screenOrientation="landscape"
+            android:theme="@style/BidanAppTheme"
+            />
+
+        <activity android:name=".activity.KIbuSmartRegisterActivity"
+            android:configChanges="keyboardHidden|orientation|screenSize"
+            android:screenOrientation="landscape"
+            android:theme="@style/AppThemeNoActionBarAndTitle"
+            android:windowSoftInputMode="adjustResize" />
         <!--<activity-->
             <!--android:name=".activity.ChildSmartRegisterActivity"-->
             <!--android:configChanges="keyboardHidden|orientation|screenSize"-->
@@ -59,9 +74,6 @@
         <!--</receiver>-->
 
         <!--<activity android:name=".activity.ProviderProfileActivity" />-->
-        <activity
-            android:name=".activity.SettingsActivity"
-            android:screenOrientation="landscape" />
         <!--<activity-->
             <!--android:name=".activity.ChildImmunizationActivity"-->
             <!--android:screenOrientation="portrait"-->
@@ -116,16 +128,7 @@
             <!--android:theme="@style/AppThemeNoTitle.NoActionBar">-->
 
         <!--</activity>-->
-        <activity android:name=".activity.BidanHomeActivity"
-            android:screenOrientation="landscape"
-            android:theme="@style/BidanAppTheme"
-            />
 
-        <!--<activity android:name=".activity.KIbuSmartRegisterActivity"-->
-            <!--android:configChanges="keyboardHidden|orientation|screenSize"-->
-            <!--android:screenOrientation="landscape"-->
-            <!--android:theme="@style/AppThemeNoActionBarAndTitle"-->
-            <!--android:windowSoftInputMode="adjustResize" />-->
 
     </application>
 

@@ -4,5 +4,52 @@
     <string name="no_internet_connectivity">No internet connection. Please ensure data connectivity</string>
     <string name="unknown_response">Login failed. Try later</string>
     <string name="unauthorized">Please check the credentials</string>
+    <string name="cohort_child">CHILDREN</string>
+    <string name="cohort_mother">KOHORT MOTHER</string>
+    <string name="cohort_fp">KOHORT KB</string>
+
+    <string name="sync_">Sync%1$s</string>
+    <string name="last_sync">(last %1$s)</string>
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="search_limits">Search limits</string>
+    <string name="client_status">Client status</string>
+    <string name="active">Active</string>
+    <string name="inactive">Inactive</string>
+
+    <string name="lost_to_follow_up">Lost to Follow-Up</string>
+    <string name="lost_to_follow_up_with_nl">Lost to\nFollow-Up</string>
+    <string name="status">status</string>
+
+    <string name="zeir_id">ZEIR ID</string>
+    <string name="zeir_id_hint">ZEIR ID number</string>
+    <string name="first_name">First Name</string>
+    <string name="first_name_hint">First name</string>
+    <string name="last_name">Last Name</string>
+    <string name="last_name_hint">Last name</string>
+    <string name="mother_guardian_name">Mother/Guardian Name</string>
+    <string name="mother_guardian_name_hint">Mother or guardian name</string>
+    <string name="mother_guardian_nrc">Mother/Guardian NRC</string>
+    <string name="mother_guardian_nrc_hint">Mother or guardian NRC number</string>
+    <string name="mother_guardian_phone_number">Mother/Guardian Phone Number</string>
+    <string name="mother_guardian_phone_number_hint">Mother or guardian phone number</string>
+    <string name="date_birth_range">Date of birth range</string>
+    <string name="start_date_hint">Select start date</string>
+    <string name="end_date_hint">Select end date</string>
+    <string name="update_search_params">Please update at least one search parameter</string>
+    <string name="no_vaccine_record_found">No vaccination record found</string>
+    <string name="matching_results">%1$s matching results found</string>
+    <string name="check_child_bcg_scar">"Check for child's BCG scar"</string>
+    <string name="move_to_catchment_confirm_dialog_title">Confirm move</string>
+    <string name="edit">Edit</string>
+    <string name="save">Save</string>
+    <string name="search">Search</string>
+    <string name="cancel">Cancel</string>
+    <string name="advanced_search">Advanced Search</string>
+    <string name="no_record">No Records Found</string>
+    <string name="str_search_hint">Search name or ID</string>
+    <string name="woman_alphabetical_sort">Alphabetical (Name)</string>
+    <string name="id_sort">BIDAN ID </string>
+
 
 </resources>

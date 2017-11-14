@@ -13,6 +13,7 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
 import android.util.DisplayMetrics;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -66,7 +67,12 @@ public class LoginActivity extends AppCompatActivity {
     public static final String ENGLISH_LOCALE = "en";
     private static final String URDU_LOCALE = "ur";
     private static final String ENGLISH_LANGUAGE = "English";
+    private static final String BAHASA_LANGUAGE = "BAHASA";
     private static final String URDU_LANGUAGE = "Urdu";
+    private static final String BAHASA_LOCALE = "in";
+    private static final String LOCALE_LANG = BAHASA_LOCALE;
+
+
     private android.content.Context appContext;
     private RemoteLoginTask remoteLoginTask;
 
@@ -103,7 +109,7 @@ public class LoginActivity extends AppCompatActivity {
 //        initializeBuildDetails();
 //        setDoneActionHandlerOnPasswordField();
         initializeProgressDialog();
-//        setLanguage();
+        setLanguage();
         if (BuildConfig.DEBUG) {
             debugApp();
         }
@@ -131,11 +137,50 @@ public class LoginActivity extends AppCompatActivity {
             startActivity(new Intent(this, SettingsActivity.class));
             return true;
         }
+        Log.e(TAG, "onOptionsItemSelected: "+ item.getTitle().toString() );
         return super.onOptionsItemSelected(item);
     }
 
+    public static void setLanguage() {
+        AllSharedPreferences allSharedPreferences = new AllSharedPreferences(getDefaultSharedPreferences(getOpenSRPContext().applicationContext()));
+        String preferredLocale = allSharedPreferences.fetchLanguagePreference();
+        if(!preferredLocale.equals(LOCALE_LANG)) {
+            switchLanguagePreference();
+            preferredLocale = allSharedPreferences.fetchLanguagePreference();
+        }
+        Resources res = getOpenSRPContext().applicationContext().getResources();
+        // Change locale settings in the app.
+        DisplayMetrics dm = res.getDisplayMetrics();
+        Configuration conf = res.getConfiguration();
+        conf.locale = new Locale(preferredLocale);
+        res.updateConfiguration(conf, dm);
 
+    }
 
+    public static String switchLanguagePreference() {
+        AllSharedPreferences allSharedPreferences = new AllSharedPreferences(getDefaultSharedPreferences(Context.getInstance().applicationContext()));
+
+        String preferredLocale = allSharedPreferences.fetchLanguagePreference();
+        if (ENGLISH_LOCALE.equals(preferredLocale)) {
+            allSharedPreferences.saveLanguagePreference(BAHASA_LOCALE);
+            Resources res = Context.getInstance().applicationContext().getResources();
+            // Change locale settings in the app.
+            DisplayMetrics dm = res.getDisplayMetrics();
+            android.content.res.Configuration conf = res.getConfiguration();
+            conf.locale = new Locale(BAHASA_LOCALE);
+            res.updateConfiguration(conf, dm);
+            return BAHASA_LANGUAGE;
+        } else {
+            allSharedPreferences.saveLanguagePreference(ENGLISH_LOCALE);
+            Resources res = Context.getInstance().applicationContext().getResources();
+            // Change locale settings in the app.
+            DisplayMetrics dm = res.getDisplayMetrics();
+            android.content.res.Configuration conf = res.getConfiguration();
+            conf.locale = new Locale(ENGLISH_LOCALE);
+            res.updateConfiguration(conf, dm);
+            return ENGLISH_LANGUAGE;
+        }
+    }
 
     private void initializeProgressDialog() {
         progressDialog = new ProgressDialog(this);
@@ -224,7 +269,6 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     private void goToHome(boolean remote) {
-        android.util.Log.e(TAG, "goToHome: from "+ (remote? "remote" : "lokal") );
         if (!remote) {
 //            startZScoreIntentService();
             Utils.startAsyncTask(new SaveTeamLocationsTask(), null);
@@ -232,8 +276,8 @@ public class LoginActivity extends AppCompatActivity {
             Utils.startAsyncTask(new SaveTeamLocationsTask(), null);
         }
         BidanApplication.setCrashlyticsUser(getOpenSRPContext());
-        Intent intent = new Intent(this, BidanHomeActivity.class);
-//        Intent intent = new Intent(this, KIbuSmartRegisterActivity.class);
+//        Intent intent = new Intent(this, BidanHomeActivity.class);
+        Intent intent = new Intent(this, KIbuSmartRegisterActivity.class);
         intent.putExtra(BaseRegisterActivity.IS_REMOTE_LOGIN, remote);
         startActivity(intent);
 
@@ -351,8 +395,6 @@ public class LoginActivity extends AppCompatActivity {
                 String curChildKey = childIterator.next();
                 extractLocations(locationList, rawLocationData.getJSONObject(CHILDREN).getJSONObject(curChildKey));
             }
-        } else {
-            android.util.Log.e(TAG, "extractLocations: NO CHILDREN " );
         }
 
     }
@@ -397,13 +439,12 @@ public class LoginActivity extends AppCompatActivity {
         protected Void doInBackground(Void... params) {
             ArrayList<String> locationsCSV = locationsCSV();
 
-            android.util.Log.e(TAG, "doInBackground: "+ locationsCSV.toString() );
             if (locationsCSV.isEmpty()) {
                 android.util.Log.e(TAG, "doInBackground: locationCSV empty" );
                 return null;
             }
 
-            android.util.Log.e(TAG, "doInBackground: value "+ StringUtils.join(locationsCSV, ",") );
+//            android.util.Log.e(TAG, "doInBackground: value "+ StringUtils.join(locationsCSV, ",") );
 
             Utils.writePreference(BidanApplication.getInstance().getApplicationContext(), LocationPickerView.PREF_VILLAGE_LOCATIONS, StringUtils.join(locationsCSV, ","));
             return null;
