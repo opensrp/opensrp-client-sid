@@ -1,4 +1,4 @@
-package org.smartregister.bidan2.activity;
+package org.smartregister.bidan.activity;
 
 import android.app.Activity;
 

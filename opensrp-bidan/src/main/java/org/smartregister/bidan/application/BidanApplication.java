@@ -1,20 +1,31 @@
-package org.smartregister.bidan2.application;
+package org.smartregister.bidan.application;
 
+import android.content.Intent;
+import android.content.res.Configuration;
+import android.util.Log;
 import android.util.Pair;
 
 import com.crashlytics.android.Crashlytics;
 
 import org.smartregister.Context;
 import org.smartregister.CoreLibrary;
-import org.smartregister.bidan2.BuildConfig;
-import org.smartregister.bidan2.utils.BidanConstants;
+import org.smartregister.bidan.BuildConfig;
+import org.smartregister.bidan.activity.LoginActivity;
+import org.smartregister.bidan.receiver.BidanSyncBroadcastReceiver;
+import org.smartregister.bidan.receiver.SyncStatusBroadcastReceiver;
+import org.smartregister.bidan.utils.BidanConstants;
 import org.smartregister.commonregistry.CommonFtsObject;
+import org.smartregister.repository.EventClientRepository;
 import org.smartregister.sync.DrishtiSyncScheduler;
 import org.smartregister.view.activity.DrishtiApplication;
+import org.smartregister.view.receiver.TimeChangedBroadcastReceiver;
 
+import java.util.Locale;
 import java.util.Map;
 
 import io.fabric.sdk.android.Fabric;
+
+import static org.smartregister.util.Log.logInfo;
 
 //import io.fabric.sdk.android.Fabric;
 //import com.crashlytics.android.Crashlytics;
@@ -25,6 +36,8 @@ import io.fabric.sdk.android.Fabric;
 
 public class BidanApplication extends DrishtiApplication {
 
+    private static final String TAG = BidanApplication.class.getName();
+    private EventClientRepository eventClientRepository;
 
     private CommonFtsObject commonFtsObject;
     private String[] ftsTables;
@@ -46,7 +59,15 @@ public class BidanApplication extends DrishtiApplication {
         if (!BuildConfig.DEBUG) {
             Fabric.with(this, new Crashlytics());
         }
+        DrishtiSyncScheduler.setReceiverClass(BidanSyncBroadcastReceiver.class);
+        SyncStatusBroadcastReceiver.init(this);
+        TimeChangedBroadcastReceiver.init(this);
+//        TimeChangedBroadcastReceiver.getInstance().addOnTimeChangedListener(this);
 
+        applyUserLanguagePreference();
+        cleanUpSyncState();
+        setCrashlyticsUser(context);
+//        setAlarms(this);
 
     }
 
@@ -55,7 +76,22 @@ public class BidanApplication extends DrishtiApplication {
      */
     @Override
     public void logoutCurrentUser() {
+        Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        intent.addCategory(Intent.CATEGORY_HOME);
+        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        getApplicationContext().startActivity(intent);
+        context.userService().logoutSession();
+    }
 
+    @Override
+    public void onTerminate() {
+        logInfo("Application is terminating. Stopping Bidan Sync scheduler and resetting isSyncInProgress setting.");
+        cleanUpSyncState();
+        SyncStatusBroadcastReceiver.destroy(this);
+        TimeChangedBroadcastReceiver.destroy(this);
+        super.onTerminate();
     }
 
     /**
@@ -104,8 +140,6 @@ public class BidanApplication extends DrishtiApplication {
         return ftsTables;
     }
 
-    
-
     private String[] getFtsMainConditions(String tableName){
         if(tableName.equals(BidanConstants.MOTHER_TABLE_NAME)) {
             String[] mainConditions = { "is_closed", "jenisKontrasepsi" };
@@ -137,4 +171,58 @@ public class BidanApplication extends DrishtiApplication {
     public Map<String,Pair<String,Boolean>> getAlertScheduleMap() {
         return alertScheduleMap;
     }
+
+    public static synchronized BidanApplication getInstance() {
+        return (BidanApplication) mInstance;
+    }
+
+    public Context context() {
+        return context;
+    }
+
+    public EventClientRepository eventClientRepository() {
+        if (eventClientRepository == null) {
+            eventClientRepository = new EventClientRepository(getRepository());
+        }
+        return eventClientRepository;
+    }
+
+    protected void applyUserLanguagePreference() {
+        Configuration config = getBaseContext().getResources().getConfiguration();
+
+        String lang = context.allSharedPreferences().fetchLanguagePreference();
+
+        if (!"".equals(lang) && !config.locale.getLanguage().equals(lang)) {
+            locale = new Locale(lang);
+            updateConfiguration(config);
+        }
+    }
+
+    private void updateConfiguration(Configuration config) {
+        config.locale = locale;
+        Locale.setDefault(locale);
+        getBaseContext().getResources().updateConfiguration(config,
+                getBaseContext().getResources().getDisplayMetrics());
+    }
+
+    protected void cleanUpSyncState() {
+        DrishtiSyncScheduler.stop(getApplicationContext());
+        context.allSharedPreferences().saveIsSyncInProgress(false);
+    }
+
+    /**
+     * This method sets the Crashlytics user to whichever username was used to log in last. It only
+     * does so if the app is not built for debugging
+     *
+     * @param context The user's context
+     */
+    public static void setCrashlyticsUser(Context context) {
+        if (!BuildConfig.DEBUG
+                && context != null && context.userService() != null
+                && context.userService().getAllSharedPreferences() != null) {
+            Crashlytics.setUserName(context.userService().getAllSharedPreferences().fetchRegisteredANM());
+        }
+    }
+
+
 }

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="org.smartregister.bidan2">
+    package="org.smartregister.bidan">
 
     <uses-permission android:name="android.permission.CAMERA" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
@@ -44,13 +44,13 @@
             <!--android:theme="@style/AppTheme.NoActionBar"-->
             <!--android:windowSoftInputMode="stateAlwaysHidden|adjustResize" />-->
         <!--<activity-->
-            <!--android:name=".activity.PathJsonFormActivity"-->
+            <!--android:name=".activity.BidanJsonFormActivity"-->
             <!--android:screenOrientation="portrait"-->
             <!--android:theme="@style/AppTheme.NoActionBar"-->
             <!--android:windowSoftInputMode="stateAlwaysHidden|adjustResize" />-->
 
         <!--&lt;!&ndash;<receiver android:name=".receiver.Hia2ServiceBroadcastReceiver" />&ndash;&gt;-->
-        <!--<receiver android:name=".receiver.BidanSyncBroadcastReceiver" />-->
+        <receiver android:name=".receiver.BidanSyncBroadcastReceiver" />
         <!--<receiver android:name=".receiver.VaccinatorAlarmReceiver" />-->
         <!--<receiver android:name=".receiver.OnBootReceiver">-->
             <!--<intent-filter>-->
@@ -59,9 +59,9 @@
         <!--</receiver>-->
 
         <!--<activity android:name=".activity.ProviderProfileActivity" />-->
-        <!--<activity-->
-            <!--android:name=".activity.SettingsActivity"-->
-            <!--android:screenOrientation="portrait" />-->
+        <activity
+            android:name=".activity.SettingsActivity"
+            android:screenOrientation="landscape" />
         <!--<activity-->
             <!--android:name=".activity.ChildImmunizationActivity"-->
             <!--android:screenOrientation="portrait"-->
@@ -94,10 +94,10 @@
         <!--<service android:name=".service.intent.ValidateIntentService" />-->
         <!--<service android:name=".service.intent.PullUniqueIdsIntentService" />-->
 
-        <service android:name="org.smartregister.growthmonitoring.service.intent.WeightIntentService" />
-        <service android:name="org.smartregister.immunization.service.intent.VaccineIntentService" />
-        <service android:name="org.smartregister.growthmonitoring.service.intent.ZScoreRefreshIntentService" />
-        <service android:name="org.smartregister.immunization.service.intent.RecurringIntentService" />
+        <!--<service android:name="org.smartregister.growthmonitoring.service.intent.WeightIntentService" />-->
+        <!--<service android:name="org.smartregister.immunization.service.intent.VaccineIntentService" />-->
+        <!--<service android:name="org.smartregister.growthmonitoring.service.intent.ZScoreRefreshIntentService" />-->
+        <!--<service android:name="org.smartregister.immunization.service.intent.RecurringIntentService" />-->
         <!--<service android:name="org.smartregister.bidan.service.intent.HIA2IntentService" />-->
 
         <!--<provider-->
