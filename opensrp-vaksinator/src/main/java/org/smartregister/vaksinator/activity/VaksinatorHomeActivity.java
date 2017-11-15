@@ -24,9 +24,10 @@ import org.smartregister.event.Listener;
 import org.smartregister.service.PendingFormSubmissionService;
 import org.smartregister.sync.SyncAfterFetchListener;
 import org.smartregister.sync.SyncProgressIndicator;
-import org.smartregister.sync.UpdateActionsTask;
 import org.smartregister.vaksinator.controller.VaksinatorNavigationController;
 import org.smartregister.vaksinator.R;
+import org.smartregister.vaksinator.service.FormSubmissionSyncService;
+import org.smartregister.vaksinator.sync.UpdateActionsTask;
 import org.smartregister.vaksinator.utils.AllConstantsINA;
 import org.smartregister.view.activity.SecuredActivity;
 import org.smartregister.view.contract.HomeContext;
@@ -283,20 +284,19 @@ public class VaksinatorHomeActivity extends SecuredActivity {
 
     public void updateFromServer() {
         Log.d("Home", "updateFromServer: tombol update");
-//        UpdateActionsTask updateActionsTask = new UpdateActionsTask(
-//                this, context().actionService(), context().formSubmissionSyncService(),
-//                new SyncProgressIndicator(), context().allFormVersionSyncService());
+        UpdateActionsTask updateActionsTask = new UpdateActionsTask(
+                this, context().actionService(), new FormSubmissionSyncService(context().applicationContext()) ,new SyncProgressIndicator(), context().allFormVersionSyncService());
 //        FlurryFacade.logEvent("click_update_from_server");
-//        updateActionsTask.updateFromServer(new SyncAfterFetchListener());
-//
-////        if (LoginActivity.generator.uniqueIdController().needToRefillUniqueId(LoginActivity.generator.UNIQUE_ID_LIMIT))  // unique id part
-////            LoginActivity.generator.requestUniqueId();                                                                  // unique id part
-//
-//        String locationjson = context().anmLocationController().get();
-//        LocationTree locationTree = EntityUtils.fromJson(locationjson, LocationTree.class);
-//
-//        Map<String, TreeNode<String, Location>> locationMap =
-//                locationTree.getLocationsHierarchy();
+        updateActionsTask.updateFromServer(new SyncAfterFetchListener());
+
+//        if (LoginActivity.generator.uniqueIdController().needToRefillUniqueId(LoginActivity.generator.UNIQUE_ID_LIMIT))  // unique id part
+//            LoginActivity.generator.requestUniqueId();                                                                  // unique id part
+
+        String locationjson = context().anmLocationController().get();
+        LocationTree locationTree = EntityUtils.fromJson(locationjson, LocationTree.class);
+
+        Map<String, TreeNode<String, Location>> locationMap =
+                locationTree.getLocationsHierarchy();
 
 
 //        String query  = "INSERT INTO ec_anak VALUES('1','2','xx',0,'asdf','zxxv','',3200,'bayi','2017-02-02')";
