@@ -24,6 +24,8 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import org.json.JSONException;
+import org.json.JSONObject;
 import org.smartregister.Context;
 import org.smartregister.vaksinator.R;
 import org.smartregister.vaksinator.application.VaksinatorApplication;
@@ -357,6 +359,8 @@ public class LoginActivity extends AppCompatActivity {
 
     private void remoteLoginWith(String userName, String password, String userInfo) {
         context.userService().remoteLogin(userName, password, userInfo);
+        String locationId = getUserDefaultLocationId(userInfo);
+        saveDefaultLocationId(userName,locationId);
         LoginActivity.generator = new Generator(context, userName, password);
         goToHome();
         //DrishtiSyncScheduler.startOnlyIfConnectedToNetwork(getApplicationContext());
@@ -412,6 +416,24 @@ public class LoginActivity extends AppCompatActivity {
             conf.locale = new Locale(ENGLISH_LOCALE);
             res.updateConfiguration(conf, dm);
             return ENGLISH_LANGUAGE;
+        }
+    }
+
+    public String getUserDefaultLocationId(String userInfo) {
+        try {
+            JSONObject userLocationJSON = new JSONObject(userInfo);
+            return userLocationJSON.getJSONObject("team").getJSONObject("team")
+                    .getJSONObject("location").getString("name");
+        } catch (JSONException e) {
+            android.util.Log.v("Error : ", e.getMessage());
+        }
+
+        return null;
+    }
+
+    public void saveDefaultLocationId(String userName, String locationId) {
+        if (userName != null) {
+            context.userService().getAllSharedPreferences().savePreference(userName + "-locationid", locationId);
         }
     }
 
