@@ -1,7 +1,7 @@
 package org.smartregister.gizi.activity;
-
 import android.database.Cursor;
 import android.os.StrictMode;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -11,28 +11,28 @@ import android.widget.Toast;
 
 import com.flurry.android.FlurryAgent;
 
-import org.smartregister.Context;
-import org.smartregister.commonregistry.CommonPersonObjectController;
-import org.smartregister.cursoradapter.SmartRegisterQueryBuilder;
-import org.smartregister.event.Listener;
-
-import org.smartregister.gizi.R;
-import org.smartregister.gizi.controller.GiziNavigationController;
-import org.smartregister.service.PendingFormSubmissionService;
-import org.smartregister.sync.SyncAfterFetchListener;
-import org.smartregister.sync.SyncProgressIndicator;
-import org.smartregister.sync.UpdateActionsTask;
-import org.smartregister.gizi.libs.FlurryFacade;
-import org.smartregister.view.activity.SecuredActivity;
-import org.smartregister.view.contract.HomeContext;
-import org.smartregister.view.controller.NativeAfterANMDetailsFetchListener;
-import org.smartregister.view.controller.NativeUpdateANMDetailsTask;
-import org.smartregister.enketo.view.fragment.DisplayFormFragment;
 import org.json.JSONObject;
 import org.opensrp.api.domain.Location;
 import org.opensrp.api.util.EntityUtils;
 import org.opensrp.api.util.LocationTree;
 import org.opensrp.api.util.TreeNode;
+import org.smartregister.Context;
+import org.smartregister.commonregistry.CommonPersonObjectController;
+import org.smartregister.cursoradapter.SmartRegisterQueryBuilder;
+import org.smartregister.event.Listener;
+import org.smartregister.service.PendingFormSubmissionService;
+import org.smartregister.sync.SyncAfterFetchListener;
+import org.smartregister.sync.SyncProgressIndicator;
+import org.smartregister.gizi.controller.GiziNavigationController;
+import org.smartregister.gizi.R;
+import org.smartregister.gizi.service.FormSubmissionSyncService;
+import org.smartregister.gizi.sync.UpdateActionsTask;
+import org.smartregister.gizi.utils.AllConstantsINA;
+import org.smartregister.view.activity.SecuredActivity;
+import org.smartregister.view.contract.HomeContext;
+import org.smartregister.view.controller.NativeAfterANMDetailsFetchListener;
+import org.smartregister.view.controller.NativeUpdateANMDetailsTask;
+import org.smartregister.enketo.view.fragment.DisplayFormFragment;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -42,6 +42,7 @@ import java.util.Map;
 import util.formula.Support;
 
 import static android.widget.Toast.LENGTH_SHORT;
+import static com.flurry.android.FlurryAgent.logEvent;
 import static java.lang.String.valueOf;
 import static org.smartregister.event.Event.ACTION_HANDLED;
 import static org.smartregister.event.Event.FORM_SUBMITTED;
@@ -238,7 +239,7 @@ public class GiziHomeActivity extends SecuredActivity {
         }
     }
 
-    public void updateFromServer() {
+    /*public void updateFromServer() {
         UpdateActionsTask updateActionsTask = new UpdateActionsTask(
                 this, context().actionService(), context().formSubmissionSyncService(),
                 new SyncProgressIndicator(), context().allFormVersionSyncService());
@@ -251,6 +252,75 @@ public class GiziHomeActivity extends SecuredActivity {
                 locationTree.getLocationsHierarchy();
 
 
+    }*/
+    public void updateFromServer() {
+        Log.d("Home", "updateFromServer: tombol update");
+        UpdateActionsTask updateActionsTask = new UpdateActionsTask(
+                this, context().actionService(), new FormSubmissionSyncService(context().applicationContext()) ,new SyncProgressIndicator(), context().allFormVersionSyncService());
+//        FlurryFacade.logEvent("click_update_from_server");
+        updateActionsTask.updateFromServer(new SyncAfterFetchListener());
+
+//        if (LoginActivity.generator.uniqueIdController().needToRefillUniqueId(LoginActivity.generator.UNIQUE_ID_LIMIT))  // unique id part
+//            LoginActivity.generator.requestUniqueId();                                                                  // unique id part
+
+        String locationjson = context().anmLocationController().get();
+        LocationTree locationTree = EntityUtils.fromJson(locationjson, LocationTree.class);
+
+        Map<String, TreeNode<String, Location>> locationMap =
+                locationTree.getLocationsHierarchy();
+
+
+
+        String query  = "SELECT name FROM sqlite_master WHERE type='table'";
+        String db = context().initRepository().getWritableDatabase().getPath();
+        Cursor dbs = context().initRepository().getWritableDatabase().rawQuery(query, null);
+        Log.d("testanak", "db: " + db);
+        if (dbs.moveToFirst()){
+            do{
+                String data = dbs.getString(dbs.getColumnIndex("name"));
+                Log.d("testanak", "table name: " + data);
+                Cursor temp = context().initRepository().getWritableDatabase().rawQuery("SELECT * FROM "+data, null);
+                temp.moveToFirst();
+                Log.d("testanak", data+": " + temp.getCount());
+                String output ="";
+                for(String str: temp.getColumnNames())
+                    output=output+", "+str;
+                Log.d("testanak", "getColumnNames: " + output);
+                String output2 ="";
+                if(temp.getCount()>0){
+                    if (temp.moveToFirst()){
+                        do{
+                            for(String d:temp.getColumnNames()){
+                                String value = "";
+                                if(d!=""){
+                                    if(temp.getType(temp.getColumnIndex(d))== temp.FIELD_TYPE_BLOB){
+                                        value = "blob";
+                                    }else{
+                                        value = temp.getString(temp.getColumnIndex(d));
+                                    }
+                                }
+                                output2=output2+", "+value;
+                            }
+                        }while(temp.moveToNext());
+                    }
+                    Log.d("testanak", "getColumnNames: " + output2);
+                }
+
+                temp.close();
+            }while(dbs.moveToNext());
+        }
+        Log.d("testanak", "getCount: " + dbs.getCount());
+        dbs.close();
+
+
+//        Cursor childcountcursor = context().commonrepository("ec_anak").rawCustomQueryForAdapter("SELECT * FROM ec_anak");
+//        childcountcursor.moveToFirst();
+//        Log.d("testanak", "getCount: "+childcountcursor.getCount());
+//        Log.d("testanak", "getColumnCount: "+childcountcursor.getColumnCount());
+//        String output ="";
+//        for(String str: childcountcursor.getColumnNames())
+//            output=output+", "+str;
+//        Log.d("testanak", "getColumnNames: "+output);
     }
 
     @Override
