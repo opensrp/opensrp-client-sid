@@ -218,7 +218,7 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     private void localLogin(View view, String userName, String password) {
-        if (context.userService().isValidLocalLogin(userName, password)) {
+        if (getOpenSRPContext().userService().isUserInValidGroup(userName, password)) {
             localLoginWith(userName, password);
 
             // Tracking Error
