@@ -422,8 +422,7 @@ public class LoginActivity extends AppCompatActivity {
     public String getUserDefaultLocationId(String userInfo) {
         try {
             JSONObject userLocationJSON = new JSONObject(userInfo);
-            return userLocationJSON.getJSONObject("team").getJSONObject("team")
-                    .getJSONObject("location").getString("name");
+            return userLocationJSON.getJSONObject("team").getJSONArray("location").getJSONObject(0).getString("name");
         } catch (JSONException e) {
             android.util.Log.v("Error : ", e.getMessage());
         }
