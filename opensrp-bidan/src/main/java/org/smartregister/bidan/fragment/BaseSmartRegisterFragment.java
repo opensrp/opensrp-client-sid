@@ -6,6 +6,10 @@ import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
 import android.view.View;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.ProgressBar;
+import android.widget.TextView;
 
 import org.apache.commons.lang3.StringUtils;
 import org.json.JSONException;
@@ -31,6 +35,13 @@ import static org.apache.commons.lang3.StringUtils.isEmpty;
 public class BaseSmartRegisterFragment extends SecuredNativeSmartRegisterCursorAdapterFragment {
 
     private static final String TAG = BaseSmartRegisterFragment.class.getName();
+    private TextView filterCount;
+    private View filterSection;
+    private ImageView backButton;
+    private TextView nameInitials;
+    private LinearLayout btnBackToHome;
+    private ProgressBar syncProgressBar;
+    private int dueOverdueCount = 0;
 
     // TODO change to FLHW
     private LocationPickerView clinicSelection;

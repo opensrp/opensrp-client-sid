@@ -172,4 +172,11 @@ public class KIbuSmartRegisterActivity extends BaseRegisterActivity {
         FragmentPagerAdapter fragmentPagerAdapter = mPagerAdapter;
         return getSupportFragmentManager().findFragmentByTag("android:switcher:" + mPager.getId() + ":" + fragmentPagerAdapter.getItemId(position));
     }
+
+    public void updateAdvancedSearchFilterCount(int count) {
+//        AdvancedSearchFragment advancedSearchFragment = (AdvancedSearchFragment) findFragmentByPosition(ADVANCED_SEARCH_POSITION);
+//        if (advancedSearchFragment != null) {
+//            advancedSearchFragment.updateFilterCount(count);
+//        }
+    }
 }

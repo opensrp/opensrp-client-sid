@@ -49,7 +49,7 @@
     <string name="no_record">No Records Found</string>
     <string name="str_search_hint">Search name or ID</string>
     <string name="woman_alphabetical_sort">Alphabetical (Name)</string>
-    <string name="id_sort">BIDAN ID </string>
+    <string name="id_sort">ID Rekam </string>
 
 
 </resources>

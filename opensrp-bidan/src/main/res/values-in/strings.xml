@@ -487,5 +487,9 @@
 
     <string name="bidan_profile">BIDAN</string>
     <string name="bidan_contact_number">No HP:</string>
+    <string name="woman_alphabetical_sort">Alfabet (Nama)</string>
+    <string name="woman_age_sort">Umur</string>
+    <string name="woman_duestatus_sort">Terlewat</string>
+    <string name="str_search_hint">Cari Nama atau ID</string>
 
 </resources>
