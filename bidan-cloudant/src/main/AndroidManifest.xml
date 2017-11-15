@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="org.smartregister.bidan_cloudant">
+
+    <application
+        android:name=".application.BidanApplication"
+        android:allowBackup="true"
+        android:icon="@mipmap/ic_launcher"
+        >
+        <activity
+            android:name=".activity.LoginActivity"
+            android:label="@string/app_name"
+            android:theme="@style/BidanAppTheme"
+            android:screenOrientation="landscape"
+            android:windowSoftInputMode="stateAlwaysHidden|adjustResize"
+            >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".activity.BidanHomeActivity"
+            android:theme="@style/BidanAppTheme"
+            android:screenOrientation="landscape" />
+        <activity android:name=".activity.KMotherSmartRegisterActivity"
+            android:configChanges="keyboardHidden|orientation|screenSize"
+            android:theme="@style/AppThemeNoActionBarAndTitle"
+            android:windowSoftInputMode="adjustResize"
+            android:screenOrientation="landscape"/>
+        <activity android:name=".activity.KFPSmartRegisterActivity"
+            android:configChanges="keyboardHidden|orientation|screenSize"
+            android:theme="@style/AppThemeNoActionBarAndTitle"
+            android:windowSoftInputMode="adjustResize"
+            android:screenOrientation="landscape"/>
+        <activity android:name=".activity.KANCSmartRegisterActivity"
+            android:configChanges="keyboardHidden|orientation|screenSize"
+            android:theme="@style/AppThemeNoActionBarAndTitle"
+            android:windowSoftInputMode="adjustResize"
+            android:screenOrientation="landscape"/>
+        <activity android:name=".activity.KPNCSmartRegisterActivity"
+            android:configChanges="keyboardHidden|orientation|screenSize"
+            android:theme="@style/AppThemeNoActionBarAndTitle"
+            android:windowSoftInputMode="adjustResize"
+            android:screenOrientation="landscape"/>
+        <activity android:name=".activity.KChildSmartRegisterActivity"
+            android:configChanges="keyboardHidden|orientation|screenSize"
+            android:theme="@style/AppThemeNoActionBarAndTitle"
+            android:windowSoftInputMode="adjustResize"
+            android:screenOrientation="landscape"/>
+        <activity android:name=".activity.BidanDetailActivity"
+            android:configChanges="keyboardHidden|orientation|screenSize"
+            android:theme="@style/AppThemeNoActionBarAndTitle"
+            android:windowSoftInputMode="adjustResize"
+            android:screenOrientation="landscape"/>
+        <activity android:name=".activity.BidanRecapitulationActivity"
+            android:configChanges="keyboardHidden|orientation|screenSize"
+            android:theme="@style/AppThemeNoActionBarAndTitle"
+            android:windowSoftInputMode="adjustResize"
+            android:screenOrientation="landscape"/>
+        <activity
+            android:name=".activity.SettingsActivity"
+            android:theme="@style/BidanAppTheme"
+            android:screenOrientation="landscape" />
+        <!-- local key -->
+            <!--<meta-data-->
+            <!--android:name="io.fabric.ApiKey"-->
+            <!--android:value="b74c58c94d8965151212e8ecf1f4fdfbf5b7f4e4" />-->
+        <!-- sid key -->
+        <meta-data
+            android:name="io.fabric.ApiKey"
+            android:value="b74c58c94d8965151212e8ecf1f4fdfbf5b7f4e4" />
+
+    </application>
+
+    <uses-permission android:name="android.permission.INTERNET" />
+</manifest>

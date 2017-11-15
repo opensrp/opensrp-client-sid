@@ -1,2 +1,3 @@
 rootProject.name = 'opensrp-app-bidan'
 include ':opensrp-bidan'
+include ':bidan-cloudant'
