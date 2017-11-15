@@ -143,9 +143,10 @@ public class ClientProcessor {
             }
 
             // Check if child is deceased and skip
-            if (client.has("deathdate") && !client.getString("deathdate").isEmpty()) {
-                return false;
-            }
+//            if (client.has("deathdate") && !client.getString("deathdate").isEmpty()) {
+//                Log.d(TAG, "processEvent: has deathdate");
+//                return false;
+//            }
 
             // Get the client type classification
             JSONArray clientClasses = clientClassificationJson
