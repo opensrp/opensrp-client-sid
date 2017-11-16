@@ -12,6 +12,7 @@ import android.widget.TextView;
 
 import com.flurry.android.FlurryAgent;
 
+import org.json.JSONObject;
 import org.smartregister.Context;
 import org.smartregister.bidan_cloudant.R;
 import org.smartregister.bidan_cloudant.libs.FlurryFacade;
@@ -26,9 +27,14 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.UUID;
 
 import util.ImageFetcher;
+import util.Utils;
 import util.formula.Support;
+
+import static org.smartregister.util.StringUtil.humanize;
+import static org.smartregister.util.StringUtil.humanizeAndDoUPPERCASE;
 
 //import org.smartregister.bidan_cloudant.face.camera.SmartShutterActivity;
 
@@ -41,331 +47,280 @@ public class KPNCDetailActivity extends Activity {
     private static final String TAG = KPNCDetailActivity.class.getSimpleName();
     private static final String IMAGE_CACHE_DIR = "thumbs";
     //  private static KmsCalc  kmsCalc;
-
     private static int mImageThumbSize;
     private static int mImageThumbSpacing;
     private static String showbgm;
     private static ImageFetcher mImageFetcher;
 
     //image retrieving
-    public static CommonPersonObjectClient controller;
+
+    public static CommonPersonObjectClient pncclient;
+    private SimpleDateFormat fta;
+    private SimpleDateFormat ftb;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         Context context = Context.getInstance();
-        setContentView(R.layout.smart_register_jurim_detail_client);
-
-        DetailsRepository detailsRepository = Context.getInstance().detailsRepository();
-        detailsRepository.updateDetails(controller);
-
-        AllCommonsRepository childRepository = Context.getInstance().allCommonsRepositoryobjects("ec_anak");
-        final CommonPersonObject controllers = childRepository.findByCaseID(controller.entityId());
-
-        AllCommonsRepository kirep = Context.getInstance().allCommonsRepositoryobjects("ec_kartu_ibu");
-        final CommonPersonObject kiparent = kirep.findByCaseID(Support.getColumnmaps(controllers, "relational_id"));
+        setContentView(R.layout.pnc_detail_activity);
 
         String DetailStart = timer.format(new Date());
         Map<String, String> Detail = new HashMap<String, String>();
         Detail.put("start", DetailStart);
-        FlurryAgent.logEvent("vaksinator_detail_view",Detail, true );
-        //label
-        TextView label001 = (TextView) findViewById(R.id.label001);
-        TextView label002 = (TextView) findViewById(R.id.label002);
-        TextView nameLabel = (TextView) findViewById(R.id.nameLabel);
-        TextView fatherLabel = (TextView) findViewById(R.id.fatherNameLabel);
-        TextView motherLabel = (TextView) findViewById(R.id.motherNameLabel);
-        TextView villageLabel = (TextView) findViewById(R.id.villageLabel);
-        TextView subVillageLabel = (TextView) findViewById(R.id.subVillageLabel);
-        TextView dateOfBirthLabel = (TextView) findViewById(R.id.dateOfBirthLabel);
-        TextView birthWeightLabel = (TextView) findViewById(R.id.birthWeightLabel);
-        TextView antipiretikLabel = (TextView) findViewById(R.id.antipyreticLabel);
-        TextView hbLabel = (TextView) findViewById(R.id.hbLabel);
-        TextView campakLabel = (TextView) findViewById(R.id.campakLabel);
-        TextView completeLabel = (TextView) findViewById(R.id.completeLabel);
-        TextView additionalDPTLabel = (TextView) findViewById(R.id.additionalDPTLabel);
-        TextView additionalMeaslesLabel = (TextView) findViewById(R.id.additionalMeaslesLabel);
+        FlurryAgent.logEvent("PNC_detail_view",Detail, true );
+
+        final ImageView kiview = (ImageView)findViewById(R.id.motherdetailprofileview);
+        //header
+        TextView today = (TextView) findViewById(R.id.detail_today);
 
         //profile
-        TextView uid = (TextView) findViewById(R.id.uidValue);
-        TextView nama = (TextView) findViewById(R.id.childName);
-        TextView motherName = (TextView) findViewById(R.id.motherName);
-        TextView fatherName = (TextView) findViewById(R.id.fatherName);
-        TextView village = (TextView) findViewById(R.id.village);
-        TextView subVillage = (TextView) findViewById(R.id.subvillage);
-        TextView dateOfBirth = (TextView) findViewById(R.id.dateOfBirth);
-        TextView birthWeight = (TextView) findViewById(R.id.birthWeight);
-        TextView antipiretik = (TextView) findViewById(R.id.antypiretic);
+        TextView nama = (TextView) findViewById(R.id.txt_wife_name);
+        TextView nik = (TextView) findViewById(R.id.txt_nik);
+        TextView husband_name = (TextView) findViewById(R.id.txt_husband_name);
+        TextView dob = (TextView) findViewById(R.id.txt_dob);
+        TextView phone = (TextView) findViewById(R.id.txt_contact_phone_number);
+        TextView risk1 = (TextView) findViewById(R.id.txt_risk1);
+        TextView risk2 = (TextView) findViewById(R.id.txt_risk2);
+        TextView risk3 = (TextView) findViewById(R.id.txt_risk3);
+        TextView risk4 = (TextView) findViewById(R.id.txt_risk4);
+//        TextView risk5 = (TextView) findViewById(R.id.txt_risk5);
+//        TextView risk6 = (TextView) findViewById(R.id.txt_risk6);
+//        TextView risk7 = (TextView) findViewById(R.id.txt_risk7);
+//        TextView risk8 = (TextView) findViewById(R.id.txt_risk8);
 
-        //vaccination date
-        TextView hb1Under7 = (TextView) findViewById(R.id.hb1under7);
-        TextView bcg = (TextView) findViewById(R.id.bcg);
-        TextView pol1 = (TextView) findViewById(R.id.pol1);
-        TextView dpt1 = (TextView) findViewById(R.id.dpt1);
-        TextView pol2 = (TextView) findViewById(R.id.pol2);
-        TextView dpt2 = (TextView) findViewById(R.id.dpt2);
-        TextView pol3 = (TextView) findViewById(R.id.pol3);
-        TextView dpt3 = (TextView) findViewById(R.id.dpt3);
-        TextView pol4 = (TextView) findViewById(R.id.pol4);
-        TextView ipv = (TextView) findViewById(R.id.ipv);
-        TextView measles = (TextView) findViewById(R.id.measles);
-        TextView complete = (TextView) findViewById(R.id.complete);
-        TextView additionalDPT = (TextView) findViewById(R.id.additionalDPT);
-        TextView additionalMeasles = (TextView) findViewById(R.id.additionalMeasles);
-        final ImageView photo = (ImageView) findViewById(R.id.photo);
+//        ImageView heart_bpm = (ImageView) findViewById(R.id.icon_device);
+        ImageView device = (ImageView) findViewById(R.id.icon_device);
+        device.setVisibility(View.VISIBLE);
+//        device.setOnClickListener(bpmListener);
 
-        ImageButton backButton = (ImageButton) findViewById(R.id.btn_back_to_home);
-        backButton.setOnClickListener(new View.OnClickListener() {
+        //detail data
+        TextView txt_keadaanIbu = (TextView) findViewById(R.id.txt_keadaanIbu);
+        TextView txt_keadaanBayi = (TextView) findViewById(R.id.txt_keadaanBayi);
+        TextView txt_beratLahir = (TextView) findViewById(R.id.txt_beratLahir);
+        TextView txt_persalinan = (TextView) findViewById(R.id.txt_persalinan);
+        TextView txt_jamKalaIAktif = (TextView) findViewById(R.id.txt_jamKalaIAktif);
+        TextView txt_jamKalaII = (TextView) findViewById(R.id.txt_jamKalaII);
+        TextView txt_jamPlasentaLahir = (TextView) findViewById(R.id.txt_jamPlasentaLahir);
+        TextView txt_perdarahanKalaIV2JamPostpartum = (TextView) findViewById(R.id.txt_perdarahanKalaIV2JamPostpartum);
+        TextView txt_persentasi = (TextView) findViewById(R.id.txt_persentasi);
+        TextView txt_tempatBersalin = (TextView) findViewById(R.id.txt_tempatBersalin);
+        TextView txt_penolong = (TextView) findViewById(R.id.txt_penolong);
+        TextView txt_caraPersalinanIbu = (TextView) findViewById(R.id.txt_caraPersalinanIbu);
+        TextView txt_namaBayi = (TextView) findViewById(R.id.txt_namaBayi);
+        TextView txt_jenisKelamin = (TextView) findViewById(R.id.txt_jenisKelamin);
+
+        TextView txt_tanggalLahirAnak = (TextView) findViewById(R.id.txt_tanggalLahirAnak);
+        TextView txt_hariKeKF = (TextView) findViewById(R.id.txt_hariKeKF);
+        TextView txt_tandaVitalTDDiastolik = (TextView) findViewById(R.id.txt_tandaVitalTDDiastolik);
+        TextView txt_tandaVitalTDSistolik = (TextView) findViewById(R.id.txt_tandaVitalTDSistolik);
+        TextView txt_tandaVitalSuhu = (TextView) findViewById(R.id.txt_tandaVitalSuhu);
+        TextView txt_pelayananfe = (TextView) findViewById(R.id.txt_pelayananfe);
+        TextView txt_vitaminA2jamPP = (TextView) findViewById(R.id.txt_vitaminA2jamPP);
+        TextView txt_vitaminA24jamPP = (TextView) findViewById(R.id.txt_vitaminA24jamPP);
+        TextView txt_integrasiProgramAntiMalaria = (TextView) findViewById(R.id.txt_integrasiProgramAntiMalaria);
+        TextView txt_integrasiProgramantitb = (TextView) findViewById(R.id.txt_integrasiProgramantitb);
+
+        TextView txt_integrasiProgramFotoThorax = (TextView) findViewById(R.id.txt_integrasiProgramFotoThorax);
+        TextView txt_komplikasi = (TextView) findViewById(R.id.txt_komplikasi);
+        TextView txt_daruratNifas = (TextView) findViewById(R.id.txt_daruratNifas);
+        TextView txt_penangananNifas = (TextView) findViewById(R.id.txt_penangananNifas);
+
+        final TextView show_risk = (TextView) findViewById(R.id.show_more);
+        final TextView show_detail = (TextView) findViewById(R.id.show_more_detail);
+
+        //detail RISK
+        TextView highRiskSTIBBVs = (TextView) findViewById(R.id.txt_highRiskSTIBBVs);
+        TextView highRiskEctopicPregnancy = (TextView) findViewById(R.id.txt_highRiskEctopicPregnancy);
+        TextView highRiskCardiovascularDiseaseRecord = (TextView) findViewById(R.id.txt_highRiskCardiovascularDiseaseRecord);
+        TextView highRiskDidneyDisorder = (TextView) findViewById(R.id.txt_highRiskDidneyDisorder);
+        TextView highRiskHeartDisorder = (TextView) findViewById(R.id.txt_highRiskHeartDisorder);
+        TextView highRiskAsthma = (TextView) findViewById(R.id.txt_highRiskAsthma);
+        TextView highRiskTuberculosis = (TextView) findViewById(R.id.txt_highRiskTuberculosis);
+        TextView highRiskMalaria = (TextView) findViewById(R.id.txt_highRiskMalaria);
+        TextView highRiskPregnancyPIH = (TextView) findViewById(R.id.txt_highRiskPregnancyPIH);
+        TextView highRiskPregnancyProteinEnergyMalnutrition = (TextView) findViewById(R.id.txt_highRiskPregnancyProteinEnergyMalnutrition);
+
+        TextView txt_highRiskLabourTBRisk = (TextView) findViewById(R.id.txt_highRiskLabourTBRisk);
+        TextView txt_HighRiskLabourSectionCesareaRecord = (TextView) findViewById(R.id.txt_HighRiskLabourSectionCesareaRecord);
+        TextView txt_highRisklabourFetusNumber = (TextView) findViewById(R.id.txt_highRisklabourFetusNumber);
+        TextView txt_highRiskLabourFetusSize = (TextView) findViewById(R.id.txt_highRiskLabourFetusSize);
+        TextView txt_lbl_highRiskLabourFetusMalpresentation = (TextView) findViewById(R.id.txt_lbl_highRiskLabourFetusMalpresentation);
+        TextView txt_highRiskPregnancyAnemia = (TextView) findViewById(R.id.txt_highRiskPregnancyAnemia);
+        TextView txt_highRiskPregnancyDiabetes = (TextView) findViewById(R.id.txt_highRiskPregnancyDiabetes);
+        TextView HighRiskPregnancyTooManyChildren = (TextView) findViewById(R.id.txt_HighRiskPregnancyTooManyChildren);
+        TextView highRiskPostPartumSectioCaesaria = (TextView) findViewById(R.id.txt_highRiskPostPartumSectioCaesaria);
+        TextView highRiskPostPartumForceps = (TextView) findViewById(R.id.txt_highRiskPostPartumForceps);
+        TextView highRiskPostPartumVacum = (TextView) findViewById(R.id.txt_highRiskPostPartumVacum);
+        TextView highRiskPostPartumPreEclampsiaEclampsia = (TextView) findViewById(R.id.txt_highRiskPostPartumPreEclampsiaEclampsia);
+        TextView highRiskPostPartumMaternalSepsis = (TextView) findViewById(R.id.txt_highRiskPostPartumMaternalSepsis);
+        TextView highRiskPostPartumInfection = (TextView) findViewById(R.id.txt_highRiskPostPartumInfection);
+        TextView highRiskPostPartumHemorrhage = (TextView) findViewById(R.id.txt_highRiskPostPartumHemorrhage);
+
+        TextView highRiskPostPartumPIH = (TextView) findViewById(R.id.txt_highRiskPostPartumPIH);
+        TextView highRiskPostPartumDistosia = (TextView) findViewById(R.id.txt_highRiskPostPartumDistosia);
+        TextView txt_highRiskHIVAIDS = (TextView) findViewById(R.id.txt_highRiskHIVAIDS);
+
+
+        ImageButton back = (ImageButton) findViewById(R.id.btn_back_to_home);
+        back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 finish();
-
-                startActivity(new Intent(KPNCDetailActivity.this, KChildSmartRegisterActivity.class));
+                startActivity(new Intent(KPNCDetailActivity.this, KPNCSmartRegisterActivity.class));
                 overridePendingTransition(0, 0);
-                //Start capture flurry log for FS
                 String DetailEnd = timer.format(new Date());
                 Map<String, String> Detail = new HashMap<String, String>();
                 Detail.put("end", DetailEnd);
-                FlurryAgent.logEvent("vaksinator_detail_view",Detail, true );
+                FlurryAgent.logEvent("PNC_detail_view", Detail, true);
             }
         });
 
-        TextView recapitulationLabel = (TextView)findViewById(R.id.recapitulation_label);
-        recapitulationLabel.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                finish();
-                BidanRecapitulationActivity.staticVillageName = Support.getDetails(controller,"desa_anak");
-                startActivity(new Intent(KPNCDetailActivity.this, BidanRecapitulationActivity.class));
-                overridePendingTransition(0, 0);
-                FlurryFacade.logEvent("click_recapitulation_button");
-            }
-        });
+        txt_keadaanIbu.setText(String.format(": %s", humanize(pncclient.getDetails().get("keadaanIbu") != null ? pncclient.getDetails().get("keadaanIbu") : "-")));
+        txt_keadaanBayi.setText(String.format(": %s", humanize(pncclient.getDetails().get("keadaanBayi") != null ? pncclient.getDetails().get("keadaanBayi") : "-")));
+        txt_beratLahir.setText(String.format(": %s", humanize(pncclient.getDetails().get("beratLahir") != null ? pncclient.getDetails().get("beratLahir") : "-")));
+        txt_persalinan.setText(String.format(": %s", humanize(pncclient.getDetails().get("persalinan") != null ? pncclient.getDetails().get("persalinan") : "-")));
+        txt_jamKalaIAktif.setText(String.format(": %s", humanize(pncclient.getDetails().get("jamKalaIAktif") != null ? pncclient.getDetails().get("jamKalaIAktif") : "-")));
+        txt_jamKalaII.setText(String.format(": %s", humanize(pncclient.getDetails().get("jamKalaII") != null ? pncclient.getDetails().get("jamKalaII") : "-")));
+        txt_jamPlasentaLahir.setText(String.format(": %s", humanize(pncclient.getDetails().get("jamPlasentaLahir") != null ? pncclient.getDetails().get("jamPlasentaLahir") : "-")));
+        txt_perdarahanKalaIV2JamPostpartum.setText(String.format(": %s", humanize(pncclient.getDetails().get("perdarahanKalaIV2JamPostpartum") != null ? pncclient.getDetails().get("perdarahanKalaIV2JamPostpartum") : "-")));
+        txt_persentasi.setText(String.format(": %s", pncclient.getDetails().get("persentasi") != null ? pncclient.getDetails().get("persentasi") : "-"));
+        txt_tempatBersalin.setText(String.format(": %s", humanize(pncclient.getDetails().get("tempatBersalin") != null ? pncclient.getDetails().get("tempatBersalin") : "-")));
+        txt_penolong.setText(String.format(": %s", humanize(pncclient.getDetails().get("penolong") != null ? pncclient.getDetails().get("penolong") : "-")));
+        txt_caraPersalinanIbu.setText(String.format(": %s", humanize(pncclient.getDetails().get("caraPersalinanIbu") != null ? pncclient.getDetails().get("caraPersalinanIbu") : "-")));
+        txt_namaBayi.setText(String.format(": %s", humanize(pncclient.getDetails().get("namaBayi") != null ? pncclient.getDetails().get("namaBayi") : "-")));
+        txt_jenisKelamin.setText(String.format(": %s", humanize(pncclient.getDetails().get("jenisKelamin") != null ? pncclient.getDetails().get("jenisKelamin") : "-")));
+        txt_tanggalLahirAnak.setText(String.format(": %s", humanize(pncclient.getDetails().get("anak.tanggalLahirAnak") != null ? pncclient.getDetails().get("anak.tanggalLahirAnak") : "-")));
 
-        //Label rename
-        label001.setText(getString(R.string.title001));
-        label002.setText(getString(R.string.title002));
-        nameLabel.setText(getString(R.string.namaAnak));
-        fatherLabel.setText(getString(R.string.namaAyah));
-        motherLabel.setText(getString(R.string.namaIbu));
-        villageLabel.setText(getString(R.string.desa));
-        subVillageLabel.setText(getString(R.string.dusun));
-        dateOfBirthLabel.setText(getString(R.string.tanggalLahir));
-        birthWeightLabel.setText(getString(R.string.beratLahir));
-        antipiretikLabel.setText(getString(R.string.dapatAntipiretik));
-        hbLabel.setText("HB0 (0-7 "+getString(R.string.hari)+")");
-        campakLabel.setText(getString(R.string.measles));
-        completeLabel.setText(getString(R.string.imunisasiLengkap));
-        additionalDPTLabel.setText(getString(R.string.dptTambahan));
-        additionalMeaslesLabel.setText(getString(R.string.campakTambahan));
+        txt_tandaVitalSuhu.setText(String.format(": %s", humanize(pncclient.getDetails().get("tandaVitalSuhu") != null ? pncclient.getDetails().get("tandaVitalSuhu") : "-")));
+        txt_pelayananfe.setText(String.format(": %s", humanize(pncclient.getDetails().get("pelayananfe") != null ? pncclient.getDetails().get("pelayananfe") : "-")));
+        txt_vitaminA2jamPP.setText(String.format(": %s", humanize(pncclient.getDetails().get("vitaminA2jamPP") != null ? pncclient.getDetails().get("vitaminA2jamPP") : "-")));
+        txt_vitaminA24jamPP.setText(String.format(": %s", humanize(pncclient.getDetails().get("vitaminA24jamPP") != null ? pncclient.getDetails().get("vitaminA24jamPP") : "-")));
+        txt_integrasiProgramAntiMalaria.setText(String.format(": %s", humanize(pncclient.getDetails().get("integrasiProgramAntiMalaria") != null ? pncclient.getDetails().get("integrasiProgramAntiMalaria") : "-")));
+        txt_integrasiProgramantitb.setText(String.format(": %s", humanize(pncclient.getDetails().get("integrasiProgramantitb") != null ? pncclient.getDetails().get("integrasiProgramantitb") : "-")));
 
+        txt_integrasiProgramFotoThorax.setText(String.format(": %s", humanize(pncclient.getDetails().get("integrasiProgramFotoThorax") != null ? pncclient.getDetails().get("integrasiProgramFotoThorax") : "-")));
+        txt_komplikasi.setText(String.format(": %s", humanize(pncclient.getDetails().get("komplikasi") != null ? pncclient.getDetails().get("komplikasi") : "-")));
+        txt_daruratNifas.setText(String.format(": %s", humanize(pncclient.getDetails().get("daruratNifas") != null ? pncclient.getDetails().get("daruratNifas") : "-")));
+        txt_penangananNifas.setText(String.format(": %s", humanize(pncclient.getDetails().get("penangananNifas") != null ? pncclient.getDetails().get("penangananNifas") : "-")));
 
-        uid.setText(": "+(Support.getDetails(controller, "UniqueId")));
-        nama.setText(": " + (Support.getColumnmaps(controller, "namaBayi")));
-        village.setText(": " + Support.getDetails(controller,"desa_anak"));
+        //risk detail
 
-        System.out.println("details: "+controller.getDetails().toString());
+        txt_lbl_highRiskLabourFetusMalpresentation.setText(humanize(pncclient.getDetails().get("highRiskLabourFetusMalpresentation") != null ? pncclient.getDetails().get("highRiskLabourFetusMalpresentation") : "-"));
+        txt_highRisklabourFetusNumber.setText(humanize(pncclient.getDetails().get("highRisklabourFetusNumber") != null ? pncclient.getDetails().get("highRisklabourFetusNumber") : "-"));
+        txt_highRiskLabourFetusSize.setText(humanize(pncclient.getDetails().get("highRiskLabourFetusSize") != null ? pncclient.getDetails().get("highRiskLabourFetusSize") : "-"));
+        //   txt_highRiskLabourTBRisk.setText(humanize(pncclient.getDetails().get("highRiskLabourTBRisk") != null ? pncclient.getDetails().get("highRiskLabourTBRisk") : "-"));
+        highRiskPregnancyProteinEnergyMalnutrition.setText(humanize(pncclient.getDetails().get("highRiskPregnancyProteinEnergyMalnutrition") != null ? pncclient.getDetails().get("highRiskPregnancyProteinEnergyMalnutrition") : "-"));
+        highRiskPregnancyPIH.setText(humanize(pncclient.getDetails().get("highRiskPregnancyPIH") != null ? pncclient.getDetails().get("highRiskPregnancyPIH") : "-"));
+        txt_highRiskPregnancyDiabetes.setText(humanize(pncclient.getDetails().get("highRiskPregnancyDiabetes") != null ? pncclient.getDetails().get("highRiskPregnancyDiabetes") : "-"));
+        txt_highRiskPregnancyAnemia.setText(humanize(pncclient.getDetails().get("highRiskPregnancyAnemia") != null ? pncclient.getDetails().get("highRiskPregnancyAnemia") : "-"));
 
-        if(kiparent != null) {
-            detailsRepository.updateDetails(kiparent);
-            String namaayah = kiparent.getDetails().get("namaSuami") != null ? kiparent.getDetails().get("namaSuami") : "";
-            String namaibu = kiparent.getColumnmaps().get("namalengkap") != null ? kiparent.getColumnmaps().get("namalengkap") : "";
+        highRiskPostPartumSectioCaesaria.setText(humanize(pncclient.getDetails().get("highRiskPostPartumSectioCaesaria") != null ? pncclient.getDetails().get("highRiskPostPartumSectioCaesaria") : "-"));
+        highRiskPostPartumForceps.setText(humanize(pncclient.getDetails().get("highRiskPostPartumForceps") != null ? pncclient.getDetails().get("highRiskPostPartumForceps") : "-"));
+        highRiskPostPartumVacum.setText(humanize(pncclient.getDetails().get("highRiskPostPartumVacum") != null ? pncclient.getDetails().get("highRiskPostPartumVacum") : "-"));
+        highRiskPostPartumPreEclampsiaEclampsia.setText(humanize(pncclient.getDetails().get("highRiskPostPartumPreEclampsiaEclampsia") != null ? pncclient.getDetails().get("highRiskPostPartumPreEclampsiaEclampsia") : "-"));
+        highRiskPostPartumMaternalSepsis.setText(humanize(pncclient.getDetails().get("highRiskPostPartumMaternalSepsis") != null ? pncclient.getDetails().get("highRiskPostPartumMaternalSepsis") : "-"));
+        highRiskPostPartumInfection.setText(humanize(pncclient.getDetails().get("highRiskPostPartumInfection") != null ? pncclient.getDetails().get("highRiskPostPartumInfection") : "-"));
+        highRiskPostPartumHemorrhage.setText(humanize(pncclient.getDetails().get("highRiskPostPartumHemorrhage") != null ? pncclient.getDetails().get("highRiskPostPartumHemorrhage") : "-"));
+        highRiskPostPartumPIH.setText(humanize(pncclient.getDetails().get("highRiskPostPartumPIH") != null ? pncclient.getDetails().get("highRiskPostPartumPIH") : "-"));
+        highRiskPostPartumDistosia.setText(humanize(pncclient.getDetails().get("highRiskPostPartumDistosia") != null ? pncclient.getDetails().get("highRiskPostPartumDistosia") : "-"));
 
-            fatherName.setText(": " + namaayah);
-            motherName.setText(": " +namaibu);
-            subVillage.setText(kiparent.getDetails().get("address1") != null ? ": " + kiparent.getDetails().get("address1") : "");
-            // viewHolder.no_ibu.setText(kiparent.getDetails().get("noBayi") != null ? kiparent.getDetails().get("noBayi") : "");
-        }
+        AllCommonsRepository kiRepository = Context.getInstance().allCommonsRepositoryobjects("ec_ibu");
 
-        /*fatherName.setText(": " + (Support.getDetails(controller,"namaAyah") != null ? transformToddmmyyyy(Support.getDetails(controller,"namaAyah");
-        motherName.setText(": " + (Support.getDetails(controller,"namaIbu") != null
-                ? Support.getDetails(controller,"namaIbu")
-                : Support.getDetails(controller,"nama_orang_tua")!=null
-                        ? Support.getDetails(controller,"nama_orang_tua")
-                        : "-"
-            )
-        );*/
-       /* village.setText(": " + (Support.getDetails(controller,"desa") != null
-                ? Support.getDetails(controller,"desa")
-                : "-"))));*/
+        CommonPersonObject kiobject = kiRepository.findByCaseID(pncclient.entityId());
 
-   /*     subVillage.setText(": " + (Support.getDetails(controller,"dusun") != null
-                ? Support.getDetails(controller,"dusun")
-                : Support.getDetails(controller,"village") != null
-                    ? Support.getDetails(controller,"village")
-                    : "-")
-        );
-*/
+        AllCommonsRepository iburep = Context.getInstance().allCommonsRepositoryobjects("ec_kartu_ibu");
 
-        dateOfBirth.setText(": " + (transformToddmmyyyy(Support.getColumnmaps(controller,"tanggalLahirAnak").substring(0,10))));
-        birthWeight.setText(": " + (!Support.getDetails(controller, "beratLahir").equals("-")
-                ? Double.toString(Integer.parseInt(controller.getDetails()
-                .get("beratLahir"))/1000)
-                + " kg"
-                : "-"));
-        antipiretik.setText(": " + (yesNo(Support.getDetails(controller, "antipiretik").toLowerCase().contains("y"))));
+        final CommonPersonObject ibuparent = iburep.findByCaseID(kiobject.getColumnmaps().get("base_entity_id"));
 
-        hb1Under7.setText(": " + transformToddmmyyyy(hasDate(controller,"hb0")
-                ? Support.getDetails(controller, "hb0")
-                : hasDate(controller,"hb1_kurang_7_hari")
-                ? Support.getDetails(controller, "hb1_kurang_7_hari")
-                :"-"));
+        DetailsRepository detailsRepository = Context.getInstance().detailsRepository();
+        detailsRepository.updateDetails(ibuparent);
+        // Set Image
+//        DrishtiApplication.getCachedImageLoaderInstance().getImageByClientId(ibuparent.getCaseId(), OpenSRPImageLoader.getStaticImageListener(kiview, R.mipmap.woman_placeholder, R.mipmap.woman_placeholder));
 
-        bcg.setText(": " + (transformToddmmyyyy(Support.getDetails(controller, "bcg"))));
-        pol1.setText(": " + (transformToddmmyyyy(Support.getDetails(controller, "polio1"))));
-        dpt1.setText(": " + (transformToddmmyyyy(Support.getDetails(controller, "dptHb1"))));
-        pol2.setText(": " + (transformToddmmyyyy(Support.getDetails(controller, "polio2"))));
-        dpt2.setText(": " + (transformToddmmyyyy(Support.getDetails(controller, "dptHb2"))));
-        pol3.setText(": " + (transformToddmmyyyy(Support.getDetails(controller, "polio3"))));
-        dpt3.setText(": " + (transformToddmmyyyy(Support.getDetails(controller, "dptHb3"))));
-        pol4.setText(": " + (transformToddmmyyyy(Support.getDetails(controller, "polio4"))));
-        ipv.setText(": " + (transformToddmmyyyy(Support.getDetails(controller, "ipv"))));
-        measles.setText(": " + (transformToddmmyyyy(Support.getDetails(controller, "campak"))));
+        Utils.setImagetoHolderFromUri(this,
+                DrishtiApplication.getAppDir() + File.separator + pncclient.getDetails().get("base_entity_id") + ".JPEG",
+                kiview, R.mipmap.woman_placeholder);
 
-        complete.setText(": " + yesNo(isComplete()));
-        additionalDPT.setText(": " + (transformToddmmyyyy(Support.getDetails(controller, "dpt_hb_lanjutan"))));
-        additionalMeasles.setText(": " + (transformToddmmyyyy(Support.getDetails(controller, "campak_lanjutan"))));
-
-
-        String mgender = controller.getDetails().containsKey("gender") ? Support.getDetails(controller, "gender"):"laki";
-
-
-        //start profile image
-
-        int placeholderDrawable= mgender.equalsIgnoreCase("male") ? R.drawable.child_boy_infant:R.drawable.child_girl_infant;
-
-        photo.setTag(R.id.entity_id, controller.getCaseId());//required when saving file to disk
-        if(controller.getCaseId()!=null){//image already in local storage most likey ):
-            //set profile image by passing the client id.If the image doesn't exist in the image repository then download and save locally
-//            DrishtiApplication.getCachedImageLoaderInstance().getImageByClientId(controller.getCaseId(), OpenSRPImageLoader.getStaticImageListener(photo, placeholderDrawable, placeholderDrawable));
-            KPNCDetailActivity.setImagetoHolderFromUri( this ,
-                    DrishtiApplication.getAppDir() + File.separator + Support.getDetails(controller, "base_entity_id") + ".JPEG",
-                    photo, Support.getDetails(controller, "gender").equals("female") ? R.drawable.child_girl_infant : R.drawable.child_boy_infant);
-
-        }
-
-//        if(Support.getDetails(controller,"profilepic")!= null){
-//            if((Support.getDetails(controller,"gender")!=null?Support.getDetails(controller,"gender"):"").equalsIgnoreCase("female")) {
-//                setImagetoHolderFromUri(VaksinatorDetailActivity.this, Support.getDetails(controller,"profilepic"), photo, R.drawable.child_girl_infant);
-//            } else if ((Support.getDetails(controller,"gender")!=null?Support.getDetails(controller,"gender"):"").equalsIgnoreCase("male")){
-//                setImagetoHolderFromUri(VaksinatorDetailActivity.this, Support.getDetails(controller,"profilepic"), photo, R.drawable.child_boy_infant);
-//
-//            }
+//        if(ibuparent.getDetails().get("profilepic")!= null){
+//            setImagetoHolderFromUri(PNCDetailActivity.this, ibuparent.getDetails().get("profilepic"), kiview, R.mipmap.woman_placeholder);
 //        }
 //        else {
-//            if (Support.getDetails(controller,"gender").equalsIgnoreCase("male") ) {
-//                photo.setImageDrawable(getResources().getDrawable(R.drawable.child_boy_infant));
-//            } else {
-//                photo.setImageDrawable(getResources().getDrawable(R.drawable.child_girl_infant));
-//            }
+//            kiview.setImageDrawable(getResources().getDrawable(R.mipmap.woman_placeholder));
 //        }
 
-        /*if(Support.getDetails(controller,"profilepic")!= null){
-            setImagetoHolderFromUri(VaksinatorDetailActivity.this, Support.getDetails(controller,"profilepic"), photo, R.drawable.child_boy_infant);
+        txt_hariKeKF.setText(String.format(": %s", humanizeAndDoUPPERCASE(kiobject.getColumnmaps().get("hariKeKF") != null ? kiobject.getColumnmaps().get("hariKeKF") : "-")));
+
+        txt_tandaVitalTDSistolik.setText(String.format(": %s", humanize(ibuparent.getDetails().get("tandaVitalTDSistolik") != null ? ibuparent.getDetails().get("tandaVitalTDSistolik") : "-")));
+        txt_tandaVitalTDDiastolik.setText(String.format(": %s", humanize(ibuparent.getDetails().get("tandaVitalTDDiastolik") != null ? ibuparent.getDetails().get("tandaVitalTDDiastolik") : "-")));
+
+        nama.setText(String.format("%s%s", getResources().getString(R.string.name), humanize(ibuparent.getColumnmaps().get("namalengkap") != null ? ibuparent.getColumnmaps().get("namalengkap") : "-")));
+        nik.setText(String.format("%s%s", getResources().getString(R.string.nik), humanize(ibuparent.getDetails().get("nik") != null ? ibuparent.getDetails().get("nik") : "-")));
+        husband_name.setText(String.format("%s%s", getResources().getString(R.string.husband_name), humanize(ibuparent.getColumnmaps().get("namaSuami") != null ? ibuparent.getColumnmaps().get("namaSuami") : "-")));
+        String tgl = ibuparent.getDetails().get("tanggalLahir") != null ? ibuparent.getDetails().get("tanggalLahir") : "-";
+        String tgl_lahir = tgl.substring(0, tgl.indexOf("T"));
+        dob.setText(String.format("%s%s", getResources().getString(R.string.dob), tgl_lahir));
+        //dob.setText(getResources().getString(R.string.dob)+ humanize(ibuparent.getDetails().get("tanggalLahir") != null ? ibuparent.getDetails().get("tanggalLahir") : "-"));
+        phone.setText(String.format("No HP: %s", ibuparent.getDetails().get("NomorTelponHp") != null ? ibuparent.getDetails().get("NomorTelponHp") : "-"));
+
+        //risk
+        if(ibuparent.getDetails().get("highRiskPregnancyYoungMaternalAge") != null ){
+            risk1.setText(String.format("%s%s", getResources().getString(R.string.highRiskPregnancyYoungMaternalAge), humanize(kiobject.getDetails().get("highRiskPregnancyYoungMaternalAge"))));
         }
-        else {
-            photo.setImageResource(Support.getDetails(controller,"jenisKelamin").contains("em")
-                    ? R.drawable.child_girl_infant
-                    : R.drawable.child_boy_infant);
+        if(ibuparent.getDetails().get("highRiskPregnancyOldMaternalAge") != null ){
+            risk1.setText(String.format("%s%s", getResources().getString(R.string.highRiskPregnancyOldMaternalAge), humanize(kiobject.getDetails().get("highRiskPregnancyYoungMaternalAge"))));
+        }
+        if(ibuparent.getDetails().get("highRiskPregnancyProteinEnergyMalnutrition") != null
+                || ibuparent.getDetails().get("HighRiskPregnancyAbortus") != null
+                || ibuparent.getDetails().get("HighRiskLabourSectionCesareaRecord" ) != null
+                ){
+            risk2.setText(String.format("%s%s", getResources().getString(R.string.highRiskPregnancyProteinEnergyMalnutrition), humanize(ibuparent.getDetails().get("highRiskPregnancyProteinEnergyMalnutrition"))));
+            risk3.setText(String.format("%s%s", getResources().getString(R.string.HighRiskPregnancyAbortus), humanize(ibuparent.getDetails().get("HighRiskPregnancyAbortus"))));
+            risk4.setText(String.format("%s%s", getResources().getString(R.string.HighRiskLabourSectionCesareaRecord), humanize(ibuparent.getDetails().get("HighRiskLabourSectionCesareaRecord"))));
 
         }
-*/
-//        photo.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                FlurryFacade.logEvent("taking_anak_pictures_on_child_detail_view");
-//                bindobject = "anak";
-//                entityid = controller.entityId();
-//                android.util.Log.e(TAG, "onClick: " + entityid);
-////                dispatchTakePictureIntent(photo);
-//                Intent takePictureIntent = new Intent(VaksinatorDetailActivity.this, SmartShutterActivity.class);
-//                takePictureIntent.putExtra("IdentifyPerson", false);
-//                takePictureIntent.putExtra("org.sid.sidface.ImageConfirmation.id", entityid);
-//                takePictureIntent.putExtra("org.sid.sidface.ImageConfirmation.origin", TAG); // send Class Name
-//                startActivityForResult(takePictureIntent, 1);
-//
-//
-//            }
-//        });
-    }
+        txt_highRiskLabourTBRisk.setText(humanize(ibuparent.getDetails().get("highRiskLabourTBRisk") != null ? ibuparent.getDetails().get("highRiskLabourTBRisk") : "-"));
 
-    String mCurrentPhotoPath;
+        highRiskSTIBBVs.setText(humanize(ibuparent.getDetails().get("highRiskSTIBBVs") != null ? ibuparent.getDetails().get("highRiskSTIBBVs") : "-"));
+        highRiskEctopicPregnancy.setText(humanize (ibuparent.getDetails().get("highRiskEctopicPregnancy") != null ? ibuparent.getDetails().get("highRiskEctopicPregnancy") : "-"));
+        highRiskCardiovascularDiseaseRecord.setText(humanize(ibuparent.getDetails().get("highRiskCardiovascularDiseaseRecord") != null ? ibuparent.getDetails().get("highRiskCardiovascularDiseaseRecord") : "-"));
+        highRiskDidneyDisorder.setText(humanize(ibuparent.getDetails().get("highRiskDidneyDisorder") != null ? ibuparent.getDetails().get("highRiskDidneyDisorder") : "-"));
+        highRiskHeartDisorder.setText(humanize(ibuparent.getDetails().get("highRiskHeartDisorder") != null ? ibuparent.getDetails().get("highRiskHeartDisorder") : "-"));
+        highRiskAsthma.setText(humanize(ibuparent.getDetails().get("highRiskAsthma") != null ? ibuparent.getDetails().get("highRiskAsthma") : "-"));
+        highRiskTuberculosis.setText(humanize(ibuparent.getDetails().get("highRiskTuberculosis") != null ? ibuparent.getDetails().get("highRiskTuberculosis") : "-"));
+        highRiskMalaria.setText(humanize(ibuparent.getDetails().get("highRiskMalaria") != null ? ibuparent.getDetails().get("highRiskMalaria") : "-"));
 
-    static final int REQUEST_TAKE_PHOTO = 1;
-    static ImageView mImageView;
-    static File currentfile;
-    static String bindobject;
-    static String entityid;
+        txt_HighRiskLabourSectionCesareaRecord.setText(humanize(ibuparent.getDetails().get("HighRiskLabourSectionCesareaRecord") != null ? ibuparent.getDetails().get("HighRiskLabourSectionCesareaRecord") : "-"));
+        HighRiskPregnancyTooManyChildren.setText(humanize(ibuparent.getDetails().get("HighRiskPregnancyTooManyChildren") != null ? ibuparent.getDetails().get("HighRiskPregnancyTooManyChildren") : "-"));
 
-    private boolean isComplete(){
-        return (Support.getDetails(controller, "hb0") != null &&
-                Support.getDetails(controller, "bcg") != null &&
-                Support.getDetails(controller, "polio1") != null &&
-                Support.getDetails(controller, "dptHb1") != null &&
-                Support.getDetails(controller, "polio2") != null &&
-                Support.getDetails(controller, "dptHb2") != null &&
-                Support.getDetails(controller, "polio3") != null &&
-                Support.getDetails(controller, "dptHb3") != null &&
-                Support.getDetails(controller, "polio4") != null &&
-                Support.getDetails(controller, "campak") != null
-        );
-    }
+        txt_highRiskHIVAIDS.setText(humanize(pncclient.getDetails().get("highRiskHIVAIDS") != null ? pncclient.getDetails().get("highRiskHIVAIDS") : "-"));
 
-    public String yesNo(boolean cond){
-        return getString(cond? R.string.mcareyes_button_label : R.string.mcareno_button_label);
-    }
-    @Override
-    public void onBackPressed() {
-        finish();
-        startActivity(new Intent(this, KChildSmartRegisterActivity.class));
-        overridePendingTransition(0, 0);
+        show_risk.setText(getResources().getString(R.string.show_more_button));
+        show_detail.setText(getResources().getString(R.string.show_less_button));
 
+        show_risk.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                FlurryFacade.logEvent("click_risk_detail");
+                findViewById(R.id.id1).setVisibility(View.GONE);
+                findViewById(R.id.id2).setVisibility(View.VISIBLE);
+                findViewById(R.id.show_more_detail).setVisibility(View.VISIBLE);
+                findViewById(R.id.show_more).setVisibility(View.GONE);
+            }
+        });
+
+        show_detail.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                findViewById(R.id.id1).setVisibility(View.VISIBLE);
+                findViewById(R.id.id2).setVisibility(View.GONE);
+                findViewById(R.id.show_more).setVisibility(View.VISIBLE);
+                findViewById(R.id.show_more_detail).setVisibility(View.GONE);
+            }
+        });
+
+//        txt_tandaVitalTDSistolik.setOnClickListener(bpmListener);
+//        txt_tandaVitalTDDiastolik.setOnClickListener(bpmListener);
 
     }
 
-    /*
-    * Used to check if the variable contains a date (10 character which representing yyyy-MM-dd) or not
-    * params:
-    * CommonPersonObjectClient pc
-    * String variable
-    *
-    * return:
-    * true - if the variable contains date
-    * false - if the variable null or less than 10 character length
-    * */
-    private boolean hasDate(CommonPersonObjectClient pc, String variable){
-        return pc.getDetails().get(variable)!=null && pc.getDetails().get(variable).length()==10;
-    }
-
-    private int age(String date1, String date2){
-        return (Integer.parseInt(date2.substring(0,3)) - Integer.parseInt(date1.substring(0,3)))*360
-                + (Integer.parseInt(date2.substring(5,7)) - Integer.parseInt(date1.substring(5,7)))*30
-                + (Integer.parseInt(date2.substring(8)) - Integer.parseInt(date1.substring(8)));
-    }
-
-    public String transformToddmmyyyy(String date){
-        if(date.length()>3) {
-            if (date.charAt(4) == '-')
-                date = String.format("%s/%s/%s", new String[]{date.substring(8, 10), date.substring(5, 7), date.substring(0, 4)});
-        }
-        return date;
-    }
-
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent intent) {
-//        refresh
-        Log.e(TAG, "onActivityResult: refresh" );
-        finish();
-        startActivity(getIntent());
-
-    }
-
-    public static void setImagetoHolderFromUri(Activity activity, String file, ImageView view, int placeholder){
-        view.setImageDrawable(activity.getResources().getDrawable(placeholder));
-        File externalFile = new File(file);
-        if (externalFile.exists()) {
-            Uri external = Uri.fromFile(externalFile);
-            view.setImageURI(external);
-        }
-
-    }
 }
