@@ -247,6 +247,14 @@
       "name": "relationalid"
     },
     {
+      "instance": {
+        "openmrs_entity_id": "ibuCaseId",
+        "openmrs_entity": "person_relationship"
+      },
+      "type": "hidden",
+      "name": "ibu_entity_id"
+    },
+    {
       "bind": {
         "calculate": "${Village}"
       },
