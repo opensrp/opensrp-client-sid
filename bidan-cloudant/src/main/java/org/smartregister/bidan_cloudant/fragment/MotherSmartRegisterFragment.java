@@ -24,8 +24,8 @@ import org.smartregister.bidan_cloudant.activity.KChildSmartRegisterActivity;
 import org.smartregister.bidan_cloudant.activity.LoginActivity;
 import org.smartregister.bidan_cloudant.libs.FlurryFacade;
 import org.smartregister.bidan_cloudant.option.KICommonObjectFilterOption;
-import org.smartregister.bidan_cloudant.option.VaksinatorServiceModeOption;
-import org.smartregister.bidan_cloudant.provider.ChildSmartClientsProvider;
+import org.smartregister.bidan_cloudant.option.MotherServiceModeOption;
+import org.smartregister.bidan_cloudant.provider.MotherSmartClientsProvider;
 import org.smartregister.commonregistry.CommonPersonObjectClient;
 import org.smartregister.commonregistry.CommonPersonObjectController;
 import org.smartregister.cursoradapter.CursorCommonObjectFilterOption;
@@ -91,7 +91,7 @@ public class MotherSmartRegisterFragment extends SecuredNativeSmartRegisterCurso
 
             @Override
             public ServiceModeOption serviceMode() {
-                return new VaksinatorServiceModeOption(clientsProvider());
+                return new MotherServiceModeOption(clientsProvider());
             }
 
             @Override
@@ -120,11 +120,9 @@ public class MotherSmartRegisterFragment extends SecuredNativeSmartRegisterCurso
             @Override
             public DialogOption[] filterOptions() {
                 FlurryAgent.logEvent("click_filter_option_on_kohort_ibu_dashboard");
-                ArrayList<DialogOption> dialogOptionslist = new ArrayList<DialogOption>();
+                ArrayList<DialogOption> dialogOptionslist = new ArrayList<>();
 
                 dialogOptionslist.add(new CursorCommonObjectFilterOption(getString(R.string.filter_by_all_label),filterStringForAll()));
-                //     dialogOptionslist.add(new CursorCommonObjectFilterOption(getString(R.string.hh_no_mwra),filterStringForNoElco()));
-                //      dialogOptionslist.add(new CursorCommonObjectFilterOption(getString(R.string.hh_has_mwra),filterStringForOneOrMoreElco()));
 
                 String locationjson = context().anmLocationController().get();
                 LocationTree locationTree = EntityUtils.fromJson(locationjson, LocationTree.class);
@@ -152,10 +150,10 @@ public class MotherSmartRegisterFragment extends SecuredNativeSmartRegisterCurso
 //                        new HouseholdCensusDueDateSort(),
 
 
-                        new CursorCommonObjectSort(getResources().getString(R.string.sort_by_name_label),KiSortByNameAZ()),
-                        new CursorCommonObjectSort(getResources().getString(R.string.sort_by_name_label_reverse),KiSortByNameZA()),
-                        new CursorCommonObjectSort(getResources().getString(R.string.sort_by_child_age),KiSortByAgeASC()),
-                        new CursorCommonObjectSort(getResources().getString(R.string.sort_by_child_age_desc),KiSortByAgeDESC()),
+                        new CursorCommonObjectSort(getResources().getString(R.string.sort_by_name_label), KiSortByNameAZ()),
+                        new CursorCommonObjectSort(getResources().getString(R.string.sort_by_name_label_reverse), KiSortByNameZA()),
+                        new CursorCommonObjectSort(getResources().getString(R.string.sort_by_child_age), KiSortByAgeASC()),
+                        new CursorCommonObjectSort(getResources().getString(R.string.sort_by_child_age_desc), KiSortByAgeDESC()),
                 };
             }
 
@@ -216,7 +214,7 @@ public class MotherSmartRegisterFragment extends SecuredNativeSmartRegisterCurso
         String tableName = "ec_anak";
       //  String parentTableName = PathConstants.MOTHER_TABLE_NAME;
 
-        ChildSmartClientsProvider hhscp = new ChildSmartClientsProvider(getActivity(),
+        MotherSmartClientsProvider hhscp = new MotherSmartClientsProvider(getActivity(),
                 clientActionHandler, context().alertService(), context().commonrepository(tableName));
         clientAdapter = new SmartRegisterPaginatedCursorAdapter(getActivity(), null, hhscp, context().commonrepository(tableName));
         clientsView.setAdapter(clientAdapter);

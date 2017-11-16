@@ -24,7 +24,7 @@ import org.smartregister.bidan_cloudant.activity.KChildSmartRegisterActivity;
 import org.smartregister.bidan_cloudant.activity.LoginActivity;
 import org.smartregister.bidan_cloudant.libs.FlurryFacade;
 import org.smartregister.bidan_cloudant.option.KICommonObjectFilterOption;
-import org.smartregister.bidan_cloudant.option.VaksinatorServiceModeOption;
+import org.smartregister.bidan_cloudant.option.ChildServiceModeOption;
 import org.smartregister.bidan_cloudant.provider.ChildSmartClientsProvider;
 import org.smartregister.commonregistry.CommonPersonObjectClient;
 import org.smartregister.commonregistry.CommonPersonObjectController;
@@ -94,7 +94,7 @@ public class ChildSmartRegisterFragment extends SecuredNativeSmartRegisterCursor
 
             @Override
             public ServiceModeOption serviceMode() {
-                return new VaksinatorServiceModeOption(clientsProvider());
+                return new ChildServiceModeOption(clientsProvider());
             }
 
             @Override

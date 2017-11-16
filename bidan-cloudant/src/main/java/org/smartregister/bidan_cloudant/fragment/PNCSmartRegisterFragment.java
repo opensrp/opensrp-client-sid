@@ -24,8 +24,8 @@ import org.smartregister.bidan_cloudant.activity.KChildSmartRegisterActivity;
 import org.smartregister.bidan_cloudant.activity.LoginActivity;
 import org.smartregister.bidan_cloudant.libs.FlurryFacade;
 import org.smartregister.bidan_cloudant.option.KICommonObjectFilterOption;
-import org.smartregister.bidan_cloudant.option.VaksinatorServiceModeOption;
-import org.smartregister.bidan_cloudant.provider.ChildSmartClientsProvider;
+import org.smartregister.bidan_cloudant.option.PNCServiceModeOption;
+import org.smartregister.bidan_cloudant.provider.PNCSmartClientsProvider;
 import org.smartregister.commonregistry.CommonPersonObjectClient;
 import org.smartregister.commonregistry.CommonPersonObjectController;
 import org.smartregister.cursoradapter.CursorCommonObjectFilterOption;
@@ -94,7 +94,7 @@ public class PNCSmartRegisterFragment extends SecuredNativeSmartRegisterCursorAd
 
             @Override
             public ServiceModeOption serviceMode() {
-                return new VaksinatorServiceModeOption(clientsProvider());
+                return new PNCServiceModeOption(clientsProvider());
             }
 
             @Override
@@ -256,7 +256,7 @@ public class PNCSmartRegisterFragment extends SecuredNativeSmartRegisterCursorAd
         String tableName = "ec_anak";
       //  String parentTableName = PathConstants.MOTHER_TABLE_NAME;
 
-        ChildSmartClientsProvider hhscp = new ChildSmartClientsProvider(getActivity(),
+        PNCSmartClientsProvider hhscp = new PNCSmartClientsProvider(getActivity(),
                 clientActionHandler, context().alertService(), context().commonrepository(tableName));
         clientAdapter = new SmartRegisterPaginatedCursorAdapter(getActivity(), null, hhscp, context().commonrepository(tableName));
         clientsView.setAdapter(clientAdapter);
