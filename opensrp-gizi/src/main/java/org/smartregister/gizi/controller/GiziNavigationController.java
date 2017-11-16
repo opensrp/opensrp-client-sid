@@ -9,6 +9,7 @@ import android.net.Uri;
 //import org.ei.opensrp.gizi.test.TestSmartRegisterActivity;
 import org.smartregister.gizi.R;
 import org.smartregister.gizi.activity.GiziSmartRegisterActivity;
+import org.smartregister.gizi.giziIbu.IbuSmartRegisterActivity;
 import org.smartregister.view.controller.ANMController;
 import org.json.JSONObject;
 
@@ -33,14 +34,7 @@ public class GiziNavigationController extends org.smartregister.view.controller.
 
     @Override
     public void startECSmartRegistry() {
-      //  activity.startActivity(new Intent(activity, TestSmartRegisterActivity.class));
-      ///  activity.startActivity(new Intent(activity, HouseHoldSmartRegisterActivity.class));
-        SharedPreferences sharedPreferences = getDefaultSharedPreferences(this.activity);
-
-        if(sharedPreferences.getBoolean("firstlauch",true)) {
-            sharedPreferences.edit().putBoolean("firstlauch",false).commit();
-       //     activity.startActivity(new Intent(activity, tutorialCircleViewFlow.class));
-        }
+        activity.startActivity(new Intent(activity, IbuSmartRegisterActivity.class));
 
     }
     @Override

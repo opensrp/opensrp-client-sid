@@ -55,7 +55,7 @@ import static org.smartregister.util.Utils.getValue;
  * Created by soran on 08/11/17.
  */
 
-public class ChildSmartClientsProvider implements SmartRegisterCLientsProviderForCursorAdapter {
+public class IbuSmartClientsProvider implements SmartRegisterCLientsProviderForCursorAdapter {
     private final LayoutInflater inflater;
     private final Context context;
     private final View.OnClickListener onClickListener;
@@ -65,8 +65,8 @@ public class ChildSmartClientsProvider implements SmartRegisterCLientsProviderFo
     private final AbsListView.LayoutParams clientViewLayoutParams;
     private final CommonRepository commonRepository;
 
-    public ChildSmartClientsProvider(Context context, View.OnClickListener onClickListener,
-                                     AlertService alertService,  CommonRepository commonRepository) {
+    public IbuSmartClientsProvider(Context context, View.OnClickListener onClickListener,
+                                   AlertService alertService,  CommonRepository commonRepository) {
         this.onClickListener = onClickListener;
         this.context = context;
         this.alertService = alertService;
@@ -98,24 +98,46 @@ public class ChildSmartClientsProvider implements SmartRegisterCLientsProviderFo
         // get parent
         AllCommonsRepository childRepository = org.smartregister.Context.getInstance().allCommonsRepositoryobjects("ec_anak");
         CommonPersonObject childobject = childRepository.findByCaseID(pc.entityId());
-    //    Log.d("IDssssssssssssss",pc.entityId());
+        //    Log.d("IDssssssssssssss",pc.entityId());
         AllCommonsRepository kirep = org.smartregister.Context.getInstance().allCommonsRepositoryobjects("ec_kartu_ibu");
         final CommonPersonObject kiparent = kirep.findByCaseID(getValue(pc.getColumnmaps(), "relational_id", true));
 
         if(kiparent != null) {
             detailsRepository.updateDetails(kiparent);
-          //  String namaayah = getValue(kiparent.getColumnmaps(), "namaSuami", true);
+            //  String namaayah = getValue(kiparent.getColumnmaps(), "namaSuami", true);
             String namaibu = getValue(kiparent.getColumnmaps(), "namalengkap", true);
             fillValue((TextView) convertView.findViewById(R.id.ParentName), namaibu);
             String subVillages = getValue(kiparent.getDetails(), "address1", true);
             fillValue((TextView) convertView.findViewById(R.id.txt_child_subVillage), subVillages);
         }
-      String dob=  pc.getColumnmaps().get("tanggalLahirAnak").substring(0, pc.getColumnmaps().get("tanggalLahirAnak").indexOf("T"));
+        String dob=  pc.getColumnmaps().get("tanggalLahirAnak").substring(0, pc.getColumnmaps().get("tanggalLahirAnak").indexOf("T"));
         String age = ""+monthRangeToToday(dob);
         //get child detail value
+/*
+* viewHolder.namaLengkap.setText(getColumnMaps("namalengkap", pc));
+        viewHolder.namaSuami.setText(getColumnMaps("namaSuami", pc));
+        viewHolder.dusun.setText(getDetails("posyandu", pc));
+        viewHolder.tanggalLahir.setText(getDetails("tanggalLahir",pc).length()>10?getDetails("tanggalLahir",pc).substring(0,10) : "-");
+        viewHolder.umur.setText(String.format("%s %s", getDetails("umur", pc), context.getString(R.string.years_unit)));
+
+        viewHolder.lastANCVisit.setText(String.format("%s: %s", context.getString(R.string.kunjunganTerakhir), getDetails("ancDate", pc)));
+        int usiaKandungan = usiaKandungan(getDetails("tanggalHPHT",pc),getDetails("ancDate",pc));
+        viewHolder.HPHT.setText(String.format("%s: %s%s", context.getString(R.string.usiaKandungan), usiaKandungan != -1
+                ? Integer.toString(usiaKandungan)
+                : "-", context.getString(R.string.str_weeks)));
+        viewHolder.lila.setText(String.format("%s: %s cm", context.getString(R.string.lila), getDetails("hasilPemeriksaanLILA", pc)));
+        viewHolder.hbLevel.setText(String.format("%s: %s", context.getString(R.string.hb_level), getDetails("laboratoriumPeriksaHbHasil", pc)));
+        viewHolder.weight.setText(String.format("%s %s %s", context.getString(R.string.str_weight), getDetails("bbKg", pc), context.getString(R.string.weight_unit)));
+
+        viewHolder.sistolik.setText(String.format("%s: %s", context.getString(R.string.sistolik), getDetails("tandaVitalTDSistolik", pc)));
+        viewHolder.diastolik.setText(String.format("%s: %s", context.getString(R.string.diastolik), getDetails("tandaVitalTDDiastolik", pc)));
 
 
-      //  String ages = getValue(pc.getColumnmaps(), "namaBayi", true);
+        viewHolder.vitaminA2.setText(String.format("%s%s", context.getString(R.string.vitamin_a_pnc_2), getDetails("vitaminA2jamPP", pc)));
+        viewHolder.vitaminA24.setText(String.format("%s%s", context.getString(R.string.vitamin_a_pnc_24), getDetails("vitaminA24jamPP", pc)));
+    */
+
+        //  String ages = getValue(pc.getColumnmaps(), "namaBayi", true);
         String dateOfBirth = getValue(pc.getColumnmaps(), "tanggalLahirAnak", true);
         String gender = getValue(pc.getDetails(), "gender", true);
         String visitDate = getValue(pc.getDetails(), "tanggalPenimbangan", true);
@@ -214,13 +236,13 @@ public class ChildSmartClientsProvider implements SmartRegisterCLientsProviderFo
         return inflater;
     }
 
-   
 
-    
 
-       
 
-  
+
+
+
+
 
 
 }

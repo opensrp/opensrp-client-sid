@@ -29,10 +29,11 @@ public class AllConstantsINA {
         public static final String REPLICATION_ERROR = "REPLICATION_ERROR";
         public static final String DOCUMENTS_REPLICATED = "DOCUMENTS_REPLICATED";
         public static final String BATCHES_REPLICATED = "BATCHES_REPLICATED";
-        public static final String COUCHDB_PORT = "5983";
-        public static final String COUCH_DATABASE_NAME = "opensrp";
-        public static final String COUCH_DATABASE_USER = "rootuser";
-        public static final String COUCH_DATABASE_PASS = "Satu23456";
+        public static final String COUCHDB_PORT = "COUCHDB_PORT";
+        public static final String COUCH_DATABASE_NAME = "COUCH_DATABASE_NAME";
+        public static final String COUCH_DATABASE_USER = "COUCH_DATABASE_USER";
+        public static final String COUCH_DATABASE_PASS = "COUCH_DATABASE_PASS";
+
     }
 
 }

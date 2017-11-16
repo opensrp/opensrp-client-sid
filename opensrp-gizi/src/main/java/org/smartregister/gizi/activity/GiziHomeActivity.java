@@ -138,7 +138,7 @@ public class GiziHomeActivity extends SecuredActivity {
     private void setupViews() {
         findViewById(R.id.btn_gizi_register).setOnClickListener(onRegisterStartListener);
 
-
+        findViewById(R.id.btn_gizi_ibu_register).setOnClickListener(onRegisterStartListener);
         findViewById(R.id.btn_reporting).setOnClickListener(onButtonsClickListener);
 
 
@@ -364,7 +364,9 @@ public class GiziHomeActivity extends SecuredActivity {
                 case R.id.btn_gizi_register:
                     navigationController.startChildSmartRegistry();
                     break;
-
+                case R.id.btn_gizi_ibu_register:
+                    navigationController.startECSmartRegistry();
+                    break;
 
 
             }

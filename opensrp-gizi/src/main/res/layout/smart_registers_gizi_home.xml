@@ -87,7 +87,7 @@
 
             </FrameLayout>
 
-           <!-- <FrameLayout
+            <FrameLayout
                 android:layout_width="0dp"
                 android:layout_height="fill_parent"
                 android:layout_weight="0.4"
@@ -118,7 +118,7 @@
                     android:layout_height="wrap_content"
                     style="@style/CustomFontTextViewStyle.Badge2"/>
 
-            </FrameLayout>-->
+            </FrameLayout>
 
         </LinearLayout>
 
