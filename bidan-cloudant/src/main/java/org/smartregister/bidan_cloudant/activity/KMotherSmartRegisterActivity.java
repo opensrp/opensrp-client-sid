@@ -9,6 +9,7 @@ import android.os.Bundle;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.util.Log;
+import android.widget.Toast;
 
 import com.flurry.android.FlurryAgent;
 
@@ -42,6 +43,13 @@ import java.util.Map;
 import butterknife.Bind;
 import butterknife.ButterKnife;
 import util.BidanFormUtils;
+import util.formula.Support;
+
+import static org.smartregister.bidan_cloudant.utils.AllConstantsINA.FormNames.ANAK_BAYI_REGISTRATION;
+import static org.smartregister.bidan_cloudant.utils.AllConstantsINA.FormNames.KARTU_IBU_ANC_REGISTRATION;
+import static org.smartregister.bidan_cloudant.utils.AllConstantsINA.FormNames.KARTU_IBU_CLOSE;
+import static org.smartregister.bidan_cloudant.utils.AllConstantsINA.FormNames.KOHORT_MOTHER_REGISTRATION;
+import static org.smartregister.bidan_cloudant.utils.AllConstantsINA.FormNames.KOHORT_KB_PELAYANAN;
 
 public class KMotherSmartRegisterActivity extends SecuredNativeSmartRegisterActivity implements
         LocationSelectorDialogFragment.OnLocationSelectedListener, DisplayFormListener{
@@ -174,15 +182,9 @@ public class KMotherSmartRegisterActivity extends SecuredNativeSmartRegisterActi
             context().formSubmissionRouter().handleSubmission(submission, formName);
             switchToBaseFragment(formSubmission); // Unnecessary!! passing on data
 
-            if(formName.equals("kartu_ibu_registration")) {
-                Log.d(TAG, "saveFormSubmission: it was kartu_ibu_registration form");
-
-                fieldOverrides.put("ibuCaseId",submission.entityId());
-                FieldOverrides fo = new FieldOverrides(fieldOverrides.toString());
-
-//                activatingOtherForm("registrasi_anak", null, fo.getJSONString());
-
-            }
+//            if(formName.equals("kartu_ibu_registration")){
+//                saveuniqueid();
+//            }
 
             //end capture flurry log for FS
             String end = timer.format(new Date());
@@ -205,6 +207,11 @@ public class KMotherSmartRegisterActivity extends SecuredNativeSmartRegisterActi
 
     @Override
     public void OnLocationSelected(String locationJSONString) {
+        if(Support.ONSYNC) {
+            Toast.makeText(this,"Data still Synchronizing, please wait",Toast.LENGTH_SHORT).show();
+            return;
+        }
+
         JSONObject combined = null;
 
         try {
@@ -226,7 +233,7 @@ public class KMotherSmartRegisterActivity extends SecuredNativeSmartRegisterActi
 
         if (combined != null) {
             FieldOverrides fieldOverrides = new FieldOverrides(combined.toString());
-            startFormActivity("registrasi_ibu", null, fieldOverrides.getJSONString());
+            startFormActivity(KOHORT_MOTHER_REGISTRATION, null, fieldOverrides.getJSONString());
         }
     }
 
@@ -369,13 +376,15 @@ public class KMotherSmartRegisterActivity extends SecuredNativeSmartRegisterActi
     }
 
     private String[] buildFormNameList(){
-        List<String> formNames = new ArrayList<String>();
-        formNames.add("registrasi_ibu");
-        formNames.add("registrasi_anak");
-        formNames.add("close_form");
-        formNames.add("kohort_bayi_immunization");
+        List<String> formNames = new ArrayList<>();
+        formNames.add(KOHORT_MOTHER_REGISTRATION);
+        formNames.add(KOHORT_KB_PELAYANAN);
+        formNames.add(KARTU_IBU_ANC_REGISTRATION);
+        formNames.add(ANAK_BAYI_REGISTRATION);
+        formNames.add(KARTU_IBU_CLOSE);
         return formNames.toArray(new String[formNames.size()]);
     }
+
 
     @Override
     protected void onPause() {
@@ -434,6 +443,16 @@ public class KMotherSmartRegisterActivity extends SecuredNativeSmartRegisterActi
 
         }
     };
+
+    public void saveuniqueid() {
+//        try {
+//            JSONObject uniqueId = new JSONObject(LoginActivity.generator.uniqueIdController().getUniqueIdJson());
+//            String uniq = uniqueId.getString("unique_id");
+//            LoginActivity.generator.uniqueIdController().updateCurrentUniqueId(uniq);
+//        } catch (JSONException e) {
+//            e.printStackTrace();
+//        }
+    }
 
 
 }

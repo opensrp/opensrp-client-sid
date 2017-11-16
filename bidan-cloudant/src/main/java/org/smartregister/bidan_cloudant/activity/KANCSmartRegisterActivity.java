@@ -43,6 +43,14 @@ import butterknife.Bind;
 import butterknife.ButterKnife;
 import util.BidanFormUtils;
 
+import static org.smartregister.bidan_cloudant.utils.AllConstantsINA.FormNames.KARTU_IBU_ANC_CLOSE;
+import static org.smartregister.bidan_cloudant.utils.AllConstantsINA.FormNames.KARTU_IBU_ANC_REGISTRATION;
+import static org.smartregister.bidan_cloudant.utils.AllConstantsINA.FormNames.KARTU_IBU_ANC_RENCANA_PERSALINAN;
+import static org.smartregister.bidan_cloudant.utils.AllConstantsINA.FormNames.KARTU_IBU_ANC_VISIT;
+import static org.smartregister.bidan_cloudant.utils.AllConstantsINA.FormNames.KARTU_IBU_ANC_VISIT_INTEGRASI;
+import static org.smartregister.bidan_cloudant.utils.AllConstantsINA.FormNames.KARTU_IBU_ANC_VISIT_LABTEST;
+import static org.smartregister.bidan_cloudant.utils.AllConstantsINA.FormNames.KOHORT_PNC_REGISTRATION;
+
 public class KANCSmartRegisterActivity extends SecuredNativeSmartRegisterActivity implements
         LocationSelectorDialogFragment.OnLocationSelectedListener, DisplayFormListener{
 
@@ -174,17 +182,6 @@ public class KANCSmartRegisterActivity extends SecuredNativeSmartRegisterActivit
             context().formSubmissionRouter().handleSubmission(submission, formName);
             switchToBaseFragment(formSubmission); // Unnecessary!! passing on data
 
-            if(formName.equals("registrasi_ibu")) {
-                Log.d(TAG, "saveFormSubmission: it was registrasi_ibu form");
-                //  FieldOverrides fieldOverrides = new FieldOverrides(combined.toString());
-
-                fieldOverrides.put("ibuCaseId",submission.entityId());
-                FieldOverrides fo = new FieldOverrides(fieldOverrides.toString());
-
-                activatingOtherForm("registrasi_anak", null, fo.getJSONString());
-        ///        activatingForm("registrasi_anak", null, fo.getJSONString());
-            }
-
             //end capture flurry log for FS
             String end = timer.format(new Date());
             Map<String, String> FS = new HashMap<String, String>();
@@ -198,8 +195,6 @@ public class KANCSmartRegisterActivity extends SecuredNativeSmartRegisterActivit
             }
             e.printStackTrace();
         }
-
-       
 
     }
 
@@ -245,7 +240,7 @@ public class KANCSmartRegisterActivity extends SecuredNativeSmartRegisterActivit
 
         if (combined != null) {
             FieldOverrides fieldOverrides = new FieldOverrides(combined.toString());
-            startFormActivity("registrasi_ibu", null, fieldOverrides.getJSONString());
+            startFormActivity(KARTU_IBU_ANC_REGISTRATION, null, fieldOverrides.getJSONString());
         }
     }
 
@@ -389,10 +384,13 @@ public class KANCSmartRegisterActivity extends SecuredNativeSmartRegisterActivit
 
     private String[] buildFormNameList(){
         List<String> formNames = new ArrayList<String>();
-        formNames.add("registrasi_ibu");
-        formNames.add("registrasi_anak");
-        formNames.add("close_form");
-        formNames.add("kohort_bayi_immunization");
+        formNames.add(KARTU_IBU_ANC_VISIT);
+        formNames.add(KARTU_IBU_ANC_VISIT_INTEGRASI);
+        formNames.add(KARTU_IBU_ANC_VISIT_LABTEST);
+        formNames.add(KARTU_IBU_ANC_RENCANA_PERSALINAN);
+        formNames.add(KOHORT_PNC_REGISTRATION);
+        formNames.add(KARTU_IBU_ANC_CLOSE);
+
         return formNames.toArray(new String[formNames.size()]);
     }
 

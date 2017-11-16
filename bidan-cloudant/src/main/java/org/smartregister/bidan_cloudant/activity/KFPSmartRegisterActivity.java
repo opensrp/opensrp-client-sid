@@ -43,6 +43,10 @@ import butterknife.Bind;
 import butterknife.ButterKnife;
 import util.BidanFormUtils;
 
+import static org.smartregister.bidan_cloudant.utils.AllConstantsINA.FormNames.KOHORT_KB_CLOSE;
+import static org.smartregister.bidan_cloudant.utils.AllConstantsINA.FormNames.KOHORT_KB_REGISTRATION;
+import static org.smartregister.bidan_cloudant.utils.AllConstantsINA.FormNames.KOHORT_KB_UPDATE;
+
 public class KFPSmartRegisterActivity extends SecuredNativeSmartRegisterActivity implements
         LocationSelectorDialogFragment.OnLocationSelectedListener, DisplayFormListener{
 
@@ -175,17 +179,6 @@ public class KFPSmartRegisterActivity extends SecuredNativeSmartRegisterActivity
             context().formSubmissionRouter().handleSubmission(submission, formName);
             switchToBaseFragment(formSubmission); // Unnecessary!! passing on data
 
-            if(formName.equals("registrasi_ibu")) {
-                Log.d(TAG, "saveFormSubmission: it was registrasi_ibu form");
-                //  FieldOverrides fieldOverrides = new FieldOverrides(combined.toString());
-
-                fieldOverrides.put("ibuCaseId",submission.entityId());
-                FieldOverrides fo = new FieldOverrides(fieldOverrides.toString());
-
-                activatingOtherForm("registrasi_anak", null, fo.getJSONString());
-        ///        activatingForm("registrasi_anak", null, fo.getJSONString());
-            }
-
             //end capture flurry log for FS
             String end = timer.format(new Date());
             Map<String, String> FS = new HashMap<String, String>();
@@ -246,7 +239,7 @@ public class KFPSmartRegisterActivity extends SecuredNativeSmartRegisterActivity
 
         if (combined != null) {
             FieldOverrides fieldOverrides = new FieldOverrides(combined.toString());
-            startFormActivity("registrasi_ibu", null, fieldOverrides.getJSONString());
+            startFormActivity(KOHORT_KB_REGISTRATION, null, fieldOverrides.getJSONString());
         }
     }
 
@@ -390,10 +383,9 @@ public class KFPSmartRegisterActivity extends SecuredNativeSmartRegisterActivity
 
     private String[] buildFormNameList(){
         List<String> formNames = new ArrayList<String>();
-        formNames.add("registrasi_ibu");
-        formNames.add("registrasi_anak");
-        formNames.add("close_form");
-        formNames.add("kohort_bayi_immunization");
+        formNames.add(KOHORT_KB_REGISTRATION);
+        formNames.add(KOHORT_KB_UPDATE);
+        formNames.add(KOHORT_KB_CLOSE);
         return formNames.toArray(new String[formNames.size()]);
     }
 

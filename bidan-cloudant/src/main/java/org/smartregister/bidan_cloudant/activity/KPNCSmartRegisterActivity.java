@@ -43,6 +43,12 @@ import butterknife.Bind;
 import butterknife.ButterKnife;
 import util.BidanFormUtils;
 
+import static org.smartregister.bidan_cloudant.utils.AllConstantsINA.FormNames.KARTU_IBU_PNC_CLOSE;
+import static org.smartregister.bidan_cloudant.utils.AllConstantsINA.FormNames.KARTU_IBU_PNC_OA;
+import static org.smartregister.bidan_cloudant.utils.AllConstantsINA.FormNames.KARTU_IBU_PNC_POSPARTUM_KB;
+import static org.smartregister.bidan_cloudant.utils.AllConstantsINA.FormNames.KOHORT_PNC_REGISTRATION;
+import static org.smartregister.bidan_cloudant.utils.AllConstantsINA.FormNames.KARTU_IBU_PNC_VISIT;
+
 public class KPNCSmartRegisterActivity extends SecuredNativeSmartRegisterActivity implements
         LocationSelectorDialogFragment.OnLocationSelectedListener, DisplayFormListener{
 
@@ -246,7 +252,7 @@ public class KPNCSmartRegisterActivity extends SecuredNativeSmartRegisterActivit
 
         if (combined != null) {
             FieldOverrides fieldOverrides = new FieldOverrides(combined.toString());
-            startFormActivity("registrasi_ibu", null, fieldOverrides.getJSONString());
+            startFormActivity(KOHORT_PNC_REGISTRATION, null, fieldOverrides.getJSONString());
         }
     }
 
@@ -389,11 +395,13 @@ public class KPNCSmartRegisterActivity extends SecuredNativeSmartRegisterActivit
     }
 
     private String[] buildFormNameList(){
-        List<String> formNames = new ArrayList<String>();
-        formNames.add("registrasi_ibu");
-        formNames.add("registrasi_anak");
-        formNames.add("close_form");
-        formNames.add("kohort_bayi_immunization");
+        List<String> formNames = new ArrayList<>();
+        formNames.add(KARTU_IBU_PNC_VISIT);
+        formNames.add(KARTU_IBU_PNC_POSPARTUM_KB);
+        formNames.add(KARTU_IBU_PNC_CLOSE);
+        formNames.add(KARTU_IBU_PNC_OA);
+        formNames.add(KARTU_IBU_PNC_CLOSE);
+
         return formNames.toArray(new String[formNames.size()]);
     }
 
