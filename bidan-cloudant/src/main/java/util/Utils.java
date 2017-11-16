@@ -16,10 +16,15 @@
 
 package util;
 
+import android.app.Activity;
+import android.net.Uri;
 import android.os.Build;
 import android.os.Build.VERSION_CODES;
+import android.widget.ImageView;
 
 import org.apache.commons.lang3.text.WordUtils;
+
+import java.io.File;
 
 import static org.apache.commons.lang3.StringUtils.capitalize;
 import static org.apache.commons.lang3.StringUtils.isBlank;
@@ -77,5 +82,16 @@ public class Utils {
 //    public static String getValue(String value) {
 //        return isBlank(value)? "" : value;
 //    }
+
+
+    public static void setImagetoHolderFromUri(Activity activity, String file, ImageView view, int placeholder){
+        view.setImageDrawable(activity.getResources().getDrawable(placeholder));
+        File externalFile = new File(file);
+        if (externalFile.exists()) {
+            Uri external = Uri.fromFile(externalFile);
+            view.setImageURI(external);
+        }
+
+    }
 
 }

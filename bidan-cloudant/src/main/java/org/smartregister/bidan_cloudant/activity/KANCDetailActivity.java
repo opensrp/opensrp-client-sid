@@ -23,6 +23,8 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
+import util.Utils;
+
 import static org.smartregister.util.StringUtil.humanize;
 import static org.smartregister.util.StringUtil.humanizeAndDoUPPERCASE;
 
@@ -247,7 +249,7 @@ public class KANCDetailActivity extends Activity {
             //image already in local storage most likey ):
             //set profile image by passing the client id.If the image doesn't exist in the image repository then download and save locally
 //            DrishtiApplication.getCachedImageLoaderInstance().getImageByClientId(ancclient.getCaseId(), OpenSRPImageLoader.getStaticImageListener(kiview, R.mipmap.woman_placeholder, R.mipmap.woman_placeholder));
-            KANCDetailActivity.setImagetoHolderFromUri(this,
+            Utils.setImagetoHolderFromUri(this,
                     DrishtiApplication.getAppDir() + File.separator + ancclient.getDetails().get("base_entity_id") + ".JPEG",
                     kiview, R.mipmap.woman_placeholder);
         }
@@ -361,16 +363,5 @@ public class KANCDetailActivity extends Activity {
         startActivity(new Intent(this, KANCSmartRegisterActivity.class));
         overridePendingTransition(0, 0);
     }
-
-    public static void setImagetoHolderFromUri(Activity activity, String file, ImageView view, int placeholder){
-        view.setImageDrawable(activity.getResources().getDrawable(placeholder));
-        File externalFile = new File(file);
-        if (externalFile.exists()) {
-            Uri external = Uri.fromFile(externalFile);
-            view.setImageURI(external);
-        }
-
-    }
-
 
 }
