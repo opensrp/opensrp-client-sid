@@ -19,7 +19,7 @@ import org.opensrp.api.util.LocationTree;
 import org.opensrp.api.util.TreeNode;
 import org.smartregister.Context;
 import org.smartregister.bidan_cloudant.R;
-import org.smartregister.bidan_cloudant.activity.BidanDetailActivity;
+import org.smartregister.bidan_cloudant.activity.KFPDetailActivity;
 import org.smartregister.bidan_cloudant.activity.KChildSmartRegisterActivity;
 import org.smartregister.bidan_cloudant.activity.LoginActivity;
 import org.smartregister.bidan_cloudant.libs.FlurryFacade;
@@ -323,8 +323,8 @@ public class FPSmartRegisterFragment extends SecuredNativeSmartRegisterCursorAda
             switch (view.getId()) {
                 case R.id.profile_info_layout:
                     FlurryFacade.logEvent("click_detail_picture_vaksinator");
-                    BidanDetailActivity.controller = (CommonPersonObjectClient)view.getTag();
-                    Intent intent = new Intent(getActivity(),BidanDetailActivity.class);
+                    KFPDetailActivity.controller = (CommonPersonObjectClient)view.getTag();
+                    Intent intent = new Intent(getActivity(),KFPDetailActivity.class);
                     startActivity(intent);
                     getActivity().finish();
                     break;

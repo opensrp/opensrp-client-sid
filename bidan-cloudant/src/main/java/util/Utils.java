@@ -19,6 +19,13 @@ package util;
 import android.os.Build;
 import android.os.Build.VERSION_CODES;
 
+import org.apache.commons.lang3.text.WordUtils;
+
+import static org.apache.commons.lang3.StringUtils.capitalize;
+import static org.apache.commons.lang3.StringUtils.isBlank;
+import static org.apache.commons.lang3.StringUtils.replace;
+import static org.apache.commons.lang3.StringUtils.upperCase;
+
 
 /**
  * Class containing some static utility methods.
@@ -50,5 +57,25 @@ public class Utils {
     public static boolean hasJellyBean() {
         return Build.VERSION.SDK_INT >= VERSION_CODES.JELLY_BEAN;
     }
+
+//    public static String humanize(String value) {
+//        return capitalize(replace(getValue(value), "_", " "));
+//    }
+//
+//    public static String replaceAndHumanize(String value, String oldCharacter, String newCharacter) {
+//        return humanize(replace(getValue(value), oldCharacter, newCharacter));
+//    }
+//
+//    public static String replaceAndHumanizeWithInitCapText(String value, String oldCharacter, String newCharacter) {
+//        return humanize(WordUtils.capitalize(replace(getValue(value), oldCharacter, newCharacter)));
+//    }
+//
+//    public static String humanizeAndDoUPPERCASE(String value) {
+//        return upperCase(humanize(getValue(value)));
+//    }
+//
+//    public static String getValue(String value) {
+//        return isBlank(value)? "" : value;
+//    }
 
 }

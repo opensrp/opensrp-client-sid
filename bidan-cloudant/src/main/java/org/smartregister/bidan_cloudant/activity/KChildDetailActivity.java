@@ -13,13 +13,12 @@ import android.widget.TextView;
 import com.flurry.android.FlurryAgent;
 
 import org.smartregister.Context;
+import org.smartregister.bidan_cloudant.R;
 import org.smartregister.bidan_cloudant.libs.FlurryFacade;
 import org.smartregister.commonregistry.AllCommonsRepository;
 import org.smartregister.commonregistry.CommonPersonObject;
 import org.smartregister.commonregistry.CommonPersonObjectClient;
 import org.smartregister.repository.DetailsRepository;
-import org.smartregister.bidan_cloudant.R;
-//import org.smartregister.bidan_cloudant.face.camera.SmartShutterActivity;
 import org.smartregister.view.activity.DrishtiApplication;
 
 import java.io.File;
@@ -31,13 +30,15 @@ import java.util.Map;
 import util.ImageFetcher;
 import util.formula.Support;
 
+//import org.smartregister.bidan_cloudant.face.camera.SmartShutterActivity;
+
 /**
  * Created by Iq on 09/06/16.
  */
-public class BidanDetailActivity extends Activity {
+public class KChildDetailActivity extends Activity {
     SimpleDateFormat timer = new SimpleDateFormat("hh:mm:ss");
     //image retrieving
-    private static final String TAG = BidanDetailActivity.class.getSimpleName();
+    private static final String TAG = KChildDetailActivity.class.getSimpleName();
     private static final String IMAGE_CACHE_DIR = "thumbs";
     //  private static KmsCalc  kmsCalc;
 
@@ -54,13 +55,13 @@ public class BidanDetailActivity extends Activity {
         Context context = Context.getInstance();
         setContentView(R.layout.smart_register_jurim_detail_client);
 
-        DetailsRepository detailsRepository = org.smartregister.Context.getInstance().detailsRepository();
+        DetailsRepository detailsRepository = Context.getInstance().detailsRepository();
         detailsRepository.updateDetails(controller);
 
-        AllCommonsRepository childRepository = org.smartregister.Context.getInstance().allCommonsRepositoryobjects("ec_anak");
+        AllCommonsRepository childRepository = Context.getInstance().allCommonsRepositoryobjects("ec_anak");
         final CommonPersonObject controllers = childRepository.findByCaseID(controller.entityId());
 
-        AllCommonsRepository kirep = org.smartregister.Context.getInstance().allCommonsRepositoryobjects("ec_kartu_ibu");
+        AllCommonsRepository kirep = Context.getInstance().allCommonsRepositoryobjects("ec_kartu_ibu");
         final CommonPersonObject kiparent = kirep.findByCaseID(Support.getColumnmaps(controllers, "relational_id"));
 
         String DetailStart = timer.format(new Date());
@@ -118,7 +119,7 @@ public class BidanDetailActivity extends Activity {
             public void onClick(View v) {
                 finish();
 
-                startActivity(new Intent(BidanDetailActivity.this, KChildSmartRegisterActivity.class));
+                startActivity(new Intent(KChildDetailActivity.this, KChildSmartRegisterActivity.class));
                 overridePendingTransition(0, 0);
                 //Start capture flurry log for FS
                 String DetailEnd = timer.format(new Date());
@@ -134,7 +135,7 @@ public class BidanDetailActivity extends Activity {
             public void onClick(View v) {
                 finish();
                 BidanRecapitulationActivity.staticVillageName = Support.getDetails(controller,"desa_anak");
-                startActivity(new Intent(BidanDetailActivity.this, BidanRecapitulationActivity.class));
+                startActivity(new Intent(KChildDetailActivity.this, BidanRecapitulationActivity.class));
                 overridePendingTransition(0, 0);
                 FlurryFacade.logEvent("click_recapitulation_button");
             }
@@ -174,6 +175,26 @@ public class BidanDetailActivity extends Activity {
             subVillage.setText(kiparent.getDetails().get("address1") != null ? ": " + kiparent.getDetails().get("address1") : "");
             // viewHolder.no_ibu.setText(kiparent.getDetails().get("noBayi") != null ? kiparent.getDetails().get("noBayi") : "");
         }
+
+        /*fatherName.setText(": " + (Support.getDetails(controller,"namaAyah") != null ? transformToddmmyyyy(Support.getDetails(controller,"namaAyah");
+        motherName.setText(": " + (Support.getDetails(controller,"namaIbu") != null
+                ? Support.getDetails(controller,"namaIbu")
+                : Support.getDetails(controller,"nama_orang_tua")!=null
+                        ? Support.getDetails(controller,"nama_orang_tua")
+                        : "-"
+            )
+        );*/
+       /* village.setText(": " + (Support.getDetails(controller,"desa") != null
+                ? Support.getDetails(controller,"desa")
+                : "-"))));*/
+
+   /*     subVillage.setText(": " + (Support.getDetails(controller,"dusun") != null
+                ? Support.getDetails(controller,"dusun")
+                : Support.getDetails(controller,"village") != null
+                    ? Support.getDetails(controller,"village")
+                    : "-")
+        );
+*/
 
         dateOfBirth.setText(": " + (transformToddmmyyyy(Support.getColumnmaps(controller,"tanggalLahirAnak").substring(0,10))));
         birthWeight.setText(": " + (!Support.getDetails(controller, "beratLahir").equals("-")
@@ -216,7 +237,7 @@ public class BidanDetailActivity extends Activity {
         if(controller.getCaseId()!=null){//image already in local storage most likey ):
             //set profile image by passing the client id.If the image doesn't exist in the image repository then download and save locally
 //            DrishtiApplication.getCachedImageLoaderInstance().getImageByClientId(controller.getCaseId(), OpenSRPImageLoader.getStaticImageListener(photo, placeholderDrawable, placeholderDrawable));
-            BidanDetailActivity.setImagetoHolderFromUri( this ,
+            KChildDetailActivity.setImagetoHolderFromUri( this ,
                     DrishtiApplication.getAppDir() + File.separator + Support.getDetails(controller, "base_entity_id") + ".JPEG",
                     photo, Support.getDetails(controller, "gender").equals("female") ? R.drawable.child_girl_infant : R.drawable.child_boy_infant);
 
