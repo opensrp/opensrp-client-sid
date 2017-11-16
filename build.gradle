@@ -35,7 +35,7 @@ subprojects {
         maven { url "http://repo.maven.apache.org/maven2" }
         maven { url "http://cloudant.github.io/cloudant-sync-eap/repository" }
         maven {
-            url "${projectDir}/opensrp-bidan/../libs/"
+            url "${projectDir}/opensrp-client-sid/../libs/"
         }
         maven {
             url "${projectDir}/opensrp-bidan-it/../libs/"

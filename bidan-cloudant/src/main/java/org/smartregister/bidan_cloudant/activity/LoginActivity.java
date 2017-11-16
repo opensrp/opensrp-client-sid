@@ -9,9 +9,13 @@ import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.content.res.Configuration;
 import android.content.res.Resources;
+import android.graphics.drawable.ColorDrawable;
+import android.os.AsyncTask;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.text.InputType;
+import android.text.TextUtils;
 import android.util.DisplayMetrics;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
@@ -24,27 +28,40 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import org.apache.commons.lang3.StringUtils;
+import org.joda.time.DateTime;
+import org.json.JSONException;
+import org.json.JSONObject;
 import org.smartregister.Context;
 import org.smartregister.bidan_cloudant.BuildConfig;
 import org.smartregister.bidan_cloudant.R;
 import org.smartregister.bidan_cloudant.application.BidanApplication;
+import org.smartregister.bidan_cloudant.utils.AllConstantsINA;
 import org.smartregister.bidan_cloudant.utils.Config;
+import org.smartregister.bidan_cloudant.view.LocationPickerView;
 import org.smartregister.domain.LoginResponse;
 import org.smartregister.domain.Response;
 import org.smartregister.domain.ResponseStatus;
+import org.smartregister.domain.TimeStatus;
 import org.smartregister.event.Listener;
 import org.smartregister.repository.AllSharedPreferences;
+import org.smartregister.sync.DrishtiSyncScheduler;
 import org.smartregister.util.Log;
+import org.smartregister.util.Utils;
 import org.smartregister.view.BackgroundAction;
 import org.smartregister.view.LockingBackgroundTask;
 import org.smartregister.view.ProgressIndicator;
 
 import java.io.IOException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.Locale;
+import java.util.TimeZone;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipFile;
 
+import util.BidanConstants;
 import util.uniqueIdGenerator.Generator;
 
 import static android.preference.PreferenceManager.getDefaultSharedPreferences;
@@ -60,74 +77,85 @@ import static org.smartregister.util.Log.logVerbose;
 //import io.fabric.sdk.android.Fabric;
 
 public class LoginActivity extends AppCompatActivity {
-    private static final String TAG = LoginActivity.class.getSimpleName();
-    private Context context;
+
+    private static final String TAG = LoginActivity.class.getName();
     private EditText userNameEditText;
     private EditText passwordEditText;
     private ProgressDialog progressDialog;
     public static final String ENGLISH_LOCALE = "en";
-    public static final String KANNADA_LOCALE = "kn";
-    public static final String BENGALI_LOCALE = "bn";
-    public static final String ENGLISH_LANGUAGE = "English";
-    public static final String KANNADA_LANGUAGE = "Kannada";
-    public static final String Bengali_LANGUAGE = "Bengali";
-    public static final String Bahasa_LANGUAGE = "Bahasa";
+    private static final String URDU_LOCALE = "ur";
+    private static final String ENGLISH_LANGUAGE = "English";
+    private static final String BAHASA_LANGUAGE = "BAHASA";
+    private static final String URDU_LANGUAGE = "Urdu";
     private static final String BAHASA_LOCALE = "in";
     private static final String LOCALE_LANG = BAHASA_LOCALE;
-    public static Generator generator;
+    private android.content.Context appContext;
+    private RemoteLoginTask remoteLoginTask;
+    private Context context;
+
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         logVerbose("Initializing ...");
-
-        try{
+        try {
             AllSharedPreferences allSharedPreferences = new AllSharedPreferences(getDefaultSharedPreferences(this));
             String preferredLocale = allSharedPreferences.fetchLanguagePreference();
             Resources res = getOpenSRPContext().applicationContext().getResources();
             // Change locale settings in the app.
             DisplayMetrics dm = res.getDisplayMetrics();
-            android.content.res.Configuration conf = res.getConfiguration();
+            Configuration conf = res.getConfiguration();
             conf.locale = new Locale(preferredLocale);
             res.updateConfiguration(conf, dm);
-        }catch(Exception e){
+        } catch (Exception e) {
+            logError("Error onCreate: " + e);
 
         }
+
         setContentView(R.layout.login);
 
-        positionViews();
+        getSupportActionBar().setDisplayShowTitleEnabled(false);
+        getSupportActionBar().setBackgroundDrawable(new ColorDrawable(getResources().getColor(android.R.color.black)));
 
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            getWindow().setStatusBarColor(getResources().getColor(android.R.color.black));
+        }
+        appContext = this;
+        positionViews();
         initializeLoginFields();
         initializeBuildDetails();
         setDoneActionHandlerOnPasswordField();
         initializeProgressDialog();
-
-//        UserService.getServerTimeZone()
-
         setLanguage();
-
         if (BuildConfig.DEBUG) {
             debugApp();
         }
     }
 
-    private void debugApp() {
-        Config config = new Config();
-        String uname = null, pwd = null;
-        try {
-            uname = config.getCredential("uname", getApplicationContext());
-            pwd = config.getCredential("pwd", getApplicationContext());
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+    @Override
+    protected void onResume() {
+        super.onResume();
 
-        LayoutInflater layoutInflater = getLayoutInflater();
-        View view = layoutInflater.inflate(R.layout.login, null);
-        if (BidanApplication.getInstance().context().userService().hasARegisteredUser()) {
-            localLogin(view, uname, pwd);
-        } else {
-            remoteLogin(view, uname, pwd);
+        if (!getOpenSRPContext().IsUserLoggedOut()) {
+            goToHome(false);
         }
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        // Inflate the menu; this adds items to the action bar if it is present.
+        menu.add("Settings");
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        if (item.getTitle().toString().equalsIgnoreCase("Settings")) {
+            startActivity(new Intent(this, SettingsActivity.class));
+            return true;
+        }
+        android.util.Log.e(TAG, "onOptionsItemSelected: "+ item.getTitle().toString() );
+        return super.onOptionsItemSelected(item);
     }
 
     private void positionViews() {
@@ -140,26 +168,6 @@ public class LoginActivity extends AppCompatActivity {
 
     }
 
-    public static Context getOpenSRPContext() {
-        return BidanApplication.getInstance().context();
-    }
-
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu)
-    {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        menu.add("Settings");
-        return true;
-    }
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        if(item.getTitle().toString().equalsIgnoreCase("Settings")){
-            startActivity(new Intent(this, SettingsActivity.class));
-            return true;
-        }
-        return super.onOptionsItemSelected(item);
-    }
-
     private void initializeBuildDetails() {
         TextView buildDetailsTextView = (TextView) findViewById(org.smartregister.R.id.login_build);
         try {
@@ -167,207 +175,6 @@ public class LoginActivity extends AppCompatActivity {
         } catch (Exception e) {
             logError("Error fetching build details: " + e);
         }
-    }
-
-    @Override
-    protected void onResume() {
-        super.onResume();
-
-        if (!context.IsUserLoggedOut()) {
-            goToHome();
-        }
-
-        fillUserIfExists();
-    }
-
-    public void login(final View view) {
-        hideKeyboard();
-        view.setClickable(false);
-
-        final String userName = userNameEditText.getText().toString();
-        final String password = passwordEditText.getText().toString();
-
-        if (context.userService().hasARegisteredUser()) {
-            localLogin(view, userName, password);
-        } else {
-            remoteLogin(view, userName, password);
-        }
-    }
-
-    private void initializeLoginFields() {
-        userNameEditText = ((EditText) findViewById(org.smartregister.R.id.login_userNameText));
-        userNameEditText.setRawInputType(InputType.TYPE_CLASS_TEXT);
-        passwordEditText = ((EditText) findViewById(org.smartregister.R.id.login_passwordText));
-        passwordEditText.setRawInputType(InputType.TYPE_CLASS_TEXT);
-    }
-
-    private void setDoneActionHandlerOnPasswordField() {
-        passwordEditText.setOnEditorActionListener(new TextView.OnEditorActionListener() {
-            @Override
-            public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
-                if (actionId == EditorInfo.IME_ACTION_DONE) {
-                    login(findViewById(R.id.login_loginButton));
-                }
-                return false;
-            }
-        });
-    }
-
-    private void initializeProgressDialog() {
-        progressDialog = new ProgressDialog(this);
-        progressDialog.setCancelable(false);
-        progressDialog.setTitle(getString(org.smartregister.R.string.loggin_in_dialog_title));
-        progressDialog.setMessage(getString(org.smartregister.R.string.loggin_in_dialog_message));
-    }
-
-    private void localLogin(View view, String userName, String password) {
-        if (context.userService().isValidLocalLogin(userName, password)) {
-            localLoginWith(userName, password);
-
-            // Tracking Error
-//            ErrorReportingFacade.setUsername("", userName);
-//            FlurryAgent.setUserId(userName);
-        } else {
-            showErrorDialog(getString(org.smartregister.R.string.login_failed_dialog_message));
-            view.setClickable(true);
-        }
-    }
-
-    private void remoteLogin(final View view, final String userName, final String password) {
-        tryRemoteLogin(userName, password, new Listener<LoginResponse>() {
-            public void onEvent(LoginResponse loginResponse) {
-//                ErrorReportingFacade.setUsername("", userName);
-//                FlurryAgent.setUserId(userName);
-                if (loginResponse == SUCCESS) {
-                    remoteLoginWith(userName, password, loginResponse.payload());
-                } else {
-                    if (loginResponse == null) {
-                        showErrorDialog("Login failed. Unknown reason. Try Again");
-                    } else {
-                        if(loginResponse == NO_INTERNET_CONNECTIVITY){
-                            showErrorDialog(getResources().getString(R.string.no_internet_connectivity));
-                        }else if (loginResponse == UNKNOWN_RESPONSE){
-                            showErrorDialog(getResources().getString(R.string.unknown_response));
-                        }else if (loginResponse == UNAUTHORIZED){
-                            showErrorDialog(getResources().getString(R.string.unauthorized));
-                        }
-//                        showErrorDialog(loginResponse.message());
-                    }
-                    view.setClickable(true);
-                }
-            }
-        });
-
-/*        tryGetUniqueId(userName, password, new Listener<ResponseStatus>() {
-            @Override
-            public void onEvent(ResponseStatus data) {
-                if (data == ResponseStatus.failure) {
-                    logError("failed to fetch unique id");
-                }
-                goToHome();
-            }
-        });*/
-    }
-
-    private void showErrorDialog(String message) {
-        AlertDialog dialog = new AlertDialog.Builder(this)
-                .setTitle(getString(R.string.login_failed_dialog_title))
-                .setMessage(message)
-                .setPositiveButton("OK", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialogInterface, int i) {
-                    }
-                })
-                .create();
-        dialog.show();
-    }
-
-    private void getLocation() {
-        tryGetLocation(new Listener<Response<String>>() {
-            @Override
-            public void onEvent(Response<String> data) {
-                if (data.status() == ResponseStatus.success) {
-                    context.userService().saveAnmLocation(data.payload());
-                }
-            }
-        });
-    }
-
-    private void tryGetLocation(final Listener<Response<String>> afterGet) {
-        LockingBackgroundTask task = new LockingBackgroundTask(new ProgressIndicator() {
-            @Override
-            public void setVisible() { }
-
-            @Override
-            public void setInvisible() { Log.logInfo("Successfully get location"); }
-        });
-
-        task.doActionInBackground(new BackgroundAction<Response<String>>() {
-            @Override
-            public Response<String> actionToDoInBackgroundThread() {
-                return context.userService().getLocationInformation();
-            }
-
-            @Override
-            public void postExecuteInUIThread(Response<String> result) {
-                afterGet.onEvent(result);
-            }
-        });
-    }
-
-    private void tryRemoteLogin(final String userName, final String password, final Listener<LoginResponse> afterLoginCheck) {
-        LockingBackgroundTask task = new LockingBackgroundTask(new ProgressIndicator() {
-            @Override
-            public void setVisible() {
-                progressDialog.show();
-            }
-
-            @Override
-            public void setInvisible() {
-                progressDialog.dismiss();
-            }
-        });
-
-        task.doActionInBackground(new BackgroundAction<LoginResponse>() {
-            public LoginResponse actionToDoInBackgroundThread() {
-                return context.userService().isValidRemoteLogin(userName, password);
-            }
-
-            public void postExecuteInUIThread(LoginResponse result) {
-                afterLoginCheck.onEvent(result);
-            }
-        });
-    }
-
-    private void fillUserIfExists() {
-        if (context.userService().hasARegisteredUser()) {
-            userNameEditText.setText(context.allSharedPreferences().fetchRegisteredANM());
-            userNameEditText.setEnabled(false);
-        }
-    }
-
-    private void hideKeyboard() {
-        InputMethodManager inputManager = (InputMethodManager) getSystemService(INPUT_METHOD_SERVICE);
-        inputManager.hideSoftInputFromWindow(getCurrentFocus().getWindowToken(), HIDE_NOT_ALWAYS);
-    }
-
-    private void localLoginWith(String userName, String password) {
-        context.userService().localLogin(userName, password);
-        LoginActivity.generator = new Generator(context, userName, password);
-        goToHome();
-        //DrishtiSyncScheduler.startOnlyIfConnectedToNetwork(getApplicationContext());
-    }
-
-    private void remoteLoginWith(String userName, String password, String userInfo) {
-        context.userService().remoteLogin(userName, password, userInfo);
-        LoginActivity.generator = new Generator(context, userName, password);
-        goToHome();
-        //DrishtiSyncScheduler.startOnlyIfConnectedToNetwork(getApplicationContext());
-    }
-
-    private void goToHome() {
-        startActivity(new Intent(this, BidanHomeActivity.class));
-        finish();
     }
 
     private String getVersion() throws PackageManager.NameNotFoundException {
@@ -382,7 +189,22 @@ public class LoginActivity extends AppCompatActivity {
         return new SimpleDateFormat("dd MMM yyyy", Locale.getDefault()).format(new java.util.Date(ze.getTime()));
     }
 
-    public static void setLanguage(){
+    private void setDoneActionHandlerOnPasswordField() {
+        passwordEditText.setOnEditorActionListener(new TextView.OnEditorActionListener() {
+            @Override
+            public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
+                if (actionId == EditorInfo.IME_ACTION_DONE) {
+                    login(findViewById(org.smartregister.R.id.login_loginButton));
+                }
+                return false;
+            }
+        });
+    }
+
+
+
+
+    public static void setLanguage() {
         AllSharedPreferences allSharedPreferences = new AllSharedPreferences(getDefaultSharedPreferences(getOpenSRPContext().applicationContext()));
         String preferredLocale = allSharedPreferences.fetchLanguagePreference();
         if(!preferredLocale.equals(LOCALE_LANG)) {
@@ -410,7 +232,7 @@ public class LoginActivity extends AppCompatActivity {
             android.content.res.Configuration conf = res.getConfiguration();
             conf.locale = new Locale(BAHASA_LOCALE);
             res.updateConfiguration(conf, dm);
-            return Bahasa_LANGUAGE;
+            return BAHASA_LANGUAGE;
         } else {
             allSharedPreferences.saveLanguagePreference(ENGLISH_LOCALE);
             Resources res = Context.getInstance().applicationContext().getResources();
@@ -423,32 +245,310 @@ public class LoginActivity extends AppCompatActivity {
         }
     }
 
-    private void tryGetUniqueId(final String username, final String password, final Listener<ResponseStatus> afterGetUniqueId) {
-        LockingBackgroundTask task = new LockingBackgroundTask(new ProgressIndicator() {
+    private void initializeProgressDialog() {
+        progressDialog = new ProgressDialog(this);
+        progressDialog.setCancelable(false);
+        progressDialog.setTitle(getString(org.smartregister.R.string.loggin_in_dialog_title));
+        progressDialog.setMessage(getString(org.smartregister.R.string.loggin_in_dialog_message));
+    }
+
+    private void debugApp() {
+        Config config = new Config();
+        String uname = null, pwd = null;
+        try {
+            uname = config.getCredential("uname", getApplicationContext());
+            pwd = config.getCredential("pwd", getApplicationContext());
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        LayoutInflater layoutInflater = getLayoutInflater();
+        View view = layoutInflater.inflate(R.layout.login, null);
+        if (BidanApplication.getInstance().context().userService().hasARegisteredUser()) {
+            localLogin(view, uname, pwd);
+        } else {
+            remoteLogin(view, uname, pwd);
+        }
+    }
+
+    public static Context getOpenSRPContext() {
+        return BidanApplication.getInstance().context();
+    }
+
+    private void initializeLoginFields() {
+        userNameEditText = (EditText) findViewById(org.smartregister.R.id.login_userNameText);
+        passwordEditText = (EditText) findViewById(org.smartregister.R.id.login_passwordText);
+    }
+
+    private void localLogin(View view, String userName, String password) {
+        view.setClickable(true);
+        if (getOpenSRPContext().userService().isUserInValidGroup(userName, password)
+                && (!AllConstantsINA.TIME_CHECK || TimeStatus.OK.equals(getOpenSRPContext().userService().validateStoredServerTimeZone()))) {
+            localLoginWith(userName, password);
+        } else {
+
+            login(findViewById(org.smartregister.R.id.login_loginButton), false);
+        }
+    }
+
+    private void localLoginWith(String userName, String password) {
+        getOpenSRPContext().userService().localLogin(userName, password);
+        goToHome(false);
+//        startZScoreIntentService();
+        new Thread(new Runnable() {
             @Override
-            public void setVisible() {
-                progressDialog.show();
+            public void run() {
+                android.util.Log.i(getClass().getName(), "Starting DrishtiSyncScheduler " + DateTime.now().toString());
+                DrishtiSyncScheduler.startOnlyIfConnectedToNetwork(getApplicationContext());
+                android.util.Log.i(getClass().getName(), "Started DrishtiSyncScheduler " + DateTime.now().toString());
             }
-            @Override
-            public void setInvisible() {
+        }).start();
+    }
+
+    public void login(final View view) {
+        login(view, !getOpenSRPContext().allSharedPreferences().fetchForceRemoteLogin());
+    }
+
+    private void login(final View view, boolean localLogin) {
+        android.util.Log.i(getClass().getName(), "Hiding Keyboard " + DateTime.now().toString());
+        hideKeyboard();
+        view.setClickable(false);
+
+        final String userName = userNameEditText.getText().toString().trim();
+        final String password = passwordEditText.getText().toString().trim();
+
+        if (!TextUtils.isEmpty(userName) && !TextUtils.isEmpty(password)) {
+            if (localLogin) {
+                localLogin(view, userName, password);
+            } else {
+                remoteLogin(view, userName, password);
+            }
+        } else {
+            showErrorDialog(getResources().getString(R.string.unauthorized));
+            view.setClickable(true);
+        }
+
+        android.util.Log.i(getClass().getName(), "Login result finished " + DateTime.now().toString());
+    }
+
+    private void hideKeyboard() {
+        try {
+            InputMethodManager inputManager = (InputMethodManager) getSystemService(INPUT_METHOD_SERVICE);
+            inputManager.hideSoftInputFromWindow(getCurrentFocus().getWindowToken(), HIDE_NOT_ALWAYS);
+        } catch (Exception e) {
+            logError("Error hideKeyboard: " + e);
+        }
+    }
+
+    private void goToHome(boolean remote) {
+        if (!remote) {
+//            startZScoreIntentService();
+            Utils.startAsyncTask(new SaveTeamLocationsTask(), null);
+        } else {
+            Utils.startAsyncTask(new SaveTeamLocationsTask(), null);
+        }
+        BidanApplication.setCrashlyticsUser(getOpenSRPContext());
+        Intent intent = new Intent(this, BidanHomeActivity.class);
+//        Intent intent = new Intent(this, KMotherSmartRegisterActivity.class);
+
+        // TODO ERROR GET FRAGMENT
+//        intent.putExtra(BaseRegisterActivity.IS_REMOTE_LOGIN, remote);
+        startActivity(intent);
+
+//        IMDatabaseUtils.accessAssetsAndFillDataBaseForVaccineTypes(this, null);
+
+        finish();
+    }
+
+
+    // REMOTE LOGIN
+
+    /**
+     *
+     * @param view
+     * @param userName
+     * @param password
+     */
+    private void remoteLogin(final View view, final String userName, final String password) {
+
+        if (!getOpenSRPContext().allSharedPreferences().fetchBaseURL("").isEmpty()) {
+            tryRemoteLogin(userName, password, new Listener<LoginResponse>() {
+                public void onEvent(LoginResponse loginResponse) {
+                    view.setClickable(true);
+                    if (loginResponse == SUCCESS) {
+                        if (getOpenSRPContext().userService().isUserInPioneerGroup(userName)) {
+                            TimeStatus timeStatus = getOpenSRPContext().userService().validateDeviceTime(
+                                    loginResponse.payload(), BidanConstants.MAX_SERVER_TIME_DIFFERENCE);
+                            if (!BidanConstants.TIME_CHECK || timeStatus.equals(TimeStatus.OK)) {
+                                remoteLoginWith(userName, password, loginResponse.payload());
+                                // Get Unique Id
+//                                Intent intent = new Intent(appContext, PullUniqueIdsIntentService.class);
+//                                appContext.startService(intent);
+
+                            } else {
+                                if (timeStatus.equals(TimeStatus.TIMEZONE_MISMATCH)) {
+                                    TimeZone serverTimeZone = getOpenSRPContext().userService()
+                                            .getServerTimeZone(loginResponse.payload());
+                                    showErrorDialog(getString(timeStatus.getMessage(),
+                                            serverTimeZone.getDisplayName()));
+                                } else {
+                                    showErrorDialog(getString(timeStatus.getMessage()));
+                                }
+                            }
+                        } else { // Valid user from wrong group trying to log in
+                            showErrorDialog(getResources().getString(R.string.unauthorized_group));
+                        }
+                    } else {
+                        if (loginResponse == null) {
+                            showErrorDialog("Sorry, your login failed. Please try again.");
+                        } else {
+                            if (loginResponse == NO_INTERNET_CONNECTIVITY) {
+                                showErrorDialog(getResources().getString(R.string.no_internet_connectivity));
+                            } else if (loginResponse == UNKNOWN_RESPONSE) {
+                                showErrorDialog(getResources().getString(R.string.unknown_response));
+                            } else if (loginResponse == UNAUTHORIZED) {
+                                showErrorDialog(getResources().getString(R.string.unauthorized));
+                            }
+//                        showErrorDialog(loginResponse.message());
+                        }
+                    }
+                }
+            });
+
+        } else {
+            view.setClickable(true);
+            showErrorDialog("OpenSRP Base URL is missing. Please add it in Settings and try again");
+
+        }
+    }
+
+    private void tryRemoteLogin(final String userName, final String password, final Listener<LoginResponse> afterLoginCheck) {
+        if (remoteLoginTask != null && !remoteLoginTask.isCancelled()) {
+            remoteLoginTask.cancel(true);
+        }
+
+        remoteLoginTask = new RemoteLoginTask(userName, password, afterLoginCheck);
+        remoteLoginTask.execute();
+    }
+
+    private void remoteLoginWith(String userName, String password, String userInfo) {
+        getOpenSRPContext().userService().remoteLogin(userName, password, userInfo);
+        goToHome(true);
+        DrishtiSyncScheduler.startOnlyIfConnectedToNetwork(getApplicationContext());
+    }
+
+    private void showErrorDialog(String message) {
+        AlertDialog dialog = new AlertDialog.Builder(this)
+                .setTitle(getString(org.smartregister.R.string.login_failed_dialog_title))
+                .setMessage(message)
+                .setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                    }
+                })
+                .create();
+        dialog.show();
+    }
+
+    private void extractLocations(ArrayList<String> locationList, JSONObject rawLocationData) throws JSONException {
+
+        final String NODE = "node";
+        final String CHILDREN = "children";
+//        String name = rawLocationData.getJSONObject(NODE).getString("locationId");
+        String name = rawLocationData.getJSONObject(NODE).getString("name");
+        String level = rawLocationData.getJSONObject(NODE).getJSONArray("tags").getString(0);
+
+        if (LocationPickerView.ALLOWED_LEVELS.contains(level)) {
+            locationList.add(name);
+        }
+
+        if (rawLocationData.has(CHILDREN)) {
+            Iterator<String> childIterator = rawLocationData.getJSONObject(CHILDREN).keys();
+            while (childIterator.hasNext()) {
+
+                String curChildKey = childIterator.next();
+                extractLocations(locationList, rawLocationData.getJSONObject(CHILDREN).getJSONObject(curChildKey));
+            }
+        }
+
+    }
+
+//    Inner Class
+
+    private class RemoteLoginTask extends AsyncTask<Void, Void, LoginResponse> {
+        private final String userName;
+        private final String password;
+        private final Listener<LoginResponse> afterLoginCheck;
+
+        private RemoteLoginTask(String userName, String password, Listener<LoginResponse> afterLoginCheck) {
+            this.userName = userName;
+            this.password = password;
+            this.afterLoginCheck = afterLoginCheck;
+        }
+
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+            progressDialog.show();
+        }
+
+        @Override
+        protected LoginResponse doInBackground(Void... params) {
+            return getOpenSRPContext().userService().isValidRemoteLogin(userName, password);
+        }
+
+        @Override
+        protected void onPostExecute(LoginResponse loginResponse) {
+            super.onPostExecute(loginResponse);
+            if (!isDestroyed()) {
                 progressDialog.dismiss();
+                afterLoginCheck.onEvent(loginResponse);
             }
-        });
+        }
+    }
 
-        task.doActionInBackground(new BackgroundAction<ResponseStatus>() {
-            @Override
-            public ResponseStatus actionToDoInBackgroundThread() {
-                LoginActivity.generator = new Generator(context,username,password);
-                LoginActivity.generator.uniqueIdService().syncUniqueIdFromServer(username, password);
-                return (LoginActivity.generator.uniqueIdService().getLastUsedId(username, password));
+    private class SaveTeamLocationsTask extends AsyncTask<Void, Void, Void> {
+
+        @Override
+        protected Void doInBackground(Void... params) {
+            ArrayList<String> locationsCSV = locationsCSV();
+
+            if (locationsCSV.isEmpty()) {
+                android.util.Log.e(TAG, "doInBackground: locationCSV empty" );
+                return null;
             }
 
-            @Override
-            public void postExecuteInUIThread(ResponseStatus result) {
-                afterGetUniqueId.onEvent(result);
+//            android.util.Log.e(TAG, "doInBackground: value "+ StringUtils.join(locationsCSV, ",") );
+
+            Utils.writePreference(BidanApplication.getInstance().getApplicationContext(), LocationPickerView.PREF_VILLAGE_LOCATIONS, StringUtils.join(locationsCSV, ","));
+            return null;
+        }
+
+        // TODO Solve Get Location failed
+        public ArrayList<String> locationsCSV() {
+            final String LOCATIONS_HIERARCHY = "locationsHierarchy";
+            final String MAP = "map";
+            JSONObject locationData;
+            ArrayList<String> locations = new ArrayList<>();
+
+            try {
+                locationData = new JSONObject(BidanApplication.getInstance().context().anmLocationController().get());
+                if (locationData.has(LOCATIONS_HIERARCHY) && locationData.getJSONObject(LOCATIONS_HIERARCHY).has(MAP)) {
+                    JSONObject map = locationData.getJSONObject(LOCATIONS_HIERARCHY).getJSONObject(MAP);
+                    Iterator<String> keys = map.keys();
+                    while (keys.hasNext()) {
+                        String curKey = keys.next();
+                        extractLocations(locations, map.getJSONObject(curKey));
+                    }
+                } else {
+                    android.util.Log.e(TAG, "locationsCSV: Not Found" );
+                }
+            } catch (Exception e) {
+                android.util.Log.e(getClass().getCanonicalName(), android.util.Log.getStackTraceString(e));
             }
-        });
+            android.util.Log.e(TAG, "locationsCSV: "+ locations );
+            return locations;
+        }
     }
 
 }
-

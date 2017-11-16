@@ -3,12 +3,16 @@ package org.smartregister.bidan_cloudant.application;
 import android.content.Intent;
 import android.content.res.Configuration;
 
+import com.crashlytics.android.Crashlytics;
+
 import org.smartregister.Context;
 import org.smartregister.CoreLibrary;
+import org.smartregister.bidan_cloudant.BuildConfig;
 import org.smartregister.bidan_cloudant.activity.LoginActivity;
 import org.smartregister.bidan_cloudant.libs.FlurryFacade;
 import org.smartregister.bidan_cloudant.repository.BidanRepository;
 import org.smartregister.commonregistry.CommonFtsObject;
+import org.smartregister.repository.EventClientRepository;
 import org.smartregister.repository.Repository;
 import org.smartregister.sync.DrishtiSyncScheduler;
 import org.smartregister.view.activity.DrishtiApplication;
@@ -19,11 +23,9 @@ import java.util.Locale;
 import static org.smartregister.util.Log.logError;
 import static org.smartregister.util.Log.logInfo;
 
-/**
- * Created by koros on 1/22/16.
- */
-
 public class BidanApplication extends DrishtiApplication {
+
+    private EventClientRepository eventClientRepository;
 
     @Override
     public void onCreate() {
@@ -161,6 +163,27 @@ public class BidanApplication extends DrishtiApplication {
             commonFtsObject.updateMainConditions(ftsTable, getFtsMainConditions(ftsTable));
         }
         return commonFtsObject;
+    }
+
+    /**
+     * This method sets the Crashlytics user to whichever username was used to log in last. It only
+     * does so if the app is not built for debugging
+     *
+     * @param context The user's context
+     */
+    public static void setCrashlyticsUser(Context context) {
+        if (!BuildConfig.DEBUG
+                && context != null && context.userService() != null
+                && context.userService().getAllSharedPreferences() != null) {
+            Crashlytics.setUserName(context.userService().getAllSharedPreferences().fetchRegisteredANM());
+        }
+    }
+
+    public EventClientRepository eventClientRepository() {
+        if (eventClientRepository == null) {
+            eventClientRepository = new EventClientRepository(getRepository());
+        }
+        return eventClientRepository;
     }
 
 

@@ -41,7 +41,7 @@ import java.util.Map;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
-import util.VaksinatorFormUtils;
+import util.BidanFormUtils;
 
 public class KMotherSmartRegisterActivity extends SecuredNativeSmartRegisterActivity implements
         LocationSelectorDialogFragment.OnLocationSelectedListener, DisplayFormListener{
@@ -165,8 +165,7 @@ public class KMotherSmartRegisterActivity extends SecuredNativeSmartRegisterActi
         Log.v("fieldoverride", fieldOverrides.toString());
         // save the form
         try{
-            VaksinatorFormUtils formUtils = VaksinatorFormUtils.getInstance(getApplicationContext());
-          //  FormUtils formUtils = FormUtils.getInstance(getApplicationContext());
+            BidanFormUtils formUtils = BidanFormUtils.getInstance(getApplicationContext());
             FormSubmission submission = formUtils.generateFormSubmisionFromXMLString(id, formSubmission, formName, fieldOverrides);
             saveService.saveForm(getParams(submission), submission.instance());
             ClientProcessor.getInstance(getApplicationContext()).processClient();
@@ -175,22 +174,22 @@ public class KMotherSmartRegisterActivity extends SecuredNativeSmartRegisterActi
             context().formSubmissionRouter().handleSubmission(submission, formName);
             switchToBaseFragment(formSubmission); // Unnecessary!! passing on data
 
-            if(formName.equals("registrasi_ibu")) {
-                Log.d(TAG, "saveFormSubmission: it was registrasi_ibu form");
-                //  FieldOverrides fieldOverrides = new FieldOverrides(combined.toString());
+            if(formName.equals("kartu_ibu_registration")) {
+                Log.d(TAG, "saveFormSubmission: it was kartu_ibu_registration form");
 
                 fieldOverrides.put("ibuCaseId",submission.entityId());
                 FieldOverrides fo = new FieldOverrides(fieldOverrides.toString());
 
-                activatingOtherForm("registrasi_anak", null, fo.getJSONString());
-        ///        activatingForm("registrasi_anak", null, fo.getJSONString());
+//                activatingOtherForm("registrasi_anak", null, fo.getJSONString());
+
             }
 
             //end capture flurry log for FS
             String end = timer.format(new Date());
-            Map<String, String> FS = new HashMap<String, String>();
+            Map<String, String> FS = new HashMap<>();
             FS.put("end", end);
             FlurryAgent.logEvent(formName, FS, true);
+
         }catch (Exception e){
             // TODO: show error dialog on the formfragment if the submission fails
             DisplayFormFragment displayFormFragment = getDisplayFormFragmentAtIndex(currentPage);
@@ -204,26 +203,7 @@ public class KMotherSmartRegisterActivity extends SecuredNativeSmartRegisterActi
 
     }
 
-    public void activatingOtherForm(final String formName, final String entityId, final String metaData) {
-        final int prevPageIndex = currentPage;
-        runOnUiThread(new Runnable() {
-            @Override
-            public void run() {
-                //hack reset the form
-                DisplayFormFragment displayFormFragment = getDisplayFormFragmentAtIndex(prevPageIndex);
-                if (displayFormFragment != null) {
-                    displayFormFragment.hideTranslucentProgressDialog();
-                    displayFormFragment.setFormData(null);
-
-                }
-
-                displayFormFragment.setRecordId(null);
-                activatingForm(formName, entityId, metaData);
-            }
-        });
-    }
-
-        @Override
+    @Override
     public void OnLocationSelected(String locationJSONString) {
         JSONObject combined = null;
 
@@ -281,13 +261,13 @@ public class KMotherSmartRegisterActivity extends SecuredNativeSmartRegisterActi
 
     private void activatingForm(String formName, String entityId, String metaData){
         try {
-            int formIndex = VaksinatorFormUtils.getIndexForFormName(formName, formNames) + 1; // add the offset
+            int formIndex = BidanFormUtils.getIndexForFormName(formName, formNames) + 1; // add the offset
             if (entityId != null || metaData != null){
                 String data = null;
                 //check if there is previously saved data for the form
                 data = getPreviouslySavedDataForForm(formName, metaData, entityId);
                 if (data == null){
-                    data = VaksinatorFormUtils.getInstance(getApplicationContext()).generateXMLInputForFormWithEntityId(entityId, formName, metaData);
+                    data = BidanFormUtils.getInstance(getApplicationContext()).generateXMLInputForFormWithEntityId(entityId, formName, metaData);
                 }
 
                 DisplayFormFragment displayFormFragment = getDisplayFormFragmentAtIndex(formIndex);

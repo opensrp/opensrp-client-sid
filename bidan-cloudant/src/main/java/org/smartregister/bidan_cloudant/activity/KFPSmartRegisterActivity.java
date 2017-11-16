@@ -41,7 +41,7 @@ import java.util.Map;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
-import util.VaksinatorFormUtils;
+import util.BidanFormUtils;
 
 public class KFPSmartRegisterActivity extends SecuredNativeSmartRegisterActivity implements
         LocationSelectorDialogFragment.OnLocationSelectedListener, DisplayFormListener{
@@ -165,7 +165,7 @@ public class KFPSmartRegisterActivity extends SecuredNativeSmartRegisterActivity
         Log.v("fieldoverride", fieldOverrides.toString());
         // save the form
         try{
-            VaksinatorFormUtils formUtils = VaksinatorFormUtils.getInstance(getApplicationContext());
+            BidanFormUtils formUtils = BidanFormUtils.getInstance(getApplicationContext());
           //  FormUtils formUtils = FormUtils.getInstance(getApplicationContext());
             FormSubmission submission = formUtils.generateFormSubmisionFromXMLString(id, formSubmission, formName, fieldOverrides);
             saveService.saveForm(getParams(submission), submission.instance());
@@ -281,13 +281,13 @@ public class KFPSmartRegisterActivity extends SecuredNativeSmartRegisterActivity
 
     private void activatingForm(String formName, String entityId, String metaData){
         try {
-            int formIndex = VaksinatorFormUtils.getIndexForFormName(formName, formNames) + 1; // add the offset
+            int formIndex = BidanFormUtils.getIndexForFormName(formName, formNames) + 1; // add the offset
             if (entityId != null || metaData != null){
                 String data = null;
                 //check if there is previously saved data for the form
                 data = getPreviouslySavedDataForForm(formName, metaData, entityId);
                 if (data == null){
-                    data = VaksinatorFormUtils.getInstance(getApplicationContext()).generateXMLInputForFormWithEntityId(entityId, formName, metaData);
+                    data = BidanFormUtils.getInstance(getApplicationContext()).generateXMLInputForFormWithEntityId(entityId, formName, metaData);
                 }
 
                 DisplayFormFragment displayFormFragment = getDisplayFormFragmentAtIndex(formIndex);
