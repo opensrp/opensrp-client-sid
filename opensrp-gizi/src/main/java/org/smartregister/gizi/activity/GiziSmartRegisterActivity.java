@@ -23,7 +23,7 @@ import org.smartregister.gizi.pageradapter.BaseRegisterActivityPagerAdapter;
 import org.smartregister.provider.SmartRegisterClientsProvider;
 import org.smartregister.service.ZiggyService;
 import org.smartregister.gizi.R;
-import org.smartregister.sync.ClientProcessor;
+import org.smartregister.gizi.sync.ClientProcessor;
 import org.smartregister.util.FormUtils;
 import org.smartregister.view.activity.SecuredNativeSmartRegisterActivity;
 import org.smartregister.view.dialog.DialogOption;

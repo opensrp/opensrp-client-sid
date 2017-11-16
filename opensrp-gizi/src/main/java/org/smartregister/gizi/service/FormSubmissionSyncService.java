@@ -24,7 +24,7 @@ public class FormSubmissionSyncService {
             CountDownLatch mCountDownLatch = new CountDownLatch(2);
             mCloudantSyncHandler.setCountDownLatch(mCountDownLatch);
             mCloudantSyncHandler.startPullReplication();
-//            mCloudantSyncHandler.startPushReplication();
+            mCloudantSyncHandler.startPushReplication();
 
             mCountDownLatch.await();
 

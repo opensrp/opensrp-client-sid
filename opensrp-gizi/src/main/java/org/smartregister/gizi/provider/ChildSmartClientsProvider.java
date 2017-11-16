@@ -107,12 +107,14 @@ public class ChildSmartClientsProvider implements SmartRegisterCLientsProviderFo
             String namaayah = getValue(kiparent.getColumnmaps(), "namaSuami", true);
             String namaibu = getValue(kiparent.getColumnmaps(), "namalengkap", true);
             fillValue((TextView) convertView.findViewById(R.id.ParentName), namaibu+","+namaayah);
-
+            String subVillages = getValue(kiparent.getDetails(), "address1", true);
+            fillValue((TextView) convertView.findViewById(R.id.txt_child_subVillage), subVillages);
         }
       String dob=  pc.getColumnmaps().get("tanggalLahirAnak").substring(0, pc.getColumnmaps().get("tanggalLahirAnak").indexOf("T"));
         String age = ""+monthRangeToToday(dob);
         //get child detail value
-        String subVillages = getValue(kiparent.getDetails(), "address1", true);
+
+
       //  String ages = getValue(pc.getColumnmaps(), "namaBayi", true);
         String dateOfBirth = getValue(pc.getColumnmaps(), "tanggalLahirAnak", true);
         String gender = getValue(pc.getDetails(), "gender", true);
@@ -125,7 +127,7 @@ public class ChildSmartClientsProvider implements SmartRegisterCLientsProviderFo
         String wasting_status = getValue(pc.getDetails(), "wasting", true);
 
         //set child detail value
-        fillValue((TextView) convertView.findViewById(R.id.txt_child_subVillage), subVillages);
+
         fillValue((TextView) convertView.findViewById(R.id.txt_child_age), age);
         fillValue((TextView) convertView.findViewById(R.id.txt_child_date_of_birth), "DOB :"+dob);
         fillValue((TextView) convertView.findViewById(R.id.txt_child_gender), gender);

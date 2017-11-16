@@ -10,6 +10,7 @@ import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.content.res.Resources;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.text.InputType;
 import android.util.DisplayMetrics;
 import android.view.KeyEvent;
@@ -23,21 +24,25 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.flurry.android.FlurryAgent;
-
+import org.json.JSONException;
+import org.json.JSONObject;
+import org.smartregister.Context;
+import org.smartregister.gizi.activity.GiziHomeActivity;
+import org.smartregister.gizi.application.GiziApplication;
 import org.smartregister.gizi.R;
 import org.smartregister.gizi.application.GiziApplication;
-import org.smartregister.Context;
 import org.smartregister.domain.LoginResponse;
 import org.smartregister.domain.Response;
 import org.smartregister.domain.ResponseStatus;
 import org.smartregister.event.Listener;
+//import org.smartregister.vaksinator.lib.ErrorReportingFacade;
 import org.smartregister.repository.AllSharedPreferences;
 import org.smartregister.sync.DrishtiSyncScheduler;
 import org.smartregister.util.Log;
 import org.smartregister.view.BackgroundAction;
 import org.smartregister.view.LockingBackgroundTask;
 import org.smartregister.view.ProgressIndicator;
+import org.smartregister.gizi.activity.SettingsActivity;
 
 import java.io.IOException;
 import java.text.SimpleDateFormat;
@@ -45,6 +50,7 @@ import java.util.Locale;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipFile;
 
+//import io.fabric.sdk.android.Fabric;
 
 import static android.preference.PreferenceManager.getDefaultSharedPreferences;
 import static android.view.inputmethod.InputMethodManager.HIDE_NOT_ALWAYS;
@@ -55,7 +61,8 @@ import static org.smartregister.domain.LoginResponse.UNKNOWN_RESPONSE;
 import static org.smartregister.util.Log.logError;
 import static org.smartregister.util.Log.logVerbose;
 
-public class LoginActivity extends Activity {
+public class LoginActivity extends AppCompatActivity {
+    private static final String TAG = LoginActivity.class.getSimpleName();
     private Context context;
     private EditText userNameEditText;
     private EditText passwordEditText;
@@ -69,52 +76,71 @@ public class LoginActivity extends Activity {
     public static final String Bengali_LANGUAGE = "Bengali";
     public static final String Bahasa_LANGUAGE = "Bahasa";
 
-
+ //   public static Generator generator;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         logVerbose("Initializing ...");
-        try {
+
+        try{
             AllSharedPreferences allSharedPreferences = new AllSharedPreferences(getDefaultSharedPreferences(this));
             String preferredLocale = allSharedPreferences.fetchLanguagePreference();
-            Resources res = Context.getInstance().applicationContext().getResources();
+            Resources res = getOpenSRPContext().applicationContext().getResources();
             // Change locale settings in the app.
             DisplayMetrics dm = res.getDisplayMetrics();
             android.content.res.Configuration conf = res.getConfiguration();
             conf.locale = new Locale(preferredLocale);
             res.updateConfiguration(conf, dm);
-        } catch (Exception e) {
+        }catch(Exception e){
 
         }
-        setContentView(org.smartregister.R.layout.login);
-        ImageView loginglogo = (ImageView) findViewById(R.id.login_logo);
-        loginglogo.setImageDrawable(getResources().getDrawable(R.mipmap.gizilogin));
-        context = Context.getInstance().updateApplicationContext(this.getApplicationContext());
+        setContentView(R.layout.login);
+
+        positionViews();
+
         initializeLoginFields();
         initializeBuildDetails();
         setDoneActionHandlerOnPasswordField();
         initializeProgressDialog();
-        getActionBar().setTitle("");
-        getActionBar().setIcon(getResources().getDrawable(org.smartregister.gizi.R.mipmap.logo));
-        getActionBar().setBackgroundDrawable(getResources().getDrawable(org.smartregister.gizi.R.color.action_bar_background));
         setLanguage();
 
-
-//        debugApp();
+      //  debugApp();
 
     }
 
-    private void debugApp(){
+   /* private void debugApp() {
+        Config config = new Config();
+        String uname = "demo1", pwd = "Satu2345";
+        try {
+            uname = config.getCredential("uname", getApplicationContext());
+            pwd =  config.getCredential("pwd", getApplicationContext());
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
         LayoutInflater layoutInflater = getLayoutInflater();
         View view = layoutInflater.inflate(R.layout.login, null);
         if (context.userService().hasARegisteredUser()){
-//            localLogin(view, "demo_test", "Demo@123");
-            localLogin(view, "user28", "1Sampai8");
+            localLoginWith(uname, pwd);
+            //localLogin(view, uname, pwd);
         } else {
-//            remoteLogin(view, "demo_test", "Demo@123");
-            remoteLogin(view, "user28", "1Sampai8");
+            remoteLogin(view, uname, pwd);
         }
+    }*/
+
+    private void positionViews() {
+        ImageView loginglogo = (ImageView)findViewById(R.id.login_logo);
+        loginglogo.setImageDrawable(getResources().getDrawable(R.mipmap.login_logo));
+        context = Context.getInstance().updateApplicationContext(this.getApplicationContext());
+//        getActionBar().setTitle("");
+//        getActionBar().setIcon(getResources().getDrawable(R.mipmap.logo));
+//        getActionBar().setBackgroundDrawable(getResources().getDrawable(R.color.action_bar_background));
+
+    }
+
+    public static Context getOpenSRPContext() {
+        return GiziApplication.getInstance().context();
     }
 
     @Override
@@ -127,7 +153,7 @@ public class LoginActivity extends Activity {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         if(item.getTitle().toString().equalsIgnoreCase("Settings")){
-            startActivity(new Intent(this,SettingsActivity.class));
+            startActivity(new Intent(this, SettingsActivity.class));
             return true;
         }
         return super.onOptionsItemSelected(item);
@@ -140,10 +166,6 @@ public class LoginActivity extends Activity {
         } catch (Exception e) {
             logError("Error fetching build details: " + e);
         }
-    }
-
-    public static Context getOpenSRPContext() {
-        return GiziApplication.getInstance().getContext();
     }
 
     @Override
@@ -183,7 +205,7 @@ public class LoginActivity extends Activity {
             @Override
             public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
                 if (actionId == EditorInfo.IME_ACTION_DONE) {
-                    login(findViewById(org.smartregister.R.id.login_loginButton));
+                    login(findViewById(R.id.login_loginButton));
                 }
                 return false;
             }
@@ -200,8 +222,10 @@ public class LoginActivity extends Activity {
     private void localLogin(View view, String userName, String password) {
         if (getOpenSRPContext().userService().isUserInValidGroup(userName, password)) {
             localLoginWith(userName, password);
-          //  ErrorReportingFacade.setUsername("", userName);
-            FlurryAgent.setUserId(userName);
+
+            // Tracking Error
+//            ErrorReportingFacade.setUsername("", userName);
+//            FlurryAgent.setUserId(userName);
         } else {
             showErrorDialog(getString(org.smartregister.R.string.login_failed_dialog_message));
             view.setClickable(true);
@@ -211,8 +235,8 @@ public class LoginActivity extends Activity {
     private void remoteLogin(final View view, final String userName, final String password) {
         tryRemoteLogin(userName, password, new Listener<LoginResponse>() {
             public void onEvent(LoginResponse loginResponse) {
-              //  ErrorReportingFacade.setUsername("", userName);
-                FlurryAgent.setUserId(userName);
+//                ErrorReportingFacade.setUsername("", userName);
+//                FlurryAgent.setUserId(userName);
                 if (loginResponse == SUCCESS) {
                     remoteLoginWith(userName, password, loginResponse.payload());
                 } else {
@@ -328,16 +352,18 @@ public class LoginActivity extends Activity {
 
     private void localLoginWith(String userName, String password) {
         context.userService().localLogin(userName, password);
-       // LoginActivity.generator = new Generator(context,userName,password);
+      //  LoginActivity.generator = new Generator(context, userName, password);
         goToHome();
-        DrishtiSyncScheduler.startOnlyIfConnectedToNetwork(getApplicationContext());
+        //DrishtiSyncScheduler.startOnlyIfConnectedToNetwork(getApplicationContext());
     }
 
     private void remoteLoginWith(String userName, String password, String userInfo) {
         context.userService().remoteLogin(userName, password, userInfo);
-      //  LoginActivity.generator = new Generator(context,userName,password);
+        String locationId = getUserDefaultLocationId(userInfo);
+        saveDefaultLocationId(userName,locationId);
+       // LoginActivity.generator = new Generator(context, userName, password);
         goToHome();
-        DrishtiSyncScheduler.startOnlyIfConnectedToNetwork(getApplicationContext());
+        //DrishtiSyncScheduler.startOnlyIfConnectedToNetwork(getApplicationContext());
     }
 
     private void goToHome() {
@@ -393,6 +419,23 @@ public class LoginActivity extends Activity {
         }
     }
 
+    public String getUserDefaultLocationId(String userInfo) {
+        try {
+            JSONObject userLocationJSON = new JSONObject(userInfo);
+            return userLocationJSON.getJSONObject("team").getJSONArray("location").getJSONObject(0).getString("name");
+        } catch (JSONException e) {
+            android.util.Log.v("Error : ", e.getMessage());
+        }
+
+        return null;
+    }
+
+    public void saveDefaultLocationId(String userName, String locationId) {
+        if (userName != null) {
+            context.userService().getAllSharedPreferences().savePreference(userName + "-locationid", locationId);
+        }
+    }
+
    /* private void tryGetUniqueId(final String username, final String password, final Listener<ResponseStatus> afterGetUniqueId) {
         LockingBackgroundTask task = new LockingBackgroundTask(new ProgressIndicator() {
             @Override
@@ -413,7 +456,7 @@ public class LoginActivity extends Activity {
                 return (LoginActivity.generator.uniqueIdService().getLastUsedId(username, password));
             }
 
-                @Override
+            @Override
             public void postExecuteInUIThread(ResponseStatus result) {
                 afterGetUniqueId.onEvent(result);
             }
