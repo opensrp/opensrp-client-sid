@@ -1,8 +1,8 @@
 package org.smartregister.bidan_cloudant.option;
 
 import org.smartregister.Context;
-import org.smartregister.commonregistry.CommonPersonObjectClient;
 import org.smartregister.bidan_cloudant.R;
+import org.smartregister.commonregistry.CommonPersonObjectClient;
 import org.smartregister.view.contract.SmartRegisterClient;
 import org.smartregister.view.dialog.FilterOption;
 

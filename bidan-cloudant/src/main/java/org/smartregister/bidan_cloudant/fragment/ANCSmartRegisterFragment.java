@@ -20,11 +20,11 @@ import org.opensrp.api.util.TreeNode;
 import org.smartregister.Context;
 import org.smartregister.bidan_cloudant.R;
 import org.smartregister.bidan_cloudant.activity.KANCDetailActivity;
-import org.smartregister.bidan_cloudant.activity.KChildSmartRegisterActivity;
+import org.smartregister.bidan_cloudant.activity.KANCSmartRegisterActivity;
 import org.smartregister.bidan_cloudant.activity.LoginActivity;
 import org.smartregister.bidan_cloudant.libs.FlurryFacade;
-import org.smartregister.bidan_cloudant.option.KICommonObjectFilterOption;
 import org.smartregister.bidan_cloudant.option.ANCServiceModeOption;
+import org.smartregister.bidan_cloudant.option.KICommonObjectFilterOption;
 import org.smartregister.bidan_cloudant.provider.ANCSmartClientsProvider;
 import org.smartregister.commonregistry.CommonPersonObjectClient;
 import org.smartregister.commonregistry.CommonPersonObjectController;
@@ -181,7 +181,7 @@ public class ANCSmartRegisterFragment extends SecuredNativeSmartRegisterCursorAd
     }
 
     private DialogOption[] getEditOptions() {
-        return ((KChildSmartRegisterActivity)getActivity()).getEditOptions();
+        return ((KANCSmartRegisterActivity)getActivity()).getEditOptions();
     }
 
     @Override
@@ -314,7 +314,7 @@ public class ANCSmartRegisterFragment extends SecuredNativeSmartRegisterCursorAd
 
         ft.addToBackStack(null);
         LocationSelectorDialogFragment
-                .newInstance((KChildSmartRegisterActivity) getActivity(), new EditDialogOptionModel(), context().anmLocationController().get(), "registrasi_ibu")
+                .newInstance((KANCSmartRegisterActivity) getActivity(), new EditDialogOptionModel(), context().anmLocationController().get(), "registrasi_ibu")
                 .show(ft, locationDialogTAG);
     }
 
@@ -640,7 +640,7 @@ public class ANCSmartRegisterFragment extends SecuredNativeSmartRegisterCursorAd
         if (requestCode == 2 ) {
 
             if (resultCode != 0) {
-                Intent myIntent = new Intent(getActivity(), KChildSmartRegisterActivity.class);
+                Intent myIntent = new Intent(getActivity(), KANCSmartRegisterActivity.class);
                 if (data != null) {
                     myIntent.putExtra("org.smartregister.indonesia.face.face_mode", true);
                     myIntent.putExtra("org.smartregister.indonesia.face.base_id", data.getStringExtra("org.smartregister.indonesia.face.base_id"));

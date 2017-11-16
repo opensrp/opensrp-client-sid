@@ -9,8 +9,6 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.flurry.android.FlurryAgent;
-
 import org.smartregister.Context;
 import org.smartregister.bidan_cloudant.R;
 import org.smartregister.bidan_cloudant.libs.FlurryFacade;

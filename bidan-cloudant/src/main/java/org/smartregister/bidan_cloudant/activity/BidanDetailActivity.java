@@ -13,13 +13,12 @@ import android.widget.TextView;
 import com.flurry.android.FlurryAgent;
 
 import org.smartregister.Context;
+import org.smartregister.bidan_cloudant.R;
 import org.smartregister.bidan_cloudant.libs.FlurryFacade;
 import org.smartregister.commonregistry.AllCommonsRepository;
 import org.smartregister.commonregistry.CommonPersonObject;
 import org.smartregister.commonregistry.CommonPersonObjectClient;
 import org.smartregister.repository.DetailsRepository;
-import org.smartregister.bidan_cloudant.R;
-//import org.smartregister.bidan_cloudant.face.camera.SmartShutterActivity;
 import org.smartregister.view.activity.DrishtiApplication;
 
 import java.io.File;
@@ -30,6 +29,8 @@ import java.util.Map;
 
 import util.ImageFetcher;
 import util.formula.Support;
+
+//import org.smartregister.bidan_cloudant.face.camera.SmartShutterActivity;
 
 /**
  * Created by Iq on 09/06/16.

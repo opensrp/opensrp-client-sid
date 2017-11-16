@@ -1,8 +1,8 @@
 package org.smartregister.bidan_cloudant.option;
 
 import org.smartregister.Context;
-import org.smartregister.provider.SmartRegisterClientsProvider;
 import org.smartregister.bidan_cloudant.R;
+import org.smartregister.provider.SmartRegisterClientsProvider;
 import org.smartregister.view.dialog.ServiceModeOption;
 
 import static org.smartregister.view.activity.SecuredNativeSmartRegisterActivity.ClientsHeaderProvider;

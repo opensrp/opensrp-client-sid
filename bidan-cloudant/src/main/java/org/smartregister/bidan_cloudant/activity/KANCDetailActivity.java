@@ -2,7 +2,6 @@ package org.smartregister.bidan_cloudant.activity;
 
 import android.app.Activity;
 import android.content.Intent;
-import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageButton;
@@ -161,8 +160,8 @@ public class KANCDetailActivity extends Activity {
         TextView highRiskPostPartumDistosia = (TextView) findViewById(R.id.txt_highRiskPostPartumDistosia);
         TextView txt_highRiskHIVAIDS = (TextView) findViewById(R.id.txt_highRiskHIVAIDS);
 
-        ImageView heart_bpm = (ImageView) findViewById(R.id.icon_device);
-        heart_bpm.setVisibility(View.VISIBLE);
+//        ImageView heart_bpm = (ImageView) findViewById(R.id.icon_device);
+//        heart_bpm.setVisibility(View.VISIBLE);
 
         ImageButton back = (ImageButton) findViewById(R.id.btn_back_to_home);
         back.setOnClickListener(new View.OnClickListener() {
@@ -178,7 +177,7 @@ public class KANCDetailActivity extends Activity {
             }
         });
 
-        ImageView device = (ImageView) findViewById(R.id.icon_device);
+//        ImageView device = (ImageView) findViewById(R.id.icon_device);
 //        device.setOnClickListener(bpmListener);
 
         DetailsRepository detailsRepository = org.smartregister.Context.getInstance().detailsRepository();

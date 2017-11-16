@@ -14,17 +14,17 @@ import com.flurry.android.FlurryAgent;
 
 import org.json.JSONObject;
 import org.smartregister.Context;
+import org.smartregister.bidan_cloudant.R;
 import org.smartregister.bidan_cloudant.controller.BidanNavigationController;
 import org.smartregister.bidan_cloudant.utils.AllConstantsINA;
 import org.smartregister.cursoradapter.SmartRegisterQueryBuilder;
+import org.smartregister.enketo.view.fragment.DisplayFormFragment;
 import org.smartregister.event.Listener;
 import org.smartregister.service.PendingFormSubmissionService;
-import org.smartregister.bidan_cloudant.R;
 import org.smartregister.view.activity.SecuredActivity;
 import org.smartregister.view.contract.HomeContext;
 import org.smartregister.view.controller.NativeAfterANMDetailsFetchListener;
 import org.smartregister.view.controller.NativeUpdateANMDetailsTask;
-import org.smartregister.enketo.view.fragment.DisplayFormFragment;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;

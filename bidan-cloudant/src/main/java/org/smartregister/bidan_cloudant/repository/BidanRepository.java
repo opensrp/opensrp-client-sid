@@ -6,10 +6,10 @@ import android.util.Log;
 import net.sqlcipher.database.SQLiteDatabase;
 
 import org.apache.commons.lang3.StringUtils;
+import org.smartregister.bidan_cloudant.application.BidanApplication;
 import org.smartregister.commonregistry.CommonFtsObject;
 import org.smartregister.repository.EventClientRepository;
 import org.smartregister.repository.Repository;
-import org.smartregister.bidan_cloudant.application.BidanApplication;
 
 import java.util.ArrayList;
 import java.util.LinkedHashSet;

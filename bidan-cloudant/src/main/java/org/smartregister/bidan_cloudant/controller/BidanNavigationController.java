@@ -5,19 +5,18 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.net.Uri;
 
-
-//import org.ei.opensrp.vaksinator.test.TestSmartRegisterActivity;
+import org.json.JSONObject;
+import org.smartregister.bidan_cloudant.R;
 import org.smartregister.bidan_cloudant.activity.KANCSmartRegisterActivity;
 import org.smartregister.bidan_cloudant.activity.KChildSmartRegisterActivity;
-import org.smartregister.bidan_cloudant.R;
 import org.smartregister.bidan_cloudant.activity.KFPSmartRegisterActivity;
 import org.smartregister.bidan_cloudant.activity.KMotherSmartRegisterActivity;
 import org.smartregister.bidan_cloudant.activity.KPNCSmartRegisterActivity;
 import org.smartregister.view.controller.ANMController;
-import org.json.JSONObject;
-
 
 import static android.preference.PreferenceManager.getDefaultSharedPreferences;
+
+//import org.ei.opensrp.vaksinator.test.TestSmartRegisterActivity;
 
 public class BidanNavigationController extends org.smartregister.view.controller.NavigationController {
     private Activity activity;

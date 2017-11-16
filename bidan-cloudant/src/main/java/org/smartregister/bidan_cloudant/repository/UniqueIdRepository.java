@@ -9,8 +9,8 @@ import net.sqlcipher.database.SQLiteDatabase;
 
 import org.smartregister.bidan_cloudant.application.BidanApplication;
 import org.smartregister.bidan_cloudant.domain.UniqueId;
-import org.smartregister.repository.Repository;
 import org.smartregister.repository.BaseRepository;
+import org.smartregister.repository.Repository;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;

@@ -8,12 +8,12 @@ import android.view.View;
 import android.widget.AbsListView;
 import android.widget.TextView;
 
+import org.smartregister.bidan_cloudant.R;
 import org.smartregister.commonregistry.AllCommonsRepository;
 import org.smartregister.commonregistry.CommonPersonObject;
 import org.smartregister.commonregistry.CommonPersonObjectClient;
 import org.smartregister.commonregistry.CommonRepository;
 import org.smartregister.cursoradapter.SmartRegisterCLientsProviderForCursorAdapter;
-import org.smartregister.bidan_cloudant.R;
 import org.smartregister.repository.DetailsRepository;
 import org.smartregister.service.AlertService;
 import org.smartregister.view.contract.SmartRegisterClient;

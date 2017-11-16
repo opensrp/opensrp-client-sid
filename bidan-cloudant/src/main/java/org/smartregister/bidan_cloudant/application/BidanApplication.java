@@ -3,21 +3,21 @@ package org.smartregister.bidan_cloudant.application;
 import android.content.Intent;
 import android.content.res.Configuration;
 
+import org.smartregister.Context;
+import org.smartregister.CoreLibrary;
 import org.smartregister.bidan_cloudant.activity.LoginActivity;
 import org.smartregister.bidan_cloudant.libs.FlurryFacade;
 import org.smartregister.bidan_cloudant.repository.BidanRepository;
-import org.smartregister.Context;
-import org.smartregister.CoreLibrary;
 import org.smartregister.commonregistry.CommonFtsObject;
 import org.smartregister.repository.Repository;
 import org.smartregister.sync.DrishtiSyncScheduler;
 import org.smartregister.view.activity.DrishtiApplication;
 import org.smartregister.view.receiver.SyncBroadcastReceiver;
 
+import java.util.Locale;
+
 import static org.smartregister.util.Log.logError;
 import static org.smartregister.util.Log.logInfo;
-
-import java.util.Locale;
 
 /**
  * Created by koros on 1/22/16.

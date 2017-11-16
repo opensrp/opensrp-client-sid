@@ -25,21 +25,19 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import org.smartregister.Context;
-import org.smartregister.bidan_cloudant.application.BidanApplication;
+import org.smartregister.bidan_cloudant.BuildConfig;
 import org.smartregister.bidan_cloudant.R;
+import org.smartregister.bidan_cloudant.application.BidanApplication;
 import org.smartregister.bidan_cloudant.utils.Config;
 import org.smartregister.domain.LoginResponse;
 import org.smartregister.domain.Response;
 import org.smartregister.domain.ResponseStatus;
 import org.smartregister.event.Listener;
-//import org.smartregister.bidan_cloudant.lib.ErrorReportingFacade;
 import org.smartregister.repository.AllSharedPreferences;
-import org.smartregister.service.UserService;
 import org.smartregister.util.Log;
 import org.smartregister.view.BackgroundAction;
 import org.smartregister.view.LockingBackgroundTask;
 import org.smartregister.view.ProgressIndicator;
-import org.smartregister.view.activity.DrishtiApplication;
 
 import java.io.IOException;
 import java.text.SimpleDateFormat;
@@ -47,7 +45,6 @@ import java.util.Locale;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipFile;
 
-//import io.fabric.sdk.android.Fabric;
 import util.uniqueIdGenerator.Generator;
 
 import static android.preference.PreferenceManager.getDefaultSharedPreferences;
@@ -58,6 +55,9 @@ import static org.smartregister.domain.LoginResponse.UNAUTHORIZED;
 import static org.smartregister.domain.LoginResponse.UNKNOWN_RESPONSE;
 import static org.smartregister.util.Log.logError;
 import static org.smartregister.util.Log.logVerbose;
+
+//import org.smartregister.bidan_cloudant.lib.ErrorReportingFacade;
+//import io.fabric.sdk.android.Fabric;
 
 public class LoginActivity extends AppCompatActivity {
     private static final String TAG = LoginActivity.class.getSimpleName();
@@ -106,25 +106,25 @@ public class LoginActivity extends AppCompatActivity {
 
         setLanguage();
 
-        debugApp();
-
+        if (BuildConfig.DEBUG) {
+            debugApp();
+        }
     }
 
     private void debugApp() {
         Config config = new Config();
-        String uname = "demo1", pwd = "Satu2345";
+        String uname = null, pwd = null;
         try {
             uname = config.getCredential("uname", getApplicationContext());
-            pwd =  config.getCredential("pwd", getApplicationContext());
+            pwd = config.getCredential("pwd", getApplicationContext());
         } catch (IOException e) {
             e.printStackTrace();
         }
 
         LayoutInflater layoutInflater = getLayoutInflater();
         View view = layoutInflater.inflate(R.layout.login, null);
-        if (context.userService().hasARegisteredUser()){
-            localLoginWith(uname, pwd);
-            //localLogin(view, uname, pwd);
+        if (BidanApplication.getInstance().context().userService().hasARegisteredUser()) {
+            localLogin(view, uname, pwd);
         } else {
             remoteLogin(view, uname, pwd);
         }

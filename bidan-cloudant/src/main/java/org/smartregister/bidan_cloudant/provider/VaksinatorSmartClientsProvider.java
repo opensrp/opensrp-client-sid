@@ -1,44 +1,6 @@
 package org.smartregister.bidan_cloudant.provider;
 
 
-
-import android.app.Activity;
-import android.content.Context;
-import android.graphics.drawable.Drawable;
-import android.util.Log;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.widget.AbsListView;
-import android.widget.Button;
-import android.widget.FrameLayout;
-import android.widget.ImageButton;
-import android.widget.ImageView;
-import android.widget.LinearLayout;
-import android.widget.TextView;
-
-import org.smartregister.commonregistry.AllCommonsRepository;
-import org.smartregister.commonregistry.CommonPersonObject;
-import org.smartregister.commonregistry.CommonPersonObjectClient;
-import org.smartregister.commonregistry.CommonPersonObjectController;
-import org.smartregister.cursoradapter.SmartRegisterCLientsProviderForCursorAdapter;
-import org.smartregister.repository.DetailsRepository;
-import org.smartregister.service.AlertService;
-import org.smartregister.bidan_cloudant.R;
-import org.smartregister.view.activity.DrishtiApplication;
-import org.smartregister.view.contract.SmartRegisterClient;
-import org.smartregister.view.contract.SmartRegisterClients;
-import org.smartregister.view.dialog.FilterOption;
-import org.smartregister.view.dialog.ServiceModeOption;
-import org.smartregister.view.dialog.SortOption;
-import org.smartregister.view.viewholder.OnClickFormLauncher;
-
-import java.io.File;
-import java.text.SimpleDateFormat;
-
-import util.formula.Support;
-
-import static android.view.ViewGroup.LayoutParams.MATCH_PARENT;
-
 /**
  * Created by user on 2/12/15.
  */

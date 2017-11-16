@@ -20,7 +20,7 @@ import org.opensrp.api.util.TreeNode;
 import org.smartregister.Context;
 import org.smartregister.bidan_cloudant.R;
 import org.smartregister.bidan_cloudant.activity.KMotherDetailActivity;
-import org.smartregister.bidan_cloudant.activity.KChildSmartRegisterActivity;
+import org.smartregister.bidan_cloudant.activity.KMotherSmartRegisterActivity;
 import org.smartregister.bidan_cloudant.activity.LoginActivity;
 import org.smartregister.bidan_cloudant.libs.FlurryFacade;
 import org.smartregister.bidan_cloudant.option.KICommonObjectFilterOption;
@@ -176,7 +176,7 @@ public class MotherSmartRegisterFragment extends SecuredNativeSmartRegisterCurso
     }
 
     private DialogOption[] getEditOptions() {
-        return ((KChildSmartRegisterActivity)getActivity()).getEditOptions();
+        return ((KMotherSmartRegisterActivity)getActivity()).getEditOptions();
     }
 
     @Override
@@ -272,7 +272,8 @@ public class MotherSmartRegisterFragment extends SecuredNativeSmartRegisterCurso
 
         ft.addToBackStack(null);
         LocationSelectorDialogFragment
-                .newInstance((KChildSmartRegisterActivity) getActivity(), new EditDialogOptionModel(), context().anmLocationController().get(), "registrasi_ibu")
+                .newInstance((KMotherSmartRegisterActivity) getActivity(),
+                        new EditDialogOptionModel(), context().anmLocationController().get(), "registrasi_ibu")
                 .show(ft, locationDialogTAG);
     }
 
@@ -305,12 +306,15 @@ public class MotherSmartRegisterFragment extends SecuredNativeSmartRegisterCurso
     private String KiSortByNameAZ() {
         return " namaBayi ASC";
     }
+
     private String KiSortByNameZA() {
         return " namaBayi DESC";
     }
+
     private String KiSortByAgeASC() {
         return " tanggalLahirAnak DESC";
     }
+
     private String KiSortByAgeDESC() {
         return " tanggalLahirAnak ASC";
     }
@@ -318,6 +322,7 @@ public class MotherSmartRegisterFragment extends SecuredNativeSmartRegisterCurso
     private String KiSortByAge() {
         return " umur DESC";
     }
+
     private String KiSortByNoIbu() {
         return " noIbu ASC";
     }
@@ -598,7 +603,7 @@ public class MotherSmartRegisterFragment extends SecuredNativeSmartRegisterCurso
         if (requestCode == 2 ) {
 
             if (resultCode != 0) {
-                Intent myIntent = new Intent(getActivity(), KChildSmartRegisterActivity.class);
+                Intent myIntent = new Intent(getActivity(), KMotherSmartRegisterActivity.class);
                 if (data != null) {
                     myIntent.putExtra("org.smartregister.indonesia.face.face_mode", true);
                     myIntent.putExtra("org.smartregister.indonesia.face.base_id", data.getStringExtra("org.smartregister.indonesia.face.base_id"));

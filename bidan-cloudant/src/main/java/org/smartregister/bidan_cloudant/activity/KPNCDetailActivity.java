@@ -2,9 +2,7 @@ package org.smartregister.bidan_cloudant.activity;
 
 import android.app.Activity;
 import android.content.Intent;
-import android.net.Uri;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.ImageView;
@@ -12,7 +10,6 @@ import android.widget.TextView;
 
 import com.flurry.android.FlurryAgent;
 
-import org.json.JSONObject;
 import org.smartregister.Context;
 import org.smartregister.bidan_cloudant.R;
 import org.smartregister.bidan_cloudant.libs.FlurryFacade;
@@ -27,11 +24,9 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.UUID;
 
 import util.ImageFetcher;
 import util.Utils;
-import util.formula.Support;
 
 import static org.smartregister.util.StringUtil.humanize;
 import static org.smartregister.util.StringUtil.humanizeAndDoUPPERCASE;
@@ -89,8 +84,8 @@ public class KPNCDetailActivity extends Activity {
 //        TextView risk8 = (TextView) findViewById(R.id.txt_risk8);
 
 //        ImageView heart_bpm = (ImageView) findViewById(R.id.icon_device);
-        ImageView device = (ImageView) findViewById(R.id.icon_device);
-        device.setVisibility(View.VISIBLE);
+//        ImageView device = (ImageView) findViewById(R.id.icon_device);
+//        device.setVisibility(View.VISIBLE);
 //        device.setOnClickListener(bpmListener);
 
         //detail data

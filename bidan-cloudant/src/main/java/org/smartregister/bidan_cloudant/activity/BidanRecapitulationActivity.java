@@ -11,9 +11,9 @@ import android.widget.Spinner;
 import android.widget.TextView;
 
 import org.smartregister.Context;
+import org.smartregister.bidan_cloudant.R;
 import org.smartregister.commonregistry.CommonPersonObjectClient;
 import org.smartregister.cursoradapter.SmartRegisterQueryBuilder;
-import org.smartregister.bidan_cloudant.R;
 
 import java.util.Date;
 import java.util.Map;
