@@ -415,47 +415,60 @@ public class BidanHomeActivity extends SecuredActivity {
         task.fetch(new NativeAfterANMDetailsFetchListener() {
             @Override
             public void afterFetch(HomeContext anmDetails) {
-//                updateRegisterCounts(anmDetails);
+                updateRegisterCounts(anmDetails);
             }
         });
     }
 
     private void updateRegisterCounts(HomeContext homeContext) {
         SmartRegisterQueryBuilder sqb = new SmartRegisterQueryBuilder();
+
         Cursor kicountcursor = context().commonrepository("ec_kartu_ibu").rawCustomQueryForAdapter(
                 sqb.queryForCountOnRegisters("ec_kartu_ibu_search", "ec_kartu_ibu_search.is_closed=0"));
         kicountcursor.moveToFirst();
         kicount= kicountcursor.getInt(0);
+//        kicount = 10;
         kicountcursor.close();
 
-        Cursor kbcountcursor = context().commonrepository("ec_kartu_ibu").rawCustomQueryForAdapter(
-                sqb.queryForCountOnRegisters("ec_kartu_ibu_search", "ec_kartu_ibu_search.is_closed=0 and jenisKontrasepsi !='0'" ));
-        kbcountcursor.moveToFirst();
-        int kbcount = kbcountcursor.getInt(0);
-        kbcountcursor.close();
+//        Cursor kbcountcursor = context().commonrepository("ec_kartu_ibu").rawCustomQueryForAdapter(
+//                sqb.queryForCountOnRegisters(
+//                        "ec_kartu_ibu_search",
+//                        "ec_kartu_ibu_search.is_closed=0 and jenisKontrasepsi !='0'" ));
+//        kbcountcursor.moveToFirst();
+//        int kbcount = kbcountcursor.getInt(0);
+//        kbcountcursor.close();
 
-        Cursor anccountcursor = context().commonrepository("ec_ibu").rawCustomQueryForAdapter(
-                sqb.queryForCountOnRegisters("ec_ibu_search", "ec_ibu_search.is_closed=0 "));
-        anccountcursor.moveToFirst();
-        int anccount = anccountcursor.getInt(0);
-        anccountcursor.close();
 
-        Cursor pnccountcursor = context().commonrepository("ec_pnc").rawCustomQueryForAdapter(
-                sqb.queryForCountOnRegisters("ec_pnc_search", "ec_pnc_search.is_closed=0 AND (ec_pnc_search.keadaanIbu ='hidup' OR ec_pnc_search.keadaanIbu IS NULL) ")); // and ec_pnc_search.keadaanIbu LIKE '%hidup%'
-        pnccountcursor.moveToFirst();
-        int pnccount = pnccountcursor.getInt(0);
-        pnccountcursor.close();
+        // ec_ibu_search no table
+//        Cursor anccountcursor = context().commonrepository("ec_ibu").rawCustomQueryForAdapter(
+//                sqb.queryForCountOnRegisters(
+//                        "ec_ibu_search",
+//                        "ec_ibu_search.is_closed=0 "));
+//        anccountcursor.moveToFirst();
+//        int anccount = anccountcursor.getInt(0);
+//        anccountcursor.close();
+
+        // No pnc_search
+//        Cursor pnccountcursor = context().commonrepository("ec_pnc").rawCustomQueryForAdapter(
+//                sqb.queryForCountOnRegisters(
+//                        "ec_pnc_search",
+//                        "ec_pnc_search.is_closed=0 AND (ec_pnc_search.keadaanIbu ='hidup' OR ec_pnc_search.keadaanIbu IS NULL) ")); // and ec_pnc_search.keadaanIbu LIKE '%hidup%'
+//        pnccountcursor.moveToFirst();
+//        int pnccount = pnccountcursor.getInt(0);
+//        pnccountcursor.close();
 
         Cursor childcountcursor = context().commonrepository("anak").rawCustomQueryForAdapter(
-                sqb.queryForCountOnRegisters("ec_anak_search", "ec_anak_search.is_closed=0"));
+                sqb.queryForCountOnRegisters(
+                        "ec_anak_search",
+                        "ec_anak_search.is_closed=0"));
         childcountcursor.moveToFirst();
         int childcount = childcountcursor.getInt(0);
         childcountcursor.close();
 
         ecRegisterClientCountView.setText(valueOf(kicount));
-        kartuIbuANCRegisterClientCountView.setText(valueOf(anccount));
-        kartuIbuPNCRegisterClientCountView.setText(valueOf(pnccount));
+//        kartuIbuANCRegisterClientCountView.setText(valueOf(anccount));
+//        kartuIbuPNCRegisterClientCountView.setText(valueOf(pnccount));
         anakRegisterClientCountView.setText(valueOf(childcount));
-        kohortKbCountView.setText(valueOf(kbcount));
+//        kohortKbCountView.setText(valueOf(kbcount));
     }
 }

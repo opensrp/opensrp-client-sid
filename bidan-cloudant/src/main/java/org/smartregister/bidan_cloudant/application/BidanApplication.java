@@ -60,6 +60,7 @@ public class BidanApplication extends DrishtiApplication {
     public Context getContext(){
         return context;
     }
+
     public Context context() {
         return context;
     }
