@@ -323,7 +323,7 @@ public class ChildSmartRegisterFragment extends SecuredNativeSmartRegisterCursor
             switch (view.getId()) {
                 case R.id.profile_info_layout:
                     FlurryFacade.logEvent("click_detail_picture_vaksinator");
-                    KChildDetailActivity.controller = (CommonPersonObjectClient)view.getTag();
+                    KChildDetailActivity.childclient = (CommonPersonObjectClient)view.getTag();
                     Intent intent = new Intent(getActivity(),KChildDetailActivity.class);
                     startActivity(intent);
                     getActivity().finish();

@@ -7,6 +7,7 @@ import android.content.Intent;
 import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
+import android.content.res.Configuration;
 import android.content.res.Resources;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -33,10 +34,12 @@ import org.smartregister.domain.ResponseStatus;
 import org.smartregister.event.Listener;
 //import org.smartregister.bidan_cloudant.lib.ErrorReportingFacade;
 import org.smartregister.repository.AllSharedPreferences;
+import org.smartregister.service.UserService;
 import org.smartregister.util.Log;
 import org.smartregister.view.BackgroundAction;
 import org.smartregister.view.LockingBackgroundTask;
 import org.smartregister.view.ProgressIndicator;
+import org.smartregister.view.activity.DrishtiApplication;
 
 import java.io.IOException;
 import java.text.SimpleDateFormat;
@@ -65,12 +68,12 @@ public class LoginActivity extends AppCompatActivity {
     public static final String ENGLISH_LOCALE = "en";
     public static final String KANNADA_LOCALE = "kn";
     public static final String BENGALI_LOCALE = "bn";
-    public static final String BAHASA_LOCALE = "in";
     public static final String ENGLISH_LANGUAGE = "English";
     public static final String KANNADA_LANGUAGE = "Kannada";
     public static final String Bengali_LANGUAGE = "Bengali";
     public static final String Bahasa_LANGUAGE = "Bahasa";
-
+    private static final String BAHASA_LOCALE = "in";
+    private static final String LOCALE_LANG = BAHASA_LOCALE;
     public static Generator generator;
 
     @Override
@@ -98,6 +101,9 @@ public class LoginActivity extends AppCompatActivity {
         initializeBuildDetails();
         setDoneActionHandlerOnPasswordField();
         initializeProgressDialog();
+
+//        UserService.getServerTimeZone()
+
         setLanguage();
 
         debugApp();
@@ -377,16 +383,21 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     public static void setLanguage(){
-        AllSharedPreferences allSharedPreferences = new AllSharedPreferences(getDefaultSharedPreferences(Context.getInstance().applicationContext()));
+        AllSharedPreferences allSharedPreferences = new AllSharedPreferences(getDefaultSharedPreferences(getOpenSRPContext().applicationContext()));
         String preferredLocale = allSharedPreferences.fetchLanguagePreference();
-        Resources res = Context.getInstance().applicationContext().getResources();
+        if(!preferredLocale.equals(LOCALE_LANG)) {
+            switchLanguagePreference();
+            preferredLocale = allSharedPreferences.fetchLanguagePreference();
+        }
+        Resources res = getOpenSRPContext().applicationContext().getResources();
         // Change locale settings in the app.
         DisplayMetrics dm = res.getDisplayMetrics();
-        android.content.res.Configuration conf = res.getConfiguration();
+        Configuration conf = res.getConfiguration();
         conf.locale = new Locale(preferredLocale);
         res.updateConfiguration(conf, dm);
 
     }
+
     public static String switchLanguagePreference() {
         AllSharedPreferences allSharedPreferences = new AllSharedPreferences(getDefaultSharedPreferences(Context.getInstance().applicationContext()));
 

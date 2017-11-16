@@ -38,7 +38,8 @@ public class KChildDetailActivity extends Activity {
     private static HashMap<String, String> hash;
     private boolean updateMode = false;
     static String entityid;
-
+    //image retrieving
+    public static CommonPersonObjectClient controller;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

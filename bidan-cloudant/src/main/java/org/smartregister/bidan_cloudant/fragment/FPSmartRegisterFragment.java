@@ -323,7 +323,7 @@ public class FPSmartRegisterFragment extends SecuredNativeSmartRegisterCursorAda
             switch (view.getId()) {
                 case R.id.profile_info_layout:
                     FlurryFacade.logEvent("click_detail_picture_vaksinator");
-                    KFPDetailActivity.controller = (CommonPersonObjectClient)view.getTag();
+                    KFPDetailActivity.kiclient = (CommonPersonObjectClient)view.getTag();
                     Intent intent = new Intent(getActivity(),KFPDetailActivity.class);
                     startActivity(intent);
                     getActivity().finish();

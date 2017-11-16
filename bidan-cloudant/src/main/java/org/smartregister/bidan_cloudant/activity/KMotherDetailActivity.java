@@ -38,11 +38,12 @@ public class KMotherDetailActivity extends Activity {
     private static final String TAG = KMotherDetailActivity.class.getSimpleName();
     SimpleDateFormat timer = new SimpleDateFormat("hh:mm:ss", Locale.US);
 
+    //image retrieving
     public static CommonPersonObjectClient kiclient;
+
     ImageView kiview;
     private static HashMap<String, String> hash;
     private boolean updateMode = false;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 

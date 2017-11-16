@@ -36,6 +36,7 @@ import static org.smartregister.util.StringUtil.humanize;
  */
 public class KFPDetailActivity extends Activity {
     private static final String TAG = KFPDetailActivity.class.getSimpleName();
+    //image retrieving
     SimpleDateFormat timer = new SimpleDateFormat("hh:mm:ss");
     public static CommonPersonObjectClient kiclient;
 

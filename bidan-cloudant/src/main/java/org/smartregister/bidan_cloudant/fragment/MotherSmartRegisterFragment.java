@@ -281,7 +281,7 @@ public class MotherSmartRegisterFragment extends SecuredNativeSmartRegisterCurso
             switch (view.getId()) {
                 case R.id.profile_info_layout:
                     FlurryFacade.logEvent("click_detail_picture_vaksinator");
-                    KMotherDetailActivity.controller = (CommonPersonObjectClient)view.getTag();
+                    KMotherDetailActivity.kiclient = (CommonPersonObjectClient)view.getTag();
                     Intent intent = new Intent(getActivity(),KMotherDetailActivity.class);
                     startActivity(intent);
                     getActivity().finish();

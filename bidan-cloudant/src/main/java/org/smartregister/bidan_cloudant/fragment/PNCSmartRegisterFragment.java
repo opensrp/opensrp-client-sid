@@ -323,7 +323,7 @@ public class PNCSmartRegisterFragment extends SecuredNativeSmartRegisterCursorAd
             switch (view.getId()) {
                 case R.id.profile_info_layout:
                     FlurryFacade.logEvent("click_detail_picture_vaksinator");
-                    KPNCDetailActivity.controller = (CommonPersonObjectClient)view.getTag();
+                    KPNCDetailActivity.pncclient = (CommonPersonObjectClient)view.getTag();
                     Intent intent = new Intent(getActivity(),KPNCDetailActivity.class);
                     startActivity(intent);
                     getActivity().finish();
