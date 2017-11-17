@@ -116,45 +116,62 @@ public class BidanApplication extends DrishtiApplication {
     }
 
     private static String[] getFtsSearchFields(String tableName){
-        if(tableName.equals("ec_anak")){
-            return new String[]{ "namaBayi","tanggalLahirAnak" };
-           // return ftsSearchFields;
-        } else if (tableName.equals("ec_kartu_ibu")){
-                return new String[]{ "namalengkap", "namaSuami" };
-           // return ftsSearchFields;
+        if(tableName.equals("ec_kartu_ibu")){
+            String[] ftsSearchFields =  { "namalengkap", "namaSuami" };
+            return ftsSearchFields;
+        } else if(tableName.equals("ec_anak")){
+            String[] ftsSearchFields =  { "namaBayi" };
+            return ftsSearchFields;
+        } else if (tableName.equals("ec_ibu")){
+            String[] ftsSearchFields =  { "namalengkap", "namaSuami"};
+            return ftsSearchFields;
+        }
+        else if (tableName.equals("ec_pnc")) {
+            String[] ftsSearchFields = {"namalengkap", "namaSuami"};
+            return ftsSearchFields;
         }
         return null;
     }
 
     private static String[] getFtsSortFields(String tableName){
-        if(tableName.equals("ec_anak")){
-            String[] sortFields = { "namaBayi","tanggalLahirAnak"};
+        if(tableName.equals("ec_kartu_ibu")) {
+            String[] sortFields = { "namalengkap", "umur",  "noIbu", "htp"};
             return sortFields;
-        } else if(tableName.equals("ec_kartu_ibu")){
-            String[] sortFields = { "namalengkap", "namaSuami"};
+        } else if(tableName.equals("ec_anak")){
+            String[] sortFields = { "namaBayi", "tanggalLahirAnak" };
+            return sortFields;
+        } else if(tableName.equals("ec_ibu")){
+            String[] sortFields = { "namalengkap", "umur", "noIbu", "pptest" , "htp" };
+            return sortFields;
+        } else if(tableName.equals("ec_pnc")){
+            String[] sortFields = { "namalengkap", "umur", "noIbu", "keadaanIbu"};
             return sortFields;
         }
         return null;
     }
 
     private  static String[] getFtsMainConditions(String tableName){
-        if(tableName.equals("ec_anak")){
-            String[] mainConditions = {"is_closed", "details" , "namaBayi"};
+        if(tableName.equals("ec_kartu_ibu")) {
+            String[] mainConditions = { "is_closed", "jenisKontrasepsi" };
             return mainConditions;
-        } else if(tableName.equals("ec_kartu_ibu")){
-            String[] mainConditions = { "is_closed", "namalengkap"};
+        } else if(tableName.equals("ec_anak")){
+            String[] mainConditions = { "is_closed", "relational_id" };
+            return mainConditions;
+        } else if(tableName.equals("ec_ibu")){
+            String[] mainConditions = { "is_closed", "type", "pptest" , "kartuIbuId" };
+            return mainConditions;
+        } else if(tableName.equals("ec_pnc")){
+            String[] mainConditions = { "is_closed","keadaanIbu" , "type"};
             return mainConditions;
         }
         return null;
     }
 
-/*    private String[] getFtsTables(){
-        String[] ftsTables = { "ec_anak", "ec_kartu_ibu" };
-        return ftsTables;
-    }*/
 
     private static String[] getFtsTables() {
-        return new String[]{"ec_anak", "ec_kartu_ibu" };
+        String[] ftsTables = { "ec_kartu_ibu", "ec_anak", "ec_ibu", "ec_pnc" };
+
+        return ftsTables;
     }
     public static CommonFtsObject createCommonFtsObject(){
         CommonFtsObject commonFtsObject = new CommonFtsObject(getFtsTables());
