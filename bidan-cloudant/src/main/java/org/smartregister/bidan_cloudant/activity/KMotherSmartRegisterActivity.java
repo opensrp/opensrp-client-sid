@@ -130,6 +130,7 @@ public class KMotherSmartRegisterActivity extends SecuredNativeSmartRegisterActi
         saveService = new SaveService(context().ziggyFileLoader(), context().formDataRepository(),
                 context().formSubmissionRouter());
     }
+
     public void onPageChanged(int page){
         setRequestedOrientation(page == 0
                 ? ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE
@@ -200,13 +201,12 @@ public class KMotherSmartRegisterActivity extends SecuredNativeSmartRegisterActi
             }
             e.printStackTrace();
         }
-
-       
-
     }
 
     @Override
     public void OnLocationSelected(String locationJSONString) {
+        Log.e(TAG, "OnLocationSelected: start" );
+
         if(Support.ONSYNC) {
             Toast.makeText(this,"Data still Synchronizing, please wait",Toast.LENGTH_SHORT).show();
             return;
@@ -216,15 +216,15 @@ public class KMotherSmartRegisterActivity extends SecuredNativeSmartRegisterActi
 
         try {
             JSONObject locationJSON = new JSONObject(locationJSONString);
-           // JSONObject uniqueId = new JSONObject(LoginActivity.generator.uniqueIdController().getUniqueIdJson());
 
             combined = locationJSON;
           //  Iterator<String> iter = uniqueId.keys();
 
-           /* while (iter.hasNext()) {
-                String key = iter.next();
-                combined.put(key, uniqueId.get(key));
-            }*/
+//            JSONObject uniqueId = new JSONObject(LoginActivity.generator.uniqueIdController().getUniqueIdJson());
+//            while (iter.hasNext()) {
+//                String key = iter.next();
+//                combined.put(key, uniqueId.get(key));
+//            }
 
             System.out.println("injection string: " + combined.toString());
         } catch (JSONException e) {
@@ -233,7 +233,7 @@ public class KMotherSmartRegisterActivity extends SecuredNativeSmartRegisterActi
 
         if (combined != null) {
             FieldOverrides fieldOverrides = new FieldOverrides(combined.toString());
-            startFormActivity(KOHORT_MOTHER_REGISTRATION, null, fieldOverrides.getJSONString());
+//            startFormActivity(KOHORT_MOTHER_REGISTRATION, null, fieldOverrides.getJSONString());
         }
     }
 

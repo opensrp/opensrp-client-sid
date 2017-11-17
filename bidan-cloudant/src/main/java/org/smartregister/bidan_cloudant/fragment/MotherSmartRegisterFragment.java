@@ -26,6 +26,7 @@ import org.smartregister.bidan_cloudant.libs.FlurryFacade;
 import org.smartregister.bidan_cloudant.option.KICommonObjectFilterOption;
 import org.smartregister.bidan_cloudant.option.MotherServiceModeOption;
 import org.smartregister.bidan_cloudant.provider.MotherSmartClientsProvider;
+import org.smartregister.bidan_cloudant.utils.AllConstantsINA;
 import org.smartregister.commonregistry.CommonPersonObjectClient;
 import org.smartregister.commonregistry.CommonPersonObjectController;
 import org.smartregister.cursoradapter.CursorCommonObjectFilterOption;
@@ -49,6 +50,7 @@ import org.smartregister.view.dialog.DialogOptionModel;
 import org.smartregister.view.dialog.EditOption;
 import org.smartregister.view.dialog.FilterOption;
 import org.smartregister.view.dialog.LocationSelectorDialogFragment;
+import org.smartregister.view.dialog.NameSort;
 import org.smartregister.view.dialog.ServiceModeOption;
 import org.smartregister.view.dialog.SortOption;
 
@@ -56,6 +58,7 @@ import java.util.ArrayList;
 import java.util.Map;
 
 import util.AsyncTask;
+import util.BidanConstants;
 
 import static android.view.View.INVISIBLE;
 import static android.view.View.VISIBLE;
@@ -102,8 +105,7 @@ public class MotherSmartRegisterFragment extends SecuredNativeSmartRegisterCurso
             @Override
             public SortOption sortOption() {
 
-                return new CursorCommonObjectSort("A-Z", "namaBayi desc");
-
+                return new CursorCommonObjectSort("A-Z", "namaIbu desc");
             }
 
             @Override
@@ -127,8 +129,7 @@ public class MotherSmartRegisterFragment extends SecuredNativeSmartRegisterCurso
                 String locationjson = context().anmLocationController().get();
                 LocationTree locationTree = EntityUtils.fromJson(locationjson, LocationTree.class);
 
-                Map<String,TreeNode<String, Location>> locationMap =
-                        locationTree.getLocationsHierarchy();
+                Map<String,TreeNode<String, Location>> locationMap = locationTree.getLocationsHierarchy();
                 addChildToList(dialogOptionslist,locationMap);
                 DialogOption[] dialogOptions = new DialogOption[dialogOptionslist.size()];
                 for (int i = 0;i < dialogOptionslist.size();i++){
@@ -147,13 +148,11 @@ public class MotherSmartRegisterFragment extends SecuredNativeSmartRegisterCurso
             public DialogOption[] sortingOptions() {
                // FlurryFacade.logEvent("click_sorting_option_on_kohort_ibu_dashboard");
                 return new DialogOption[]{
-//                        new HouseholdCensusDueDateSort(),
-
-
                         new CursorCommonObjectSort(getResources().getString(R.string.sort_by_name_label), KiSortByNameAZ()),
                         new CursorCommonObjectSort(getResources().getString(R.string.sort_by_name_label_reverse), KiSortByNameZA()),
-                        new CursorCommonObjectSort(getResources().getString(R.string.sort_by_child_age), KiSortByAgeASC()),
-                        new CursorCommonObjectSort(getResources().getString(R.string.sort_by_child_age_desc), KiSortByAgeDESC()),
+                        new CursorCommonObjectSort(getResources().getString(R.string.sort_by_wife_age_label), KiSortByAge()),
+                        new CursorCommonObjectSort(getResources().getString(R.string.sort_by_edd_label), KiSortByEdd()),
+                        new CursorCommonObjectSort(getResources().getString(R.string.sort_by_no_ibu_label), KiSortByNoIbu()),
                 };
             }
 
@@ -211,33 +210,32 @@ public class MotherSmartRegisterFragment extends SecuredNativeSmartRegisterCurso
     }
 
     private void initializeQueries() {
-        String tableName = "ec_anak";
-      //  String parentTableName = PathConstants.MOTHER_TABLE_NAME;
+        String tableName = AllConstantsINA.MOTHER_TABLE_NAME;
 
-        MotherSmartClientsProvider hhscp = new MotherSmartClientsProvider(getActivity(),
+        MotherSmartClientsProvider mscp = new MotherSmartClientsProvider(getActivity(),
                 clientActionHandler, context().alertService(), context().commonrepository(tableName));
-        clientAdapter = new SmartRegisterPaginatedCursorAdapter(getActivity(), null, hhscp, context().commonrepository(tableName));
+        clientAdapter = new SmartRegisterPaginatedCursorAdapter(getActivity(), null, mscp,
+                context().commonrepository(tableName));
         clientsView.setAdapter(clientAdapter);
 
         setTablename(tableName);
         SmartRegisterQueryBuilder countqueryBUilder = new SmartRegisterQueryBuilder();
         countqueryBUilder.SelectInitiateMainTableCounts(tableName);
-        mainCondition = " is_closed = 0 ";
+        mainCondition = "is_closed = 0 and namalengkap != '' ";
         countSelect = countqueryBUilder.mainCondition(mainCondition);
         super.CountExecute();
 
         SmartRegisterQueryBuilder queryBUilder = new SmartRegisterQueryBuilder();
         queryBUilder.SelectInitiateMainTable(tableName, new String[]{
                 tableName + ".relationalid",
-                tableName + ".details",
                 tableName + ".is_closed",
-                tableName + ".relational_id",
                 tableName + ".details",
-                tableName + ".tanggalLahirAnak",
-                tableName + ".namaBayi",
-
+                tableName + ".isOutOfArea",
+                tableName + ".namalengkap",
+                tableName + ".umur",
+                tableName + ".namaSuami",
+                "noIbu"
         });
-    //    queryBUilder.customJoin("LEFT JOIN " + parentTableName + " ON  " + tableName + ".relational_id =  " + parentTableName + ".id");
         mainSelect = queryBUilder.mainCondition(mainCondition);
         Sortqueries = ((CursorSortOption) getDefaultOptionsProvider().sortOption()).sort();
 
@@ -301,36 +299,25 @@ public class MotherSmartRegisterFragment extends SecuredNativeSmartRegisterCurso
         }
     }
 
-
-
     private String KiSortByNameAZ() {
-        return " namaBayi ASC";
+        return "namalengkap ASC";
     }
 
     private String KiSortByNameZA() {
-        return " namaBayi DESC";
-    }
-
-    private String KiSortByAgeASC() {
-        return " tanggalLahirAnak DESC";
-    }
-
-    private String KiSortByAgeDESC() {
-        return " tanggalLahirAnak ASC";
+        return "namalengkap DESC";
     }
 
     private String KiSortByAge() {
-        return " umur DESC";
+        return "umur DESC";
     }
 
     private String KiSortByNoIbu() {
-        return " noIbu ASC";
+        return "noIbu ASC";
     }
 
     private String KiSortByEdd() {
-        return " htp IS NULL, htp";
+        return "htp IS NULL, htp";
     }
-
 
     private class EditDialogOptionModel implements DialogOptionModel {
         @Override
@@ -543,7 +530,7 @@ public class MotherSmartRegisterFragment extends SecuredNativeSmartRegisterCurso
     }*/
 
     public void searchTextChangeListener(String s) {
-        Log.e(TAG, "searchTextChangeListener: " + s);
+
         if (s != null) {
             filters = s;
         } else {
@@ -556,36 +543,12 @@ public class MotherSmartRegisterFragment extends SecuredNativeSmartRegisterCurso
                 public void onTextChanged(final CharSequence cs, int start, int before, int count) {
 
                     (new AsyncTask() {
-//                    SmartRegisterClients filteredClients;
 
                         @Override
                         protected Object doInBackground(Object[] params) {
-//                        currentSearchFilter =
-//                        setCurrentSearchFilter(new HHSearchOption(cs.toString()));
-//                        filteredClients = getClientsAdapter().getListItemProvider()
-//                                .updateClients(getCurrentVillageFilter(), getCurrentServiceModeOption(),
-//                                        getCurrentSearchFilter(), getCurrentSortOption());
-//
-
                             filters = cs.toString();
-                            joinTable = "";
-                            mainCondition = "nama_bayi !=''";
-                            Log.e(TAG, "doInBackground: " + filters);
                             return null;
                         }
-//
-//                    @Override
-//                    protected void onPostExecute(Object o) {
-////                        clientsAdapter
-////                                .refreshList(currentVillageFilter, currentServiceModeOption,
-////                                        currentSearchFilter, currentSortOption);
-////                        getClientsAdapter().refreshClients(filteredClients);
-////                        getClientsAdapter().notifyDataSetChanged();
-//                        getSearchCancelView().setVisibility(isEmpty(cs) ? INVISIBLE : VISIBLE);
-//                        CountExecute();
-//                        filterandSortExecute();
-//                        super.onPostExecute(o);
-//                    }
                     }).execute();
                 }
 
