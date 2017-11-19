@@ -13,10 +13,14 @@ import android.widget.Toast;
 
 import com.flurry.android.FlurryAgent;
 
+import org.smartregister.commonregistry.AllCommonsRepository;
+import org.smartregister.commonregistry.CommonPersonObject;
+import org.smartregister.commonregistry.CommonPersonObjectClient;
 import org.smartregister.cursoradapter.SmartRegisterQueryBuilder;
 import org.smartregister.domain.form.FieldOverrides;
 import org.smartregister.domain.form.FormSubmission;
 import org.smartregister.enketo.listener.DisplayFormListener;
+import org.smartregister.repository.DetailsRepository;
 import org.smartregister.vaksinator.fragment.VaksinatorSmartRegisterFragment;
 import org.smartregister.vaksinator.pageradapter.BaseRegisterActivityPagerAdapter;
 import org.smartregister.provider.SmartRegisterClientsProvider;
@@ -25,7 +29,10 @@ import org.smartregister.vaksinator.R;
 import org.smartregister.vaksinator.sync.ClientProcessor;
 import org.smartregister.util.FormUtils;
 import org.smartregister.view.activity.SecuredNativeSmartRegisterActivity;
+import org.smartregister.view.contract.SmartRegisterClient;
 import org.smartregister.view.dialog.DialogOption;
+import org.smartregister.view.dialog.DialogOptionModel;
+import org.smartregister.view.dialog.EditOption;
 import org.smartregister.view.dialog.LocationSelectorDialogFragment;
 import org.smartregister.view.dialog.OpenFormOption;
 import org.smartregister.enketo.view.fragment.DisplayFormFragment;
@@ -45,6 +52,8 @@ import butterknife.Bind;
 import butterknife.ButterKnife;
 import util.VaksinatorFormUtils;
 import util.formula.Support;
+
+import static org.smartregister.util.Utils.getValue;
 
 public class VaksinatorSmartRegisterActivity extends SecuredNativeSmartRegisterActivity implements
         LocationSelectorDialogFragment.OnLocationSelectedListener, DisplayFormListener{
@@ -157,8 +166,9 @@ public class VaksinatorSmartRegisterActivity extends SecuredNativeSmartRegisterA
 
     public DialogOption[] getEditOptions() {
             return new DialogOption[]{
-                new OpenFormOption("Kunjungan Per Bulan ", "kohort_bayi_immunization", formController),
-                new OpenFormOption("Close Form","close_form",formController)
+                    new OpenFormOption("Edit Data Anak", "child_edit", formController),
+                    new OpenFormOption("Kunjungan Per Bulan ", "kohort_bayi_immunization", formController),
+                    new OpenFormOption("Close Form","close_form",formController)
             };
     }
 
@@ -283,6 +293,9 @@ public class VaksinatorSmartRegisterActivity extends SecuredNativeSmartRegisterA
     }
 
     private void activatingForm(String formName, String entityId, String metaData){
+        Log.d(TAG, "activatingForm: formName="+formName);
+        Log.d(TAG, "activatingForm: entityId="+entityId);
+        Log.d(TAG, "activatingForm: metaData="+metaData);
         try {
             int formIndex = VaksinatorFormUtils.getIndexForFormName(formName, formNames) + 1; // add the offset
             if (entityId != null || metaData != null){
@@ -292,6 +305,8 @@ public class VaksinatorSmartRegisterActivity extends SecuredNativeSmartRegisterA
                 if (data == null){
                     data = VaksinatorFormUtils.getInstance(getApplicationContext()).generateXMLInputForFormWithEntityId(entityId, formName, metaData);
                 }
+
+                Log.d(TAG, "activatingForm: data="+data);
 
                 DisplayFormFragment displayFormFragment = getDisplayFormFragmentAtIndex(formIndex);
                 if (displayFormFragment != null) {
@@ -395,6 +410,7 @@ public class VaksinatorSmartRegisterActivity extends SecuredNativeSmartRegisterA
         List<String> formNames = new ArrayList<String>();
         formNames.add("registrasi_ibu");
         formNames.add("registrasi_anak");
+        formNames.add("child_edit");
         formNames.add("close_form");
         formNames.add("kohort_bayi_immunization");
         return formNames.toArray(new String[formNames.size()]);
@@ -457,6 +473,33 @@ public class VaksinatorSmartRegisterActivity extends SecuredNativeSmartRegisterA
 
         }
     };
+
+    public class EditDialogOptionModel implements DialogOptionModel {
+        @Override
+        public DialogOption[] getDialogOptions() {
+            return getEditOptions();
+        }
+        @Override
+        public void onDialogOptionSelection(DialogOption option, Object tag) {
+            CommonPersonObjectClient pc = (CommonPersonObjectClient) tag;
+            DetailsRepository detailsRepository = org.smartregister.Context.getInstance().detailsRepository();
+            detailsRepository.updateDetails(pc);
+            String ibuCaseId = getValue(pc.getColumnmaps(), "relational_id", true).toLowerCase();
+            JSONObject fieldOverrides = new JSONObject();
+            try {
+                fieldOverrides.put("Province", pc.getDetails().get("stateProvince"));
+                fieldOverrides.put("District", pc.getDetails().get("countyDistrict"));
+                fieldOverrides.put("Sub-district", pc.getDetails().get("address2"));
+                fieldOverrides.put("Village", pc.getDetails().get("cityVillage"));
+                fieldOverrides.put("Sub-village", pc.getDetails().get("address1"));
+                fieldOverrides.put("ibuCaseId", ibuCaseId);
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+            FieldOverrides fo = new FieldOverrides(fieldOverrides.toString());
+            onEditSelectionWithMetadata((EditOption) option, (SmartRegisterClient) tag, fo.getJSONString());
+        }
+    }
 
 
 }

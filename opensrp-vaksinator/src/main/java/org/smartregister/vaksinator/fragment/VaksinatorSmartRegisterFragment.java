@@ -14,6 +14,8 @@ import android.widget.EditText;
 import com.flurry.android.FlurryAgent;
 
 import org.smartregister.Context;
+import org.smartregister.commonregistry.AllCommonsRepository;
+import org.smartregister.commonregistry.CommonPersonObject;
 import org.smartregister.commonregistry.CommonPersonObjectClient;
 import org.smartregister.commonregistry.CommonPersonObjectController;
 import org.smartregister.cursoradapter.CursorCommonObjectFilterOption;
@@ -61,6 +63,7 @@ import util.AsyncTask;
 import static android.view.View.INVISIBLE;
 import static android.view.View.VISIBLE;
 import static org.apache.commons.lang3.StringUtils.isEmpty;
+import static org.smartregister.util.Utils.getValue;
 
 /**
  * Created by koros on 10/12/15.
@@ -179,10 +182,6 @@ public class VaksinatorSmartRegisterFragment extends SecuredNativeSmartRegisterC
 //                    getActivity(),clientActionHandler , context().alertService());
 //        }
         return null;
-    }
-
-    private DialogOption[] getEditOptions() {
-        return ((VaksinatorSmartRegisterActivity)getActivity()).getEditOptions();
     }
 
     @Override
@@ -315,7 +314,7 @@ public class VaksinatorSmartRegisterFragment extends SecuredNativeSmartRegisterC
 
         ft.addToBackStack(null);
         LocationSelectorDialogFragment
-                .newInstance((VaksinatorSmartRegisterActivity) getActivity(), new EditDialogOptionModel(), context().anmLocationController().get(), "registrasi_ibu")
+                .newInstance((VaksinatorSmartRegisterActivity) getActivity(), ((VaksinatorSmartRegisterActivity)getActivity()).new EditDialogOptionModel(), context().anmLocationController().get(), "registrasi_ibu")
                 .show(ft, locationDialogTAG);
     }
 
@@ -333,7 +332,7 @@ public class VaksinatorSmartRegisterFragment extends SecuredNativeSmartRegisterC
                 //untuk follow up button
                 case R.id.btn_edit:
                     FlurryFacade.logEvent("click_button_edit_vaksinator");
-                    showFragmentDialog(new EditDialogOptionModel(), view.getTag());
+                    showFragmentDialog(((VaksinatorSmartRegisterActivity)getActivity()).new EditDialogOptionModel(), view.getTag());
                     break;
             }
         }
@@ -369,28 +368,6 @@ public class VaksinatorSmartRegisterFragment extends SecuredNativeSmartRegisterC
         return " htp IS NULL, htp";
     }
 
-
-    private class EditDialogOptionModel implements DialogOptionModel {
-        @Override
-        public DialogOption[] getDialogOptions() {
-            return getEditOptions();
-        }
-        @Override
-        public void onDialogOptionSelection(DialogOption option, Object tag) {
-
-
-            /*if(option.name().equalsIgnoreCase(getString(R.string.str_register_anc_form)) ) {
-                CommonPersonObjectClient pc = KIDetailActivity.kiclient;
-                if(pc.getDetails().get("ibu.type")!= null) {
-                    if (pc.getDetails().get("ibu.type").equals("anc") || pc.getDetails().get("ibu.type").equals("pnc")) {
-                        Toast.makeText(getActivity().getApplicationContext(), getString(R.string.mother_already_registered), Toast.LENGTH_SHORT).show();
-                        return;
-                    }
-                }
-            }*/
-            onEditSelection((EditOption) option, (SmartRegisterClient) tag);
-        }
-    }
 
     @Override
     protected void onResumption() {
