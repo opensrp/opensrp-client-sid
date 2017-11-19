@@ -22,7 +22,7 @@ import org.smartregister.vaksinator.pageradapter.BaseRegisterActivityPagerAdapte
 import org.smartregister.provider.SmartRegisterClientsProvider;
 import org.smartregister.vaksinator.service.SaveService;
 import org.smartregister.vaksinator.R;
-import org.smartregister.sync.ClientProcessor;
+import org.smartregister.vaksinator.sync.ClientProcessor;
 import org.smartregister.util.FormUtils;
 import org.smartregister.view.activity.SecuredNativeSmartRegisterActivity;
 import org.smartregister.view.dialog.DialogOption;

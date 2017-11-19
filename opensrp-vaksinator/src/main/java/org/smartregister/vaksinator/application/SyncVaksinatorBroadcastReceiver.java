@@ -4,9 +4,10 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 
-import org.smartregister.sync.SyncAfterFetchListener;
-import org.smartregister.sync.SyncProgressIndicator;
-import org.smartregister.sync.UpdateActionsTask;
+import org.smartregister.vaksinator.service.FormSubmissionSyncService;
+import org.smartregister.vaksinator.sync.SyncAfterFetchListener;
+import org.smartregister.vaksinator.sync.SyncProgressIndicator;
+import org.smartregister.vaksinator.sync.UpdateActionsTask;
 
 import static org.smartregister.util.Log.logInfo;
 
@@ -20,7 +21,7 @@ public class SyncVaksinatorBroadcastReceiver extends BroadcastReceiver {
         UpdateActionsTask updateActionsTask = new UpdateActionsTask(
                 context,
                 org.smartregister.Context.getInstance().actionService(),
-                org.smartregister.Context.getInstance().formSubmissionSyncService(),
+                new FormSubmissionSyncService(org.smartregister.Context.getInstance().applicationContext()),
                 new SyncProgressIndicator(),
                 org.smartregister.Context.getInstance().allFormVersionSyncService());
 

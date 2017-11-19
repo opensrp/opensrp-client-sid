@@ -32,7 +32,7 @@ import org.smartregister.vaksinator.option.KICommonObjectFilterOption;
 import org.smartregister.provider.SmartRegisterClientsProvider;
 import org.smartregister.vaksinator.R;
 
-import org.smartregister.sync.ClientProcessor;
+import org.smartregister.vaksinator.sync.ClientProcessor;
 import org.smartregister.util.StringUtil;
 import org.smartregister.view.activity.SecuredNativeSmartRegisterActivity;
 import org.smartregister.view.contract.ECClient;

@@ -10,7 +10,7 @@ import org.smartregister.commonregistry.CommonFtsObject;
 import org.smartregister.vaksinator.activity.LoginActivity;
 import org.smartregister.vaksinator.libs.FlurryFacade;
 import org.smartregister.repository.Repository;
-import org.smartregister.sync.DrishtiSyncScheduler;
+import org.smartregister.vaksinator.sync.DrishtiSyncScheduler;
 import org.smartregister.view.activity.DrishtiApplication;
 import org.smartregister.view.receiver.SyncBroadcastReceiver;
 
