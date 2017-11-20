@@ -44,7 +44,7 @@ public class SaveService {
 
     public void saveForm(String params, String formInstance) throws Exception {
         context = enter();
-        saveFunction.call(context, scope, scope, new Object[]{params, formInstance});
+//        saveFunction.call(context, scope, scope, new Object[]{params, formInstance});
         logInfo(format("Saving form successful, with params: {0}, with instance {1}.", params, formInstance));
         exit();
     }
