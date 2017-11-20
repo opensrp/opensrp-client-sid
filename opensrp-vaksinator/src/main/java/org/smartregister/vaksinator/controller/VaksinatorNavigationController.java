@@ -8,6 +8,7 @@ import android.net.Uri;
 
 //import org.ei.opensrp.vaksinator.test.TestSmartRegisterActivity;
 import org.smartregister.vaksinator.R;
+import org.smartregister.vaksinator.activity.TTSmartRegisterActivity;
 import org.smartregister.vaksinator.activity.VaksinatorSmartRegisterActivity;
 import org.smartregister.view.controller.ANMController;
 import org.json.JSONObject;
@@ -45,7 +46,7 @@ public class VaksinatorNavigationController extends org.smartregister.view.contr
     }
     @Override
     public void startFPSmartRegistry() {
-     //   activity.startActivity(new Intent(activity, ElcoSmartRegisterActivity.class));
+        activity.startActivity(new Intent(activity, TTSmartRegisterActivity.class));
     }
     @Override
     public void startANCSmartRegistry() {
