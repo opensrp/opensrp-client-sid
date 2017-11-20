@@ -34,6 +34,7 @@ import org.smartregister.gizi.option.KICommonObjectFilterOption;
 import org.smartregister.provider.SmartRegisterClientsProvider;
 import org.smartregister.gizi.R;
 
+import org.smartregister.gizi.activity.GiziSmartRegisterActivity;
 import org.smartregister.gizi.sync.ClientProcessor;
 import org.smartregister.util.StringUtil;
 import org.smartregister.view.activity.SecuredNativeSmartRegisterActivity;
@@ -185,9 +186,9 @@ public class GiziSmartRegisterFragment extends SecuredNativeSmartRegisterCursorA
         return null;
     }
 
-    private DialogOption[] getEditOptions() {
+    /*private DialogOption[] getEditOptions() {
         return ((GiziSmartRegisterActivity)getActivity()).getEditOptions();
-    }
+    }*/
 
     @Override
     protected void onInitialization() {
@@ -283,7 +284,7 @@ public class GiziSmartRegisterFragment extends SecuredNativeSmartRegisterCursorA
 
         ft.addToBackStack(null);
         LocationSelectorDialogFragment
-                .newInstance((GiziSmartRegisterActivity) getActivity(), new EditDialogOptionModel(), context().anmLocationController().get(), "registrasi_ibu")
+                .newInstance((GiziSmartRegisterActivity) getActivity(), ((GiziSmartRegisterActivity)getActivity()).new EditDialogOptionModel(), context().anmLocationController().get(), "registrasi_ibu")
                 .show(ft, locationDialogTAG);
     }
 
@@ -320,7 +321,7 @@ public class GiziSmartRegisterFragment extends SecuredNativeSmartRegisterCursorA
                 //untuk follow up button
                 case R.id.btn_edit:
                   //  FlurryFacade.logEvent("click_button_edit_vaksinator");
-                    showFragmentDialog(new EditDialogOptionModel(), view.getTag());
+                    showFragmentDialog(((GiziSmartRegisterActivity)getActivity()).new EditDialogOptionModel(), view.getTag());
                     break;
             }
         }
@@ -356,7 +357,7 @@ public class GiziSmartRegisterFragment extends SecuredNativeSmartRegisterCursorA
         return " htp IS NULL, htp";
     }
 
-
+/*
     private class EditDialogOptionModel implements DialogOptionModel {
         @Override
         public DialogOption[] getDialogOptions() {
@@ -366,7 +367,7 @@ public class GiziSmartRegisterFragment extends SecuredNativeSmartRegisterCursorA
         public void onDialogOptionSelection(DialogOption option, Object tag) {
 
 
-            /*if(option.name().equalsIgnoreCase(getString(R.string.str_register_anc_form)) ) {
+            *//*if(option.name().equalsIgnoreCase(getString(R.string.str_register_anc_form)) ) {
                 CommonPersonObjectClient pc = KIDetailActivity.kiclient;
                 if(pc.getDetails().get("ibu.type")!= null) {
                     if (pc.getDetails().get("ibu.type").equals("anc") || pc.getDetails().get("ibu.type").equals("pnc")) {
@@ -374,10 +375,10 @@ public class GiziSmartRegisterFragment extends SecuredNativeSmartRegisterCursorA
                         return;
                     }
                 }
-            }*/
+            }*//*
             onEditSelection((EditOption) option, (SmartRegisterClient) tag);
         }
-    }
+    }*/
 
     @Override
     protected void onResumption() {

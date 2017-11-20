@@ -301,12 +301,12 @@ public class CloudantDataHandler {
                 return Client.fromRevision(created);
             } else {
                 //TODO: merge/update the client document
-                DocumentRevision created = this.mDatastore.createDocumentFromRevision(rev);
-                return Client.fromRevision(created);
-//                DocumentRevision revupdate = c.getDocumentRevision();
-//                revupdate.setBody(DocumentBodyFactory.create(client.asMap()));
-//                DocumentRevision updated = this.mDatastore.updateDocumentFromRevision(revupdate);
-//                return Client.fromRevision(updated);
+//                DocumentRevision created = this.mDatastore.createDocumentFromRevision(rev);
+//                return Client.fromRevision(created);
+                DocumentRevision revupdate = c.getDocumentRevision();
+                revupdate.setBody(DocumentBodyFactory.create(client.asMap()));
+                DocumentRevision updated = this.mDatastore.updateDocumentFromRevision(revupdate);
+                return Client.fromRevision(updated);
 //                return c;
             }
 
