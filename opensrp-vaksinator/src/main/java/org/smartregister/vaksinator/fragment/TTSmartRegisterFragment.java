@@ -22,6 +22,7 @@ import org.smartregister.commonregistry.CommonPersonObjectController;
 import org.smartregister.commonregistry.CommonRepository;
 import org.smartregister.cursoradapter.CursorCommonObjectFilterOption;
 import org.smartregister.cursoradapter.CursorCommonObjectSort;
+import org.smartregister.cursoradapter.CursorSortOption;
 import org.smartregister.cursoradapter.SecuredNativeSmartRegisterCursorAdapterFragment;
 import org.smartregister.cursoradapter.SmartRegisterPaginatedCursorAdapter;
 import org.smartregister.cursoradapter.SmartRegisterQueryBuilder;
@@ -96,7 +97,7 @@ public class TTSmartRegisterFragment extends SecuredNativeSmartRegisterCursorAda
 
             @Override
             public SortOption sortOption() {
-                return new NameSort();
+                return new CursorCommonObjectSort("A-Z", "namalengkap asc");
 
             }
 
@@ -185,7 +186,7 @@ public class TTSmartRegisterFragment extends SecuredNativeSmartRegisterCursorAda
         clientsView.setVisibility(View.VISIBLE);
         clientsProgressView.setVisibility(View.INVISIBLE);
 //        list.setBackgroundColor(Color.RED);
-        initializeQueries(getCriteria());
+        initializeQueries();
     }
     private String filterStringForAll(){
         return "";
@@ -200,46 +201,40 @@ public class TTSmartRegisterFragment extends SecuredNativeSmartRegisterCursorAda
                 "Else alerts.status END ASC";
     }
 
-   public void initializeQueries(String s){
-       try {
-           TTSmartClientsProvider kiscp = new TTSmartClientsProvider(getActivity(),clientActionHandler,context().alertService());
-           clientAdapter = new SmartRegisterPaginatedCursorAdapter(getActivity(), null, kiscp, new CommonRepository("ec_ibu",new String []{"ec_ibu.is_closed", "ec_kartu_ibu.namalengkap", "ec_kartu_ibu.namaSuami"}));
-           clientsView.setAdapter(clientAdapter);
+   public void initializeQueries(){
+       String tableName = "ec_ibu";
+       TTSmartClientsProvider kiscp = new TTSmartClientsProvider(getActivity(),clientActionHandler,context().alertService());
+       clientAdapter = new SmartRegisterPaginatedCursorAdapter(getActivity(), null, kiscp, new CommonRepository("ec_ibu",new String []{"ec_ibu.is_closed", "ec_kartu_ibu.namalengkap", "ec_kartu_ibu.namaSuami"}));
+       clientsView.setAdapter(clientAdapter);
 
-           setTablename("ec_ibu");
-           SmartRegisterQueryBuilder countqueryBUilder = new SmartRegisterQueryBuilder();
-           countqueryBUilder.SelectInitiateMainTableCounts("ec_ibu");
-           countqueryBUilder.customJoin("LEFT JOIN ec_kartu_ibu on ec_kartu_ibu.id = ec_ibu.id");
-           if (s == null || s.equals("!")) {
-               Log.e(TAG, "initializeQueries: "+"Not Initialized" );
-               mainCondition = "ec_ibu.is_closed = 0 and pptest ='Positive' ";
-           } else {
-               Log.e(TAG, "initializeQueries: " + s);
-               mainCondition = "ec_ibu.is_closed = 0 and pptest ='Positive' AND ec_ibu.id LIKE '%" + s + "%'";
-           }
+       setTablename(tableName);
+       SmartRegisterQueryBuilder countqueryBUilder = new SmartRegisterQueryBuilder();
+       countqueryBUilder.SelectInitiateMainTableCounts(tableName);
+       countqueryBUilder.customJoin("LEFT JOIN ec_kartu_ibu on ec_kartu_ibu.id = ec_ibu.id");
+       mainCondition = " is_closed = 0 and pptest ='Positive' ";
 
-           joinTable = "";
-           countSelect = countqueryBUilder.mainCondition(mainCondition);
-           super.CountExecute();
+       countSelect = countqueryBUilder.mainCondition(mainCondition);
+       super.CountExecute();
 
-           SmartRegisterQueryBuilder queryBUilder = new SmartRegisterQueryBuilder();
-           queryBUilder.SelectInitiateMainTable("ec_ibu", new String[]{"ec_ibu.relationalid","ec_ibu.is_closed", "ec_ibu.details",  "ec_kartu_ibu.namalengkap","ec_kartu_ibu.namaSuami"});
-           queryBUilder.customJoin("LEFT JOIN ec_kartu_ibu on ec_kartu_ibu.id = ec_ibu.id");
-           mainSelect = queryBUilder.mainCondition(mainCondition);
-           Sortqueries = KiSortByNameAZ();
+       SmartRegisterQueryBuilder queryBUilder = new SmartRegisterQueryBuilder();
+       queryBUilder.SelectInitiateMainTable(tableName, new String[]{
+               "ec_ibu.relationalid",
+               "ec_ibu.is_closed",
+               "ec_ibu.details",
+               "ec_kartu_ibu.namalengkap",
+               "ec_kartu_ibu.namaSuami",
+       });
+       queryBUilder.customJoin("LEFT JOIN ec_kartu_ibu on ec_kartu_ibu.id = ec_ibu.id");
+       mainSelect = queryBUilder.mainCondition(mainCondition);
+       Sortqueries = ((CursorSortOption) getDefaultOptionsProvider().sortOption()).sort();
 
-           currentlimit = 20;
-           currentoffset = 0;
+       currentlimit = 20;
+       currentoffset = 0;
 
-           super.filterandSortInInitializeQueries();
+       super.filterandSortInInitializeQueries();
 
-           updateSearchView();
-           refresh();
-       } catch (Exception e){
-           e.printStackTrace();
-       }
-       finally {
-       }
+       updateSearchView();
+       refresh();
 
    }
 
@@ -328,7 +323,7 @@ public class TTSmartRegisterFragment extends SecuredNativeSmartRegisterCursorAda
 //        super.onResumption();
         getDefaultOptionsProvider();
         if(isPausedOrRefreshList()) {
-            initializeQueries("!");
+            initializeQueries();
         }
         //     updateSearchView();
 //
@@ -362,7 +357,7 @@ public class TTSmartRegisterFragment extends SecuredNativeSmartRegisterCursorAda
 
                         filters = cs.toString();
                         joinTable = "";
-                        mainCondition = " namaBayi !='' ";
+                        mainCondition = " namalengkap !='' ";
                         return null;
                     }
 
@@ -425,21 +420,17 @@ public class TTSmartRegisterFragment extends SecuredNativeSmartRegisterCursorAda
         searchView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-//                if (SmartShutterActivity.isDevCompat) {
-//                    CharSequence selections[] = new CharSequence[]{"Name", "Photo"};
-//                    final AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
-//                    builder.setTitle("Please Choose one, Search by");
-//                    builder.setItems(selections, new DialogInterface.OnClickListener() {
-//                        @Override
-//                        public void onClick(DialogInterface dialog, int opt) {
-//                            if (opt == 0) searchTextChangeListener("");
-//                            else getFacialRecord(view);
-//                        }
-//                    });
-//                    builder.show();
-//                } else {
-                    searchTextChangeListener("");
-//                }
+                CharSequence selections[] = new CharSequence[]{"Name", "Photo"};
+                final AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+                builder.setTitle("Please Choose one, Search by");
+                builder.setItems(selections, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int opt) {
+                        if (opt == 0) searchTextChangeListener("");
+                        // else getFacialRecord(view);
+                    }
+                });
+                builder.show();
             }
         });
 
@@ -488,7 +479,7 @@ public class TTSmartRegisterFragment extends SecuredNativeSmartRegisterCursorAda
 
                             filters = cs.toString();
                             joinTable = "";
-                            mainCondition = "nama_bayi !=''";
+                            mainCondition = "namalengkap !=''";
                             Log.e(TAG, "doInBackground: " + filters);
                             return null;
                         }

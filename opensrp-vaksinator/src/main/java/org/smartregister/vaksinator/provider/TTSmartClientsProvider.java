@@ -102,32 +102,20 @@ public class TTSmartClientsProvider implements SmartRegisterCLientsProviderForCu
             viewHolder = (ViewHolder) convertView.getTag();
         }
 
+        viewHolder.follow_up.setImageDrawable(iconPencilDrawable);
         viewHolder.profilepic.setImageDrawable(context.getResources().getDrawable(R.mipmap.woman_placeholder));
-
-        viewHolder.follow_up.setOnClickListener(onClickListener);
-        viewHolder.follow_up.setTag(smartRegisterClient);
-        viewHolder.profilelayout.setOnClickListener(onClickListener);
-        viewHolder.profilelayout.setTag(smartRegisterClient);
         CommonPersonObjectClient pc = (CommonPersonObjectClient) smartRegisterClient;
         if (iconPencilDrawable == null) {
             iconPencilDrawable = context.getResources().getDrawable(R.drawable.ic_pencil);
         }
-        viewHolder.follow_up.setImageDrawable(iconPencilDrawable);
-        viewHolder.follow_up.setOnClickListener(onClickListener);
         //set image
 
         AllCommonsRepository allancRepository =  org.smartregister.Context.getInstance().allCommonsRepositoryobjects("ec_ibu");
         CommonPersonObject ancobject = allancRepository.findByCaseID(pc.entityId());
 
         DetailsRepository detailsRepository = org.smartregister.Context.getInstance().detailsRepository();
-        Map<String, String> details =  detailsRepository.getAllDetailsForClient(pc.entityId());
-        details.putAll(ancobject.getColumnmaps());
-
-        if(pc.getDetails() != null) {
-            pc.getDetails().putAll(details);
-        }else{
-            pc.setDetails(details);
-        }
+        detailsRepository.updateDetails(pc);
+        detailsRepository.updateDetails(ancobject);
 
 //        final ImageView kiview = (ImageView)convertView.findViewById(R.id.img_profile);
 //        if (pc.getDetails().get("profilepic") != null) {
