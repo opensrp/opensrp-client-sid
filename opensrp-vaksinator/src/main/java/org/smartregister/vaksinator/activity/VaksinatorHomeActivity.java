@@ -275,6 +275,7 @@ public class VaksinatorHomeActivity extends SecuredActivity {
                 }catch (org.json.JSONException e){
                     anmID = "undefined";
                 }
+
                 Toast.makeText(this, String.format("%s current user = %s",context().getStringResource(R.string.app_name),anmID), LENGTH_SHORT).show();return true;
             default:
                 return super.onOptionsItemSelected(item);
@@ -296,59 +297,6 @@ public class VaksinatorHomeActivity extends SecuredActivity {
 
         Map<String, TreeNode<String, Location>> locationMap =
                 locationTree.getLocationsHierarchy();
-
-
-//        String query  = "INSERT INTO ec_anak VALUES('1','2','xx',0,'asdf','zxxv','',3200,'bayi','2017-02-02')";
-
-//        Cursor x = context().initRepository().getWritableDatabase().rawQuery("SELECT COUNT(*) FROM ec_anak  WHERE ec_anak.id IN ()", null);
-//        x.moveToFirst();
-//        Log.d("testanak", "itung(*): " + x.getCount());
-//        String a ="";
-//        for(String str: x.getColumnNames())
-//            a=a+", "+str;
-//        Log.d("testanak", "getColumnNames: " + a);
-
-
-        String query  = "SELECT name FROM sqlite_master WHERE type='table'";
-        String db = context().initRepository().getWritableDatabase().getPath();
-        Cursor dbs = context().initRepository().getWritableDatabase().rawQuery(query, null);
-        Log.d("testanak", "db: " + db);
-        if (dbs.moveToFirst()){
-            do{
-                String data = dbs.getString(dbs.getColumnIndex("name"));
-                Log.d("testanak", "table name: " + data);
-                Cursor temp = context().initRepository().getWritableDatabase().rawQuery("SELECT * FROM "+data, null);
-                temp.moveToFirst();
-                Log.d("testanak", data+": " + temp.getCount());
-                String output ="";
-                for(String str: temp.getColumnNames())
-                    output=output+", "+str;
-                Log.d("testanak", "getColumnNames: " + output);
-                String output2 ="";
-                if(temp.getCount()>0){
-                    if (temp.moveToFirst()){
-                        do{
-                            for(String d:temp.getColumnNames()){
-                                String value = "";
-                                if(d!=""){
-                                    if(temp.getType(temp.getColumnIndex(d))== temp.FIELD_TYPE_BLOB){
-                                        value = "blob";
-                                    }else{
-                                        value = temp.getString(temp.getColumnIndex(d));
-                                    }
-                                }
-                                output2=output2+", "+value;
-                            }
-                        }while(temp.moveToNext());
-                    }
-                    Log.d("testanak", "getColumnNames: " + output2);
-                }
-
-                temp.close();
-            }while(dbs.moveToNext());
-        }
-        Log.d("testanak", "getCount: " + dbs.getCount());
-        dbs.close();
 
 
 //        Cursor childcountcursor = context().commonrepository("ec_anak").rawCustomQueryForAdapter("SELECT * FROM ec_anak");
