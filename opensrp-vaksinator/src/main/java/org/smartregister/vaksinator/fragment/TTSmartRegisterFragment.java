@@ -1,10 +1,9 @@
 package org.smartregister.vaksinator.fragment;
 
 import android.app.AlertDialog;
-import android.app.Fragment;
-import android.app.FragmentTransaction;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.os.Parcelable;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
@@ -13,29 +12,30 @@ import android.widget.EditText;
 
 import com.flurry.android.FlurryAgent;
 
+import org.opensrp.api.domain.Location;
+import org.opensrp.api.util.EntityUtils;
+import org.opensrp.api.util.LocationTree;
+import org.opensrp.api.util.TreeNode;
 import org.smartregister.Context;
-import org.smartregister.commonregistry.AllCommonsRepository;
-import org.smartregister.commonregistry.CommonPersonObject;
 import org.smartregister.commonregistry.CommonPersonObjectClient;
 import org.smartregister.commonregistry.CommonPersonObjectController;
+import org.smartregister.commonregistry.CommonRepository;
 import org.smartregister.cursoradapter.CursorCommonObjectFilterOption;
 import org.smartregister.cursoradapter.CursorCommonObjectSort;
 import org.smartregister.cursoradapter.CursorSortOption;
 import org.smartregister.cursoradapter.SecuredNativeSmartRegisterCursorAdapterFragment;
 import org.smartregister.cursoradapter.SmartRegisterPaginatedCursorAdapter;
 import org.smartregister.cursoradapter.SmartRegisterQueryBuilder;
-import org.smartregister.vaksinator.activity.LoginActivity;
-import org.smartregister.vaksinator.activity.VaksinatorDetailActivity;
-import org.smartregister.vaksinator.libs.FlurryFacade;
-import org.smartregister.vaksinator.option.VaksinatorServiceModeOption;
-import org.smartregister.vaksinator.provider.ChildSmartClientsProvider;
-import org.smartregister.vaksinator.activity.VaksinatorSmartRegisterActivity;
-import org.smartregister.vaksinator.option.KICommonObjectFilterOption;
 import org.smartregister.provider.SmartRegisterClientsProvider;
-import org.smartregister.vaksinator.R;
-
-import org.smartregister.vaksinator.sync.ClientProcessor;
 import org.smartregister.util.StringUtil;
+import org.smartregister.vaksinator.activity.LoginActivity;
+import org.smartregister.vaksinator.R;
+//import org.smartregister.vaksinator.face.camera.SmartShutterActivity;
+import org.smartregister.vaksinator.option.TTServiceModeOption;
+import org.smartregister.vaksinator.provider.TTSmartClientsProvider;
+import org.smartregister.vaksinator.activity.TTSmartRegisterActivity;
+//import org.smartregister.vaksinator.vaksinator.FlurryFacade;
+import org.smartregister.vaksinator.option.KICommonObjectFilterOption;
 import org.smartregister.view.activity.SecuredNativeSmartRegisterActivity;
 import org.smartregister.view.contract.ECClient;
 import org.smartregister.view.contract.SmartRegisterClient;
@@ -47,13 +47,9 @@ import org.smartregister.view.dialog.DialogOptionMapper;
 import org.smartregister.view.dialog.DialogOptionModel;
 import org.smartregister.view.dialog.EditOption;
 import org.smartregister.view.dialog.FilterOption;
-import org.smartregister.view.dialog.LocationSelectorDialogFragment;
+import org.smartregister.view.dialog.NameSort;
 import org.smartregister.view.dialog.ServiceModeOption;
 import org.smartregister.view.dialog.SortOption;
-import org.opensrp.api.domain.Location;
-import org.opensrp.api.util.EntityUtils;
-import org.opensrp.api.util.LocationTree;
-import org.opensrp.api.util.TreeNode;
 
 import java.util.ArrayList;
 import java.util.Map;
@@ -63,20 +59,19 @@ import util.AsyncTask;
 import static android.view.View.INVISIBLE;
 import static android.view.View.VISIBLE;
 import static org.apache.commons.lang3.StringUtils.isEmpty;
-import static org.smartregister.util.Utils.getValue;
 
 /**
  * Created by koros on 10/12/15.
  */
-public class VaksinatorSmartRegisterFragment extends SecuredNativeSmartRegisterCursorAdapterFragment {
+public class TTSmartRegisterFragment extends SecuredNativeSmartRegisterCursorAdapterFragment {
 
-    private static final String TAG = VaksinatorSmartRegisterFragment.class.getSimpleName();
+    private static final String TAG = TTSmartRegisterFragment.class.getSimpleName();
 
     private SmartRegisterClientsProvider clientProvider = null;
     private CommonPersonObjectController controller;
     private VillageController villageController;
     private DialogOptionMapper dialogOptionMapper;
-    private ClientProcessor clientProcessor;
+
     private final ClientActionHandler clientActionHandler = new ClientActionHandler();
     private String locationDialogTAG = "locationDialogTAG";
 
@@ -84,13 +79,7 @@ public class VaksinatorSmartRegisterFragment extends SecuredNativeSmartRegisterC
 
     @Override
     protected void onCreation() {
-        //
     }
-
-//    @Override
-//    protected SmartRegisterPaginatedAdapter adapter() {
-//        return new SmartRegisterPaginatedAdapter(clientsProvider());
-//    }
 
     @Override
     protected SecuredNativeSmartRegisterActivity.DefaultOptionsProvider getDefaultOptionsProvider() {
@@ -98,7 +87,7 @@ public class VaksinatorSmartRegisterFragment extends SecuredNativeSmartRegisterC
 
             @Override
             public ServiceModeOption serviceMode() {
-                return new VaksinatorServiceModeOption(clientsProvider());
+                return new TTServiceModeOption(clientsProvider());
             }
 
             @Override
@@ -108,14 +97,13 @@ public class VaksinatorSmartRegisterFragment extends SecuredNativeSmartRegisterC
 
             @Override
             public SortOption sortOption() {
-
-                return new CursorCommonObjectSort("A-Z", "namaBayi desc");
+                return new CursorCommonObjectSort("A-Z", "namalengkap asc");
 
             }
 
             @Override
             public String nameInShortFormForTitle() {
-                return Context.getInstance().getStringResource(R.string.vaksinator);
+                return Context.getInstance().getStringResource(R.string.registerTT);
             }
         };
     }
@@ -126,7 +114,7 @@ public class VaksinatorSmartRegisterFragment extends SecuredNativeSmartRegisterC
 
             @Override
             public DialogOption[] filterOptions() {
-                FlurryAgent.logEvent("click_filter_option_on_kohort_ibu_dashboard");
+//                FlurryFacade.logEvent("click_filter_option_on_kohort_ibu_dashboard");
                 ArrayList<DialogOption> dialogOptionslist = new ArrayList<DialogOption>();
 
                 dialogOptionslist.add(new CursorCommonObjectFilterOption(getString(R.string.filter_by_all_label),filterStringForAll()));
@@ -154,15 +142,10 @@ public class VaksinatorSmartRegisterFragment extends SecuredNativeSmartRegisterC
 
             @Override
             public DialogOption[] sortingOptions() {
-               // FlurryFacade.logEvent("click_sorting_option_on_kohort_ibu_dashboard");
+//                FlurryFacade.logEvent("click_sorting_option_on_kohort_ibu_dashboard");
                 return new DialogOption[]{
-//                        new HouseholdCensusDueDateSort(),
-
-
                         new CursorCommonObjectSort(getResources().getString(R.string.sort_by_name_label),KiSortByNameAZ()),
                         new CursorCommonObjectSort(getResources().getString(R.string.sort_by_name_label_reverse),KiSortByNameZA()),
-                        new CursorCommonObjectSort(getResources().getString(R.string.sort_by_child_age),KiSortByAgeASC()),
-                        new CursorCommonObjectSort(getResources().getString(R.string.sort_by_child_age_desc),KiSortByAgeDESC()),
                 };
             }
 
@@ -179,14 +162,18 @@ public class VaksinatorSmartRegisterFragment extends SecuredNativeSmartRegisterC
     protected SmartRegisterClientsProvider clientsProvider() {
 //        if (clientProvider == null) {
 //            clientProvider = new HouseHoldSmartClientsProvider(
-//                    getActivity(),clientActionHandler , context().alertService());
+//                    getActivity(),clientActionHandler , context.alertService());
 //        }
         return null;
     }
 
+    private DialogOption[] getEditOptions() {
+        return ((TTSmartRegisterActivity)getActivity()).getEditOptions();
+    }
+
     @Override
     protected void onInitialization() {
-         //  context().formSubmissionRouter().getHandlerMap().put("census_enrollment_form", new CensusEnrollmentHandler());
+        //  context.formSubmissionRouter().getHandlerMap().put("census_enrollment_form", new CensusEnrollmentHandler());
     }
 
     @Override
@@ -201,11 +188,9 @@ public class VaksinatorSmartRegisterFragment extends SecuredNativeSmartRegisterC
 //        list.setBackgroundColor(Color.RED);
         initializeQueries();
     }
-
     private String filterStringForAll(){
         return "";
     }
-
     private String sortByAlertmethod() {
         return " CASE WHEN alerts.status = 'urgent' THEN '1'"
                 +
@@ -215,125 +200,73 @@ public class VaksinatorSmartRegisterFragment extends SecuredNativeSmartRegisterC
                 "WHEN alerts.status is Null THEN '5'\n" +
                 "Else alerts.status END ASC";
     }
-    /*public void initializeQueries(String s){
-        VaksinatorSmartClientsProvider kiscp = new VaksinatorSmartClientsProvider(getActivity(),clientActionHandler,context().alertService());
-        clientAdapter = new SmartRegisterPaginatedCursorAdapter(getActivity(), null, kiscp, new CommonRepository("ec_anak",new String []{"tanggalLahirAnak","namaBayi"}));
-        clientsView.setAdapter(clientAdapter);
 
-        setTablename("ec_anak");
-        SmartRegisterQueryBuilder countqueryBUilder = new SmartRegisterQueryBuilder();
-        countqueryBUilder.SelectInitiateMainTableCounts("ec_anak");
+   public void initializeQueries(){
+       String tableName = "ec_ibu";
+       TTSmartClientsProvider kiscp = new TTSmartClientsProvider(getActivity(),clientActionHandler,context().alertService());
+       clientAdapter = new SmartRegisterPaginatedCursorAdapter(getActivity(), null, kiscp, new CommonRepository("ec_ibu",new String []{"ec_ibu.is_closed", "ec_kartu_ibu.namalengkap", "ec_kartu_ibu.namaSuami"}));
+       clientsView.setAdapter(clientAdapter);
 
-        if (s == null || s.equals("!") || s.equals("")) {
-            Log.e(TAG, "initializeQueries: "+"Not Initialized" );
-            mainCondition = "is_closed = 0 ";
-        } else {
-            Log.e(TAG, "initializeQueries: " + s);
-            mainCondition = "is_closed = 0 AND object_id LIKE '%" + s + "%'";
-        }
+       setTablename(tableName);
+       SmartRegisterQueryBuilder countqueryBUilder = new SmartRegisterQueryBuilder();
+       countqueryBUilder.SelectInitiateMainTableCounts(tableName);
+       countqueryBUilder.customJoin("LEFT JOIN ec_kartu_ibu on ec_kartu_ibu.id = ec_ibu.id");
+       mainCondition = " is_closed = 0 and pptest ='Positive' ";
 
-        countSelect = countqueryBUilder.mainCondition("is_closed = 0 ");
-        //  mainCondition = " isClosed !='true' ";
-        super.CountExecute();
+       countSelect = countqueryBUilder.mainCondition(mainCondition);
+       super.CountExecute();
 
-        SmartRegisterQueryBuilder queryBUilder = new SmartRegisterQueryBuilder();
-        queryBUilder.SelectInitiateMainTable("ec_anak", new String[]{"ec_anak.relationalid","ec_anak.is_closed","ec_anak.details","tanggalLahirAnak","namaBayi"});
-        mainSelect = queryBUilder.mainCondition("is_closed = 0 ");
-        //   Sortqueries = KiSortByNameAZ();
+       SmartRegisterQueryBuilder queryBUilder = new SmartRegisterQueryBuilder();
+       queryBUilder.SelectInitiateMainTable(tableName, new String[]{
+               "ec_ibu.relationalid",
+               "ec_ibu.is_closed",
+               "ec_ibu.details",
+               "ec_kartu_ibu.namalengkap",
+               "ec_kartu_ibu.namaSuami",
+       });
+       queryBUilder.customJoin("LEFT JOIN ec_kartu_ibu on ec_kartu_ibu.id = ec_ibu.id");
+       mainSelect = queryBUilder.mainCondition(mainCondition);
+       Sortqueries = ((CursorSortOption) getDefaultOptionsProvider().sortOption()).sort();
 
-        currentlimit = 20;
-        currentoffset = 0;
+       currentlimit = 20;
+       currentoffset = 0;
 
-        super.filterandSortInInitializeQueries();
+       super.filterandSortInInitializeQueries();
 
-//        setServiceModeViewDrawableRight(null);
-        updateSearchView();
-        refresh();
+       updateSearchView();
+       refresh();
 
-
-    }*/
-    private void initializeQueries() {
-        String tableName = "ec_anak";
-      //  String parentTableName = PathConstants.MOTHER_TABLE_NAME;
-
-        ChildSmartClientsProvider hhscp = new ChildSmartClientsProvider(getActivity(),
-                clientActionHandler, context().alertService(), context().commonrepository(tableName));
-        clientAdapter = new SmartRegisterPaginatedCursorAdapter(getActivity(), null, hhscp, context().commonrepository(tableName));
-        clientsView.setAdapter(clientAdapter);
-
-        setTablename(tableName);
-        SmartRegisterQueryBuilder countqueryBUilder = new SmartRegisterQueryBuilder();
-        countqueryBUilder.SelectInitiateMainTableCounts(tableName);
-        mainCondition = " is_closed = 0 ";
-        countSelect = countqueryBUilder.mainCondition(mainCondition);
-        super.CountExecute();
-
-        SmartRegisterQueryBuilder queryBUilder = new SmartRegisterQueryBuilder();
-        queryBUilder.SelectInitiateMainTable(tableName, new String[]{
-                tableName + ".relationalid",
-                tableName + ".details",
-                tableName + ".is_closed",
-                tableName + ".relational_id",
-                tableName + ".details",
-                tableName + ".tanggalLahirAnak",
-                tableName + ".namaBayi",
-
-        });
-    //    queryBUilder.customJoin("LEFT JOIN " + parentTableName + " ON  " + tableName + ".relational_id =  " + parentTableName + ".id");
-        mainSelect = queryBUilder.mainCondition(mainCondition);
-        Sortqueries = ((CursorSortOption) getDefaultOptionsProvider().sortOption()).sort();
-
-        currentlimit = 20;
-        currentoffset = 0;
-
-        super.filterandSortInInitializeQueries();
-
-        updateSearchView();
-        refresh();
-    }
-
+   }
 
     @Override
     public void startRegistration() {
-       /* if(Support.ONSYNC) {
-            Toast.makeText(getActivity(), "Data still Synchronizing, please wait", Toast.LENGTH_SHORT).show();
-            return;
-        }*/
-
-        FragmentTransaction ft = getActivity().getFragmentManager().beginTransaction();
-        Fragment prev = getActivity().getFragmentManager().findFragmentByTag(locationDialogTAG);
-        if (prev != null) {
-            ft.remove(prev);
-        }
-
-       // String uniqueIdJson = LoginActivity.generator.uniqueIdController().getUniqueIdJson();
-       /* if(uniqueIdJson == null || uniqueIdJson.isEmpty()){
-            Toast.makeText(getActivity(),"No unique id",Toast.LENGTH_LONG).show();
-            return;
-        }*/
-
-        ft.addToBackStack(null);
-        LocationSelectorDialogFragment
-                .newInstance((VaksinatorSmartRegisterActivity) getActivity(), ((VaksinatorSmartRegisterActivity)getActivity()).new EditDialogOptionModel(), context().anmLocationController().get(), "registrasi_ibu")
-                .show(ft, locationDialogTAG);
+//        FragmentTransaction ft = getActivity().getFragmentManager().beginTransaction();
+//        Fragment prev = getActivity().getFragmentManager().findFragmentByTag(locationDialogTAG);
+//        if (prev != null) {
+//            ft.remove(prev);
+//        }
+//        ft.addToBackStack(null);
+//        LocationSelectorDialogFragment
+//                .newInstance((TTSmartRegisterActivity) getActivity(), new EditDialogOptionModel(), context.anmLocationController().get(), "registrasi_jurim")
+//                .show(ft, locationDialogTAG);
     }
 
     private class ClientActionHandler implements View.OnClickListener {
         public void onClick(View view) {
             switch (view.getId()) {
-                case R.id.profile_info_layout:
-                    FlurryFacade.logEvent("click_detail_picture_vaksinator");
-                    VaksinatorDetailActivity.controller = (CommonPersonObjectClient)view.getTag();
-                    Intent intent = new Intent(getActivity(),VaksinatorDetailActivity.class);
-                    startActivity(intent);
-                    getActivity().finish();
-                    break;
-
-                //untuk follow up button
-                case R.id.btn_edit:
-                    FlurryFacade.logEvent("click_button_edit_vaksinator");
-                    showFragmentDialog(((VaksinatorSmartRegisterActivity)getActivity()).new EditDialogOptionModel(), view.getTag());
-                    break;
+//                case R.id.profile_info_layout:
+//                    FlurryFacade.logEvent("click_detail_picture_vaksinator");
+//                    VaksinatorDetailActivity.controller = (CommonPersonObjectClient)view.getTag();
+//                    Intent intent = new Intent(getActivity(),VaksinatorDetailActivity.class);
+//                    startActivity(intent);
+//                    getActivity().finish();
+//                    break;
+//
+//                //untuk follow up button
+//                case R.id.btn_edit:
+//                    FlurryFacade.logEvent("click_button_edit_vaksinator");
+//                    showFragmentDialog(new EditDialogOptionModel(), view.getTag());
+//                    break;
             }
         }
 
@@ -345,16 +278,10 @@ public class VaksinatorSmartRegisterFragment extends SecuredNativeSmartRegisterC
 
 
     private String KiSortByNameAZ() {
-        return " namaBayi ASC";
+        return " namalengkap ASC";
     }
     private String KiSortByNameZA() {
-        return " namaBayi DESC";
-    }
-    private String KiSortByAgeASC() {
-        return " tanggalLahirAnak DESC";
-    }
-    private String KiSortByAgeDESC() {
-        return " tanggalLahirAnak ASC";
+        return " namalengkap DESC";
     }
 
     private String KiSortByAge() {
@@ -368,6 +295,28 @@ public class VaksinatorSmartRegisterFragment extends SecuredNativeSmartRegisterC
         return " htp IS NULL, htp";
     }
 
+
+    private class EditDialogOptionModel implements DialogOptionModel {
+        @Override
+        public DialogOption[] getDialogOptions() {
+            return getEditOptions();
+        }
+        @Override
+        public void onDialogOptionSelection(DialogOption option, Object tag) {
+
+
+            /*if(option.name().equalsIgnoreCase(getString(R.string.str_register_anc_form)) ) {
+                CommonPersonObjectClient pc = KIDetailActivity.kiclient;
+                if(pc.getColumnmaps().get("ibu.type")!= null) {
+                    if (pc.getColumnmaps().get("ibu.type").equals("anc") || pc.getColumnmaps().get("ibu.type").equals("pnc")) {
+                        Toast.makeText(getActivity().getApplicationContext(), getString(R.string.mother_already_registered), Toast.LENGTH_SHORT).show();
+                        return;
+                    }
+                }
+            }*/
+            onEditSelection((EditOption) option, (SmartRegisterClient) tag);
+        }
+    }
 
     @Override
     protected void onResumption() {
@@ -385,58 +334,7 @@ public class VaksinatorSmartRegisterFragment extends SecuredNativeSmartRegisterC
         }
 
     }
-//    @Override
-//    public void setupSearchView(View view) {
-//        searchView = (EditText) view.findViewById(org.ei.opensrp.R.id.edt_search);
-//        searchView.setHint(getNavBarOptionsProvider().searchHint());
-//        searchView.addTextChangedListener(new TextWatcher() {
-//            @Override
-//            public void beforeTextChanged(CharSequence charSequence, int i, int i2, int i3) {
-//            }
-//
-//            @Override
-//            public void onTextChanged(final CharSequence cs, int start, int before, int count) {
-//
-//                (new AsyncTask() {
-//                    SmartRegisterClients filteredClients;
-//
-//                    @Override
-//                    protected Object doInBackground(Object[] params) {
-////                        currentSearchFilter =
-////                        setCurrentSearchFilter(new HHSearchOption(cs.toString()));
-////                        filteredClients = getClientsAdapter().getListItemProvider()
-////                                .updateClients(getCurrentVillageFilter(), getCurrentServiceModeOption(),
-////                                        getCurrentSearchFilter(), getCurrentSortOption());
-////
-//                        filters = cs.toString();
-//                        joinTable = "";
-//                        mainCondition = " is_closed = 0 AND namaBayi !='' ";
-//                        return null;
-//                    }
-//
-//                    @Override
-//                    protected void onPostExecute(Object o) {
-////                        clientsAdapter
-////                                .refreshList(currentVillageFilter, currentServiceModeOption,
-////                                        currentSearchFilter, currentSortOption);
-////                        getClientsAdapter().refreshClients(filteredClients);
-////                        getClientsAdapter().notifyDataSetChanged();
-//                        getSearchCancelView().setVisibility(isEmpty(cs) ? INVISIBLE : VISIBLE);
-//                        CountExecute();
-//                        filterandSortExecute();
-//                        super.onPostExecute(o);
-//                    }
-//                }).execute();
-//            }
-//
-//            @Override
-//            public void afterTextChanged(Editable editable) {
-//            }
-//        });
-//        searchCancelView = view.findViewById(org.ei.opensrp.R.id.btn_search_cancel);
-//        searchCancelView.setOnClickListener(searchCancelHandler);
-//    }
-//
+
     public void updateSearchView(){
         getSearchView().addTextChangedListener(new TextWatcher() {
             @Override
@@ -459,7 +357,7 @@ public class VaksinatorSmartRegisterFragment extends SecuredNativeSmartRegisterC
 
                         filters = cs.toString();
                         joinTable = "";
-                        mainCondition = " is_closed = 0 AND namaBayi !='' ";
+                        mainCondition = " namalengkap !='' ";
                         return null;
                     }
 
@@ -506,8 +404,6 @@ public class VaksinatorSmartRegisterFragment extends SecuredNativeSmartRegisterC
         }
     }
 
-
-
     //    WD
     public void setCriteria(String criteria) {
         this.criteria = criteria;
@@ -520,7 +416,7 @@ public class VaksinatorSmartRegisterFragment extends SecuredNativeSmartRegisterC
     //    WD
     @Override
     public void setupSearchView(final View view) {
-        searchView = (EditText) view.findViewById(org.smartregister.R.id.edt_search);
+        searchView = (EditText) view.findViewById(org.smartregister.vaksinator.R.id.edt_search);
         searchView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -531,31 +427,29 @@ public class VaksinatorSmartRegisterFragment extends SecuredNativeSmartRegisterC
                     @Override
                     public void onClick(DialogInterface dialog, int opt) {
                         if (opt == 0) searchTextChangeListener("");
-                       // else getFacialRecord(view);
+                        // else getFacialRecord(view);
                     }
                 });
                 builder.show();
             }
         });
 
-        searchCancelView = view.findViewById(org.smartregister.R.id.btn_search_cancel);
+        searchCancelView = view.findViewById(org.smartregister.vaksinator.R.id.btn_search_cancel);
         searchCancelView.setOnClickListener(searchCancelHandler);
     }
 
-    /*public void getFacialRecord(View view) {
-        FlurryAgent.logEvent(TAG+" search_by_face", true);
-        Log.e(TAG, "getFacialRecord: start ");
-        SmartShutterActivity.kidetail = (CommonPersonObjectClient) view.getTag();
-        FlurryAgent.logEvent(TAG + " search_by_face", true);
-
-        Intent intent = new Intent(getActivity(), SmartShutterActivity.class);
-        intent.putExtra("org.sid.sidface.ImageConfirmation.origin", VaksinatorSmartRegisterFragment.class.getSimpleName());
-        intent.putExtra("org.sid.sidface.ImageConfirmation.identify", true);
-        intent.putExtra("org.sid.sidface.ImageConfirmation.kidetail", (Parcelable) SmartShutterActivity.kidetail);
-        startActivityForResult(intent, 2);
-
-
-    }*/
+//    public void getFacialRecord(View view) {
+//        FlurryAgent.logEvent(TAG + " search_by_face", true);
+//        Log.e(TAG, "getFacialRecord: ");
+//        SmartShutterActivity.kidetail = (CommonPersonObjectClient) view.getTag();
+//        FlurryAgent.logEvent(TAG + " search_by_face", true);
+//
+//        Intent intent = new Intent(getActivity(), SmartShutterActivity.class);
+//        intent.putExtra("org.sid.sidface.ImageConfirmation.origin", TTSmartRegisterFragment.class.getSimpleName());
+//        intent.putExtra("org.sid.sidface.ImageConfirmation.identify", true);
+//        intent.putExtra("org.sid.sidface.ImageConfirmation.kidetail", (Parcelable) SmartShutterActivity.kidetail);
+//        startActivityForResult(intent, 2);
+//    }
 
     public void searchTextChangeListener(String s) {
         Log.e(TAG, "searchTextChangeListener: " + s);
@@ -570,6 +464,7 @@ public class VaksinatorSmartRegisterFragment extends SecuredNativeSmartRegisterC
                 @Override
                 public void onTextChanged(final CharSequence cs, int start, int before, int count) {
 
+                    Log.e(TAG, "onTextChanged: " + searchView.getText());
                     (new AsyncTask() {
 //                    SmartRegisterClients filteredClients;
 
@@ -584,7 +479,7 @@ public class VaksinatorSmartRegisterFragment extends SecuredNativeSmartRegisterC
 
                             filters = cs.toString();
                             joinTable = "";
-                            mainCondition = "nama_bayi !=''";
+                            mainCondition = "namalengkap !=''";
                             Log.e(TAG, "doInBackground: " + filters);
                             return null;
                         }
@@ -618,7 +513,7 @@ public class VaksinatorSmartRegisterFragment extends SecuredNativeSmartRegisterC
         if (requestCode == 2 ) {
 
             if (resultCode != 0) {
-                Intent myIntent = new Intent(getActivity(), VaksinatorSmartRegisterActivity.class);
+                Intent myIntent = new Intent(getActivity(), TTSmartRegisterActivity.class);
                 if (data != null) {
                     myIntent.putExtra("org.smartregister.indonesia.face.face_mode", true);
                     myIntent.putExtra("org.smartregister.indonesia.face.base_id", data.getStringExtra("org.smartregister.indonesia.face.base_id"));
@@ -630,6 +525,7 @@ public class VaksinatorSmartRegisterFragment extends SecuredNativeSmartRegisterC
         }
 
     }
+
 
 
 }

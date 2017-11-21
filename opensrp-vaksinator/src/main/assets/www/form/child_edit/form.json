@@ -1,14 +1,14 @@
 {
-  "name": "child_registration",
-  "title": "Child Registration",
-  "sms_keyword": "child_registration",
+  "name": "child_edit",
+  "title": "Child Edit",
+  "sms_keyword": "child_edit",
   "default_language": "Bahasa",
   "instance": {
-    "encounter_type": "Child Registration"
+    "encounter_type": "Child Edit"
   },
   "relational_id": "",
   "version": "201703131313",
-  "id_string": "child_registration",
+  "id_string": "child_edit",
   "type": "survey",
   "children": [
     {
@@ -233,7 +233,7 @@
           }
         }
       ],
-      "name": "child_registration"
+      "name": "child_edit"
     },
     {
       "bind": {

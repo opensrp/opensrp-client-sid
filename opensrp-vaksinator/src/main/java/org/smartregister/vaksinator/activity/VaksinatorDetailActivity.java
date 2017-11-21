@@ -306,7 +306,7 @@ public class VaksinatorDetailActivity extends Activity {
     static String entityid;
 
     private boolean isComplete(){
-        return (Support.getDetails(controller, "hb0") != null &&
+        return ((Support.getDetails(controller, "hb0") != null &&
                 Support.getDetails(controller, "bcg") != null &&
                 Support.getDetails(controller, "polio1") != null &&
                 Support.getDetails(controller, "dptHb1") != null &&
@@ -315,7 +315,17 @@ public class VaksinatorDetailActivity extends Activity {
                 Support.getDetails(controller, "polio3") != null &&
                 Support.getDetails(controller, "dptHb3") != null &&
                 Support.getDetails(controller, "polio4") != null &&
-                Support.getDetails(controller, "campak") != null
+                Support.getDetails(controller, "campak") != null) &&
+                (!Support.getDetails(controller, "hb0").equals("-") &&
+                !Support.getDetails(controller, "bcg").equals("-") &&
+                !Support.getDetails(controller, "polio1").equals("-") &&
+                !Support.getDetails(controller, "dptHb1").equals("-") &&
+                !Support.getDetails(controller, "polio2").equals("-") &&
+                !Support.getDetails(controller, "dptHb2").equals("-") &&
+                !Support.getDetails(controller, "polio3").equals("-") &&
+                !Support.getDetails(controller, "dptHb3").equals("-") &&
+                !Support.getDetails(controller, "polio4").equals("-") &&
+                !Support.getDetails(controller, "campak").equals("-"))
         );
     }
 
