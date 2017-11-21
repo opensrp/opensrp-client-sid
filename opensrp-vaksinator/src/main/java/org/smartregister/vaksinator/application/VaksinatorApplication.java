@@ -3,6 +3,7 @@ package org.smartregister.vaksinator.application;
 import android.content.Intent;
 import android.content.res.Configuration;
 
+import org.smartregister.vaksinator.sync.DrishtiSyncScheduler;
 import org.smartregister.vaksinator.repository.VaksinatorRepository;
 import org.smartregister.Context;
 import org.smartregister.CoreLibrary;
@@ -10,7 +11,6 @@ import org.smartregister.commonregistry.CommonFtsObject;
 import org.smartregister.vaksinator.activity.LoginActivity;
 import org.smartregister.vaksinator.libs.FlurryFacade;
 import org.smartregister.repository.Repository;
-import org.smartregister.vaksinator.sync.DrishtiSyncScheduler;
 import org.smartregister.view.activity.DrishtiApplication;
 import org.smartregister.view.receiver.SyncBroadcastReceiver;
 
