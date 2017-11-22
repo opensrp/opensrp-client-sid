@@ -3,17 +3,13 @@ package org.smartregister.gizi.fragment;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.os.Parcelable;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 
-import com.flurry.android.FlurryAgent;
-
 import org.smartregister.Context;
-import org.smartregister.commonregistry.CommonPersonObjectClient;
 import org.smartregister.commonregistry.CommonPersonObjectController;
 import org.smartregister.commonregistry.CommonRepository;
 import org.smartregister.cursoradapter.CursorCommonObjectFilterOption;
@@ -23,11 +19,9 @@ import org.smartregister.cursoradapter.SecuredNativeSmartRegisterCursorAdapterFr
 import org.smartregister.cursoradapter.SmartRegisterPaginatedCursorAdapter;
 import org.smartregister.cursoradapter.SmartRegisterQueryBuilder;
 import org.smartregister.gizi.R;
-import org.smartregister.gizi.giziIbu.IbuServiceModeOption;
-import org.smartregister.gizi.giziIbu.IbuSmartClientsProvider;
-import org.smartregister.gizi.giziIbu.IbuSmartRegisterActivity;
-import org.smartregister.gizi.giziIbu.KICommonObjectFilterOption;
-import org.smartregister.gizi.provider.ChildSmartClientsProvider;
+import org.smartregister.gizi.option.IbuServiceModeOption;
+import org.smartregister.gizi.provider.IbuSmartClientsProvider;
+import org.smartregister.gizi.activity.IbuSmartRegisterActivity;
 import org.smartregister.provider.SmartRegisterClientsProvider;
 import org.smartregister.sync.ClientProcessor;
 import org.smartregister.util.StringUtil;
@@ -42,7 +36,6 @@ import org.smartregister.view.dialog.DialogOptionMapper;
 import org.smartregister.view.dialog.DialogOptionModel;
 import org.smartregister.view.dialog.EditOption;
 import org.smartregister.view.dialog.FilterOption;
-import org.smartregister.view.dialog.NameSort;
 import org.smartregister.view.dialog.ServiceModeOption;
 import org.smartregister.view.dialog.SortOption;
 import org.opensrp.api.domain.Location;
@@ -191,6 +184,7 @@ public class GiziIbuSmartRegisterFragment extends SecuredNativeSmartRegisterCurs
         super.setupViews(view);
         view.findViewById(R.id.btn_report_month).setVisibility(INVISIBLE);
         view.findViewById(R.id.service_mode_selection).setVisibility(View.GONE);
+        view.findViewById(R.id.register_client).setVisibility(View.GONE);
         clientsView.setVisibility(View.VISIBLE);
         clientsProgressView.setVisibility(View.INVISIBLE);
 //        list.setBackgroundColor(Color.RED);

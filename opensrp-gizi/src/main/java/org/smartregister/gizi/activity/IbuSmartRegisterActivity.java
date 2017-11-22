@@ -1,4 +1,4 @@
-package org.smartregister.gizi.giziIbu;
+package org.smartregister.gizi.activity;
 
 import android.app.AlertDialog;
 import android.content.DialogInterface;
@@ -13,7 +13,6 @@ import com.flurry.android.FlurryAgent;
 
 import org.smartregister.domain.form.FieldOverrides;
 import org.smartregister.domain.form.FormSubmission;
-import org.smartregister.gizi.activity.LoginActivity;
 import org.smartregister.gizi.R;
 import org.smartregister.gizi.fragment.GiziIbuSmartRegisterFragment;
 import org.smartregister.gizi.pageradapter.BaseRegisterActivityPagerAdapter;
@@ -32,8 +31,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import org.smartregister.enketo.view.fragment.DisplayFormFragment;
-import org.smartregister.view.fragment.SecuredNativeSmartRegisterFragment;
-import org.smartregister.view.viewpager.OpenSRPViewPager;
+
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;

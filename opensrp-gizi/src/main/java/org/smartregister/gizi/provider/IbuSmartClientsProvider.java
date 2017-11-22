@@ -1,4 +1,4 @@
-package org.smartregister.gizi.giziIbu;
+package org.smartregister.gizi.provider;
 
 import android.app.Activity;
 import android.content.Context;

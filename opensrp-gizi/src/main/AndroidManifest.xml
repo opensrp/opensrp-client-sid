@@ -50,7 +50,7 @@
             android:theme="@style/AppThemeNoActionBarAndTitle"
             android:windowSoftInputMode="adjustResize"
             android:screenOrientation="landscape"/>
-        <activity android:name=".giziIbu.IbuSmartRegisterActivity"
+        <activity android:name=".activity.IbuSmartRegisterActivity"
             android:configChanges="keyboardHidden|orientation|screenSize"
             android:theme="@style/AppThemeNoActionBarAndTitle"
             android:windowSoftInputMode="adjustResize"

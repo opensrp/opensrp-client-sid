@@ -2,19 +2,15 @@ package org.smartregister.gizi.controller;
 
 import android.app.Activity;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.net.Uri;
 
 
 //import org.ei.opensrp.gizi.test.TestSmartRegisterActivity;
 import org.smartregister.gizi.R;
 import org.smartregister.gizi.activity.GiziSmartRegisterActivity;
-import org.smartregister.gizi.giziIbu.IbuSmartRegisterActivity;
+import org.smartregister.gizi.activity.IbuSmartRegisterActivity;
 import org.smartregister.view.controller.ANMController;
 import org.json.JSONObject;
-
-
-import static android.preference.PreferenceManager.getDefaultSharedPreferences;
 
 public class GiziNavigationController extends org.smartregister.view.controller.NavigationController {
     private Activity activity;
