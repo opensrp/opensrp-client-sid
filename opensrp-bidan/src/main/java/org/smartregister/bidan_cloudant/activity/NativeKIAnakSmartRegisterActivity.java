@@ -13,7 +13,6 @@ import android.widget.Toast;
 import com.flurry.android.FlurryAgent;
 
 import org.smartregister.domain.form.FormSubmission;
-import org.smartregister.bidan_cloudant.LoginActivity;
 import org.smartregister.bidan_cloudant.R;
 import org.smartregister.bidan_cloudant.fragment.NativeKIAnakSmartRegisterFragment;
 import org.smartregister.bidan_cloudant.pageradapter.BaseRegisterActivityPagerAdapter;

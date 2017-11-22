@@ -7,7 +7,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 
 import org.smartregister.Context;
-import org.smartregister.bidan_cloudant.LoginActivity;
+import org.smartregister.bidan_cloudant.activity.LoginActivity;
 import org.smartregister.bidan_cloudant.R;
 
 import java.lang.reflect.Field;

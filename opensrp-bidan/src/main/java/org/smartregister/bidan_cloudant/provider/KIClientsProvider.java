@@ -1,4 +1,4 @@
-package org.smartregister.bidan_cloudant.kartu_ibu;
+package org.smartregister.bidan_cloudant.provider;
 
 import android.app.Activity;
 import android.content.Context;
@@ -14,6 +14,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import org.apache.commons.lang3.StringUtils;
+import org.smartregister.bidan_cloudant.kartu_ibu.KIDetailActivity;
 import org.smartregister.commonregistry.AllCommonsRepository;
 import org.smartregister.commonregistry.CommonPersonObject;
 import org.smartregister.commonregistry.CommonPersonObjectClient;

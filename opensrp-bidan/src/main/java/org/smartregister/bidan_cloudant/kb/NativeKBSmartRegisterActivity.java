@@ -14,7 +14,7 @@ import com.flurry.android.FlurryAgent;
 
 import org.smartregister.domain.form.FieldOverrides;
 import org.smartregister.domain.form.FormSubmission;
-import org.smartregister.bidan_cloudant.LoginActivity;
+import org.smartregister.bidan_cloudant.activity.LoginActivity;
 import org.smartregister.bidan_cloudant.R;
 import org.smartregister.bidan_cloudant.fragment.NativeKBSmartRegisterFragment;
 import org.smartregister.bidan_cloudant.pageradapter.BaseRegisterActivityPagerAdapter;

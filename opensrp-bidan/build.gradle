@@ -75,16 +75,16 @@ dependencies {
 }
 
 android {
-    compileSdkVersion androidCompileSdkVersion
-    buildToolsVersion androidBuildToolsVersion
+    compileSdkVersion 22
+    buildToolsVersion "26.0.1"
 
     defaultConfig {
         applicationId "org.smartregister.bidan_cloudant"
         minSdkVersion 18
         targetSdkVersion 21
 
-        versionCode 6
-        versionName "6.03"
+        versionCode 2
+        versionName "2.0"
 
         multiDexEnabled true
 

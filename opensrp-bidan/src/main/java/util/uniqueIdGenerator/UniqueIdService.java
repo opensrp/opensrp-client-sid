@@ -4,7 +4,7 @@ import org.smartregister.DristhiConfiguration;
 import org.smartregister.domain.FetchStatus;
 import org.smartregister.domain.Response;
 import org.smartregister.domain.ResponseStatus;
-import org.smartregister.bidan_cloudant.LoginActivity;
+import org.smartregister.bidan_cloudant.activity.LoginActivity;
 import org.smartregister.repository.AllSharedPreferences;
 import org.smartregister.service.HTTPAgent;
 import org.smartregister.sync.AdditionalSyncService;

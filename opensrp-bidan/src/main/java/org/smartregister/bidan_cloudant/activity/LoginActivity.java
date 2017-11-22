@@ -1,4 +1,4 @@
-package org.smartregister.bidan_cloudant;
+package org.smartregister.bidan_cloudant.activity;
 
 import android.app.Activity;
 import android.app.AlertDialog;
@@ -26,7 +26,7 @@ import android.widget.TextView;
 import com.flurry.android.FlurryAgent;
 
 import org.smartregister.Context;
-import org.smartregister.bidan_cloudant.activity.BidanHomeActivity;
+import org.smartregister.bidan_cloudant.R;
 import org.smartregister.bidan_cloudant.application.BidanApplication;
 import org.smartregister.domain.LoginResponse;
 import org.smartregister.domain.Response;

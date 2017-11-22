@@ -5,7 +5,7 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 
-import org.smartregister.bidan_cloudant.LoginActivity;
+import org.smartregister.bidan_cloudant.activity.LoginActivity;
 import org.smartregister.sync.SyncAfterFetchListener;
 import org.smartregister.sync.SyncProgressIndicator;
 import org.smartregister.sync.UpdateActionsTask;

@@ -1,10 +1,6 @@
 package org.smartregister.bidan_cloudant.application;
 import android.content.Intent;
 import android.content.res.Configuration;
-import android.util.Log;
-
-import org.acra.ReportingInteractionMode;
-import org.acra.annotation.ReportsCrashes;
 
 import org.smartregister.Context;
 import org.smartregister.CoreLibrary;
@@ -18,7 +14,7 @@ import org.smartregister.sync.DrishtiSyncScheduler;
 import org.smartregister.view.receiver.SyncBroadcastReceiver;
 
 
-import org.smartregister.bidan_cloudant.LoginActivity;
+import org.smartregister.bidan_cloudant.activity.LoginActivity;
 import org.smartregister.bidan_cloudant.lib.ErrorReportingFacade;
 import org.smartregister.bidan_cloudant.lib.FlurryFacade;
 

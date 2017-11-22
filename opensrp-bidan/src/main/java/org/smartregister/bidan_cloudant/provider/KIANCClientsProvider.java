@@ -1,4 +1,4 @@
-package org.smartregister.bidan_cloudant.anc;
+package org.smartregister.bidan_cloudant.provider;
 
 import android.app.Activity;
 import android.content.Context;

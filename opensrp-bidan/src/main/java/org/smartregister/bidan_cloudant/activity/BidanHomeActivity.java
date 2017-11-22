@@ -1,4 +1,4 @@
-package org.smartregister.bidan_cloudant;
+package org.smartregister.bidan_cloudant.activity;
 import android.database.Cursor;
 import android.os.StrictMode;
 import android.view.Menu;
@@ -10,8 +10,9 @@ import android.widget.Toast;
 
 import com.flurry.android.FlurryAgent;
 
-import org.smartregister.AllConstants;
 import org.smartregister.Context;
+import org.smartregister.bidan_cloudant.AllConstantsINA;
+import org.smartregister.bidan_cloudant.controller.NavigationControllerINA;
 import org.smartregister.cursoradapter.SmartRegisterQueryBuilder;
 import org.smartregister.event.Listener;
 

@@ -33,7 +33,7 @@
             android:value="b74c58c94d8965151212e8ecf1f4fdfbf5b7f4e4" />
 
         <activity
-            android:name="org.smartregister.bidan_cloudant.LoginActivity"
+            android:name="org.smartregister.bidan_cloudant.activity.LoginActivity"
             android:label="@string/app_name"
             android:screenOrientation="landscape"
             android:theme="@android:style/Theme.Holo"
@@ -45,7 +45,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name="org.smartregister.bidan_cloudant.BidanHomeActivity"
+            android:name="org.smartregister.bidan_cloudant.activity.BidanHomeActivity"
             android:screenOrientation="landscape"
             android:theme="@style/AppTheme" />
         <activity
