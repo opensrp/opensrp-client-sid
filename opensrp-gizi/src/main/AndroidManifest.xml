@@ -50,12 +50,11 @@
             android:theme="@style/AppThemeNoActionBarAndTitle"
             android:windowSoftInputMode="adjustResize"
             android:screenOrientation="landscape"/>
-       <!-- <activity android:name=".giziIbu.IbuSmartRegisterActivity"
+        <activity android:name=".giziIbu.IbuSmartRegisterActivity"
             android:configChanges="keyboardHidden|orientation|screenSize"
             android:theme="@style/AppThemeNoActionBarAndTitle"
             android:windowSoftInputMode="adjustResize"
             android:screenOrientation="landscape"/>
--->
         <activity android:name=".activity.SettingsActivity" android:label="@string/action_settings"/>
       <!--  <activity android:name=".face.camera.SmartShutterActivity" android:noHistory="true" />
         <activity android:name=".face.camera.ImageConfirmation" android:noHistory="true" />

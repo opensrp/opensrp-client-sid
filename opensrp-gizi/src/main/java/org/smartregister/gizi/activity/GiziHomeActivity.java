@@ -143,7 +143,7 @@ public class GiziHomeActivity extends SecuredActivity {
 
 
         anakRegisterClientCountView = (TextView) findViewById(R.id.txt_child_register_client_count);
-
+        ibuRegisterClientCountView = (TextView) findViewById(R.id.txt_mother_register_client_count);
 
     }
 
@@ -190,6 +190,13 @@ public class GiziHomeActivity extends SecuredActivity {
         childcountcursor.moveToFirst();
         childcount = childcountcursor.getInt(0);
         childcountcursor.close();
+
+        Cursor ibucountcursor = context().commonrepository("ec_ibu").rawCustomQueryForAdapter(sqb.queryForCountOnRegisters("ec_ibu", "ec_ibu.is_closed=0 and ec_ibu.pptest ='Positive'"));
+        ibucountcursor.moveToFirst();
+        ibucount = ibucountcursor.getInt(0);
+        ibucountcursor.close();
+
+        ibuRegisterClientCountView.setText(valueOf(ibucount));
 
         anakRegisterClientCountView.setText(valueOf(childcount));
 

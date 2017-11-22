@@ -196,8 +196,10 @@ public class LoginActivity extends AppCompatActivity {
     private void initializeLoginFields() {
         userNameEditText = ((EditText) findViewById(org.smartregister.R.id.login_userNameText));
         userNameEditText.setRawInputType(InputType.TYPE_CLASS_TEXT);
+       // userNameEditText.setText("demo_ec");
         passwordEditText = ((EditText) findViewById(org.smartregister.R.id.login_passwordText));
         passwordEditText.setRawInputType(InputType.TYPE_CLASS_TEXT);
+      //  passwordEditText.setText("Satu2345");
     }
 
     private void setDoneActionHandlerOnPasswordField() {

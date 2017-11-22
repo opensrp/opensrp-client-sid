@@ -10,7 +10,7 @@ import org.smartregister.commonregistry.CommonFtsObject;
 import org.smartregister.gizi.activity.LoginActivity;
 import org.smartregister.gizi.libs.FlurryFacade;
 import org.smartregister.repository.Repository;
-import org.smartregister.sync.DrishtiSyncScheduler;
+import org.smartregister.gizi.sync.DrishtiSyncScheduler;
 import org.smartregister.view.activity.DrishtiApplication;
 import org.smartregister.view.receiver.SyncBroadcastReceiver;
 
@@ -116,7 +116,10 @@ public class GiziApplication extends DrishtiApplication {
         if(tableName.equals("ec_anak")){
             return new String[]{ "namaBayi","tanggalLahirAnak" };
            // return ftsSearchFields;
-        } else if (tableName.equals("ec_kartu_ibu")){
+        }  else if (tableName.equals("ec_ibu")){
+            return new String[]{ "namalengkap" };
+            // return ftsSearchFields;
+        }else if (tableName.equals("ec_kartu_ibu")){
                 return new String[]{ "namalengkap", "namaSuami" };
            // return ftsSearchFields;
         }
@@ -127,7 +130,10 @@ public class GiziApplication extends DrishtiApplication {
         if(tableName.equals("ec_anak")){
             String[] sortFields = { "namaBayi","tanggalLahirAnak"};
             return sortFields;
-        } else if(tableName.equals("ec_kartu_ibu")){
+        } else if(tableName.equals("ec_ibu")){
+            String[] sortFields = { "namalengkap"};
+            return sortFields;
+        }  else if(tableName.equals("ec_kartu_ibu")){
             String[] sortFields = { "namalengkap", "namaSuami"};
             return sortFields;
         }
@@ -137,6 +143,9 @@ public class GiziApplication extends DrishtiApplication {
     private  static String[] getFtsMainConditions(String tableName){
         if(tableName.equals("ec_anak")){
             String[] mainConditions = {"is_closed", "details" , "namaBayi"};
+            return mainConditions;
+        } else if(tableName.equals("ec_ibu")){
+            String[] mainConditions = { "is_closed", "pptest"};
             return mainConditions;
         } else if(tableName.equals("ec_kartu_ibu")){
             String[] mainConditions = { "is_closed", "namalengkap"};
@@ -151,7 +160,7 @@ public class GiziApplication extends DrishtiApplication {
     }*/
 
     private static String[] getFtsTables() {
-        return new String[]{"ec_anak", "ec_kartu_ibu" };
+        return new String[]{"ec_anak", "ec_ibu","ec_kartu_ibu" };
     }
     public static CommonFtsObject createCommonFtsObject(){
         CommonFtsObject commonFtsObject = new CommonFtsObject(getFtsTables());
