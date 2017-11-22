@@ -1,85 +1,27 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="org.smartregister.bidan">
-
-    <uses-permission android:name="android.permission.CAMERA" />
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
-
-    <uses-feature android:name="android.hardware.camera" />
-    <uses-feature android:name="android.hardware.camera.autofocus" />
-
-    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    package="org.smartregister.bidan_cloudant">
+    <uses-permission android:name="android.permission.BLUETOOTH" />
+    <uses-permission android:name="android.permission.BLUETOOTH_ADMIN" />
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+    <uses-permission android:name="android.permission.CHANGE_WIFI_STATE" />
+    <uses-permission android:name="android.permission.RECORD_AUDIO" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.MODIFY_AUDIO_SETTINGS" />
+
+    <uses-permission android:name="android.permission.CAMERA"/>
+    <uses-permission android:name="android.permission.VIBRATE"/>
+    <uses-permission android:name="android.permission.READ_PHONE_STATE"/>
 
     <application
-        android:name=".application.BidanApplication"
+        android:name="org.smartregister.bidan_cloudant.application.BidanApplication"
         android:allowBackup="true"
-        >
-        <activity
-            android:name=".activity.LoginActivity"
-            android:label="@string/app_name"
-            android:screenOrientation="landscape"
-            android:theme="@style/PathAppTheme"
-            android:windowSoftInputMode="stateAlwaysHidden|adjustResize">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
+        android:label="@string/app_name">
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
-        <activity
-            android:name=".activity.ChildSmartRegisterActivity"
-            android:configChanges="keyboardHidden|orientation|screenSize"
-            android:launchMode="singleTask"
-            android:screenOrientation="portrait"
-            android:theme="@style/AppThemeNoActionBarAndTitle" />
-        <activity
-            android:name=".activity.ChildDetailTabbedActivity"
-            android:screenOrientation="portrait"
-            android:theme="@style/AppThemeNoActionBarAndTitleWithEditButton" />
-        <activity
-            android:name="com.vijay.jsonwizard.activities.JsonFormActivity"
-            android:screenOrientation="portrait"
-            android:theme="@style/AppTheme.NoActionBar"
-            android:windowSoftInputMode="stateAlwaysHidden|adjustResize" />
-        <activity
-            android:name=".activity.PathJsonFormActivity"
-            android:screenOrientation="portrait"
-            android:theme="@style/AppTheme.NoActionBar"
-            android:windowSoftInputMode="stateAlwaysHidden|adjustResize" />
-
-        <!--<receiver android:name=".receiver.Hia2ServiceBroadcastReceiver" />-->
-        <receiver android:name=".receiver.BidanSyncBroadcastReceiver" />
-        <receiver android:name=".receiver.VaccinatorAlarmReceiver" />
-        <receiver android:name=".receiver.OnBootReceiver">
-            <intent-filter>
-                <action android:name="android.intent.action.BOOT_COMPLETED" />
-            </intent-filter>
-        </receiver>
-
-        <activity android:name=".activity.ProviderProfileActivity" />
-        <activity
-            android:name=".activity.SettingsActivity"
-            android:screenOrientation="portrait" />
-        <activity
-            android:name=".activity.ChildImmunizationActivity"
-            android:screenOrientation="portrait"
-            android:theme="@style/AppThemeNoTitle.NoActionBar" />
-        <activity
-            android:name=".activity.HIA2ReportsActivity"
-            android:screenOrientation="portrait"
-            android:theme="@style/AppThemeNoTitle.NoActionBar" />
-        <activity
-            android:name=".activity.ReportSummaryActivity"
-            android:screenOrientation="portrait"
-            android:theme="@style/AppThemeNoTitle.NoActionBar" />
-        <activity
-            android:name=".activity.StockActivity"
-            android:screenOrientation="portrait"
-            android:theme="@style/AppThemeNoTitle.NoActionBar" />
-
-        <!-- local test key -->
+        <!-- local key -->
         <!--
             <meta-data
             android:name="io.fabric.ApiKey"
@@ -90,42 +32,104 @@
             android:name="io.fabric.ApiKey"
             android:value="b74c58c94d8965151212e8ecf1f4fdfbf5b7f4e4" />
 
-        <service android:name=".service.intent.SyncIntentService" />
-        <service android:name=".service.intent.ValidateIntentService" />
-        <service android:name=".service.intent.PullUniqueIdsIntentService" />
-
-        <service android:name="org.smartregister.growthmonitoring.service.intent.WeightIntentService" />
-        <service android:name="org.smartregister.immunization.service.intent.VaccineIntentService" />
-        <service android:name="org.smartregister.growthmonitoring.service.intent.ZScoreRefreshIntentService" />
-        <service android:name="org.smartregister.immunization.service.intent.RecurringIntentService" />
-        <service android:name="org.smartregister.bidan.service.intent.HIA2IntentService" />
-
-        <provider
-            android:name="android.support.v4.content.FileProvider"
-            android:authorities="com.vijay.jsonwizard.fileprovider"
-            android:exported="false"
-            android:grantUriPermissions="true">
-            <meta-data
-                android:name="android.support.FILE_PROVIDER_PATHS"
-                android:resource="@xml/captured_images_path" />
-        </provider>
-
         <activity
-            android:name=".activity.StockControlActivity"
-            android:label="@string/title_activity_stock_control"
-            android:theme="@style/AppThemeNoTitle.NoActionBar">
-
-        </activity>
-        <activity android:name=".activity.BidanHomeActivity"
+            android:name="org.smartregister.bidan_cloudant.LoginActivity"
+            android:label="@string/app_name"
             android:screenOrientation="landscape"
-            android:theme="@style/BidanAppTheme"
-            />
+            android:theme="@android:style/Theme.Holo"
+            android:windowSoftInputMode="adjustResize|stateHidden">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
 
-        <activity android:name=".activity.KIbuSmartRegisterActivity"
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name="org.smartregister.bidan_cloudant.BidanHomeActivity"
+            android:screenOrientation="landscape"
+            android:theme="@style/AppTheme" />
+        <activity
+            android:name="org.smartregister.bidan_cloudant.activity.NativeKISmartRegisterActivity"
             android:configChanges="keyboardHidden|orientation|screenSize"
             android:screenOrientation="landscape"
             android:theme="@style/AppThemeNoActionBarAndTitle"
             android:windowSoftInputMode="adjustResize" />
+        <activity
+            android:name="org.smartregister.bidan_cloudant.kartu_ibu.KIDetailActivity"
+            android:screenOrientation="landscape"
+            android:theme="@style/AppThemeNoTitle" />
+        <activity
+            android:name="org.smartregister.bidan_cloudant.kb.NativeKBSmartRegisterActivity"
+            android:configChanges="keyboardHidden|orientation|screenSize"
+            android:screenOrientation="landscape"
+            android:theme="@style/AppThemeNoActionBarAndTitle"
+            android:windowSoftInputMode="adjustResize" />
+        <activity
+            android:name="org.smartregister.bidan_cloudant.kb.KBDetailActivity"
+            android:screenOrientation="landscape"
+            android:theme="@style/AppThemeNoTitle" />
+        <activity
+            android:name="org.smartregister.bidan_cloudant.activity.NativeKIANCSmartRegisterActivity"
+            android:configChanges="keyboardHidden|orientation|screenSize"
+            android:screenOrientation="landscape"
+            android:theme="@style/AppThemeNoActionBarAndTitle"
+            android:windowSoftInputMode="adjustResize" />
+        <activity
+            android:name="org.smartregister.bidan_cloudant.activity.ANCDetailActivity"
+            android:screenOrientation="landscape"
+            android:theme="@style/AppThemeNoTitle" />
+        <activity
+            android:name="org.smartregister.bidan_cloudant.pnc.NativeKIPNCSmartRegisterActivity"
+            android:configChanges="keyboardHidden|orientation|screenSize"
+            android:screenOrientation="landscape"
+            android:theme="@style/AppThemeNoActionBarAndTitle"
+            android:windowSoftInputMode="adjustResize" />
+        <activity
+            android:name="org.smartregister.bidan_cloudant.pnc.PNCDetailActivity"
+            android:screenOrientation="landscape"
+            android:theme="@style/AppThemeNoTitle" />
+        <activity
+            android:name="org.smartregister.bidan_cloudant.activity.NativeKIAnakSmartRegisterActivity"
+            android:configChanges="keyboardHidden|orientation|screenSize"
+            android:screenOrientation="landscape"
+            android:theme="@style/AppThemeNoActionBarAndTitle"
+            android:windowSoftInputMode="adjustResize" />
+        <activity
+            android:name="org.smartregister.bidan_cloudant.child.AnakDetailActivity"
+            android:screenOrientation="landscape"
+            android:theme="@style/AppThemeNoTitle" />
+        <activity
+            android:name="org.smartregister.bidan_cloudant.child.ChildDetailActivity"
+            android:screenOrientation="landscape"
+            android:theme="@style/AppThemeNoTitle" />
+        <activity
+            android:name="org.smartregister.bidan_cloudant.child.ChildGrowthChartActivity"
+            android:screenOrientation="landscape"
+            android:theme="@style/AppThemeNoTitle" />
+        <activity
+            android:name="org.smartregister.bidan_cloudant.child.ChildZScoreChartActivity"
+            android:screenOrientation="landscape"
+            android:theme="@style/AppThemeNoTitle" />
+
+        <!--Face Recognition-->
+        <activity
+            android:name="org.smartregister.bidan_cloudant.face.camera.SmartShutterActivity"
+            android:screenOrientation="portrait"
+            android:noHistory="false" />
+        <activity
+            android:name="org.smartregister.bidan_cloudant.face.camera.ImageConfirmation"
+            android:screenOrientation="portrait"
+            android:label="FaceRecognition Confirmation"
+            android:noHistory="true" />
+        <activity android:name="org.smartregister.bidan_cloudant.face.camera.ClientsList"
+            android:screenOrientation="portrait"
+            />
+        <!-- BPM -->
+        <!--<activity android:name=".face.bpm.BpmMainActivity" />-->
+        <activity android:name="org.smartregister.bidan_cloudant.device.MainBPM" android:label="Blood Pressure Monitor"/>
+        <activity android:name="org.smartregister.bidan_cloudant.device.BP7" android:label="Wireless Blood Pressure Wrist Monitor BP7"/>
+        <activity android:name="org.smartregister.bidan_cloudant.device.BP5" android:label="BP5"/>
+        <activity android:name="org.smartregister.bidan_cloudant.device.TestBPM" />
 
     </application>
 

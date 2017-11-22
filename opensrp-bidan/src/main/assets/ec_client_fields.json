@@ -1,7 +1,7 @@
 {
   "bindobjects": [
     {
-      "name": "ec_mother",
+      "name": "ec_kartu_ibu",
       "columns": [
         {
           "column_name": "base_entity_id",
@@ -11,166 +11,76 @@
           }
         },
         {
-          "column_name": "zeir_id",
-          "type": "Client",
-          "json_mapping": {
-            "field": "identifiers.M_ZEIR_ID"
-          }
-        },
-        {
-          "column_name": "first_name",
+          "column_name": "namalengkap",
           "type": "Client",
           "json_mapping": {
             "field": "firstName"
           }
         },
         {
-          "column_name": "husband_name",
-          "type": "Event",
-          "json_mapping": {
-            "field": "obs.fieldCode",
-            "concept": "161135AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
-          }
-        },
-        {
-          "column_name": "father_name",
-          "type": "Event",
-          "json_mapping": {
-            "field": "obs.fieldCode",
-            "concept": "1594AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
-          }
-        },
-        {
-          "column_name": "dob",
+          "column_name": "noIbu",
           "type": "Client",
           "json_mapping": {
-            "field": "birthdate"
+            "field": "attributes.NoIbu"
           }
         },
         {
-          "column_name": "epi_card_number",
+          "column_name": "unique_id",
           "type": "Client",
           "json_mapping": {
-            "field": "attributes.EPI Card Number"
+            "field": "attributes.UniqueId"
           }
         },
         {
-          "column_name": "contact_phone_number",
-          "type": "Event",
-          "json_mapping": {
-            "field": "obs.fieldCode",
-            "concept": "159635AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
-          }
-        },
-        {
-          "column_name": "nrc_number",
-          "type": "Client",
-          "json_mapping": {
-            "field": "attributes.NRC_Number"
-          }
-        },
-        {
-          "column_name": "provider_uc",
-          "type": "Client",
-          "json_mapping": {
-            "field": "provider_uc"
-          }
-        },
-        {
-          "column_name": "provider_town",
-          "type": "Client",
-          "json_mapping": {
-            "field": "provider_town"
-          }
-        },
-        {
-          "column_name": "provider_id",
-          "type": "Client",
-          "json_mapping": {
-            "field": "provider_id"
-          }
-        },
-        {
-          "column_name": "provider_location_id",
-          "type": "Client",
-          "json_mapping": {
-            "field": "provider_location_id"
-          }
-        },
-        {
-          "column_name": "client_reg_date",
-          "type": "Event",
-          "json_mapping": {
-            "field": "eventDate"
-          }
-        },
-        {
-          "column_name": "last_name",
+          "column_name": "namaSuami",
           "type": "Client",
           "json_mapping": {
             "field": "lastName"
           }
         },
         {
-          "column_name": "gender",
+          "column_name": "tanggalLahir",
           "type": "Client",
           "json_mapping": {
-            "field": "gender"
+            "field": "birthdate"
           }
         },
         {
-          "column_name": "marriage",
+          "column_name": "isOutOfArea",
           "type": "Client",
           "json_mapping": {
-            "field": "marriage"
+            "field": "isOutOfArea",
+            "comment": "doesn't have concept mapping"
           }
         },
         {
-          "column_name": "town",
-          "type": "Client",
-          "json_mapping": {
-            "field": "addresses.town"
-          }
-        },
-        {
-          "column_name": "union_council",
-          "type": "Client",
-          "json_mapping": {
-            "field": "addresses.subTown"
-          }
-        },
-        {
-          "column_name": "address1",
-          "type": "Client",
-          "json_mapping": {
-            "field": "addresses.addressFields.address1"
-          }
-        },
-        {
-          "column_name": "address",
-          "type": "Client",
-          "json_mapping": {
-            "field": "addresses.addressType"
-          }
-        },
-        {
-          "column_name": "date",
+          "column_name": "htp",
           "type": "Event",
           "json_mapping": {
-            "field": "eventDate"
+            "field": "obs.fieldCode",
+            "concept": "5596AAAAAAAAAAAAAAAAAAAAAAAAAAAA"
           }
         },
         {
-          "column_name": "last_interacted_with",
+          "column_name": "jenisKontrasepsi",
           "type": "Event",
           "json_mapping": {
-            "field": "version"
+            "field": "obs.fieldCode",
+            "concept": "374AAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+          }
+        },
+        {
+          "column_name": "umur",
+          "type": "Event",
+          "json_mapping": {
+            "field": "obs.fieldCode",
+            "concept": "1532AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
           }
         }
       ]
     },
     {
-      "name": "ec_child",
+      "name": "ec_ibu",
       "columns": [
         {
           "column_name": "base_entity_id",
@@ -180,190 +90,172 @@
           }
         },
         {
-          "column_name": "zeir_id",
+          "column_name": "kartuIbuId",
           "type": "Client",
           "json_mapping": {
-            "field": "identifiers.ZEIR_ID"
+            "field": "kartuIbuId",
+            "comment": "doesn't have concept mapping"
           }
         },
         {
-          "column_name": "inactive",
-          "type": "Client",
+          "column_name": "tanggalHPHT",
+          "type": "Event",
           "json_mapping": {
-            "field": "attributes.inactive"
+            "field": "obs.fieldCode",
+            "concept": "1427AAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+          }
+        },
+
+        {
+          "column_name": "referenceDate",
+          "type": "Event",
+          "json_mapping": {
+            "field": "obs.fieldCode",
+            "concept": "160753AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
           }
         },
         {
-          "column_name": "lost_to_follow_up",
+          "column_name": "pptest",
+          "type": "Event",
+          "json_mapping": {
+            "field": "obs.fieldCode",
+            "concept": "45AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+          }
+        },
+        {
+          "column_name": "ancDate",
+          "type": "Event",
+          "json_mapping": {
+            "field": "obs.fieldCode",
+            "concept": "160753AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+          }
+        },
+        {
+          "column_name": "ancKe",
+          "type": "Event",
+          "json_mapping": {
+            "field": "obs.fieldCode",
+            "concept": "1425AAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+          }
+        },
+
+        {
+          "column_name": "type",
+          "type": "Event",
+          "json_mapping": {
+            "field": "type",
+            "comment": "doesn't have concept mapping"
+          }
+        }
+      ]
+    },
+    {
+      "name": "ec_pnc",
+      "columns": [
+        {
+          "column_name": "base_entity_id",
           "type": "Client",
           "json_mapping": {
-            "field": "attributes.lost_to_follow_up"
+            "field": "baseEntityId"
+          }
+        },
+        {
+          "column_name": "keadaanIbu",
+          "type": "Event",
+          "json_mapping": {
+            "field": "obs.fieldCode",
+            "concept": "160085AAAAAAAAAAAAAAAAAAAAAAAAAA"
+          }
+        },
+        {
+          "column_name": "tempatBersalin",
+          "type": "Event",
+          "json_mapping": {
+            "field": "obs.fieldCode",
+            "concept": "1572AAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+          }
+        },
+        {
+          "column_name": "caraPersalinanIbu",
+          "type": "Event",
+          "json_mapping": {
+            "field": "obs.fieldCode",
+            "concept": "5630AAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+          }
+        },
+        {
+          "column_name": "komplikasi",
+          "type": "Event",
+          "json_mapping": {
+            "field": "obs.fieldCode",
+            "concept": "1576AAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+          }
+        }
+      ]
+    },
+    {
+      "name": "ec_anak",
+      "columns": [
+        {
+          "column_name": "base_entity_id",
+          "type": "Client",
+          "json_mapping": {
+            "field": "baseEntityId"
           }
         },
         {
           "column_name": "relational_id",
           "type": "Client",
           "json_mapping": {
-            "field": "relationships.mother"
+            "field": "relationships.ibuCaseId"
           }
         },
         {
-          "column_name": "first_name",
+          "column_name": "noBayi",
           "type": "Client",
           "json_mapping": {
-            "field": "firstName"
+            "field": "attributes.noBayi"
           }
         },
         {
-          "column_name": "last_name",
-          "type": "Client",
-          "json_mapping": {
-            "field": "lastName"
-          }
-        },
-        {
-          "column_name": "gender",
-          "type": "Client",
-          "json_mapping": {
-            "field": "gender"
-          }
-        },
-        {
-          "column_name": "mother_first_name",
+          "column_name": "beratLahir",
           "type": "Event",
           "json_mapping": {
             "field": "obs.fieldCode",
-            "formSubmissionField": "Mother_Guardian_First_Name"
+            "concept": "5916AAAAAAAAAAAAAAAAAAAAAAAAAAAA"
           }
         },
         {
-          "column_name": "mother_last_name",
+          "column_name": "namaBayi",
           "type": "Event",
           "json_mapping": {
             "field": "obs.fieldCode",
-            "formSubmissionField": "Mother_Guardian_Last_Name"
+            "concept": "1586AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
           }
         },
         {
-          "column_name": "father_name",
-          "type": "Event",
-          "json_mapping": {
-            "field": "obs.fieldCode",
-            "concept": "1594AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
-          }
-        },
-        {
-          "column_name": "dob",
+          "column_name": "tanggalLahirAnak",
           "type": "Client",
           "json_mapping": {
             "field": "birthdate"
           }
-        },
+        }
+      ]
+    },
+    {"name": "ec_multimedia",
+      "columns" : [
         {
-          "column_name": "dod",
-          "type": "Client",
-          "json_mapping": {
-            "field": "deathdate"
+          "column_name" : "baseEntityID",
+          "type" : "Multimedia",
+          "json_mapping" : {
+            "field" : "caseId"
           }
         },
         {
-          "column_name": "epi_card_number",
-          "type": "Client",
-          "json_mapping": {
-            "field": "attributes.Child_Register_Card_Number"
-          }
-        },
-        {
-          "column_name": "contact_phone_number",
-          "type": "Event",
-          "json_mapping": {
-            "field": "obs.fieldCode",
-            "concept": "159635AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
-          }
-        },
-        {
-          "column_name": "pmtct_status",
-          "type": "Event",
-          "json_mapping": {
-            "field": "obs.fieldCode",
-            "concept": "1396AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
-          }
-        },
-        {
-          "column_name": "provider_uc",
-          "type": "Client",
-          "json_mapping": {
-            "field": "provider_uc"
-          }
-        },
-        {
-          "column_name": "provider_town",
-          "type": "Client",
-          "json_mapping": {
-            "field": "provider_town"
-          }
-        },
-        {
-          "column_name": "provider_id",
-          "type": "Client",
-          "json_mapping": {
-            "field": "provider_id"
-          }
-        },
-        {
-          "column_name": "provider_location_id",
-          "type": "Client",
-          "json_mapping": {
-            "field": "provider_location_id"
-          }
-        },
-        {
-          "column_name": "client_reg_date",
-          "type": "Event",
-          "json_mapping": {
-            "field": "eventDate"
-          }
-        },
-        {
-          "column_name": "town",
-          "type": "Client",
-          "json_mapping": {
-            "field": "addresses.town"
-          }
-        },
-        {
-          "column_name": "union_council",
-          "type": "Client",
-          "json_mapping": {
-            "field": "addresses.subTown"
-          }
-        },
-        {
-          "column_name": "address1",
-          "type": "Client",
-          "json_mapping": {
-            "field": "addresses.addressFields.address1"
-          }
-        },
-        {
-          "column_name": "address",
-          "type": "Client",
-          "json_mapping": {
-            "field": "addresses.addressType"
-          }
-        },
-        {
-          "column_name": "date",
-          "type": "Event",
-          "json_mapping": {
-            "field": "eventDate"
-          }
-        },
-        {
-          "column_name": "last_interacted_with",
-          "type": "Event",
-          "json_mapping": {
-            "field": "version"
+          "column_name" : "faceVector",
+          "type" : "Multimedia",
+          "json_mapping" : {
+            "field" : "attributes.faceVector"
           }
         }
       ]

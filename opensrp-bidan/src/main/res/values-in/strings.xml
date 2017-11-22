@@ -43,7 +43,7 @@
     <string name="header_edit"></string>
 
     <string name="header_anak">ANAK</string>
-    <string name="header_nama">NAMA</string>
+    <string name="header_nama">Nama</string>
     <string name="header_tgl_periksa">Tgl Periksa</string>
     <string name="header_edd">HTP</string>
     <string name="header_kunjungan">Kunjungan</string>
@@ -393,7 +393,7 @@
     <string name="place_place">Tempat:</string>
     <string name="plan_type">Tipe:</string>
     <string name="mother_title">Ibu</string>
-    <string name="child_title">ANAK</string>
+    <string name="child_title">Anak</string>
     <string name="dob_title">Tgl Lahir:</string>
     <string name="birth_place_title">Tmpt:</string>
     <string name="birth_weight_title">B.Lahir:</string>
@@ -484,8 +484,4 @@
     <string name="Nutrition_status">Status Gizi:</string>
     <string name="mother_already_registered_in_fp">Mother already registered</string>
     <string name="dho_site">kia-report.sid-indonesia.org/login/auth</string>
-
-    <string name="bidan_profile">BIDAN</string>
-    <string name="bidan_contact_number">No HP:</string>
-
 </resources>
