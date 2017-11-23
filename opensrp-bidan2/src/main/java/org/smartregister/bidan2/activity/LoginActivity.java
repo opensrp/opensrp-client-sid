@@ -308,8 +308,8 @@ public class LoginActivity extends AppCompatActivity {
 //            Utils.startAsyncTask(new SaveTeamLocationsTask(), null);
         }
 
-        Intent intent = new Intent(this, BidanHomeActivity.class);
-//        Intent intent = new Intent(this, KMotherSmartRegisterActivity.class);
+//        Intent intent = new Intent(this, BidanHomeActivity.class);
+        Intent intent = new Intent(this, KMotherSmartRegisterActivity.class);
 
         // TODO ERROR GET FRAGMENT
 //        intent.putExtra(BaseRegisterActivity.IS_REMOTE_LOGIN, remote);
