@@ -72,3 +72,9 @@ project.properties
 .settings
 /opensrp-bidan/src/main/assets/config.properties
 /**/config.properties
+opensrp-app/
+opensrp-bidan2/
+opensrp-path/
+/opensrp-app/
+/opensrp-bidan2/
+/opensrp-path/
