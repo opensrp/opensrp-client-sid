@@ -2,7 +2,6 @@ package org.smartregister.bidan2.activity;
 
 import android.database.Cursor;
 import android.os.Bundle;
-import android.os.PersistableBundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
@@ -12,14 +11,11 @@ import android.widget.TextView;
 import org.smartregister.Context;
 import org.smartregister.bidan2.R;
 import org.smartregister.cursoradapter.SmartRegisterQueryBuilder;
+import org.smartregister.view.activity.SecuredActivity;
 import org.smartregister.view.contract.HomeContext;
 import org.smartregister.view.controller.NativeAfterANMDetailsFetchListener;
 import org.smartregister.view.controller.NativeUpdateANMDetailsTask;
 import org.smartregister.view.controller.NavigationController;
-
-import java.util.Date;
-import java.util.HashMap;
-import java.util.Map;
 
 import static java.lang.String.valueOf;
 
@@ -27,7 +23,7 @@ import static java.lang.String.valueOf;
  * Created by sid-tech on 11/23/17.
  */
 
-public class BidanHomeActivity extends AppCompatActivity {
+public class BidanHomeActivity extends SecuredActivity {
 
     private TextView ecRegisterClientCountView;
     private TextView kartuIbuANCRegisterClientCountView;
@@ -39,9 +35,6 @@ public class BidanHomeActivity extends AppCompatActivity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.home_bidan);
-
-        setupViews();
     }
 
     @Override
@@ -50,11 +43,24 @@ public class BidanHomeActivity extends AppCompatActivity {
     }
 
     @Override
-    protected void onResume() {
-        super.onResume();
+    protected void onCreation() {
+        setContentView(R.layout.home_bidan);
+
+        setupViews();
+
+    }
+
+    @Override
+    protected void onResumption() {
         updateRegisterCounts();
 //        updateSyncIndicator();
 //        updateRemainingFormsToSyncCount();
+
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
     }
 
     private void updateRegisterCounts() {
