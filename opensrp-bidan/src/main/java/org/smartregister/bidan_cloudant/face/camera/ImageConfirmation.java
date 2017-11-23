@@ -441,7 +441,7 @@ public class ImageConfirmation extends Activity {
         bitmap.compress(Bitmap.CompressFormat.PNG, 100, baos);
         String imageEncoded = Base64.encodeToString(baos.toByteArray(), Base64.DEFAULT);
 //        DatabaseReference ref = FirebaseDatabase.getInstance()
-//                .getReference(AllConstantsINA.FIREBASE_OPENSRP_INA)
+//                .getReference(AllConstants.FIREBASE_OPENSRP_INA)
 //                .child(FirebaseAuth.getInstance().getCurrentUser().getUid())
 //                .child(mRestaurant.getPushId())
 //                .child("imageUrl");

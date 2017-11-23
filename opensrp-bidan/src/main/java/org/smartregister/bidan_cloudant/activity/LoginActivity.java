@@ -25,6 +25,8 @@ import android.widget.TextView;
 
 import com.flurry.android.FlurryAgent;
 
+import org.json.JSONException;
+import org.json.JSONObject;
 import org.smartregister.Context;
 import org.smartregister.bidan_cloudant.R;
 import org.smartregister.bidan_cloudant.application.BidanApplication;
@@ -111,17 +113,20 @@ public class LoginActivity extends Activity {
         debugApp();
 
     }
+    public static Context getOpenSRPContext() {
+        return BidanApplication.getInstance().context();
+    }
 
     private void debugApp() {
-        String uname = getResources().getString(R.string.uname);
-        String pwd = getResources().getString(R.string.pwd);
-//        String uname = "demo_test";
-//        String pwd = "Demo@123";
+    //    String uname = getResources().getString(R.string.uname);
+     //   String pwd = getResources().getString(R.string.pwd);
+       String uname = "demo_ec";
+        String pwd = "Satu2345";
 
         LayoutInflater layoutInflater = getLayoutInflater();
         View view = layoutInflater.inflate(R.layout.login, null);
 
-        if (context.userService().hasARegisteredUser()) {
+        if (getOpenSRPContext().userService().hasARegisteredUser()) {
             localLogin(view, uname, pwd);
         } else {
             remoteLogin(view, uname, pwd);
@@ -207,10 +212,12 @@ public class LoginActivity extends Activity {
     }
 
     private void localLogin(View view, String userName, String password) {
-        if (context.userService().isValidLocalLogin(userName, password)) {
+        if (getOpenSRPContext().userService().isUserInValidGroup(userName, password)) {
             localLoginWith(userName, password);
-            ErrorReportingFacade.setUsername("", userName);
-            FlurryAgent.setUserId(userName);
+
+            // Tracking Error
+//            ErrorReportingFacade.setUsername("", userName);
+//            FlurryAgent.setUserId(userName);
         } else {
             showErrorDialog(getString(org.smartregister.R.string.login_failed_dialog_message));
             view.setClickable(true);
@@ -344,7 +351,9 @@ public class LoginActivity extends Activity {
 
     private void remoteLoginWith(String userName, String password, String userInfo) {
         context.userService().remoteLogin(userName, password, userInfo);
-        LoginActivity.generator = new Generator(context, userName, password);
+       // LoginActivity.generator = new Generator(context, userName, password);
+        String locationId = getUserDefaultLocationId(userInfo);
+        saveDefaultLocationId(userName,locationId);
         goToHome();
         DrishtiSyncScheduler.startOnlyIfConnectedToNetwork(getApplicationContext());
     }
@@ -427,6 +436,22 @@ public class LoginActivity extends Activity {
                 afterGetUniqueId.onEvent(result);
             }
         });
+    }
+    public String getUserDefaultLocationId(String userInfo) {
+        try {
+            JSONObject userLocationJSON = new JSONObject(userInfo);
+            return userLocationJSON.getJSONObject("team").getJSONArray("location").getJSONObject(0).getString("name");
+        } catch (JSONException e) {
+            android.util.Log.v("Error : ", e.getMessage());
+        }
+
+        return null;
+    }
+
+    public void saveDefaultLocationId(String userName, String locationId) {
+        if (userName != null) {
+            context.userService().getAllSharedPreferences().savePreference(userName + "-locationid", locationId);
+        }
     }
 
 }

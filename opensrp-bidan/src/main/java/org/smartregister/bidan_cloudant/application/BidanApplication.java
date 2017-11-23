@@ -54,6 +54,19 @@ public class BidanApplication extends DrishtiApplication {
         cleanUpSyncState();
 
     }
+    @Override
+    public Repository getRepository() {
+        try {
+            if (repository == null) {
+                repository = new BidanRepository(getInstance().getApplicationContext(), context());
+
+            }
+        } catch (UnsatisfiedLinkError e) {
+            logError("Error on getRepository: " + e);
+
+        }
+        return repository;
+    }
 
     @Override
     public void logoutCurrentUser(){
@@ -159,12 +172,12 @@ public class BidanApplication extends DrishtiApplication {
         return null;
     }
 
-    public UniqueIdRepository uniqueIdRepository() {
+  /*  public UniqueIdRepository uniqueIdRepository() {
         if (uniqueIdRepository == null) {
             uniqueIdRepository = new UniqueIdRepository((BidanRepository) getRepository());
         }
         return uniqueIdRepository;
-    }
+    }*/
 
     public static synchronized BidanApplication getInstance() {
         return (BidanApplication) mInstance;
@@ -174,7 +187,7 @@ public class BidanApplication extends DrishtiApplication {
         return context;
     }
 
-    @Override
+   /* @Override
     public Repository getRepository() {
 
         try {
@@ -188,7 +201,7 @@ public class BidanApplication extends DrishtiApplication {
 
         }
         return repository;
-    }
+    }*/
 
     public static SettingsRepository getSettingsRepositoryforUniqueId(){
         return settingsRepository();

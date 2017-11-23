@@ -1,6 +1,7 @@
 package org.smartregister.bidan_cloudant.activity;
 import android.database.Cursor;
 import android.os.StrictMode;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -10,19 +11,22 @@ import android.widget.Toast;
 
 import com.flurry.android.FlurryAgent;
 
+import org.opensrp.api.domain.Location;
+import org.opensrp.api.util.TreeNode;
 import org.smartregister.Context;
 import org.smartregister.bidan_cloudant.AllConstantsINA;
 import org.smartregister.bidan_cloudant.controller.NavigationControllerINA;
+import org.smartregister.bidan_cloudant.service.FormSubmissionSyncService;
 import org.smartregister.cursoradapter.SmartRegisterQueryBuilder;
 import org.smartregister.event.Listener;
 
+import org.smartregister.bidan_cloudant.sync.UpdateActionsTask;
 import org.smartregister.bidan_cloudant.R;
 import org.smartregister.bidan_cloudant.face.camera.utils.Tools;
 import org.smartregister.bidan_cloudant.lib.FlurryFacade;
 import org.smartregister.service.PendingFormSubmissionService;
 import org.smartregister.sync.SyncAfterFetchListener;
 import org.smartregister.sync.SyncProgressIndicator;
-import org.smartregister.sync.UpdateActionsTask;
 import org.smartregister.view.activity.SecuredActivity;
 import org.smartregister.view.contract.HomeContext;
 import org.smartregister.view.controller.NativeAfterANMDetailsFetchListener;
@@ -290,7 +294,7 @@ public class BidanHomeActivity extends SecuredActivity {
         }
     }
 
-    public void updateFromServer() {
+    /*public void updateFromServer() {
         FlurryFacade.logEvent("clicked_update_from_server");
         UpdateActionsTask updateActionsTask = new UpdateActionsTask(
                 this, context().actionService(), context().formSubmissionSyncService(),
@@ -304,6 +308,23 @@ public class BidanHomeActivity extends SecuredActivity {
 
 //        if(LoginActivity.generator.uniqueIdController().needToRefillUniqueId(LoginActivity.generator.UNIQUE_ID_LIMIT))  // unique id part
 //            LoginActivity.generator.requestUniqueId();                                                                  // unique id part
+    }*/
+    public void updateFromServer() {
+        Log.d("Home", "updateFromServer: tombol update");
+        UpdateActionsTask updateActionsTask = new UpdateActionsTask(
+                this, context().actionService(), new FormSubmissionSyncService(context().applicationContext()) ,new SyncProgressIndicator(), context().allFormVersionSyncService());
+//        FlurryFacade.logEvent("click_update_from_server");
+        updateActionsTask.updateFromServer(new SyncAfterFetchListener());
+
+//        if (LoginActivity.generator.uniqueIdController().needToRefillUniqueId(LoginActivity.generator.UNIQUE_ID_LIMIT))  // unique id part
+//            LoginActivity.generator.requestUniqueId();                                                                  // unique id part
+
+        String locationjson = context().anmLocationController().get();
+        LocationTree locationTree = EntityUtils.fromJson(locationjson, LocationTree.class);
+
+        Map<String, TreeNode<String, Location>> locationMap =
+                locationTree.getLocationsHierarchy();
+
     }
 
     @Override

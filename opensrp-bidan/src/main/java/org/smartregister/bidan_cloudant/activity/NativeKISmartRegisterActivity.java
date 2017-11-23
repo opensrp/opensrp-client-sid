@@ -124,12 +124,12 @@ public class NativeKISmartRegisterActivity extends SecuredNativeSmartRegisterAct
         });
 
 
-        if(LoginActivity.generator.uniqueIdController().needToRefillUniqueId(LoginActivity.generator.UNIQUE_ID_LIMIT)) {
+/*        if(LoginActivity.generator.uniqueIdController().needToRefillUniqueId(LoginActivity.generator.UNIQUE_ID_LIMIT)) {
             String toastMessage =   "need to refill unique id, its only "+
                                     LoginActivity.generator.uniqueIdController().countRemainingUniqueId()+
                                     " remaining";
             Toast.makeText(context().applicationContext(), toastMessage, Toast.LENGTH_LONG).show();
-        }
+        }*/
 
         ziggyService = context().ziggyService();
 
@@ -183,15 +183,15 @@ public class NativeKISmartRegisterActivity extends SecuredNativeSmartRegisterAct
 
         try {
             JSONObject locationJSON = new JSONObject(locationJSONString);
-            JSONObject uniqueId = new JSONObject(LoginActivity.generator.uniqueIdController().getUniqueIdJson());
+          //  JSONObject uniqueId = new JSONObject(LoginActivity.generator.uniqueIdController().getUniqueIdJson());
 
             combined = locationJSON;
-            Iterator<String> iter = uniqueId.keys();
+          //  Iterator<String> iter = uniqueId.keys();
 
-            while (iter.hasNext()) {
+           /* while (iter.hasNext()) {
                 String key = iter.next();
                 combined.put(key, uniqueId.get(key));
-            }
+            }*/
 
         } catch (JSONException e) {
             e.printStackTrace();
@@ -218,7 +218,7 @@ public class NativeKISmartRegisterActivity extends SecuredNativeSmartRegisterAct
             context().formSubmissionRouter().handleSubmission(submission, formName);
 
             if(formName.equals("kartu_ibu_registration")){
-                saveuniqueid();
+              //  saveuniqueid();
             }
             //switch to forms list fragment
             switchToBaseFragment(formSubmission); // Unnecessary!! passing on data
@@ -276,16 +276,16 @@ public class NativeKISmartRegisterActivity extends SecuredNativeSmartRegisterAct
 
     }
 
-    public void saveuniqueid() {
+  /*  public void saveuniqueid() {
         try {
             JSONObject uniqueId = new JSONObject(LoginActivity.generator.uniqueIdController().getUniqueIdJson());
             String uniq = uniqueId.getString("unique_id");
-            LoginActivity.generator.uniqueIdController().updateCurrentUniqueId(uniq);
+           // LoginActivity.generator.uniqueIdController().updateCurrentUniqueId(uniq);
 
         } catch (JSONException e) {
             e.printStackTrace();
         }
-    }
+    }*/
 
     public void switchToBaseFragment(final String data){
         final int prevPageIndex = currentPage;
