@@ -103,6 +103,9 @@ android {
             resValue "string", 'uname', '"demo_test"'
             resValue "string", 'pwd', '"Demo@123"'
             buildConfigField "int", "DATABASE_VERSION", '1'
+            buildConfigField "boolean", "SYNC_WAIT", 'false'
+            buildConfigField "boolean", "UNIQUE_ID", 'false'
+
 
         }
     }

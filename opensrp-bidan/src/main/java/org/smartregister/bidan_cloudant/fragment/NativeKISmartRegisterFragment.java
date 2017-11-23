@@ -19,6 +19,7 @@ import com.flurry.android.FlurryAgent;
 
 import org.apache.commons.lang3.StringUtils;
 import org.smartregister.Context;
+import org.smartregister.bidan_cloudant.BuildConfig;
 import org.smartregister.commonregistry.AllCommonsRepository;
 import org.smartregister.commonregistry.CommonPersonObject;
 import org.smartregister.commonregistry.CommonPersonObjectClient;
@@ -179,15 +180,22 @@ public class NativeKISmartRegisterFragment extends SecuredNativeSmartRegisterCur
 
     @Override
     public void startRegistration() {
-        if(Support.ONSYNC) {
-            Toast.makeText(getActivity(), "Data still Synchronizing, please wait", Toast.LENGTH_SHORT).show();
-            return;
+
+        if (BuildConfig.SYNC_WAIT){
+            if(Support.ONSYNC) {
+                Toast.makeText(getActivity(), "Data still Synchronizing, please wait", Toast.LENGTH_SHORT).show();
+                return;
+            }
+
         }
 
         String uniqueIdJson = LoginActivity.generator.uniqueIdController().getUniqueIdJson();
-        if (uniqueIdJson == null || uniqueIdJson.isEmpty()) {
-            Toast.makeText(getActivity(), "no unique id", Toast.LENGTH_LONG).show();
-            return;
+
+        if (BuildConfig.UNIQUE_ID){
+            if (uniqueIdJson == null || uniqueIdJson.isEmpty()) {
+                Toast.makeText(getActivity(), "no unique id", Toast.LENGTH_LONG).show();
+                return;
+            }
         }
 
         FragmentTransaction ft = getActivity().getFragmentManager().beginTransaction();
