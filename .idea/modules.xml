@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/opensrp-app/opensrp-app.iml" filepath="$PROJECT_DIR$/opensrp-app/opensrp-app.iml" />
+      <module fileurl="file://$PROJECT_DIR$/opensrp-bidan2/opensrp-bidan2.iml" filepath="$PROJECT_DIR$/opensrp-bidan2/opensrp-bidan2.iml" />
+      <module fileurl="file://$PROJECT_DIR$/opensrp-client-core.iml" filepath="$PROJECT_DIR$/opensrp-client-core.iml" />
+      <module fileurl="file://$PROJECT_DIR$/opensrp-path/opensrp-path.iml" filepath="$PROJECT_DIR$/opensrp-path/opensrp-path.iml" />
+    </modules>
+  </component>
+</project>

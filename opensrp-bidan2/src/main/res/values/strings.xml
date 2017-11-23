@@ -1,0 +1,16 @@
+<resources>
+    <string name="app_name">opensrp-bidan-2</string>
+    <string name="action_settings">Settings</string>
+    <string name="unauthorized">Please Check the credentials</string>
+    <string name="unauthorized_group">Your user group is not allowed to access this device</string>
+    <string name="no_internet_connectivity">No internet connection. Please ensure data connectivity</string>
+    <string name="unknown_response">Login failed. Try later</string>
+    <string name="cohort_mother">Mother Cohort</string>
+    <string name="cohort_fp">FP Cohort</string>
+    <string name="cohort_child">Child Cohort</string>
+    <string name="anc">ANC</string>
+    <string name="pnc">PNC</string>
+    <string name="register">REGISTER</string>
+    <string name="bidan_logo_desc">Bidan logo description</string>
+
+</resources>
