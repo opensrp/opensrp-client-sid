@@ -12,5 +12,6 @@
     <string name="pnc">PNC</string>
     <string name="register">REGISTER</string>
     <string name="bidan_logo_desc">Bidan logo description</string>
+    <string name="ec_register_button_description">EC Register Button Description</string>
 
 </resources>
