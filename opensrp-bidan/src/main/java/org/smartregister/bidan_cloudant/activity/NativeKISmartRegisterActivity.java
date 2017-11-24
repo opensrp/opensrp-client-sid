@@ -235,6 +235,7 @@ public class NativeKISmartRegisterActivity extends SecuredNativeSmartRegisterAct
                     displayFormFragment.setFormData(data);
                     displayFormFragment.setRecordId(entityId);
                     displayFormFragment.setFieldOverides(metaData);
+                    displayFormFragment.setListener(this);
                 }
 
             }
