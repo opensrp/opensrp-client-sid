@@ -128,12 +128,14 @@ public class NativeKBSmartRegisterActivity extends SecuredNativeSmartRegisterAct
             }
         });
 
+        if (BuildConfig.UNIQUE_ID){
+            if(LoginActivity.generator.uniqueIdController().needToRefillUniqueId(LoginActivity.generator.UNIQUE_ID_LIMIT)) {
+                String toastMessage =   "need to refill unique id, its only "+
+                        LoginActivity.generator.uniqueIdController().countRemainingUniqueId()+
+                        " remaining";
+                Toast.makeText(context().applicationContext(), toastMessage, Toast.LENGTH_LONG).show();
+            }
 
-        if(LoginActivity.generator.uniqueIdController().needToRefillUniqueId(LoginActivity.generator.UNIQUE_ID_LIMIT)) {
-            String toastMessage =   "need to refill unique id, its only "+
-                                    LoginActivity.generator.uniqueIdController().countRemainingUniqueId()+
-                                    " remaining";
-            Toast.makeText(context().applicationContext(), toastMessage, Toast.LENGTH_LONG).show();
         }
 
         ziggyService = context().ziggyService();

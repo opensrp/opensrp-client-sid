@@ -189,9 +189,9 @@ public class NativeKISmartRegisterFragment extends SecuredNativeSmartRegisterCur
 
         }
 
-        String uniqueIdJson = LoginActivity.generator.uniqueIdController().getUniqueIdJson();
 
         if (BuildConfig.UNIQUE_ID){
+            String uniqueIdJson = LoginActivity.generator.uniqueIdController().getUniqueIdJson();
             if (uniqueIdJson == null || uniqueIdJson.isEmpty()) {
                 Toast.makeText(getActivity(), "no unique id", Toast.LENGTH_LONG).show();
                 return;
