@@ -56,20 +56,17 @@ public class AnakRegisterClientsProvider implements SmartRegisterCLientsProvider
 
     AlertService alertService;
 
-    public AnakRegisterClientsProvider(Context context,
-                                       View.OnClickListener onClickListener,
+    public AnakRegisterClientsProvider(Context context, View.OnClickListener onClickListener,
                                        AlertService alertService) {
+
         this.onClickListener = onClickListener;
-//        this.controller = controller;
         this.context = context;
         this.alertService = alertService;
         this.inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 
-        clientViewLayoutParams = new AbsListView.LayoutParams(MATCH_PARENT,
-                (int) context.getResources().getDimension(org.smartregister.R.dimen.list_item_height));
+        clientViewLayoutParams = new AbsListView.LayoutParams(MATCH_PARENT, (int) context.getResources().getDimension(org.smartregister.R.dimen.list_item_height));
         txtColorBlack = context.getResources().getColor(org.smartregister.R.color.text_black);
-        mImageLoader = BidanApplication.getInstance().getCachedImageLoaderInstance();
-
+        mImageLoader = DrishtiApplication.getCachedImageLoaderInstance();
 
     }
 
@@ -90,8 +87,6 @@ public class AnakRegisterClientsProvider implements SmartRegisterCLientsProvider
             viewHolder.mother_name = (TextView) convertView.findViewById(R.id.mother_name);
             viewHolder.village_name = (TextView) convertView.findViewById(R.id.txt_village_name);
             viewHolder.childs_age = (TextView) convertView.findViewById(R.id.child_age);
-            // viewHolder.no_ibu = (TextView) convertView.findViewById(R.id.txt_ibu_ki_no);
-            // viewHolder.unique_id = (TextView)convertView.findViewById(R.id.unique_id);
 
             viewHolder.hp_badge = (ImageView) convertView.findViewById(R.id.img_hr_badge);
 
@@ -155,21 +150,6 @@ public class AnakRegisterClientsProvider implements SmartRegisterCLientsProvider
 
         //start profile image
         viewHolder.profilepic.setTag(R.id.entity_id, pc.getCaseId());//required when saving file to disk
-
-//        Log.e(TAG, "getView: " + pc.getDetails().toString());
-//        if (pc.getCaseId() != null) {//image already in local storage most likey ):
-        //set profile image by passing the client id.If the image doesn't exist in the image repository then download and save locally
-//            if (pc.getDetails().get("gender") != null) {
-//                DrishtiApplication.getCachedImageLoaderInstance().getImageByClientId(pc.getCaseId(),
-//                        OpenSRPImageLoader.getStaticImageListener(
-//                                viewHolder.profilepic,
-//                                pc.getDetails().get("gender").equals("female") ? R.drawable.child_girl_infant : R.drawable.child_boy_infant,
-//                                0)
-//                );
-//            } else {
-//                Log.e(TAG, "getView: Gender is NOT SET");
-//            }
-//        }
 
         if (pc.getDetails().get("gender") != null) {
             KIDetailActivity.setImagetoHolderFromUri((Activity) context,
@@ -304,14 +284,13 @@ public class AnakRegisterClientsProvider implements SmartRegisterCLientsProvider
 
     class ViewHolder {
 
-        TextView village_name, tanggal_kunjungan_anc, childs_age, mother_name, childs_name, anak_register_dob;
-        TextView tempat_lahir, berat_lahir, tipe_lahir, berat_badan, tinggi, status_gizi;
-
         LinearLayout profilelayout;
         ImageButton follow_up;
 
-        ImageView hp_badge, hb0_no, hb0_yes, pol1_no, pol1_yes, pol2_no, pol2_yes, pol3_no, pol3_yes;
-        ImageView pol4_no, pol4_yes, vitk_no, vitk_yes, campak_no, campak_yes, ivp_no, ivp_yes, profilepic;
+        TextView village_name, tanggal_kunjungan_anc, childs_age, mother_name, childs_name,
+                anak_register_dob, tempat_lahir, berat_lahir, tipe_lahir, berat_badan, tinggi, status_gizi;
+        ImageView hp_badge, hb0_no, hb0_yes, pol1_no, pol1_yes, pol2_no, pol2_yes, pol3_no, pol3_yes,
+                pol4_no, pol4_yes, vitk_no, vitk_yes, campak_no, campak_yes, ivp_no, ivp_yes, profilepic;
     }
 
 

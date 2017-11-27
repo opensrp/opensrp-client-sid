@@ -236,19 +236,19 @@ public class NativeKIANCSmartRegisterFragment extends SecuredNativeSmartRegister
         clientsView.setAdapter(clientAdapter);
 
         setTablename("ec_ibu");
-        SmartRegisterQueryBuilder countqueryBUilder = new SmartRegisterQueryBuilder();
-        countqueryBUilder.SelectInitiateMainTableCounts("ec_ibu");
-     //   countqueryBUilder.customJoin("LEFT JOIN kartu_ibu ON ibu.id = kartu_ibu.id");
+        SmartRegisterQueryBuilder countqueryBuilder = new SmartRegisterQueryBuilder();
+        countqueryBuilder.SelectInitiateMainTableCounts("ec_ibu");
+     //   countqueryBuilder.customJoin("LEFT JOIN kartu_ibu ON ibu.id = kartu_ibu.id");
         mainCondition = " isClosed !=0 and pptest = 'Positive'";
              joinTable = "";
-             countSelect = countqueryBUilder.mainCondition(mainCondition);
+             countSelect = countqueryBuilder.mainCondition(mainCondition);
              super.CountExecute();
 
 
-        SmartRegisterQueryBuilder queryBUilder = new SmartRegisterQueryBuilder();
-        queryBUilder.SelectInitiateMainTable("ec_ibu", new String[]{"ec_ibu.isClosed", "ec_ibu.details", "ec_ibu.ancDate", "ec_ibu.ancKe","ec_ibu.namalengkap","ec_ibu.namaSuami"});
-         //    countqueryBUilder.customJoin("LEFT JOIN kartu_ibu ON ibu.id = kartu_ibu.id");
-             mainSelect = queryBUilder.mainCondition(mainCondition);
+        SmartRegisterQueryBuilder queryBuilder = new SmartRegisterQueryBuilder();
+        queryBuilder.SelectInitiateMainTable("ec_ibu", new String[]{"ec_ibu.isClosed", "ec_ibu.details", "ec_ibu.ancDate", "ec_ibu.ancKe","ec_ibu.namalengkap","ec_ibu.namaSuami"});
+         //    countqueryBuilder.customJoin("LEFT JOIN kartu_ibu ON ibu.id = kartu_ibu.id");
+             mainSelect = queryBuilder.mainCondition(mainCondition);
      //   Sortqueries = KiSortByNameAZ();
 
 
@@ -274,9 +274,9 @@ public class NativeKIANCSmartRegisterFragment extends SecuredNativeSmartRegister
             clientsView.setAdapter(clientAdapter);
 
             setTablename("ec_ibu");
-            SmartRegisterQueryBuilder countqueryBUilder = new SmartRegisterQueryBuilder();
-            countqueryBUilder.SelectInitiateMainTableCounts("ec_ibu");
-            countqueryBUilder.customJoin("LEFT JOIN ec_kartu_ibu on ec_kartu_ibu.id = ec_ibu.id");
+            SmartRegisterQueryBuilder countqueryBuilder = new SmartRegisterQueryBuilder();
+            countqueryBuilder.SelectInitiateMainTableCounts("ec_ibu");
+            countqueryBuilder.customJoin("LEFT JOIN ec_kartu_ibu on ec_kartu_ibu.id = ec_ibu.id");
 
             if (s == null || Objects.equals(s, "!")) {
                 mainCondition = "is_closed = 0";
@@ -288,13 +288,13 @@ public class NativeKIANCSmartRegisterFragment extends SecuredNativeSmartRegister
 
 //            mainCondition = " is_closed = 0 ";
             joinTable = "";
-            countSelect = countqueryBUilder.mainCondition(mainCondition);
+            countSelect = countqueryBuilder.mainCondition(mainCondition);
             super.CountExecute();
 
-            SmartRegisterQueryBuilder queryBUilder = new SmartRegisterQueryBuilder();
-            queryBUilder.SelectInitiateMainTable("ec_ibu", new String[]{"ec_ibu.relationalid","ec_ibu.is_closed", "ec_ibu.details",  "ec_kartu_ibu.namalengkap","ec_kartu_ibu.namaSuami","imagelist.imageid"});
-            queryBUilder.customJoin("LEFT JOIN ec_kartu_ibu on ec_kartu_ibu.id = ec_ibu.id LEFT JOIN ImageList imagelist ON ec_ibu.id=imagelist.entityID");
-            mainSelect = queryBUilder.mainCondition(" ec_kartu_ibu.is_closed = 0");
+            SmartRegisterQueryBuilder queryBuilder = new SmartRegisterQueryBuilder();
+            queryBuilder.SelectInitiateMainTable("ec_ibu", new String[]{"ec_ibu.relationalid","ec_ibu.is_closed", "ec_ibu.details",  "ec_kartu_ibu.namalengkap","ec_kartu_ibu.namaSuami","imagelist.imageid"});
+            queryBuilder.customJoin("LEFT JOIN ec_kartu_ibu on ec_kartu_ibu.id = ec_ibu.id LEFT JOIN ImageList imagelist ON ec_ibu.id=imagelist.entityID");
+            mainSelect = queryBuilder.mainCondition(" ec_kartu_ibu.is_closed = 0");
             Sortqueries = KiSortByNameAZ();
 
             currentlimit = 20;

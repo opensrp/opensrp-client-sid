@@ -232,9 +232,9 @@ public class NativeKBSmartRegisterFragment extends SecuredNativeSmartRegisterCur
             clientsView.setAdapter(clientAdapter);
 
             setTablename("ec_kartu_ibu");
-            SmartRegisterQueryBuilder countqueryBUilder = new SmartRegisterQueryBuilder();
-            countqueryBUilder.SelectInitiateMainTableCounts("ec_kartu_ibu");
-         //   countqueryBUilder.customJoin("LEFT JOIN ec_ibu on ec_kartu_ibu.id = ec_ibu.base_entity_id");
+            SmartRegisterQueryBuilder countqueryBuilder = new SmartRegisterQueryBuilder();
+            countqueryBuilder.SelectInitiateMainTableCounts("ec_kartu_ibu");
+         //   countqueryBuilder.customJoin("LEFT JOIN ec_ibu on ec_kartu_ibu.id = ec_ibu.base_entity_id");
             if (s == null || Objects.equals(s, "!")) {
                 Log.e(TAG, "initializeQueries: "+"Not Initialized" );
                 mainCondition = "is_closed = 0 and jenisKontrasepsi != '0'";
@@ -244,14 +244,14 @@ public class NativeKBSmartRegisterFragment extends SecuredNativeSmartRegisterCur
             }
 
             joinTable = "";
-            countSelect = countqueryBUilder.mainCondition(mainCondition);
+            countSelect = countqueryBuilder.mainCondition(mainCondition);
             super.CountExecute();
 
-            SmartRegisterQueryBuilder queryBUilder = new SmartRegisterQueryBuilder();
-            queryBUilder.SelectInitiateMainTable("ec_kartu_ibu", new String[]{"ec_kartu_ibu.relationalid","ec_kartu_ibu.is_closed", "ec_kartu_ibu.details", "ec_kartu_ibu.isOutOfArea", "namalengkap", "umur", "namaSuami", "imagelist.imageid"});
-            queryBUilder.customJoin("LEFT JOIN ec_ibu on ec_kartu_ibu.id = ec_ibu.base_entity_id LEFT JOIN ImageList imagelist ON ec_ibu.base_entity_id=imagelist.entityID ");
+            SmartRegisterQueryBuilder queryBuilder = new SmartRegisterQueryBuilder();
+            queryBuilder.SelectInitiateMainTable("ec_kartu_ibu", new String[]{"ec_kartu_ibu.relationalid","ec_kartu_ibu.is_closed", "ec_kartu_ibu.details", "ec_kartu_ibu.isOutOfArea", "namalengkap", "umur", "namaSuami", "imagelist.imageid"});
+            queryBuilder.customJoin("LEFT JOIN ec_ibu on ec_kartu_ibu.id = ec_ibu.base_entity_id LEFT JOIN ImageList imagelist ON ec_ibu.base_entity_id=imagelist.entityID ");
 
-            mainSelect = queryBUilder.mainCondition(" ec_kartu_ibu.is_closed = 0 and jenisKontrasepsi != '0'");
+            mainSelect = queryBuilder.mainCondition(" ec_kartu_ibu.is_closed = 0 and jenisKontrasepsi != '0'");
             Sortqueries = KiSortByNameAZ();
 
             currentlimit = 20;
@@ -261,6 +261,7 @@ public class NativeKBSmartRegisterFragment extends SecuredNativeSmartRegisterCur
             CountExecute();
             updateSearchView();
             refresh();
+
         } catch (Exception e){
             e.printStackTrace();
         }

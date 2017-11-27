@@ -14,25 +14,28 @@ import com.flurry.android.FlurryAgent;
 import org.smartregister.bidan_cloudant.BuildConfig;
 import org.smartregister.bidan_cloudant.service.SaveService;
 import org.smartregister.bidan_cloudant.utils.VaksinatorFormUtils;
-import org.smartregister.domain.form.FieldOverrides;
-import org.smartregister.domain.form.FormSubmission;
 import org.smartregister.bidan_cloudant.R;
 import org.smartregister.bidan_cloudant.fragment.NativeKISmartRegisterFragment;
 import org.smartregister.bidan_cloudant.pageradapter.BaseRegisterActivityPagerAdapter;
-import org.smartregister.enketo.listener.DisplayFormListener;
+
+import org.smartregister.domain.form.FieldOverrides;
+import org.smartregister.domain.form.FormSubmission;
 import org.smartregister.provider.SmartRegisterClientsProvider;
 import org.smartregister.service.ZiggyService;
-import org.smartregister.sync.ClientProcessor;
 import org.smartregister.view.activity.SecuredNativeSmartRegisterActivity;
 import org.smartregister.view.dialog.DialogOption;
 import org.smartregister.view.dialog.LocationSelectorDialogFragment;
 import org.smartregister.view.dialog.OpenFormOption;
-import org.smartregister.enketo.view.fragment.DisplayFormFragment;;
 import org.smartregister.view.fragment.SecuredNativeSmartRegisterFragment;
 import org.smartregister.view.viewpager.OpenSRPViewPager;
+import org.smartregister.enketo.view.fragment.DisplayFormFragment;;
+import org.smartregister.enketo.listener.DisplayFormListener;
+
+import org.smartregister.bidan_cloudant.AllConstantsINA;
+import org.smartregister.bidan_cloudant.sync.ClientProcessor;
+
 import org.json.JSONException;
 import org.json.JSONObject;
-import org.smartregister.bidan_cloudant.AllConstantsINA;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -258,6 +261,7 @@ public class NativeKISmartRegisterActivity extends SecuredNativeSmartRegisterAct
             VaksinatorFormUtils formUtils = VaksinatorFormUtils.getInstance(getApplicationContext());
             FormSubmission submission = formUtils.generateFormSubmisionFromXMLString(id, formSubmission, formName, fieldOverrides);
             saveService.saveForm(getParams(submission), submission.instance());
+
             ClientProcessor.getInstance(getApplicationContext()).processClient();
 
             context().formSubmissionService().updateFTSsearch(submission);

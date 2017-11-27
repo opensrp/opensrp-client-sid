@@ -224,19 +224,19 @@ public class NativeKIPNCSmartRegisterFragment extends SecuredNativeSmartRegister
         clientsView.setAdapter(clientAdapter);
 
         setTablename("ibu");
-        SmartRegisterQueryBuilder countqueryBUilder = new SmartRegisterQueryBuilder();
-        countqueryBUilder.SelectInitiateMainTableCounts("ibu");
-        countqueryBUilder.customJoin("LEFT JOIN kartu_ibu ON ibu.kartuIbuId = kartu_ibu.id");
-        countSelect = countqueryBUilder.mainCondition(" ibu.isClosed !='true'  and ibu.type = 'pnc' and ibu.kartuIbuId != ''");
+        SmartRegisterQueryBuilder countqueryBuilder = new SmartRegisterQueryBuilder();
+        countqueryBuilder.SelectInitiateMainTableCounts("ibu");
+        countqueryBuilder.customJoin("LEFT JOIN kartu_ibu ON ibu.kartuIbuId = kartu_ibu.id");
+        countSelect = countqueryBuilder.mainCondition(" ibu.isClosed !='true'  and ibu.type = 'pnc' and ibu.kartuIbuId != ''");
         mainCondition = " isClosed !='true'  and type = 'pnc' and kartuIbuId != '' ";
         super.CountExecute();
 
-        SmartRegisterQueryBuilder queryBUilder = new SmartRegisterQueryBuilder();
-        queryBUilder.SelectInitiateMainTable("ibu", new String[]{"ibu.isClosed", "ibu.details", "ibu.hariKeKF","kartu_ibu.namalengkap","kartu_ibu.umur","kartu_ibu.namaSuami"});
+        SmartRegisterQueryBuilder queryBuilder = new SmartRegisterQueryBuilder();
+        queryBuilder.SelectInitiateMainTable("ibu", new String[]{"ibu.isClosed", "ibu.details", "ibu.hariKeKF","kartu_ibu.namalengkap","kartu_ibu.umur","kartu_ibu.namaSuami"});
 
-        queryBUilder.customJoin("LEFT JOIN kartu_ibu ON ibu.kartuIbuId = kartu_ibu.id");
-      //  queryBUilder.joinwithIbus("ibu");
-        mainSelect = queryBUilder.mainCondition(" ibu.isClosed !='true' and ibu.type = 'pnc' and ibu.kartuIbuId != ''");
+        queryBuilder.customJoin("LEFT JOIN kartu_ibu ON ibu.kartuIbuId = kartu_ibu.id");
+      //  queryBuilder.joinwithIbus("ibu");
+        mainSelect = queryBuilder.mainCondition(" ibu.isClosed !='true' and ibu.type = 'pnc' and ibu.kartuIbuId != ''");
         //   Sortqueries = KiSortByNameAZ();
 
         currentlimit = 20;
@@ -257,9 +257,9 @@ public class NativeKIPNCSmartRegisterFragment extends SecuredNativeSmartRegister
             clientsView.setAdapter(clientAdapter);
 
             setTablename("ec_pnc");
-            SmartRegisterQueryBuilder countqueryBUilder = new SmartRegisterQueryBuilder();
-            countqueryBUilder.SelectInitiateMainTableCounts("ec_pnc");
-            countqueryBUilder.customJoin("LEFT JOIN ec_kartu_ibu on ec_kartu_ibu.id = ec_pnc.id");
+            SmartRegisterQueryBuilder countqueryBuilder = new SmartRegisterQueryBuilder();
+            countqueryBuilder.SelectInitiateMainTableCounts("ec_pnc");
+            countqueryBuilder.customJoin("LEFT JOIN ec_kartu_ibu on ec_kartu_ibu.id = ec_pnc.id");
 
             if (s == null || Objects.equals(s, "!")) {
                 mainCondition = "is_closed = 0 AND (keadaanIbu ='hidup' OR keadaanIbu IS NULL) ";
@@ -270,13 +270,13 @@ public class NativeKIPNCSmartRegisterFragment extends SecuredNativeSmartRegister
             }
 
             joinTable = "";
-            countSelect = countqueryBUilder.mainCondition(mainCondition);
+            countSelect = countqueryBuilder.mainCondition(mainCondition);
             super.CountExecute();
 
-            SmartRegisterQueryBuilder queryBUilder = new SmartRegisterQueryBuilder();
-            queryBUilder.SelectInitiateMainTable("ec_pnc", new String[]{"ec_pnc.relationalid", "ec_pnc.details",  "ec_kartu_ibu.namalengkap","ec_kartu_ibu.namaSuami","imagelist.imageid"});
-            queryBUilder.customJoin("LEFT JOIN ec_kartu_ibu on ec_kartu_ibu.id = ec_pnc.id LEFT JOIN ImageList imagelist ON ec_pnc.id=imagelist.entityID");
-            mainSelect = queryBUilder.mainCondition("ec_kartu_ibu.is_closed = 0 and (keadaanIbu ='hidup' OR keadaanIbu IS NULL) ");
+            SmartRegisterQueryBuilder queryBuilder = new SmartRegisterQueryBuilder();
+            queryBuilder.SelectInitiateMainTable("ec_pnc", new String[]{"ec_pnc.relationalid", "ec_pnc.details",  "ec_kartu_ibu.namalengkap","ec_kartu_ibu.namaSuami","imagelist.imageid"});
+            queryBuilder.customJoin("LEFT JOIN ec_kartu_ibu on ec_kartu_ibu.id = ec_pnc.id LEFT JOIN ImageList imagelist ON ec_pnc.id=imagelist.entityID");
+            mainSelect = queryBuilder.mainCondition("ec_kartu_ibu.is_closed = 0 and (keadaanIbu ='hidup' OR keadaanIbu IS NULL) ");
 
             Sortqueries = KiSortByNameAZ();
 

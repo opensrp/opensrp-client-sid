@@ -15,11 +15,14 @@ import android.widget.EditText;
 import com.flurry.android.FlurryAgent;
 
 import org.smartregister.Context;
+import org.smartregister.bidan_cloudant.provider.ChildClientsProvider;
+import org.smartregister.commonregistry.CommonObjectDateSort;
 import org.smartregister.commonregistry.CommonPersonObjectClient;
 import org.smartregister.commonregistry.CommonPersonObjectController;
 import org.smartregister.commonregistry.CommonRepository;
 import org.smartregister.cursoradapter.CursorCommonObjectFilterOption;
 import org.smartregister.cursoradapter.CursorCommonObjectSort;
+import org.smartregister.cursoradapter.CursorSortOption;
 import org.smartregister.cursoradapter.SecuredNativeSmartRegisterCursorAdapterFragment;
 import org.smartregister.cursoradapter.SmartRegisterPaginatedCursorAdapter;
 import org.smartregister.cursoradapter.SmartRegisterQueryBuilder;
@@ -86,16 +89,11 @@ public class NativeKIAnakSmartRegisterFragment extends SecuredNativeSmartRegiste
 
     @Override
     protected void onCreation() {
-        //
     }
-
-//    @Override
-//    protected SmartRegisterPaginatedAdapter adapter() {
-//        return new SmartRegisterPaginatedAdapter(clientsProvider());
-//    }
 
     @Override
     protected SecuredNativeSmartRegisterActivity.DefaultOptionsProvider getDefaultOptionsProvider() {
+
         return new SecuredNativeSmartRegisterActivity.DefaultOptionsProvider() {
 
             @Override
@@ -110,7 +108,9 @@ public class NativeKIAnakSmartRegisterFragment extends SecuredNativeSmartRegiste
 
             @Override
             public SortOption sortOption() {
-                return new NameSort();
+                return
+                        new CursorCommonObjectSort(getResources().getString(R.string.sort_by_name_label), AnakNameShort());
+
 
             }
 
@@ -131,8 +131,6 @@ public class NativeKIAnakSmartRegisterFragment extends SecuredNativeSmartRegiste
                 ArrayList<DialogOption> dialogOptionslist = new ArrayList<DialogOption>();
 
                 dialogOptionslist.add(new CursorCommonObjectFilterOption(getString(R.string.filter_by_all_label), filterStringForAll()));
-                //     dialogOptionslist.add(new CursorCommonObjectFilterOption(getString(R.string.hh_no_mwra),filterStringForNoElco()));
-                //      dialogOptionslist.add(new CursorCommonObjectFilterOption(getString(R.string.hh_has_mwra),filterStringForOneOrMoreElco()));
 
                 String locationjson = context().anmLocationController().get();
                 LocationTree locationTree = EntityUtils.fromJson(locationjson, LocationTree.class);
@@ -204,7 +202,6 @@ public class NativeKIAnakSmartRegisterFragment extends SecuredNativeSmartRegiste
         view.findViewById(R.id.service_mode_selection).setVisibility(View.GONE);
         clientsView.setVisibility(View.VISIBLE);
         clientsProgressView.setVisibility(View.INVISIBLE);
-//        list.setBackgroundColor(Color.RED);
         initializeQueries(getCriteria());
     }
 
@@ -222,49 +219,124 @@ public class NativeKIAnakSmartRegisterFragment extends SecuredNativeSmartRegiste
                 "Else alerts.status END ASC";
     }
 
-    @TargetApi(Build.VERSION_CODES.KITKAT)
-    public void initializeQueries(String s) {
+    public void initializeQueries(String s){
+        String tableName = "ec_anak";
+        //  String parentTableName = PathConstants.MOTHER_TABLE_NAME;
 
-        AnakRegisterClientsProvider anakscp = new AnakRegisterClientsProvider(getActivity(), clientActionHandler, context().alertService());
-        clientAdapter = new SmartRegisterPaginatedCursorAdapter(getActivity(), null, anakscp, new CommonRepository("ec_anak", new String[]{"namaBayi", "tanggalLahirAnak", "ec_anak.is_closed"}));
+        ChildClientsProvider hhscp = new ChildClientsProvider(getActivity(),
+                clientActionHandler, context().alertService(), context().commonrepository(tableName));
+        clientAdapter = new SmartRegisterPaginatedCursorAdapter(getActivity(), null, hhscp, context().commonrepository(tableName));
         clientsView.setAdapter(clientAdapter);
 
-        setTablename("ec_anak");
+        setTablename(tableName);
         SmartRegisterQueryBuilder countqueryBUilder = new SmartRegisterQueryBuilder();
-        countqueryBUilder.SelectInitiateMainTableCounts("ec_anak");
-        countqueryBUilder.customJoin("LEFT JOIN ec_kartu_ibu ON ec_kartu_ibu.id = ec_anak.relational_id");
+        countqueryBUilder.SelectInitiateMainTableCounts(tableName);
 
-        if (s == null || Objects.equals(s, "!")) {
-            Log.e(TAG, "initializeQueries: "+"Not Initialized" );
-            mainCondition = " is_closed = 0  and relational_id != ''";
-        } else {
-            Log.e(TAG, "initializeQueries: " + s);
-            mainCondition = "is_closed = 0 AND relational_id !='' AND object_id LIKE '%" + s + "%'";
-        }
-
-
+        // mainCondition = "is_closed = 0 AND relational_id !='' AND object_id LIKE '%" + s + "%'";
+        mainCondition = "is_closed = 0";
         countSelect = countqueryBUilder.mainCondition(mainCondition);
         super.CountExecute();
 
-        SmartRegisterQueryBuilder queryBUilder = new SmartRegisterQueryBuilder();
-        queryBUilder.SelectInitiateMainTable("ec_anak", new String[]{"ec_anak.is_closed", "ec_anak.details", "namaBayi", "tanggalLahirAnak", "imagelist.imageid"});
-        queryBUilder.customJoin("LEFT JOIN ec_ibu ON ec_ibu.id =  ec_anak.relational_id LEFT JOIN ImageList imagelist ON ec_anak.id=imagelist.entityID");
-        mainSelect = queryBUilder.mainCondition("ec_anak.is_closed = 0  and relational_id != ''");
-        Sortqueries = AnakNameShort();
+        SmartRegisterQueryBuilder queryBuilder = new SmartRegisterQueryBuilder();
+        queryBuilder.SelectInitiateMainTable(tableName, new String[]{
+                tableName + ".is_closed",
+                tableName + ".details",
+                tableName + ".tanggalLahirAnak",
+                tableName + ".namaBayi",
+        });
+
+//        queryBuilder.SelectInitiateMainTable(tableName, new String[]{
+//                        tableName + ".relationalid",
+//                        tableName + ".details",
+//                        tableName + ".is_closed",
+//                        tableName + ".relational_id",
+//                        tableName + ".details",
+//                        tableName + ".tanggalLahirAnak",
+//                        tableName + ".namaBayi",
+//                });
+
+//        queryBuilder.customJoin("LEFT JOIN ec_ibu ON ec_ibu.id = ec_anak.relational_id LEFT JOIN ImageList imagelist ON ec_anak.id=imagelist.entityID");
+        queryBuilder.customJoin("LEFT JOIN ec_ibu ON ec_ibu.id = ec_anak.relational_id");
+//        queryBuilder.customJoin("");
+
+//        mainSelect = queryBuilder.mainCondition(mainCondition);
+        mainSelect = queryBuilder.mainCondition("ec_anak.is_closed = 0 and relational_id != ''");
+
+//        Sortqueries = AnakNameShort();
+//        Sortqueries = ((CursorSortOption) getDefaultOptionsProvider().sortOption()).sort();
 
         currentlimit = 20;
         currentoffset = 0;
 
         super.filterandSortInInitializeQueries();
         CountExecute();
-//        setServiceModeViewDrawableRight(null);
+
         updateSearchView();
         refresh();
-//        checkforNidMissing(view);
     }
 
+    @TargetApi(Build.VERSION_CODES.KITKAT)
+//    public void initializeQueries(String s) {
+//
+////        AnakRegisterClientsProvider anakscp =
+//        ChildClientsProvider anakscp =
+//                new ChildClientsProvider(getActivity(), clientActionHandler, context().alertService(), context().commonrepository("ec_anak"));
+//
+//        clientAdapter = new SmartRegisterPaginatedCursorAdapter(
+//                getActivity(),
+//                null,
+//                anakscp,
+//                new CommonRepository(
+//                        "ec_anak",
+//                        new String[]{"namaBayi", "tanggalLahirAnak", "ec_anak.is_closed"})
+//        );
+//
+//        clientsView.setAdapter(clientAdapter);
+//
+//        setTablename("ec_anak");
+//        SmartRegisterQueryBuilder countqueryBuilder = new SmartRegisterQueryBuilder();
+//        countqueryBuilder.SelectInitiateMainTableCounts("ec_anak");
+//        countqueryBuilder.customJoin("LEFT JOIN ec_kartu_ibu ON ec_kartu_ibu.id = ec_anak.relational_id");
+//
+//        if (s == null || Objects.equals(s, "!")) {
+//            Log.e(TAG, "initializeQueries: "+"Not Initialized" );
+//            mainCondition = "is_closed = 0  and relational_id != ''";
+//        } else {
+//            Log.e(TAG, "initializeQueries: " + s);
+//            mainCondition = "is_closed = 0 AND relational_id !='' AND object_id LIKE '%" + s + "%'";
+//        }
+//
+//        countSelect = countqueryBuilder.mainCondition(mainCondition);
+//        super.CountExecute();
+//
+//        SmartRegisterQueryBuilder queryBuilder = new SmartRegisterQueryBuilder();
+//        queryBuilder.SelectInitiateMainTable("ec_anak",
+//                new String[]{
+//                        "ec_anak.is_closed",
+//                        "ec_anak.details",
+//                        "namaBayi",
+//                        "tanggalLahirAnak",
+//                        "imagelist.imageid"
+//        });
+//
+//        queryBuilder.customJoin("LEFT JOIN ec_ibu ON ec_ibu.id = ec_anak.relational_id LEFT JOIN ImageList imagelist ON ec_anak.id=imagelist.entityID");
+//        mainSelect = queryBuilder.mainCondition("ec_anak.is_closed = 0  and relational_id != ''");
+//        Sortqueries = AnakNameShort();
+//
+//        currentlimit = 20;
+//        currentoffset = 0;
+//
+//        super.filterandSortInInitializeQueries();
+//        CountExecute();
+////        setServiceModeViewDrawableRight(null);
+//        updateSearchView();
+//        refresh();
+////        checkforNidMissing(view);
+//    }
+//
 
     @Override
+
     public void startRegistration() {
         //     FragmentTransaction ft = getActivity().getFragmentManager().beginTransaction();
         //     Fragment prev = getActivity().getFragmentManager().findFragmentByTag(locationDialogTAG);
@@ -302,11 +374,11 @@ public class NativeKIAnakSmartRegisterFragment extends SecuredNativeSmartRegiste
 
 
     private String AnakNameShort() {
-        return " namaBayi ASC";
+        return "namaBayi ASC";
     }
 
     private String AnakNameShortR() {
-        return " namaBayi DESC";
+        return "namaBayi DESC";
     }
 
     private class EditDialogOptionModel implements DialogOptionModel {
@@ -348,10 +420,9 @@ public class NativeKIAnakSmartRegisterFragment extends SecuredNativeSmartRegiste
             @Override
             public void onTextChanged(final CharSequence cs, int start, int before, int count) {
 
-
                 filters = cs.toString();
                 joinTable = "";
-                mainCondition = " is_closed = 0 and relational_id != '' ";
+                mainCondition = "is_closed = 0 and relational_id != '' ";
 
                 getSearchCancelView().setVisibility(isEmpty(cs) ? INVISIBLE : VISIBLE);
                 CountExecute();
