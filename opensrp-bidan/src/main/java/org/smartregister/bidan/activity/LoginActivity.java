@@ -1,4 +1,4 @@
-package org.smartregister.vaksinator.activity;
+package org.smartregister.bidan.activity;
 
 import android.app.Activity;
 import android.app.AlertDialog;
@@ -10,7 +10,10 @@ import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.content.res.Resources;
 import android.os.Bundle;
+import android.support.design.widget.FloatingActionButton;
+import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 import android.text.InputType;
 import android.util.DisplayMetrics;
 import android.view.KeyEvent;
@@ -27,30 +30,21 @@ import android.widget.TextView;
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.smartregister.Context;
-import org.smartregister.vaksinator.R;
-import org.smartregister.vaksinator.application.VaksinatorApplication;
-import org.smartregister.vaksinator.utils.Config;
+import org.smartregister.bidan.R;
+import org.smartregister.bidan.application.BidanApplication;
 import org.smartregister.domain.LoginResponse;
-import org.smartregister.domain.Response;
-import org.smartregister.domain.ResponseStatus;
 import org.smartregister.event.Listener;
-//import org.smartregister.vaksinator.lib.ErrorReportingFacade;
 import org.smartregister.repository.AllSharedPreferences;
-import org.smartregister.vaksinator.sync.DrishtiSyncScheduler;
-import org.smartregister.util.Log;
+import org.smartregister.sync.DrishtiSyncScheduler;
 import org.smartregister.view.BackgroundAction;
 import org.smartregister.view.LockingBackgroundTask;
 import org.smartregister.view.ProgressIndicator;
-import org.smartregister.vaksinator.activity.SettingsActivity;
 
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Locale;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipFile;
-
-//import io.fabric.sdk.android.Fabric;
-import util.uniqueIdGenerator.Generator;
 
 import static android.preference.PreferenceManager.getDefaultSharedPreferences;
 import static android.view.inputmethod.InputMethodManager.HIDE_NOT_ALWAYS;
@@ -61,9 +55,11 @@ import static org.smartregister.domain.LoginResponse.UNKNOWN_RESPONSE;
 import static org.smartregister.util.Log.logError;
 import static org.smartregister.util.Log.logVerbose;
 
-public class LoginActivity extends AppCompatActivity {
-    private static final String TAG = LoginActivity.class.getSimpleName();
-    private Context context;
+public class LoginActivity extends Activity {
+
+    private final String TAG = LoginActivity.class.getName();
+
+    private Context context = BidanApplication.getInstance().context();
     private EditText userNameEditText;
     private EditText passwordEditText;
     private ProgressDialog progressDialog;
@@ -76,17 +72,15 @@ public class LoginActivity extends AppCompatActivity {
     public static final String Bengali_LANGUAGE = "Bengali";
     public static final String Bahasa_LANGUAGE = "Bahasa";
 
-    public static Generator generator;
-
     @Override
-    public void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        logVerbose("Initializing ...");
 
+        logVerbose("Initializing ...");
         try{
             AllSharedPreferences allSharedPreferences = new AllSharedPreferences(getDefaultSharedPreferences(this));
             String preferredLocale = allSharedPreferences.fetchLanguagePreference();
-            Resources res = getOpenSRPContext().applicationContext().getResources();
+            Resources res = Context.getInstance().applicationContext().getResources();
             // Change locale settings in the app.
             DisplayMetrics dm = res.getDisplayMetrics();
             android.content.res.Configuration conf = res.getConfiguration();
@@ -95,68 +89,51 @@ public class LoginActivity extends AppCompatActivity {
         }catch(Exception e){
 
         }
-        setContentView(R.layout.login);
-
-        positionViews();
+        setContentView(org.smartregister.R.layout.login);
+        ImageView loginglogo = (ImageView)findViewById(R.id.login_logo);
+        loginglogo.setImageDrawable(getResources().getDrawable(R.drawable.login_logo_bidan));
+        context = Context.getInstance().updateApplicationContext(this.getApplicationContext());
+//        context = BidanApplication.getInstance().context();;
 
         initializeLoginFields();
         initializeBuildDetails();
         setDoneActionHandlerOnPasswordField();
         initializeProgressDialog();
+        getActionBar().setTitle("");
+        getActionBar().setIcon(getResources().getDrawable(R.mipmap.logo));
+        getActionBar().setBackgroundDrawable(getResources().getDrawable(R.color.action_bar_background));
         setLanguage();
 
         debugApp();
-
-    }
-
-    private void debugApp() {
-        Config config = new Config();
-        String uname = "demo_ec", pwd = "Satu2345";
-        try {
-            uname = config.getCredential("uname", getApplicationContext());
-            pwd =  config.getCredential("pwd", getApplicationContext());
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
-        LayoutInflater layoutInflater = getLayoutInflater();
-        View view = layoutInflater.inflate(R.layout.login, null);
-        if (context.userService().hasARegisteredUser()){
-            localLoginWith(uname, pwd);
-            //localLogin(view, uname, pwd);
-        } else {
-            remoteLogin(view, uname, pwd);
-        }
-    }
-
-    private void positionViews() {
-        ImageView loginglogo = (ImageView)findViewById(R.id.login_logo);
-        loginglogo.setImageDrawable(getResources().getDrawable(R.mipmap.opensrp_indonesia_vaccine_logo));
-        context = Context.getInstance().updateApplicationContext(this.getApplicationContext());
-//        getActionBar().setTitle("");
-//        getActionBar().setIcon(getResources().getDrawable(R.mipmap.logo));
-//        getActionBar().setBackgroundDrawable(getResources().getDrawable(R.color.action_bar_background));
-
-    }
-
-    public static Context getOpenSRPContext() {
-        return VaksinatorApplication.getInstance().context();
     }
 
     @Override
-    public boolean onCreateOptionsMenu(Menu menu)
-    {
+    public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        menu.add("Settings");
+        getMenuInflater().inflate(R.menu.menu_main, menu);
         return true;
     }
+
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        if(item.getTitle().toString().equalsIgnoreCase("Settings")){
-            startActivity(new Intent(this, SettingsActivity.class));
+        // Handle action bar item clicks here. The action bar will
+        // automatically handle clicks on the Home/Up button, so long
+        // as you specify a parent activity in AndroidManifest.xml.
+        int id = item.getItemId();
+
+        //noinspection SimplifiableIfStatement
+        if (id == R.id.action_settings) {
             return true;
         }
+
         return super.onOptionsItemSelected(item);
+    }
+
+    private void initializeLoginFields() {
+        userNameEditText = ((EditText) findViewById(org.smartregister.R.id.login_userNameText));
+        userNameEditText.setRawInputType(InputType.TYPE_CLASS_TEXT);
+        passwordEditText = ((EditText) findViewById(org.smartregister.R.id.login_passwordText));
+        passwordEditText.setRawInputType(InputType.TYPE_CLASS_TEXT);
     }
 
     private void initializeBuildDetails() {
@@ -168,15 +145,28 @@ public class LoginActivity extends AppCompatActivity {
         }
     }
 
-    @Override
-    protected void onResume() {
-        super.onResume();
+    private String getVersion() throws PackageManager.NameNotFoundException {
+        PackageInfo packageInfo = getPackageManager().getPackageInfo(getPackageName(), 0);
+        return packageInfo.versionName;
+    }
 
-        if (!context.IsUserLoggedOut()) {
-            goToHome();
-        }
+    private String getBuildDate() throws PackageManager.NameNotFoundException, IOException {
+        ApplicationInfo applicationInfo = getPackageManager().getApplicationInfo(getPackageName(), 0);
+        ZipFile zf = new ZipFile(applicationInfo.sourceDir);
+        ZipEntry ze = zf.getEntry("classes.dex");
+        return new SimpleDateFormat("dd MMM yyyy", Locale.getDefault()).format(new java.util.Date(ze.getTime()));
+    }
 
-        fillUserIfExists();
+    private void setDoneActionHandlerOnPasswordField() {
+        passwordEditText.setOnEditorActionListener(new TextView.OnEditorActionListener() {
+            @Override
+            public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
+                if (actionId == EditorInfo.IME_ACTION_DONE) {
+                    login(findViewById(org.smartregister.R.id.login_loginButton));
+                }
+                return false;
+            }
+        });
     }
 
     public void login(final View view) {
@@ -187,45 +177,18 @@ public class LoginActivity extends AppCompatActivity {
         final String password = passwordEditText.getText().toString();
 
         if (context.userService().hasARegisteredUser()) {
+            android.util.Log.e(TAG, "login: lokal " );
             localLogin(view, userName, password);
         } else {
+            android.util.Log.e(TAG, "login: remote " );
             remoteLogin(view, userName, password);
         }
-    }
-
-    private void initializeLoginFields() {
-        userNameEditText = ((EditText) findViewById(org.smartregister.R.id.login_userNameText));
-        userNameEditText.setRawInputType(InputType.TYPE_CLASS_TEXT);
-        passwordEditText = ((EditText) findViewById(org.smartregister.R.id.login_passwordText));
-        passwordEditText.setRawInputType(InputType.TYPE_CLASS_TEXT);
-    }
-
-    private void setDoneActionHandlerOnPasswordField() {
-        passwordEditText.setOnEditorActionListener(new TextView.OnEditorActionListener() {
-            @Override
-            public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
-                if (actionId == EditorInfo.IME_ACTION_DONE) {
-                    login(findViewById(R.id.login_loginButton));
-                }
-                return false;
-            }
-        });
-    }
-
-    private void initializeProgressDialog() {
-        progressDialog = new ProgressDialog(this);
-        progressDialog.setCancelable(false);
-        progressDialog.setTitle(getString(org.smartregister.R.string.loggin_in_dialog_title));
-        progressDialog.setMessage(getString(org.smartregister.R.string.loggin_in_dialog_message));
     }
 
     private void localLogin(View view, String userName, String password) {
         if (getOpenSRPContext().userService().isUserInValidGroup(userName, password)) {
             localLoginWith(userName, password);
 
-            // Tracking Error
-//            ErrorReportingFacade.setUsername("", userName);
-//            FlurryAgent.setUserId(userName);
         } else {
             showErrorDialog(getString(org.smartregister.R.string.login_failed_dialog_message));
             view.setClickable(true);
@@ -268,6 +231,22 @@ public class LoginActivity extends AppCompatActivity {
         });*/
     }
 
+    private void hideKeyboard() {
+        InputMethodManager inputManager = (InputMethodManager) getSystemService(INPUT_METHOD_SERVICE);
+        inputManager.hideSoftInputFromWindow(getCurrentFocus().getWindowToken(), HIDE_NOT_ALWAYS);
+    }
+
+    public static Context getOpenSRPContext() {
+        return BidanApplication.getInstance().context();
+    }
+
+    private void localLoginWith(String userName, String password) {
+        context.userService().localLogin(userName, password);
+//        LoginActivity.generator = new Generator(context, userName, password);
+        goToHome();
+        DrishtiSyncScheduler.startOnlyIfConnectedToNetwork(getApplicationContext());
+    }
+
     private void showErrorDialog(String message) {
         AlertDialog dialog = new AlertDialog.Builder(this)
                 .setTitle(getString(R.string.login_failed_dialog_title))
@@ -281,38 +260,11 @@ public class LoginActivity extends AppCompatActivity {
         dialog.show();
     }
 
-    private void getLocation() {
-        tryGetLocation(new Listener<Response<String>>() {
-            @Override
-            public void onEvent(Response<String> data) {
-                if (data.status() == ResponseStatus.success) {
-                    context.userService().saveAnmLocation(data.payload());
-                }
-            }
-        });
+    private void goToHome() {
+        startActivity(new Intent(this, BidanHomeActivity.class));
+        finish();
     }
 
-    private void tryGetLocation(final Listener<Response<String>> afterGet) {
-        LockingBackgroundTask task = new LockingBackgroundTask(new ProgressIndicator() {
-            @Override
-            public void setVisible() { }
-
-            @Override
-            public void setInvisible() { Log.logInfo("Successfully get location"); }
-        });
-
-        task.doActionInBackground(new BackgroundAction<Response<String>>() {
-            @Override
-            public Response<String> actionToDoInBackgroundThread() {
-                return context.userService().getLocationInformation();
-            }
-
-            @Override
-            public void postExecuteInUIThread(Response<String> result) {
-                afterGet.onEvent(result);
-            }
-        });
-    }
 
     private void tryRemoteLogin(final String userName, final String password, final Listener<LoginResponse> afterLoginCheck) {
         LockingBackgroundTask task = new LockingBackgroundTask(new ProgressIndicator() {
@@ -338,50 +290,56 @@ public class LoginActivity extends AppCompatActivity {
         });
     }
 
-    private void fillUserIfExists() {
-        if (context.userService().hasARegisteredUser()) {
-            userNameEditText.setText(context.allSharedPreferences().fetchRegisteredANM());
-            userNameEditText.setEnabled(false);
+    private void remoteLoginWith(String userName, String password, String userInfo) {
+        context.userService().remoteLogin(userName, password, userInfo);
+        // LoginActivity.generator = new Generator(context, userName, password);
+        String locationId = getUserDefaultLocationId(userInfo);
+        setDefaultLocationId(userName,locationId);
+        goToHome();
+        DrishtiSyncScheduler.startOnlyIfConnectedToNetwork(getApplicationContext());
+    }
+
+
+    public void setDefaultLocationId(String userName, String locationId) {
+        if (userName != null) {
+            context.userService().getAllSharedPreferences().savePreference(userName + "-locationid", locationId);
         }
     }
 
-    private void hideKeyboard() {
-        InputMethodManager inputManager = (InputMethodManager) getSystemService(INPUT_METHOD_SERVICE);
-        inputManager.hideSoftInputFromWindow(getCurrentFocus().getWindowToken(), HIDE_NOT_ALWAYS);
+    public String getUserDefaultLocationId(String userInfo) {
+        try {
+            JSONObject userLocationJSON = new JSONObject(userInfo);
+            return userLocationJSON.getJSONObject("team").getJSONArray("location").getJSONObject(0).getString("name");
+        } catch (JSONException e) {
+            android.util.Log.v("Error : ", e.getMessage());
+        }
+
+        return null;
     }
 
-    private void localLoginWith(String userName, String password) {
-        context.userService().localLogin(userName, password);
-        LoginActivity.generator = new Generator(context, userName, password);
-        goToHome();
-        //DrishtiSyncScheduler.startOnlyIfConnectedToNetwork(getApplicationContext());
+    private void initializeProgressDialog() {
+        progressDialog = new ProgressDialog(this);
+        progressDialog.setCancelable(false);
+        progressDialog.setTitle(getString(org.smartregister.R.string.loggin_in_dialog_title));
+        progressDialog.setMessage(getString(org.smartregister.R.string.loggin_in_dialog_message));
     }
 
-    private void remoteLoginWith(String userName, String password, String userInfo) {
-        context.userService().remoteLogin(userName, password, userInfo);
-        String locationId = getUserDefaultLocationId(userInfo);
-        saveDefaultLocationId(userName,locationId);
-        LoginActivity.generator = new Generator(context, userName, password);
-        goToHome();
-        //DrishtiSyncScheduler.startOnlyIfConnectedToNetwork(getApplicationContext());
+    private void debugApp() {
+        //    String uname = getResources().getString(R.string.uname);
+        //   String pwd = getResources().getString(R.string.pwd);
+        String uname = "demo_ec";
+        String pwd = "Satu2345";
+
+        LayoutInflater layoutInflater = getLayoutInflater();
+        View view = layoutInflater.inflate(R.layout.login, null);
+
+        if (getOpenSRPContext().userService().hasARegisteredUser()) {
+            localLogin(view, uname, pwd);
+        } else {
+            remoteLogin(view, uname, pwd);
+        }
     }
 
-    private void goToHome() {
-        startActivity(new Intent(this, VaksinatorHomeActivity.class));
-        finish();
-    }
-
-    private String getVersion() throws PackageManager.NameNotFoundException {
-        PackageInfo packageInfo = getPackageManager().getPackageInfo(getPackageName(), 0);
-        return packageInfo.versionName;
-    }
-
-    private String getBuildDate() throws PackageManager.NameNotFoundException, IOException {
-        ApplicationInfo applicationInfo = getPackageManager().getApplicationInfo(getPackageName(), 0);
-        ZipFile zf = new ZipFile(applicationInfo.sourceDir);
-        ZipEntry ze = zf.getEntry("classes.dex");
-        return new SimpleDateFormat("dd MMM yyyy", Locale.getDefault()).format(new java.util.Date(ze.getTime()));
-    }
 
     public static void setLanguage(){
         AllSharedPreferences allSharedPreferences = new AllSharedPreferences(getDefaultSharedPreferences(Context.getInstance().applicationContext()));
@@ -394,6 +352,8 @@ public class LoginActivity extends AppCompatActivity {
         res.updateConfiguration(conf, dm);
 
     }
+
+
     public static String switchLanguagePreference() {
         AllSharedPreferences allSharedPreferences = new AllSharedPreferences(getDefaultSharedPreferences(Context.getInstance().applicationContext()));
 
@@ -419,49 +379,4 @@ public class LoginActivity extends AppCompatActivity {
         }
     }
 
-    public String getUserDefaultLocationId(String userInfo) {
-        try {
-            JSONObject userLocationJSON = new JSONObject(userInfo);
-            return userLocationJSON.getJSONObject("team").getJSONArray("location").getJSONObject(0).getString("name");
-        } catch (JSONException e) {
-            android.util.Log.v("Error : ", e.getMessage());
-        }
-
-        return null;
-    }
-
-    public void saveDefaultLocationId(String userName, String locationId) {
-        if (userName != null) {
-            context.userService().getAllSharedPreferences().savePreference(userName + "-locationid", locationId);
-        }
-    }
-
-    private void tryGetUniqueId(final String username, final String password, final Listener<ResponseStatus> afterGetUniqueId) {
-        LockingBackgroundTask task = new LockingBackgroundTask(new ProgressIndicator() {
-            @Override
-            public void setVisible() {
-                progressDialog.show();
-            }
-            @Override
-            public void setInvisible() {
-                progressDialog.dismiss();
-            }
-        });
-
-        task.doActionInBackground(new BackgroundAction<ResponseStatus>() {
-            @Override
-            public ResponseStatus actionToDoInBackgroundThread() {
-                LoginActivity.generator = new Generator(context,username,password);
-                LoginActivity.generator.uniqueIdService().syncUniqueIdFromServer(username, password);
-                return (LoginActivity.generator.uniqueIdService().getLastUsedId(username, password));
-            }
-
-            @Override
-            public void postExecuteInUIThread(ResponseStatus result) {
-                afterGetUniqueId.onEvent(result);
-            }
-        });
-    }
-
 }
-

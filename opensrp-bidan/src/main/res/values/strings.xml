@@ -652,4 +652,13 @@
     <string name="start_discovery">Start Discovery</string>
     <string name="stop_discovery">Stop Discovery</string>
     <string name="pulse">PULSE</string>
+
+    <string name="vaksinator">CHILD VACCINATION</string>
+    <string name="space">\"</string>
+    <string name="hb1">HB0</string>
+    <string name="polio1">BCG/Pol1</string>
+    <string name="polio2">DPT-HB1/Pol2</string>
+    <string name="polio3">DPT-HB2/Pol3</string>
+    <string name="polio4">DPT-HB3/Pol4</string>
+    <string name="sort_by_child_age_desc">Age 5 to 0 yrs</string>
 </resources>

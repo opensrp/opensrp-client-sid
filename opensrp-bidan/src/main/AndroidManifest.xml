@@ -1,39 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="org.smartregister.bidan_cloudant">
-    <uses-permission android:name="android.permission.BLUETOOTH" />
-    <uses-permission android:name="android.permission.BLUETOOTH_ADMIN" />
-    <uses-permission android:name="android.permission.INTERNET" />
-    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
-    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
-    <uses-permission android:name="android.permission.CHANGE_WIFI_STATE" />
-    <uses-permission android:name="android.permission.RECORD_AUDIO" />
-    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
-    <uses-permission android:name="android.permission.MODIFY_AUDIO_SETTINGS" />
-
-    <uses-permission android:name="android.permission.CAMERA"/>
-    <uses-permission android:name="android.permission.VIBRATE"/>
-    <uses-permission android:name="android.permission.READ_PHONE_STATE"/>
+    package="org.smartregister.bidan">
 
     <application
-        android:name="org.smartregister.bidan_cloudant.application.BidanApplication"
+        android:name="org.smartregister.bidan.application.BidanApplication"
         android:allowBackup="true"
-        android:label="@string/app_name">
-
-        <!-- local key -->
-        <!--
-            <meta-data
-            android:name="io.fabric.ApiKey"
-            android:value="5bda8a6293b5b89b510a53e5d297d42bdf427e10" />
-        -->
-        <!-- sid key -->
-        <meta-data
-            android:name="io.fabric.ApiKey"
-            android:value="b74c58c94d8965151212e8ecf1f4fdfbf5b7f4e4" />
-
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:supportsRtl="true"
+        android:theme="@style/AppTheme">
         <activity
-            android:name="org.smartregister.bidan_cloudant.activity.LoginActivity"
+            android:name="org.smartregister.bidan.activity.LoginActivity"
             android:label="@string/app_name"
             android:screenOrientation="landscape"
             android:theme="@android:style/Theme.Holo"
@@ -44,93 +21,21 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity
-            android:name="org.smartregister.bidan_cloudant.activity.BidanHomeActivity"
+
+        <activity android:name=".activity.BidanHomeActivity"
             android:screenOrientation="landscape"
             android:theme="@style/AppTheme" />
-        <activity
-            android:name="org.smartregister.bidan_cloudant.activity.NativeKISmartRegisterActivity"
-            android:configChanges="keyboardHidden|orientation|screenSize"
-            android:screenOrientation="landscape"
-            android:theme="@style/AppThemeNoActionBarAndTitle"
-            android:windowSoftInputMode="adjustResize" />
-        <activity
-            android:name="org.smartregister.bidan_cloudant.kartu_ibu.KIDetailActivity"
-            android:screenOrientation="landscape"
-            android:theme="@style/AppThemeNoTitle" />
-        <activity
-            android:name="org.smartregister.bidan_cloudant.kb.NativeKBSmartRegisterActivity"
-            android:configChanges="keyboardHidden|orientation|screenSize"
-            android:screenOrientation="landscape"
-            android:theme="@style/AppThemeNoActionBarAndTitle"
-            android:windowSoftInputMode="adjustResize" />
-        <activity
-            android:name="org.smartregister.bidan_cloudant.kb.KBDetailActivity"
-            android:screenOrientation="landscape"
-            android:theme="@style/AppThemeNoTitle" />
-        <activity
-            android:name="org.smartregister.bidan_cloudant.activity.NativeKIANCSmartRegisterActivity"
-            android:configChanges="keyboardHidden|orientation|screenSize"
-            android:screenOrientation="landscape"
-            android:theme="@style/AppThemeNoActionBarAndTitle"
-            android:windowSoftInputMode="adjustResize" />
-        <activity
-            android:name="org.smartregister.bidan_cloudant.activity.ANCDetailActivity"
-            android:screenOrientation="landscape"
-            android:theme="@style/AppThemeNoTitle" />
-        <activity
-            android:name="org.smartregister.bidan_cloudant.pnc.NativeKIPNCSmartRegisterActivity"
-            android:configChanges="keyboardHidden|orientation|screenSize"
-            android:screenOrientation="landscape"
-            android:theme="@style/AppThemeNoActionBarAndTitle"
-            android:windowSoftInputMode="adjustResize" />
-        <activity
-            android:name="org.smartregister.bidan_cloudant.pnc.PNCDetailActivity"
-            android:screenOrientation="landscape"
-            android:theme="@style/AppThemeNoTitle" />
-        <activity
-            android:name="org.smartregister.bidan_cloudant.activity.NativeKIAnakSmartRegisterActivity"
-            android:configChanges="keyboardHidden|orientation|screenSize"
-            android:screenOrientation="landscape"
-            android:theme="@style/AppThemeNoActionBarAndTitle"
-            android:windowSoftInputMode="adjustResize" />
-        <activity
-            android:name="org.smartregister.bidan_cloudant.child.AnakDetailActivity"
-            android:screenOrientation="landscape"
-            android:theme="@style/AppThemeNoTitle" />
-        <activity
-            android:name="org.smartregister.bidan_cloudant.child.ChildDetailActivity"
-            android:screenOrientation="landscape"
-            android:theme="@style/AppThemeNoTitle" />
-        <activity
-            android:name="org.smartregister.bidan_cloudant.child.ChildGrowthChartActivity"
-            android:screenOrientation="landscape"
-            android:theme="@style/AppThemeNoTitle" />
-        <activity
-            android:name="org.smartregister.bidan_cloudant.child.ChildZScoreChartActivity"
-            android:screenOrientation="landscape"
-            android:theme="@style/AppThemeNoTitle" />
 
-        <!--Face Recognition-->
+        <activity android:name=".activity.IbuSmartRegisterActivity"
+            android:configChanges="keyboardHidden|orientation|screenSize"
+            android:screenOrientation="landscape"
+            android:theme="@style/AppThemeNoActionBarAndTitle"
+            android:windowSoftInputMode="adjustResize" />
+        <activity android:name=".activity.NativeKIAnakSmartRegisterActivity" />
         <activity
-            android:name="org.smartregister.bidan_cloudant.face.camera.SmartShutterActivity"
-            android:screenOrientation="portrait"
-            android:noHistory="false" />
-        <activity
-            android:name="org.smartregister.bidan_cloudant.face.camera.ImageConfirmation"
-            android:screenOrientation="portrait"
-            android:label="FaceRecognition Confirmation"
-            android:noHistory="true" />
-        <activity android:name="org.smartregister.bidan_cloudant.face.camera.ClientsList"
-            android:screenOrientation="portrait"
-            />
-        <!-- BPM -->
-        <!--<activity android:name=".face.bpm.BpmMainActivity" />-->
-        <activity android:name="org.smartregister.bidan_cloudant.device.MainBPM" android:label="Blood Pressure Monitor"/>
-        <activity android:name="org.smartregister.bidan_cloudant.device.BP7" android:label="Wireless Blood Pressure Wrist Monitor BP7"/>
-        <activity android:name="org.smartregister.bidan_cloudant.device.BP5" android:label="BP5"/>
-        <activity android:name="org.smartregister.bidan_cloudant.device.TestBPM" />
-
+            android:name="org.smartregister.bidan.activity.AnakDetailActivity"
+            android:screenOrientation="landscape"
+            android:theme="@style/AppThemeNoTitle" />
     </application>
 
 </manifest>
