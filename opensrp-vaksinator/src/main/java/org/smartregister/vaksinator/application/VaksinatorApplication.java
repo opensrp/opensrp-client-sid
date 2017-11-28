@@ -3,6 +3,7 @@ package org.smartregister.vaksinator.application;
 import android.content.Intent;
 import android.content.res.Configuration;
 
+import org.smartregister.vaksinator.sync.DrishtiSyncScheduler;
 import org.smartregister.vaksinator.repository.VaksinatorRepository;
 import org.smartregister.Context;
 import org.smartregister.CoreLibrary;
@@ -10,7 +11,6 @@ import org.smartregister.commonregistry.CommonFtsObject;
 import org.smartregister.vaksinator.activity.LoginActivity;
 import org.smartregister.vaksinator.libs.FlurryFacade;
 import org.smartregister.repository.Repository;
-import org.smartregister.sync.DrishtiSyncScheduler;
 import org.smartregister.view.activity.DrishtiApplication;
 import org.smartregister.view.receiver.SyncBroadcastReceiver;
 
@@ -112,20 +112,26 @@ public class VaksinatorApplication extends DrishtiApplication {
                 getBaseContext().getResources().getDisplayMetrics());
     }
 
-    private static String[] getFtsSearchFields(String tableName){
+    public static String[] getFtsSearchFields(String tableName){
         if(tableName.equals("ec_anak")){
             return new String[]{ "namaBayi","tanggalLahirAnak" };
            // return ftsSearchFields;
+        } else if (tableName.equals("ec_ibu")){
+            return new String[]{ "namalengkap" };
+            // return ftsSearchFields;
         } else if (tableName.equals("ec_kartu_ibu")){
-                return new String[]{ "namalengkap", "namaSuami" };
-           // return ftsSearchFields;
+            return new String[]{ "namalengkap", "namaSuami" };
+            // return ftsSearchFields;
         }
         return null;
     }
 
-    private static String[] getFtsSortFields(String tableName){
+    public static String[] getFtsSortFields(String tableName){
         if(tableName.equals("ec_anak")){
             String[] sortFields = { "namaBayi","tanggalLahirAnak"};
+            return sortFields;
+        } else if(tableName.equals("ec_ibu")){
+            String[] sortFields = { "namalengkap"};
             return sortFields;
         } else if(tableName.equals("ec_kartu_ibu")){
             String[] sortFields = { "namalengkap", "namaSuami"};
@@ -134,9 +140,12 @@ public class VaksinatorApplication extends DrishtiApplication {
         return null;
     }
 
-    private  static String[] getFtsMainConditions(String tableName){
+    public  static String[] getFtsMainConditions(String tableName){
         if(tableName.equals("ec_anak")){
             String[] mainConditions = {"is_closed", "details" , "namaBayi"};
+            return mainConditions;
+        } else if(tableName.equals("ec_ibu")){
+            String[] mainConditions = { "is_closed", "pptest"};
             return mainConditions;
         } else if(tableName.equals("ec_kartu_ibu")){
             String[] mainConditions = { "is_closed", "namalengkap"};
@@ -150,8 +159,8 @@ public class VaksinatorApplication extends DrishtiApplication {
         return ftsTables;
     }*/
 
-    private static String[] getFtsTables() {
-        return new String[]{"ec_anak", "ec_kartu_ibu" };
+    public static String[] getFtsTables() {
+        return new String[]{"ec_anak", "ec_ibu" , "ec_kartu_ibu" };
     }
     public static CommonFtsObject createCommonFtsObject(){
         CommonFtsObject commonFtsObject = new CommonFtsObject(getFtsTables());

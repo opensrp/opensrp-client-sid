@@ -10,7 +10,7 @@ import org.smartregister.domain.ResponseStatus;
 import org.smartregister.vaksinator.activity.LoginActivity;
 import org.smartregister.repository.AllSharedPreferences;
 import org.smartregister.service.HTTPAgent;
-import org.smartregister.sync.AdditionalSyncService;
+import org.smartregister.vaksinator.sync.AdditionalSyncService;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;

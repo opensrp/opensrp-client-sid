@@ -23,7 +23,7 @@ import org.smartregister.domain.SyncStatus;
 import org.smartregister.domain.form.FormSubmission;
 import org.smartregister.domain.form.SubForm;
 import org.smartregister.service.intentservices.ReplicationIntentService;
-import org.smartregister.sync.CloudantDataHandler;
+import org.smartregister.vaksinator.sync.CloudantDataHandler;
 import org.smartregister.util.AssetHandler;
 import org.smartregister.util.Log;
 import org.w3c.dom.Attr;

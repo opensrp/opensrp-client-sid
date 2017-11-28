@@ -36,7 +36,7 @@ import org.smartregister.domain.ResponseStatus;
 import org.smartregister.event.Listener;
 //import org.smartregister.vaksinator.lib.ErrorReportingFacade;
 import org.smartregister.repository.AllSharedPreferences;
-import org.smartregister.sync.DrishtiSyncScheduler;
+import org.smartregister.vaksinator.sync.DrishtiSyncScheduler;
 import org.smartregister.util.Log;
 import org.smartregister.view.BackgroundAction;
 import org.smartregister.view.LockingBackgroundTask;
@@ -105,7 +105,7 @@ public class LoginActivity extends AppCompatActivity {
         initializeProgressDialog();
         setLanguage();
 
-        debugApp();
+//        debugApp();
 
     }
 

@@ -20,12 +20,13 @@ import org.opensrp.api.util.TreeNode;
 import org.smartregister.Context;
 import org.smartregister.commonregistry.CommonPersonObjectController;
 import org.smartregister.cursoradapter.SmartRegisterQueryBuilder;
+import org.smartregister.enketo.view.fragment.DisplayFormFragment;
 import org.smartregister.event.Listener;
 import org.smartregister.service.PendingFormSubmissionService;
-import org.smartregister.sync.SyncAfterFetchListener;
-import org.smartregister.sync.SyncProgressIndicator;
-import org.smartregister.vaksinator.controller.VaksinatorNavigationController;
+import org.smartregister.vaksinator.sync.SyncAfterFetchListener;
+import org.smartregister.vaksinator.sync.SyncProgressIndicator;
 import org.smartregister.vaksinator.R;
+import org.smartregister.vaksinator.controller.VaksinatorNavigationController;
 import org.smartregister.vaksinator.service.FormSubmissionSyncService;
 import org.smartregister.vaksinator.sync.UpdateActionsTask;
 import org.smartregister.vaksinator.utils.AllConstantsINA;
@@ -33,7 +34,6 @@ import org.smartregister.view.activity.SecuredActivity;
 import org.smartregister.view.contract.HomeContext;
 import org.smartregister.view.controller.NativeAfterANMDetailsFetchListener;
 import org.smartregister.view.controller.NativeUpdateANMDetailsTask;
-import org.smartregister.enketo.view.fragment.DisplayFormFragment;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -43,7 +43,6 @@ import java.util.Map;
 import util.formula.Support;
 
 import static android.widget.Toast.LENGTH_SHORT;
-import static com.flurry.android.FlurryAgent.logEvent;
 import static java.lang.String.valueOf;
 import static org.smartregister.event.Event.ACTION_HANDLED;
 import static org.smartregister.event.Event.FORM_SUBMITTED;
@@ -276,6 +275,7 @@ public class VaksinatorHomeActivity extends SecuredActivity {
                 }catch (org.json.JSONException e){
                     anmID = "undefined";
                 }
+
                 Toast.makeText(this, String.format("%s current user = %s",context().getStringResource(R.string.app_name),anmID), LENGTH_SHORT).show();return true;
             default:
                 return super.onOptionsItemSelected(item);
@@ -297,59 +297,6 @@ public class VaksinatorHomeActivity extends SecuredActivity {
 
         Map<String, TreeNode<String, Location>> locationMap =
                 locationTree.getLocationsHierarchy();
-
-
-//        String query  = "INSERT INTO ec_anak VALUES('1','2','xx',0,'asdf','zxxv','',3200,'bayi','2017-02-02')";
-
-//        Cursor x = context().initRepository().getWritableDatabase().rawQuery("SELECT COUNT(*) FROM ec_anak  WHERE ec_anak.id IN ()", null);
-//        x.moveToFirst();
-//        Log.d("testanak", "itung(*): " + x.getCount());
-//        String a ="";
-//        for(String str: x.getColumnNames())
-//            a=a+", "+str;
-//        Log.d("testanak", "getColumnNames: " + a);
-
-
-        String query  = "SELECT name FROM sqlite_master WHERE type='table'";
-        String db = context().initRepository().getWritableDatabase().getPath();
-        Cursor dbs = context().initRepository().getWritableDatabase().rawQuery(query, null);
-        Log.d("testanak", "db: " + db);
-        if (dbs.moveToFirst()){
-            do{
-                String data = dbs.getString(dbs.getColumnIndex("name"));
-                Log.d("testanak", "table name: " + data);
-                Cursor temp = context().initRepository().getWritableDatabase().rawQuery("SELECT * FROM "+data, null);
-                temp.moveToFirst();
-                Log.d("testanak", data+": " + temp.getCount());
-                String output ="";
-                for(String str: temp.getColumnNames())
-                    output=output+", "+str;
-                Log.d("testanak", "getColumnNames: " + output);
-                String output2 ="";
-                if(temp.getCount()>0){
-                    if (temp.moveToFirst()){
-                        do{
-                            for(String d:temp.getColumnNames()){
-                                String value = "";
-                                if(d!=""){
-                                    if(temp.getType(temp.getColumnIndex(d))== temp.FIELD_TYPE_BLOB){
-                                        value = "blob";
-                                    }else{
-                                        value = temp.getString(temp.getColumnIndex(d));
-                                    }
-                                }
-                                output2=output2+", "+value;
-                            }
-                        }while(temp.moveToNext());
-                    }
-                    Log.d("testanak", "getColumnNames: " + output2);
-                }
-
-                temp.close();
-            }while(dbs.moveToNext());
-        }
-        Log.d("testanak", "getCount: " + dbs.getCount());
-        dbs.close();
 
 
 //        Cursor childcountcursor = context().commonrepository("ec_anak").rawCustomQueryForAdapter("SELECT * FROM ec_anak");
