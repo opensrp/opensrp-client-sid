@@ -485,6 +485,7 @@ public class VaksinatorSmartRegisterActivity extends SecuredNativeSmartRegisterA
             DetailsRepository detailsRepository = org.smartregister.Context.getInstance().detailsRepository();
             detailsRepository.updateDetails(pc);
             String ibuCaseId = getValue(pc.getColumnmaps(), "relational_id", true).toLowerCase();
+            Log.d(TAG, "onDialogOptionSelection: "+pc.getDetails());
             JSONObject fieldOverrides = new JSONObject();
             try {
                 fieldOverrides.put("Province", pc.getDetails().get("stateProvince"));
@@ -492,6 +493,7 @@ public class VaksinatorSmartRegisterActivity extends SecuredNativeSmartRegisterA
                 fieldOverrides.put("Sub-district", pc.getDetails().get("address2"));
                 fieldOverrides.put("Village", pc.getDetails().get("cityVillage"));
                 fieldOverrides.put("Sub-village", pc.getDetails().get("address1"));
+                fieldOverrides.put("jenis_kelamin", pc.getDetails().get("gender"));
                 fieldOverrides.put("ibuCaseId", ibuCaseId);
             } catch (JSONException e) {
                 e.printStackTrace();

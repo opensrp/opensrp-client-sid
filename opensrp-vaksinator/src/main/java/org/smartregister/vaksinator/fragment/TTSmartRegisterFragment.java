@@ -3,7 +3,11 @@ package org.smartregister.vaksinator.fragment;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.database.Cursor;
+import android.os.Bundle;
 import android.os.Parcelable;
+import android.support.v4.content.CursorLoader;
+import android.support.v4.content.Loader;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
@@ -22,20 +26,21 @@ import org.smartregister.commonregistry.CommonPersonObjectController;
 import org.smartregister.commonregistry.CommonRepository;
 import org.smartregister.cursoradapter.CursorCommonObjectFilterOption;
 import org.smartregister.cursoradapter.CursorCommonObjectSort;
+import org.smartregister.cursoradapter.CursorFilterOption;
 import org.smartregister.cursoradapter.CursorSortOption;
 import org.smartregister.cursoradapter.SecuredNativeSmartRegisterCursorAdapterFragment;
 import org.smartregister.cursoradapter.SmartRegisterPaginatedCursorAdapter;
-import org.smartregister.cursoradapter.SmartRegisterQueryBuilder;
+import org.smartregister.vaksinator.utils.SmartRegisterQueryBuilder;
 import org.smartregister.provider.SmartRegisterClientsProvider;
 import org.smartregister.util.StringUtil;
 import org.smartregister.vaksinator.activity.LoginActivity;
 import org.smartregister.vaksinator.R;
 //import org.smartregister.vaksinator.face.camera.SmartShutterActivity;
+import org.smartregister.vaksinator.option.TTCommonObjectFilterOption;
 import org.smartregister.vaksinator.option.TTServiceModeOption;
 import org.smartregister.vaksinator.provider.TTSmartClientsProvider;
 import org.smartregister.vaksinator.activity.TTSmartRegisterActivity;
 //import org.smartregister.vaksinator.vaksinator.FlurryFacade;
-import org.smartregister.vaksinator.option.KICommonObjectFilterOption;
 import org.smartregister.view.activity.SecuredNativeSmartRegisterActivity;
 import org.smartregister.view.contract.ECClient;
 import org.smartregister.view.contract.SmartRegisterClient;
@@ -52,6 +57,7 @@ import org.smartregister.view.dialog.ServiceModeOption;
 import org.smartregister.view.dialog.SortOption;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 
 import util.AsyncTask;
@@ -213,8 +219,9 @@ public class TTSmartRegisterFragment extends SecuredNativeSmartRegisterCursorAda
        countqueryBUilder.customJoin("LEFT JOIN ec_kartu_ibu on ec_kartu_ibu.id = ec_ibu.id");
        mainCondition = " is_closed = 0 and pptest ='Positive' ";
 
-       countSelect = countqueryBUilder.mainCondition(mainCondition);
-       super.CountExecute();
+       countSelect = countqueryBUilder.mainCondition(tableName,mainCondition);
+       CountExecute();
+
 
        SmartRegisterQueryBuilder queryBUilder = new SmartRegisterQueryBuilder();
        queryBUilder.SelectInitiateMainTable(tableName, new String[]{
@@ -225,18 +232,137 @@ public class TTSmartRegisterFragment extends SecuredNativeSmartRegisterCursorAda
                "ec_kartu_ibu.namaSuami",
        });
        queryBUilder.customJoin("LEFT JOIN ec_kartu_ibu on ec_kartu_ibu.id = ec_ibu.id");
-       mainSelect = queryBUilder.mainCondition(mainCondition);
+       mainSelect = queryBUilder.mainCondition(tableName,mainCondition);
        Sortqueries = ((CursorSortOption) getDefaultOptionsProvider().sortOption()).sort();
 
        currentlimit = 20;
        currentoffset = 0;
 
-       super.filterandSortInInitializeQueries();
+       filterandSortInInitializeQueries();
 
        updateSearchView();
        refresh();
 
    }
+
+    @Override
+    public void CountExecute() {
+        Cursor c = null;
+
+        try {
+            SmartRegisterQueryBuilder sqb = new SmartRegisterQueryBuilder(countSelect);
+            String query = "";
+            if (isValidFilterForFts(commonRepository())) {
+                String sql = sqb.countQueryFts(tablename, joinTable, mainCondition, filters);
+                List<String> ids = commonRepository().findSearchIds(sql);
+                query = sqb.toStringFts(ids, tablename + "." + CommonRepository.ID_COLUMN);
+                query = sqb.Endquery(query);
+            } else {
+                sqb.addCondition(filters);
+                query = sqb.orderbyCondition(Sortqueries);
+                query = sqb.Endquery(query);
+            }
+
+            Log.i(getClass().getName(), query);
+            c = commonRepository().rawCustomQueryForAdapter(query);
+            c.moveToFirst();
+            totalcount = c.getInt(0);
+            Log.v("total count here", "" + totalcount);
+            currentlimit = 20;
+            currentoffset = 0;
+
+        } catch (Exception e) {
+            Log.e(getClass().getName(), e.toString(), e);
+        } finally {
+            if (c != null) {
+                c.close();
+            }
+        }
+    }
+
+    @Override
+    public void filterandSortInInitializeQueries() {
+        if (isPausedOrRefreshList()) {
+            this.showProgressView();
+            filterandSortExecute();
+        } else {
+            Loader<Cursor> loader = getLoaderManager().getLoader(LOADER_ID);
+            showProgressView();
+            if (loader != null) {
+                filterandSortExecute();
+            } else {
+                getLoaderManager().initLoader(LOADER_ID, null, this);
+            }
+        }
+    }
+
+    private String filterandSortQuery() {
+        SmartRegisterQueryBuilder sqb = new SmartRegisterQueryBuilder(mainSelect);
+
+        String query = "";
+        try {
+            if (isValidFilterForFts(commonRepository())) {
+                String sql = sqb
+                        .searchQueryFts(tablename, joinTable, mainCondition, filters, Sortqueries,
+                                currentlimit, currentoffset);
+                List<String> ids = commonRepository().findSearchIds(sql);
+                query = sqb.toStringFts(ids, tablename + "." + CommonRepository.ID_COLUMN,
+                        Sortqueries);
+                query = sqb.Endquery(query);
+            } else {
+                sqb.addCondition(filters);
+                query = sqb.orderbyCondition(Sortqueries);
+                query = sqb.Endquery(sqb.addlimitandOffset(query, currentlimit, currentoffset));
+
+            }
+        } catch (Exception e) {
+            Log.e(getClass().getName(), e.toString(), e);
+        }
+
+        return query;
+    }
+
+    @Override
+    public Loader<Cursor> onCreateLoader(int id, final Bundle args) {
+        switch (id) {
+            case LOADER_ID:
+                // Returns a new CursorLoader
+                return new CursorLoader(getActivity()) {
+                    @Override
+                    public Cursor loadInBackground() {
+                        String query = filterandSortQuery();
+                        Cursor cursor = commonRepository().rawCustomQueryForAdapter(query);
+                        getActivity().runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+                                hideProgressView();
+                            }
+                        });
+
+                        return cursor;
+                    }
+                };
+            default:
+                // An invalid id was passed in
+                return null;
+        }
+
+    }
+
+    @Override
+    public void onFilterSelection(FilterOption filter) {
+        appliedVillageFilterView.setText(filter.name());
+        filters = ((CursorFilterOption) filter).filter();
+        CountExecute();
+        filterandSortExecute();
+    }
+
+    @Override
+    public void filterandSortExecute() {
+        refresh();
+
+        getLoaderManager().restartLoader(LOADER_ID, null, this);
+    }
 
     @Override
     public void startRegistration() {
@@ -398,7 +524,7 @@ public class TTSmartRegisterFragment extends SecuredNativeSmartRegisterCursorAda
             }else{
                 StringUtil.humanize(entry.getValue().getLabel());
                 String name = StringUtil.humanize(entry.getValue().getLabel());
-                dialogOptionslist.add(new KICommonObjectFilterOption(name,"desa", name));
+                dialogOptionslist.add(new TTCommonObjectFilterOption(name,"desa", name));
 
             }
         }
