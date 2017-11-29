@@ -13,7 +13,6 @@ import android.widget.Toast;
 
 import org.smartregister.Context;
 import org.smartregister.bidan.R;
-//import org.smartregister.bidan.lib.FlurryFacade;
 import org.smartregister.commonregistry.AllCommonsRepository;
 import org.smartregister.commonregistry.CommonPersonObject;
 import org.smartregister.commonregistry.CommonPersonObjectClient;
@@ -25,6 +24,8 @@ import java.util.HashMap;
 
 import static org.smartregister.util.StringUtil.humanize;
 
+//import org.smartregister.bidan.lib.FlurryFacade;
+
 /**
  * Created by Iq on 07/09/16.
  */
@@ -33,10 +34,19 @@ public class AnakDetailActivity extends Activity {
     //image retrieving
     private static final String TAG = AnakDetailActivity.class.getSimpleName();
     public static CommonPersonObjectClient childclient;
-
+    static String entityid;
     private static HashMap<String, String> hash;
     private boolean updateMode = false;
-    static String entityid;
+
+    public static void setImagetoHolderFromUri(Activity activity, String file, ImageView view, int placeholder) {
+        view.setImageDrawable(activity.getResources().getDrawable(placeholder));
+        File externalFile = new File(file);
+        if (externalFile.exists()) {
+            Uri external = Uri.fromFile(externalFile);
+            view.setImageURI(external);
+        }
+
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,19 +57,19 @@ public class AnakDetailActivity extends Activity {
         final ImageView childview = (ImageView)findViewById(R.id.childdetailprofileview);
         //header
 //        TextView today = (TextView) findViewById(R.id.detail_today);
-        
+
         //profile
         TextView nama = (TextView) findViewById(R.id.txt_child_name);
         TextView mother = (TextView) findViewById(R.id.txt_mother_name);
         TextView father = (TextView) findViewById(R.id.txt_father_number);
         TextView dob = (TextView) findViewById(R.id.txt_dob);
-        
+
       //  TextView phone = (TextView) findViewById(R.id.txt_contact_phone_number);
 //        TextView risk1 = (TextView) findViewById(R.id.txt_risk1);
 //        TextView risk2 = (TextView) findViewById(R.id.txt_risk2);
 //        TextView risk3 = (TextView) findViewById(R.id.txt_risk3);
 //        TextView risk4 = (TextView) findViewById(R.id.txt_risk4);
-        
+
         //detail data
         TextView txt_noBayi = (TextView) findViewById(R.id.txt_noBayi);
         TextView txt_jenisKelamin = (TextView) findViewById(R.id.txt_jenisKelamin);
@@ -106,11 +116,10 @@ public class AnakDetailActivity extends Activity {
 
 
         //start profile image
-
         int placeholderDrawable= gender.equalsIgnoreCase("male") ? R.drawable.child_boy_infant:R.drawable.child_girl_infant;
-
         childview.setTag(R.id.entity_id, childclient.getCaseId());//required when saving file to disk
-        if(childclient.getCaseId()!=null){//image already in local storage most likey ):
+        if (childclient.getCaseId() != null) {
+            //image already in local storage most likey ):
             //set profile image by passing the client id.If the image doesn't exist in the image repository then download and save locally
 //            DrishtiApplication.getCachedImageLoaderInstance().getImageByClientId(childclient.getCaseId(), OpenSRPImageLoader.getStaticImageListener(childview, placeholderDrawable, placeholderDrawable));
 
@@ -127,7 +136,7 @@ public class AnakDetailActivity extends Activity {
 
 //        AllCommonsRepository iburep = org.smartregister.Context.getInstance().allCommonsRepositoryobjects("ec_ibu");
 //        final CommonPersonObject ibuparent = iburep.findByCaseID(childobject.getColumnmaps().get("relational_id"));
-        
+
         AllCommonsRepository kirep = org.smartregister.Context.getInstance().allCommonsRepositoryobjects("ec_kartu_ibu");
         final CommonPersonObject kiparent = kirep.findByCaseID(childobject.getColumnmaps().get("relational_id"));
 
@@ -161,9 +170,9 @@ public class AnakDetailActivity extends Activity {
 
 //                FlurryFacade.logEvent("taking_child_pictures_on_anak_detail_view");
                 entityid = childclient.entityId();
-                if (hash.containsValue(entityid)) {
-                    updateMode = true;
-                }
+//                if (hash.containsValue(entityid)) {
+//                    updateMode = true;
+//                }
                 Toast.makeText(AnakDetailActivity.this, "Replace for Camera", Toast.LENGTH_SHORT).show();
 //                Intent takePictureIntent = new Intent(AnakDetailActivity.this, SmartShutterActivity.class);
 //                takePictureIntent.putExtra("org.sid.sidface.SmartShutterActivity.updated", updateMode);
@@ -184,23 +193,12 @@ public class AnakDetailActivity extends Activity {
         overridePendingTransition(0, 0);
     }
 
-
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent intent) {
 //        refresh
         Log.e(TAG, "onActivityResult: refresh" );
         finish();
         startActivity(getIntent());
-
-    }
-
-    public static void setImagetoHolderFromUri(Activity activity, String file, ImageView view, int placeholder){
-        view.setImageDrawable(activity.getResources().getDrawable(placeholder));
-        File externalFile = new File(file);
-        if (externalFile.exists()) {
-            Uri external = Uri.fromFile(externalFile);
-            view.setImageURI(external);
-        }
 
     }
 }

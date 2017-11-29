@@ -1,11 +1,5 @@
 package org.smartregister.bidan.activity;
 
-import android.app.Activity;
-
-/**
- * Created by sid-tech on 11/28/17.
- */
-
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -16,14 +10,13 @@ import android.support.v4.view.ViewPager;
 import android.util.Log;
 import android.widget.Toast;
 
-//import com.flurry.android.FlurryAgent;
-//import org.smartregister.bidan.lib.FlurryFacade;
-
-import org.smartregister.bidan.utils.Support;
-import org.smartregister.domain.form.FormSubmission;
+import org.json.JSONObject;
 import org.smartregister.bidan.R;
 import org.smartregister.bidan.fragment.NativeKIAnakSmartRegisterFragment;
 import org.smartregister.bidan.pageradapter.BaseRegisterActivityPagerAdapter;
+import org.smartregister.bidan.utils.Support;
+import org.smartregister.domain.form.FormSubmission;
+import org.smartregister.enketo.view.fragment.DisplayFormFragment;
 import org.smartregister.provider.SmartRegisterClientsProvider;
 import org.smartregister.service.ZiggyService;
 import org.smartregister.sync.ClientProcessor;
@@ -31,10 +24,8 @@ import org.smartregister.util.FormUtils;
 import org.smartregister.view.activity.SecuredNativeSmartRegisterActivity;
 import org.smartregister.view.dialog.DialogOption;
 import org.smartregister.view.dialog.OpenFormOption;
-import org.smartregister.enketo.view.fragment.DisplayFormFragment;
 import org.smartregister.view.fragment.SecuredNativeSmartRegisterFragment;
 import org.smartregister.view.viewpager.OpenSRPViewPager;
-import org.json.JSONObject;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -53,26 +44,53 @@ import static org.smartregister.bidan.utils.AllConstantsINA.FormNames.KARTU_IBU_
 import static org.smartregister.bidan.utils.AllConstantsINA.FormNames.KOHORT_BAYI_KUNJUNGAN;
 
 /**
+ * Created by sid-tech on 11/28/17.
+ */
+//import com.flurry.android.FlurryAgent;
+//import org.smartregister.bidan.lib.FlurryFacade;
+
+/**
  * Created by Dimas Ciputra on 4/7/15.
  */
 public class NativeKIAnakSmartRegisterActivity extends SecuredNativeSmartRegisterActivity {
 
-    SimpleDateFormat timer = new SimpleDateFormat("hh:mm:ss");
     public static final String TAG = NativeKIAnakSmartRegisterFragment.class.getSimpleName();
+    SimpleDateFormat timer = new SimpleDateFormat("hh:mm:ss");
     @Bind(R.id.view_pager)
     OpenSRPViewPager mPager;
-    private FragmentPagerAdapter mPagerAdapter;
-    private int currentPage;
-
-    private String[] formNames = new String[]{};
-    private android.support.v4.app.Fragment mBaseFragment = null;
-
     ZiggyService ziggyService;
-
     // WD need for initialize queries
     NativeKIAnakSmartRegisterFragment nf = new NativeKIAnakSmartRegisterFragment();
-
     Map<String, String> FS = new HashMap<>();
+    private FragmentPagerAdapter mPagerAdapter;
+    private int currentPage;
+    private String[] formNames = new String[]{};
+    private android.support.v4.app.Fragment mBaseFragment = null;
+    private DialogInterface.OnClickListener listener = new DialogInterface.OnClickListener() {
+        @Override
+        public void onClick(DialogInterface dialog, int which) {
+            String face_end = timer.format(new Date());
+            FS.put("face_end", face_end);
+
+            if (which == -1) {
+                nf.setCriteria("!");
+                currentPage = 0;
+                Log.e(TAG, "onClick: YES " + currentPage);
+//                FlurryAgent.logEvent(TAG+"search_by_face OK", FS, true);
+
+            } else {
+                nf.setCriteria("!");
+                onBackPressed();
+                Log.e(TAG, "onClick: NO " + currentPage);
+//                FlurryAgent.logEvent(TAG + "search_by_face NOK", FS, true);
+
+                Intent intent = new Intent(NativeKIAnakSmartRegisterActivity.this, NativeKIAnakSmartRegisterActivity.class);
+                startActivity(intent.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT));
+            }
+
+
+        }
+    };
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -146,7 +164,6 @@ public class NativeKIAnakSmartRegisterActivity extends SecuredNativeSmartRegiste
         ziggyService = context().ziggyService();
     }
 
-
     public void onPageChanged(int page){
         setRequestedOrientation(page == 0 ? ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE : ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
         LoginActivity.setLanguage();
@@ -183,7 +200,6 @@ public class NativeKIAnakSmartRegisterActivity extends SecuredNativeSmartRegiste
                 new OpenFormOption(getString(R.string.str_anak_balita_visit), BALITA_KUNJUNGAN, formController),
                 new OpenFormOption(getString(R.string.str_child_immunizations), BAYI_IMUNISASI, formController),
                 new OpenFormOption(getString(R.string.str_child_close), KARTU_IBU_ANAK_CLOSE, formController),
-
         };
     }
 
@@ -335,32 +351,6 @@ public class NativeKIAnakSmartRegisterActivity extends SecuredNativeSmartRegiste
     private boolean currentActivityIsShowingForm(){
         return currentPage != 0;
     }
-
-    private DialogInterface.OnClickListener listener = new DialogInterface.OnClickListener() {
-        @Override
-        public void onClick(DialogInterface dialog, int which) {
-            String face_end = timer.format(new Date());
-            FS.put("face_end", face_end);
-
-            if (which == -1 ){
-                nf.setCriteria("!");
-                currentPage = 0;
-                Log.e(TAG, "onClick: YES " + currentPage);
-//                FlurryAgent.logEvent(TAG+"search_by_face OK", FS, true);
-
-            } else {
-                nf.setCriteria("!");
-                onBackPressed();
-                Log.e(TAG, "onClick: NO " + currentPage);
-//                FlurryAgent.logEvent(TAG + "search_by_face NOK", FS, true);
-
-                Intent intent= new Intent(NativeKIAnakSmartRegisterActivity.this, NativeKIAnakSmartRegisterActivity.class);
-                startActivity(intent.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT));
-            }
-
-
-        }
-    };
 
 
 }

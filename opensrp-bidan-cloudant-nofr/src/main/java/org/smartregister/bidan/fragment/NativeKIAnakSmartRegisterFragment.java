@@ -1,20 +1,12 @@
 package org.smartregister.bidan.fragment;
 
-import android.annotation.TargetApi;
-import android.app.AlertDialog;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.AsyncTask;
-import android.os.Build;
-import android.os.Parcelable;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
-
-//import com.flurry.android.FlurryAgent;
-//import org.smartregister.bidan.lib.FlurryFacade;
 
 import org.opensrp.api.domain.Location;
 import org.opensrp.api.util.EntityUtils;
@@ -22,27 +14,22 @@ import org.opensrp.api.util.LocationTree;
 import org.opensrp.api.util.TreeNode;
 import org.smartregister.Context;
 import org.smartregister.bidan.R;
+import org.smartregister.bidan.activity.AnakDetailActivity;
 import org.smartregister.bidan.activity.LoginActivity;
 import org.smartregister.bidan.activity.NativeKIAnakSmartRegisterActivity;
-
-import org.smartregister.bidan.activity.AnakDetailActivity;
-
+import org.smartregister.bidan.options.AnakOverviewServiceMode;
 import org.smartregister.bidan.options.ChildFilterOption;
 import org.smartregister.bidan.provider.ChildClientsProvider;
-
-import org.smartregister.bidan.options.AnakOverviewServiceMode;
 import org.smartregister.commonregistry.CommonPersonObjectClient;
 import org.smartregister.commonregistry.CommonPersonObjectController;
 import org.smartregister.cursoradapter.CursorCommonObjectFilterOption;
 import org.smartregister.cursoradapter.CursorCommonObjectSort;
 import org.smartregister.cursoradapter.CursorSortOption;
-import org.smartregister.cursoradapter.SecuredNativeSmartRegisterCursorAdapterFragment;
 import org.smartregister.cursoradapter.SmartRegisterPaginatedCursorAdapter;
 import org.smartregister.cursoradapter.SmartRegisterQueryBuilder;
 import org.smartregister.provider.SmartRegisterClientsProvider;
 import org.smartregister.util.StringUtil;
 import org.smartregister.view.activity.SecuredNativeSmartRegisterActivity;
-import org.smartregister.view.contract.ECClient;
 import org.smartregister.view.contract.SmartRegisterClient;
 import org.smartregister.view.controller.VillageController;
 import org.smartregister.view.dialog.AllClientsFilter;
@@ -62,26 +49,37 @@ import java.util.Locale;
 import java.util.Map;
 
 import static android.view.View.INVISIBLE;
-import static android.view.View.VISIBLE;
-import static org.apache.commons.lang3.StringUtils.isEmpty;
+
+//import com.flurry.android.FlurryAgent;
+//import org.smartregister.bidan.lib.FlurryFacade;
 
 /**
  * Created by koros on 10/29/15.
  */
-public class NativeKIAnakSmartRegisterFragment extends SecuredNativeSmartRegisterCursorAdapterFragment {
+public class NativeKIAnakSmartRegisterFragment extends BaseSmartRegisterFragment
+//        SecuredNativeSmartRegisterCursorAdapterFragment
+{
 
     private static final String TAG = NativeKIAnakSmartRegisterFragment.class.getSimpleName();
+    //    WD
+    public static String criteria;
+    private final ClientActionHandler clientActionHandler = new ClientActionHandler();
+    Date date = new Date();
+    SimpleDateFormat sdf;
+    Map<String, String> FS = new HashMap<>();
     private SmartRegisterClientsProvider clientProvider = null;
     private CommonPersonObjectController controller;
     private VillageController villageController;
     private DialogOptionMapper dialogOptionMapper;
-
-    private final ClientActionHandler clientActionHandler = new ClientActionHandler();
     private String locationDialogTAG = "locationDialogTAG";
 
-    Date date = new Date();
-    SimpleDateFormat sdf;
-    Map<String, String> FS = new HashMap<>();
+    public static String getCriteria() {
+        return criteria;
+    }
+
+    public void setCriteria(String criteria) {
+        this.criteria = criteria;
+    }
 
     @Override
     protected void onCreation() {
@@ -204,21 +202,28 @@ public class NativeKIAnakSmartRegisterFragment extends SecuredNativeSmartRegiste
 
     public void initializeQueries(String s){
         String tableName = "ec_anak";
-        ChildClientsProvider hhscp = new ChildClientsProvider(getActivity(),
+        ChildClientsProvider childClientsProvider = new ChildClientsProvider(getActivity(),
                 clientActionHandler, context().alertService(), context().commonrepository(tableName));
-        clientAdapter = new SmartRegisterPaginatedCursorAdapter(getActivity(), null, hhscp, context().commonrepository(tableName));
+        clientAdapter = new SmartRegisterPaginatedCursorAdapter(getActivity(), null, childClientsProvider, context().commonrepository(tableName));
         clientsView.setAdapter(clientAdapter);
 
         setTablename(tableName);
+        SmartRegisterQueryBuilder countqueryBuilder = new SmartRegisterQueryBuilder();
+        countqueryBuilder.SelectInitiateMainTableCounts(tableName);
+        countqueryBuilder.customJoin("LEFT JOIN ec_ibu ON ec_ibu.id = ec_anak.relational_id");
+
+        mainCondition = "is_closed=0";
+        countSelect = countqueryBuilder.mainCondition(mainCondition);
+        super.CountExecute();
+
+
         SmartRegisterQueryBuilder queryBuilder = new SmartRegisterQueryBuilder();
         queryBuilder.SelectInitiateMainTableCounts(tableName);
-
         queryBuilder.SelectInitiateMainTable(tableName, new String[]{
                 tableName + ".relationalid",
                 tableName + ".details",
                 tableName + ".is_closed",
                 tableName + ".relational_id",
-                tableName + ".details",
                 tableName + ".tanggalLahirAnak",
                 tableName + ".namaBayi",
         });
@@ -235,7 +240,6 @@ public class NativeKIAnakSmartRegisterFragment extends SecuredNativeSmartRegiste
         currentoffset = 0;
 
         super.filterandSortInInitializeQueries();
-//        CountExecute();
 
         updateSearchView();
         refresh();
@@ -245,46 +249,12 @@ public class NativeKIAnakSmartRegisterFragment extends SecuredNativeSmartRegiste
     public void startRegistration() {
     }
 
-    private class ClientActionHandler implements View.OnClickListener {
-        @Override
-        public void onClick(View view) {
-            switch (view.getId()) {
-                case R.id.profile_info_layout:
-//                    FlurryFacade.logEvent("click_detail_view_on_kohort_anak_dashboard");
-                    AnakDetailActivity.childclient = (CommonPersonObjectClient) view.getTag();
-                    Intent intent = new Intent(getActivity(), AnakDetailActivity.class);
-                    startActivity(intent);
-                    getActivity().finish();
-                    break;
-                case R.id.btn_edit:
-//                    FlurryFacade.logEvent("click_visit_button_on_kohort_anak_dashboard");
-//                    showFragmentDialog(((GiziSmartRegisterActivity)getActivity()).new EditDialogOptionModel(), view.getTag());
-
-                    showFragmentDialog(new EditDialogOptionModel(), view.getTag());
-                    break;
-            }
-        }
-    }
-
-
     private String AnakNameShort() {
         return "namaBayi ASC";
     }
 
     private String AnakNameShortR() {
         return "namaBayi DESC";
-    }
-
-    private class EditDialogOptionModel implements DialogOptionModel {
-        @Override
-        public DialogOption[] getDialogOptions() {
-            return getEditOptions();
-        }
-
-        @Override
-        public void onDialogOptionSelection(DialogOption option, Object tag) {
-            onEditSelection((EditOption) option, (SmartRegisterClient) tag);
-        }
     }
 
     @Override
@@ -304,30 +274,9 @@ public class NativeKIAnakSmartRegisterFragment extends SecuredNativeSmartRegiste
 
     }
 
-    public void updateSearchView() {
-        getSearchView().addTextChangedListener(new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence charSequence, int i, int i2, int i3) {
-            }
-
-            @Override
-            public void onTextChanged(final CharSequence cs, int start, int before, int count) {
-
-                filters = cs.toString();
-                joinTable = "";
-                mainCondition = "is_closed = 0 and relational_id != '' ";
-
-                getSearchCancelView().setVisibility(isEmpty(cs) ? INVISIBLE : VISIBLE);
-                CountExecute();
-                filterandSortExecute();
-
-            }
-
-            @Override
-            public void afterTextChanged(Editable editable) {
-
-            }
-        });
+    private void updateSearchView() {
+        getSearchView().removeTextChangedListener(textWatcher);
+        getSearchView().addTextChangedListener(textWatcher);
     }
 
     public void addChildToList(ArrayList<DialogOption> dialogOptionslist, Map<String, TreeNode<String, Location>> locationMap) {
@@ -343,18 +292,6 @@ public class NativeKIAnakSmartRegisterFragment extends SecuredNativeSmartRegiste
 
             }
         }
-    }
-
-
-    //    WD
-    public static String criteria;
-
-    public void setCriteria(String criteria) {
-        this.criteria = criteria;
-    }
-
-    public static String getCriteria() {
-        return criteria;
     }
 
     //    WD
@@ -416,7 +353,7 @@ public class NativeKIAnakSmartRegisterFragment extends SecuredNativeSmartRegiste
                 @Override
                 public void onTextChanged(final CharSequence cs, int start, int before, int count) {
 
-                    Log.e(TAG, "onTextChanged: " + searchView.getText());
+                    Log.e(TAG, "onTextChanged: searchTextChangeListener" + searchView.getText());
                     (new AsyncTask() {
 //                    SmartRegisterClients filteredClients;
 
@@ -430,7 +367,7 @@ public class NativeKIAnakSmartRegisterFragment extends SecuredNativeSmartRegiste
 //
                             filters = cs.toString();
                             joinTable = "";
-                            mainCondition = " isClosed !='true' and ibuCaseId !='' ";
+                            mainCondition = "isClosed !='true' and ibuCaseId !='' ";
                             return null;
                         }
 //
@@ -467,6 +404,37 @@ public class NativeKIAnakSmartRegisterFragment extends SecuredNativeSmartRegiste
         }
         getActivity().startActivity(myIntent);
 
+    }
+
+    private class ClientActionHandler implements View.OnClickListener {
+        @Override
+        public void onClick(View view) {
+            switch (view.getId()) {
+                case R.id.profile_info_layout:
+//                    FlurryFacade.logEvent("click_detail_view_on_kohort_anak_dashboard");
+                    AnakDetailActivity.childclient = (CommonPersonObjectClient) view.getTag();
+                    Intent intent = new Intent(getActivity(), AnakDetailActivity.class);
+                    startActivity(intent);
+                    getActivity().finish();
+                    break;
+                case R.id.btn_edit:
+//                    FlurryFacade.logEvent("click_visit_button_on_kohort_anak_dashboard");
+                    showFragmentDialog(new EditDialogOptionModel(), view.getTag());
+                    break;
+            }
+        }
+    }
+
+    private class EditDialogOptionModel implements DialogOptionModel {
+        @Override
+        public DialogOption[] getDialogOptions() {
+            return getEditOptions();
+        }
+
+        @Override
+        public void onDialogOptionSelection(DialogOption option, Object tag) {
+            onEditSelection((EditOption) option, (SmartRegisterClient) tag);
+        }
     }
 
 }

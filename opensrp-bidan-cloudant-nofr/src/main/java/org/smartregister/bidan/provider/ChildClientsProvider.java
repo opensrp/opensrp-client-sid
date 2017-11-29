@@ -4,20 +4,15 @@ import android.app.Activity;
 import android.content.Context;
 import android.database.Cursor;
 import android.graphics.drawable.Drawable;
+import android.net.Uri;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.AbsListView;
-import android.widget.FrameLayout;
 import android.widget.ImageButton;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import org.joda.time.LocalDate;
-import org.joda.time.Months;
-import org.joda.time.format.DateTimeFormat;
-import org.joda.time.format.DateTimeFormatter;
 import org.smartregister.bidan.R;
 import org.smartregister.bidan.utils.Support;
 import org.smartregister.commonregistry.AllCommonsRepository;
@@ -40,8 +35,6 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 import static android.view.ViewGroup.LayoutParams.MATCH_PARENT;
-import static org.joda.time.LocalDateTime.parse;
-import static org.smartregister.bidan.activity.AnakDetailActivity.setImagetoHolderFromUri;
 import static org.smartregister.util.Utils.fillValue;
 import static org.smartregister.util.Utils.getValue;
 
@@ -55,10 +48,13 @@ public class ChildClientsProvider implements SmartRegisterCLientsProviderForCurs
     private final Context context;
     private final View.OnClickListener onClickListener;
     private final AlertService alertService;
-
-    private Drawable iconPencilDrawable;
     private final AbsListView.LayoutParams clientViewLayoutParams;
     private final CommonRepository commonRepository;
+    private Drawable iconPencilDrawable;
+    private String str_current_weight;
+    private String str_visit_date;
+    private String str_current_height;
+    private String str_status_gizi;
 
     public ChildClientsProvider(Context context, View.OnClickListener onClickListener,
                                 AlertService alertService, CommonRepository commonRepository) {
@@ -68,7 +64,18 @@ public class ChildClientsProvider implements SmartRegisterCLientsProviderForCurs
         this.alertService = alertService;
         this.commonRepository = commonRepository;
         this.inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+
         clientViewLayoutParams = new AbsListView.LayoutParams(MATCH_PARENT, (int) context.getResources().getDimension(org.smartregister.R.dimen.list_item_height));
+    }
+
+    public static void setPhoto(Activity activity, String file, ImageView view, int placeholder) {
+        view.setImageDrawable(activity.getResources().getDrawable(placeholder));
+        File externalFile = new File(file);
+        if (externalFile.exists()) {
+            Uri external = Uri.fromFile(externalFile);
+            view.setImageURI(external);
+        }
+
     }
 
     @Override
@@ -76,10 +83,7 @@ public class ChildClientsProvider implements SmartRegisterCLientsProviderForCurs
         ViewHolder viewHolder = new ViewHolder();
 
         CommonPersonObjectClient pc = (CommonPersonObjectClient) client;
-        if (iconPencilDrawable == null) {
-            iconPencilDrawable = context.getResources().getDrawable(R.drawable.ic_pencil);
-        }
-        convertView.findViewById(R.id.btn_edit).setBackgroundDrawable(iconPencilDrawable);
+
         convertView.findViewById(R.id.btn_edit).setTag(client);
         convertView.findViewById(R.id.btn_edit).setOnClickListener(onClickListener);
 
@@ -90,14 +94,14 @@ public class ChildClientsProvider implements SmartRegisterCLientsProviderForCurs
         detailsRepository.updateDetails(pc);
 
         String firstName = getValue(pc.getColumnmaps(), "namaBayi", true);
-        fillValue((TextView) convertView.findViewById(R.id.txt_child_name), firstName);
+        String birthDate = getValue(pc.getColumnmaps(), "tanggalLahirAnak", true);
 
-        String childBOD = getValue(pc.getColumnmaps(), "tanggalLahirAnak", true);
+        if (birthDate.length() > 10)
+            birthDate = birthDate.substring(0, Support.getColumnmaps(pc, "tanggalLahirAnak").indexOf("T"));
+        String age = monthRangeToToday(birthDate) + " Month";
 
-        if (childBOD.length()>10)
-            childBOD = childBOD.substring(0, Support.getColumnmaps(pc,"tanggalLahirAnak").indexOf("T"));
-        String age = monthRangeToToday(childBOD) + "Month";
-
+        // kartu ibu = data KI only
+        // ec_ibu = data anc + pnc
         // get parent
         AllCommonsRepository childRepository = org.smartregister.Context.getInstance().allCommonsRepositoryobjects("ec_anak");
         CommonPersonObject childobject = childRepository.findByCaseID(pc.entityId());
@@ -107,48 +111,77 @@ public class ChildClientsProvider implements SmartRegisterCLientsProviderForCurs
 
         String motherName = null;
         String childAddress = null;
+        String birthPlace = null;
+
+        AllCommonsRepository iburep = org.smartregister.Context.getInstance().allCommonsRepositoryobjects("ec_ibu");
+        final CommonPersonObject ibuparent = iburep.findByCaseID(childobject.getColumnmaps().get("relational_id"));
+
+        if (ibuparent != null) {
+            detailsRepository.updateDetails(ibuparent);
+            birthPlace = ibuparent.getDetails().get("tempatBersalin") != null ? ibuparent.getDetails().get("tempatBersalin") : "";
+        }
 
         if(kiparent != null) {
             detailsRepository.updateDetails(kiparent);
-
             motherName = kiparent.getDetails().get("namalengkap");
-
             childAddress = kiparent.getDetails().get("address1");
-
         }
 
-        //----------Child Basic Information
+        //---------- Child Basic Information
+        viewHolder.profilepic = (ImageView) convertView.findViewById(R.id.img_profile);
+        viewHolder.follow_up = (ImageButton) convertView.findViewById(R.id.btn_edit);
+        viewHolder.profilepic.setImageDrawable(context.getResources().getDrawable(R.mipmap.child_boy));
+
+        if (pc.getDetails().get("gender") != null) {
+            setPhoto((Activity) context,
+                    DrishtiApplication.getAppDir() + File.separator + pc.getDetails().get("base_entity_id") + ".JPEG",
+                    viewHolder.profilepic, pc.getDetails().get("gender").equals("female") ? R.drawable.child_girl_infant : R.drawable.child_boy_infant);
+        } else {
+            Log.e(TAG, "getView: Gender is NOT SET");
+        }
+
         fillValue((TextView) convertView.findViewById(R.id.txt_child_name), firstName);
         fillValue((TextView) convertView.findViewById(R.id.txt_mother_name), motherName);
         fillValue((TextView) convertView.findViewById(R.id.txt_child_age), age);
         fillValue((TextView) convertView.findViewById(R.id.txt_village_name), childAddress);
+
         //----------Child Deliver Information
 
+        String childBirthWeight = pc.getDetails().get("beratLahir") != null ? pc.getDetails().get("beratLahir") : "";
+        String childBirthType = "";
+
+        fillValue((TextView) convertView.findViewById(R.id.tempat_lahir), birthPlace);
+        fillValue((TextView) convertView.findViewById(R.id.anak_register_dob), birthDate);
+        fillValue((TextView) convertView.findViewById(R.id.berat_lahir), childBirthWeight);
+        fillValue((TextView) convertView.findViewById(R.id.tipe_lahir), childBirthType);
+
         //----------Child Neonatal Visits Information
-
-        //----------Child Immunizations Information
-
         viewHolder.hb0_no = (ImageView) convertView.findViewById(R.id.icon_immuni_hb_no);
         viewHolder.hb0_yes = (ImageView) convertView.findViewById(R.id.icon_immuni_hb_yes);
         viewHolder.vitk_no = (ImageView) convertView.findViewById(R.id.icon_vit_k_no);
         viewHolder.vitk_yes = (ImageView) convertView.findViewById(R.id.icon_vit_k_yes);
+        viewHolder.pol1_no = (ImageView) convertView.findViewById(R.id.icon_pol1_no);
+        viewHolder.pol1_yes = (ImageView) convertView.findViewById(R.id.icon_pol1_yes);
+        viewHolder.pol2_no = (ImageView) convertView.findViewById(R.id.icon_pol2_no);
+        viewHolder.pol2_yes = (ImageView) convertView.findViewById(R.id.icon_pol2_yes);
+
+        checkVisibility(pc.getDetails().get("hb0"), null, viewHolder.hb0_no, viewHolder.hb0_yes);
+        checkVisibility(pc.getDetails().get("polio1"), pc.getDetails().get("bcg"), viewHolder.pol1_no, viewHolder.pol1_yes);
+        checkVisibility(pc.getDetails().get("dptHb1"), pc.getDetails().get("polio2"), viewHolder.pol2_no, viewHolder.pol2_yes);
+
+
+        //----------Child Immunizations Information
+
         viewHolder.campak_no = (ImageView) convertView.findViewById(R.id.icon_campak_no);
         viewHolder.campak_yes = (ImageView) convertView.findViewById(R.id.icon_campak_yes);
         viewHolder.ivp_no = (ImageView) convertView.findViewById(R.id.icon_ivp_no);
         viewHolder.ivp_yes = (ImageView) convertView.findViewById(R.id.icon_ivp_yes);
 
-        viewHolder.pol1_no = (ImageView) convertView.findViewById(R.id.icon_pol1_no);
-        viewHolder.pol1_yes = (ImageView) convertView.findViewById(R.id.icon_pol1_yes);
-        viewHolder.pol2_no = (ImageView) convertView.findViewById(R.id.icon_pol2_no);
-        viewHolder.pol2_yes = (ImageView) convertView.findViewById(R.id.icon_pol2_yes);
         viewHolder.pol3_no = (ImageView) convertView.findViewById(R.id.icon_pol3_no);
         viewHolder.pol3_yes = (ImageView) convertView.findViewById(R.id.icon_pol3_yes);
         viewHolder.pol4_no = (ImageView) convertView.findViewById(R.id.icon_pol4_no);
         viewHolder.pol4_yes = (ImageView) convertView.findViewById(R.id.icon_pol4_yes);
 
-        checkVisibility(pc.getDetails().get("hb0"), null, viewHolder.hb0_no, viewHolder.hb0_yes);
-        checkVisibility(pc.getDetails().get("polio1"), pc.getDetails().get("bcg"), viewHolder.pol1_no, viewHolder.pol1_yes);
-        checkVisibility(pc.getDetails().get("dptHb1"), pc.getDetails().get("polio2"), viewHolder.pol2_no, viewHolder.pol2_yes);
         checkVisibility(pc.getDetails().get("dptHb2"), pc.getDetails().get("polio3"), viewHolder.pol3_no, viewHolder.pol3_yes);
         checkVisibility(pc.getDetails().get("dptHb3"), pc.getDetails().get("polio4"), viewHolder.pol4_no, viewHolder.pol4_yes);
         checkVisibility(pc.getDetails().get("jenisPelayanan"), null, viewHolder.vitk_no, viewHolder.vitk_yes);
@@ -164,16 +197,25 @@ public class ChildClientsProvider implements SmartRegisterCLientsProviderForCurs
         String gizi = status_gizi.equals("GB") ? "Gizi Buruk" : status_gizi.equals("GK") ? "Gizi Kurang" : status_gizi.equals("GR") ? "Gizi Rendah" : "";
 
         if (pc.getDetails().get("tanggalPenimbangan") != null) {
-
-        } else{
-
+            str_current_weight = berat;
+            str_visit_date = tanggal;
+            str_current_height = tinggi;
+            str_status_gizi = gizi;
         }
 
         fillValue((TextView) convertView.findViewById(R.id.txt_current_weight), context.getString(R.string.str_weight) + berat);
         fillValue((TextView) convertView.findViewById(R.id.txt_visit_date), context.getString(R.string.date_visit_title) + tanggal);
         fillValue((TextView) convertView.findViewById(R.id.txt_current_height), context.getString(R.string.height) + tinggi);
+        fillValue((TextView) convertView.findViewById(R.id.txt_status_gizi), context.getString(R.string.nutrition) + gizi);
 
     }
+
+//    @Override
+//    public void getView(Cursor cursor, SmartRegisterClient client, final View convertView) {
+//
+//        getView(client, convertView);
+//
+//    }
 
     void checkVisibility(String immunization1, String immunization2, ImageView no, ImageView yes) {
         if (immunization1 != null || immunization2 != null) {
@@ -184,48 +226,6 @@ public class ChildClientsProvider implements SmartRegisterCLientsProviderForCurs
             yes.setVisibility(View.INVISIBLE);
         }
 
-    }
-
-
-
-//    @Override
-//    public void getView(Cursor cursor, SmartRegisterClient client, final View convertView) {
-//
-//        getView(client, convertView);
-//
-//    }
-
-
-    private String setStatus(String status) {
-        switch (status.toLowerCase()) {
-//            case "underweight":
-//                return context.getString(R.string.underweight);
-//            case "severely underweight":
-//                return context.getString(R.string.s_underweight);
-//            case "normal":
-//                return context.getString(R.string.normal);
-//            case "overweight":
-//                return context.getString(R.string.overweight);
-//            case "severely stunted":
-//                return context.getString(R.string.s_stunted);
-//            case "stunted":
-//                return context.getString(R.string.stunted);
-//            case "tall":
-//                return context.getString(R.string.tall);
-//            case "severely wasted":
-//                return context.getString(R.string.s_wasted);
-//            case "wasted":
-//                return context.getString(R.string.wasted);
-            default:
-                return "";
-        }
-    }
-
-    public void setVitAVisibility() {
-        int month = Integer.parseInt(new SimpleDateFormat("MM").format(new Date()));
-        int visibility = month == 2 || month == 8 ? View.VISIBLE : View.INVISIBLE;
-//             vitALogo.setVisibility(visibility);
-//             vitAText.setVisibility(visibility);
     }
 
     private int monthRangeToToday(String lastVisitDate) {
@@ -259,47 +259,11 @@ public class ChildClientsProvider implements SmartRegisterCLientsProviderForCurs
         return inflater;
     }
 
-
     class ViewHolder {
 
-        TextView village_name, tanggal_kunjungan_anc, childs_age, mother_name, childs_name, anak_register_dob;
-        TextView tempat_lahir, berat_lahir, tipe_lahir, berat_badan, tinggi, status_gizi;
-
-        LinearLayout profilelayout;
+        public TextView hb0, complete, name, village, age, campak, gender;
         ImageButton follow_up;
-
         ImageView hp_badge, hb0_no, hb0_yes, pol1_no, pol1_yes, pol2_no, pol2_yes, pol3_no, pol3_yes;
         ImageView pol4_no, pol4_yes, vitk_no, vitk_yes, campak_no, campak_yes, ivp_no, ivp_yes, profilepic;
-
-        public TextView hb0;
-        public TextView pol1;
-        public TextView pol2;
-        public TextView complete;
-        public TextView name;
-        public TextView motherName;
-        public TextView village;
-        public TextView age;
-        public TextView pol3;
-        public TextView pol4;
-        public TextView campak;
-        public TextView gender;
-        public ImageView hbLogo;
-        public ImageView pol1Logo;
-        public ImageView pol2Logo;
-        public ImageView pol3Logo;
-        public ImageView pol4Logo;
-        public ImageView ipvLogo;
-        public ImageView hbAlert;
-        public ImageView pol1Alert;
-        public ImageView pol2Alert;
-        public ImageView pol3Alert;
-        public ImageView pol4Alert;
-        public ImageView measlesAlert;
-        public FrameLayout hb0Layout;
-        public FrameLayout bcgLayout;
-        public FrameLayout hb1Layout;
-        public FrameLayout hb2Layout;
-        public FrameLayout hb3Layout;
-        public FrameLayout campakLayout;
     }
 }

@@ -472,6 +472,7 @@
     <string name="str_anak_edit">Edit Child</string>
     <string name="str_anak_bayi_visit">Baby Visit</string>
     <string name="str_anak_balita_visit">Toddler Visit</string>
+    <string name="nutrition">Nutrition:</string>
     <string name="height">Height:</string>
     <string name="service_anc">Service Status: ANC</string>
     <string name="service_pnc">Service Status: PNC</string>
