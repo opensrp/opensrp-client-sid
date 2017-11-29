@@ -150,11 +150,9 @@ public class NativeKIAnakSmartRegisterFragment extends SecuredNativeSmartRegiste
             public DialogOption[] sortingOptions() {
 //                FlurryFacade.logEvent("click_sorting_option_on_kohort_anak_dashboard");
                 return new DialogOption[]{
-
                         new CursorCommonObjectSort(getResources().getString(R.string.sort_by_name_label), AnakNameShort()),
                         new CursorCommonObjectSort(getResources().getString(R.string.sort_by_name_label_reverse), AnakNameShortR()),
                         new CursorCommonObjectSort(getResources().getString(R.string.sort_by_dob_label), AnakDOB()),//tanggalLahirAnak
-
                 };
             }
 
@@ -225,7 +223,7 @@ public class NativeKIAnakSmartRegisterFragment extends SecuredNativeSmartRegiste
                 tableName + ".namaBayi",
         });
 
-        queryBuilder.customJoin("LEFT JOIN ec_ibu ON ec_ibu.id = ec_anak.relationalid");
+        queryBuilder.customJoin("LEFT JOIN ec_ibu ON ec_ibu.id = ec_anak.relational_id");
 
 //        mainSelect = queryBuilder.mainCondition("ec_anak.is_closed = 0 and relationalid != ''");
         mainSelect = queryBuilder.mainCondition(mainCondition);
@@ -260,11 +258,12 @@ public class NativeKIAnakSmartRegisterFragment extends SecuredNativeSmartRegiste
                     break;
                 case R.id.btn_edit:
 //                    FlurryFacade.logEvent("click_visit_button_on_kohort_anak_dashboard");
+//                    showFragmentDialog(((GiziSmartRegisterActivity)getActivity()).new EditDialogOptionModel(), view.getTag());
+
                     showFragmentDialog(new EditDialogOptionModel(), view.getTag());
                     break;
             }
         }
-
     }
 
 

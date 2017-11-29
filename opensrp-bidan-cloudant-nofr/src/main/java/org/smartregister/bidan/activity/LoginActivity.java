@@ -261,7 +261,8 @@ public class LoginActivity extends Activity {
     }
 
     private void goToHome() {
-        startActivity(new Intent(this, BidanHomeActivity.class));
+//        startActivity(new Intent(this, BidanHomeActivity.class));
+        startActivity(new Intent(this, NativeKIAnakSmartRegisterActivity.class));
         finish();
     }
 

@@ -1,2 +1,2 @@
 rootProject.name = 'opensrp-app-bidan'
-include ':opensrp-bidan', ':opensrp-vaksinator'
+include ':opensrp-bidan-cloudant-nofr', ':opensrp-vaksinator'

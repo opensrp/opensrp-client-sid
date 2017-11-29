@@ -71,7 +71,9 @@
     <string name="header_fp">FP METHOD</string>
     <string name="header_children">CHILDREN</string>
     <string name="header_status">STATUS</string>
-    <string name="header_edit"></string>
+    <string name="header_edit">ACTIONS</string>
+    <string name="year_short">y</string>
+    <string name="month_short">m</string>
 
     <string name="couple_selection">All Eligible Couples</string>
     <string name="str_ec_search_hint">Search</string>
@@ -661,4 +663,6 @@
     <string name="polio3">DPT-HB2/Pol3</string>
     <string name="polio4">DPT-HB3/Pol4</string>
     <string name="sort_by_child_age_desc">Age 5 to 0 yrs</string>
+    <string name="header_neonatal">NEONATAL VISIT</string>
+    <string name="header_immunizations">IMMUNIZATIONS</string>
 </resources>

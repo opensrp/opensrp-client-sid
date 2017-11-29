@@ -31,7 +31,11 @@
             android:screenOrientation="landscape"
             android:theme="@style/AppThemeNoActionBarAndTitle"
             android:windowSoftInputMode="adjustResize" />
-        <activity android:name=".activity.NativeKIAnakSmartRegisterActivity" />
+        <activity android:name=".activity.NativeKIAnakSmartRegisterActivity"
+            android:configChanges="keyboardHidden|orientation|screenSize"
+            android:screenOrientation="landscape"
+            android:theme="@style/AppThemeNoActionBarAndTitle"
+            android:windowSoftInputMode="adjustResize" />
         <activity
             android:name="org.smartregister.bidan.activity.AnakDetailActivity"
             android:screenOrientation="landscape"

@@ -56,6 +56,7 @@ import static org.smartregister.bidan.utils.AllConstantsINA.FormNames.KOHORT_BAY
  * Created by Dimas Ciputra on 4/7/15.
  */
 public class NativeKIAnakSmartRegisterActivity extends SecuredNativeSmartRegisterActivity {
+
     SimpleDateFormat timer = new SimpleDateFormat("hh:mm:ss");
     public static final String TAG = NativeKIAnakSmartRegisterFragment.class.getSimpleName();
     @Bind(R.id.view_pager)
@@ -65,7 +66,6 @@ public class NativeKIAnakSmartRegisterActivity extends SecuredNativeSmartRegiste
 
     private String[] formNames = new String[]{};
     private android.support.v4.app.Fragment mBaseFragment = null;
-
 
     ZiggyService ziggyService;
 
@@ -181,11 +181,8 @@ public class NativeKIAnakSmartRegisterActivity extends SecuredNativeSmartRegiste
                 new OpenFormOption(getString(R.string.str_anak_neonatal), BAYI_NEONATAL_PERIOD, formController),
                 new OpenFormOption(getString(R.string.str_anak_bayi_visit), KOHORT_BAYI_KUNJUNGAN, formController),
                 new OpenFormOption(getString(R.string.str_anak_balita_visit), BALITA_KUNJUNGAN, formController),
-                //      new OpenFormOption(getString(R.string.str_anak_edit), KOHORT_BAYI_EDIT, formController),
                 new OpenFormOption(getString(R.string.str_child_immunizations), BAYI_IMUNISASI, formController),
                 new OpenFormOption(getString(R.string.str_child_close), KARTU_IBU_ANAK_CLOSE, formController),
-                //    new OpenFormOption(getString(R.string.str_tutup_anak),
-                //           BAYI_IMUNISASI, formController),
 
         };
     }

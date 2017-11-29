@@ -72,7 +72,7 @@ public class ChildSmartClientsProvider implements SmartRegisterCLientsProviderFo
     private final CommonRepository commonRepository;
 
     public ChildSmartClientsProvider(Context context, View.OnClickListener onClickListener,
-                                     AlertService alertService,  CommonRepository commonRepository) {
+                                     AlertService alertService, CommonRepository commonRepository) {
         this.onClickListener = onClickListener;
         this.context = context;
         this.alertService = alertService;
@@ -216,10 +216,6 @@ public class ChildSmartClientsProvider implements SmartRegisterCLientsProviderFo
         setIcon(viewHolder.hb2Layout, viewHolder.pol3Logo, null, "dptHb2,polio3", umur, 3, pc);
         setIcon(viewHolder.hb3Layout, viewHolder.pol4Logo, null, "dptHb3,polio4,ipv", umur, 4, pc);
         setIcon(viewHolder.campakLayout, viewHolder.ipvLogo, null, "campak", umur, 9, pc);
-
-
-
-
     }
 
     private String latestDate(String[] dates) {

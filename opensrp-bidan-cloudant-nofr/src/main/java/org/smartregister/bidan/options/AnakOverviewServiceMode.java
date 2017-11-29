@@ -34,14 +34,18 @@ public class AnakOverviewServiceMode extends ServiceModeOption {
 
             @Override
             public int[] weights() {
-                return new int[]{26, 16, 15, 15, 23, 8};
+                return new int[]{26, 16, 16, 16, 18, 8};
             }
 
             @Override
             public int[] headerTextResourceIds() {
                 return new int[]{
-                        R.string.header_name, R.string.header_dok_persalinan, R.string.str_header_neonatal,
-                        R.string.str_child_immunizations, R.string.header_birth_status, R.string.header_edit};
+                        R.string.header_name,
+                        R.string.header_dok_persalinan,
+                        R.string.header_neonatal,
+                        R.string.header_immunizations,
+                        R.string.header_birth_status,
+                        R.string.header_edit};
             }
         };
     }
