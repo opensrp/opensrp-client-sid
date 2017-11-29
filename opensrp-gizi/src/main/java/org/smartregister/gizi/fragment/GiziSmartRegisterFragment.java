@@ -225,11 +225,14 @@ public class GiziSmartRegisterFragment extends SecuredNativeSmartRegisterCursorA
     private void initializeQueries() {
         String tableName = "ec_anak";
       //  String parentTableName = PathConstants.MOTHER_TABLE_NAME;
+        ChildSmartClientsProvider kiscp = new ChildSmartClientsProvider(getActivity(),clientActionHandler,context().alertService());
+        clientAdapter = new SmartRegisterPaginatedCursorAdapter(getActivity(), null, kiscp, new CommonRepository("ec_anak",new String []{"tanggalLahirAnak","namaBayi"}));
+        clientsView.setAdapter(clientAdapter);
 
-        ChildSmartClientsProvider hhscp = new ChildSmartClientsProvider(getActivity(),
+     /*   ChildSmartClientsProvider hhscp = new ChildSmartClientsProvider(getActivity(),
                 clientActionHandler, context().alertService(), context().commonrepository(tableName));
         clientAdapter = new SmartRegisterPaginatedCursorAdapter(getActivity(), null, hhscp, context().commonrepository(tableName));
-        clientsView.setAdapter(clientAdapter);
+        clientsView.setAdapter(clientAdapter);*/
 
         setTablename(tableName);
         SmartRegisterQueryBuilder countqueryBUilder = new SmartRegisterQueryBuilder();
