@@ -155,7 +155,10 @@ public class NativeKISmartRegisterActivity extends SecuredNativeSmartRegisterAct
 
     }
 
+    @Override
+    protected void setupViews() {
 
+    }
 
     @Override
     protected void onResumption() {
