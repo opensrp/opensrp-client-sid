@@ -14,7 +14,7 @@ import org.opensrp.api.util.LocationTree;
 import org.opensrp.api.util.TreeNode;
 import org.smartregister.Context;
 import org.smartregister.bidan.R;
-import org.smartregister.bidan.activity.AnakDetailActivity;
+import org.smartregister.bidan.activity.DetailChildActivity;
 import org.smartregister.bidan.activity.LoginActivity;
 import org.smartregister.bidan.activity.NativeKIAnakSmartRegisterActivity;
 import org.smartregister.bidan.options.AnakOverviewServiceMode;
@@ -412,8 +412,8 @@ public class NativeKIAnakSmartRegisterFragment extends BaseSmartRegisterFragment
             switch (view.getId()) {
                 case R.id.profile_info_layout:
 //                    FlurryFacade.logEvent("click_detail_view_on_kohort_anak_dashboard");
-                    AnakDetailActivity.childclient = (CommonPersonObjectClient) view.getTag();
-                    Intent intent = new Intent(getActivity(), AnakDetailActivity.class);
+                    DetailChildActivity.childclient = (CommonPersonObjectClient) view.getTag();
+                    Intent intent = new Intent(getActivity(), DetailChildActivity.class);
                     startActivity(intent);
                     getActivity().finish();
                     break;

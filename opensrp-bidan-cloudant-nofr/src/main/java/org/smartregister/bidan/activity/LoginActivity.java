@@ -10,10 +10,6 @@ import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.content.res.Resources;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
-import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
 import android.text.InputType;
 import android.util.DisplayMetrics;
 import android.view.KeyEvent;
@@ -57,12 +53,6 @@ import static org.smartregister.util.Log.logVerbose;
 
 public class LoginActivity extends Activity {
 
-    private final String TAG = LoginActivity.class.getName();
-
-    private Context context = BidanApplication.getInstance().context();
-    private EditText userNameEditText;
-    private EditText passwordEditText;
-    private ProgressDialog progressDialog;
     public static final String ENGLISH_LOCALE = "en";
     public static final String KANNADA_LOCALE = "kn";
     public static final String BENGALI_LOCALE = "bn";
@@ -71,6 +61,52 @@ public class LoginActivity extends Activity {
     public static final String KANNADA_LANGUAGE = "Kannada";
     public static final String Bengali_LANGUAGE = "Bengali";
     public static final String Bahasa_LANGUAGE = "Bahasa";
+    private final String TAG = LoginActivity.class.getName();
+    private Context context = BidanApplication.getInstance().context();
+    private EditText userNameEditText;
+    private EditText passwordEditText;
+    private ProgressDialog progressDialog;
+
+    public static Context getOpenSRPContext() {
+        return BidanApplication.getInstance().context();
+    }
+
+    public static void setLanguage() {
+        AllSharedPreferences allSharedPreferences = new AllSharedPreferences(getDefaultSharedPreferences(Context.getInstance().applicationContext()));
+        String preferredLocale = allSharedPreferences.fetchLanguagePreference();
+        Resources res = Context.getInstance().applicationContext().getResources();
+        // Change locale settings in the app.
+        DisplayMetrics dm = res.getDisplayMetrics();
+        android.content.res.Configuration conf = res.getConfiguration();
+        conf.locale = new Locale(preferredLocale);
+        res.updateConfiguration(conf, dm);
+
+    }
+
+    public static String switchLanguagePreference() {
+        AllSharedPreferences allSharedPreferences = new AllSharedPreferences(getDefaultSharedPreferences(Context.getInstance().applicationContext()));
+
+        String preferredLocale = allSharedPreferences.fetchLanguagePreference();
+        if (ENGLISH_LOCALE.equals(preferredLocale)) {
+            allSharedPreferences.saveLanguagePreference(BAHASA_LOCALE);
+            Resources res = Context.getInstance().applicationContext().getResources();
+            // Change locale settings in the app.
+            DisplayMetrics dm = res.getDisplayMetrics();
+            android.content.res.Configuration conf = res.getConfiguration();
+            conf.locale = new Locale(BAHASA_LOCALE);
+            res.updateConfiguration(conf, dm);
+            return Bahasa_LANGUAGE;
+        } else {
+            allSharedPreferences.saveLanguagePreference(ENGLISH_LOCALE);
+            Resources res = Context.getInstance().applicationContext().getResources();
+            // Change locale settings in the app.
+            DisplayMetrics dm = res.getDisplayMetrics();
+            android.content.res.Configuration conf = res.getConfiguration();
+            conf.locale = new Locale(ENGLISH_LOCALE);
+            res.updateConfiguration(conf, dm);
+            return ENGLISH_LANGUAGE;
+        }
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -236,10 +272,6 @@ public class LoginActivity extends Activity {
         inputManager.hideSoftInputFromWindow(getCurrentFocus().getWindowToken(), HIDE_NOT_ALWAYS);
     }
 
-    public static Context getOpenSRPContext() {
-        return BidanApplication.getInstance().context();
-    }
-
     private void localLoginWith(String userName, String password) {
         context.userService().localLogin(userName, password);
 //        LoginActivity.generator = new Generator(context, userName, password);
@@ -262,10 +294,10 @@ public class LoginActivity extends Activity {
 
     private void goToHome() {
 //        startActivity(new Intent(this, BidanHomeActivity.class));
-        startActivity(new Intent(this, NativeKIAnakSmartRegisterActivity.class));
+//        startActivity(new Intent(this, NativeKIAnakSmartRegisterActivity.class));
+        startActivity(new Intent(this, NativeKISmartRegisterActivity.class));
         finish();
     }
-
 
     private void tryRemoteLogin(final String userName, final String password, final Listener<LoginResponse> afterLoginCheck) {
         LockingBackgroundTask task = new LockingBackgroundTask(new ProgressIndicator() {
@@ -299,7 +331,6 @@ public class LoginActivity extends Activity {
         goToHome();
         DrishtiSyncScheduler.startOnlyIfConnectedToNetwork(getApplicationContext());
     }
-
 
     public void setDefaultLocationId(String userName, String locationId) {
         if (userName != null) {
@@ -338,45 +369,6 @@ public class LoginActivity extends Activity {
             localLogin(view, uname, pwd);
         } else {
             remoteLogin(view, uname, pwd);
-        }
-    }
-
-
-    public static void setLanguage(){
-        AllSharedPreferences allSharedPreferences = new AllSharedPreferences(getDefaultSharedPreferences(Context.getInstance().applicationContext()));
-        String preferredLocale = allSharedPreferences.fetchLanguagePreference();
-        Resources res = Context.getInstance().applicationContext().getResources();
-        // Change locale settings in the app.
-        DisplayMetrics dm = res.getDisplayMetrics();
-        android.content.res.Configuration conf = res.getConfiguration();
-        conf.locale = new Locale(preferredLocale);
-        res.updateConfiguration(conf, dm);
-
-    }
-
-
-    public static String switchLanguagePreference() {
-        AllSharedPreferences allSharedPreferences = new AllSharedPreferences(getDefaultSharedPreferences(Context.getInstance().applicationContext()));
-
-        String preferredLocale = allSharedPreferences.fetchLanguagePreference();
-        if (ENGLISH_LOCALE.equals(preferredLocale)) {
-            allSharedPreferences.saveLanguagePreference(BAHASA_LOCALE);
-            Resources res = Context.getInstance().applicationContext().getResources();
-            // Change locale settings in the app.
-            DisplayMetrics dm = res.getDisplayMetrics();
-            android.content.res.Configuration conf = res.getConfiguration();
-            conf.locale = new Locale(BAHASA_LOCALE);
-            res.updateConfiguration(conf, dm);
-            return Bahasa_LANGUAGE;
-        } else {
-            allSharedPreferences.saveLanguagePreference(ENGLISH_LOCALE);
-            Resources res = Context.getInstance().applicationContext().getResources();
-            // Change locale settings in the app.
-            DisplayMetrics dm = res.getDisplayMetrics();
-            android.content.res.Configuration conf = res.getConfiguration();
-            conf.locale = new Locale(ENGLISH_LOCALE);
-            res.updateConfiguration(conf, dm);
-            return ENGLISH_LANGUAGE;
         }
     }
 

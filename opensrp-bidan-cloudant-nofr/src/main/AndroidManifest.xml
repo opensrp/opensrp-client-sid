@@ -31,13 +31,24 @@
             android:screenOrientation="landscape"
             android:theme="@style/AppThemeNoActionBarAndTitle"
             android:windowSoftInputMode="adjustResize" />
+
+        <activity
+            android:name=".activity.NativeKISmartRegisterActivity"
+            android:configChanges="keyboardHidden|orientation|screenSize"
+            android:screenOrientation="landscape"
+            android:theme="@style/AppThemeNoActionBarAndTitle"
+            android:windowSoftInputMode="adjustResize" />
+        <activity
+            android:name=".activity.DetailIbuActivity"
+            android:screenOrientation="landscape"
+            android:theme="@style/AppThemeNoTitle" />
         <activity android:name=".activity.NativeKIAnakSmartRegisterActivity"
             android:configChanges="keyboardHidden|orientation|screenSize"
             android:screenOrientation="landscape"
             android:theme="@style/AppThemeNoActionBarAndTitle"
             android:windowSoftInputMode="adjustResize" />
         <activity
-            android:name="org.smartregister.bidan.activity.AnakDetailActivity"
+            android:name="org.smartregister.bidan.activity.DetailChildActivity"
             android:screenOrientation="landscape"
             android:theme="@style/AppThemeNoTitle" />
     </application>

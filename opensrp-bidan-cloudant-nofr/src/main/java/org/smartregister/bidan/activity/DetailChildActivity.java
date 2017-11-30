@@ -29,10 +29,10 @@ import static org.smartregister.util.StringUtil.humanize;
 /**
  * Created by Iq on 07/09/16.
  */
-public class AnakDetailActivity extends Activity {
+public class DetailChildActivity extends Activity {
 
     //image retrieving
-    private static final String TAG = AnakDetailActivity.class.getSimpleName();
+    private static final String TAG = DetailChildActivity.class.getSimpleName();
     public static CommonPersonObjectClient childclient;
     static String entityid;
     private static HashMap<String, String> hash;
@@ -94,8 +94,8 @@ public class AnakDetailActivity extends Activity {
             @Override
             public void onClick(View v) {
                 finish();
-                AnakDetailActivity.childclient = childclient;
-                startActivity(new Intent(AnakDetailActivity.this, AnakDetailActivity.class));
+                DetailChildActivity.childclient = childclient;
+                startActivity(new Intent(DetailChildActivity.this, DetailChildActivity.class));
                 overridePendingTransition(0, 0);
             }
         });
@@ -103,7 +103,7 @@ public class AnakDetailActivity extends Activity {
             @Override
             public void onClick(View v) {
                 finish();
-                startActivity(new Intent(AnakDetailActivity.this, NativeKIAnakSmartRegisterActivity.class));
+                startActivity(new Intent(DetailChildActivity.this, NativeKIAnakSmartRegisterActivity.class));
                 overridePendingTransition(0, 0);
             }
         });
@@ -123,7 +123,7 @@ public class AnakDetailActivity extends Activity {
             //set profile image by passing the client id.If the image doesn't exist in the image repository then download and save locally
 //            DrishtiApplication.getCachedImageLoaderInstance().getImageByClientId(childclient.getCaseId(), OpenSRPImageLoader.getStaticImageListener(childview, placeholderDrawable, placeholderDrawable));
 
-            AnakDetailActivity.setImagetoHolderFromUri(this,
+            DetailChildActivity.setImagetoHolderFromUri(this,
                     DrishtiApplication.getAppDir() + File.separator + childclient.getDetails().get("base_entity_id") + ".JPEG",
                     childview, childclient.getDetails().get("gender").equals("female") ? R.drawable.child_girl_infant : R.drawable.child_boy_infant);
         }
@@ -173,8 +173,8 @@ public class AnakDetailActivity extends Activity {
 //                if (hash.containsValue(entityid)) {
 //                    updateMode = true;
 //                }
-                Toast.makeText(AnakDetailActivity.this, "Replace for Camera", Toast.LENGTH_SHORT).show();
-//                Intent takePictureIntent = new Intent(AnakDetailActivity.this, SmartShutterActivity.class);
+                Toast.makeText(DetailChildActivity.this, "Replace for Camera", Toast.LENGTH_SHORT).show();
+//                Intent takePictureIntent = new Intent(DetailChildActivity.this, SmartShutterActivity.class);
 //                takePictureIntent.putExtra("org.sid.sidface.SmartShutterActivity.updated", updateMode);
 //                takePictureIntent.putExtra("IdentifyPerson", false);
 //                takePictureIntent.putExtra("org.sid.sidface.ImageConfirmation.id", entityid);
