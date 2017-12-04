@@ -21,6 +21,7 @@ import org.smartregister.bidan.R;
 import org.smartregister.bidan.activity.DetailFPActivity;
 //import org.smartregister.bidan.activity.LoginActivity;
 import org.smartregister.bidan.activity.NativeKIFPSmartRegisterActivity;
+import org.smartregister.bidan.activity.NativeKISmartRegisterActivity;
 import org.smartregister.bidan.options.AllKBServiceMode;
 import org.smartregister.bidan.options.MotherFilterOption;
 import org.smartregister.bidan.provider.KBClientsProvider;
@@ -274,6 +275,7 @@ public class FPSmartRegisterFragment extends BaseSmartRegisterFragment {
 
     @Override
     public void startRegistration() {
+        Log.e(TAG, "startRegistration: " );
 //        FlurryFacade.logEvent("click_start_registration_on_kohort_kb_dashboard");
         FragmentTransaction ft = getActivity().getFragmentManager().beginTransaction();
         Fragment prev = getActivity().getFragmentManager().findFragmentByTag(locationDialogTAG);
@@ -282,12 +284,19 @@ public class FPSmartRegisterFragment extends BaseSmartRegisterFragment {
         }
         ft.addToBackStack(null);
 
+//        LocationSelectorDialogFragment
+//                .newInstance(
+//                        (NativeKIFPSmartRegisterActivity) getActivity(),
+//                        new EditDialogOptionModel(), context().anmLocationController().get(),
+//                        KOHORT_KB_REGISTER)
+//                .show(ft, locationDialogTAG);
+
         LocationSelectorDialogFragment
-                .newInstance(
-                        (NativeKIFPSmartRegisterActivity) getActivity(),
-                        new EditDialogOptionModel(), context().anmLocationController().get(),
+                .newInstance((NativeKISmartRegisterActivity) getActivity(),
+                        ((NativeKISmartRegisterActivity)getActivity()).new EditDialogOptionModel(), context().anmLocationController().get(),
                         KOHORT_KB_REGISTER)
                 .show(ft, locationDialogTAG);
+
     }
 
     private class ClientActionHandler implements View.OnClickListener {
@@ -304,7 +313,9 @@ public class FPSmartRegisterFragment extends BaseSmartRegisterFragment {
                     break;
                 case R.id.btn_edit:
 //                    FlurryFacade.logEvent("click_visit_button_on_kohort_kb_dashboard");
-                    showFragmentDialog(new EditDialogOptionModel(), view.getTag());
+//                    showFragmentDialog(new EditDialogOptionModel(), view.getTag());
+                    showFragmentDialog(((NativeKISmartRegisterActivity) getActivity()).new EditDialogOptionModel(), view.getTag());
+
                     break;
             }
         }
@@ -334,7 +345,7 @@ public class FPSmartRegisterFragment extends BaseSmartRegisterFragment {
         return "htp IS NULL, htp";
     }
 
-    private class EditDialogOptionModel implements DialogOptionModel {
+    private class EditDialogOptionModelOld implements DialogOptionModel {
         @Override
         public DialogOption[] getDialogOptions() {
             return getEditOptions();

@@ -260,7 +260,7 @@ public class KISmartRegisterFragment extends BaseSmartRegisterFragment implement
 
             } else {
 //                mainCondition = "is_closed = 1 ";
-                mainCondition = "";
+                mainCondition = "is_closed = 0 and namalengkap != ''";
                 Log.e(TAG, "initializeQueries: Not Initialized");
             }
 

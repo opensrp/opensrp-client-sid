@@ -19,6 +19,7 @@ import org.smartregister.bidan.R;
 import org.smartregister.bidan.activity.LoginActivity;
 import org.smartregister.bidan.activity.NativeKIPNCSmartRegisterActivity;
 import org.smartregister.bidan.activity.DetailPNCActivity;
+import org.smartregister.bidan.activity.NativeKISmartRegisterActivity;
 import org.smartregister.bidan.options.KIPNCOverviewServiceMode;
 import org.smartregister.bidan.options.MotherFilterOption;
 import org.smartregister.bidan.provider.KIPNCClientsProvider;
@@ -308,7 +309,9 @@ public class PNCSmartRegisterFragment extends BaseSmartRegisterFragment {
                     break;
                 case R.id.btn_edit:
 //                    //FlurryFacade.logEvent("click_visit_button_on_kohort_pnc_dashboard");
-                    showFragmentDialog(new EditDialogOptionModel(), view.getTag());
+//                    showFragmentDialog(new EditDialogOptionModel(), view.getTag());
+                    showFragmentDialog(((NativeKISmartRegisterActivity) getActivity()).new EditDialogOptionModel(), view.getTag());
+
                     break;
             }
         }
@@ -342,7 +345,7 @@ public class PNCSmartRegisterFragment extends BaseSmartRegisterFragment {
         return " htp IS NULL, htp";
     }
     
-    private class EditDialogOptionModel implements DialogOptionModel {
+    private class EditDialogOptionModelOld implements DialogOptionModel {
         @Override
         public DialogOption[] getDialogOptions() {
             return getEditOptions();

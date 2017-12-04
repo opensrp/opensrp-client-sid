@@ -401,14 +401,16 @@ public class ANCSmartRegisterFragment extends BaseSmartRegisterFragment {
 
                 case R.id.btn_edit:
                     DetailANCActivity.ancClient = (CommonPersonObjectClient) view.getTag();
-                    showFragmentDialog(new EditDialogOptionModel(), view.getTag());
+//                    showFragmentDialog(new EditDialogOptionModel(), view.getTag());
+                    showFragmentDialog(((NativeKISmartRegisterActivity) getActivity()).new EditDialogOptionModel(), view.getTag());
+
                     break;
             }
         }
 
     }
 
-    private class EditDialogOptionModel implements DialogOptionModel {
+    private class EditDialogOptionModelOld implements DialogOptionModel {
         @Override
         public DialogOption[] getDialogOptions() {
             return getEditOptions();

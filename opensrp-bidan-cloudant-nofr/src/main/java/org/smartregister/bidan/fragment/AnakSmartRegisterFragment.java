@@ -17,6 +17,7 @@ import org.smartregister.bidan.R;
 import org.smartregister.bidan.activity.DetailChildActivity;
 import org.smartregister.bidan.activity.LoginActivity;
 import org.smartregister.bidan.activity.NativeKIAnakSmartRegisterActivity;
+import org.smartregister.bidan.activity.NativeKISmartRegisterActivity;
 import org.smartregister.bidan.options.AnakOverviewServiceMode;
 import org.smartregister.bidan.options.ChildFilterOption;
 import org.smartregister.bidan.provider.ChildClientsProvider;
@@ -419,13 +420,15 @@ public class AnakSmartRegisterFragment extends BaseSmartRegisterFragment
                     break;
                 case R.id.btn_edit:
 //                    FlurryFacade.logEvent("click_visit_button_on_kohort_anak_dashboard");
-                    showFragmentDialog(new EditDialogOptionModel(), view.getTag());
+//                    showFragmentDialog(new EditDialogOptionModel(), view.getTag());
+                    showFragmentDialog(((NativeKISmartRegisterActivity) getActivity()).new EditDialogOptionModel(), view.getTag());
+
                     break;
             }
         }
     }
 
-    private class EditDialogOptionModel implements DialogOptionModel {
+    private class EditDialogOptionModelOld implements DialogOptionModel {
         @Override
         public DialogOption[] getDialogOptions() {
             return getEditOptions();
