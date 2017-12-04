@@ -13,15 +13,20 @@ import org.smartregister.bidan.R;
 import org.smartregister.bidan.fragment.KISmartRegisterFragment;
 import org.smartregister.bidan.pageradapter.BaseRegisterActivityPagerAdapter;
 import org.smartregister.bidan.sync.ClientProcessor;
+import org.smartregister.commonregistry.CommonPersonObjectClient;
 import org.smartregister.domain.form.FieldOverrides;
 import org.smartregister.domain.form.FormSubmission;
 import org.smartregister.enketo.listener.DisplayFormListener;
 import org.smartregister.enketo.view.fragment.DisplayFormFragment;
 import org.smartregister.provider.SmartRegisterClientsProvider;
+import org.smartregister.repository.DetailsRepository;
 import org.smartregister.service.ZiggyService;
 import org.smartregister.bidan.utils.VaksinatorFormUtils;
 import org.smartregister.view.activity.SecuredNativeSmartRegisterActivity;
+import org.smartregister.view.contract.SmartRegisterClient;
 import org.smartregister.view.dialog.DialogOption;
+import org.smartregister.view.dialog.DialogOptionModel;
+import org.smartregister.view.dialog.EditOption;
 import org.smartregister.view.dialog.LocationSelectorDialogFragment;
 import org.smartregister.view.dialog.OpenFormOption;
 import org.smartregister.view.fragment.SecuredNativeSmartRegisterFragment;
@@ -42,6 +47,7 @@ import static org.smartregister.bidan.utils.AllConstantsINA.FormNames.KARTU_IBU_
 import static org.smartregister.bidan.utils.AllConstantsINA.FormNames.KARTU_IBU_CLOSE;
 import static org.smartregister.bidan.utils.AllConstantsINA.FormNames.KARTU_IBU_REGISTRATION;
 import static org.smartregister.bidan.utils.AllConstantsINA.FormNames.KOHORT_KB_PELAYANAN;
+import static org.smartregister.util.Utils.getValue;
 
 /**
  * Created by sid-tech on 11/28/17.
@@ -295,6 +301,33 @@ public class NativeKISmartRegisterActivity extends SecuredNativeSmartRegisterAct
         }
 
     }
-
+    public class EditDialogOptionModel implements DialogOptionModel {
+        @Override
+        public DialogOption[] getDialogOptions() {
+            return getEditOptions();
+        }
+        @Override
+        public void onDialogOptionSelection(DialogOption option, Object tag) {
+            CommonPersonObjectClient pc = (CommonPersonObjectClient) tag;
+            DetailsRepository detailsRepository = org.smartregister.Context.getInstance().detailsRepository();
+            detailsRepository.updateDetails(pc);
+          //  String ibuCaseId = getValue(pc.getColumnmaps(), "relational_id", true).toLowerCase();
+            Log.d(TAG, "onDialogOptionSelection: "+pc.getDetails());
+            JSONObject fieldOverrides = new JSONObject();
+            try {
+                fieldOverrides.put("Province", pc.getDetails().get("stateProvince"));
+                fieldOverrides.put("District", pc.getDetails().get("countyDistrict"));
+                fieldOverrides.put("Sub-district", pc.getDetails().get("address2"));
+                fieldOverrides.put("Village", pc.getDetails().get("cityVillage"));
+                fieldOverrides.put("Sub-village", pc.getDetails().get("address1"));
+                fieldOverrides.put("jenis_kelamin", pc.getDetails().get("gender"));
+            //    fieldOverrides.put("ibuCaseId", ibuCaseId);
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+            FieldOverrides fo = new FieldOverrides(fieldOverrides.toString());
+            onEditSelectionWithMetadata((EditOption) option, (SmartRegisterClient) tag, fo.getJSONString());
+        }
+    }
 
 }

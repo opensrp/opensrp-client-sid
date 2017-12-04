@@ -60,6 +60,7 @@ import java.util.Objects;
 
 import static android.view.View.INVISIBLE;
 import static org.smartregister.bidan.utils.AllConstantsINA.FormNames.KARTU_IBU_PNC_OA;
+import static org.smartregister.view.activity.NativeECSmartRegisterActivity.locationDialogTAG;
 
 /**
  * Created by sid-tech on 11/29/17.
@@ -178,36 +179,27 @@ public class KISmartRegisterFragment extends BaseSmartRegisterFragment implement
         //  context.formSubmissionRouter().getHandlerMap().put("census_enrollment_form", new CensusEnrollmentHandler());
     }
 
-    @Override
     public void startRegistration() {
-
-//        if (BuildConfig.SYNC_WAIT){
-//            if(Support.ONSYNC) {
-//                Toast.makeText(getActivity(), "Data still Synchronizing, please wait", Toast.LENGTH_SHORT).show();
-//                return;
-//            }
-//        }
-//
-
-//        if (BuildConfig.UNIQUE_ID){
-//            String uniqueIdJson = LoginActivity.generator.uniqueIdController().getUniqueIdJson();
-//            if (uniqueIdJson == null || uniqueIdJson.isEmpty()) {
-//                Toast.makeText(getActivity(), "no unique id", Toast.LENGTH_LONG).show();
-//                return;
-//            }
-//        }
+       /* if(Support.ONSYNC) {
+            Toast.makeText(getActivity(), "Data still Synchronizing, please wait", Toast.LENGTH_SHORT).show();
+            return;
+        }*/
 
         FragmentTransaction ft = getActivity().getFragmentManager().beginTransaction();
-        String locationDialogTAG = "locationDialogTAG";
         Fragment prev = getActivity().getFragmentManager().findFragmentByTag(locationDialogTAG);
         if (prev != null) {
             ft.remove(prev);
         }
+
+        // String uniqueIdJson = LoginActivity.generator.uniqueIdController().getUniqueIdJson();
+       /* if(uniqueIdJson == null || uniqueIdJson.isEmpty()){
+            Toast.makeText(getActivity(),"No unique id",Toast.LENGTH_LONG).show();
+            return;
+        }*/
+
         ft.addToBackStack(null);
         LocationSelectorDialogFragment
-                .newInstance((NativeKISmartRegisterActivity) getActivity(), new
-                                EditDialogOptionModel(), context().anmLocationController().get(),
-                        "kartu_ibu_registration")
+                .newInstance((NativeKISmartRegisterActivity) getActivity(), ((NativeKISmartRegisterActivity)getActivity()).new EditDialogOptionModel(), context().anmLocationController().get(), "kartu_ibu_registration")
                 .show(ft, locationDialogTAG);
     }
 

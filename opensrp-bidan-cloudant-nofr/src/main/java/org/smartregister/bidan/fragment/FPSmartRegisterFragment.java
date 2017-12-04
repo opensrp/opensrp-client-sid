@@ -24,6 +24,7 @@ import org.smartregister.bidan.activity.NativeKIFPSmartRegisterActivity;
 import org.smartregister.bidan.options.AllKBServiceMode;
 import org.smartregister.bidan.options.MotherFilterOption;
 import org.smartregister.bidan.provider.KBClientsProvider;
+import org.smartregister.bidan.provider.KIClientsProvider;
 import org.smartregister.commonregistry.CommonPersonObjectClient;
 import org.smartregister.commonregistry.CommonRepository;
 import org.smartregister.cursoradapter.CursorCommonObjectFilterOption;
@@ -200,52 +201,37 @@ public class FPSmartRegisterFragment extends BaseSmartRegisterFragment {
     @TargetApi(Build.VERSION_CODES.KITKAT)
     public void initializeQueries(String s){
         try {
-            KBClientsProvider kbScp = new KBClientsProvider(getActivity(), clientActionHandler, context().alertService());
-            clientAdapter = new SmartRegisterPaginatedCursorAdapter(getActivity(), null, kbScp,
-                    new CommonRepository(
-                            tableName,
-                            new String []{
-                                    "is_closed",
-                                    "namalengkap",
-                                    "umur",
-                                    "namaSuami",
-                                    "isOutOfArea"
-                            }));
-
+            KBClientsProvider kiscp =
+                    new KBClientsProvider(getActivity(), clientActionHandler, context().alertService());
+            clientAdapter = new SmartRegisterPaginatedCursorAdapter(
+                    getActivity(),
+                    null,
+                    kiscp,
+                    new CommonRepository("ec_kartu_ibu",
+                            new String[]{"ec_kartu_ibu.is_closed", "ec_kartu_ibu.namalengkap", "ec_kartu_ibu.umur", "ec_kartu_ibu.namaSuami", "noIbu"}));
             clientsView.setAdapter(clientAdapter);
 
-            setTablename(tableName);
+            setTablename("ec_kartu_ibu");
             SmartRegisterQueryBuilder countqueryBuilder = new SmartRegisterQueryBuilder();
-            countqueryBuilder.SelectInitiateMainTableCounts(tableName);
-            //   countqueryBuilder.customJoin("LEFT JOIN ec_ibu on ec_kartu_ibu.id = ec_ibu.base_entity_id");
-            if (s == null || Objects.equals(s, "!")) {
-                Log.e(TAG, "initializeQueries: "+"Not Initialized" );
-                mainCondition = "is_closed = 0 and jenisKontrasepsi != '0' AND namalengkap != '' ";
-            } else {
-                Log.e(TAG, "initializeQueries: " + s);
-                mainCondition = "is_closed = 0 and jenisKontrasepsi != '0' AND object_id LIKE '%" + s + "%'";
-            }
+            countqueryBuilder.SelectInitiateMainTableCounts("ec_kartu_ibu");
+            // countqueryBuilder.customJoin("LEFT JOIN ec_anak ON ec_kartu_ibu.id = ec_anak.relational_id ");
 
+            if (s == null || Objects.equals(s, "!")) {
+                mainCondition = "is_closed = 0 and namalengkap != '' and jenisKontrasepsi !='' ";
+//                mainCondition = "is_closed = 0";
+                Log.e(TAG, "initializeQueries: Not Initialized");
+            } else {
+                Log.e(TAG, "initializeQueries: id " + s);
+                mainCondition = "is_closed = 0 and namalengkap != '' and jenisKontrasepsi !='' AND object_id LIKE '%" + s + "%'";
+            }
             joinTable = "";
             countSelect = countqueryBuilder.mainCondition(mainCondition);
             super.CountExecute();
 
             SmartRegisterQueryBuilder queryBuilder = new SmartRegisterQueryBuilder();
-            queryBuilder.SelectInitiateMainTable(
-                    tableName,
-                    new String[]{
-                            tableName + ".relationalid",
-                            tableName + ".is_closed",
-                            tableName + ".details",
-                            tableName + ".isOutOfArea",
-                            "namalengkap",
-                            "umur",
-                            "namaSuami",
-                    });
 
-//            queryBuilder.customJoin("LEFT JOIN ec_ibu ON "+tableName+".id = ec_ibu.base_entity_id LEFT JOIN ImageList imagelist ON ec_ibu.base_entity_id=imagelist.entityID ");
-            queryBuilder.customJoin("LEFT JOIN ec_ibu ON "+tableName+".id = ec_ibu.base_entity_id");
-
+            queryBuilder.SelectInitiateMainTable("ec_kartu_ibu", new String[]{"ec_kartu_ibu.relationalid", "ec_kartu_ibu.is_closed", "ec_kartu_ibu.details", "ec_kartu_ibu.isOutOfArea", "ec_kartu_ibu.namalengkap", "ec_kartu_ibu.umur", "ec_kartu_ibu.namaSuami", "noIbu"});
+            //   queryBuilder.customJoin("LEFT JOIN ec_anak ON ec_kartu_ibu.id = ec_anak.relational_id ");
             mainSelect = queryBuilder.mainCondition(mainCondition);
             Sortqueries = KiSortByNameAZ();
 
@@ -258,10 +244,8 @@ public class FPSmartRegisterFragment extends BaseSmartRegisterFragment {
 
             refresh();
 
-        } catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
-        }
-        finally {
         }
 
     }
