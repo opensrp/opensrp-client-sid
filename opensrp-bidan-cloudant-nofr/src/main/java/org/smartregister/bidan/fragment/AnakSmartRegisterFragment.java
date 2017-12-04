@@ -421,7 +421,7 @@ public class AnakSmartRegisterFragment extends BaseSmartRegisterFragment
                 case R.id.btn_edit:
 //                    FlurryFacade.logEvent("click_visit_button_on_kohort_anak_dashboard");
 //                    showFragmentDialog(new EditDialogOptionModel(), view.getTag());
-                    showFragmentDialog(((NativeKISmartRegisterActivity) getActivity()).new EditDialogOptionModel(), view.getTag());
+                    showFragmentDialog(((NativeKIAnakSmartRegisterActivity) getActivity()).new EditDialogOptionModel(), view.getTag());
 
                     break;
             }

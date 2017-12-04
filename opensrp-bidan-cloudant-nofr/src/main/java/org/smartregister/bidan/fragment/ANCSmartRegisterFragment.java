@@ -402,7 +402,7 @@ public class ANCSmartRegisterFragment extends BaseSmartRegisterFragment {
                 case R.id.btn_edit:
                     DetailANCActivity.ancClient = (CommonPersonObjectClient) view.getTag();
 //                    showFragmentDialog(new EditDialogOptionModel(), view.getTag());
-                    showFragmentDialog(((NativeKISmartRegisterActivity) getActivity()).new EditDialogOptionModel(), view.getTag());
+                    showFragmentDialog(((NativeKIANCSmartRegisterActivity) getActivity()).new EditDialogOptionModel(), view.getTag());
 
                     break;
             }
