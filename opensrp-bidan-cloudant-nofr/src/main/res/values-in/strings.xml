@@ -127,17 +127,17 @@
     <string name="date_of_birth">Tanggal Lahir : </string>
 
     <!-- BIDAN -->
-    <string name="header_resiko">Resiko</string>
-    <string name="header_trimester">Trimester</string>
-    <string name="header_tt_imunisasi">Imunisasi</string>
-    <string name="header_tt_usia_klinis">Usia Klinis</string>
-    <string name="header_komplikasi">Komplikasi</string>
-    <string name="header_kontrasepsi">Kondisi</string>
-    <string name="header_rencana">Dok Persalinan</string>
-    <string name="header_tanda_vital">Tanda Vital</string>
-    <string name="header_pemeriksaan">Pemeriksaan</string>
+    <string name="header_resiko">RESIKO</string>
+    <string name="header_trimester">TRIMESTER</string>
+    <string name="header_tt_imunisasi">IMUNISASI</string>
+    <string name="header_tt_usia_klinis">USIA KLINIS</string>
+    <string name="header_komplikasi">KOMPLIKASI</string>
+    <string name="header_kontrasepsi">KONDISI</string>
+    <string name="header_rencana">DOK PERSALINAN</string>
+    <string name="header_tanda_vital">TANDA VITAL</string>
+    <string name="header_pemeriksaan">PEMERIKSAAN</string>
 
-    <string name="header_history_anc">Riwayat Kunjungan</string>
+    <string name="header_history_anc">RIWAYAT KUNJUNGAN</string>
     <string name="str_delivery_at">Persalinan Di</string>
     <string name="videos_cannot_play_video_dialog_title">Tidak bisa memutar video.</string>
     <string name="videos_unknown_error_dialog_message">Tidak bisa memutar video dikarenakan kesalahan teknis.</string>
@@ -146,13 +146,13 @@
     <string name="str_pnc_close_form">Tutup PNC</string>
     <string name="edd_label">"HTP: "</string>
     <string name="fp_register_service_mode_all_methods"></string>
-    <string name="header_kb_method">Kontrasepsi</string>
-    <string name="header_last_service">Pelayanan</string>
-    <string name="header_method">Metode</string>
-    <string name="header_risk_factors">Faktor Risk</string>
+    <string name="header_kb_method">KONTRASEPSI</string>
+    <string name="header_last_service">PELAYANAN</string>
+    <string name="header_method">METODE</string>
+    <string name="header_risk_factors">FAKTOR RESIKO</string>
     <string name="str_pnc_dob_label">Tanggal Lahir</string>
-    <string name="header_dob">Tgl Lahir</string>
-    <string name="header_dok_persalinan">Dok Prsalinan</string>
+    <string name="header_dob">TGL LAHIR</string>
+    <string name="header_dok_persalinan">DOK PERSALINAN</string>
 
     <string name="app_name">Bidan OpenSRP</string>
 
@@ -201,7 +201,7 @@
     <string name="child_service_mode_immunization">Imunisasi</string>
     <string name="child_service_mode_immunization_0_to_9">Imunisasi 0-9</string>
     <string name="child_service_mode_immunization_9_plus">Imunisasi 9+</string>
-    <string name="header_id_no">ID NO</string>
+    <string name="header_id_no">NO. ID</string>
     <string name="header_sick_status">SICK STATUS</string>
     <string name="header_bcg">BCG</string>
     <string name="header_hep_b_birth">HEP B BIRTH</string>

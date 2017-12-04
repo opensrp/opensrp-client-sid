@@ -12,6 +12,7 @@ import android.content.res.Resources;
 import android.os.Bundle;
 import android.text.InputType;
 import android.util.DisplayMetrics;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -74,11 +75,13 @@ public class LoginActivity extends Activity {
     public static void setLanguage() {
         AllSharedPreferences allSharedPreferences = new AllSharedPreferences(getDefaultSharedPreferences(Context.getInstance().applicationContext()));
         String preferredLocale = allSharedPreferences.fetchLanguagePreference();
+
         Resources res = Context.getInstance().applicationContext().getResources();
         // Change locale settings in the app.
         DisplayMetrics dm = res.getDisplayMetrics();
         android.content.res.Configuration conf = res.getConfiguration();
-        conf.locale = new Locale(preferredLocale);
+//        conf.locale = new Locale(preferredLocale);
+        conf.locale = new Locale(BAHASA_LOCALE);
         res.updateConfiguration(conf, dm);
 
     }
@@ -294,11 +297,7 @@ public class LoginActivity extends Activity {
 
     private void goToHome() {
         startActivity(new Intent(this, BidanHomeActivity.class));
-//        startActivity(new Intent(this, NativeKISmartRegisterActivity.class));
 //        startActivity(new Intent(this, NativeKIFPSmartRegisterActivity.class));
-//        startActivity(new Intent(this, NativeKIANCSmartRegisterActivity.class));
-//        startActivity(new Intent(this, NativeKIPNCSmartRegisterActivity.class));
-//        startActivity(new Intent(this, NativeKIAnakSmartRegisterActivity.class));
         finish();
     }
 

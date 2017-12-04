@@ -59,17 +59,15 @@ import java.util.Map;
 import java.util.Objects;
 
 import static android.view.View.INVISIBLE;
-import static android.view.View.VISIBLE;
-import static org.apache.commons.lang3.StringUtils.isEmpty;
 import static org.smartregister.bidan.utils.AllConstantsINA.FormNames.KARTU_IBU_PNC_OA;
 
 /**
  * Created by sid-tech on 11/29/17.
  */
 
-public class NativeKISmartRegisterFragment extends BaseSmartRegisterFragment implements LocationSelectorDialogFragment.OnLocationSelectedListener {
+public class KISmartRegisterFragment extends BaseSmartRegisterFragment implements LocationSelectorDialogFragment.OnLocationSelectedListener {
 
-    private static final String TAG = NativeKISmartRegisterFragment.class.getSimpleName();
+    private static final String TAG = KISmartRegisterFragment.class.getSimpleName();
     //    WD
     public static String criteria;
     private final ClientActionHandler clientActionHandler = new ClientActionHandler();
@@ -82,7 +80,7 @@ public class NativeKISmartRegisterFragment extends BaseSmartRegisterFragment imp
     }
 
     public void setCriteria(String criteria) {
-        NativeKISmartRegisterFragment.criteria = criteria;
+        KISmartRegisterFragment.criteria = criteria;
     }
 
     @Override
@@ -126,8 +124,8 @@ public class NativeKISmartRegisterFragment extends BaseSmartRegisterFragment imp
 
                 dialogOptionslist.add(new CursorCommonObjectFilterOption(getString(R.string.filter_by_all_label), filterStringForAll()));
 
-                String locationjson = context().anmLocationController().get();
-                LocationTree locationTree = EntityUtils.fromJson(locationjson, LocationTree.class);
+                String locationJSON = context().anmLocationController().get();
+                LocationTree locationTree = EntityUtils.fromJson(locationJSON, LocationTree.class);
 
                 Map<String, TreeNode<String, Location>> locationMap =
                         locationTree.getLocationsHierarchy();
@@ -168,7 +166,6 @@ public class NativeKISmartRegisterFragment extends BaseSmartRegisterFragment imp
 
     @Override
     protected SmartRegisterClientsProvider clientsProvider() {
-        Log.e(TAG, "clientsProvider: here");
         return null;
     }
 
@@ -252,6 +249,7 @@ public class NativeKISmartRegisterFragment extends BaseSmartRegisterFragment imp
 
             if (s == null || Objects.equals(s, "!")) {
                 mainCondition = "is_closed = 0 and namalengkap != '' ";
+//                mainCondition = "is_closed = 0";
                 Log.e(TAG, "initializeQueries: Not Initialized");
             } else {
                 Log.e(TAG, "initializeQueries: id " + s);
@@ -274,7 +272,9 @@ public class NativeKISmartRegisterFragment extends BaseSmartRegisterFragment imp
             super.filterandSortInInitializeQueries();
             CountExecute();
             updateSearchView();
+
             refresh();
+
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -443,8 +443,6 @@ public class NativeKISmartRegisterFragment extends BaseSmartRegisterFragment imp
             startFormActivity(KARTU_IBU_PNC_OA, null, fieldOverrides.getJSONString());
         }
     }
-
-
 
     private class ClientActionHandler implements View.OnClickListener {
         @Override

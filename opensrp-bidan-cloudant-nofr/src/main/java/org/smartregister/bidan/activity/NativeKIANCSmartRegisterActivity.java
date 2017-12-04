@@ -1,24 +1,18 @@
 package org.smartregister.bidan.activity;
 
-import android.app.Activity;
-import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
-import android.view.View;
 
 import org.smartregister.bidan.R;
 import org.smartregister.bidan.fragment.ANCSmartRegisterFragment;
-import org.smartregister.bidan.fragment.NativeKISmartRegisterFragment;
 import org.smartregister.bidan.pageradapter.BaseRegisterActivityPagerAdapter;
-import org.smartregister.commonregistry.CommonPersonObjectClient;
 import org.smartregister.enketo.view.fragment.DisplayFormFragment;
 import org.smartregister.provider.SmartRegisterClientsProvider;
 import org.smartregister.service.ZiggyService;
 import org.smartregister.view.activity.SecuredNativeSmartRegisterActivity;
-import org.smartregister.view.contract.ECClient;
 import org.smartregister.view.dialog.DialogOption;
 import org.smartregister.view.dialog.OpenFormOption;
 import org.smartregister.view.viewpager.OpenSRPViewPager;

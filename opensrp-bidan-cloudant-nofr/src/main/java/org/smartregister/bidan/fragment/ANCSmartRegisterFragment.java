@@ -124,8 +124,8 @@ public class ANCSmartRegisterFragment extends BaseSmartRegisterFragment {
 
                 dialogOptionslist.add(new CursorCommonObjectFilterOption(getString(R.string.filter_by_all_label), filterStringForAll()));
 
-                String locationjson = context().anmLocationController().get();
-                LocationTree locationTree = EntityUtils.fromJson(locationjson, LocationTree.class);
+                String locationJSON = context().anmLocationController().get();
+                LocationTree locationTree = EntityUtils.fromJson(locationJSON, LocationTree.class);
 
                 Map<String, TreeNode<String, Location>> locationMap =
                         locationTree.getLocationsHierarchy();
@@ -212,7 +212,7 @@ public class ANCSmartRegisterFragment extends BaseSmartRegisterFragment {
             countqueryBuilder.SelectInitiateMainTableCounts("ec_ibu");
 
             if (s == null || Objects.equals(s, "!")) {
-                mainCondition = "is_closed = 0";
+                mainCondition = "is_closed = 0 AND namalengkap != ''";
                 Log.e(TAG, "initializeQueries: "+"Not Initialized" );
             } else {
                 Log.e(TAG, "initializeQueries: " + s);
@@ -227,7 +227,7 @@ public class ANCSmartRegisterFragment extends BaseSmartRegisterFragment {
 
             queryBuilder.SelectInitiateMainTable("ec_ibu", new String[]{"ec_ibu.relationalid","ec_ibu.is_closed", "ec_ibu.details",  "ec_kartu_ibu.namalengkap","ec_kartu_ibu.namaSuami","imagelist.imageid"});
             queryBuilder.customJoin("LEFT JOIN ec_kartu_ibu on ec_kartu_ibu.id = ec_ibu.id LEFT JOIN ImageList imagelist ON ec_ibu.id=imagelist.entityID");
-            mainSelect = queryBuilder.mainCondition(" ec_kartu_ibu.is_closed = 0");
+            mainSelect = queryBuilder.mainCondition(mainCondition);
             Sortqueries = KiSortByNameAZ();
 
             currentlimit = 20;
@@ -270,7 +270,7 @@ public class ANCSmartRegisterFragment extends BaseSmartRegisterFragment {
             initializeQueries("");
         }
         try {
-            LoginActivity.setLanguage();
+//            LoginActivity.setLanguage();
         } catch (Exception ignored) {
 
         }

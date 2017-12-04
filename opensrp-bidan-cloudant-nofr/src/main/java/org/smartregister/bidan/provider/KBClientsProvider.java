@@ -4,9 +4,9 @@ import android.content.Context;
 import android.app.Activity;
 import android.database.Cursor;
 import android.graphics.drawable.Drawable;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.AbsListView;
 import android.widget.Button;
 import android.widget.ImageButton;
@@ -22,7 +22,6 @@ import org.smartregister.cursoradapter.SmartRegisterCLientsProviderForCursorAdap
 import org.smartregister.domain.Alert;
 import org.smartregister.repository.DetailsRepository;
 import org.smartregister.service.AlertService;
-import org.smartregister.util.OpenSRPImageLoader;
 import org.smartregister.view.activity.DrishtiApplication;
 import org.smartregister.view.contract.SmartRegisterClient;
 import org.smartregister.view.contract.SmartRegisterClients;
@@ -41,83 +40,81 @@ import static android.view.ViewGroup.LayoutParams.MATCH_PARENT;
  */
 
 public class KBClientsProvider implements SmartRegisterCLientsProviderForCursorAdapter {
+
+    private static final String TAG = KBClientsProvider.class.getSimpleName();
+
     private final LayoutInflater inflater;
     private final View.OnClickListener onClickListener;
-    private final OpenSRPImageLoader mImageLoader;
     private final Context context;
     private Drawable iconPencilDrawable;
-    private final int txtColorBlack;
     private final AbsListView.LayoutParams clientViewLayoutParams;
 
     protected CommonPersonObjectController controller;
 
     AlertService alertService;
-    public KBClientsProvider(Context context,
-                             View.OnClickListener onClickListener,
-                             AlertService alertService) {
+
+    public KBClientsProvider(Context context, View.OnClickListener onClickListener, AlertService alertService) {
+
         this.onClickListener = onClickListener;
-//        this.controller = controller;
         this.context = context;
         this.alertService = alertService;
         this.inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 
-        clientViewLayoutParams = new AbsListView.LayoutParams(MATCH_PARENT,
-                (int) context.getResources().getDimension(R.dimen.list_item_height));
-        txtColorBlack = context.getResources().getColor(R.color.text_black);
-        mImageLoader = DrishtiApplication.getCachedImageLoaderInstance();
-
+        clientViewLayoutParams = new AbsListView.LayoutParams(MATCH_PARENT, (int) context.getResources().getDimension(R.dimen.list_item_height));
+//        txtColorBlack = context.getResources().getColor(R.color.text_black);
+//        mImageLoader = DrishtiApplication.getCachedImageLoaderInstance();
     }
 
-    public void getView(SmartRegisterClient smartRegisterClient, View convertView) {
+    private void getView(SmartRegisterClient smartRegisterClient, View convertView) {
 
         ViewHolder viewHolder;
 
-        if(convertView.getTag() == null || !(convertView.getTag() instanceof  ViewHolder)){
+        if (convertView.getTag() == null || !(convertView.getTag() instanceof  ViewHolder)){
             viewHolder = new ViewHolder();
-            viewHolder.profilelayout =  (LinearLayout)convertView.findViewById(R.id.profile_info_layout);
-            viewHolder.wife_name = (TextView)convertView.findViewById(R.id.wife_name);
-            viewHolder.husband_name = (TextView)convertView.findViewById(R.id.txt_husband_name);
-            viewHolder.village_name = (TextView)convertView.findViewById(R.id.txt_village_name);
-            viewHolder.wife_age = (TextView)convertView.findViewById(R.id.wife_age);
-            viewHolder.no_ibu = (TextView)convertView.findViewById(R.id.no_ibu);
-            //   viewHolder.unique_id = (TextView)convertView.findViewById(R.id.unique_id);
+            viewHolder.profilelayout =  (LinearLayout) convertView.findViewById(R.id.profile_info_layout);
+            viewHolder.wife_name = (TextView) convertView.findViewById(R.id.wife_name);
+            viewHolder.husband_name = (TextView) convertView.findViewById(R.id.txt_husband_name);
+            viewHolder.village_name = (TextView) convertView.findViewById(R.id.txt_village_name);
+            viewHolder.wife_age = (TextView) convertView.findViewById(R.id.wife_age);
+            viewHolder.no_ibu = (TextView) convertView.findViewById(R.id.no_ibu);
+            //   viewHolder.unique_id = (TextView) convertView.findViewById(R.id.unique_id);
+            viewHolder.gravida = (TextView) convertView.findViewById(R.id.txt_gravida);
+            viewHolder.parity = (TextView) convertView.findViewById(R.id.txt_parity);
+            viewHolder.number_of_abortus = (TextView) convertView.findViewById(R.id.txt_number_of_abortus);
+            viewHolder.number_of_alive = (TextView) convertView.findViewById(R.id.txt_number_of_alive);
+            viewHolder.hr_badge = (ImageView) convertView.findViewById(R.id.img_hr_badge);
+            viewHolder.img_hrl_badge = (ImageView) convertView.findViewById(R.id.img_hrl_badge);
+            viewHolder.bpl_badge = (ImageView) convertView.findViewById(R.id.img_bpl_badge);
+            viewHolder.hrp_badge = (ImageView) convertView.findViewById(R.id.img_hrp_badge);
+            viewHolder.hrpp_badge = (ImageView) convertView.findViewById(R.id.img_hrpp_badge);
+            viewHolder.kb_method = (TextView) convertView.findViewById(R.id.kb_method);
+            viewHolder.kb_mulai = (TextView) convertView.findViewById(R.id.kb_mulai);
+            viewHolder.risk_HB = (TextView) convertView.findViewById(R.id.risk_HB);
+            viewHolder.LILA = (TextView) convertView.findViewById(R.id.risk_LILA);
 
-            viewHolder.gravida = (TextView)convertView.findViewById(R.id.txt_gravida);
-            viewHolder.parity = (TextView)convertView.findViewById(R.id.txt_parity);
-            viewHolder.number_of_abortus = (TextView)convertView.findViewById(R.id.txt_number_of_abortus);
-            viewHolder.number_of_alive = (TextView)convertView.findViewById(R.id.txt_number_of_alive);
+            viewHolder.risk_PenyakitKronis = (TextView) convertView.findViewById(R.id.risk_PenyakitKronis);
+            viewHolder.risk_IMS = (TextView) convertView.findViewById(R.id.risk_IMS);
 
-            viewHolder.hr_badge =(ImageView)convertView.findViewById(R.id.img_hr_badge);
-            viewHolder.img_hrl_badge =(ImageView)convertView.findViewById(R.id.img_hrl_badge);
-            viewHolder.bpl_badge =(ImageView)convertView.findViewById(R.id.img_bpl_badge);
-            viewHolder.hrp_badge =(ImageView)convertView.findViewById(R.id.img_hrp_badge);
-            viewHolder.hrpp_badge =(ImageView)convertView.findViewById(R.id.img_hrpp_badge);
-            viewHolder.kb_method = (TextView)convertView.findViewById(R.id.kb_method);
-            viewHolder.kb_mulai = (TextView)convertView.findViewById(R.id.kb_mulai);
-            viewHolder.risk_HB = (TextView)convertView.findViewById(R.id.risk_HB);
-            viewHolder.LILA =(TextView)convertView.findViewById(R.id.risk_LILA);
-
-            viewHolder.risk_PenyakitKronis = (TextView)convertView.findViewById(R.id.risk_PenyakitKronis);
-            viewHolder.risk_IMS = (TextView)convertView.findViewById(R.id.risk_IMS);
-
-            viewHolder.follow_up_due = (TextView)convertView.findViewById(R.id.follow_due);
+            viewHolder.follow_up_due = (TextView) convertView.findViewById(R.id.follow_due);
             viewHolder.follow_layout = (LinearLayout) convertView.findViewById(R.id. follow_layout);
             viewHolder.follow_status = (TextView) convertView.findViewById(R.id. follow_status);
             viewHolder.follow_due = (TextView) convertView.findViewById(R.id. follow_up_due);
 
-            viewHolder.profilepic =(ImageView) convertView.findViewById(R.id.img_profile);
+            viewHolder.profilepic = (ImageView) convertView.findViewById(R.id.img_profile);
             viewHolder.follow_up = (ImageButton) convertView.findViewById(R.id.btn_edit);
+            
             convertView.setTag(viewHolder);
+
         }else{
             viewHolder = (ViewHolder) convertView.getTag();
         }
 
         viewHolder.profilepic.setImageDrawable(context.getResources().getDrawable(R.mipmap.woman_placeholder));
-
         viewHolder.follow_up.setOnClickListener(onClickListener);
         viewHolder.follow_up.setTag(smartRegisterClient);
         viewHolder.profilelayout.setOnClickListener(onClickListener);
         viewHolder.profilelayout.setTag(smartRegisterClient);
+
         CommonPersonObjectClient pc = (CommonPersonObjectClient) smartRegisterClient;
         if (iconPencilDrawable == null) {
             iconPencilDrawable = context.getResources().getDrawable(R.drawable.ic_pencil);
@@ -130,15 +127,18 @@ public class KBClientsProvider implements SmartRegisterCLientsProviderForCursorA
         DetailsRepository detailsRepository = org.smartregister.Context.getInstance().detailsRepository();
         detailsRepository.updateDetails(pc);
 
+        System.out.println("client : " + pc.getColumnmaps().toString());
+        System.out.println("event : " + pc.getDetails().toString());
+
         //Risk flag
-        risk(pc.getDetails().get("highRiskSTIBBVs"),pc.getDetails().get("highRiskEctopicPregnancy"),pc.getDetails().get("highRiskCardiovascularDiseaseRecord"),
-                pc.getDetails().get("highRiskDidneyDisorder"),pc.getDetails().get("highRiskHeartDisorder"),pc.getDetails().get("highRiskAsthma"),
-                pc.getDetails().get("highRiskTuberculosis"),pc.getDetails().get("highRiskMalaria"),pc.getDetails().get("highRiskPregnancyYoungMaternalAge"),
-                pc.getDetails().get("highRiskPregnancyOldMaternalAge"),viewHolder.hr_badge);
+        risk(pc.getDetails().get("highRiskSTIBBVs"), pc.getDetails().get("highRiskEctopicPregnancy"), pc.getDetails().get("highRiskCardiovascularDiseaseRecord"),
+                pc.getDetails().get("highRiskDidneyDisorder"), pc.getDetails().get("highRiskHeartDisorder"), pc.getDetails().get("highRiskAsthma"),
+                pc.getDetails().get("highRiskTuberculosis"), pc.getDetails().get("highRiskMalaria"), pc.getDetails().get("highRiskPregnancyYoungMaternalAge"),
+                pc.getDetails().get("highRiskPregnancyOldMaternalAge"), viewHolder.hr_badge);
 
 
         //set image
-//        final ImageView kiview = (ImageView)convertView.findViewById(R.id.img_profile);
+//        final ImageView kiview = (ImageView) convertView.findViewById(R.id.img_profile);
         //start profile image
         viewHolder.profilepic.setTag(R.id.entity_id, pc.getColumnmaps().get("_id"));//required when saving file to disk
 //        if(pc.getCaseId()!=null){//image already in local storage most likey ):
@@ -152,24 +152,24 @@ public class KBClientsProvider implements SmartRegisterCLientsProviderForCursorA
 
         //end profile image
 
-        viewHolder.wife_name.setText(pc.getColumnmaps().get("namalengkap")!=null?pc.getColumnmaps().get("namalengkap"):"");
-        viewHolder.husband_name.setText(pc.getColumnmaps().get("namaSuami")!=null?pc.getColumnmaps().get("namaSuami"):"");
-        viewHolder.village_name.setText(pc.getDetails().get("address1")!=null?pc.getDetails().get("address1"):"");
-        viewHolder.wife_age.setText(pc.getColumnmaps().get("umur")!=null?pc.getColumnmaps().get("umur"):"");
-        viewHolder.no_ibu.setText(pc.getDetails().get("noIbu")!=null?pc.getDetails().get("noIbu"):"");
+        viewHolder.wife_name.setText(pc.getColumnmaps().get("namalengkap")!=null ? pc.getColumnmaps().get("namalengkap"):"null");
+        viewHolder.husband_name.setText(pc.getColumnmaps().get("namaSuami")!=null ? pc.getColumnmaps().get("namaSuami"):"null");
+        viewHolder.village_name.setText(pc.getDetails().get("address1")!=null ? pc.getDetails().get("address1"):"");
+        viewHolder.wife_age.setText(pc.getColumnmaps().get("umur")!=null ? pc.getColumnmaps().get("umur"):"");
+        viewHolder.no_ibu.setText(pc.getDetails().get("noIbu")!=null ? pc.getDetails().get("noIbu"):"");
 
-        viewHolder.gravida.setText(pc.getDetails().get("gravida")!=null?pc.getDetails().get("gravida"):"-");
-        viewHolder.parity.setText(pc.getDetails().get("partus")!=null?pc.getDetails().get("partus"):"-");
-        viewHolder.number_of_abortus.setText(pc.getDetails().get("abortus")!=null?pc.getDetails().get("abortus"):"-");
-        viewHolder.number_of_alive.setText(pc.getDetails().get("hidup")!=null?pc.getDetails().get("hidup"):"-");
+        viewHolder.gravida.setText(pc.getDetails().get("gravida")!=null ? pc.getDetails().get("gravida"):"-");
+        viewHolder.parity.setText(pc.getDetails().get("partus")!=null ? pc.getDetails().get("partus"):"-");
+        viewHolder.number_of_abortus.setText(pc.getDetails().get("abortus")!=null ? pc.getDetails().get("abortus"):"-");
+        viewHolder.number_of_alive.setText(pc.getDetails().get("hidup")!=null ? pc.getDetails().get("hidup"):"-");
 
-        viewHolder.kb_method.setText(pc.getDetails().get("jenisKontrasepsi")!=null?pc.getDetails().get("jenisKontrasepsi"):"");
-        viewHolder.kb_mulai.setText(pc.getDetails().get("tanggalkunjungan")!=null?pc.getDetails().get("tanggalkunjungan"):"");
-        viewHolder.risk_HB.setText(pc.getDetails().get("alkihb")!=null?pc.getDetails().get("alkihb"):"-");
-        viewHolder.LILA.setText(pc.getDetails().get("alkilila")!=null?pc.getDetails().get("alkilila"):"-");
-        viewHolder.risk_IMS.setText(pc.getDetails().get("alkiPenyakitIms")!=null?pc.getDetails().get("alkiPenyakitIms"):"");
-//        viewHolder.follow_up_due.setText(pc.getDetails().get("tanggalLahirAnak")!=null?pc.getDetails().get("tanggalLahirAnak"):"");
-        viewHolder.risk_PenyakitKronis.setText(pc.getDetails().get("alkiPenyakitKronis")!=null?pc.getDetails().get("alkiPenyakitKronis"):"");
+        viewHolder.kb_method.setText(pc.getDetails().get("jenisKontrasepsi")!=null ? pc.getDetails().get("jenisKontrasepsi"):"");
+        viewHolder.kb_mulai.setText(pc.getDetails().get("tanggalkunjungan")!=null ? pc.getDetails().get("tanggalkunjungan"):"");
+        viewHolder.risk_HB.setText(pc.getDetails().get("alkihb")!=null ? pc.getDetails().get("alkihb"):"-");
+        viewHolder.LILA.setText(pc.getDetails().get("alkilila")!=null ? pc.getDetails().get("alkilila"):"-");
+        viewHolder.risk_IMS.setText(pc.getDetails().get("alkiPenyakitIms")!=null ? pc.getDetails().get("alkiPenyakitIms"):"");
+//        viewHolder.follow_up_due.setText(pc.getDetails().get("tanggalLahirAnak")!=null ? pc.getDetails().get("tanggalLahirAnak"):"");
+        viewHolder.risk_PenyakitKronis.setText(pc.getDetails().get("alkiPenyakitKronis")!=null ? pc.getDetails().get("alkiPenyakitKronis"):"");
 
         viewHolder.hrp_badge.setVisibility(View.INVISIBLE);
         viewHolder.img_hrl_badge.setVisibility(View.INVISIBLE);
@@ -201,7 +201,7 @@ public class KBClientsProvider implements SmartRegisterCLientsProviderForCursorA
         viewHolder.follow_layout.setBackgroundColor(context.getResources().getColor(R.color.status_bar_text_almost_white));
         viewHolder.follow_status.setText("");
 
-        String jenis = pc.getDetails().get("jenisKontrasepsi")!=null?pc.getDetails().get("jenisKontrasepsi"):"-";
+        String jenis = pc.getDetails().get("jenisKontrasepsi")!=null ? pc.getDetails().get("jenisKontrasepsi"):"-";
         if(jenis.equals("suntik")){
             List<Alert> alertlist_for_client = alertService.findByEntityIdAndAlertNames(pc.entityId(), "KB Injection Cyclofem");
             //alertlist_for_client.get(i).
@@ -279,7 +279,7 @@ public class KBClientsProvider implements SmartRegisterCLientsProviderForCursorA
 
     @Override
     public void getView(Cursor cursor, SmartRegisterClient smartRegisterClient, View view) {
-
+        getView(smartRegisterClient, view);
     }
 
 
@@ -294,9 +294,10 @@ public class KBClientsProvider implements SmartRegisterCLientsProviderForCursorA
 
     @Override
     public View inflatelayoutForCursorAdapter() {
-        View View = (ViewGroup) inflater().inflate(R.layout.smart_register_kb_client, null);
+        View View = inflater().inflate(R.layout.smart_register_kb_client, null);
         return View;
     }
+
 
     class ViewHolder {
 

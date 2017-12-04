@@ -8,13 +8,11 @@ import android.os.Bundle;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.util.Log;
-import android.widget.Toast;
 
 import org.json.JSONObject;
 import org.smartregister.bidan.R;
-import org.smartregister.bidan.fragment.NativeKIAnakSmartRegisterFragment;
+import org.smartregister.bidan.fragment.AnakSmartRegisterFragment;
 import org.smartregister.bidan.pageradapter.BaseRegisterActivityPagerAdapter;
-import org.smartregister.bidan.utils.Support;
 import org.smartregister.domain.form.FormSubmission;
 import org.smartregister.enketo.view.fragment.DisplayFormFragment;
 import org.smartregister.provider.SmartRegisterClientsProvider;
@@ -54,13 +52,13 @@ import static org.smartregister.bidan.utils.AllConstantsINA.FormNames.KOHORT_BAY
  */
 public class NativeKIAnakSmartRegisterActivity extends SecuredNativeSmartRegisterActivity {
 
-    public static final String TAG = NativeKIAnakSmartRegisterFragment.class.getSimpleName();
+    public static final String TAG = AnakSmartRegisterFragment.class.getSimpleName();
     SimpleDateFormat timer = new SimpleDateFormat("hh:mm:ss");
     @Bind(R.id.view_pager)
     OpenSRPViewPager mPager;
     ZiggyService ziggyService;
     // WD need for initialize queries
-    NativeKIAnakSmartRegisterFragment nf = new NativeKIAnakSmartRegisterFragment();
+    AnakSmartRegisterFragment nf = new AnakSmartRegisterFragment();
     Map<String, String> FS = new HashMap<>();
     private FragmentPagerAdapter mPagerAdapter;
     private int currentPage;
@@ -106,7 +104,7 @@ public class NativeKIAnakSmartRegisterActivity extends SecuredNativeSmartRegiste
 //        FlurryAgent.logEvent("Anak_dashboard", KI, true);
 
         formNames = this.buildFormNameList();
-        mBaseFragment = new NativeKIAnakSmartRegisterFragment();
+        mBaseFragment = new AnakSmartRegisterFragment();
 
         // Relace by followed
 //        WD
@@ -124,7 +122,7 @@ public class NativeKIAnakSmartRegisterActivity extends SecuredNativeSmartRegiste
 
             if (mode_face){
                 nf.setCriteria(base_id);
-                mBaseFragment = new NativeKIAnakSmartRegisterFragment();
+                mBaseFragment = new AnakSmartRegisterFragment();
 
 //                CommonPersonObject cpo = new CommonPersonObject(base_id, null, null, null);
 //                CommonPersonObjectClient pc = new CommonPersonObjectClient(base_id, null, null);
@@ -146,7 +144,7 @@ public class NativeKIAnakSmartRegisterActivity extends SecuredNativeSmartRegiste
                 builder.show();
             }
         } else {
-            mBaseFragment = new NativeKIAnakSmartRegisterFragment();
+            mBaseFragment = new AnakSmartRegisterFragment();
         }
 
         // Instantiate a ViewPager and a PagerAdapter.

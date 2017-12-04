@@ -7,7 +7,7 @@ import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 
 import org.smartregister.bidan.R;
-import org.smartregister.bidan.fragment.NativePNCSmartRegisterFragment;
+import org.smartregister.bidan.fragment.PNCSmartRegisterFragment;
 import org.smartregister.bidan.pageradapter.BaseRegisterActivityPagerAdapter;
 import org.smartregister.enketo.view.fragment.DisplayFormFragment;
 import org.smartregister.provider.SmartRegisterClientsProvider;
@@ -57,7 +57,7 @@ public class NativeKIPNCSmartRegisterActivity extends SecuredNativeSmartRegister
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
 
         formNames = this.buildFormNameList();
-        mBaseFragment = new NativePNCSmartRegisterFragment();
+        mBaseFragment = new PNCSmartRegisterFragment();
 
         // Instantiate a ViewPager and a PagerAdapter.
         mPagerAdapter = new BaseRegisterActivityPagerAdapter(getSupportFragmentManager(), formNames, mBaseFragment);

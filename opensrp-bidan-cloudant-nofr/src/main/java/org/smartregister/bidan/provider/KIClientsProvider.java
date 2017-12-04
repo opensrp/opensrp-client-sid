@@ -57,16 +57,13 @@ public class KIClientsProvider implements SmartRegisterCLientsProviderForCursorA
     AlertService alertService;
     private Drawable iconPencilDrawable;
 
-    public KIClientsProvider(Context context,
-                             View.OnClickListener onClickListener,
-                             AlertService alertService) {
+    public KIClientsProvider(Context context, View.OnClickListener onClickListener, AlertService alertService) {
         this.onClickListener = onClickListener;
         this.context = context;
         this.alertService = alertService;
         this.inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 
-        clientViewLayoutParams = new AbsListView.LayoutParams(MATCH_PARENT,
-                (int) context.getResources().getDimension(org.smartregister.R.dimen.list_item_height));
+        clientViewLayoutParams = new AbsListView.LayoutParams(MATCH_PARENT, (int) context.getResources().getDimension(org.smartregister.R.dimen.list_item_height));
 
     }
 
@@ -199,7 +196,6 @@ public class KIClientsProvider implements SmartRegisterCLientsProviderForCursorA
             checkLastVisit(pc.getDetails().get("tanggalkunjungan"), context.getString(R.string.fp_methods) + ": " + pc.getDetails().get("jenisKontrasepsi"), context.getString(R.string.service_fp),
                     viewHolder.anc_status_layout, viewHolder.date_status, viewHolder.visit_status);
         }
-
 
         //anak
         AllCommonsRepository anakrep = org.smartregister.Context.getInstance().allCommonsRepositoryobjects("ec_anak");

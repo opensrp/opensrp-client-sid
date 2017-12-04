@@ -187,16 +187,19 @@ public class BidanHomeActivity extends SecuredActivity {
         getSupportActionBar().setLogo(org.smartregister.bidan.R.mipmap.logo);
         getSupportActionBar().setDisplayUseLogoEnabled(true);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
-        LoginActivity.setLanguage();
+
+//        LoginActivity.setLanguage();
 //        getActionBar().setBackgroundDrawable(getResources().getDrawable(R.color.action_bar_background));
     }
 
     @Override
     protected void onResumption() {
-        LoginActivity.setLanguage();
+//        LoginActivity.setLanguage();
+
         updateRegisterCounts();
         updateSyncIndicator();
         updateRemainingFormsToSyncCount();
+
 //        initFR();
     }
 
@@ -217,22 +220,22 @@ public class BidanHomeActivity extends SecuredActivity {
 
     private void updateRegisterCounts(HomeContext homeContext) {
         SmartRegisterQueryBuilder sqb = new SmartRegisterQueryBuilder();
-        Cursor kicountcursor = context().commonrepository("ec_kartu_ibu").rawCustomQueryForAdapter(sqb.queryForCountOnRegisters("ec_kartu_ibu_search", "ec_kartu_ibu_search.is_closed=0"));
+        Cursor kicountcursor = context().commonrepository("ec_kartu_ibu").rawCustomQueryForAdapter(sqb.queryForCountOnRegisters("ec_kartu_ibu_search", "ec_kartu_ibu_search.is_closed=0 and namalengkap != ''"));
         kicountcursor.moveToFirst();
         kicount= kicountcursor.getInt(0);
         kicountcursor.close();
 
-        Cursor kbcountcursor = context().commonrepository("ec_kartu_ibu").rawCustomQueryForAdapter(sqb.queryForCountOnRegisters("ec_kartu_ibu_search", "ec_kartu_ibu_search.is_closed=0 and jenisKontrasepsi !='0'" ));
+        Cursor kbcountcursor = context().commonrepository("ec_kartu_ibu").rawCustomQueryForAdapter(sqb.queryForCountOnRegisters("ec_kartu_ibu_search", "ec_kartu_ibu_search.is_closed=0 and jenisKontrasepsi !='0' and namalengkap != ''" ));
         kbcountcursor.moveToFirst();
         int kbcount = kbcountcursor.getInt(0);
         kbcountcursor.close();
 
-        Cursor anccountcursor = context().commonrepository("ec_ibu").rawCustomQueryForAdapter(sqb.queryForCountOnRegisters("ec_ibu_search", "ec_ibu_search.is_closed=0 "));
+        Cursor anccountcursor = context().commonrepository("ec_ibu").rawCustomQueryForAdapter(sqb.queryForCountOnRegisters("ec_ibu_search", "ec_ibu_search.is_closed=0 and namalengkap != '' "));
         anccountcursor.moveToFirst();
         int anccount = anccountcursor.getInt(0);
         anccountcursor.close();
 
-        Cursor pnccountcursor = context().commonrepository("ec_pnc").rawCustomQueryForAdapter(sqb.queryForCountOnRegisters("ec_pnc_search", "ec_pnc_search.is_closed=0 AND (ec_pnc_search.keadaanIbu ='hidup' OR ec_pnc_search.keadaanIbu IS NULL) ")); // and ec_pnc_search.keadaanIbu LIKE '%hidup%'
+        Cursor pnccountcursor = context().commonrepository("ec_pnc").rawCustomQueryForAdapter(sqb.queryForCountOnRegisters("ec_pnc_search", "ec_pnc_search.is_closed=0 AND (ec_pnc_search.keadaanIbu ='hidup' OR ec_pnc_search.keadaanIbu IS NULL) and namalengkap != ''")); // and ec_pnc_search.keadaanIbu LIKE '%hidup%'
         pnccountcursor.moveToFirst();
         int pnccount = pnccountcursor.getInt(0);
         pnccountcursor.close();
@@ -300,8 +303,8 @@ public class BidanHomeActivity extends SecuredActivity {
                 this, context().actionService(), context().formSubmissionSyncService(),
                 new SyncProgressIndicator(), context().allFormVersionSyncService());
         updateActionsTask.updateFromServer(new SyncAfterFetchListener());
-        String locationjson = context().anmLocationController().get();
-        LocationTree locationTree = EntityUtils.fromJson(locationjson, LocationTree.class);
+        String locationJSON = context().anmLocationController().get();
+        LocationTree locationTree = EntityUtils.fromJson(locationJSON, LocationTree.class);
 
 //        Map<String,TreeNode<String, Location>> locationMap =
 //                locationTree.getLocationsHierarchy();
@@ -319,8 +322,8 @@ public class BidanHomeActivity extends SecuredActivity {
 //        if (LoginActivity.generator.uniqueIdController().needToRefillUniqueId(LoginActivity.generator.UNIQUE_ID_LIMIT))  // unique id part
 //            LoginActivity.generator.requestUniqueId();                                                                  // unique id part
 
-        String locationjson = context().anmLocationController().get();
-        LocationTree locationTree = EntityUtils.fromJson(locationjson, LocationTree.class);
+        String locationJSON = context().anmLocationController().get();
+        LocationTree locationTree = EntityUtils.fromJson(locationJSON, LocationTree.class);
 
         Map<String, TreeNode<String, Location>> locationMap =
                 locationTree.getLocationsHierarchy();

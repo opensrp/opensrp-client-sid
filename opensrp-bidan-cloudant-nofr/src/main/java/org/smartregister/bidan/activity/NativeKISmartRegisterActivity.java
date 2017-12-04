@@ -6,16 +6,13 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.util.Log;
-import android.widget.Toast;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.smartregister.bidan.R;
-import org.smartregister.bidan.fragment.NativeKISmartRegisterFragment;
+import org.smartregister.bidan.fragment.KISmartRegisterFragment;
 import org.smartregister.bidan.pageradapter.BaseRegisterActivityPagerAdapter;
 import org.smartregister.bidan.sync.ClientProcessor;
-import org.smartregister.bidan.utils.AllConstantsINA;
-import org.smartregister.bidan.utils.Support;
 import org.smartregister.domain.form.FieldOverrides;
 import org.smartregister.domain.form.FormSubmission;
 import org.smartregister.enketo.listener.DisplayFormListener;
@@ -34,14 +31,17 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
 
+import static org.smartregister.bidan.utils.AllConstantsINA.FormNames.ANAK_BAYI_REGISTRATION;
+import static org.smartregister.bidan.utils.AllConstantsINA.FormNames.KARTU_IBU_ANC_REGISTRATION;
+import static org.smartregister.bidan.utils.AllConstantsINA.FormNames.KARTU_IBU_CLOSE;
 import static org.smartregister.bidan.utils.AllConstantsINA.FormNames.KARTU_IBU_REGISTRATION;
+import static org.smartregister.bidan.utils.AllConstantsINA.FormNames.KOHORT_KB_PELAYANAN;
 
 /**
  * Created by sid-tech on 11/28/17.
@@ -69,7 +69,7 @@ public class NativeKISmartRegisterActivity extends SecuredNativeSmartRegisterAct
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
 
         formNames = this.buildFormNameList();
-        mBaseFragment = new NativeKISmartRegisterFragment();
+        mBaseFragment = new KISmartRegisterFragment();
 
         // Instantiate a ViewPager and a PagerAdapter.
         mPagerAdapter = new BaseRegisterActivityPagerAdapter(getSupportFragmentManager(), formNames, mBaseFragment);
@@ -121,10 +121,10 @@ public class NativeKISmartRegisterActivity extends SecuredNativeSmartRegisterAct
 
     public DialogOption[] getEditOptions() {
         return new DialogOption[]{
-                new OpenFormOption(getString(R.string.str_register_fp_form), "kohort_kb_pelayanan", formController),
-                new OpenFormOption(getString(R.string.str_register_anc_form), "kartu_anc_registration", formController),
-                new OpenFormOption(getString(R.string.str_register_child_form), AllConstantsINA.FormNames.ANAK_BAYI_REGISTRATION, formController),
-                new OpenFormOption(getString(R.string.str_close_ki_form), AllConstantsINA.FormNames.KARTU_IBU_CLOSE, formController),
+                new OpenFormOption(getString(R.string.str_register_fp_form), KOHORT_KB_PELAYANAN, formController),
+                new OpenFormOption(getString(R.string.str_register_anc_form), KARTU_IBU_ANC_REGISTRATION, formController),
+                new OpenFormOption(getString(R.string.str_register_child_form), ANAK_BAYI_REGISTRATION, formController),
+                new OpenFormOption(getString(R.string.str_close_ki_form), KARTU_IBU_CLOSE, formController),
         };
     }
 
@@ -136,10 +136,10 @@ public class NativeKISmartRegisterActivity extends SecuredNativeSmartRegisterAct
     private String[] buildFormNameList() {
         List<String> formNames = new ArrayList<>();
         formNames.add(KARTU_IBU_REGISTRATION);
-        formNames.add(AllConstantsINA.FormNames.KOHORT_KB_PELAYANAN);
-        formNames.add(AllConstantsINA.FormNames.KARTU_IBU_ANC_REGISTRATION);
-        formNames.add(AllConstantsINA.FormNames.ANAK_BAYI_REGISTRATION);
-        formNames.add(AllConstantsINA.FormNames.KARTU_IBU_CLOSE);
+        formNames.add(KOHORT_KB_PELAYANAN);
+        formNames.add(KARTU_IBU_ANC_REGISTRATION);
+        formNames.add(ANAK_BAYI_REGISTRATION);
+        formNames.add(KARTU_IBU_CLOSE);
 
         return formNames.toArray(new String[formNames.size()]);
     }
@@ -198,6 +198,7 @@ public class NativeKISmartRegisterActivity extends SecuredNativeSmartRegisterAct
 //                String key = iter.next();
 //                combined.put(key, uniqueId.get(key));
 //            }
+            Log.e(TAG, "OnLocationSelected: "+ combined.toString() );
 
         } catch (JSONException e) {
             e.printStackTrace();
@@ -270,6 +271,9 @@ public class NativeKISmartRegisterActivity extends SecuredNativeSmartRegisterAct
             if (entityId != null || metaData != null){
                 String data = null;
                 //check if there is previously saved data for the form
+                Log.e(TAG, "startFormActivity: formNameame "+ formName );
+                Log.e(TAG, "startFormActivity: metaData "+ metaData );
+                Log.e(TAG, "startFormActivity: entityId "+ entityId );
                 data = getPreviouslySavedDataForForm(formName, metaData, entityId);
                 if (data == null){
                     data = VaksinatorFormUtils.getInstance(getApplicationContext()).generateXMLInputForFormWithEntityId(entityId, formName, metaData);

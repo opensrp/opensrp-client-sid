@@ -157,7 +157,11 @@ public class DetailFPActivity extends Activity {
         nik.setText(String.format("%s%s", getResources().getString(R.string.nik), kiclient.getDetails().get("nik") != null ? kiclient.getDetails().get("nik") : "-"));
         husband_name.setText(String.format("%s%s", getResources().getString(R.string.husband_name), kiclient.getColumnmaps().get("namaSuami") != null ? kiclient.getColumnmaps().get("namaSuami") : "-"));
         String tgl = kiclient.getDetails().get("tanggalLahir") != null ? kiclient.getDetails().get("tanggalLahir") : "-";
-        String tgl_lahir = tgl.substring(0, tgl.indexOf("T"));
+        String tgl_lahir = null;
+        if (tgl != null && !tgl.isEmpty()){
+            tgl_lahir = tgl.substring(0, tgl.indexOf("T"));
+        }
+
         dob.setText(String.format("%s%s", getResources().getString(R.string.dob), tgl_lahir));
         phone.setText(String.format("No HP: %s", kiclient.getDetails().get("NomorTelponHp") != null ? kiclient.getDetails().get("NomorTelponHp") : "-"));
 
@@ -268,7 +272,7 @@ public class DetailFPActivity extends Activity {
     @Override
     public void onBackPressed() {
         finish();
-        startActivity(new Intent(this, NativeKBSmartRegisterActivity.class));
+        startActivity(new Intent(this, NativeKIFPSmartRegisterActivity.class));
         overridePendingTransition(0, 0);
     }
 }

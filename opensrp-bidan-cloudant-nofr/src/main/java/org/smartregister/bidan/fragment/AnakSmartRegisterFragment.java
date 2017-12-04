@@ -56,11 +56,11 @@ import static android.view.View.INVISIBLE;
 /**
  * Created by koros on 10/29/15.
  */
-public class NativeKIAnakSmartRegisterFragment extends BaseSmartRegisterFragment
+public class AnakSmartRegisterFragment extends BaseSmartRegisterFragment
 //        SecuredNativeSmartRegisterCursorAdapterFragment
 {
 
-    private static final String TAG = NativeKIAnakSmartRegisterFragment.class.getSimpleName();
+    private static final String TAG = AnakSmartRegisterFragment.class.getSimpleName();
     //    WD
     public static String criteria;
     private final ClientActionHandler clientActionHandler = new ClientActionHandler();
@@ -125,8 +125,8 @@ public class NativeKIAnakSmartRegisterFragment extends BaseSmartRegisterFragment
 
                 dialogOptionslist.add(new CursorCommonObjectFilterOption(getString(R.string.filter_by_all_label), filterStringForAll()));
 
-                String locationjson = context().anmLocationController().get();
-                LocationTree locationTree = EntityUtils.fromJson(locationjson, LocationTree.class);
+                String locationJSON = context().anmLocationController().get();
+                LocationTree locationTree = EntityUtils.fromJson(locationJSON, LocationTree.class);
 
                 Map<String, TreeNode<String, Location>> locationMap =
                         locationTree.getLocationsHierarchy();

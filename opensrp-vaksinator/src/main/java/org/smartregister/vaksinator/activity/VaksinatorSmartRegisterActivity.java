@@ -238,6 +238,7 @@ public class VaksinatorSmartRegisterActivity extends SecuredNativeSmartRegisterA
 
         @Override
     public void OnLocationSelected(String locationJSONString) {
+            Log.e(TAG, "OnLocationSelected: "+locationJSONString );
         JSONObject combined = null;
 
         try {
@@ -288,6 +289,7 @@ public class VaksinatorSmartRegisterActivity extends SecuredNativeSmartRegisterA
         FS.put("start", start);
         FlurryAgent.logEvent(formName, FS, true);
 
+        Log.e(TAG, "startFormActivity: "+ metaData );
             activatingForm(formName,entityId,metaData);
 
     }
@@ -301,6 +303,7 @@ public class VaksinatorSmartRegisterActivity extends SecuredNativeSmartRegisterA
             if (entityId != null || metaData != null){
                 String data = null;
                 //check if there is previously saved data for the form
+                Log.e(TAG, "activatingForm: "+metaData );
                 data = getPreviouslySavedDataForForm(formName, metaData, entityId);
                 if (data == null){
                     data = VaksinatorFormUtils.getInstance(getApplicationContext()).generateXMLInputForFormWithEntityId(entityId, formName, metaData);

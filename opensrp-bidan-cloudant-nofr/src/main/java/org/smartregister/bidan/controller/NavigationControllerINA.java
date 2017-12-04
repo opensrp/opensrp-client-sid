@@ -9,6 +9,7 @@ import org.json.JSONObject;
 import org.smartregister.Context;
 import org.smartregister.bidan.activity.NativeKIANCSmartRegisterActivity;
 import org.smartregister.bidan.activity.NativeKIAnakSmartRegisterActivity;
+import org.smartregister.bidan.activity.NativeKIFPSmartRegisterActivity;
 import org.smartregister.bidan.activity.NativeKIPNCSmartRegisterActivity;
 import org.smartregister.bidan.activity.NativeKISmartRegisterActivity;
 import org.smartregister.view.controller.ANMController;
@@ -37,7 +38,7 @@ public class NavigationControllerINA extends org.smartregister.view.controller.N
     }
     @Override
     public void startFPSmartRegistry() {
-           activity.startActivity(new Intent(activity, NativeKBSmartRegisterActivity.class));
+           activity.startActivity(new Intent(activity, NativeKIFPSmartRegisterActivity.class));
     }
     @Override
     public void startANCSmartRegistry() {

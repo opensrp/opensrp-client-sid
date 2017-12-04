@@ -1,6 +1,5 @@
 package org.smartregister.bidan.activity;
 
-import android.app.Activity;
 import android.content.pm.ActivityInfo;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -8,7 +7,7 @@ import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 
 import org.smartregister.bidan.R;
-import org.smartregister.bidan.fragment.NativeKIFPSmartRegisterFragment;
+import org.smartregister.bidan.fragment.FPSmartRegisterFragment;
 import org.smartregister.bidan.pageradapter.BaseRegisterActivityPagerAdapter;
 import org.smartregister.enketo.view.fragment.DisplayFormFragment;
 import org.smartregister.provider.SmartRegisterClientsProvider;
@@ -39,6 +38,7 @@ import static org.smartregister.bidan.utils.AllConstantsINA.FormNames.KOHORT_KB_
 public class NativeKIFPSmartRegisterActivity extends SecuredNativeSmartRegisterActivity {
 
     public static final String TAG = NativeKIFPSmartRegisterActivity.class.getSimpleName();
+
     SimpleDateFormat timer = new SimpleDateFormat("hh:mm:ss");
     @Bind(R.id.view_pager)
     OpenSRPViewPager mPager;
@@ -57,7 +57,7 @@ public class NativeKIFPSmartRegisterActivity extends SecuredNativeSmartRegisterA
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
 
         formNames = this.buildFormNameList();
-        mBaseFragment = new NativeKIFPSmartRegisterFragment();
+        mBaseFragment = new FPSmartRegisterFragment();
 
         // Instantiate a ViewPager and a PagerAdapter.
         mPagerAdapter = new BaseRegisterActivityPagerAdapter(getSupportFragmentManager(), formNames, mBaseFragment);
@@ -91,17 +91,14 @@ public class NativeKIFPSmartRegisterActivity extends SecuredNativeSmartRegisterA
 
     @Override
     protected void onInitialization() {
-
     }
 
     @Override
     public void startRegistration() {
-
     }
 
     @Override
     protected void setupViews() {
-
     }
 
     @Override
@@ -113,23 +110,21 @@ public class NativeKIFPSmartRegisterActivity extends SecuredNativeSmartRegisterA
         LoginActivity.setLanguage();
     }
 
-    private String[] buildFormNameList(){
-        List<String> formNames = new ArrayList<String>();
-        formNames.add(KOHORT_KB_REGISTER);
-        formNames.add(KOHORT_KB_UPDATE);
-        DialogOption[] options = getEditOptions();
-        return formNames.toArray(new String[formNames.size()]);
-    }
-
     public DialogOption[] getEditOptions() {
         return new DialogOption[]{
                 new OpenFormOption(getString(R.string.str_kb_update), KOHORT_KB_UPDATE, formController),
                 new OpenFormOption(getString(R.string.str_kb_close), KOHORT_KB_CLOSE, formController),
-
         };
-
-
     }
+
+    private String[] buildFormNameList(){
+        List<String> formNames = new ArrayList<>();
+        formNames.add(KOHORT_KB_REGISTER);
+        formNames.add(KOHORT_KB_UPDATE);
+
+        return formNames.toArray(new String[formNames.size()]);
+    }
+
 
     @Override
     protected void onPause() {
