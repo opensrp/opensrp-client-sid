@@ -19,7 +19,7 @@ import org.smartregister.domain.form.FormSubmission;
 import org.smartregister.enketo.view.fragment.DisplayFormFragment;
 import org.smartregister.provider.SmartRegisterClientsProvider;
 import org.smartregister.service.ZiggyService;
-import org.smartregister.sync.ClientProcessor;
+import org.smartregister.bidan.sync.ClientProcessor;
 import org.smartregister.util.FormUtils;
 import org.smartregister.view.activity.SecuredNativeSmartRegisterActivity;
 import org.smartregister.view.dialog.DialogOption;
@@ -164,10 +164,6 @@ public class NativeKIAnakSmartRegisterActivity extends SecuredNativeSmartRegiste
         ziggyService = context().ziggyService();
     }
 
-    public void onPageChanged(int page){
-        setRequestedOrientation(page == 0 ? ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE : ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
-        LoginActivity.setLanguage();
-    }
 
     @Override
     protected DefaultOptionsProvider getDefaultOptionsProvider() {return null;}
@@ -237,10 +233,10 @@ public class NativeKIAnakSmartRegisterActivity extends SecuredNativeSmartRegiste
     @Override
     public void startFormActivity(String formName, String entityId, String metaData) {
         //  FlurryFacade.logEvent(formName);
-        if(Support.ONSYNC) {
-            Toast.makeText(this, "Data still Synchronizing, please wait", Toast.LENGTH_SHORT).show();
-            return;
-        }
+//        if(Support.ONSYNC) {
+//            Toast.makeText(this, "Data still Synchronizing, please wait", Toast.LENGTH_SHORT).show();
+//            return;
+//        }
         String start = timer.format(new Date());
         Map<String, String> FS = new HashMap<String, String>();
         FS.put("start", start);
@@ -350,6 +346,11 @@ public class NativeKIAnakSmartRegisterActivity extends SecuredNativeSmartRegiste
 
     private boolean currentActivityIsShowingForm(){
         return currentPage != 0;
+    }
+
+    public void onPageChanged(int page){
+        setRequestedOrientation(page == 0 ? ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE : ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
+        LoginActivity.setLanguage();
     }
 
 

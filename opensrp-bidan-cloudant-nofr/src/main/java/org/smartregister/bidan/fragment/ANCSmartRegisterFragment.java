@@ -14,19 +14,21 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import org.apache.commons.lang3.StringUtils;
-import org.json.JSONException;
-import org.json.JSONObject;
 import org.opensrp.api.domain.Location;
 import org.opensrp.api.util.EntityUtils;
 import org.opensrp.api.util.LocationTree;
 import org.opensrp.api.util.TreeNode;
 import org.smartregister.Context;
 import org.smartregister.bidan.R;
+import org.smartregister.bidan.activity.DetailANCActivity;
 import org.smartregister.bidan.activity.DetailMotherActivity;
 import org.smartregister.bidan.activity.LoginActivity;
+import org.smartregister.bidan.activity.NativeKIANCSmartRegisterActivity;
 import org.smartregister.bidan.activity.NativeKISmartRegisterActivity;
 import org.smartregister.bidan.options.AllKartuIbuServiceMode;
+import org.smartregister.bidan.options.KIANCOverviewServiceMode;
 import org.smartregister.bidan.options.MotherFilterOption;
+import org.smartregister.bidan.provider.KIANCClientsProvider;
 import org.smartregister.bidan.provider.KIClientsProvider;
 import org.smartregister.commonregistry.AllCommonsRepository;
 import org.smartregister.commonregistry.CommonPersonObject;
@@ -36,7 +38,6 @@ import org.smartregister.cursoradapter.CursorCommonObjectFilterOption;
 import org.smartregister.cursoradapter.CursorCommonObjectSort;
 import org.smartregister.cursoradapter.SmartRegisterPaginatedCursorAdapter;
 import org.smartregister.cursoradapter.SmartRegisterQueryBuilder;
-import org.smartregister.domain.form.FieldOverrides;
 import org.smartregister.provider.SmartRegisterClientsProvider;
 import org.smartregister.util.StringUtil;
 import org.smartregister.view.activity.SecuredNativeSmartRegisterActivity;
@@ -59,17 +60,14 @@ import java.util.Map;
 import java.util.Objects;
 
 import static android.view.View.INVISIBLE;
-import static android.view.View.VISIBLE;
-import static org.apache.commons.lang3.StringUtils.isEmpty;
-import static org.smartregister.bidan.utils.AllConstantsINA.FormNames.KARTU_IBU_PNC_OA;
 
 /**
  * Created by sid-tech on 11/29/17.
  */
 
-public class NativeKISmartRegisterFragment extends BaseSmartRegisterFragment implements LocationSelectorDialogFragment.OnLocationSelectedListener {
+public class ANCSmartRegisterFragment extends BaseSmartRegisterFragment {
 
-    private static final String TAG = NativeKISmartRegisterFragment.class.getSimpleName();
+    private static final String TAG = ANCSmartRegisterFragment.class.getSimpleName();
     //    WD
     public static String criteria;
     private final ClientActionHandler clientActionHandler = new ClientActionHandler();
@@ -82,7 +80,7 @@ public class NativeKISmartRegisterFragment extends BaseSmartRegisterFragment imp
     }
 
     public void setCriteria(String criteria) {
-        NativeKISmartRegisterFragment.criteria = criteria;
+        ANCSmartRegisterFragment.criteria = criteria;
     }
 
     @Override
@@ -95,7 +93,7 @@ public class NativeKISmartRegisterFragment extends BaseSmartRegisterFragment imp
 
             @Override
             public ServiceModeOption serviceMode() {
-                return new AllKartuIbuServiceMode(clientsProvider());
+                return new KIANCOverviewServiceMode(clientsProvider());
             }
 
             @Override
@@ -168,12 +166,11 @@ public class NativeKISmartRegisterFragment extends BaseSmartRegisterFragment imp
 
     @Override
     protected SmartRegisterClientsProvider clientsProvider() {
-        Log.e(TAG, "clientsProvider: here");
         return null;
     }
 
     private DialogOption[] getEditOptions() {
-        return ((NativeKISmartRegisterActivity) getActivity()).getEditOptions();
+        return ((NativeKIANCSmartRegisterActivity) getActivity()).getEditOptions();
     }
 
     @Override
@@ -183,35 +180,6 @@ public class NativeKISmartRegisterFragment extends BaseSmartRegisterFragment imp
 
     @Override
     public void startRegistration() {
-
-//        if (BuildConfig.SYNC_WAIT){
-//            if(Support.ONSYNC) {
-//                Toast.makeText(getActivity(), "Data still Synchronizing, please wait", Toast.LENGTH_SHORT).show();
-//                return;
-//            }
-//        }
-//
-
-//        if (BuildConfig.UNIQUE_ID){
-//            String uniqueIdJson = LoginActivity.generator.uniqueIdController().getUniqueIdJson();
-//            if (uniqueIdJson == null || uniqueIdJson.isEmpty()) {
-//                Toast.makeText(getActivity(), "no unique id", Toast.LENGTH_LONG).show();
-//                return;
-//            }
-//        }
-
-        FragmentTransaction ft = getActivity().getFragmentManager().beginTransaction();
-        String locationDialogTAG = "locationDialogTAG";
-        Fragment prev = getActivity().getFragmentManager().findFragmentByTag(locationDialogTAG);
-        if (prev != null) {
-            ft.remove(prev);
-        }
-        ft.addToBackStack(null);
-        LocationSelectorDialogFragment
-                .newInstance((NativeKISmartRegisterActivity) getActivity(), new
-                                EditDialogOptionModel(), context().anmLocationController().get(),
-                        "kartu_ibu_registration")
-                .show(ft, locationDialogTAG);
     }
 
     @Override
@@ -235,37 +203,31 @@ public class NativeKISmartRegisterFragment extends BaseSmartRegisterFragment imp
     public void initializeQueries(String s) {
         try {
 
-            KIClientsProvider kiscp =
-                    new KIClientsProvider(getActivity(), clientActionHandler, context().alertService());
-            clientAdapter = new SmartRegisterPaginatedCursorAdapter(
-                    getActivity(),
-                    null,
-                    kiscp,
-                    new CommonRepository("ec_kartu_ibu",
-                            new String[]{"ec_kartu_ibu.is_closed", "ec_kartu_ibu.namalengkap", "ec_kartu_ibu.umur", "ec_kartu_ibu.namaSuami", "noIbu"}));
+            KIANCClientsProvider kiscp = new KIANCClientsProvider(getActivity(),clientActionHandler,context().alertService());
+            clientAdapter = new SmartRegisterPaginatedCursorAdapter(getActivity(), null, kiscp, new CommonRepository("ec_ibu",new String []{"ec_ibu.is_closed", "ec_kartu_ibu.namalengkap", "ec_kartu_ibu.namaSuami"}));
             clientsView.setAdapter(clientAdapter);
 
-            setTablename("ec_kartu_ibu");
+            setTablename("ec_ibu");
             SmartRegisterQueryBuilder countqueryBuilder = new SmartRegisterQueryBuilder();
-            countqueryBuilder.SelectInitiateMainTableCounts("ec_kartu_ibu");
-            // countqueryBuilder.customJoin("LEFT JOIN ec_anak ON ec_kartu_ibu.id = ec_anak.relational_id ");
+            countqueryBuilder.SelectInitiateMainTableCounts("ec_ibu");
 
             if (s == null || Objects.equals(s, "!")) {
-                mainCondition = "is_closed = 0 and namalengkap != '' ";
-                Log.e(TAG, "initializeQueries: Not Initialized");
+                mainCondition = "is_closed = 0";
+                Log.e(TAG, "initializeQueries: "+"Not Initialized" );
             } else {
-                Log.e(TAG, "initializeQueries: id " + s);
-                mainCondition = "is_closed = 0 and namalengkap != '' AND object_id LIKE '%" + s + "%'";
+                Log.e(TAG, "initializeQueries: " + s);
+                mainCondition = "is_closed = 0 AND object_id LIKE '%" + s + "%'";
             }
+
             joinTable = "";
             countSelect = countqueryBuilder.mainCondition(mainCondition);
             super.CountExecute();
 
             SmartRegisterQueryBuilder queryBuilder = new SmartRegisterQueryBuilder();
 
-            queryBuilder.SelectInitiateMainTable("ec_kartu_ibu", new String[]{"ec_kartu_ibu.relationalid", "ec_kartu_ibu.is_closed", "ec_kartu_ibu.details", "ec_kartu_ibu.isOutOfArea", "ec_kartu_ibu.namalengkap", "ec_kartu_ibu.umur", "ec_kartu_ibu.namaSuami", "noIbu"});
-            //   queryBuilder.customJoin("LEFT JOIN ec_anak ON ec_kartu_ibu.id = ec_anak.relational_id ");
-            mainSelect = queryBuilder.mainCondition(mainCondition);
+            queryBuilder.SelectInitiateMainTable("ec_ibu", new String[]{"ec_ibu.relationalid","ec_ibu.is_closed", "ec_ibu.details",  "ec_kartu_ibu.namalengkap","ec_kartu_ibu.namaSuami","imagelist.imageid"});
+            queryBuilder.customJoin("LEFT JOIN ec_kartu_ibu on ec_kartu_ibu.id = ec_ibu.id LEFT JOIN ImageList imagelist ON ec_ibu.id=imagelist.entityID");
+            mainSelect = queryBuilder.mainCondition(" ec_kartu_ibu.is_closed = 0");
             Sortqueries = KiSortByNameAZ();
 
             currentlimit = 20;
@@ -425,41 +387,20 @@ public class NativeKISmartRegisterFragment extends BaseSmartRegisterFragment imp
 
     }
 
-    @Override
-    public void OnLocationSelected(String locationJSONString) {
-        JSONObject combined = null;
-
-        try {
-            JSONObject locationJSON = new JSONObject(locationJSONString);
-
-            combined = locationJSON;
-
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
-
-        if (combined != null) {
-            FieldOverrides fieldOverrides = new FieldOverrides(combined.toString());
-            startFormActivity(KARTU_IBU_PNC_OA, null, fieldOverrides.getJSONString());
-        }
-    }
-
-
-
     private class ClientActionHandler implements View.OnClickListener {
         @Override
         public void onClick(View view) {
             switch (view.getId()) {
                 case R.id.profile_info_layout:
 //                    FlurryFacade.logEvent("click_detail_view_on_kohort_ibu_dashboard");
-                    DetailMotherActivity.motherClient = (CommonPersonObjectClient) view.getTag();
-                    Intent intent = new Intent(getActivity(), DetailMotherActivity.class);
+                    DetailANCActivity.ancClient = (CommonPersonObjectClient) view.getTag();
+                    Intent intent = new Intent(getActivity(), DetailANCActivity.class);
                     startActivity(intent);
                     getActivity().finish();
                     break;
 
                 case R.id.btn_edit:
-                    DetailMotherActivity.motherClient = (CommonPersonObjectClient) view.getTag();
+                    DetailANCActivity.ancClient = (CommonPersonObjectClient) view.getTag();
                     showFragmentDialog(new EditDialogOptionModel(), view.getTag());
                     break;
             }
@@ -478,7 +419,7 @@ public class NativeKISmartRegisterFragment extends BaseSmartRegisterFragment imp
 
             if (option.name().equalsIgnoreCase(getString(R.string.str_register_anc_form))) {
                 CommonPersonObjectClient pc = DetailMotherActivity.motherClient;
-                AllCommonsRepository iburep = org.smartregister.Context.getInstance().allCommonsRepositoryobjects("ec_ibu");
+                AllCommonsRepository iburep = Context.getInstance().allCommonsRepositoryobjects("ec_ibu");
                 final CommonPersonObject ibuparent = iburep.findByCaseID(pc.entityId());
                 if (ibuparent != null) {
                     short anc_isclosed = ibuparent.getClosed();
@@ -496,7 +437,7 @@ public class NativeKISmartRegisterFragment extends BaseSmartRegisterFragment imp
                     return;
                 }
 
-                AllCommonsRepository iburep = org.smartregister.Context.getInstance().allCommonsRepositoryobjects("ec_ibu");
+                AllCommonsRepository iburep = Context.getInstance().allCommonsRepositoryobjects("ec_ibu");
                 final CommonPersonObject ibuparent = iburep.findByCaseID(pc.entityId());
                 if (ibuparent != null) {
                     short anc_isclosed = ibuparent.getClosed();

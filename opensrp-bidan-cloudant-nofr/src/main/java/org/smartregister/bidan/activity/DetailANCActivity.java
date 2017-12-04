@@ -29,11 +29,11 @@ import static org.smartregister.util.StringUtil.humanize;
 /**
  * Created by Iq on 07/09/16.
  */
-public class DetailChildActivity extends Activity {
+public class DetailANCActivity extends Activity {
 
     //image retrieving
-    private static final String TAG = DetailChildActivity.class.getSimpleName();
-    public static CommonPersonObjectClient childclient;
+    private static final String TAG = DetailANCActivity.class.getSimpleName();
+    public static CommonPersonObjectClient ancClient;
     static String entityid;
     private static HashMap<String, String> hash;
     private boolean updateMode = false;
@@ -94,8 +94,8 @@ public class DetailChildActivity extends Activity {
             @Override
             public void onClick(View v) {
                 finish();
-                DetailChildActivity.childclient = childclient;
-                startActivity(new Intent(DetailChildActivity.this, DetailChildActivity.class));
+                DetailANCActivity.ancClient = ancClient;
+                startActivity(new Intent(DetailANCActivity.this, DetailANCActivity.class));
                 overridePendingTransition(0, 0);
             }
         });
@@ -103,64 +103,64 @@ public class DetailChildActivity extends Activity {
             @Override
             public void onClick(View v) {
                 finish();
-                startActivity(new Intent(DetailChildActivity.this, NativeKIAnakSmartRegisterActivity.class));
+                startActivity(new Intent(DetailANCActivity.this, NativeKIAnakSmartRegisterActivity.class));
                 overridePendingTransition(0, 0);
             }
         });
 
 
-        DetailsRepository detailsRepository = org.smartregister.Context.getInstance().detailsRepository();
-        detailsRepository.updateDetails(childclient);
+        DetailsRepository detailsRepository = Context.getInstance().detailsRepository();
+        detailsRepository.updateDetails(ancClient);
 
-        String gender = childclient.getDetails().containsKey("gender") ? childclient.getDetails().get("gender"):"laki";
+        String gender = ancClient.getDetails().containsKey("gender") ? ancClient.getDetails().get("gender"):"laki";
 
 
         //start profile image
         int placeholderDrawable= gender.equalsIgnoreCase("male") ? R.drawable.child_boy_infant:R.drawable.child_girl_infant;
-        childview.setTag(R.id.entity_id, childclient.getCaseId());//required when saving file to disk
-        if (childclient.getCaseId() != null) {
+        childview.setTag(R.id.entity_id, ancClient.getCaseId());//required when saving file to disk
+        if (ancClient.getCaseId() != null) {
             //image already in local storage most likey ):
             //set profile image by passing the client id.If the image doesn't exist in the image repository then download and save locally
 //            DrishtiApplication.getCachedImageLoaderInstance().getImageByClientId(ancClient.getCaseId(), OpenSRPImageLoader.getStaticImageListener(childview, placeholderDrawable, placeholderDrawable));
 
-            DetailChildActivity.setImagetoHolderFromUri(this,
-                    DrishtiApplication.getAppDir() + File.separator + childclient.getDetails().get("base_entity_id") + ".JPEG",
-                    childview, childclient.getDetails().get("gender").equals("female") ? R.drawable.child_girl_infant : R.drawable.child_boy_infant);
+            DetailANCActivity.setImagetoHolderFromUri(this,
+                    DrishtiApplication.getAppDir() + File.separator + ancClient.getDetails().get("base_entity_id") + ".JPEG",
+                    childview, ancClient.getDetails().get("gender").equals("female") ? R.drawable.child_girl_infant : R.drawable.child_boy_infant);
         }
 
         //end profile image
 
-        AllCommonsRepository childRepository = org.smartregister.Context.getInstance().allCommonsRepositoryobjects("ec_anak");
+        AllCommonsRepository childRepository = Context.getInstance().allCommonsRepositoryobjects("ec_anak");
 
-        CommonPersonObject childobject = childRepository.findByCaseID(childclient.entityId());
+        CommonPersonObject childobject = childRepository.findByCaseID(ancClient.entityId());
 
 //        AllCommonsRepository iburep = org.smartregister.Context.getInstance().allCommonsRepositoryobjects("ec_ibu");
 //        final CommonPersonObject ibuparent = iburep.findByCaseID(childobject.getColumnmaps().get("relational_id"));
 
-        AllCommonsRepository kirep = org.smartregister.Context.getInstance().allCommonsRepositoryobjects("ec_kartu_ibu");
+        AllCommonsRepository kirep = Context.getInstance().allCommonsRepositoryobjects("ec_kartu_ibu");
         final CommonPersonObject kiparent = kirep.findByCaseID(childobject.getColumnmaps().get("relational_id"));
 
 
-        nama.setText(String.format("%s%s", getResources().getString(R.string.name), humanize(childclient.getColumnmaps().get("namaBayi") != null ? childclient.getColumnmaps().get("namaBayi") : "-")));
+        nama.setText(String.format("%s%s", getResources().getString(R.string.name), humanize(ancClient.getColumnmaps().get("namaBayi") != null ? ancClient.getColumnmaps().get("namaBayi") : "-")));
         mother.setText(String.format("%s%s", getResources().getString(R.string.child_details_mothers_name_label), humanize(kiparent.getColumnmaps().get("namalengkap") != null ? kiparent.getColumnmaps().get("namalengkap") : "-")));
         father.setText(String.format("%s%s", getResources().getString(R.string.child_details_fathers_name_label), humanize(kiparent.getColumnmaps().get("namaSuami") != null ? kiparent.getColumnmaps().get("namaSuami") : "-")));
-        dob.setText(String.format("%s%s", getResources().getString(R.string.date_of_birth), humanize(childclient.getColumnmaps().get("tanggalLahirAnak") != null ? childclient.getColumnmaps().get("tanggalLahirAnak") : "-")));
+        dob.setText(String.format("%s%s", getResources().getString(R.string.date_of_birth), humanize(ancClient.getColumnmaps().get("tanggalLahirAnak") != null ? ancClient.getColumnmaps().get("tanggalLahirAnak") : "-")));
 
-        txt_noBayi.setText(String.format("%s: ", humanize(childclient.getDetails().get("noBayi") != null ? childclient.getDetails().get("noBayi") : "-")));
-        txt_jenisKelamin.setText(String.format(": %s", humanize(childclient.getDetails().get("gender") != null ? childclient.getDetails().get("gender") : "-")));
-        txt_beratLahir.setText(String.format(": %s", humanize(childclient.getDetails().get("beratLahir") != null ? childclient.getDetails().get("beratLahir") : "-")));
-        tinggi.setText(String.format(": %s", humanize(childclient.getDetails().get("hasilPengukuranTinggiBayihasilPengukuranTinggiBayi") != null ? childclient.getDetails().get("hasilPengukuranTinggiBayihasilPengukuranTinggiBayi") : "-")));
-        berat.setText(String.format(": %s", humanize(childclient.getDetails().get("indikatorBeratBedanBayi") != null ? childclient.getDetails().get("indikatorBeratBedanBayi") : "-")));
-        asi.setText(String.format(": %s", humanize(childclient.getDetails().get("pemberianAsiEksklusif") != null ? childclient.getDetails().get("pemberianAsiEksklusif") : "-")));
-        status_gizi.setText(String.format(": %s", humanize(childclient.getDetails().get("statusGizi") != null ? childclient.getDetails().get("statusGizi") : "-")));
-        kpsp.setText(String.format(": %s", humanize(childclient.getDetails().get("hasilDilakukannyaKPSP") != null ? childclient.getDetails().get("hasilDilakukannyaKPSP") : "-")));
-        hb0.setText(String.format(": %s", humanize(childclient.getDetails().get("hb0") != null ? childclient.getDetails().get("hb0") : "-")));
-        pol1.setText(String.format(": %s", humanize(childclient.getDetails().get("polio1") != null ? childclient.getDetails().get("polio1") : childclient.getDetails().get("bcg") != null ? childclient.getDetails().get("bcg") : "-")));
-        pol2.setText(String.format(": %s", humanize(childclient.getDetails().get("dptHb1") != null ? childclient.getDetails().get("dptHb1") : childclient.getDetails().get("polio2") != null ? childclient.getDetails().get("polio2") : "-")));
-        pol3.setText(String.format(": %s", humanize(childclient.getDetails().get("dptHb2") != null ? childclient.getDetails().get("dptHb2") : childclient.getDetails().get("polio3") != null ? childclient.getDetails().get("polio3") : "-")));
-        pol4.setText(String.format(": %s", humanize(childclient.getDetails().get("dptHb3") != null ? childclient.getDetails().get("dptHb3") : childclient.getDetails().get("polio4") != null ? childclient.getDetails().get("polio4") : "-")));
-        campak.setText(String.format(": %s", humanize(childclient.getDetails().get("campak") != null ? childclient.getDetails().get("campak") : "-")));
-        vita.setText(String.format(": %s", humanize(childclient.getDetails().get("pelayananVita") != null ? childclient.getDetails().get("pelayananVita") : "-")));
+        txt_noBayi.setText(String.format("%s: ", humanize(ancClient.getDetails().get("noBayi") != null ? ancClient.getDetails().get("noBayi") : "-")));
+        txt_jenisKelamin.setText(String.format(": %s", humanize(ancClient.getDetails().get("gender") != null ? ancClient.getDetails().get("gender") : "-")));
+        txt_beratLahir.setText(String.format(": %s", humanize(ancClient.getDetails().get("beratLahir") != null ? ancClient.getDetails().get("beratLahir") : "-")));
+        tinggi.setText(String.format(": %s", humanize(ancClient.getDetails().get("hasilPengukuranTinggiBayihasilPengukuranTinggiBayi") != null ? ancClient.getDetails().get("hasilPengukuranTinggiBayihasilPengukuranTinggiBayi") : "-")));
+        berat.setText(String.format(": %s", humanize(ancClient.getDetails().get("indikatorBeratBedanBayi") != null ? ancClient.getDetails().get("indikatorBeratBedanBayi") : "-")));
+        asi.setText(String.format(": %s", humanize(ancClient.getDetails().get("pemberianAsiEksklusif") != null ? ancClient.getDetails().get("pemberianAsiEksklusif") : "-")));
+        status_gizi.setText(String.format(": %s", humanize(ancClient.getDetails().get("statusGizi") != null ? ancClient.getDetails().get("statusGizi") : "-")));
+        kpsp.setText(String.format(": %s", humanize(ancClient.getDetails().get("hasilDilakukannyaKPSP") != null ? ancClient.getDetails().get("hasilDilakukannyaKPSP") : "-")));
+        hb0.setText(String.format(": %s", humanize(ancClient.getDetails().get("hb0") != null ? ancClient.getDetails().get("hb0") : "-")));
+        pol1.setText(String.format(": %s", humanize(ancClient.getDetails().get("polio1") != null ? ancClient.getDetails().get("polio1") : ancClient.getDetails().get("bcg") != null ? ancClient.getDetails().get("bcg") : "-")));
+        pol2.setText(String.format(": %s", humanize(ancClient.getDetails().get("dptHb1") != null ? ancClient.getDetails().get("dptHb1") : ancClient.getDetails().get("polio2") != null ? ancClient.getDetails().get("polio2") : "-")));
+        pol3.setText(String.format(": %s", humanize(ancClient.getDetails().get("dptHb2") != null ? ancClient.getDetails().get("dptHb2") : ancClient.getDetails().get("polio3") != null ? ancClient.getDetails().get("polio3") : "-")));
+        pol4.setText(String.format(": %s", humanize(ancClient.getDetails().get("dptHb3") != null ? ancClient.getDetails().get("dptHb3") : ancClient.getDetails().get("polio4") != null ? ancClient.getDetails().get("polio4") : "-")));
+        campak.setText(String.format(": %s", humanize(ancClient.getDetails().get("campak") != null ? ancClient.getDetails().get("campak") : "-")));
+        vita.setText(String.format(": %s", humanize(ancClient.getDetails().get("pelayananVita") != null ? ancClient.getDetails().get("pelayananVita") : "-")));
 
 //        hash = Tools.retrieveHash(context.applicationContext());
 
@@ -169,11 +169,11 @@ public class DetailChildActivity extends Activity {
             public void onClick(View v) {
 
 //                FlurryFacade.logEvent("taking_child_pictures_on_anak_detail_view");
-                entityid = childclient.entityId();
+                entityid = ancClient.entityId();
 //                if (hash.containsValue(entityid)) {
 //                    updateMode = true;
 //                }
-                Toast.makeText(DetailChildActivity.this, "Replace for Camera", Toast.LENGTH_SHORT).show();
+                Toast.makeText(DetailANCActivity.this, "Replace for Camera", Toast.LENGTH_SHORT).show();
 //                Intent takePictureIntent = new Intent(DetailChildActivity.this, SmartShutterActivity.class);
 //                takePictureIntent.putExtra("org.sid.sidface.SmartShutterActivity.updated", updateMode);
 //                takePictureIntent.putExtra("IdentifyPerson", false);

@@ -29,10 +29,10 @@ import static org.smartregister.util.StringUtil.humanize;
 
 /**
  */
-public class DetailIbuActivity extends Activity {
+public class DetailMotherActivity extends Activity {
 
     //image retrieving
-    private static final String TAG = DetailIbuActivity.class.getSimpleName();
+    private static final String TAG = DetailMotherActivity.class.getSimpleName();
     public static CommonPersonObjectClient motherClient;
     static String entityid;
     private static HashMap<String, String> hash;
@@ -125,7 +125,7 @@ public class DetailIbuActivity extends Activity {
             @Override
             public void onClick(View v) {
                 finish();
-                startActivity(new Intent(DetailIbuActivity.this, NativeKISmartRegisterActivity.class));
+                startActivity(new Intent(DetailMotherActivity.this, NativeKISmartRegisterActivity.class));
                 overridePendingTransition(0, 0);
 
                 String DetailEnd = timer.format(new Date());
@@ -141,7 +141,7 @@ public class DetailIbuActivity extends Activity {
         //set profile image by passing the client id.If the image doesn't exist in the image repository then download and save locally
 //        DrishtiApplication.getCachedImageLoaderInstance().getImageByClientId(motherClient.getCaseId(), OpenSRPImageLoader.getStaticImageListener(kiview, R.mipmap.woman_placeholder, R.mipmap.woman_placeholder));
 
-        DetailIbuActivity.setImagetoHolderFromUri(this,
+        DetailMotherActivity.setImagetoHolderFromUri(this,
                 DrishtiApplication.getAppDir() + File.separator + motherClient.getDetails().get("base_entity_id") + ".JPEG",
                 kiview, R.mipmap.woman_placeholder);
 
@@ -249,7 +249,7 @@ public class DetailIbuActivity extends Activity {
 //                    updateMode = true;
 //                }
 //
-//                Intent takePictureIntent = new Intent(DetailIbuActivity.this, SmartShutterActivity.class);
+//                Intent takePictureIntent = new Intent(DetailMotherActivity.this, SmartShutterActivity.class);
 //                takePictureIntent.putExtra("org.sid.sidface.SmartShutterActivity.updated", updateMode);
 //                takePictureIntent.putExtra("IdentifyPerson", false);
 //                takePictureIntent.putExtra("org.sid.sidface.ImageConfirmation.id", entityid);

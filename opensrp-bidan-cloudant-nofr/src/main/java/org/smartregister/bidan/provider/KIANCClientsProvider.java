@@ -46,9 +46,9 @@ import static org.joda.time.LocalDateTime.parse;
 /**
  * Created by Dimas Ciputra on 2/16/15.
  */
-public class KIClientsProvider implements SmartRegisterCLientsProviderForCursorAdapter {
+public class KIANCClientsProvider implements SmartRegisterCLientsProviderForCursorAdapter {
 
-    private static final String TAG = KIClientsProvider.class.getSimpleName();
+    private static final String TAG = KIANCClientsProvider.class.getSimpleName();
     private final LayoutInflater inflater;
     private final Context context;
     private final View.OnClickListener onClickListener;
@@ -57,9 +57,9 @@ public class KIClientsProvider implements SmartRegisterCLientsProviderForCursorA
     AlertService alertService;
     private Drawable iconPencilDrawable;
 
-    public KIClientsProvider(Context context,
-                             View.OnClickListener onClickListener,
-                             AlertService alertService) {
+    public KIANCClientsProvider(Context context,
+                                View.OnClickListener onClickListener,
+                                AlertService alertService) {
         this.onClickListener = onClickListener;
         this.context = context;
         this.alertService = alertService;

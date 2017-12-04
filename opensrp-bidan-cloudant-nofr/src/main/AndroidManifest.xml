@@ -3,14 +3,14 @@
     package="org.smartregister.bidan">
 
     <application
-        android:name="org.smartregister.bidan.application.BidanApplication"
+        android:name=".application.BidanApplication"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
-            android:name="org.smartregister.bidan.activity.LoginActivity"
+            android:name=".activity.LoginActivity"
             android:label="@string/app_name"
             android:screenOrientation="landscape"
             android:theme="@android:style/Theme.Holo"
@@ -26,12 +26,6 @@
             android:screenOrientation="landscape"
             android:theme="@style/AppTheme" />
 
-        <activity android:name=".activity.IbuSmartRegisterActivity"
-            android:configChanges="keyboardHidden|orientation|screenSize"
-            android:screenOrientation="landscape"
-            android:theme="@style/AppThemeNoActionBarAndTitle"
-            android:windowSoftInputMode="adjustResize" />
-
         <activity
             android:name=".activity.NativeKISmartRegisterActivity"
             android:configChanges="keyboardHidden|orientation|screenSize"
@@ -39,16 +33,49 @@
             android:theme="@style/AppThemeNoActionBarAndTitle"
             android:windowSoftInputMode="adjustResize" />
         <activity
-            android:name=".activity.DetailIbuActivity"
+            android:name=".activity.DetailMotherActivity"
             android:screenOrientation="landscape"
             android:theme="@style/AppThemeNoTitle" />
+
+        <activity
+            android:name=".activity.NativeKIFPSmartRegisterActivity"
+            android:configChanges="keyboardHidden|orientation|screenSize"
+            android:screenOrientation="landscape"
+            android:theme="@style/AppThemeNoActionBarAndTitle"
+            android:windowSoftInputMode="adjustResize" />
+        <activity
+            android:name=".activity.DetailFPActivity"
+            android:screenOrientation="landscape"
+            android:theme="@style/AppThemeNoTitle" />
+
+        <activity
+            android:name=".activity.NativeKIPNCSmartRegisterActivity"
+            android:configChanges="keyboardHidden|orientation|screenSize"
+            android:screenOrientation="landscape"
+            android:theme="@style/AppThemeNoActionBarAndTitle"
+            android:windowSoftInputMode="adjustResize" />
+        <activity
+            android:name=".activity.DetailPNCActivity"
+            android:screenOrientation="landscape"
+            android:theme="@style/AppThemeNoTitle" />
+
+        <activity android:name=".activity.NativeKIANCSmartRegisterActivity"
+            android:configChanges="keyboardHidden|orientation|screenSize"
+            android:screenOrientation="landscape"
+            android:theme="@style/AppThemeNoActionBarAndTitle"
+            android:windowSoftInputMode="adjustResize" />
+        <activity
+            android:name=".activity.DetailANCActivity"
+            android:screenOrientation="landscape"
+            android:theme="@style/AppThemeNoTitle" />
+
         <activity android:name=".activity.NativeKIAnakSmartRegisterActivity"
             android:configChanges="keyboardHidden|orientation|screenSize"
             android:screenOrientation="landscape"
             android:theme="@style/AppThemeNoActionBarAndTitle"
             android:windowSoftInputMode="adjustResize" />
         <activity
-            android:name="org.smartregister.bidan.activity.DetailChildActivity"
+            android:name=".activity.DetailChildActivity"
             android:screenOrientation="landscape"
             android:theme="@style/AppThemeNoTitle" />
     </application>

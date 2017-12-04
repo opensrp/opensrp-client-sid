@@ -35,7 +35,6 @@ public class MotherFilterOption implements CursorFilterOption {
 
     @Override
     public boolean filter(SmartRegisterClient client) {
-
         return false;
     }
 }

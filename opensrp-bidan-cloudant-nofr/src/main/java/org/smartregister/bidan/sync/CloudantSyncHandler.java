@@ -31,9 +31,9 @@ import org.apache.http.HttpResponse;
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.impl.client.DefaultHttpClient;
-import org.smartregister.bidan.utils.AllConstants;
 import org.smartregister.repository.AllSharedPreferences;
 import org.smartregister.util.AssetHandler;
+import org.smartregister.bidan.utils.AllConstants;
 
 import java.io.InputStream;
 import java.io.InputStreamReader;
@@ -45,10 +45,7 @@ import java.net.URL;
 import java.nio.charset.Charset;
 import java.util.concurrent.CountDownLatch;
 
-/**
- * Handles cloundant replication/sync processes.
- * Created by koros on 3/16/16.
- */
+
 public class CloudantSyncHandler {
     private static final String LOG_TAG = "CloudantSyncHandler";
     private static CloudantSyncHandler instance;

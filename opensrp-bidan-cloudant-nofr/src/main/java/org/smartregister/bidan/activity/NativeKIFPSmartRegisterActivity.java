@@ -1,5 +1,6 @@
 package org.smartregister.bidan.activity;
 
+import android.app.Activity;
 import android.content.pm.ActivityInfo;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -7,7 +8,7 @@ import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 
 import org.smartregister.bidan.R;
-import org.smartregister.bidan.fragment.NativePNCSmartRegisterFragment;
+import org.smartregister.bidan.fragment.NativeKIFPSmartRegisterFragment;
 import org.smartregister.bidan.pageradapter.BaseRegisterActivityPagerAdapter;
 import org.smartregister.enketo.view.fragment.DisplayFormFragment;
 import org.smartregister.provider.SmartRegisterClientsProvider;
@@ -27,18 +28,17 @@ import java.util.Map;
 import butterknife.Bind;
 import butterknife.ButterKnife;
 
-import static org.smartregister.bidan.utils.AllConstantsINA.FormNames.KARTU_IBU_PNC_CLOSE;
-import static org.smartregister.bidan.utils.AllConstantsINA.FormNames.KARTU_IBU_PNC_OA;
-import static org.smartregister.bidan.utils.AllConstantsINA.FormNames.KARTU_IBU_PNC_POSPARTUM_KB;
-import static org.smartregister.bidan.utils.AllConstantsINA.FormNames.KARTU_IBU_PNC_VISIT;
+import static org.smartregister.bidan.utils.AllConstantsINA.FormNames.KOHORT_KB_CLOSE;
+import static org.smartregister.bidan.utils.AllConstantsINA.FormNames.KOHORT_KB_REGISTER;
+import static org.smartregister.bidan.utils.AllConstantsINA.FormNames.KOHORT_KB_UPDATE;
 
 /**
- * Created by sid-tech on 11/28/17.
+ * Created by sid-tech on 11/30/17.
  */
 
-public class NativeKIPNCSmartRegisterActivity extends SecuredNativeSmartRegisterActivity {
+public class NativeKIFPSmartRegisterActivity extends SecuredNativeSmartRegisterActivity {
 
-    public static final String TAG = NativeKIPNCSmartRegisterActivity.class.getSimpleName();
+    public static final String TAG = NativeKIFPSmartRegisterActivity.class.getSimpleName();
     SimpleDateFormat timer = new SimpleDateFormat("hh:mm:ss");
     @Bind(R.id.view_pager)
     OpenSRPViewPager mPager;
@@ -57,7 +57,7 @@ public class NativeKIPNCSmartRegisterActivity extends SecuredNativeSmartRegister
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
 
         formNames = this.buildFormNameList();
-        mBaseFragment = new NativePNCSmartRegisterFragment();
+        mBaseFragment = new NativeKIFPSmartRegisterFragment();
 
         // Instantiate a ViewPager and a PagerAdapter.
         mPagerAdapter = new BaseRegisterActivityPagerAdapter(getSupportFragmentManager(), formNames, mBaseFragment);
@@ -74,7 +74,6 @@ public class NativeKIPNCSmartRegisterActivity extends SecuredNativeSmartRegister
         ziggyService = context().ziggyService();
 
     }
-
     @Override
     protected DefaultOptionsProvider getDefaultOptionsProvider() {
         return null;
@@ -109,6 +108,29 @@ public class NativeKIPNCSmartRegisterActivity extends SecuredNativeSmartRegister
     protected void onResumption() {
     }
 
+    public void onPageChanged(int page) {
+        setRequestedOrientation(page == 0 ? ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE : ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
+        LoginActivity.setLanguage();
+    }
+
+    private String[] buildFormNameList(){
+        List<String> formNames = new ArrayList<String>();
+        formNames.add(KOHORT_KB_REGISTER);
+        formNames.add(KOHORT_KB_UPDATE);
+        DialogOption[] options = getEditOptions();
+        return formNames.toArray(new String[formNames.size()]);
+    }
+
+    public DialogOption[] getEditOptions() {
+        return new DialogOption[]{
+                new OpenFormOption(getString(R.string.str_kb_update), KOHORT_KB_UPDATE, formController),
+                new OpenFormOption(getString(R.string.str_kb_close), KOHORT_KB_CLOSE, formController),
+
+        };
+
+
+    }
+
     @Override
     protected void onPause() {
         super.onPause();
@@ -126,14 +148,6 @@ public class NativeKIPNCSmartRegisterActivity extends SecuredNativeSmartRegister
         }
     }
 
-
-
-    public void onPageChanged(int page) {
-        setRequestedOrientation(page == 0 ? ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE : ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
-        LoginActivity.setLanguage();
-    }
-
-
     private boolean currentActivityIsShowingForm() {
         return currentPage != 0;
     }
@@ -146,26 +160,6 @@ public class NativeKIPNCSmartRegisterActivity extends SecuredNativeSmartRegister
     public Fragment findFragmentByPosition(int position) {
         FragmentPagerAdapter fragmentPagerAdapter = mPagerAdapter;
         return getSupportFragmentManager().findFragmentByTag("android:switcher:" + mPager.getId() + ":" + fragmentPagerAdapter.getItemId(position));
-    }
-
-    private String[] buildFormNameList(){
-        List<String> formNames = new ArrayList<>();
-
-        formNames.add(KARTU_IBU_PNC_VISIT);
-        formNames.add(KARTU_IBU_PNC_POSPARTUM_KB);
-        formNames.add(KARTU_IBU_PNC_CLOSE);
-        formNames.add(KARTU_IBU_PNC_OA);
-        formNames.add(KARTU_IBU_PNC_CLOSE);
-
-        return formNames.toArray(new String[formNames.size()]);
-    }
-
-    public DialogOption[] getEditOptions() {
-        return new DialogOption[]{
-                new OpenFormOption(getString(R.string.str_pnc_visit_form), KARTU_IBU_PNC_VISIT, formController),
-                new OpenFormOption(getString(R.string.str_pnc_postpartum_family_planning_form), KARTU_IBU_PNC_POSPARTUM_KB, formController),
-                new OpenFormOption(getString(R.string.str_pnc_close_form), KARTU_IBU_PNC_CLOSE, formController),
-        };
     }
 
 }

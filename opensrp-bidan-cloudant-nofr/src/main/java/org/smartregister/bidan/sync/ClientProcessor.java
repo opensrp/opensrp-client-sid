@@ -125,8 +125,7 @@ public class ClientProcessor {
 
     }
 
-    public Boolean processEvent(JSONObject event, JSONObject clientClassificationJson) throws
-            Exception {
+    public Boolean processEvent(JSONObject event, JSONObject clientClassificationJson) throws Exception {
 
         try {
             String baseEntityId = event.getString(baseEntityIdJSONKey);

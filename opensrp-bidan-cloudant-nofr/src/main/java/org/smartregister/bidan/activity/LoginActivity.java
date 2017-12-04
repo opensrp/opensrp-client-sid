@@ -293,9 +293,12 @@ public class LoginActivity extends Activity {
     }
 
     private void goToHome() {
-//        startActivity(new Intent(this, BidanHomeActivity.class));
+        startActivity(new Intent(this, BidanHomeActivity.class));
+//        startActivity(new Intent(this, NativeKISmartRegisterActivity.class));
+//        startActivity(new Intent(this, NativeKIFPSmartRegisterActivity.class));
+//        startActivity(new Intent(this, NativeKIANCSmartRegisterActivity.class));
+//        startActivity(new Intent(this, NativeKIPNCSmartRegisterActivity.class));
 //        startActivity(new Intent(this, NativeKIAnakSmartRegisterActivity.class));
-        startActivity(new Intent(this, NativeKISmartRegisterActivity.class));
         finish();
     }
 
