@@ -314,7 +314,8 @@ public class VaksinatorSmartRegisterFragment extends SecuredNativeSmartRegisterC
 
         ft.addToBackStack(null);
         LocationSelectorDialogFragment
-                .newInstance((VaksinatorSmartRegisterActivity) getActivity(), ((VaksinatorSmartRegisterActivity)getActivity()).new EditDialogOptionModel(), context().anmLocationController().get(), "registrasi_ibu")
+                .newInstance((VaksinatorSmartRegisterActivity) getActivity(),
+                        ((VaksinatorSmartRegisterActivity)getActivity()).new EditDialogOptionModel(), context().anmLocationController().get(), "registrasi_ibu")
                 .show(ft, locationDialogTAG);
     }
 

@@ -60,6 +60,7 @@ import java.util.Objects;
 
 import static android.view.View.INVISIBLE;
 import static org.smartregister.bidan.utils.AllConstantsINA.FormNames.KARTU_IBU_PNC_OA;
+import static org.smartregister.bidan.utils.BidanConstants.EC_IBU_TABLE_NAME;
 
 /**
  * Created by sid-tech on 11/29/17.
@@ -205,8 +206,8 @@ public class KISmartRegisterFragment extends BaseSmartRegisterFragment implement
         }
         ft.addToBackStack(null);
         LocationSelectorDialogFragment
-                .newInstance((NativeKISmartRegisterActivity) getActivity(), new
-                                EditDialogOptionModel(), context().anmLocationController().get(),
+                .newInstance((NativeKISmartRegisterActivity) getActivity(),
+                        ((NativeKISmartRegisterActivity)getActivity()).new EditDialogOptionModel(), context().anmLocationController().get(),
                         "kartu_ibu_registration")
                 .show(ft, locationDialogTAG);
     }
@@ -238,30 +239,48 @@ public class KISmartRegisterFragment extends BaseSmartRegisterFragment implement
                     getActivity(),
                     null,
                     kiscp,
-                    new CommonRepository("ec_kartu_ibu",
-                            new String[]{"ec_kartu_ibu.is_closed", "ec_kartu_ibu.namalengkap", "ec_kartu_ibu.umur", "ec_kartu_ibu.namaSuami", "noIbu"}));
+                    new CommonRepository(EC_IBU_TABLE_NAME,
+                            new String[]{
+                                    EC_IBU_TABLE_NAME + ".is_closed",
+                                    EC_IBU_TABLE_NAME + ".namalengkap",
+                                    EC_IBU_TABLE_NAME + ".umur",
+                                    EC_IBU_TABLE_NAME + ".namaSuami",
+                                    "noIbu"
+                    }));
             clientsView.setAdapter(clientAdapter);
 
-            setTablename("ec_kartu_ibu");
+            setTablename(EC_IBU_TABLE_NAME);
             SmartRegisterQueryBuilder countqueryBuilder = new SmartRegisterQueryBuilder();
-            countqueryBuilder.SelectInitiateMainTableCounts("ec_kartu_ibu");
+            countqueryBuilder.SelectInitiateMainTableCounts(EC_IBU_TABLE_NAME);
             // countqueryBuilder.customJoin("LEFT JOIN ec_anak ON ec_kartu_ibu.id = ec_anak.relational_id ");
 
-            if (s == null || Objects.equals(s, "!")) {
-                mainCondition = "is_closed = 0 and namalengkap != '' ";
-//                mainCondition = "is_closed = 0";
-                Log.e(TAG, "initializeQueries: Not Initialized");
-            } else {
-                Log.e(TAG, "initializeQueries: id " + s);
+            if(s != null && !s.isEmpty()){
+                Log.e(TAG, "initializeQueries with ID = " + s);
                 mainCondition = "is_closed = 0 and namalengkap != '' AND object_id LIKE '%" + s + "%'";
+
+            } else {
+//                mainCondition = "is_closed = 1 ";
+                mainCondition = "";
+                Log.e(TAG, "initializeQueries: Not Initialized");
             }
+
             joinTable = "";
             countSelect = countqueryBuilder.mainCondition(mainCondition);
             super.CountExecute();
 
             SmartRegisterQueryBuilder queryBuilder = new SmartRegisterQueryBuilder();
 
-            queryBuilder.SelectInitiateMainTable("ec_kartu_ibu", new String[]{"ec_kartu_ibu.relationalid", "ec_kartu_ibu.is_closed", "ec_kartu_ibu.details", "ec_kartu_ibu.isOutOfArea", "ec_kartu_ibu.namalengkap", "ec_kartu_ibu.umur", "ec_kartu_ibu.namaSuami", "noIbu"});
+            queryBuilder.SelectInitiateMainTable(EC_IBU_TABLE_NAME,
+                    new String[]{
+                            EC_IBU_TABLE_NAME + ".relationalid",
+                            EC_IBU_TABLE_NAME + ".is_closed",
+                            EC_IBU_TABLE_NAME + ".details",
+                            EC_IBU_TABLE_NAME + ".isOutOfArea",
+                            EC_IBU_TABLE_NAME + ".namalengkap",
+                            EC_IBU_TABLE_NAME + ".umur",
+                            EC_IBU_TABLE_NAME + ".namaSuami",
+                            "noIbu"
+            });
             //   queryBuilder.customJoin("LEFT JOIN ec_anak ON ec_kartu_ibu.id = ec_anak.relational_id ");
             mainSelect = queryBuilder.mainCondition(mainCondition);
             Sortqueries = KiSortByNameAZ();
@@ -458,14 +477,15 @@ public class KISmartRegisterFragment extends BaseSmartRegisterFragment implement
 
                 case R.id.btn_edit:
                     DetailMotherActivity.motherClient = (CommonPersonObjectClient) view.getTag();
-                    showFragmentDialog(new EditDialogOptionModel(), view.getTag());
+                    showFragmentDialog(((NativeKISmartRegisterActivity) getActivity()).new EditDialogOptionModel(), view.getTag());
+
                     break;
             }
         }
 
     }
 
-    private class EditDialogOptionModel implements DialogOptionModel {
+    private class EditDialogOptionModelOld implements DialogOptionModel {
         @Override
         public DialogOption[] getDialogOptions() {
             return getEditOptions();

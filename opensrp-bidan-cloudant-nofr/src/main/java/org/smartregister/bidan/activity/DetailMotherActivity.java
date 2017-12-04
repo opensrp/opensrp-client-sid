@@ -149,7 +149,12 @@ public class DetailMotherActivity extends Activity {
         nik.setText(String.format("%s%s", getResources().getString(R.string.nik), motherClient.getDetails().get("nik") != null ? motherClient.getDetails().get("nik") : "-"));
         husband_name.setText(String.format("%s%s", getResources().getString(R.string.husband_name), motherClient.getColumnmaps().get("namaSuami") != null ? motherClient.getColumnmaps().get("namaSuami") : "-"));
         String tgl = motherClient.getDetails().get("tanggalLahir") != null ? motherClient.getDetails().get("tanggalLahir") : "-";
-        String tgl_lahir = tgl.substring(0, tgl.indexOf("T"));
+
+        String tgl_lahir = "null";
+        if(tgl != null && !tgl.isEmpty()) {
+            tgl_lahir = tgl.substring(0, tgl.indexOf("T"));
+        }
+
         dob.setText(String.format("%s%s", getResources().getString(R.string.dob), tgl_lahir));
         phone.setText(String.format("No HP: %s", motherClient.getDetails().get("NomorTelponHp") != null ? motherClient.getDetails().get("NomorTelponHp") : "-"));
 

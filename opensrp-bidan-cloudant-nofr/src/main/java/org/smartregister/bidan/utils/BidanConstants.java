@@ -14,6 +14,7 @@ public class BidanConstants extends AllConstants {
 
     public static final String CHILD_TABLE_NAME = "ec_anak";
     public static final String MOTHER_TABLE_NAME = "ec_mother";
+    public static final String EC_IBU_TABLE_NAME = "ec_kartu_ibu";
     public static final String CURRENT_LOCATION_ID = "CURRENT_LOCATION_ID";
 
     public static final String DEFAULT_DATE_STRING = "1970-1-1";
