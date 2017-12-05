@@ -60,6 +60,7 @@ import java.util.Objects;
 
 import static android.view.View.INVISIBLE;
 import static org.smartregister.bidan.utils.AllConstantsINA.FormNames.KARTU_IBU_PNC_OA;
+import static org.smartregister.view.activity.NativeECSmartRegisterActivity.locationDialogTAG;
 import static org.smartregister.bidan.utils.BidanConstants.EC_IBU_TABLE_NAME;
 
 /**
@@ -179,7 +180,6 @@ public class KISmartRegisterFragment extends BaseSmartRegisterFragment implement
         //  context.formSubmissionRouter().getHandlerMap().put("census_enrollment_form", new CensusEnrollmentHandler());
     }
 
-    @Override
     public void startRegistration() {
 
 //        if (BuildConfig.SYNC_WAIT){
@@ -204,6 +204,13 @@ public class KISmartRegisterFragment extends BaseSmartRegisterFragment implement
         if (prev != null) {
             ft.remove(prev);
         }
+
+        // String uniqueIdJson = LoginActivity.generator.uniqueIdController().getUniqueIdJson();
+       /* if(uniqueIdJson == null || uniqueIdJson.isEmpty()){
+            Toast.makeText(getActivity(),"No unique id",Toast.LENGTH_LONG).show();
+            return;
+        }*/
+
         ft.addToBackStack(null);
         LocationSelectorDialogFragment
                 .newInstance((NativeKISmartRegisterActivity) getActivity(),
