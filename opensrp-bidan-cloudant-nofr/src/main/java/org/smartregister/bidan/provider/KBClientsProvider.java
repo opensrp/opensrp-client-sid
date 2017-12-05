@@ -136,6 +136,8 @@ public class KBClientsProvider implements SmartRegisterCLientsProviderForCursorA
                 pc.getDetails().get("highRiskTuberculosis"), pc.getDetails().get("highRiskMalaria"), pc.getDetails().get("highRiskPregnancyYoungMaternalAge"),
                 pc.getDetails().get("highRiskPregnancyOldMaternalAge"), viewHolder.hr_badge);
 
+        Log.e(TAG, "getView: "+ pc.getDetails().toString() );
+        Log.e(TAG, "getView: "+ pc.getColumnmaps().toString() );
 
         //set image
 //        final ImageView kiview = (ImageView) convertView.findViewById(R.id.img_profile);

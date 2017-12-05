@@ -177,7 +177,6 @@ public class KISmartRegisterFragment extends BaseSmartRegisterFragment implement
 
     @Override
     protected void onInitialization() {
-        //  context.formSubmissionRouter().getHandlerMap().put("census_enrollment_form", new CensusEnrollmentHandler());
     }
 
     public void startRegistration() {
@@ -214,7 +213,8 @@ public class KISmartRegisterFragment extends BaseSmartRegisterFragment implement
         ft.addToBackStack(null);
         LocationSelectorDialogFragment
                 .newInstance((NativeKISmartRegisterActivity) getActivity(),
-                        ((NativeKISmartRegisterActivity)getActivity()).new EditDialogOptionModel(), context().anmLocationController().get(),
+                        ((NativeKISmartRegisterActivity) getActivity()).new EditDialogOptionModel(),
+                        context().anmLocationController().get(),
                         "kartu_ibu_registration")
                 .show(ft, locationDialogTAG);
     }
@@ -228,7 +228,6 @@ public class KISmartRegisterFragment extends BaseSmartRegisterFragment implement
         view.findViewById(R.id.service_mode_selection).setVisibility(View.GONE);
         clientsView.setVisibility(View.VISIBLE);
         clientsProgressView.setVisibility(View.INVISIBLE);
-//        list.setBackgroundColor(Color.RED);
         initializeQueries(getCriteria());
     }
 
@@ -333,11 +332,11 @@ public class KISmartRegisterFragment extends BaseSmartRegisterFragment implement
         if (isPausedOrRefreshList()) {
             initializeQueries("");
         }
-        try {
-            LoginActivity.setLanguage();
-        } catch (Exception ignored) {
-
-        }
+//        try {
+//            LoginActivity.setLanguage();
+//        } catch (Exception ignored) {
+//
+//        }
 
     }
 
