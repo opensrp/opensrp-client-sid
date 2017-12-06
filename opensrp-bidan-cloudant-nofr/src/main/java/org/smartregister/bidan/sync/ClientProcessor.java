@@ -786,7 +786,6 @@ public class ClientProcessor {
     }
 
     public Map<String, String> getClientAddressAsMap(JSONObject client) {
-        Log.e(TAG, "getClientAddressAsMap: "+ client );
         Map<String, String> addressMap = new HashMap<>();
         try {
             String addressFieldsKey = "addressFields";
@@ -799,7 +798,7 @@ public class ClientProcessor {
                     JSONObject addressJson = addressJsonArray.getJSONObject(0);
 
                     // Need to handle multiple addresses as well
-                    if (addressJson.has(addressFieldsKey)) {
+                    if (addressJson.has(addressFieldsKey) && !addressJson.isNull(addressFieldsKey)) {
                         JSONObject addressFields = addressJson.getJSONObject(addressFieldsKey);
                         Iterator<String> it = addressFields.keys();
 
