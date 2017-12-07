@@ -79,8 +79,8 @@ public class NativeKISmartRegisterActivity extends SecuredNativeSmartRegisterAct
         Map<String, String> KI = new HashMap<>();
         KI.put("start", KIStart);
 //        FlurryAgent.logEvent("KI_dashboard", KI, true);
-        
-     //   FlurryFacade.logEvent("kohort_ibu_dashboard");
+
+        //   FlurryFacade.logEvent("kohort_ibu_dashboard");
         formNames = this.buildFormNameList();
 
 //        mBaseFragment = new NativeKISmartRegisterFragment(); // Relace by followed
@@ -244,7 +244,7 @@ public class NativeKISmartRegisterActivity extends SecuredNativeSmartRegisterAct
 
     @Override
     public void startFormActivity(String formName, String entityId, String metaData) {
-      //  FlurryFacade.logEvent(formName);
+        //  FlurryFacade.logEvent(formName);
 //        if(Support.ONSYNC) {
 //            Toast.makeText(this,"Data still Synchronizing, please wait",Toast.LENGTH_SHORT).show();
 //            return;
@@ -334,7 +334,7 @@ public class NativeKISmartRegisterActivity extends SecuredNativeSmartRegisterAct
         super.onPause();
         retrieveAndSaveUnsubmittedFormData();
         String KIEnd = timer.format(new Date());
-        Map<String, String> KI = new HashMap<>();
+        Map<String, String> KI = new HashMap<String, String>();
         KI.put("end", KIEnd);
 //        FlurryAgent.logEvent("KI_dashboard",KI, true );
     }

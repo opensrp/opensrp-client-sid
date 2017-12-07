@@ -45,7 +45,7 @@ import static org.smartregister.util.Utils.getValue;
  * Created by sid-tech on 11/30/17.
  */
 
-public class NativeKIFPSmartRegisterActivity extends SecuredNativeSmartRegisterActivity {
+public class NativeKIFPSmartRegisterActivity extends BaseRegisterActivity {
 
     public static final String TAG = NativeKIFPSmartRegisterActivity.class.getSimpleName();
 

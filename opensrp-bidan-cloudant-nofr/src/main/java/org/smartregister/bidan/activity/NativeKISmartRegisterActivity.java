@@ -1,17 +1,24 @@
 package org.smartregister.bidan.activity;
 
 import android.support.v4.app.Fragment;
+
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.smartregister.bidan.R;
 import org.smartregister.bidan.fragment.NativeKISmartRegisterFragment;
-import org.smartregister.commonregistry.CommonPersonObjectClient;
+import org.smartregister.bidan.utils.BidanFormUtils;
 import org.smartregister.domain.form.FieldOverrides;
+import org.smartregister.enketo.view.fragment.DisplayFormFragment;
 import org.smartregister.view.dialog.DialogOption;
 import org.smartregister.view.dialog.LocationSelectorDialogFragment;
 import org.smartregister.view.dialog.OpenFormOption;
+
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import static org.smartregister.bidan.utils.AllConstantsINA.FormNames.ANAK_BAYI_REGISTRATION;
 import static org.smartregister.bidan.utils.AllConstantsINA.FormNames.KARTU_IBU_ANC_REGISTRATION;
@@ -20,26 +27,25 @@ import static org.smartregister.bidan.utils.AllConstantsINA.FormNames.KARTU_IBU_
 import static org.smartregister.bidan.utils.AllConstantsINA.FormNames.KOHORT_KB_PELAYANAN;
 
 /**
- * Created by sid-tech on 11/28/17.
+ * Created by Dimas Ciputra on 2/18/15.
  */
+public class NativeKISmartRegisterActivity extends BaseRegisterActivity implements LocationSelectorDialogFragment.OnLocationSelectedListener {
 
-public class NativeKIbuSmartRegisterActivity extends BaseRegisterActivity implements LocationSelectorDialogFragment.OnLocationSelectedListener {
+    public static final String TAG = NativeKISmartRegisterActivity.class.getSimpleName();
 
-    public static final String TAG = NativeKIbuSmartRegisterActivity.class.getSimpleName();
-
-        @Override
-        protected String[] formNames() {
+    @Override
+    protected String[] formNames() {
 
         return this.buildFormNameList();
     }
 
-        @Override
-        protected Fragment mBaseFragment(){
+    @Override
+    protected Fragment mBaseFragment(){
 
         return new NativeKISmartRegisterFragment();
     }
 
-        public DialogOption[] getEditOptions() {
+    public DialogOption[] getEditOptions() {
         return new DialogOption[]{
                 new OpenFormOption(getString(R.string.str_register_fp_form), "kohort_kb_pelayanan", formController),
                 new OpenFormOption(getString(R.string.str_register_anc_form), "kartu_anc_registration", formController),
@@ -48,7 +54,7 @@ public class NativeKIbuSmartRegisterActivity extends BaseRegisterActivity implem
         };
     }
 
-        private String[] buildFormNameList(){
+    private String[] buildFormNameList(){
         List<String> formNames = new ArrayList<>();
         formNames.add(KARTU_IBU_REGISTRATION);
         formNames.add(KOHORT_KB_PELAYANAN);
@@ -59,8 +65,8 @@ public class NativeKIbuSmartRegisterActivity extends BaseRegisterActivity implem
         return formNames.toArray(new String[formNames.size()]);
     }
 
-        @Override
-        public void OnLocationSelected(String locationJSONString) {
+    @Override
+    public void OnLocationSelected(String locationJSONString) {
 //        if(Support.ONSYNC) {
 //            Toast.makeText(this,"Data still Synchronizing, please wait",Toast.LENGTH_SHORT).show();
 //            return;
@@ -89,6 +95,7 @@ public class NativeKIbuSmartRegisterActivity extends BaseRegisterActivity implem
             startFormActivity(KARTU_IBU_REGISTRATION, null, fieldOverrides.getJSONString());
         }
     }
+
 
 
 }

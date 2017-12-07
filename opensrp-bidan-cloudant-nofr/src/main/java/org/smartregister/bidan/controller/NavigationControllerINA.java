@@ -12,8 +12,7 @@ import org.smartregister.bidan.activity.NativeKIAnakSmartRegisterActivity;
 import org.smartregister.bidan.activity.NativeKIFPSmartRegisterActivity;
 import org.smartregister.bidan.activity.NativeKIPNCSmartRegisterActivity;
 
-import org.smartregister.bidan.activity.v1.NativeKISmartRegisterActivity;
-
+import org.smartregister.bidan.activity.NativeKISmartRegisterActivity;
 import org.smartregister.view.controller.ANMController;
 
 import static android.preference.PreferenceManager.getDefaultSharedPreferences;
@@ -32,7 +31,7 @@ public class NavigationControllerINA extends org.smartregister.view.controller.N
     @Override
     public void startECSmartRegistry() {
 //           activity.startActivity(new Intent(activity, NativeKIbuSmartRegisterActivity.class));
-        activity.startActivity(new Intent(activity, NativeKISmartRegisterActivity.class));
+           activity.startActivity(new Intent(activity, NativeKISmartRegisterActivity.class));
 
         SharedPreferences sharedPreferences = getDefaultSharedPreferences(this.activity);
 
