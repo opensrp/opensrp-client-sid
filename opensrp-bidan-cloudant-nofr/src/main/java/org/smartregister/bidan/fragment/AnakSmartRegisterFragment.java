@@ -56,9 +56,7 @@ import static android.view.View.INVISIBLE;
 /**
  * Created by koros on 10/29/15.
  */
-public class AnakSmartRegisterFragment extends BaseSmartRegisterFragment
-//        SecuredNativeSmartRegisterCursorAdapterFragment
-{
+public class AnakSmartRegisterFragment extends BaseSmartRegisterFragment {
 
     private static final String TAG = AnakSmartRegisterFragment.class.getSimpleName();
     //    WD
@@ -249,8 +247,8 @@ public class AnakSmartRegisterFragment extends BaseSmartRegisterFragment
             Log.e(TAG, "initializeQueries: Not Initialized");
         }
 
-//        Sortqueries = AnakNameShort();
-        Sortqueries = ((CursorSortOption) getDefaultOptionsProvider().sortOption()).sort();
+        Sortqueries = AnakNameShort();
+//        Sortqueries = ((CursorSortOption) getDefaultOptionsProvider().sortOption()).sort();
 
         currentlimit = 20;
         currentoffset = 0;

@@ -217,10 +217,10 @@ public class FPSmartRegisterFragment extends BaseSmartRegisterFragment {
 
             if(s != null && !s.isEmpty()){
                 Log.e(TAG, "initializeQueries with ID = " + s);
-                mainCondition = "is_closed = 0 AND jenisKontrasepsi !='' AND namalengkap != '' AND object_id LIKE '%" + s + "%'";
+                mainCondition = "is_closed = 0 AND jenisKontrasepsi !='0' AND namalengkap != '' AND object_id LIKE '%" + s + "%'";
 
             } else {
-                mainCondition = "is_closed = 0 AND jenisKontrasepsi !='' AND namalengkap != '' ";
+                mainCondition = "is_closed = 0 AND jenisKontrasepsi !='0' AND namalengkap != '' ";
                 Log.e(TAG, "initializeQueries: Not Initialized");
             }
 

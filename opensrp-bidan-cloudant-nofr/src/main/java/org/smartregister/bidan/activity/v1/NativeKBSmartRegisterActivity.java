@@ -13,7 +13,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 import org.smartregister.bidan.R;
 import org.smartregister.bidan.activity.LoginActivity;
-import org.smartregister.bidan.fragment.NativeKBSmartRegisterFragment;
+import org.smartregister.bidan.fragment.v1.NativeKBSmartRegisterFragment;
 import org.smartregister.bidan.pageradapter.BaseRegisterActivityPagerAdapter;
 import org.smartregister.bidan.sync.ClientProcessor;
 import org.smartregister.domain.form.FieldOverrides;
@@ -138,7 +138,7 @@ public class NativeKBSmartRegisterActivity extends SecuredNativeSmartRegisterAct
     }
     public void onPageChanged(int page){
         setRequestedOrientation(page == 0 ? ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE : ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
-        LoginActivity.setLanguage();
+//        LoginActivity.setLanguage();
     }
 
     @Override

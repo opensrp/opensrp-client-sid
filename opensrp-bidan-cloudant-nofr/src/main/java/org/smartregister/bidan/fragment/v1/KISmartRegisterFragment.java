@@ -1,4 +1,4 @@
-package org.smartregister.bidan.fragment;
+package org.smartregister.bidan.fragment.v1;
 
 import android.annotation.TargetApi;
 import android.app.Fragment;
@@ -25,6 +25,7 @@ import org.smartregister.bidan.R;
 import org.smartregister.bidan.activity.BaseRegisterActivity;
 import org.smartregister.bidan.activity.DetailMotherActivity;
 import org.smartregister.bidan.activity.NativeKIbuSmartRegisterActivity;
+import org.smartregister.bidan.fragment.BaseSmartRegisterFragment;
 import org.smartregister.bidan.options.AllKartuIbuServiceMode;
 import org.smartregister.bidan.options.MotherFilterOption;
 import org.smartregister.bidan.provider.KIClientsProvider;

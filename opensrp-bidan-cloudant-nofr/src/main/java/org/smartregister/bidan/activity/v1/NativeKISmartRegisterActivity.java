@@ -140,7 +140,7 @@ public class NativeKISmartRegisterActivity extends SecuredNativeSmartRegisterAct
     }
     public void onPageChanged(int page){
         setRequestedOrientation(page == 0 ? ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE : ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
-        LoginActivity.setLanguage();
+//        LoginActivity.setLanguage();
     }
 
     @Override

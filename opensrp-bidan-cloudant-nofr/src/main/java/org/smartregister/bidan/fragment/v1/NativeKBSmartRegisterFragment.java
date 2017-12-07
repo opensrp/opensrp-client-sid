@@ -1,4 +1,4 @@
-package org.smartregister.bidan.fragment;
+package org.smartregister.bidan.fragment.v1;
 
 import android.annotation.TargetApi;
 import android.app.Fragment;
@@ -56,7 +56,6 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Objects;
 
 
 import static android.view.View.INVISIBLE;
@@ -347,11 +346,11 @@ public class NativeKBSmartRegisterFragment extends SecuredNativeSmartRegisterCur
         //     updateSearchView();
         //   checkforNidMissing(mView);
 //
-        try{
-            LoginActivity.setLanguage();
-        }catch (Exception e){
-
-        }
+//        try{
+//            LoginActivity.setLanguage();
+//        }catch (Exception e){
+//
+//        }
 
     }
 

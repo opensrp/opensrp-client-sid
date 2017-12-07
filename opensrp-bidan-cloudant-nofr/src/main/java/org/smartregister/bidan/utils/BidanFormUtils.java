@@ -4,6 +4,8 @@ import android.content.Context;
 import android.content.Intent;
 import android.util.Xml;
 
+import com.cloudant.sync.datastore.ConflictException;
+
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
@@ -261,8 +263,16 @@ public class BidanFormUtils {
             org.smartregister.cloudant.models.Client client = new org.smartregister.cloudant
                     .models.Client(
                     c);
-            createNewClientDocument(client);
-        }
+            if(EditClientFormNameList().contains(formName)){
+                try {
+                    updateClientDocument(client);
+                } catch (ConflictException e1) {
+                    e1.printStackTrace();
+                }
+            }else{
+                createNewClientDocument(client);
+            }        }
+
 
         Map<String, Map<String, Object>> dep = formEntityConverter.
                 getDependentClientsFromFormSubmission(v2FormSubmission);
@@ -1107,5 +1117,15 @@ public class BidanFormUtils {
 
     private void createNewClientDocument(org.smartregister.cloudant.models.Client client) {
         mCloudantDataHandler.createClientDocument(client);
+    }
+
+    private List<String> EditClientFormNameList(){
+        List<String> formNames = new ArrayList<String>();
+        formNames.add("child_edit");
+        return formNames;
+    }
+
+    private void updateClientDocument(org.smartregister.cloudant.models.Client client) throws ConflictException {
+        mCloudantDataHandler.updateDocument(client);
     }
 }
