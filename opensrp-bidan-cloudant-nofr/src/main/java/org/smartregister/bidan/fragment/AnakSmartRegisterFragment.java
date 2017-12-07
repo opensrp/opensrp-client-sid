@@ -14,6 +14,7 @@ import org.opensrp.api.util.LocationTree;
 import org.opensrp.api.util.TreeNode;
 import org.smartregister.Context;
 import org.smartregister.bidan.R;
+import org.smartregister.bidan.activity.BaseRegisterActivity;
 import org.smartregister.bidan.activity.DetailChildActivity;
 import org.smartregister.bidan.activity.NativeKIAnakSmartRegisterActivity;
 import org.smartregister.bidan.options.AnakOverviewServiceMode;
@@ -174,7 +175,7 @@ public class AnakSmartRegisterFragment extends BaseSmartRegisterFragment
     }
 
     private DialogOption[] getEditOptions() {
-        return ((NativeKIAnakSmartRegisterActivity) getActivity()).getEditOptions();
+        return ((BaseRegisterActivity) getActivity()).getEditOptions();
     }
 
     @Override

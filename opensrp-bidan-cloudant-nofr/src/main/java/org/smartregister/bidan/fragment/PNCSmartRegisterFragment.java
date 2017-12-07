@@ -16,6 +16,7 @@ import org.opensrp.api.util.LocationTree;
 import org.opensrp.api.util.TreeNode;
 import org.smartregister.Context;
 import org.smartregister.bidan.R;
+import org.smartregister.bidan.activity.BaseRegisterActivity;
 import org.smartregister.bidan.activity.NativeKIPNCSmartRegisterActivity;
 import org.smartregister.bidan.activity.DetailPNCActivity;
 import org.smartregister.bidan.options.KIPNCOverviewServiceMode;
@@ -167,7 +168,7 @@ public class PNCSmartRegisterFragment extends BaseSmartRegisterFragment {
     }
 
     private DialogOption[] getEditOptions() {
-        return ((NativeKIPNCSmartRegisterActivity)getActivity()).getEditOptions();
+        return ((BaseRegisterActivity) getActivity()).getEditOptions();
     }
 
     @Override

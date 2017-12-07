@@ -254,11 +254,17 @@ public class BaseRegisterActivity extends SecuredNativeSmartRegisterActivity imp
 
     @Override
     public void saveFormSubmission(String formSubmission, String id, String formName, JSONObject fieldOverrides){
-        Log.v("fieldoverride", fieldOverrides.toString());
+        Log.e("fieldoverride", formSubmission);
+        Log.e("fieldoverride", formName);
+        Log.e("fieldoverride", fieldOverrides.toString());
+
         // save the form
-        try{
+        try {
             BidanFormUtils formUtils = BidanFormUtils.getInstance(getApplicationContext());
             FormSubmission submission = formUtils.generateFormSubmisionFromXMLString(id, formSubmission, formName, fieldOverrides);
+
+            Log.e(TAG, "saveFormSubmission: "+ submission );
+
             ziggyService.saveForm(getParams(submission), submission.instance());
             ClientProcessor.getInstance(getApplicationContext()).processClient();
 

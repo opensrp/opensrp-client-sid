@@ -16,6 +16,7 @@ import android.widget.Toast;
 import org.apache.commons.lang3.StringUtils;
 import org.smartregister.Context;
 import org.smartregister.bidan.R;
+import org.smartregister.bidan.activity.BaseRegisterActivity;
 import org.smartregister.bidan.activity.v1.KIDetailActivity;
 import org.smartregister.bidan.activity.LoginActivity;
 import org.smartregister.bidan.activity.v1.NativeKISmartRegisterActivity;
@@ -159,7 +160,7 @@ public class NativeKISmartRegisterFragment extends SecuredNativeSmartRegisterCur
     }
 
     private DialogOption[] getEditOptions() {
-        return ((NativeKISmartRegisterActivity) getActivity()).getEditOptions();
+        return ((BaseRegisterActivity) getActivity()).getEditOptions();
     }
 
     @Override
@@ -188,7 +189,7 @@ public class NativeKISmartRegisterFragment extends SecuredNativeSmartRegisterCur
         }
         ft.addToBackStack(null);
         LocationSelectorDialogFragment
-                .newInstance((NativeKISmartRegisterActivity) getActivity(), new
+                .newInstance((BaseRegisterActivity) getActivity(), new
                                 EditDialogOptionModel(), context().anmLocationController().get(),
                         "kartu_ibu_registration")
                 .show(ft, locationDialogTAG);

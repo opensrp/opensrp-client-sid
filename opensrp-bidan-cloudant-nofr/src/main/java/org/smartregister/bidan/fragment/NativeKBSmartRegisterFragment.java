@@ -19,6 +19,7 @@ import org.opensrp.api.util.LocationTree;
 import org.opensrp.api.util.TreeNode;
 import org.smartregister.Context;
 import org.smartregister.bidan.R;
+import org.smartregister.bidan.activity.BaseRegisterActivity;
 import org.smartregister.bidan.activity.v1.KBDetailActivity;
 import org.smartregister.bidan.activity.LoginActivity;
 import org.smartregister.bidan.activity.v1.NativeKBSmartRegisterActivity;
@@ -178,7 +179,7 @@ public class NativeKBSmartRegisterFragment extends SecuredNativeSmartRegisterCur
     }
 
     private DialogOption[] getEditOptions() {
-        return ((NativeKBSmartRegisterActivity)getActivity()).getEditOptions();
+        return ((BaseRegisterActivity) getActivity()).getEditOptions();
     }
 
     @Override

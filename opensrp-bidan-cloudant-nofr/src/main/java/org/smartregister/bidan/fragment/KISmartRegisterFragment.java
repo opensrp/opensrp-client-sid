@@ -22,6 +22,7 @@ import org.opensrp.api.util.LocationTree;
 import org.opensrp.api.util.TreeNode;
 import org.smartregister.Context;
 import org.smartregister.bidan.R;
+import org.smartregister.bidan.activity.BaseRegisterActivity;
 import org.smartregister.bidan.activity.DetailMotherActivity;
 import org.smartregister.bidan.activity.NativeKIbuSmartRegisterActivity;
 import org.smartregister.bidan.options.AllKartuIbuServiceMode;
@@ -510,7 +511,7 @@ public class KISmartRegisterFragment extends BaseSmartRegisterFragment implement
      * @return
      */
     private DialogOption[] getEditOptions() {
-        return ((NativeKIbuSmartRegisterActivity) getActivity()).getEditOptions();
+        return ((BaseRegisterActivity) getActivity()).getEditOptions();
     }
 
     private class EditDialogOptionModelOld implements DialogOptionModel {

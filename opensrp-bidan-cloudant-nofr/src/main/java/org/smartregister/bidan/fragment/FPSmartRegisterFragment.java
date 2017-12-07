@@ -18,6 +18,7 @@ import org.opensrp.api.util.LocationTree;
 import org.opensrp.api.util.TreeNode;
 import org.smartregister.Context;
 import org.smartregister.bidan.R;
+import org.smartregister.bidan.activity.BaseRegisterActivity;
 import org.smartregister.bidan.activity.DetailFPActivity;
 import org.smartregister.bidan.activity.NativeKIFPSmartRegisterActivity;
 import org.smartregister.bidan.activity.NativeKIbuSmartRegisterActivity;
@@ -161,7 +162,7 @@ public class FPSmartRegisterFragment extends BaseSmartRegisterFragment {
     }
 
     private DialogOption[] getEditOptions() {
-        return ((NativeKIFPSmartRegisterActivity) getActivity()).getEditOptions();
+        return ((BaseRegisterActivity) getActivity()).getEditOptions();
     }
 
     @Override
