@@ -68,7 +68,9 @@ public class BaseRegisterActivity extends SecuredNativeSmartRegisterActivity imp
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
 
         mPagerAdapter = new BaseRegisterActivityPagerAdapter(getSupportFragmentManager(), formNames(), mBaseFragment());
-        mPager.setOffscreenPageLimit(formNames().length);
+
+        int formLength = ((formNames() == null) ? 1 : formNames().length);
+        mPager.setOffscreenPageLimit(formLength);
         mPager.setAdapter(mPagerAdapter);
         mPager.setOnPageChangeListener(new ViewPager.SimpleOnPageChangeListener() {
             @Override
@@ -125,6 +127,8 @@ public class BaseRegisterActivity extends SecuredNativeSmartRegisterActivity imp
 
     @Override
     protected void onResumption() {
+
+        formNames();
     }
 
     @Override
@@ -263,7 +267,7 @@ public class BaseRegisterActivity extends SecuredNativeSmartRegisterActivity imp
             BidanFormUtils formUtils = BidanFormUtils.getInstance(getApplicationContext());
             FormSubmission submission = formUtils.generateFormSubmisionFromXMLString(id, formSubmission, formName, fieldOverrides);
 
-            Log.e(TAG, "saveFormSubmission: "+ submission );
+            Log.e(TAG, "saveFormSubmission: "+ submission.toString() );
 
             ziggyService.saveForm(getParams(submission), submission.instance());
             ClientProcessor.getInstance(getApplicationContext()).processClient();
@@ -334,6 +338,7 @@ public class BaseRegisterActivity extends SecuredNativeSmartRegisterActivity imp
 
         return pc.getDetails().get(key);
     }
+
 
 
 }
