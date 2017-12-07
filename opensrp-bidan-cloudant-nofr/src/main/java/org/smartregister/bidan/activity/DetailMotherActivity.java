@@ -125,7 +125,7 @@ public class DetailMotherActivity extends Activity {
             @Override
             public void onClick(View v) {
                 finish();
-                startActivity(new Intent(DetailMotherActivity.this, NativeKISmartRegisterActivity.class));
+                startActivity(new Intent(DetailMotherActivity.this, NativeKIbuSmartRegisterActivity.class));
                 overridePendingTransition(0, 0);
 
                 String DetailEnd = timer.format(new Date());
@@ -269,7 +269,7 @@ public class DetailMotherActivity extends Activity {
     @Override
     public void onBackPressed() {
         finish();
-        startActivity(new Intent(this, NativeKISmartRegisterActivity.class));
+        startActivity(new Intent(this, NativeKIbuSmartRegisterActivity.class));
         overridePendingTransition(0, 0);
     }
 

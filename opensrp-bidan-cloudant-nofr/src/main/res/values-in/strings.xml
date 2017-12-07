@@ -95,13 +95,14 @@
     <string name="str_rencana_persalinan_anc_form">Rencana Persalinan</string>
 
     <string name="str_register_pnc_form">Daftar PNC</string>
-    <string name="str_register_fp_form">Register KB</string>
-    <string name="str_register_child_form">Register Anak</string>
-    <string name="str_fp_change_form">FP Change</string>
-    <string name="str_fp_change_fp_form">Change FP</string>
+    <string name="str_register_fp_form">Daftar KB</string>
+    <string name="str_register_child_form">Daftar Anak</string>
+
+    <string name="str_fp_change_form">Ubah KB</string>
+    <string name="str_fp_change_fp_form">Ubah KB</string>
     <string name="str_record_ecp_form">Record ECP</string>
-    <string name="str_edit_ec_form">Edit EC</string>
-    <string name="str_close_ec_form">Close EC</string>
+    <string name="str_edit_ec_form">Ubah KI</string>
+    <string name="str_close_ec_form">Tutup KI</string>
     <string name="report_month_sample_text">26/03 - 25/04</string>
     <string name="str_switch_language">Ubah Bahasa</string>
     <string name="str_edit_ki_form">Edit Kartu Ibu</string>
@@ -212,12 +213,12 @@
     <string name="header_dpt_booster">DPT BOOSTER</string>
     <string name="header_vitamin_a">VITAMIN A</string>
     <string name="thayi_label">Thayi:</string>
-    <string name="mother_ec_label">Mother EC:</string>
-    <string name="sort_by_child_age">Age</string>
+    <string name="mother_ec_label">Ibu EC:</string>
+    <string name="sort_by_child_age">Usia</string>
     <string name="sort_by_child_hr">HR</string>
-    <string name="str_child_immunizations">Child Immunizations</string>
+    <string name="str_child_immunizations">Imunisasi Anak</string>
     <string name="str_child_illness">Child Illness</string>
-    <string name="str_child_close">Child Close</string>
+    <string name="str_child_close">Tutup Kohort Ibu</string>
     <string name="str_vitamin_a">Vitamin A</string>
     <string name="service_type_pnc">PNC</string>
     <string name="service_type_pentavalent_2">Pentavalent 2</string>

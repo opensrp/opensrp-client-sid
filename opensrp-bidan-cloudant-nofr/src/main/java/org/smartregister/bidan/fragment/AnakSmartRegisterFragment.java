@@ -15,9 +15,7 @@ import org.opensrp.api.util.TreeNode;
 import org.smartregister.Context;
 import org.smartregister.bidan.R;
 import org.smartregister.bidan.activity.DetailChildActivity;
-import org.smartregister.bidan.activity.LoginActivity;
 import org.smartregister.bidan.activity.NativeKIAnakSmartRegisterActivity;
-import org.smartregister.bidan.activity.NativeKISmartRegisterActivity;
 import org.smartregister.bidan.options.AnakOverviewServiceMode;
 import org.smartregister.bidan.options.ChildFilterOption;
 import org.smartregister.bidan.provider.ChildClientsProvider;
@@ -266,12 +264,6 @@ public class AnakSmartRegisterFragment extends BaseSmartRegisterFragment
             initializeQueries("!");
         }
         //     updateSearchView();
-
-        try {
-            LoginActivity.setLanguage();
-        } catch (Exception e) {
-
-        }
 
     }
 

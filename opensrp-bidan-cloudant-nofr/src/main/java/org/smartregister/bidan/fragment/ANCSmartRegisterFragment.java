@@ -1,8 +1,6 @@
 package org.smartregister.bidan.fragment;
 
 import android.annotation.TargetApi;
-import android.app.Fragment;
-import android.app.FragmentTransaction;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Build;
@@ -23,7 +21,7 @@ import org.smartregister.bidan.R;
 import org.smartregister.bidan.activity.DetailANCActivity;
 import org.smartregister.bidan.activity.DetailMotherActivity;
 import org.smartregister.bidan.activity.NativeKIANCSmartRegisterActivity;
-import org.smartregister.bidan.activity.NativeKISmartRegisterActivity;
+import org.smartregister.bidan.activity.NativeKIbuSmartRegisterActivity;
 import org.smartregister.bidan.options.KIANCOverviewServiceMode;
 import org.smartregister.bidan.options.MotherFilterOption;
 import org.smartregister.bidan.provider.KIANCClientsProvider;
@@ -44,7 +42,6 @@ import org.smartregister.view.dialog.DialogOption;
 import org.smartregister.view.dialog.DialogOptionModel;
 import org.smartregister.view.dialog.EditOption;
 import org.smartregister.view.dialog.FilterOption;
-import org.smartregister.view.dialog.LocationSelectorDialogFragment;
 import org.smartregister.view.dialog.NameSort;
 import org.smartregister.view.dialog.ServiceModeOption;
 import org.smartregister.view.dialog.SortOption;
@@ -375,7 +372,7 @@ public class ANCSmartRegisterFragment extends BaseSmartRegisterFragment {
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
 
-        Intent myIntent = new Intent(getActivity(), NativeKISmartRegisterActivity.class);
+        Intent myIntent = new Intent(getActivity(), NativeKIbuSmartRegisterActivity.class);
         if (data != null) {
             myIntent.putExtra("org.smartregister.bidan_cloudant.face.face_mode", true);
             myIntent.putExtra("org.smartregister.bidan_cloudant.face.base_id", data.getStringExtra("org.smartregister.bidan_cloudant.face.base_id"));

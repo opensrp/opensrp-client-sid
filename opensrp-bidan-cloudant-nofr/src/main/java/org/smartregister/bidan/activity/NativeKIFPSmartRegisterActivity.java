@@ -117,7 +117,7 @@ public class NativeKIFPSmartRegisterActivity extends SecuredNativeSmartRegisterA
 
     public void onPageChanged(int page) {
         setRequestedOrientation(page == 0 ? ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE : ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
-        LoginActivity.setLanguage();
+//        LoginActivity.setLanguage();
     }
 
     public DialogOption[] getEditOptions() {

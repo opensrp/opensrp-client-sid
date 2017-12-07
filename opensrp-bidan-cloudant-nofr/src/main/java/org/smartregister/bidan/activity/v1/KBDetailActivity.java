@@ -1,4 +1,4 @@
-package org.smartregister.bidan.activity;
+package org.smartregister.bidan.activity.v1;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -10,7 +10,6 @@ import android.widget.TextView;
 
 import org.smartregister.Context;
 import org.smartregister.bidan.R;
-import org.smartregister.bidan.activity.v1.NativeKBSmartRegisterActivity;
 import org.smartregister.commonregistry.AllCommonsRepository;
 import org.smartregister.commonregistry.CommonPersonObject;
 import org.smartregister.commonregistry.CommonPersonObjectClient;
@@ -26,14 +25,14 @@ import java.util.Map;
 import static org.smartregister.bidan.utils.Support.setImagetoHolderFromUri;
 import static org.smartregister.util.StringUtil.humanize;
 
-/**
- * Created by sid-tech on 11/30/17.
- */
 
-public class DetailFPActivity extends Activity {
+/**
+ * Created by Iq on 07/09/16.
+ */
+public class KBDetailActivity extends Activity {
 
     //image retrieving
-    private static final String TAG = DetailFPActivity.class.getSimpleName();
+    private static final String TAG = KBDetailActivity.class.getSimpleName();
     SimpleDateFormat timer = new SimpleDateFormat("hh:mm:ss");
     //image retrieving
 
@@ -50,13 +49,12 @@ public class DetailFPActivity extends Activity {
         String DetailStart = timer.format(new Date());
         Map<String, String> Detail = new HashMap<String, String>();
         Detail.put("start", DetailStart);
-        
-//        FlurryAgent.logEvent("KB_detail_view", Detail, true);
+        // FlurryAgent.logEvent("KB_detail_view",Detail, true );
 
-        final ImageView kiview = (ImageView) findViewById(R.id.motherdetailprofileview);
+        final ImageView kiview = (ImageView)findViewById(R.id.motherdetailprofileview);
         //header
         TextView today = (TextView) findViewById(R.id.detail_today);
-
+        
         //profile
         TextView nama = (TextView) findViewById(R.id.txt_wife_name);
         TextView nik = (TextView) findViewById(R.id.txt_nik);
@@ -86,9 +84,9 @@ public class DetailFPActivity extends Activity {
         TextView jenisKontrasepsi = (TextView) findViewById(R.id.txt_jenisKontrasepsi);
         TextView td_diastolik = (TextView) findViewById(R.id.txt_td_diastolik);
         TextView tdSistolik = (TextView) findViewById(R.id.txt_tdSistolik);
-        TextView alkilila = (TextView) findViewById(R.id.txt_alkilila);
+        TextView alkilila  = (TextView) findViewById(R.id.txt_alkilila);
         TextView alkiPenyakitIms = (TextView) findViewById(R.id.txt_alkiPenyakitIms);
-        TextView keteranganTentangPesertaKB = (TextView) findViewById(R.id.txt_keteranganTentangPesertaKB);
+        TextView keteranganTentangPesertaKB   = (TextView) findViewById(R.id.txt_keteranganTentangPesertaKB);
         TextView keteranganTentangPesertaKB2 = (TextView) findViewById(R.id.txt_keteranganTentangPesertaKB2);
         TextView alkiPenyakitKronis = (TextView) findViewById(R.id.txt_alkiPenyakitKronis);
         TextView alkihb = (TextView) findViewById(R.id.txt_alkihb);
@@ -132,19 +130,19 @@ public class DetailFPActivity extends Activity {
             @Override
             public void onClick(View v) {
                 finish();
-                startActivity(new Intent(DetailFPActivity.this, NativeKBSmartRegisterActivity.class));
+                startActivity(new Intent(KBDetailActivity.this, NativeKBSmartRegisterActivity.class));
                 overridePendingTransition(0, 0);
                 String DetailEnd = timer.format(new Date());
                 Map<String, String> Detail = new HashMap<>();
                 Detail.put("end", DetailEnd);
-//                FlurryAgent.logEvent("KB_detail_view", Detail, true);
+                // FlurryAgent.logEvent("KB_detail_view", Detail, true);
             }
         });
 
-        DetailsRepository detailsRepository = Context.getInstance().detailsRepository();
+        DetailsRepository detailsRepository = org.smartregister.Context.getInstance().detailsRepository();
         detailsRepository.updateDetails(kiclient);
 
-        if (kiclient.getCaseId() != null) {//image already in local storage most likey ):
+        if(kiclient.getCaseId()!=null){//image already in local storage most likey ):
             //set profile image by passing the client id.If the image doesn't exist in the image repository then download and save locally
 //            DrishtiApplication.getCachedImageLoaderInstance().getImageByClientId(kiclient.getCaseId(), OpenSRPImageLoader.getStaticImageListener(kiview, R.mipmap.woman_placeholder, R.mipmap.woman_placeholder));
             setImagetoHolderFromUri(this,
@@ -153,29 +151,26 @@ public class DetailFPActivity extends Activity {
         }
 
 
+
         nama.setText(String.format("%s%s", getResources().getString(R.string.name), kiclient.getColumnmaps().get("namalengkap") != null ? kiclient.getColumnmaps().get("namalengkap") : "-"));
         nik.setText(String.format("%s%s", getResources().getString(R.string.nik), kiclient.getDetails().get("nik") != null ? kiclient.getDetails().get("nik") : "-"));
         husband_name.setText(String.format("%s%s", getResources().getString(R.string.husband_name), kiclient.getColumnmaps().get("namaSuami") != null ? kiclient.getColumnmaps().get("namaSuami") : "-"));
         String tgl = kiclient.getDetails().get("tanggalLahir") != null ? kiclient.getDetails().get("tanggalLahir") : "-";
-        String tgl_lahir = null;
-        if (tgl != null && !tgl.isEmpty()){
-            tgl_lahir = tgl.substring(0, tgl.indexOf("T"));
-        }
-
+        String tgl_lahir = tgl.substring(0, tgl.indexOf("T"));
         dob.setText(String.format("%s%s", getResources().getString(R.string.dob), tgl_lahir));
         phone.setText(String.format("No HP: %s", kiclient.getDetails().get("NomorTelponHp") != null ? kiclient.getDetails().get("NomorTelponHp") : "-"));
 
         //risk
-        if (kiclient.getDetails().get("highRiskPregnancyYoungMaternalAge") != null) {
+        if(kiclient.getDetails().get("highRiskPregnancyYoungMaternalAge") != null ){
             risk1.setText(String.format("%s%s", getResources().getString(R.string.highRiskPregnancyYoungMaternalAge), humanize(kiclient.getDetails().get("highRiskPregnancyYoungMaternalAge"))));
         }
-        if (kiclient.getDetails().get("highRiskPregnancyOldMaternalAge") != null) {
+        if(kiclient.getDetails().get("highRiskPregnancyOldMaternalAge") != null ){
             risk1.setText(String.format("%s%s", getResources().getString(R.string.highRiskPregnancyOldMaternalAge), humanize(kiclient.getDetails().get("highRiskPregnancyYoungMaternalAge"))));
         }
-        if (kiclient.getDetails().get("highRiskPregnancyProteinEnergyMalnutrition") != null
+        if(kiclient.getDetails().get("highRiskPregnancyProteinEnergyMalnutrition") != null
                 || kiclient.getDetails().get("HighRiskPregnancyAbortus") != null
-                || kiclient.getDetails().get("HighRiskLabourSectionCesareaRecord") != null
-                ) {
+                || kiclient.getDetails().get("HighRiskLabourSectionCesareaRecord" ) != null
+                ){
             risk2.setText(String.format("%s%s", getResources().getString(R.string.highRiskPregnancyProteinEnergyMalnutrition), humanize(kiclient.getDetails().get("highRiskPregnancyProteinEnergyMalnutrition"))));
             risk3.setText(String.format("%s%s", getResources().getString(R.string.HighRiskPregnancyAbortus), humanize(kiclient.getDetails().get("HighRiskPregnancyAbortus"))));
             risk4.setText(String.format("%s%s", getResources().getString(R.string.HighRiskLabourSectionCesareaRecord), humanize(kiclient.getDetails().get("HighRiskLabourSectionCesareaRecord"))));
@@ -209,7 +204,7 @@ public class DetailFPActivity extends Activity {
 
 //      risk detail
         highRiskSTIBBVs.setText(humanize(kiclient.getDetails().get("highRiskSTIBBVs") != null ? kiclient.getDetails().get("highRiskSTIBBVs") : "-"));
-        highRiskEctopicPregnancy.setText(humanize(kiclient.getDetails().get("highRiskEctopicPregnancy") != null ? kiclient.getDetails().get("highRiskEctopicPregnancy") : "-"));
+        highRiskEctopicPregnancy.setText(humanize (kiclient.getDetails().get("highRiskEctopicPregnancy") != null ? kiclient.getDetails().get("highRiskEctopicPregnancy") : "-"));
         highRiskCardiovascularDiseaseRecord.setText(humanize(kiclient.getDetails().get("highRiskCardiovascularDiseaseRecord") != null ? kiclient.getDetails().get("highRiskCardiovascularDiseaseRecord") : "-"));
         highRiskDidneyDisorder.setText(humanize(kiclient.getDetails().get("highRiskDidneyDisorder") != null ? kiclient.getDetails().get("highRiskDidneyDisorder") : "-"));
         highRiskHeartDisorder.setText(humanize(kiclient.getDetails().get("highRiskHeartDisorder") != null ? kiclient.getDetails().get("highRiskHeartDisorder") : "-"));
@@ -222,8 +217,8 @@ public class DetailFPActivity extends Activity {
 
         txt_highRiskHIVAIDS.setText(humanize(kiclient.getDetails().get("highRiskHIVAIDS") != null ? kiclient.getDetails().get("highRiskHIVAIDS") : "-"));
 
-        AllCommonsRepository iburep = Context.getInstance().allCommonsRepositoryobjects("ibu");
-        if (kiclient.getColumnmaps().get("ibu.id") != null) {
+        AllCommonsRepository iburep = org.smartregister.Context.getInstance().allCommonsRepositoryobjects("ibu");
+        if(kiclient.getColumnmaps().get("ibu.id") != null) {
             final CommonPersonObject ibuparent = iburep.findByCaseID(kiclient.getColumnmaps().get("ibu.id"));
 
             txt_lbl_highRiskLabourFetusMalpresentation.setText(humanize(ibuparent.getDetails().get("highRiskLabourFetusMalpresentation") != null ? ibuparent.getDetails().get("highRiskLabourFetusMalpresentation") : "-"));
@@ -249,7 +244,7 @@ public class DetailFPActivity extends Activity {
         show_risk.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-//                FlurryFacade.logEvent("click_risk_detail");
+                // FlurryFacade.logEvent("click_risk_detail");
                 findViewById(R.id.id1).setVisibility(View.GONE);
                 findViewById(R.id.id2).setVisibility(View.VISIBLE);
                 findViewById(R.id.show_more_detail).setVisibility(View.VISIBLE);
@@ -272,7 +267,9 @@ public class DetailFPActivity extends Activity {
     @Override
     public void onBackPressed() {
         finish();
-        startActivity(new Intent(this, NativeKIFPSmartRegisterActivity.class));
+        startActivity(new Intent(this, NativeKBSmartRegisterActivity.class));
         overridePendingTransition(0, 0);
     }
+
+
 }

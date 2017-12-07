@@ -11,7 +11,9 @@ import org.smartregister.bidan.activity.NativeKIANCSmartRegisterActivity;
 import org.smartregister.bidan.activity.NativeKIAnakSmartRegisterActivity;
 import org.smartregister.bidan.activity.NativeKIFPSmartRegisterActivity;
 import org.smartregister.bidan.activity.NativeKIPNCSmartRegisterActivity;
-import org.smartregister.bidan.activity.NativeKISmartRegisterActivity;
+
+import org.smartregister.bidan.activity.v1.NativeKISmartRegisterActivity;
+
 import org.smartregister.view.controller.ANMController;
 
 import static android.preference.PreferenceManager.getDefaultSharedPreferences;
@@ -29,12 +31,14 @@ public class NavigationControllerINA extends org.smartregister.view.controller.N
     }
     @Override
     public void startECSmartRegistry() {
-           activity.startActivity(new Intent(activity, NativeKISmartRegisterActivity.class));
+//           activity.startActivity(new Intent(activity, NativeKIbuSmartRegisterActivity.class));
+        activity.startActivity(new Intent(activity, NativeKISmartRegisterActivity.class));
+
         SharedPreferences sharedPreferences = getDefaultSharedPreferences(this.activity);
 
-        if(sharedPreferences.getBoolean("firstlauch",true)) {
-            sharedPreferences.edit().putBoolean("firstlauch",false).commit();
-        }
+        if (sharedPreferences.getBoolean("firstlauch",true))
+            sharedPreferences.edit().putBoolean("firstlauch",false).apply();
+
     }
     @Override
     public void startFPSmartRegistry() {
@@ -52,16 +56,19 @@ public class NavigationControllerINA extends org.smartregister.view.controller.N
     public void startChildSmartRegistry() {
         activity.startActivity(new Intent(activity, NativeKIAnakSmartRegisterActivity.class));
     }
+
     @Override
     public void startReports() {
         String id, pass;
-        try{
+        try {
             id = new JSONObject(anmController.get()).get("anmName").toString();
             pass = context.allSettings().fetchANMPassword();
-        }catch(org.json.JSONException ex){
-            id="noname";
-            pass="null";
+
+        } catch (org.json.JSONException ex){
+            id = "noname";
+            pass = "null";
         }
+
         String uri = "http://"+id+":"+pass+"@kia-report.sid-bidan_cloudant.org/login/auth";
         activity.startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(uri)));
     }

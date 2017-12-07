@@ -1,6 +1,8 @@
 package org.smartregister.bidan.fragment;
 
 import android.annotation.TargetApi;
+import android.app.Fragment;
+import android.app.FragmentTransaction;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Build;
@@ -10,22 +12,25 @@ import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 
+
 import org.opensrp.api.domain.Location;
 import org.opensrp.api.util.EntityUtils;
 import org.opensrp.api.util.LocationTree;
 import org.opensrp.api.util.TreeNode;
 import org.smartregister.Context;
 import org.smartregister.bidan.R;
-import org.smartregister.bidan.activity.NativeKIPNCSmartRegisterActivity;
-import org.smartregister.bidan.activity.DetailPNCActivity;
-import org.smartregister.bidan.options.KIPNCOverviewServiceMode;
-import org.smartregister.bidan.options.MotherFilterOption;
-import org.smartregister.bidan.provider.KIPNCClientsProvider;
+import org.smartregister.bidan.activity.v1.KBDetailActivity;
+import org.smartregister.bidan.activity.LoginActivity;
+import org.smartregister.bidan.activity.v1.NativeKBSmartRegisterActivity;
+import org.smartregister.bidan.options.AllKBServiceMode;
+import org.smartregister.bidan.options.KICommonObjectFilterOption;
+import org.smartregister.bidan.provider.KBClientsProvider;
 import org.smartregister.commonregistry.CommonPersonObjectClient;
 import org.smartregister.commonregistry.CommonPersonObjectController;
 import org.smartregister.commonregistry.CommonRepository;
 import org.smartregister.cursoradapter.CursorCommonObjectFilterOption;
 import org.smartregister.cursoradapter.CursorCommonObjectSort;
+import org.smartregister.cursoradapter.SecuredNativeSmartRegisterCursorAdapterFragment;
 import org.smartregister.cursoradapter.SmartRegisterPaginatedCursorAdapter;
 import org.smartregister.cursoradapter.SmartRegisterQueryBuilder;
 import org.smartregister.provider.SmartRegisterClientsProvider;
@@ -40,6 +45,7 @@ import org.smartregister.view.dialog.DialogOptionMapper;
 import org.smartregister.view.dialog.DialogOptionModel;
 import org.smartregister.view.dialog.EditOption;
 import org.smartregister.view.dialog.FilterOption;
+import org.smartregister.view.dialog.LocationSelectorDialogFragment;
 import org.smartregister.view.dialog.NameSort;
 import org.smartregister.view.dialog.ServiceModeOption;
 import org.smartregister.view.dialog.SortOption;
@@ -51,15 +57,18 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
 
+
 import static android.view.View.INVISIBLE;
+import static android.view.View.VISIBLE;
+import static org.apache.commons.lang3.StringUtils.isEmpty;
+import static org.smartregister.bidan.utils.AllConstantsINA.FormNames.KOHORT_KB_REGISTER;
 
 /**
- * Created by sid-tech on 11/30/17.
+ * Created by koros on 10/29/15.
  */
+public class NativeKBSmartRegisterFragment extends SecuredNativeSmartRegisterCursorAdapterFragment {
 
-public class PNCSmartRegisterFragment extends BaseSmartRegisterFragment {
-    private static final String TAG = PNCSmartRegisterFragment.class.getSimpleName();
-
+    private static final String TAG = NativeKBSmartRegisterFragment.class.getSimpleName();
     private SmartRegisterClientsProvider clientProvider = null;
     private CommonPersonObjectController controller;
     private VillageController villageController;
@@ -67,11 +76,9 @@ public class PNCSmartRegisterFragment extends BaseSmartRegisterFragment {
 
     private final ClientActionHandler clientActionHandler = new ClientActionHandler();
     private String locationDialogTAG = "locationDialogTAG";
-
     Date date = new Date();
     SimpleDateFormat sdf;
     Map<String, String> FS = new HashMap<>();
-
 
     @Override
     protected void onCreation() {
@@ -89,7 +96,7 @@ public class PNCSmartRegisterFragment extends BaseSmartRegisterFragment {
 
             @Override
             public ServiceModeOption serviceMode() {
-                return new KIPNCOverviewServiceMode(clientsProvider());
+                return new AllKBServiceMode(clientsProvider());
             }
 
             @Override
@@ -105,7 +112,7 @@ public class PNCSmartRegisterFragment extends BaseSmartRegisterFragment {
 
             @Override
             public String nameInShortFormForTitle() {
-                return Context.getInstance().getStringResource(R.string.pnc_register_title_in_short);
+                return Context.getInstance().getStringResource(R.string.kb_register_title_in_short);
             }
         };
     }
@@ -116,13 +123,15 @@ public class PNCSmartRegisterFragment extends BaseSmartRegisterFragment {
 
             @Override
             public DialogOption[] filterOptions() {
-                //FlurryFacade.logEvent("click_filter_option_on_kohort_pnc_dashboard");
+                // FlurryFacade.logEvent("click_filter_option_on_kohort_kb_dashboard");
                 ArrayList<DialogOption> dialogOptionslist = new ArrayList<DialogOption>();
 
                 dialogOptionslist.add(new CursorCommonObjectFilterOption(getString(R.string.filter_by_all_label),filterStringForAll()));
+                //     dialogOptionslist.add(new CursorCommonObjectFilterOption(getString(R.string.hh_no_mwra),filterStringForNoElco()));
+                //      dialogOptionslist.add(new CursorCommonObjectFilterOption(getString(R.string.hh_has_mwra),filterStringForOneOrMoreElco()));
 
-                String locationJSON = context().anmLocationController().get();
-                LocationTree locationTree = EntityUtils.fromJson(locationJSON, LocationTree.class);
+                String locationjson = context().anmLocationController().get();
+                LocationTree locationTree = EntityUtils.fromJson(locationjson, LocationTree.class);
 
                 Map<String,TreeNode<String, Location>> locationMap =
                         locationTree.getLocationsHierarchy();
@@ -142,14 +151,12 @@ public class PNCSmartRegisterFragment extends BaseSmartRegisterFragment {
 
             @Override
             public DialogOption[] sortingOptions() {
-                //FlurryFacade.logEvent("click_sorting_option_on_kohort_pnc_dashboard");
+                // FlurryFacade.logEvent("click_sorting_option_on_kohort_kb_dashboard");
                 return new DialogOption[]{
-//                        new HouseholdCensusDueDateSort(),
-
                         new CursorCommonObjectSort(getResources().getString(R.string.sort_by_name_label),KiSortByNameAZ()),
                         new CursorCommonObjectSort(getResources().getString(R.string.sort_by_name_label_reverse),KiSortByNameZA()),
                         new CursorCommonObjectSort(getResources().getString(R.string.sort_by_wife_age_label),KiSortByAge()),
-                        //    new CursorCommonObjectSort(getResources().getString(R.string.sort_by_edd_label),KiSortByEdd()),
+                        new CursorCommonObjectSort(getResources().getString(R.string.sort_by_edd_label),KiSortByEdd()),
                         new CursorCommonObjectSort(getResources().getString(R.string.sort_by_no_ibu_label),KiSortByNoIbu()),
                 };
             }
@@ -163,11 +170,15 @@ public class PNCSmartRegisterFragment extends BaseSmartRegisterFragment {
 
     @Override
     protected SmartRegisterClientsProvider clientsProvider() {
+//        if (clientProvider == null) {
+//            clientProvider = new HouseHoldSmartClientsProvider(
+//                    getActivity(),clientActionHandler , context.alertService());
+//        }
         return null;
     }
 
     private DialogOption[] getEditOptions() {
-        return ((NativeKIPNCSmartRegisterActivity)getActivity()).getEditOptions();
+        return ((NativeKBSmartRegisterActivity)getActivity()).getEditOptions();
     }
 
     @Override
@@ -181,7 +192,6 @@ public class PNCSmartRegisterFragment extends BaseSmartRegisterFragment {
 
         super.setupViews(view);
         view.findViewById(R.id.btn_report_month).setVisibility(INVISIBLE);
-        view.findViewById(R.id.register_client).setVisibility(View.GONE);
         view.findViewById(R.id.service_mode_selection).setVisibility(View.GONE);
         view.findViewById(R.id.register_client).setVisibility(View.GONE);
         clientsView.setVisibility(View.VISIBLE);
@@ -192,7 +202,6 @@ public class PNCSmartRegisterFragment extends BaseSmartRegisterFragment {
     private String filterStringForAll(){
         return "";
     }
-
     private String sortByAlertmethod() {
         return " CASE WHEN alerts.status = 'urgent' THEN '1'" +
                 "WHEN alerts.status = 'upcoming' THEN '2'\n" +
@@ -201,66 +210,39 @@ public class PNCSmartRegisterFragment extends BaseSmartRegisterFragment {
                 "WHEN alerts.status is Null THEN '5'\n" +
                 "Else alerts.status END ASC";
     }
-    /*public void initializeQueries(){
-        KIPNCClientsProvider kiscp = new KIPNCClientsProvider(getActivity(),clientActionHandler,context.alertService());
-        clientAdapter = new SmartRegisterPaginatedCursorAdapter(getActivity(), null, kiscp, new CommonRepository("ibu",new String []{"ibu.isClosed",  "ibu.hariKeKF","kartu_ibu.namalengkap","kartu_ibu.umur","kartu_ibu.namaSuami"}));
-        clientsView.setAdapter(clientAdapter);
 
-        setTablename("ibu");
-        SmartRegisterQueryBuilder countqueryBuilder = new SmartRegisterQueryBuilder();
-        countqueryBuilder.SelectInitiateMainTableCounts("ibu");
-        countqueryBuilder.customJoin("LEFT JOIN kartu_ibu ON ibu.kartuIbuId = kartu_ibu.id");
-        countSelect = countqueryBuilder.mainCondition(" ibu.isClosed !='true'  and ibu.type = 'pnc' and ibu.kartuIbuId != ''");
-        mainCondition = " isClosed !='true'  and type = 'pnc' and kartuIbuId != '' ";
-        super.CountExecute();
-
-        SmartRegisterQueryBuilder queryBuilder = new SmartRegisterQueryBuilder();
-        queryBuilder.SelectInitiateMainTable("ibu", new String[]{"ibu.isClosed", "ibu.details", "ibu.hariKeKF","kartu_ibu.namalengkap","kartu_ibu.umur","kartu_ibu.namaSuami"});
-
-        queryBuilder.customJoin("LEFT JOIN kartu_ibu ON ibu.kartuIbuId = kartu_ibu.id");
-      //  queryBuilder.joinwithIbus("ibu");
-        mainSelect = queryBuilder.mainCondition(" ibu.isClosed !='true' and ibu.type = 'pnc' and ibu.kartuIbuId != ''");
-        //   Sortqueries = KiSortByNameAZ();
-
-        currentlimit = 20;
-        currentoffset = 0;
-
-        super.filterandSortInInitializeQueries();
-
-//        setServiceModeViewDrawableRight(null);
-        updateSearchView();
-        refresh();
-    }*/
+    public String KartuIbuMainCount(){
+        return "Select Count(*) from ec_kartu_ibu";
+    }
 
     @TargetApi(Build.VERSION_CODES.KITKAT)
     public void initializeQueries(String s){
         try {
-            KIPNCClientsProvider kiscp = new KIPNCClientsProvider(getActivity(),clientActionHandler,context().alertService());
-            clientAdapter = new SmartRegisterPaginatedCursorAdapter(getActivity(), null, kiscp, new CommonRepository("ec_pnc",new String []{"ec_kartu_ibu.namalengkap", "ec_kartu_ibu.namaSuami"}));
+            KBClientsProvider kiscp = new KBClientsProvider(getActivity(),clientActionHandler,context().alertService());
+            clientAdapter = new SmartRegisterPaginatedCursorAdapter(getActivity(), null, kiscp, new CommonRepository("ec_kartu_ibu",new String []{"ec_kartu_ibu.is_closed", "namalengkap", "umur","namaSuami", "ec_kartu_ibu.isOutOfArea"}));
             clientsView.setAdapter(clientAdapter);
 
-            setTablename("ec_pnc");
-            SmartRegisterQueryBuilder countqueryBuilder = new SmartRegisterQueryBuilder();
-            countqueryBuilder.SelectInitiateMainTableCounts("ec_pnc");
-            countqueryBuilder.customJoin("LEFT JOIN ec_kartu_ibu on ec_kartu_ibu.id = ec_pnc.id");
-
+            setTablename("ec_kartu_ibu");
+            SmartRegisterQueryBuilder countqueryBUilder = new SmartRegisterQueryBuilder();
+            countqueryBUilder.SelectInitiateMainTableCounts("ec_kartu_ibu");
+         //   countqueryBUilder.customJoin("LEFT JOIN ec_ibu on ec_kartu_ibu.id = ec_ibu.base_entity_id");
             if (s == null || Objects.equals(s, "!")) {
-                mainCondition = "is_closed = 0 AND (keadaanIbu ='hidup' OR keadaanIbu IS NULL) AND namalengkap != ''  ";
                 Log.e(TAG, "initializeQueries: "+"Not Initialized" );
+                mainCondition = "is_closed = 0 and jenisKontrasepsi != '0'";
             } else {
                 Log.e(TAG, "initializeQueries: " + s);
-                mainCondition = "is_closed = 0 AND (keadaanIbu ='hidup' OR keadaanIbu IS NULL) AND object_id LIKE '%" + s + "%'";
+                mainCondition = "is_closed = 0 and jenisKontrasepsi != '0' AND object_id LIKE '%" + s + "%'";
             }
 
             joinTable = "";
-            countSelect = countqueryBuilder.mainCondition(mainCondition);
+            countSelect = countqueryBUilder.mainCondition(mainCondition);
             super.CountExecute();
 
-            SmartRegisterQueryBuilder queryBuilder = new SmartRegisterQueryBuilder();
-            queryBuilder.SelectInitiateMainTable("ec_pnc", new String[]{"ec_pnc.relationalid", "ec_pnc.details",  "ec_kartu_ibu.namalengkap","ec_kartu_ibu.namaSuami","imagelist.imageid"});
-            queryBuilder.customJoin("LEFT JOIN ec_kartu_ibu on ec_kartu_ibu.id = ec_pnc.id LEFT JOIN ImageList imagelist ON ec_pnc.id=imagelist.entityID");
-            mainSelect = queryBuilder.mainCondition(mainCondition);
+            SmartRegisterQueryBuilder queryBUilder = new SmartRegisterQueryBuilder();
+            queryBUilder.SelectInitiateMainTable("ec_kartu_ibu", new String[]{"ec_kartu_ibu.relationalid","ec_kartu_ibu.is_closed", "ec_kartu_ibu.details", "ec_kartu_ibu.isOutOfArea", "namalengkap", "umur", "namaSuami", "imagelist.imageid"});
+            queryBUilder.customJoin("LEFT JOIN ec_ibu on ec_kartu_ibu.id = ec_ibu.base_entity_id LEFT JOIN ImageList imagelist ON ec_ibu.base_entity_id=imagelist.entityID ");
 
+            mainSelect = queryBUilder.mainCondition(" ec_kartu_ibu.is_closed = 0 and jenisKontrasepsi != '0'");
             Sortqueries = KiSortByNameAZ();
 
             currentlimit = 20;
@@ -276,22 +258,24 @@ public class PNCSmartRegisterFragment extends BaseSmartRegisterFragment {
         finally {
         }
 
+
     }
+
 
     @Override
     public void startRegistration() {
-
-//        FragmentTransaction ft = getActivity().getFragmentManager().beginTransaction();
-//        Fragment prev = getActivity().getFragmentManager().findFragmentByTag(locationDialogTAG);
-//        if (prev != null) {
-//            ft.remove(prev);
-//        }
-//        ft.addToBackStack(null);
-//        LocationSelectorDialogFragment
-//                .newInstance((NativeKIPNCSmartRegisterActivity) getActivity(), new
-//                        EditDialogOptionModel(), context().anmLocationController().get(),
-//                        "kartu_pnc_regitration_oa")
-//                .show(ft, locationDialogTAG);
+        // FlurryFacade.logEvent("click_start_registration_on_kohort_kb_dashboard");
+        FragmentTransaction ft = getActivity().getFragmentManager().beginTransaction();
+        Fragment prev = getActivity().getFragmentManager().findFragmentByTag(locationDialogTAG);
+        if (prev != null) {
+            ft.remove(prev);
+        }
+        ft.addToBackStack(null);
+        LocationSelectorDialogFragment
+                .newInstance((NativeKBSmartRegisterActivity) getActivity(), new
+                        EditDialogOptionModel(), context().anmLocationController().get(),
+                        KOHORT_KB_REGISTER)
+                .show(ft, locationDialogTAG);
     }
 
     private class ClientActionHandler implements View.OnClickListener {
@@ -299,17 +283,15 @@ public class PNCSmartRegisterFragment extends BaseSmartRegisterFragment {
         public void onClick(View view) {
             switch (view.getId()) {
                 case R.id.profile_info_layout:
-//                    //FlurryFacade.logEvent("click_detail_view_on_kohort_pnc_dashboard");
-                    DetailPNCActivity.pncclient = (CommonPersonObjectClient)view.getTag();
-                    Intent intent = new Intent(getActivity(),DetailPNCActivity.class);
+                    // FlurryFacade.logEvent("click_detail_view_on_kohort_kb_dashboard");
+                    KBDetailActivity.kiclient = (CommonPersonObjectClient)view.getTag();
+                    Intent intent = new Intent(getActivity(),KBDetailActivity.class);
                     startActivity(intent);
                     getActivity().finish();
                     break;
-                case R.id.btn_edit:
-//                    //FlurryFacade.logEvent("click_visit_button_on_kohort_pnc_dashboard");
-//                    showFragmentDialog(new EditDialogOptionModel(), view.getTag());
-                    showFragmentDialog(((NativeKIPNCSmartRegisterActivity) getActivity()).new EditDialogOptionModel(), view.getTag());
-
+         case R.id.btn_edit:
+                    // FlurryFacade.logEvent("click_visit_button_on_kohort_kb_dashboard");
+                    showFragmentDialog(new EditDialogOptionModel(), view.getTag());
                     break;
             }
         }
@@ -319,22 +301,17 @@ public class PNCSmartRegisterFragment extends BaseSmartRegisterFragment {
         }
     }
 
-    private String KiSortByName() {
-        return " namalengkap ASC";
-    }
-    
+
+
     private String KiSortByNameAZ() {
         return " namalengkap ASC";
     }
-    
     private String KiSortByNameZA() {
         return " namalengkap DESC";
     }
-    
     private String KiSortByAge() {
         return " umur DESC";
     }
-    
     private String KiSortByNoIbu() {
         return " noIbu ASC";
     }
@@ -342,8 +319,8 @@ public class PNCSmartRegisterFragment extends BaseSmartRegisterFragment {
     private String KiSortByEdd() {
         return " htp IS NULL, htp";
     }
-    
-    private class EditDialogOptionModelOld implements DialogOptionModel {
+
+    private class EditDialogOptionModel implements DialogOptionModel {
         @Override
         public DialogOption[] getDialogOptions() {
             return getEditOptions();
@@ -362,17 +339,43 @@ public class PNCSmartRegisterFragment extends BaseSmartRegisterFragment {
         if(isPausedOrRefreshList()) {
             initializeQueries("!");
         }
-        updateSearchView();
+        //     updateSearchView();
+        //   checkforNidMissing(mView);
+//
+        try{
+            LoginActivity.setLanguage();
+        }catch (Exception e){
 
+        }
 
     }
 
-    private void updateSearchView() {
-        getSearchView().removeTextChangedListener(textWatcher);
-        getSearchView().addTextChangedListener(textWatcher);
-    }
+    public void updateSearchView(){
+        getSearchView().addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i2, int i3) {
+            }
 
-    public void addChildToList(ArrayList<DialogOption> dialogOptionslist, Map<String,TreeNode<String, Location>> locationMap){
+            @Override
+            public void onTextChanged(final CharSequence cs, int start, int before, int count) {
+
+                filters = cs.toString();
+                joinTable = "";
+                mainCondition = " is_closed = 0 and jenisKontrasepsi != '0' ";
+
+                getSearchCancelView().setVisibility(isEmpty(cs) ? INVISIBLE : VISIBLE);
+                CountExecute();
+                filterandSortExecute();
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+
+            }
+        });
+    }
+    public void addChildToList(ArrayList<DialogOption> dialogOptionslist,Map<String,TreeNode<String, Location>> locationMap){
         for(Map.Entry<String, TreeNode<String, Location>> entry : locationMap.entrySet()) {
 
             if(entry.getValue().getChildren() != null) {
@@ -381,7 +384,7 @@ public class PNCSmartRegisterFragment extends BaseSmartRegisterFragment {
             }else{
                 StringUtil.humanize(entry.getValue().getLabel());
                 String name = StringUtil.humanize(entry.getValue().getLabel());
-                dialogOptionslist.add(new MotherFilterOption(name, "location_name", name, "ec_kartu_ibu"));
+                dialogOptionslist.add(new KICommonObjectFilterOption(name, "location_name", name, "ec_kartu_ibu"));
 
             }
         }
@@ -427,23 +430,21 @@ public class PNCSmartRegisterFragment extends BaseSmartRegisterFragment {
         searchCancelView.setOnClickListener(searchCancelHandler);
     }
 
-//    public void getFacialRecord(View view) {
-//
-//        FlurryAgent.logEvent(TAG + "search_by_face", true);
-//        Log.d(TAG, "getFacialRecord: is_Called");
+    public void getFacialRecord(View view) {
+//        //FlurryAgent.logEvent(TAG+" search_by_face", true);
+//        Log.e(TAG, "getFacialRecord: ");
 //        sdf = new SimpleDateFormat("hh:mm:ss.SS", Locale.ENGLISH);
 //        String face_start = sdf.format(date);
 //        FS.put("face_start", face_start);
-//
 //        SmartShutterActivity.kidetail = (CommonPersonObjectClient) view.getTag();
-//        FlurryAgent.logEvent(TAG + "search_by_face", FS, true);
+//        FlurryAgent.logEvent(TAG + " search_by_face", FS, true);
 //
 //        Intent intent = new Intent(getActivity(), SmartShutterActivity.class);
 //        intent.putExtra("org.sid.sidface.ImageConfirmation.origin", TAG);
 //        intent.putExtra("org.sid.sidface.ImageConfirmation.identify", true);
 //        intent.putExtra("org.sid.sidface.ImageConfirmation.kidetail", (Parcelable) SmartShutterActivity.kidetail);
 //        startActivityForResult(intent, 2);
-//    }
+    }
 
     public void searchTextChangeListener(String s) {
         Log.e(TAG, "searchTextChangeListener: " + s);
@@ -460,12 +461,34 @@ public class PNCSmartRegisterFragment extends BaseSmartRegisterFragment {
 
                     Log.e(TAG, "onTextChanged: " + searchView.getText());
                     (new AsyncTask() {
+//                    SmartRegisterClients filteredClients;
+
                         @Override
                         protected Object doInBackground(Object[] params) {
+//                        currentSearchFilter =
+//                        setCurrentSearchFilter(new HHSearchOption(cs.toString()));
+//                        filteredClients = getClientsAdapter().getListItemProvider()
+//                                .updateClients(getCurrentVillageFilter(), getCurrentServiceModeOption(),
+//                                        getCurrentSearchFilter(), getCurrentSortOption());
+//
                             filters = cs.toString();
+                            joinTable = "";
+                            mainCondition = " isClosed !='true' and ibuCaseId !='' ";
                             return null;
                         }
 //
+//                    @Override
+//                    protected void onPostExecute(Object o) {
+////                        clientsAdapter
+////                                .refreshList(currentVillageFilter, currentServiceModeOption,
+////                                        currentSearchFilter, currentSortOption);
+////                        getClientsAdapter().refreshClients(filteredClients);
+////                        getClientsAdapter().notifyDataSetChanged();
+//                        getSearchCancelView().setVisibility(isEmpty(cs) ? INVISIBLE : VISIBLE);
+//                        CountExecute();
+//                        filterandSortExecute();
+//                        super.onPostExecute(o);
+//                    }
                     }).execute();
                 }
 
@@ -480,15 +503,14 @@ public class PNCSmartRegisterFragment extends BaseSmartRegisterFragment {
     public void onActivityResult(int requestCode, int resultCode, Intent data){
         super.onActivityResult(requestCode, resultCode, data);
 
-        Intent myIntent = new Intent(getActivity(), NativeKIPNCSmartRegisterActivity.class);
+        Intent myIntent = new Intent(getActivity(), NativeKBSmartRegisterActivity.class);
         if (data != null) {
-            myIntent.putExtra("indonesia.face.face_mode", true);
-            myIntent.putExtra("indonesia.face.base_id", data.getStringExtra("indonesia.face.base_id"));
+            myIntent.putExtra("org.ei.opensrp.indonesia.face.face_mode", true);
+            myIntent.putExtra("org.ei.opensrp.indonesia.face.base_id", data.getStringExtra("org.ei.opensrp.indonesia.face.base_id"));
         }
         getActivity().startActivity(myIntent);
 
     }
-
 
 
 }

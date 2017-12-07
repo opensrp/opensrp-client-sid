@@ -54,15 +54,15 @@ import javax.xml.parsers.DocumentBuilderFactory;
 /**
  * Created by Dani on 08/11/2017.
  */
-public class VaksinatorFormUtils {
+public class BidanFormUtils {
 
-    public static final String TAG = "VaksinatorFormUtils";
+    public static final String TAG = "BidanFormUtils";
     public static final String ecClientRelationships = "ec_client_relationships.json";
     private static final String shouldLoadValueKey = "shouldLoadValue";
     private static final String relationalIdKey = "relational_id";
     private static final String databaseIdKey = "_id";
     private static final String injectedBaseEntityIdKey = "injectedBaseEntityId";
-    private static VaksinatorFormUtils instance;
+    private static BidanFormUtils instance;
     private Context mContext;
     private org.smartregister.Context theAppContext;
     private SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSSZ");
@@ -70,7 +70,7 @@ public class VaksinatorFormUtils {
     private VaksinatorFormEntityConverter formEntityConverter;
     private CloudantDataHandler mCloudantDataHandler;
 
-    public VaksinatorFormUtils(Context context) throws Exception {
+    public BidanFormUtils(Context context) throws Exception {
         mContext = context;
         theAppContext = CoreLibrary.getInstance().context();
         FormAttributeParser formAttributeParser = new FormAttributeParser(context);
@@ -79,9 +79,9 @@ public class VaksinatorFormUtils {
         mCloudantDataHandler = CloudantDataHandler.getInstance(context.getApplicationContext());
     }
 
-    public static VaksinatorFormUtils getInstance(Context ctx) throws Exception {
+    public static BidanFormUtils getInstance(Context ctx) throws Exception {
         if (instance == null) {
-            instance = new VaksinatorFormUtils(ctx);
+            instance = new BidanFormUtils(ctx);
         }
 
         return instance;

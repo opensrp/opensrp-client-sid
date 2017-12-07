@@ -27,7 +27,7 @@
             android:theme="@style/AppTheme" />
 
         <activity
-            android:name=".activity.NativeKISmartRegisterActivity"
+            android:name=".activity.NativeKIbuSmartRegisterActivity"
             android:configChanges="keyboardHidden|orientation|screenSize"
             android:screenOrientation="landscape"
             android:theme="@style/AppThemeNoActionBarAndTitle"
@@ -78,6 +78,29 @@
             android:name=".activity.DetailChildActivity"
             android:screenOrientation="landscape"
             android:theme="@style/AppThemeNoTitle" />
+
+        <activity android:name=".activity.v1.NativeKISmartRegisterActivity"
+            android:configChanges="keyboardHidden|orientation|screenSize"
+            android:screenOrientation="landscape"
+            android:theme="@style/AppThemeNoActionBarAndTitle"
+            android:windowSoftInputMode="adjustResize" />
+        <activity
+            android:name=".activity.v1.KIDetailActivity"
+            android:screenOrientation="landscape"
+            android:theme="@style/AppThemeNoTitle" />
+
+        <activity android:name=".activity.v1.NativeKBSmartRegisterActivity"
+            android:configChanges="keyboardHidden|orientation|screenSize"
+            android:screenOrientation="landscape"
+            android:theme="@style/AppThemeNoActionBarAndTitle"
+            android:windowSoftInputMode="adjustResize" />
+        <activity
+            android:name=".activity.v1.KBDetailActivity"
+            android:screenOrientation="landscape"
+            android:theme="@style/AppThemeNoTitle" />
+
+
+
     </application>
 
 </manifest>
