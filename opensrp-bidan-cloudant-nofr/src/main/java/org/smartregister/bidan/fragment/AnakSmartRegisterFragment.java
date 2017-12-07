@@ -212,7 +212,15 @@ public class AnakSmartRegisterFragment extends BaseSmartRegisterFragment
         countqueryBuilder.SelectInitiateMainTableCounts(tableName);
         countqueryBuilder.customJoin("LEFT JOIN ec_ibu ON ec_ibu.id = ec_anak.relational_id");
 
-        mainCondition = "is_closed=0";
+        if(s != null && !s.isEmpty()){
+            Log.e(TAG, "initializeQueries with ID = " + s);
+            mainCondition = "is_closed = 0 AND object_id LIKE '%" + s + "%'";
+
+        } else {
+            mainCondition = "is_closed = 0";
+            Log.e(TAG, "initializeQueries: Not Initialized");
+        }
+
         countSelect = countqueryBuilder.mainCondition(mainCondition);
         super.CountExecute();
 
@@ -232,6 +240,14 @@ public class AnakSmartRegisterFragment extends BaseSmartRegisterFragment
 
 //        mainSelect = queryBuilder.mainCondition("ec_anak.is_closed = 0 and relationalid != ''");
         mainSelect = queryBuilder.mainCondition(mainCondition);
+        if(s != null && !s.isEmpty()){
+            Log.e(TAG, "initializeQueries with ID = " + s);
+            mainCondition = "is_closed = 0 AND namalengkap != '' AND object_id LIKE '%" + s + "%'";
+
+        } else {
+            mainCondition = "is_closed = 0 AND namalengkap != '' ";
+            Log.e(TAG, "initializeQueries: Not Initialized");
+        }
 
 //        Sortqueries = AnakNameShort();
         Sortqueries = ((CursorSortOption) getDefaultOptionsProvider().sortOption()).sort();

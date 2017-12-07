@@ -245,12 +245,13 @@ public class PNCSmartRegisterFragment extends BaseSmartRegisterFragment {
             countqueryBuilder.SelectInitiateMainTableCounts("ec_pnc");
             countqueryBuilder.customJoin("LEFT JOIN ec_kartu_ibu on ec_kartu_ibu.id = ec_pnc.id");
 
-            if (s == null || Objects.equals(s, "!")) {
-                mainCondition = "is_closed = 0 AND (keadaanIbu ='hidup' OR keadaanIbu IS NULL) AND namalengkap != ''  ";
-                Log.e(TAG, "initializeQueries: "+"Not Initialized" );
+            if(s != null && !s.isEmpty()){
+                Log.e(TAG, "initializeQueries with ID = " + s);
+                mainCondition = "is_closed = 0 AND (keadaanIbu ='hidup' OR keadaanIbu IS NULL) AND namalengkap != '' AND object_id LIKE '%" + s + "%'";
+
             } else {
-                Log.e(TAG, "initializeQueries: " + s);
-                mainCondition = "is_closed = 0 AND (keadaanIbu ='hidup' OR keadaanIbu IS NULL) AND object_id LIKE '%" + s + "%'";
+                mainCondition = "is_closed = 0 AND (keadaanIbu ='hidup' OR keadaanIbu IS NULL) AND namalengkap != '' ";
+                Log.e(TAG, "initializeQueries: Not Initialized");
             }
 
             joinTable = "";

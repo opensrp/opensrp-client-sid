@@ -1,7 +1,9 @@
 {
   "form_data_definition_version": "1",
   "form": {
+    "name": "kartu_ibu_edit",
     "bind_type": "kartu_ibu",
+    "ec_bind_type": "ec_anak",
     "default_bind_path": "/model/instance/Kartu_ibu/",
     "fields": [
       {

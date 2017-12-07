@@ -138,6 +138,7 @@ public class DetailMotherActivity extends Activity {
         DetailsRepository detailsRepository = org.smartregister.Context.getInstance().detailsRepository();
         detailsRepository.updateDetails(motherClient);
 
+        Log.e(TAG, "onCreate: "+ motherClient );
         //set profile image by passing the client id.If the image doesn't exist in the image repository then download and save locally
 //        DrishtiApplication.getCachedImageLoaderInstance().getImageByClientId(motherClient.getCaseId(), OpenSRPImageLoader.getStaticImageListener(kiview, R.mipmap.woman_placeholder, R.mipmap.woman_placeholder));
 

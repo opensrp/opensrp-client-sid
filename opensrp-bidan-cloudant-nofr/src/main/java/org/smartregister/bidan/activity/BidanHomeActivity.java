@@ -165,7 +165,6 @@ public class BidanHomeActivity extends SecuredActivity {
         findViewById(R.id.btn_anak_register).setOnClickListener(onRegisterStartListener);
         findViewById(R.id.btn_kohort_kb_register).setOnClickListener(onRegisterStartListener);
 
-
         findViewById(R.id.btn_reporting).setOnClickListener(onButtonsClickListener);
 //        findViewById(R.id.btn_videos).setOnClickListener(onButtonsClickListener);
 
@@ -178,10 +177,12 @@ public class BidanHomeActivity extends SecuredActivity {
 
     private void initialize() {
         pendingFormSubmissionService = context().pendingFormSubmissionService();
+
         SYNC_STARTED.addListener(onSyncStartListener);
         SYNC_COMPLETED.addListener(onSyncCompleteListener);
         FORM_SUBMITTED.addListener(onFormSubmittedListener);
         ACTION_HANDLED.addListener(updateANMDetailsListener);
+
         getSupportActionBar().setTitle("");
         getSupportActionBar().setIcon(getResources().getDrawable(org.smartregister.bidan.R.mipmap.logo));
         getSupportActionBar().setLogo(org.smartregister.bidan.R.mipmap.logo);

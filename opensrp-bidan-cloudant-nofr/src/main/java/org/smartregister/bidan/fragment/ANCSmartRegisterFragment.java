@@ -103,7 +103,7 @@ public class ANCSmartRegisterFragment extends BaseSmartRegisterFragment {
 
             @Override
             public String nameInShortFormForTitle() {
-                return Context.getInstance().getStringResource(R.string.ki_register_title_in_short);
+                return Context.getInstance().getStringResource(R.string.anc_register_title_in_short);
             }
         };
     }
@@ -206,12 +206,13 @@ public class ANCSmartRegisterFragment extends BaseSmartRegisterFragment {
             SmartRegisterQueryBuilder countqueryBuilder = new SmartRegisterQueryBuilder();
             countqueryBuilder.SelectInitiateMainTableCounts("ec_ibu");
 
-            if (s == null || Objects.equals(s, "!")) {
-                mainCondition = "is_closed = 0 AND namalengkap != ''";
-                Log.e(TAG, "initializeQueries: "+"Not Initialized" );
+            if(s != null && !s.isEmpty()){
+                Log.e(TAG, "initializeQueries with ID = " + s);
+                mainCondition = "is_closed = 0 AND namalengkap != '' AND object_id LIKE '%" + s + "%'";
+
             } else {
-                Log.e(TAG, "initializeQueries: " + s);
-                mainCondition = "is_closed = 0 AND object_id LIKE '%" + s + "%'";
+                mainCondition = "is_closed = 0 AND namalengkap != '' ";
+                Log.e(TAG, "initializeQueries: Not Initialized");
             }
 
             joinTable = "";

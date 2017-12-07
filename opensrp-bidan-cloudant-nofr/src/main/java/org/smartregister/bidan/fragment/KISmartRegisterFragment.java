@@ -212,18 +212,19 @@ public class KISmartRegisterFragment extends BaseSmartRegisterFragment implement
 
         ft.addToBackStack(null);
 
-//        LocationSelectorDialogFragment
-//                .newInstance((NativeKIbuSmartRegisterActivity) getActivity(),
-//                        ((NativeKIbuSmartRegisterActivity) getActivity()).new EditDialogOptionModel(),
-//                        context().anmLocationController().get(),
-//                        "kartu_ibu_registration")
-//                .show(ft, locationDialogTAG);
-
         LocationSelectorDialogFragment
-                .newInstance((NativeKIbuSmartRegisterActivity) getActivity(),
-                        new EditDialogOptionModelOld(), context().anmLocationController().get(),
+                .newInstance(
+                        (BaseRegisterActivity) getActivity(),
+                        ((BaseRegisterActivity) getActivity()).new EditDialogOptionModelNew(),
+                        context().anmLocationController().get(),
                         "kartu_ibu_registration")
                 .show(ft, locationDialogTAG);
+
+//        LocationSelectorDialogFragment
+//                .newInstance((NativeKIbuSmartRegisterActivity) getActivity(),
+//                        new EditDialogOptionModelOld(), context().anmLocationController().get(),
+//                        "kartu_ibu_registration")
+//                .show(ft, locationDialogTAG);
     }
 
     @Override

@@ -76,6 +76,7 @@ public class ClientProcessor {
         //this seems to be easy for now cloudant json to events model is crazy
         List<JSONObject> eventsAndAlerts = handler.getUpdatedEventsAndAlerts(lastSyncDate);
         if (!eventsAndAlerts.isEmpty()) {
+            Log.e(TAG, "processClient:  ");
             for (JSONObject eventOrAlert : eventsAndAlerts) {
                 String type = eventOrAlert.has("type") ? eventOrAlert.getString("type") : null;
 
@@ -173,8 +174,7 @@ public class ClientProcessor {
         }
     }
 
-    public Boolean processEvent(JSONObject event, JSONObject client, JSONObject
-            clientClassificationJson) throws Exception {
+    public Boolean processEvent(JSONObject event, JSONObject client, JSONObject clientClassificationJson) throws Exception {
 
         try {
             String baseEntityId = event.getString(baseEntityIdJSONKey);
@@ -335,8 +335,7 @@ public class ClientProcessor {
         }
     }
 
-    public Boolean processAlert(JSONObject alert, JSONObject clientAlertClassificationJson)
-            throws Exception {
+    public Boolean processAlert(JSONObject alert, JSONObject clientAlertClassificationJson) throws Exception {
 
         try {
             if (alert == null || alert.length() == 0) {
@@ -760,8 +759,7 @@ public class ClientProcessor {
      * @return
      * @throws Exception
      */
-    protected String getHumanReadableConceptResponse(String value, JSONObject jsonDocObject)
-            throws Exception {
+    protected String getHumanReadableConceptResponse(String value, JSONObject jsonDocObject) throws Exception {
 
         JSONArray humanReadableValues = jsonDocObject.has("humanReadableValues") ? jsonDocObject
                 .getJSONArray("humanReadableValues") : null;

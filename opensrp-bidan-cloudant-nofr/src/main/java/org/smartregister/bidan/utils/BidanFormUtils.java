@@ -153,9 +153,7 @@ public class BidanFormUtils {
         return -1;
     }
 
-    public FormSubmission generateFormSubmisionFromXMLString(String entity_id, String formData,
-                                                             String formName, JSONObject
-                                                                     overrides) throws Exception {
+    public FormSubmission generateFormSubmisionFromXMLString(String entity_id, String formData, String formName, JSONObject overrides) throws Exception {
         JSONObject formSubmission = XML.toJSONObject(formData);
 
         //FileUtilities fu = new FileUtilities();
@@ -315,7 +313,7 @@ public class BidanFormUtils {
     }
 
     private List<SubFormData> getSubFormList(FormSubmission formSubmission) {
-        List<SubFormData> sub_forms = new ArrayList<SubFormData>();
+        List<SubFormData> sub_forms = new ArrayList<>();
         List<SubForm> subForms = formSubmission.getFormInstance().getForm().getSub_forms();
         if (subForms != null) {
             for (SubForm sf : subForms) {
@@ -373,8 +371,10 @@ public class BidanFormUtils {
         return subForms;
     }
 
-    public String generateXMLInputForFormWithEntityId(String entityId, String formName, String
-            overrides) {
+    public String generateXMLInputForFormWithEntityId(String entityId, String formName, String overrides) {
+        android.util.Log.e(TAG, "generateXMLInputForFormWithEntityId: "+ overrides );
+        android.util.Log.e(TAG, "generateXMLInputForFormWithEntityId: "+ formName );
+        android.util.Log.e(TAG, "generateXMLInputForFormWithEntityId: "+ entityId );
         try {
             // get the field overrides map
             JSONObject fieldOverrides = new JSONObject();

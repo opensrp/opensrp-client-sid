@@ -203,6 +203,7 @@ public class NativeKBSmartRegisterFragment extends SecuredNativeSmartRegisterCur
     private String filterStringForAll(){
         return "";
     }
+
     private String sortByAlertmethod() {
         return " CASE WHEN alerts.status = 'urgent' THEN '1'" +
                 "WHEN alerts.status = 'upcoming' THEN '2'\n" +
@@ -226,14 +227,17 @@ public class NativeKBSmartRegisterFragment extends SecuredNativeSmartRegisterCur
             setTablename("ec_kartu_ibu");
             SmartRegisterQueryBuilder countqueryBUilder = new SmartRegisterQueryBuilder();
             countqueryBUilder.SelectInitiateMainTableCounts("ec_kartu_ibu");
-         //   countqueryBUilder.customJoin("LEFT JOIN ec_ibu on ec_kartu_ibu.id = ec_ibu.base_entity_id");
-            if (s == null || Objects.equals(s, "!")) {
-                Log.e(TAG, "initializeQueries: "+"Not Initialized" );
-                mainCondition = "is_closed = 0 and jenisKontrasepsi != '0'";
+
+            if(s != null && !s.isEmpty()){
+                Log.e(TAG, "initializeQueries with ID = " + s);
+                mainCondition = "is_closed = 0 and jenisKontrasepsi != '0' AND namalengkap != '' AND object_id LIKE '%" + s + "%'";
+
             } else {
-                Log.e(TAG, "initializeQueries: " + s);
-                mainCondition = "is_closed = 0 and jenisKontrasepsi != '0' AND object_id LIKE '%" + s + "%'";
+                mainCondition = "is_closed = 0 and jenisKontrasepsi != '0' AND namalengkap != '' ";
+                Log.e(TAG, "initializeQueries: Not Initialized");
             }
+
+
 
             joinTable = "";
             countSelect = countqueryBUilder.mainCondition(mainCondition);

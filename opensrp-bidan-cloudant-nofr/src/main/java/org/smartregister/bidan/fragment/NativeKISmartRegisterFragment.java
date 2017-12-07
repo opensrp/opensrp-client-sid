@@ -17,7 +17,8 @@ import org.apache.commons.lang3.StringUtils;
 import org.smartregister.Context;
 import org.smartregister.bidan.R;
 import org.smartregister.bidan.activity.BaseRegisterActivity;
-import org.smartregister.bidan.activity.v1.KIDetailActivity;
+//import org.smartregister.bidan.activity.v1.KIDetailActivity;
+import org.smartregister.bidan.activity.DetailMotherActivity;
 import org.smartregister.bidan.activity.LoginActivity;
 import org.smartregister.bidan.activity.v1.NativeKISmartRegisterActivity;
 import org.smartregister.bidan.options.AllKartuIbuServiceMode;
@@ -225,15 +226,16 @@ public class NativeKISmartRegisterFragment extends SecuredNativeSmartRegisterCur
             setTablename("ec_kartu_ibu");
             SmartRegisterQueryBuilder countqueryBUilder = new SmartRegisterQueryBuilder();
             countqueryBUilder.SelectInitiateMainTableCounts("ec_kartu_ibu");
-            // countqueryBUilder.customJoin("LEFT JOIN ec_anak ON ec_kartu_ibu.id = ec_anak.relational_id ");
 
-            if (s == null || Objects.equals(s, "!")) {
-                mainCondition = "is_closed = 0 and namalengkap != '' ";
-                Log.e(TAG, "initializeQueries: Not Initialized" );
+            if(s != null && !s.isEmpty()){
+                Log.e(TAG, "initializeQueries with ID = " + s);
+                mainCondition = "is_closed = 0 AND namalengkap != '' AND object_id LIKE '%" + s + "%'";
+
             } else {
-                Log.e(TAG, "initializeQueries: id " + s);
-                mainCondition = "is_closed = 0 and namalengkap != '' AND object_id LIKE '%" + s + "%'";
+                mainCondition = "is_closed = 0 AND namalengkap != '' ";
+                Log.e(TAG, "initializeQueries: Not Initialized");
             }
+
             joinTable = "";
             countSelect = countqueryBUilder.mainCondition(mainCondition);
             super.CountExecute();
@@ -264,15 +266,15 @@ public class NativeKISmartRegisterFragment extends SecuredNativeSmartRegisterCur
             switch (view.getId()) {
                 case R.id.profile_info_layout:
 //                    FlurryFacade.logEvent("click_detail_view_on_kohort_ibu_dashboard");
-                    KIDetailActivity.kiclient = (CommonPersonObjectClient) view.getTag();
-                    Intent intent = new Intent(getActivity(), KIDetailActivity.class);
+                    DetailMotherActivity.motherClient = (CommonPersonObjectClient) view.getTag();
+                    Intent intent = new Intent(getActivity(), DetailMotherActivity.class);
                     startActivity(intent);
                     getActivity().finish();
                     break;
 
                 case R.id.btn_edit:
-                    KIDetailActivity.kiclient = (CommonPersonObjectClient) view.getTag();
-                    showFragmentDialog(new EditDialogOptionModel(), view.getTag());
+                    DetailMotherActivity.motherClient = (CommonPersonObjectClient) view.getTag();
+                    showFragmentDialog(((BaseRegisterActivity) getActivity()).new EditDialogOptionModelNew(), view.getTag());
                     break;
             }
         }
@@ -309,7 +311,7 @@ public class NativeKISmartRegisterFragment extends SecuredNativeSmartRegisterCur
         public void onDialogOptionSelection(DialogOption option, Object tag) {
 
             if (option.name().equalsIgnoreCase(getString(R.string.str_register_anc_form))) {
-                CommonPersonObjectClient pc = KIDetailActivity.kiclient;
+                CommonPersonObjectClient pc = DetailMotherActivity.motherClient;
                 AllCommonsRepository iburep = org.smartregister.Context.getInstance().allCommonsRepositoryobjects("ec_ibu");
                 final CommonPersonObject ibuparent = iburep.findByCaseID(pc.entityId());
                 if (ibuparent != null) {
@@ -321,7 +323,7 @@ public class NativeKISmartRegisterFragment extends SecuredNativeSmartRegisterCur
                 }
             }
             if(option.name().equalsIgnoreCase(getString(R.string.str_register_fp_form)) ) {
-                CommonPersonObjectClient pc = KIDetailActivity.kiclient;
+                CommonPersonObjectClient pc = DetailMotherActivity.motherClient;
 
                 if(!StringUtils.isNumeric(pc.getDetails().get("jenisKontrasepsi"))) {
                     Toast.makeText(getActivity().getApplicationContext(), getString(R.string.mother_already_registered_in_fp), Toast.LENGTH_SHORT).show();
@@ -349,11 +351,11 @@ public class NativeKISmartRegisterFragment extends SecuredNativeSmartRegisterCur
         if (isPausedOrRefreshList()) {
             initializeQueries("");
         }
-        try {
-            LoginActivity.setLanguage();
-        } catch (Exception ignored) {
-
-        }
+//        try {
+//            LoginActivity.setLanguage();
+//        } catch (Exception ignored) {
+//
+//        }
 
     }
 

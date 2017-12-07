@@ -214,16 +214,17 @@ public class FPSmartRegisterFragment extends BaseSmartRegisterFragment {
             setTablename("ec_kartu_ibu");
             SmartRegisterQueryBuilder countqueryBuilder = new SmartRegisterQueryBuilder();
             countqueryBuilder.SelectInitiateMainTableCounts("ec_kartu_ibu");
-            // countqueryBuilder.customJoin("LEFT JOIN ec_anak ON ec_kartu_ibu.id = ec_anak.relational_id ");
 
-            if (s == null || Objects.equals(s, "!")) {
-                mainCondition = "is_closed = 0 AND jenisKontrasepsi !='' ";
-//                mainCondition = "is_closed = 0";
-                Log.e(TAG, "initializeQueries: Not Initialized");
+            if(s != null && !s.isEmpty()){
+                Log.e(TAG, "initializeQueries with ID = " + s);
+                mainCondition = "is_closed = 0 AND jenisKontrasepsi !='' AND namalengkap != '' AND object_id LIKE '%" + s + "%'";
+
             } else {
-                Log.e(TAG, "initializeQueries: id " + s);
-                mainCondition = "is_closed = 0 and namalengkap != '' and jenisKontrasepsi !='' AND object_id LIKE '%" + s + "%'";
+                mainCondition = "is_closed = 0 AND jenisKontrasepsi !='' AND namalengkap != '' ";
+                Log.e(TAG, "initializeQueries: Not Initialized");
             }
+
+
             joinTable = "";
             countSelect = countqueryBuilder.mainCondition(mainCondition);
             super.CountExecute();
