@@ -9,7 +9,6 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.AbsListView;
-import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -35,6 +34,7 @@ import java.io.File;
 import java.util.List;
 
 import butterknife.Bind;
+import butterknife.ButterKnife;
 
 import static android.view.ViewGroup.LayoutParams.MATCH_PARENT;
 
@@ -87,19 +87,19 @@ public class KBClientsProvider implements SmartRegisterCLientsProviderForCursorA
     TextView number_of_alive;
 
     @Bind(R.id.iv_hr_badge)
-    TextView hr_badge;
+    ImageView hr_badge;
 
     @Bind(R.id.iv_hrl_badge)
-    TextView img_hrl_badge;
+    ImageView img_hrl_badge;
 
     @Bind(R.id.iv_bpl_badge)
-    TextView bpl_badge;
+    ImageView bpl_badge;
 
     @Bind(R.id.iv_hrp_badge)
-    TextView hrp_badge;
+    ImageView hrp_badge;
 
     @Bind(R.id.iv_hrpp_badge)
-    TextView hrpp_badge;
+    ImageView hrpp_badge;
 
     @Bind(R.id.tv_kb_method)
     TextView kb_method;
@@ -135,10 +135,10 @@ public class KBClientsProvider implements SmartRegisterCLientsProviderForCursorA
 
 
     @Bind(R.id.iv_profile)
-    TextView profilepic;
+    ImageView profilepic;
 
     @Bind(R.id.ib_btn_edit)
-    TextView follow_up;
+    ImageButton follow_up;
 
     public KBClientsProvider(Context context, View.OnClickListener onClickListener, AlertService alertService) {
 
@@ -148,120 +148,69 @@ public class KBClientsProvider implements SmartRegisterCLientsProviderForCursorA
         this.inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 
         clientViewLayoutParams = new AbsListView.LayoutParams(MATCH_PARENT, (int) context.getResources().getDimension(R.dimen.list_item_height));
-//        txtColorBlack = context.getResources().getColor(R.color.text_black);
-//        mImageLoader = DrishtiApplication.getCachedImageLoaderInstance();
     }
 
     private void getView(SmartRegisterClient smartRegisterClient, View convertView) {
 
-        ViewHolder viewHolder;
-
-        if (convertView.getTag() == null || !(convertView.getTag() instanceof ViewHolder)) {
-            viewHolder = new ViewHolder();
-            viewHolder.profilelayout = (LinearLayout) convertView.findViewById(R.id.profile_info_layout);
-            viewHolder.wife_name = (TextView) convertView.findViewById(R.id.tv_wife_name);
-            viewHolder.husband_name = (TextView) convertView.findViewById(R.id.tv_husband_name);
-            viewHolder.village_name = (TextView) convertView.findViewById(R.id.tv_village_name);
-            viewHolder.wife_age = (TextView) convertView.findViewById(R.id.tv_wife_age);
-            viewHolder.no_ibu = (TextView) convertView.findViewById(R.id.tv_no_ibu);
-            // viewHolder.unique_id = (TextView) convertView.findViewById(R.id.unique_id);
-            viewHolder.gravida = (TextView) convertView.findViewById(R.id.tv_gravida);
-            viewHolder.parity = (TextView) convertView.findViewById(R.id.tv_parity);
-            viewHolder.number_of_abortus = (TextView) convertView.findViewById(R.id.tv_number_of_abortus);
-            viewHolder.number_of_alive = (TextView) convertView.findViewById(R.id.tv_number_of_alive);
-            viewHolder.hr_badge = (ImageView) convertView.findViewById(R.id.iv_hr_badge);
-            viewHolder.img_hrl_badge = (ImageView) convertView.findViewById(R.id.iv_hrl_badge);
-            viewHolder.bpl_badge = (ImageView) convertView.findViewById(R.id.iv_bpl_badge);
-            viewHolder.hrp_badge = (ImageView) convertView.findViewById(R.id.iv_hrp_badge);
-            viewHolder.hrpp_badge = (ImageView) convertView.findViewById(R.id.iv_hrpp_badge);
-            viewHolder.kb_method = (TextView) convertView.findViewById(R.id.tv_kb_method);
-            viewHolder.kb_mulai = (TextView) convertView.findViewById(R.id.tv_kb_mulai);
-            viewHolder.risk_HB = (TextView) convertView.findViewById(R.id.tv_risk_HB);
-            viewHolder.LILA = (TextView) convertView.findViewById(R.id.tv_risk_LILA);
-
-            viewHolder.risk_PenyakitKronis = (TextView) convertView.findViewById(R.id.tv_risk_PenyakitKronis);
-            viewHolder.risk_IMS = (TextView) convertView.findViewById(R.id.tv_risk_IMS);
-
-            viewHolder.follow_up_due = (TextView) convertView.findViewById(R.id.tv_follow_due);
-            viewHolder.follow_layout = (LinearLayout) convertView.findViewById(R.id.follow_layout);
-            viewHolder.follow_status = (TextView) convertView.findViewById(R.id.tv_follow_status);
-            viewHolder.follow_due = (TextView) convertView.findViewById(R.id.tv_follow_up_due);
-
-            viewHolder.profilepic = (ImageView) convertView.findViewById(R.id.iv_profile);
-            viewHolder.follow_up = (ImageButton) convertView.findViewById(R.id.ib_btn_edit);
-
-            convertView.setTag(viewHolder);
-
-        } else {
-            viewHolder = (ViewHolder) convertView.getTag();
-        }
-
-        viewHolder.profilepic.setImageDrawable(context.getResources().getDrawable(R.mipmap.woman_placeholder));
-        viewHolder.follow_up.setOnClickListener(onClickListener);
-        viewHolder.follow_up.setTag(smartRegisterClient);
-        viewHolder.profilelayout.setOnClickListener(onClickListener);
-        viewHolder.profilelayout.setTag(smartRegisterClient);
-
         CommonPersonObjectClient pc = (CommonPersonObjectClient) smartRegisterClient;
-        if (iconPencilDrawable == null) {
-            iconPencilDrawable = context.getResources().getDrawable(R.drawable.ic_pencil);
-        }
-        viewHolder.follow_up.setImageDrawable(iconPencilDrawable);
-        viewHolder.follow_up.setOnClickListener(onClickListener);
-
-        viewHolder.hr_badge.setVisibility(View.INVISIBLE);
-
         DetailsRepository detailsRepository = org.smartregister.Context.getInstance().detailsRepository();
         detailsRepository.updateDetails(pc);
 
         System.out.println("client : " + pc.getColumnmaps().toString());
         System.out.println("event : " + pc.getDetails().toString());
 
+        Log.e(TAG, "getView: " + pc.getDetails().toString());
+        Log.e(TAG, "getView: " + pc.getColumnmaps().toString());
+
+        try {
+            ButterKnife.bind(this, convertView);
+        } catch (Exception e){
+            e.getCause().printStackTrace();
+        }
+
+        profilelayout.setOnClickListener(onClickListener);
+        profilelayout.setTag(smartRegisterClient);
+
+        profilepic.setImageDrawable(context.getResources().getDrawable(R.mipmap.woman_placeholder));
+        profilepic.setTag(R.id.entity_id, pc.getColumnmaps().get("_id"));//required when saving file to disk
+
+        if (iconPencilDrawable == null) {
+            iconPencilDrawable = context.getResources().getDrawable(R.drawable.ic_pencil);
+        }
+        follow_up.setImageDrawable(iconPencilDrawable);
+        follow_up.setOnClickListener(onClickListener);
+        follow_up.setOnClickListener(onClickListener);
+        follow_up.setTag(smartRegisterClient);
+
+        hr_badge.setVisibility(View.INVISIBLE);
+
         //Risk flag
         risk(pc.getDetails().get("highRiskSTIBBVs"), pc.getDetails().get("highRiskEctopicPregnancy"), pc.getDetails().get("highRiskCardiovascularDiseaseRecord"),
                 pc.getDetails().get("highRiskDidneyDisorder"), pc.getDetails().get("highRiskHeartDisorder"), pc.getDetails().get("highRiskAsthma"),
                 pc.getDetails().get("highRiskTuberculosis"), pc.getDetails().get("highRiskMalaria"), pc.getDetails().get("highRiskPregnancyYoungMaternalAge"),
-                pc.getDetails().get("highRiskPregnancyOldMaternalAge"), viewHolder.hr_badge);
-
-        Log.e(TAG, "getView: " + pc.getDetails().toString());
-        Log.e(TAG, "getView: " + pc.getColumnmaps().toString());
-
-        //set image
-//        final ImageView kiview = (ImageView) convertView.findViewById(R.id.img_profile);
-        //start profile image
-        viewHolder.profilepic.setTag(R.id.entity_id, pc.getColumnmaps().get("_id"));//required when saving file to disk
-//        if(pc.getCaseId()!=null){//image already in local storage most likey ):
-//            set profile image by passing the client id.If the image doesn't exist in the image repository then download and save locally
-//            DrishtiApplication.getCachedImageLoaderInstance().getImageByClientId(pc.getCaseId(), OpenSRPImageLoader.getStaticImageListener(viewHolder.profilepic, R.mipmap.woman_placeholder, R.mipmap.woman_placeholder));
-//        }
+                pc.getDetails().get("highRiskPregnancyOldMaternalAge"), hr_badge);
 
         Support.setImagetoHolderFromUri((Activity) context,
                 DrishtiApplication.getAppDir() + File.separator + pc.getDetails().get("base_entity_id") + ".JPEG",
-                viewHolder.profilepic, R.mipmap.woman_placeholder);
+                        profilepic, R.mipmap.woman_placeholder);
 
-        //end profile image
-
-        viewHolder.wife_name.setText(pc.getColumnmaps().get("namalengkap") != null ? pc.getColumnmaps().get("namalengkap") : "null");
-        viewHolder.husband_name.setText(pc.getColumnmaps().get("namaSuami") != null ? pc.getColumnmaps().get("namaSuami") : "null");
-        viewHolder.village_name.setText(pc.getDetails().get("address1") != null ? pc.getDetails().get("address1") : "");
-        viewHolder.wife_age.setText(pc.getColumnmaps().get("umur") != null ? pc.getColumnmaps().get("umur") : "");
-        viewHolder.no_ibu.setText(pc.getDetails().get("noIbu") != null ? pc.getDetails().get("noIbu") : "");
-
-        viewHolder.gravida.setText(pc.getDetails().get("gravida") != null ? pc.getDetails().get("gravida") : "-");
-        viewHolder.parity.setText(pc.getDetails().get("partus") != null ? pc.getDetails().get("partus") : "-");
-        viewHolder.number_of_abortus.setText(pc.getDetails().get("abortus") != null ? pc.getDetails().get("abortus") : "-");
-        viewHolder.number_of_alive.setText(pc.getDetails().get("hidup") != null ? pc.getDetails().get("hidup") : "-");
-
-        viewHolder.kb_method.setText(pc.getDetails().get("jenisKontrasepsi") != null ? pc.getDetails().get("jenisKontrasepsi") : "");
-        viewHolder.kb_mulai.setText(pc.getDetails().get("tanggalkunjungan") != null ? pc.getDetails().get("tanggalkunjungan") : "");
-        viewHolder.risk_HB.setText(pc.getDetails().get("alkihb") != null ? pc.getDetails().get("alkihb") : "-");
-        viewHolder.LILA.setText(pc.getDetails().get("alkilila") != null ? pc.getDetails().get("alkilila") : "-");
-        viewHolder.risk_IMS.setText(pc.getDetails().get("alkiPenyakitIms") != null ? pc.getDetails().get("alkiPenyakitIms") : "");
-//        viewHolder.follow_up_due.setText(pc.getDetails().get("tanggalLahirAnak")!=null ? pc.getDetails().get("tanggalLahirAnak"):"");
-        viewHolder.risk_PenyakitKronis.setText(pc.getDetails().get("alkiPenyakitKronis") != null ? pc.getDetails().get("alkiPenyakitKronis") : "");
-
-        viewHolder.hrp_badge.setVisibility(View.INVISIBLE);
-        viewHolder.img_hrl_badge.setVisibility(View.INVISIBLE);
+        wife_name.setText(pc.getColumnmaps().get("namalengkap") != null ? pc.getColumnmaps().get("namalengkap") : "null");
+        husband_name.setText(pc.getColumnmaps().get("namaSuami") != null ? pc.getColumnmaps().get("namaSuami") : "null");
+        village_name.setText(pc.getDetails().get("address1") != null ? pc.getDetails().get("address1") : "");
+        wife_age.setText(pc.getColumnmaps().get("umur") != null ? pc.getColumnmaps().get("umur") : "");
+        no_ibu.setText(pc.getDetails().get("noIbu") != null ? pc.getDetails().get("noIbu") : "");
+        gravida.setText(pc.getDetails().get("gravida") != null ? pc.getDetails().get("gravida") : "-");
+        parity.setText(pc.getDetails().get("partus") != null ? pc.getDetails().get("partus") : "-");
+        number_of_abortus.setText(pc.getDetails().get("abortus") != null ? pc.getDetails().get("abortus") : "-");
+        number_of_alive.setText(pc.getDetails().get("hidup") != null ? pc.getDetails().get("hidup") : "-");
+        kb_method.setText(pc.getDetails().get("jenisKontrasepsi") != null ? pc.getDetails().get("jenisKontrasepsi") : "");
+        kb_mulai.setText(pc.getDetails().get("tanggalkunjungan") != null ? pc.getDetails().get("tanggalkunjungan") : "");
+        risk_HB.setText(pc.getDetails().get("alkihb") != null ? pc.getDetails().get("alkihb") : "-");
+        LILA.setText(pc.getDetails().get("alkilila") != null ? pc.getDetails().get("alkilila") : "-");
+        risk_IMS.setText(pc.getDetails().get("alkiPenyakitIms") != null ? pc.getDetails().get("alkiPenyakitIms") : "");
+        risk_PenyakitKronis.setText(pc.getDetails().get("alkiPenyakitKronis") != null ? pc.getDetails().get("alkiPenyakitKronis") : "");
+        hrp_badge.setVisibility(View.INVISIBLE);
+        img_hrl_badge.setVisibility(View.INVISIBLE);
 
 /*        AllCommonsRepository iburep = Context.getInstance().allCommonsRepositoryobjects("ibu");
         if(pc.getColumnmaps().get("ibu.id") != null) {
@@ -285,10 +234,10 @@ public class KBClientsProvider implements SmartRegisterCLientsProviderForCursorA
             }
         }*/
 
-        viewHolder.follow_due.setText("");
-        viewHolder.follow_up_due.setText("");
-        viewHolder.follow_layout.setBackgroundColor(context.getResources().getColor(R.color.status_bar_text_almost_white));
-        viewHolder.follow_status.setText("");
+        follow_due.setText("");
+        follow_up_due.setText("");
+        follow_layout.setBackgroundColor(context.getResources().getColor(R.color.status_bar_text_almost_white));
+        follow_status.setText("");
 
         String jenis = pc.getDetails().get("jenisKontrasepsi") != null ? pc.getDetails().get("jenisKontrasepsi") : "-";
         if (jenis.equals("suntik")) {
@@ -296,35 +245,35 @@ public class KBClientsProvider implements SmartRegisterCLientsProviderForCursorA
             //alertlist_for_client.get(i).
             if (alertlist_for_client.size() == 0) {
                 // viewHolder.follow_up_due.setText("Not Synced");
-                viewHolder.follow_layout.setBackgroundColor(context.getResources().getColor(R.color.status_bar_text_almost_white));
+                        follow_layout.setBackgroundColor(context.getResources().getColor(R.color.status_bar_text_almost_white));
             }
             for (int i = 0; i < alertlist_for_client.size(); i++) {
-                viewHolder.follow_due.setText("Follow up due");
+                        follow_due.setText("Follow up due");
                 if (alertlist_for_client.get(i).status().value().equalsIgnoreCase("normal")) {
-                    viewHolder.follow_up_due.setText(alertlist_for_client.get(i).expiryDate());
-                    viewHolder.follow_layout.setBackgroundColor(context.getResources().getColor(R.color.alert_upcoming_light_blue));
-                    viewHolder.follow_status.setText(alertlist_for_client.get(i).status().value());
+                    follow_up_due.setText(alertlist_for_client.get(i).expiryDate());
+                    follow_layout.setBackgroundColor(context.getResources().getColor(R.color.alert_upcoming_light_blue));
+                    follow_status.setText(alertlist_for_client.get(i).status().value());
                 }
                 if (alertlist_for_client.get(i).status().value().equalsIgnoreCase("upcoming")) {
-                    viewHolder.follow_up_due.setText(alertlist_for_client.get(i).expiryDate());
-                    viewHolder.follow_layout.setBackgroundColor(context.getResources().getColor(R.color.alert_upcoming_light_blue));
-                    viewHolder.follow_status.setText(alertlist_for_client.get(i).status().value());
+                    follow_up_due.setText(alertlist_for_client.get(i).expiryDate());
+                    follow_layout.setBackgroundColor(context.getResources().getColor(R.color.alert_upcoming_light_blue));
+                    follow_status.setText(alertlist_for_client.get(i).status().value());
                 }
                 if (alertlist_for_client.get(i).status().value().equalsIgnoreCase("urgent")) {
-                    viewHolder.follow_up_due.setText(alertlist_for_client.get(i).expiryDate());
-                    viewHolder.follow_layout.setBackgroundColor(context.getResources().getColor(R.color.alert_urgent_red));
-                    viewHolder.follow_status.setText(alertlist_for_client.get(i).status().value());
+                    follow_up_due.setText(alertlist_for_client.get(i).expiryDate());
+                    follow_layout.setBackgroundColor(context.getResources().getColor(R.color.alert_urgent_red));
+                    follow_status.setText(alertlist_for_client.get(i).status().value());
 
                 }
                 if (alertlist_for_client.get(i).status().value().equalsIgnoreCase("expired")) {
-                    viewHolder.follow_up_due.setText(alertlist_for_client.get(i).expiryDate());
-                    viewHolder.follow_layout.setBackgroundColor(context.getResources().getColor(R.color.client_list_header_dark_grey));
-                    viewHolder.follow_status.setText(alertlist_for_client.get(i).status().value());
+                    follow_up_due.setText(alertlist_for_client.get(i).expiryDate());
+                    follow_layout.setBackgroundColor(context.getResources().getColor(R.color.client_list_header_dark_grey));
+                    follow_status.setText(alertlist_for_client.get(i).status().value());
                 }
                 if (alertlist_for_client.get(i).isComplete()) {
-                    viewHolder.follow_up_due.setText(alertlist_for_client.get(i).expiryDate());
-                    viewHolder.follow_layout.setBackgroundColor(context.getResources().getColor(R.color.status_bar_text_almost_white));
-                    viewHolder.follow_status.setText(alertlist_for_client.get(i).status().value());
+                    follow_up_due.setText(alertlist_for_client.get(i).expiryDate());
+                    follow_layout.setBackgroundColor(context.getResources().getColor(R.color.status_bar_text_almost_white));
+                    follow_status.setText(alertlist_for_client.get(i).status().value());
                 }
             }
         }
@@ -332,8 +281,6 @@ public class KBClientsProvider implements SmartRegisterCLientsProviderForCursorA
         convertView.setLayoutParams(clientViewLayoutParams);
         //   return convertView;
     }
-
-    CommonPersonObjectController householdelcocontroller;
 
     public SmartRegisterClients getClients() {
         return controller.getClients();
@@ -384,43 +331,9 @@ public class KBClientsProvider implements SmartRegisterCLientsProviderForCursorA
 
     @Override
     public View inflatelayoutForCursorAdapter() {
-        View View = inflater().inflate(R.layout.smart_register_kb_client, null);
-        return View;
+        View view = inflater().inflate(R.layout.smart_register_kb_client, null);
+        return view;
     }
-
-
-    class ViewHolder {
-
-        TextView wife_name;
-        TextView husband_name;
-        TextView village_name;
-        TextView wife_age;
-        LinearLayout profilelayout;
-        ImageView profilepic;
-        TextView gravida;
-        Button warnbutton;
-        ImageButton follow_up;
-        TextView parity;
-        TextView number_of_abortus;
-        TextView number_of_alive;
-        TextView no_ibu;
-        TextView unique_id;
-        TextView kb_method;
-        TextView risk_HB;
-        TextView LILA;
-        TextView risk_PenyakitKronis;
-        TextView risk_IMS;
-        TextView follow_up_due;
-        TextView kb_mulai;
-        ImageView hr_badge;
-        ImageView hrpp_badge;
-        ImageView bpl_badge;
-        ImageView hrp_badge;
-        ImageView img_hrl_badge;
-        LinearLayout follow_layout;
-        TextView follow_status;
-        TextView follow_due;
-    }
-
 
 }
+
