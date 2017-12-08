@@ -51,23 +51,23 @@ public class DetailFPActivity extends Activity {
         
 //        FlurryAgent.logEvent("KB_detail_view", Detail, true);
 
-        final ImageView kiview = (ImageView) findViewById(R.id.motherdetailprofileview);
+        final ImageView kiview = (ImageView) findViewById(R.id.tv_mother_detail_profile_view);
         //header
-        TextView today = (TextView) findViewById(R.id.detail_today);
+        TextView today = (TextView) findViewById(R.id.tv_detail_today);
 
         //profile
-        TextView nama = (TextView) findViewById(R.id.txt_wife_name);
-        TextView nik = (TextView) findViewById(R.id.txt_nik);
+        TextView nama = (TextView) findViewById(R.id.tv_wife_name);
+        TextView nik = (TextView) findViewById(R.id.tv_nik);
         TextView husband_name = (TextView) findViewById(R.id.tv_husband_name);
-        TextView dob = (TextView) findViewById(R.id.txt_dob);
-        TextView phone = (TextView) findViewById(R.id.txt_contact_phone_number);
-        TextView risk1 = (TextView) findViewById(R.id.txt_risk1);
-        TextView risk2 = (TextView) findViewById(R.id.txt_risk2);
-        TextView risk3 = (TextView) findViewById(R.id.txt_risk3);
-        TextView risk4 = (TextView) findViewById(R.id.txt_risk4);
+        TextView dob = (TextView) findViewById(R.id.tv_dob);
+        TextView phone = (TextView) findViewById(R.id.tv_contact_phone_number);
+        TextView risk1 = (TextView) findViewById(R.id.tv_risk1);
+        TextView risk2 = (TextView) findViewById(R.id.tv_risk2);
+        TextView risk3 = (TextView) findViewById(R.id.tv_risk3);
+        TextView risk4 = (TextView) findViewById(R.id.tv_risk4);
 
-        final TextView show_risk = (TextView) findViewById(R.id.show_more);
-        final TextView show_detail = (TextView) findViewById(R.id.show_more_detail);
+        final TextView show_risk = (TextView) findViewById(R.id.tv_show_more);
+        final TextView show_detail = (TextView) findViewById(R.id.tv_show_more_detail);
 
         //detail data
         TextView village = (TextView) findViewById(R.id.tv_village_name);
@@ -250,8 +250,8 @@ public class DetailFPActivity extends Activity {
 //                FlurryFacade.logEvent("click_risk_detail");
                 findViewById(R.id.id1).setVisibility(View.GONE);
                 findViewById(R.id.id2).setVisibility(View.VISIBLE);
-                findViewById(R.id.show_more_detail).setVisibility(View.VISIBLE);
-                findViewById(R.id.show_more).setVisibility(View.GONE);
+                findViewById(R.id.tv_show_more_detail).setVisibility(View.VISIBLE);
+                findViewById(R.id.tv_show_more).setVisibility(View.GONE);
             }
         });
 
@@ -260,8 +260,8 @@ public class DetailFPActivity extends Activity {
             public void onClick(View v) {
                 findViewById(R.id.id1).setVisibility(View.VISIBLE);
                 findViewById(R.id.id2).setVisibility(View.GONE);
-                findViewById(R.id.show_more).setVisibility(View.VISIBLE);
-                findViewById(R.id.show_more_detail).setVisibility(View.GONE);
+                findViewById(R.id.tv_show_more).setVisibility(View.VISIBLE);
+                findViewById(R.id.tv_show_more_detail).setVisibility(View.GONE);
             }
         });
 

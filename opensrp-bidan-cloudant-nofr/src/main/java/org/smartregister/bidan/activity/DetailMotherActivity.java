@@ -54,21 +54,21 @@ public class DetailMotherActivity extends Activity {
 //    }
 
     // Main Profile
-    @Bind(R.id.motherdetailprofileview) ImageView kiview;
+    @Bind(R.id.tv_mother_detail_profile_view) ImageView kiview;
 
-    @Bind(R.id.txt_wife_name) TextView nama;
-    @Bind(R.id.txt_nik) TextView nik;
+    @Bind(R.id.tv_wife_name) TextView nama;
+    @Bind(R.id.tv_nik) TextView nik;
     @Bind(R.id.tv_husband_name) TextView husband_name;
-    @Bind(R.id.txt_dob) TextView dob;
-    @Bind(R.id.txt_contact_phone_number) TextView phone;
-    @Bind(R.id.txt_risk1) TextView risk1;
-    @Bind(R.id.txt_risk2) TextView risk2;
-    @Bind(R.id.txt_risk3) TextView risk3;
-    @Bind(R.id.txt_risk4) TextView risk4;
+    @Bind(R.id.tv_dob) TextView dob;
+    @Bind(R.id.tv_contact_phone_number) TextView phone;
+    @Bind(R.id.tv_risk1) TextView risk1;
+    @Bind(R.id.tv_risk2) TextView risk2;
+    @Bind(R.id.tv_risk3) TextView risk3;
+    @Bind(R.id.tv_risk4) TextView risk4;
 
-    @Bind(R.id.show_more) TextView show_risk;
+    @Bind(R.id.tv_show_more) TextView show_risk;
 
-    @Bind(R.id.show_more_detail) TextView show_detail;
+    @Bind(R.id.tv_show_more_detail) TextView show_detail;
 
     //detail data
     @Bind(R.id.tv_village_name)TextView village;
@@ -130,7 +130,7 @@ public class DetailMotherActivity extends Activity {
         Detail.put("start", DetailStart);
 //        FlurryAgent.logEvent("KI_detail_view",Detail, true );
 
-        kiview = (ImageView) findViewById(R.id.motherdetailprofileview);
+        kiview = (ImageView) findViewById(R.id.tv_mother_detail_profile_view);
 
         //profile
 //        TextView nama = (TextView) findViewById(R.id.txt_wife_name);
@@ -296,8 +296,8 @@ public class DetailMotherActivity extends Activity {
                 // FlurryFacade.logEvent("click_risk_detail");
                 findViewById(R.id.id1).setVisibility(View.GONE);
                 findViewById(R.id.id2).setVisibility(View.VISIBLE);
-                findViewById(R.id.show_more_detail).setVisibility(View.VISIBLE);
-                findViewById(R.id.show_more).setVisibility(View.GONE);
+                findViewById(R.id.tv_show_more_detail).setVisibility(View.VISIBLE);
+                findViewById(R.id.tv_show_more).setVisibility(View.GONE);
             }
         });
 
@@ -306,8 +306,8 @@ public class DetailMotherActivity extends Activity {
             public void onClick(View v) {
                 findViewById(R.id.id1).setVisibility(View.VISIBLE);
                 findViewById(R.id.id2).setVisibility(View.GONE);
-                findViewById(R.id.show_more).setVisibility(View.VISIBLE);
-                findViewById(R.id.show_more_detail).setVisibility(View.GONE);
+                findViewById(R.id.tv_show_more).setVisibility(View.VISIBLE);
+                findViewById(R.id.tv_show_more_detail).setVisibility(View.GONE);
             }
         });
 

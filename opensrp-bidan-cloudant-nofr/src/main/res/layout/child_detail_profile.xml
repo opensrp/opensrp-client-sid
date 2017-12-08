@@ -59,7 +59,7 @@
                 android:textSize="14sp" />
 
             <org.smartregister.view.customcontrols.CustomFontTextView
-                android:id="@+id/txt_dob"
+                android:id="@+id/tv_dob"
                 style="@style/CustomFontTextViewStyle.ListView.Medium"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -90,7 +90,7 @@
                 android:textSize="14sp" />
 
             <org.smartregister.view.customcontrols.CustomFontTextView
-                android:id="@+id/txt_risk1"
+                android:id="@+id/tv_risk1"
                 style="@style/CustomFontTextViewStyle.ListView.Medium"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -100,7 +100,7 @@
                 android:textSize="14sp" />
 
             <org.smartregister.view.customcontrols.CustomFontTextView
-                android:id="@+id/txt_risk2"
+                android:id="@+id/tv_risk2"
                 style="@style/CustomFontTextViewStyle.ListView.Medium"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -110,7 +110,7 @@
                 android:textSize="14sp" />
 
             <org.smartregister.view.customcontrols.CustomFontTextView
-                android:id="@+id/txt_risk3"
+                android:id="@+id/tv_risk3"
                 style="@style/CustomFontTextViewStyle.ListView.Medium"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -120,7 +120,7 @@
                 android:textSize="14sp" />
 
             <org.smartregister.view.customcontrols.CustomFontTextView
-                android:id="@+id/txt_risk4"
+                android:id="@+id/tv_risk4"
                 style="@style/CustomFontTextViewStyle.ListView.Medium"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"

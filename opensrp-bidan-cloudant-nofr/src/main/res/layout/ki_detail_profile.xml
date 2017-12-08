@@ -12,7 +12,7 @@
         android:weightSum="1">
 
         <ImageView
-            android:id="@+id/motherdetailprofileview"
+            android:id="@+id/tv_mother_detail_profile_view"
             android:layout_width="103dp"
             android:layout_height="100dp"
             android:layout_margin="10dp"
@@ -26,7 +26,7 @@
             android:orientation="vertical">
 
             <org.smartregister.view.customcontrols.CustomFontTextView
-                android:id="@+id/txt_wife_name"
+                android:id="@+id/tv_wife_name"
                 style="@style/CustomFontTextViewStyle.ListView.Medium"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -37,7 +37,7 @@
                 android:textSize="14sp" />
 
             <org.smartregister.view.customcontrols.CustomFontTextView
-                android:id="@+id/txt_nik"
+                android:id="@+id/tv_nik"
                 style="@style/CustomFontTextViewStyle.ListView.Medium"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -59,7 +59,7 @@
                 android:textSize="14sp" />
 
             <org.smartregister.view.customcontrols.CustomFontTextView
-                android:id="@+id/txt_dob"
+                android:id="@+id/tv_dob"
                 style="@style/CustomFontTextViewStyle.ListView.Medium"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -70,7 +70,7 @@
                 android:textSize="14sp" />
 
             <org.smartregister.view.customcontrols.CustomFontTextView
-                android:id="@+id/txt_contact_phone_number"
+                android:id="@+id/tv_contact_phone_number"
                 style="@style/CustomFontTextViewStyle.ListView.Medium"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -87,7 +87,7 @@
             android:orientation="vertical">
 
             <org.smartregister.view.customcontrols.CustomFontTextView
-                android:id="@+id/Risk"
+                android:id="@+id/tv_risk"
                 style="@style/CustomFontTextViewStyle.ListView.Medium"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -98,7 +98,7 @@
                 android:textSize="14sp" />
 
             <org.smartregister.view.customcontrols.CustomFontTextView
-                android:id="@+id/txt_risk1"
+                android:id="@+id/tv_risk1"
                 style="@style/CustomFontTextViewStyle.ListView.Medium"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -108,7 +108,7 @@
                 android:textSize="14sp" />
 
             <org.smartregister.view.customcontrols.CustomFontTextView
-                android:id="@+id/txt_risk2"
+                android:id="@+id/tv_risk2"
                 style="@style/CustomFontTextViewStyle.ListView.Medium"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -118,7 +118,7 @@
                 android:textSize="14sp" />
 
             <org.smartregister.view.customcontrols.CustomFontTextView
-                android:id="@+id/txt_risk3"
+                android:id="@+id/tv_risk3"
                 style="@style/CustomFontTextViewStyle.ListView.Medium"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -128,7 +128,7 @@
                 android:textSize="14sp" />
 
             <org.smartregister.view.customcontrols.CustomFontTextView
-                android:id="@+id/txt_risk4"
+                android:id="@+id/tv_risk4"
                 style="@style/CustomFontTextViewStyle.ListView.Medium"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -138,7 +138,7 @@
                 android:textSize="14sp" />
 
             <org.smartregister.view.customcontrols.CustomFontTextView
-                android:id="@+id/show_more"
+                android:id="@+id/tv_show_more"
                 style="@style/CustomFontTextViewStyle.ListView.Medium"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -148,7 +148,7 @@
                 android:textSize="18sp" />
 
             <org.smartregister.view.customcontrols.CustomFontTextView
-                android:id="@+id/show_more_detail"
+                android:id="@+id/tv_show_more_detail"
                 style="@style/CustomFontTextViewStyle.ListView.Medium"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -167,7 +167,7 @@
             android:gravity="center">
 
             <ImageView
-                android:id="@+id/icon_device"
+                android:id="@+id/iv_icon_device"
                 android:layout_width="60dp"
                 android:layout_height="60dp"
                 android:layout_gravity="center"

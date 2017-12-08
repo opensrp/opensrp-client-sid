@@ -29,7 +29,7 @@
                     android:textSize="14sp" />
 
                 <org.smartregister.view.customcontrols.CustomFontTextView
-                    android:id="@+id/txt_b_edd"
+                    android:id="@+id/tv_b_edd"
                     style="@style/CustomFontTextViewStyle.ListView.Medium"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -56,7 +56,7 @@
                     android:textSize="14sp" />
 
                 <org.smartregister.view.customcontrols.CustomFontTextView
-                    android:id="@+id/txt_b_lastvisit"
+                    android:id="@+id/tv_b_lastvisit"
                     style="@style/CustomFontTextViewStyle.ListView.Medium"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -83,7 +83,7 @@
 
 
                 <org.smartregister.view.customcontrols.CustomFontTextView
-                    android:id="@+id/txt_b_location"
+                    android:id="@+id/tv_b_location"
                     style="@style/CustomFontTextViewStyle.ListView.Medium"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -109,7 +109,7 @@
                     android:textSize="14sp" />
 
                 <org.smartregister.view.customcontrols.CustomFontTextView
-                    android:id="@+id/txt_b_edd2"
+                    android:id="@+id/tv_b_edd2"
                     style="@style/CustomFontTextViewStyle.ListView.Medium"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -138,7 +138,7 @@
 
 
                 <org.smartregister.view.customcontrols.CustomFontTextView
-                    android:id="@+id/txt_b_attend"
+                    android:id="@+id/tv_b_attend"
                     style="@style/CustomFontTextViewStyle.ListView.Medium"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -164,7 +164,7 @@
                     android:textSize="14sp" />
 
                 <org.smartregister.view.customcontrols.CustomFontTextView
-                    android:id="@+id/txt_b_place"
+                    android:id="@+id/tv_b_place"
                     style="@style/CustomFontTextViewStyle.ListView.Medium"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -190,7 +190,7 @@
                     android:textSize="14sp" />
 
                 <org.smartregister.view.customcontrols.CustomFontTextView
-                    android:id="@+id/txt_b_person"
+                    android:id="@+id/tv_b_person"
                     style="@style/CustomFontTextViewStyle.ListView.Medium"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -216,7 +216,7 @@
                     android:textSize="14sp" />
 
                 <org.smartregister.view.customcontrols.CustomFontTextView
-                    android:id="@+id/txt_b_transport"
+                    android:id="@+id/tv_b_transport"
                     style="@style/CustomFontTextViewStyle.ListView.Medium"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -242,7 +242,7 @@
                     android:textSize="14sp" />
 
                 <org.smartregister.view.customcontrols.CustomFontTextView
-                    android:id="@+id/txt_b_blood"
+                    android:id="@+id/tv_b_blood"
                     style="@style/CustomFontTextViewStyle.ListView.Medium"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -268,7 +268,7 @@
                     android:textSize="14sp" />
 
                 <org.smartregister.view.customcontrols.CustomFontTextView
-                    android:id="@+id/txt_b_houser"
+                    android:id="@+id/tv_b_houser"
                     style="@style/CustomFontTextViewStyle.ListView.Medium"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -294,7 +294,7 @@
                     android:textSize="14sp" />
 
                 <org.smartregister.view.customcontrols.CustomFontTextView
-                    android:id="@+id/txt_b_stock"
+                    android:id="@+id/tv_b_stock"
                     style="@style/CustomFontTextViewStyle.ListView.Medium"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"

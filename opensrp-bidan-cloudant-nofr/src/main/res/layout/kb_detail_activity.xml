@@ -22,7 +22,7 @@
         android:weightSum="4">
 
         <org.smartregister.view.customcontrols.CustomFontTextView
-            android:id="@+id/child_detail_information"
+            android:id="@+id/tv_child_detail_information"
             style="@style/CustomFontTextViewStyle.ListView.Medium"
 
             android:layout_width="0dp"
@@ -39,7 +39,7 @@
 
 
         <org.smartregister.view.customcontrols.CustomFontTextView
-            android:id="@+id/detail_today"
+            android:id="@+id/tv_detail_today"
             style="@style/CustomFontTextViewStyle.ListView.Medium"
             android:layout_width="0dp"
             android:layout_height="match_parent"
@@ -79,7 +79,7 @@
         android:orientation="horizontal">
 
         <org.smartregister.view.customcontrols.CustomFontTextView
-            android:id="@+id/mother_summary"
+            android:id="@+id/tv_mother_summary"
             style="@style/CustomFontTextViewStyle.ListView.Medium"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

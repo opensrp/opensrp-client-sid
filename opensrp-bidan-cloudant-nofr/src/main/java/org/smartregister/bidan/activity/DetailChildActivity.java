@@ -18,13 +18,11 @@ import org.smartregister.commonregistry.CommonPersonObject;
 import org.smartregister.commonregistry.CommonPersonObjectClient;
 import org.smartregister.repository.DetailsRepository;
 import org.smartregister.view.activity.DrishtiApplication;
-import org.smartregister.view.viewpager.OpenSRPViewPager;
 
 import java.io.File;
 import java.util.HashMap;
 
 import butterknife.Bind;
-import butterknife.BindDrawable;
 
 import static org.smartregister.util.StringUtil.humanize;
 
@@ -68,7 +66,7 @@ public class DetailChildActivity extends Activity {
         TextView nama = (TextView) findViewById(R.id.txt_child_name);
         TextView mother = (TextView) findViewById(R.id.txt_mother_name);
         TextView father = (TextView) findViewById(R.id.txt_father_number);
-        TextView dob = (TextView) findViewById(R.id.txt_dob);
+        TextView dob = (TextView) findViewById(R.id.tv_dob);
 
       //  TextView phone = (TextView) findViewById(R.id.txt_contact_phone_number);
 //        TextView risk1 = (TextView) findViewById(R.id.txt_risk1);
