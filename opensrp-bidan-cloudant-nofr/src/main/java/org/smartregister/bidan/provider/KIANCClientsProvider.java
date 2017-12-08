@@ -57,6 +57,8 @@ public class KIANCClientsProvider implements SmartRegisterCLientsProviderForCurs
     AlertService alertService;
     private Drawable iconPencilDrawable;
 
+
+
     public KIANCClientsProvider(Context context,
                                 View.OnClickListener onClickListener,
                                 AlertService alertService) {

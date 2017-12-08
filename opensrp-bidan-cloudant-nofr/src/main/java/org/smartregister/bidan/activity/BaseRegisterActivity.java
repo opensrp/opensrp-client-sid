@@ -11,7 +11,6 @@ import org.apache.commons.lang3.StringUtils;
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.smartregister.bidan.R;
-import org.smartregister.bidan.activity.v1.KIDetailActivity;
 import org.smartregister.bidan.pageradapter.BaseRegisterActivityPagerAdapter;
 import org.smartregister.bidan.sync.ClientProcessor;
 import org.smartregister.bidan.utils.BidanFormUtils;
@@ -193,7 +192,7 @@ public class BaseRegisterActivity extends SecuredNativeSmartRegisterActivity imp
     }
 
     public DisplayFormFragment getDisplayFormFragmentAtIndex(int index) {
-        return (DisplayFormFragment) findFragmentByPosition(index);
+        return (DisplayFormFragment) findFragmentByPosition(3);
     }
 
     public void retrieveAndSaveUnsubmittedFormData() {

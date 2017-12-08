@@ -10,7 +10,7 @@ import android.widget.TextView;
 
 import org.smartregister.Context;
 import org.smartregister.bidan.R;
-import org.smartregister.bidan.activity.v1.NativeKBSmartRegisterActivity;
+//import org.smartregister.bidan.activity.v1.NativeKBSmartRegisterActivity;
 import org.smartregister.commonregistry.AllCommonsRepository;
 import org.smartregister.commonregistry.CommonPersonObject;
 import org.smartregister.commonregistry.CommonPersonObjectClient;
@@ -32,10 +32,8 @@ import static org.smartregister.util.StringUtil.humanize;
 
 public class DetailFPActivity extends Activity {
 
-    //image retrieving
     private static final String TAG = DetailFPActivity.class.getName();
     SimpleDateFormat timer = new SimpleDateFormat("hh:mm:ss");
-    //image retrieving
 
     public static CommonPersonObjectClient kiclient;
     private View.OnClickListener bpmListener;
@@ -132,7 +130,7 @@ public class DetailFPActivity extends Activity {
             @Override
             public void onClick(View v) {
                 finish();
-                startActivity(new Intent(DetailFPActivity.this, NativeKBSmartRegisterActivity.class));
+                startActivity(new Intent(DetailFPActivity.this, NativeKIFPSmartRegisterActivity.class));
                 overridePendingTransition(0, 0);
                 String DetailEnd = timer.format(new Date());
                 Map<String, String> Detail = new HashMap<>();

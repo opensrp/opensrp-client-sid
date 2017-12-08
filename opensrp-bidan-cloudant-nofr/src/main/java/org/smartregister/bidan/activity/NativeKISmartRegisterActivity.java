@@ -6,19 +6,13 @@ import org.json.JSONException;
 import org.json.JSONObject;
 import org.smartregister.bidan.R;
 import org.smartregister.bidan.fragment.NativeKISmartRegisterFragment;
-import org.smartregister.bidan.utils.BidanFormUtils;
 import org.smartregister.domain.form.FieldOverrides;
-import org.smartregister.enketo.view.fragment.DisplayFormFragment;
 import org.smartregister.view.dialog.DialogOption;
 import org.smartregister.view.dialog.LocationSelectorDialogFragment;
 import org.smartregister.view.dialog.OpenFormOption;
 
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import static org.smartregister.bidan.utils.AllConstantsINA.FormNames.ANAK_BAYI_REGISTRATION;
 import static org.smartregister.bidan.utils.AllConstantsINA.FormNames.KARTU_IBU_ANC_REGISTRATION;
@@ -58,6 +52,7 @@ public class NativeKISmartRegisterActivity extends BaseRegisterActivity implemen
 
     private String[] buildFormNameList(){
         List<String> formNames = new ArrayList<>();
+        formNames.add(KARTU_IBU_EDIT);
         formNames.add(KARTU_IBU_REGISTRATION);
         formNames.add(KOHORT_KB_PELAYANAN);
         formNames.add(KARTU_IBU_ANC_REGISTRATION);

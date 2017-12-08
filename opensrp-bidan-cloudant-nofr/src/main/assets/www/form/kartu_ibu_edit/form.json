@@ -1,12 +1,12 @@
 {
-  "name": "Kartu_ibu_edit",
-  "title": "Edit Identitas Ibu",
+  "name": "Kartu_ibu",
+  "title": "Identitas Ibu Edit",
   "sms_keyword": "Kartu_ibu_edit",
   "default_language": "Bahasa",
   "instance": {
-    "encounter_type": "Edit Identitas Ibu"
+    "encounter_type": "Identitas Ibu Edit"
   },
-  "version": "201702121028",
+  "version": "201712081035",
   "id_string": "Kartu_ibu_edit",
   "type": "survey",
   "children": [
@@ -85,74 +85,74 @@
       }
     },
     {
-      "bind": {
-        "calculate": "${Village}"
-      },
-      "type": "hidden",
-      "name": "existing_location",
       "instance": {
         "openmrs_entity_id": "location_id",
         "openmrs_entity": "encounter"
+      },
+      "type": "hidden",
+      "name": "existing_location",
+      "bind": {
+        "calculate": "${Village}"
       }
     },
     {
-      "bind": {
-        "calculate": "${Province}"
-      },
-      "type": "calculate",
-      "name": "provinsi",
       "instance": {
         "openmrs_entity_parent": "usual_residence",
         "openmrs_entity_id": "stateProvince",
         "openmrs_entity": "person_address"
+      },
+      "type": "calculate",
+      "name": "provinsi",
+      "bind": {
+        "calculate": "${Province}"
       }
     },
     {
-      "bind": {
-        "calculate": "${District}"
-      },
-      "type": "calculate",
-      "name": "kabupaten",
       "instance": {
         "openmrs_entity_parent": "usual_residence",
         "openmrs_entity_id": "countyDistrict",
         "openmrs_entity": "person_address"
+      },
+      "type": "calculate",
+      "name": "kabupaten",
+      "bind": {
+        "calculate": "${District}"
       }
     },
     {
-      "bind": {
-        "calculate": "${Village}"
-      },
-      "type": "calculate",
-      "name": "desa",
       "instance": {
         "openmrs_entity_parent": "usual_residence",
         "openmrs_entity_id": "cityVillage",
         "openmrs_entity": "person_address"
+      },
+      "type": "calculate",
+      "name": "desa",
+      "bind": {
+        "calculate": "${Village}"
       }
     },
     {
-      "bind": {
-        "calculate": "${Sub-village}"
-      },
-      "type": "calculate",
-      "name": "dusun",
       "instance": {
         "openmrs_entity_parent": "usual_residence",
         "openmrs_entity_id": "address1",
         "openmrs_entity": "person_address"
+      },
+      "type": "calculate",
+      "name": "dusun",
+      "bind": {
+        "calculate": "${Sub-village}"
       }
     },
     {
-      "bind": {
-        "calculate": "${Sub-district}"
-      },
-      "type": "calculate",
-      "name": "kecamatan",
       "instance": {
         "openmrs_entity_parent": "usual_residence",
         "openmrs_entity_id": "address2",
         "openmrs_entity": "person_address"
+      },
+      "type": "calculate",
+      "name": "kecamatan",
+      "bind": {
+        "calculate": "${Sub-district}"
       }
     },
     {
@@ -251,15 +251,15 @@
       "type": "date"
     },
     {
+      "instance": {
+        "openmrs_entity_id": "160753AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+        "openmrs_entity": "concept"
+      },
       "bind": {
         "required": "yes",
         "constraint": ".<=${today}"
       },
       "type": "date",
-      "instance": {
-        "openmrs_entity_id": "160753AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-        "openmrs_entity": "concept"
-      },
       "name": "tanggal_periksa",
       "label": {
         "Bahasa": "Tanggal Registrasi",
@@ -484,14 +484,14 @@
       "type": "date"
     },
     {
-      "bind": {
-        "calculate": "int((${today} - ${tanggal_lahir_ibu}) div 365.25)"
-      },
-      "type": "calculate",
-      "name": "umur",
       "instance": {
         "openmrs_entity_id": "1532AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
         "openmrs_entity": "concept"
+      },
+      "type": "calculate",
+      "name": "umur",
+      "bind": {
+        "calculate": "int((${today} - ${tanggal_lahir_ibu}) div 365.25)"
       }
     },
     {
@@ -1060,25 +1060,25 @@
       "name": "jenis_kontrasepsi"
     },
     {
-      "bind": {
-        "calculate": "if(${umur} <20, 'yes','no')"
-      },
-      "type": "calculate",
-      "name": "high_risk_pregnancy_young_maternal_age",
       "instance": {
         "openmrs_entity_id": "163119AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
         "openmrs_entity": "concept"
+      },
+      "type": "calculate",
+      "name": "high_risk_pregnancy_young_maternal_age",
+      "bind": {
+        "calculate": "if(${umur} <20, 'yes','no')"
       }
     },
     {
-      "bind": {
-        "calculate": "if(${umur} >35, 'yes','no')"
-      },
-      "type": "calculate",
-      "name": "high_risk_pregnancy_old_maternal_age",
       "instance": {
         "openmrs_entity_id": "163120AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
         "openmrs_entity": "concept"
+      },
+      "type": "calculate",
+      "name": "high_risk_pregnancy_old_maternal_age",
+      "bind": {
+        "calculate": "if(${umur} >35, 'yes','no')"
       }
     },
     {
