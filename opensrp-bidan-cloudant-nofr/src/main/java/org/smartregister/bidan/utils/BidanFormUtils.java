@@ -53,6 +53,11 @@ import java.util.UUID;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 
+import static org.smartregister.bidan.utils.AllConstantsINA.FormNames.KARTU_IBU_ANC_EDIT;
+import static org.smartregister.bidan.utils.AllConstantsINA.FormNames.KARTU_IBU_ANC_REGISTRATION;
+import static org.smartregister.bidan.utils.AllConstantsINA.FormNames.KARTU_IBU_EDIT;
+import static org.smartregister.bidan.utils.AllConstantsINA.FormNames.KARTU_IBU_PNC_EDIT;
+
 /**
  * Created by Dani on 08/11/2017.
  */
@@ -1120,8 +1125,10 @@ public class BidanFormUtils {
     }
 
     private List<String> EditClientFormNameList(){
-        List<String> formNames = new ArrayList<String>();
+        android.util.Log.e(TAG, "EditClientFormNameList: " );
+        List<String> formNames = new ArrayList<>();
         formNames.add("child_edit");
+        formNames.add(KARTU_IBU_EDIT);
         return formNames;
     }
 
