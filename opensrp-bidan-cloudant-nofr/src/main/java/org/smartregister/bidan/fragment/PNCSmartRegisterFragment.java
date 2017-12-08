@@ -59,7 +59,7 @@ import static android.view.View.INVISIBLE;
  */
 
 public class PNCSmartRegisterFragment extends BaseSmartRegisterFragment {
-    private static final String TAG = PNCSmartRegisterFragment.class.getSimpleName();
+    private static final String TAG = PNCSmartRegisterFragment.class.getName();
 
     private SmartRegisterClientsProvider clientProvider = null;
     private CommonPersonObjectController controller;

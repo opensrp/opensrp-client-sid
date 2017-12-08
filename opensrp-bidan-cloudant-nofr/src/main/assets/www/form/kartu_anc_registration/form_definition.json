@@ -276,7 +276,7 @@
       },
       {
         "name": "jenisKontrasepsi",
-        "value": ""
+        "bind": "/model/instance/anc_registration/jenis_kontrasepsi"
       },
       {
         "name": "type",

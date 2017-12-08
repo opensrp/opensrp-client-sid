@@ -41,7 +41,7 @@ import static android.view.ViewGroup.LayoutParams.MATCH_PARENT;
 
 public class KBClientsProvider implements SmartRegisterCLientsProviderForCursorAdapter {
 
-    private static final String TAG = KBClientsProvider.class.getSimpleName();
+    private static final String TAG = KBClientsProvider.class.getName();
 
     private final LayoutInflater inflater;
     private final View.OnClickListener onClickListener;

@@ -44,12 +44,12 @@ import java.util.Map;
 import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.xpath.XPathExpressionException;
 
-public class VaksinatorFormEntityConverter {
-    private static final String TAG = "FormEntityConverter";
+public class BidanFormEntityConverter {
+    private static final String TAG = BidanFormEntityConverter.class.getName();
     private FormAttributeParser formAttributeParser;
     private Context mContext;
 
-    public VaksinatorFormEntityConverter(FormAttributeParser formAttributeParser, Context _context) {
+    public BidanFormEntityConverter(FormAttributeParser formAttributeParser, Context _context) {
         this.formAttributeParser = formAttributeParser;
         mContext = _context;
     }

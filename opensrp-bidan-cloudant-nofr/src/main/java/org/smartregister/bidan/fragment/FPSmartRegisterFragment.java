@@ -62,7 +62,7 @@ import static org.smartregister.bidan.utils.AllConstantsINA.FormNames.KOHORT_KB_
 
 public class FPSmartRegisterFragment extends BaseSmartRegisterFragment {
 
-    private static final String TAG = FPSmartRegisterFragment.class.getSimpleName();
+    private static final String TAG = FPSmartRegisterFragment.class.getName();
     private final ClientActionHandler clientActionHandler = new ClientActionHandler();
     private String locationDialogTAG = "locationDialogTAG";
 
@@ -208,7 +208,7 @@ public class FPSmartRegisterFragment extends BaseSmartRegisterFragment {
                     null,
                     kiscp,
                     new CommonRepository("ec_kartu_ibu",
-                            new String[]{"ec_kartu_ibu.is_closed", "ec_kartu_ibu.namalengkap", "ec_kartu_ibu.umur", "ec_kartu_ibu.namaSuami", "noIbu"}));
+                            new String[]{"ec_kartu_ibu.is_closed", "ec_kartu_ibu.namalengkap", "ec_kartu_ibu.umur", "ec_kartu_ibu.namaSuami", "noIbu", "jenisKontrasepsi"}));
             clientsView.setAdapter(clientAdapter);
 
             setTablename("ec_kartu_ibu");
@@ -217,10 +217,10 @@ public class FPSmartRegisterFragment extends BaseSmartRegisterFragment {
 
             if(s != null && !s.isEmpty()){
                 Log.e(TAG, "initializeQueries with ID = " + s);
-                mainCondition = "is_closed = 0 AND jenisKontrasepsi !='0' AND namalengkap != '' AND object_id LIKE '%" + s + "%'";
+                mainCondition = " is_closed = 0 AND jenisKontrasepsi !=0 AND namalengkap != '' AND object_id LIKE '%" + s + "%'";
 
             } else {
-                mainCondition = "is_closed = 0 AND jenisKontrasepsi !='0' AND namalengkap != '' ";
+                mainCondition = " is_closed = 0 AND jenisKontrasepsi != '0' AND namalengkap != '' ";
                 Log.e(TAG, "initializeQueries: Not Initialized");
             }
 

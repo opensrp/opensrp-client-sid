@@ -51,7 +51,7 @@ import static org.smartregister.bidan.utils.AllConstantsINA.FormNames.KOHORT_KB_
 public class NativeKISmartRegisterActivity extends SecuredNativeSmartRegisterActivity implements
         LocationSelectorDialogFragment.OnLocationSelectedListener, DisplayFormListener {
     SimpleDateFormat timer = new SimpleDateFormat("hh:mm:ss");
-    public static final String TAG = NativeKISmartRegisterActivity.class.getSimpleName();
+    public static final String TAG = NativeKISmartRegisterActivity.class.getName();
     @Bind(R.id.view_pager)
     OpenSRPViewPager mPager;
     private FragmentPagerAdapter mPagerAdapter;

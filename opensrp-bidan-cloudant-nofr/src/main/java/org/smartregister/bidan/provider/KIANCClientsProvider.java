@@ -21,6 +21,7 @@ import org.joda.time.format.DateTimeFormatter;
 import org.smartregister.bidan.R;
 import org.smartregister.bidan.activity.DetailMotherActivity;
 import org.smartregister.bidan.utils.AllConstantsINA;
+import org.smartregister.bidan.utils.Support;
 import org.smartregister.commonregistry.AllCommonsRepository;
 import org.smartregister.commonregistry.CommonPersonObject;
 import org.smartregister.commonregistry.CommonPersonObjectClient;
@@ -48,7 +49,7 @@ import static org.joda.time.LocalDateTime.parse;
  */
 public class KIANCClientsProvider implements SmartRegisterCLientsProviderForCursorAdapter {
 
-    private static final String TAG = KIANCClientsProvider.class.getSimpleName();
+    private static final String TAG = KIANCClientsProvider.class.getName();
     private final LayoutInflater inflater;
     private final Context context;
     private final View.OnClickListener onClickListener;
@@ -128,7 +129,7 @@ public class KIANCClientsProvider implements SmartRegisterCLientsProviderForCurs
 
         //start profile image
         viewHolder.profilepic.setTag(R.id.entity_id, pc.getColumnmaps().get("_id"));//required when saving file to disk
-        DetailMotherActivity.setImagetoHolderFromUri((Activity) context,
+        Support.setImagetoHolderFromUri((Activity) context,
                 DrishtiApplication.getAppDir() + File.separator + pc.getDetails().get("base_entity_id") + ".JPEG",
                 viewHolder.profilepic, R.mipmap.woman_placeholder);
 //        viewHolder.profilepic.setTag(smartRegisterClient);

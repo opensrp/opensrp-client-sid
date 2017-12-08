@@ -12,6 +12,7 @@ import android.widget.TextView;
 
 import org.smartregister.Context;
 import org.smartregister.bidan.R;
+import org.smartregister.bidan.utils.Support;
 import org.smartregister.commonregistry.CommonPersonObjectClient;
 import org.smartregister.repository.DetailsRepository;
 import org.smartregister.view.activity.DrishtiApplication;
@@ -23,6 +24,10 @@ import java.util.HashMap;
 import java.util.Locale;
 import java.util.Map;
 
+import butterknife.Bind;
+import butterknife.ButterKnife;
+import butterknife.OnClick;
+
 import static org.smartregister.util.StringUtil.humanize;
 
 //import org.smartregister.bidan.lib.FlurryFacade;
@@ -32,22 +37,87 @@ import static org.smartregister.util.StringUtil.humanize;
 public class DetailMotherActivity extends Activity {
 
     //image retrieving
-    private static final String TAG = DetailMotherActivity.class.getSimpleName();
+    private static final String TAG = DetailMotherActivity.class.getName();
     public static CommonPersonObjectClient motherClient;
     static String entityid;
     private static HashMap<String, String> hash;
     SimpleDateFormat timer = new SimpleDateFormat("hh:mm:ss", Locale.US);
-    ImageView kiview;
+//    ImageView kiview;
     private boolean updateMode = false;
 
-    public static void setImagetoHolderFromUri(Activity activity, String file, ImageView view, int placeholder) {
-        view.setImageDrawable(activity.getResources().getDrawable(placeholder));
-        File externalFile = new File(file);
-        if (externalFile.exists()) {
-            Uri external = Uri.fromFile(externalFile);
-            view.setImageURI(external);
-        }
+//    public static void setImagetoHolderFromUri(Activity activity, String file, ImageView view, int placeholder) {
+//        view.setImageDrawable(activity.getResources().getDrawable(placeholder));
+//        File externalFile = new File(file);
+//        if (externalFile.exists()) {
+//            Uri external = Uri.fromFile(externalFile);
+//            view.setImageURI(external);
+//        }
+//
+//    }
 
+    // Main Profile
+    @Bind(R.id.motherdetailprofileview) ImageView kiview;
+
+    @Bind(R.id.txt_wife_name) TextView nama;
+    @Bind(R.id.txt_nik) TextView nik;
+    @Bind(R.id.txt_husband_name) TextView husband_name;
+    @Bind(R.id.txt_dob) TextView dob;
+    @Bind(R.id.txt_contact_phone_number) TextView phone;
+    @Bind(R.id.txt_risk1) TextView risk1;
+    @Bind(R.id.txt_risk2) TextView risk2;
+    @Bind(R.id.txt_risk3) TextView risk3;
+    @Bind(R.id.txt_risk4) TextView risk4;
+
+    @Bind(R.id.show_more) TextView show_risk;
+
+    @Bind(R.id.show_more_detail) TextView show_detail;
+
+    //detail data
+    @Bind(R.id.txt_village_name)TextView village;
+    @Bind(R.id.txt_subvillage)TextView subvillage;
+    @Bind(R.id.txt_age)TextView age;
+    @Bind(R.id.txt_alamat)TextView alamat;
+    @Bind(R.id.txt_edu)TextView education;
+    @Bind(R.id.txt_agama)TextView religion;
+    @Bind(R.id.txt_job)TextView job;
+    @Bind(R.id.txt_gakin)TextView gakin;
+    @Bind(R.id.txt_blood)TextView blood_type;
+    @Bind(R.id.txt_asuransi)TextView asuransi;
+
+    //detail RISK
+    @Bind(R.id.txt_highRiskSTIBBVs) TextView highRiskSTIBBVs;
+    @Bind(R.id.txt_highRiskEctopicPregnancy) TextView highRiskEctopicPregnancy;
+    @Bind(R.id.txt_highRiskCardiovascularDiseaseRecord) TextView highRiskCardiovascularDiseaseRecord;
+    @Bind(R.id.txt_highRiskDidneyDisorder) TextView highRiskDidneyDisorder;
+    @Bind(R.id.txt_highRiskHeartDisorder) TextView highRiskHeartDisorder;
+    @Bind(R.id.txt_highRiskAsthma) TextView highRiskAsthma;
+    @Bind(R.id.txt_highRiskTuberculosis) TextView highRiskTuberculosis;
+    @Bind(R.id.txt_highRiskMalaria) TextView highRiskMalaria;
+    @Bind(R.id.txt_highRiskPregnancyPIH) TextView highRiskPregnancyPIH;
+    @Bind(R.id.txt_highRiskPregnancyProteinEnergyMalnutrition) TextView highRiskPregnancyProteinEnergyMalnutrition;
+    @Bind(R.id.txt_highRiskLabourTBRisk) TextView txt_highRiskLabourTBRisk;
+    @Bind(R.id.txt_HighRiskLabourSectionCesareaRecord) TextView txt_HighRiskLabourSectionCesareaRecord;
+    @Bind(R.id.txt_highRisklabourFetusNumber) TextView txt_highRisklabourFetusNumber;
+    @Bind(R.id.txt_highRiskLabourFetusSize) TextView txt_highRiskLabourFetusSize;
+    @Bind(R.id.txt_lbl_highRiskLabourFetusMalpresentation) TextView txt_lbl_highRiskLabourFetusMalpresentation;
+    @Bind(R.id.txt_highRiskPregnancyAnemia) TextView txt_highRiskPregnancyAnemia;
+    @Bind(R.id.txt_highRiskPregnancyDiabetes) TextView txt_highRiskPregnancyDiabetes;
+    @Bind(R.id.txt_HighRiskPregnancyTooManyChildren) TextView HighRiskPregnancyTooManyChildren;
+    @Bind(R.id.txt_highRiskPostPartumSectioCaesaria) TextView highRiskPostPartumSectioCaesaria;
+    @Bind(R.id.txt_highRiskPostPartumForceps) TextView highRiskPostPartumForceps;
+    @Bind(R.id.txt_highRiskPostPartumVacum) TextView highRiskPostPartumVacum;
+    @Bind(R.id.txt_highRiskPostPartumPreEclampsiaEclampsia) TextView highRiskPostPartumPreEclampsiaEclampsia;
+    @Bind(R.id.txt_highRiskPostPartumMaternalSepsis) TextView highRiskPostPartumMaternalSepsis;
+    @Bind(R.id.txt_highRiskPostPartumInfection) TextView highRiskPostPartumInfection;
+    @Bind(R.id.txt_highRiskPostPartumHemorrhage) TextView highRiskPostPartumHemorrhage;
+    @Bind(R.id.txt_highRiskPostPartumPIH) TextView highRiskPostPartumPIH;
+    @Bind(R.id.txt_highRiskPostPartumDistosia) TextView highRiskPostPartumDistosia;
+    @Bind(R.id.txt_highRiskHIVAIDS)TextView txt_highRiskHIVAIDS;
+
+    @Bind(org.smartregister.R.id.btn_back_to_home) ImageButton back;
+
+    @OnClick(R.id.btn_back_to_home) void sayHello() {
+//        ButterKnife.apply(headerViews, ALPHA_FADE);
     }
 
     @Override
@@ -65,62 +135,63 @@ public class DetailMotherActivity extends Activity {
         kiview = (ImageView) findViewById(R.id.motherdetailprofileview);
 
         //profile
-        TextView nama = (TextView) findViewById(R.id.txt_wife_name);
-        TextView nik = (TextView) findViewById(R.id.txt_nik);
-        TextView husband_name = (TextView) findViewById(R.id.txt_husband_name);
-        TextView dob = (TextView) findViewById(R.id.txt_dob);
-        TextView phone = (TextView) findViewById(R.id.txt_contact_phone_number);
-        TextView risk1 = (TextView) findViewById(R.id.txt_risk1);
-        TextView risk2 = (TextView) findViewById(R.id.txt_risk2);
-        TextView risk3 = (TextView) findViewById(R.id.txt_risk3);
-        TextView risk4 = (TextView) findViewById(R.id.txt_risk4);
+//        TextView nama = (TextView) findViewById(R.id.txt_wife_name);
+//        TextView nik = (TextView) findViewById(R.id.txt_nik);
+//        TextView husband_name = (TextView) findViewById(R.id.txt_husband_name);
+//        TextView dob = (TextView) findViewById(R.id.txt_dob);
+//        TextView phone = (TextView) findViewById(R.id.txt_contact_phone_number);
+//        TextView risk1 = (TextView) findViewById(R.id.txt_risk1);
+//        TextView risk2 = (TextView) findViewById(R.id.txt_risk2);
+//        TextView risk3 = (TextView) findViewById(R.id.txt_risk3);
+//        TextView risk4 = (TextView) findViewById(R.id.txt_risk4);
 
-        final TextView show_risk = (TextView) findViewById(R.id.show_more);
-        final TextView show_detail = (TextView) findViewById(R.id.show_more_detail);
+//        final TextView show_risk = (TextView) findViewById(R.id.show_more);
+//        final TextView show_detail = (TextView) findViewById(R.id.show_more_detail);
 
         //detail data
-        TextView village = (TextView) findViewById(R.id.txt_village_name);
-        TextView subvillage = (TextView) findViewById(R.id.txt_subvillage);
-        TextView age = (TextView) findViewById(R.id.txt_age);
-        TextView alamat = (TextView) findViewById(R.id.txt_alamat);
-        TextView education = (TextView) findViewById(R.id.txt_edu);
-        TextView religion = (TextView) findViewById(R.id.txt_agama);
-        TextView job = (TextView) findViewById(R.id.txt_job);
-        TextView gakin = (TextView) findViewById(R.id.txt_gakin);
-        TextView blood_type = (TextView) findViewById(R.id.txt_blood);
-        TextView asuransi = (TextView) findViewById(R.id.txt_asuransi);
+//        TextView village = (TextView) findViewById(R.id.txt_village_name);
+//        TextView subvillage = (TextView) findViewById(R.id.txt_subvillage);
+//        TextView age = (TextView) findViewById(R.id.txt_age);
+//        TextView alamat = (TextView) findViewById(R.id.txt_alamat);
+//        TextView education = (TextView) findViewById(R.id.txt_edu);
+//        TextView religion = (TextView) findViewById(R.id.txt_agama);
+//        TextView job = (TextView) findViewById(R.id.txt_job);
+//        TextView gakin = (TextView) findViewById(R.id.txt_gakin);
+//        TextView blood_type = (TextView) findViewById(R.id.txt_blood);
+//        TextView asuransi = (TextView) findViewById(R.id.txt_asuransi);
 
         //detail RISK
-        TextView highRiskSTIBBVs = (TextView) findViewById(R.id.txt_highRiskSTIBBVs);
-        TextView highRiskEctopicPregnancy = (TextView) findViewById(R.id.txt_highRiskEctopicPregnancy);
-        TextView highRiskCardiovascularDiseaseRecord = (TextView) findViewById(R.id.txt_highRiskCardiovascularDiseaseRecord);
-        TextView highRiskDidneyDisorder = (TextView) findViewById(R.id.txt_highRiskDidneyDisorder);
-        TextView highRiskHeartDisorder = (TextView) findViewById(R.id.txt_highRiskHeartDisorder);
-        TextView highRiskAsthma = (TextView) findViewById(R.id.txt_highRiskAsthma);
-        TextView highRiskTuberculosis = (TextView) findViewById(R.id.txt_highRiskTuberculosis);
-        TextView highRiskMalaria = (TextView) findViewById(R.id.txt_highRiskMalaria);
-        TextView highRiskPregnancyPIH = (TextView) findViewById(R.id.txt_highRiskPregnancyPIH);
-        TextView highRiskPregnancyProteinEnergyMalnutrition = (TextView) findViewById(R.id.txt_highRiskPregnancyProteinEnergyMalnutrition);
-        TextView txt_highRiskLabourTBRisk = (TextView) findViewById(R.id.txt_highRiskLabourTBRisk);
-        TextView txt_HighRiskLabourSectionCesareaRecord = (TextView) findViewById(R.id.txt_HighRiskLabourSectionCesareaRecord);
-        TextView txt_highRisklabourFetusNumber = (TextView) findViewById(R.id.txt_highRisklabourFetusNumber);
-        TextView txt_highRiskLabourFetusSize = (TextView) findViewById(R.id.txt_highRiskLabourFetusSize);
-        TextView txt_lbl_highRiskLabourFetusMalpresentation = (TextView) findViewById(R.id.txt_lbl_highRiskLabourFetusMalpresentation);
-        TextView txt_highRiskPregnancyAnemia = (TextView) findViewById(R.id.txt_highRiskPregnancyAnemia);
-        TextView txt_highRiskPregnancyDiabetes = (TextView) findViewById(R.id.txt_highRiskPregnancyDiabetes);
-        TextView HighRiskPregnancyTooManyChildren = (TextView) findViewById(R.id.txt_HighRiskPregnancyTooManyChildren);
-        TextView highRiskPostPartumSectioCaesaria = (TextView) findViewById(R.id.txt_highRiskPostPartumSectioCaesaria);
-        TextView highRiskPostPartumForceps = (TextView) findViewById(R.id.txt_highRiskPostPartumForceps);
-        TextView highRiskPostPartumVacum = (TextView) findViewById(R.id.txt_highRiskPostPartumVacum);
-        TextView highRiskPostPartumPreEclampsiaEclampsia = (TextView) findViewById(R.id.txt_highRiskPostPartumPreEclampsiaEclampsia);
-        TextView highRiskPostPartumMaternalSepsis = (TextView) findViewById(R.id.txt_highRiskPostPartumMaternalSepsis);
-        TextView highRiskPostPartumInfection = (TextView) findViewById(R.id.txt_highRiskPostPartumInfection);
-        TextView highRiskPostPartumHemorrhage = (TextView) findViewById(R.id.txt_highRiskPostPartumHemorrhage);
-        TextView highRiskPostPartumPIH = (TextView) findViewById(R.id.txt_highRiskPostPartumPIH);
-        TextView highRiskPostPartumDistosia = (TextView) findViewById(R.id.txt_highRiskPostPartumDistosia);
-        TextView txt_highRiskHIVAIDS = (TextView) findViewById(R.id.txt_highRiskHIVAIDS);
+//        TextView highRiskSTIBBVs = (TextView) findViewById(R.id.txt_highRiskSTIBBVs);
+//        TextView highRiskEctopicPregnancy = (TextView) findViewById(R.id.txt_highRiskEctopicPregnancy);
+//        TextView highRiskCardiovascularDiseaseRecord = (TextView) findViewById(R.id.txt_highRiskCardiovascularDiseaseRecord);
+//        TextView highRiskDidneyDisorder = (TextView) findViewById(R.id.txt_highRiskDidneyDisorder);
+//        TextView highRiskHeartDisorder = (TextView) findViewById(R.id.txt_highRiskHeartDisorder);
+//        TextView highRiskAsthma = (TextView) findViewById(R.id.txt_highRiskAsthma);
+//        TextView highRiskTuberculosis = (TextView) findViewById(R.id.txt_highRiskTuberculosis);
+//        TextView highRiskMalaria = (TextView) findViewById(R.id.txt_highRiskMalaria);
+//        TextView highRiskPregnancyPIH = (TextView) findViewById(R.id.txt_highRiskPregnancyPIH);
+//        TextView highRiskPregnancyProteinEnergyMalnutrition = (TextView) findViewById(R.id.txt_highRiskPregnancyProteinEnergyMalnutrition);
+//        TextView txt_highRiskLabourTBRisk = (TextView) findViewById(R.id.txt_highRiskLabourTBRisk);
+//        TextView txt_HighRiskLabourSectionCesareaRecord = (TextView) findViewById(R.id.txt_HighRiskLabourSectionCesareaRecord);
+//        TextView txt_highRisklabourFetusNumber = (TextView) findViewById(R.id.txt_highRisklabourFetusNumber);
+//        TextView txt_highRiskLabourFetusSize = (TextView) findViewById(R.id.txt_highRiskLabourFetusSize);
+//        TextView txt_lbl_highRiskLabourFetusMalpresentation = (TextView) findViewById(R.id.txt_lbl_highRiskLabourFetusMalpresentation);
+//        TextView txt_highRiskPregnancyAnemia = (TextView) findViewById(R.id.txt_highRiskPregnancyAnemia);
+//        TextView txt_highRiskPregnancyDiabetes = (TextView) findViewById(R.id.txt_highRiskPregnancyDiabetes);
+//        TextView HighRiskPregnancyTooManyChildren = (TextView) findViewById(R.id.txt_HighRiskPregnancyTooManyChildren);
+//        TextView highRiskPostPartumSectioCaesaria = (TextView) findViewById(R.id.txt_highRiskPostPartumSectioCaesaria);
+//        TextView highRiskPostPartumForceps = (TextView) findViewById(R.id.txt_highRiskPostPartumForceps);
+//        TextView highRiskPostPartumVacum = (TextView) findViewById(R.id.txt_highRiskPostPartumVacum);
+//        TextView highRiskPostPartumPreEclampsiaEclampsia = (TextView) findViewById(R.id.txt_highRiskPostPartumPreEclampsiaEclampsia);
+//        TextView highRiskPostPartumMaternalSepsis = (TextView) findViewById(R.id.txt_highRiskPostPartumMaternalSepsis);
+//        TextView highRiskPostPartumInfection = (TextView) findViewById(R.id.txt_highRiskPostPartumInfection);
+//        TextView highRiskPostPartumHemorrhage = (TextView) findViewById(R.id.txt_highRiskPostPartumHemorrhage);
+//        TextView highRiskPostPartumPIH = (TextView) findViewById(R.id.txt_highRiskPostPartumPIH);
+//        TextView highRiskPostPartumDistosia = (TextView) findViewById(R.id.txt_highRiskPostPartumDistosia);
+//        TextView txt_highRiskHIVAIDS = (TextView) findViewById(R.id.txt_highRiskHIVAIDS);
+//
+//        ImageButton back = (ImageButton) findViewById(org.smartregister.R.id.btn_back_to_home);
 
-        ImageButton back = (ImageButton) findViewById(org.smartregister.R.id.btn_back_to_home);
         back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -138,11 +209,10 @@ public class DetailMotherActivity extends Activity {
         DetailsRepository detailsRepository = org.smartregister.Context.getInstance().detailsRepository();
         detailsRepository.updateDetails(motherClient);
 
-        Log.e(TAG, "onCreate: "+ motherClient );
         //set profile image by passing the client id.If the image doesn't exist in the image repository then download and save locally
 //        DrishtiApplication.getCachedImageLoaderInstance().getImageByClientId(motherClient.getCaseId(), OpenSRPImageLoader.getStaticImageListener(kiview, R.mipmap.woman_placeholder, R.mipmap.woman_placeholder));
 
-        DetailMotherActivity.setImagetoHolderFromUri(this,
+        Support.setImagetoHolderFromUri(this,
                 DrishtiApplication.getAppDir() + File.separator + motherClient.getDetails().get("base_entity_id") + ".JPEG",
                 kiview, R.mipmap.woman_placeholder);
 

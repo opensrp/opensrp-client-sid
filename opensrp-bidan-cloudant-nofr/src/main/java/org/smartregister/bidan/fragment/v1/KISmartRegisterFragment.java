@@ -68,7 +68,7 @@ import static org.smartregister.bidan.utils.BidanConstants.EC_IBU_TABLE_NAME;
 
 public class KISmartRegisterFragment extends BaseSmartRegisterFragment implements LocationSelectorDialogFragment.OnLocationSelectedListener {
 
-    private static final String TAG = KISmartRegisterFragment.class.getSimpleName();
+    private static final String TAG = KISmartRegisterFragment.class.getName();
     //    WD
     public static String criteria;
     private final ClientActionHandler clientActionHandler = new ClientActionHandler();

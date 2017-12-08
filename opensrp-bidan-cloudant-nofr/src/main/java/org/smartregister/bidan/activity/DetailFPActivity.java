@@ -33,7 +33,7 @@ import static org.smartregister.util.StringUtil.humanize;
 public class DetailFPActivity extends Activity {
 
     //image retrieving
-    private static final String TAG = DetailFPActivity.class.getSimpleName();
+    private static final String TAG = DetailFPActivity.class.getName();
     SimpleDateFormat timer = new SimpleDateFormat("hh:mm:ss");
     //image retrieving
 

@@ -68,7 +68,7 @@ import static org.smartregister.bidan.utils.AllConstantsINA.FormNames.KOHORT_KB_
  */
 public class NativeKBSmartRegisterFragment extends SecuredNativeSmartRegisterCursorAdapterFragment {
 
-    private static final String TAG = NativeKBSmartRegisterFragment.class.getSimpleName();
+    private static final String TAG = NativeKBSmartRegisterFragment.class.getName();
     private SmartRegisterClientsProvider clientProvider = null;
     private CommonPersonObjectController controller;
     private VillageController villageController;

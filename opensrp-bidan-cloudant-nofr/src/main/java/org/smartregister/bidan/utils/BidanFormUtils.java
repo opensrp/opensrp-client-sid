@@ -58,7 +58,7 @@ import javax.xml.parsers.DocumentBuilderFactory;
  */
 public class BidanFormUtils {
 
-    public static final String TAG = "BidanFormUtils";
+    public static final String TAG = BidanFormUtils.class.getName();
     public static final String ecClientRelationships = "ec_client_relationships.json";
     private static final String shouldLoadValueKey = "shouldLoadValue";
     private static final String relationalIdKey = "relational_id";
@@ -69,14 +69,14 @@ public class BidanFormUtils {
     private org.smartregister.Context theAppContext;
     private SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSSZ");
     private Format formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-    private VaksinatorFormEntityConverter formEntityConverter;
+    private BidanFormEntityConverter formEntityConverter;
     private CloudantDataHandler mCloudantDataHandler;
 
     public BidanFormUtils(Context context) throws Exception {
         mContext = context;
         theAppContext = CoreLibrary.getInstance().context();
         FormAttributeParser formAttributeParser = new FormAttributeParser(context);
-        formEntityConverter = new VaksinatorFormEntityConverter(formAttributeParser, mContext);
+        formEntityConverter = new BidanFormEntityConverter(formAttributeParser, mContext);
         // Protect creation of static variable.
         mCloudantDataHandler = CloudantDataHandler.getInstance(context.getApplicationContext());
     }

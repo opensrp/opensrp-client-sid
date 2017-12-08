@@ -32,7 +32,7 @@ import static org.smartregister.util.StringUtil.humanize;
 public class DetailANCActivity extends Activity {
 
     //image retrieving
-    private static final String TAG = DetailANCActivity.class.getSimpleName();
+    private static final String TAG = DetailANCActivity.class.getName();
     public static CommonPersonObjectClient ancClient;
     static String entityid;
     private static HashMap<String, String> hash;

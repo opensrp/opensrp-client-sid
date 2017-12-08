@@ -255,7 +255,7 @@ public class BaseRegisterActivity extends SecuredNativeSmartRegisterActivity imp
 
             mPager.setCurrentItem(formIndex, false); //Don't animate the view on orientation change the view disapears
 
-        }catch (Exception e){
+        } catch (Exception e){
             e.printStackTrace();
         }
 
@@ -263,22 +263,10 @@ public class BaseRegisterActivity extends SecuredNativeSmartRegisterActivity imp
 
     @Override
     public void saveFormSubmission(String formSubmission, String id, String formName, JSONObject fieldOverrides){
-        System.out.println("formSubmission: "+ formSubmission);
-        System.out.println("formName: "+ formName);
-        System.out.println("fieldOverrides: "+ fieldOverrides.toString());
-
-
         // save the form
         try {
             BidanFormUtils formUtils = BidanFormUtils.getInstance(getApplicationContext());
             FormSubmission submission = formUtils.generateFormSubmisionFromXMLString(id, formSubmission, formName, fieldOverrides);
-
-            System.out.println("saveFormSubmission: "+ submission.toString() );
-            Log.logDebug("============== CLIENT ================");
-            Log.logDebug(submission.toString());
-            Log.logDebug("====================================");
-
-//            ziggyService.saveForm(getParams(submission), submission.instance());
 
             ClientProcessor.getInstance(getApplicationContext()).processClient();
 

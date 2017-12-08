@@ -67,7 +67,7 @@ import static org.apache.commons.lang3.StringUtils.isEmpty;
  */
 public class NativeKISmartRegisterFragment extends SecuredNativeSmartRegisterCursorAdapterFragment {
 
-    private static final String TAG = NativeKISmartRegisterFragment.class.getSimpleName();
+    private static final String TAG = NativeKISmartRegisterFragment.class.getName();
     private final ClientActionHandler clientActionHandler = new ClientActionHandler();
     Date date = new Date();
     SimpleDateFormat sdf;

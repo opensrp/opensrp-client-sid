@@ -38,7 +38,7 @@ public class DetailPNCActivity extends Activity {
 
     SimpleDateFormat timer = new SimpleDateFormat("hh:mm:ss");
     //image retrieving
-    private static final String TAG = DetailPNCActivity.class.getSimpleName();
+    private static final String TAG = DetailPNCActivity.class.getName();
     private static final String IMAGE_CACHE_DIR = "thumbs";
     //  private static KmsCalc  kmsCalc;
     private static int mImageThumbSize;

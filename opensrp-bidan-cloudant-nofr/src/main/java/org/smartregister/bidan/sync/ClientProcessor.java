@@ -37,7 +37,7 @@ public class ClientProcessor {
     public static final String baseEntityIdJSONKey = "baseEntityId";
     protected static final String providerIdJSONKey = "providerId";
     protected static final String VALUES_KEY = "values";
-    private static final String TAG = "ClientProcessor";
+    private static final String TAG = ClientProcessor.class.getName();
     private static final String detailsUpdated = "detailsUpdated";
     private static final String[] openmrs_gen_ids = {"zeir_id"};
     private static ClientProcessor instance;

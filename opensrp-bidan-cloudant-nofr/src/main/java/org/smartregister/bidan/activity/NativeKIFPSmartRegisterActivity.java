@@ -54,8 +54,7 @@ import static org.smartregister.util.Utils.getValue;
 
 public class NativeKIFPSmartRegisterActivity extends BaseRegisterActivity {
 
-    public static final String TAG = NativeKIFPSmartRegisterActivity.class.getSimpleName();
-
+    public static final String TAG = NativeKIFPSmartRegisterActivity.class.getName();
 
     @Override
     protected String[] formNames() {

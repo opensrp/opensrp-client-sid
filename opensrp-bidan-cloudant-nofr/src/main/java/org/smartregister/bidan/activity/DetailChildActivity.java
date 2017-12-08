@@ -18,9 +18,13 @@ import org.smartregister.commonregistry.CommonPersonObject;
 import org.smartregister.commonregistry.CommonPersonObjectClient;
 import org.smartregister.repository.DetailsRepository;
 import org.smartregister.view.activity.DrishtiApplication;
+import org.smartregister.view.viewpager.OpenSRPViewPager;
 
 import java.io.File;
 import java.util.HashMap;
+
+import butterknife.Bind;
+import butterknife.BindDrawable;
 
 import static org.smartregister.util.StringUtil.humanize;
 
@@ -32,7 +36,7 @@ import static org.smartregister.util.StringUtil.humanize;
 public class DetailChildActivity extends Activity {
 
     //image retrieving
-    private static final String TAG = DetailChildActivity.class.getSimpleName();
+    private static final String TAG = DetailChildActivity.class.getName();
     public static CommonPersonObjectClient childclient;
     static String entityid;
     private static HashMap<String, String> hash;
@@ -47,6 +51,8 @@ public class DetailChildActivity extends Activity {
         }
 
     }
+
+    @Bind(R.id.childdetailprofileview) ImageView childview;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

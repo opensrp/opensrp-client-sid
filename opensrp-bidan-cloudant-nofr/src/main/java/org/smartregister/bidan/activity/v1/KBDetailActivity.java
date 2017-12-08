@@ -32,7 +32,7 @@ import static org.smartregister.util.StringUtil.humanize;
 public class KBDetailActivity extends Activity {
 
     //image retrieving
-    private static final String TAG = KBDetailActivity.class.getSimpleName();
+    private static final String TAG = KBDetailActivity.class.getName();
     SimpleDateFormat timer = new SimpleDateFormat("hh:mm:ss");
     //image retrieving
 

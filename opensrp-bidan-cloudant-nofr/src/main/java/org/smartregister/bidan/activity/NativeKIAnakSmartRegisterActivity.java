@@ -25,7 +25,7 @@ import static org.smartregister.bidan.utils.AllConstantsINA.FormNames.KOHORT_BAY
  */
 public class NativeKIAnakSmartRegisterActivity extends BaseRegisterActivity {
 
-    public static final String TAG = AnakSmartRegisterFragment.class.getSimpleName();
+    public static final String TAG = AnakSmartRegisterFragment.class.getName();
 
     @Override
     protected String[] formNames() {

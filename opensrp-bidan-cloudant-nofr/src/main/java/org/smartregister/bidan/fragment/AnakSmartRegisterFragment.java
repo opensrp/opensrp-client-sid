@@ -58,7 +58,7 @@ import static android.view.View.INVISIBLE;
  */
 public class AnakSmartRegisterFragment extends BaseSmartRegisterFragment {
 
-    private static final String TAG = AnakSmartRegisterFragment.class.getSimpleName();
+    private static final String TAG = AnakSmartRegisterFragment.class.getName();
     //    WD
     public static String criteria;
     private final ClientActionHandler clientActionHandler = new ClientActionHandler();
