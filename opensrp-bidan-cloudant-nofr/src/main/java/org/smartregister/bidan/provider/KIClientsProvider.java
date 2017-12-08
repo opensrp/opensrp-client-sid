@@ -192,7 +192,7 @@ public class KIClientsProvider implements SmartRegisterCLientsProviderForCursorA
             }
         }
         //last check if mother in PF (KB) service
-        else if (!StringUtils.isNumeric(pc.getDetails().get("jenisKontrasepsi"))) {
+        if (!StringUtils.isNumeric(pc.getDetails().get("jenisKontrasepsi"))) {
             checkLastVisit(pc.getDetails().get("tanggalkunjungan"), context.getString(R.string.fp_methods) + ": " + pc.getDetails().get("jenisKontrasepsi"), context.getString(R.string.service_fp),
                     viewHolder.anc_status_layout, viewHolder.date_status, viewHolder.visit_status);
         }
