@@ -6,34 +6,35 @@
     android:layout_height="fill_parent"
     android:layout_weight="@integer/ec_list_profile_box_weight"
     android:background="@drawable/transparent_blue_background">
+
     <FrameLayout
         android:id="@+id/img_profile_layout"
         android:layout_width="@dimen/client_profile_pic_width"
         android:layout_height="fill_parent">
 
         <ImageView
-            android:id="@+id/img_profile"
+            android:id="@+id/iv_profile"
             android:layout_width="@dimen/client_profile_pic_width"
             android:layout_height="@dimen/client_profile_pic_height"
             android:layout_marginLeft="@dimen/client_profile_pic_margin_left"
             android:layout_marginRight="@dimen/client_profile_pic_margin_right"
-            android:layout_marginTop="@dimen/client_profile_pic_margin_top"/>
+            android:layout_marginTop="@dimen/client_profile_pic_margin_top" />
 
         <LinearLayout
             android:id="@+id/badges_layout"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:paddingTop="@dimen/client_profile_badge_layout_margin_top"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            android:paddingTop="@dimen/client_profile_badge_layout_margin_top">
 
             <ImageView
-                android:id="@+id/img_hr_badge"
+                android:id="@+id/iv_hr_badge"
                 android:layout_width="@dimen/client_profile_badge_width"
                 android:layout_height="@dimen/client_profile_badge_height"
                 android:layout_marginBottom="-5dp"
                 android:scaleType="fitStart"
                 android:src="@drawable/flag_yellow_rt"
-                android:visibility="gone"/>
+                android:visibility="gone" />
 
         </LinearLayout>
 
@@ -42,57 +43,57 @@
     <RelativeLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_toRightOf="@+id/img_profile_layout"
+        android:layout_marginLeft="-5dp"
         android:layout_marginTop="5dp"
-        android:layout_marginLeft="-5dp">
+        android:layout_toRightOf="@+id/img_profile_layout">
 
         <org.smartregister.view.customcontrols.CustomFontTextView
             android:id="@+id/txt_child_name"
+            style="@style/CustomFontTextViewStyle.ListView.Medium"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentTop="true"
             android:layout_toLeftOf="@+id/txt_age"
             android:singleLine="true"
-            android:textStyle="bold"
-            style="@style/CustomFontTextViewStyle.ListView.Medium"/>
+            android:textStyle="bold" />
 
         <org.smartregister.view.customcontrols.CustomFontTextView
             android:id="@+id/txt_mother_name"
+            style="@style/CustomFontTextViewStyle.ListView.Small"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@id/txt_child_name"
-            style="@style/CustomFontTextViewStyle.ListView.Small"/>
+            android:layout_below="@id/txt_child_name" />
 
         <org.smartregister.view.customcontrols.CustomFontTextView
-            android:id="@+id/txt_village_name"
+            android:id="@+id/tv_village_name"
+            style="@style/CustomFontTextViewStyle.ListView.Small"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:layout_below="@id/txt_mother_name"
-            android:layout_toLeftOf="@+id/txt_out_of_area"
-            android:layout_marginTop="@dimen/client_profile_village_margin"
             android:layout_marginBottom="@dimen/client_profile_village_margin"
-            style="@style/CustomFontTextViewStyle.ListView.Small"/>
+            android:layout_marginTop="@dimen/client_profile_village_margin"
+            android:layout_toLeftOf="@+id/txt_out_of_area" />
 
         <org.smartregister.view.customcontrols.CustomFontTextView
             android:id="@+id/txt_child_age"
+            style="@style/CustomFontTextViewStyle.ListView.Small.NoHeight"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
             android:layout_alignParentTop="true"
-            android:paddingTop="@dimen/client_age_padding"
-            android:paddingRight="2dp"
-            android:paddingLeft="2dp"
             android:background="#FFFFFF"
-            style="@style/CustomFontTextViewStyle.ListView.Small.NoHeight"/>
+            android:paddingLeft="2dp"
+            android:paddingRight="2dp"
+            android:paddingTop="@dimen/client_age_padding" />
 
         <org.smartregister.view.customcontrols.CustomFontTextView
-            android:id="@+id/txt_is_out_of_area"
+            android:id="@+id/tv_is_out_of_area"
+            style="@style/CustomFontTextViewStyle.ListView.Small"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignParentRight="true"
             android:layout_alignParentBottom="true"
-            android:padding="5dp"
-            style="@style/CustomFontTextViewStyle.ListView.Small"/>
+            android:layout_alignParentRight="true"
+            android:padding="5dp" />
 
     </RelativeLayout>
 

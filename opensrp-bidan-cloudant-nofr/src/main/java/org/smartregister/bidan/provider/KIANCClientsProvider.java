@@ -19,7 +19,6 @@ import org.joda.time.Months;
 import org.joda.time.format.DateTimeFormat;
 import org.joda.time.format.DateTimeFormatter;
 import org.smartregister.bidan.R;
-import org.smartregister.bidan.activity.DetailMotherActivity;
 import org.smartregister.bidan.utils.AllConstantsINA;
 import org.smartregister.bidan.utils.Support;
 import org.smartregister.commonregistry.AllCommonsRepository;
@@ -77,21 +76,21 @@ public class KIANCClientsProvider implements SmartRegisterCLientsProviderForCurs
         if (convertView.getTag() == null || !(convertView.getTag() instanceof ViewHolder)) {
             viewHolder = new ViewHolder();
             viewHolder.profilelayout = (LinearLayout) convertView.findViewById(R.id.profile_info_layout);
-            viewHolder.wife_name = (TextView) convertView.findViewById(R.id.wife_name);
-            viewHolder.husband_name = (TextView) convertView.findViewById(R.id.txt_husband_name);
-            viewHolder.village_name = (TextView) convertView.findViewById(R.id.txt_village_name);
-            viewHolder.wife_age = (TextView) convertView.findViewById(R.id.wife_age);
-            viewHolder.no_ibu = (TextView) convertView.findViewById(R.id.no_ibu);
+            viewHolder.wife_name = (TextView) convertView.findViewById(R.id.tv_wife_name);
+            viewHolder.husband_name = (TextView) convertView.findViewById(R.id.tv_husband_name);
+            viewHolder.village_name = (TextView) convertView.findViewById(R.id.tv_village_name);
+            viewHolder.wife_age = (TextView) convertView.findViewById(R.id.tv_wife_age);
+            viewHolder.no_ibu = (TextView) convertView.findViewById(R.id.tv_no_ibu);
             viewHolder.unique_id = (TextView) convertView.findViewById(R.id.unique_id);
-            viewHolder.gravida = (TextView) convertView.findViewById(R.id.txt_gravida);
-            viewHolder.parity = (TextView) convertView.findViewById(R.id.txt_parity);
-            viewHolder.number_of_abortus = (TextView) convertView.findViewById(R.id.txt_number_of_abortus);
-            viewHolder.number_of_alive = (TextView) convertView.findViewById(R.id.txt_number_of_alive);
-            viewHolder.hr_badge = (ImageView) convertView.findViewById(R.id.img_hr_badge);
-            viewHolder.img_hrl_badge = (ImageView) convertView.findViewById(R.id.img_hrl_badge);
-            viewHolder.bpl_badge = (ImageView) convertView.findViewById(R.id.img_bpl_badge);
-            viewHolder.hrp_badge = (ImageView) convertView.findViewById(R.id.img_hrp_badge);
-            viewHolder.hrpp_badge = (ImageView) convertView.findViewById(R.id.img_hrpp_badge);
+            viewHolder.gravida = (TextView) convertView.findViewById(R.id.tv_gravida);
+            viewHolder.parity = (TextView) convertView.findViewById(R.id.tv_parity);
+            viewHolder.number_of_abortus = (TextView) convertView.findViewById(R.id.tv_number_of_abortus);
+            viewHolder.number_of_alive = (TextView) convertView.findViewById(R.id.tv_number_of_alive);
+            viewHolder.hr_badge = (ImageView) convertView.findViewById(R.id.iv_hr_badge);
+            viewHolder.img_hrl_badge = (ImageView) convertView.findViewById(R.id.iv_hrl_badge);
+            viewHolder.bpl_badge = (ImageView) convertView.findViewById(R.id.iv_bpl_badge);
+            viewHolder.hrp_badge = (ImageView) convertView.findViewById(R.id.iv_hrp_badge);
+            viewHolder.hrpp_badge = (ImageView) convertView.findViewById(R.id.iv_hrpp_badge);
             viewHolder.edd = (TextView) convertView.findViewById(R.id.txt_edd);
             viewHolder.edd_due = (TextView) convertView.findViewById(R.id.txt_edd_due);
             viewHolder.children_age_left = (TextView) convertView.findViewById(R.id.txt_children_age_left);
@@ -100,8 +99,8 @@ public class KIANCClientsProvider implements SmartRegisterCLientsProviderForCurs
             viewHolder.anc_status_layout = (TextView) convertView.findViewById(R.id.mother_status);
             viewHolder.date_status = (TextView) convertView.findViewById(R.id.last_visit_status);
             viewHolder.visit_status = (TextView) convertView.findViewById(R.id.visit_status);
-            viewHolder.profilepic = (ImageView) convertView.findViewById(R.id.img_profile);
-            viewHolder.follow_up = (ImageButton) convertView.findViewById(R.id.btn_edit);
+            viewHolder.profilepic = (ImageView) convertView.findViewById(R.id.iv_profile);
+            viewHolder.follow_up = (ImageButton) convertView.findViewById(R.id.ib_btn_edit);
 
             convertView.setTag(viewHolder);
         } else {

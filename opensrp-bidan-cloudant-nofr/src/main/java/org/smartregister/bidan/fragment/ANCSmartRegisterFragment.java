@@ -52,7 +52,6 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Objects;
 
 import static android.view.View.INVISIBLE;
 
@@ -395,7 +394,7 @@ public class ANCSmartRegisterFragment extends BaseSmartRegisterFragment {
                     getActivity().finish();
                     break;
 
-                case R.id.btn_edit:
+                case R.id.ib_btn_edit:
                     DetailANCActivity.ancClient = (CommonPersonObjectClient) view.getTag();
 //                    showFragmentDialog(new EditDialogOptionModel(), view.getTag());
                     showFragmentDialog(((NativeKIANCSmartRegisterActivity) getActivity()).new EditDialogOptionModel(), view.getTag());

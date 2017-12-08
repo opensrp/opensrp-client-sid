@@ -21,7 +21,6 @@ import org.smartregister.Context;
 import org.smartregister.bidan.R;
 import org.smartregister.bidan.activity.BaseRegisterActivity;
 import org.smartregister.bidan.activity.v1.KBDetailActivity;
-import org.smartregister.bidan.activity.LoginActivity;
 import org.smartregister.bidan.activity.v1.NativeKBSmartRegisterActivity;
 import org.smartregister.bidan.options.AllKBServiceMode;
 import org.smartregister.bidan.options.KICommonObjectFilterOption;
@@ -293,7 +292,7 @@ public class NativeKBSmartRegisterFragment extends SecuredNativeSmartRegisterCur
                     startActivity(intent);
                     getActivity().finish();
                     break;
-         case R.id.btn_edit:
+         case R.id.ib_btn_edit:
                     // FlurryFacade.logEvent("click_visit_button_on_kohort_kb_dashboard");
                     showFragmentDialog(new EditDialogOptionModel(), view.getTag());
                     break;

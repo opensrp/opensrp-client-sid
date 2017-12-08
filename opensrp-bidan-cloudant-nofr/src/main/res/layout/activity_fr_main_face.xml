@@ -6,9 +6,9 @@
     android:paddingLeft="0dp"
     android:paddingRight="0dp"
     android:paddingTop="0dp"
-    tools:context="org.smartregister.bidan_cloudant.face.camera.SmartShutterActivity" >
-    
-	<FrameLayout
+    tools:context="org.smartregister.bidan_cloudant.face.camera.SmartShutterActivity">
+
+    <FrameLayout
         android:id="@+id/cameraPreview"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -16,7 +16,7 @@
         android:layout_alignParentTop="true">
 
     </FrameLayout>
-    
+
     <ImageView
         android:id="@+id/cameraButton"
         android:layout_width="70dp"
@@ -25,7 +25,7 @@
         android:layout_centerHorizontal="true"
         android:background="@drawable/ic_camera_alt_white_24dp"
         android:gravity="bottom" />
-    
+
     <ImageView
         android:id="@+id/settings"
         android:layout_width="65dp"
@@ -50,8 +50,7 @@
         android:layout_height="70dp"
         android:layout_alignParentBottom="true"
         android:layout_alignParentLeft="true"
-        android:gravity="bottom"
-        />
+        android:gravity="bottom" />
 
     <CheckBox
         android:id="@+id/smileCheckBox"
@@ -85,8 +84,8 @@
         android:layout_above="@+id/settings"
         android:layout_alignLeft="@+id/settings"
         android:gravity="bottom" />
-    
-     <ImageView
+
+    <ImageView
         android:id="@+id/clientList"
         android:layout_width="50dp"
         android:layout_height="50dp"
@@ -94,25 +93,25 @@
         android:layout_alignRight="@+id/menu"
         android:layout_alignTop="@+id/menu"
         android:gravity="center" />
-     
-     <ImageView
-         android:id="@+id/perfectMode"
-         android:layout_width="50dp"
-         android:layout_height="50dp"
-         android:layout_alignLeft="@+id/menu"
-         android:layout_alignRight="@+id/menu"
-         android:layout_marginTop= "4dp"
-         android:layout_below="@+id/clientList"
-         android:gravity="center" />
 
-     <ImageView
+    <ImageView
+        android:id="@+id/perfectMode"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_alignLeft="@+id/menu"
+        android:layout_alignRight="@+id/menu"
+        android:layout_below="@+id/clientList"
+        android:layout_marginTop="4dp"
+        android:gravity="center" />
+
+    <ImageView
         android:id="@+id/faceDetection"
         android:layout_width="55dp"
         android:layout_height="50dp"
         android:layout_alignLeft="@+id/menu"
         android:layout_alignRight="@+id/menu"
-        android:layout_marginTop="4dp"
         android:layout_below="@+id/perfectMode"
+        android:layout_marginTop="4dp"
         android:gravity="center" />
 
     <ImageView
@@ -121,18 +120,18 @@
         android:layout_height="50dp"
         android:layout_alignLeft="@+id/menu"
         android:layout_alignRight="@+id/menu"
-        android:layout_marginTop="4dp"
         android:layout_below="@+id/faceDetection"
+        android:layout_marginTop="4dp"
         android:gravity="center" />
-	
+
     <ImageView
         android:id="@+id/flash"
         android:layout_width="50dp"
         android:layout_height="50dp"
         android:layout_alignLeft="@+id/menu"
         android:layout_alignRight="@+id/menu"
-        android:layout_marginTop="4dp"
         android:layout_below="@+id/switchCamera"
-        android:gravity="center"  />
+        android:layout_marginTop="4dp"
+        android:gravity="center" />
 
 </RelativeLayout>

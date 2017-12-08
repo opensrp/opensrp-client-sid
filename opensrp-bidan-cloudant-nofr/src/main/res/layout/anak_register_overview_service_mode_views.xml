@@ -5,7 +5,7 @@
     android:orientation="horizontal"
     android:weightSum="73">
 
-    <include layout="@layout/anak_register_birth"/>
+    <include layout="@layout/anak_register_birth" />
 
 
     <ImageView
@@ -13,7 +13,7 @@
         android:layout_height="fill_parent"
         android:src="@color/smart_register_client_divider_color" />
 
-    <include layout="@layout/anak_register_client_neonatal"/>
+    <include layout="@layout/anak_register_client_neonatal" />
 
 
     <ImageView
@@ -21,14 +21,14 @@
         android:layout_height="fill_parent"
         android:src="@color/smart_register_client_divider_color" />
 
-    <include layout="@layout/anak_register_client_immunzation"/>
+    <include layout="@layout/anak_register_client_immunzation" />
 
     <ImageView
         android:layout_width="@dimen/smart_register_client_divider_height"
         android:layout_height="fill_parent"
         android:src="@color/smart_register_client_divider_color" />
 
-    <include layout="@layout/anak_register_client_birth_status"/>
+    <include layout="@layout/anak_register_client_birth_status" />
 
     <ImageView
         android:layout_width="@dimen/smart_register_client_divider_height"
@@ -36,7 +36,7 @@
         android:src="@color/smart_register_client_divider_color" />
 
     <ImageButton
-        android:id="@+id/btn_edit"
+        android:id="@+id/ib_btn_edit"
         android:layout_width="@dimen/list_edit_icon_view_width"
         android:layout_height="fill_parent"
         android:layout_margin="5dp"

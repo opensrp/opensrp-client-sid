@@ -24,7 +24,6 @@ import org.smartregister.commonregistry.CommonPersonObjectClient;
 import org.smartregister.commonregistry.CommonPersonObjectController;
 import org.smartregister.cursoradapter.CursorCommonObjectFilterOption;
 import org.smartregister.cursoradapter.CursorCommonObjectSort;
-import org.smartregister.cursoradapter.CursorSortOption;
 import org.smartregister.cursoradapter.SmartRegisterPaginatedCursorAdapter;
 import org.smartregister.cursoradapter.SmartRegisterQueryBuilder;
 import org.smartregister.provider.SmartRegisterClientsProvider;
@@ -425,7 +424,7 @@ public class AnakSmartRegisterFragment extends BaseSmartRegisterFragment {
                     startActivity(intent);
                     getActivity().finish();
                     break;
-                case R.id.btn_edit:
+                case R.id.ib_btn_edit:
 //                    FlurryFacade.logEvent("click_visit_button_on_kohort_anak_dashboard");
 //                    showFragmentDialog(new EditDialogOptionModel(), view.getTag());
                     showFragmentDialog(((NativeKIAnakSmartRegisterActivity) getActivity()).new EditDialogOptionModel(), view.getTag());

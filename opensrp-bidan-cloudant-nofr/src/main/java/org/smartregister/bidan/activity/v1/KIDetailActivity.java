@@ -57,7 +57,7 @@ public class KIDetailActivity extends Activity {
         //profile
         TextView nama = (TextView) findViewById(R.id.txt_wife_name);
         TextView nik = (TextView) findViewById(R.id.txt_nik);
-        TextView husband_name = (TextView) findViewById(R.id.txt_husband_name);
+        TextView husband_name = (TextView) findViewById(R.id.tv_husband_name);
         TextView dob = (TextView) findViewById(R.id.txt_dob);
         TextView phone = (TextView) findViewById(R.id.txt_contact_phone_number);
         TextView risk1 = (TextView) findViewById(R.id.txt_risk1);
@@ -69,7 +69,7 @@ public class KIDetailActivity extends Activity {
         final TextView show_detail = (TextView) findViewById(R.id.show_more_detail);
 
         //detail data
-        TextView village = (TextView) findViewById(R.id.txt_village_name);
+        TextView village = (TextView) findViewById(R.id.tv_village_name);
         TextView subvillage = (TextView) findViewById(R.id.txt_subvillage);
         TextView age = (TextView) findViewById(R.id.txt_age);
         TextView alamat = (TextView) findViewById(R.id.txt_alamat);

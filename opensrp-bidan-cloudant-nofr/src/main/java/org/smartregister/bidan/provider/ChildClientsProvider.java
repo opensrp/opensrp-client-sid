@@ -84,8 +84,8 @@ public class ChildClientsProvider implements SmartRegisterCLientsProviderForCurs
 
         CommonPersonObjectClient pc = (CommonPersonObjectClient) client;
 
-        convertView.findViewById(R.id.btn_edit).setTag(client);
-        convertView.findViewById(R.id.btn_edit).setOnClickListener(onClickListener);
+        convertView.findViewById(R.id.ib_btn_edit).setTag(client);
+        convertView.findViewById(R.id.ib_btn_edit).setOnClickListener(onClickListener);
 
         convertView.findViewById(R.id.profile_info_layout).setTag(client);
         convertView.findViewById(R.id.profile_info_layout).setOnClickListener(onClickListener);
@@ -128,8 +128,8 @@ public class ChildClientsProvider implements SmartRegisterCLientsProviderForCurs
         }
 
         //---------- Child Basic Information
-        viewHolder.profilepic = (ImageView) convertView.findViewById(R.id.img_profile);
-        viewHolder.follow_up = (ImageButton) convertView.findViewById(R.id.btn_edit);
+        viewHolder.profilepic = (ImageView) convertView.findViewById(R.id.iv_profile);
+        viewHolder.follow_up = (ImageButton) convertView.findViewById(R.id.ib_btn_edit);
         viewHolder.profilepic.setImageDrawable(context.getResources().getDrawable(R.mipmap.child_boy));
 
         if (pc.getDetails().get("gender") != null) {
@@ -143,7 +143,7 @@ public class ChildClientsProvider implements SmartRegisterCLientsProviderForCurs
         fillValue((TextView) convertView.findViewById(R.id.txt_child_name), firstName);
         fillValue((TextView) convertView.findViewById(R.id.txt_mother_name), motherName);
         fillValue((TextView) convertView.findViewById(R.id.txt_child_age), age);
-        fillValue((TextView) convertView.findViewById(R.id.txt_village_name), childAddress);
+        fillValue((TextView) convertView.findViewById(R.id.tv_village_name), childAddress);
 
         //----------Child Deliver Information
 

@@ -1,163 +1,170 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="#ffffff">
+    android:background="#ffffff"
+    android:orientation="vertical">
 
     <LinearLayout
-        android:orientation="horizontal"
         android:layout_width="fill_parent"
         android:layout_height="150dp"
+        android:orientation="horizontal"
         android:weightSum="1">
 
         <ImageView
+            android:id="@+id/motherdetailprofileview"
             android:layout_width="103dp"
             android:layout_height="100dp"
-            android:id="@+id/motherdetailprofileview"
-            android:src="@drawable/woman_placeholder"
             android:layout_margin="10dp"
-            android:scaleType="fitXY" />
+            android:scaleType="fitXY"
+            android:src="@drawable/woman_placeholder" />
 
         <LinearLayout
-            android:orientation="vertical"
             android:layout_width="200dp"
             android:layout_height="match_parent"
-            android:layout_weight="0.15">
+            android:layout_weight="0.15"
+            android:orientation="vertical">
 
             <org.smartregister.view.customcontrols.CustomFontTextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textAppearance="?android:attr/textAppearanceLarge"
-                style="@style/CustomFontTextViewStyle.ListView.Medium"
-                android:text="@string/name"
-                android:layout_margin="5dp"
                 android:id="@+id/txt_wife_name"
-                android:textSize="14sp"
-                android:textColor="@color/text_black" />
-
-            <org.smartregister.view.customcontrols.CustomFontTextView
+                style="@style/CustomFontTextViewStyle.ListView.Medium"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_margin="5dp"
+                android:text="@string/name"
                 android:textAppearance="?android:attr/textAppearanceLarge"
-                style="@style/CustomFontTextViewStyle.ListView.Medium"
-                android:text="@string/nik"
+                android:textColor="@color/text_black"
+                android:textSize="14sp" />
+
+            <org.smartregister.view.customcontrols.CustomFontTextView
                 android:id="@+id/txt_nik"
-                android:textSize="14sp"
-                android:layout_margin="5dp"
-                android:textColor="@color/text_black" />
-
-            <org.smartregister.view.customcontrols.CustomFontTextView
+                style="@style/CustomFontTextViewStyle.ListView.Medium"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_margin="5dp"
+                android:text="@string/nik"
                 android:textAppearance="?android:attr/textAppearanceLarge"
+                android:textColor="@color/text_black"
+                android:textSize="14sp" />
+
+            <org.smartregister.view.customcontrols.CustomFontTextView
+                android:id="@+id/tv_husband_name"
                 style="@style/CustomFontTextViewStyle.ListView.Medium"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp"
                 android:text="@string/husband_name"
-                android:id="@+id/txt_husband_name"
-                android:textSize="14sp"
-                android:layout_margin="5dp"
-                android:textColor="@color/text_black" />
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:textColor="@color/text_black"
+                android:textSize="14sp" />
 
             <org.smartregister.view.customcontrols.CustomFontTextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textAppearance="?android:attr/textAppearanceLarge"
-                style="@style/CustomFontTextViewStyle.ListView.Medium"
-                android:text="@string/date_of_birth"
                 android:id="@+id/txt_dob"
-                android:textSize="14sp"
-                android:layout_margin="5dp"
-                android:textColor="@color/text_black" />
-            <org.smartregister.view.customcontrols.CustomFontTextView
+                style="@style/CustomFontTextViewStyle.ListView.Medium"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textAppearance="?android:attr/textAppearanceLarge"
-                style="@style/CustomFontTextViewStyle.ListView.Medium"
-                android:text="@string/phone"
-                android:id="@+id/txt_contact_phone_number"
-                android:textSize="14sp"
                 android:layout_margin="5dp"
-                android:textColor="@color/text_black" />
+                android:text="@string/date_of_birth"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:textColor="@color/text_black"
+                android:textSize="14sp" />
+
+            <org.smartregister.view.customcontrols.CustomFontTextView
+                android:id="@+id/txt_contact_phone_number"
+                style="@style/CustomFontTextViewStyle.ListView.Medium"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp"
+                android:text="@string/phone"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:textColor="@color/text_black"
+                android:textSize="14sp" />
         </LinearLayout>
 
         <LinearLayout
-            android:orientation="vertical"
             android:layout_width="330dp"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
             <org.smartregister.view.customcontrols.CustomFontTextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textAppearance="?android:attr/textAppearanceLarge"
-                style="@style/CustomFontTextViewStyle.ListView.Medium"
-                android:layout_margin="5dp"
                 android:id="@+id/Risk"
+                style="@style/CustomFontTextViewStyle.ListView.Medium"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp"
                 android:text="RISK :"
-                android:textColor="@color/alert_urgent_red"
-                android:textSize="14sp"
-                />
-            <org.smartregister.view.customcontrols.CustomFontTextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
                 android:textAppearance="?android:attr/textAppearanceLarge"
-                style="@style/CustomFontTextViewStyle.ListView.Medium"
-                android:layout_margin="5dp"
+                android:textColor="@color/alert_urgent_red"
+                android:textSize="14sp" />
+
+            <org.smartregister.view.customcontrols.CustomFontTextView
                 android:id="@+id/txt_risk1"
-                android:textSize="14sp"
-                android:textColor="@color/text_black" />
-            <org.smartregister.view.customcontrols.CustomFontTextView
+                style="@style/CustomFontTextViewStyle.ListView.Medium"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textAppearance="?android:attr/textAppearanceLarge"
-                style="@style/CustomFontTextViewStyle.ListView.Medium"
                 android:layout_margin="5dp"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:textColor="@color/text_black"
+                android:textSize="14sp" />
+
+            <org.smartregister.view.customcontrols.CustomFontTextView
                 android:id="@+id/txt_risk2"
-                android:textSize="14sp"
-                android:textColor="@color/text_black" />
-            <org.smartregister.view.customcontrols.CustomFontTextView
+                style="@style/CustomFontTextViewStyle.ListView.Medium"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textAppearance="?android:attr/textAppearanceLarge"
-                style="@style/CustomFontTextViewStyle.ListView.Medium"
                 android:layout_margin="5dp"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:textColor="@color/text_black"
+                android:textSize="14sp" />
+
+            <org.smartregister.view.customcontrols.CustomFontTextView
                 android:id="@+id/txt_risk3"
-                android:textSize="14sp"
-                android:textColor="@color/text_black" />
-            <org.smartregister.view.customcontrols.CustomFontTextView
+                style="@style/CustomFontTextViewStyle.ListView.Medium"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textAppearance="?android:attr/textAppearanceLarge"
-                style="@style/CustomFontTextViewStyle.ListView.Medium"
                 android:layout_margin="5dp"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:textColor="@color/text_black"
+                android:textSize="14sp" />
+
+            <org.smartregister.view.customcontrols.CustomFontTextView
                 android:id="@+id/txt_risk4"
-                android:textSize="14sp"
-                android:textColor="@color/text_black" />
-            <org.smartregister.view.customcontrols.CustomFontTextView
+                style="@style/CustomFontTextViewStyle.ListView.Medium"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textAppearance="?android:attr/textAppearanceLarge"
-                style="@style/CustomFontTextViewStyle.ListView.Medium"
                 android:layout_margin="5dp"
-                android:textColor="@color/alert_urgent_red"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:textColor="@color/text_black"
+                android:textSize="14sp" />
+
+            <org.smartregister.view.customcontrols.CustomFontTextView
                 android:id="@+id/show_more"
-                android:textSize="18sp"/>
-            <org.smartregister.view.customcontrols.CustomFontTextView
+                style="@style/CustomFontTextViewStyle.ListView.Medium"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textAppearance="?android:attr/textAppearanceLarge"
-                style="@style/CustomFontTextViewStyle.ListView.Medium"
                 android:layout_margin="5dp"
+                android:textAppearance="?android:attr/textAppearanceLarge"
                 android:textColor="@color/alert_urgent_red"
+                android:textSize="18sp" />
+
+            <org.smartregister.view.customcontrols.CustomFontTextView
                 android:id="@+id/show_more_detail"
-                android:visibility="gone"
-                android:textSize="18sp"/>
+                style="@style/CustomFontTextViewStyle.ListView.Medium"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:textColor="@color/alert_urgent_red"
+                android:textSize="18sp"
+                android:visibility="gone" />
 
         </LinearLayout>
 
         <LinearLayout
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:gravity="center"
-            android:layout_weight="1" >
+            android:layout_weight="1"
+            android:gravity="center">
 
             <ImageView
                 android:id="@+id/icon_device"
@@ -167,8 +174,7 @@
                 android:layout_margin="10dp"
                 android:scaleType="fitXY"
                 android:src="@drawable/pulseheart"
-                android:visibility="invisible"
-                />
+                android:visibility="invisible" />
         </LinearLayout>
 
     </LinearLayout>

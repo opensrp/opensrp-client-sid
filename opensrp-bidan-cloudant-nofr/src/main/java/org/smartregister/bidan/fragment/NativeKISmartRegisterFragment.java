@@ -19,7 +19,6 @@ import org.smartregister.bidan.R;
 import org.smartregister.bidan.activity.BaseRegisterActivity;
 //import org.smartregister.bidan.activity.v1.KIDetailActivity;
 import org.smartregister.bidan.activity.DetailMotherActivity;
-import org.smartregister.bidan.activity.LoginActivity;
 import org.smartregister.bidan.activity.v1.NativeKISmartRegisterActivity;
 import org.smartregister.bidan.options.AllKartuIbuServiceMode;
 import org.smartregister.bidan.options.KICommonObjectFilterOption;
@@ -56,7 +55,6 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Objects;
 
 import static android.view.View.INVISIBLE;
 import static android.view.View.VISIBLE;
@@ -272,7 +270,7 @@ public class NativeKISmartRegisterFragment extends SecuredNativeSmartRegisterCur
                     getActivity().finish();
                     break;
 
-                case R.id.btn_edit:
+                case R.id.ib_btn_edit:
                     DetailMotherActivity.motherClient = (CommonPersonObjectClient) view.getTag();
                     showFragmentDialog(((BaseRegisterActivity) getActivity()).new EditDialogOptionModelNew(), view.getTag());
                     break;

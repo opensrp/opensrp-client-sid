@@ -51,7 +51,8 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Objects;
+
+import butterknife.ButterKnife;
 
 import static android.view.View.INVISIBLE;
 import static org.smartregister.bidan.utils.AllConstantsINA.FormNames.KOHORT_KB_REGISTER;
@@ -74,6 +75,7 @@ public class FPSmartRegisterFragment extends BaseSmartRegisterFragment {
 
     @Override
     protected void onCreation() {
+
     }
 
 //    @Override
@@ -200,14 +202,15 @@ public class FPSmartRegisterFragment extends BaseSmartRegisterFragment {
 
     @TargetApi(Build.VERSION_CODES.KITKAT)
     public void initializeQueries(String s){
+
         try {
-            KBClientsProvider kiscp =
-                    new KBClientsProvider(getActivity(), clientActionHandler, context().alertService());
+            KBClientsProvider kiscp = new KBClientsProvider(getActivity(), clientActionHandler, context().alertService());
             clientAdapter = new SmartRegisterPaginatedCursorAdapter(
                     getActivity(),
                     null,
                     kiscp,
-                    new CommonRepository("ec_kartu_ibu",
+                    new CommonRepository(
+                            "ec_kartu_ibu",
                             new String[]{"ec_kartu_ibu.is_closed", "ec_kartu_ibu.namalengkap", "ec_kartu_ibu.umur", "ec_kartu_ibu.namaSuami", "noIbu", "jenisKontrasepsi"}));
             clientsView.setAdapter(clientAdapter);
 
@@ -283,7 +286,7 @@ public class FPSmartRegisterFragment extends BaseSmartRegisterFragment {
                     startActivity(intent);
                     getActivity().finish();
                     break;
-                case R.id.btn_edit:
+                case R.id.ib_btn_edit:
 //                    FlurryFacade.logEvent("click_visit_button_on_kohort_kb_dashboard");
 //                    showFragmentDialog(new EditDialogOptionModel(), view.getTag());
                     showFragmentDialog(((NativeKIFPSmartRegisterActivity) getActivity()).new EditDialogOptionModel(), view.getTag());

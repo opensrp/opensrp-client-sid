@@ -82,18 +82,18 @@ public class KIPNCClientsProvider implements SmartRegisterCLientsProviderForCurs
             viewHolder = new ViewHolder();
             viewHolder.profilelayout = (LinearLayout) convertView.findViewById(R.id.profile_info_layout);
 
-            viewHolder.wife_name = (TextView) convertView.findViewById(R.id.wife_name);
-            viewHolder.husband_name = (TextView) convertView.findViewById(R.id.txt_husband_name);
-            viewHolder.village_name = (TextView) convertView.findViewById(R.id.txt_village_name);
-            viewHolder.wife_age = (TextView) convertView.findViewById(R.id.wife_age);
+            viewHolder.wife_name = (TextView) convertView.findViewById(R.id.tv_wife_name);
+            viewHolder.husband_name = (TextView) convertView.findViewById(R.id.tv_husband_name);
+            viewHolder.village_name = (TextView) convertView.findViewById(R.id.tv_village_name);
+            viewHolder.wife_age = (TextView) convertView.findViewById(R.id.tv_wife_age);
             viewHolder.pnc_id = (TextView) convertView.findViewById(R.id.pnc_id);
             // viewHolder.unique_id = (TextView)convertView.findViewById(R.id.unique_id);
 
-            viewHolder.hr_badge = (ImageView) convertView.findViewById(R.id.img_hr_badge);
-            viewHolder.img_hrl_badge = (ImageView) convertView.findViewById(R.id.img_hrl_badge);
-            viewHolder.bpl_badge = (ImageView) convertView.findViewById(R.id.img_bpl_badge);
-            viewHolder.hrp_badge = (ImageView) convertView.findViewById(R.id.img_hrp_badge);
-            viewHolder.hrpp_badge = (ImageView) convertView.findViewById(R.id.img_hrpp_badge);
+            viewHolder.hr_badge = (ImageView) convertView.findViewById(R.id.iv_hr_badge);
+            viewHolder.img_hrl_badge = (ImageView) convertView.findViewById(R.id.iv_hrl_badge);
+            viewHolder.bpl_badge = (ImageView) convertView.findViewById(R.id.iv_bpl_badge);
+            viewHolder.hrp_badge = (ImageView) convertView.findViewById(R.id.iv_hrp_badge);
+            viewHolder.hrpp_badge = (ImageView) convertView.findViewById(R.id.iv_hrpp_badge);
             // ViewHolder.img_hp_badge = ImageView.Set;   img_hrl_badge img_bpl_badge img_hrp_badge img_hrpp_badge
 
             viewHolder.tanggal_bersalin = (TextView) convertView.findViewById(R.id.dok_tanggal_bersalin);
@@ -112,8 +112,8 @@ public class KIPNCClientsProvider implements SmartRegisterCLientsProviderForCurs
 
             //  txt_kondisi_ibu txt_KF txt_vit_a
 
-            viewHolder.profilepic = (ImageView) convertView.findViewById(R.id.img_profile);
-            viewHolder.follow_up = (ImageButton) convertView.findViewById(R.id.btn_edit);
+            viewHolder.profilepic = (ImageView) convertView.findViewById(R.id.iv_profile);
+            viewHolder.follow_up = (ImageButton) convertView.findViewById(R.id.ib_btn_edit);
             convertView.setTag(viewHolder);
         } else {
             viewHolder = (ViewHolder) convertView.getTag();

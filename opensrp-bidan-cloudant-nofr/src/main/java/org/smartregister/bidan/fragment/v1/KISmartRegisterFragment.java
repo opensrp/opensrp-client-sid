@@ -495,7 +495,7 @@ public class KISmartRegisterFragment extends BaseSmartRegisterFragment implement
                     getActivity().finish();
                     break;
 
-                case R.id.btn_edit:
+                case R.id.ib_btn_edit:
                     DetailMotherActivity.motherClient = (CommonPersonObjectClient) view.getTag();
 
 //                    showFragmentDialog(((NativeKIbuSmartRegisterActivity) getActivity()).new EditDialogOptionModel(), view.getTag());

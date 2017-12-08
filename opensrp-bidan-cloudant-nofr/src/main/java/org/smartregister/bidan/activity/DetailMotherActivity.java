@@ -2,7 +2,6 @@ package org.smartregister.bidan.activity;
 
 import android.app.Activity;
 import android.content.Intent;
-import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -25,7 +24,6 @@ import java.util.Locale;
 import java.util.Map;
 
 import butterknife.Bind;
-import butterknife.ButterKnife;
 import butterknife.OnClick;
 
 import static org.smartregister.util.StringUtil.humanize;
@@ -60,7 +58,7 @@ public class DetailMotherActivity extends Activity {
 
     @Bind(R.id.txt_wife_name) TextView nama;
     @Bind(R.id.txt_nik) TextView nik;
-    @Bind(R.id.txt_husband_name) TextView husband_name;
+    @Bind(R.id.tv_husband_name) TextView husband_name;
     @Bind(R.id.txt_dob) TextView dob;
     @Bind(R.id.txt_contact_phone_number) TextView phone;
     @Bind(R.id.txt_risk1) TextView risk1;
@@ -73,7 +71,7 @@ public class DetailMotherActivity extends Activity {
     @Bind(R.id.show_more_detail) TextView show_detail;
 
     //detail data
-    @Bind(R.id.txt_village_name)TextView village;
+    @Bind(R.id.tv_village_name)TextView village;
     @Bind(R.id.txt_subvillage)TextView subvillage;
     @Bind(R.id.txt_age)TextView age;
     @Bind(R.id.txt_alamat)TextView alamat;

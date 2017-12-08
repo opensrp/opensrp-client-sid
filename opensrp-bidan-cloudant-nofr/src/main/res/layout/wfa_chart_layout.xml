@@ -1,15 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:background="@color/status_bar_text_almost_white"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/status_bar_text_almost_white"
     android:orientation="vertical"
     android:weightSum="1">
 
-    <include layout="@layout/growth_chart_navbar"/>
-
-
+    <include layout="@layout/growth_chart_navbar" />
 
 
     <!--    <LinearLayout
@@ -21,54 +19,55 @@
         </LinearLayout>-->
 
     <ImageView
+        android:id="@+id/imageView4"
         android:layout_width="match_parent"
         android:layout_height="@dimen/smart_register_client_divider_height"
-        android:src="@color/smart_register_client_divider_color"
-        android:id="@+id/imageView4" />
+        android:src="@color/smart_register_client_divider_color" />
 
 
     <ImageView
+        android:id="@+id/imageView3"
         android:layout_width="match_parent"
         android:layout_height="@dimen/smart_register_client_divider_height"
-        android:src="@color/smart_register_client_divider_color"
-        android:id="@+id/imageView3" />
+        android:src="@color/smart_register_client_divider_color" />
+
     <org.smartregister.view.customcontrols.CustomFontTextView
+        android:id="@+id/lbl_chart_header"
+        style="@style/CustomFontTextViewStyle.ListView.Medium"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:layout_gravity="center_horizontal"
         android:text="WFA GROWTH CHART"
-        style="@style/CustomFontTextViewStyle.ListView.Medium"
-        android:id="@+id/lbl_chart_header"
-        android:textStyle="bold"
+        android:textAppearance="?android:attr/textAppearanceMedium"
         android:textColor="#000000"
         android:textSize="16sp"
-        android:layout_gravity="center_horizontal" />
+        android:textStyle="bold" />
 
     <ImageView
         android:layout_width="match_parent"
         android:layout_height="@dimen/smart_register_client_divider_height"
-        android:src="@color/smart_register_client_divider_color"/>
+        android:src="@color/smart_register_client_divider_color" />
 
     <com.jjoe64.graphview.GraphView
-        android:layout_marginLeft="10dp"
-        android:layout_marginRight="10dp"
-        android:layout_marginBottom="10dp"
-        android:layout_marginTop="10dp"
+        android:id="@+id/graph"
         android:layout_width="match_parent"
         android:layout_height="117dp"
-        android:id="@+id/graph"
+        android:layout_marginBottom="10dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginTop="10dp"
         android:layout_weight="0.91" />
 
     <org.smartregister.view.customcontrols.CustomFontTextView
+        android:id="@+id/lbl_chart_label"
+        style="@style/CustomFontTextViewStyle.ListView.Medium"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:layout_gravity="center_horizontal"
         android:text="Age (Month)"
-        style="@style/CustomFontTextViewStyle.ListView.Medium"
-        android:id="@+id/lbl_chart_label"
-        android:textStyle="bold"
+        android:textAppearance="?android:attr/textAppearanceMedium"
         android:textColor="#000000"
         android:textSize="16sp"
-        android:layout_gravity="center_horizontal" />
+        android:textStyle="bold" />
 
 </LinearLayout>
