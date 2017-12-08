@@ -221,7 +221,6 @@ public class AnakSmartRegisterFragment extends BaseSmartRegisterFragment {
         countSelect = countqueryBuilder.mainCondition(mainCondition);
         super.CountExecute();
 
-
         SmartRegisterQueryBuilder queryBuilder = new SmartRegisterQueryBuilder();
         queryBuilder.SelectInitiateMainTableCounts(tableName);
         queryBuilder.SelectInitiateMainTable(tableName, new String[]{
@@ -239,10 +238,10 @@ public class AnakSmartRegisterFragment extends BaseSmartRegisterFragment {
         mainSelect = queryBuilder.mainCondition(mainCondition);
         if(s != null && !s.isEmpty()){
             Log.e(TAG, "initializeQueries with ID = " + s);
-            mainCondition = "is_closed = 0 AND namalengkap != '' AND object_id LIKE '%" + s + "%'";
+            mainCondition = "is_closed = 0 AND object_id LIKE '%" + s + "%'";
 
         } else {
-            mainCondition = "is_closed = 0 AND namalengkap != '' ";
+            mainCondition = "is_closed = 0";
             Log.e(TAG, "initializeQueries: Not Initialized");
         }
 

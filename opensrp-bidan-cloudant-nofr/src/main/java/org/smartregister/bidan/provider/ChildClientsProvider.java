@@ -43,6 +43,7 @@ import static org.smartregister.util.Utils.getValue;
  */
 
 public class ChildClientsProvider implements SmartRegisterCLientsProviderForCursorAdapter {
+
     private static final String TAG = ChildClientsProvider.class.getName();
     private final LayoutInflater inflater;
     private final Context context;
@@ -83,23 +84,8 @@ public class ChildClientsProvider implements SmartRegisterCLientsProviderForCurs
         ViewHolder viewHolder = new ViewHolder();
 
         CommonPersonObjectClient pc = (CommonPersonObjectClient) client;
-
-        convertView.findViewById(R.id.ib_btn_edit).setTag(client);
-        convertView.findViewById(R.id.ib_btn_edit).setOnClickListener(onClickListener);
-
-        convertView.findViewById(R.id.profile_info_layout).setTag(client);
-        convertView.findViewById(R.id.profile_info_layout).setOnClickListener(onClickListener);
-
         DetailsRepository detailsRepository = org.smartregister.Context.getInstance().detailsRepository();
         detailsRepository.updateDetails(pc);
-
-        String firstName = getValue(pc.getColumnmaps(), "namaBayi", true);
-        String birthDate = getValue(pc.getColumnmaps(), "tanggalLahirAnak", true);
-
-        if (birthDate.length() > 10)
-            birthDate = birthDate.substring(0, Support.getColumnmaps(pc, "tanggalLahirAnak").indexOf("T"));
-        String age = monthRangeToToday(birthDate) + " Month";
-
         // kartu ibu = data KI only
         // ec_ibu = data anc + pnc
         // get parent
@@ -115,6 +101,20 @@ public class ChildClientsProvider implements SmartRegisterCLientsProviderForCurs
 
         AllCommonsRepository iburep = org.smartregister.Context.getInstance().allCommonsRepositoryobjects("ec_ibu");
         final CommonPersonObject ibuparent = iburep.findByCaseID(childobject.getColumnmaps().get("relational_id"));
+
+        convertView.findViewById(R.id.ib_btn_edit).setTag(client);
+        convertView.findViewById(R.id.ib_btn_edit).setOnClickListener(onClickListener);
+
+        convertView.findViewById(R.id.profile_info_layout).setTag(client);
+        convertView.findViewById(R.id.profile_info_layout).setOnClickListener(onClickListener);
+
+        String firstName = getValue(pc.getColumnmaps(), "namaBayi", true);
+        String birthDate = getValue(pc.getColumnmaps(), "tanggalLahirAnak", true);
+
+        if (birthDate.length() > 10)
+            birthDate = birthDate.substring(0, Support.getColumnmaps(pc, "tanggalLahirAnak").indexOf("T"));
+        String age = monthRangeToToday(birthDate) + " " + context.getString(R.string.str_month);
+
 
         if (ibuparent != null) {
             detailsRepository.updateDetails(ibuparent);
@@ -169,9 +169,7 @@ public class ChildClientsProvider implements SmartRegisterCLientsProviderForCurs
         checkVisibility(pc.getDetails().get("polio1"), pc.getDetails().get("bcg"), viewHolder.pol1_no, viewHolder.pol1_yes);
         checkVisibility(pc.getDetails().get("dptHb1"), pc.getDetails().get("polio2"), viewHolder.pol2_no, viewHolder.pol2_yes);
 
-
         //----------Child Immunizations Information
-
         viewHolder.campak_no = (ImageView) convertView.findViewById(R.id.icon_campak_no);
         viewHolder.campak_yes = (ImageView) convertView.findViewById(R.id.icon_campak_yes);
         viewHolder.ivp_no = (ImageView) convertView.findViewById(R.id.icon_ivp_no);

@@ -667,4 +667,5 @@
     <string name="sort_by_child_age_desc">Age 5 to 0 yrs</string>
     <string name="header_neonatal">NEONATAL VISIT</string>
     <string name="header_immunizations">IMMUNIZATIONS</string>
+    <string name="str_month">Month</string>
 </resources>
