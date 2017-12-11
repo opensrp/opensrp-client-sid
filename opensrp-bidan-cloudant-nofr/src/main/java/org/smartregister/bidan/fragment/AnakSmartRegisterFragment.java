@@ -14,40 +14,29 @@ import org.opensrp.api.util.LocationTree;
 import org.opensrp.api.util.TreeNode;
 import org.smartregister.Context;
 import org.smartregister.bidan.R;
-import org.smartregister.bidan.activity.BaseRegisterActivity;
 import org.smartregister.bidan.activity.DetailChildActivity;
 import org.smartregister.bidan.activity.NativeKIAnakSmartRegisterActivity;
 import org.smartregister.bidan.options.AnakOverviewServiceMode;
 import org.smartregister.bidan.options.ChildFilterOption;
 import org.smartregister.bidan.provider.ChildClientsProvider;
 import org.smartregister.commonregistry.CommonPersonObjectClient;
-import org.smartregister.commonregistry.CommonPersonObjectController;
 import org.smartregister.cursoradapter.CursorCommonObjectFilterOption;
 import org.smartregister.cursoradapter.CursorCommonObjectSort;
 import org.smartregister.cursoradapter.SmartRegisterPaginatedCursorAdapter;
 import org.smartregister.cursoradapter.SmartRegisterQueryBuilder;
-import org.smartregister.provider.SmartRegisterClientsProvider;
 import org.smartregister.util.StringUtil;
 import org.smartregister.view.activity.SecuredNativeSmartRegisterActivity;
-import org.smartregister.view.contract.SmartRegisterClient;
-import org.smartregister.view.controller.VillageController;
 import org.smartregister.view.dialog.AllClientsFilter;
 import org.smartregister.view.dialog.DialogOption;
-import org.smartregister.view.dialog.DialogOptionMapper;
-import org.smartregister.view.dialog.DialogOptionModel;
-import org.smartregister.view.dialog.EditOption;
 import org.smartregister.view.dialog.FilterOption;
 import org.smartregister.view.dialog.ServiceModeOption;
 import org.smartregister.view.dialog.SortOption;
 
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.Locale;
 import java.util.Map;
 
 import static android.view.View.INVISIBLE;
+import static org.smartregister.bidan.utils.BidanConstants.CHILD_TABLE_NAME;
 
 //import com.flurry.android.FlurryAgent;
 //import org.smartregister.bidan.lib.FlurryFacade;
@@ -61,14 +50,6 @@ public class AnakSmartRegisterFragment extends BaseSmartRegisterFragment {
     //    WD
     public static String criteria;
     private final ClientActionHandler clientActionHandler = new ClientActionHandler();
-    Date date = new Date();
-    SimpleDateFormat sdf;
-    Map<String, String> FS = new HashMap<>();
-    private SmartRegisterClientsProvider clientProvider = null;
-    private CommonPersonObjectController controller;
-    private VillageController villageController;
-    private DialogOptionMapper dialogOptionMapper;
-    private String locationDialogTAG = "locationDialogTAG";
 
     public static String getCriteria() {
         return criteria;
@@ -76,10 +57,6 @@ public class AnakSmartRegisterFragment extends BaseSmartRegisterFragment {
 
     public void setCriteria(String criteria) {
         this.criteria = criteria;
-    }
-
-    @Override
-    protected void onCreation() {
     }
 
     @Override
@@ -99,8 +76,7 @@ public class AnakSmartRegisterFragment extends BaseSmartRegisterFragment {
 
             @Override
             public SortOption sortOption() {
-                return
-                        new CursorCommonObjectSort(getResources().getString(R.string.sort_by_name_label), AnakNameShort());
+                return new CursorCommonObjectSort(getResources().getString(R.string.sort_by_name_label), AnakNameShort());
 
             }
 
@@ -162,23 +138,6 @@ public class AnakSmartRegisterFragment extends BaseSmartRegisterFragment {
         return "tanggalLahirAnak ASC";
     }
 
-    @Override
-    protected SmartRegisterClientsProvider clientsProvider() {
-//        if (clientProvider == null) {
-//            clientProvider = new HouseHoldSmartClientsProvider(
-//                    getActivity(),clientActionHandler , context.alertService());
-//        }
-        return null;
-    }
-
-    private DialogOption[] getEditOptions() {
-        return ((BaseRegisterActivity) getActivity()).getEditOptions();
-    }
-
-    @Override
-    protected void onInitialization() {
-        //  context.formSubmissionRouter().getHandlerMap().put("census_enrollment_form", new CensusEnrollmentHandler());
-    }
 
     @Override
     public void setupViews(View view) {
@@ -198,7 +157,7 @@ public class AnakSmartRegisterFragment extends BaseSmartRegisterFragment {
     }
 
     public void initializeQueries(String s){
-        String tableName = "ec_anak";
+        String tableName = CHILD_TABLE_NAME;
         ChildClientsProvider childClientsProvider = new ChildClientsProvider(getActivity(),
                 clientActionHandler, context().alertService(), context().commonrepository(tableName));
         clientAdapter = new SmartRegisterPaginatedCursorAdapter(getActivity(), null, childClientsProvider, context().commonrepository(tableName));
@@ -257,10 +216,6 @@ public class AnakSmartRegisterFragment extends BaseSmartRegisterFragment {
         refresh();
     }
 
-    @Override
-    public void startRegistration() {
-    }
-
     private String AnakNameShort() {
         return "namaBayi ASC";
     }
@@ -276,7 +231,6 @@ public class AnakSmartRegisterFragment extends BaseSmartRegisterFragment {
         if (isPausedOrRefreshList()) {
             initializeQueries("!");
         }
-        //     updateSearchView();
 
     }
 
@@ -329,23 +283,6 @@ public class AnakSmartRegisterFragment extends BaseSmartRegisterFragment {
         searchCancelView.setOnClickListener(searchCancelHandler);
     }
 
-    public void getFacialRecord(View view) {
-//        FlurryAgent.logEvent(TAG+" search_by_face", true);
-        Log.e(TAG, "getFacialRecord: ");
-        sdf = new SimpleDateFormat("hh:mm:ss.SS", Locale.ENGLISH);
-        String face_start = sdf.format(date);
-        FS.put("face_start", face_start);
-
-//        SmartShutterActivity.kidetail = (CommonPersonObjectClient) view.getTag();
-//        FlurryAgent.logEvent(TAG + " search_by_face", FS, true);
-//
-//        Intent intent = new Intent(getActivity(), SmartShutterActivity.class);
-//        intent.putExtra("org.sid.sidface.ImageConfirmation.origin", TAG);
-//        intent.putExtra("org.sid.sidface.ImageConfirmation.identify", true);
-//        intent.putExtra("org.sid.sidface.ImageConfirmation.kidetail", (Parcelable) SmartShutterActivity.kidetail);
-//        startActivityForResult(intent, 2);
-    }
-
     public void searchTextChangeListener(String s) {
         Log.e(TAG, "searchTextChangeListener: " + s);
         if (s != null) {
@@ -361,34 +298,14 @@ public class AnakSmartRegisterFragment extends BaseSmartRegisterFragment {
 
                     Log.e(TAG, "onTextChanged: searchTextChangeListener" + searchView.getText());
                     (new AsyncTask() {
-//                    SmartRegisterClients filteredClients;
 
                         @Override
                         protected Object doInBackground(Object[] params) {
-//                        currentSearchFilter =
-//                        setCurrentSearchFilter(new HHSearchOption(cs.toString()));
-//                        filteredClients = getClientsAdapter().getListItemProvider()
-//                                .updateClients(getCurrentVillageFilter(), getCurrentServiceModeOption(),
-//                                        getCurrentSearchFilter(), getCurrentSortOption());
-//
                             filters = cs.toString();
                             joinTable = "";
                             mainCondition = "isClosed !='true' and ibuCaseId !='' ";
                             return null;
                         }
-//
-//                    @Override
-//                    protected void onPostExecute(Object o) {
-////                        clientsAdapter
-////                                .refreshList(currentVillageFilter, currentServiceModeOption,
-////                                        currentSearchFilter, currentSortOption);
-////                        getClientsAdapter().refreshClients(filteredClients);
-////                        getClientsAdapter().notifyDataSetChanged();
-//                        getSearchCancelView().setVisibility(isEmpty(cs) ? INVISIBLE : VISIBLE);
-//                        CountExecute();
-//                        filterandSortExecute();
-//                        super.onPostExecute(o);
-//                    }
                     }).execute();
                 }
 
@@ -430,18 +347,6 @@ public class AnakSmartRegisterFragment extends BaseSmartRegisterFragment {
 
                     break;
             }
-        }
-    }
-
-    private class EditDialogOptionModelOld implements DialogOptionModel {
-        @Override
-        public DialogOption[] getDialogOptions() {
-            return getEditOptions();
-        }
-
-        @Override
-        public void onDialogOptionSelection(DialogOption option, Object tag) {
-            onEditSelection((EditOption) option, (SmartRegisterClient) tag);
         }
     }
 
