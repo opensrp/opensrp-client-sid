@@ -71,7 +71,6 @@
             <Other_High_Risk_Pregnancy_early_waterbreak openmrs_entity="concept" openmrs_entity_id="163156AAAAAAAAAAAAAAAAAAAAAAAAAA"/>
             <end openmrs_entity="encounter" openmrs_entity_id="encounter_end"/>
             <type>anc</type>
-            <jenis_kontrasepsi openmrs_entity="concept" openmrs_entity_id="374AAAAAAAAAAAAAAAAAAAAAAAAAAAAA">0</jenis_kontrasepsi>
             <motherId/>
             <meta>
                 <instanceID/>
