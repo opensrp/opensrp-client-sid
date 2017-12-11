@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_centerHorizontal="true"
+    android:orientation="vertical">
+
+    <TableLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <TableRow>
+
+            <TextView
+                android:id="@+id/tv_high_caps"
+                android:text="SYS"
+                android:textSize="70dp" />
+
+            <TextView
+                android:id="@+id/tv_high_value"
+                android:layout_width="200dp"
+                android:layout_height="wrap_content"
+                android:gravity="end"
+                android:text="SYS_VALUE"
+                android:textColor="@android:color/holo_orange_dark"
+                android:textSize="140sp" />
+        </TableRow>
+
+        <TableRow>
+
+            <TextView
+                android:id="@+id/tv_low_caps"
+                android:text="DIA"
+                android:textSize="70dp" />
+
+            <TextView
+                android:id="@+id/tv_low_value"
+                android:layout_width="200dp"
+                android:layout_height="wrap_content"
+                android:gravity="end"
+                android:text="DIA_VALUE"
+                android:textColor="?android:attr/colorFocusedHighlight"
+                android:textSize="140sp" />
+
+        </TableRow>
+
+        <TableRow>
+
+            <TextView
+                android:id="@+id/tv_pulse_caps"
+                android:text="PULSE"
+                android:textSize="60dp" />
+
+            <TextView
+                android:id="@+id/tv_pulse_value"
+                android:layout_width="200dp"
+                android:layout_height="wrap_content"
+                android:gravity="end"
+                android:text="DIA_VALUE"
+                android:textColor="@color/background_floating_material_light"
+                android:textSize="100sp" />
+
+        </TableRow>
+
+        <TableRow>
+
+            <Button
+                android:id="@+id/bt_done"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="DONE" />
+        </TableRow>
+
+    </TableLayout>
+
+</LinearLayout>

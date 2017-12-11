@@ -1,0 +1,1029 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent">
+
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="horizontal"
+        android:weightSum="2">
+
+        <TableLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="@drawable/listview_background_rounded">
+
+            <TableRow>
+
+                <org.smartregister.view.customcontrols.CustomFontTextView
+                    android:id="@+id/lbl_ancDate"
+                    style="@style/CustomFontTextViewStyle.ListView.Medium"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="5dp"
+                    android:text="Tanggal Kunjungan : "
+                    android:textAppearance="?android:attr/textAppearanceLarge"
+                    android:textColor="@color/text_black"
+                    android:textSize="14sp" />
+
+                <org.smartregister.view.customcontrols.CustomFontTextView
+                    android:id="@+id/txt_ancDate"
+                    style="@style/CustomFontTextViewStyle.ListView.Medium"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="5dp"
+                    android:text="N/A "
+                    android:textAppearance="?android:attr/textAppearanceLarge"
+                    android:textColor="@color/text_black"
+                    android:textSize="14sp" />
+
+
+            </TableRow>
+
+            <TableRow>
+
+                <org.smartregister.view.customcontrols.CustomFontTextView
+                    android:id="@+id/lbl_ancKe"
+                    style="@style/CustomFontTextViewStyle.ListView.Medium"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="5dp"
+                    android:text="ANC Ke : "
+                    android:textAppearance="?android:attr/textAppearanceLarge"
+                    android:textColor="@color/text_black"
+                    android:textSize="14sp" />
+
+                <org.smartregister.view.customcontrols.CustomFontTextView
+                    android:id="@+id/txt_ancKe"
+                    style="@style/CustomFontTextViewStyle.ListView.Medium"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="5dp"
+                    android:text="N/A"
+                    android:textAppearance="?android:attr/textAppearanceLarge"
+                    android:textColor="@color/text_black"
+                    android:textSize="14sp" />
+
+            </TableRow>
+
+            <TableRow>
+
+                <org.smartregister.view.customcontrols.CustomFontTextView
+                    android:id="@+id/lbl_Keterangan_k1k4"
+                    style="@style/CustomFontTextViewStyle.ListView.Medium"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="5dp"
+                    android:text="Keterangan K1/K4  : "
+                    android:textAppearance="?android:attr/textAppearanceLarge"
+                    android:textColor="@color/text_black"
+                    android:textSize="14sp" />
+
+
+                <org.smartregister.view.customcontrols.CustomFontTextView
+                    android:id="@+id/txt_Keterangan_k1k4"
+                    style="@style/CustomFontTextViewStyle.ListView.Medium"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="5dp"
+                    android:text="N/A"
+                    android:textAppearance="?android:attr/textAppearanceLarge"
+                    android:textColor="@color/text_black"
+                    android:textSize="14sp" />
+
+            </TableRow>
+
+            <TableRow>
+
+                <org.smartregister.view.customcontrols.CustomFontTextView
+                    android:id="@+id/lbl_kunjunganKe"
+                    style="@style/CustomFontTextViewStyle.ListView.Medium"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="5dp"
+                    android:text="Kunjungan Ke : "
+                    android:textAppearance="?android:attr/textAppearanceLarge"
+                    android:textColor="@color/text_black"
+                    android:textSize="14sp" />
+
+                <org.smartregister.view.customcontrols.CustomFontTextView
+                    android:id="@+id/txt_kunjunganKe"
+                    style="@style/CustomFontTextViewStyle.ListView.Medium"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="5dp"
+                    android:text="N/A"
+                    android:textAppearance="?android:attr/textAppearanceLarge"
+                    android:textColor="@color/text_black"
+                    android:textSize="14sp" />
+
+            </TableRow>
+
+
+            <TableRow>
+
+
+                <org.smartregister.view.customcontrols.CustomFontTextView
+                    android:id="@+id/lbl_tanggalHPHT"
+                    style="@style/CustomFontTextViewStyle.ListView.Medium"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="5dp"
+                    android:text="Tanggal HPHT  : "
+                    android:textAppearance="?android:attr/textAppearanceLarge"
+                    android:textColor="@color/text_black"
+                    android:textSize="14sp" />
+
+
+                <org.smartregister.view.customcontrols.CustomFontTextView
+                    android:id="@+id/txt_tanggalHPHT"
+                    style="@style/CustomFontTextViewStyle.ListView.Medium"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="5dp"
+                    android:text="N/A"
+                    android:textAppearance="?android:attr/textAppearanceLarge"
+                    android:textColor="@color/text_black"
+                    android:textSize="14sp" />
+
+            </TableRow>
+
+            <TableRow>
+
+                <org.smartregister.view.customcontrols.CustomFontTextView
+                    android:id="@+id/lbl_usiaKlinis"
+                    style="@style/CustomFontTextViewStyle.ListView.Medium"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="5dp"
+                    android:text="Usia Klinis  : "
+                    android:textAppearance="?android:attr/textAppearanceLarge"
+                    android:textColor="@color/text_black"
+                    android:textSize="14sp" />
+
+                <org.smartregister.view.customcontrols.CustomFontTextView
+                    android:id="@+id/txt_usiaKlinis"
+                    style="@style/CustomFontTextViewStyle.ListView.Medium"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="5dp"
+                    android:text="N/A"
+                    android:textAppearance="?android:attr/textAppearanceLarge"
+                    android:textColor="@color/text_black"
+                    android:textSize="14sp" />
+
+            </TableRow>
+
+            <TableRow>
+
+                <org.smartregister.view.customcontrols.CustomFontTextView
+                    android:id="@+id/lbl_trimesterKe"
+                    style="@style/CustomFontTextViewStyle.ListView.Medium"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="5dp"
+                    android:text="Trimester  : "
+                    android:textAppearance="?android:attr/textAppearanceLarge"
+                    android:textColor="@color/text_black"
+                    android:textSize="14sp" />
+
+                <org.smartregister.view.customcontrols.CustomFontTextView
+                    android:id="@+id/txt_trimesterKe"
+                    style="@style/CustomFontTextViewStyle.ListView.Medium"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="5dp"
+                    android:text="N/A"
+                    android:textAppearance="?android:attr/textAppearanceLarge"
+                    android:textColor="@color/text_black"
+                    android:textSize="14sp" />
+
+            </TableRow>
+
+            <TableRow>
+
+                <org.smartregister.view.customcontrols.CustomFontTextView
+                    android:id="@+id/lbl_bbKg"
+                    style="@style/CustomFontTextViewStyle.ListView.Medium"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="5dp"
+                    android:text="Berat Badan  : "
+                    android:textAppearance="?android:attr/textAppearanceLarge"
+                    android:textColor="@color/text_black"
+                    android:textSize="14sp" />
+
+                <org.smartregister.view.customcontrols.CustomFontTextView
+                    android:id="@+id/txt_bbKg"
+                    style="@style/CustomFontTextViewStyle.ListView.Medium"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="5dp"
+                    android:text="N/A"
+                    android:textAppearance="?android:attr/textAppearanceLarge"
+                    android:textColor="@color/text_black"
+                    android:textSize="14sp" />
+
+            </TableRow>
+
+            <TableRow>
+
+                <org.smartregister.view.customcontrols.CustomFontTextView
+                    android:id="@+id/lbl_tandaVitalTDSistolik"
+                    style="@style/CustomFontTextViewStyle.ListView.Medium"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="5dp"
+                    android:text="TD Sistolik  : "
+                    android:textAppearance="?android:attr/textAppearanceLarge"
+                    android:textColor="@color/text_black"
+                    android:textSize="14sp" />
+
+                <org.smartregister.view.customcontrols.CustomFontTextView
+                    android:id="@+id/txt_tandaVitalTDSistolik"
+                    style="@style/CustomFontTextViewStyle.ListView.Medium"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="5dp"
+                    android:text="N/A"
+                    android:textAppearance="?android:attr/textAppearanceLarge"
+                    android:textColor="@color/text_black"
+                    android:textSize="14sp" />
+
+            </TableRow>
+
+            <TableRow>
+
+                <org.smartregister.view.customcontrols.CustomFontTextView
+                    android:id="@+id/lbl_tandaVitalTDDiastolik"
+                    style="@style/CustomFontTextViewStyle.ListView.Medium"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="5dp"
+                    android:text="TD Diastolik  : "
+                    android:textAppearance="?android:attr/textAppearanceLarge"
+                    android:textColor="@color/text_black"
+                    android:textSize="14sp" />
+
+                <org.smartregister.view.customcontrols.CustomFontTextView
+                    android:id="@+id/txt_tandaVitalTDDiastolik"
+                    style="@style/CustomFontTextViewStyle.ListView.Medium"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="5dp"
+                    android:text="N/A"
+                    android:textAppearance="?android:attr/textAppearanceLarge"
+                    android:textColor="@color/text_black"
+                    android:textSize="14sp" />
+
+            </TableRow>
+
+            <TableRow>
+
+                <org.smartregister.view.customcontrols.CustomFontTextView
+                    android:id="@+id/lbl_hasilPemeriksaanLILA"
+                    style="@style/CustomFontTextViewStyle.ListView.Medium"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="5dp"
+                    android:text="LILA  : "
+                    android:textAppearance="?android:attr/textAppearanceLarge"
+                    android:textColor="@color/text_black"
+                    android:textSize="14sp" />
+
+                <org.smartregister.view.customcontrols.CustomFontTextView
+                    android:id="@+id/txt_hasilPemeriksaanLILA"
+                    style="@style/CustomFontTextViewStyle.ListView.Medium"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="5dp"
+                    android:text="N/A"
+                    android:textAppearance="?android:attr/textAppearanceLarge"
+                    android:textColor="@color/text_black"
+                    android:textSize="14sp" />
+
+            </TableRow>
+
+            <TableRow>
+
+                <org.smartregister.view.customcontrols.CustomFontTextView
+                    android:id="@+id/lbl_statusGiziibu"
+                    style="@style/CustomFontTextViewStyle.ListView.Medium"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="5dp"
+                    android:text="Status Gizi Ibu  : "
+                    android:textAppearance="?android:attr/textAppearanceLarge"
+                    android:textColor="@color/text_black"
+                    android:textSize="14sp" />
+
+                <org.smartregister.view.customcontrols.CustomFontTextView
+                    android:id="@+id/txt_statusGiziibu"
+                    style="@style/CustomFontTextViewStyle.ListView.Medium"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="5dp"
+                    android:text="N/A"
+                    android:textAppearance="?android:attr/textAppearanceLarge"
+                    android:textColor="@color/text_black"
+                    android:textSize="14sp" />
+
+            </TableRow>
+
+            <TableRow>
+
+                <org.smartregister.view.customcontrols.CustomFontTextView
+                    android:id="@+id/lbl_tfu"
+                    style="@style/CustomFontTextViewStyle.ListView.Medium"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="5dp"
+                    android:text="TFU  : "
+                    android:textAppearance="?android:attr/textAppearanceLarge"
+                    android:textColor="@color/text_black"
+                    android:textSize="14sp" />
+
+                <org.smartregister.view.customcontrols.CustomFontTextView
+                    android:id="@+id/txt_tfu"
+                    style="@style/CustomFontTextViewStyle.ListView.Medium"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="5dp"
+                    android:text="N/A"
+                    android:textAppearance="?android:attr/textAppearanceLarge"
+                    android:textColor="@color/text_black"
+                    android:textSize="14sp" />
+
+            </TableRow>
+
+            <TableRow>
+
+                <org.smartregister.view.customcontrols.CustomFontTextView
+                    android:id="@+id/lbl_refleksPatelaIbu"
+                    style="@style/CustomFontTextViewStyle.ListView.Medium"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="5dp"
+                    android:text="Refleksi Patela Ibu  : "
+                    android:textAppearance="?android:attr/textAppearanceLarge"
+                    android:textColor="@color/text_black"
+                    android:textSize="14sp" />
+
+                <org.smartregister.view.customcontrols.CustomFontTextView
+                    android:id="@+id/txt_refleksPatelaIbu"
+                    style="@style/CustomFontTextViewStyle.ListView.Medium"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="5dp"
+                    android:text="N/A"
+                    android:textAppearance="?android:attr/textAppearanceLarge"
+                    android:textColor="@color/text_black"
+                    android:textSize="14sp" />
+
+            </TableRow>
+
+            <TableRow>
+
+                <org.smartregister.view.customcontrols.CustomFontTextView
+                    android:id="@+id/lbl_djj"
+                    style="@style/CustomFontTextViewStyle.ListView.Medium"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="5dp"
+                    android:text="DJJ  : "
+                    android:textAppearance="?android:attr/textAppearanceLarge"
+                    android:textColor="@color/text_black"
+                    android:textSize="14sp" />
+
+                <org.smartregister.view.customcontrols.CustomFontTextView
+                    android:id="@+id/txt_djj"
+                    style="@style/CustomFontTextViewStyle.ListView.Medium"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="5dp"
+                    android:text="N/A"
+                    android:textAppearance="?android:attr/textAppearanceLarge"
+                    android:textColor="@color/text_black"
+                    android:textSize="14sp" />
+
+            </TableRow>
+
+            <TableRow>
+
+                <org.smartregister.view.customcontrols.CustomFontTextView
+                    android:id="@+id/lbl_kepalaJaninTerhadapPAP"
+                    style="@style/CustomFontTextViewStyle.ListView.Medium"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="5dp"
+                    android:text="Kepala Janin Terhadap PAP  : "
+                    android:textAppearance="?android:attr/textAppearanceLarge"
+                    android:textColor="@color/text_black"
+                    android:textSize="14sp" />
+
+                <org.smartregister.view.customcontrols.CustomFontTextView
+                    android:id="@+id/txt_kepalaJaninTerhadapPAP"
+                    style="@style/CustomFontTextViewStyle.ListView.Medium"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="5dp"
+                    android:text="N/A"
+                    android:textAppearance="?android:attr/textAppearanceLarge"
+                    android:textColor="@color/text_black"
+                    android:textSize="14sp" />
+
+            </TableRow>
+
+            <TableRow>
+
+                <org.smartregister.view.customcontrols.CustomFontTextView
+                    android:id="@+id/lbl_persentasiJanin"
+                    style="@style/CustomFontTextViewStyle.ListView.Medium"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="5dp"
+                    android:text="Presentasi Janin  : "
+                    android:textAppearance="?android:attr/textAppearanceLarge"
+                    android:textColor="@color/text_black"
+                    android:textSize="14sp" />
+
+                <org.smartregister.view.customcontrols.CustomFontTextView
+                    android:id="@+id/txt_persentasiJanin"
+                    style="@style/CustomFontTextViewStyle.ListView.Medium"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="5dp"
+                    android:text="N/A"
+                    android:textAppearance="?android:attr/textAppearanceLarge"
+                    android:textColor="@color/text_black"
+                    android:textSize="14sp" />
+
+            </TableRow>
+
+            <TableRow>
+
+                <org.smartregister.view.customcontrols.CustomFontTextView
+                    android:id="@+id/lbl_taksiranBeratJanin"
+                    style="@style/CustomFontTextViewStyle.ListView.Medium"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="5dp"
+                    android:text="Taksiran Berat Janin  : "
+                    android:textAppearance="?android:attr/textAppearanceLarge"
+                    android:textColor="@color/text_black"
+                    android:textSize="14sp" />
+
+                <org.smartregister.view.customcontrols.CustomFontTextView
+                    android:id="@+id/txt_taksiranBeratJanin"
+                    style="@style/CustomFontTextViewStyle.ListView.Medium"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="5dp"
+                    android:text="N/A"
+                    android:textAppearance="?android:attr/textAppearanceLarge"
+                    android:textColor="@color/text_black"
+                    android:textSize="14sp" />
+
+            </TableRow>
+
+            <TableRow>
+
+                <org.smartregister.view.customcontrols.CustomFontTextView
+                    android:id="@+id/lbl_jumlahJanin"
+                    style="@style/CustomFontTextViewStyle.ListView.Medium"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="5dp"
+                    android:text="Jumlah Janin  : "
+                    android:textAppearance="?android:attr/textAppearanceLarge"
+                    android:textColor="@color/text_black"
+                    android:textSize="14sp" />
+
+                <org.smartregister.view.customcontrols.CustomFontTextView
+                    android:id="@+id/txt_jumlahJanin"
+                    style="@style/CustomFontTextViewStyle.ListView.Medium"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="5dp"
+                    android:text="N/A"
+                    android:textAppearance="?android:attr/textAppearanceLarge"
+                    android:textColor="@color/text_black"
+                    android:textSize="14sp" />
+
+            </TableRow>
+
+        </TableLayout>
+
+        <TableLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="@drawable/listview_background_rounded">
+
+            <TableRow>
+
+                <org.smartregister.view.customcontrols.CustomFontTextView
+                    android:id="@+id/lbl_statusImunisasitt"
+                    style="@style/CustomFontTextViewStyle.ListView.Medium"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="5dp"
+                    android:text="Status Imunisasi TT : "
+                    android:textAppearance="?android:attr/textAppearanceLarge"
+                    android:textColor="@color/text_black"
+                    android:textSize="14sp" />
+
+                <org.smartregister.view.customcontrols.CustomFontTextView
+                    android:id="@+id/txt_statusImunisasitt"
+                    style="@style/CustomFontTextViewStyle.ListView.Medium"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="5dp"
+                    android:text="N/A "
+                    android:textAppearance="?android:attr/textAppearanceLarge"
+                    android:textColor="@color/text_black"
+                    android:textSize="14sp" />
+
+
+            </TableRow>
+
+            <TableRow>
+
+                <org.smartregister.view.customcontrols.CustomFontTextView
+                    android:id="@+id/lbl_pelayananfe"
+                    style="@style/CustomFontTextViewStyle.ListView.Medium"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="5dp"
+                    android:text="Pelayanan FE : "
+                    android:textAppearance="?android:attr/textAppearanceLarge"
+                    android:textColor="@color/text_black"
+                    android:textSize="14sp" />
+
+                <org.smartregister.view.customcontrols.CustomFontTextView
+                    android:id="@+id/txt_pelayananfe"
+                    style="@style/CustomFontTextViewStyle.ListView.Medium"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="5dp"
+                    android:text="N/A"
+                    android:textAppearance="?android:attr/textAppearanceLarge"
+                    android:textColor="@color/text_black"
+                    android:textSize="14sp" />
+
+            </TableRow>
+
+            <TableRow>
+
+
+                <org.smartregister.view.customcontrols.CustomFontTextView
+                    android:id="@+id/lbl_komplikasidalamKehamilan"
+                    style="@style/CustomFontTextViewStyle.ListView.Medium"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="5dp"
+                    android:text="Komlikasi Dalam Kehamilan  : "
+                    android:textAppearance="?android:attr/textAppearanceLarge"
+                    android:textColor="@color/text_black"
+                    android:textSize="14sp" />
+
+
+                <org.smartregister.view.customcontrols.CustomFontTextView
+                    android:id="@+id/txt_komplikasidalamKehamilan"
+                    style="@style/CustomFontTextViewStyle.ListView.Medium"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="5dp"
+                    android:text="N/A"
+                    android:textAppearance="?android:attr/textAppearanceLarge"
+                    android:textColor="@color/text_black"
+                    android:textSize="14sp" />
+
+            </TableRow>
+
+            <TableRow>
+
+                <org.smartregister.view.customcontrols.CustomFontTextView
+                    android:id="@+id/lbl_integrasiProgrampmtctvct"
+                    style="@style/CustomFontTextViewStyle.ListView.Medium"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="5dp"
+                    android:text="Voluntary Counseling Test : "
+                    android:textAppearance="?android:attr/textAppearanceLarge"
+                    android:textColor="@color/text_black"
+                    android:textSize="14sp" />
+
+                <org.smartregister.view.customcontrols.CustomFontTextView
+                    android:id="@+id/txt_integrasiProgrampmtctvct"
+                    style="@style/CustomFontTextViewStyle.ListView.Medium"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="5dp"
+                    android:text="N/A"
+                    android:textAppearance="?android:attr/textAppearanceLarge"
+                    android:textColor="@color/text_black"
+                    android:textSize="14sp" />
+
+            </TableRow>
+
+
+            <TableRow>
+
+
+                <org.smartregister.view.customcontrols.CustomFontTextView
+                    android:id="@+id/lbl_integrasiProgrampmtctPeriksaDarah"
+                    style="@style/CustomFontTextViewStyle.ListView.Medium"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="5dp"
+                    android:text="Pemeriksaan Darah  : "
+                    android:textAppearance="?android:attr/textAppearanceLarge"
+                    android:textColor="@color/text_black"
+                    android:textSize="14sp" />
+
+
+                <org.smartregister.view.customcontrols.CustomFontTextView
+                    android:id="@+id/txt_integrasiProgrampmtctPeriksaDarah"
+                    style="@style/CustomFontTextViewStyle.ListView.Medium"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="5dp"
+                    android:text="N/A"
+                    android:textAppearance="?android:attr/textAppearanceLarge"
+                    android:textColor="@color/text_black"
+                    android:textSize="14sp" />
+
+            </TableRow>
+
+            <TableRow>
+
+                <org.smartregister.view.customcontrols.CustomFontTextView
+                    android:id="@+id/lbl_integrasiProgrampmtctSerologi"
+                    style="@style/CustomFontTextViewStyle.ListView.Medium"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="5dp"
+                    android:text="Serologi  : "
+                    android:textAppearance="?android:attr/textAppearanceLarge"
+                    android:textColor="@color/text_black"
+                    android:textSize="14sp" />
+
+                <org.smartregister.view.customcontrols.CustomFontTextView
+                    android:id="@+id/txt_integrasiProgrampmtctSerologi"
+                    style="@style/CustomFontTextViewStyle.ListView.Medium"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="5dp"
+                    android:text="N/A"
+                    android:textAppearance="?android:attr/textAppearanceLarge"
+                    android:textColor="@color/text_black"
+                    android:textSize="14sp" />
+
+            </TableRow>
+
+            <TableRow>
+
+                <org.smartregister.view.customcontrols.CustomFontTextView
+                    android:id="@+id/lbl_integrasiProgrampmtctarvProfilaksis"
+                    style="@style/CustomFontTextViewStyle.ListView.Medium"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="5dp"
+                    android:text="jenis obat pada Ibu PMTCT  : "
+                    android:textAppearance="?android:attr/textAppearanceLarge"
+                    android:textColor="@color/text_black"
+                    android:textSize="14sp" />
+
+                <org.smartregister.view.customcontrols.CustomFontTextView
+                    android:id="@+id/txt_integrasiProgrampmtctarvProfilaksis"
+                    style="@style/CustomFontTextViewStyle.ListView.Medium"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="5dp"
+                    android:text="N/A"
+                    android:textAppearance="?android:attr/textAppearanceLarge"
+                    android:textColor="@color/text_black"
+                    android:textSize="14sp" />
+
+            </TableRow>
+
+            <TableRow>
+
+                <org.smartregister.view.customcontrols.CustomFontTextView
+                    android:id="@+id/lbl_integrasiProgramMalariaPeriksaDarah"
+                    style="@style/CustomFontTextViewStyle.ListView.Medium"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="5dp"
+                    android:text="Periksaan Darah (Malaria) : "
+                    android:textAppearance="?android:attr/textAppearanceLarge"
+                    android:textColor="@color/text_black"
+                    android:textSize="14sp" />
+
+                <org.smartregister.view.customcontrols.CustomFontTextView
+                    android:id="@+id/txt_integrasiProgramMalariaPeriksaDarah"
+                    style="@style/CustomFontTextViewStyle.ListView.Medium"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="5dp"
+                    android:text="N/A"
+                    android:textAppearance="?android:attr/textAppearanceLarge"
+                    android:textColor="@color/text_black"
+                    android:textSize="14sp" />
+
+            </TableRow>
+
+            <TableRow>
+
+                <org.smartregister.view.customcontrols.CustomFontTextView
+                    android:id="@+id/lbl_integrasiProgramMalariaObat"
+                    style="@style/CustomFontTextViewStyle.ListView.Medium"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="5dp"
+                    android:text="Integrasi Program Malaria Obat  : "
+                    android:textAppearance="?android:attr/textAppearanceLarge"
+                    android:textColor="@color/text_black"
+                    android:textSize="14sp" />
+
+                <org.smartregister.view.customcontrols.CustomFontTextView
+                    android:id="@+id/txt_integrasiProgramMalariaObat"
+                    style="@style/CustomFontTextViewStyle.ListView.Medium"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="5dp"
+                    android:text="N/A"
+                    android:textAppearance="?android:attr/textAppearanceLarge"
+                    android:textColor="@color/text_black"
+                    android:textSize="14sp" />
+
+            </TableRow>
+
+            <TableRow>
+
+                <org.smartregister.view.customcontrols.CustomFontTextView
+                    android:id="@+id/lbl_integrasiProgramMalariaKelambuBerinsektisida"
+                    style="@style/CustomFontTextViewStyle.ListView.Medium"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="5dp"
+                    android:text="Integrasi Program Malaria Kelambu  : "
+                    android:textAppearance="?android:attr/textAppearanceLarge"
+                    android:textColor="@color/text_black"
+                    android:textSize="14sp" />
+
+                <org.smartregister.view.customcontrols.CustomFontTextView
+                    android:id="@+id/txt_integrasiProgramMalariaKelambuBerinsektisida"
+                    style="@style/CustomFontTextViewStyle.ListView.Medium"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="5dp"
+                    android:text="N/A"
+                    android:textAppearance="?android:attr/textAppearanceLarge"
+                    android:textColor="@color/text_black"
+                    android:textSize="14sp" />
+
+            </TableRow>
+
+            <TableRow>
+
+                <org.smartregister.view.customcontrols.CustomFontTextView
+                    android:id="@+id/lbl_integrasiProgramtbDahak"
+                    style="@style/CustomFontTextViewStyle.ListView.Medium"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="5dp"
+                    android:text="Integrasi Program TB Dahak  : "
+                    android:textAppearance="?android:attr/textAppearanceLarge"
+                    android:textColor="@color/text_black"
+                    android:textSize="14sp" />
+
+                <org.smartregister.view.customcontrols.CustomFontTextView
+                    android:id="@+id/txt_integrasiProgramtbDahak"
+                    style="@style/CustomFontTextViewStyle.ListView.Medium"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="5dp"
+                    android:text="N/A"
+                    android:textAppearance="?android:attr/textAppearanceLarge"
+                    android:textColor="@color/text_black"
+                    android:textSize="14sp" />
+
+            </TableRow>
+
+            <TableRow>
+
+                <org.smartregister.view.customcontrols.CustomFontTextView
+                    android:id="@+id/lbl_integrasiProgramtbObat"
+                    style="@style/CustomFontTextViewStyle.ListView.Medium"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="5dp"
+                    android:text="Integrasi Obat TB  : "
+                    android:textAppearance="?android:attr/textAppearanceLarge"
+                    android:textColor="@color/text_black"
+                    android:textSize="14sp" />
+
+                <org.smartregister.view.customcontrols.CustomFontTextView
+                    android:id="@+id/txt_integrasiProgramtbObat"
+                    style="@style/CustomFontTextViewStyle.ListView.Medium"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="5dp"
+                    android:text="N/A"
+                    android:textAppearance="?android:attr/textAppearanceLarge"
+                    android:textColor="@color/text_black"
+                    android:textSize="14sp" />
+
+            </TableRow>
+
+            <TableRow>
+
+                <org.smartregister.view.customcontrols.CustomFontTextView
+                    android:id="@+id/lbl_laboratoriumPeriksaHbHasil"
+                    style="@style/CustomFontTextViewStyle.ListView.Medium"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="5dp"
+                    android:text="Pemeriksaan Lab HB  : "
+                    android:textAppearance="?android:attr/textAppearanceLarge"
+                    android:textColor="@color/text_black"
+                    android:textSize="14sp" />
+
+                <org.smartregister.view.customcontrols.CustomFontTextView
+                    android:id="@+id/txt_laboratoriumPeriksaHbHasil"
+                    style="@style/CustomFontTextViewStyle.ListView.Medium"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="5dp"
+                    android:text="N/A"
+                    android:textAppearance="?android:attr/textAppearanceLarge"
+                    android:textColor="@color/text_black"
+                    android:textSize="14sp" />
+
+            </TableRow>
+
+            <TableRow>
+
+                <org.smartregister.view.customcontrols.CustomFontTextView
+                    android:id="@+id/lbl_laboratoriumPeriksaHbAnemia"
+                    style="@style/CustomFontTextViewStyle.ListView.Medium"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="5dp"
+                    android:text="Pemeriksaan Lab HB Anemia  : "
+                    android:textAppearance="?android:attr/textAppearanceLarge"
+                    android:textColor="@color/text_black"
+                    android:textSize="14sp" />
+
+                <org.smartregister.view.customcontrols.CustomFontTextView
+                    android:id="@+id/txt_laboratoriumPeriksaHbAnemia"
+                    style="@style/CustomFontTextViewStyle.ListView.Medium"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="5dp"
+                    android:text="N/A"
+                    android:textAppearance="?android:attr/textAppearanceLarge"
+                    android:textColor="@color/text_black"
+                    android:textSize="14sp" />
+
+            </TableRow>
+
+            <TableRow>
+
+                <org.smartregister.view.customcontrols.CustomFontTextView
+                    android:id="@+id/lbl_laboratoriumProteinUria"
+                    style="@style/CustomFontTextViewStyle.ListView.Medium"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="5dp"
+                    android:text="Pemeriksaan Lab Protein Uria : "
+                    android:textAppearance="?android:attr/textAppearanceLarge"
+                    android:textColor="@color/text_black"
+                    android:textSize="14sp" />
+
+                <org.smartregister.view.customcontrols.CustomFontTextView
+                    android:id="@+id/txt_laboratoriumProteinUria"
+                    style="@style/CustomFontTextViewStyle.ListView.Medium"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="5dp"
+                    android:text="N/A"
+                    android:textAppearance="?android:attr/textAppearanceLarge"
+                    android:textColor="@color/text_black"
+                    android:textSize="14sp" />
+
+            </TableRow>
+
+            <TableRow>
+
+                <org.smartregister.view.customcontrols.CustomFontTextView
+                    android:id="@+id/lbl_laboratoriumGulaDarah"
+                    style="@style/CustomFontTextViewStyle.ListView.Medium"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="5dp"
+                    android:text="Pemeriksaan Lab Gula Darah : "
+                    android:textAppearance="?android:attr/textAppearanceLarge"
+                    android:textColor="@color/text_black"
+                    android:textSize="14sp" />
+
+                <org.smartregister.view.customcontrols.CustomFontTextView
+                    android:id="@+id/txt_laboratoriumGulaDarah"
+                    style="@style/CustomFontTextViewStyle.ListView.Medium"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="5dp"
+                    android:text="N/A"
+                    android:textAppearance="?android:attr/textAppearanceLarge"
+                    android:textColor="@color/text_black"
+                    android:textSize="14sp" />
+
+            </TableRow>
+
+            <TableRow>
+
+                <org.smartregister.view.customcontrols.CustomFontTextView
+                    android:id="@+id/lbl_laboratoriumThalasemia"
+                    style="@style/CustomFontTextViewStyle.ListView.Medium"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="5dp"
+                    android:text="Pemeriksaan Lab Thalasemia  : "
+                    android:textAppearance="?android:attr/textAppearanceLarge"
+                    android:textColor="@color/text_black"
+                    android:textSize="14sp" />
+
+                <org.smartregister.view.customcontrols.CustomFontTextView
+                    android:id="@+id/txt_laboratoriumThalasemia"
+                    style="@style/CustomFontTextViewStyle.ListView.Medium"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="5dp"
+                    android:text="N/A"
+                    android:textAppearance="?android:attr/textAppearanceLarge"
+                    android:textColor="@color/text_black"
+                    android:textSize="14sp" />
+
+            </TableRow>
+
+            <TableRow>
+
+                <org.smartregister.view.customcontrols.CustomFontTextView
+                    android:id="@+id/lbl_laboratoriumSifilis"
+                    style="@style/CustomFontTextViewStyle.ListView.Medium"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="5dp"
+                    android:text="Pemeriksaan Lab Sifilis  : "
+                    android:textAppearance="?android:attr/textAppearanceLarge"
+                    android:textColor="@color/text_black"
+                    android:textSize="14sp" />
+
+                <org.smartregister.view.customcontrols.CustomFontTextView
+                    android:id="@+id/txt_laboratoriumSifilis"
+                    style="@style/CustomFontTextViewStyle.ListView.Medium"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="5dp"
+                    android:text="N/A"
+                    android:textAppearance="?android:attr/textAppearanceLarge"
+                    android:textColor="@color/text_black"
+                    android:textSize="14sp" />
+
+            </TableRow>
+
+            <TableRow>
+
+                <org.smartregister.view.customcontrols.CustomFontTextView
+                    android:id="@+id/lbl_laboratoriumHbsAg"
+                    style="@style/CustomFontTextViewStyle.ListView.Medium"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="5dp"
+                    android:text="Pemeriksaan Lab HbsAG  : "
+                    android:textAppearance="?android:attr/textAppearanceLarge"
+                    android:textColor="@color/text_black"
+                    android:textSize="14sp" />
+
+                <org.smartregister.view.customcontrols.CustomFontTextView
+                    android:id="@+id/txt_laboratoriumHbsAg"
+                    style="@style/CustomFontTextViewStyle.ListView.Medium"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="5dp"
+                    android:text="N/A"
+                    android:textAppearance="?android:attr/textAppearanceLarge"
+                    android:textColor="@color/text_black"
+                    android:textSize="14sp" />
+
+            </TableRow>
+
+        </TableLayout>
+
+
+    </LinearLayout>
+</ScrollView>

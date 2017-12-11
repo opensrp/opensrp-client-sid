@@ -1,0 +1,3 @@
+[submodule "lib/facialrecognition"]
+	path = lib/facialrecognition
+	url = git@github.com:OpenSRP/opensrp-client-facial-recognition.git
