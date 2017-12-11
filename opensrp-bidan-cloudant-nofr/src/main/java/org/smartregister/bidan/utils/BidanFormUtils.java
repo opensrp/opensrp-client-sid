@@ -57,6 +57,7 @@ import static org.smartregister.bidan.utils.AllConstantsINA.FormNames.KARTU_IBU_
 import static org.smartregister.bidan.utils.AllConstantsINA.FormNames.KARTU_IBU_ANC_REGISTRATION;
 import static org.smartregister.bidan.utils.AllConstantsINA.FormNames.KARTU_IBU_EDIT;
 import static org.smartregister.bidan.utils.AllConstantsINA.FormNames.KARTU_IBU_PNC_EDIT;
+import static org.smartregister.bidan.utils.AllConstantsINA.FormNames.KOHORT_BAYI_EDIT;
 
 /**
  * Created by Dani on 08/11/2017.
@@ -1129,6 +1130,7 @@ public class BidanFormUtils {
         List<String> formNames = new ArrayList<>();
         formNames.add("child_edit");
         formNames.add(KARTU_IBU_EDIT);
+        formNames.add(KOHORT_BAYI_EDIT);
         return formNames;
     }
 
