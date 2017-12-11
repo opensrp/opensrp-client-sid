@@ -368,10 +368,10 @@ public class DetailMotherActivity extends Activity {
                     updateMode = true;
                 }
                 Intent takePictureIntent = new Intent(DetailMotherActivity.this, OpenCameraActivity.class);
-                takePictureIntent.putExtra("org.smartregister.face.updated", updateMode);
-                takePictureIntent.putExtra("org.smartregister.face.identify", false);
-                takePictureIntent.putExtra("org.smartregister.face.uid", entityid);
-                takePictureIntent.putExtra("org.smartregister.face.origin", TAG); // send Class Name
+                takePictureIntent.putExtra("org.smartregister.facialrecognition.OpenCameraActivity.updated", updateMode);
+                takePictureIntent.putExtra("org.smartregister.facialrecognition.PhotoConfirmationActivity.identify", false);
+                takePictureIntent.putExtra("org.smartregister.facialrecognition.PhotoConfirmationActivity.id", entityid);
+                takePictureIntent.putExtra("org.smartregister.facialrecognition.PhotoConfirmationActivity.origin", TAG); // send Class Name
                 startActivityForResult(takePictureIntent, 2);
 
             }

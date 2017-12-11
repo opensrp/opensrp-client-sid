@@ -122,6 +122,8 @@ dependencies {
     }
     testCompile 'org.apache.maven:maven-ant-tasks:2.1.3'
 
+    compile 'com.android.support:multidex:1.0.1'
+
     // Snapdragon Facial Recognition
 //    compile project(':opensrp-facial-recognition-debug')
     compile (name : 'opensrp-facial-recognition-debug', ext:'aar')

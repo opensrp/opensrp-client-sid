@@ -146,7 +146,9 @@ public class BidanHomeActivity extends SecuredActivity {
         initialize();
         DisplayFormFragment.formInputErrorMessage = getResources().getString(R.string.forminputerror);
         DisplayFormFragment.okMessage = getResources().getString(R.string.okforminputerror);
-        //  context.formSubmissionRouter().getHandlerMap().put("census_enrollment_form", new ANChandler());
+
+
+        // Require for okhttp
         int SDK_INT = android.os.Build.VERSION.SDK_INT;
         if (SDK_INT > 8)
         {
