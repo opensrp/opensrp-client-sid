@@ -5,6 +5,7 @@ import android.content.Context;
 import android.database.Cursor;
 import android.graphics.drawable.Drawable;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.AbsListView;
 import android.widget.ImageButton;
 import android.widget.ImageView;
@@ -133,17 +134,16 @@ public class KIANCClientsProvider extends BaseClientsProvider {
         list.add((pc.entityId()));
         List<CommonPersonObject> allchild = anakrep.findByRelational_IDs(list);
 
-        follow_up.setOnClickListener(onClickListener);
-        follow_up.setTag(smartRegisterClient);
         profilelayout.setOnClickListener(onClickListener);
         profilelayout.setTag(smartRegisterClient);
-        if (iconPencilDrawable == null) {
-            iconPencilDrawable = context.getResources().getDrawable(R.drawable.ic_pencil);
-        }
+
+        follow_up.setTag(smartRegisterClient);
         follow_up.setImageDrawable(iconPencilDrawable);
         follow_up.setOnClickListener(onClickListener);
 
-        // set flag High Risk
+        if (iconPencilDrawable == null) {
+            iconPencilDrawable = context.getResources().getDrawable(R.drawable.ic_pencil);
+        }
 
         //start profile image
         profilepic.setTag(R.id.entity_id, pc.getColumnmaps().get("_id"));//required when saving file to disk
@@ -168,7 +168,6 @@ public class KIANCClientsProvider extends BaseClientsProvider {
         visit_status.setText("");
         children_age_left.setText("");
         children_age_right.setText("");
-
 
         if (ibuparent != null) {
             short anc_isclosed = ibuparent.getClosed();
@@ -269,7 +268,7 @@ public class KIANCClientsProvider extends BaseClientsProvider {
 
     @Override
     public View inflatelayoutForCursorAdapter() {
-        View view = inflater().inflate(R.layout.smart_register_ki_anc_client, null);
-        return view;
+        return inflater().inflate(R.layout.smart_register_ki_client, null);
     }
+
 }

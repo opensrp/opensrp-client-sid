@@ -51,8 +51,8 @@ public class DetailChildActivity extends Activity {
 //        TextView today = (TextView) findViewById(R.id.detail_today);
 
         //profile
-        TextView nama = (TextView) findViewById(R.id.txt_child_name);
-        TextView mother = (TextView) findViewById(R.id.txt_mother_name);
+        TextView nama = (TextView) findViewById(R.id.tv_child_name);
+        TextView mother = (TextView) findViewById(R.id.tv_mother_name);
         TextView father = (TextView) findViewById(R.id.txt_father_number);
         TextView dob = (TextView) findViewById(R.id.tv_dob);
 

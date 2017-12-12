@@ -233,8 +233,7 @@ public class KIPNCClientsProvider extends BaseClientsProvider {
 
     @Override
     public View inflatelayoutForCursorAdapter() {
-        View view = inflater().inflate(R.layout.smart_register_ki_pnc_client, null);
-        return view;
+        return inflater().inflate(R.layout.smart_register_ki_pnc_client, null);
     }
 
 }
