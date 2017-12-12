@@ -4,7 +4,6 @@ import android.app.Activity;
 import android.content.Context;
 import android.database.Cursor;
 import android.graphics.drawable.Drawable;
-import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.AbsListView;
 import android.widget.ImageButton;
@@ -20,15 +19,9 @@ import org.smartregister.commonregistry.AllCommonsRepository;
 import org.smartregister.commonregistry.CommonPersonObject;
 import org.smartregister.commonregistry.CommonPersonObjectClient;
 import org.smartregister.commonregistry.CommonPersonObjectController;
-import org.smartregister.cursoradapter.SmartRegisterCLientsProviderForCursorAdapter;
 import org.smartregister.repository.DetailsRepository;
 import org.smartregister.service.AlertService;
 import org.smartregister.view.contract.SmartRegisterClient;
-import org.smartregister.view.contract.SmartRegisterClients;
-import org.smartregister.view.dialog.FilterOption;
-import org.smartregister.view.dialog.ServiceModeOption;
-import org.smartregister.view.dialog.SortOption;
-import org.smartregister.view.viewholder.OnClickFormLauncher;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -95,7 +88,7 @@ public class KIANCClientsProvider extends BaseClientsProvider {
     TextView date_status;
     @Bind(R.id.visit_status)
     TextView visit_status;
-    @Bind(R.id.iv_profile)
+    @Bind(R.id.iv_mother_photo)
     ImageView profilepic;
     @Bind(R.id.ib_btn_edit)
     ImageButton follow_up;
@@ -274,4 +267,9 @@ public class KIANCClientsProvider extends BaseClientsProvider {
         visitStatus.setText(Status);
     }
 
+    @Override
+    public View inflatelayoutForCursorAdapter() {
+        View view = inflater().inflate(R.layout.smart_register_ki_anc_client, null);
+        return view;
+    }
 }

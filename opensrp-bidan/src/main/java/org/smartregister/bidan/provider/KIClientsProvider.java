@@ -90,7 +90,7 @@ public class KIClientsProvider extends BaseClientsProvider {
     TextView date_status;
     @Bind(R.id.visit_status)
     TextView visit_status;
-    @Bind(R.id.iv_profile)
+    @Bind(R.id.iv_mother_photo)
     ImageView profilepic;
     @Bind(R.id.ib_btn_edit)
     ImageButton follow_up;
@@ -143,7 +143,6 @@ public class KIClientsProvider extends BaseClientsProvider {
             iconPencilDrawable = context.getResources().getDrawable(R.drawable.ic_pencil);
         }
         follow_up.setImageDrawable(iconPencilDrawable);
-        follow_up.setOnClickListener(onClickListener);
 
         //start profile image
         profilepic.setTag(R.id.entity_id, pc.getColumnmaps().get("_id"));//required when saving file to disk
@@ -266,6 +265,11 @@ public class KIClientsProvider extends BaseClientsProvider {
         VisitNumber.setText(visitNumber);
         visitDate.setText(visit_date);
         visitStatus.setText(Status);
+    }
+
+    public View inflatelayoutForCursorAdapter() {
+        View view = inflater().inflate(R.layout.smart_register_ki_client, null);
+        return view;
     }
 
 }

@@ -4,7 +4,6 @@ import android.app.Activity;
 import android.content.Context;
 import android.database.Cursor;
 import android.graphics.drawable.Drawable;
-import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.AbsListView;
 import android.widget.ImageButton;
@@ -16,16 +15,10 @@ import org.smartregister.bidan.R;
 import org.smartregister.bidan.utils.Support;
 import org.smartregister.commonregistry.CommonPersonObjectClient;
 import org.smartregister.commonregistry.CommonPersonObjectController;
-import org.smartregister.cursoradapter.SmartRegisterCLientsProviderForCursorAdapter;
 import org.smartregister.domain.Alert;
 import org.smartregister.repository.DetailsRepository;
 import org.smartregister.service.AlertService;
 import org.smartregister.view.contract.SmartRegisterClient;
-import org.smartregister.view.contract.SmartRegisterClients;
-import org.smartregister.view.dialog.FilterOption;
-import org.smartregister.view.dialog.ServiceModeOption;
-import org.smartregister.view.dialog.SortOption;
-import org.smartregister.view.viewholder.OnClickFormLauncher;
 
 import java.util.List;
 
@@ -47,6 +40,7 @@ public class KBClientsProvider extends BaseClientsProvider {
     private final AbsListView.LayoutParams clientViewLayoutParams;
     protected CommonPersonObjectController controller;
     AlertService alertService;
+
     @Bind(R.id.profile_info_layout)
     LinearLayout profilelayout;
     @Bind(R.id.tv_wife_name)
@@ -97,10 +91,11 @@ public class KBClientsProvider extends BaseClientsProvider {
     TextView follow_status;
     @Bind(R.id.tv_follow_up_due)
     TextView follow_due;
-    @Bind(R.id.iv_profile)
+    @Bind(R.id.iv_mother_photo)
     ImageView profilepic;
     @Bind(R.id.ib_btn_edit)
     ImageButton follow_up;
+
     private Drawable iconPencilDrawable;
 
     public KBClientsProvider(Context context, View.OnClickListener onClickListener, AlertService alertService) {
@@ -114,6 +109,11 @@ public class KBClientsProvider extends BaseClientsProvider {
     }
 
     private void getView(SmartRegisterClient smartRegisterClient, View convertView) {
+        try {
+            ButterKnife.bind(this, convertView);
+        } catch (Exception e) {
+            e.getCause().printStackTrace();
+        }
 
         CommonPersonObjectClient pc = (CommonPersonObjectClient) smartRegisterClient;
         DetailsRepository detailsRepository = org.smartregister.Context.getInstance().detailsRepository();
@@ -125,25 +125,16 @@ public class KBClientsProvider extends BaseClientsProvider {
 //        Log.e(TAG, "getView: " + pc.getDetails().toString());
 //        Log.e(TAG, "getView: " + pc.getColumnmaps().toString());
 
-        try {
-            ButterKnife.bind(this, convertView);
-        } catch (Exception e) {
-            e.getCause().printStackTrace();
-        }
-
         profilelayout.setOnClickListener(onClickListener);
         profilelayout.setTag(smartRegisterClient);
-
-        profilepic.setImageDrawable(context.getResources().getDrawable(R.mipmap.woman_placeholder));
-        profilepic.setTag(R.id.entity_id, pc.getColumnmaps().get("_id"));//required when saving file to disk
 
         if (iconPencilDrawable == null) {
             iconPencilDrawable = context.getResources().getDrawable(R.drawable.ic_pencil);
         }
-        follow_up.setImageDrawable(iconPencilDrawable);
-        follow_up.setOnClickListener(onClickListener);
+
         follow_up.setOnClickListener(onClickListener);
         follow_up.setTag(smartRegisterClient);
+        follow_up.setImageDrawable(iconPencilDrawable);
 
         hr_badge.setVisibility(View.INVISIBLE);
 
@@ -153,6 +144,7 @@ public class KBClientsProvider extends BaseClientsProvider {
                 pc.getDetails().get("highRiskTuberculosis"), pc.getDetails().get("highRiskMalaria"), pc.getDetails().get("highRiskPregnancyYoungMaternalAge"),
                 pc.getDetails().get("highRiskPregnancyOldMaternalAge"), hr_badge);
 
+        profilepic.setTag(R.id.entity_id, pc.getColumnmaps().get("_id"));//required when saving file to disk
         Support.setImagetoHolderFromUri((Activity) context, pc.getDetails().get("base_entity_id"), profilepic, R.mipmap.woman_placeholder);
 
         wife_name.setText(pc.getColumnmaps().get("namalengkap") != null ? pc.getColumnmaps().get("namalengkap") : "null");
@@ -265,5 +257,10 @@ public class KBClientsProvider extends BaseClientsProvider {
 
     }
 
+    @Override
+    public View inflatelayoutForCursorAdapter() {
+        View view = inflater().inflate(R.layout.smart_register_kb_client, null);
+        return view;
+    }
 }
 

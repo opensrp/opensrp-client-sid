@@ -51,8 +51,9 @@ public class BaseClientsProvider implements SmartRegisterCLientsProviderForCurso
 
     @Override
     public View inflatelayoutForCursorAdapter() {
-        View view = inflater().inflate(R.layout.smart_register_ki_client, null);
-        return view;
+//        View view = inflater().inflate(R.layout.smart_register_ki_client, null);
+//        return view;
+        return null;
     }
 
     public SmartRegisterClients getClients() {

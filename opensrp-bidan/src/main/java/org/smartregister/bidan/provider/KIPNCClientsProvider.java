@@ -4,7 +4,6 @@ import android.app.Activity;
 import android.content.Context;
 import android.database.Cursor;
 import android.graphics.drawable.Drawable;
-import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.AbsListView;
 import android.widget.ImageButton;
@@ -18,17 +17,11 @@ import org.smartregister.commonregistry.AllCommonsRepository;
 import org.smartregister.commonregistry.CommonPersonObject;
 import org.smartregister.commonregistry.CommonPersonObjectClient;
 import org.smartregister.commonregistry.CommonPersonObjectController;
-import org.smartregister.cursoradapter.SmartRegisterCLientsProviderForCursorAdapter;
 import org.smartregister.repository.DetailsRepository;
 import org.smartregister.service.AlertService;
 import org.smartregister.util.OpenSRPImageLoader;
 import org.smartregister.view.activity.DrishtiApplication;
 import org.smartregister.view.contract.SmartRegisterClient;
-import org.smartregister.view.contract.SmartRegisterClients;
-import org.smartregister.view.dialog.FilterOption;
-import org.smartregister.view.dialog.ServiceModeOption;
-import org.smartregister.view.dialog.SortOption;
-import org.smartregister.view.viewholder.OnClickFormLauncher;
 
 import java.util.Map;
 
@@ -97,7 +90,7 @@ public class KIPNCClientsProvider extends BaseClientsProvider {
     @Bind(R.id.tv_td_suhu)
     TextView td_suhu;
     //  txt_kondisi_ibu txt_KF txt_vit_a
-    @Bind(R.id.iv_profile)
+    @Bind(R.id.iv_mother_photo)
     ImageView profilepic;
     @Bind(R.id.ib_btn_edit)
     ImageButton follow_up;
@@ -236,6 +229,12 @@ public class KIPNCClientsProvider extends BaseClientsProvider {
             riskview.setVisibility(View.VISIBLE);
         }
 
+    }
+
+    @Override
+    public View inflatelayoutForCursorAdapter() {
+        View view = inflater().inflate(R.layout.smart_register_ki_pnc_client, null);
+        return view;
     }
 
 }
