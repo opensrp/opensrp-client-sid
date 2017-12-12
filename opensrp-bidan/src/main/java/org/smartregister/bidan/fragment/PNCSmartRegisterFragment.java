@@ -17,8 +17,8 @@ import org.opensrp.api.util.TreeNode;
 import org.smartregister.Context;
 import org.smartregister.bidan.R;
 import org.smartregister.bidan.activity.BaseRegisterActivity;
-import org.smartregister.bidan.activity.NativeKIPNCSmartRegisterActivity;
 import org.smartregister.bidan.activity.DetailPNCActivity;
+import org.smartregister.bidan.activity.NativeKIPNCSmartRegisterActivity;
 import org.smartregister.bidan.options.KIPNCOverviewServiceMode;
 import org.smartregister.bidan.options.MotherFilterOption;
 import org.smartregister.bidan.provider.KIPNCClientsProvider;
@@ -59,29 +59,35 @@ import static android.view.View.INVISIBLE;
 
 public class PNCSmartRegisterFragment extends BaseSmartRegisterFragment {
     private static final String TAG = PNCSmartRegisterFragment.class.getName();
-
+    //    WD
+    public static String criteria;
+    private final ClientActionHandler clientActionHandler = new ClientActionHandler();
+    Date date = new Date();
+    SimpleDateFormat sdf;
+    Map<String, String> FS = new HashMap<>();
     private SmartRegisterClientsProvider clientProvider = null;
     private CommonPersonObjectController controller;
     private VillageController villageController;
     private DialogOptionMapper dialogOptionMapper;
-
-    private final ClientActionHandler clientActionHandler = new ClientActionHandler();
     private String locationDialogTAG = "locationDialogTAG";
-
-    Date date = new Date();
-    SimpleDateFormat sdf;
-    Map<String, String> FS = new HashMap<>();
-
-
-    @Override
-    protected void onCreation() {
-        //
-    }
 
 //    @Override
 //    protected SmartRegisterPaginatedAdapter adapter() {
 //        return new SmartRegisterPaginatedAdapter(clientsProvider());
 //    }
+
+    public static String getCriteria() {
+        return criteria;
+    }
+
+    public void setCriteria(String criteria) {
+        this.criteria = criteria;
+    }
+
+    @Override
+    protected void onCreation() {
+        //
+    }
 
     @Override
     protected SecuredNativeSmartRegisterActivity.DefaultOptionsProvider getDefaultOptionsProvider() {
@@ -119,20 +125,20 @@ public class PNCSmartRegisterFragment extends BaseSmartRegisterFragment {
                 //FlurryFacade.logEvent("click_filter_option_on_kohort_pnc_dashboard");
                 ArrayList<DialogOption> dialogOptionslist = new ArrayList<DialogOption>();
 
-                dialogOptionslist.add(new CursorCommonObjectFilterOption(getString(R.string.filter_by_all_label),filterStringForAll()));
+                dialogOptionslist.add(new CursorCommonObjectFilterOption(getString(R.string.filter_by_all_label), filterStringForAll()));
 
                 String locationJSON = context().anmLocationController().get();
                 LocationTree locationTree = EntityUtils.fromJson(locationJSON, LocationTree.class);
 
-                Map<String,TreeNode<String, Location>> locationMap =
+                Map<String, TreeNode<String, Location>> locationMap =
                         locationTree.getLocationsHierarchy();
-                addChildToList(dialogOptionslist,locationMap);
+                addChildToList(dialogOptionslist, locationMap);
                 DialogOption[] dialogOptions = new DialogOption[dialogOptionslist.size()];
-                for (int i = 0;i < dialogOptionslist.size();i++){
+                for (int i = 0; i < dialogOptionslist.size(); i++) {
                     dialogOptions[i] = dialogOptionslist.get(i);
                 }
 
-                return  dialogOptions;
+                return dialogOptions;
             }
 
             @Override
@@ -146,11 +152,11 @@ public class PNCSmartRegisterFragment extends BaseSmartRegisterFragment {
                 return new DialogOption[]{
 //                        new HouseholdCensusDueDateSort(),
 
-                        new CursorCommonObjectSort(getResources().getString(R.string.sort_by_name_label),KiSortByNameAZ()),
-                        new CursorCommonObjectSort(getResources().getString(R.string.sort_by_name_label_reverse),KiSortByNameZA()),
-                        new CursorCommonObjectSort(getResources().getString(R.string.sort_by_wife_age_label),KiSortByAge()),
+                        new CursorCommonObjectSort(getResources().getString(R.string.sort_by_name_label), KiSortByNameAZ()),
+                        new CursorCommonObjectSort(getResources().getString(R.string.sort_by_name_label_reverse), KiSortByNameZA()),
+                        new CursorCommonObjectSort(getResources().getString(R.string.sort_by_wife_age_label), KiSortByAge()),
                         //    new CursorCommonObjectSort(getResources().getString(R.string.sort_by_edd_label),KiSortByEdd()),
-                        new CursorCommonObjectSort(getResources().getString(R.string.sort_by_no_ibu_label),KiSortByNoIbu()),
+                        new CursorCommonObjectSort(getResources().getString(R.string.sort_by_no_ibu_label), KiSortByNoIbu()),
                 };
             }
 
@@ -173,33 +179,6 @@ public class PNCSmartRegisterFragment extends BaseSmartRegisterFragment {
     @Override
     protected void onInitialization() {
         //  context.formSubmissionRouter().getHandlerMap().put("census_enrollment_form", new CensusEnrollmentHandler());
-    }
-
-    @Override
-    public void setupViews(View view) {
-        getDefaultOptionsProvider();
-
-        super.setupViews(view);
-        view.findViewById(R.id.btn_report_month).setVisibility(INVISIBLE);
-        view.findViewById(R.id.register_client).setVisibility(View.GONE);
-        view.findViewById(R.id.service_mode_selection).setVisibility(View.GONE);
-        view.findViewById(R.id.register_client).setVisibility(View.GONE);
-        clientsView.setVisibility(View.VISIBLE);
-        clientsProgressView.setVisibility(View.INVISIBLE);
-//        list.setBackgroundColor(Color.RED);
-        initializeQueries(getCriteria());
-    }
-    private String filterStringForAll(){
-        return "";
-    }
-
-    private String sortByAlertmethod() {
-        return " CASE WHEN alerts.status = 'urgent' THEN '1'" +
-                "WHEN alerts.status = 'upcoming' THEN '2'\n" +
-                "WHEN alerts.status = 'normal' THEN '3'\n" +
-                "WHEN alerts.status = 'expired' THEN '4'\n" +
-                "WHEN alerts.status is Null THEN '5'\n" +
-                "Else alerts.status END ASC";
     }
     /*public void initializeQueries(){
         KIPNCClientsProvider kiscp = new KIPNCClientsProvider(getActivity(),clientActionHandler,context.alertService());
@@ -232,11 +211,39 @@ public class PNCSmartRegisterFragment extends BaseSmartRegisterFragment {
         refresh();
     }*/
 
+    @Override
+    public void setupViews(View view) {
+        getDefaultOptionsProvider();
+
+        super.setupViews(view);
+        view.findViewById(R.id.btn_report_month).setVisibility(INVISIBLE);
+        view.findViewById(R.id.register_client).setVisibility(View.GONE);
+        view.findViewById(R.id.service_mode_selection).setVisibility(View.GONE);
+        view.findViewById(R.id.register_client).setVisibility(View.GONE);
+        clientsView.setVisibility(View.VISIBLE);
+        clientsProgressView.setVisibility(View.INVISIBLE);
+//        list.setBackgroundColor(Color.RED);
+        initializeQueries(getCriteria());
+    }
+
+    private String filterStringForAll() {
+        return "";
+    }
+
+    private String sortByAlertmethod() {
+        return " CASE WHEN alerts.status = 'urgent' THEN '1'" +
+                "WHEN alerts.status = 'upcoming' THEN '2'\n" +
+                "WHEN alerts.status = 'normal' THEN '3'\n" +
+                "WHEN alerts.status = 'expired' THEN '4'\n" +
+                "WHEN alerts.status is Null THEN '5'\n" +
+                "Else alerts.status END ASC";
+    }
+
     @TargetApi(Build.VERSION_CODES.KITKAT)
-    public void initializeQueries(String s){
+    public void initializeQueries(String s) {
         try {
-            KIPNCClientsProvider kiscp = new KIPNCClientsProvider(getActivity(),clientActionHandler,context().alertService());
-            clientAdapter = new SmartRegisterPaginatedCursorAdapter(getActivity(), null, kiscp, new CommonRepository("ec_pnc",new String []{"ec_kartu_ibu.namalengkap", "ec_kartu_ibu.namaSuami"}));
+            KIPNCClientsProvider kiscp = new KIPNCClientsProvider(getActivity(), clientActionHandler, context().alertService());
+            clientAdapter = new SmartRegisterPaginatedCursorAdapter(getActivity(), null, kiscp, new CommonRepository("ec_pnc", new String[]{"ec_kartu_ibu.namalengkap", "ec_kartu_ibu.namaSuami"}));
             clientsView.setAdapter(clientAdapter);
 
             setTablename("ec_pnc");
@@ -244,7 +251,7 @@ public class PNCSmartRegisterFragment extends BaseSmartRegisterFragment {
             countqueryBuilder.SelectInitiateMainTableCounts("ec_pnc");
             countqueryBuilder.customJoin("LEFT JOIN ec_kartu_ibu on ec_kartu_ibu.id = ec_pnc.id");
 
-            if(s != null && !s.isEmpty()){
+            if (s != null && !s.isEmpty()) {
                 Log.e(TAG, "initializeQueries with ID = " + s);
                 mainCondition = "is_closed = 0 AND (keadaanIbu ='hidup' OR keadaanIbu IS NULL) AND namalengkap != '' AND object_id LIKE '%" + s + "%'";
 
@@ -258,7 +265,7 @@ public class PNCSmartRegisterFragment extends BaseSmartRegisterFragment {
             super.CountExecute();
 
             SmartRegisterQueryBuilder queryBuilder = new SmartRegisterQueryBuilder();
-            queryBuilder.SelectInitiateMainTable("ec_pnc", new String[]{"ec_pnc.relationalid", "ec_pnc.details",  "ec_kartu_ibu.namalengkap","ec_kartu_ibu.namaSuami","imagelist.imageid"});
+            queryBuilder.SelectInitiateMainTable("ec_pnc", new String[]{"ec_pnc.relationalid", "ec_pnc.details", "ec_kartu_ibu.namalengkap", "ec_kartu_ibu.namaSuami", "imagelist.imageid"});
             queryBuilder.customJoin("LEFT JOIN ec_kartu_ibu on ec_kartu_ibu.id = ec_pnc.id LEFT JOIN ImageList imagelist ON ec_pnc.id=imagelist.entityID");
             mainSelect = queryBuilder.mainCondition(mainCondition);
 
@@ -271,10 +278,9 @@ public class PNCSmartRegisterFragment extends BaseSmartRegisterFragment {
             CountExecute();
             updateSearchView();
             refresh();
-        } catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
-        }
-        finally {
+        } finally {
         }
 
     }
@@ -295,47 +301,22 @@ public class PNCSmartRegisterFragment extends BaseSmartRegisterFragment {
 //                .show(ft, locationDialogTAG);
     }
 
-    private class ClientActionHandler implements View.OnClickListener {
-        @Override
-        public void onClick(View view) {
-            switch (view.getId()) {
-                case R.id.profile_info_layout:
-//                    //FlurryFacade.logEvent("click_detail_view_on_kohort_pnc_dashboard");
-                    DetailPNCActivity.pncclient = (CommonPersonObjectClient)view.getTag();
-                    Intent intent = new Intent(getActivity(),DetailPNCActivity.class);
-                    startActivity(intent);
-                    getActivity().finish();
-                    break;
-                case R.id.ib_btn_edit:
-//                    //FlurryFacade.logEvent("click_visit_button_on_kohort_pnc_dashboard");
-//                    showFragmentDialog(new EditDialogOptionModel(), view.getTag());
-                    showFragmentDialog(((NativeKIPNCSmartRegisterActivity) getActivity()).new EditDialogOptionModel(), view.getTag());
-
-                    break;
-            }
-        }
-
-        private void showProfileView(ECClient client) {
-            navigationController.startEC(client.entityId());
-        }
-    }
-
     private String KiSortByName() {
         return " namalengkap ASC";
     }
-    
+
     private String KiSortByNameAZ() {
         return " namalengkap ASC";
     }
-    
+
     private String KiSortByNameZA() {
         return " namalengkap DESC";
     }
-    
+
     private String KiSortByAge() {
         return " umur DESC";
     }
-    
+
     private String KiSortByNoIbu() {
         return " noIbu ASC";
     }
@@ -343,24 +324,12 @@ public class PNCSmartRegisterFragment extends BaseSmartRegisterFragment {
     private String KiSortByEdd() {
         return " htp IS NULL, htp";
     }
-    
-    private class EditDialogOptionModelOld implements DialogOptionModel {
-        @Override
-        public DialogOption[] getDialogOptions() {
-            return getEditOptions();
-        }
-
-        @Override
-        public void onDialogOptionSelection(DialogOption option, Object tag) {
-            onEditSelection((EditOption) option, (SmartRegisterClient) tag);
-        }
-    }
 
     @Override
     protected void onResumption() {
 //        super.onResumption();
         getDefaultOptionsProvider();
-        if(isPausedOrRefreshList()) {
+        if (isPausedOrRefreshList()) {
             initializeQueries("!");
         }
         updateSearchView();
@@ -373,30 +342,19 @@ public class PNCSmartRegisterFragment extends BaseSmartRegisterFragment {
         getSearchView().addTextChangedListener(textWatcher);
     }
 
-    public void addChildToList(ArrayList<DialogOption> dialogOptionslist, Map<String,TreeNode<String, Location>> locationMap){
-        for(Map.Entry<String, TreeNode<String, Location>> entry : locationMap.entrySet()) {
+    public void addChildToList(ArrayList<DialogOption> dialogOptionslist, Map<String, TreeNode<String, Location>> locationMap) {
+        for (Map.Entry<String, TreeNode<String, Location>> entry : locationMap.entrySet()) {
 
-            if(entry.getValue().getChildren() != null) {
-                addChildToList(dialogOptionslist,entry.getValue().getChildren());
+            if (entry.getValue().getChildren() != null) {
+                addChildToList(dialogOptionslist, entry.getValue().getChildren());
 
-            }else{
+            } else {
                 StringUtil.humanize(entry.getValue().getLabel());
                 String name = StringUtil.humanize(entry.getValue().getLabel());
                 dialogOptionslist.add(new MotherFilterOption(name, "location_name", name, "ec_kartu_ibu"));
 
             }
         }
-    }
-
-    //    WD
-    public static String criteria;
-
-    public void setCriteria(String criteria) {
-        this.criteria = criteria;
-    }
-
-    public static String getCriteria() {
-        return criteria;
     }
 
     //    WD
@@ -419,7 +377,7 @@ public class PNCSmartRegisterFragment extends BaseSmartRegisterFragment {
 //                    });
 //                    builder.show();
 //                } else {
-                    searchTextChangeListener("");
+                searchTextChangeListener("");
 //                }
             }
         });
@@ -427,24 +385,6 @@ public class PNCSmartRegisterFragment extends BaseSmartRegisterFragment {
         searchCancelView = view.findViewById(R.id.btn_search_cancel);
         searchCancelView.setOnClickListener(searchCancelHandler);
     }
-
-//    public void getFacialRecord(View view) {
-//
-//        FlurryAgent.logEvent(TAG + "search_by_face", true);
-//        Log.d(TAG, "getFacialRecord: is_Called");
-//        sdf = new SimpleDateFormat("hh:mm:ss.SS", Locale.ENGLISH);
-//        String face_start = sdf.format(date);
-//        FS.put("face_start", face_start);
-//
-//        SmartShutterActivity.kidetail = (CommonPersonObjectClient) view.getTag();
-//        FlurryAgent.logEvent(TAG + "search_by_face", FS, true);
-//
-//        Intent intent = new Intent(getActivity(), SmartShutterActivity.class);
-//        intent.putExtra("org.sid.sidface.ImageConfirmation.origin", TAG);
-//        intent.putExtra("org.sid.sidface.ImageConfirmation.identify", true);
-//        intent.putExtra("org.sid.sidface.ImageConfirmation.kidetail", (Parcelable) SmartShutterActivity.kidetail);
-//        startActivityForResult(intent, 2);
-//    }
 
     public void searchTextChangeListener(String s) {
         Log.e(TAG, "searchTextChangeListener: " + s);
@@ -478,7 +418,7 @@ public class PNCSmartRegisterFragment extends BaseSmartRegisterFragment {
     }
 
     @Override
-    public void onActivityResult(int requestCode, int resultCode, Intent data){
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
 
         Intent myIntent = new Intent(getActivity(), NativeKIPNCSmartRegisterActivity.class);
@@ -490,6 +430,60 @@ public class PNCSmartRegisterFragment extends BaseSmartRegisterFragment {
 
     }
 
+//    public void getFacialRecord(View view) {
+//
+//        FlurryAgent.logEvent(TAG + "search_by_face", true);
+//        Log.d(TAG, "getFacialRecord: is_Called");
+//        sdf = new SimpleDateFormat("hh:mm:ss.SS", Locale.ENGLISH);
+//        String face_start = sdf.format(date);
+//        FS.put("face_start", face_start);
+//
+//        SmartShutterActivity.kidetail = (CommonPersonObjectClient) view.getTag();
+//        FlurryAgent.logEvent(TAG + "search_by_face", FS, true);
+//
+//        Intent intent = new Intent(getActivity(), SmartShutterActivity.class);
+//        intent.putExtra("org.sid.sidface.ImageConfirmation.origin", TAG);
+//        intent.putExtra("org.sid.sidface.ImageConfirmation.identify", true);
+//        intent.putExtra("org.sid.sidface.ImageConfirmation.kidetail", (Parcelable) SmartShutterActivity.kidetail);
+//        startActivityForResult(intent, 2);
+//    }
+
+    private class ClientActionHandler implements View.OnClickListener {
+        @Override
+        public void onClick(View view) {
+            switch (view.getId()) {
+                case R.id.profile_info_layout:
+//                    //FlurryFacade.logEvent("click_detail_view_on_kohort_pnc_dashboard");
+                    DetailPNCActivity.pncclient = (CommonPersonObjectClient) view.getTag();
+                    Intent intent = new Intent(getActivity(), DetailPNCActivity.class);
+                    startActivity(intent);
+                    getActivity().finish();
+                    break;
+                case R.id.ib_btn_edit:
+//                    //FlurryFacade.logEvent("click_visit_button_on_kohort_pnc_dashboard");
+//                    showFragmentDialog(new EditDialogOptionModel(), view.getTag());
+                    showFragmentDialog(((NativeKIPNCSmartRegisterActivity) getActivity()).new EditDialogOptionModel(), view.getTag());
+
+                    break;
+            }
+        }
+
+        private void showProfileView(ECClient client) {
+            navigationController.startEC(client.entityId());
+        }
+    }
+
+    private class EditDialogOptionModelOld implements DialogOptionModel {
+        @Override
+        public DialogOption[] getDialogOptions() {
+            return getEditOptions();
+        }
+
+        @Override
+        public void onDialogOptionSelection(DialogOption option, Object tag) {
+            onEditSelection((EditOption) option, (SmartRegisterClient) tag);
+        }
+    }
 
 
 }

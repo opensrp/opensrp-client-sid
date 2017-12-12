@@ -16,9 +16,7 @@ import org.smartregister.commonregistry.CommonPersonObjectClient;
 import org.smartregister.facialrecognition.activities.OpenCameraActivity;
 import org.smartregister.facialrecognition.utils.Tools;
 import org.smartregister.repository.DetailsRepository;
-import org.smartregister.view.activity.DrishtiApplication;
 
-import java.io.File;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashMap;
@@ -46,7 +44,7 @@ public class DetailMotherActivity extends Activity {
     @Bind(R.id.tv_mother_detail_profile_view)
     ImageView kiview;
 
-//    public static void setImagetoHolderFromUri(Activity activity, String file, ImageView view, int placeholder) {
+    //    public static void setImagetoHolderFromUri(Activity activity, String file, ImageView view, int placeholder) {
 //        view.setImageDrawable(activity.getResources().getDrawable(placeholder));
 //        File externalFile = new File(file);
 //        if (externalFile.exists()) {
@@ -254,9 +252,7 @@ public class DetailMotherActivity extends Activity {
         //set profile image by passing the client id.If the image doesn't exist in the image repository then download and save locally
 //        DrishtiApplication.getCachedImageLoaderInstance().getImageByClientId(motherClient.getCaseId(), OpenSRPImageLoader.getStaticImageListener(kiview, R.mipmap.woman_placeholder, R.mipmap.woman_placeholder));
 
-        Support.setImagetoHolderFromUri(this,
-                DrishtiApplication.getAppDir() + File.separator + motherClient.getDetails().get("base_entity_id") + ".JPEG",
-                kiview, R.mipmap.woman_placeholder);
+        Support.setImagetoHolderFromUri(this, motherClient.getDetails().get("base_entity_id"), kiview, R.mipmap.woman_placeholder);
 
         nama.setText(String.format("%s%s", getResources().getString(R.string.name), motherClient.getColumnmaps().get("namalengkap") != null ? motherClient.getColumnmaps().get("namalengkap") : "-"));
         nik.setText(String.format("%s%s", getResources().getString(R.string.nik), motherClient.getDetails().get("nik") != null ? motherClient.getDetails().get("nik") : "-"));

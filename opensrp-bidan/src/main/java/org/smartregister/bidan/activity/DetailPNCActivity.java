@@ -10,13 +10,6 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import org.json.JSONObject;
-
-import java.io.File;
-import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.UUID;
 import org.smartregister.Context;
 import org.smartregister.bidan.R;
 import org.smartregister.bidan.utils.Support;
@@ -25,7 +18,12 @@ import org.smartregister.commonregistry.CommonPersonObject;
 import org.smartregister.commonregistry.CommonPersonObjectClient;
 import org.smartregister.repository.DetailsRepository;
 import org.smartregister.util.FormUtils;
-import org.smartregister.view.activity.DrishtiApplication;
+
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.UUID;
 
 import static org.smartregister.util.StringUtil.humanize;
 import static org.smartregister.util.StringUtil.humanizeAndDoUPPERCASE;
@@ -36,10 +34,10 @@ import static org.smartregister.util.StringUtil.humanizeAndDoUPPERCASE;
 
 public class DetailPNCActivity extends Activity {
 
-    SimpleDateFormat timer = new SimpleDateFormat("hh:mm:ss");
     //image retrieving
     private static final String TAG = DetailPNCActivity.class.getName();
     private static final String IMAGE_CACHE_DIR = "thumbs";
+    public static CommonPersonObjectClient pncclient;
     //  private static KmsCalc  kmsCalc;
     private static int mImageThumbSize;
     private static int mImageThumbSpacing;
@@ -47,10 +45,15 @@ public class DetailPNCActivity extends Activity {
 //    private static ImageFetcher mImageFetcher;
 
     //image retrieving
-
-    public static CommonPersonObjectClient pncclient;
+    SimpleDateFormat timer = new SimpleDateFormat("hh:mm:ss");
     private SimpleDateFormat fta;
     private SimpleDateFormat ftb;
+    private View.OnClickListener bpmListener = new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+//            bpmAction();
+        }
+    };
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -63,7 +66,7 @@ public class DetailPNCActivity extends Activity {
         Detail.put("start", DetailStart);
         //FlurryAgent.logEvent("PNC_detail_view",Detail, true );
 
-        final ImageView kiview = (ImageView)findViewById(R.id.tv_mother_detail_profile_view);
+        final ImageView kiview = (ImageView) findViewById(R.id.tv_mother_detail_profile_view);
         //header
         TextView today = (TextView) findViewById(R.id.tv_detail_today);
 
@@ -115,7 +118,7 @@ public class DetailPNCActivity extends Activity {
         TextView txt_integrasiProgramantitb = (TextView) findViewById(R.id.txt_integrasiProgramantitb);
 
         TextView txt_integrasiProgramFotoThorax = (TextView) findViewById(R.id.txt_integrasiProgramFotoThorax);
-        TextView txt_komplikasi = (TextView) findViewById(R.id.txt_komplikasi);
+        TextView txt_komplikasi = (TextView) findViewById(R.id.tv_komplikasi);
         TextView txt_daruratNifas = (TextView) findViewById(R.id.txt_daruratNifas);
         TextView txt_penangananNifas = (TextView) findViewById(R.id.txt_penangananNifas);
 
@@ -231,16 +234,7 @@ public class DetailPNCActivity extends Activity {
         // Set Image
 //        DrishtiApplication.getCachedImageLoaderInstance().getImageByClientId(ibuparent.getCaseId(), OpenSRPImageLoader.getStaticImageListener(kiview, R.mipmap.woman_placeholder, R.mipmap.woman_placeholder));
 
-        Support.setImagetoHolderFromUri(this,
-                DrishtiApplication.getAppDir() + File.separator + pncclient.getDetails().get("base_entity_id") + ".JPEG",
-                kiview, R.mipmap.woman_placeholder);
-
-//        if(ibuparent.getDetails().get("profilepic")!= null){
-//            setImagetoHolderFromUri(DetailPNCActivity.this, ibuparent.getDetails().get("profilepic"), kiview, R.mipmap.woman_placeholder);
-//        }
-//        else {
-//            kiview.setImageDrawable(getResources().getDrawable(R.mipmap.woman_placeholder));
-//        }
+        Support.setImagetoHolderFromUri(this, pncclient.getDetails().get("base_entity_id"), kiview, R.mipmap.woman_placeholder);
 
         txt_hariKeKF.setText(String.format(": %s", humanizeAndDoUPPERCASE(kiobject.getColumnmaps().get("hariKeKF") != null ? kiobject.getColumnmaps().get("hariKeKF") : "-")));
 
@@ -253,7 +247,7 @@ public class DetailPNCActivity extends Activity {
         String tgl = ibuparent.getDetails().get("tanggalLahir") != null ? ibuparent.getDetails().get("tanggalLahir") : "-";
 //        String tgl_lahir = tgl.substring(0, tgl.indexOf("T"));
         String tgl_lahir = "null";
-        if(tgl != null && !tgl.isEmpty()) {
+        if (tgl != null && !tgl.isEmpty()) {
             tgl_lahir = tgl.substring(0, tgl.indexOf("T"));
         }
         dob.setText(String.format("%s%s", getResources().getString(R.string.dob), tgl_lahir));
@@ -261,16 +255,16 @@ public class DetailPNCActivity extends Activity {
         phone.setText(String.format("No HP: %s", ibuparent.getDetails().get("NomorTelponHp") != null ? ibuparent.getDetails().get("NomorTelponHp") : "-"));
 
         //risk
-        if(ibuparent.getDetails().get("highRiskPregnancyYoungMaternalAge") != null ){
+        if (ibuparent.getDetails().get("highRiskPregnancyYoungMaternalAge") != null) {
             risk1.setText(String.format("%s%s", getResources().getString(R.string.highRiskPregnancyYoungMaternalAge), humanize(kiobject.getDetails().get("highRiskPregnancyYoungMaternalAge"))));
         }
-        if(ibuparent.getDetails().get("highRiskPregnancyOldMaternalAge") != null ){
+        if (ibuparent.getDetails().get("highRiskPregnancyOldMaternalAge") != null) {
             risk1.setText(String.format("%s%s", getResources().getString(R.string.highRiskPregnancyOldMaternalAge), humanize(kiobject.getDetails().get("highRiskPregnancyYoungMaternalAge"))));
         }
-        if(ibuparent.getDetails().get("highRiskPregnancyProteinEnergyMalnutrition") != null
+        if (ibuparent.getDetails().get("highRiskPregnancyProteinEnergyMalnutrition") != null
                 || ibuparent.getDetails().get("HighRiskPregnancyAbortus") != null
-                || ibuparent.getDetails().get("HighRiskLabourSectionCesareaRecord" ) != null
-                ){
+                || ibuparent.getDetails().get("HighRiskLabourSectionCesareaRecord") != null
+                ) {
             risk2.setText(String.format("%s%s", getResources().getString(R.string.highRiskPregnancyProteinEnergyMalnutrition), humanize(ibuparent.getDetails().get("highRiskPregnancyProteinEnergyMalnutrition"))));
             risk3.setText(String.format("%s%s", getResources().getString(R.string.HighRiskPregnancyAbortus), humanize(ibuparent.getDetails().get("HighRiskPregnancyAbortus"))));
             risk4.setText(String.format("%s%s", getResources().getString(R.string.HighRiskLabourSectionCesareaRecord), humanize(ibuparent.getDetails().get("HighRiskLabourSectionCesareaRecord"))));
@@ -279,7 +273,7 @@ public class DetailPNCActivity extends Activity {
         txt_highRiskLabourTBRisk.setText(humanize(ibuparent.getDetails().get("highRiskLabourTBRisk") != null ? ibuparent.getDetails().get("highRiskLabourTBRisk") : "-"));
 
         highRiskSTIBBVs.setText(humanize(ibuparent.getDetails().get("highRiskSTIBBVs") != null ? ibuparent.getDetails().get("highRiskSTIBBVs") : "-"));
-        highRiskEctopicPregnancy.setText(humanize (ibuparent.getDetails().get("highRiskEctopicPregnancy") != null ? ibuparent.getDetails().get("highRiskEctopicPregnancy") : "-"));
+        highRiskEctopicPregnancy.setText(humanize(ibuparent.getDetails().get("highRiskEctopicPregnancy") != null ? ibuparent.getDetails().get("highRiskEctopicPregnancy") : "-"));
         highRiskCardiovascularDiseaseRecord.setText(humanize(ibuparent.getDetails().get("highRiskCardiovascularDiseaseRecord") != null ? ibuparent.getDetails().get("highRiskCardiovascularDiseaseRecord") : "-"));
         highRiskDidneyDisorder.setText(humanize(ibuparent.getDetails().get("highRiskDidneyDisorder") != null ? ibuparent.getDetails().get("highRiskDidneyDisorder") : "-"));
         highRiskHeartDisorder.setText(humanize(ibuparent.getDetails().get("highRiskHeartDisorder") != null ? ibuparent.getDetails().get("highRiskHeartDisorder") : "-"));
@@ -321,14 +315,6 @@ public class DetailPNCActivity extends Activity {
 
     }
 
-
-    private View.OnClickListener bpmListener = new View.OnClickListener() {
-        @Override
-        public void onClick(View v) {
-//            bpmAction();
-        }
-    };
-
     private void bpmAction() {
 //        Intent i = new Intent(DetailPNCActivity.this, MainBPM.class);
 //        Intent i = new Intent(ANCDetailActivity.this, TestBPM.class);
@@ -338,9 +324,9 @@ public class DetailPNCActivity extends Activity {
     }
 
     @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data){
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if (requestCode == 2 && resultCode!=RESULT_CANCELED ){
+        if (requestCode == 2 && resultCode != RESULT_CANCELED) {
 //            Log.e(
 //                    TAG, "onActivityResult: "+
 //                    data.getStringExtra("HIGH") +
@@ -349,18 +335,18 @@ public class DetailPNCActivity extends Activity {
 //                    data.getStringExtra("PULSE")
 //            );
             DetailsRepository detailsRepository = org.smartregister.Context.getInstance().detailsRepository();
-            Long tsLong = System.currentTimeMillis()/1000;
+            Long tsLong = System.currentTimeMillis() / 1000;
             detailsRepository.add(pncclient.entityId(), "tandaVitalTDSistolik", data.getStringExtra("HIGH"), tsLong);
             detailsRepository.add(pncclient.entityId(), "tandaVitalTDDiastolik", data.getStringExtra("LOW"), tsLong);
             detailsRepository.add(pncclient.entityId(), "tandaVitalPulse", data.getStringExtra("PULSE"), tsLong);
-            try{
-                Log.i(TAG, "onActivityResult: saveToserver" );
+            try {
+                Log.i(TAG, "onActivityResult: saveToserver");
                 FormUtils formUtils = FormUtils.getInstance(getApplicationContext());
                 String formSubmission =
-                        "<Blood_Test encounter_type=\"Blood Test\" id=\"blood_test\" version=\"201705080820\" _id=\""+pncclient.entityId()+"\">" +
-                                "<formhub><uuid>"+ UUID.randomUUID().toString() +"</uuid></formhub>" +
+                        "<Blood_Test encounter_type=\"Blood Test\" id=\"blood_test\" version=\"201705080820\" _id=\"" + pncclient.entityId() + "\">" +
+                                "<formhub><uuid>" + UUID.randomUUID().toString() + "</uuid></formhub>" +
                                 "<start openmrs_entity=\"encounter\" openmrs_entity_id=\"encounter_start\">2017-05-08T17:21:47.000+08:00</start>" +
-                                "<today openmrs_entity=\"encounter\" openmrs_entity_id=\"encounter_date\">"+fta+"</today>" +
+                                "<today openmrs_entity=\"encounter\" openmrs_entity_id=\"encounter_date\">" + fta + "</today>" +
                                 "<deviceid>Error: could not determine deviceID</deviceid>" +
                                 "<simserial>no simserial property in enketo</simserial>" +
                                 "<phonenumber>no phonenumber property in enketo</phonenumber>" +
@@ -371,31 +357,31 @@ public class DetailPNCActivity extends Activity {
                                 "<Sub-village>Selaparang.</Sub-village>" +
                                 "<generated_note_name_13/>" +
                                 "<generated_note_name_14/>" +
-                                "<existing_location openmrs_entity=\"encounter\" openmrs_entity_id=\"location_id\">"+pncclient.getDetails().get("Village")+"</existing_location>" +
+                                "<existing_location openmrs_entity=\"encounter\" openmrs_entity_id=\"location_id\">" + pncclient.getDetails().get("Village") + "</existing_location>" +
                                 "<provinsi openmrs_entity=\"person_address\" openmrs_entity_id=\"stateProvince\" openmrs_entity_parent=\"usual_residence\">Nusa Tenggara Barat</provinsi>" +
                                 "<kabupaten openmrs_entity=\"person_address\" openmrs_entity_id=\"countyDistrict\" openmrs_entity_parent=\"usual_residence\">Kota Mataram</kabupaten>" +
                                 "<desa openmrs_entity=\"person_address\" openmrs_entity_id=\"cityVillage\" openmrs_entity_parent=\"usual_residence\">Banjar</desa>" +
                                 "<dusun openmrs_entity=\"person_address\" openmrs_entity_id=\"address1\" openmrs_entity_parent=\"usual_residence\">Selaparang.</dusun>" +
                                 "<kecamatan openmrs_entity=\"person_address\" openmrs_entity_id=\"address2\" openmrs_entity_parent=\"usual_residence\">Tanjung Karang</kecamatan>" +
-                                "<td_sistolik openmrs_entity=\"concept\" openmrs_entity_id=\"5085AAAAAAAAAAAAAAAAAAAAAAAAAAAA\">"+ data.getStringExtra("HIGH")+"</td_sistolik>" +
-                                "<td_diastolik openmrs_entity=\"concept\" openmrs_entity_id=\"5086AAAAAAAAAAAAAAAAAAAAAAAAAAAA\">"+data.getStringExtra("LOW")+"</td_diastolik>" +
-                                "<pulse openmrs_entity=\"concept\" openmrs_entity_id=\"5087AAAAAAAAAAAAAAAAAAAAAAAAAAAA\">"+data.getStringExtra("PULSE")+"</pulse>\n" +
-                                "<ahr openmrs_entity=\"concept\" openmrs_entity_id=\"160632AAAAAAAAAAAAAAAAAAAAAAAAAA\" openmrs_entity_parent=\"5087AAAAAAAAAAAAAAAAAAAAAAAAAAAA\">"+data.getStringExtra("AHR")+"</ahr>" +
+                                "<td_sistolik openmrs_entity=\"concept\" openmrs_entity_id=\"5085AAAAAAAAAAAAAAAAAAAAAAAAAAAA\">" + data.getStringExtra("HIGH") + "</td_sistolik>" +
+                                "<td_diastolik openmrs_entity=\"concept\" openmrs_entity_id=\"5086AAAAAAAAAAAAAAAAAAAAAAAAAAAA\">" + data.getStringExtra("LOW") + "</td_diastolik>" +
+                                "<pulse openmrs_entity=\"concept\" openmrs_entity_id=\"5087AAAAAAAAAAAAAAAAAAAAAAAAAAAA\">" + data.getStringExtra("PULSE") + "</pulse>\n" +
+                                "<ahr openmrs_entity=\"concept\" openmrs_entity_id=\"160632AAAAAAAAAAAAAAAAAAAAAAAAAA\" openmrs_entity_parent=\"5087AAAAAAAAAAAAAAAAAAAAAAAAAAAA\">" + data.getStringExtra("AHR") + "</ahr>" +
                                 "<end openmrs_entity=\"encounter\" openmrs_entity_id=\"encounter_end\">2017-05-08T17:21:47.000+08:00</end>\n" +
                                 "<meta>" +
-                                "<instanceID>uuid:"+UUID.randomUUID().toString()+"</instanceID>" +
+                                "<instanceID>uuid:" + UUID.randomUUID().toString() + "</instanceID>" +
                                 "<deprecatedID/>" +
                                 "</meta>" +
                                 "</Blood_Test>";
 
                 formUtils.generateFormSubmisionFromXMLString(pncclient.entityId(), formSubmission, "blood_test", new JSONObject());
 
-            }catch (Exception e){
+            } catch (Exception e) {
                 // TODO: show error dialog on the formfragment if the submission fails
                 e.printStackTrace();
             }
-        } else{
-            Log.e(TAG, "onActivityResult: Cancel " );
+        } else {
+            Log.e(TAG, "onActivityResult: Cancel ");
         }
 
         finish();

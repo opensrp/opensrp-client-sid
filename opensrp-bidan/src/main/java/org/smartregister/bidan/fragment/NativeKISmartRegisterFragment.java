@@ -14,6 +14,10 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import org.apache.commons.lang3.StringUtils;
+import org.opensrp.api.domain.Location;
+import org.opensrp.api.util.EntityUtils;
+import org.opensrp.api.util.LocationTree;
+import org.opensrp.api.util.TreeNode;
 import org.smartregister.Context;
 import org.smartregister.bidan.R;
 import org.smartregister.bidan.activity.BaseRegisterActivity;
@@ -44,10 +48,6 @@ import org.smartregister.view.dialog.LocationSelectorDialogFragment;
 import org.smartregister.view.dialog.NameSort;
 import org.smartregister.view.dialog.ServiceModeOption;
 import org.smartregister.view.dialog.SortOption;
-import org.opensrp.api.domain.Location;
-import org.opensrp.api.util.EntityUtils;
-import org.opensrp.api.util.LocationTree;
-import org.opensrp.api.util.TreeNode;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -65,10 +65,20 @@ import static org.apache.commons.lang3.StringUtils.isEmpty;
 public class NativeKISmartRegisterFragment extends SecuredNativeSmartRegisterCursorAdapterFragment {
 
     private static final String TAG = NativeKISmartRegisterFragment.class.getName();
+    //    WD
+    public static String criteria;
     private final ClientActionHandler clientActionHandler = new ClientActionHandler();
     Date date = new Date();
     SimpleDateFormat sdf;
     Map<String, String> FS = new HashMap<>();
+
+    public static String getCriteria() {
+        return criteria;
+    }
+
+    public void setCriteria(String criteria) {
+        NativeKISmartRegisterFragment.criteria = criteria;
+    }
 
     @Override
     protected void onCreation() {
@@ -209,7 +219,6 @@ public class NativeKISmartRegisterFragment extends SecuredNativeSmartRegisterCur
         return "";
     }
 
-
     @TargetApi(Build.VERSION_CODES.KITKAT)
     public void initializeQueries(String s) {
         try {
@@ -223,7 +232,7 @@ public class NativeKISmartRegisterFragment extends SecuredNativeSmartRegisterCur
             SmartRegisterQueryBuilder countqueryBUilder = new SmartRegisterQueryBuilder();
             countqueryBUilder.SelectInitiateMainTableCounts("ec_kartu_ibu");
 
-            if(s != null && !s.isEmpty()){
+            if (s != null && !s.isEmpty()) {
                 Log.e(TAG, "initializeQueries with ID = " + s);
                 mainCondition = "is_closed = 0 AND namalengkap != '' AND object_id LIKE '%" + s + "%'";
 
@@ -256,27 +265,6 @@ public class NativeKISmartRegisterFragment extends SecuredNativeSmartRegisterCur
 
     }
 
-    private class ClientActionHandler implements View.OnClickListener {
-        @Override
-        public void onClick(View view) {
-            switch (view.getId()) {
-                case R.id.profile_info_layout:
-//                    FlurryFacade.logEvent("click_detail_view_on_kohort_ibu_dashboard");
-                    DetailMotherActivity.motherClient = (CommonPersonObjectClient) view.getTag();
-                    Intent intent = new Intent(getActivity(), DetailMotherActivity.class);
-                    startActivity(intent);
-                    getActivity().finish();
-                    break;
-
-                case R.id.ib_btn_edit:
-                    DetailMotherActivity.motherClient = (CommonPersonObjectClient) view.getTag();
-                    showFragmentDialog(((BaseRegisterActivity) getActivity()).new EditDialogOptionModelNew(), view.getTag());
-                    break;
-            }
-        }
-
-    }
-
     private String KiSortByNameAZ() {
         return "namalengkap ASC";
     }
@@ -295,50 +283,6 @@ public class NativeKISmartRegisterFragment extends SecuredNativeSmartRegisterCur
 
     private String KiSortByEdd() {
         return "htp IS NULL, htp";
-    }
-
-    private class EditDialogOptionModel implements DialogOptionModel {
-        @Override
-        public DialogOption[] getDialogOptions() {
-            return getEditOptions();
-        }
-
-        @Override
-        public void onDialogOptionSelection(DialogOption option, Object tag) {
-
-            if (option.name().equalsIgnoreCase(getString(R.string.str_register_anc_form))) {
-                CommonPersonObjectClient pc = DetailMotherActivity.motherClient;
-                AllCommonsRepository iburep = org.smartregister.Context.getInstance().allCommonsRepositoryobjects("ec_ibu");
-                final CommonPersonObject ibuparent = iburep.findByCaseID(pc.entityId());
-                if (ibuparent != null) {
-                    short anc_isclosed = ibuparent.getClosed();
-                    if (anc_isclosed == 0) {
-                        Toast.makeText(getActivity().getApplicationContext(), getString(R.string.mother_already_registered), Toast.LENGTH_SHORT).show();
-                        return;
-                    }
-                }
-            }
-            if(option.name().equalsIgnoreCase(getString(R.string.str_register_fp_form)) ) {
-                CommonPersonObjectClient pc = DetailMotherActivity.motherClient;
-
-                if(!StringUtils.isNumeric(pc.getDetails().get("jenisKontrasepsi"))) {
-                    Toast.makeText(getActivity().getApplicationContext(), getString(R.string.mother_already_registered_in_fp), Toast.LENGTH_SHORT).show();
-                    return;
-                }
-
-                AllCommonsRepository iburep = org.smartregister.Context.getInstance().allCommonsRepositoryobjects("ec_ibu");
-                final CommonPersonObject ibuparent = iburep.findByCaseID(pc.entityId());
-                if (ibuparent != null) {
-                    short anc_isclosed = ibuparent.getClosed();
-                    if (anc_isclosed == 0) {
-                        Toast.makeText(getActivity().getApplicationContext(), getString(R.string.mother_already_registered), Toast.LENGTH_SHORT).show();
-                        return;
-                    }
-                }
-            }
-
-            onEditSelection((EditOption) option, (SmartRegisterClient) tag);
-        }
     }
 
     @Override
@@ -396,17 +340,6 @@ public class NativeKISmartRegisterFragment extends SecuredNativeSmartRegisterCur
         }
     }
 
-    //    WD
-    public static String criteria;
-
-    public void setCriteria(String criteria) {
-        NativeKISmartRegisterFragment.criteria = criteria;
-    }
-
-    public static String getCriteria() {
-        return criteria;
-    }
-
     @Override
     public void setupSearchView(final View view) {
         searchView = (EditText) view.findViewById(org.smartregister.R.id.edt_search);
@@ -426,7 +359,7 @@ public class NativeKISmartRegisterFragment extends SecuredNativeSmartRegisterCur
 //                    });
 //                    builder.show();
 //                } else {
-                    searchTextChangeListener("");
+                searchTextChangeListener("");
 //                }
             }
         });
@@ -486,7 +419,7 @@ public class NativeKISmartRegisterFragment extends SecuredNativeSmartRegisterCur
     }
 
     @Override
-    public void onActivityResult(int requestCode, int resultCode, Intent data){
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
 
         Intent myIntent = new Intent(getActivity(), NativeKISmartRegisterActivity.class);
@@ -496,6 +429,71 @@ public class NativeKISmartRegisterFragment extends SecuredNativeSmartRegisterCur
         }
         getActivity().startActivity(myIntent);
 
+    }
+
+    private class ClientActionHandler implements View.OnClickListener {
+        @Override
+        public void onClick(View view) {
+            switch (view.getId()) {
+                case R.id.profile_info_layout:
+//                    FlurryFacade.logEvent("click_detail_view_on_kohort_ibu_dashboard");
+                    DetailMotherActivity.motherClient = (CommonPersonObjectClient) view.getTag();
+                    Intent intent = new Intent(getActivity(), DetailMotherActivity.class);
+                    startActivity(intent);
+                    getActivity().finish();
+                    break;
+
+                case R.id.ib_btn_edit:
+                    DetailMotherActivity.motherClient = (CommonPersonObjectClient) view.getTag();
+                    showFragmentDialog(((BaseRegisterActivity) getActivity()).new EditDialogOptionModelNew(), view.getTag());
+                    break;
+            }
+        }
+
+    }
+
+    private class EditDialogOptionModel implements DialogOptionModel {
+        @Override
+        public DialogOption[] getDialogOptions() {
+            return getEditOptions();
+        }
+
+        @Override
+        public void onDialogOptionSelection(DialogOption option, Object tag) {
+
+            if (option.name().equalsIgnoreCase(getString(R.string.str_register_anc_form))) {
+                CommonPersonObjectClient pc = DetailMotherActivity.motherClient;
+                AllCommonsRepository iburep = org.smartregister.Context.getInstance().allCommonsRepositoryobjects("ec_ibu");
+                final CommonPersonObject ibuparent = iburep.findByCaseID(pc.entityId());
+                if (ibuparent != null) {
+                    short anc_isclosed = ibuparent.getClosed();
+                    if (anc_isclosed == 0) {
+                        Toast.makeText(getActivity().getApplicationContext(), getString(R.string.mother_already_registered), Toast.LENGTH_SHORT).show();
+                        return;
+                    }
+                }
+            }
+            if (option.name().equalsIgnoreCase(getString(R.string.str_register_fp_form))) {
+                CommonPersonObjectClient pc = DetailMotherActivity.motherClient;
+
+                if (!StringUtils.isNumeric(pc.getDetails().get("jenisKontrasepsi"))) {
+                    Toast.makeText(getActivity().getApplicationContext(), getString(R.string.mother_already_registered_in_fp), Toast.LENGTH_SHORT).show();
+                    return;
+                }
+
+                AllCommonsRepository iburep = org.smartregister.Context.getInstance().allCommonsRepositoryobjects("ec_ibu");
+                final CommonPersonObject ibuparent = iburep.findByCaseID(pc.entityId());
+                if (ibuparent != null) {
+                    short anc_isclosed = ibuparent.getClosed();
+                    if (anc_isclosed == 0) {
+                        Toast.makeText(getActivity().getApplicationContext(), getString(R.string.mother_already_registered), Toast.LENGTH_SHORT).show();
+                        return;
+                    }
+                }
+            }
+
+            onEditSelection((EditOption) option, (SmartRegisterClient) tag);
+        }
     }
 
 }

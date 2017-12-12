@@ -52,8 +52,6 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
-import butterknife.ButterKnife;
-
 import static android.view.View.INVISIBLE;
 import static org.smartregister.bidan.utils.AllConstantsINA.FormNames.KOHORT_KB_REGISTER;
 
@@ -64,24 +62,33 @@ import static org.smartregister.bidan.utils.AllConstantsINA.FormNames.KOHORT_KB_
 public class FPSmartRegisterFragment extends BaseSmartRegisterFragment {
 
     private static final String TAG = FPSmartRegisterFragment.class.getName();
+    //    WD
+    public static String criteria;
     private final ClientActionHandler clientActionHandler = new ClientActionHandler();
-    private String locationDialogTAG = "locationDialogTAG";
-
     Date date = new Date();
     SimpleDateFormat sdf;
     Map<String, String> FS = new HashMap<>();
 
     String tableName = "ec_kartu_ibu";
-
-    @Override
-    protected void onCreation() {
-
-    }
+    private String locationDialogTAG = "locationDialogTAG";
 
 //    @Override
 //    protected SmartRegisterPaginatedAdapter adapter() {
 //        return new SmartRegisterPaginatedAdapter(clientsProvider());
 //    }
+
+    public static String getCriteria() {
+        return criteria;
+    }
+
+    public void setCriteria(String criteria) {
+        this.criteria = criteria;
+    }
+
+    @Override
+    protected void onCreation() {
+
+    }
 
     @Override
     protected SecuredNativeSmartRegisterActivity.DefaultOptionsProvider getDefaultOptionsProvider() {
@@ -119,19 +126,19 @@ public class FPSmartRegisterFragment extends BaseSmartRegisterFragment {
 //                FlurryFacade.logEvent("click_filter_option_on_kohort_kb_dashboard");
                 ArrayList<DialogOption> dialogOptionslist = new ArrayList<>();
 
-                dialogOptionslist.add(new CursorCommonObjectFilterOption(getString(R.string.filter_by_all_label),filterStringForAll()));
+                dialogOptionslist.add(new CursorCommonObjectFilterOption(getString(R.string.filter_by_all_label), filterStringForAll()));
 
                 String locationJSON = context().anmLocationController().get();
                 LocationTree locationTree = EntityUtils.fromJson(locationJSON, LocationTree.class);
 
-                Map<String,TreeNode<String, Location>> locationMap = locationTree.getLocationsHierarchy();
-                addChildToList(dialogOptionslist,locationMap);
+                Map<String, TreeNode<String, Location>> locationMap = locationTree.getLocationsHierarchy();
+                addChildToList(dialogOptionslist, locationMap);
                 DialogOption[] dialogOptions = new DialogOption[dialogOptionslist.size()];
-                for (int i = 0;i < dialogOptionslist.size();i++){
+                for (int i = 0; i < dialogOptionslist.size(); i++) {
                     dialogOptions[i] = dialogOptionslist.get(i);
                 }
 
-                return  dialogOptions;
+                return dialogOptions;
             }
 
             @Override
@@ -143,11 +150,11 @@ public class FPSmartRegisterFragment extends BaseSmartRegisterFragment {
             public DialogOption[] sortingOptions() {
 //                FlurryFacade.logEvent("click_sorting_option_on_kohort_kb_dashboard");
                 return new DialogOption[]{
-                        new CursorCommonObjectSort(getResources().getString(R.string.sort_by_name_label),KiSortByNameAZ()),
-                        new CursorCommonObjectSort(getResources().getString(R.string.sort_by_name_label_reverse),KiSortByNameZA()),
-                        new CursorCommonObjectSort(getResources().getString(R.string.sort_by_wife_age_label),KiSortByAge()),
-                        new CursorCommonObjectSort(getResources().getString(R.string.sort_by_edd_label),KiSortByEdd()),
-                        new CursorCommonObjectSort(getResources().getString(R.string.sort_by_no_ibu_label),KiSortByNoIbu()),
+                        new CursorCommonObjectSort(getResources().getString(R.string.sort_by_name_label), KiSortByNameAZ()),
+                        new CursorCommonObjectSort(getResources().getString(R.string.sort_by_name_label_reverse), KiSortByNameZA()),
+                        new CursorCommonObjectSort(getResources().getString(R.string.sort_by_wife_age_label), KiSortByAge()),
+                        new CursorCommonObjectSort(getResources().getString(R.string.sort_by_edd_label), KiSortByEdd()),
+                        new CursorCommonObjectSort(getResources().getString(R.string.sort_by_no_ibu_label), KiSortByNoIbu()),
                 };
             }
 
@@ -183,7 +190,8 @@ public class FPSmartRegisterFragment extends BaseSmartRegisterFragment {
         clientsProgressView.setVisibility(View.INVISIBLE);
         initializeQueries(getCriteria());
     }
-    private String filterStringForAll(){
+
+    private String filterStringForAll() {
         return "";
     }
 
@@ -196,12 +204,12 @@ public class FPSmartRegisterFragment extends BaseSmartRegisterFragment {
                 "Else alerts.status END ASC";
     }
 
-    public String KartuIbuMainCount(){
+    public String KartuIbuMainCount() {
         return "Select Count(*) from ec_kartu_ibu";
     }
 
     @TargetApi(Build.VERSION_CODES.KITKAT)
-    public void initializeQueries(String s){
+    public void initializeQueries(String s) {
 
         try {
             KBClientsProvider kiscp = new KBClientsProvider(getActivity(), clientActionHandler, context().alertService());
@@ -218,7 +226,7 @@ public class FPSmartRegisterFragment extends BaseSmartRegisterFragment {
             SmartRegisterQueryBuilder countqueryBuilder = new SmartRegisterQueryBuilder();
             countqueryBuilder.SelectInitiateMainTableCounts("ec_kartu_ibu");
 
-            if(s != null && !s.isEmpty()){
+            if (s != null && !s.isEmpty()) {
                 Log.e(TAG, "initializeQueries with ID = " + s);
                 mainCondition = " is_closed = 0 AND jenisKontrasepsi !=0 AND namalengkap != '' AND object_id LIKE '%" + s + "%'";
 
@@ -254,10 +262,9 @@ public class FPSmartRegisterFragment extends BaseSmartRegisterFragment {
 
     }
 
-
     @Override
     public void startRegistration() {
-        Log.e(TAG, "startRegistration: " );
+        Log.e(TAG, "startRegistration: ");
 //        FlurryFacade.logEvent("click_start_registration_on_kohort_kb_dashboard");
         FragmentTransaction ft = getActivity().getFragmentManager().beginTransaction();
         Fragment prev = getActivity().getFragmentManager().findFragmentByTag(locationDialogTAG);
@@ -268,36 +275,10 @@ public class FPSmartRegisterFragment extends BaseSmartRegisterFragment {
 
         LocationSelectorDialogFragment
                 .newInstance((NativeKIbuSmartRegisterActivity) getActivity(),
-                        ((NativeKIbuSmartRegisterActivity)getActivity()).new EditDialogOptionModel(), context().anmLocationController().get(),
+                        ((NativeKIbuSmartRegisterActivity) getActivity()).new EditDialogOptionModel(), context().anmLocationController().get(),
                         KOHORT_KB_REGISTER)
                 .show(ft, locationDialogTAG);
 
-    }
-
-    private class ClientActionHandler implements View.OnClickListener {
-
-        @Override
-        public void onClick(View view) {
-            switch (view.getId()) {
-                case R.id.profile_info_layout:
-//                    FlurryFacade.logEvent("click_detail_view_on_kohort_kb_dashboard");
-                    DetailFPActivity.kiclient = (CommonPersonObjectClient)view.getTag();
-                    Intent intent = new Intent(getActivity(),DetailFPActivity.class);
-                    startActivity(intent);
-                    getActivity().finish();
-                    break;
-                case R.id.ib_btn_edit:
-//                    FlurryFacade.logEvent("click_visit_button_on_kohort_kb_dashboard");
-//                    showFragmentDialog(new EditDialogOptionModel(), view.getTag());
-                    showFragmentDialog(((NativeKIFPSmartRegisterActivity) getActivity()).new EditDialogOptionModel(), view.getTag());
-
-                    break;
-            }
-        }
-
-        private void showProfileView(ECClient client) {
-            navigationController.startEC(client.entityId());
-        }
     }
 
     private String KiSortByNameAZ() {
@@ -320,23 +301,11 @@ public class FPSmartRegisterFragment extends BaseSmartRegisterFragment {
         return "htp IS NULL, htp";
     }
 
-    private class EditDialogOptionModelOld implements DialogOptionModel {
-        @Override
-        public DialogOption[] getDialogOptions() {
-            return getEditOptions();
-        }
-
-        @Override
-        public void onDialogOptionSelection(DialogOption option, Object tag) {
-            onEditSelection((EditOption) option, (SmartRegisterClient) tag);
-        }
-    }
-
     @Override
     protected void onResumption() {
 //        super.onResumption();
         getDefaultOptionsProvider();
-        if(isPausedOrRefreshList()) {
+        if (isPausedOrRefreshList()) {
             initializeQueries("!");
         }
         //     updateSearchView();
@@ -355,30 +324,19 @@ public class FPSmartRegisterFragment extends BaseSmartRegisterFragment {
         getSearchView().addTextChangedListener(textWatcher);
     }
 
-    public void addChildToList(ArrayList<DialogOption> dialogOptionslist, Map<String,TreeNode<String, Location>> locationMap){
-        for(Map.Entry<String, TreeNode<String, Location>> entry : locationMap.entrySet()) {
+    public void addChildToList(ArrayList<DialogOption> dialogOptionslist, Map<String, TreeNode<String, Location>> locationMap) {
+        for (Map.Entry<String, TreeNode<String, Location>> entry : locationMap.entrySet()) {
 
-            if(entry.getValue().getChildren() != null) {
-                addChildToList(dialogOptionslist,entry.getValue().getChildren());
+            if (entry.getValue().getChildren() != null) {
+                addChildToList(dialogOptionslist, entry.getValue().getChildren());
 
-            }else{
+            } else {
                 StringUtil.humanize(entry.getValue().getLabel());
                 String name = StringUtil.humanize(entry.getValue().getLabel());
-                dialogOptionslist.add(new MotherFilterOption(name, "location_name", name, tableName ));
+                dialogOptionslist.add(new MotherFilterOption(name, "location_name", name, tableName));
 
             }
         }
-    }
-
-    //    WD
-    public static String criteria;
-
-    public void setCriteria(String criteria) {
-        this.criteria = criteria;
-    }
-
-    public static String getCriteria() {
-        return criteria;
     }
 
     //    WD
@@ -401,7 +359,7 @@ public class FPSmartRegisterFragment extends BaseSmartRegisterFragment {
 //                    });
 //                    builder.show();
 //                } else {
-                    searchTextChangeListener("");
+                searchTextChangeListener("");
 //                }
             }
         });
@@ -458,7 +416,7 @@ public class FPSmartRegisterFragment extends BaseSmartRegisterFragment {
     }
 
     @Override
-    public void onActivityResult(int requestCode, int resultCode, Intent data){
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
 
         Intent myIntent = new Intent(getActivity(), NativeKIFPSmartRegisterActivity.class);
@@ -468,6 +426,44 @@ public class FPSmartRegisterFragment extends BaseSmartRegisterFragment {
         }
         getActivity().startActivity(myIntent);
 
+    }
+
+    private class ClientActionHandler implements View.OnClickListener {
+
+        @Override
+        public void onClick(View view) {
+            switch (view.getId()) {
+                case R.id.profile_info_layout:
+//                    FlurryFacade.logEvent("click_detail_view_on_kohort_kb_dashboard");
+                    DetailFPActivity.kiclient = (CommonPersonObjectClient) view.getTag();
+                    Intent intent = new Intent(getActivity(), DetailFPActivity.class);
+                    startActivity(intent);
+                    getActivity().finish();
+                    break;
+                case R.id.ib_btn_edit:
+//                    FlurryFacade.logEvent("click_visit_button_on_kohort_kb_dashboard");
+//                    showFragmentDialog(new EditDialogOptionModel(), view.getTag());
+                    showFragmentDialog(((NativeKIFPSmartRegisterActivity) getActivity()).new EditDialogOptionModel(), view.getTag());
+
+                    break;
+            }
+        }
+
+        private void showProfileView(ECClient client) {
+            navigationController.startEC(client.entityId());
+        }
+    }
+
+    private class EditDialogOptionModelOld implements DialogOptionModel {
+        @Override
+        public DialogOption[] getDialogOptions() {
+            return getEditOptions();
+        }
+
+        @Override
+        public void onDialogOptionSelection(DialogOption option, Object tag) {
+            onEditSelection((EditOption) option, (SmartRegisterClient) tag);
+        }
     }
 
 }

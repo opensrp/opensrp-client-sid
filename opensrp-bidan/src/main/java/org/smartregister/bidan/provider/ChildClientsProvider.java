@@ -42,10 +42,9 @@ import static org.smartregister.util.Utils.getValue;
  * Created by sid-tech on 11/27/17.
  */
 
-public class ChildClientsProvider implements SmartRegisterCLientsProviderForCursorAdapter {
+public class ChildClientsProvider extends BaseClientsProvider {
 
     private static final String TAG = ChildClientsProvider.class.getName();
-    private final LayoutInflater inflater;
     private final Context context;
     private final View.OnClickListener onClickListener;
     private final AlertService alertService;
@@ -57,30 +56,19 @@ public class ChildClientsProvider implements SmartRegisterCLientsProviderForCurs
     private String str_current_height;
     private String str_status_gizi;
 
-    public ChildClientsProvider(Context context, View.OnClickListener onClickListener,
-                                AlertService alertService, CommonRepository commonRepository) {
+    public ChildClientsProvider(Context context, View.OnClickListener onClickListener, AlertService alertService, CommonRepository commonRepository) {
+
+        super(context);
 
         this.onClickListener = onClickListener;
         this.context = context;
         this.alertService = alertService;
         this.commonRepository = commonRepository;
-        this.inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-
         clientViewLayoutParams = new AbsListView.LayoutParams(MATCH_PARENT, (int) context.getResources().getDimension(org.smartregister.R.dimen.list_item_height));
     }
 
-    public static void setPhoto(Activity activity, String file, ImageView view, int placeholder) {
-        view.setImageDrawable(activity.getResources().getDrawable(placeholder));
-        File externalFile = new File(file);
-        if (externalFile.exists()) {
-            Uri external = Uri.fromFile(externalFile);
-            view.setImageURI(external);
-        }
-
-    }
-
     @Override
-    public void getView(Cursor cursor, SmartRegisterClient client, final View convertView){
+    public void getView(Cursor cursor, SmartRegisterClient client, final View convertView) {
         ViewHolder viewHolder = new ViewHolder();
 
         CommonPersonObjectClient pc = (CommonPersonObjectClient) client;
@@ -121,7 +109,7 @@ public class ChildClientsProvider implements SmartRegisterCLientsProviderForCurs
             birthPlace = ibuparent.getDetails().get("tempatBersalin") != null ? ibuparent.getDetails().get("tempatBersalin") : "";
         }
 
-        if(kiparent != null) {
+        if (kiparent != null) {
             detailsRepository.updateDetails(kiparent);
             motherName = kiparent.getDetails().get("namalengkap");
             childAddress = kiparent.getDetails().get("address1");
@@ -133,9 +121,9 @@ public class ChildClientsProvider implements SmartRegisterCLientsProviderForCurs
         viewHolder.profilepic.setImageDrawable(context.getResources().getDrawable(R.mipmap.child_boy));
 
         if (pc.getDetails().get("gender") != null) {
-            setPhoto((Activity) context,
-                    DrishtiApplication.getAppDir() + File.separator + pc.getDetails().get("base_entity_id") + ".JPEG",
+            Support.setImagetoHolderFromUri((Activity) context, pc.getDetails().get("base_entity_id"),
                     viewHolder.profilepic, pc.getDetails().get("gender").equals("female") ? R.drawable.child_girl_infant : R.drawable.child_boy_infant);
+
         } else {
             Log.e(TAG, "getView: Gender is NOT SET");
         }
@@ -208,13 +196,6 @@ public class ChildClientsProvider implements SmartRegisterCLientsProviderForCurs
 
     }
 
-//    @Override
-//    public void getView(Cursor cursor, SmartRegisterClient client, final View convertView) {
-//
-//        getView(client, convertView);
-//
-//    }
-
     void checkVisibility(String immunization1, String immunization2, ImageView no, ImageView yes) {
         if (immunization1 != null || immunization2 != null) {
             no.setVisibility(View.INVISIBLE);
@@ -230,31 +211,6 @@ public class ChildClientsProvider implements SmartRegisterCLientsProviderForCurs
         String currentDate[] = new SimpleDateFormat("yyyy-MM").format(new Date()).substring(0, 7).split("-");
         return ((Integer.parseInt(currentDate[0]) - Integer.parseInt(lastVisitDate.substring(0, 4))) * 12 +
                 (Integer.parseInt(currentDate[1]) - Integer.parseInt(lastVisitDate.substring(5, 7))));
-    }
-
-    @Override
-    public SmartRegisterClients updateClients(FilterOption villageFilter, ServiceModeOption
-            serviceModeOption, FilterOption searchFilter, SortOption sortOption) {
-        throw new UnsupportedOperationException("Operation not supported");
-    }
-
-    @Override
-    public void onServiceModeSelected(ServiceModeOption serviceModeOption) {
-
-    }
-
-    @Override
-    public OnClickFormLauncher newFormLauncher(String formName, String entityId, String metaData) {
-        throw new UnsupportedOperationException("Operation not supported");
-    }
-
-    @Override
-    public View inflatelayoutForCursorAdapter() {
-        return inflater().inflate(R.layout.smart_register_anak_client, null);
-    }
-
-    public LayoutInflater inflater() {
-        return inflater;
     }
 
     class ViewHolder {

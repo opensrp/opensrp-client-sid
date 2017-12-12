@@ -2,7 +2,6 @@ package org.smartregister.bidan.activity;
 
 import android.app.Activity;
 import android.content.Intent;
-import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -13,13 +12,12 @@ import android.widget.Toast;
 
 import org.smartregister.Context;
 import org.smartregister.bidan.R;
+import org.smartregister.bidan.utils.Support;
 import org.smartregister.commonregistry.AllCommonsRepository;
 import org.smartregister.commonregistry.CommonPersonObject;
 import org.smartregister.commonregistry.CommonPersonObjectClient;
 import org.smartregister.repository.DetailsRepository;
-import org.smartregister.view.activity.DrishtiApplication;
 
-import java.io.File;
 import java.util.HashMap;
 
 import butterknife.Bind;
@@ -38,19 +36,9 @@ public class DetailChildActivity extends Activity {
     public static CommonPersonObjectClient childclient;
     static String entityid;
     private static HashMap<String, String> hash;
+    @Bind(R.id.childdetailprofileview)
+    ImageView childview;
     private boolean updateMode = false;
-
-    public static void setImagetoHolderFromUri(Activity activity, String file, ImageView view, int placeholder) {
-        view.setImageDrawable(activity.getResources().getDrawable(placeholder));
-        File externalFile = new File(file);
-        if (externalFile.exists()) {
-            Uri external = Uri.fromFile(externalFile);
-            view.setImageURI(external);
-        }
-
-    }
-
-    @Bind(R.id.childdetailprofileview) ImageView childview;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -58,7 +46,7 @@ public class DetailChildActivity extends Activity {
         Context context = Context.getInstance();
         setContentView(R.layout.child_detail_activity);
 
-        final ImageView childview = (ImageView)findViewById(R.id.childdetailprofileview);
+        final ImageView childview = (ImageView) findViewById(R.id.childdetailprofileview);
         //header
 //        TextView today = (TextView) findViewById(R.id.detail_today);
 
@@ -68,7 +56,7 @@ public class DetailChildActivity extends Activity {
         TextView father = (TextView) findViewById(R.id.txt_father_number);
         TextView dob = (TextView) findViewById(R.id.tv_dob);
 
-      //  TextView phone = (TextView) findViewById(R.id.txt_contact_phone_number);
+        //  TextView phone = (TextView) findViewById(R.id.txt_contact_phone_number);
 //        TextView risk1 = (TextView) findViewById(R.id.txt_risk1);
 //        TextView risk2 = (TextView) findViewById(R.id.txt_risk2);
 //        TextView risk3 = (TextView) findViewById(R.id.txt_risk3);
@@ -91,7 +79,7 @@ public class DetailChildActivity extends Activity {
         TextView pol4 = (TextView) findViewById(R.id.txt_tanggalpemberianimunisasiDPTHB3Polio4);
         TextView campak = (TextView) findViewById(R.id.txt_tanggalpemberianimunisasiCampak);
 
-        TextView growthChartButton = (TextView)findViewById(R.id.chart_label);
+        TextView growthChartButton = (TextView) findViewById(R.id.chart_label);
         ImageButton back = (ImageButton) findViewById(org.smartregister.R.id.btn_back_to_home);
 
         growthChartButton.setOnClickListener(new View.OnClickListener() {
@@ -116,20 +104,17 @@ public class DetailChildActivity extends Activity {
         DetailsRepository detailsRepository = org.smartregister.Context.getInstance().detailsRepository();
         detailsRepository.updateDetails(childclient);
 
-        String gender = childclient.getDetails().containsKey("gender") ? childclient.getDetails().get("gender"):"laki";
-
+        String gender = childclient.getDetails().containsKey("gender") ? childclient.getDetails().get("gender") : "laki";
 
         //start profile image
-        int placeholderDrawable= gender.equalsIgnoreCase("male") ? R.drawable.child_boy_infant:R.drawable.child_girl_infant;
+        int placeholderDrawable = gender.equalsIgnoreCase("male") ? R.drawable.child_boy_infant : R.drawable.child_girl_infant;
         childview.setTag(R.id.entity_id, childclient.getCaseId());//required when saving file to disk
         if (childclient.getCaseId() != null) {
             //image already in local storage most likey ):
             //set profile image by passing the client id.If the image doesn't exist in the image repository then download and save locally
 //            DrishtiApplication.getCachedImageLoaderInstance().getImageByClientId(ancClient.getCaseId(), OpenSRPImageLoader.getStaticImageListener(childview, placeholderDrawable, placeholderDrawable));
 
-            DetailChildActivity.setImagetoHolderFromUri(this,
-                    DrishtiApplication.getAppDir() + File.separator + childclient.getDetails().get("base_entity_id") + ".JPEG",
-                    childview, childclient.getDetails().get("gender").equals("female") ? R.drawable.child_girl_infant : R.drawable.child_boy_infant);
+            Support.setImagetoHolderFromUri(this, childclient.getDetails().get("base_entity_id"), childview, childclient.getDetails().get("gender").equals("female") ? R.drawable.child_girl_infant : R.drawable.child_boy_infant);
         }
 
         //end profile image
@@ -200,7 +185,7 @@ public class DetailChildActivity extends Activity {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent intent) {
 //        refresh
-        Log.e(TAG, "onActivityResult: refresh" );
+        Log.e(TAG, "onActivityResult: refresh");
         finish();
         startActivity(getIntent());
 

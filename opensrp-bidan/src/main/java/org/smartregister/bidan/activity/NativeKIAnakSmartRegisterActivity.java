@@ -1,10 +1,12 @@
 package org.smartregister.bidan.activity;
 
 import android.support.v4.app.Fragment;
+
 import org.smartregister.bidan.R;
 import org.smartregister.bidan.fragment.AnakSmartRegisterFragment;
 import org.smartregister.view.dialog.DialogOption;
 import org.smartregister.view.dialog.OpenFormOption;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -35,13 +37,13 @@ public class NativeKIAnakSmartRegisterActivity extends BaseRegisterActivity {
     }
 
     @Override
-    protected Fragment mBaseFragment(){
+    protected Fragment mBaseFragment() {
 
         return new AnakSmartRegisterFragment();
     }
 
 
-    private String[] buildFormNameList(){
+    private String[] buildFormNameList() {
 
         List<String> formNames = new ArrayList<>();
 

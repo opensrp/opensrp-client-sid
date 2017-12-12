@@ -1,11 +1,9 @@
 package org.smartregister.bidan.provider;
 
-import android.content.Context;
-
 import android.app.Activity;
+import android.content.Context;
 import android.database.Cursor;
 import android.graphics.drawable.Drawable;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.AbsListView;
@@ -22,7 +20,6 @@ import org.smartregister.cursoradapter.SmartRegisterCLientsProviderForCursorAdap
 import org.smartregister.domain.Alert;
 import org.smartregister.repository.DetailsRepository;
 import org.smartregister.service.AlertService;
-import org.smartregister.view.activity.DrishtiApplication;
 import org.smartregister.view.contract.SmartRegisterClient;
 import org.smartregister.view.contract.SmartRegisterClients;
 import org.smartregister.view.dialog.FilterOption;
@@ -30,7 +27,6 @@ import org.smartregister.view.dialog.ServiceModeOption;
 import org.smartregister.view.dialog.SortOption;
 import org.smartregister.view.viewholder.OnClickFormLauncher;
 
-import java.io.File;
 import java.util.List;
 
 import butterknife.Bind;
@@ -42,110 +38,77 @@ import static android.view.ViewGroup.LayoutParams.MATCH_PARENT;
  * Created by sid-tech on 11/30/17.
  */
 
-public class KBClientsProvider implements SmartRegisterCLientsProviderForCursorAdapter {
+public class KBClientsProvider extends BaseClientsProvider {
 
     private static final String TAG = KBClientsProvider.class.getName();
 
-    private final LayoutInflater inflater;
     private final View.OnClickListener onClickListener;
     private final Context context;
-    private Drawable iconPencilDrawable;
     private final AbsListView.LayoutParams clientViewLayoutParams;
-
     protected CommonPersonObjectController controller;
-
     AlertService alertService;
-
     @Bind(R.id.profile_info_layout)
     LinearLayout profilelayout;
-
     @Bind(R.id.tv_wife_name)
     TextView wife_name;
-
     @Bind(R.id.tv_husband_name)
     TextView husband_name;
-
     @Bind(R.id.tv_village_name)
     TextView village_name;
-
     @Bind(R.id.tv_wife_age)
     TextView wife_age;
-
     @Bind(R.id.tv_no_ibu)
     TextView no_ibu;
-
     @Bind(R.id.tv_gravida)
     TextView gravida;
-
     @Bind(R.id.tv_parity)
     TextView parity;
-
     @Bind(R.id.tv_number_of_abortus)
     TextView number_of_abortus;
-
     @Bind(R.id.tv_number_of_alive)
     TextView number_of_alive;
-
     @Bind(R.id.iv_hr_badge)
     ImageView hr_badge;
-
     @Bind(R.id.iv_hrl_badge)
     ImageView img_hrl_badge;
-
     @Bind(R.id.iv_bpl_badge)
     ImageView bpl_badge;
-
     @Bind(R.id.iv_hrp_badge)
     ImageView hrp_badge;
-
     @Bind(R.id.iv_hrpp_badge)
     ImageView hrpp_badge;
-
     @Bind(R.id.tv_kb_method)
     TextView kb_method;
-
     @Bind(R.id.tv_kb_mulai)
     TextView kb_mulai;
-
     @Bind(R.id.tv_risk_HB)
     TextView risk_HB;
-
     @Bind(R.id.tv_risk_LILA)
     TextView LILA;
-
-
     @Bind(R.id.tv_risk_PenyakitKronis)
     TextView risk_PenyakitKronis;
-
     @Bind(R.id.tv_risk_IMS)
     TextView risk_IMS;
-
-
     @Bind(R.id.tv_follow_due)
     TextView follow_up_due;
-
     @Bind(R.id.follow_layout)
     LinearLayout follow_layout;
-
     @Bind(R.id.tv_follow_status)
     TextView follow_status;
-
     @Bind(R.id.tv_follow_up_due)
     TextView follow_due;
-
-
     @Bind(R.id.iv_profile)
     ImageView profilepic;
-
     @Bind(R.id.ib_btn_edit)
     ImageButton follow_up;
+    private Drawable iconPencilDrawable;
 
     public KBClientsProvider(Context context, View.OnClickListener onClickListener, AlertService alertService) {
 
+        super(context);
         this.onClickListener = onClickListener;
         this.context = context;
         this.alertService = alertService;
-        this.inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 
         clientViewLayoutParams = new AbsListView.LayoutParams(MATCH_PARENT, (int) context.getResources().getDimension(R.dimen.list_item_height));
     }
@@ -159,12 +122,12 @@ public class KBClientsProvider implements SmartRegisterCLientsProviderForCursorA
         System.out.println("client : " + pc.getColumnmaps().toString());
         System.out.println("event : " + pc.getDetails().toString());
 
-        Log.e(TAG, "getView: " + pc.getDetails().toString());
-        Log.e(TAG, "getView: " + pc.getColumnmaps().toString());
+//        Log.e(TAG, "getView: " + pc.getDetails().toString());
+//        Log.e(TAG, "getView: " + pc.getColumnmaps().toString());
 
         try {
             ButterKnife.bind(this, convertView);
-        } catch (Exception e){
+        } catch (Exception e) {
             e.getCause().printStackTrace();
         }
 
@@ -190,9 +153,7 @@ public class KBClientsProvider implements SmartRegisterCLientsProviderForCursorA
                 pc.getDetails().get("highRiskTuberculosis"), pc.getDetails().get("highRiskMalaria"), pc.getDetails().get("highRiskPregnancyYoungMaternalAge"),
                 pc.getDetails().get("highRiskPregnancyOldMaternalAge"), hr_badge);
 
-        Support.setImagetoHolderFromUri((Activity) context,
-                DrishtiApplication.getAppDir() + File.separator + pc.getDetails().get("base_entity_id") + ".JPEG",
-                        profilepic, R.mipmap.woman_placeholder);
+        Support.setImagetoHolderFromUri((Activity) context, pc.getDetails().get("base_entity_id"), profilepic, R.mipmap.woman_placeholder);
 
         wife_name.setText(pc.getColumnmaps().get("namalengkap") != null ? pc.getColumnmaps().get("namalengkap") : "null");
         husband_name.setText(pc.getColumnmaps().get("namaSuami") != null ? pc.getColumnmaps().get("namaSuami") : "null");
@@ -245,10 +206,10 @@ public class KBClientsProvider implements SmartRegisterCLientsProviderForCursorA
             //alertlist_for_client.get(i).
             if (alertlist_for_client.size() == 0) {
                 // viewHolder.follow_up_due.setText("Not Synced");
-                        follow_layout.setBackgroundColor(context.getResources().getColor(R.color.status_bar_text_almost_white));
+                follow_layout.setBackgroundColor(context.getResources().getColor(R.color.status_bar_text_almost_white));
             }
             for (int i = 0; i < alertlist_for_client.size(); i++) {
-                        follow_due.setText("Follow up due");
+                follow_due.setText("Follow up due");
                 if (alertlist_for_client.get(i).status().value().equalsIgnoreCase("normal")) {
                     follow_up_due.setText(alertlist_for_client.get(i).expiryDate());
                     follow_layout.setBackgroundColor(context.getResources().getColor(R.color.alert_upcoming_light_blue));
@@ -282,14 +243,9 @@ public class KBClientsProvider implements SmartRegisterCLientsProviderForCursorA
         //   return convertView;
     }
 
-    public SmartRegisterClients getClients() {
-        return controller.getClients();
-    }
-
     @Override
-    public SmartRegisterClients updateClients(FilterOption villageFilter, ServiceModeOption serviceModeOption,
-                                              FilterOption searchFilter, SortOption sortOption) {
-        return getClients().applyFilter(villageFilter, serviceModeOption, searchFilter, sortOption);
+    public void getView(Cursor cursor, SmartRegisterClient smartRegisterClient, View view) {
+        getView(smartRegisterClient, view);
     }
 
     public void risk(String risk1, String risk2, String risk3, String risk4, String risk5, String risk6, String risk7, String risk8, String risk9, String risk10, ImageView riskview) {
@@ -307,32 +263,6 @@ public class KBClientsProvider implements SmartRegisterCLientsProviderForCursorA
             riskview.setVisibility(View.VISIBLE);
         }
 
-    }
-
-    @Override
-    public void onServiceModeSelected(ServiceModeOption serviceModeOption) {
-        // do nothing.
-    }
-
-    @Override
-    public void getView(Cursor cursor, SmartRegisterClient smartRegisterClient, View view) {
-        getView(smartRegisterClient, view);
-    }
-
-
-    @Override
-    public OnClickFormLauncher newFormLauncher(String formName, String entityId, String metaData) {
-        return null;
-    }
-
-    public LayoutInflater inflater() {
-        return inflater;
-    }
-
-    @Override
-    public View inflatelayoutForCursorAdapter() {
-        View view = inflater().inflate(R.layout.smart_register_kb_client, null);
-        return view;
     }
 
 }

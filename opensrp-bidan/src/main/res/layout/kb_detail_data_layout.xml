@@ -350,7 +350,7 @@
                 android:textSize="14sp" />
 
             <org.smartregister.view.customcontrols.CustomFontTextView
-                android:id="@+id/txt_td_diastolik"
+                android:id="@+id/tv_td_diastolik"
                 style="@style/CustomFontTextViewStyle.ListView.Medium"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"

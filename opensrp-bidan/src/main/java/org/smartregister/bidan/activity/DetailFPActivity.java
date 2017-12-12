@@ -10,14 +10,11 @@ import android.widget.TextView;
 
 import org.smartregister.Context;
 import org.smartregister.bidan.R;
-//import org.smartregister.bidan.activity.v1.NativeKBSmartRegisterActivity;
 import org.smartregister.commonregistry.AllCommonsRepository;
 import org.smartregister.commonregistry.CommonPersonObject;
 import org.smartregister.commonregistry.CommonPersonObjectClient;
 import org.smartregister.repository.DetailsRepository;
-import org.smartregister.view.activity.DrishtiApplication;
 
-import java.io.File;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashMap;
@@ -26,6 +23,8 @@ import java.util.Map;
 import static org.smartregister.bidan.utils.Support.setImagetoHolderFromUri;
 import static org.smartregister.util.StringUtil.humanize;
 
+//import org.smartregister.bidan.activity.v1.NativeKBSmartRegisterActivity;
+
 /**
  * Created by sid-tech on 11/30/17.
  */
@@ -33,9 +32,8 @@ import static org.smartregister.util.StringUtil.humanize;
 public class DetailFPActivity extends Activity {
 
     private static final String TAG = DetailFPActivity.class.getName();
-    SimpleDateFormat timer = new SimpleDateFormat("hh:mm:ss");
-
     public static CommonPersonObjectClient kiclient;
+    SimpleDateFormat timer = new SimpleDateFormat("hh:mm:ss");
     private View.OnClickListener bpmListener;
 
     @Override
@@ -48,7 +46,7 @@ public class DetailFPActivity extends Activity {
         String DetailStart = timer.format(new Date());
         Map<String, String> Detail = new HashMap<String, String>();
         Detail.put("start", DetailStart);
-        
+
 //        FlurryAgent.logEvent("KB_detail_view", Detail, true);
 
         final ImageView kiview = (ImageView) findViewById(R.id.tv_mother_detail_profile_view);
@@ -82,7 +80,7 @@ public class DetailFPActivity extends Activity {
         TextView asuransi = (TextView) findViewById(R.id.txt_asuransi);
 
         TextView jenisKontrasepsi = (TextView) findViewById(R.id.txt_jenisKontrasepsi);
-        TextView td_diastolik = (TextView) findViewById(R.id.txt_td_diastolik);
+        TextView td_diastolik = (TextView) findViewById(R.id.tv_td_diastolik);
         TextView tdSistolik = (TextView) findViewById(R.id.txt_tdSistolik);
         TextView alkilila = (TextView) findViewById(R.id.txt_alkilila);
         TextView alkiPenyakitIms = (TextView) findViewById(R.id.txt_alkiPenyakitIms);
@@ -145,9 +143,7 @@ public class DetailFPActivity extends Activity {
         if (kiclient.getCaseId() != null) {//image already in local storage most likey ):
             //set profile image by passing the client id.If the image doesn't exist in the image repository then download and save locally
 //            DrishtiApplication.getCachedImageLoaderInstance().getImageByClientId(kiclient.getCaseId(), OpenSRPImageLoader.getStaticImageListener(kiview, R.mipmap.woman_placeholder, R.mipmap.woman_placeholder));
-            setImagetoHolderFromUri(this,
-                    DrishtiApplication.getAppDir() + File.separator + kiclient.getDetails().get("base_entity_id") + ".JPEG",
-                    kiview, R.mipmap.woman_placeholder);
+            setImagetoHolderFromUri(this, kiclient.getDetails().get("base_entity_id"), kiview, R.mipmap.woman_placeholder);
         }
 
 
@@ -156,7 +152,7 @@ public class DetailFPActivity extends Activity {
         husband_name.setText(String.format("%s%s", getResources().getString(R.string.husband_name), kiclient.getColumnmaps().get("namaSuami") != null ? kiclient.getColumnmaps().get("namaSuami") : "-"));
         String tgl = kiclient.getDetails().get("tanggalLahir") != null ? kiclient.getDetails().get("tanggalLahir") : "-";
         String tgl_lahir = null;
-        if (tgl != null && !tgl.isEmpty()){
+        if (tgl != null && !tgl.isEmpty()) {
             tgl_lahir = tgl.substring(0, tgl.indexOf("T"));
         }
 

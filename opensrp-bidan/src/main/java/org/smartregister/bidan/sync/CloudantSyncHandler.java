@@ -31,9 +31,9 @@ import org.apache.http.HttpResponse;
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.impl.client.DefaultHttpClient;
+import org.smartregister.bidan.utils.AllConstants;
 import org.smartregister.repository.AllSharedPreferences;
 import org.smartregister.util.AssetHandler;
-import org.smartregister.bidan.utils.AllConstants;
 
 import java.io.InputStream;
 import java.io.InputStreamReader;
@@ -68,9 +68,9 @@ public class CloudantSyncHandler {
             SharedPreferences preferences = PreferenceManager
                     .getDefaultSharedPreferences(this.mContext);
             AllSharedPreferences allSharedPreferences = new AllSharedPreferences(preferences);
-            String locationAnmids=allSharedPreferences.getPreference(allSharedPreferences.fetchRegisteredANM()+"-locationid");
+            String locationAnmids = allSharedPreferences.getPreference(allSharedPreferences.fetchRegisteredANM() + "-locationid");
             String port = AllConstants.CloudantSync.COUCHDB_PORT;
-            String databaseName = AllConstants.CloudantSync.COUCH_DATABASE_NAME+"_"+locationAnmids.toLowerCase().replace(' ', '_').replace(".","");
+            String databaseName = AllConstants.CloudantSync.COUCH_DATABASE_NAME + "_" + locationAnmids.toLowerCase().replace(' ', '_').replace(".", "");
             dbURL = allSharedPreferences.fetchHost("").concat(":").concat(port).concat("/")
                     .concat(databaseName);
 

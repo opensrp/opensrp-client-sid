@@ -692,7 +692,7 @@
                 android:textSize="14sp" />
 
             <org.smartregister.view.customcontrols.CustomFontTextView
-                android:id="@+id/txt_komplikasi"
+                android:id="@+id/tv_komplikasi"
                 style="@style/CustomFontTextViewStyle.ListView.Medium"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
