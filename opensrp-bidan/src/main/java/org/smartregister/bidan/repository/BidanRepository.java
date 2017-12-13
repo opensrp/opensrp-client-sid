@@ -9,6 +9,8 @@ import org.apache.commons.lang3.StringUtils;
 import org.smartregister.bidan.application.BidanApplication;
 import org.smartregister.bidan.utils.BidanConstants;
 import org.smartregister.commonregistry.CommonFtsObject;
+import org.smartregister.facialrecognition.FacialRecognitionLibrary;
+import org.smartregister.facialrecognition.repository.ImageRepository;
 import org.smartregister.repository.EventClientRepository;
 import org.smartregister.repository.Repository;
 
@@ -40,7 +42,10 @@ public class BidanRepository extends Repository {
 //        EventClientRepository.createTable(database, EventClientRepository.Table.address, EventClientRepository.address_column.values());
 //        EventClientRepository.createTable(database, EventClientRepository.Table.event, EventClientRepository.event_column.values());
 //        EventClientRepository.createTable(database, EventClientRepository.Table.obs, EventClientRepository.obs_column.values());
-        onUpgrade(database, 1, BidanConstants.DATABASE_VERSION);
+//        onUpgrade(database, 1, BidanConstants.DATABASE_VERSION);
+
+        ImageRepository.createTable(database);
+        Log.e(TAG, "onCreate: Database created" );
 
     }
 

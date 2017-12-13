@@ -125,10 +125,10 @@ dependencies {
     compile 'com.android.support:multidex:1.0.1'
 
 
-        compile 'com.squareup.okhttp3:logging-interceptor:3.2.0'
+        compile 'com.squareup.okhttp3:logging-interceptor:3.8.1'
 //    compile 'com.squareup.okhttp3:okhttp:3.8.1'
     compile 'com.github.bumptech.glide:okhttp3-integration:1.4.0@aar'
-    compile 'com.squareup.okhttp3:okhttp:3.2.0'
+    compile 'com.squareup.okhttp3:okhttp:3.8.1'
     // Snapdragon Facial Recognition
 
 //    compile project(':opensrp-facial-recognition-debug')

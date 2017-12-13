@@ -3,9 +3,12 @@ package org.smartregister.bidan.fragment;
 import android.annotation.TargetApi;
 import android.app.Fragment;
 import android.app.FragmentTransaction;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Build;
+import android.os.Parcelable;
+import android.support.v7.app.AlertDialog;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
@@ -35,6 +38,8 @@ import org.smartregister.cursoradapter.CursorCommonObjectSort;
 import org.smartregister.cursoradapter.SecuredNativeSmartRegisterCursorAdapterFragment;
 import org.smartregister.cursoradapter.SmartRegisterPaginatedCursorAdapter;
 import org.smartregister.cursoradapter.SmartRegisterQueryBuilder;
+import org.smartregister.facialrecognition.FacialRecognitionLibrary;
+import org.smartregister.facialrecognition.activities.OpenCameraActivity;
 import org.smartregister.provider.SmartRegisterClientsProvider;
 import org.smartregister.util.StringUtil;
 import org.smartregister.view.activity.SecuredNativeSmartRegisterActivity;
@@ -340,27 +345,30 @@ public class NativeKISmartRegisterFragment extends SecuredNativeSmartRegisterCur
         }
     }
 
+
     @Override
     public void setupSearchView(final View view) {
         searchView = (EditText) view.findViewById(org.smartregister.R.id.edt_search);
         searchView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-//                if (SmartShutterActivity.isDevCompat) {
-//                    CharSequence selections[] = new CharSequence[]{"Name", "Photo"};
-//                    final AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
-//                    builder.setTitle("Please Choose one, Search by");
-//                    builder.setItems(selections, new DialogInterface.OnClickListener() {
-//                        @Override
-//                        public void onClick(DialogInterface dialog, int opt) {
-//                            if (opt == 0) searchTextChangeListener("");
-//                            else getFacialRecord(view);
-//                        }
-//                    });
-//                    builder.show();
-//                } else {
-                searchTextChangeListener("");
-//                }
+
+                if (FacialRecognitionLibrary.getDevCompat()) {
+                    CharSequence selections[] = new CharSequence[]{"Name", "Photo"};
+                    final AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+                    builder.setTitle("Please Choose one, Search by");
+                    builder.setItems(selections, new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int opt) {
+                            if (opt == 0) searchTextChangeListener("");
+                            else getFacialRecord(view);
+                        }
+                    });
+                    builder.show();
+                } else {
+                    searchTextChangeListener("");
+                }
+
             }
         });
 
@@ -380,12 +388,17 @@ public class NativeKISmartRegisterFragment extends SecuredNativeSmartRegisterCur
 //
 //        SmartShutterActivity.kidetail = (CommonPersonObjectClient) view.getTag();
 //        FlurryAgent.logEvent(TAG + "search_by_face", FS, true);
-//
-//        Intent intent = new Intent(getActivity(), SmartShutterActivity.class);
-//        intent.putExtra("org.sid.sidface.ImageConfirmation.origin", TAG);
-//        intent.putExtra("org.sid.sidface.ImageConfirmation.identify", true);
-//        intent.putExtra("org.sid.sidface.ImageConfirmation.kidetail", (Parcelable) SmartShutterActivity.kidetail);
-//        startActivityForResult(intent, 2);
+
+//        updated = extras.getBoolean("org.smartregister.facialrecognition.OpenCameraActivity.updated");
+//        entityId = extras.getString("org.smartregister.facialrecognition.PhotoConfirmationActivity.id");
+//        identifyPerson = extras.getBoolean("org.smartregister.facialrecognition.PhotoConfirmationActivity.identify");
+//        str_origin_class = extras.getString("org.smartregister.facialrecognition.PhotoConfirmationActivity.origin");
+
+        Intent intent = new Intent(getActivity(), OpenCameraActivity.class);
+        intent.putExtra("org.smartregister.facialrecognition.PhotoConfirmationActivity.origin", TAG);
+        intent.putExtra("org.smartregister.facialrecognition.PhotoConfirmationActivity.identify", false);
+//        intent.putExtra("org.sid.sidface.ImageConfirmation.kidetail", (Parcelable) OpenCameraActivity.kidetail);
+        startActivityForResult(intent, 2);
     }
 
     public void searchTextChangeListener(String s) {
@@ -424,8 +437,8 @@ public class NativeKISmartRegisterFragment extends SecuredNativeSmartRegisterCur
 
         Intent myIntent = new Intent(getActivity(), NativeKISmartRegisterActivity.class);
         if (data != null) {
-            myIntent.putExtra("org.smartregister.indonesia.face.face_mode", true);
-            myIntent.putExtra("org.smartregister.indonesia.face.base_id", data.getStringExtra("org.smartregister.indonesia.face.base_id"));
+            myIntent.putExtra("org.smartregister.bidan.face.face_mode", true);
+            myIntent.putExtra("org.smartregister.bidan.face.base_id", data.getStringExtra("org.smartregister.indonesia.face.base_id"));
         }
         getActivity().startActivity(myIntent);
 
