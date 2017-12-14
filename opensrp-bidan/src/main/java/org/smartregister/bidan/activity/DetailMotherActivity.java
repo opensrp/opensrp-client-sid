@@ -206,7 +206,7 @@ public class DetailMotherActivity extends Activity {
         detailsRepository.updateDetails(motherClient);
 
         //set profile image by passing the client id.If the image doesn't exist in the image repository then download and save locally
-//        DrishtiApplication.getCachedImageLoaderInstance().getImageByClientId(motherClient.getCaseId(), OpenSRPImageLoader.getStaticImageListener(kiview, R.mipmap.woman_placeholder, R.mipmap.woman_placeholder));
+//        DrishtiApplicatio n.getCachedImageLoaderInstance().getImageByClientId(motherClient.getCaseId(), OpenSRPImageLoader.getStaticImageListener(kiview, R.mipmap.woman_placeholder, R.mipmap.woman_placeholder));
 
         Support.setImagetoHolderFromUri(this, motherClient.getDetails().get("base_entity_id"), kiview, R.mipmap.woman_placeholder);
 

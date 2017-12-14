@@ -180,11 +180,10 @@ public class DetailANCActivity extends Activity {
 
         ImageView heart_bpm = (ImageView) findViewById(R.id.iv_icon_device);
         heart_bpm.setVisibility(View.VISIBLE);
-        heart_bpm.setOnClickListener(bpmListener);
 //        ImageView device = (ImageView) findViewById(R.id.iv_icon_device);
 //        device.setOnClickListener(bpmListener);
-
         ImageButton back = (ImageButton) findViewById(R.id.btn_back_to_home);
+
         back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -367,9 +366,6 @@ public class DetailANCActivity extends Activity {
             }
         });
 
-        tandaVitalTDDiastolik.setOnClickListener(bpmListener);
-        tandaVitalTDSistolik.setOnClickListener(bpmListener);
-
     }
 
     @Override
@@ -378,18 +374,6 @@ public class DetailANCActivity extends Activity {
         startActivity(new Intent(this, NativeKIANCSmartRegisterActivity.class));
         overridePendingTransition(0, 0);
     }
-
-    private View.OnClickListener bpmListener = new View.OnClickListener() {
-        @Override
-        public void onClick(View v) {
-//            Intent intent = new Intent(ANCDetailActivity.this, MainBPM.class);
-//            Intent intent = new Intent(ANCDetailActivity.this, MainActivity.class);
-//            Intent intent = new Intent(ANCDetailActivity.this, BpmMainActivity.class);
-//            startActivity(intent);
-
-            bpmAction();
-        }
-    };
 
     private void bpmAction() {
         Intent i = new Intent(DetailANCActivity.this, MainBPM.class);
