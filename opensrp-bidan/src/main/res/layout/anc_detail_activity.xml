@@ -34,7 +34,7 @@
             android:layout_marginTop="2dp"
             android:layout_weight="1.05"
             android:text="@string/basic_information"
-            android:textColor="@color/alert_urgent_red"
+            android:textColor="@color/accent_material_light"
             android:textSize="16sp"
             android:textStyle="bold" />
 

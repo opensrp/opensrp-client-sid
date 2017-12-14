@@ -13,6 +13,7 @@ import android.widget.Toast;
 
 import org.smartregister.Context;
 import org.smartregister.bidan.R;
+import org.smartregister.bidan.utils.Support;
 import org.smartregister.commonregistry.AllCommonsRepository;
 import org.smartregister.commonregistry.CommonPersonObject;
 import org.smartregister.commonregistry.CommonPersonObjectClient;
@@ -39,16 +40,6 @@ public class DetailChildActivity extends Activity {
     static String entityid;
     private static HashMap<String, String> hash;
     private boolean updateMode = false;
-
-    public static void setImagetoHolderFromUri(Activity activity, String file, ImageView view, int placeholder) {
-        view.setImageDrawable(activity.getResources().getDrawable(placeholder));
-        File externalFile = new File(file);
-        if (externalFile.exists()) {
-            Uri external = Uri.fromFile(externalFile);
-            view.setImageURI(external);
-        }
-
-    }
 
     @Bind(R.id.childdetailprofileview) ImageView childview;
 
@@ -127,8 +118,8 @@ public class DetailChildActivity extends Activity {
             //set profile image by passing the client id.If the image doesn't exist in the image repository then download and save locally
 //            DrishtiApplication.getCachedImageLoaderInstance().getImageByClientId(ancClient.getCaseId(), OpenSRPImageLoader.getStaticImageListener(childview, placeholderDrawable, placeholderDrawable));
 
-            DetailChildActivity.setImagetoHolderFromUri(this,
-                    DrishtiApplication.getAppDir() + File.separator + childclient.getDetails().get("base_entity_id") + ".JPEG",
+            Support.setImagetoHolderFromUri(this,
+                    childclient.getDetails().get("base_entity_id"),
                     childview, childclient.getDetails().get("gender").equals("female") ? R.drawable.child_girl_infant : R.drawable.child_boy_infant);
         }
 

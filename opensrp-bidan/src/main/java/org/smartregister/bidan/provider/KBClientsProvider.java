@@ -191,8 +191,8 @@ public class KBClientsProvider implements SmartRegisterCLientsProviderForCursorA
                 pc.getDetails().get("highRiskPregnancyOldMaternalAge"), hr_badge);
 
         Support.setImagetoHolderFromUri((Activity) context,
-                DrishtiApplication.getAppDir() + File.separator + pc.getDetails().get("base_entity_id") + ".JPEG",
-                        profilepic, R.mipmap.woman_placeholder);
+                pc.getDetails().get("base_entity_id"),
+                profilepic, R.mipmap.woman_placeholder);
 
         wife_name.setText(pc.getColumnmaps().get("namalengkap") != null ? pc.getColumnmaps().get("namalengkap") : "null");
         husband_name.setText(pc.getColumnmaps().get("namaSuami") != null ? pc.getColumnmaps().get("namaSuami") : "null");

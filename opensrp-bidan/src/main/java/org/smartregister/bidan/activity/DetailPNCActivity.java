@@ -232,7 +232,7 @@ public class DetailPNCActivity extends Activity {
 //        DrishtiApplication.getCachedImageLoaderInstance().getImageByClientId(ibuparent.getCaseId(), OpenSRPImageLoader.getStaticImageListener(kiview, R.mipmap.woman_placeholder, R.mipmap.woman_placeholder));
 
         Support.setImagetoHolderFromUri(this,
-                DrishtiApplication.getAppDir() + File.separator + pncclient.getDetails().get("base_entity_id") + ".JPEG",
+                pncclient.getDetails().get("base_entity_id"),
                 kiview, R.mipmap.woman_placeholder);
 
 //        if(ibuparent.getDetails().get("profilepic")!= null){

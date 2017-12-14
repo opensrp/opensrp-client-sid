@@ -17,13 +17,22 @@ repositories {
 
 apply plugin: 'com.android.application'
 
+// Local repo
+repositories {
+    flatDir {
+        dirs '../lib/bpm/opensrp-deviceinterface/build/outputs/aar'
+    }
+}
+
 dependencies {
     compile fileTree(include: ['commons-validator-1.6.jar'], dir: 'libs')
-    //    compile project(':opensrp-app')
     compile('org.smartregister:opensrp-client-core:1.1.1-SNAPSHOT@aar') {
         transitive = true
         exclude group: 'com.github.bmelnychuk', module: 'atv'
     }
+
+    compile(name: 'opensrp-deviceinterface-debug', ext:'aar')
+
     // FORM
     compile('org.smartregister:opensrp-client-enketo:1.0.0-SNAPSHOT@aar') {
         transitive = true
@@ -47,6 +56,7 @@ dependencies {
         exclude group: 'com.google.guava', module: 'guava'
     }
     testCompile 'org.apache.maven:maven-ant-tasks:2.1.3'
+//    compile project(':lib:bpm')
 }
 
 

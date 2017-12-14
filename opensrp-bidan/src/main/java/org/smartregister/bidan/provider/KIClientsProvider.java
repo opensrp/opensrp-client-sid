@@ -126,7 +126,7 @@ public class KIClientsProvider implements SmartRegisterCLientsProviderForCursorA
         //start profile image
         viewHolder.profilepic.setTag(R.id.entity_id, pc.getColumnmaps().get("_id"));//required when saving file to disk
         Support.setImagetoHolderFromUri((Activity) context,
-                DrishtiApplication.getAppDir() + File.separator + pc.getDetails().get("base_entity_id") + ".JPEG",
+                pc.getDetails().get("base_entity_id"),
                 viewHolder.profilepic, R.mipmap.woman_placeholder);
 //        viewHolder.profilepic.setTag(smartRegisterClient);
 

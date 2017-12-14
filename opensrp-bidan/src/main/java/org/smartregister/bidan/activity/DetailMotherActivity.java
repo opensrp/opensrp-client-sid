@@ -24,7 +24,7 @@ import java.util.Locale;
 import java.util.Map;
 
 import butterknife.Bind;
-import butterknife.OnClick;
+import butterknife.ButterKnife;
 
 import static org.smartregister.util.StringUtil.humanize;
 
@@ -112,11 +112,7 @@ public class DetailMotherActivity extends Activity {
     @Bind(R.id.txt_highRiskPostPartumDistosia) TextView highRiskPostPartumDistosia;
     @Bind(R.id.txt_highRiskHIVAIDS)TextView txt_highRiskHIVAIDS;
 
-    @Bind(org.smartregister.R.id.btn_back_to_home) ImageButton back;
-
-    @OnClick(R.id.btn_back_to_home) void sayHello() {
-//        ButterKnife.apply(headerViews, ALPHA_FADE);
-    }
+    @Bind(R.id.btn_back_to_home) ImageButton back;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -125,14 +121,16 @@ public class DetailMotherActivity extends Activity {
         Context context = Context.getInstance();
         setContentView(R.layout.ki_detail_activity);
 
+        ButterKnife.bind(this);
+
         String DetailStart = timer.format(new Date());
         Map<String, String> Detail = new HashMap<>();
         Detail.put("start", DetailStart);
 //        FlurryAgent.logEvent("KI_detail_view",Detail, true );
 
-        kiview = (ImageView) findViewById(R.id.tv_mother_detail_profile_view);
 
         //profile
+//        kiview = (ImageView) findViewById(R.id.tv_mother_detail_profile_view);
 //        TextView nama = (TextView) findViewById(R.id.txt_wife_name);
 //        TextView nik = (TextView) findViewById(R.id.txt_nik);
 //        TextView husband_name = (TextView) findViewById(R.id.txt_husband_name);
@@ -210,9 +208,7 @@ public class DetailMotherActivity extends Activity {
         //set profile image by passing the client id.If the image doesn't exist in the image repository then download and save locally
 //        DrishtiApplication.getCachedImageLoaderInstance().getImageByClientId(motherClient.getCaseId(), OpenSRPImageLoader.getStaticImageListener(kiview, R.mipmap.woman_placeholder, R.mipmap.woman_placeholder));
 
-        Support.setImagetoHolderFromUri(this,
-                DrishtiApplication.getAppDir() + File.separator + motherClient.getDetails().get("base_entity_id") + ".JPEG",
-                kiview, R.mipmap.woman_placeholder);
+        Support.setImagetoHolderFromUri(this, motherClient.getDetails().get("base_entity_id"), kiview, R.mipmap.woman_placeholder);
 
         nama.setText(String.format("%s%s", getResources().getString(R.string.name), motherClient.getColumnmaps().get("namalengkap") != null ? motherClient.getColumnmaps().get("namalengkap") : "-"));
         nik.setText(String.format("%s%s", getResources().getString(R.string.nik), motherClient.getDetails().get("nik") != null ? motherClient.getDetails().get("nik") : "-"));

@@ -16,6 +16,7 @@ import org.smartregister.bidan.R;
 import org.smartregister.bidan.utils.BidanFormUtils;
 import org.smartregister.bidan.utils.Support;
 import org.smartregister.commonregistry.CommonPersonObjectClient;
+import org.smartregister.deviceinterface.device.MainBPM;
 import org.smartregister.repository.DetailsRepository;
 import org.smartregister.view.activity.DrishtiApplication;
 
@@ -49,7 +50,6 @@ public class DetailANCActivity extends Activity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        Context context = Context.getInstance();
         setContentView(R.layout.anc_detail_activity);
 
         String DetailStart = timer.format(new Date());
@@ -57,7 +57,12 @@ public class DetailANCActivity extends Activity {
         Detail.put("start", DetailStart);
         //FlurryAgent.logEvent("ANC_detail_view",Detail, true );
 
+        // FR
+        Context context = Context.getInstance();
+
+
         final ImageView kiview = (ImageView)findViewById(R.id.tv_mother_detail_profile_view);
+
         //header
         TextView today = (TextView) findViewById(R.id.tv_detail_today);
 
@@ -173,8 +178,10 @@ public class DetailANCActivity extends Activity {
         TextView highRiskPostPartumDistosia = (TextView) findViewById(R.id.txt_highRiskPostPartumDistosia);
         TextView txt_highRiskHIVAIDS = (TextView) findViewById(R.id.txt_highRiskHIVAIDS);
 
-        ImageView heart_bpm = (ImageView) findViewById(R.id.iv_icon_device);
-        heart_bpm.setVisibility(View.VISIBLE);
+//        ImageView heart_bpm = (ImageView) findViewById(R.id.iv_icon_device);
+//        heart_bpm.setVisibility(View.VISIBLE);
+        ImageView device = (ImageView) findViewById(R.id.iv_icon_device);
+        device.setOnClickListener(bpmListener);
 
         ImageButton back = (ImageButton) findViewById(R.id.btn_back_to_home);
         back.setOnClickListener(new View.OnClickListener() {
@@ -189,9 +196,6 @@ public class DetailANCActivity extends Activity {
                 //FlurryAgent.logEvent("ANC_detail_view", Detail, true);
             }
         });
-
-        ImageView device = (ImageView) findViewById(R.id.iv_icon_device);
-        device.setOnClickListener(bpmListener);
 
         DetailsRepository detailsRepository = Context.getInstance().detailsRepository();
         detailsRepository.updateDetails(ancClient);
@@ -262,7 +266,7 @@ public class DetailANCActivity extends Activity {
             //set profile image by passing the client id.If the image doesn't exist in the image repository then download and save locally
 //            DrishtiApplication.getCachedImageLoaderInstance().getImageByClientId(ancClient.getCaseId(), OpenSRPImageLoader.getStaticImageListener(kiview, R.mipmap.woman_placeholder, R.mipmap.woman_placeholder));
             Support.setImagetoHolderFromUri(this,
-                    DrishtiApplication.getAppDir() + File.separator + ancClient.getDetails().get("base_entity_id") + ".JPEG",
+                    ancClient.getDetails().get("base_entity_id"),
                     kiview, R.mipmap.woman_placeholder);
         }
 
@@ -382,15 +386,15 @@ public class DetailANCActivity extends Activity {
 //            Intent intent = new Intent(ANCDetailActivity.this, BpmMainActivity.class);
 //            startActivity(intent);
 
-//            bpmAction();
+            bpmAction();
         }
     };
 
     private void bpmAction() {
-//        Intent i = new Intent(DetailANCActivity.this, MainBPM.class);
+        Intent i = new Intent(DetailANCActivity.this, MainBPM.class);
 //        Intent i = new Intent(ANCDetailActivity.this, TestBPM.class);
-//        bpm_timer = new SimpleDateFormat("hh:mm:ss.SS", Locale.ENGLISH);
-//        startActivityForResult(i, 2);
+        bpm_timer = new SimpleDateFormat("hh:mm:ss.SS", Locale.ENGLISH);
+        startActivityForResult(i, 2);
     }
 
     @Override

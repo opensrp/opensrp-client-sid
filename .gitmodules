@@ -1,0 +1,3 @@
+[submodule "lib/bpm"]
+	path = lib/bpm
+	url = git@github.com:sidthrive/opensrp-device.git

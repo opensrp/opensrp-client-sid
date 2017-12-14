@@ -11,19 +11,17 @@ import android.widget.TextView;
 import org.smartregister.Context;
 import org.smartregister.bidan.R;
 //import org.smartregister.bidan.activity.v1.NativeKBSmartRegisterActivity;
+import org.smartregister.bidan.utils.Support;
 import org.smartregister.commonregistry.AllCommonsRepository;
 import org.smartregister.commonregistry.CommonPersonObject;
 import org.smartregister.commonregistry.CommonPersonObjectClient;
 import org.smartregister.repository.DetailsRepository;
-import org.smartregister.view.activity.DrishtiApplication;
 
-import java.io.File;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
-import static org.smartregister.bidan.utils.Support.setImagetoHolderFromUri;
 import static org.smartregister.util.StringUtil.humanize;
 
 /**
@@ -145,8 +143,8 @@ public class DetailFPActivity extends Activity {
         if (kiclient.getCaseId() != null) {//image already in local storage most likey ):
             //set profile image by passing the client id.If the image doesn't exist in the image repository then download and save locally
 //            DrishtiApplication.getCachedImageLoaderInstance().getImageByClientId(kiclient.getCaseId(), OpenSRPImageLoader.getStaticImageListener(kiview, R.mipmap.woman_placeholder, R.mipmap.woman_placeholder));
-            setImagetoHolderFromUri(this,
-                    DrishtiApplication.getAppDir() + File.separator + kiclient.getDetails().get("base_entity_id") + ".JPEG",
+            Support.setImagetoHolderFromUri(this,
+                    kiclient.getDetails().get("base_entity_id"),
                     kiview, R.mipmap.woman_placeholder);
         }
 

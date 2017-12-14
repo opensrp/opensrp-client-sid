@@ -203,12 +203,9 @@ public class KIPNCClientsProvider implements SmartRegisterCLientsProviderForCurs
 //        }
 
         Support.setImagetoHolderFromUri((Activity) context,
-                DrishtiApplication.getAppDir() + File.separator + pc.getDetails().get("base_entity_id") + ".JPEG",
+                pc.getDetails().get("base_entity_id"),
                 viewHolder.profilepic, R.mipmap.woman_placeholder);
-
-
         //end profile image
-
 
         convertView.setLayoutParams(clientViewLayoutParams);
     }
