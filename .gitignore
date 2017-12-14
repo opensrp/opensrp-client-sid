@@ -81,4 +81,5 @@ opensrp-path/
 /opensrp-vaksinator/
 opensrp-vaksinator/
 AllConstants.java
+lib/bpm
 lib/
