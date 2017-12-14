@@ -237,6 +237,7 @@ public class BaseRegisterActivity extends SecuredNativeSmartRegisterActivity imp
                 String data = null;
                 //check if there is previously saved data for the form
                 data = getPreviouslySavedDataForForm(formName, metaData, entityId);
+
                 if (data == null){
                     data = BidanFormUtils.getInstance(getApplicationContext()).generateXMLInputForFormWithEntityId(entityId, formName, metaData);
                 }

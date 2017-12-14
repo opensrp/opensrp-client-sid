@@ -401,17 +401,14 @@ public class BidanFormUtils {
             }
 
             // use the form_definition.json to get the form mappings
-            String formDefinitionJson = readFileFromAssetsFolder(
-                    "www/form/" + formName + "/form_definition.json");
+            String formDefinitionJson = readFileFromAssetsFolder("www/form/" + formName + "/form_definition.json");
             JSONObject formDefinition = new JSONObject(formDefinitionJson);
+
             String ec_bind_path = formDefinition.getJSONObject("form").getString("ec_bind_type");
 
-            String sql =
-                    "select * from " + ec_bind_path + " where base_entity_id='" + entityId + "'";
-            Map<String, String> dbEntity = theAppContext.formDataRepository().
-                    getMapFromSQLQuery(sql);
-            Map<String, String> detailsMap = theAppContext.detailsRepository().
-                    getAllDetailsForClient(entityId);
+            String sql = "SELECT * FROM " + ec_bind_path + " WHERE base_entity_id='" + entityId + "'";
+            Map<String, String> dbEntity = theAppContext.formDataRepository().getMapFromSQLQuery(sql);
+            Map<String, String> detailsMap = theAppContext.detailsRepository().getAllDetailsForClient(entityId);
             detailsMap.putAll(dbEntity);
 
             JSONObject entityJson = new JSONObject();

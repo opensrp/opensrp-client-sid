@@ -16,9 +16,7 @@ import org.smartregister.bidan.R;
 import org.smartregister.bidan.utils.BidanFormUtils;
 import org.smartregister.bidan.utils.Support;
 import org.smartregister.commonregistry.CommonPersonObjectClient;
-import org.smartregister.deviceinterface.device.MainBPM;
 import org.smartregister.repository.DetailsRepository;
-import org.smartregister.view.activity.DrishtiApplication;
 
 import java.io.File;
 import java.text.DateFormat;
@@ -373,13 +371,6 @@ public class DetailANCActivity extends Activity {
         finish();
         startActivity(new Intent(this, NativeKIANCSmartRegisterActivity.class));
         overridePendingTransition(0, 0);
-    }
-
-    private void bpmAction() {
-        Intent i = new Intent(DetailANCActivity.this, MainBPM.class);
-//        Intent i = new Intent(ANCDetailActivity.this, TestBPM.class);
-        bpm_timer = new SimpleDateFormat("hh:mm:ss.SS", Locale.ENGLISH);
-        startActivityForResult(i, 2);
     }
 
     @Override
