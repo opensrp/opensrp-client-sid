@@ -115,7 +115,7 @@
         android:layout_height="fill_parent"
         android:src="@color/smart_register_client_divider_color" />
 
-    <include layout="@layout/smart_register_client_children_layout_ki" />
+    <include layout="@layout/smart_register_client_anak_layout_ki" />
 
     <ImageView
         android:layout_width="@dimen/smart_register_client_divider_height"

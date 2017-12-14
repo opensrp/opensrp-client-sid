@@ -6,7 +6,7 @@
     android:background="@color/client_list_header_dark_grey"
     android:orientation="vertical">
 
-    <include layout="@layout/motherdetail_nav_bar" />
+    <include layout="@layout/ki_detail_nav_bar" />
 
     <ImageView
         android:id="@+id/imageView5"

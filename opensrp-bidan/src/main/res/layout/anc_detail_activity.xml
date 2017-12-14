@@ -6,7 +6,7 @@
     android:background="@color/client_list_header_dark_grey"
     android:orientation="vertical">
 
-    <include layout="@layout/motherdetail_nav_bar" />
+    <include layout="@layout/ki_detail_nav_bar" />
 
     <ImageView
         android:id="@+id/imageView5"
@@ -114,7 +114,7 @@
 
     <include
         android:id="@+id/id1"
-        layout="@layout/anc_detail_data_layout" />
+        layout="@layout/anc_detail_layout" />
 
     <include
         android:id="@+id/id2"
@@ -123,6 +123,6 @@
 
     <include
         android:id="@+id/id3"
-        layout="@layout/birthplan_detail_data_layout"
+        layout="@layout/anc_birthplan_detail_layout"
         android:visibility="gone" />
 </LinearLayout>

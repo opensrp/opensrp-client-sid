@@ -178,10 +178,11 @@ public class DetailANCActivity extends Activity {
         TextView highRiskPostPartumDistosia = (TextView) findViewById(R.id.txt_highRiskPostPartumDistosia);
         TextView txt_highRiskHIVAIDS = (TextView) findViewById(R.id.txt_highRiskHIVAIDS);
 
-//        ImageView heart_bpm = (ImageView) findViewById(R.id.iv_icon_device);
-//        heart_bpm.setVisibility(View.VISIBLE);
-        ImageView device = (ImageView) findViewById(R.id.iv_icon_device);
-        device.setOnClickListener(bpmListener);
+        ImageView heart_bpm = (ImageView) findViewById(R.id.iv_icon_device);
+        heart_bpm.setVisibility(View.VISIBLE);
+        heart_bpm.setOnClickListener(bpmListener);
+//        ImageView device = (ImageView) findViewById(R.id.iv_icon_device);
+//        device.setOnClickListener(bpmListener);
 
         ImageButton back = (ImageButton) findViewById(R.id.btn_back_to_home);
         back.setOnClickListener(new View.OnClickListener() {

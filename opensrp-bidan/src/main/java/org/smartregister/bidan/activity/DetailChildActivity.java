@@ -2,7 +2,6 @@ package org.smartregister.bidan.activity;
 
 import android.app.Activity;
 import android.content.Intent;
-import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -18,9 +17,7 @@ import org.smartregister.commonregistry.AllCommonsRepository;
 import org.smartregister.commonregistry.CommonPersonObject;
 import org.smartregister.commonregistry.CommonPersonObjectClient;
 import org.smartregister.repository.DetailsRepository;
-import org.smartregister.view.activity.DrishtiApplication;
 
-import java.io.File;
 import java.util.HashMap;
 
 import butterknife.Bind;
@@ -47,7 +44,7 @@ public class DetailChildActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         Context context = Context.getInstance();
-        setContentView(R.layout.child_detail_activity);
+        setContentView(R.layout.anak_detail_activity);
 
         final ImageView childview = (ImageView)findViewById(R.id.childdetailprofileview);
         //header
