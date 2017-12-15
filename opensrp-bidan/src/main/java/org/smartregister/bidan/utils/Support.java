@@ -215,4 +215,13 @@ public class Support {
 
     }
 
+
+    public void checkLastVisit(Context context, String date, String visitNumber, String Status, TextView visitStatus, TextView visitDate, TextView VisitNumber) {
+        String visit_date = date != null ? context.getString(R.string.date_visit_title) + " " + date : "";
+
+        VisitNumber.setText(visitNumber);
+        visitDate.setText(visit_date);
+        visitStatus.setText(Status);
+    }
+
 }

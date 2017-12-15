@@ -41,13 +41,9 @@ import static org.smartregister.bidan.utils.BidanConstants.CHILD_TABLE_NAME;
 //import com.flurry.android.FlurryAgent;
 //import org.smartregister.bidan.lib.FlurryFacade;
 
-/**
- * Created by koros on 10/29/15.
- */
 public class AnakSmartRegisterFragment extends BaseSmartRegisterFragment {
 
     private static final String TAG = AnakSmartRegisterFragment.class.getName();
-    //    WD
     public static String criteria;
     private final ClientActionHandler clientActionHandler = new ClientActionHandler();
 
@@ -156,7 +152,7 @@ public class AnakSmartRegisterFragment extends BaseSmartRegisterFragment {
         return "";
     }
 
-    public void initializeQueries(String s){
+    public void initializeQueries(String s) {
         String tableName = CHILD_TABLE_NAME;
         ChildClientsProvider childClientsProvider = new ChildClientsProvider(getActivity(),
                 clientActionHandler, context().alertService(), context().commonrepository(tableName));
@@ -168,7 +164,7 @@ public class AnakSmartRegisterFragment extends BaseSmartRegisterFragment {
         countqueryBuilder.SelectInitiateMainTableCounts(tableName);
         countqueryBuilder.customJoin("LEFT JOIN ec_ibu ON ec_ibu.id = ec_anak.relational_id");
 
-        if(s != null && !s.isEmpty()){
+        if (s != null && !s.isEmpty()) {
             Log.e(TAG, "initializeQueries with ID = " + s);
             mainCondition = "is_closed = 0 AND object_id LIKE '%" + s + "%'";
 
@@ -195,7 +191,7 @@ public class AnakSmartRegisterFragment extends BaseSmartRegisterFragment {
 
 //        mainSelect = queryBuilder.mainCondition("ec_anak.is_closed = 0 and relationalid != ''");
         mainSelect = queryBuilder.mainCondition(mainCondition);
-        if(s != null && !s.isEmpty()){
+        if (s != null && !s.isEmpty()) {
             Log.e(TAG, "initializeQueries with ID = " + s);
             mainCondition = "is_closed = 0 AND object_id LIKE '%" + s + "%'";
 
@@ -261,21 +257,7 @@ public class AnakSmartRegisterFragment extends BaseSmartRegisterFragment {
         searchView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-//                if (SmartShutterActivity.isDevCompat) {
-//                    CharSequence selections[] = new CharSequence[]{"Name", "Photo"};
-//                    final AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
-//                    builder.setTitle("Please Choose one, Search by");
-//                    builder.setItems(selections, new DialogInterface.OnClickListener() {
-//                        @Override
-//                        public void onClick(DialogInterface dialog, int opt) {
-//                            if (opt == 0) searchTextChangeListener("");
-//                            else getFacialRecord(view);
-//                        }
-//                    });
-//                    builder.show();
-//                } else  {
-                    searchTextChangeListener("");
-//                }
+                searchTextChangeListener("");
             }
         });
 
@@ -317,7 +299,7 @@ public class AnakSmartRegisterFragment extends BaseSmartRegisterFragment {
     }
 
     @Override
-    public void onActivityResult(int requestCode, int resultCode, Intent data){
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
 
         Intent myIntent = new Intent(getActivity(), NativeKIAnakSmartRegisterActivity.class);

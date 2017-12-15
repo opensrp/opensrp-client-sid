@@ -14,10 +14,6 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import org.apache.commons.lang3.StringUtils;
-import org.joda.time.LocalDate;
-import org.joda.time.Months;
-import org.joda.time.format.DateTimeFormat;
-import org.joda.time.format.DateTimeFormatter;
 import org.smartregister.bidan.R;
 import org.smartregister.bidan.utils.AllConstantsINA;
 import org.smartregister.bidan.utils.Support;
@@ -28,7 +24,6 @@ import org.smartregister.commonregistry.CommonPersonObjectController;
 import org.smartregister.cursoradapter.SmartRegisterCLientsProviderForCursorAdapter;
 import org.smartregister.repository.DetailsRepository;
 import org.smartregister.service.AlertService;
-import org.smartregister.view.activity.DrishtiApplication;
 import org.smartregister.view.contract.SmartRegisterClient;
 import org.smartregister.view.contract.SmartRegisterClients;
 import org.smartregister.view.dialog.FilterOption;
@@ -36,12 +31,10 @@ import org.smartregister.view.dialog.ServiceModeOption;
 import org.smartregister.view.dialog.SortOption;
 import org.smartregister.view.viewholder.OnClickFormLauncher;
 
-import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
 import static android.view.ViewGroup.LayoutParams.MATCH_PARENT;
-import static org.joda.time.LocalDateTime.parse;
 
 /**
  * Created by Dimas Ciputra on 2/16/15.
@@ -55,6 +48,7 @@ public class KIClientsProvider implements SmartRegisterCLientsProviderForCursorA
     private final AbsListView.LayoutParams clientViewLayoutParams;
     protected CommonPersonObjectController controller;
     AlertService alertService;
+    Support support = new Support();
     private Drawable iconPencilDrawable;
 
     public KIClientsProvider(Context context, View.OnClickListener onClickListener, AlertService alertService) {
@@ -166,10 +160,11 @@ public class KIClientsProvider implements SmartRegisterCLientsProviderForCursorA
             if (anc_isclosed == 0) {
                 detailsRepository.updateDetails(ibuparent);
                 if (pc.getDetails().get("htp") == null) {
-                    checkMonth(pc.getDetails().get("htp"), viewHolder.edd_due);
+
+                    Support.checkMonth(context, pc.getDetails().get("htp"), viewHolder.edd_due);
 
                 }
-                checkLastVisit(pc.getDetails().get("ancDate"), context.getString(R.string.anc_ke) + ": " + pc.getDetails().get("ancKe"), context.getString(R.string.service_anc),
+                support.checkLastVisit(context, pc.getDetails().get("ancDate"), context.getString(R.string.anc_ke) + ": " + pc.getDetails().get("ancKe"), context.getString(R.string.service_anc),
                         viewHolder.anc_status_layout, viewHolder.date_status, viewHolder.visit_status);
             }
             //if anc is 1(closed) set status to pnc
@@ -184,7 +179,7 @@ public class KIClientsProvider implements SmartRegisterCLientsProviderForCursorA
                         viewHolder.edd_due.setTextColor(context.getResources().getColor(R.color.alert_complete_green));
                         String deliver = context.getString(R.string.delivered);
                         viewHolder.edd_due.setText(deliver);
-                        checkLastVisit(pc.getDetails().get("PNCDate"), context.getString(R.string.pnc_ke) + " " + pc.getDetails().get("hariKeKF"), context.getString(R.string.service_pnc),
+                        support.checkLastVisit(context, pc.getDetails().get("PNCDate"), context.getString(R.string.pnc_ke) + " " + pc.getDetails().get("hariKeKF"), context.getString(R.string.service_pnc),
                                 viewHolder.anc_status_layout, viewHolder.date_status, viewHolder.visit_status);
                     }
                 }
@@ -193,7 +188,7 @@ public class KIClientsProvider implements SmartRegisterCLientsProviderForCursorA
         }
         //last check if mother in PF (KB) service
         if (!StringUtils.isNumeric(pc.getDetails().get("jenisKontrasepsi"))) {
-            checkLastVisit(pc.getDetails().get("tanggalkunjungan"), context.getString(R.string.fp_methods) + ": " + pc.getDetails().get("jenisKontrasepsi"), context.getString(R.string.service_fp),
+            support.checkLastVisit(context, pc.getDetails().get("tanggalkunjungan"), context.getString(R.string.fp_methods) + ": " + pc.getDetails().get("jenisKontrasepsi"), context.getString(R.string.service_fp),
                     viewHolder.anc_status_layout, viewHolder.date_status, viewHolder.visit_status);
         }
 
@@ -281,49 +276,6 @@ public class KIClientsProvider implements SmartRegisterCLientsProviderForCursorA
 
             riskview.setVisibility(View.VISIBLE);
         }
-    }
-
-    public void checkLastVisit(String date, String visitNumber, String Status, TextView visitStatus, TextView visitDate, TextView VisitNumber) {
-        String visit_stat = "";
-        String visit_date = date != null ? context.getString(R.string.date_visit_title) + " " + date : "";
-
-        VisitNumber.setText(visitNumber);
-        visitDate.setText(visit_date);
-        visitStatus.setText(Status);
-    }
-
-    public void checkMonth(String htp, TextView TextMonth) {
-        String edd = htp;
-        String _edd = edd;
-        String _dueEdd = "";
-        DateTimeFormatter formatter = DateTimeFormat.forPattern("yyyy-MM-dd");
-
-        if (StringUtils.isNotBlank(htp) && !htp.equals("delivered")) {
-
-            LocalDate date = parse(_edd, formatter).toLocalDate();
-            LocalDate dateNow = LocalDate.now();
-            date = date.withDayOfMonth(1);
-            dateNow = dateNow.withDayOfMonth(1);
-            int months = Months.monthsBetween(dateNow, date).getMonths();
-            if (months >= 1) {
-                TextMonth.setTextColor(context.getResources().getColor(R.color.alert_in_progress_blue));
-                _dueEdd = "" + months + " " + context.getString(R.string.months_away);
-            } else if (months == 0) {
-                TextMonth.setTextColor(context.getResources().getColor(R.color.light_blue));
-                _dueEdd = context.getString(R.string.this_month);
-            } else if (months < 0) {
-                TextMonth.setTextColor(context.getResources().getColor(R.color.alert_urgent_red));
-                _dueEdd = context.getString(R.string.edd_passed);
-            }
-            TextMonth.setText(_dueEdd);
-        }/*else if(htp.equals("delivered")){
-            TextMonth.setTextColor(context.getResources().getColor(R.color.alert_complete_green));
-            _dueEdd = context.getString(R.string.delivered);
-            TextMonth.setText(_dueEdd);
-        }*/ else {
-            TextMonth.setText("-");
-        }
-
     }
 
 

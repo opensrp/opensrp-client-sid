@@ -197,15 +197,15 @@ public class ANCSmartRegisterFragment extends BaseSmartRegisterFragment {
     public void initializeQueries(String s) {
         try {
 
-            KIANCClientsProvider kiscp = new KIANCClientsProvider(getActivity(),clientActionHandler,context().alertService());
-            clientAdapter = new SmartRegisterPaginatedCursorAdapter(getActivity(), null, kiscp, new CommonRepository("ec_ibu",new String []{"ec_ibu.is_closed", "ec_kartu_ibu.namalengkap", "ec_kartu_ibu.namaSuami"}));
+            KIANCClientsProvider kiscp = new KIANCClientsProvider(getActivity(), clientActionHandler, context().alertService());
+            clientAdapter = new SmartRegisterPaginatedCursorAdapter(getActivity(), null, kiscp, new CommonRepository("ec_ibu", new String[]{"ec_ibu.is_closed", "ec_kartu_ibu.namalengkap", "ec_kartu_ibu.namaSuami"}));
             clientsView.setAdapter(clientAdapter);
 
             setTablename("ec_ibu");
             SmartRegisterQueryBuilder countqueryBuilder = new SmartRegisterQueryBuilder();
             countqueryBuilder.SelectInitiateMainTableCounts("ec_ibu");
 
-            if(s != null && !s.isEmpty()){
+            if (s != null && !s.isEmpty()) {
                 Log.e(TAG, "initializeQueries with ID = " + s);
                 mainCondition = "is_closed = 0 AND namalengkap != '' AND object_id LIKE '%" + s + "%'";
 
@@ -220,7 +220,7 @@ public class ANCSmartRegisterFragment extends BaseSmartRegisterFragment {
 
             SmartRegisterQueryBuilder queryBuilder = new SmartRegisterQueryBuilder();
 
-            queryBuilder.SelectInitiateMainTable("ec_ibu", new String[]{"ec_ibu.relationalid","ec_ibu.is_closed", "ec_ibu.details",  "ec_kartu_ibu.namalengkap","ec_kartu_ibu.namaSuami","imagelist.imageid"});
+            queryBuilder.SelectInitiateMainTable("ec_ibu", new String[]{"ec_ibu.relationalid", "ec_ibu.is_closed", "ec_ibu.details", "ec_kartu_ibu.namalengkap", "ec_kartu_ibu.namaSuami", "imagelist.imageid"});
             queryBuilder.customJoin("LEFT JOIN ec_kartu_ibu on ec_kartu_ibu.id = ec_ibu.id LEFT JOIN ImageList imagelist ON ec_ibu.id=imagelist.entityID");
             mainSelect = queryBuilder.mainCondition(mainCondition);
             Sortqueries = KiSortByNameAZ();
@@ -298,45 +298,12 @@ public class ANCSmartRegisterFragment extends BaseSmartRegisterFragment {
         searchView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-//                if (SmartShutterActivity.isDevCompat) {
-//                    CharSequence selections[] = new CharSequence[]{"Name", "Photo"};
-//                    final AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
-//                    builder.setTitle("Please Choose one, Search by");
-//                    builder.setItems(selections, new DialogInterface.OnClickListener() {
-//                        @Override
-//                        public void onClick(DialogInterface dialog, int opt) {
-//                            if (opt == 0) searchTextChangeListener("");
-//                            else getFacialRecord(view);
-//                        }
-//                    });
-//                    builder.show();
-//                } else {
                 searchTextChangeListener("");
-//                }
             }
         });
 
         searchCancelView = view.findViewById(org.smartregister.R.id.btn_search_cancel);
         searchCancelView.setOnClickListener(searchCancelHandler);
-    }
-
-    public void getFacialRecord(View view) {
-
-//        FlurryAgent.logEvent(TAG + "search_by_face", true);
-        Log.d(TAG, "getFacialRecord: ");
-//        Log.e(TAG, "getFacialRecord: ");
-
-//        sdf = new SimpleDateFormat("hh:mm:ss.SS", Locale.ENGLISH);
-//        String face_start = sdf.format(date);
-//        FS.put("face_start", face_start);
-
-//        SmartShutterActivity.kidetail = (CommonPersonObjectClient) view.getTag();
-//        FlurryAgent.logEvent(TAG + "search_by_face", FS, true);
-//        Intent intent = new Intent(getActivity(), SmartShutterActivity.class);
-//        intent.putExtra("org.sid.sidface.ImageConfirmation.origin", TAG);
-//        intent.putExtra("org.sid.sidface.ImageConfirmation.identify", true);
-//        intent.putExtra("org.sid.sidface.ImageConfirmation.kidetail", (Parcelable) SmartShutterActivity.kidetail);
-//        startActivityForResult(intent, 2);
     }
 
     public void searchTextChangeListener(String s) {
