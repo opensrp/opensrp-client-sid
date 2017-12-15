@@ -87,7 +87,7 @@ android {
 repositories {
 //    mavenCentral()
     flatDir {
-        dirs 'libs'
+        dirs '../lib/facialrecognition/opensrp-facial-recognition/build/outputs/aar'
     }
 }
 
