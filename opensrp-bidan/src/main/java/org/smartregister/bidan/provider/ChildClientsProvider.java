@@ -52,6 +52,13 @@ public class ChildClientsProvider implements SmartRegisterCLientsProviderForCurs
     private final AbsListView.LayoutParams clientViewLayoutParams;
     private final CommonRepository commonRepository;
     private Drawable iconPencilDrawable;
+    private String str_firstName;
+    private String str_motherName;
+    private String str_birthDate;
+    private String str_birthPlace;
+    private String str_childAddress;
+    private String str_childAge;
+
     private String str_current_weight;
     private String str_visit_date;
     private String str_current_height;
@@ -69,15 +76,15 @@ public class ChildClientsProvider implements SmartRegisterCLientsProviderForCurs
         clientViewLayoutParams = new AbsListView.LayoutParams(MATCH_PARENT, (int) context.getResources().getDimension(org.smartregister.R.dimen.list_item_height));
     }
 
-    public static void setPhoto(Activity activity, String file, ImageView view, int placeholder) {
-        view.setImageDrawable(activity.getResources().getDrawable(placeholder));
-        File externalFile = new File(file);
-        if (externalFile.exists()) {
-            Uri external = Uri.fromFile(externalFile);
-            view.setImageURI(external);
-        }
-
-    }
+//    public static void setPhoto(Activity activity, String file, ImageView view, int placeholder) {
+//        view.setImageDrawable(activity.getResources().getDrawable(placeholder));
+//        File externalFile = new File(file);
+//        if (externalFile.exists()) {
+//            Uri external = Uri.fromFile(externalFile);
+//            view.setImageURI(external);
+//        }
+//
+//    }
 
     @Override
     public void getView(Cursor cursor, SmartRegisterClient client, final View convertView){
@@ -95,9 +102,6 @@ public class ChildClientsProvider implements SmartRegisterCLientsProviderForCurs
         AllCommonsRepository kirep = org.smartregister.Context.getInstance().allCommonsRepositoryobjects("ec_kartu_ibu");
         final CommonPersonObject kiparent = kirep.findByCaseID(relationalId);
 
-        String motherName = null;
-        String childAddress = null;
-        String birthPlace = null;
 
         AllCommonsRepository iburep = org.smartregister.Context.getInstance().allCommonsRepositoryobjects("ec_ibu");
         final CommonPersonObject ibuparent = iburep.findByCaseID(childobject.getColumnmaps().get("relational_id"));
@@ -108,50 +112,51 @@ public class ChildClientsProvider implements SmartRegisterCLientsProviderForCurs
         convertView.findViewById(R.id.profile_info_layout).setTag(client);
         convertView.findViewById(R.id.profile_info_layout).setOnClickListener(onClickListener);
 
-        String firstName = getValue(pc.getColumnmaps(), "namaBayi", true);
-        String birthDate = getValue(pc.getColumnmaps(), "tanggalLahirAnak", true);
+        str_firstName = getValue(pc.getColumnmaps(), "namaBayi", true);
+        str_birthDate = getValue(pc.getColumnmaps(), "tanggalLahirAnak", true);
 
-        if (birthDate.length() > 10)
-            birthDate = birthDate.substring(0, Support.getColumnmaps(pc, "tanggalLahirAnak").indexOf("T"));
-        String age = monthRangeToToday(birthDate) + " " + context.getString(R.string.str_month);
+        if (str_birthDate.length() > 10)
+            str_birthDate = str_birthDate.substring(0, Support.getColumnmaps(pc, "tanggalLahirAnak").indexOf("T"));
+
+        str_childAge = monthRangeToToday(str_birthDate) + " " + context.getString(R.string.str_month);
 
 
         if (ibuparent != null) {
             detailsRepository.updateDetails(ibuparent);
-            birthPlace = ibuparent.getDetails().get("tempatBersalin") != null ? ibuparent.getDetails().get("tempatBersalin") : "";
+            str_birthPlace = ibuparent.getDetails().get("tempatBersalin") != null ? ibuparent.getDetails().get("tempatBersalin") : "";
         }
 
         if(kiparent != null) {
             detailsRepository.updateDetails(kiparent);
-            motherName = kiparent.getDetails().get("namalengkap");
-            childAddress = kiparent.getDetails().get("address1");
+            str_motherName = kiparent.getDetails().get("namalengkap");
+            str_childAddress = kiparent.getDetails().get("address1");
         }
 
         //---------- Child Basic Information
-        viewHolder.profilepic = (ImageView) convertView.findViewById(R.id.iv_profile);
+        // Photo, Name, Mother, Father, Address
+        viewHolder.profilepic = (ImageView) convertView.findViewById(R.id.iv_child_photo);
         viewHolder.follow_up = (ImageButton) convertView.findViewById(R.id.ib_btn_edit);
         viewHolder.profilepic.setImageDrawable(context.getResources().getDrawable(R.mipmap.child_boy));
 
         if (pc.getDetails().get("gender") != null) {
-            setPhoto((Activity) context,
-                    DrishtiApplication.getAppDir() + File.separator + pc.getDetails().get("base_entity_id") + ".JPEG",
+            Support.setImagetoHolderFromUri((Activity) context, pc.getDetails().get("base_entity_id") ,
                     viewHolder.profilepic, pc.getDetails().get("gender").equals("female") ? R.drawable.child_girl_infant : R.drawable.child_boy_infant);
         } else {
             Log.e(TAG, "getView: Gender is NOT SET");
         }
 
-        fillValue((TextView) convertView.findViewById(R.id.txt_child_name), firstName);
-        fillValue((TextView) convertView.findViewById(R.id.txt_mother_name), motherName);
-        fillValue((TextView) convertView.findViewById(R.id.txt_child_age), age);
-        fillValue((TextView) convertView.findViewById(R.id.tv_village_name), childAddress);
+        fillValue((TextView) convertView.findViewById(R.id.tv_child_name), str_firstName);
+        fillValue((TextView) convertView.findViewById(R.id.tv_mother_name), str_motherName);
+        fillValue((TextView) convertView.findViewById(R.id.tv_child_age), str_childAge);
+        fillValue((TextView) convertView.findViewById(R.id.tv_village_name), str_childAddress);
 
         //----------Child Deliver Information
 
         String childBirthWeight = pc.getDetails().get("beratLahir") != null ? pc.getDetails().get("beratLahir") : "";
         String childBirthType = "";
 
-        fillValue((TextView) convertView.findViewById(R.id.tempat_lahir), birthPlace);
-        fillValue((TextView) convertView.findViewById(R.id.anak_register_dob), birthDate);
+        fillValue((TextView) convertView.findViewById(R.id.tempat_lahir), str_birthPlace);
+        fillValue((TextView) convertView.findViewById(R.id.anak_register_dob), str_birthDate);
         fillValue((TextView) convertView.findViewById(R.id.berat_lahir), childBirthWeight);
         fillValue((TextView) convertView.findViewById(R.id.tipe_lahir), childBirthType);
 
@@ -207,13 +212,6 @@ public class ChildClientsProvider implements SmartRegisterCLientsProviderForCurs
         fillValue((TextView) convertView.findViewById(R.id.txt_status_gizi), context.getString(R.string.nutrition) + gizi);
 
     }
-
-//    @Override
-//    public void getView(Cursor cursor, SmartRegisterClient client, final View convertView) {
-//
-//        getView(client, convertView);
-//
-//    }
 
     void checkVisibility(String immunization1, String immunization2, ImageView no, ImageView yes) {
         if (immunization1 != null || immunization2 != null) {

@@ -1,6 +1,6 @@
 <model>
   <instance>
-    <Kartu_ibu encounter_type="Edit Identitas Ibu" id="Kartu_ibu_edit" version="201511260619">
+    <Kartu_ibu encounter_type="Identitas Ibu" id="Kartu_ibu" version="201511260619">
       <formhub>
         <uuid/>
       </formhub>

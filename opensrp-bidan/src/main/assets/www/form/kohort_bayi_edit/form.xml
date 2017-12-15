@@ -1,7 +1,7 @@
 <form autocomplete="off" class="or clearfix" id="tambah_bayi" novalidate="novalidate">
     <!--This form was created by transforming a OpenRosa-flavored (X)Form using an XSLT sheet created by Enketo LLC.-->
     <section class="form-logo"></section>
-    <h3 id="form-title">Edit Biodata Bayi</h3>
+    <h3 id="form-title">Tambah Bayi</h3>
     <select data-default-lang="Bahasa" id="form-languages">
         <option value="Bahasa">Bahasa</option>
         <option value="en">English</option>

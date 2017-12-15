@@ -1,7 +1,6 @@
 {
   "form_data_definition_version": "1",
   "form": {
-    "name" : "Kartu_ibu_edit",
     "bind_type": "kartu_ibu",
     "default_bind_path": "/model/instance/Kartu_ibu/",
     "fields": [
@@ -156,18 +155,15 @@
       },
       {
         "name": "highRiskPregnancyYoungMaternalAge",
-        "bind": "/model/instance/Kartu_ibu/High_Risk_Pregnancy_Young_maternal_age",
-        "shouldLoadValue" : true
+        "bind": "/model/instance/Kartu_ibu/High_Risk_Pregnancy_Young_maternal_age"
       },
       {
         "name": "highRiskPregnancyOldMaternalAge",
-        "bind": "/model/instance/Kartu_ibu/High_Risk_Pregnancy_Old_maternal_age",
-        "shouldLoadValue" : true
+        "bind": "/model/instance/Kartu_ibu/High_Risk_Pregnancy_Old_maternal_age"
       },
       {
         "name": "isOutOfArea",
-        "value": "false",
-        "shouldLoadValue" : true
+        "value": "false"
       },
       {
         "name": "isClosed",

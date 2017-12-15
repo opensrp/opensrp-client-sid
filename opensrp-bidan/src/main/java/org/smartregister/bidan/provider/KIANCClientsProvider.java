@@ -4,8 +4,8 @@ import android.app.Activity;
 import android.content.Context;
 import android.database.Cursor;
 import android.graphics.drawable.Drawable;
-import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.AbsListView;
 import android.widget.ImageButton;
 import android.widget.ImageView;
@@ -20,15 +20,9 @@ import org.smartregister.commonregistry.AllCommonsRepository;
 import org.smartregister.commonregistry.CommonPersonObject;
 import org.smartregister.commonregistry.CommonPersonObjectClient;
 import org.smartregister.commonregistry.CommonPersonObjectController;
-import org.smartregister.cursoradapter.SmartRegisterCLientsProviderForCursorAdapter;
 import org.smartregister.repository.DetailsRepository;
 import org.smartregister.service.AlertService;
 import org.smartregister.view.contract.SmartRegisterClient;
-import org.smartregister.view.contract.SmartRegisterClients;
-import org.smartregister.view.dialog.FilterOption;
-import org.smartregister.view.dialog.ServiceModeOption;
-import org.smartregister.view.dialog.SortOption;
-import org.smartregister.view.viewholder.OnClickFormLauncher;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -37,53 +31,76 @@ import butterknife.Bind;
 import butterknife.ButterKnife;
 
 import static android.view.ViewGroup.LayoutParams.MATCH_PARENT;
+
 /**
  * Created by Dimas Ciputra on 2/16/15.
  */
-public class KIANCClientsProvider implements SmartRegisterCLientsProviderForCursorAdapter {
+public class KIANCClientsProvider extends BaseClientsProvider {
 
     private static final String TAG = KIANCClientsProvider.class.getName();
-    private final LayoutInflater inflater;
     private final Context context;
     private final View.OnClickListener onClickListener;
     private final AbsListView.LayoutParams clientViewLayoutParams;
     protected CommonPersonObjectController controller;
     AlertService alertService;
-    Support support = new Support();
-    @Bind(R.id.profile_info_layout) LinearLayout profilelayout;
-    @Bind(R.id.tv_wife_name)TextView wife_name;
-    @Bind(R.id.tv_husband_name)TextView husband_name;
-    @Bind(R.id.tv_village_name)TextView village_name;
-    @Bind(R.id.tv_wife_age)TextView wife_age;
-    @Bind(R.id.tv_no_ibu)TextView no_ibu;
-    @Bind(R.id.unique_id)TextView unique_id;
-    @Bind(R.id.tv_gravida)TextView gravida;
-    @Bind(R.id.tv_parity)TextView parity;
-    @Bind(R.id.tv_number_of_abortus)TextView number_of_abortus;
-    @Bind(R.id.tv_number_of_alive)TextView number_of_alive;
-    @Bind(R.id.iv_hr_badge)ImageView hr_badge;
-    @Bind(R.id.iv_hrl_badge)ImageView img_hrl_badge;
-    @Bind(R.id.iv_bpl_badge)ImageView bpl_badge;
-    @Bind(R.id.iv_hrp_badge)ImageView hrp_badge;
-    @Bind(R.id.iv_hrpp_badge)ImageView hrpp_badge;
-    @Bind(R.id.txt_edd)TextView edd;
-    @Bind(R.id.txt_edd_due)TextView edd_due;
-    @Bind(R.id.txt_children_age_left)TextView children_age_left;
-    @Bind(R.id.txt_children_age_right)TextView children_age_right;
-    @Bind(R.id.mother_status)TextView anc_status_layout;
-    @Bind(R.id.last_visit_status)TextView date_status;
-    @Bind(R.id.visit_status)TextView visit_status;
-    @Bind(R.id.iv_profile)ImageView profilepic;
-    @Bind(R.id.ib_btn_edit)ImageButton follow_up;
+    @Bind(R.id.profile_info_layout)
+    LinearLayout profilelayout;
+    @Bind(R.id.tv_wife_name)
+    TextView wife_name;
+    @Bind(R.id.tv_husband_name)
+    TextView husband_name;
+    @Bind(R.id.tv_village_name)
+    TextView village_name;
+    @Bind(R.id.tv_wife_age)
+    TextView wife_age;
+    @Bind(R.id.tv_no_ibu)
+    TextView no_ibu;
+    @Bind(R.id.unique_id)
+    TextView unique_id;
+    @Bind(R.id.tv_gravida)
+    TextView gravida;
+    @Bind(R.id.tv_parity)
+    TextView parity;
+    @Bind(R.id.tv_number_of_abortus)
+    TextView number_of_abortus;
+    @Bind(R.id.tv_number_of_alive)
+    TextView number_of_alive;
+    @Bind(R.id.iv_hr_badge)
+    ImageView hr_badge;
+    @Bind(R.id.iv_hrl_badge)
+    ImageView img_hrl_badge;
+    @Bind(R.id.iv_bpl_badge)
+    ImageView bpl_badge;
+    @Bind(R.id.iv_hrp_badge)
+    ImageView hrp_badge;
+    @Bind(R.id.iv_hrpp_badge)
+    ImageView hrpp_badge;
+    @Bind(R.id.txt_edd)
+    TextView edd;
+    @Bind(R.id.txt_edd_due)
+    TextView edd_due;
+    @Bind(R.id.txt_children_age_left)
+    TextView children_age_left;
+    @Bind(R.id.txt_children_age_right)
+    TextView children_age_right;
+    @Bind(R.id.mother_status)
+    TextView anc_status_layout;
+    @Bind(R.id.last_visit_status)
+    TextView date_status;
+    @Bind(R.id.visit_status)
+    TextView visit_status;
+    @Bind(R.id.iv_mother_photo)
+    ImageView profilepic;
+    @Bind(R.id.ib_btn_edit)
+    ImageButton follow_up;
     private Drawable iconPencilDrawable;
 
-    public KIANCClientsProvider(Context context,
-                                View.OnClickListener onClickListener,
-                                AlertService alertService) {
+    public KIANCClientsProvider(Context context, View.OnClickListener onClickListener, AlertService alertService) {
+        super(context);
         this.onClickListener = onClickListener;
         this.context = context;
         this.alertService = alertService;
-        this.inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+//        this.inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 
         clientViewLayoutParams = new AbsListView.LayoutParams(MATCH_PARENT,
                 (int) context.getResources().getDimension(org.smartregister.R.dimen.list_item_height));
@@ -94,42 +111,43 @@ public class KIANCClientsProvider implements SmartRegisterCLientsProviderForCurs
 
         try {
             ButterKnife.bind(this, convertView);
-        } catch (Exception e){
+        } catch (Exception e) {
             e.getCause().printStackTrace();
         }
         // Load data from DB
         CommonPersonObjectClient pc = (CommonPersonObjectClient) smartRegisterClient;
         DetailsRepository detailsRepository = org.smartregister.Context.getInstance().detailsRepository();
         detailsRepository.updateDetails(pc);
+
         System.out.println("client : " + pc.getColumnmaps().toString());
         System.out.println("event : " + pc.getDetails().toString());
+
         AllCommonsRepository iburep = org.smartregister.Context.getInstance().allCommonsRepositoryobjects("ec_ibu");
-        final CommonPersonObject ibuparent = iburep.findByCaseID(pc.entityId());
         AllCommonsRepository pncrep = org.smartregister.Context.getInstance().allCommonsRepositoryobjects("ec_pnc");
-        final CommonPersonObject pncparent = pncrep.findByCaseID(pc.entityId());
-        //anak
         AllCommonsRepository anakrep = org.smartregister.Context.getInstance().allCommonsRepositoryobjects("ec_anak");
+
+        final CommonPersonObject ibuparent = iburep.findByCaseID(pc.entityId());
+        final CommonPersonObject pncparent = pncrep.findByCaseID(pc.entityId());
+
+        //anak
         ArrayList<String> list = new ArrayList<>();
         list.add((pc.entityId()));
         List<CommonPersonObject> allchild = anakrep.findByRelational_IDs(list);
 
-        follow_up.setOnClickListener(onClickListener);
-        follow_up.setTag(smartRegisterClient);
         profilelayout.setOnClickListener(onClickListener);
         profilelayout.setTag(smartRegisterClient);
-        if (iconPencilDrawable == null) {
-            iconPencilDrawable = context.getResources().getDrawable(R.drawable.ic_pencil);
-        }
+
+        follow_up.setTag(smartRegisterClient);
         follow_up.setImageDrawable(iconPencilDrawable);
         follow_up.setOnClickListener(onClickListener);
 
-        // set flag High Risk
+        if (iconPencilDrawable == null) {
+            iconPencilDrawable = context.getResources().getDrawable(R.drawable.ic_pencil);
+        }
 
         //start profile image
         profilepic.setTag(R.id.entity_id, pc.getColumnmaps().get("_id"));//required when saving file to disk
-        Support.setImagetoHolderFromUri((Activity) context,
-                pc.getDetails().get("base_entity_id"),
-                profilepic, R.mipmap.woman_placeholder);
+        Support.setImagetoHolderFromUri((Activity) context, pc.getDetails().get("base_entity_id"), profilepic, R.mipmap.woman_placeholder);
         //end profile image
 
         wife_name.setText(pc.getColumnmaps().get("namalengkap") != null ? pc.getColumnmaps().get("namalengkap") : "");
@@ -151,19 +169,16 @@ public class KIANCClientsProvider implements SmartRegisterCLientsProviderForCurs
         children_age_left.setText("");
         children_age_right.setText("");
 
-
         if (ibuparent != null) {
             short anc_isclosed = ibuparent.getClosed();
             //check anc  status
             if (anc_isclosed == 0) {
                 detailsRepository.updateDetails(ibuparent);
                 if (pc.getDetails().get("htp") == null) {
-
                     Support.checkMonth(context, pc.getDetails().get("htp"), edd_due);
 
                 }
-
-                support.checkLastVisit(context, pc.getDetails().get("ancDate"), context.getString(R.string.anc_ke) + ": " + pc.getDetails().get("ancKe"), context.getString(R.string.service_anc),
+                checkLastVisit(pc.getDetails().get("ancDate"), context.getString(R.string.anc_ke) + ": " + pc.getDetails().get("ancKe"), context.getString(R.string.service_anc),
                         anc_status_layout, date_status, visit_status);
             }
             //if anc is 1(closed) set status to pnc
@@ -177,8 +192,7 @@ public class KIANCClientsProvider implements SmartRegisterCLientsProviderForCurs
                         edd_due.setTextColor(context.getResources().getColor(R.color.alert_complete_green));
                         String deliver = context.getString(R.string.delivered);
                         edd_due.setText(deliver);
-
-                        support.checkLastVisit(context, pc.getDetails().get("PNCDate"), context.getString(R.string.pnc_ke) + " " + pc.getDetails().get("hariKeKF"), context.getString(R.string.service_pnc),
+                        checkLastVisit(pc.getDetails().get("PNCDate"), context.getString(R.string.pnc_ke) + " " + pc.getDetails().get("hariKeKF"), context.getString(R.string.service_pnc),
                                 anc_status_layout, date_status, visit_status);
                     }
                 }
@@ -187,7 +201,7 @@ public class KIANCClientsProvider implements SmartRegisterCLientsProviderForCurs
         }
         //last check if mother in PF (KB) service
         else if (!StringUtils.isNumeric(pc.getDetails().get("jenisKontrasepsi"))) {
-            support.checkLastVisit(context, pc.getDetails().get("tanggalkunjungan"), context.getString(R.string.fp_methods) + ": " + pc.getDetails().get("jenisKontrasepsi"), context.getString(R.string.service_fp),
+            checkLastVisit(pc.getDetails().get("tanggalkunjungan"), context.getString(R.string.fp_methods) + ": " + pc.getDetails().get("jenisKontrasepsi"), context.getString(R.string.service_fp),
                     anc_status_layout, date_status, visit_status);
         }
 
@@ -222,39 +236,9 @@ public class KIANCClientsProvider implements SmartRegisterCLientsProviderForCurs
 
     }
 
-    public SmartRegisterClients getClients() {
-        return controller.getClients();
-    }
-
     @Override
     public void getView(Cursor cursor, SmartRegisterClient smartRegisterClient, View view) {
         getView(smartRegisterClient, view);
-    }
-
-    @Override
-    public SmartRegisterClients updateClients(FilterOption villageFilter, ServiceModeOption serviceModeOption,
-                                              FilterOption searchFilter, SortOption sortOption) {
-        return getClients().applyFilter(villageFilter, serviceModeOption, searchFilter, sortOption);
-    }
-
-    @Override
-    public void onServiceModeSelected(ServiceModeOption serviceModeOption) {
-        // do nothing.
-    }
-
-    @Override
-    public OnClickFormLauncher newFormLauncher(String formName, String entityId, String metaData) {
-        return null;
-    }
-
-    public LayoutInflater inflater() {
-        return inflater;
-    }
-
-    @Override
-    public View inflatelayoutForCursorAdapter() {
-        View View = inflater().inflate(R.layout.smart_register_ki_client, null);
-        return View;
     }
 
     public void risk(String risk1, String risk2, String risk3, String risk4, String risk5, String risk6, String risk7, String risk8, String risk9, String risk10, ImageView riskview) {
@@ -273,6 +257,18 @@ public class KIANCClientsProvider implements SmartRegisterCLientsProviderForCurs
         }
     }
 
+    public void checkLastVisit(String date, String visitNumber, String Status, TextView visitStatus, TextView visitDate, TextView VisitNumber) {
+        String visit_stat = "";
+        String visit_date = date != null ? context.getString(R.string.date_visit_title) + " " + date : "";
 
+        VisitNumber.setText(visitNumber);
+        visitDate.setText(visit_date);
+        visitStatus.setText(Status);
+    }
+
+    @Override
+    public View inflatelayoutForCursorAdapter() {
+        return inflater().inflate(R.layout.smart_register_ki_client, null);
+    }
 
 }

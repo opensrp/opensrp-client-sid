@@ -235,13 +235,6 @@ public class DetailPNCActivity extends Activity {
                 pncclient.getDetails().get("base_entity_id"),
                 kiview, R.mipmap.woman_placeholder);
 
-//        if(ibuparent.getDetails().get("profilepic")!= null){
-//            setImagetoHolderFromUri(DetailPNCActivity.this, ibuparent.getDetails().get("profilepic"), kiview, R.mipmap.woman_placeholder);
-//        }
-//        else {
-//            kiview.setImageDrawable(getResources().getDrawable(R.mipmap.woman_placeholder));
-//        }
-
         txt_hariKeKF.setText(String.format(": %s", humanizeAndDoUPPERCASE(kiobject.getColumnmaps().get("hariKeKF") != null ? kiobject.getColumnmaps().get("hariKeKF") : "-")));
 
         txt_tandaVitalTDSistolik.setText(String.format(": %s", humanize(ibuparent.getDetails().get("tandaVitalTDSistolik") != null ? ibuparent.getDetails().get("tandaVitalTDSistolik") : "-")));
