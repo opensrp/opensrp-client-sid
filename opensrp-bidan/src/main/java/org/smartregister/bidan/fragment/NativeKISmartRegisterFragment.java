@@ -25,6 +25,7 @@ import org.smartregister.Context;
 import org.smartregister.bidan.R;
 import org.smartregister.bidan.activity.BaseRegisterActivity;
 import org.smartregister.bidan.activity.DetailMotherActivity;
+import org.smartregister.bidan.activity.LoginActivity;
 import org.smartregister.bidan.activity.NativeKISmartRegisterActivity;
 import org.smartregister.bidan.options.AllKartuIbuServiceMode;
 import org.smartregister.bidan.options.KICommonObjectFilterOption;
@@ -67,7 +68,7 @@ import static org.apache.commons.lang3.StringUtils.isEmpty;
 /**
  * Created by Dimas Ciputra on 2/18/15.
  */
-public class NativeKISmartRegisterFragment extends SecuredNativeSmartRegisterCursorAdapterFragment {
+public class NativeKISmartRegisterFragment extends BaseSmartRegisterFragment {
 
     private static final String TAG = NativeKISmartRegisterFragment.class.getName();
     //    WD
@@ -77,16 +78,8 @@ public class NativeKISmartRegisterFragment extends SecuredNativeSmartRegisterCur
     SimpleDateFormat sdf;
     Map<String, String> FS = new HashMap<>();
 
-    public static String getCriteria() {
-        return criteria;
-    }
-
     public void setCriteria(String criteria) {
         NativeKISmartRegisterFragment.criteria = criteria;
-    }
-
-    @Override
-    protected void onCreation() {
     }
 
     @Override
@@ -162,16 +155,6 @@ public class NativeKISmartRegisterFragment extends SecuredNativeSmartRegisterCur
                 return getResources().getString(R.string.hh_search_hint);
             }
         };
-    }
-
-    @Override
-    protected SmartRegisterClientsProvider clientsProvider() {
-        Log.e(TAG, "clientsProvider: here");
-        return null;
-    }
-
-    private DialogOption[] getEditOptions() {
-        return ((BaseRegisterActivity) getActivity()).getEditOptions();
     }
 
     @Override
@@ -290,20 +273,6 @@ public class NativeKISmartRegisterFragment extends SecuredNativeSmartRegisterCur
         return "htp IS NULL, htp";
     }
 
-    @Override
-    protected void onResumption() {
-        getDefaultOptionsProvider();
-        if (isPausedOrRefreshList()) {
-            initializeQueries("");
-        }
-//        try {
-//            LoginActivity.setLanguage();
-//        } catch (Exception ignored) {
-//
-//        }
-
-    }
-
     public void updateSearchView() {
         getSearchView().addTextChangedListener(new TextWatcher() {
             @Override
@@ -344,7 +313,6 @@ public class NativeKISmartRegisterFragment extends SecuredNativeSmartRegisterCur
             }
         }
     }
-
 
     @Override
     public void setupSearchView(final View view) {
@@ -443,6 +411,20 @@ public class NativeKISmartRegisterFragment extends SecuredNativeSmartRegisterCur
         getActivity().startActivity(myIntent);
 
     }
+
+    @Override
+    protected void onResumption() {
+        super.onResumption();
+        Log.e(TAG, "onResumption: "+ LoginActivity.getLanguage());
+        if (LoginActivity.getLanguage().equals("en")){
+            LoginActivity.switchLanguagePreference();
+            LoginActivity.setDefaultLanguage();
+        }
+        Log.e(TAG, "onResumption: "+ LoginActivity.getLanguage());
+
+    }
+
+    //=================================== INNER CLASS ==============================================
 
     private class ClientActionHandler implements View.OnClickListener {
         @Override

@@ -51,10 +51,6 @@ public class AnakSmartRegisterFragment extends BaseSmartRegisterFragment {
     public static String criteria;
     private final ClientActionHandler clientActionHandler = new ClientActionHandler();
 
-    public static String getCriteria() {
-        return criteria;
-    }
-
     public void setCriteria(String criteria) {
         this.criteria = criteria;
     }

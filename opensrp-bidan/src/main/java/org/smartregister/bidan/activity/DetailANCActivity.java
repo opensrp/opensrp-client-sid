@@ -41,17 +41,6 @@ public class DetailANCActivity extends Activity {
     public static CommonPersonObjectClient ancClient;
     SimpleDateFormat timer = new SimpleDateFormat("hh:mm:ss");
     SimpleDateFormat bpm_timer;
-    private View.OnClickListener bpmListener = new View.OnClickListener() {
-        @Override
-        public void onClick(View v) {
-//            Intent intent = new Intent(ANCDetailActivity.this, MainBPM.class);
-//            Intent intent = new Intent(ANCDetailActivity.this, MainActivity.class);
-//            Intent intent = new Intent(ANCDetailActivity.this, BpmMainActivity.class);
-//            startActivity(intent);
-
-//            bpmAction();
-        }
-    };
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -198,7 +187,7 @@ public class DetailANCActivity extends Activity {
         });
 
         ImageView device = (ImageView) findViewById(R.id.iv_icon_device);
-        device.setOnClickListener(bpmListener);
+//        device.setOnClickListener(bpmListener);
 
         DetailsRepository detailsRepository = Context.getInstance().detailsRepository();
         detailsRepository.updateDetails(ancClient);
@@ -370,8 +359,8 @@ public class DetailANCActivity extends Activity {
             }
         });
 
-        tandaVitalTDDiastolik.setOnClickListener(bpmListener);
-        tandaVitalTDSistolik.setOnClickListener(bpmListener);
+//        tandaVitalTDDiastolik.setOnClickListener(bpmListener);
+//        tandaVitalTDSistolik.setOnClickListener(bpmListener);
 
     }
 

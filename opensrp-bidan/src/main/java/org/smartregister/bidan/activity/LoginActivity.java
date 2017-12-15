@@ -60,7 +60,10 @@ public class LoginActivity extends Activity {
     public static final String ENGLISH_LANGUAGE = "English";
     public static final String KANNADA_LANGUAGE = "Kannada";
     public static final String Bengali_LANGUAGE = "Bengali";
-    public static final String Bahasa_LANGUAGE = "Bahasa";
+    public static final String BAHASA_LANGUAGE = "Bahasa";
+    private static String preferredLocale = "";
+    private static AllSharedPreferences allSharedPreferences = new AllSharedPreferences(getDefaultSharedPreferences(Context.getInstance().applicationContext()));
+
     private final String TAG = LoginActivity.class.getName();
     private Context context = BidanApplication.getInstance().context();
     private EditText userNameEditText;
@@ -73,7 +76,7 @@ public class LoginActivity extends Activity {
 
     public static void setLanguage() {
         AllSharedPreferences allSharedPreferences = new AllSharedPreferences(getDefaultSharedPreferences(Context.getInstance().applicationContext()));
-        String preferredLocale = allSharedPreferences.fetchLanguagePreference();
+        preferredLocale = allSharedPreferences.fetchLanguagePreference();
 
         Resources res = Context.getInstance().applicationContext().getResources();
         // Change locale settings in the app.
@@ -87,8 +90,8 @@ public class LoginActivity extends Activity {
 
     public static String switchLanguagePreference() {
         AllSharedPreferences allSharedPreferences = new AllSharedPreferences(getDefaultSharedPreferences(Context.getInstance().applicationContext()));
+        preferredLocale = allSharedPreferences.fetchLanguagePreference();
 
-        String preferredLocale = allSharedPreferences.fetchLanguagePreference();
         if (ENGLISH_LOCALE.equals(preferredLocale)) {
             allSharedPreferences.saveLanguagePreference(BAHASA_LOCALE);
             Resources res = Context.getInstance().applicationContext().getResources();
@@ -97,7 +100,8 @@ public class LoginActivity extends Activity {
             android.content.res.Configuration conf = res.getConfiguration();
             conf.locale = new Locale(BAHASA_LOCALE);
             res.updateConfiguration(conf, dm);
-            return Bahasa_LANGUAGE;
+            return BAHASA_LANGUAGE;
+
         } else {
             allSharedPreferences.saveLanguagePreference(ENGLISH_LOCALE);
             Resources res = Context.getInstance().applicationContext().getResources();
@@ -108,6 +112,11 @@ public class LoginActivity extends Activity {
             res.updateConfiguration(conf, dm);
             return ENGLISH_LANGUAGE;
         }
+    }
+
+    public static String getLanguage() {
+
+        return preferredLocale;
     }
 
     @Override
@@ -373,4 +382,13 @@ public class LoginActivity extends Activity {
         }
     }
 
+    public static void setDefaultLanguage() {
+        allSharedPreferences.saveLanguagePreference(BAHASA_LOCALE);
+        Resources res = Context.getInstance().applicationContext().getResources();
+        // Change locale settings in the app.
+        DisplayMetrics dm = res.getDisplayMetrics();
+        android.content.res.Configuration conf = res.getConfiguration();
+        conf.locale = new Locale(BAHASA_LOCALE);
+        res.updateConfiguration(conf, dm);
+    }
 }

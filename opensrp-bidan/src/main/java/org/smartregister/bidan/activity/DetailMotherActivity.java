@@ -44,15 +44,6 @@ public class DetailMotherActivity extends Activity {
     @Bind(R.id.tv_mother_detail_profile_view)
     ImageView kiview;
 
-    //    public static void setImagetoHolderFromUri(Activity activity, String file, ImageView view, int placeholder) {
-//        view.setImageDrawable(activity.getResources().getDrawable(placeholder));
-//        File externalFile = new File(file);
-//        if (externalFile.exists()) {
-//            Uri external = Uri.fromFile(externalFile);
-//            view.setImageURI(external);
-//        }
-//
-//    }
     @Bind(R.id.tv_wife_name)
     TextView nama;
     @Bind(R.id.tv_nik)

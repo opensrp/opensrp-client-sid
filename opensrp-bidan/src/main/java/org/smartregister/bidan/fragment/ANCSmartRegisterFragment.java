@@ -69,10 +69,6 @@ public class ANCSmartRegisterFragment extends BaseSmartRegisterFragment {
     SimpleDateFormat sdf;
     Map<String, String> FS = new HashMap<>();
 
-    public static String getCriteria() {
-        return criteria;
-    }
-
     public void setCriteria(String criteria) {
         ANCSmartRegisterFragment.criteria = criteria;
     }
@@ -161,10 +157,6 @@ public class ANCSmartRegisterFragment extends BaseSmartRegisterFragment {
     @Override
     protected SmartRegisterClientsProvider clientsProvider() {
         return null;
-    }
-
-    private DialogOption[] getEditOptions() {
-        return ((BaseRegisterActivity) getActivity()).getEditOptions();
     }
 
     @Override

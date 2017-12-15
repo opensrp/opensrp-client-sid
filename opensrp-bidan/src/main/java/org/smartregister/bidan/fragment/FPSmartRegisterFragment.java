@@ -72,15 +72,6 @@ public class FPSmartRegisterFragment extends BaseSmartRegisterFragment {
     String tableName = "ec_kartu_ibu";
     private String locationDialogTAG = "locationDialogTAG";
 
-//    @Override
-//    protected SmartRegisterPaginatedAdapter adapter() {
-//        return new SmartRegisterPaginatedAdapter(clientsProvider());
-//    }
-
-    public static String getCriteria() {
-        return criteria;
-    }
-
     public void setCriteria(String criteria) {
         this.criteria = criteria;
     }
@@ -168,10 +159,6 @@ public class FPSmartRegisterFragment extends BaseSmartRegisterFragment {
     @Override
     protected SmartRegisterClientsProvider clientsProvider() {
         return null;
-    }
-
-    private DialogOption[] getEditOptions() {
-        return ((BaseRegisterActivity) getActivity()).getEditOptions();
     }
 
     @Override

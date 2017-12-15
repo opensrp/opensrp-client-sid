@@ -2,10 +2,14 @@ package org.smartregister.bidan.fragment;
 
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.view.View;
 
+import org.smartregister.bidan.R;
+import org.smartregister.bidan.activity.BaseRegisterActivity;
 import org.smartregister.cursoradapter.SecuredNativeSmartRegisterCursorAdapterFragment;
 import org.smartregister.provider.SmartRegisterClientsProvider;
 import org.smartregister.view.activity.SecuredNativeSmartRegisterActivity;
+import org.smartregister.view.dialog.DialogOption;
 
 import static android.view.View.INVISIBLE;
 import static android.view.View.VISIBLE;
@@ -31,6 +35,7 @@ public class BaseSmartRegisterFragment extends SecuredNativeSmartRegisterCursorA
 
         }
     };
+    private String criteria;
 
     @Override
     protected SecuredNativeSmartRegisterActivity.DefaultOptionsProvider getDefaultOptionsProvider() {
@@ -69,6 +74,45 @@ public class BaseSmartRegisterFragment extends SecuredNativeSmartRegisterCursorA
         getSearchCancelView().setVisibility(isEmpty(filterString) ? INVISIBLE : VISIBLE);
         CountExecute();
         filterandSortExecute();
+    }
+
+    @Override
+    public void setupViews(View view) {
+
+        super.setupViews(view);
+
+        getDefaultOptionsProvider();
+
+        view.findViewById(R.id.btn_report_month).setVisibility(INVISIBLE);
+        view.findViewById(R.id.service_mode_selection).setVisibility(View.GONE);
+        clientsView.setVisibility(View.VISIBLE);
+        clientsProgressView.setVisibility(View.INVISIBLE);
+        initializeQueries(getCriteria());
+    }
+
+    public void initializeQueries(String s) {
+    }
+
+    @Override
+    protected void onResumption() {
+        getDefaultOptionsProvider();
+        if (isPausedOrRefreshList()) {
+            initializeQueries("");
+        }
+//        try {
+//            LoginActivity.setLanguage();
+//        } catch (Exception ignored) {
+//
+//        }
+
+    }
+
+    public String getCriteria() {
+        return criteria;
+    }
+
+    protected DialogOption[] getEditOptions() {
+        return ((BaseRegisterActivity) getActivity()).getEditOptions();
     }
 
 }

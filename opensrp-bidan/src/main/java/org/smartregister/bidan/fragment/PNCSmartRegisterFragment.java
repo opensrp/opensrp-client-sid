@@ -76,10 +76,6 @@ public class PNCSmartRegisterFragment extends BaseSmartRegisterFragment {
 //        return new SmartRegisterPaginatedAdapter(clientsProvider());
 //    }
 
-    public static String getCriteria() {
-        return criteria;
-    }
-
     public void setCriteria(String criteria) {
         this.criteria = criteria;
     }
@@ -170,10 +166,6 @@ public class PNCSmartRegisterFragment extends BaseSmartRegisterFragment {
     @Override
     protected SmartRegisterClientsProvider clientsProvider() {
         return null;
-    }
-
-    private DialogOption[] getEditOptions() {
-        return ((BaseRegisterActivity) getActivity()).getEditOptions();
     }
 
     @Override
