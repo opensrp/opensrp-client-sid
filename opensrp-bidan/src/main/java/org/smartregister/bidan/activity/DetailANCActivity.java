@@ -17,6 +17,7 @@ import org.smartregister.bidan.utils.BidanFormUtils;
 import org.smartregister.bidan.utils.Support;
 import org.smartregister.commonregistry.CommonPersonObjectClient;
 import org.smartregister.facialrecognition.activities.OpenCameraActivity;
+import org.smartregister.facialrecognition.util.BitmapUtil;
 import org.smartregister.facialrecognition.utils.Tools;
 import org.smartregister.repository.DetailsRepository;
 
@@ -366,26 +367,8 @@ public class DetailANCActivity extends Activity {
 //        tandaVitalTDDiastolik.setOnClickListener(bpmListener);
 //        tandaVitalTDSistolik.setOnClickListener(bpmListener);
 
-        // FR
-        hash = Tools.retrieveHash(context.applicationContext());
-        kiview.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                // FlurryFacade.logEvent("taking_mother_pictures_on_kohort_ibu_detail_view");
-                entityid = ancClient.entityId();
-                boolean updateMode = false;
-                if (hash.containsValue(entityid)) {
-                    updateMode = true;
-                }
-                Intent takePictureIntent = new Intent(DetailANCActivity.this, OpenCameraActivity.class);
-                takePictureIntent.putExtra("org.smartregister.facialrecognition.OpenCameraActivity.updated", updateMode);
-                takePictureIntent.putExtra("org.smartregister.facialrecognition.PhotoConfirmationActivity.identify", false);
-                takePictureIntent.putExtra("org.smartregister.facialrecognition.PhotoConfirmationActivity.id", entityid);
-                takePictureIntent.putExtra("org.smartregister.facialrecognition.PhotoConfirmationActivity.origin", TAG); // send Class Name
-                startActivityForResult(takePictureIntent, 2);
-
-            }
-        });
+        // Enable FR
+        BitmapUtil.enableFR(context, DetailANCActivity.this, ancClient, kiview) ;
 
     }
 

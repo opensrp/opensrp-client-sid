@@ -17,6 +17,7 @@ import org.smartregister.commonregistry.AllCommonsRepository;
 import org.smartregister.commonregistry.CommonPersonObject;
 import org.smartregister.commonregistry.CommonPersonObjectClient;
 import org.smartregister.facialrecognition.activities.OpenCameraActivity;
+import org.smartregister.facialrecognition.util.BitmapUtil;
 import org.smartregister.facialrecognition.utils.Tools;
 import org.smartregister.repository.DetailsRepository;
 import org.smartregister.util.FormUtils;
@@ -299,25 +300,8 @@ public class DetailPNCActivity extends Activity {
         // FR
         final HashMap<String, String> hash = Tools.retrieveHash(context.applicationContext());
 
-        kiview.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                // FlurryFacade.logEvent("taking_mother_pictures_on_kohort_ibu_detail_view");
-                String entityid = pncclient.entityId();
-
-                boolean updateMode = false;
-                if (hash.containsValue(entityid)) {
-                    updateMode = true;
-                }
-                Intent takePictureIntent = new Intent(DetailPNCActivity.this, OpenCameraActivity.class);
-                takePictureIntent.putExtra("org.smartregister.facialrecognition.OpenCameraActivity.updated", updateMode);
-                takePictureIntent.putExtra("org.smartregister.facialrecognition.PhotoConfirmationActivity.identify", false);
-                takePictureIntent.putExtra("org.smartregister.facialrecognition.PhotoConfirmationActivity.id", entityid);
-                takePictureIntent.putExtra("org.smartregister.facialrecognition.PhotoConfirmationActivity.origin", TAG); // send Class Name
-                startActivityForResult(takePictureIntent, 2);
-
-            }
-        });
+        // Enable FR
+        BitmapUtil.enableFR(context, DetailPNCActivity.this, pncclient, kiview) ;
 
     }
 

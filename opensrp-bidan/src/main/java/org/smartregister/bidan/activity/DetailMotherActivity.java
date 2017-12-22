@@ -14,6 +14,7 @@ import org.smartregister.bidan.R;
 import org.smartregister.bidan.utils.Support;
 import org.smartregister.commonregistry.CommonPersonObjectClient;
 import org.smartregister.facialrecognition.activities.OpenCameraActivity;
+import org.smartregister.facialrecognition.util.BitmapUtil;
 import org.smartregister.facialrecognition.utils.Tools;
 import org.smartregister.repository.DetailsRepository;
 
@@ -286,43 +287,26 @@ public class DetailMotherActivity extends Activity {
             }
         });
 
-        // FR
-        hash = Tools.retrieveHash(context.applicationContext());
 
-        kiview.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                // FlurryFacade.logEvent("taking_mother_pictures_on_kohort_ibu_detail_view");
-                entityid = motherClient.entityId();
+        // Enable FR
+        BitmapUtil.enableFR(context, DetailMotherActivity.this, motherClient, kiview) ;
 
-                if (hash.containsValue(entityid)) {
-                    updateMode = true;
-                }
-                Intent takePictureIntent = new Intent(DetailMotherActivity.this, OpenCameraActivity.class);
-                takePictureIntent.putExtra("org.smartregister.facialrecognition.OpenCameraActivity.updated", updateMode);
-                takePictureIntent.putExtra("org.smartregister.facialrecognition.PhotoConfirmationActivity.identify", false);
-                takePictureIntent.putExtra("org.smartregister.facialrecognition.PhotoConfirmationActivity.id", entityid);
-                takePictureIntent.putExtra("org.smartregister.facialrecognition.PhotoConfirmationActivity.origin", TAG); // send Class Name
-                startActivityForResult(takePictureIntent, 2);
+        }
 
-            }
-        });
 
-    }
+        @Override
+        public void onBackPressed () {
+            finish();
+            startActivity(new Intent(this, NativeKIbuSmartRegisterActivity.class));
+            overridePendingTransition(0, 0);
+        }
 
-    @Override
-    public void onBackPressed() {
-        finish();
-        startActivity(new Intent(this, NativeKIbuSmartRegisterActivity.class));
-        overridePendingTransition(0, 0);
-    }
-
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent intent) {
+        @Override
+        protected void onActivityResult ( int requestCode, int resultCode, Intent intent){
 //        refresh
-        Log.e(TAG, "onActivityResult: refresh");
-        finish();
-        startActivity(getIntent());
+            Log.e(TAG, "onActivityResult: refresh");
+            finish();
+            startActivity(getIntent());
+        }
 
-    }
 }

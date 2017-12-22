@@ -17,6 +17,7 @@ import org.smartregister.commonregistry.AllCommonsRepository;
 import org.smartregister.commonregistry.CommonPersonObject;
 import org.smartregister.commonregistry.CommonPersonObjectClient;
 import org.smartregister.facialrecognition.activities.OpenCameraActivity;
+import org.smartregister.facialrecognition.util.BitmapUtil;
 import org.smartregister.facialrecognition.utils.Tools;
 import org.smartregister.repository.DetailsRepository;
 
@@ -155,25 +156,8 @@ public class DetailChildActivity extends Activity {
 
         hash = Tools.retrieveHash(context.applicationContext());
 
-        childview.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-//                FlurryFacade.logEvent("taking_child_pictures_on_anak_detail_view");
-                entityid = childclient.entityId();
-                if (hash.containsValue(entityid)) {
-                    updateMode = true;
-                }
-                Toast.makeText(DetailChildActivity.this, "Replace for Camera", Toast.LENGTH_SHORT).show();
-                Intent takePictureIntent = new Intent(DetailChildActivity.this, OpenCameraActivity.class);
-                takePictureIntent.putExtra("org.smartregister.facialrecognition.OpenCameraActivity.updated", updateMode);
-                takePictureIntent.putExtra("org.smartregister.facialrecognition.PhotoConfirmationActivity.identify", false);
-                takePictureIntent.putExtra("org.smartregister.facialrecognition.PhotoConfirmationActivity.id", entityid);
-                takePictureIntent.putExtra("org.smartregister.facialrecognition.PhotoConfirmationActivity.origin", TAG); // send Class Name
-                startActivityForResult(takePictureIntent, 2);
-
-            }
-        });
+        // Enable FR
+        BitmapUtil.enableFR(context, DetailChildActivity.this, childclient, childview) ;
 
 
 
