@@ -381,7 +381,7 @@ public class BaseRegisterActivity extends SecuredNativeSmartRegisterActivity imp
 //                detailsRepository.updateDetails(motherClient);
 
                 if (option.name().equalsIgnoreCase(getString(R.string.str_register_fp_form))) {
-//                     pc = KIDetailActivity.kiclient;
+//                     pc = KIDetailActivity.fpClient;
                     pc = DetailMotherActivity.motherClient;
 
 //                    CommonPersonObjectClient pc = motherClient;

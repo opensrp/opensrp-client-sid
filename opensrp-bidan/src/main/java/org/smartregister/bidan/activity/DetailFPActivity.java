@@ -13,6 +13,8 @@ import org.smartregister.bidan.R;
 import org.smartregister.commonregistry.AllCommonsRepository;
 import org.smartregister.commonregistry.CommonPersonObject;
 import org.smartregister.commonregistry.CommonPersonObjectClient;
+import org.smartregister.facialrecognition.activities.OpenCameraActivity;
+import org.smartregister.facialrecognition.utils.Tools;
 import org.smartregister.repository.DetailsRepository;
 
 import java.text.SimpleDateFormat;
@@ -32,9 +34,8 @@ import static org.smartregister.util.StringUtil.humanize;
 public class DetailFPActivity extends Activity {
 
     private static final String TAG = DetailFPActivity.class.getName();
-    public static CommonPersonObjectClient kiclient;
+    public static CommonPersonObjectClient fpClient;
     SimpleDateFormat timer = new SimpleDateFormat("hh:mm:ss");
-    private View.OnClickListener bpmListener;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -138,87 +139,87 @@ public class DetailFPActivity extends Activity {
         });
 
         DetailsRepository detailsRepository = Context.getInstance().detailsRepository();
-        detailsRepository.updateDetails(kiclient);
+        detailsRepository.updateDetails(fpClient);
 
-        if (kiclient.getCaseId() != null) {//image already in local storage most likey ):
+        if (fpClient.getCaseId() != null) {//image already in local storage most likey ):
             //set profile image by passing the client id.If the image doesn't exist in the image repository then download and save locally
-//            DrishtiApplication.getCachedImageLoaderInstance().getImageByClientId(kiclient.getCaseId(), OpenSRPImageLoader.getStaticImageListener(kiview, R.mipmap.woman_placeholder, R.mipmap.woman_placeholder));
-            setImagetoHolderFromUri(this, kiclient.getDetails().get("base_entity_id"), kiview, R.mipmap.woman_placeholder);
+//            DrishtiApplication.getCachedImageLoaderInstance().getImageByClientId(fpClient.getCaseId(), OpenSRPImageLoader.getStaticImageListener(kiview, R.mipmap.woman_placeholder, R.mipmap.woman_placeholder));
+            setImagetoHolderFromUri(this, fpClient.getDetails().get("base_entity_id"), kiview, R.mipmap.woman_placeholder);
         }
 
 
-        nama.setText(String.format("%s%s", getResources().getString(R.string.name), kiclient.getColumnmaps().get("namalengkap") != null ? kiclient.getColumnmaps().get("namalengkap") : "-"));
-        nik.setText(String.format("%s%s", getResources().getString(R.string.nik), kiclient.getDetails().get("nik") != null ? kiclient.getDetails().get("nik") : "-"));
-        husband_name.setText(String.format("%s%s", getResources().getString(R.string.husband_name), kiclient.getColumnmaps().get("namaSuami") != null ? kiclient.getColumnmaps().get("namaSuami") : "-"));
-        String tgl = kiclient.getDetails().get("tanggalLahir") != null ? kiclient.getDetails().get("tanggalLahir") : "-";
+        nama.setText(String.format("%s%s", getResources().getString(R.string.name), fpClient.getColumnmaps().get("namalengkap") != null ? fpClient.getColumnmaps().get("namalengkap") : "-"));
+        nik.setText(String.format("%s%s", getResources().getString(R.string.nik), fpClient.getDetails().get("nik") != null ? fpClient.getDetails().get("nik") : "-"));
+        husband_name.setText(String.format("%s%s", getResources().getString(R.string.husband_name), fpClient.getColumnmaps().get("namaSuami") != null ? fpClient.getColumnmaps().get("namaSuami") : "-"));
+        String tgl = fpClient.getDetails().get("tanggalLahir") != null ? fpClient.getDetails().get("tanggalLahir") : "-";
         String tgl_lahir = null;
         if (tgl != null && !tgl.isEmpty()) {
             tgl_lahir = tgl.substring(0, tgl.indexOf("T"));
         }
 
         dob.setText(String.format("%s%s", getResources().getString(R.string.dob), tgl_lahir));
-        phone.setText(String.format("No HP: %s", kiclient.getDetails().get("NomorTelponHp") != null ? kiclient.getDetails().get("NomorTelponHp") : "-"));
+        phone.setText(String.format("No HP: %s", fpClient.getDetails().get("NomorTelponHp") != null ? fpClient.getDetails().get("NomorTelponHp") : "-"));
 
         //risk
-        if (kiclient.getDetails().get("highRiskPregnancyYoungMaternalAge") != null) {
-            risk1.setText(String.format("%s%s", getResources().getString(R.string.highRiskPregnancyYoungMaternalAge), humanize(kiclient.getDetails().get("highRiskPregnancyYoungMaternalAge"))));
+        if (fpClient.getDetails().get("highRiskPregnancyYoungMaternalAge") != null) {
+            risk1.setText(String.format("%s%s", getResources().getString(R.string.highRiskPregnancyYoungMaternalAge), humanize(fpClient.getDetails().get("highRiskPregnancyYoungMaternalAge"))));
         }
-        if (kiclient.getDetails().get("highRiskPregnancyOldMaternalAge") != null) {
-            risk1.setText(String.format("%s%s", getResources().getString(R.string.highRiskPregnancyOldMaternalAge), humanize(kiclient.getDetails().get("highRiskPregnancyYoungMaternalAge"))));
+        if (fpClient.getDetails().get("highRiskPregnancyOldMaternalAge") != null) {
+            risk1.setText(String.format("%s%s", getResources().getString(R.string.highRiskPregnancyOldMaternalAge), humanize(fpClient.getDetails().get("highRiskPregnancyYoungMaternalAge"))));
         }
-        if (kiclient.getDetails().get("highRiskPregnancyProteinEnergyMalnutrition") != null
-                || kiclient.getDetails().get("HighRiskPregnancyAbortus") != null
-                || kiclient.getDetails().get("HighRiskLabourSectionCesareaRecord") != null
+        if (fpClient.getDetails().get("highRiskPregnancyProteinEnergyMalnutrition") != null
+                || fpClient.getDetails().get("HighRiskPregnancyAbortus") != null
+                || fpClient.getDetails().get("HighRiskLabourSectionCesareaRecord") != null
                 ) {
-            risk2.setText(String.format("%s%s", getResources().getString(R.string.highRiskPregnancyProteinEnergyMalnutrition), humanize(kiclient.getDetails().get("highRiskPregnancyProteinEnergyMalnutrition"))));
-            risk3.setText(String.format("%s%s", getResources().getString(R.string.HighRiskPregnancyAbortus), humanize(kiclient.getDetails().get("HighRiskPregnancyAbortus"))));
-            risk4.setText(String.format("%s%s", getResources().getString(R.string.HighRiskLabourSectionCesareaRecord), humanize(kiclient.getDetails().get("HighRiskLabourSectionCesareaRecord"))));
+            risk2.setText(String.format("%s%s", getResources().getString(R.string.highRiskPregnancyProteinEnergyMalnutrition), humanize(fpClient.getDetails().get("highRiskPregnancyProteinEnergyMalnutrition"))));
+            risk3.setText(String.format("%s%s", getResources().getString(R.string.HighRiskPregnancyAbortus), humanize(fpClient.getDetails().get("HighRiskPregnancyAbortus"))));
+            risk4.setText(String.format("%s%s", getResources().getString(R.string.HighRiskLabourSectionCesareaRecord), humanize(fpClient.getDetails().get("HighRiskLabourSectionCesareaRecord"))));
 
         }
 
         show_risk.setText(getResources().getString(R.string.show_more_button));
         show_detail.setText(getResources().getString(R.string.show_less_button));
 
-        village.setText(String.format(": %s", humanize(kiclient.getDetails().get("cityVillage") != null ? kiclient.getDetails().get("cityVillage") : "-")));
-        subvillage.setText(String.format(": %s", humanize(kiclient.getDetails().get("address1") != null ? kiclient.getDetails().get("address1") : "-")));
-        age.setText(String.format(": %s", humanize(kiclient.getColumnmaps().get("umur") != null ? kiclient.getColumnmaps().get("umur") : "-")));
-        alamat.setText(String.format(": %s", humanize(kiclient.getDetails().get("address3") != null ? kiclient.getDetails().get("address3") : "-")));
-        education.setText(String.format(": %s", humanize(kiclient.getDetails().get("pendidikan") != null ? kiclient.getDetails().get("pendidikan") : "-")));
-        religion.setText(String.format(": %s", humanize(kiclient.getDetails().get("agama") != null ? kiclient.getDetails().get("agama") : "-")));
-        job.setText(String.format(": %s", humanize(kiclient.getDetails().get("pekerjaan") != null ? kiclient.getDetails().get("pekerjaan") : "-")));
-        gakin.setText(String.format(": %s", humanize(kiclient.getDetails().get("gakinTidak") != null ? kiclient.getDetails().get("gakinTidak") : "-")));
-        blood_type.setText(String.format(": %s", humanize(kiclient.getDetails().get("golonganDarah") != null ? kiclient.getDetails().get("golonganDarah") : "-")));
-        asuransi.setText(String.format(": %s", humanize(kiclient.getDetails().get("jamkesmas") != null ? kiclient.getDetails().get("jamkesmas") : "-")));
+        village.setText(String.format(": %s", humanize(fpClient.getDetails().get("cityVillage") != null ? fpClient.getDetails().get("cityVillage") : "-")));
+        subvillage.setText(String.format(": %s", humanize(fpClient.getDetails().get("address1") != null ? fpClient.getDetails().get("address1") : "-")));
+        age.setText(String.format(": %s", humanize(fpClient.getColumnmaps().get("umur") != null ? fpClient.getColumnmaps().get("umur") : "-")));
+        alamat.setText(String.format(": %s", humanize(fpClient.getDetails().get("address3") != null ? fpClient.getDetails().get("address3") : "-")));
+        education.setText(String.format(": %s", humanize(fpClient.getDetails().get("pendidikan") != null ? fpClient.getDetails().get("pendidikan") : "-")));
+        religion.setText(String.format(": %s", humanize(fpClient.getDetails().get("agama") != null ? fpClient.getDetails().get("agama") : "-")));
+        job.setText(String.format(": %s", humanize(fpClient.getDetails().get("pekerjaan") != null ? fpClient.getDetails().get("pekerjaan") : "-")));
+        gakin.setText(String.format(": %s", humanize(fpClient.getDetails().get("gakinTidak") != null ? fpClient.getDetails().get("gakinTidak") : "-")));
+        blood_type.setText(String.format(": %s", humanize(fpClient.getDetails().get("golonganDarah") != null ? fpClient.getDetails().get("golonganDarah") : "-")));
+        asuransi.setText(String.format(": %s", humanize(fpClient.getDetails().get("jamkesmas") != null ? fpClient.getDetails().get("jamkesmas") : "-")));
 
-        jenisKontrasepsi.setText(String.format(": %s", humanize(kiclient.getDetails().get("jenisKontrasepsi") != null ? kiclient.getDetails().get("jenisKontrasepsi") : "-")));
-        alkihb.setText(String.format(": %s", humanize(kiclient.getDetails().get("alkihb") != null ? kiclient.getDetails().get("alkihb") : "-")));
-        tdSistolik.setText(String.format(": %s", humanize(kiclient.getDetails().get("tdDiastolik") != null ? kiclient.getDetails().get("tdDiastolik") : "-")));
-        td_diastolik.setText(String.format(": %s", humanize(kiclient.getDetails().get("tdDiastolik") != null ? kiclient.getDetails().get("tdDiastolik") : "-")));
-        alkilila.setText(String.format(": %s", humanize(kiclient.getDetails().get("alkilila") != null ? kiclient.getDetails().get("alkilila") : "-")));
-        alkiPenyakitIms.setText(String.format(": %s", humanize(kiclient.getDetails().get("alkiPenyakitIms") != null ? kiclient.getDetails().get("alkiPenyakitIms") : "-")));
-        keteranganTentangPesertaKB.setText(String.format(": %s", humanize(kiclient.getDetails().get("keteranganTentangPesertaKB") != null ? kiclient.getDetails().get("keteranganTentangPesertaKB") : "-")));
-        keteranganTentangPesertaKB2.setText(String.format(": %s", humanize(kiclient.getDetails().get("keterangantentangPesertaKB2") != null ? kiclient.getDetails().get("keterangantentangPesertaKB2") : "-")));
-        alkiPenyakitKronis.setText(String.format(": %s", humanize(kiclient.getDetails().get("alkiPenyakitKronis") != null ? kiclient.getDetails().get("alkiPenyakitKronis") : "-")));
-        keteranganGantiCara.setText(String.format(": %s", humanize(kiclient.getDetails().get("keteranganGantiCara") != null ? kiclient.getDetails().get("keteranganGantiCara") : "-")));
+        jenisKontrasepsi.setText(String.format(": %s", humanize(fpClient.getDetails().get("jenisKontrasepsi") != null ? fpClient.getDetails().get("jenisKontrasepsi") : "-")));
+        alkihb.setText(String.format(": %s", humanize(fpClient.getDetails().get("alkihb") != null ? fpClient.getDetails().get("alkihb") : "-")));
+        tdSistolik.setText(String.format(": %s", humanize(fpClient.getDetails().get("tdDiastolik") != null ? fpClient.getDetails().get("tdDiastolik") : "-")));
+        td_diastolik.setText(String.format(": %s", humanize(fpClient.getDetails().get("tdDiastolik") != null ? fpClient.getDetails().get("tdDiastolik") : "-")));
+        alkilila.setText(String.format(": %s", humanize(fpClient.getDetails().get("alkilila") != null ? fpClient.getDetails().get("alkilila") : "-")));
+        alkiPenyakitIms.setText(String.format(": %s", humanize(fpClient.getDetails().get("alkiPenyakitIms") != null ? fpClient.getDetails().get("alkiPenyakitIms") : "-")));
+        keteranganTentangPesertaKB.setText(String.format(": %s", humanize(fpClient.getDetails().get("keteranganTentangPesertaKB") != null ? fpClient.getDetails().get("keteranganTentangPesertaKB") : "-")));
+        keteranganTentangPesertaKB2.setText(String.format(": %s", humanize(fpClient.getDetails().get("keterangantentangPesertaKB2") != null ? fpClient.getDetails().get("keterangantentangPesertaKB2") : "-")));
+        alkiPenyakitKronis.setText(String.format(": %s", humanize(fpClient.getDetails().get("alkiPenyakitKronis") != null ? fpClient.getDetails().get("alkiPenyakitKronis") : "-")));
+        keteranganGantiCara.setText(String.format(": %s", humanize(fpClient.getDetails().get("keteranganGantiCara") != null ? fpClient.getDetails().get("keteranganGantiCara") : "-")));
 
 //      risk detail
-        highRiskSTIBBVs.setText(humanize(kiclient.getDetails().get("highRiskSTIBBVs") != null ? kiclient.getDetails().get("highRiskSTIBBVs") : "-"));
-        highRiskEctopicPregnancy.setText(humanize(kiclient.getDetails().get("highRiskEctopicPregnancy") != null ? kiclient.getDetails().get("highRiskEctopicPregnancy") : "-"));
-        highRiskCardiovascularDiseaseRecord.setText(humanize(kiclient.getDetails().get("highRiskCardiovascularDiseaseRecord") != null ? kiclient.getDetails().get("highRiskCardiovascularDiseaseRecord") : "-"));
-        highRiskDidneyDisorder.setText(humanize(kiclient.getDetails().get("highRiskDidneyDisorder") != null ? kiclient.getDetails().get("highRiskDidneyDisorder") : "-"));
-        highRiskHeartDisorder.setText(humanize(kiclient.getDetails().get("highRiskHeartDisorder") != null ? kiclient.getDetails().get("highRiskHeartDisorder") : "-"));
-        highRiskAsthma.setText(humanize(kiclient.getDetails().get("highRiskAsthma") != null ? kiclient.getDetails().get("highRiskAsthma") : "-"));
-        highRiskTuberculosis.setText(humanize(kiclient.getDetails().get("highRiskTuberculosis") != null ? kiclient.getDetails().get("highRiskTuberculosis") : "-"));
-        highRiskMalaria.setText(humanize(kiclient.getDetails().get("highRiskMalaria") != null ? kiclient.getDetails().get("highRiskMalaria") : "-"));
+        highRiskSTIBBVs.setText(humanize(fpClient.getDetails().get("highRiskSTIBBVs") != null ? fpClient.getDetails().get("highRiskSTIBBVs") : "-"));
+        highRiskEctopicPregnancy.setText(humanize(fpClient.getDetails().get("highRiskEctopicPregnancy") != null ? fpClient.getDetails().get("highRiskEctopicPregnancy") : "-"));
+        highRiskCardiovascularDiseaseRecord.setText(humanize(fpClient.getDetails().get("highRiskCardiovascularDiseaseRecord") != null ? fpClient.getDetails().get("highRiskCardiovascularDiseaseRecord") : "-"));
+        highRiskDidneyDisorder.setText(humanize(fpClient.getDetails().get("highRiskDidneyDisorder") != null ? fpClient.getDetails().get("highRiskDidneyDisorder") : "-"));
+        highRiskHeartDisorder.setText(humanize(fpClient.getDetails().get("highRiskHeartDisorder") != null ? fpClient.getDetails().get("highRiskHeartDisorder") : "-"));
+        highRiskAsthma.setText(humanize(fpClient.getDetails().get("highRiskAsthma") != null ? fpClient.getDetails().get("highRiskAsthma") : "-"));
+        highRiskTuberculosis.setText(humanize(fpClient.getDetails().get("highRiskTuberculosis") != null ? fpClient.getDetails().get("highRiskTuberculosis") : "-"));
+        highRiskMalaria.setText(humanize(fpClient.getDetails().get("highRiskMalaria") != null ? fpClient.getDetails().get("highRiskMalaria") : "-"));
 
-        txt_HighRiskLabourSectionCesareaRecord.setText(humanize(kiclient.getDetails().get("HighRiskLabourSectionCesareaRecord") != null ? kiclient.getDetails().get("HighRiskLabourSectionCesareaRecord") : "-"));
-        HighRiskPregnancyTooManyChildren.setText(humanize(kiclient.getDetails().get("HighRiskPregnancyTooManyChildren") != null ? kiclient.getDetails().get("HighRiskPregnancyTooManyChildren") : "-"));
+        txt_HighRiskLabourSectionCesareaRecord.setText(humanize(fpClient.getDetails().get("HighRiskLabourSectionCesareaRecord") != null ? fpClient.getDetails().get("HighRiskLabourSectionCesareaRecord") : "-"));
+        HighRiskPregnancyTooManyChildren.setText(humanize(fpClient.getDetails().get("HighRiskPregnancyTooManyChildren") != null ? fpClient.getDetails().get("HighRiskPregnancyTooManyChildren") : "-"));
 
-        txt_highRiskHIVAIDS.setText(humanize(kiclient.getDetails().get("highRiskHIVAIDS") != null ? kiclient.getDetails().get("highRiskHIVAIDS") : "-"));
+        txt_highRiskHIVAIDS.setText(humanize(fpClient.getDetails().get("highRiskHIVAIDS") != null ? fpClient.getDetails().get("highRiskHIVAIDS") : "-"));
 
         AllCommonsRepository iburep = Context.getInstance().allCommonsRepositoryobjects("ibu");
-        if (kiclient.getColumnmaps().get("ibu.id") != null) {
-            final CommonPersonObject ibuparent = iburep.findByCaseID(kiclient.getColumnmaps().get("ibu.id"));
+        if (fpClient.getColumnmaps().get("ibu.id") != null) {
+            final CommonPersonObject ibuparent = iburep.findByCaseID(fpClient.getColumnmaps().get("ibu.id"));
 
             txt_lbl_highRiskLabourFetusMalpresentation.setText(humanize(ibuparent.getDetails().get("highRiskLabourFetusMalpresentation") != null ? ibuparent.getDetails().get("highRiskLabourFetusMalpresentation") : "-"));
             txt_highRisklabourFetusNumber.setText(humanize(ibuparent.getDetails().get("highRisklabourFetusNumber") != null ? ibuparent.getDetails().get("highRisklabourFetusNumber") : "-"));
@@ -260,6 +261,28 @@ public class DetailFPActivity extends Activity {
                 findViewById(R.id.tv_show_more_detail).setVisibility(View.GONE);
             }
         });
+
+        // FR
+        final HashMap<String, String> hash = Tools.retrieveHash(context.applicationContext());
+        kiview.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // FlurryFacade.logEvent("taking_mother_pictures_on_kohort_ibu_detail_view");
+                String entityid = fpClient.entityId();
+                boolean updateMode = false;
+                if (hash.containsValue(entityid)) {
+                    updateMode = true;
+                }
+                Intent takePictureIntent = new Intent(DetailFPActivity.this, OpenCameraActivity.class);
+                takePictureIntent.putExtra("org.smartregister.facialrecognition.OpenCameraActivity.updated", updateMode);
+                takePictureIntent.putExtra("org.smartregister.facialrecognition.PhotoConfirmationActivity.identify", false);
+                takePictureIntent.putExtra("org.smartregister.facialrecognition.PhotoConfirmationActivity.id", entityid);
+                takePictureIntent.putExtra("org.smartregister.facialrecognition.PhotoConfirmationActivity.origin", TAG); // send Class Name
+                startActivityForResult(takePictureIntent, 2);
+
+            }
+        });
+
 
     }
 

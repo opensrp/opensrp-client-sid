@@ -18,7 +18,6 @@ import org.opensrp.api.util.LocationTree;
 import org.opensrp.api.util.TreeNode;
 import org.smartregister.Context;
 import org.smartregister.bidan.R;
-import org.smartregister.bidan.activity.BaseRegisterActivity;
 import org.smartregister.bidan.activity.DetailFPActivity;
 import org.smartregister.bidan.activity.NativeKIFPSmartRegisterActivity;
 import org.smartregister.bidan.activity.NativeKIbuSmartRegisterActivity;
@@ -422,7 +421,7 @@ public class FPSmartRegisterFragment extends BaseSmartRegisterFragment {
             switch (view.getId()) {
                 case R.id.profile_info_layout:
 //                    FlurryFacade.logEvent("click_detail_view_on_kohort_kb_dashboard");
-                    DetailFPActivity.kiclient = (CommonPersonObjectClient) view.getTag();
+                    DetailFPActivity.fpClient = (CommonPersonObjectClient) view.getTag();
                     Intent intent = new Intent(getActivity(), DetailFPActivity.class);
                     startActivity(intent);
                     getActivity().finish();

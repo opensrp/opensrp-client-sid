@@ -16,6 +16,8 @@ import org.smartregister.bidan.utils.Support;
 import org.smartregister.commonregistry.AllCommonsRepository;
 import org.smartregister.commonregistry.CommonPersonObject;
 import org.smartregister.commonregistry.CommonPersonObjectClient;
+import org.smartregister.facialrecognition.activities.OpenCameraActivity;
+import org.smartregister.facialrecognition.utils.Tools;
 import org.smartregister.repository.DetailsRepository;
 import org.smartregister.util.FormUtils;
 
@@ -36,24 +38,10 @@ public class DetailPNCActivity extends Activity {
 
     //image retrieving
     private static final String TAG = DetailPNCActivity.class.getName();
-    private static final String IMAGE_CACHE_DIR = "thumbs";
     public static CommonPersonObjectClient pncclient;
-    //  private static KmsCalc  kmsCalc;
-    private static int mImageThumbSize;
-    private static int mImageThumbSpacing;
-    private static String showbgm;
-//    private static ImageFetcher mImageFetcher;
 
     //image retrieving
     SimpleDateFormat timer = new SimpleDateFormat("hh:mm:ss");
-    private SimpleDateFormat fta;
-    private SimpleDateFormat ftb;
-    private View.OnClickListener bpmListener = new View.OnClickListener() {
-        @Override
-        public void onClick(View v) {
-//            bpmAction();
-        }
-    };
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -85,10 +73,8 @@ public class DetailPNCActivity extends Activity {
 //        TextView risk7 = (TextView) findViewById(R.id.txt_risk7);
 //        TextView risk8 = (TextView) findViewById(R.id.txt_risk8);
 
-//        ImageView heart_bpm = (ImageView) findViewById(R.id.icon_device);
         ImageView device = (ImageView) findViewById(R.id.iv_icon_device);
         device.setVisibility(View.VISIBLE);
-        device.setOnClickListener(bpmListener);
 
         //detail data
         TextView txt_keadaanIbu = (TextView) findViewById(R.id.txt_keadaanIbu);
@@ -310,82 +296,35 @@ public class DetailPNCActivity extends Activity {
             }
         });
 
-        txt_tandaVitalTDSistolik.setOnClickListener(bpmListener);
-        txt_tandaVitalTDDiastolik.setOnClickListener(bpmListener);
+        // FR
+        final HashMap<String, String> hash = Tools.retrieveHash(context.applicationContext());
 
-    }
+        kiview.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // FlurryFacade.logEvent("taking_mother_pictures_on_kohort_ibu_detail_view");
+                String entityid = pncclient.entityId();
 
-    private void bpmAction() {
-//        Intent i = new Intent(DetailPNCActivity.this, MainBPM.class);
-//        Intent i = new Intent(ANCDetailActivity.this, TestBPM.class);
-//        fta = new SimpleDateFormat ("yyyy-MM-dd");
-//        ftb = new SimpleDateFormat ("yyyy-MM-dd");
-//        startActivityForResult(i, 2);
+                boolean updateMode = false;
+                if (hash.containsValue(entityid)) {
+                    updateMode = true;
+                }
+                Intent takePictureIntent = new Intent(DetailPNCActivity.this, OpenCameraActivity.class);
+                takePictureIntent.putExtra("org.smartregister.facialrecognition.OpenCameraActivity.updated", updateMode);
+                takePictureIntent.putExtra("org.smartregister.facialrecognition.PhotoConfirmationActivity.identify", false);
+                takePictureIntent.putExtra("org.smartregister.facialrecognition.PhotoConfirmationActivity.id", entityid);
+                takePictureIntent.putExtra("org.smartregister.facialrecognition.PhotoConfirmationActivity.origin", TAG); // send Class Name
+                startActivityForResult(takePictureIntent, 2);
+
+            }
+        });
+
     }
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if (requestCode == 2 && resultCode != RESULT_CANCELED) {
-//            Log.e(
-//                    TAG, "onActivityResult: "+
-//                    data.getStringExtra("HIGH") +
-//                    data.getStringExtra("LOW") +
-//                    data.getStringExtra("AHR") +
-//                    data.getStringExtra("PULSE")
-//            );
-            DetailsRepository detailsRepository = org.smartregister.Context.getInstance().detailsRepository();
-            Long tsLong = System.currentTimeMillis() / 1000;
-            detailsRepository.add(pncclient.entityId(), "tandaVitalTDSistolik", data.getStringExtra("HIGH"), tsLong);
-            detailsRepository.add(pncclient.entityId(), "tandaVitalTDDiastolik", data.getStringExtra("LOW"), tsLong);
-            detailsRepository.add(pncclient.entityId(), "tandaVitalPulse", data.getStringExtra("PULSE"), tsLong);
-            try {
-                Log.i(TAG, "onActivityResult: saveToserver");
-                FormUtils formUtils = FormUtils.getInstance(getApplicationContext());
-                String formSubmission =
-                        "<Blood_Test encounter_type=\"Blood Test\" id=\"blood_test\" version=\"201705080820\" _id=\"" + pncclient.entityId() + "\">" +
-                                "<formhub><uuid>" + UUID.randomUUID().toString() + "</uuid></formhub>" +
-                                "<start openmrs_entity=\"encounter\" openmrs_entity_id=\"encounter_start\">2017-05-08T17:21:47.000+08:00</start>" +
-                                "<today openmrs_entity=\"encounter\" openmrs_entity_id=\"encounter_date\">" + fta + "</today>" +
-                                "<deviceid>Error: could not determine deviceID</deviceid>" +
-                                "<simserial>no simserial property in enketo</simserial>" +
-                                "<phonenumber>no phonenumber property in enketo</phonenumber>" +
-                                "<Province>Nusa Tenggara Barat</Province>" +
-                                "<District>Kota Mataram</District>" +
-                                "<Sub-district>Tanjung Karang</Sub-district>" +
-                                "<Village>Banjar</Village>" +
-                                "<Sub-village>Selaparang.</Sub-village>" +
-                                "<generated_note_name_13/>" +
-                                "<generated_note_name_14/>" +
-                                "<existing_location openmrs_entity=\"encounter\" openmrs_entity_id=\"location_id\">" + pncclient.getDetails().get("Village") + "</existing_location>" +
-                                "<provinsi openmrs_entity=\"person_address\" openmrs_entity_id=\"stateProvince\" openmrs_entity_parent=\"usual_residence\">Nusa Tenggara Barat</provinsi>" +
-                                "<kabupaten openmrs_entity=\"person_address\" openmrs_entity_id=\"countyDistrict\" openmrs_entity_parent=\"usual_residence\">Kota Mataram</kabupaten>" +
-                                "<desa openmrs_entity=\"person_address\" openmrs_entity_id=\"cityVillage\" openmrs_entity_parent=\"usual_residence\">Banjar</desa>" +
-                                "<dusun openmrs_entity=\"person_address\" openmrs_entity_id=\"address1\" openmrs_entity_parent=\"usual_residence\">Selaparang.</dusun>" +
-                                "<kecamatan openmrs_entity=\"person_address\" openmrs_entity_id=\"address2\" openmrs_entity_parent=\"usual_residence\">Tanjung Karang</kecamatan>" +
-                                "<td_sistolik openmrs_entity=\"concept\" openmrs_entity_id=\"5085AAAAAAAAAAAAAAAAAAAAAAAAAAAA\">" + data.getStringExtra("HIGH") + "</td_sistolik>" +
-                                "<td_diastolik openmrs_entity=\"concept\" openmrs_entity_id=\"5086AAAAAAAAAAAAAAAAAAAAAAAAAAAA\">" + data.getStringExtra("LOW") + "</td_diastolik>" +
-                                "<pulse openmrs_entity=\"concept\" openmrs_entity_id=\"5087AAAAAAAAAAAAAAAAAAAAAAAAAAAA\">" + data.getStringExtra("PULSE") + "</pulse>\n" +
-                                "<ahr openmrs_entity=\"concept\" openmrs_entity_id=\"160632AAAAAAAAAAAAAAAAAAAAAAAAAA\" openmrs_entity_parent=\"5087AAAAAAAAAAAAAAAAAAAAAAAAAAAA\">" + data.getStringExtra("AHR") + "</ahr>" +
-                                "<end openmrs_entity=\"encounter\" openmrs_entity_id=\"encounter_end\">2017-05-08T17:21:47.000+08:00</end>\n" +
-                                "<meta>" +
-                                "<instanceID>uuid:" + UUID.randomUUID().toString() + "</instanceID>" +
-                                "<deprecatedID/>" +
-                                "</meta>" +
-                                "</Blood_Test>";
 
-                formUtils.generateFormSubmisionFromXMLString(pncclient.entityId(), formSubmission, "blood_test", new JSONObject());
-
-            } catch (Exception e) {
-                // TODO: show error dialog on the formfragment if the submission fails
-                e.printStackTrace();
-            }
-        } else {
-            Log.e(TAG, "onActivityResult: Cancel ");
-        }
-
-        finish();
-        startActivity(getIntent());
     }
 
 }

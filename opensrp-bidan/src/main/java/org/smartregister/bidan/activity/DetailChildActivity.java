@@ -16,6 +16,8 @@ import org.smartregister.bidan.utils.Support;
 import org.smartregister.commonregistry.AllCommonsRepository;
 import org.smartregister.commonregistry.CommonPersonObject;
 import org.smartregister.commonregistry.CommonPersonObjectClient;
+import org.smartregister.facialrecognition.activities.OpenCameraActivity;
+import org.smartregister.facialrecognition.utils.Tools;
 import org.smartregister.repository.DetailsRepository;
 
 import java.util.HashMap;
@@ -151,7 +153,7 @@ public class DetailChildActivity extends Activity {
         campak.setText(String.format(": %s", humanize(childclient.getDetails().get("campak") != null ? childclient.getDetails().get("campak") : "-")));
         vita.setText(String.format(": %s", humanize(childclient.getDetails().get("pelayananVita") != null ? childclient.getDetails().get("pelayananVita") : "-")));
 
-//        hash = Tools.retrieveHash(context.applicationContext());
+        hash = Tools.retrieveHash(context.applicationContext());
 
         childview.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -159,19 +161,21 @@ public class DetailChildActivity extends Activity {
 
 //                FlurryFacade.logEvent("taking_child_pictures_on_anak_detail_view");
                 entityid = childclient.entityId();
-//                if (hash.containsValue(entityid)) {
-//                    updateMode = true;
-//                }
+                if (hash.containsValue(entityid)) {
+                    updateMode = true;
+                }
                 Toast.makeText(DetailChildActivity.this, "Replace for Camera", Toast.LENGTH_SHORT).show();
-//                Intent takePictureIntent = new Intent(DetailChildActivity.this, SmartShutterActivity.class);
-//                takePictureIntent.putExtra("org.sid.sidface.SmartShutterActivity.updated", updateMode);
-//                takePictureIntent.putExtra("IdentifyPerson", false);
-//                takePictureIntent.putExtra("org.sid.sidface.ImageConfirmation.id", entityid);
-//                takePictureIntent.putExtra("org.sid.sidface.ImageConfirmation.origin", TAG); // send Class Name
-//                startActivityForResult(takePictureIntent, 2);
+                Intent takePictureIntent = new Intent(DetailChildActivity.this, OpenCameraActivity.class);
+                takePictureIntent.putExtra("org.smartregister.facialrecognition.OpenCameraActivity.updated", updateMode);
+                takePictureIntent.putExtra("org.smartregister.facialrecognition.PhotoConfirmationActivity.identify", false);
+                takePictureIntent.putExtra("org.smartregister.facialrecognition.PhotoConfirmationActivity.id", entityid);
+                takePictureIntent.putExtra("org.smartregister.facialrecognition.PhotoConfirmationActivity.origin", TAG); // send Class Name
+                startActivityForResult(takePictureIntent, 2);
 
             }
         });
+
+
 
     }
 
