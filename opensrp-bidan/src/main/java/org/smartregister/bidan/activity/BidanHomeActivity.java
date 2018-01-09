@@ -239,7 +239,7 @@ public class BidanHomeActivity extends SecuredActivity {
 
     @Override
     protected void onResumption() {
-//        LoginActivity.setLanguage();
+        LoginActivity.setLanguage();
 
         updateRegisterCounts();
         updateSyncIndicator();

@@ -1,15 +1,20 @@
 package org.smartregister.bidan.fragment;
 
+import android.annotation.TargetApi;
+import android.os.Build;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.View;
 
 import org.smartregister.bidan.R;
 import org.smartregister.bidan.activity.BaseRegisterActivity;
+import org.smartregister.bidan.activity.LoginActivity;
 import org.smartregister.cursoradapter.SecuredNativeSmartRegisterCursorAdapterFragment;
 import org.smartregister.provider.SmartRegisterClientsProvider;
 import org.smartregister.view.activity.SecuredNativeSmartRegisterActivity;
 import org.smartregister.view.dialog.DialogOption;
+
+import java.util.Locale;
 
 import static android.view.View.INVISIBLE;
 import static android.view.View.VISIBLE;
@@ -93,12 +98,14 @@ public class BaseSmartRegisterFragment extends SecuredNativeSmartRegisterCursorA
     public void initializeQueries(String s) {
     }
 
+    @TargetApi(Build.VERSION_CODES.LOLLIPOP)
     @Override
     protected void onResumption() {
         getDefaultOptionsProvider();
         if (isPausedOrRefreshList()) {
             initializeQueries("");
         }
+
 //        try {
 //            LoginActivity.setLanguage();
 //        } catch (Exception ignored) {

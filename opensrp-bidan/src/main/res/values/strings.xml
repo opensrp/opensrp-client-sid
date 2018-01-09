@@ -57,8 +57,8 @@
     <string name="pnc_edit">Edit PNC</string>
     <string name="pnc_visit">PNC Visit</string>
     <string name="pnc_pospartum_kb">Postpartum KB</string>
-    <string name="str_next">"Next &gt;&gt;"</string>
-    <string name="str_previous">"&lt;&lt; Previous"</string>
+    <string name="str_next">"Next …"</string>
+    <string name="str_previous">"… Previous"</string>
     <string name="str_page_info">Page {0} of {1}</string>
     <string name="str_edit_ki_form">EC Edit</string>
 

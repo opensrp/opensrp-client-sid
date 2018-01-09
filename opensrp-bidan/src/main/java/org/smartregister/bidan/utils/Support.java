@@ -168,7 +168,7 @@ public class Support {
             Uri external = Uri.fromFile(externalFile);
             view.setImageURI(external);
         } else {
-            Log.logError(Support.class.getName(), String.format("image %s doesn't exist", file));
+            Log.logDebug(String.format("image %s doesn't exist", file));
         }
     }
 

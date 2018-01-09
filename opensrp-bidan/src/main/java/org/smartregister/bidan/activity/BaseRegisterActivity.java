@@ -1,6 +1,9 @@
 package org.smartregister.bidan.activity;
 
+import android.annotation.SuppressLint;
+import android.annotation.TargetApi;
 import android.content.pm.ActivityInfo;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentPagerAdapter;
@@ -35,6 +38,7 @@ import org.smartregister.view.viewpager.OpenSRPViewPager;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.Locale;
 import java.util.Map;
 
 import butterknife.Bind;
@@ -86,8 +90,9 @@ public class BaseRegisterActivity extends SecuredNativeSmartRegisterActivity imp
         return null;
     }
 
+    @TargetApi(Build.VERSION_CODES.LOLLIPOP)
     protected Fragment mBaseFragment() {
-
+//        Locale.setDefault(Locale.forLanguageTag("in"));
         return null;
     }
 
@@ -174,9 +179,14 @@ public class BaseRegisterActivity extends SecuredNativeSmartRegisterActivity imp
 
     }
 
-
+    @TargetApi(Build.VERSION_CODES.LOLLIPOP)
+    @SuppressLint("LongLogTag")
     public void onPageChanged(int page) {
         setRequestedOrientation(page == 0 ? ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE : ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
+//        Log.logError("CheckLanguage");
+        LoginActivity.setLanguage();
+        Locale.setDefault(Locale.forLanguageTag("in"));
+        android.util.Log.e(TAG, "onPageChanged: "+ Locale.getDefault().getDisplayLanguage() );
     }
 
     private boolean currentActivityIsShowingForm() {
@@ -374,6 +384,7 @@ public class BaseRegisterActivity extends SecuredNativeSmartRegisterActivity imp
                 }
 
                 FieldOverrides fo = new FieldOverrides(fieldOverrides.toString());
+                // Open Enketo Form
                 onEditSelectionWithMetadata((EditOption) option, (SmartRegisterClient) tag, fo.getJSONString());
 
             } else {

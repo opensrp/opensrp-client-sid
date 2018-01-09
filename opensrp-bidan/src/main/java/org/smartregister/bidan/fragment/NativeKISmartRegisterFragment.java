@@ -226,7 +226,7 @@ public class NativeKISmartRegisterFragment extends BaseSmartRegisterFragment {
 
             } else {
                 mainCondition = "is_closed = 0 AND namalengkap != '' ";
-                Log.e(TAG, "initializeQueries: Not Initialized");
+//                Log.e(TAG, "initializeQueries: Not Initialized");
             }
 
             joinTable = "";
@@ -415,12 +415,14 @@ public class NativeKISmartRegisterFragment extends BaseSmartRegisterFragment {
     @Override
     protected void onResumption() {
         super.onResumption();
-        Log.e(TAG, "onResumption: "+ LoginActivity.getLanguage());
+//        Log.e(TAG, "onResumption: "+ LoginActivity.getLanguage());
+        LoginActivity.setDefaultLanguage();
+
         if (LoginActivity.getLanguage().equals("en")){
             LoginActivity.switchLanguagePreference();
             LoginActivity.setDefaultLanguage();
         }
-        Log.e(TAG, "onResumption: "+ LoginActivity.getLanguage());
+//        Log.e(TAG, "onResumption: "+ LoginActivity.getLanguage());
 
     }
 
