@@ -48,10 +48,10 @@ script:
   - ls -la
   #- ./gradlew connectedAndroidTest
   #Run All tests Unit and Instrumentation
-  - travis_wait ./gradlew opensrp-client-sid:clean opensrp-client-sid:jacocoTestReport coveralls --stacktrace
+  - travis_wait ./gradlew opensrp-app-bidan:clean opensrp-app-bidan:jacocoTestReport coveralls --stacktrace
 
 after_failure:
- - pandoc opensrp-client-sid/build/reports/tests/index.html -t plain
+ - pandoc opensrp-app-bidan/build/reports/tests/index.html -t plain
 
 
 notifications:
