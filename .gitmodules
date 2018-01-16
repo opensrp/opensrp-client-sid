@@ -1,6 +1,6 @@
-[submodule "lib/bpm"]
-	path = lib/bpm
-	url = git@github.com:sidthrive/opensrp-device.git
-[submodule "lib/facialrecognition"]
-        path = lib/facialrecognition
-        url = git@github.com:OpenSRP/opensrp-client-facial-recognition.git
+#[submodule "lib/bpm"]
+#	path = lib/bpm
+#	url = git@github.com:sidthrive/opensrp-device.git
+#[submodule "lib/facialrecognition"]
+#        path = lib/facialrecognition
+#        url = git@github.com:OpenSRP/opensrp-client-facial-recognition.git
