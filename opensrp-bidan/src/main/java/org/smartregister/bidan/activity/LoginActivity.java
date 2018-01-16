@@ -10,6 +10,8 @@ import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.content.res.Resources;
 import android.os.Bundle;
+import android.support.v4.content.ContextCompat;
+import android.support.v4.content.res.ResourcesCompat;
 import android.text.InputType;
 import android.util.DisplayMetrics;
 import android.util.Log;
@@ -130,7 +132,11 @@ public class LoginActivity extends Activity {
         }
         setContentView(org.smartregister.R.layout.login);
         ImageView loginglogo = (ImageView)findViewById(R.id.login_logo);
-        loginglogo.setImageDrawable(getResources().getDrawable(R.drawable.login_logo_bidan));
+//        loginglogo.setImageDrawable(getResources().getDrawable(R.drawable.login_logo_bidan));
+        loginglogo.setImageDrawable(ResourcesCompat.getDrawable(getResources(), R.drawable.login_logo_bidan, null));
+//        ContextCompat.getDrawable(getActivity(), R.drawable.login_logo_bidan);
+        ResourcesCompat.getDrawable(getResources(), R.drawable.login_logo_bidan, null);
+
         context = Context.getInstance().updateApplicationContext(this.getApplicationContext());
 //        context = BidanApplication.getInstance().context();;
 
@@ -139,8 +145,10 @@ public class LoginActivity extends Activity {
         setDoneActionHandlerOnPasswordField();
         initializeProgressDialog();
         getActionBar().setTitle("");
-        getActionBar().setIcon(getResources().getDrawable(R.mipmap.logo));
-        getActionBar().setBackgroundDrawable(getResources().getDrawable(R.color.action_bar_background));
+//        getActionBar().setIcon(getResources().getDrawable(R.mipmap.logo));
+        getActionBar().setIcon(ResourcesCompat.getDrawable(getResources(), R.mipmap.logo, null));
+//        getActionBar().setBackgroundDrawable(getResources().getDrawable(R.color.action_bar_background));
+        getActionBar().setBackgroundDrawable(ResourcesCompat.getDrawable(getResources(), R.color.action_bar_background, null));
         setLanguage();
 
         debugApp();

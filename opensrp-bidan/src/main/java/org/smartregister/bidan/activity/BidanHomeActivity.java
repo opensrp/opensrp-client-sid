@@ -2,6 +2,7 @@ package org.smartregister.bidan.activity;
 
 import android.database.Cursor;
 import android.os.StrictMode;
+import android.support.v4.content.res.ResourcesCompat;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -184,7 +185,8 @@ public class BidanHomeActivity extends SecuredActivity {
         ACTION_HANDLED.addListener(updateANMDetailsListener);
 
         getSupportActionBar().setTitle("");
-        getSupportActionBar().setIcon(getResources().getDrawable(org.smartregister.bidan.R.mipmap.logo));
+//        getSupportActionBar().setIcon(getResources().getDrawable(org.smartregister.bidan.R.mipmap.logo));
+        getSupportActionBar().setIcon(ResourcesCompat.getDrawable(getResources(), R.mipmap.logo, null));
         getSupportActionBar().setLogo(org.smartregister.bidan.R.mipmap.logo);
         getSupportActionBar().setDisplayUseLogoEnabled(true);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
