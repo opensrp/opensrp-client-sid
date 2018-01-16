@@ -548,8 +548,8 @@
     <string name="usia">Clinical Age:&#160;</string>
     <string name="header_klinis">CLINCAL STATUS</string>
     <string name="sort_by_dob_label">Date Of Birth</string>
-    <string name="months_away" translatable="false">months away</string>
-    <string name="this_month" translatable="false">this month</string>
+    <string name="months_away">months away</string>
+    <string name="this_month">this month</string>
     <string name="delivered">delivered</string>
     <string name="month">Month</string>
     <string name="service_fp">Service Status: FP </string>
@@ -668,4 +668,33 @@
     <string name="header_neonatal">NEONATAL VISIT</string>
     <string name="header_immunizations">IMMUNIZATIONS</string>
     <string name="str_month">Month</string>
+
+
+    <string name="detail_subtitle">Details</string>
+    <string name="edd_title">EDD</string>
+    <string name="header_imunisasi_bcg_polio1">BCG POLIO1</string>
+    <string name="header_imunisasi_campak">CAMPAK</string>
+    <string name="header_imunisasi_dpt_hb1_polio2">DPT/HB1 POLIO2</string>
+    <string name="header_imunisasi_dpt_hb2_polio3">DPT/HB2 POLIO3</string>
+    <string name="header_imunisasi_dpt_hb3_polio4">DPT/HB3 POLIO3</string>
+    <string name="header_imunisasi_hb07">HB07</string>
+    <string name="header_pnc_plan">PNC PLAN</string>
+    <string name="header_trimester">TRIMESTER</string>
+    <string name="header_tt_imunisasi">TT VACCINE</string>
+    <string name="hh_last_visit_date">LAST VISIT</string>
+    <string name="kartu_ibu_selection">MOTHER CARD</string>
+    <string name="risk_flags_subtitle">RISK FLAGS</string>
+    <string name="risk_flags_title">RISK FLAGS</string>
+    <string name="sort_by_dusun">SORT BY VILLAGES</string>
+    <string name="sort_by_kb_method">SORT BY KB METHOD</string>
+    <string name="str_dokumentasi_persalinan_anc_form">ANC FORM DOCUMENTATION</string>
+    <string name="str_imunisasi_bayi">BABY VACCINE</string>
+    <string name="str_ki_search_hint">EDD SEARCH</string>
+    <string name="str_kunjungan_anak">VISIT</string>
+    <string name="str_register_anak_form">CHILD REGISTER FORM</string>
+    <string name="str_register_anc_partograf_form">ANC PARTOGRAF FORM</string>
+    <string name="str_register_kb_form">KB FORM</string>
+    <string name="str_tutup_anak">CHILD CLOSE FORM</string>
+    <string name="title_app">BIDAN</string>
+    <string name="title_double_selection">DOUBLE SELECTION</string>
 </resources>
