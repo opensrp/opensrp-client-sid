@@ -35,7 +35,7 @@ public class AllConstantsINA {
 
 
    //  Flurry Key Bidan EC Prototype 1
-    public static final String FLURRY_KEY = "7N8KZP67BP6QRJPB2RXX";
+//    public static final String FLURRY_KEY = "7N8KZP67BP6QRJPB2RXX";
 
     public class KeluargaBerencanaFields {
         public static final String CONTRACEPTION_METHOD = "jenisKontrasepsi";
@@ -66,6 +66,7 @@ public class AllConstantsINA {
         public static final String COUCH_DATABASE_PASS = "";
 
     }
+
     public class FormNames {
         public static final String EC_REGISTRATION = "ec_registration";
         public static final String FP_COMPLICATIONS = "fp_complications";
@@ -229,4 +230,23 @@ public class AllConstantsINA {
         public static int SLEEP_TIME = 15000;
         public static boolean IDLE = false;
     }
+
+    ////
+    public static final String FLURRY_KEY = "9RDM5TWW4HJ5QH8TNJ3P";
+    public static int SLEEP_TIME = 15000;
+    public static final int WAITING_TIME = 5000;
+    public static boolean IDLE = false;
+
+    public static class SyncFilters {
+        // These pull filters must be defined in your couchDB server for them to work
+        // Filters
+        public static final String FILTER_LOCATION_ID = "locationId";
+        public static final String FILTER_PROVIDER = "providerId";
+
+        //filter by team e.g. team = user1,user2,user3
+        public static final String FILTER_TEAM = "team";
+
+    }
+
+
 }

@@ -31,7 +31,8 @@ import org.apache.http.HttpResponse;
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.impl.client.DefaultHttpClient;
-import org.smartregister.bidan.utils.AllConstants;
+//import org.smartregister.bidan.utils.AllConstantsINA;
+import org.smartregister.bidan.utils.AllConstantsINA;
 import org.smartregister.repository.AllSharedPreferences;
 import org.smartregister.util.AssetHandler;
 
@@ -69,8 +70,8 @@ public class CloudantSyncHandler {
                     .getDefaultSharedPreferences(this.mContext);
             AllSharedPreferences allSharedPreferences = new AllSharedPreferences(preferences);
             String locationAnmids=allSharedPreferences.getPreference(allSharedPreferences.fetchRegisteredANM()+"-locationid");
-            String port = AllConstants.CloudantSync.COUCHDB_PORT;
-            String databaseName = AllConstants.CloudantSync.COUCH_DATABASE_NAME+"_"+locationAnmids.toLowerCase().replace(' ', '_').replace(".","");
+            String port = AllConstantsINA.CloudantSync.COUCHDB_PORT;
+            String databaseName = AllConstantsINA.CloudantSync.COUCH_DATABASE_NAME+"_"+locationAnmids.toLowerCase().replace(' ', '_').replace(".","");
             dbURL = allSharedPreferences.fetchHost("").concat(":").concat(port).concat("/")
                     .concat(databaseName);
 
@@ -81,10 +82,10 @@ public class CloudantSyncHandler {
 //            if (designDocumentId != null) {
 //                String filterDoc = designDocumentId.split("/")[1];
 //                HashMap<String, String> filterParams = new HashMap<String, String>();
-//                filterParams.put(AllConstants.SyncFilters.FILTER_PROVIDER,
+//                filterParams.put(AllConstantsINA.SyncFilters.FILTER_PROVIDER,
 //                        allSharedPreferences.fetchRegisteredANM());
 //                pullFilter = new PullFilter(
-//                        filterDoc.concat("/").concat(AllConstants.SyncFilters.FILTER_PROVIDER),
+//                        filterDoc.concat("/").concat(AllConstantsINA.SyncFilters.FILTER_PROVIDER),
 //                        filterParams);
 //            }
 
@@ -179,8 +180,8 @@ public class CloudantSyncHandler {
             mPullBuilder.filter(pullFilter);
         }
 
-        String username = AllConstants.CloudantSync.COUCH_DATABASE_USER;
-        String password = AllConstants.CloudantSync.COUCH_DATABASE_PASS;
+        String username = AllConstantsINA.CloudantSync.COUCH_DATABASE_USER;
+        String password = AllConstantsINA.CloudantSync.COUCH_DATABASE_PASS;
 
         if (StringUtils.isNotBlank(username) && StringUtils.isNotBlank(password)) {
             mPullBuilder
@@ -243,11 +244,11 @@ public class CloudantSyncHandler {
 
                 // Fire this incase the replication was lauched from an intent service
                 Intent localIntent = new Intent(
-                        AllConstants.CloudantSync.ACTION_REPLICATION_COMPLETED);
+                        AllConstantsINA.CloudantSync.ACTION_REPLICATION_COMPLETED);
                 // Puts the status into the Intent
-                localIntent.putExtra(AllConstants.CloudantSync.DOCUMENTS_REPLICATED,
+                localIntent.putExtra(AllConstantsINA.CloudantSync.DOCUMENTS_REPLICATED,
                         rc.documentsReplicated);
-                localIntent.putExtra(AllConstants.CloudantSync.BATCHES_REPLICATED,
+                localIntent.putExtra(AllConstantsINA.CloudantSync.BATCHES_REPLICATED,
                         rc.batchesReplicated);
                 // Broadcasts the Intent to receivers in this app.
                 LocalBroadcastManager.getInstance(mContext).sendBroadcast(localIntent);
@@ -276,9 +277,9 @@ public class CloudantSyncHandler {
                 }
 
                 //Fire this incase the replication was lauched from an intent service
-                Intent localIntent = new Intent(AllConstants.CloudantSync.ACTION_REPLICATION_ERROR);
+                Intent localIntent = new Intent(AllConstantsINA.CloudantSync.ACTION_REPLICATION_ERROR);
                 // Puts the status into the Intent
-                localIntent.putExtra(AllConstants.CloudantSync.REPLICATION_ERROR,
+                localIntent.putExtra(AllConstantsINA.CloudantSync.REPLICATION_ERROR,
                         re.errorInfo.getException().getMessage());
                 // Broadcasts the Intent to receivers in this app.
                 LocalBroadcastManager.getInstance(mContext).sendBroadcast(localIntent);
@@ -407,8 +408,8 @@ public class CloudantSyncHandler {
 
     private String getAuthorization() {
 
-        String username = AllConstants.CloudantSync.COUCH_DATABASE_USER;
-        String password = AllConstants.CloudantSync.COUCH_DATABASE_PASS;
+        String username = AllConstantsINA.CloudantSync.COUCH_DATABASE_USER;
+        String password = AllConstantsINA.CloudantSync.COUCH_DATABASE_PASS;
 
         if (StringUtils.isNotBlank(username) && StringUtils.isNotBlank(password)) {
             String authenticationData = username + ":" + password;
