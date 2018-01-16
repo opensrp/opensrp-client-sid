@@ -48,7 +48,7 @@ script:
   - ls -la
   #- ./gradlew connectedAndroidTest
   #Run All tests Unit and Instrumentation
-  - travis_wait ./gradlew opensrp-app-bidan:clean opensrp-app-bidan:jacocoTestReport coveralls --stacktrace
+  - travis_wait ./gradlew opensrp-bidan:clean opensrp-bidan:jacocoTestReport coveralls --stacktrace
 
 after_failure:
  - pandoc opensrp-app-bidan/build/reports/tests/index.html -t plain
