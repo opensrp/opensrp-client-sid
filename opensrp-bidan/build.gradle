@@ -3,10 +3,9 @@ buildscript {
         jcenter()
     }
     dependencies {
-        classpath "com.android.tools.build:gradle:2.3.3"
+        classpath "com.android.tools.build:gradle:1.3.0"
         classpath 'org.robolectric:robolectric-gradle-plugin:1.1.0'
         classpath 'org.kt3k.gradle.plugin:coveralls-gradle-plugin:2.8.1'
-
     }
 }
 
@@ -28,42 +27,6 @@ repositories {
     }
 }
 
-dependencies {
-    compile fileTree(include: ['commons-validator-1.6.jar'], dir: 'libs')
-    compile('org.smartregister:opensrp-client-core:1.1.1-SNAPSHOT@aar') {
-        transitive = true
-        exclude group: 'com.github.bmelnychuk', module: 'atv'
-    }
-
-//    compile(name: 'opensrp-deviceinterface-debug', ext:'aar')
-
-    // FORM
-    compile('org.smartregister:opensrp-client-enketo:1.0.0-SNAPSHOT@aar') {
-        transitive = true
-        exclude group: 'com.github.bmelnychuk', module: 'atv'
-        exclude group: 'com.google.guava', module: 'guava'
-    }
-    compile('com.android.support:design:22.2.1') {
-        exclude group: 'com.android.support', module: 'recyclerview-v7'
-
-    }
-    testCompile 'junit:junit:4.12'
-    testCompile('org.robolectric:robolectric:3.4') {
-
-        exclude group: 'com.google.guava', module: 'guava'
-        exclude group: 'org.apache.maven', module: 'maven-model'
-        exclude group: 'org.apache.maven', module: 'maven-ant-tasks'
-        exclude group: 'com.android.support'
-        exclude group: 'com.thoughtworks.xstream', module: '0cxstream'
-    }
-    testCompile('org.robolectric:shadows-multidex:3.4-rc2') {
-        exclude group: 'com.google.guava', module: 'guava'
-    }
-    testCompile 'org.apache.maven:maven-ant-tasks:2.1.3'
-//    compile project(':lib:bpm')
-}
-
-
 android {
 
     compileSdkVersion 22
@@ -79,6 +42,7 @@ android {
 
         buildConfigField "long", "MAX_SERVER_TIME_DIFFERENCE", "1800000l"
         buildConfigField "boolean", "TIME_CHECK", "false"
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
 
     dexOptions {
@@ -127,6 +91,40 @@ android {
         abortOnError false
     }
 }
+
+dependencies {
+    compile('org.smartregister:opensrp-client-core:1.1.1-SNAPSHOT@aar') {
+        transitive = true
+        exclude group: 'com.github.bmelnychuk', module: 'atv'
+        exclude group: 'com.google.guava', module: 'guava'
+    }
+
+    compile('org.smartregister:opensrp-client-enketo:1.0.0-SNAPSHOT@aar') {
+        transitive = true
+    }
+    compile fileTree(include: ['commons-validator-1.6.jar'], dir: 'libs')
+
+
+    compile('com.android.support:design:22.2.1') {
+        exclude group: 'com.android.support', module: 'recyclerview-v7'
+
+    }
+    testCompile 'junit:junit:4.12'
+    testCompile('org.robolectric:robolectric:3.4') {
+
+        exclude group: 'com.google.guava', module: 'guava'
+        exclude group: 'org.apache.maven', module: 'maven-model'
+        exclude group: 'org.apache.maven', module: 'maven-ant-tasks'
+        exclude group: 'com.android.support'
+        exclude group: 'com.thoughtworks.xstream', module: '0cxstream'
+    }
+    testCompile('org.robolectric:shadows-multidex:3.4-rc2') {
+        exclude group: 'com.google.guava', module: 'guava'
+    }
+    testCompile 'org.apache.maven:maven-ant-tasks:2.1.3'
+//    compile project(':lib:bpm')
+}
+
 
 task jacocoTestReport(type: JacocoReport, dependsOn: ['testDebugUnitTest']) {
 
