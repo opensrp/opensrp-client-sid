@@ -31,7 +31,6 @@ import org.apache.http.HttpResponse;
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.impl.client.DefaultHttpClient;
-//import org.smartregister.bidan.utils.AllConstantsINA;
 import org.smartregister.bidan.utils.AllConstantsINA;
 import org.smartregister.repository.AllSharedPreferences;
 import org.smartregister.util.AssetHandler;
@@ -45,6 +44,8 @@ import java.net.URISyntaxException;
 import java.net.URL;
 import java.nio.charset.Charset;
 import java.util.concurrent.CountDownLatch;
+
+//import org.smartregister.bidan.utils.AllConstantsINA;
 
 
 public class CloudantSyncHandler {
@@ -69,9 +70,9 @@ public class CloudantSyncHandler {
             SharedPreferences preferences = PreferenceManager
                     .getDefaultSharedPreferences(this.mContext);
             AllSharedPreferences allSharedPreferences = new AllSharedPreferences(preferences);
-            String locationAnmids=allSharedPreferences.getPreference(allSharedPreferences.fetchRegisteredANM()+"-locationid");
+            String locationAnmids = allSharedPreferences.getPreference(allSharedPreferences.fetchRegisteredANM() + "-locationid");
             String port = AllConstantsINA.CloudantSync.COUCHDB_PORT;
-            String databaseName = AllConstantsINA.CloudantSync.COUCH_DATABASE_NAME+"_"+locationAnmids.toLowerCase().replace(' ', '_').replace(".","");
+            String databaseName = AllConstantsINA.CloudantSync.COUCH_DATABASE_NAME + "_" + locationAnmids.toLowerCase().replace(' ', '_').replace(".", "");
             dbURL = allSharedPreferences.fetchHost("").concat(":").concat(port).concat("/")
                     .concat(databaseName);
 

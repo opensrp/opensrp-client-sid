@@ -9,7 +9,7 @@ public class AllConstantsINA {
     public static final String BOOLEAN_FALSE = "no";
     public static final String SPACE = " ";
     public static final String COMMA_WITH_SPACE = ", ";
-    public static final int DIALOG_DOUBLE_SELECTION_NUM  = 3;
+    public static final int DIALOG_DOUBLE_SELECTION_NUM = 3;
     public static final String FEMALE_GENDER_INA = "perempuan";
     public static final String ENGLISH_LOCALE = "en";
     public static final String BAHASA_LOCALE = "in";
@@ -34,8 +34,43 @@ public class AllConstantsINA {
     public static final String GREEN = "#5FB404";
 
 
-   //  Flurry Key Bidan EC Prototype 1
+    //  Flurry Key Bidan EC Prototype 1
 //    public static final String FLURRY_KEY = "7N8KZP67BP6QRJPB2RXX";
+    ////
+    public static final String FLURRY_KEY = "9RDM5TWW4HJ5QH8TNJ3P";
+    public static final int WAITING_TIME = 5000;
+    public static int SLEEP_TIME = 15000;
+    public static boolean IDLE = false;
+
+    public static class CloudantSync {
+        public static final String ACTION_DATABASE_CREATED = "org.smartregister.DATABASE_CREATED_ACTION";
+        public static final String ACTION_REPLICATION_ERROR = "org.smartregister.REPLICATION_ERROR_ACTION";
+        public static final String ACTION_REPLICATION_COMPLETED = "org.smartregister.REPLICATION_COMPLETED_ACTION";
+        public static final String REPLICATION_ERROR = "REPLICATION_ERROR";
+        public static final String DOCUMENTS_REPLICATED = "DOCUMENTS_REPLICATED";
+        public static final String BATCHES_REPLICATED = "BATCHES_REPLICATED";
+        public static final String COUCHDB_PORT = "";
+        public static final String COUCH_DATABASE_NAME = "";
+        public static final String COUCH_DATABASE_USER = "";
+        public static final String COUCH_DATABASE_PASS = "";
+
+    }
+
+    public static class TimeConstants {
+        public static int SLEEP_TIME = 15000;
+        public static boolean IDLE = false;
+    }
+
+    public static class SyncFilters {
+        // These pull filters must be defined in your couchDB server for them to work
+        // Filters
+        public static final String FILTER_LOCATION_ID = "locationId";
+        public static final String FILTER_PROVIDER = "providerId";
+
+        //filter by team e.g. team = user1,user2,user3
+        public static final String FILTER_TEAM = "team";
+
+    }
 
     public class KeluargaBerencanaFields {
         public static final String CONTRACEPTION_METHOD = "jenisKontrasepsi";
@@ -51,20 +86,6 @@ public class AllConstantsINA {
     public class CommonFormFields {
         public static final String SUBMISSION_DATE = "submissionDate";
         public static final String UNIQUE_ID = "unique_id";
-    }
-
-    public static class CloudantSync {
-        public static final String ACTION_DATABASE_CREATED = "org.smartregister.DATABASE_CREATED_ACTION";
-        public static final String ACTION_REPLICATION_ERROR = "org.smartregister.REPLICATION_ERROR_ACTION";
-        public static final String ACTION_REPLICATION_COMPLETED = "org.smartregister.REPLICATION_COMPLETED_ACTION";
-        public static final String REPLICATION_ERROR = "REPLICATION_ERROR";
-        public static final String DOCUMENTS_REPLICATED = "DOCUMENTS_REPLICATED";
-        public static final String BATCHES_REPLICATED = "BATCHES_REPLICATED";
-        public static final String COUCHDB_PORT = "";
-        public static final String COUCH_DATABASE_NAME = "";
-        public static final String COUCH_DATABASE_USER = "";
-        public static final String COUCH_DATABASE_PASS = "";
-
     }
 
     public class FormNames {
@@ -108,41 +129,42 @@ public class AllConstantsINA {
 
         // ANC
         public static final String KARTU_IBU_ANC_REGISTRATION = "kartu_anc_registration";
-        public static final String KARTU_IBU_ANC_OA="kartu_anc_registration_oa";
+        public static final String KARTU_IBU_ANC_OA = "kartu_anc_registration_oa";
         public static final String KARTU_IBU_ANC_RENCANA_PERSALINAN = "kartu_anc_rencana_persalinan";
-        public static final String KARTU_IBU_ANC_EDIT="kartu_anc_visit_edit";
-        public static final String KARTU_IBU_ANC_CLOSE="kartu_anc_close";
-        public static final String KARTU_IBU_ANC_VISIT="kartu_anc_visit";
+        public static final String KARTU_IBU_ANC_EDIT = "kartu_anc_visit_edit";
+        public static final String KARTU_IBU_ANC_CLOSE = "kartu_anc_close";
+        public static final String KARTU_IBU_ANC_VISIT = "kartu_anc_visit";
         public static final String KARTU_IBU_ANC_VISIT_INTEGRASI = "kartu_anc_visit_integrasi";
         public static final String KARTU_IBU_ANC_VISIT_LABTEST = "kartu_anc_visit_labTest";
 
         // PNC
-        public static final String KARTU_IBU_PNC_EDIT="kartu_pnc_edit";
+        public static final String KARTU_IBU_PNC_EDIT = "kartu_pnc_edit";
         public static final String KARTU_IBU_PNC_REGISTRATION = "kartu_pnc_dokumentasi_persalinan";
-        public static final String KARTU_IBU_PNC_CLOSE="kartu_pnc_close";
-        public static final String KARTU_IBU_PNC_OA="kartu_pnc_regitration_oa";
-        public static final String KARTU_IBU_PNC_VISIT="kartu_pnc_visit";
-        public static final String KARTU_IBU_PNC_POSPARTUM_KB="kartu_pnc_pospartum_kb";
+        public static final String KARTU_IBU_PNC_CLOSE = "kartu_pnc_close";
+        public static final String KARTU_IBU_PNC_OA = "kartu_pnc_regitration_oa";
+        public static final String KARTU_IBU_PNC_VISIT = "kartu_pnc_visit";
+        public static final String KARTU_IBU_PNC_POSPARTUM_KB = "kartu_pnc_pospartum_kb";
 
         // ANAK
-        public static final String KOHORT_BAYI_KUNJUNGAN="kohort_bayi_kunjungan";
-        public static final String KARTU_IBU_ANAK_CLOSE="kohort_anak_tutup";
-        public static final String BALITA_KUNJUNGAN="kohort_balita_kunjungan";
-        public static final String BAYI_IMUNISASI="kohort_bayi_immunization";
-        public static final String BAYI_NEONATAL_PERIOD="kohort_bayi_neonatal_period";
-        public static final String KOHORT_BAYI_EDIT="kohort_bayi_edit";
+        public static final String KOHORT_BAYI_KUNJUNGAN = "kohort_bayi_kunjungan";
+        public static final String KARTU_IBU_ANAK_CLOSE = "kohort_anak_tutup";
+        public static final String BALITA_KUNJUNGAN = "kohort_balita_kunjungan";
+        public static final String BAYI_IMUNISASI = "kohort_bayi_immunization";
+        public static final String BAYI_NEONATAL_PERIOD = "kohort_bayi_neonatal_period";
+        public static final String KOHORT_BAYI_EDIT = "kohort_bayi_edit";
         public static final String ANAK_BAYI_REGISTRATION = "kohort_bayi_registration";
-        public static final String ANAK_NEW_REGISTRATION="kohort_bayi_registration_oa";
+        public static final String ANAK_NEW_REGISTRATION = "kohort_bayi_registration_oa";
 
         // KB
-        public static final String KOHORT_KB_REGISTER="kohort_kb_registration";
-        public static final String KOHORT_KB_PELAYANAN="kohort_kb_pelayanan";
-        public static final String KOHORT_KB_CLOSE="kohort_kb_close";
-        public static final String KOHORT_KB_UPDATE="kohort_kb_update";
-       // public static final String KOHORT_KB_EDIT="kohort_kb_edit";
+        public static final String KOHORT_KB_REGISTER = "kohort_kb_registration";
+        public static final String KOHORT_KB_PELAYANAN = "kohort_kb_pelayanan";
+        public static final String KOHORT_KB_CLOSE = "kohort_kb_close";
+        public static final String KOHORT_KB_UPDATE = "kohort_kb_update";
+        // public static final String KOHORT_KB_EDIT="kohort_kb_edit";
 
         public static final String FEEDBACK_BIDAN = "feedback_bidan";
     }
+
     public class KartuIbuFields {
         public static final String PUSKESMAS_NAME = "puskesmas";
         public static final String POSYANDU_NAME = "posyandu";
@@ -224,28 +246,6 @@ public class AllConstantsINA {
         public static final String BIRTH_PLACE = "tempatBersalin";
         public static final String CHILD_VISIT_DATE = "tanggalKunjunganBayiPerbulan";
         public static final String CHILD_CURRENT_WEIGTH = "beratBadanBayiSetiapKunjunganBayiPerbulan";
-    }
-
-    public static class TimeConstants {
-        public static int SLEEP_TIME = 15000;
-        public static boolean IDLE = false;
-    }
-
-    ////
-    public static final String FLURRY_KEY = "9RDM5TWW4HJ5QH8TNJ3P";
-    public static int SLEEP_TIME = 15000;
-    public static final int WAITING_TIME = 5000;
-    public static boolean IDLE = false;
-
-    public static class SyncFilters {
-        // These pull filters must be defined in your couchDB server for them to work
-        // Filters
-        public static final String FILTER_LOCATION_ID = "locationId";
-        public static final String FILTER_PROVIDER = "providerId";
-
-        //filter by team e.g. team = user1,user2,user3
-        public static final String FILTER_TEAM = "team";
-
     }
 
 

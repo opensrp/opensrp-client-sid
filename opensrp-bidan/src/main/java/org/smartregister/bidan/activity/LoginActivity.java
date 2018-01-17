@@ -10,11 +10,9 @@ import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.content.res.Resources;
 import android.os.Bundle;
-import android.support.v4.content.ContextCompat;
 import android.support.v4.content.res.ResourcesCompat;
 import android.text.InputType;
 import android.util.DisplayMetrics;
-import android.util.Log;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -118,7 +116,7 @@ public class LoginActivity extends Activity {
         super.onCreate(savedInstanceState);
 
         logVerbose("Initializing ...");
-        try{
+        try {
             AllSharedPreferences allSharedPreferences = new AllSharedPreferences(getDefaultSharedPreferences(this));
             String preferredLocale = allSharedPreferences.fetchLanguagePreference();
             Resources res = Context.getInstance().applicationContext().getResources();
@@ -127,11 +125,11 @@ public class LoginActivity extends Activity {
             android.content.res.Configuration conf = res.getConfiguration();
             conf.locale = new Locale(preferredLocale);
             res.updateConfiguration(conf, dm);
-        }catch(Exception e){
+        } catch (Exception e) {
 
         }
         setContentView(org.smartregister.R.layout.login);
-        ImageView loginglogo = (ImageView)findViewById(R.id.login_logo);
+        ImageView loginglogo = (ImageView) findViewById(R.id.login_logo);
 //        loginglogo.setImageDrawable(getResources().getDrawable(R.drawable.login_logo_bidan));
         loginglogo.setImageDrawable(ResourcesCompat.getDrawable(getResources(), R.drawable.login_logo_bidan, null));
 //        ContextCompat.getDrawable(getActivity(), R.drawable.login_logo_bidan);
@@ -224,10 +222,10 @@ public class LoginActivity extends Activity {
         final String password = passwordEditText.getText().toString();
 
         if (context.userService().hasARegisteredUser()) {
-            android.util.Log.e(TAG, "login: lokal " );
+            android.util.Log.e(TAG, "login: lokal ");
             localLogin(view, userName, password);
         } else {
-            android.util.Log.e(TAG, "login: remote " );
+            android.util.Log.e(TAG, "login: remote ");
             remoteLogin(view, userName, password);
         }
     }
@@ -253,11 +251,11 @@ public class LoginActivity extends Activity {
                     if (loginResponse == null) {
                         showErrorDialog("Login failed. Unknown reason. Try Again");
                     } else {
-                        if(loginResponse == NO_INTERNET_CONNECTIVITY){
+                        if (loginResponse == NO_INTERNET_CONNECTIVITY) {
                             showErrorDialog(getResources().getString(R.string.no_internet_connectivity));
-                        }else if (loginResponse == UNKNOWN_RESPONSE){
+                        } else if (loginResponse == UNKNOWN_RESPONSE) {
                             showErrorDialog(getResources().getString(R.string.unknown_response));
-                        }else if (loginResponse == UNAUTHORIZED){
+                        } else if (loginResponse == UNAUTHORIZED) {
                             showErrorDialog(getResources().getString(R.string.unauthorized));
                         }
 //                        showErrorDialog(loginResponse.message());
@@ -337,7 +335,7 @@ public class LoginActivity extends Activity {
         context.userService().remoteLogin(userName, password, userInfo);
         // LoginActivity.generator = new Generator(context, userName, password);
         String locationId = getUserDefaultLocationId(userInfo);
-        setDefaultLocationId(userName,locationId);
+        setDefaultLocationId(userName, locationId);
         goToHome();
         DrishtiSyncScheduler.startOnlyIfConnectedToNetwork(getApplicationContext());
     }

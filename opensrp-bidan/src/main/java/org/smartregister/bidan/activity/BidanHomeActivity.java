@@ -11,21 +11,21 @@ import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
 
-//import com.flurry.android.FlurryAgent;
-//import org.smartregister.bidan.lib.FlurryFacade;
-
+import org.json.JSONObject;
 import org.opensrp.api.domain.Location;
+import org.opensrp.api.util.EntityUtils;
+import org.opensrp.api.util.LocationTree;
 import org.opensrp.api.util.TreeNode;
 import org.smartregister.Context;
-import org.smartregister.bidan.utils.AllConstantsINA;
+import org.smartregister.bidan.R;
 import org.smartregister.bidan.controller.NavigationControllerINA;
 import org.smartregister.bidan.service.FormSubmissionSyncService;
+import org.smartregister.bidan.sync.UpdateActionsTask;
+import org.smartregister.bidan.utils.AllConstantsINA;
 import org.smartregister.bidan.utils.Support;
 import org.smartregister.cursoradapter.SmartRegisterQueryBuilder;
+import org.smartregister.enketo.view.fragment.DisplayFormFragment;
 import org.smartregister.event.Listener;
-
-import org.smartregister.bidan.sync.UpdateActionsTask;
-import org.smartregister.bidan.R;
 import org.smartregister.service.PendingFormSubmissionService;
 import org.smartregister.sync.SyncAfterFetchListener;
 import org.smartregister.sync.SyncProgressIndicator;
@@ -33,16 +33,11 @@ import org.smartregister.view.activity.SecuredActivity;
 import org.smartregister.view.contract.HomeContext;
 import org.smartregister.view.controller.NativeAfterANMDetailsFetchListener;
 import org.smartregister.view.controller.NativeUpdateANMDetailsTask;
-import org.smartregister.enketo.view.fragment.DisplayFormFragment;
-import org.json.JSONObject;
-import org.opensrp.api.util.EntityUtils;
-import org.opensrp.api.util.LocationTree;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
-
 
 import static android.widget.Toast.LENGTH_SHORT;
 import static java.lang.String.valueOf;
@@ -51,11 +46,20 @@ import static org.smartregister.event.Event.FORM_SUBMITTED;
 import static org.smartregister.event.Event.SYNC_COMPLETED;
 import static org.smartregister.event.Event.SYNC_STARTED;
 
+//import com.flurry.android.FlurryAgent;
+//import org.smartregister.bidan.lib.FlurryFacade;
+
 public class BidanHomeActivity extends SecuredActivity {
+    //    public static CommonPersonObjectController kicontroller;
+//    public static CommonPersonObjectController anccontroller;
+//    public static CommonPersonObjectController kbcontroller;
+//    public static CommonPersonObjectController childcontroller;
+//    public static CommonPersonObjectController pnccontroller;
+    public static int kicount;
+    SimpleDateFormat timer = new SimpleDateFormat("hh:mm:ss");
     private MenuItem updateMenuItem;
     private MenuItem remainingFormsToSyncMenuItem;
     private PendingFormSubmissionService pendingFormSubmissionService;
-
     private Listener<Boolean> onSyncStartListener = new Listener<Boolean>() {
         @Override
         public void onEvent(Boolean data) {
@@ -67,7 +71,11 @@ public class BidanHomeActivity extends SecuredActivity {
             }
         }
     };
-
+    private TextView ecRegisterClientCountView;
+    private TextView kartuIbuANCRegisterClientCountView;
+    private TextView kartuIbuPNCRegisterClientCountView;
+    private TextView anakRegisterClientCountView;
+    private TextView kohortKbCountView;
     private Listener<Boolean> onSyncCompleteListener = new Listener<Boolean>() {
         @Override
         public void onEvent(Boolean data) {
@@ -87,50 +95,81 @@ public class BidanHomeActivity extends SecuredActivity {
 
         }
     };
-
-    private void flagActivator(){
-        new Thread(){
-            public void run(){
-                try{
-                    while(AllConstantsINA.TimeConstants.SLEEP_TIME>0){
-                        sleep(1000);
-                        if(AllConstantsINA.TimeConstants.IDLE)
-                            AllConstantsINA.TimeConstants.SLEEP_TIME-=1000;
-                    }
-                    Support.ONSYNC=false;
-                }catch (InterruptedException ie){
-
-                }
-            }
-        }.start();
-    }
-
     private Listener<String> onFormSubmittedListener = new Listener<String>() {
         @Override
         public void onEvent(String instanceId) {
             updateRegisterCounts();
         }
     };
-
     private Listener<String> updateANMDetailsListener = new Listener<String>() {
         @Override
         public void onEvent(String data) {
             updateRegisterCounts();
         }
     };
+    private View.OnClickListener onRegisterStartListener = new View.OnClickListener() {
 
-    SimpleDateFormat timer = new SimpleDateFormat("hh:mm:ss");
-    private TextView ecRegisterClientCountView;
-    private TextView kartuIbuANCRegisterClientCountView;
-    private TextView kartuIbuPNCRegisterClientCountView;
-    private TextView anakRegisterClientCountView;
-    private TextView kohortKbCountView;
-    //    public static CommonPersonObjectController kicontroller;
-//    public static CommonPersonObjectController anccontroller;
-//    public static CommonPersonObjectController kbcontroller;
-//    public static CommonPersonObjectController childcontroller;
-//    public static CommonPersonObjectController pnccontroller;
-    public static int kicount;
+        @Override
+        public void onClick(View view) {
+            switch (view.getId()) {
+                case R.id.btn_kartu_ibu_register:
+                    navigationController.startECSmartRegistry();
+                    break;
+
+                case R.id.btn_kohort_kb_register:
+                    navigationController.startFPSmartRegistry();
+                    break;
+
+                case R.id.btn_kartu_ibu_anc_register:
+                    navigationController.startANCSmartRegistry();
+                    break;
+
+                case R.id.btn_anak_register:
+                    navigationController.startChildSmartRegistry();
+                    break;
+
+                case R.id.btn_kartu_ibu_pnc_register:
+                    navigationController.startPNCSmartRegistry();
+                    break;
+            }
+            String HomeEnd = timer.format(new Date());
+            Map<String, String> Home = new HashMap<String, String>();
+            Home.put("end", HomeEnd);
+//            FlurryAgent.logEvent("home_dashboard",Home, true);
+        }
+    };
+    private View.OnClickListener onButtonsClickListener = new View.OnClickListener() {
+
+        @Override
+        public void onClick(View view) {
+            switch (view.getId()) {
+                case R.id.btn_reporting:
+                    navigationController.startReports();
+                    break;
+
+//                case R.id.btn_videos:
+//                    navigationController.startVideos();
+//                    break;
+            }
+        }
+    };
+
+    private void flagActivator() {
+        new Thread() {
+            public void run() {
+                try {
+                    while (AllConstantsINA.TimeConstants.SLEEP_TIME > 0) {
+                        sleep(1000);
+                        if (AllConstantsINA.TimeConstants.IDLE)
+                            AllConstantsINA.TimeConstants.SLEEP_TIME -= 1000;
+                    }
+                    Support.ONSYNC = false;
+                } catch (InterruptedException ie) {
+
+                }
+            }
+        }.start();
+    }
 
     @Override
     protected void onCreation() {
@@ -149,8 +188,7 @@ public class BidanHomeActivity extends SecuredActivity {
         DisplayFormFragment.okMessage = getResources().getString(R.string.okforminputerror);
         //  context.formSubmissionRouter().getHandlerMap().put("census_enrollment_form", new ANChandler());
         int SDK_INT = android.os.Build.VERSION.SDK_INT;
-        if (SDK_INT > 8)
-        {
+        if (SDK_INT > 8) {
             StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder()
                     .permitAll().build();
             StrictMode.setThreadPolicy(policy);
@@ -175,6 +213,10 @@ public class BidanHomeActivity extends SecuredActivity {
         anakRegisterClientCountView = (TextView) findViewById(R.id.txt_anak_client_count);
         kohortKbCountView = (TextView) findViewById(R.id.txt_kohort_kb_register_count);
     }
+
+//    private void initFR() {
+//        new Tools(context());
+//    }
 
     private void initialize() {
         pendingFormSubmissionService = context().pendingFormSubmissionService();
@@ -206,11 +248,6 @@ public class BidanHomeActivity extends SecuredActivity {
 //        initFR();
     }
 
-//    private void initFR() {
-//        new Tools(context());
-//    }
-
-
     private void updateRegisterCounts() {
         NativeUpdateANMDetailsTask task = new NativeUpdateANMDetailsTask(Context.getInstance().anmController());
         task.fetch(new NativeAfterANMDetailsFetchListener() {
@@ -225,10 +262,10 @@ public class BidanHomeActivity extends SecuredActivity {
         SmartRegisterQueryBuilder sqb = new SmartRegisterQueryBuilder();
         Cursor kicountcursor = context().commonrepository("ec_kartu_ibu").rawCustomQueryForAdapter(sqb.queryForCountOnRegisters("ec_kartu_ibu_search", "ec_kartu_ibu_search.is_closed=0 AND namalengkap != ''"));
         kicountcursor.moveToFirst();
-        kicount= kicountcursor.getInt(0);
+        kicount = kicountcursor.getInt(0);
         kicountcursor.close();
 
-        Cursor kbcountcursor = context().commonrepository("ec_kartu_ibu").rawCustomQueryForAdapter(sqb.queryForCountOnRegisters("ec_kartu_ibu_search", "ec_kartu_ibu_search.is_closed=0 AND jenisKontrasepsi !='0' AND namalengkap != ''" ));
+        Cursor kbcountcursor = context().commonrepository("ec_kartu_ibu").rawCustomQueryForAdapter(sqb.queryForCountOnRegisters("ec_kartu_ibu_search", "ec_kartu_ibu_search.is_closed=0 AND jenisKontrasepsi !='0' AND namalengkap != ''"));
         kbcountcursor.moveToFirst();
         int kbcount = kbcountcursor.getInt(0);
         kbcountcursor.close();
@@ -290,10 +327,10 @@ public class BidanHomeActivity extends SecuredActivity {
                 String anmID;
                 try {
                     anmID = new JSONObject(context().anmController().get()).get("anmName").toString();
-                }catch (org.json.JSONException e){
+                } catch (org.json.JSONException e) {
                     anmID = "undefined";
                 }
-                Toast.makeText(this, String.format("%s current user = %s",context().getStringResource(R.string.app_name),anmID), LENGTH_SHORT).show();
+                Toast.makeText(this, String.format("%s current user = %s", context().getStringResource(R.string.app_name), anmID), LENGTH_SHORT).show();
                 return true;
             default:
                 return super.onOptionsItemSelected(item);
@@ -318,7 +355,7 @@ public class BidanHomeActivity extends SecuredActivity {
     public void updateFromServer() {
         Log.d("Home", "updateFromServer: tombol update");
         UpdateActionsTask updateActionsTask = new UpdateActionsTask(
-                this, context().actionService(), new FormSubmissionSyncService(context().applicationContext()) ,new SyncProgressIndicator(), context().allFormVersionSyncService());
+                this, context().actionService(), new FormSubmissionSyncService(context().applicationContext()), new SyncProgressIndicator(), context().allFormVersionSyncService());
 //        FlurryFacade.logEvent("click_update_from_server");
         updateActionsTask.updateFromServer(new SyncAfterFetchListener());
 
@@ -366,56 +403,7 @@ public class BidanHomeActivity extends SecuredActivity {
         }
     }
 
-    private View.OnClickListener onRegisterStartListener = new View.OnClickListener() {
-
-        @Override
-        public void onClick(View view) {
-            switch (view.getId()) {
-                case R.id.btn_kartu_ibu_register:
-                    navigationController.startECSmartRegistry();
-                    break;
-
-                case R.id.btn_kohort_kb_register:
-                    navigationController.startFPSmartRegistry();
-                    break;
-
-                case R.id.btn_kartu_ibu_anc_register:
-                    navigationController.startANCSmartRegistry();
-                    break;
-
-                case R.id.btn_anak_register:
-                    navigationController.startChildSmartRegistry();
-                    break;
-
-                case R.id.btn_kartu_ibu_pnc_register:
-                    navigationController.startPNCSmartRegistry();
-                    break;
-            }
-            String HomeEnd = timer.format(new Date());
-            Map<String, String> Home = new HashMap<String, String>();
-            Home.put("end", HomeEnd);
-//            FlurryAgent.logEvent("home_dashboard",Home, true);
-        }
-    };
-
-    private View.OnClickListener onButtonsClickListener = new View.OnClickListener() {
-
-        @Override
-        public void onClick(View view) {
-            switch (view.getId()) {
-                case R.id.btn_reporting:
-                    navigationController.startReports();
-                    break;
-
-//                case R.id.btn_videos:
-//                    navigationController.startVideos();
-//                    break;
-            }
-        }
-    };
-
-
-    public void helpMenu(){
+    public void helpMenu() {
         Toast.makeText(getApplicationContext(), String.valueOf(1), Toast.LENGTH_LONG).show();
 
     }

@@ -14,9 +14,7 @@ import org.smartregister.bidan.R;
 import org.smartregister.bidan.utils.Support;
 import org.smartregister.commonregistry.CommonPersonObjectClient;
 import org.smartregister.repository.DetailsRepository;
-import org.smartregister.view.activity.DrishtiApplication;
 
-import java.io.File;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashMap;
@@ -40,69 +38,113 @@ public class DetailMotherActivity extends Activity {
     static String entityid;
     private static HashMap<String, String> hash;
     SimpleDateFormat timer = new SimpleDateFormat("hh:mm:ss", Locale.US);
-//    ImageView kiview;
-    private boolean updateMode = false;
-
     // Main Profile
-    @Bind(R.id.tv_mother_detail_profile_view) ImageView kiview;
-
-    @Bind(R.id.tv_wife_name) TextView nama;
-    @Bind(R.id.tv_nik) TextView nik;
-    @Bind(R.id.tv_husband_name) TextView husband_name;
-    @Bind(R.id.tv_dob) TextView dob;
-    @Bind(R.id.tv_contact_phone_number) TextView phone;
-    @Bind(R.id.tv_risk1) TextView risk1;
-    @Bind(R.id.tv_risk2) TextView risk2;
-    @Bind(R.id.tv_risk3) TextView risk3;
-    @Bind(R.id.tv_risk4) TextView risk4;
-
-    @Bind(R.id.tv_show_more) TextView show_risk;
-
-    @Bind(R.id.tv_show_more_detail) TextView show_detail;
-
+    @Bind(R.id.tv_mother_detail_profile_view)
+    ImageView kiview;
+    @Bind(R.id.tv_wife_name)
+    TextView nama;
+    @Bind(R.id.tv_nik)
+    TextView nik;
+    @Bind(R.id.tv_husband_name)
+    TextView husband_name;
+    @Bind(R.id.tv_dob)
+    TextView dob;
+    @Bind(R.id.tv_contact_phone_number)
+    TextView phone;
+    @Bind(R.id.tv_risk1)
+    TextView risk1;
+    @Bind(R.id.tv_risk2)
+    TextView risk2;
+    @Bind(R.id.tv_risk3)
+    TextView risk3;
+    @Bind(R.id.tv_risk4)
+    TextView risk4;
+    @Bind(R.id.tv_show_more)
+    TextView show_risk;
+    @Bind(R.id.tv_show_more_detail)
+    TextView show_detail;
     //detail data
-    @Bind(R.id.tv_village_name)TextView village;
-    @Bind(R.id.txt_subvillage)TextView subvillage;
-    @Bind(R.id.txt_age)TextView age;
-    @Bind(R.id.txt_alamat)TextView alamat;
-    @Bind(R.id.txt_edu)TextView education;
-    @Bind(R.id.txt_agama)TextView religion;
-    @Bind(R.id.txt_job)TextView job;
-    @Bind(R.id.txt_gakin)TextView gakin;
-    @Bind(R.id.txt_blood)TextView blood_type;
-    @Bind(R.id.txt_asuransi)TextView asuransi;
-
+    @Bind(R.id.tv_village_name)
+    TextView village;
+    @Bind(R.id.txt_subvillage)
+    TextView subvillage;
+    @Bind(R.id.txt_age)
+    TextView age;
+    @Bind(R.id.txt_alamat)
+    TextView alamat;
+    @Bind(R.id.txt_edu)
+    TextView education;
+    @Bind(R.id.txt_agama)
+    TextView religion;
+    @Bind(R.id.txt_job)
+    TextView job;
+    @Bind(R.id.txt_gakin)
+    TextView gakin;
+    @Bind(R.id.txt_blood)
+    TextView blood_type;
+    @Bind(R.id.txt_asuransi)
+    TextView asuransi;
     //detail RISK
-    @Bind(R.id.txt_highRiskSTIBBVs) TextView highRiskSTIBBVs;
-    @Bind(R.id.txt_highRiskEctopicPregnancy) TextView highRiskEctopicPregnancy;
-    @Bind(R.id.txt_highRiskCardiovascularDiseaseRecord) TextView highRiskCardiovascularDiseaseRecord;
-    @Bind(R.id.txt_highRiskDidneyDisorder) TextView highRiskDidneyDisorder;
-    @Bind(R.id.txt_highRiskHeartDisorder) TextView highRiskHeartDisorder;
-    @Bind(R.id.txt_highRiskAsthma) TextView highRiskAsthma;
-    @Bind(R.id.txt_highRiskTuberculosis) TextView highRiskTuberculosis;
-    @Bind(R.id.txt_highRiskMalaria) TextView highRiskMalaria;
-    @Bind(R.id.txt_highRiskPregnancyPIH) TextView highRiskPregnancyPIH;
-    @Bind(R.id.txt_highRiskPregnancyProteinEnergyMalnutrition) TextView highRiskPregnancyProteinEnergyMalnutrition;
-    @Bind(R.id.txt_highRiskLabourTBRisk) TextView txt_highRiskLabourTBRisk;
-    @Bind(R.id.txt_HighRiskLabourSectionCesareaRecord) TextView txt_HighRiskLabourSectionCesareaRecord;
-    @Bind(R.id.txt_highRisklabourFetusNumber) TextView txt_highRisklabourFetusNumber;
-    @Bind(R.id.txt_highRiskLabourFetusSize) TextView txt_highRiskLabourFetusSize;
-    @Bind(R.id.txt_lbl_highRiskLabourFetusMalpresentation) TextView txt_lbl_highRiskLabourFetusMalpresentation;
-    @Bind(R.id.txt_highRiskPregnancyAnemia) TextView txt_highRiskPregnancyAnemia;
-    @Bind(R.id.txt_highRiskPregnancyDiabetes) TextView txt_highRiskPregnancyDiabetes;
-    @Bind(R.id.txt_HighRiskPregnancyTooManyChildren) TextView HighRiskPregnancyTooManyChildren;
-    @Bind(R.id.txt_highRiskPostPartumSectioCaesaria) TextView highRiskPostPartumSectioCaesaria;
-    @Bind(R.id.txt_highRiskPostPartumForceps) TextView highRiskPostPartumForceps;
-    @Bind(R.id.txt_highRiskPostPartumVacum) TextView highRiskPostPartumVacum;
-    @Bind(R.id.txt_highRiskPostPartumPreEclampsiaEclampsia) TextView highRiskPostPartumPreEclampsiaEclampsia;
-    @Bind(R.id.txt_highRiskPostPartumMaternalSepsis) TextView highRiskPostPartumMaternalSepsis;
-    @Bind(R.id.txt_highRiskPostPartumInfection) TextView highRiskPostPartumInfection;
-    @Bind(R.id.txt_highRiskPostPartumHemorrhage) TextView highRiskPostPartumHemorrhage;
-    @Bind(R.id.txt_highRiskPostPartumPIH) TextView highRiskPostPartumPIH;
-    @Bind(R.id.txt_highRiskPostPartumDistosia) TextView highRiskPostPartumDistosia;
-    @Bind(R.id.txt_highRiskHIVAIDS)TextView txt_highRiskHIVAIDS;
-
-    @Bind(R.id.btn_back_to_home) ImageButton back;
+    @Bind(R.id.txt_highRiskSTIBBVs)
+    TextView highRiskSTIBBVs;
+    @Bind(R.id.txt_highRiskEctopicPregnancy)
+    TextView highRiskEctopicPregnancy;
+    @Bind(R.id.txt_highRiskCardiovascularDiseaseRecord)
+    TextView highRiskCardiovascularDiseaseRecord;
+    @Bind(R.id.txt_highRiskDidneyDisorder)
+    TextView highRiskDidneyDisorder;
+    @Bind(R.id.txt_highRiskHeartDisorder)
+    TextView highRiskHeartDisorder;
+    @Bind(R.id.txt_highRiskAsthma)
+    TextView highRiskAsthma;
+    @Bind(R.id.txt_highRiskTuberculosis)
+    TextView highRiskTuberculosis;
+    @Bind(R.id.txt_highRiskMalaria)
+    TextView highRiskMalaria;
+    @Bind(R.id.txt_highRiskPregnancyPIH)
+    TextView highRiskPregnancyPIH;
+    @Bind(R.id.txt_highRiskPregnancyProteinEnergyMalnutrition)
+    TextView highRiskPregnancyProteinEnergyMalnutrition;
+    @Bind(R.id.txt_highRiskLabourTBRisk)
+    TextView txt_highRiskLabourTBRisk;
+    @Bind(R.id.txt_HighRiskLabourSectionCesareaRecord)
+    TextView txt_HighRiskLabourSectionCesareaRecord;
+    @Bind(R.id.txt_highRisklabourFetusNumber)
+    TextView txt_highRisklabourFetusNumber;
+    @Bind(R.id.txt_highRiskLabourFetusSize)
+    TextView txt_highRiskLabourFetusSize;
+    @Bind(R.id.txt_lbl_highRiskLabourFetusMalpresentation)
+    TextView txt_lbl_highRiskLabourFetusMalpresentation;
+    @Bind(R.id.txt_highRiskPregnancyAnemia)
+    TextView txt_highRiskPregnancyAnemia;
+    @Bind(R.id.txt_highRiskPregnancyDiabetes)
+    TextView txt_highRiskPregnancyDiabetes;
+    @Bind(R.id.txt_HighRiskPregnancyTooManyChildren)
+    TextView HighRiskPregnancyTooManyChildren;
+    @Bind(R.id.txt_highRiskPostPartumSectioCaesaria)
+    TextView highRiskPostPartumSectioCaesaria;
+    @Bind(R.id.txt_highRiskPostPartumForceps)
+    TextView highRiskPostPartumForceps;
+    @Bind(R.id.txt_highRiskPostPartumVacum)
+    TextView highRiskPostPartumVacum;
+    @Bind(R.id.txt_highRiskPostPartumPreEclampsiaEclampsia)
+    TextView highRiskPostPartumPreEclampsiaEclampsia;
+    @Bind(R.id.txt_highRiskPostPartumMaternalSepsis)
+    TextView highRiskPostPartumMaternalSepsis;
+    @Bind(R.id.txt_highRiskPostPartumInfection)
+    TextView highRiskPostPartumInfection;
+    @Bind(R.id.txt_highRiskPostPartumHemorrhage)
+    TextView highRiskPostPartumHemorrhage;
+    @Bind(R.id.txt_highRiskPostPartumPIH)
+    TextView highRiskPostPartumPIH;
+    @Bind(R.id.txt_highRiskPostPartumDistosia)
+    TextView highRiskPostPartumDistosia;
+    @Bind(R.id.txt_highRiskHIVAIDS)
+    TextView txt_highRiskHIVAIDS;
+    @Bind(R.id.btn_back_to_home)
+    ImageButton back;
+    //    ImageView kiview;
+    private boolean updateMode = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -206,7 +248,7 @@ public class DetailMotherActivity extends Activity {
         String tgl = motherClient.getDetails().get("tanggalLahir") != null ? motherClient.getDetails().get("tanggalLahir") : "-";
 
         String tgl_lahir = "null";
-        if(tgl != null && !tgl.isEmpty()) {
+        if (tgl != null && !tgl.isEmpty()) {
             tgl_lahir = tgl.substring(0, tgl.indexOf("T"));
         }
 

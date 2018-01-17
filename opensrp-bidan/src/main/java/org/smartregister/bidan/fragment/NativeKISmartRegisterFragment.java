@@ -348,7 +348,7 @@ public class NativeKISmartRegisterFragment extends SecuredNativeSmartRegisterCur
             @Override
             public void onClick(View v) {
 
-                    searchTextChangeListener("");
+                searchTextChangeListener("");
 
             }
         });

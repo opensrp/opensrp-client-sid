@@ -10,22 +10,20 @@ public class KICommonObjectFilterOption implements CursorFilterOption {
     private final String filterOptionName;
     private final String tablename;
 
-    @Override
-    public String filter() {
-        if(StringUtils.isNotBlank(fieldname) && !fieldname.equals("location_name")){
-            return  " AND " + tablename+ ".base_entity_id IN (SELECT DISTINCT base_entity_id FROM ec_details WHERE key MATCH '"+fieldname+"' INTERSECT SELECT DISTINCT base_entity_id FROM ec_details WHERE value MATCH '"+criteria+"' ) ";
-        } else{
-            return  " AND " + tablename+ ".base_entity_id IN (SELECT DISTINCT base_entity_id FROM ec_details WHERE value MATCH '"+criteria+"' ) ";
-        }
-    }
-
-
-
     public KICommonObjectFilterOption(String criteria, String fieldname, String filteroptionname, String tablename) {
         this.criteria = criteria;
         this.fieldname = fieldname;
         this.filterOptionName = filteroptionname;
         this.tablename = tablename;
+    }
+
+    @Override
+    public String filter() {
+        if (StringUtils.isNotBlank(fieldname) && !fieldname.equals("location_name")) {
+            return " AND " + tablename + ".base_entity_id IN (SELECT DISTINCT base_entity_id FROM ec_details WHERE key MATCH '" + fieldname + "' INTERSECT SELECT DISTINCT base_entity_id FROM ec_details WHERE value MATCH '" + criteria + "' ) ";
+        } else {
+            return " AND " + tablename + ".base_entity_id IN (SELECT DISTINCT base_entity_id FROM ec_details WHERE value MATCH '" + criteria + "' ) ";
+        }
     }
 
     @Override

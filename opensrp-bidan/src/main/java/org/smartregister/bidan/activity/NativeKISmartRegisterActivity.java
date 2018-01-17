@@ -35,7 +35,7 @@ public class NativeKISmartRegisterActivity extends BaseRegisterActivity implemen
     }
 
     @Override
-    protected Fragment mBaseFragment(){
+    protected Fragment mBaseFragment() {
 
         return new NativeKISmartRegisterFragment();
     }
@@ -50,7 +50,7 @@ public class NativeKISmartRegisterActivity extends BaseRegisterActivity implemen
         };
     }
 
-    private String[] buildFormNameList(){
+    private String[] buildFormNameList() {
         List<String> formNames = new ArrayList<>();
         formNames.add(KARTU_IBU_EDIT);
         formNames.add(KARTU_IBU_REGISTRATION);
@@ -92,7 +92,6 @@ public class NativeKISmartRegisterActivity extends BaseRegisterActivity implemen
             startFormActivity(KARTU_IBU_REGISTRATION, null, fieldOverrides.getJSONString());
         }
     }
-
 
 
 }

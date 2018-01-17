@@ -4,7 +4,6 @@ import android.app.Activity;
 import android.content.Context;
 import android.database.Cursor;
 import android.graphics.drawable.Drawable;
-import android.net.Uri;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -22,7 +21,6 @@ import org.smartregister.commonregistry.CommonRepository;
 import org.smartregister.cursoradapter.SmartRegisterCLientsProviderForCursorAdapter;
 import org.smartregister.repository.DetailsRepository;
 import org.smartregister.service.AlertService;
-import org.smartregister.view.activity.DrishtiApplication;
 import org.smartregister.view.contract.SmartRegisterClient;
 import org.smartregister.view.contract.SmartRegisterClients;
 import org.smartregister.view.dialog.FilterOption;
@@ -30,7 +28,6 @@ import org.smartregister.view.dialog.ServiceModeOption;
 import org.smartregister.view.dialog.SortOption;
 import org.smartregister.view.viewholder.OnClickFormLauncher;
 
-import java.io.File;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
@@ -87,7 +84,7 @@ public class ChildClientsProvider implements SmartRegisterCLientsProviderForCurs
 //    }
 
     @Override
-    public void getView(Cursor cursor, SmartRegisterClient client, final View convertView){
+    public void getView(Cursor cursor, SmartRegisterClient client, final View convertView) {
         ViewHolder viewHolder = new ViewHolder();
 
         CommonPersonObjectClient pc = (CommonPersonObjectClient) client;
@@ -126,7 +123,7 @@ public class ChildClientsProvider implements SmartRegisterCLientsProviderForCurs
             str_birthPlace = ibuparent.getDetails().get("tempatBersalin") != null ? ibuparent.getDetails().get("tempatBersalin") : "";
         }
 
-        if(kiparent != null) {
+        if (kiparent != null) {
             detailsRepository.updateDetails(kiparent);
             str_motherName = kiparent.getDetails().get("namalengkap");
             str_childAddress = kiparent.getDetails().get("address1");
@@ -139,7 +136,7 @@ public class ChildClientsProvider implements SmartRegisterCLientsProviderForCurs
         viewHolder.profilepic.setImageDrawable(context.getResources().getDrawable(R.mipmap.child_boy));
 
         if (pc.getDetails().get("gender") != null) {
-            Support.setImagetoHolderFromUri((Activity) context, pc.getDetails().get("base_entity_id") ,
+            Support.setImagetoHolderFromUri((Activity) context, pc.getDetails().get("base_entity_id"),
                     viewHolder.profilepic, pc.getDetails().get("gender").equals("female") ? R.drawable.child_girl_infant : R.drawable.child_boy_infant);
         } else {
             Log.e(TAG, "getView: Gender is NOT SET");

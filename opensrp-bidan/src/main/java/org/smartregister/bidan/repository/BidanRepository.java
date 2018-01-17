@@ -24,9 +24,9 @@ import java.util.Set;
 public class BidanRepository extends Repository {
 
     private static final String TAG = BidanRepository.class.getCanonicalName();
+    private final Context context;
     private SQLiteDatabase readableDatabase;
     private SQLiteDatabase writableDatabase;
-    private final Context context;
 
     public BidanRepository(Context context, org.smartregister.Context opensrpContext) {
         super(context, BidanConstants.DATABASE_NAME, BidanConstants.DATABASE_VERSION, opensrpContext.session(), BidanApplication.createCommonFtsObject(), opensrpContext.sharedRepositoriesArray());
@@ -51,8 +51,6 @@ public class BidanRepository extends Repository {
                         + newVersion + ", which will destroy all old data");
 
     }
-
-
 
 
     @Override
@@ -201,7 +199,6 @@ public class BidanRepository extends Repository {
         database.execSQL(renameQuery);
 
     }
-
 
 
 }

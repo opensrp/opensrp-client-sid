@@ -1,15 +1,16 @@
 package org.smartregister.bidan.activity;
 
 import android.support.v4.app.Fragment;
+
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.smartregister.bidan.R;
 import org.smartregister.bidan.fragment.NativeKISmartRegisterFragment;
-import org.smartregister.commonregistry.CommonPersonObjectClient;
 import org.smartregister.domain.form.FieldOverrides;
 import org.smartregister.view.dialog.DialogOption;
 import org.smartregister.view.dialog.LocationSelectorDialogFragment;
 import org.smartregister.view.dialog.OpenFormOption;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -27,19 +28,19 @@ public class NativeKIbuSmartRegisterActivity extends BaseRegisterActivity implem
 
     public static final String TAG = NativeKIbuSmartRegisterActivity.class.getName();
 
-        @Override
-        protected String[] formNames() {
+    @Override
+    protected String[] formNames() {
 
         return this.buildFormNameList();
     }
 
-        @Override
-        protected Fragment mBaseFragment(){
+    @Override
+    protected Fragment mBaseFragment() {
 
         return new NativeKISmartRegisterFragment();
     }
 
-        public DialogOption[] getEditOptions() {
+    public DialogOption[] getEditOptions() {
         return new DialogOption[]{
                 new OpenFormOption(getString(R.string.str_register_fp_form), "kohort_kb_pelayanan", formController),
                 new OpenFormOption(getString(R.string.str_register_anc_form), "kartu_anc_registration", formController),
@@ -48,7 +49,7 @@ public class NativeKIbuSmartRegisterActivity extends BaseRegisterActivity implem
         };
     }
 
-        private String[] buildFormNameList(){
+    private String[] buildFormNameList() {
         List<String> formNames = new ArrayList<>();
         formNames.add(KARTU_IBU_REGISTRATION);
         formNames.add(KOHORT_KB_PELAYANAN);
@@ -59,8 +60,8 @@ public class NativeKIbuSmartRegisterActivity extends BaseRegisterActivity implem
         return formNames.toArray(new String[formNames.size()]);
     }
 
-        @Override
-        public void OnLocationSelected(String locationJSONString) {
+    @Override
+    public void OnLocationSelected(String locationJSONString) {
 //        if(Support.ONSYNC) {
 //            Toast.makeText(this,"Data still Synchronizing, please wait",Toast.LENGTH_SHORT).show();
 //            return;

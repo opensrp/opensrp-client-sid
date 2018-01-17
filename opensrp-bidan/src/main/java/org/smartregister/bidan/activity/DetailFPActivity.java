@@ -10,7 +10,6 @@ import android.widget.TextView;
 
 import org.smartregister.Context;
 import org.smartregister.bidan.R;
-//import org.smartregister.bidan.activity.v1.NativeKBSmartRegisterActivity;
 import org.smartregister.bidan.utils.Support;
 import org.smartregister.commonregistry.AllCommonsRepository;
 import org.smartregister.commonregistry.CommonPersonObject;
@@ -24,6 +23,8 @@ import java.util.Map;
 
 import static org.smartregister.util.StringUtil.humanize;
 
+//import org.smartregister.bidan.activity.v1.NativeKBSmartRegisterActivity;
+
 /**
  * Created by sid-tech on 11/30/17.
  */
@@ -31,9 +32,8 @@ import static org.smartregister.util.StringUtil.humanize;
 public class DetailFPActivity extends Activity {
 
     private static final String TAG = DetailFPActivity.class.getName();
-    SimpleDateFormat timer = new SimpleDateFormat("hh:mm:ss");
-
     public static CommonPersonObjectClient kiclient;
+    SimpleDateFormat timer = new SimpleDateFormat("hh:mm:ss");
     private View.OnClickListener bpmListener;
 
     @Override
@@ -46,7 +46,7 @@ public class DetailFPActivity extends Activity {
         String DetailStart = timer.format(new Date());
         Map<String, String> Detail = new HashMap<String, String>();
         Detail.put("start", DetailStart);
-        
+
 //        FlurryAgent.logEvent("KB_detail_view", Detail, true);
 
         final ImageView kiview = (ImageView) findViewById(R.id.tv_mother_detail_profile_view);
@@ -154,7 +154,7 @@ public class DetailFPActivity extends Activity {
         husband_name.setText(String.format("%s%s", getResources().getString(R.string.husband_name), kiclient.getColumnmaps().get("namaSuami") != null ? kiclient.getColumnmaps().get("namaSuami") : "-"));
         String tgl = kiclient.getDetails().get("tanggalLahir") != null ? kiclient.getDetails().get("tanggalLahir") : "-";
         String tgl_lahir = null;
-        if (tgl != null && !tgl.isEmpty()){
+        if (tgl != null && !tgl.isEmpty()) {
             tgl_lahir = tgl.substring(0, tgl.indexOf("T"));
         }
 

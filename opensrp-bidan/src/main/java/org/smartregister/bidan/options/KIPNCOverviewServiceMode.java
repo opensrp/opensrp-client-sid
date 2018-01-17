@@ -1,7 +1,5 @@
 package org.smartregister.bidan.options;
 
-import android.view.View;
-
 import org.smartregister.Context;
 import org.smartregister.bidan.R;
 import org.smartregister.provider.SmartRegisterClientsProvider;

@@ -463,7 +463,7 @@ public class ClientProcessor {
                         fieldName = fieldNameArray[1];
                         fieldValue = jsonMapping.has("concept") ? jsonMapping.getString("concept")
                                 : (jsonMapping.has("formSubmissionField") ? jsonMapping
-                                        .getString("formSubmissionField") : null);
+                                .getString("formSubmissionField") : null);
                         if (fieldValue != null) {
                             responseKey = VALUES_KEY;
                         }
@@ -784,7 +784,7 @@ public class ClientProcessor {
     }
 
     public Map<String, String> getClientAddressAsMap(JSONObject client) {
-        Log.e(TAG, "getClientAddressAsMap: "+ client );
+        Log.e(TAG, "getClientAddressAsMap: " + client);
         Map<String, String> addressMap = new HashMap<>();
         try {
             String addressFieldsKey = "addressFields";

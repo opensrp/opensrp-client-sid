@@ -18,7 +18,6 @@ import org.smartregister.bidan.utils.Support;
 import org.smartregister.commonregistry.CommonPersonObjectClient;
 import org.smartregister.repository.DetailsRepository;
 
-import java.io.File;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -39,10 +38,8 @@ import static org.smartregister.util.StringUtil.humanizeAndDoUPPERCASE;
 public class DetailANCActivity extends Activity {
 
     private static final String TAG = DetailANCActivity.class.getSimpleName();
-
-    SimpleDateFormat timer = new SimpleDateFormat("hh:mm:ss");
-
     public static CommonPersonObjectClient ancClient;
+    SimpleDateFormat timer = new SimpleDateFormat("hh:mm:ss");
     SimpleDateFormat bpm_timer;
 
     @Override
@@ -59,7 +56,7 @@ public class DetailANCActivity extends Activity {
         Context context = Context.getInstance();
 
 
-        final ImageView kiview = (ImageView)findViewById(R.id.tv_mother_detail_profile_view);
+        final ImageView kiview = (ImageView) findViewById(R.id.tv_mother_detail_profile_view);
 
         //header
         TextView today = (TextView) findViewById(R.id.tv_detail_today);
@@ -260,7 +257,7 @@ public class DetailANCActivity extends Activity {
 
         ancDate.setText(String.format(": %s", ancClient.getDetails().get("ancDate") != null ? ancClient.getDetails().get("ancDate") : "-"));
 
-        if(ancClient.getCaseId()!=null){//image already in local storage most likey ):
+        if (ancClient.getCaseId() != null) {//image already in local storage most likey ):
             //set profile image by passing the client id.If the image doesn't exist in the image repository then download and save locally
 //            DrishtiApplication.getCachedImageLoaderInstance().getImageByClientId(ancClient.getCaseId(), OpenSRPImageLoader.getStaticImageListener(kiview, R.mipmap.woman_placeholder, R.mipmap.woman_placeholder));
             Support.setImagetoHolderFromUri(this,
@@ -279,16 +276,16 @@ public class DetailANCActivity extends Activity {
         phone.setText(String.format("No HP: %s", ancClient.getDetails().get("NomorTelponHp") != null ? ancClient.getDetails().get("NomorTelponHp") : "-"));
 
         //risk
-        if(ancClient.getDetails().get("highRiskPregnancyYoungMaternalAge") != null ){
+        if (ancClient.getDetails().get("highRiskPregnancyYoungMaternalAge") != null) {
             risk1.setText(String.format("%s%s", getResources().getString(R.string.highRiskPregnancyYoungMaternalAge), humanize(ancClient.getDetails().get("highRiskPregnancyYoungMaternalAge"))));
         }
-        if(ancClient.getDetails().get("highRiskPregnancyOldMaternalAge") != null ){
+        if (ancClient.getDetails().get("highRiskPregnancyOldMaternalAge") != null) {
             risk1.setText(String.format("%s%s", getResources().getString(R.string.highRiskPregnancyOldMaternalAge), humanize(ancClient.getDetails().get("highRiskPregnancyYoungMaternalAge"))));
         }
-        if(ancClient.getDetails().get("highRiskPregnancyProteinEnergyMalnutrition") != null
+        if (ancClient.getDetails().get("highRiskPregnancyProteinEnergyMalnutrition") != null
                 || ancClient.getDetails().get("HighRiskPregnancyAbortus") != null
-                || ancClient.getDetails().get("HighRiskLabourSectionCesareaRecord" ) != null
-                ){
+                || ancClient.getDetails().get("HighRiskLabourSectionCesareaRecord") != null
+                ) {
             risk2.setText(String.format("%s%s", getResources().getString(R.string.highRiskPregnancyProteinEnergyMalnutrition), humanize(ancClient.getDetails().get("highRiskPregnancyProteinEnergyMalnutrition"))));
             risk3.setText(String.format("%s%s", getResources().getString(R.string.HighRiskPregnancyAbortus), humanize(ancClient.getDetails().get("HighRiskPregnancyAbortus"))));
             risk4.setText(String.format("%s%s", getResources().getString(R.string.HighRiskLabourSectionCesareaRecord), humanize(ancClient.getDetails().get("HighRiskLabourSectionCesareaRecord"))));
@@ -297,7 +294,7 @@ public class DetailANCActivity extends Activity {
         txt_highRiskLabourTBRisk.setText(humanize(ancClient.getDetails().get("highRiskLabourTBRisk") != null ? ancClient.getDetails().get("highRiskLabourTBRisk") : "-"));
 
         highRiskSTIBBVs.setText(humanize(ancClient.getDetails().get("highRiskSTIBBVs") != null ? ancClient.getDetails().get("highRiskSTIBBVs") : "-"));
-        highRiskEctopicPregnancy.setText(humanize (ancClient.getDetails().get("highRiskEctopicPregnancy") != null ? ancClient.getDetails().get("highRiskEctopicPregnancy") : "-"));
+        highRiskEctopicPregnancy.setText(humanize(ancClient.getDetails().get("highRiskEctopicPregnancy") != null ? ancClient.getDetails().get("highRiskEctopicPregnancy") : "-"));
         highRiskCardiovascularDiseaseRecord.setText(humanize(ancClient.getDetails().get("highRiskCardiovascularDiseaseRecord") != null ? ancClient.getDetails().get("highRiskCardiovascularDiseaseRecord") : "-"));
         highRiskDidneyDisorder.setText(humanize(ancClient.getDetails().get("highRiskDidneyDisorder") != null ? ancClient.getDetails().get("highRiskDidneyDisorder") : "-"));
         highRiskHeartDisorder.setText(humanize(ancClient.getDetails().get("highRiskHeartDisorder") != null ? ancClient.getDetails().get("highRiskHeartDisorder") : "-"));
@@ -374,7 +371,7 @@ public class DetailANCActivity extends Activity {
     }
 
     @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data){
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         String imei = ((TelephonyManager) getSystemService(android.content.Context.TELEPHONY_SERVICE)).getDeviceId();
 
@@ -382,7 +379,7 @@ public class DetailANCActivity extends Activity {
         Calendar cal = Calendar.getInstance();
 //        System.out.println(dateFormat.format(cal.getTime()));
 
-        if (requestCode == 2 && resultCode!=RESULT_CANCELED ){
+        if (requestCode == 2 && resultCode != RESULT_CANCELED) {
 //            Log.e(
 //                    TAG, "onActivityResult: "+
 //                    data.getStringExtra("HIGH") +
@@ -391,12 +388,12 @@ public class DetailANCActivity extends Activity {
 //                    data.getStringExtra("PULSE")
 //            );
             DetailsRepository detailsRepository = Context.getInstance().detailsRepository();
-            Long tsLong = System.currentTimeMillis()/1000;
+            Long tsLong = System.currentTimeMillis() / 1000;
             detailsRepository.add(ancClient.entityId(), "tandaVitalTDSistolik", data.getStringExtra("HIGH"), tsLong);
             detailsRepository.add(ancClient.entityId(), "tandaVitalTDDiastolik", data.getStringExtra("LOW"), tsLong);
             detailsRepository.add(ancClient.entityId(), "tandaVitalPulse", data.getStringExtra("PULSE"), tsLong);
-            try{
-                Log.i(TAG, "onActivityResult: saveToserver" );
+            try {
+                Log.i(TAG, "onActivityResult: saveToserver");
                 SimpleDateFormat sdf;
                 Date date = new Date();
 
@@ -405,43 +402,43 @@ public class DetailANCActivity extends Activity {
                 sdf = new SimpleDateFormat("dd MMM yyyy hh:mm:ss zzz");
                 BidanFormUtils formUtils = BidanFormUtils.getInstance(getApplicationContext());
                 String formSubmission =
-                        "<Blood_Test encounter_type=\"Blood Test\" id=\"blood_test\" version=\"201705080820\" _id=\""+ ancClient.entityId()+"\">" +
-                                "<formhub><uuid>"+ UUID.randomUUID().toString() +"</uuid></formhub>\n" +
-                                "<start openmrs_entity=\"encounter\" openmrs_entity_id=\"encounter_start\">"+bpm_timer+"</start>" +
-                                "<today openmrs_entity=\"encounter\" openmrs_entity_id=\"encounter_date\">"+ dateFormat.format(cal.getTime()) +"</today>" +
-                                "<deviceid>"+ imei +"</deviceid>" +
+                        "<Blood_Test encounter_type=\"Blood Test\" id=\"blood_test\" version=\"201705080820\" _id=\"" + ancClient.entityId() + "\">" +
+                                "<formhub><uuid>" + UUID.randomUUID().toString() + "</uuid></formhub>\n" +
+                                "<start openmrs_entity=\"encounter\" openmrs_entity_id=\"encounter_start\">" + bpm_timer + "</start>" +
+                                "<today openmrs_entity=\"encounter\" openmrs_entity_id=\"encounter_date\">" + dateFormat.format(cal.getTime()) + "</today>" +
+                                "<deviceid>" + imei + "</deviceid>" +
                                 "<simserial>no simserial property in enketo</simserial>" +
                                 "<phonenumber>no phonenumber property in enketo</phonenumber>" +
-                                "<Province>"+ ancClient.getDetails().get("stateProvince") +"</Province>" +
-                                "<District>"+ ancClient.getDetails().get("countyDistrict") +"</District>" +
-                                "<Sub-district>"+ ancClient.getDetails().get("countyDistrict") +"</Sub-district>" +
-                                "<Village>"+ ancClient.getDetails().get("countyDistrict")+"</Village>" +
-                                "<Sub-village>"+ ancClient.getDetails().get("countyDistrict") +".</Sub-village>" +
-                                "<existing_location openmrs_entity=\"encounter\" openmrs_entity_id=\"location_id\">"+ ancClient.getDetails().get("cityVillage")+"</existing_location>" +
-                                "<provinsi openmrs_entity=\"person_address\" openmrs_entity_id=\"stateProvince\" openmrs_entity_parent=\"usual_residence\">"+ ancClient.getDetails().get("stateProvince") +"</provinsi>" +
-                                "<kabupaten openmrs_entity=\"person_address\" openmrs_entity_id=\"countyDistrict\" openmrs_entity_parent=\"usual_residence\">"+ ancClient.getDetails().get("countyDistrict") +"</kabupaten>" +
-                                "<desa openmrs_entity=\"person_address\" openmrs_entity_id=\"cityVillage\" openmrs_entity_parent=\"usual_residence\">"+ ancClient.getDetails().get("countyDistrict") +"</desa>" +
-                                "<dusun openmrs_entity=\"person_address\" openmrs_entity_id=\"address1\" openmrs_entity_parent=\"usual_residence\">"+ ancClient.getDetails().get("countyDistrict") +"</dusun>" +
-                                "<kecamatan openmrs_entity=\"person_address\" openmrs_entity_id=\"address2\" openmrs_entity_parent=\"usual_residence\">"+ ancClient.getDetails().get("countyDistrict") +"</kecamatan>" +
-                                "<td_sistolik openmrs_entity=\"concept\" openmrs_entity_id=\"5085AAAAAAAAAAAAAAAAAAAAAAAAAAAA\">"+ data.getStringExtra("HIGH")+"</td_sistolik>" +
-                                "<td_diastolik openmrs_entity=\"concept\" openmrs_entity_id=\"5086AAAAAAAAAAAAAAAAAAAAAAAAAAAA\">"+data.getStringExtra("LOW")+"</td_diastolik>" +
-                                "<pulse openmrs_entity=\"concept\" openmrs_entity_id=\"5087AAAAAAAAAAAAAAAAAAAAAAAAAAAA\">"+data.getStringExtra("PULSE")+"</pulse>" +
-                                "<ahr openmrs_entity=\"concept\" openmrs_entity_id=\"160632AAAAAAAAAAAAAAAAAAAAAAAAAA\" openmrs_entity_parent=\"5087AAAAAAAAAAAAAAAAAAAAAAAAAAAA\">"+data.getStringExtra("AHR")+"</ahr>\n" +
+                                "<Province>" + ancClient.getDetails().get("stateProvince") + "</Province>" +
+                                "<District>" + ancClient.getDetails().get("countyDistrict") + "</District>" +
+                                "<Sub-district>" + ancClient.getDetails().get("countyDistrict") + "</Sub-district>" +
+                                "<Village>" + ancClient.getDetails().get("countyDistrict") + "</Village>" +
+                                "<Sub-village>" + ancClient.getDetails().get("countyDistrict") + ".</Sub-village>" +
+                                "<existing_location openmrs_entity=\"encounter\" openmrs_entity_id=\"location_id\">" + ancClient.getDetails().get("cityVillage") + "</existing_location>" +
+                                "<provinsi openmrs_entity=\"person_address\" openmrs_entity_id=\"stateProvince\" openmrs_entity_parent=\"usual_residence\">" + ancClient.getDetails().get("stateProvince") + "</provinsi>" +
+                                "<kabupaten openmrs_entity=\"person_address\" openmrs_entity_id=\"countyDistrict\" openmrs_entity_parent=\"usual_residence\">" + ancClient.getDetails().get("countyDistrict") + "</kabupaten>" +
+                                "<desa openmrs_entity=\"person_address\" openmrs_entity_id=\"cityVillage\" openmrs_entity_parent=\"usual_residence\">" + ancClient.getDetails().get("countyDistrict") + "</desa>" +
+                                "<dusun openmrs_entity=\"person_address\" openmrs_entity_id=\"address1\" openmrs_entity_parent=\"usual_residence\">" + ancClient.getDetails().get("countyDistrict") + "</dusun>" +
+                                "<kecamatan openmrs_entity=\"person_address\" openmrs_entity_id=\"address2\" openmrs_entity_parent=\"usual_residence\">" + ancClient.getDetails().get("countyDistrict") + "</kecamatan>" +
+                                "<td_sistolik openmrs_entity=\"concept\" openmrs_entity_id=\"5085AAAAAAAAAAAAAAAAAAAAAAAAAAAA\">" + data.getStringExtra("HIGH") + "</td_sistolik>" +
+                                "<td_diastolik openmrs_entity=\"concept\" openmrs_entity_id=\"5086AAAAAAAAAAAAAAAAAAAAAAAAAAAA\">" + data.getStringExtra("LOW") + "</td_diastolik>" +
+                                "<pulse openmrs_entity=\"concept\" openmrs_entity_id=\"5087AAAAAAAAAAAAAAAAAAAAAAAAAAAA\">" + data.getStringExtra("PULSE") + "</pulse>" +
+                                "<ahr openmrs_entity=\"concept\" openmrs_entity_id=\"160632AAAAAAAAAAAAAAAAAAAAAAAAAA\" openmrs_entity_parent=\"5087AAAAAAAAAAAAAAAAAAAAAAAAAAAA\">" + data.getStringExtra("AHR") + "</ahr>\n" +
                                 "<end openmrs_entity=\"encounter\" openmrs_entity_id=\"encounter_end\">2017-05-08T17:21:47.000+08:00</end>" +
                                 "<meta>" +
-                                "<instanceID>uuid:"+UUID.randomUUID().toString()+"</instanceID>" +
+                                "<instanceID>uuid:" + UUID.randomUUID().toString() + "</instanceID>" +
                                 "<deprecatedID/>" +
                                 "</meta>" +
                                 "</Blood_Test>";
 
                 formUtils.generateFormSubmisionFromXMLString(ancClient.entityId(), formSubmission, "blood_test", new JSONObject());
 
-            }catch (Exception e){
+            } catch (Exception e) {
                 // TODO: show error dialog on the formfragment if the submission fails
                 e.printStackTrace();
             }
-        } else{
-            Log.e(TAG, "onActivityResult: Cancel " );
+        } else {
+            Log.e(TAG, "onActivityResult: Cancel ");
         }
 
         finish();

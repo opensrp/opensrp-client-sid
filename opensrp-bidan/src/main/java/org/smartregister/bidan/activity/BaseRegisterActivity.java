@@ -23,12 +23,12 @@ import org.smartregister.enketo.listener.DisplayFormListener;
 import org.smartregister.enketo.view.fragment.DisplayFormFragment;
 import org.smartregister.provider.SmartRegisterClientsProvider;
 import org.smartregister.repository.DetailsRepository;
+import org.smartregister.util.Log;
 import org.smartregister.view.activity.SecuredNativeSmartRegisterActivity;
 import org.smartregister.view.contract.SmartRegisterClient;
 import org.smartregister.view.dialog.DialogOption;
 import org.smartregister.view.dialog.DialogOptionModel;
 import org.smartregister.view.dialog.EditOption;
-import org.smartregister.view.dialog.OpenFormOption;
 import org.smartregister.view.fragment.SecuredNativeSmartRegisterFragment;
 import org.smartregister.view.viewpager.OpenSRPViewPager;
 
@@ -40,15 +40,8 @@ import java.util.Map;
 import butterknife.Bind;
 import butterknife.ButterKnife;
 
-import static org.smartregister.bidan.activity.DetailMotherActivity.motherClient;
-import static org.smartregister.bidan.utils.AllConstantsINA.FormNames.KARTU_IBU_ANC_CLOSE;
-import static org.smartregister.bidan.utils.AllConstantsINA.FormNames.KARTU_IBU_ANC_RENCANA_PERSALINAN;
-import static org.smartregister.bidan.utils.AllConstantsINA.FormNames.KARTU_IBU_ANC_VISIT;
-import static org.smartregister.bidan.utils.AllConstantsINA.FormNames.KARTU_IBU_ANC_VISIT_INTEGRASI;
-import static org.smartregister.bidan.utils.AllConstantsINA.FormNames.KARTU_IBU_ANC_VISIT_LABTEST;
-import static org.smartregister.bidan.utils.AllConstantsINA.FormNames.KARTU_IBU_PNC_REGISTRATION;
 import static org.smartregister.util.Utils.getValue;
-import org.smartregister.util.Log;
+
 /**
  * Created by sid-tech on 12/7/17.
  */
@@ -84,9 +77,6 @@ public class BaseRegisterActivity extends SecuredNativeSmartRegisterActivity imp
             }
         });
 
-//        ziggyService = context().ziggyService();
-
-
     }
 
     protected String[] formNames() {
@@ -94,7 +84,7 @@ public class BaseRegisterActivity extends SecuredNativeSmartRegisterActivity imp
         return null;
     }
 
-    protected Fragment mBaseFragment(){
+    protected Fragment mBaseFragment() {
 
         return null;
     }
@@ -157,7 +147,7 @@ public class BaseRegisterActivity extends SecuredNativeSmartRegisterActivity imp
         }
     }
 
-    public void switchToBaseFragment(final String data){
+    public void switchToBaseFragment(final String data) {
         final int prevPageIndex = currentPage;
         runOnUiThread(new Runnable() {
             @Override
@@ -183,7 +173,7 @@ public class BaseRegisterActivity extends SecuredNativeSmartRegisterActivity imp
     }
 
 
-    public void onPageChanged(int page){
+    public void onPageChanged(int page) {
         setRequestedOrientation(page == 0 ? ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE : ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
     }
 
@@ -233,12 +223,12 @@ public class BaseRegisterActivity extends SecuredNativeSmartRegisterActivity imp
 //        Log.v("fieldoverride", metaData);
         try {
             int formIndex = BidanFormUtils.getIndexForFormName(formName, formNames()) + 1; // add the offset
-            if (entityId != null || metaData != null){
+            if (entityId != null || metaData != null) {
                 String data = null;
                 //check if there is previously saved data for the form
                 data = getPreviouslySavedDataForForm(formName, metaData, entityId);
 
-                if (data == null){
+                if (data == null) {
                     data = BidanFormUtils.getInstance(getApplicationContext()).generateXMLInputForFormWithEntityId(entityId, formName, metaData);
                 }
 
@@ -255,14 +245,14 @@ public class BaseRegisterActivity extends SecuredNativeSmartRegisterActivity imp
 
             mPager.setCurrentItem(formIndex, false); //Don't animate the view on orientation change the view disapears
 
-        } catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
 
     }
 
     @Override
-    public void saveFormSubmission(String formSubmission, String id, String formName, JSONObject fieldOverrides){
+    public void saveFormSubmission(String formSubmission, String id, String formName, JSONObject fieldOverrides) {
         // save the form
         try {
             BidanFormUtils formUtils = BidanFormUtils.getInstance(getApplicationContext());
@@ -273,13 +263,13 @@ public class BaseRegisterActivity extends SecuredNativeSmartRegisterActivity imp
             context().formSubmissionService().updateFTSsearch(submission);
             context().formSubmissionRouter().handleSubmission(submission, formName);
 
-            if(formName.equals("kartu_ibu_registration")){
+            if (formName.equals("kartu_ibu_registration")) {
                 saveuniqueid();
             }
             //switch to forms list fragment
             switchToBaseFragment(formSubmission); // Unnecessary!! passing on data
 
-        } catch (Exception e){
+        } catch (Exception e) {
             // TODO: show error dialog on the formfragment if the submission fails
             DisplayFormFragment displayFormFragment = getDisplayFormFragmentAtIndex(currentPage);
             if (displayFormFragment != null) {
@@ -298,7 +288,11 @@ public class BaseRegisterActivity extends SecuredNativeSmartRegisterActivity imp
         return new DialogOption[]{};
     }
 
+    private String getDetailsPc(Object tag, String key) {
+        CommonPersonObjectClient pc = (CommonPersonObjectClient) tag;
 
+        return pc.getDetails().get(key);
+    }
 
     public class EditDialogOptionModel implements DialogOptionModel {
 
@@ -313,7 +307,7 @@ public class BaseRegisterActivity extends SecuredNativeSmartRegisterActivity imp
             DetailsRepository detailsRepository = org.smartregister.Context.getInstance().detailsRepository();
             detailsRepository.updateDetails(pc);
             String ibuCaseId = getValue(pc.getColumnmaps(), "relational_id", true).toLowerCase();
-            Log.logError(TAG, "onDialogOptionSelection: "+pc.getDetails());
+            Log.logError(TAG, "onDialogOptionSelection: " + pc.getDetails());
             JSONObject fieldOverrides = new JSONObject();
             try {
                 fieldOverrides.put("Province", pc.getDetails().get("stateProvince"));
@@ -332,12 +326,6 @@ public class BaseRegisterActivity extends SecuredNativeSmartRegisterActivity imp
         }
     }
 
-    private String getDetailsPc(Object tag, String key) {
-        CommonPersonObjectClient pc = (CommonPersonObjectClient) tag;
-
-        return pc.getDetails().get(key);
-    }
-
     /**
      * Inner class for Edit and Followup
      */
@@ -352,6 +340,7 @@ public class BaseRegisterActivity extends SecuredNativeSmartRegisterActivity imp
 
         /**
          * Method
+         *
          * @param option
          * @param tag
          */
@@ -372,13 +361,13 @@ public class BaseRegisterActivity extends SecuredNativeSmartRegisterActivity imp
                 JSONObject fieldOverrides = new JSONObject();
 
                 try {
-                    fieldOverrides.put("Province",      pc.getDetails().get("stateProvince"));
-                    fieldOverrides.put("District",      pc.getDetails().get("countyDistrict"));
-                    fieldOverrides.put("Sub-district",  pc.getDetails().get("address2"));
-                    fieldOverrides.put("Village",       pc.getDetails().get("cityVillage"));
-                    fieldOverrides.put("Sub-village",   pc.getDetails().get("address1"));
+                    fieldOverrides.put("Province", pc.getDetails().get("stateProvince"));
+                    fieldOverrides.put("District", pc.getDetails().get("countyDistrict"));
+                    fieldOverrides.put("Sub-district", pc.getDetails().get("address2"));
+                    fieldOverrides.put("Village", pc.getDetails().get("cityVillage"));
+                    fieldOverrides.put("Sub-village", pc.getDetails().get("address1"));
                     fieldOverrides.put("jenis_kelamin", pc.getDetails().get("gender"));
-                    fieldOverrides.put("ibuCaseId",     ibuCaseId);
+                    fieldOverrides.put("ibuCaseId", ibuCaseId);
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
@@ -392,7 +381,7 @@ public class BaseRegisterActivity extends SecuredNativeSmartRegisterActivity imp
 
                 if (option.name().equalsIgnoreCase(getString(R.string.str_register_fp_form))) {
 //                     pc = KIDetailActivity.kiclient;
-                     pc = DetailMotherActivity.motherClient;
+                    pc = DetailMotherActivity.motherClient;
 
 //                    CommonPersonObjectClient pc = motherClient;
 

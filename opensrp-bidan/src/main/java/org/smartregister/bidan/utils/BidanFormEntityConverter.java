@@ -373,7 +373,7 @@ public class BidanFormEntityConverter {
     }
 
     public Client createBaseClient(FormSubmissionMap fs) throws ParseException {
-        Log.d(TAG, "createBaseClient: "+fs.formAttributes());
+        Log.d(TAG, "createBaseClient: " + fs.formAttributes());
 
 
         String firstName = fs.getFieldValue(getFieldName(Person.first_name, fs));
@@ -417,8 +417,8 @@ public class BidanFormEntityConverter {
 
         c.withAddresses(addresses).withAttributes(extractAttributes(fs))
                 .withIdentifiers(extractIdentifiers(fs));
-        for (FormFieldMap ffm:fs.fields()){
-            if (ffm.name().equals("relationalid")){
+        for (FormFieldMap ffm : fs.fields()) {
+            if (ffm.name().equals("relationalid")) {
                 c.addRelationship(ffm.fieldAttributes().get("openmrs_entity_id"), ffm.value());
             }
         }

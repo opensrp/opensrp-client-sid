@@ -5,7 +5,6 @@ import android.content.Intent;
 import android.util.Xml;
 
 import com.cloudant.sync.datastore.ConflictException;
-
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
@@ -53,10 +52,7 @@ import java.util.UUID;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 
-import static org.smartregister.bidan.utils.AllConstantsINA.FormNames.KARTU_IBU_ANC_EDIT;
-import static org.smartregister.bidan.utils.AllConstantsINA.FormNames.KARTU_IBU_ANC_REGISTRATION;
 import static org.smartregister.bidan.utils.AllConstantsINA.FormNames.KARTU_IBU_EDIT;
-import static org.smartregister.bidan.utils.AllConstantsINA.FormNames.KARTU_IBU_PNC_EDIT;
 import static org.smartregister.bidan.utils.AllConstantsINA.FormNames.KOHORT_BAYI_EDIT;
 
 /**
@@ -269,15 +265,16 @@ public class BidanFormUtils {
             org.smartregister.cloudant.models.Client client = new org.smartregister.cloudant
                     .models.Client(
                     c);
-            if(EditClientFormNameList().contains(formName)){
+            if (EditClientFormNameList().contains(formName)) {
                 try {
                     updateClientDocument(client);
                 } catch (ConflictException e1) {
                     e1.printStackTrace();
                 }
-            }else{
+            } else {
                 createNewClientDocument(client);
-            }        }
+            }
+        }
 
 
         Map<String, Map<String, Object>> dep = formEntityConverter.
@@ -388,9 +385,9 @@ public class BidanFormUtils {
     }
 
     public String generateXMLInputForFormWithEntityId(String entityId, String formName, String overrides) {
-        android.util.Log.e(TAG, "generateXMLInputForFormWithEntityId: "+ overrides );
-        android.util.Log.e(TAG, "generateXMLInputForFormWithEntityId: "+ formName );
-        android.util.Log.e(TAG, "generateXMLInputForFormWithEntityId: "+ entityId );
+        android.util.Log.e(TAG, "generateXMLInputForFormWithEntityId: " + overrides);
+        android.util.Log.e(TAG, "generateXMLInputForFormWithEntityId: " + formName);
+        android.util.Log.e(TAG, "generateXMLInputForFormWithEntityId: " + entityId);
         try {
             // get the field overrides map
             JSONObject fieldOverrides = new JSONObject();
@@ -451,7 +448,7 @@ public class BidanFormUtils {
             // Add model and instance tags
             xml = xml.substring(56);
             System.out.println(xml);
-            android.util.Log.d(TAG, "generateXMLInputForFormWithEntityId: "+xml);
+            android.util.Log.d(TAG, "generateXMLInputForFormWithEntityId: " + xml);
 
             return xml;
 
@@ -1122,8 +1119,8 @@ public class BidanFormUtils {
         mCloudantDataHandler.createClientDocument(client);
     }
 
-    private List<String> EditClientFormNameList(){
-        android.util.Log.e(TAG, "EditClientFormNameList: " );
+    private List<String> EditClientFormNameList() {
+        android.util.Log.e(TAG, "EditClientFormNameList: ");
         List<String> formNames = new ArrayList<>();
         formNames.add("child_edit");
         formNames.add(KARTU_IBU_EDIT);
