@@ -104,6 +104,7 @@ dependencies {
     }
     compile fileTree(include: ['commons-validator-1.6.jar'], dir: 'libs')
 
+    compile 'com.google.guava:guava:23.6-android'
 
     compile('com.android.support:design:22.2.1') {
         exclude group: 'com.android.support', module: 'recyclerview-v7'
