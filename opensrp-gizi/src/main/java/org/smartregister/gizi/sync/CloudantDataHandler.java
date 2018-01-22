@@ -267,14 +267,17 @@ public class CloudantDataHandler {
      *                           match the current rev in the datastore.
      */
     public Client updateDocument(Client client) throws ConflictException {
-        DocumentRevision rev = client.getDocumentRevision();
-        rev.setBody(DocumentBodyFactory.create(client.asMap()));
         try {
+            Client c = getClientDocumentByBaseEntityId(client.getBaseEntityId());
+            DocumentRevision rev = c.getDocumentRevision();
+            rev.setBody(DocumentBodyFactory.create(client.asMap()));
             DocumentRevision updated = this.mDatastore.updateDocumentFromRevision(rev);
             return Client.fromRevision(updated);
         } catch (DocumentException de) {
             return null;
         } catch (ParseException e) {
+            return null;
+        } catch (Exception e) {
             return null;
         }
     }
@@ -299,15 +302,6 @@ public class CloudantDataHandler {
             if (c == null) {
                 DocumentRevision created = this.mDatastore.createDocumentFromRevision(rev);
                 return Client.fromRevision(created);
-            } else {
-                //TODO: merge/update the client document
-//                DocumentRevision created = this.mDatastore.createDocumentFromRevision(rev);
-//                return Client.fromRevision(created);
-                DocumentRevision revupdate = c.getDocumentRevision();
-                revupdate.setBody(DocumentBodyFactory.create(client.asMap()));
-                DocumentRevision updated = this.mDatastore.updateDocumentFromRevision(revupdate);
-                return Client.fromRevision(updated);
-//                return c;
             }
 
         } catch (Exception e) {
