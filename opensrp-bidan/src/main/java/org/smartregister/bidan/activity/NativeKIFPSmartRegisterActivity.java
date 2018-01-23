@@ -23,25 +23,19 @@ public class NativeKIFPSmartRegisterActivity extends BaseRegisterActivity {
     public static final String TAG = NativeKIFPSmartRegisterActivity.class.getName();
 
     @Override
-    protected String[] formNames() {
-
-        return this.buildFormNameList();
-    }
-
-    @Override
     protected Fragment mBaseFragment() {
 
         return new FPSmartRegisterFragment();
     }
 
-
-    private String[] buildFormNameList() {
+    @Override
+    protected List<String> buildFormNameList() {
 
         List<String> formNames = new ArrayList<>();
         formNames.add(KOHORT_KB_REGISTER);
         formNames.add(KOHORT_KB_UPDATE);
 
-        return formNames.toArray(new String[formNames.size()]);
+        return formNames;
     }
 
     public DialogOption[] getEditOptions() {

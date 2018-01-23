@@ -19,6 +19,7 @@ import org.smartregister.commonregistry.CommonPersonObject;
 import org.smartregister.commonregistry.CommonPersonObjectClient;
 import org.smartregister.domain.form.FieldOverrides;
 import org.smartregister.domain.form.FormSubmission;
+import org.smartregister.enketo.adapter.pager.EnketoRegisterPagerAdapter;
 import org.smartregister.enketo.listener.DisplayFormListener;
 import org.smartregister.enketo.view.fragment.DisplayFormFragment;
 import org.smartregister.provider.SmartRegisterClientsProvider;
@@ -33,8 +34,10 @@ import org.smartregister.view.fragment.SecuredNativeSmartRegisterFragment;
 import org.smartregister.view.viewpager.OpenSRPViewPager;
 
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import butterknife.Bind;
@@ -49,6 +52,7 @@ import static org.smartregister.util.Utils.getValue;
 public class BaseRegisterActivity extends SecuredNativeSmartRegisterActivity implements DisplayFormListener {
 
     protected SimpleDateFormat timer = new SimpleDateFormat("hh:mm:ss");
+    protected List<String> formNames;
 
     @Bind(R.id.view_pager)
     protected OpenSRPViewPager mPager;
@@ -63,11 +67,11 @@ public class BaseRegisterActivity extends SecuredNativeSmartRegisterActivity imp
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
+        formNames = this.buildFormNameList();
 
-        mPagerAdapter = new BaseRegisterActivityPagerAdapter(getSupportFragmentManager(), formNames(), mBaseFragment());
-
-        int formLength = ((formNames() == null) ? 1 : formNames().length);
-        mPager.setOffscreenPageLimit(formLength);
+        // Instantiate a ViewPager and a PagerAdapter.
+        mPagerAdapter = new EnketoRegisterPagerAdapter(getSupportFragmentManager(), formNames.toArray(new String[formNames.size()]), mBaseFragment());
+        mPager.setOffscreenPageLimit(formNames.size());
         mPager.setAdapter(mPagerAdapter);
         mPager.setOnPageChangeListener(new ViewPager.SimpleOnPageChangeListener() {
             @Override
@@ -79,9 +83,8 @@ public class BaseRegisterActivity extends SecuredNativeSmartRegisterActivity imp
 
     }
 
-    protected String[] formNames() {
-
-        return null;
+    protected List<String> buildFormNameList() {
+        return new ArrayList<>();
     }
 
     protected Fragment mBaseFragment() {
@@ -121,8 +124,6 @@ public class BaseRegisterActivity extends SecuredNativeSmartRegisterActivity imp
 
     @Override
     protected void onResumption() {
-
-        formNames();
     }
 
     @Override
@@ -182,7 +183,7 @@ public class BaseRegisterActivity extends SecuredNativeSmartRegisterActivity imp
     }
 
     public DisplayFormFragment getDisplayFormFragmentAtIndex(int index) {
-        return (DisplayFormFragment) findFragmentByPosition(3);
+        return (DisplayFormFragment) findFragmentByPosition(index);
     }
 
     public void retrieveAndSaveUnsubmittedFormData() {
@@ -222,7 +223,7 @@ public class BaseRegisterActivity extends SecuredNativeSmartRegisterActivity imp
 //        FlurryAgent.logEvent(formName,FS, true );
 //        Log.v("fieldoverride", metaData);
         try {
-            int formIndex = BidanFormUtils.getIndexForFormName(formName, formNames()) + 1; // add the offset
+            int formIndex = formNames.indexOf(formName) + 1;// add the offset
             if (entityId != null || metaData != null) {
                 String data = null;
                 //check if there is previously saved data for the form

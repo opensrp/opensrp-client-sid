@@ -31,19 +31,13 @@ public class NativeKIAnakSmartRegisterActivity extends BaseRegisterActivity {
     public static final String TAG = AnakSmartRegisterFragment.class.getName();
 
     @Override
-    protected String[] formNames() {
-
-        return this.buildFormNameList();
-    }
-
-    @Override
     protected Fragment mBaseFragment() {
 
         return new AnakSmartRegisterFragment();
     }
 
-
-    private String[] buildFormNameList() {
+    @Override
+    protected List<String> buildFormNameList() {
 
         List<String> formNames = new ArrayList<>();
 
@@ -54,7 +48,7 @@ public class NativeKIAnakSmartRegisterActivity extends BaseRegisterActivity {
         formNames.add(BAYI_IMUNISASI);
         formNames.add(KOHORT_BAYI_EDIT);
 
-        return formNames.toArray(new String[formNames.size()]);
+        return formNames;
     }
 
     public DialogOption[] getEditOptions() {

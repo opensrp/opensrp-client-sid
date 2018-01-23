@@ -29,12 +29,6 @@ public class NativeKIbuSmartRegisterActivity extends BaseRegisterActivity implem
     public static final String TAG = NativeKIbuSmartRegisterActivity.class.getName();
 
     @Override
-    protected String[] formNames() {
-
-        return this.buildFormNameList();
-    }
-
-    @Override
     protected Fragment mBaseFragment() {
 
         return new NativeKISmartRegisterFragment();
@@ -49,7 +43,7 @@ public class NativeKIbuSmartRegisterActivity extends BaseRegisterActivity implem
         };
     }
 
-    private String[] buildFormNameList() {
+    protected List<String> buildFormNameList() {
         List<String> formNames = new ArrayList<>();
         formNames.add(KARTU_IBU_REGISTRATION);
         formNames.add(KOHORT_KB_PELAYANAN);
@@ -57,7 +51,7 @@ public class NativeKIbuSmartRegisterActivity extends BaseRegisterActivity implem
         formNames.add(ANAK_BAYI_REGISTRATION);
         formNames.add(KARTU_IBU_CLOSE);
 
-        return formNames.toArray(new String[formNames.size()]);
+        return formNames;
     }
 
     @Override

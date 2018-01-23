@@ -26,19 +26,13 @@ public class NativeKIANCSmartRegisterActivity extends BaseRegisterActivity {
     public static final String TAG = NativeKIANCSmartRegisterActivity.class.getName();
 
     @Override
-    protected String[] formNames() {
-
-        return this.buildFormNameList();
-    }
-
-    @Override
     protected Fragment mBaseFragment() {
 
         return new ANCSmartRegisterFragment();
     }
 
-
-    private String[] buildFormNameList() {
+    @Override
+    protected List<String> buildFormNameList() {
 
         List<String> formNames = new ArrayList<>();
         formNames.add(KARTU_IBU_ANC_VISIT);
@@ -48,7 +42,7 @@ public class NativeKIANCSmartRegisterActivity extends BaseRegisterActivity {
         formNames.add(KARTU_IBU_PNC_REGISTRATION);
         formNames.add(KARTU_IBU_ANC_CLOSE);
 
-        return formNames.toArray(new String[formNames.size()]);
+        return formNames;
     }
 
     public DialogOption[] getEditOptions() {
