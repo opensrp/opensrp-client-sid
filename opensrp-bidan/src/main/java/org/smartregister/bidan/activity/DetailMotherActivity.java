@@ -2,6 +2,7 @@ package org.smartregister.bidan.activity;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -11,10 +12,16 @@ import android.widget.TextView;
 
 import org.smartregister.Context;
 import org.smartregister.bidan.R;
+import org.smartregister.bidan.utils.CameraPreviewActivity;
+import org.smartregister.bidan.utils.ImageUtils;
 import org.smartregister.bidan.utils.Support;
+import org.smartregister.bidan.utils.Tools;
 import org.smartregister.commonregistry.CommonPersonObjectClient;
 import org.smartregister.repository.DetailsRepository;
+import org.smartregister.repository.ImageRepository;
+import org.smartregister.view.activity.DrishtiApplication;
 
+import java.io.File;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashMap;
@@ -145,6 +152,7 @@ public class DetailMotherActivity extends Activity {
     ImageButton back;
     //    ImageView kiview;
     private boolean updateMode = false;
+    private String userId;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -160,66 +168,7 @@ public class DetailMotherActivity extends Activity {
         Detail.put("start", DetailStart);
 //        FlurryAgent.logEvent("KI_detail_view",Detail, true );
 
-
-        //profile
-//        kiview = (ImageView) findViewById(R.id.tv_mother_detail_profile_view);
-//        TextView nama = (TextView) findViewById(R.id.txt_wife_name);
-//        TextView nik = (TextView) findViewById(R.id.txt_nik);
-//        TextView husband_name = (TextView) findViewById(R.id.txt_husband_name);
-//        TextView dob = (TextView) findViewById(R.id.txt_dob);
-//        TextView phone = (TextView) findViewById(R.id.txt_contact_phone_number);
-//        TextView risk1 = (TextView) findViewById(R.id.txt_risk1);
-//        TextView risk2 = (TextView) findViewById(R.id.txt_risk2);
-//        TextView risk3 = (TextView) findViewById(R.id.txt_risk3);
-//        TextView risk4 = (TextView) findViewById(R.id.txt_risk4);
-
-//        final TextView show_risk = (TextView) findViewById(R.id.show_more);
-//        final TextView show_detail = (TextView) findViewById(R.id.show_more_detail);
-
-        //detail data
-//        TextView village = (TextView) findViewById(R.id.txt_village_name);
-//        TextView subvillage = (TextView) findViewById(R.id.txt_subvillage);
-//        TextView age = (TextView) findViewById(R.id.txt_age);
-//        TextView alamat = (TextView) findViewById(R.id.txt_alamat);
-//        TextView education = (TextView) findViewById(R.id.txt_edu);
-//        TextView religion = (TextView) findViewById(R.id.txt_agama);
-//        TextView job = (TextView) findViewById(R.id.txt_job);
-//        TextView gakin = (TextView) findViewById(R.id.txt_gakin);
-//        TextView blood_type = (TextView) findViewById(R.id.txt_blood);
-//        TextView asuransi = (TextView) findViewById(R.id.txt_asuransi);
-
-        //detail RISK
-//        TextView highRiskSTIBBVs = (TextView) findViewById(R.id.txt_highRiskSTIBBVs);
-//        TextView highRiskEctopicPregnancy = (TextView) findViewById(R.id.txt_highRiskEctopicPregnancy);
-//        TextView highRiskCardiovascularDiseaseRecord = (TextView) findViewById(R.id.txt_highRiskCardiovascularDiseaseRecord);
-//        TextView highRiskDidneyDisorder = (TextView) findViewById(R.id.txt_highRiskDidneyDisorder);
-//        TextView highRiskHeartDisorder = (TextView) findViewById(R.id.txt_highRiskHeartDisorder);
-//        TextView highRiskAsthma = (TextView) findViewById(R.id.txt_highRiskAsthma);
-//        TextView highRiskTuberculosis = (TextView) findViewById(R.id.txt_highRiskTuberculosis);
-//        TextView highRiskMalaria = (TextView) findViewById(R.id.txt_highRiskMalaria);
-//        TextView highRiskPregnancyPIH = (TextView) findViewById(R.id.txt_highRiskPregnancyPIH);
-//        TextView highRiskPregnancyProteinEnergyMalnutrition = (TextView) findViewById(R.id.txt_highRiskPregnancyProteinEnergyMalnutrition);
-//        TextView txt_highRiskLabourTBRisk = (TextView) findViewById(R.id.txt_highRiskLabourTBRisk);
-//        TextView txt_HighRiskLabourSectionCesareaRecord = (TextView) findViewById(R.id.txt_HighRiskLabourSectionCesareaRecord);
-//        TextView txt_highRisklabourFetusNumber = (TextView) findViewById(R.id.txt_highRisklabourFetusNumber);
-//        TextView txt_highRiskLabourFetusSize = (TextView) findViewById(R.id.txt_highRiskLabourFetusSize);
-//        TextView txt_lbl_highRiskLabourFetusMalpresentation = (TextView) findViewById(R.id.txt_lbl_highRiskLabourFetusMalpresentation);
-//        TextView txt_highRiskPregnancyAnemia = (TextView) findViewById(R.id.txt_highRiskPregnancyAnemia);
-//        TextView txt_highRiskPregnancyDiabetes = (TextView) findViewById(R.id.txt_highRiskPregnancyDiabetes);
-//        TextView HighRiskPregnancyTooManyChildren = (TextView) findViewById(R.id.txt_HighRiskPregnancyTooManyChildren);
-//        TextView highRiskPostPartumSectioCaesaria = (TextView) findViewById(R.id.txt_highRiskPostPartumSectioCaesaria);
-//        TextView highRiskPostPartumForceps = (TextView) findViewById(R.id.txt_highRiskPostPartumForceps);
-//        TextView highRiskPostPartumVacum = (TextView) findViewById(R.id.txt_highRiskPostPartumVacum);
-//        TextView highRiskPostPartumPreEclampsiaEclampsia = (TextView) findViewById(R.id.txt_highRiskPostPartumPreEclampsiaEclampsia);
-//        TextView highRiskPostPartumMaternalSepsis = (TextView) findViewById(R.id.txt_highRiskPostPartumMaternalSepsis);
-//        TextView highRiskPostPartumInfection = (TextView) findViewById(R.id.txt_highRiskPostPartumInfection);
-//        TextView highRiskPostPartumHemorrhage = (TextView) findViewById(R.id.txt_highRiskPostPartumHemorrhage);
-//        TextView highRiskPostPartumPIH = (TextView) findViewById(R.id.txt_highRiskPostPartumPIH);
-//        TextView highRiskPostPartumDistosia = (TextView) findViewById(R.id.txt_highRiskPostPartumDistosia);
-//        TextView txt_highRiskHIVAIDS = (TextView) findViewById(R.id.txt_highRiskHIVAIDS);
-//
-//        ImageButton back = (ImageButton) findViewById(org.smartregister.R.id.btn_back_to_home);
-
+        userId = motherClient.getDetails().get("base_entity_id");
         back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -347,16 +296,9 @@ public class DetailMotherActivity extends Activity {
                 // FlurryFacade.logEvent("taking_mother_pictures_on_kohort_ibu_detail_view");
                 entityid = motherClient.entityId();
 
-//                if(hash.containsValue(entityid)){
-//                    updateMode = true;
-//                }
-//
-//                Intent takePictureIntent = new Intent(DetailMotherActivity.this, SmartShutterActivity.class);
-//                takePictureIntent.putExtra("org.sid.sidface.SmartShutterActivity.updated", updateMode);
-//                takePictureIntent.putExtra("IdentifyPerson", false);
-//                takePictureIntent.putExtra("org.sid.sidface.ImageConfirmation.id", entityid);
-//                takePictureIntent.putExtra("org.sid.sidface.ImageConfirmation.origin", TAG); // send Class Name
-//                startActivityForResult(takePictureIntent, 2);
+                Intent intent = new Intent(DetailMotherActivity.this, CameraPreviewActivity.class);
+                intent.putExtra(CameraPreviewActivity.REQUEST_TYPE, 201);
+                startActivityForResult(intent, 201);
 
             }
         });
@@ -372,7 +314,27 @@ public class DetailMotherActivity extends Activity {
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent intent) {
-//        refresh
+        if (requestCode == 201) {
+
+            StringBuilder path = new StringBuilder();
+            path.append(DrishtiApplication.getAppDir());
+            ImageRepository photo = new ImageRepository();
+
+            File file = new File(path.toString());
+            if (!file.exists()) {
+                file.mkdir();
+            }
+            if (file.canWrite()) {
+                path.append(File.separator).append(userId).append(".jpg");
+                Tools.savefile(Tools.scaleDown((Bitmap) intent.getExtras().get("data"), 400.0f, false), path.toString());
+
+            }
+            Log.e(TAG, "onActivityResult:path save into "+ path );
+
+            kiview.setImageBitmap(Tools.getThumbnailBitmap(motherClient.getDetails().get("photo_path"), 200));
+            finish();
+        }
+        //        refresh
         Log.e(TAG, "onActivityResult: refresh");
         finish();
         startActivity(getIntent());

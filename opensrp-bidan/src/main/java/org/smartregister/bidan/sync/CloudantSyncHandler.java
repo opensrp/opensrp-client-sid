@@ -65,7 +65,6 @@ public class CloudantSyncHandler {
         // the main thread so the UI can update safely.
         this.mHandler = new Handler(Looper.getMainLooper());
         try {
-
             // Retrieve database host from preferences
             SharedPreferences preferences = PreferenceManager
                     .getDefaultSharedPreferences(this.mContext);

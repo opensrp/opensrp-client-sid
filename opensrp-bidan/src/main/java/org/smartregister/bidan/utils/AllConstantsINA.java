@@ -24,9 +24,6 @@ public class AllConstantsINA {
     public static final String HIGH_RISK_LABOUR = "high_risk_labour";
     public static final String HIGH_RISK_POST_PARTUM = "high_risk_post_partum";
 
-    // Flurry Bidan Testing 2
-//     public static final String FLURRY_KEY = "9RDM5TWW4HJ5QH8TNJ3P";
-
     //    COLOR
     public static final String RED_ORANGE = "#FE642E";
     public static final String ORANGE_YELLOW = "#D7DF01";
@@ -49,10 +46,10 @@ public class AllConstantsINA {
         public static final String REPLICATION_ERROR = "REPLICATION_ERROR";
         public static final String DOCUMENTS_REPLICATED = "DOCUMENTS_REPLICATED";
         public static final String BATCHES_REPLICATED = "BATCHES_REPLICATED";
-        public static final String COUCHDB_PORT = "";
-        public static final String COUCH_DATABASE_NAME = "";
-        public static final String COUCH_DATABASE_USER = "";
-        public static final String COUCH_DATABASE_PASS = "";
+        public static final String COUCHDB_PORT = "5983";
+        public static final String COUCH_DATABASE_NAME = "opensrp";
+        public static final String COUCH_DATABASE_USER = "rootuser";
+        public static final String COUCH_DATABASE_PASS = "Satu23456";
 
     }
 
@@ -64,7 +61,7 @@ public class AllConstantsINA {
     public static class SyncFilters {
         // These pull filters must be defined in your couchDB server for them to work
         // Filters
-        public static final String FILTER_LOCATION_ID = "locationId";
+        public static final String FILTER_LOCATION_ID = "location";
         public static final String FILTER_PROVIDER = "providerId";
 
         //filter by team e.g. team = user1,user2,user3
@@ -248,5 +245,10 @@ public class AllConstantsINA {
         public static final String CHILD_CURRENT_WEIGTH = "beratBadanBayiSetiapKunjunganBayiPerbulan";
     }
 
+    public static final class GENDER {
 
+        public static final String MALE = "male";
+        public static final String FEMALE = "female";
+        public static final String TRANSGENDER = "transgender";
+    }
 }

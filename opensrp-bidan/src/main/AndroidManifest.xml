@@ -103,6 +103,8 @@
 
         <activity android:name=".activity.SettingsActivity"
             android:screenOrientation="landscape"/>
+        <activity android:name=".utils.CameraPreviewActivity" />
+        <activity android:name=".utils.Camera2PreviewActivity" />
 
 
     </application>

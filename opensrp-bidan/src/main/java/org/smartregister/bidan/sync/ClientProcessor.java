@@ -784,7 +784,7 @@ public class ClientProcessor {
     }
 
     public Map<String, String> getClientAddressAsMap(JSONObject client) {
-        Log.e(TAG, "getClientAddressAsMap: " + client);
+//        Log.e(TAG, "getClientAddressAsMap: " + client);
         Map<String, String> addressMap = new HashMap<>();
         try {
             String addressFieldsKey = "addressFields";

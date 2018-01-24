@@ -153,8 +153,9 @@ public class Support {
     }
 
     public static void setImagetoHolderFromUri(Activity activity, String file, ImageView view, int placeholder) {
-        String path = DrishtiApplication.getAppDir() + File.separator + ".thumbs" + File.separator + "th_";
-        String fullPath = path + file + ".jpg";
+//        String path = DrishtiApplication.getAppDir() + File.separator + ".thumbs" + File.separator + "th_";
+        String path = DrishtiApplication.getAppDir();
+        String fullPath = path + File.separator + file + ".jpg";
         android.util.Log.e(TAG, "setImagetoHolderFromUri: " + fullPath);
         view.setImageDrawable(activity.getResources().getDrawable(placeholder));
         File externalFile = new File(fullPath);

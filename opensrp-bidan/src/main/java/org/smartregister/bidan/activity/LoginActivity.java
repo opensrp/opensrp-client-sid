@@ -29,6 +29,7 @@ import org.json.JSONObject;
 import org.smartregister.Context;
 import org.smartregister.bidan.R;
 import org.smartregister.bidan.application.BidanApplication;
+import org.smartregister.bidan.utils.AllConstantsINA;
 import org.smartregister.domain.LoginResponse;
 import org.smartregister.event.Listener;
 import org.smartregister.repository.AllSharedPreferences;
@@ -149,7 +150,7 @@ public class LoginActivity extends Activity {
         getActionBar().setBackgroundDrawable(ResourcesCompat.getDrawable(getResources(), R.color.action_bar_background, null));
         setLanguage();
 
-//        debugApp();
+        debugApp();
     }
 
     @Override
@@ -345,7 +346,12 @@ public class LoginActivity extends Activity {
     public String getUserDefaultLocationId(String userInfo) {
         try {
             JSONObject userLocationJSON = new JSONObject(userInfo);
-            return userLocationJSON.getJSONObject("team").getJSONArray("location").getJSONObject(0).getString("name");
+            return userLocationJSON
+                    .getJSONObject(AllConstantsINA.SyncFilters.FILTER_TEAM)
+                    .getJSONArray(AllConstantsINA.SyncFilters.FILTER_LOCATION_ID)
+                    .getJSONObject(0)
+                    .getString("name");
+
         } catch (JSONException e) {
             android.util.Log.v("Error : ", e.getMessage());
         }
