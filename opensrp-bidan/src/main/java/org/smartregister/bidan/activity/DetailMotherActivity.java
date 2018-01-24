@@ -318,7 +318,6 @@ public class DetailMotherActivity extends Activity {
 
             StringBuilder path = new StringBuilder();
             path.append(DrishtiApplication.getAppDir());
-            ImageRepository photo = new ImageRepository();
 
             File file = new File(path.toString());
             if (!file.exists()) {
@@ -327,11 +326,8 @@ public class DetailMotherActivity extends Activity {
             if (file.canWrite()) {
                 path.append(File.separator).append(userId).append(".jpg");
                 Tools.savefile(Tools.scaleDown((Bitmap) intent.getExtras().get("data"), 400.0f, false), path.toString());
-
             }
-            Log.e(TAG, "onActivityResult:path save into "+ path );
 
-            kiview.setImageBitmap(Tools.getThumbnailBitmap(motherClient.getDetails().get("photo_path"), 200));
             finish();
         }
         //        refresh

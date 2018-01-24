@@ -166,8 +166,14 @@ public class Support {
         }
 
         if (externalFile.exists()) {
+
             Uri external = Uri.fromFile(externalFile);
-            view.setImageURI(external);
+//            view.setImageURI(external);
+
+            view.setImageBitmap(Tools.getThumbnailBitmap(externalFile.getPath(), 100));
+
+            android.util.Log.e(TAG, "setImagetoHolderFromUri: "+ external );
+
         } else {
             Log.logError(Support.class.getName(), String.format("image %s doesn't exist", file));
         }

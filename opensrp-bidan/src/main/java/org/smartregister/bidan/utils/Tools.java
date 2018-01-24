@@ -2,8 +2,14 @@ package org.smartregister.bidan.utils;
 
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.media.ThumbnailUtils;
+import android.util.Log;
+
+import org.apache.commons.io.FilenameUtils;
+import org.smartregister.view.activity.DrishtiApplication;
 
 import java.io.ByteArrayOutputStream;
+import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 
@@ -12,6 +18,7 @@ import java.io.IOException;
  */
 
 public class Tools {
+    private static String TAG = Tools.class.getName();
 
     public static void savefile(Bitmap sourceuri, String destinationFilename) {
         try {
@@ -22,8 +29,22 @@ public class Tools {
             fos.write(bitmapdata);
             fos.flush();
             fos.close();
+
+            String basename = FilenameUtils.getName(destinationFilename);
+            // Create Thumbs
+            String pathTh = DrishtiApplication.getAppDir() + File.separator + "th" + File.separator + basename;
+            FileOutputStream tfos = new FileOutputStream(pathTh);
+            final int THUMBSIZE = AllConstantsINA.THUMBSIZE;
+
+            Bitmap thumbImage = ThumbnailUtils.extractThumbnail(
+                    BitmapFactory.decodeFile(tfos.toString()), THUMBSIZE, THUMBSIZE);
+            if (thumbImage != null) thumbImage.compress(Bitmap.CompressFormat.PNG, 100, tfos);
+            else Log.e(TAG, "savefile: " );
+
+            tfos.close();
         } catch (IOException e) {
             e.printStackTrace();
+            Log.e(TAG, "savefile: "+ e.getCause() );
         }
     }
 
