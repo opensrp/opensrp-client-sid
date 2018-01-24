@@ -15,7 +15,6 @@
     <integer name="child_list_service_mode_views_section_weight">60</integer>
     <integer name="child_list_dob_view_weight">12</integer>
     <integer name="child_list_last_service_view_weight">15</integer>
-    <integer name="child_list_visit_status_view_weight">20</integer>
     <integer name="child_list_edit_icon_view_weight">10</integer>
 
     <integer name="child_list_bcg_view_weight">15</integer>
@@ -86,9 +85,6 @@
     <integer name="pnc_list_edit_icon_view_weight">7</integer>
     <integer name="pnc_list_service_mode_views_section_weight">68</integer>
     <integer name="pnc_list_days_pp_view_weight">7</integer>
-
-    <integer name="stroke_width">4</integer>
-    <integer name="heart_animation_duration">300</integer>
 
 
 </resources>

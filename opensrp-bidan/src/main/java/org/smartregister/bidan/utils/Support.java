@@ -172,7 +172,7 @@ public class Support {
 
             view.setImageBitmap(Tools.getThumbnailBitmap(externalFile.getPath(), 100));
 
-            android.util.Log.e(TAG, "setImagetoHolderFromUri: "+ external );
+            android.util.Log.e(TAG, "setImagetoHolderFromUri: " + external);
 
         } else {
             Log.logError(Support.class.getName(), String.format("image %s doesn't exist", file));

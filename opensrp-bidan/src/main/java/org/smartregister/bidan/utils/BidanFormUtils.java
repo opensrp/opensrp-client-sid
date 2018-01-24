@@ -401,7 +401,7 @@ public class BidanFormUtils {
             String formDefinitionJson = readFileFromAssetsFolder("www/form/" + formName + "/form_definition.json");
             JSONObject formDefinition = new JSONObject(formDefinitionJson);
 
-            android.util.Log.e(TAG, "generateXMLInputForFormWithEntityId: "+ formDefinition.getJSONObject("form") );
+            android.util.Log.e(TAG, "generateXMLInputForFormWithEntityId: " + formDefinition.getJSONObject("form"));
             String ec_bind_path = formDefinition.getJSONObject("form").getString("ec_bind_type");
 
             String sql = "SELECT * FROM " + ec_bind_path + " WHERE base_entity_id='" + entityId + "'";

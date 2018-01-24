@@ -11,7 +11,6 @@ import org.apache.commons.lang3.StringUtils;
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.smartregister.bidan.R;
-import org.smartregister.bidan.pageradapter.BaseRegisterActivityPagerAdapter;
 import org.smartregister.bidan.sync.ClientProcessor;
 import org.smartregister.bidan.utils.BidanFormUtils;
 import org.smartregister.commonregistry.AllCommonsRepository;

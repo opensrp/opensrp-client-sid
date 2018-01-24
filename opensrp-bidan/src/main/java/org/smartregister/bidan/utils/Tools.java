@@ -39,12 +39,12 @@ public class Tools {
             Bitmap thumbImage = ThumbnailUtils.extractThumbnail(
                     BitmapFactory.decodeFile(tfos.toString()), THUMBSIZE, THUMBSIZE);
             if (thumbImage != null) thumbImage.compress(Bitmap.CompressFormat.PNG, 100, tfos);
-            else Log.e(TAG, "savefile: " );
+            else Log.e(TAG, "savefile: ");
 
             tfos.close();
         } catch (IOException e) {
             e.printStackTrace();
-            Log.e(TAG, "savefile: "+ e.getCause() );
+            Log.e(TAG, "savefile: " + e.getCause());
         }
     }
 

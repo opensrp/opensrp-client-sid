@@ -164,7 +164,7 @@ public class LoginActivity extends Activity {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        if(item.getTitle().toString().equalsIgnoreCase("Settings")){
+        if (item.getTitle().toString().equalsIgnoreCase("Settings")) {
             startActivity(new Intent(this, SettingsActivity.class));
             return true;
         }

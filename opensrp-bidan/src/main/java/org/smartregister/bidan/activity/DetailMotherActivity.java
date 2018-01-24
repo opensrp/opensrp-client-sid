@@ -13,12 +13,10 @@ import android.widget.TextView;
 import org.smartregister.Context;
 import org.smartregister.bidan.R;
 import org.smartregister.bidan.utils.CameraPreviewActivity;
-import org.smartregister.bidan.utils.ImageUtils;
 import org.smartregister.bidan.utils.Support;
 import org.smartregister.bidan.utils.Tools;
 import org.smartregister.commonregistry.CommonPersonObjectClient;
 import org.smartregister.repository.DetailsRepository;
-import org.smartregister.repository.ImageRepository;
 import org.smartregister.view.activity.DrishtiApplication;
 
 import java.io.File;

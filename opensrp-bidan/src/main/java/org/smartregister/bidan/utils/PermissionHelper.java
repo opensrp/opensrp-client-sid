@@ -1,11 +1,9 @@
 package org.smartregister.bidan.utils;
 
-import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
-import android.support.v4.content.ContextCompat;
 
 import java.util.ArrayList;
 
@@ -70,7 +68,7 @@ public class PermissionHelper extends Fragment {
 //            if (ContextCompat.checkSelfPermission(getActivity(), permission) == 0) {
 //                this.mCallback.onPermissionResult(permission, true);
 //            } else {
-                requiredPermissions.add(permission);
+            requiredPermissions.add(permission);
 //            }
         }
 //        if (requiredPermissions.size() > 0) {

@@ -40,7 +40,7 @@ public class ImageUtils {
 
     public static Photo profilePhotoByClient(CommonPersonObjectClient client) {
         Photo photo = new Photo();
-        ProfileImage profileImage =  BidanApplication.getInstance().context().imageRepository().findByEntityId(client.entityId());
+        ProfileImage profileImage = BidanApplication.getInstance().context().imageRepository().findByEntityId(client.entityId());
         if (profileImage != null) {
             photo.setFilePath(profileImage.getFilepath());
         } else {

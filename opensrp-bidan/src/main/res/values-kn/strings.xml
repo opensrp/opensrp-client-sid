@@ -50,15 +50,12 @@
 
     <string name="header_anak">Anak</string>
     <string name="header_nama">Name</string>
-    <string name="header_tgl_periksa">Check Date</string>
     <string name="header_edd">HTP</string>
     <string name="header_no_ibu">Mother Number</string>
     <string name="header_status_b">Status</string>
     <string name="header_obsetri">Obsetri</string>
 
-    <string name="kartu_ibu_selection">Kartu Ibu</string>
     <string name="kb_selection">KB</string>
-    <string name="str_ki_search_hint">Search</string>
 
     <string name="couple_selection">All Eligible Couples</string>
     <string name="str_ec_search_hint">Search EC Register</string>
@@ -106,8 +103,6 @@
     <string name="sort_by_high_risk_pregnancy_label">HRP</string>
     <string name="sort_by_high_risk_label">High Risk (HR)</string>
     <string name="sort_by_bpl_label">BPL</string>
-    <string name="sort_by_dusun">Dusun</string>
-    <string name="sort_by_kb_method">KB</string>
 
     <string name="filter_by_all_label">All</string>
     <string name="filter_by_out_of_area_label">O/A</string>
@@ -117,8 +112,6 @@
     <string name="kb_register_title_in_short">KB:</string>
 
     <string name="str_register_anc_form">Register ANC</string>
-    <string name="str_register_kb_form">Register KB</string>
-    <string name="str_dokumentasi_persalinan_anc_form">Delivery Documentation</string>
     <string name="str_rencana_persalinan_anc_form">Delivery Plan</string>
 
     <string name="str_register_pnc_form">Register PNC</string>
@@ -134,13 +127,6 @@
     <string name="str_edit_ki_form">Edit Kartu Ibu</string>
     <string name="str_close_ki_form">Close Kartu Ibu</string>
     <string name="str_kb_update">Update KB</string>
-    <string name="str_kb_edit">Edit KB</string>
-    <string name="str_register_anak_form">Register Anak</string>
-    <string name="str_tutup_anak">Close Anak</string>
-    <string name="str_kunjungan_anak">Visit</string>
-    <string name="anc_edit">Edit ANC</string>
-    <string name="pnc_edit">Edit PNC</string>
-    <string name="pnc_visit">PNC VISIT</string>
 
     <string name="str_register_anc_visit_form">ANC Visit</string>
     <string name="str_register_hb_test_form">Hb Test</string>
@@ -149,7 +135,6 @@
     <string name="str_register_delivery_plan_form">Delivery Plan</string>
     <string name="str_register_pnc_registration_form">PNC Registration</string>
     <string name="str_register_anc_investigations_form">ANC Investigations</string>
-    <string name="str_register_anc_partograf_form">Kartu Partograf</string>
     <string name="str_register_anc_close_form">ANC Close</string>
 
     <string name="str_reporting">Reporting</string>
@@ -157,7 +142,6 @@
 
     <string name="child_register_title_in_short">Child</string>
     <string name="child_service_mode_overview">Overview</string>
-    <string name="child_service_mode_immunization">Immunization</string>
     <string name="child_service_mode_immunization_0_to_9">Immunization 0-9</string>
     <string name="child_service_mode_immunization_9_plus">Immunization 9+</string>
     <string name="header_id_no">ID NO</string>
@@ -298,7 +282,6 @@
     <string name="anc_service_mode_ifa_tablets">" Tablets</string>
     <string name="header_id">ID</string>
     <string name="header_anc_status">ANC STATUS</string>
-    <string name="header_pnc_plan">PLAN</string>
     <string name="header_risk_factors">RISK FACTORS</string>
     <string name="header_kb_method">KB METHOD</string>
     <string name="header_update_refill">UPDATE REFILL</string>
@@ -343,27 +326,11 @@
     <string name="str_pnc_visit_button_label">PNC Visit</string>
 
     <!-- BIDAN -->
-    <string name="header_resiko">Risk</string>
-    <string name="header_trimester">Trimester</string>
-    <string name="header_tt_imunisasi">Immunization</string>
-    <string name="header_tt_usia_klinis">Clinical Age</string>
     <string name="header_komplikasi">Complication</string>
-    <string name="header_kontrasepsi">Contraception</string>
     <string name="header_rencana">Plan</string>
     <string name="header_tanda_vital">Vital Sign</string>
     <string name="header_pemeriksaan">Examination</string>
 
-    <string name="header_imunisasi_hb07">Hb</string>
-    <string name="header_imunisasi_bcg_polio1">BCG/Pol1</string>
-    <string name="header_imunisasi_dpt_hb1_polio2">DPT/HB1/Pol2</string>
-    <string name="header_imunisasi_dpt_hb2_polio3">DPT/HB2/Pol3</string>
-    <string name="header_imunisasi_dpt_hb3_polio4">DPT/HB3/Pol4</string>
-    <string name="header_imunisasi_campak">Campak</string>
-
-    <string name="str_imunisasi_bayi">"Baby Immunization"</string>
-
-    <string name="title_double_selection">"Pick the name again"</string>
-    <string name="title_app">"Bidan"</string>
     <string name="home_fp_label">FP</string>
     <string name="str_kb_close"></string>
 

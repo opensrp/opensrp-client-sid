@@ -2,22 +2,25 @@ package org.smartregister.bidan.activity;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import org.smartregister.Context;
 import org.smartregister.bidan.R;
+import org.smartregister.bidan.utils.CameraPreviewActivity;
 import org.smartregister.bidan.utils.Support;
+import org.smartregister.bidan.utils.Tools;
 import org.smartregister.commonregistry.AllCommonsRepository;
 import org.smartregister.commonregistry.CommonPersonObject;
 import org.smartregister.commonregistry.CommonPersonObjectClient;
 import org.smartregister.repository.DetailsRepository;
+import org.smartregister.view.activity.DrishtiApplication;
 
+import java.io.File;
 import java.util.HashMap;
 
 import butterknife.Bind;
@@ -39,6 +42,7 @@ public class DetailChildActivity extends Activity {
     @Bind(R.id.childdetailprofileview)
     ImageView childview;
     private boolean updateMode = false;
+    private String userId;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -55,12 +59,6 @@ public class DetailChildActivity extends Activity {
         TextView mother = (TextView) findViewById(R.id.txt_mother_name);
         TextView father = (TextView) findViewById(R.id.txt_father_number);
         TextView dob = (TextView) findViewById(R.id.tv_dob);
-
-        //  TextView phone = (TextView) findViewById(R.id.txt_contact_phone_number);
-//        TextView risk1 = (TextView) findViewById(R.id.txt_risk1);
-//        TextView risk2 = (TextView) findViewById(R.id.txt_risk2);
-//        TextView risk3 = (TextView) findViewById(R.id.txt_risk3);
-//        TextView risk4 = (TextView) findViewById(R.id.txt_risk4);
 
         //detail data
         TextView txt_noBayi = (TextView) findViewById(R.id.txt_noBayi);
@@ -100,12 +98,11 @@ public class DetailChildActivity extends Activity {
             }
         });
 
-
         DetailsRepository detailsRepository = org.smartregister.Context.getInstance().detailsRepository();
         detailsRepository.updateDetails(childclient);
 
         String gender = childclient.getDetails().containsKey("gender") ? childclient.getDetails().get("gender") : "laki";
-
+        userId = childclient.getDetails().get("base_entity_id");
 
         //start profile image
         int placeholderDrawable = gender.equalsIgnoreCase("male") ? R.drawable.child_boy_infant : R.drawable.child_girl_infant;
@@ -116,7 +113,7 @@ public class DetailChildActivity extends Activity {
 //            DrishtiApplication.getCachedImageLoaderInstance().getImageByClientId(ancClient.getCaseId(), OpenSRPImageLoader.getStaticImageListener(childview, placeholderDrawable, placeholderDrawable));
 
             Support.setImagetoHolderFromUri(this,
-                    childclient.getDetails().get("base_entity_id"),
+                    userId,
                     childview, childclient.getDetails().get("gender").equals("female") ? R.drawable.child_girl_infant : R.drawable.child_boy_infant);
         }
 
@@ -165,14 +162,10 @@ public class DetailChildActivity extends Activity {
 //                if (hash.containsValue(entityid)) {
 //                    updateMode = true;
 //                }
-                Toast.makeText(DetailChildActivity.this, "Replace for Camera", Toast.LENGTH_SHORT).show();
-//                Intent takePictureIntent = new Intent(DetailChildActivity.this, SmartShutterActivity.class);
-//                takePictureIntent.putExtra("org.sid.sidface.SmartShutterActivity.updated", updateMode);
-//                takePictureIntent.putExtra("IdentifyPerson", false);
-//                takePictureIntent.putExtra("org.sid.sidface.ImageConfirmation.id", entityid);
-//                takePictureIntent.putExtra("org.sid.sidface.ImageConfirmation.origin", TAG); // send Class Name
-//                startActivityForResult(takePictureIntent, 2);
 
+                Intent intent = new Intent(DetailChildActivity.this, CameraPreviewActivity.class);
+                intent.putExtra(CameraPreviewActivity.REQUEST_TYPE, 201);
+                startActivityForResult(intent, 201);
             }
         });
 
@@ -188,7 +181,22 @@ public class DetailChildActivity extends Activity {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent intent) {
 //        refresh
-        Log.e(TAG, "onActivityResult: refresh");
+        if (requestCode == 201) {
+
+            StringBuilder path = new StringBuilder();
+            path.append(DrishtiApplication.getAppDir());
+
+            File file = new File(path.toString());
+            if (!file.exists()) {
+                file.mkdir();
+            }
+            if (file.canWrite()) {
+                path.append(File.separator).append(userId).append(".jpg");
+                Tools.savefile(Tools.scaleDown((Bitmap) intent.getExtras().get("data"), 400.0f, false), path.toString());
+            }
+
+            finish();
+        }
         finish();
         startActivity(getIntent());
 

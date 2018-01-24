@@ -4,6 +4,7 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.util.Log;
+
 import com.cloudant.sync.datastore.ConflictException;
 import com.cloudant.sync.datastore.Datastore;
 import com.cloudant.sync.datastore.DatastoreManager;
@@ -272,13 +273,13 @@ public class CloudantDataHandler {
             DocumentRevision updated = this.mDatastore.updateDocumentFromRevision(rev);
             return Client.fromRevision(updated);
         } catch (DocumentException de) {
-            Log.e(TAG, "updateDocument: "+ de.getCause() );
+            Log.e(TAG, "updateDocument: " + de.getCause());
             return null;
         } catch (ParseException e) {
-            Log.e(TAG, "updateDocument: "+ e.getCause() );
+            Log.e(TAG, "updateDocument: " + e.getCause());
             return null;
         } catch (Exception e) {
-            Log.e(TAG, "updateDocument: "+ e.getCause() );
+            Log.e(TAG, "updateDocument: " + e.getCause());
             return null;
         }
     }
