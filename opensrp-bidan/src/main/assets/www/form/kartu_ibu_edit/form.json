@@ -1,10 +1,10 @@
 {
   "name": "Kartu_ibu",
-  "title": "Identitas Ibu",
+  "title": "Edit Ibu",
   "sms_keyword": "Kartu_ibu",
   "default_language": "Bahasa",
   "instance": {
-    "encounter_type": "Identitas Ibu"
+    "encounter_type": "Edit Ibu"
   },
   "version": "201702121028",
   "id_string": "Kartu_ibu",

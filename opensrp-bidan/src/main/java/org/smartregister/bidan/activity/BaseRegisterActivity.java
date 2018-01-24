@@ -230,7 +230,8 @@ public class BaseRegisterActivity extends SecuredNativeSmartRegisterActivity imp
                 data = getPreviouslySavedDataForForm(formName, metaData, entityId);
 
                 if (data == null) {
-                    data = BidanFormUtils.getInstance(getApplicationContext()).generateXMLInputForFormWithEntityId(entityId, formName, metaData);
+                    data = BidanFormUtils.getInstance(getApplicationContext())
+                            .generateXMLInputForFormWithEntityId(entityId, formName, metaData);
                 }
 
                 DisplayFormFragment displayFormFragment = getDisplayFormFragmentAtIndex(formIndex);
@@ -295,6 +296,9 @@ public class BaseRegisterActivity extends SecuredNativeSmartRegisterActivity imp
         return pc.getDetails().get(key);
     }
 
+    /**
+     * Follow Up without Edit
+     */
     public class EditDialogOptionModel implements DialogOptionModel {
 
         @Override
@@ -307,8 +311,7 @@ public class BaseRegisterActivity extends SecuredNativeSmartRegisterActivity imp
             CommonPersonObjectClient pc = (CommonPersonObjectClient) tag;
             DetailsRepository detailsRepository = org.smartregister.Context.getInstance().detailsRepository();
             detailsRepository.updateDetails(pc);
-            String ibuCaseId = getValue(pc.getColumnmaps(), "relational_id", true).toLowerCase();
-            Log.logError(TAG, "onDialogOptionSelection: " + pc.getDetails());
+            String ibuCaseId = getValue(pc.getColumnmaps(), "_id", true).toLowerCase();
             JSONObject fieldOverrides = new JSONObject();
             try {
                 fieldOverrides.put("Province", pc.getDetails().get("stateProvince"));
@@ -332,7 +335,6 @@ public class BaseRegisterActivity extends SecuredNativeSmartRegisterActivity imp
      */
     public class EditDialogOptionModelNew implements DialogOptionModel {
 
-
         @Override
         public DialogOption[] getDialogOptions() {
 
@@ -347,7 +349,6 @@ public class BaseRegisterActivity extends SecuredNativeSmartRegisterActivity imp
          */
         @Override
         public void onDialogOptionSelection(DialogOption option, Object tag) {
-//            android.util.Log.e(TAG, "onDialogOptionSelection: "+ option.name() );
             CommonPersonObjectClient pc = (CommonPersonObjectClient) tag;
 
             DetailsRepository detailsRepository = org.smartregister.Context.getInstance().detailsRepository();
@@ -355,10 +356,8 @@ public class BaseRegisterActivity extends SecuredNativeSmartRegisterActivity imp
             if (option.name().equalsIgnoreCase(getString(R.string.str_edit_ki_form))) {
                 // Edit Form Ibu
                 Log.logError(TAG, "update_ibu_form");
-//                CommonPersonObjectClient pc = (CommonPersonObjectClient) tag;
-//                DetailsRepository detailsRepository = org.smartregister.Context.getInstance().detailsRepository();
                 detailsRepository.updateDetails(pc);
-                String ibuCaseId = getValue(pc.getColumnmaps(), "relational_id", true).toLowerCase();
+                String ibuCaseId = getValue(pc.getColumnmaps(), "_id", true).toLowerCase();
                 JSONObject fieldOverrides = new JSONObject();
 
                 try {
@@ -377,16 +376,9 @@ public class BaseRegisterActivity extends SecuredNativeSmartRegisterActivity imp
                 onEditSelectionWithMetadata((EditOption) option, (SmartRegisterClient) tag, fo.getJSONString());
 
             } else {
-//                DetailsRepository detailsRepository = org.smartregister.Context.getInstance().detailsRepository();
-//                detailsRepository.updateDetails(motherClient);
 
                 if (option.name().equalsIgnoreCase(getString(R.string.str_register_fp_form))) {
-//                     pc = KIDetailActivity.kiclient;
                     pc = DetailMotherActivity.motherClient;
-
-//                    CommonPersonObjectClient pc = motherClient;
-
-//                    Log.logError(TAG, String.valueOf(motherClient));
 
                     if (!StringUtils.isNumeric(pc.getDetails().get("jenisKontrasepsi"))) {
                         Toast.makeText(BaseRegisterActivity.this, getString(R.string.mother_already_registered_in_fp), Toast.LENGTH_SHORT).show();
@@ -406,7 +398,6 @@ public class BaseRegisterActivity extends SecuredNativeSmartRegisterActivity imp
                 }
 
                 if (option.name().equalsIgnoreCase(getString(R.string.str_register_anc_form))) {
-//                    CommonPersonObjectClient pc = motherClient;
                     AllCommonsRepository iburep = org.smartregister.Context.getInstance().allCommonsRepositoryobjects("ec_ibu");
                     final CommonPersonObject ibuparent = iburep.findByCaseID(pc.entityId());
                     if (ibuparent != null) {
@@ -416,7 +407,6 @@ public class BaseRegisterActivity extends SecuredNativeSmartRegisterActivity imp
                             return;
                         }
                     }
-
 
                 }
                 onEditSelection((EditOption) option, (SmartRegisterClient) tag);

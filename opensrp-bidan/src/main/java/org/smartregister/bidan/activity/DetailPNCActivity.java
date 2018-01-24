@@ -329,13 +329,6 @@ public class DetailPNCActivity extends Activity {
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == 2 && resultCode != RESULT_CANCELED) {
-//            Log.e(
-//                    TAG, "onActivityResult: "+
-//                    data.getStringExtra("HIGH") +
-//                    data.getStringExtra("LOW") +
-//                    data.getStringExtra("AHR") +
-//                    data.getStringExtra("PULSE")
-//            );
             DetailsRepository detailsRepository = org.smartregister.Context.getInstance().detailsRepository();
             Long tsLong = System.currentTimeMillis() / 1000;
             detailsRepository.add(pncclient.entityId(), "tandaVitalTDSistolik", data.getStringExtra("HIGH"), tsLong);

@@ -272,10 +272,13 @@ public class CloudantDataHandler {
             DocumentRevision updated = this.mDatastore.updateDocumentFromRevision(rev);
             return Client.fromRevision(updated);
         } catch (DocumentException de) {
+            Log.e(TAG, "updateDocument: "+ de.getCause() );
             return null;
         } catch (ParseException e) {
+            Log.e(TAG, "updateDocument: "+ e.getCause() );
             return null;
         } catch (Exception e) {
+            Log.e(TAG, "updateDocument: "+ e.getCause() );
             return null;
         }
     }
@@ -300,6 +303,15 @@ public class CloudantDataHandler {
             if (c == null) {
                 DocumentRevision created = this.mDatastore.createDocumentFromRevision(rev);
                 return Client.fromRevision(created);
+
+            } else {
+
+                DocumentRevision revupdate = c.getDocumentRevision();
+                revupdate.setBody(DocumentBodyFactory.create(client.asMap()));
+                DocumentRevision updated = this.mDatastore.updateDocumentFromRevision(revupdate);
+
+                return Client.fromRevision(updated);
+
             }
 
         } catch (Exception e) {

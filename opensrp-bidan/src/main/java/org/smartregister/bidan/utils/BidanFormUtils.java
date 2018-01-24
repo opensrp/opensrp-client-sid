@@ -401,6 +401,7 @@ public class BidanFormUtils {
             String formDefinitionJson = readFileFromAssetsFolder("www/form/" + formName + "/form_definition.json");
             JSONObject formDefinition = new JSONObject(formDefinitionJson);
 
+            android.util.Log.e(TAG, "generateXMLInputForFormWithEntityId: "+ formDefinition.getJSONObject("form") );
             String ec_bind_path = formDefinition.getJSONObject("form").getString("ec_bind_type");
 
             String sql = "SELECT * FROM " + ec_bind_path + " WHERE base_entity_id='" + entityId + "'";
@@ -415,8 +416,7 @@ public class BidanFormUtils {
 
             //read the xml form model, the expected form model that is passed to the form mirrors it
             String formModelString = readFileFromAssetsFolder(
-                    "www/form/" + formName + "/model" + ".xml").replaceAll("\n", " ")
-                    .replaceAll("\r", " ");
+                    "www/form/" + formName + "/model" + ".xml").replaceAll("\n", " ").replaceAll("\r", " ");
             InputStream is = new ByteArrayInputStream(formModelString.getBytes());
             DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
             dbf.setValidating(false);
@@ -448,7 +448,7 @@ public class BidanFormUtils {
             // Add model and instance tags
             xml = xml.substring(56);
             System.out.println(xml);
-            android.util.Log.d(TAG, "generateXMLInputForFormWithEntityId: " + xml);
+            android.util.Log.d(TAG, "generateXMLInputForFormWithEntityId: xml " + xml);
 
             return xml;
 

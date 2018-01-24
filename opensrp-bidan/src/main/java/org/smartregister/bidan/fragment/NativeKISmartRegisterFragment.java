@@ -22,6 +22,7 @@ import org.smartregister.Context;
 import org.smartregister.bidan.R;
 import org.smartregister.bidan.activity.BaseRegisterActivity;
 import org.smartregister.bidan.activity.DetailMotherActivity;
+import org.smartregister.bidan.activity.NativeKIAnakSmartRegisterActivity;
 import org.smartregister.bidan.activity.NativeKISmartRegisterActivity;
 import org.smartregister.bidan.options.AllKartuIbuServiceMode;
 import org.smartregister.bidan.options.KICommonObjectFilterOption;
@@ -195,8 +196,8 @@ public class NativeKISmartRegisterFragment extends SecuredNativeSmartRegisterCur
         }
         ft.addToBackStack(null);
         LocationSelectorDialogFragment
-                .newInstance((BaseRegisterActivity) getActivity(), new
-                                EditDialogOptionModel(), context().anmLocationController().get(),
+                .newInstance((BaseRegisterActivity) getActivity(),
+                        ((NativeKIAnakSmartRegisterActivity) getActivity()).new EditDialogOptionModel(), context().anmLocationController().get(),
                         "kartu_ibu_registration")
                 .show(ft, locationDialogTAG);
     }

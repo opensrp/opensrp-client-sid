@@ -36,8 +36,8 @@ public class NativeKIbuSmartRegisterActivity extends BaseRegisterActivity implem
 
     public DialogOption[] getEditOptions() {
         return new DialogOption[]{
-                new OpenFormOption(getString(R.string.str_register_fp_form), "kohort_kb_pelayanan", formController),
-                new OpenFormOption(getString(R.string.str_register_anc_form), "kartu_anc_registration", formController),
+                new OpenFormOption(getString(R.string.str_register_fp_form), KOHORT_KB_PELAYANAN, formController),
+                new OpenFormOption(getString(R.string.str_register_anc_form), KARTU_IBU_ANC_REGISTRATION, formController),
                 new OpenFormOption(getString(R.string.str_register_child_form), ANAK_BAYI_REGISTRATION, formController),
                 new OpenFormOption(getString(R.string.str_close_ki_form), KARTU_IBU_CLOSE, formController),
         };
