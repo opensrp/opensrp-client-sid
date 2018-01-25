@@ -165,7 +165,6 @@ public class BaseRegisterActivity extends SecuredNativeSmartRegisterActivity imp
                     displayFormFragment.setFormData(null);
 
                 }
-
                 displayFormFragment.setRecordId(null);
             }
         });
@@ -231,6 +230,9 @@ public class BaseRegisterActivity extends SecuredNativeSmartRegisterActivity imp
                 if (data == null) {
                     data = BidanFormUtils.getInstance(getApplicationContext())
                             .generateXMLInputForFormWithEntityId(entityId, formName, metaData);
+                    android.util.Log.e(TAG, "startFormActivity: entityId "+ entityId );
+                    android.util.Log.e(TAG, "startFormActivity: formName "+ formName );
+                    android.util.Log.e(TAG, "startFormActivity: metaData "+ metaData );
                 }
 
                 DisplayFormFragment displayFormFragment = getDisplayFormFragmentAtIndex(formIndex);

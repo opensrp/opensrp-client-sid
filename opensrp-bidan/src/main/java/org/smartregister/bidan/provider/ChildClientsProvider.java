@@ -148,7 +148,6 @@ public class ChildClientsProvider implements SmartRegisterCLientsProviderForCurs
         fillValue((TextView) convertView.findViewById(R.id.tv_village_name), str_childAddress);
 
         //----------Child Deliver Information
-
         String childBirthWeight = pc.getDetails().get("beratLahir") != null ? pc.getDetails().get("beratLahir") : "";
         String childBirthType = "";
 

@@ -385,9 +385,9 @@ public class BidanFormUtils {
     }
 
     public String generateXMLInputForFormWithEntityId(String entityId, String formName, String overrides) {
-        android.util.Log.e(TAG, "generateXMLInputForFormWithEntityId: " + overrides);
-        android.util.Log.e(TAG, "generateXMLInputForFormWithEntityId: " + formName);
-        android.util.Log.e(TAG, "generateXMLInputForFormWithEntityId: " + entityId);
+//        android.util.Log.e(TAG, "generateXMLInputForFormWithEntityId: " + overrides);
+        android.util.Log.e(TAG, "generateXMLInputForFormWithEntityId: formname " + formName);
+//        android.util.Log.e(TAG, "generateXMLInputForFormWithEntityId: " + entityId);
         try {
             // get the field overrides map
             JSONObject fieldOverrides = new JSONObject();
@@ -401,8 +401,9 @@ public class BidanFormUtils {
             String formDefinitionJson = readFileFromAssetsFolder("www/form/" + formName + "/form_definition.json");
             JSONObject formDefinition = new JSONObject(formDefinitionJson);
 
-            android.util.Log.e(TAG, "generateXMLInputForFormWithEntityId: " + formDefinition.getJSONObject("form"));
+//            android.util.Log.e(TAG, "generateXMLInputForFormWithEntityId: " + formDefinition.getJSONObject("form"));
             String ec_bind_path = formDefinition.getJSONObject("form").getString("ec_bind_type");
+            android.util.Log.e(TAG, "generateXMLInputForFormWithEntityId: ec_bind_path "+ ec_bind_path );
 
             String sql = "SELECT * FROM " + ec_bind_path + " WHERE base_entity_id='" + entityId + "'";
             Map<String, String> dbEntity = theAppContext.formDataRepository().getMapFromSQLQuery(sql);
@@ -1120,6 +1121,7 @@ public class BidanFormUtils {
     }
 
     private List<String> EditClientFormNameList() {
+        android.util.Log.e(TAG, "EditClientFormNameList: " );
         List<String> formNames = new ArrayList<>();
         formNames.add(KARTU_IBU_EDIT);
         formNames.add(KOHORT_BAYI_EDIT);
