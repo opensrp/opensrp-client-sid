@@ -225,6 +225,7 @@ public class NativeKISmartRegisterFragment extends SecuredNativeSmartRegisterCur
         try {
 
             KIClientsProvider kiscp = new KIClientsProvider(getActivity(), clientActionHandler, context().alertService());
+
             clientAdapter = new SmartRegisterPaginatedCursorAdapter(getActivity(), null, kiscp,
                     new CommonRepository("ec_kartu_ibu", new String[]{"ec_kartu_ibu.is_closed", "ec_kartu_ibu.namalengkap", "ec_kartu_ibu.umur", "ec_kartu_ibu.namaSuami", "noIbu"}));
             clientsView.setAdapter(clientAdapter);

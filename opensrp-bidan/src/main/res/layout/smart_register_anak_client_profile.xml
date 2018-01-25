@@ -62,14 +62,14 @@
             style="@style/CustomFontTextViewStyle.ListView.Small"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@id/txt_child_name" />
+            android:layout_below="@id/tv_child_name" />
 
         <org.smartregister.view.customcontrols.CustomFontTextView
             android:id="@+id/tv_village_name"
             style="@style/CustomFontTextViewStyle.ListView.Small"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@id/txt_mother_name"
+            android:layout_below="@id/tv_mother_name"
             android:layout_marginBottom="@dimen/client_profile_village_margin"
             android:layout_marginTop="@dimen/client_profile_village_margin"
             android:layout_toLeftOf="@+id/tv_is_out_of_area" />

@@ -1,6 +1,6 @@
 <model>
     <instance>
-        <tambah_bayi_reviewed encounter_type="Tambah Bayi" id="tambah_bayi" version="201511160646">
+        <tambah_bayi_reviewed encounter_type="Edit Bayi" id="tambah_bayi" version="201511160646">
             <formhub>
                 <uuid />
             </formhub>

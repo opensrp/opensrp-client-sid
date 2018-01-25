@@ -1120,9 +1120,7 @@ public class BidanFormUtils {
     }
 
     private List<String> EditClientFormNameList() {
-        android.util.Log.e(TAG, "EditClientFormNameList: ");
         List<String> formNames = new ArrayList<>();
-        formNames.add("child_edit");
         formNames.add(KARTU_IBU_EDIT);
         formNames.add(KOHORT_BAYI_EDIT);
         return formNames;
