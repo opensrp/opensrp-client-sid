@@ -403,7 +403,6 @@ public class BidanFormUtils {
 
 //            android.util.Log.e(TAG, "generateXMLInputForFormWithEntityId: " + formDefinition.getJSONObject("form"));
             String ec_bind_path = formDefinition.getJSONObject("form").getString("ec_bind_type");
-            android.util.Log.e(TAG, "generateXMLInputForFormWithEntityId: ec_bind_path "+ ec_bind_path );
 
             String sql = "SELECT * FROM " + ec_bind_path + " WHERE base_entity_id='" + entityId + "'";
             Map<String, String> dbEntity = theAppContext.formDataRepository().getMapFromSQLQuery(sql);
