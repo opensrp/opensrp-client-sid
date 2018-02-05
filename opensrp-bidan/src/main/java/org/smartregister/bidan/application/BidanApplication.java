@@ -3,6 +3,8 @@ package org.smartregister.bidan.application;
 import android.content.Intent;
 import android.content.res.Configuration;
 
+import com.crashlytics.android.Crashlytics;
+
 import org.smartregister.Context;
 import org.smartregister.CoreLibrary;
 import org.smartregister.bidan.activity.LoginActivity;
@@ -16,6 +18,8 @@ import org.smartregister.view.activity.DrishtiApplication;
 import org.smartregister.view.receiver.SyncBroadcastReceiver;
 
 import java.util.Locale;
+
+import io.fabric.sdk.android.Fabric;
 
 import static org.smartregister.util.Log.logError;
 import static org.smartregister.util.Log.logInfo;
@@ -115,7 +119,7 @@ public class BidanApplication extends DrishtiApplication {
 
         applyUserLanguagePreference();
         cleanUpSyncState();
-
+        Fabric.with(this, new Crashlytics());
     }
 
     @Override

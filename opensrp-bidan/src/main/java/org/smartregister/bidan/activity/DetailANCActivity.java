@@ -176,7 +176,7 @@ public class DetailANCActivity extends Activity {
         ImageView heart_bpm = (ImageView) findViewById(R.id.iv_icon_device);
         heart_bpm.setVisibility(View.VISIBLE);
 //        ImageView device = (ImageView) findViewById(R.id.iv_icon_device);
-//        device.setOnClickListener(bpmListener);
+//        heart_bpm.setOnClickListener(bpmListener);
         ImageButton back = (ImageButton) findViewById(R.id.btn_back_to_home);
 
         back.setOnClickListener(new View.OnClickListener() {
@@ -445,5 +445,17 @@ public class DetailANCActivity extends Activity {
         startActivity(getIntent());
     }
 
+//    private SimpleDateFormat fta, ftb;
+//    private View.OnClickListener bpmListener = new View.OnClickListener() {
+//        @Override
+//        public void onClick(View v) {
+//            Intent i = new Intent(DetailANCActivity.this, MainBPM.class);
+////        Intent i = new Intent(ANCDetailActivity.this, TestBPM.class);
+//            fta = new SimpleDateFormat ("yyyy-MM-dd");
+//            ftb = new SimpleDateFormat ("yyyy-MM-dd");
+//
+//            startActivityForResult(i, 2);
+//        }
+//    };
 
 }

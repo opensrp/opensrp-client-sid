@@ -106,7 +106,9 @@
         <activity android:name=".utils.CameraPreviewActivity" />
         <activity android:name=".utils.Camera2PreviewActivity" />
 
-
+        <meta-data
+            android:name="io.fabric.ApiKey"
+            android:value="5bda8a6293b5b89b510a53e5d297d42bdf427e10" />
     </application>
 
 </manifest>
