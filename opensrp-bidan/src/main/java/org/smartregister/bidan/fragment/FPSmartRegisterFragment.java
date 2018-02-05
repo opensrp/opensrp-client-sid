@@ -21,6 +21,7 @@ import org.smartregister.bidan.R;
 import org.smartregister.bidan.activity.BaseRegisterActivity;
 import org.smartregister.bidan.activity.DetailFPActivity;
 import org.smartregister.bidan.activity.NativeKIFPSmartRegisterActivity;
+import org.smartregister.bidan.activity.NativeKISmartRegisterActivity;
 import org.smartregister.bidan.activity.NativeKIbuSmartRegisterActivity;
 import org.smartregister.bidan.options.AllKBServiceMode;
 import org.smartregister.bidan.options.MotherFilterOption;
@@ -271,8 +272,8 @@ public class FPSmartRegisterFragment extends BaseSmartRegisterFragment {
         ft.addToBackStack(null);
 
         LocationSelectorDialogFragment
-                .newInstance((NativeKIbuSmartRegisterActivity) getActivity(),
-                        ((NativeKIbuSmartRegisterActivity) getActivity()).new EditDialogOptionModel(), context().anmLocationController().get(),
+                .newInstance((NativeKISmartRegisterActivity) getActivity(),
+                        ((NativeKISmartRegisterActivity) getActivity()).new EditDialogOptionModel(), context().anmLocationController().get(),
                         KOHORT_KB_REGISTER)
                 .show(ft, locationDialogTAG);
 

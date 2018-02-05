@@ -197,7 +197,7 @@ public class NativeKISmartRegisterFragment extends SecuredNativeSmartRegisterCur
         ft.addToBackStack(null);
         LocationSelectorDialogFragment
                 .newInstance((BaseRegisterActivity) getActivity(),
-                        ((NativeKIAnakSmartRegisterActivity) getActivity()).new EditDialogOptionModel(), context().anmLocationController().get(),
+                        ((NativeKISmartRegisterActivity) getActivity()).new EditDialogOptionModel(), context().anmLocationController().get(),
                         "kartu_ibu_registration")
                 .show(ft, locationDialogTAG);
     }
