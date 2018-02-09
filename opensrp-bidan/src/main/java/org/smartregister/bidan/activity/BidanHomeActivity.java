@@ -23,12 +23,14 @@ import org.smartregister.bidan.service.FormSubmissionSyncService;
 import org.smartregister.bidan.sync.UpdateActionsTask;
 import org.smartregister.bidan.utils.AllConstantsINA;
 import org.smartregister.bidan.utils.Support;
+import org.smartregister.bidan.utils.Tools;
 import org.smartregister.cursoradapter.SmartRegisterQueryBuilder;
 import org.smartregister.enketo.view.fragment.DisplayFormFragment;
 import org.smartregister.event.Listener;
 import org.smartregister.service.PendingFormSubmissionService;
 import org.smartregister.sync.SyncAfterFetchListener;
 import org.smartregister.sync.SyncProgressIndicator;
+import org.smartregister.util.Utils;
 import org.smartregister.view.activity.SecuredActivity;
 import org.smartregister.view.contract.HomeContext;
 import org.smartregister.view.controller.NativeAfterANMDetailsFetchListener;
@@ -331,6 +333,8 @@ public class BidanHomeActivity extends SecuredActivity {
                     anmID = "undefined";
                 }
                 Toast.makeText(this, String.format("%s current user = %s", context().getStringResource(R.string.app_name), anmID), LENGTH_SHORT).show();
+
+                Tools.getDbRecord(context());
                 return true;
             default:
                 return super.onOptionsItemSelected(item);

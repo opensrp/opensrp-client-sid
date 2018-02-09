@@ -1,2 +1,2 @@
 rootProject.name = 'opensrp-app-bidan'
-include ':opensrp-bidan', ':lib:opensrp-device:opensrp-deviceinterface'
+include ':opensrp-bidan'
