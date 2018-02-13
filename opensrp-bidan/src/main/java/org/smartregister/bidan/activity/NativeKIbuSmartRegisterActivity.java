@@ -5,7 +5,7 @@ import android.support.v4.app.Fragment;
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.smartregister.bidan.R;
-import org.smartregister.bidan.fragment.NativeKISmartRegisterFragment;
+import org.smartregister.bidan.fragment.KISmartRegisterFragment;
 import org.smartregister.domain.form.FieldOverrides;
 import org.smartregister.view.dialog.DialogOption;
 import org.smartregister.view.dialog.LocationSelectorDialogFragment;
@@ -31,7 +31,7 @@ public class NativeKIbuSmartRegisterActivity extends BaseRegisterActivity implem
     @Override
     protected Fragment mBaseFragment() {
 
-        return new NativeKISmartRegisterFragment();
+        return new KISmartRegisterFragment();
     }
 
     public DialogOption[] getEditOptions() {

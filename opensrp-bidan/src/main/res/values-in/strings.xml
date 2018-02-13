@@ -16,7 +16,7 @@
     <string name="form_back_confirm_dialog_title">Konfirmasi penutupan form</string>
     <string name="yes_button_label">Iya</string>
     <string name="no_button_label">Tidak</string>
-    <string name="anc_ke">ANC Ke:&#160;</string>
+    <string name="anc_ke">ANC Ke: …</string>
     <string name="pnc_ke">PNC Visit</string>
     <string name="sort_by_name_label_reverse">Nama (Z ke A)</string>
     <string name="sort_by_wife_age_label">Umur</string>
@@ -265,7 +265,7 @@
     <string name="fp_prioritization_one_child_service_mode">1 Child</string>
     <string name="fp_register_child_details">Anak</string>
     <string name="str_due">"Due "</string>
-    <string name="fp_methods">Jenis:&#160;</string>
+    <string name="fp_methods">Jenis: …</string>
     <string name="fp_prioritization">FP Prioritization</string>
     <string name="fp_prioritization_add_fp">Add FP</string>
     <string name="fp_prioritization_fp_videos">FP Videos</string>
@@ -290,7 +290,7 @@
     <string name="hb_test_label">Hb Test</string>
     <string name="str_days_past_due">day (s) past due</string>
     <string name="lmp_label">LMP:</string>
-    <string name="str_weeks">&#160;Minggu</string>
+    <string name="str_weeks"> …Minggu</string>
     <string name="anc_register_title_in_short">ANC</string>
     <string name="str_bp">BP</string>
     <string name="str_weight">Berat</string>
@@ -340,7 +340,7 @@
     <string name="str_child_illness_sam">sam</string>
     <string name="str_pnc_visit_button_label">PNC Visit</string>
 
-    <string name="show_more_button">Lihat lebih...</string>
+    <string name="show_more_button">Lihat lebih …</string>
     <string name="show_less_button">Sembunyikan  . . .</string>
     <string name="mother_already_registered">Ibu sudah terdaftar di ANC</string>
     <string name="anc_visit_integrasi">Kunjungan ANC Integrasi</string>
@@ -360,15 +360,16 @@
     <string name="cohort_mother">KOHORT IBU</string>
     <string name="cohort_fp">KOHORT KB</string>
 
-    <string name="child_details_mothers_name_label">Nama Ibu:&#160;</string>
-    <string name="child_details_fathers_name_label">Nama Ayah:&#160;</string>
+    <string name="child_details_mothers_name_label">Nama Ibu:…</string>
+    <string name="child_details_fathers_name_label">Nama Ayah: …</string>
+    <string name="service_fp">Status Pelayanan: KB </string>
     <string name="service_anc">Status Pelayanan: ANC</string>
     <string name="service_pnc">Status Pelayanan: PNC</string>
-    <string name="name">NAMA: &#160;</string>
-    <string name="nik">NIK:&#160; </string>
-    <string name="husband_name">Nama Suami:&#160; </string>
-    <string name="dob">Tanggal Lahir: &#160;</string>
-    <string name="phone">No HP:&#160;</string>
+    <string name="name">NAMA:  …</string>
+    <string name="nik">NIK: … </string>
+    <string name="husband_name">Nama Suami: … </string>
+    <string name="dob">Tanggal Lahir:  …</string>
+    <string name="phone">No HP: …</string>
 
     <!-- Mother detail -->
     <string name="basic_information">Informasi Dasar</string>
@@ -385,11 +386,11 @@
     <string name="blodd_type">Golongan Darah</string>
 
     <!-- Risk detail-->
-    <string name="highRiskPregnancyYoungMaternalAge">Ibu Terlalu Muda: &#160;</string>
-    <string name="highRiskPregnancyOldMaternalAge">Ibu Terlalu Tua: &#160;</string>
-    <string name="highRiskPregnancyProteinEnergyMalnutrition">Kekurangan Energi Kronis: &#160;</string>
-    <string name="HighRiskPregnancyAbortus">Riwayat Abortus: &#160;</string>
-    <string name="HighRiskLabourSectionCesareaRecord">Riwayat Cesar: &#160;</string>
+    <string name="highRiskPregnancyYoungMaternalAge">Ibu Terlalu Muda:  …</string>
+    <string name="highRiskPregnancyOldMaternalAge">Ibu Terlalu Tua:  …</string>
+    <string name="highRiskPregnancyProteinEnergyMalnutrition">Kekurangan Energi Kronis:  …</string>
+    <string name="HighRiskPregnancyAbortus">Riwayat Abortus:  …</string>
+    <string name="HighRiskLabourSectionCesareaRecord">Riwayat Cesar:  …</string>
     <string name="highRiskHIVAIDS">Resiko TInggi HIV/AIDS</string>
     <string name="highRiskSTIBBVs">Resiko Tinggi STIBBVs</string>
     <string name="highRiskEctopicPregnancy">Resiko TInggi Ectopic Kehamilan</string>
@@ -428,7 +429,6 @@
     <string name="elco_details_summary">Ringkasan</string>
     <string name="header_klinis">STATUS KLINIS</string>
     <string name="height">Tinggi:</string>
-    <string name="service_fp">Status Pelayanan: KB </string>
     <string name="edd_passed">HTP sudah lewat</string>
     <string name="fe">FE:</string>
 

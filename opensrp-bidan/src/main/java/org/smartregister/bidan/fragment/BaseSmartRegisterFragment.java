@@ -2,7 +2,9 @@ package org.smartregister.bidan.fragment;
 
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Log;
 
+import org.smartregister.bidan.activity.LoginActivity;
 import org.smartregister.cursoradapter.SecuredNativeSmartRegisterCursorAdapterFragment;
 import org.smartregister.provider.SmartRegisterClientsProvider;
 import org.smartregister.view.activity.SecuredNativeSmartRegisterActivity;
@@ -16,6 +18,8 @@ import static org.apache.commons.lang3.StringUtils.isEmpty;
  */
 
 public class BaseSmartRegisterFragment extends SecuredNativeSmartRegisterCursorAdapterFragment {
+    private static final String TAG = BaseSmartRegisterFragment.class.getName();
+
     protected final TextWatcher textWatcher = new TextWatcher() {
         @Override
         public void beforeTextChanged(CharSequence charSequence, int i, int i2, int i3) {
@@ -71,4 +75,10 @@ public class BaseSmartRegisterFragment extends SecuredNativeSmartRegisterCursorA
         filterandSortExecute();
     }
 
+    @Override
+    protected void onResumption() {
+        super.onResumption();
+        Log.e(TAG, "onResumption: " );
+        LoginActivity.setLanguage();
+    }
 }

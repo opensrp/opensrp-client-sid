@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Context;
 import android.database.Cursor;
 import android.graphics.drawable.Drawable;
+import android.util.Log;
 import android.view.View;
 import android.widget.AbsListView;
 import android.widget.ImageButton;
@@ -30,6 +31,7 @@ import butterknife.Bind;
 import butterknife.ButterKnife;
 
 import static android.view.ViewGroup.LayoutParams.MATCH_PARENT;
+import static org.smartregister.bidan.R.layout.smart_register_ki_client;
 
 /**
  * Created by Dimas Ciputra on 2/16/15.
@@ -84,6 +86,7 @@ public class KIClientsProvider extends BaseClientsProvider {
     TextView children_age_left;
     @Bind(R.id.txt_children_age_right)
     TextView children_age_right;
+
     @Bind(R.id.mother_status)
     TextView anc_status_layout;
     @Bind(R.id.last_visit_status)
@@ -120,10 +123,12 @@ public class KIClientsProvider extends BaseClientsProvider {
         CommonPersonObjectClient pc = (CommonPersonObjectClient) smartRegisterClient;
         DetailsRepository detailsRepository = org.smartregister.Context.getInstance().detailsRepository();
         detailsRepository.updateDetails(pc);
+        Log.e(TAG, "getView:CommonPersonObjectClient "+ pc.getDetails());
 
 //        System.out.println("client : " + pc.getColumnmaps().toString());
 //        System.out.println("event : " + pc.getDetails().toString());
         AllCommonsRepository iburep = org.smartregister.Context.getInstance().allCommonsRepositoryobjects("ec_ibu");
+        AllCommonsRepository ancrep = org.smartregister.Context.getInstance().allCommonsRepositoryobjects("ec_anc");
         AllCommonsRepository pncrep = org.smartregister.Context.getInstance().allCommonsRepositoryobjects("ec_pnc");
         AllCommonsRepository anakrep = org.smartregister.Context.getInstance().allCommonsRepositoryobjects("ec_anak");
         ArrayList<String> list = new ArrayList<>();
@@ -134,8 +139,6 @@ public class KIClientsProvider extends BaseClientsProvider {
         // ========================================================================================
         // Set Value
         // ========================================================================================
-        follow_up.setOnClickListener(onClickListener);
-        follow_up.setTag(smartRegisterClient);
         profilelayout.setOnClickListener(onClickListener);
         profilelayout.setTag(smartRegisterClient);
 
@@ -143,6 +146,8 @@ public class KIClientsProvider extends BaseClientsProvider {
             iconPencilDrawable = context.getResources().getDrawable(R.drawable.ic_pencil);
         }
         follow_up.setImageDrawable(iconPencilDrawable);
+        follow_up.setOnClickListener(onClickListener);
+        follow_up.setTag(smartRegisterClient);
 
         //start profile image
         profilepic.setTag(R.id.entity_id, pc.getColumnmaps().get("_id"));//required when saving file to disk
@@ -170,9 +175,17 @@ public class KIClientsProvider extends BaseClientsProvider {
         children_age_right.setText("");
 
         if (ibuparent != null) {
+//            Log.e(TAG, "getView:ibuparent.getColumnmaps "+ ibuparent.getColumnmaps());
+//            Log.e(TAG, "getView:ibuparent.getCaseId "+ ibuparent.getCaseId());
+//            Log.e(TAG, "getView:ibuparent.getClosed "+ ibuparent.getClosed());
+//            Log.e(TAG, "getView:ibuparent.getDetails "+ ibuparent.getDetails());
+//            Log.e(TAG, "getView:ibuparent.getRelationalId "+ ibuparent.getRelationalId());
+
             short anc_isclosed = ibuparent.getClosed();
+
             //check anc  status
             if (anc_isclosed == 0) {
+                Log.e(TAG, "getView: ACTIVE in ANC" );
                 detailsRepository.updateDetails(ibuparent);
                 if (pc.getDetails().get("htp") == null) {
 
@@ -202,8 +215,9 @@ public class KIClientsProvider extends BaseClientsProvider {
         }
         //last check if mother in PF (KB) service
         if (!StringUtils.isNumeric(pc.getDetails().get("jenisKontrasepsi"))) {
-            checkLastVisit(pc.getDetails().get("tanggalkunjungan"), context.getString(R.string.fp_methods) + ": " + pc.getDetails().get("jenisKontrasepsi"), context.getString(R.string.service_fp),
-                    anc_status_layout, date_status, visit_status);
+            checkLastVisit(pc.getDetails().get("tanggalkunjungan"),
+                    context.getString(R.string.fp_methods) + ": " + pc.getDetails().get("jenisKontrasepsi"),
+                    context.getString(R.string.service_fp), anc_status_layout, date_status, visit_status);
         }
 
         //anak
@@ -259,17 +273,16 @@ public class KIClientsProvider extends BaseClientsProvider {
         }
     }
 
-    private void checkLastVisit(String date, String visitNumber, String Status, TextView visitStatus, TextView visitDate, TextView VisitNumber) {
+    private void checkLastVisit(String date, String visitNumber, String status, TextView tvVisitStatus, TextView tvVisitDate, TextView tvVisitNumber) {
         String visit_date = date != null ? context.getString(R.string.date_visit_title) + " " + date : "";
 
-        VisitNumber.setText(visitNumber);
-        visitDate.setText(visit_date);
-        visitStatus.setText(Status);
+        tvVisitNumber.setText(visitNumber);
+        tvVisitDate.setText(visit_date);
+        tvVisitStatus.setText(status);
     }
 
     public View inflatelayoutForCursorAdapter() {
-        View view = inflater().inflate(R.layout.smart_register_ki_client, null);
-        return view;
+        return inflater().inflate(smart_register_ki_client, null);
     }
 
 }

@@ -156,7 +156,7 @@ public class Support {
 //        String path = DrishtiApplication.getAppDir() + File.separator + ".thumbs" + File.separator + "th_";
         String path = DrishtiApplication.getAppDir();
         String fullPath = path + File.separator + file + ".jpg";
-        android.util.Log.e(TAG, "setImagetoHolderFromUri: " + fullPath);
+//        android.util.Log.e(TAG, "setImagetoHolderFromUri: " + fullPath);
         view.setImageDrawable(activity.getResources().getDrawable(placeholder));
         File externalFile = new File(fullPath);
 
@@ -172,10 +172,10 @@ public class Support {
 
             view.setImageBitmap(Tools.getThumbnailBitmap(externalFile.getPath(), 100));
 
-            android.util.Log.e(TAG, "setImagetoHolderFromUri: " + external);
+//            android.util.Log.e(TAG, "setImagetoHolderFromUri: " + external);
 
         } else {
-            Log.logError(Support.class.getName(), String.format("image %s doesn't exist", file));
+//            Log.logError(Support.class.getName(), String.format("image %s doesn't exist", file));
         }
     }
 

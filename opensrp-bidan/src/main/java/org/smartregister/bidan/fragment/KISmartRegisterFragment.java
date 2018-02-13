@@ -22,7 +22,6 @@ import org.smartregister.Context;
 import org.smartregister.bidan.R;
 import org.smartregister.bidan.activity.BaseRegisterActivity;
 import org.smartregister.bidan.activity.DetailMotherActivity;
-import org.smartregister.bidan.activity.NativeKIAnakSmartRegisterActivity;
 import org.smartregister.bidan.activity.NativeKISmartRegisterActivity;
 import org.smartregister.bidan.options.AllKartuIbuServiceMode;
 import org.smartregister.bidan.options.KICommonObjectFilterOption;
@@ -63,9 +62,9 @@ import static org.apache.commons.lang3.StringUtils.isEmpty;
 /**
  * Created by Dimas Ciputra on 2/18/15.
  */
-public class NativeKISmartRegisterFragment extends SecuredNativeSmartRegisterCursorAdapterFragment {
+public class KISmartRegisterFragment extends SecuredNativeSmartRegisterCursorAdapterFragment {
 
-    private static final String TAG = NativeKISmartRegisterFragment.class.getName();
+    private static final String TAG = KISmartRegisterFragment.class.getName();
     //    WD
     public static String criteria;
     private final ClientActionHandler clientActionHandler = new ClientActionHandler();
@@ -78,7 +77,7 @@ public class NativeKISmartRegisterFragment extends SecuredNativeSmartRegisterCur
     }
 
     public void setCriteria(String criteria) {
-        NativeKISmartRegisterFragment.criteria = criteria;
+        KISmartRegisterFragment.criteria = criteria;
     }
 
     @Override

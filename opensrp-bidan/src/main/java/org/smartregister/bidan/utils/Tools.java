@@ -77,7 +77,7 @@ public class Tools {
         String query  = "SELECT name FROM sqlite_master WHERE type='table'";
         String db = context.initRepository().getWritableDatabase().getPath();
         Cursor dbs = context.initRepository().getWritableDatabase().rawQuery(query, null);
-        Log.d("testanak", "db: " + db);
+        Log.d("GiziApp", "db: " + db);
         if (dbs.moveToFirst()){
             do{
                 String data = dbs.getString(dbs.getColumnIndex("name"));
