@@ -79,7 +79,6 @@
 
 
             <org.smartregister.view.customcontrols.CustomFontTextView
-                android:id="@+id/lbl_risk"
                 style="@style/CustomFontTextViewStyle.ListView.Medium"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"

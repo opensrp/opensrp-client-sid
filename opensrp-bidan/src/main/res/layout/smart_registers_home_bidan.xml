@@ -28,7 +28,6 @@
                     android:src="@drawable/bidan_logo" />
 
                 <org.smartregister.view.customcontrols.CustomFontTextView
-                    android:id="@+id/feedback_option"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="right"

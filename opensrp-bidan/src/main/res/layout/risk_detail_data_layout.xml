@@ -14,7 +14,6 @@
         <TableRow>
 
             <org.smartregister.view.customcontrols.CustomFontTextView
-                android:id="@+id/lbl_highRiskHIVAIDS"
                 style="@style/CustomFontTextViewStyle.ListView.Medium"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -41,7 +40,6 @@
         <TableRow>
 
             <org.smartregister.view.customcontrols.CustomFontTextView
-                android:id="@+id/lbl_highRiskSTIBBVs"
                 style="@style/CustomFontTextViewStyle.ListView.Medium"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -68,7 +66,6 @@
         <TableRow>
 
             <org.smartregister.view.customcontrols.CustomFontTextView
-                android:id="@+id/lbl_highRiskEctopicPregnancy"
                 style="@style/CustomFontTextViewStyle.ListView.Medium"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -94,7 +91,6 @@
         <TableRow>
 
             <org.smartregister.view.customcontrols.CustomFontTextView
-                android:id="@+id/lbl_highRiskCardiovascularDiseaseRecord"
                 style="@style/CustomFontTextViewStyle.ListView.Medium"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -121,7 +117,6 @@
 
 
             <org.smartregister.view.customcontrols.CustomFontTextView
-                android:id="@+id/lbl_highRiskDidneyDisorder"
                 style="@style/CustomFontTextViewStyle.ListView.Medium"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -149,7 +144,6 @@
 
 
             <org.smartregister.view.customcontrols.CustomFontTextView
-                android:id="@+id/lbl_highRiskHeartDisorder"
                 style="@style/CustomFontTextViewStyle.ListView.Medium"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -176,7 +170,6 @@
         <TableRow>
 
             <org.smartregister.view.customcontrols.CustomFontTextView
-                android:id="@+id/lbl_highRiskAsthma"
                 style="@style/CustomFontTextViewStyle.ListView.Medium"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -202,7 +195,6 @@
         <TableRow>
 
             <org.smartregister.view.customcontrols.CustomFontTextView
-                android:id="@+id/lbl_highRiskTuberculosis"
                 style="@style/CustomFontTextViewStyle.ListView.Medium"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -228,7 +220,6 @@
         <TableRow>
 
             <org.smartregister.view.customcontrols.CustomFontTextView
-                android:id="@+id/lbl_highRiskMalaria"
                 style="@style/CustomFontTextViewStyle.ListView.Medium"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -254,7 +245,6 @@
         <TableRow>
 
             <org.smartregister.view.customcontrols.CustomFontTextView
-                android:id="@+id/lbl_highRiskPregnancyPIH"
                 style="@style/CustomFontTextViewStyle.ListView.Medium"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -280,7 +270,6 @@
         <TableRow>
 
             <org.smartregister.view.customcontrols.CustomFontTextView
-                android:id="@+id/lbl_highRiskPregnancyProteinEnergyMalnutrition"
                 style="@style/CustomFontTextViewStyle.ListView.Medium"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -306,7 +295,6 @@
         <TableRow>
 
             <org.smartregister.view.customcontrols.CustomFontTextView
-                android:id="@+id/lbl_highRiskPregnancyDiabetes"
                 style="@style/CustomFontTextViewStyle.ListView.Medium"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -332,7 +320,6 @@
         <TableRow>
 
             <org.smartregister.view.customcontrols.CustomFontTextView
-                android:id="@+id/lbl_highRiskPregnancyAnemia"
                 style="@style/CustomFontTextViewStyle.ListView.Medium"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -358,7 +345,6 @@
         <TableRow>
 
             <org.smartregister.view.customcontrols.CustomFontTextView
-                android:id="@+id/lbl_highRiskLabourFetusMalpresentation"
                 style="@style/CustomFontTextViewStyle.ListView.Medium"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -391,7 +377,6 @@
         <TableRow>
 
             <org.smartregister.view.customcontrols.CustomFontTextView
-                android:id="@+id/lbl_highRiskLabourFetusSize"
                 style="@style/CustomFontTextViewStyle.ListView.Medium"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -416,7 +401,6 @@
         <TableRow>
 
             <org.smartregister.view.customcontrols.CustomFontTextView
-                android:id="@+id/lbl_highRisklabourFetusNumber"
                 style="@style/CustomFontTextViewStyle.ListView.Medium"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -441,7 +425,6 @@
         <TableRow>
 
             <org.smartregister.view.customcontrols.CustomFontTextView
-                android:id="@+id/lbl_HighRiskLabourSectionCesareaRecord"
                 style="@style/CustomFontTextViewStyle.ListView.Medium"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -466,7 +449,6 @@
         <TableRow>
 
             <org.smartregister.view.customcontrols.CustomFontTextView
-                android:id="@+id/lbl_highRiskLabourTBRisk"
                 style="@style/CustomFontTextViewStyle.ListView.Medium"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -491,7 +473,6 @@
         <TableRow>
 
             <org.smartregister.view.customcontrols.CustomFontTextView
-                android:id="@+id/lbl_HighRiskPregnancyTooManyChildren"
                 style="@style/CustomFontTextViewStyle.ListView.Medium"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -516,7 +497,6 @@
         <TableRow>
 
             <org.smartregister.view.customcontrols.CustomFontTextView
-                android:id="@+id/lbl_highRiskPostPartumForceps"
                 style="@style/CustomFontTextViewStyle.ListView.Medium"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -541,7 +521,6 @@
         <TableRow>
 
             <org.smartregister.view.customcontrols.CustomFontTextView
-                android:id="@+id/lbl_highRiskPostPartumVacum"
                 style="@style/CustomFontTextViewStyle.ListView.Medium"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -566,7 +545,6 @@
         <TableRow>
 
             <org.smartregister.view.customcontrols.CustomFontTextView
-                android:id="@+id/lbl_highRiskPostPartumPreEclampsiaEclampsia"
                 style="@style/CustomFontTextViewStyle.ListView.Medium"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -591,7 +569,6 @@
         <TableRow>
 
             <org.smartregister.view.customcontrols.CustomFontTextView
-                android:id="@+id/lbl_highRiskPostPartumMaternalSepsis"
                 style="@style/CustomFontTextViewStyle.ListView.Medium"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -616,7 +593,6 @@
         <TableRow>
 
             <org.smartregister.view.customcontrols.CustomFontTextView
-                android:id="@+id/lbl_highRiskPostPartumInfection"
                 style="@style/CustomFontTextViewStyle.ListView.Medium"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -641,7 +617,6 @@
         <TableRow>
 
             <org.smartregister.view.customcontrols.CustomFontTextView
-                android:id="@+id/lbl_highRiskPostPartumHemorrhage"
                 style="@style/CustomFontTextViewStyle.ListView.Medium"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -666,7 +641,6 @@
         <TableRow>
 
             <org.smartregister.view.customcontrols.CustomFontTextView
-                android:id="@+id/lbl_highRiskPostPartumPIH"
                 style="@style/CustomFontTextViewStyle.ListView.Medium"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -691,7 +665,6 @@
         <TableRow>
 
             <org.smartregister.view.customcontrols.CustomFontTextView
-                android:id="@+id/lbl_highRiskPostPartumDistosia"
                 style="@style/CustomFontTextViewStyle.ListView.Medium"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -716,7 +689,6 @@
         <TableRow>
 
             <org.smartregister.view.customcontrols.CustomFontTextView
-                android:id="@+id/lbl_highRiskPostPartumSectioCaesaria"
                 style="@style/CustomFontTextViewStyle.ListView.Medium"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"

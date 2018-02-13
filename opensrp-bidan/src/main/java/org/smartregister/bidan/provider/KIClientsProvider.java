@@ -4,7 +4,6 @@ import android.app.Activity;
 import android.content.Context;
 import android.database.Cursor;
 import android.graphics.drawable.Drawable;
-import android.util.Log;
 import android.view.View;
 import android.widget.AbsListView;
 import android.widget.ImageButton;
@@ -123,7 +122,7 @@ public class KIClientsProvider extends BaseClientsProvider {
         CommonPersonObjectClient pc = (CommonPersonObjectClient) smartRegisterClient;
         DetailsRepository detailsRepository = org.smartregister.Context.getInstance().detailsRepository();
         detailsRepository.updateDetails(pc);
-        Log.e(TAG, "getView:CommonPersonObjectClient "+ pc.getDetails());
+//        Log.e(TAG, "getView:CommonPersonObjectClient "+ pc.getDetails());
 
 //        System.out.println("client : " + pc.getColumnmaps().toString());
 //        System.out.println("event : " + pc.getDetails().toString());
@@ -175,24 +174,20 @@ public class KIClientsProvider extends BaseClientsProvider {
         children_age_right.setText("");
 
         if (ibuparent != null) {
-//            Log.e(TAG, "getView:ibuparent.getColumnmaps "+ ibuparent.getColumnmaps());
-//            Log.e(TAG, "getView:ibuparent.getCaseId "+ ibuparent.getCaseId());
-//            Log.e(TAG, "getView:ibuparent.getClosed "+ ibuparent.getClosed());
-//            Log.e(TAG, "getView:ibuparent.getDetails "+ ibuparent.getDetails());
-//            Log.e(TAG, "getView:ibuparent.getRelationalId "+ ibuparent.getRelationalId());
 
             short anc_isclosed = ibuparent.getClosed();
 
             //check anc  status
             if (anc_isclosed == 0) {
-                Log.e(TAG, "getView: ACTIVE in ANC" );
                 detailsRepository.updateDetails(ibuparent);
                 if (pc.getDetails().get("htp") == null) {
 
                     Support.checkMonth(context, pc.getDetails().get("htp"), edd_due);
 
                 }
-                checkLastVisit(pc.getDetails().get("ancDate"), context.getString(R.string.anc_ke) + ": " + pc.getDetails().get("ancKe"), context.getString(R.string.service_anc),
+                checkLastVisit(pc.getDetails().get("ancDate"),
+                        context.getString(R.string.anc_ke) + ": " + pc.getDetails().get("ancKe"),
+                        context.getString(R.string.service_anc),
                         anc_status_layout, date_status, visit_status);
             }
             //if anc is 1(closed) set status to pnc
@@ -212,13 +207,13 @@ public class KIClientsProvider extends BaseClientsProvider {
                 }
 
             }
-        }
-        //last check if mother in PF (KB) service
-        if (!StringUtils.isNumeric(pc.getDetails().get("jenisKontrasepsi"))) {
-            checkLastVisit(pc.getDetails().get("tanggalkunjungan"),
-                    context.getString(R.string.fp_methods) + ": " + pc.getDetails().get("jenisKontrasepsi"),
-                    context.getString(R.string.service_fp), anc_status_layout, date_status, visit_status);
-        }
+        } else
+            //last check if mother in PF (KB) service
+            if (!StringUtils.isNumeric(pc.getDetails().get("jenisKontrasepsi"))) {
+                checkLastVisit(pc.getDetails().get("tanggalkunjungan"),
+                        context.getString(R.string.fp_methods) + ": " + pc.getDetails().get("jenisKontrasepsi"),
+                        context.getString(R.string.service_fp), anc_status_layout, date_status, visit_status);
+            }
 
         //anak
         for (int i = 0; i < allchild.size(); i++) {

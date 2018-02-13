@@ -16,8 +16,6 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 
-import static android.R.attr.value;
-
 /**
  * Created by sid-tech on 1/24/18.
  */
@@ -74,45 +72,45 @@ public class Tools {
     }
 
     public static void getDbRecord(Context context) {
-        String query  = "SELECT name FROM sqlite_master WHERE type='table'";
+        String query = "SELECT name FROM sqlite_master WHERE type='table'";
         String db = context.initRepository().getWritableDatabase().getPath();
         Cursor dbs = context.initRepository().getWritableDatabase().rawQuery(query, null);
         Log.d("GiziApp", "db: " + db);
-        if (dbs.moveToFirst()){
-            do{
+        if (dbs.moveToFirst()) {
+            do {
                 String data = dbs.getString(dbs.getColumnIndex("name"));
                 Log.d("testanak", "table name: " + data);
-                Cursor temp = context.initRepository().getWritableDatabase().rawQuery("SELECT * FROM "+data, null);
+                Cursor temp = context.initRepository().getWritableDatabase().rawQuery("SELECT * FROM " + data, null);
                 temp.moveToFirst();
-                Log.d("testanak", data+": " + temp.getCount());
-                String output ="";
-                for(String str: temp.getColumnNames())
-                    output=output+", "+str;
+                Log.d("testanak", data + ": " + temp.getCount());
+                String output = "";
+                for (String str : temp.getColumnNames())
+                    output = output + ", " + str;
                 Log.d("testanak", "getColumnNames: " + output);
 
-                if(temp.getCount()>0){
-                    if (temp.moveToFirst()){
-                        do{
-                            String output2 ="";
-                            for(String d:temp.getColumnNames()){
+                if (temp.getCount() > 0) {
+                    if (temp.moveToFirst()) {
+                        do {
+                            String output2 = "";
+                            for (String d : temp.getColumnNames()) {
                                 String value = "";
-                                if(d!=""){
-                                    if(temp.getType(temp.getColumnIndex(d))== temp.FIELD_TYPE_BLOB){
+                                if (d != "") {
+                                    if (temp.getType(temp.getColumnIndex(d)) == temp.FIELD_TYPE_BLOB) {
                                         value = "blob";
-                                    }else{
+                                    } else {
                                         value = temp.getString(temp.getColumnIndex(d));
                                     }
                                 }
-                                output2=output2+", "+value;
+                                output2 = output2 + ", " + value;
                             }
                             Log.d("testanak", "getColumnNames: " + output2);
-                        }while(temp.moveToNext());
+                        } while (temp.moveToNext());
                     }
 
                 }
 
                 temp.close();
-            }while(dbs.moveToNext());
+            } while (dbs.moveToNext());
         }
         Log.d("testanak", "getCount: " + dbs.getCount());
         dbs.close();

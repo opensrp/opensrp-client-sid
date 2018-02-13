@@ -10,32 +10,41 @@
     <fieldset class="question ">
         <fieldset>
             <legend>
-                <span class="question-label active" data-itext-id="/kunjungan_anc_reviewed_anc_visit/Lokasi_periksa:label"
+                <span class="question-label active"
+                    data-itext-id="/kunjungan_anc_reviewed_anc_visit/Lokasi_periksa:label"
                     lang="Bahasa">Lokasi Periksa
                 </span>
                 <span class="required">*</span>
-                <span class="question-label " data-itext-id="/kunjungan_anc_reviewed_anc_visit/Lokasi_periksa:label" lang="en">
+                <span class="question-label "
+                    data-itext-id="/kunjungan_anc_reviewed_anc_visit/Lokasi_periksa:label"
+                    lang="en">
                     Location of Service
                 </span>
             </legend>
             <div class="option-wrapper">
                 <label class="">
-                    <input name="/kunjungan_anc_reviewed_anc_visit/Lokasi_periksa" data-name="/kunjungan_anc_reviewed_anc_visit/Lokasi_periksa" data-type-xml="select1"
-                        type="radio" value="1" required="required" />
-                    <span class="option-label active" data-itext-id="/kunjungan_anc_reviewed_anc_visit/Lokasi_periksa/Posyandu:label"
+                    <input name="/kunjungan_anc_reviewed_anc_visit/Lokasi_periksa"
+                        data-name="/kunjungan_anc_reviewed_anc_visit/Lokasi_periksa"
+                        data-type-xml="select1" required="required" type="radio" value="1" />
+                    <span class="option-label active"
+                        data-itext-id="/kunjungan_anc_reviewed_anc_visit/Lokasi_periksa/Posyandu:label"
                         lang="Bahasa">Posyandu
                     </span>
-                    <span class="option-label " data-itext-id="/kunjungan_anc_reviewed_anc_visit/Lokasi_periksa/Posyandu:label"
+                    <span class="option-label "
+                        data-itext-id="/kunjungan_anc_reviewed_anc_visit/Lokasi_periksa/Posyandu:label"
                         lang="en">Posyandu
                     </span>
                 </label>
                 <label class="">
-                    <input name="/kunjungan_anc_reviewed_anc_visit/Lokasi_periksa" data-name="/kunjungan_anc_reviewed_anc_visit/Lokasi_periksa" data-type-xml="select1"
-                        type="radio" value="2" required="required" />
-                    <span class="option-label active" data-itext-id="/kunjungan_anc_reviewed_anc_visit/Lokasi_periksa/Polindes:label"
+                    <input name="/kunjungan_anc_reviewed_anc_visit/Lokasi_periksa"
+                        data-name="/kunjungan_anc_reviewed_anc_visit/Lokasi_periksa"
+                        data-type-xml="select1" required="required" type="radio" value="2" />
+                    <span class="option-label active"
+                        data-itext-id="/kunjungan_anc_reviewed_anc_visit/Lokasi_periksa/Polindes:label"
                         lang="Bahasa">Polindes
                     </span>
-                    <span class="option-label " data-itext-id="/kunjungan_anc_reviewed_anc_visit/Lokasi_periksa/Polindes:label"
+                    <span class="option-label "
+                        data-itext-id="/kunjungan_anc_reviewed_anc_visit/Lokasi_periksa/Polindes:label"
                         lang="en">Polindes
                     </span>
                 </label>
@@ -45,35 +54,40 @@
     <fieldset class="question ">
         <fieldset>
             <legend>
-                <span class="question-label active" data-itext-id="/kunjungan_anc_reviewed_anc_visit/nomortelpon:label"
+                <span class="question-label active"
+                    data-itext-id="/kunjungan_anc_reviewed_anc_visit/nomortelpon:label"
                     lang="Bahasa">Apakah ibu
                     memiliki nomor telpon?
                 </span>
-                <span class="question-label " data-itext-id="/kunjungan_anc_reviewed_anc_visit/nomortelpon:label"
-                    lang="en">-
+                <span class="question-label "
+                    data-itext-id="/kunjungan_anc_reviewed_anc_visit/nomortelpon:label" lang="en">-
                 </span>
             </legend>
             <div class="option-wrapper">
                 <label class="">
-                    <input name="/kunjungan_anc_reviewed_anc_visit/nomortelpon" data-name="/kunjungan_anc_reviewed_anc_visit/nomortelpon"
-                        data-type-xml="select1" type="radio"
-                        value="Ya" />
-                    <span class="option-label active" data-itext-id="/kunjungan_anc_reviewed_anc_visit/nomortelpon/Ya:label"
+                    <input name="/kunjungan_anc_reviewed_anc_visit/nomortelpon"
+                        data-name="/kunjungan_anc_reviewed_anc_visit/nomortelpon"
+                        data-type-xml="select1" type="radio" value="Ya" />
+                    <span class="option-label active"
+                        data-itext-id="/kunjungan_anc_reviewed_anc_visit/nomortelpon/Ya:label"
                         lang="Bahasa">Ya
                     </span>
-                    <span class="option-label " data-itext-id="/kunjungan_anc_reviewed_anc_visit/nomortelpon/Ya:label"
+                    <span class="option-label "
+                        data-itext-id="/kunjungan_anc_reviewed_anc_visit/nomortelpon/Ya:label"
                         lang="en">Yes
                     </span>
                 </label>
                 <label class="">
-                    <input name="/kunjungan_anc_reviewed_anc_visit/nomortelpon" data-name="/kunjungan_anc_reviewed_anc_visit/nomortelpon"
-                        data-type-xml="select1" type="radio"
-                        value="Tidak" />
-                    <span class="option-label active" data-itext-id="/kunjungan_anc_reviewed_anc_visit/nomortelpon/Tidak:label"
+                    <input name="/kunjungan_anc_reviewed_anc_visit/nomortelpon"
+                        data-name="/kunjungan_anc_reviewed_anc_visit/nomortelpon"
+                        data-type-xml="select1" type="radio" value="Tidak" />
+                    <span class="option-label active"
+                        data-itext-id="/kunjungan_anc_reviewed_anc_visit/nomortelpon/Tidak:label"
                         lang="Bahasa">
                         Tidak
                     </span>
-                    <span class="option-label " data-itext-id="/kunjungan_anc_reviewed_anc_visit/nomortelpon/Tidak:label"
+                    <span class="option-label "
+                        data-itext-id="/kunjungan_anc_reviewed_anc_visit/nomortelpon/Tidak:label"
                         lang="en">No
                     </span>
                 </label>
@@ -81,22 +95,26 @@
         </fieldset>
     </fieldset>
     <label class="question non-select ">
-        <span class="question-label active" data-itext-id="/kunjungan_anc_reviewed_anc_visit/nomor_telpon_hp:label"
-            lang="Bahasa">Nomor Telpon/Hp
+        <span class="question-label active"
+            data-itext-id="/kunjungan_anc_reviewed_anc_visit/nomor_telpon_hp:label" lang="Bahasa">
+            Nomor Telpon/Hp
         </span>
-        <span class="question-label " data-itext-id="/kunjungan_anc_reviewed_anc_visit/nomor_telpon_hp:label"
-            lang="en">Landline/Cell
+        <span class="question-label "
+            data-itext-id="/kunjungan_anc_reviewed_anc_visit/nomor_telpon_hp:label" lang="en">
+            Landline/Cell
             Phone Number
         </span>
         <input name="/kunjungan_anc_reviewed_anc_visit/nomor_telpon_hp" data-type-xml="string"
             type="text" />
     </label>
     <label class="question non-select ">
-        <span class="question-label active" data-itext-id="/kunjungan_anc_reviewed_anc_visit/anc_date:label"
-            lang="Bahasa">Tanggal kunjungan ANC
+        <span class="question-label active"
+            data-itext-id="/kunjungan_anc_reviewed_anc_visit/anc_date:label" lang="Bahasa">Tanggal
+            kunjungan ANC
         </span>
-        <span class="question-label " data-itext-id="/kunjungan_anc_reviewed_anc_visit/anc_date:label"
-            lang="en">Date of ANC visit
+        <span class="question-label "
+            data-itext-id="/kunjungan_anc_reviewed_anc_visit/anc_date:label" lang="en">Date of ANC
+            visit
         </span>
         <span class="required">*</span>
         <span class="or-hint active" data-itext-id="/kunjungan_anc_reviewed_anc_visit/anc_date:hint"
@@ -107,136 +125,169 @@
             lang="en">Fill in the date of
             check-up
         </span>
-        <input name="/kunjungan_anc_reviewed_anc_visit/anc_date" data-type-xml="date" required="required"
-            type="date" />
+        <input name="/kunjungan_anc_reviewed_anc_visit/anc_date" data-type-xml="date"
+            required="required" type="date" />
     </label>
     <label class="note non-select ">
-        <span class="question-label active" data-itext-id="/kunjungan_anc_reviewed_anc_visit/generated_note_name_12:label"
+        <span class="question-label active"
+            data-itext-id="/kunjungan_anc_reviewed_anc_visit/generated_note_name_12:label"
             lang="Bahasa">Usia
             Klinis :
             <span class="or-output"
                 data-value=" /kunjungan_anc_reviewed_anc_visit/usia_klinis "></span>
         </span>
-        <span class="question-label " data-itext-id="/kunjungan_anc_reviewed_anc_visit/generated_note_name_12:label"
+        <span class="question-label "
+            data-itext-id="/kunjungan_anc_reviewed_anc_visit/generated_note_name_12:label"
             lang="en">
             Gestational Age
         </span>
-        <input name="/kunjungan_anc_reviewed_anc_visit/generated_note_name_12" data-type-xml="string"
-            readonly="readonly" type="text" />
+        <input name="/kunjungan_anc_reviewed_anc_visit/generated_note_name_12"
+            data-type-xml="string" readonly="readonly" type="text" />
     </label>
     <label class="note non-select ">
-        <span class="question-label active" data-itext-id="/kunjungan_anc_reviewed_anc_visit/generated_note_name_14:label"
+        <span class="question-label active"
+            data-itext-id="/kunjungan_anc_reviewed_anc_visit/generated_note_name_14:label"
             lang="Bahasa">Trimester
             Ke:
             <span class="or-output"
                 data-value=" /kunjungan_anc_reviewed_anc_visit/trimester_ke "></span>
         </span>
-        <span class="question-label " data-itext-id="/kunjungan_anc_reviewed_anc_visit/generated_note_name_14:label"
+        <span class="question-label "
+            data-itext-id="/kunjungan_anc_reviewed_anc_visit/generated_note_name_14:label"
             lang="en">Trimester
             order
         </span>
-        <input name="/kunjungan_anc_reviewed_anc_visit/generated_note_name_14" data-type-xml="string"
-            readonly="readonly" type="text" />
+        <input name="/kunjungan_anc_reviewed_anc_visit/generated_note_name_14"
+            data-type-xml="string" readonly="readonly" type="text" />
     </label>
     <fieldset class="question or-appearance-horizontal">
         <fieldset>
             <legend>
-                <span class="question-label active" data-itext-id="/kunjungan_anc_reviewed_anc_visit/Kunjungan_ke:label"
+                <span class="question-label active"
+                    data-itext-id="/kunjungan_anc_reviewed_anc_visit/Kunjungan_ke:label"
                     lang="Bahasa">Kunjungan Ke :
                 </span>
                 <span class="required">*</span>
-                <span class="question-label " data-itext-id="/kunjungan_anc_reviewed_anc_visit/Kunjungan_ke:label" lang="en">
+                <span class="question-label "
+                    data-itext-id="/kunjungan_anc_reviewed_anc_visit/Kunjungan_ke:label" lang="en">
                     Number of Visit
                 </span>
             </legend>
             <div class="option-wrapper">
                 <label class="">
-                    <input name="/kunjungan_anc_reviewed_anc_visit/Kunjungan_ke" data-name="/kunjungan_anc_reviewed_anc_visit/Kunjungan_ke" data-type-xml="select1"
-                        type="radio" value="1" required="required" />
-                    <span class="option-label active" data-itext-id="/kunjungan_anc_reviewed_anc_visit/Kunjungan_ke/1:label"
+                    <input name="/kunjungan_anc_reviewed_anc_visit/Kunjungan_ke"
+                        data-name="/kunjungan_anc_reviewed_anc_visit/Kunjungan_ke"
+                        data-type-xml="select1" required="required" type="radio" value="1" />
+                    <span class="option-label active"
+                        data-itext-id="/kunjungan_anc_reviewed_anc_visit/Kunjungan_ke/1:label"
                         lang="Bahasa">1
                     </span>
-                    <span class="option-label " data-itext-id="/kunjungan_anc_reviewed_anc_visit/Kunjungan_ke/1:label"
+                    <span class="option-label "
+                        data-itext-id="/kunjungan_anc_reviewed_anc_visit/Kunjungan_ke/1:label"
                         lang="en">1
                     </span>
                 </label>
                 <label class="">
-                    <input name="/kunjungan_anc_reviewed_anc_visit/Kunjungan_ke" data-name="/kunjungan_anc_reviewed_anc_visit/Kunjungan_ke" data-type-xml="select1"
-                        type="radio" value="2" required="required" />
-                    <span class="option-label active" data-itext-id="/kunjungan_anc_reviewed_anc_visit/Kunjungan_ke/2:label"
+                    <input name="/kunjungan_anc_reviewed_anc_visit/Kunjungan_ke"
+                        data-name="/kunjungan_anc_reviewed_anc_visit/Kunjungan_ke"
+                        data-type-xml="select1" required="required" type="radio" value="2" />
+                    <span class="option-label active"
+                        data-itext-id="/kunjungan_anc_reviewed_anc_visit/Kunjungan_ke/2:label"
                         lang="Bahasa">2
                     </span>
-                    <span class="option-label " data-itext-id="/kunjungan_anc_reviewed_anc_visit/Kunjungan_ke/2:label"
+                    <span class="option-label "
+                        data-itext-id="/kunjungan_anc_reviewed_anc_visit/Kunjungan_ke/2:label"
                         lang="en">2
                     </span>
                 </label>
                 <label class="">
-                    <input name="/kunjungan_anc_reviewed_anc_visit/Kunjungan_ke" data-name="/kunjungan_anc_reviewed_anc_visit/Kunjungan_ke" data-type-xml="select3"
-                        type="radio" value="3" required="required" />
-                    <span class="option-label active" data-itext-id="/kunjungan_anc_reviewed_anc_visit/Kunjungan_ke/3:label"
+                    <input name="/kunjungan_anc_reviewed_anc_visit/Kunjungan_ke"
+                        data-name="/kunjungan_anc_reviewed_anc_visit/Kunjungan_ke"
+                        data-type-xml="select3" required="required" type="radio" value="3" />
+                    <span class="option-label active"
+                        data-itext-id="/kunjungan_anc_reviewed_anc_visit/Kunjungan_ke/3:label"
                         lang="Bahasa">3
                     </span>
-                    <span class="option-label " data-itext-id="/kunjungan_anc_reviewed_anc_visit/Kunjungan_ke/3:label"
+                    <span class="option-label "
+                        data-itext-id="/kunjungan_anc_reviewed_anc_visit/Kunjungan_ke/3:label"
                         lang="en">3
                     </span>
                 </label>
                 <label class="">
-                    <input name="/kunjungan_anc_reviewed_anc_visit/Kunjungan_ke" data-name="/kunjungan_anc_reviewed_anc_visit/Kunjungan_ke" data-type-xml="select4"
-                        type="radio" value="4" required="required" />
-                    <span class="option-label active" data-itext-id="/kunjungan_anc_reviewed_anc_visit/Kunjungan_ke/4:label"
+                    <input name="/kunjungan_anc_reviewed_anc_visit/Kunjungan_ke"
+                        data-name="/kunjungan_anc_reviewed_anc_visit/Kunjungan_ke"
+                        data-type-xml="select4" required="required" type="radio" value="4" />
+                    <span class="option-label active"
+                        data-itext-id="/kunjungan_anc_reviewed_anc_visit/Kunjungan_ke/4:label"
                         lang="Bahasa">4
                     </span>
-                    <span class="option-label " data-itext-id="/kunjungan_anc_reviewed_anc_visit/Kunjungan_ke/4:label"
+                    <span class="option-label "
+                        data-itext-id="/kunjungan_anc_reviewed_anc_visit/Kunjungan_ke/4:label"
                         lang="en">4
                     </span>
                 </label>
                 <label class="">
-                    <input name="/kunjungan_anc_reviewed_anc_visit/Kunjungan_ke" data-name="/kunjungan_anc_reviewed_anc_visit/Kunjungan_ke" data-type-xml="select5"
-                        type="radio" value="5" required="required" />
-                    <span class="option-label active" data-itext-id="/kunjungan_anc_reviewed_anc_visit/Kunjungan_ke/5:label"
+                    <input name="/kunjungan_anc_reviewed_anc_visit/Kunjungan_ke"
+                        data-name="/kunjungan_anc_reviewed_anc_visit/Kunjungan_ke"
+                        data-type-xml="select5" required="required" type="radio" value="5" />
+                    <span class="option-label active"
+                        data-itext-id="/kunjungan_anc_reviewed_anc_visit/Kunjungan_ke/5:label"
                         lang="Bahasa">5
                     </span>
-                    <span class="option-label " data-itext-id="/kunjungan_anc_reviewed_anc_visit/Kunjungan_ke/5:label"
+                    <span class="option-label "
+                        data-itext-id="/kunjungan_anc_reviewed_anc_visit/Kunjungan_ke/5:label"
                         lang="en">5
                     </span>
                 </label>
                 <label class="">
-                    <input name="/kunjungan_anc_reviewed_anc_visit/Kunjungan_ke" data-name="/kunjungan_anc_reviewed_anc_visit/Kunjungan_ke" data-type-xml="select6"
-                        type="radio" value="6" required="required" />
-                    <span class="option-label active" data-itext-id="/kunjungan_anc_reviewed_anc_visit/Kunjungan_ke/6:label"
+                    <input name="/kunjungan_anc_reviewed_anc_visit/Kunjungan_ke"
+                        data-name="/kunjungan_anc_reviewed_anc_visit/Kunjungan_ke"
+                        data-type-xml="select6" required="required" type="radio" value="6" />
+                    <span class="option-label active"
+                        data-itext-id="/kunjungan_anc_reviewed_anc_visit/Kunjungan_ke/6:label"
                         lang="Bahasa">6
                     </span>
-                    <span class="option-label " data-itext-id="/kunjungan_anc_reviewed_anc_visit/Kunjungan_ke/6:label"
+                    <span class="option-label "
+                        data-itext-id="/kunjungan_anc_reviewed_anc_visit/Kunjungan_ke/6:label"
                         lang="en">6
                     </span>
                 </label>
                 <label class="">
-                    <input name="/kunjungan_anc_reviewed_anc_visit/Kunjungan_ke" data-name="/kunjungan_anc_reviewed_anc_visit/Kunjungan_ke" data-type-xml="select7"
-                        type="radio" value="7" required="required" />
-                    <span class="option-label active" data-itext-id="/kunjungan_anc_reviewed_anc_visit/Kunjungan_ke/7:label"
+                    <input name="/kunjungan_anc_reviewed_anc_visit/Kunjungan_ke"
+                        data-name="/kunjungan_anc_reviewed_anc_visit/Kunjungan_ke"
+                        data-type-xml="select7" required="required" type="radio" value="7" />
+                    <span class="option-label active"
+                        data-itext-id="/kunjungan_anc_reviewed_anc_visit/Kunjungan_ke/7:label"
                         lang="Bahasa">7
                     </span>
-                    <span class="option-label " data-itext-id="/kunjungan_anc_reviewed_anc_visit/Kunjungan_ke/7:label"
+                    <span class="option-label "
+                        data-itext-id="/kunjungan_anc_reviewed_anc_visit/Kunjungan_ke/7:label"
                         lang="en">7
                     </span>
                 </label>
                 <label class="">
-                    <input name="/kunjungan_anc_reviewed_anc_visit/Kunjungan_ke" data-name="/kunjungan_anc_reviewed_anc_visit/Kunjungan_ke" data-type-xml="select8"
-                        type="radio" value="8" required="required" />
-                    <span class="option-label active" data-itext-id="/kunjungan_anc_reviewed_anc_visit/Kunjungan_ke/8:label"
+                    <input name="/kunjungan_anc_reviewed_anc_visit/Kunjungan_ke"
+                        data-name="/kunjungan_anc_reviewed_anc_visit/Kunjungan_ke"
+                        data-type-xml="select8" required="required" type="radio" value="8" />
+                    <span class="option-label active"
+                        data-itext-id="/kunjungan_anc_reviewed_anc_visit/Kunjungan_ke/8:label"
                         lang="Bahasa">8
                     </span>
-                    <span class="option-label " data-itext-id="/kunjungan_anc_reviewed_anc_visit/Kunjungan_ke/8:label"
+                    <span class="option-label "
+                        data-itext-id="/kunjungan_anc_reviewed_anc_visit/Kunjungan_ke/8:label"
                         lang="en">8
                     </span>
                 </label>
                 <label class="">
-                    <input name="/kunjungan_anc_reviewed_anc_visit/Kunjungan_ke" data-name="/kunjungan_anc_reviewed_anc_visit/Kunjungan_ke" data-type-xml="select9"
-                        type="radio" value="9" required="required" />
-                    <span class="option-label active" data-itext-id="/kunjungan_anc_reviewed_anc_visit/Kunjungan_ke/9:label"
+                    <input name="/kunjungan_anc_reviewed_anc_visit/Kunjungan_ke"
+                        data-name="/kunjungan_anc_reviewed_anc_visit/Kunjungan_ke"
+                        data-type-xml="select9" required="required" type="radio" value="9" />
+                    <span class="option-label active"
+                        data-itext-id="/kunjungan_anc_reviewed_anc_visit/Kunjungan_ke/9:label"
                         lang="Bahasa">9
                     </span>
-                    <span class="option-label " data-itext-id="/kunjungan_anc_reviewed_anc_visit/Kunjungan_ke/9:label"
+                    <span class="option-label "
+                        data-itext-id="/kunjungan_anc_reviewed_anc_visit/Kunjungan_ke/9:label"
                         lang="en">9
                     </span>
                 </label>
@@ -246,53 +297,67 @@
     <fieldset class="question ">
         <fieldset>
             <legend>
-                <span class="question-label active" data-itext-id="/kunjungan_anc_reviewed_anc_visit/anc_ke:label"
-                    lang="Bahasa">K1 - K4?
+                <span class="question-label active"
+                    data-itext-id="/kunjungan_anc_reviewed_anc_visit/anc_ke:label" lang="Bahasa">K1
+                    - K4?
                 </span>
                 <span class="required">*</span>
-                <span class="question-label " data-itext-id="/kunjungan_anc_reviewed_anc_visit/anc_ke:label" lang="en">
+                <span class="question-label "
+                    data-itext-id="/kunjungan_anc_reviewed_anc_visit/anc_ke:label" lang="en">
                     Recommend Antenatal Care Visit 1 to 4
                 </span>
             </legend>
             <div class="option-wrapper">
                 <label class="">
-                    <input name="/kunjungan_anc_reviewed_anc_visit/anc_ke" data-name="/kunjungan_anc_reviewed_anc_visit/anc_ke" data-type-xml="select1"
-                        type="radio" value="1" required="required" />
-                    <span class="option-label active" data-itext-id="/kunjungan_anc_reviewed_anc_visit/anc_ke/1:label"
+                    <input name="/kunjungan_anc_reviewed_anc_visit/anc_ke"
+                        data-name="/kunjungan_anc_reviewed_anc_visit/anc_ke" data-type-xml="select1"
+                        required="required" type="radio" value="1" />
+                    <span class="option-label active"
+                        data-itext-id="/kunjungan_anc_reviewed_anc_visit/anc_ke/1:label"
                         lang="Bahasa">K1
                     </span>
-                    <span class="option-label " data-itext-id="/kunjungan_anc_reviewed_anc_visit/anc_ke/1:label"
-                        lang="en">K1
+                    <span class="option-label "
+                        data-itext-id="/kunjungan_anc_reviewed_anc_visit/anc_ke/1:label" lang="en">
+                        K1
                     </span>
                 </label>
                 <label class="">
-                    <input name="/kunjungan_anc_reviewed_anc_visit/anc_ke" data-name="/kunjungan_anc_reviewed_anc_visit/anc_ke" data-type-xml="select1"
-                        type="radio" value="2" required="required" />
-                    <span class="option-label active" data-itext-id="/kunjungan_anc_reviewed_anc_visit/anc_ke/2:label"
+                    <input name="/kunjungan_anc_reviewed_anc_visit/anc_ke"
+                        data-name="/kunjungan_anc_reviewed_anc_visit/anc_ke" data-type-xml="select1"
+                        required="required" type="radio" value="2" />
+                    <span class="option-label active"
+                        data-itext-id="/kunjungan_anc_reviewed_anc_visit/anc_ke/2:label"
                         lang="Bahasa">K2
                     </span>
-                    <span class="option-label " data-itext-id="/kunjungan_anc_reviewed_anc_visit/anc_ke/2:label"
-                        lang="en">K2
+                    <span class="option-label "
+                        data-itext-id="/kunjungan_anc_reviewed_anc_visit/anc_ke/2:label" lang="en">
+                        K2
                     </span>
                 </label>
                 <label class="">
-                    <input name="/kunjungan_anc_reviewed_anc_visit/anc_ke" data-name="/kunjungan_anc_reviewed_anc_visit/anc_ke" data-type-xml="select3"
-                        type="radio" value="3" required="required" />
-                    <span class="option-label active" data-itext-id="/kunjungan_anc_reviewed_anc_visit/anc_ke/3:label"
+                    <input name="/kunjungan_anc_reviewed_anc_visit/anc_ke"
+                        data-name="/kunjungan_anc_reviewed_anc_visit/anc_ke" data-type-xml="select3"
+                        required="required" type="radio" value="3" />
+                    <span class="option-label active"
+                        data-itext-id="/kunjungan_anc_reviewed_anc_visit/anc_ke/3:label"
                         lang="Bahasa">K3
                     </span>
-                    <span class="option-label " data-itext-id="/kunjungan_anc_reviewed_anc_visit/anc_ke/3:label"
-                        lang="en">K3
+                    <span class="option-label "
+                        data-itext-id="/kunjungan_anc_reviewed_anc_visit/anc_ke/3:label" lang="en">
+                        K3
                     </span>
                 </label>
                 <label class="">
-                    <input name="/kunjungan_anc_reviewed_anc_visit/anc_ke" data-name="/kunjungan_anc_reviewed_anc_visit/anc_ke" data-type-xml="select4"
-                        type="radio" value="4" required="required" />
-                    <span class="option-label active" data-itext-id="/kunjungan_anc_reviewed_anc_visit/anc_ke/4:label"
+                    <input name="/kunjungan_anc_reviewed_anc_visit/anc_ke"
+                        data-name="/kunjungan_anc_reviewed_anc_visit/anc_ke" data-type-xml="select4"
+                        required="required" type="radio" value="4" />
+                    <span class="option-label active"
+                        data-itext-id="/kunjungan_anc_reviewed_anc_visit/anc_ke/4:label"
                         lang="Bahasa">K4
                     </span>
-                    <span class="option-label " data-itext-id="/kunjungan_anc_reviewed_anc_visit/anc_ke/4:label"
-                        lang="en">K4
+                    <span class="option-label "
+                        data-itext-id="/kunjungan_anc_reviewed_anc_visit/anc_ke/4:label" lang="en">
+                        K4
                     </span>
                 </label>
 
@@ -300,46 +365,56 @@
         </fieldset>
     </fieldset>
     <label class="note non-select ">
-        <span class="question-label active" data-itext-id="/kunjungan_anc_reviewed_anc_visit/generated_note_name_9:label"
-            lang="Bahasa"> K1 standar - kunjungan pertama kurang atau sama dg 12 minggu. K1 akses - kunjungan pertama pada semua usia kehamilan.
+        <span class="question-label active"
+            data-itext-id="/kunjungan_anc_reviewed_anc_visit/generated_note_name_9:label"
+            lang="Bahasa">K1 standar - kunjungan pertama kurang atau sama dg 12 minggu. K1 akses -
+            kunjungan pertama pada semua usia kehamilan.
         </span>
-        <span class="question-label " data-itext-id="/kunjungan_anc_reviewed_anc_visit/generated_note_name_9:label"
-            lang="en"> K1 standar - kunjungan pertama kurang atau sama dg 12 minggu. K1 akses - kunjungan pertama pada semua usia kehamilan.
+        <span class="question-label "
+            data-itext-id="/kunjungan_anc_reviewed_anc_visit/generated_note_name_9:label" lang="en">
+            K1 standar - kunjungan pertama kurang atau sama dg 12 minggu. K1 akses - kunjungan
+            pertama pada semua usia kehamilan.
         </span>
-        <input name="/kunjungan_anc_reviewed_anc_visit/generated_note_name_9" data-type-xml="string" readonly="readonly"
-            type="text" />
+        <input name="/kunjungan_anc_reviewed_anc_visit/generated_note_name_9" data-type-xml="string"
+            readonly="readonly" type="text" />
     </label>
     <fieldset class="question ">
         <fieldset>
             <legend>
-                <span class="question-label active" data-itext-id="/kunjungan_anc_reviewed_anc_visit/Keterangan_k1k4:label"
+                <span class="question-label active"
+                    data-itext-id="/kunjungan_anc_reviewed_anc_visit/Keterangan_k1k4:label"
                     lang="Bahasa">Keterangan K1/K4?
                 </span>
-                <span class="question-label " data-itext-id="/kunjungan_anc_reviewed_anc_visit/Keterangan_k1k4:label"
+                <span class="question-label "
+                    data-itext-id="/kunjungan_anc_reviewed_anc_visit/Keterangan_k1k4:label"
                     lang="en">-
                 </span>
             </legend>
             <div class="option-wrapper">
                 <label class="">
-                    <input name="/kunjungan_anc_reviewed_anc_visit/Keterangan_k1k4" data-name="/kunjungan_anc_reviewed_anc_visit/Keterangan_k1k4"
-                        data-type-xml="select1" type="radio"
-                        value="standar" />
-                    <span class="option-label active" data-itext-id="/kunjungan_anc_reviewed_anc_visit/Keterangan_k1k4/standar:label"
+                    <input name="/kunjungan_anc_reviewed_anc_visit/Keterangan_k1k4"
+                        data-name="/kunjungan_anc_reviewed_anc_visit/Keterangan_k1k4"
+                        data-type-xml="select1" type="radio" value="standar" />
+                    <span class="option-label active"
+                        data-itext-id="/kunjungan_anc_reviewed_anc_visit/Keterangan_k1k4/standar:label"
                         lang="Bahasa">Standar
                     </span>
-                    <span class="option-label " data-itext-id="/kunjungan_anc_reviewed_anc_visit/Keterangan_k1k4/standar:label"
+                    <span class="option-label "
+                        data-itext-id="/kunjungan_anc_reviewed_anc_visit/Keterangan_k1k4/standar:label"
                         lang="en">Standard
                     </span>
                 </label>
                 <label class="">
-                    <input name="/kunjungan_anc_reviewed_anc_visit/Keterangan_k1k4" data-name="/kunjungan_anc_reviewed_anc_visit/Keterangan_k1k4"
-                        data-type-xml="select1" type="radio"
-                        value="standar" />
-                    <span class="option-label active" data-itext-id="/kunjungan_anc_reviewed_anc_visit/Keterangan_k1k4/standar:label"
+                    <input name="/kunjungan_anc_reviewed_anc_visit/Keterangan_k1k4"
+                        data-name="/kunjungan_anc_reviewed_anc_visit/Keterangan_k1k4"
+                        data-type-xml="select1" type="radio" value="standar" />
+                    <span class="option-label active"
+                        data-itext-id="/kunjungan_anc_reviewed_anc_visit/Keterangan_k1k4/standar:label"
                         lang="Bahasa">
                         Akses
                     </span>
-                    <span class="option-label " data-itext-id="/kunjungan_anc_reviewed_anc_visit/Keterangan_k1k4/standar:label"
+                    <span class="option-label "
+                        data-itext-id="/kunjungan_anc_reviewed_anc_visit/Keterangan_k1k4/standar:label"
                         lang="en">Accessible
                     </span>
                 </label>
@@ -349,44 +424,52 @@
     <fieldset class="question ">
         <fieldset>
             <legend>
-                <span class="question-label active" data-itext-id="/kunjungan_anc_reviewed_anc_visit/jamkesmas:label"
-                    lang="Bahasa">Jamkesmas
+                <span class="question-label active"
+                    data-itext-id="/kunjungan_anc_reviewed_anc_visit/jamkesmas:label" lang="Bahasa">
+                    Jamkesmas
                 </span>
-                <span class="question-label " data-itext-id="/kunjungan_anc_reviewed_anc_visit/jamkesmas:label"
-                    lang="en">Insurance
+                <span class="question-label "
+                    data-itext-id="/kunjungan_anc_reviewed_anc_visit/jamkesmas:label" lang="en">
+                    Insurance
                 </span>
-                <span class="or-hint active" data-itext-id="/kunjungan_anc_reviewed_anc_visit/jamkesmas:hint"
-                    lang="Bahasa">Apakah Ibu
+                <span class="or-hint active"
+                    data-itext-id="/kunjungan_anc_reviewed_anc_visit/jamkesmas:hint" lang="Bahasa">
+                    Apakah Ibu
                     memiliki Jamkesmas atau tidak
                 </span>
-                <span class="or-hint " data-itext-id="/kunjungan_anc_reviewed_anc_visit/jamkesmas:hint"
-                    lang="en">Does mother
+                <span class="or-hint "
+                    data-itext-id="/kunjungan_anc_reviewed_anc_visit/jamkesmas:hint" lang="en">Does
+                    mother
                     have the card of National Health Insurance for the Poor and Near Poor?
                 </span>
             </legend>
             <div class="option-wrapper">
                 <label class="">
-                    <input name="/kunjungan_anc_reviewed_anc_visit/jamkesmas" data-name="/kunjungan_anc_reviewed_anc_visit/jamkesmas"
-                        data-type-xml="select1" type="radio"
-                        value="jika_ya" />
-                    <span class="option-label active" data-itext-id="/kunjungan_anc_reviewed_anc_visit/jamkesmas/jika_ya:label"
+                    <input name="/kunjungan_anc_reviewed_anc_visit/jamkesmas"
+                        data-name="/kunjungan_anc_reviewed_anc_visit/jamkesmas"
+                        data-type-xml="select1" type="radio" value="jika_ya" />
+                    <span class="option-label active"
+                        data-itext-id="/kunjungan_anc_reviewed_anc_visit/jamkesmas/jika_ya:label"
                         lang="Bahasa">
                         Jika Ya (&#x221A;)
                     </span>
-                    <span class="option-label " data-itext-id="/kunjungan_anc_reviewed_anc_visit/jamkesmas/jika_ya:label"
+                    <span class="option-label "
+                        data-itext-id="/kunjungan_anc_reviewed_anc_visit/jamkesmas/jika_ya:label"
                         lang="en">
                         Yes
                     </span>
                 </label>
                 <label class="">
-                    <input name="/kunjungan_anc_reviewed_anc_visit/jamkesmas" data-name="/kunjungan_anc_reviewed_anc_visit/jamkesmas"
-                        data-type-xml="select1" type="radio"
-                        value="jika_tidak" />
-                    <span class="option-label active" data-itext-id="/kunjungan_anc_reviewed_anc_visit/jamkesmas/jika_tidak:label"
+                    <input name="/kunjungan_anc_reviewed_anc_visit/jamkesmas"
+                        data-name="/kunjungan_anc_reviewed_anc_visit/jamkesmas"
+                        data-type-xml="select1" type="radio" value="jika_tidak" />
+                    <span class="option-label active"
+                        data-itext-id="/kunjungan_anc_reviewed_anc_visit/jamkesmas/jika_tidak:label"
                         lang="Bahasa">
                         Jika Tidak (x)
                     </span>
-                    <span class="option-label " data-itext-id="/kunjungan_anc_reviewed_anc_visit/jamkesmas/jika_tidak:label"
+                    <span class="option-label "
+                        data-itext-id="/kunjungan_anc_reviewed_anc_visit/jamkesmas/jika_tidak:label"
                         lang="en">
                         No
                     </span>
@@ -395,19 +478,23 @@
         </fieldset>
     </fieldset>
     <label class="question or-appearance-minimal ">
-        <span class="question-label active" data-itext-id="/kunjungan_anc_reviewed_anc_visit/cara_masuk_tempat_pelayanan:label"
+        <span class="question-label active"
+            data-itext-id="/kunjungan_anc_reviewed_anc_visit/cara_masuk_tempat_pelayanan:label"
             lang="Bahasa">Cara
             Masuk Tempat Pelayanan
         </span>
-        <span class="question-label " data-itext-id="/kunjungan_anc_reviewed_anc_visit/cara_masuk_tempat_pelayanan:label"
+        <span class="question-label "
+            data-itext-id="/kunjungan_anc_reviewed_anc_visit/cara_masuk_tempat_pelayanan:label"
             lang="en">
             Process to get to Health Facility
         </span>
-        <span class="or-hint active" data-itext-id="/kunjungan_anc_reviewed_anc_visit/cara_masuk_tempat_pelayanan:hint"
+        <span class="or-hint active"
+            data-itext-id="/kunjungan_anc_reviewed_anc_visit/cara_masuk_tempat_pelayanan:hint"
             lang="Bahasa">Diisi
             dengan cara Ibu untuk masuk ke tempat pelayanan
         </span>
-        <span class="or-hint " data-itext-id="/kunjungan_anc_reviewed_anc_visit/cara_masuk_tempat_pelayanan:hint"
+        <span class="or-hint "
+            data-itext-id="/kunjungan_anc_reviewed_anc_visit/cara_masuk_tempat_pelayanan:hint"
             lang="en">
             Mother's reason for seeking care service in the facility
         </span>
@@ -460,15 +547,18 @@
         </span>
     </label>
     <label class="question non-select ">
-        <span class="question-label active" data-itext-id="/kunjungan_anc_reviewed_anc_visit/anamnesis_ibu:label"
-            lang="Bahasa">Anamnesis Ibu
+        <span class="question-label active"
+            data-itext-id="/kunjungan_anc_reviewed_anc_visit/anamnesis_ibu:label" lang="Bahasa">
+            Anamnesis Ibu
         </span>
-        <span class="question-label " data-itext-id="/kunjungan_anc_reviewed_anc_visit/anamnesis_ibu:label"
-            lang="en">Anamnesis of
+        <span class="question-label "
+            data-itext-id="/kunjungan_anc_reviewed_anc_visit/anamnesis_ibu:label" lang="en">
+            Anamnesis of
             mother
         </span>
-        <span class="or-hint active" data-itext-id="/kunjungan_anc_reviewed_anc_visit/anamnesis_ibu:hint"
-            lang="Bahasa">Diisi dengan
+        <span class="or-hint active"
+            data-itext-id="/kunjungan_anc_reviewed_anc_visit/anamnesis_ibu:hint" lang="Bahasa">Diisi
+            dengan
             keluhan atau hal-hal yang dirasakan Ibu selama hamil
         </span>
         <span class="or-hint " data-itext-id="/kunjungan_anc_reviewed_anc_visit/anamnesis_ibu:hint"
@@ -479,16 +569,18 @@
             type="text" />
     </label>
     <label class="question non-select ">
-        <span class="or-constraint-msg active" data-itext-id="/kunjungan_anc_reviewed_anc_visit/bb_kg:jr:constraintMsg"
-            lang="Bahasa">Nilai yang
+        <span class="or-constraint-msg active"
+            data-itext-id="/kunjungan_anc_reviewed_anc_visit/bb_kg:jr:constraintMsg" lang="Bahasa">
+            Nilai yang
             dimasukkan tidak memenuhi syarat, mohon periksa kembali
         </span>
-        <span class="or-constraint-msg " data-itext-id="/kunjungan_anc_reviewed_anc_visit/bb_kg:jr:constraintMsg"
-            lang="en">The entered
+        <span class="or-constraint-msg "
+            data-itext-id="/kunjungan_anc_reviewed_anc_visit/bb_kg:jr:constraintMsg" lang="en">The
+            entered
             value doesn't meet the criteria, please check it again
         </span>
-        <span class="question-label active" data-itext-id="/kunjungan_anc_reviewed_anc_visit/bb_kg:label"
-            lang="Bahasa">BB (Kg)
+        <span class="question-label active"
+            data-itext-id="/kunjungan_anc_reviewed_anc_visit/bb_kg:label" lang="Bahasa">BB (Kg)
         </span>
         <span class="question-label " data-itext-id="/kunjungan_anc_reviewed_anc_visit/bb_kg:label"
             lang="en">Weight of mother
@@ -502,77 +594,89 @@
             lang="en">Indicating mother's weight
             on ANC check-up (kg)
         </span>
-        <input name="/kunjungan_anc_reviewed_anc_visit/bb_kg" data-constraint=".&gt;0 and .&lt;200" data-type-xml="decimal"
-            required="required" step="any" type="number" />
+        <input name="/kunjungan_anc_reviewed_anc_visit/bb_kg" data-constraint=".&gt;0 and .&lt;200"
+            data-type-xml="decimal" required="required" step="any" type="number" />
     </label>
     <label class="question non-select ">
-        <span class="or-constraint-msg active" data-itext-id="/kunjungan_anc_reviewed_anc_visit/td_sistolik:jr:constraintMsg"
+        <span class="or-constraint-msg active"
+            data-itext-id="/kunjungan_anc_reviewed_anc_visit/td_sistolik:jr:constraintMsg"
             lang="Bahasa">Nilai
             yang dimasukkan tidak memenuhi syarat, mohon periksa kembali
         </span>
-        <span class="or-constraint-msg " data-itext-id="/kunjungan_anc_reviewed_anc_visit/td_sistolik:jr:constraintMsg"
+        <span class="or-constraint-msg "
+            data-itext-id="/kunjungan_anc_reviewed_anc_visit/td_sistolik:jr:constraintMsg"
             lang="en">The
             entered value doesn't meet the criteria, please check it again
         </span>
-        <span class="question-label active" data-itext-id="/kunjungan_anc_reviewed_anc_visit/td_sistolik:label"
-            lang="Bahasa">TD (Sistolik)
+        <span class="question-label active"
+            data-itext-id="/kunjungan_anc_reviewed_anc_visit/td_sistolik:label" lang="Bahasa">TD
+            (Sistolik)
         </span>
-        <span class="question-label " data-itext-id="/kunjungan_anc_reviewed_anc_visit/td_sistolik:label"
-            lang="en">Blood pressure
+        <span class="question-label "
+            data-itext-id="/kunjungan_anc_reviewed_anc_visit/td_sistolik:label" lang="en">Blood
+            pressure
             (sistolic)
         </span>
-        <span class="or-hint active" data-itext-id="/kunjungan_anc_reviewed_anc_visit/td_sistolik:hint"
-            lang="Bahasa">Menunjukkan tekanan
+        <span class="or-hint active"
+            data-itext-id="/kunjungan_anc_reviewed_anc_visit/td_sistolik:hint" lang="Bahasa">
+            Menunjukkan tekanan
             darah (Sistolik) Ibu pada saat kunjungan ANC (mmHg)
         </span>
         <span class="or-hint " data-itext-id="/kunjungan_anc_reviewed_anc_visit/td_sistolik:hint"
             lang="en">Indicating mother's
             blood pressure (systolic) on ANC check-up
         </span>
-        <input name="/kunjungan_anc_reviewed_anc_visit/td_sistolik" data-constraint=".&gt;0 and .&lt;1000"
-            data-type-xml="int" type="number" />
+        <input name="/kunjungan_anc_reviewed_anc_visit/td_sistolik"
+            data-constraint=".&gt;0 and .&lt;1000" data-type-xml="int" type="number" />
     </label>
     <label class="question non-select ">
-        <span class="or-constraint-msg active" data-itext-id="/kunjungan_anc_reviewed_anc_visit/td_diastolik:jr:constraintMsg"
+        <span class="or-constraint-msg active"
+            data-itext-id="/kunjungan_anc_reviewed_anc_visit/td_diastolik:jr:constraintMsg"
             lang="Bahasa">Nilai
             yang dimasukkan tidak memenuhi syarat, mohon periksa kembali
         </span>
-        <span class="or-constraint-msg " data-itext-id="/kunjungan_anc_reviewed_anc_visit/td_diastolik:jr:constraintMsg"
+        <span class="or-constraint-msg "
+            data-itext-id="/kunjungan_anc_reviewed_anc_visit/td_diastolik:jr:constraintMsg"
             lang="en">The
             entered value doesn't meet the criteria, please check it again
         </span>
-        <span class="question-label active" data-itext-id="/kunjungan_anc_reviewed_anc_visit/td_diastolik:label"
-            lang="Bahasa">TD (Diastolik)
+        <span class="question-label active"
+            data-itext-id="/kunjungan_anc_reviewed_anc_visit/td_diastolik:label" lang="Bahasa">TD
+            (Diastolik)
         </span>
-        <span class="question-label " data-itext-id="/kunjungan_anc_reviewed_anc_visit/td_diastolik:label"
-            lang="en">Blood pressure
+        <span class="question-label "
+            data-itext-id="/kunjungan_anc_reviewed_anc_visit/td_diastolik:label" lang="en">Blood
+            pressure
             (Diastolic)
         </span>
-        <span class="or-hint active" data-itext-id="/kunjungan_anc_reviewed_anc_visit/td_diastolik:hint"
-            lang="Bahasa">Menunjukkan tekanan
+        <span class="or-hint active"
+            data-itext-id="/kunjungan_anc_reviewed_anc_visit/td_diastolik:hint" lang="Bahasa">
+            Menunjukkan tekanan
             darah (Diastolik) Ibu pada saat kunjungan ANC (mmHg)
         </span>
         <span class="or-hint " data-itext-id="/kunjungan_anc_reviewed_anc_visit/td_diastolik:hint"
             lang="en">Indicating mother's
             blood pressure (dyastolic) on ANC check-up
         </span>
-        <input name="/kunjungan_anc_reviewed_anc_visit/td_diastolik" data-constraint=".&gt;0 and .&lt;1000"
-            data-type-xml="int" type="number" />
+        <input name="/kunjungan_anc_reviewed_anc_visit/td_diastolik"
+            data-constraint=".&gt;0 and .&lt;1000" data-type-xml="int" type="number" />
     </label>
     <label class="question non-select ">
-        <span class="or-constraint-msg active" data-itext-id="/kunjungan_anc_reviewed_anc_visit/lila_cm:jr:constraintMsg"
+        <span class="or-constraint-msg active"
+            data-itext-id="/kunjungan_anc_reviewed_anc_visit/lila_cm:jr:constraintMsg"
             lang="Bahasa">Nilai yang
             dimasukkan tidak memenuhi syarat, mohon periksa kembali
         </span>
-        <span class="or-constraint-msg " data-itext-id="/kunjungan_anc_reviewed_anc_visit/lila_cm:jr:constraintMsg"
-            lang="en">The entered
+        <span class="or-constraint-msg "
+            data-itext-id="/kunjungan_anc_reviewed_anc_visit/lila_cm:jr:constraintMsg" lang="en">The
+            entered
             value doesn't meet the criteria, please check it again
         </span>
-        <span class="question-label active" data-itext-id="/kunjungan_anc_reviewed_anc_visit/lila_cm:label"
-            lang="Bahasa">LILA (cm)
+        <span class="question-label active"
+            data-itext-id="/kunjungan_anc_reviewed_anc_visit/lila_cm:label" lang="Bahasa">LILA (cm)
         </span>
-        <span class="question-label " data-itext-id="/kunjungan_anc_reviewed_anc_visit/lila_cm:label"
-            lang="en">Mid-Upper Arm
+        <span class="question-label "
+            data-itext-id="/kunjungan_anc_reviewed_anc_visit/lila_cm:label" lang="en">Mid-Upper Arm
             Circumference of mother
         </span>
         <span class="or-hint active" data-itext-id="/kunjungan_anc_reviewed_anc_visit/lila_cm:hint"
@@ -583,52 +687,61 @@
             lang="en">Indicating mother's arm
             circumference on ANC check-up
         </span>
-        <input name="/kunjungan_anc_reviewed_anc_visit/lila_cm" data-constraint=".&gt;0 and .&lt;200"
-            data-type-xml="decimal" step="any" type="number" />
+        <input name="/kunjungan_anc_reviewed_anc_visit/lila_cm"
+            data-constraint=".&gt;0 and .&lt;200" data-type-xml="decimal" step="any"
+            type="number" />
     </label>
     <fieldset class="question ">
         <fieldset>
             <legend>
-                <span class="question-label active" data-itext-id="/kunjungan_anc_reviewed_anc_visit/status_gizi_ibu:label"
+                <span class="question-label active"
+                    data-itext-id="/kunjungan_anc_reviewed_anc_visit/status_gizi_ibu:label"
                     lang="Bahasa">Status
                     Gizi ibu
                 </span>
-                <span class="question-label " data-itext-id="/kunjungan_anc_reviewed_anc_visit/status_gizi_ibu:label"
+                <span class="question-label "
+                    data-itext-id="/kunjungan_anc_reviewed_anc_visit/status_gizi_ibu:label"
                     lang="en">
                     Nutritional status of mother
                 </span>
-                <span class="or-hint active" data-itext-id="/kunjungan_anc_reviewed_anc_visit/status_gizi_ibu:hint"
+                <span class="or-hint active"
+                    data-itext-id="/kunjungan_anc_reviewed_anc_visit/status_gizi_ibu:hint"
                     lang="Bahasa">
                     Menunjukkan status gizi Ibu pada saat kunjungan ANC (Kg)
                 </span>
-                <span class="or-hint " data-itext-id="/kunjungan_anc_reviewed_anc_visit/status_gizi_ibu:hint"
+                <span class="or-hint "
+                    data-itext-id="/kunjungan_anc_reviewed_anc_visit/status_gizi_ibu:hint"
                     lang="en">
                     Indicating mother's nutritional status on ANC check-up
                 </span>
             </legend>
             <div class="option-wrapper">
                 <label class="">
-                    <input name="/kunjungan_anc_reviewed_anc_visit/status_gizi_ibu" data-name="/kunjungan_anc_reviewed_anc_visit/status_gizi_ibu"
-                        data-type-xml="select1"
-                        type="radio" value="kekurangan_energi_kronis" />
-                    <span class="option-label active" data-itext-id="/kunjungan_anc_reviewed_anc_visit/status_gizi_ibu/kekurangan_energi_kronis:label"
+                    <input name="/kunjungan_anc_reviewed_anc_visit/status_gizi_ibu"
+                        data-name="/kunjungan_anc_reviewed_anc_visit/status_gizi_ibu"
+                        data-type-xml="select1" type="radio" value="kekurangan_energi_kronis" />
+                    <span class="option-label active"
+                        data-itext-id="/kunjungan_anc_reviewed_anc_visit/status_gizi_ibu/kekurangan_energi_kronis:label"
                         lang="Bahasa">
                         Kekurangan Energi Kronis (KEK)
                     </span>
-                    <span class="option-label " data-itext-id="/kunjungan_anc_reviewed_anc_visit/status_gizi_ibu/kekurangan_energi_kronis:label"
+                    <span class="option-label "
+                        data-itext-id="/kunjungan_anc_reviewed_anc_visit/status_gizi_ibu/kekurangan_energi_kronis:label"
                         lang="en">
                         Chronic Energy Deficiency (CED)
                     </span>
                 </label>
                 <label class="">
-                    <input name="/kunjungan_anc_reviewed_anc_visit/status_gizi_ibu" data-name="/kunjungan_anc_reviewed_anc_visit/status_gizi_ibu"
-                        data-type-xml="select1" type="radio"
-                        value="normal" />
-                    <span class="option-label active" data-itext-id="/kunjungan_anc_reviewed_anc_visit/status_gizi_ibu/normal:label"
+                    <input name="/kunjungan_anc_reviewed_anc_visit/status_gizi_ibu"
+                        data-name="/kunjungan_anc_reviewed_anc_visit/status_gizi_ibu"
+                        data-type-xml="select1" type="radio" value="normal" />
+                    <span class="option-label active"
+                        data-itext-id="/kunjungan_anc_reviewed_anc_visit/status_gizi_ibu/normal:label"
                         lang="Bahasa">
                         Normal (N)
                     </span>
-                    <span class="option-label " data-itext-id="/kunjungan_anc_reviewed_anc_visit/status_gizi_ibu/normal:label"
+                    <span class="option-label "
+                        data-itext-id="/kunjungan_anc_reviewed_anc_visit/status_gizi_ibu/normal:label"
                         lang="en">
                         Normal
                     </span>
@@ -637,16 +750,18 @@
         </fieldset>
     </fieldset>
     <label class="question or-branch pre-init non-select ">
-        <span class="or-constraint-msg active" data-itext-id="/kunjungan_anc_reviewed_anc_visit/tfu:jr:constraintMsg"
-            lang="Bahasa">Nilai yang
+        <span class="or-constraint-msg active"
+            data-itext-id="/kunjungan_anc_reviewed_anc_visit/tfu:jr:constraintMsg" lang="Bahasa">
+            Nilai yang
             dimasukkan tidak memenuhi syarat, mohon periksa kembali
         </span>
-        <span class="or-constraint-msg " data-itext-id="/kunjungan_anc_reviewed_anc_visit/tfu:jr:constraintMsg"
-            lang="en">The entered value
+        <span class="or-constraint-msg "
+            data-itext-id="/kunjungan_anc_reviewed_anc_visit/tfu:jr:constraintMsg" lang="en">The
+            entered value
             doesn't meet the criteria, please check it again
         </span>
-        <span class="question-label active" data-itext-id="/kunjungan_anc_reviewed_anc_visit/tfu:label"
-            lang="Bahasa">TFU
+        <span class="question-label active"
+            data-itext-id="/kunjungan_anc_reviewed_anc_visit/tfu:label" lang="Bahasa">TFU
         </span>
         <span class="question-label " data-itext-id="/kunjungan_anc_reviewed_anc_visit/tfu:label"
             lang="en">Fundal height
@@ -660,55 +775,61 @@
         </span>
         <input name="/kunjungan_anc_reviewed_anc_visit/tfu" data-constraint=".&gt;0 and .&lt;50"
             data-relevant=" /kunjungan_anc_reviewed_anc_visit/usia_klinis &gt;=20"
-            data-type-xml="int"
-            type="number" />
+            data-type-xml="int" type="number" />
     </label>
     <fieldset class="question or-branch pre-init ">
         <fieldset>
             <legend>
-                <span class="question-label active" data-itext-id="/kunjungan_anc_reviewed_anc_visit/refleks_patela_ibu:label"
+                <span class="question-label active"
+                    data-itext-id="/kunjungan_anc_reviewed_anc_visit/refleks_patela_ibu:label"
                     lang="Bahasa">
                     Refleks Patela Ibu
                 </span>
-                <span class="question-label " data-itext-id="/kunjungan_anc_reviewed_anc_visit/refleks_patela_ibu:label"
+                <span class="question-label "
+                    data-itext-id="/kunjungan_anc_reviewed_anc_visit/refleks_patela_ibu:label"
                     lang="en">
                     Patella reflex
                 </span>
-                <span class="or-hint active" data-itext-id="/kunjungan_anc_reviewed_anc_visit/refleks_patela_ibu:hint"
+                <span class="or-hint active"
+                    data-itext-id="/kunjungan_anc_reviewed_anc_visit/refleks_patela_ibu:hint"
                     lang="Bahasa">
                     Menunjukkan hasil Pemeriksaan Refleks Patella Ibu pada saat Kunjungan ANC
                 </span>
-                <span class="or-hint " data-itext-id="/kunjungan_anc_reviewed_anc_visit/refleks_patela_ibu:hint"
+                <span class="or-hint "
+                    data-itext-id="/kunjungan_anc_reviewed_anc_visit/refleks_patela_ibu:hint"
                     lang="en">
                     Indicating mother's patella reflex on ANC check-up
                 </span>
             </legend>
             <div class="option-wrapper">
                 <label class="">
-                    <input name="/kunjungan_anc_reviewed_anc_visit/refleks_patela_ibu" data-name="/kunjungan_anc_reviewed_anc_visit/refleks_patela_ibu"
-                        data-relevant=" /kunjungan_anc_reviewed_anc_visit/usia_klinis &gt;=20" data-type-xml="select1"
-                        type="radio"
-                        value="ada" />
-                    <span class="option-label active" data-itext-id="/kunjungan_anc_reviewed_anc_visit/refleks_patela_ibu/ada:label"
+                    <input name="/kunjungan_anc_reviewed_anc_visit/refleks_patela_ibu"
+                        data-name="/kunjungan_anc_reviewed_anc_visit/refleks_patela_ibu"
+                        data-relevant=" /kunjungan_anc_reviewed_anc_visit/usia_klinis &gt;=20"
+                        data-type-xml="select1" type="radio" value="ada" />
+                    <span class="option-label active"
+                        data-itext-id="/kunjungan_anc_reviewed_anc_visit/refleks_patela_ibu/ada:label"
                         lang="Bahasa">
                         Ada (+)
                     </span>
-                    <span class="option-label " data-itext-id="/kunjungan_anc_reviewed_anc_visit/refleks_patela_ibu/ada:label"
+                    <span class="option-label "
+                        data-itext-id="/kunjungan_anc_reviewed_anc_visit/refleks_patela_ibu/ada:label"
                         lang="en">
                         Positive
                     </span>
                 </label>
                 <label class="">
-                    <input name="/kunjungan_anc_reviewed_anc_visit/refleks_patela_ibu" data-name="/kunjungan_anc_reviewed_anc_visit/refleks_patela_ibu"
+                    <input name="/kunjungan_anc_reviewed_anc_visit/refleks_patela_ibu"
+                        data-name="/kunjungan_anc_reviewed_anc_visit/refleks_patela_ibu"
                         data-relevant=" /kunjungan_anc_reviewed_anc_visit/usia_klinis &gt;=20"
-                        data-type-xml="select1"
-                        type="radio"
-                        value="tidak" />
-                    <span class="option-label active" data-itext-id="/kunjungan_anc_reviewed_anc_visit/refleks_patela_ibu/tidak:label"
+                        data-type-xml="select1" type="radio" value="tidak" />
+                    <span class="option-label active"
+                        data-itext-id="/kunjungan_anc_reviewed_anc_visit/refleks_patela_ibu/tidak:label"
                         lang="Bahasa">
                         Tidak (-)
                     </span>
-                    <span class="option-label " data-itext-id="/kunjungan_anc_reviewed_anc_visit/refleks_patela_ibu/tidak:label"
+                    <span class="option-label "
+                        data-itext-id="/kunjungan_anc_reviewed_anc_visit/refleks_patela_ibu/tidak:label"
                         lang="en">
                         Negative
                     </span>
@@ -717,16 +838,18 @@
         </fieldset>
     </fieldset>
     <label class="question or-branch pre-init non-select ">
-        <span class="or-constraint-msg active" data-itext-id="/kunjungan_anc_reviewed_anc_visit/djj:jr:constraintMsg"
-            lang="Bahasa">Nilai yang
+        <span class="or-constraint-msg active"
+            data-itext-id="/kunjungan_anc_reviewed_anc_visit/djj:jr:constraintMsg" lang="Bahasa">
+            Nilai yang
             dimasukkan tidak memenuhi syarat, mohon periksa kembali
         </span>
-        <span class="or-constraint-msg " data-itext-id="/kunjungan_anc_reviewed_anc_visit/djj:jr:constraintMsg"
-            lang="en">The entered value
+        <span class="or-constraint-msg "
+            data-itext-id="/kunjungan_anc_reviewed_anc_visit/djj:jr:constraintMsg" lang="en">The
+            entered value
             doesn't meet the criteria, please check it again
         </span>
-        <span class="question-label active" data-itext-id="/kunjungan_anc_reviewed_anc_visit/djj:label"
-            lang="Bahasa">DJJ
+        <span class="question-label active"
+            data-itext-id="/kunjungan_anc_reviewed_anc_visit/djj:label" lang="Bahasa">DJJ
         </span>
         <span class="question-label " data-itext-id="/kunjungan_anc_reviewed_anc_visit/djj:label"
             lang="en">Heart rate of fetus
@@ -740,26 +863,29 @@
         </span>
         <input name="/kunjungan_anc_reviewed_anc_visit/djj" data-constraint=".&gt;0 and .&lt;1000"
             data-relevant=" /kunjungan_anc_reviewed_anc_visit/usia_klinis &gt;=20"
-            data-type-xml="int"
-            type="number" />
+            data-type-xml="int" type="number" />
     </label>
     <fieldset class="question or-branch pre-init ">
         <fieldset>
             <legend>
-                <span class="question-label active" data-itext-id="/kunjungan_anc_reviewed_anc_visit/kepala_terhadap_janin_pap:label"
+                <span class="question-label active"
+                    data-itext-id="/kunjungan_anc_reviewed_anc_visit/kepala_terhadap_janin_pap:label"
                     lang="Bahasa">
                     Kepala Janin Terhadap PAP
                 </span>
-                <span class="question-label " data-itext-id="/kunjungan_anc_reviewed_anc_visit/kepala_terhadap_janin_pap:label"
+                <span class="question-label "
+                    data-itext-id="/kunjungan_anc_reviewed_anc_visit/kepala_terhadap_janin_pap:label"
                     lang="en">
                     Head of fetus towards Pelvic Inlet
                 </span>
                 <span class="required">*</span>
-                <span class="or-hint active" data-itext-id="/kunjungan_anc_reviewed_anc_visit/kepala_terhadap_janin_pap:hint"
+                <span class="or-hint active"
+                    data-itext-id="/kunjungan_anc_reviewed_anc_visit/kepala_terhadap_janin_pap:hint"
                     lang="Bahasa">
                     Menunjukkan apakah kepala janin sudah masuk Pintu Atas Panggul atau tidak
                 </span>
-                <span class="or-hint " data-itext-id="/kunjungan_anc_reviewed_anc_visit/kepala_terhadap_janin_pap:hint"
+                <span class="or-hint "
+                    data-itext-id="/kunjungan_anc_reviewed_anc_visit/kepala_terhadap_janin_pap:hint"
                     lang="en">
                     Indicating whether fetus head has gotten into the pelvic inlet
                 </span>
@@ -769,14 +895,14 @@
                     <input name="/kunjungan_anc_reviewed_anc_visit/kepala_terhadap_janin_pap"
                         data-name="/kunjungan_anc_reviewed_anc_visit/kepala_terhadap_janin_pap"
                         data-relevant=" /kunjungan_anc_reviewed_anc_visit/usia_klinis &gt;=20"
-                        data-type-xml="select1" required="required"
-                        type="radio"
-                        value="masuk" />
-                    <span class="option-label active" data-itext-id="/kunjungan_anc_reviewed_anc_visit/kepala_terhadap_janin_pap/masuk:label"
+                        data-type-xml="select1" required="required" type="radio" value="masuk" />
+                    <span class="option-label active"
+                        data-itext-id="/kunjungan_anc_reviewed_anc_visit/kepala_terhadap_janin_pap/masuk:label"
                         lang="Bahasa">
                         Masuk (M)
                     </span>
-                    <span class="option-label " data-itext-id="/kunjungan_anc_reviewed_anc_visit/kepala_terhadap_janin_pap/masuk:label"
+                    <span class="option-label "
+                        data-itext-id="/kunjungan_anc_reviewed_anc_visit/kepala_terhadap_janin_pap/masuk:label"
                         lang="en">
                         Fetus head enters pelvic inlet
                     </span>
@@ -785,14 +911,15 @@
                     <input name="/kunjungan_anc_reviewed_anc_visit/kepala_terhadap_janin_pap"
                         data-name="/kunjungan_anc_reviewed_anc_visit/kepala_terhadap_janin_pap"
                         data-relevant=" /kunjungan_anc_reviewed_anc_visit/usia_klinis &gt;=20"
-                        data-type-xml="select1" required="required"
-                        type="radio"
+                        data-type-xml="select1" required="required" type="radio"
                         value="belum_masuk" />
-                    <span class="option-label active" data-itext-id="/kunjungan_anc_reviewed_anc_visit/kepala_terhadap_janin_pap/belum_masuk:label"
+                    <span class="option-label active"
+                        data-itext-id="/kunjungan_anc_reviewed_anc_visit/kepala_terhadap_janin_pap/belum_masuk:label"
                         lang="Bahasa">
                         Belum Masuk (BM)
                     </span>
-                    <span class="option-label " data-itext-id="/kunjungan_anc_reviewed_anc_visit/kepala_terhadap_janin_pap/belum_masuk:label"
+                    <span class="option-label "
+                        data-itext-id="/kunjungan_anc_reviewed_anc_visit/kepala_terhadap_janin_pap/belum_masuk:label"
                         lang="en">
                         Fetus head doesn't enter pelvic inlet
                     </span>
@@ -801,83 +928,97 @@
         </fieldset>
     </fieldset>
     <label class="note non-select ">
-        <span class="question-label active" data-itext-id="/kunjungan_anc_reviewed_anc_visit/generated_note_name_30:label"
+        <span class="question-label active"
+            data-itext-id="/kunjungan_anc_reviewed_anc_visit/generated_note_name_30:label"
             lang="Bahasa">Taksiran
             Berat Janin:
             <span class="or-output"
                 data-value=" /kunjungan_anc_reviewed_anc_visit/taksiran_berat_janin "></span>
         </span>
-        <span class="question-label " data-itext-id="/kunjungan_anc_reviewed_anc_visit/generated_note_name_30:label"
+        <span class="question-label "
+            data-itext-id="/kunjungan_anc_reviewed_anc_visit/generated_note_name_30:label"
             lang="en">Estimated
             weight of fetus
         </span>
-        <span class="or-hint active" data-itext-id="/kunjungan_anc_reviewed_anc_visit/generated_note_name_30:hint"
+        <span class="or-hint active"
+            data-itext-id="/kunjungan_anc_reviewed_anc_visit/generated_note_name_30:hint"
             lang="Bahasa">
             Menunjukkan berapa hasil perhitungan taksiran berat badan janin (gram)
         </span>
-        <span class="or-hint " data-itext-id="/kunjungan_anc_reviewed_anc_visit/generated_note_name_30:hint"
-            lang="en">Indicating
+        <span class="or-hint "
+            data-itext-id="/kunjungan_anc_reviewed_anc_visit/generated_note_name_30:hint" lang="en">
+            Indicating
             the calculation of estimated fetus weight (gram)
         </span>
-        <input name="/kunjungan_anc_reviewed_anc_visit/generated_note_name_30" data-type-xml="string"
-            readonly="readonly" type="text" />
+        <input name="/kunjungan_anc_reviewed_anc_visit/generated_note_name_30"
+            data-type-xml="string" readonly="readonly" type="text" />
     </label>
     <fieldset class="question ">
         <fieldset>
             <legend>
-                <span class="question-label active" data-itext-id="/kunjungan_anc_reviewed_anc_visit/persentasi_janin:label"
+                <span class="question-label active"
+                    data-itext-id="/kunjungan_anc_reviewed_anc_visit/persentasi_janin:label"
                     lang="Bahasa">
                     Persentasi Janin
                 </span>
-                <span class="question-label " data-itext-id="/kunjungan_anc_reviewed_anc_visit/persentasi_janin:label"
+                <span class="question-label "
+                    data-itext-id="/kunjungan_anc_reviewed_anc_visit/persentasi_janin:label"
                     lang="en">Fetal
                     presentation
                 </span>
-                <span class="or-hint active" data-itext-id="/kunjungan_anc_reviewed_anc_visit/persentasi_janin:hint"
+                <span class="or-hint active"
+                    data-itext-id="/kunjungan_anc_reviewed_anc_visit/persentasi_janin:hint"
                     lang="Bahasa">Bagian
                     terendah dari janin dalam perut Ibu
                 </span>
-                <span class="or-hint " data-itext-id="/kunjungan_anc_reviewed_anc_visit/persentasi_janin:hint"
+                <span class="or-hint "
+                    data-itext-id="/kunjungan_anc_reviewed_anc_visit/persentasi_janin:hint"
                     lang="en">
                     Indicating the lowest part of fetus inside mother's womb
                 </span>
             </legend>
             <div class="option-wrapper">
                 <label class="">
-                    <input name="/kunjungan_anc_reviewed_anc_visit/persentasi_janin" data-name="/kunjungan_anc_reviewed_anc_visit/persentasi_janin"
-                        data-type-xml="select1"
-                        type="radio" value="kepala" />
-                    <span class="option-label active" data-itext-id="/kunjungan_anc_reviewed_anc_visit/persentasi_janin/kepala:label"
+                    <input name="/kunjungan_anc_reviewed_anc_visit/persentasi_janin"
+                        data-name="/kunjungan_anc_reviewed_anc_visit/persentasi_janin"
+                        data-type-xml="select1" type="radio" value="kepala" />
+                    <span class="option-label active"
+                        data-itext-id="/kunjungan_anc_reviewed_anc_visit/persentasi_janin/kepala:label"
                         lang="Bahasa">
                         Kepala (KP)
                     </span>
-                    <span class="option-label " data-itext-id="/kunjungan_anc_reviewed_anc_visit/persentasi_janin/kepala:label"
+                    <span class="option-label "
+                        data-itext-id="/kunjungan_anc_reviewed_anc_visit/persentasi_janin/kepala:label"
                         lang="en">
                         Head
                     </span>
                 </label>
                 <label class="">
-                    <input name="/kunjungan_anc_reviewed_anc_visit/persentasi_janin" data-name="/kunjungan_anc_reviewed_anc_visit/persentasi_janin"
-                        data-type-xml="select1"
-                        type="radio" value="bokong_sungsang" />
-                    <span class="option-label active" data-itext-id="/kunjungan_anc_reviewed_anc_visit/persentasi_janin/bokong_sungsang:label"
+                    <input name="/kunjungan_anc_reviewed_anc_visit/persentasi_janin"
+                        data-name="/kunjungan_anc_reviewed_anc_visit/persentasi_janin"
+                        data-type-xml="select1" type="radio" value="bokong_sungsang" />
+                    <span class="option-label active"
+                        data-itext-id="/kunjungan_anc_reviewed_anc_visit/persentasi_janin/bokong_sungsang:label"
                         lang="Bahasa">
                         Bokong / Sungsang (BS)
                     </span>
-                    <span class="option-label " data-itext-id="/kunjungan_anc_reviewed_anc_visit/persentasi_janin/bokong_sungsang:label"
+                    <span class="option-label "
+                        data-itext-id="/kunjungan_anc_reviewed_anc_visit/persentasi_janin/bokong_sungsang:label"
                         lang="en">
                         Buttock/ breech presentation
                     </span>
                 </label>
                 <label class="">
-                    <input name="/kunjungan_anc_reviewed_anc_visit/persentasi_janin" data-name="/kunjungan_anc_reviewed_anc_visit/persentasi_janin"
-                        data-type-xml="select1"
-                        type="radio" value="letak_lintang_obligue" />
-                    <span class="option-label active" data-itext-id="/kunjungan_anc_reviewed_anc_visit/persentasi_janin/letak_lintang_obligue:label"
+                    <input name="/kunjungan_anc_reviewed_anc_visit/persentasi_janin"
+                        data-name="/kunjungan_anc_reviewed_anc_visit/persentasi_janin"
+                        data-type-xml="select1" type="radio" value="letak_lintang_obligue" />
+                    <span class="option-label active"
+                        data-itext-id="/kunjungan_anc_reviewed_anc_visit/persentasi_janin/letak_lintang_obligue:label"
                         lang="Bahasa">
                         Letak Lintang / Obligue (LLO)
                     </span>
-                    <span class="option-label " data-itext-id="/kunjungan_anc_reviewed_anc_visit/persentasi_janin/letak_lintang_obligue:label"
+                    <span class="option-label "
+                        data-itext-id="/kunjungan_anc_reviewed_anc_visit/persentasi_janin/letak_lintang_obligue:label"
                         lang="en">
                         Oblique
                     </span>
@@ -888,46 +1029,54 @@
     <fieldset class="question ">
         <fieldset>
             <legend>
-                <span class="question-label active" data-itext-id="/kunjungan_anc_reviewed_anc_visit/jumlah_janin:label"
+                <span class="question-label active"
+                    data-itext-id="/kunjungan_anc_reviewed_anc_visit/jumlah_janin:label"
                     lang="Bahasa">Jumlah
                     Janin
                 </span>
-                <span class="question-label " data-itext-id="/kunjungan_anc_reviewed_anc_visit/jumlah_janin:label"
-                    lang="en">Number of
+                <span class="question-label "
+                    data-itext-id="/kunjungan_anc_reviewed_anc_visit/jumlah_janin:label" lang="en">
+                    Number of
                     fetus
                 </span>
-                <span class="or-hint active" data-itext-id="/kunjungan_anc_reviewed_anc_visit/jumlah_janin:hint"
+                <span class="or-hint active"
+                    data-itext-id="/kunjungan_anc_reviewed_anc_visit/jumlah_janin:hint"
                     lang="Bahasa">Berapa
                     jumlah janin yang ada dalam uterus Ibu
                 </span>
-                <span class="or-hint " data-itext-id="/kunjungan_anc_reviewed_anc_visit/jumlah_janin:hint"
-                    lang="en">Indicating
+                <span class="or-hint "
+                    data-itext-id="/kunjungan_anc_reviewed_anc_visit/jumlah_janin:hint" lang="en">
+                    Indicating
                     number of fetus in mother's womb
                 </span>
             </legend>
             <div class="option-wrapper">
                 <label class="">
-                    <input name="/kunjungan_anc_reviewed_anc_visit/jumlah_janin" data-name="/kunjungan_anc_reviewed_anc_visit/jumlah_janin"
-                        data-type-xml="select1" type="radio"
-                        value="tunggal" />
-                    <span class="option-label active" data-itext-id="/kunjungan_anc_reviewed_anc_visit/jumlah_janin/tunggal:label"
+                    <input name="/kunjungan_anc_reviewed_anc_visit/jumlah_janin"
+                        data-name="/kunjungan_anc_reviewed_anc_visit/jumlah_janin"
+                        data-type-xml="select1" type="radio" value="tunggal" />
+                    <span class="option-label active"
+                        data-itext-id="/kunjungan_anc_reviewed_anc_visit/jumlah_janin/tunggal:label"
                         lang="Bahasa">
                         Tunggal (T)
                     </span>
-                    <span class="option-label " data-itext-id="/kunjungan_anc_reviewed_anc_visit/jumlah_janin/tunggal:label"
+                    <span class="option-label "
+                        data-itext-id="/kunjungan_anc_reviewed_anc_visit/jumlah_janin/tunggal:label"
                         lang="en">
                         Single
                     </span>
                 </label>
                 <label class="">
-                    <input name="/kunjungan_anc_reviewed_anc_visit/jumlah_janin" data-name="/kunjungan_anc_reviewed_anc_visit/jumlah_janin"
-                        data-type-xml="select1" type="radio"
-                        value="ganda" />
-                    <span class="option-label active" data-itext-id="/kunjungan_anc_reviewed_anc_visit/jumlah_janin/ganda:label"
+                    <input name="/kunjungan_anc_reviewed_anc_visit/jumlah_janin"
+                        data-name="/kunjungan_anc_reviewed_anc_visit/jumlah_janin"
+                        data-type-xml="select1" type="radio" value="ganda" />
+                    <span class="option-label active"
+                        data-itext-id="/kunjungan_anc_reviewed_anc_visit/jumlah_janin/ganda:label"
                         lang="Bahasa">
                         Ganda (G)
                     </span>
-                    <span class="option-label " data-itext-id="/kunjungan_anc_reviewed_anc_visit/jumlah_janin/ganda:label"
+                    <span class="option-label "
+                        data-itext-id="/kunjungan_anc_reviewed_anc_visit/jumlah_janin/ganda:label"
                         lang="en">
                         Double
                     </span>
@@ -936,26 +1085,29 @@
         </fieldset>
     </fieldset>
     <label class="question or-appearance-minimal ">
-        <span class="question-label active" data-itext-id="/kunjungan_anc_reviewed_anc_visit/status_imunisasi_tt:label"
+        <span class="question-label active"
+            data-itext-id="/kunjungan_anc_reviewed_anc_visit/status_imunisasi_tt:label"
             lang="Bahasa">Status
             Imunisasi TT
         </span>
-        <span class="question-label " data-itext-id="/kunjungan_anc_reviewed_anc_visit/status_imunisasi_tt:label"
-            lang="en">TT
+        <span class="question-label "
+            data-itext-id="/kunjungan_anc_reviewed_anc_visit/status_imunisasi_tt:label" lang="en">TT
             immunization status
         </span>
         <span class="required">*</span>
-        <span class="or-hint active" data-itext-id="/kunjungan_anc_reviewed_anc_visit/status_imunisasi_tt:hint"
+        <span class="or-hint active"
+            data-itext-id="/kunjungan_anc_reviewed_anc_visit/status_imunisasi_tt:hint"
             lang="Bahasa">Menunjukkan
             status imunisasi TT yang diberikan kepada Ibu
         </span>
-        <span class="or-hint " data-itext-id="/kunjungan_anc_reviewed_anc_visit/status_imunisasi_tt:hint"
-            lang="en">Indicating
+        <span class="or-hint "
+            data-itext-id="/kunjungan_anc_reviewed_anc_visit/status_imunisasi_tt:hint" lang="en">
+            Indicating
             status of TT immunization that mother has received
         </span>
         <select name="/kunjungan_anc_reviewed_anc_visit/status_imunisasi_tt"
-            data-name="/kunjungan_anc_reviewed_anc_visit/status_imunisasi_tt" data-type-xml="select1"
-            required="required">
+            data-name="/kunjungan_anc_reviewed_anc_visit/status_imunisasi_tt"
+            data-type-xml="select1" required="required">
             <option value="">...</option>
             <option value="tt_ke_0">TT Ke 0 (T0)</option>
             <option value="tt_ke_1">TT ke 1 (T1)</option>
@@ -989,19 +1141,23 @@
     <fieldset class="question ">
         <fieldset>
             <legend>
-                <span class="question-label active" data-itext-id="/kunjungan_anc_reviewed_anc_visit/pelayanan_injeksi_tt:label"
+                <span class="question-label active"
+                    data-itext-id="/kunjungan_anc_reviewed_anc_visit/pelayanan_injeksi_tt:label"
                     lang="Bahasa">
                     Injeksi TT dilakukan
                 </span>
-                <span class="question-label " data-itext-id="/kunjungan_anc_reviewed_anc_visit/pelayanan_injeksi_tt:label"
+                <span class="question-label "
+                    data-itext-id="/kunjungan_anc_reviewed_anc_visit/pelayanan_injeksi_tt:label"
                     lang="en">
                     Service / TT Injection
                 </span>
-                <span class="or-hint active" data-itext-id="/kunjungan_anc_reviewed_anc_visit/pelayanan_injeksi_tt:hint"
+                <span class="or-hint active"
+                    data-itext-id="/kunjungan_anc_reviewed_anc_visit/pelayanan_injeksi_tt:hint"
                     lang="Bahasa">
                     Menunjukkan apakah Ibu mendapatkan suntik TT pada saat kunjungan ANC atau tidak
                 </span>
-                <span class="or-hint " data-itext-id="/kunjungan_anc_reviewed_anc_visit/pelayanan_injeksi_tt:hint"
+                <span class="or-hint "
+                    data-itext-id="/kunjungan_anc_reviewed_anc_visit/pelayanan_injeksi_tt:hint"
                     lang="en">
                     Indicating whether mother gets TT injection on ANC check-up
                 </span>
@@ -1010,13 +1166,14 @@
                 <label class="">
                     <input name="/kunjungan_anc_reviewed_anc_visit/pelayanan_injeksi_tt"
                         data-name="/kunjungan_anc_reviewed_anc_visit/pelayanan_injeksi_tt"
-                        data-type-xml="select1"
-                        type="radio" value="jika_dilakukan" />
-                    <span class="option-label active" data-itext-id="/kunjungan_anc_reviewed_anc_visit/pelayanan_injeksi_tt/jika_dilakukan:label"
+                        data-type-xml="select1" type="radio" value="jika_dilakukan" />
+                    <span class="option-label active"
+                        data-itext-id="/kunjungan_anc_reviewed_anc_visit/pelayanan_injeksi_tt/jika_dilakukan:label"
                         lang="Bahasa">
                         JIka dilakukan (&#x221A;)
                     </span>
-                    <span class="option-label " data-itext-id="/kunjungan_anc_reviewed_anc_visit/pelayanan_injeksi_tt/jika_dilakukan:label"
+                    <span class="option-label "
+                        data-itext-id="/kunjungan_anc_reviewed_anc_visit/pelayanan_injeksi_tt/jika_dilakukan:label"
                         lang="en">
                         Yes (&#x221A;)
                     </span>
@@ -1024,13 +1181,14 @@
                 <label class="">
                     <input name="/kunjungan_anc_reviewed_anc_visit/pelayanan_injeksi_tt"
                         data-name="/kunjungan_anc_reviewed_anc_visit/pelayanan_injeksi_tt"
-                        data-type-xml="select1"
-                        type="radio" value="jika_tidak_dilakukan" />
-                    <span class="option-label active" data-itext-id="/kunjungan_anc_reviewed_anc_visit/pelayanan_injeksi_tt/jika_tidak_dilakukan:label"
+                        data-type-xml="select1" type="radio" value="jika_tidak_dilakukan" />
+                    <span class="option-label active"
+                        data-itext-id="/kunjungan_anc_reviewed_anc_visit/pelayanan_injeksi_tt/jika_tidak_dilakukan:label"
                         lang="Bahasa">
                         Jika tidak dilakukan (x)
                     </span>
-                    <span class="option-label " data-itext-id="/kunjungan_anc_reviewed_anc_visit/pelayanan_injeksi_tt/jika_tidak_dilakukan:label"
+                    <span class="option-label "
+                        data-itext-id="/kunjungan_anc_reviewed_anc_visit/pelayanan_injeksi_tt/jika_tidak_dilakukan:label"
                         lang="en">
                         No (x)
                     </span>
@@ -1041,19 +1199,23 @@
     <fieldset class="question ">
         <fieldset>
             <legend>
-                <span class="question-label active" data-itext-id="/kunjungan_anc_reviewed_anc_visit/pelayanan_catat_buku_kia:label"
+                <span class="question-label active"
+                    data-itext-id="/kunjungan_anc_reviewed_anc_visit/pelayanan_catat_buku_kia:label"
                     lang="Bahasa">
                     Catat di Buku Kia
                 </span>
-                <span class="question-label " data-itext-id="/kunjungan_anc_reviewed_anc_visit/pelayanan_catat_buku_kia:label"
+                <span class="question-label "
+                    data-itext-id="/kunjungan_anc_reviewed_anc_visit/pelayanan_catat_buku_kia:label"
                     lang="en">
                     Service / Write in Maternal and Child Health Booklet (Pink Book)
                 </span>
-                <span class="or-hint active" data-itext-id="/kunjungan_anc_reviewed_anc_visit/pelayanan_catat_buku_kia:hint"
+                <span class="or-hint active"
+                    data-itext-id="/kunjungan_anc_reviewed_anc_visit/pelayanan_catat_buku_kia:hint"
                     lang="Bahasa">
                     Semua hasil pemeriksaan di catat di buku KIA
                 </span>
-                <span class="or-hint " data-itext-id="/kunjungan_anc_reviewed_anc_visit/pelayanan_catat_buku_kia:hint"
+                <span class="or-hint "
+                    data-itext-id="/kunjungan_anc_reviewed_anc_visit/pelayanan_catat_buku_kia:hint"
                     lang="en">
                     Indicating whether all check-up results are recorded in MCH Booklet
                 </span>
@@ -1062,13 +1224,14 @@
                 <label class="">
                     <input name="/kunjungan_anc_reviewed_anc_visit/pelayanan_catat_buku_kia"
                         data-name="/kunjungan_anc_reviewed_anc_visit/pelayanan_catat_buku_kia"
-                        data-type-xml="select1"
-                        type="radio" value="jika_dilakukan" />
-                    <span class="option-label active" data-itext-id="/kunjungan_anc_reviewed_anc_visit/pelayanan_catat_buku_kia/jika_dilakukan:label"
+                        data-type-xml="select1" type="radio" value="jika_dilakukan" />
+                    <span class="option-label active"
+                        data-itext-id="/kunjungan_anc_reviewed_anc_visit/pelayanan_catat_buku_kia/jika_dilakukan:label"
                         lang="Bahasa">
                         JIka dilakukan (&#x221A;)
                     </span>
-                    <span class="option-label " data-itext-id="/kunjungan_anc_reviewed_anc_visit/pelayanan_catat_buku_kia/jika_dilakukan:label"
+                    <span class="option-label "
+                        data-itext-id="/kunjungan_anc_reviewed_anc_visit/pelayanan_catat_buku_kia/jika_dilakukan:label"
                         lang="en">
                         Yes (&#x221A;)
                     </span>
@@ -1076,13 +1239,14 @@
                 <label class="">
                     <input name="/kunjungan_anc_reviewed_anc_visit/pelayanan_catat_buku_kia"
                         data-name="/kunjungan_anc_reviewed_anc_visit/pelayanan_catat_buku_kia"
-                        data-type-xml="select1"
-                        type="radio" value="jika_tidak_dilakukan" />
-                    <span class="option-label active" data-itext-id="/kunjungan_anc_reviewed_anc_visit/pelayanan_catat_buku_kia/jika_tidak_dilakukan:label"
+                        data-type-xml="select1" type="radio" value="jika_tidak_dilakukan" />
+                    <span class="option-label active"
+                        data-itext-id="/kunjungan_anc_reviewed_anc_visit/pelayanan_catat_buku_kia/jika_tidak_dilakukan:label"
                         lang="Bahasa">
                         Jika tidak dilakukan (x)
                     </span>
-                    <span class="option-label " data-itext-id="/kunjungan_anc_reviewed_anc_visit/pelayanan_catat_buku_kia/jika_tidak_dilakukan:label"
+                    <span class="option-label "
+                        data-itext-id="/kunjungan_anc_reviewed_anc_visit/pelayanan_catat_buku_kia/jika_tidak_dilakukan:label"
                         lang="en">
                         No (x)
                     </span>
@@ -1093,43 +1257,51 @@
     <fieldset class="question ">
         <fieldset>
             <legend>
-                <span class="question-label active" data-itext-id="/kunjungan_anc_reviewed_anc_visit/pelayananfe:label"
+                <span class="question-label active"
+                    data-itext-id="/kunjungan_anc_reviewed_anc_visit/pelayananfe:label"
                     lang="Bahasa">Pelayanan Fe
                     dilakukan
                 </span>
-                <span class="question-label " data-itext-id="/kunjungan_anc_reviewed_anc_visit/pelayananfe:label"
-                    lang="en">Service / Fe
+                <span class="question-label "
+                    data-itext-id="/kunjungan_anc_reviewed_anc_visit/pelayananfe:label" lang="en">
+                    Service / Fe
                 </span>
-                <span class="or-hint active" data-itext-id="/kunjungan_anc_reviewed_anc_visit/pelayananfe:hint"
+                <span class="or-hint active"
+                    data-itext-id="/kunjungan_anc_reviewed_anc_visit/pelayananfe:hint"
                     lang="Bahasa">Menunjukkan
                     pelayanan Fe dilakukan atau tidak
                 </span>
-                <span class="or-hint " data-itext-id="/kunjungan_anc_reviewed_anc_visit/pelayananfe:hint"
-                    lang="en">Indicating
+                <span class="or-hint "
+                    data-itext-id="/kunjungan_anc_reviewed_anc_visit/pelayananfe:hint" lang="en">
+                    Indicating
                     whether midwife provides Fe service
                 </span>
             </legend>
             <div class="option-wrapper">
                 <label class="">
-                    <input name="/kunjungan_anc_reviewed_anc_visit/pelayananfe" data-name="/kunjungan_anc_reviewed_anc_visit/pelayananfe"
-                        data-type-xml="select1" type="radio"
-                        value="Ya" />
-                    <span class="option-label active" data-itext-id="/kunjungan_anc_reviewed_anc_visit/pelayananfe/Ya:label"
+                    <input name="/kunjungan_anc_reviewed_anc_visit/pelayananfe"
+                        data-name="/kunjungan_anc_reviewed_anc_visit/pelayananfe"
+                        data-type-xml="select1" type="radio" value="Ya" />
+                    <span class="option-label active"
+                        data-itext-id="/kunjungan_anc_reviewed_anc_visit/pelayananfe/Ya:label"
                         lang="Bahasa">Ya
                     </span>
-                    <span class="option-label " data-itext-id="/kunjungan_anc_reviewed_anc_visit/pelayananfe/Ya:label"
+                    <span class="option-label "
+                        data-itext-id="/kunjungan_anc_reviewed_anc_visit/pelayananfe/Ya:label"
                         lang="en">Yes
                     </span>
                 </label>
                 <label class="">
-                    <input name="/kunjungan_anc_reviewed_anc_visit/pelayananfe" data-name="/kunjungan_anc_reviewed_anc_visit/pelayananfe"
-                        data-type-xml="select1" type="radio"
-                        value="Tidak" />
-                    <span class="option-label active" data-itext-id="/kunjungan_anc_reviewed_anc_visit/pelayananfe/Tidak:label"
+                    <input name="/kunjungan_anc_reviewed_anc_visit/pelayananfe"
+                        data-name="/kunjungan_anc_reviewed_anc_visit/pelayananfe"
+                        data-type-xml="select1" type="radio" value="Tidak" />
+                    <span class="option-label active"
+                        data-itext-id="/kunjungan_anc_reviewed_anc_visit/pelayananfe/Tidak:label"
                         lang="Bahasa">
                         Tidak
                     </span>
-                    <span class="option-label " data-itext-id="/kunjungan_anc_reviewed_anc_visit/pelayananfe/Tidak:label"
+                    <span class="option-label "
+                        data-itext-id="/kunjungan_anc_reviewed_anc_visit/pelayananfe/Tidak:label"
                         lang="en">No
                     </span>
                 </label>
@@ -1137,51 +1309,60 @@
         </fieldset>
     </fieldset>
     <label class="question or-branch pre-init non-select ">
-        <span class="or-constraint-msg active" data-itext-id="/kunjungan_anc_reviewed_anc_visit/jumlah_fe:jr:constraintMsg"
+        <span class="or-constraint-msg active"
+            data-itext-id="/kunjungan_anc_reviewed_anc_visit/jumlah_fe:jr:constraintMsg"
             lang="Bahasa">Nilai yang
             dimasukkan tidak memenuhi syarat, mohon periksa kembali
         </span>
-        <span class="or-constraint-msg " data-itext-id="/kunjungan_anc_reviewed_anc_visit/jumlah_fe:jr:constraintMsg"
-            lang="en">The entered
+        <span class="or-constraint-msg "
+            data-itext-id="/kunjungan_anc_reviewed_anc_visit/jumlah_fe:jr:constraintMsg" lang="en">
+            The entered
             value doesn't meet the criteria, please check it again
         </span>
-        <span class="question-label active" data-itext-id="/kunjungan_anc_reviewed_anc_visit/jumlah_fe:label"
-            lang="Bahasa">Jumlah Fe yang
+        <span class="question-label active"
+            data-itext-id="/kunjungan_anc_reviewed_anc_visit/jumlah_fe:label" lang="Bahasa">Jumlah
+            Fe yang
             diberikan
         </span>
-        <span class="question-label " data-itext-id="/kunjungan_anc_reviewed_anc_visit/jumlah_fe:label"
-            lang="en">Number of Fe Tablet
+        <span class="question-label "
+            data-itext-id="/kunjungan_anc_reviewed_anc_visit/jumlah_fe:label" lang="en">Number of Fe
+            Tablet
             given
         </span>
-        <span class="or-hint active" data-itext-id="/kunjungan_anc_reviewed_anc_visit/jumlah_fe:hint"
-            lang="Bahasa">Menunjukkan jumlah Fe
+        <span class="or-hint active"
+            data-itext-id="/kunjungan_anc_reviewed_anc_visit/jumlah_fe:hint" lang="Bahasa">
+            Menunjukkan jumlah Fe
             yang diberikan saat kunjungan ANC (tab/botol)
         </span>
         <span class="or-hint " data-itext-id="/kunjungan_anc_reviewed_anc_visit/jumlah_fe:hint"
             lang="en">Indicating amount of Fe
             tablets given to mother on ANC check-up (tablet/bottle)
         </span>
-        <input name="/kunjungan_anc_reviewed_anc_visit/jumlah_fe" data-constraint=".&gt;0 and .&lt;1000"
-            data-relevant=" /kunjungan_anc_reviewed_anc_visit/pelayananfe ='Ya'"
-            data-type-xml="int"
+        <input name="/kunjungan_anc_reviewed_anc_visit/jumlah_fe"
+            data-constraint=".&gt;0 and .&lt;1000"
+            data-relevant=" /kunjungan_anc_reviewed_anc_visit/pelayananfe ='Ya'" data-type-xml="int"
             type="number" />
     </label>
     <fieldset class="question ">
         <fieldset>
             <legend>
-                <span class="question-label active" data-itext-id="/kunjungan_anc_reviewed_anc_visit/komplikasi_dalam_kehamilan:label"
+                <span class="question-label active"
+                    data-itext-id="/kunjungan_anc_reviewed_anc_visit/komplikasi_dalam_kehamilan:label"
                     lang="Bahasa">
                     Komplikasi dalam kehamilan
                 </span>
-                <span class="question-label " data-itext-id="/kunjungan_anc_reviewed_anc_visit/komplikasi_dalam_kehamilan:label"
+                <span class="question-label "
+                    data-itext-id="/kunjungan_anc_reviewed_anc_visit/komplikasi_dalam_kehamilan:label"
                     lang="en">
                     Complications during pregnancy
                 </span>
-                <span class="or-hint active" data-itext-id="/kunjungan_anc_reviewed_anc_visit/komplikasi_dalam_kehamilan:hint"
+                <span class="or-hint active"
+                    data-itext-id="/kunjungan_anc_reviewed_anc_visit/komplikasi_dalam_kehamilan:hint"
                     lang="Bahasa">
                     Menunjukkan komplikasi kehamilan pada Ibu
                 </span>
-                <span class="or-hint " data-itext-id="/kunjungan_anc_reviewed_anc_visit/komplikasi_dalam_kehamilan:hint"
+                <span class="or-hint "
+                    data-itext-id="/kunjungan_anc_reviewed_anc_visit/komplikasi_dalam_kehamilan:hint"
                     lang="en">
                     Indicating pregnancy complication that mother has
                 </span>
@@ -1189,169 +1370,183 @@
             <div class="option-wrapper">
                 <label class="">
                     <input name="/kunjungan_anc_reviewed_anc_visit/komplikasi_dalam_kehamilan"
-                        data-type-xml="select"
-                        type="checkbox" value="hipertensi_dalam_kehamilan" />
-                    <span class="option-label active" data-itext-id="/kunjungan_anc_reviewed_anc_visit/komplikasi_dalam_kehamilan/hipertensi_dalam_kehamilan:label"
+                        data-type-xml="select" type="checkbox" value="hipertensi_dalam_kehamilan" />
+                    <span class="option-label active"
+                        data-itext-id="/kunjungan_anc_reviewed_anc_visit/komplikasi_dalam_kehamilan/hipertensi_dalam_kehamilan:label"
                         lang="Bahasa">
                         Hipertensi dalam Kehamilan (HDK)
                     </span>
-                    <span class="option-label " data-itext-id="/kunjungan_anc_reviewed_anc_visit/komplikasi_dalam_kehamilan/hipertensi_dalam_kehamilan:label"
+                    <span class="option-label "
+                        data-itext-id="/kunjungan_anc_reviewed_anc_visit/komplikasi_dalam_kehamilan/hipertensi_dalam_kehamilan:label"
                         lang="en">
                         Hypertension during Pregnancy (HDP)
                     </span>
                 </label>
                 <label class="">
                     <input name="/kunjungan_anc_reviewed_anc_visit/komplikasi_dalam_kehamilan"
-                        data-type-xml="select"
-                        type="checkbox" value="abortus" />
-                    <span class="option-label active" data-itext-id="/kunjungan_anc_reviewed_anc_visit/komplikasi_dalam_kehamilan/abortus:label"
+                        data-type-xml="select" type="checkbox" value="abortus" />
+                    <span class="option-label active"
+                        data-itext-id="/kunjungan_anc_reviewed_anc_visit/komplikasi_dalam_kehamilan/abortus:label"
                         lang="Bahasa">
                         Abortus (AS)
                     </span>
-                    <span class="option-label " data-itext-id="/kunjungan_anc_reviewed_anc_visit/komplikasi_dalam_kehamilan/abortus:label"
+                    <span class="option-label "
+                        data-itext-id="/kunjungan_anc_reviewed_anc_visit/komplikasi_dalam_kehamilan/abortus:label"
                         lang="en">
                         Abortus (AS)
                     </span>
                 </label>
                 <label class="">
                     <input name="/kunjungan_anc_reviewed_anc_visit/komplikasi_dalam_kehamilan"
-                        data-type-xml="select"
-                        type="checkbox" value="mola" />
-                    <span class="option-label active" data-itext-id="/kunjungan_anc_reviewed_anc_visit/komplikasi_dalam_kehamilan/mola:label"
+                        data-type-xml="select" type="checkbox" value="mola" />
+                    <span class="option-label active"
+                        data-itext-id="/kunjungan_anc_reviewed_anc_visit/komplikasi_dalam_kehamilan/mola:label"
                         lang="Bahasa">
                         Mola (ML)
                     </span>
-                    <span class="option-label " data-itext-id="/kunjungan_anc_reviewed_anc_visit/komplikasi_dalam_kehamilan/mola:label"
+                    <span class="option-label "
+                        data-itext-id="/kunjungan_anc_reviewed_anc_visit/komplikasi_dalam_kehamilan/mola:label"
                         lang="en">
                         Mola (ML)
                     </span>
                 </label>
                 <label class="">
                     <input name="/kunjungan_anc_reviewed_anc_visit/komplikasi_dalam_kehamilan"
-                        data-type-xml="select"
-                        type="checkbox" value="kehamilan_ektopit_terganggu" />
-                    <span class="option-label active" data-itext-id="/kunjungan_anc_reviewed_anc_visit/komplikasi_dalam_kehamilan/kehamilan_ektopit_terganggu:label"
+                        data-type-xml="select" type="checkbox"
+                        value="kehamilan_ektopit_terganggu" />
+                    <span class="option-label active"
+                        data-itext-id="/kunjungan_anc_reviewed_anc_visit/komplikasi_dalam_kehamilan/kehamilan_ektopit_terganggu:label"
                         lang="Bahasa">
                         Kehamilan Ektopit Terganggu (KET)
                     </span>
-                    <span class="option-label " data-itext-id="/kunjungan_anc_reviewed_anc_visit/komplikasi_dalam_kehamilan/kehamilan_ektopit_terganggu:label"
+                    <span class="option-label "
+                        data-itext-id="/kunjungan_anc_reviewed_anc_visit/komplikasi_dalam_kehamilan/kehamilan_ektopit_terganggu:label"
                         lang="en">
                         Ectopic Pregnancy (EP)
                     </span>
                 </label>
                 <label class="">
                     <input name="/kunjungan_anc_reviewed_anc_visit/komplikasi_dalam_kehamilan"
-                        data-type-xml="select"
-                        type="checkbox" value="hemoragi_post_partum" />
-                    <span class="option-label active" data-itext-id="/kunjungan_anc_reviewed_anc_visit/komplikasi_dalam_kehamilan/hemoragi_post_partum:label"
+                        data-type-xml="select" type="checkbox" value="hemoragi_post_partum" />
+                    <span class="option-label active"
+                        data-itext-id="/kunjungan_anc_reviewed_anc_visit/komplikasi_dalam_kehamilan/hemoragi_post_partum:label"
                         lang="Bahasa">
                         Hemoragi Post Partum (HPP)
                     </span>
-                    <span class="option-label " data-itext-id="/kunjungan_anc_reviewed_anc_visit/komplikasi_dalam_kehamilan/hemoragi_post_partum:label"
+                    <span class="option-label "
+                        data-itext-id="/kunjungan_anc_reviewed_anc_visit/komplikasi_dalam_kehamilan/hemoragi_post_partum:label"
                         lang="en">
                         Post Partum Hemorrhage (PPH)
                     </span>
                 </label>
                 <label class="">
                     <input name="/kunjungan_anc_reviewed_anc_visit/komplikasi_dalam_kehamilan"
-                        data-type-xml="select"
-                        type="checkbox" value="ante_partum_beleding" />
-                    <span class="option-label active" data-itext-id="/kunjungan_anc_reviewed_anc_visit/komplikasi_dalam_kehamilan/ante_partum_beleding:label"
+                        data-type-xml="select" type="checkbox" value="ante_partum_beleding" />
+                    <span class="option-label active"
+                        data-itext-id="/kunjungan_anc_reviewed_anc_visit/komplikasi_dalam_kehamilan/ante_partum_beleding:label"
                         lang="Bahasa">
                         Ante Partum Beleding (APB)
                     </span>
-                    <span class="option-label " data-itext-id="/kunjungan_anc_reviewed_anc_visit/komplikasi_dalam_kehamilan/ante_partum_beleding:label"
+                    <span class="option-label "
+                        data-itext-id="/kunjungan_anc_reviewed_anc_visit/komplikasi_dalam_kehamilan/ante_partum_beleding:label"
                         lang="en">
                         Ante Partum Bleeding (APB)
                     </span>
                 </label>
                 <label class="">
                     <input name="/kunjungan_anc_reviewed_anc_visit/komplikasi_dalam_kehamilan"
-                        data-type-xml="select"
-                        type="checkbox" value="injeksi_jalan_lahir" />
-                    <span class="option-label active" data-itext-id="/kunjungan_anc_reviewed_anc_visit/komplikasi_dalam_kehamilan/injeksi_jalan_lahir:label"
+                        data-type-xml="select" type="checkbox" value="injeksi_jalan_lahir" />
+                    <span class="option-label active"
+                        data-itext-id="/kunjungan_anc_reviewed_anc_visit/komplikasi_dalam_kehamilan/injeksi_jalan_lahir:label"
                         lang="Bahasa">
                         Injeksi Jalan Lahir (IJL)
                     </span>
-                    <span class="option-label " data-itext-id="/kunjungan_anc_reviewed_anc_visit/komplikasi_dalam_kehamilan/injeksi_jalan_lahir:label"
+                    <span class="option-label "
+                        data-itext-id="/kunjungan_anc_reviewed_anc_visit/komplikasi_dalam_kehamilan/injeksi_jalan_lahir:label"
                         lang="en">
                         Puerperal Infection (PI)
                     </span>
                 </label>
                 <label class="">
                     <input name="/kunjungan_anc_reviewed_anc_visit/komplikasi_dalam_kehamilan"
-                        data-type-xml="select"
-                        type="checkbox" value="partum_kasep" />
-                    <span class="option-label active" data-itext-id="/kunjungan_anc_reviewed_anc_visit/komplikasi_dalam_kehamilan/partum_kasep:label"
+                        data-type-xml="select" type="checkbox" value="partum_kasep" />
+                    <span class="option-label active"
+                        data-itext-id="/kunjungan_anc_reviewed_anc_visit/komplikasi_dalam_kehamilan/partum_kasep:label"
                         lang="Bahasa">
                         Partum Kasep (PK)
                     </span>
-                    <span class="option-label " data-itext-id="/kunjungan_anc_reviewed_anc_visit/komplikasi_dalam_kehamilan/partum_kasep:label"
+                    <span class="option-label "
+                        data-itext-id="/kunjungan_anc_reviewed_anc_visit/komplikasi_dalam_kehamilan/partum_kasep:label"
                         lang="en">
                         Prolonged Labor with complcations (PLC)
                     </span>
                 </label>
                 <label class="">
                     <input name="/kunjungan_anc_reviewed_anc_visit/komplikasi_dalam_kehamilan"
-                        data-type-xml="select"
-                        type="checkbox" value="partus_lama" />
-                    <span class="option-label active" data-itext-id="/kunjungan_anc_reviewed_anc_visit/komplikasi_dalam_kehamilan/partus_lama:label"
+                        data-type-xml="select" type="checkbox" value="partus_lama" />
+                    <span class="option-label active"
+                        data-itext-id="/kunjungan_anc_reviewed_anc_visit/komplikasi_dalam_kehamilan/partus_lama:label"
                         lang="Bahasa">
                         Partus Lama (PL)
                     </span>
-                    <span class="option-label " data-itext-id="/kunjungan_anc_reviewed_anc_visit/komplikasi_dalam_kehamilan/partus_lama:label"
+                    <span class="option-label "
+                        data-itext-id="/kunjungan_anc_reviewed_anc_visit/komplikasi_dalam_kehamilan/partus_lama:label"
                         lang="en">
                         Prolonged Labor (PL)
                     </span>
                 </label>
                 <label class="">
                     <input name="/kunjungan_anc_reviewed_anc_visit/komplikasi_dalam_kehamilan"
-                        data-type-xml="select"
-                        type="checkbox" value="demam_berdarah" />
-                    <span class="option-label active" data-itext-id="/kunjungan_anc_reviewed_anc_visit/komplikasi_dalam_kehamilan/demam_berdarah:label"
+                        data-type-xml="select" type="checkbox" value="demam_berdarah" />
+                    <span class="option-label active"
+                        data-itext-id="/kunjungan_anc_reviewed_anc_visit/komplikasi_dalam_kehamilan/demam_berdarah:label"
                         lang="Bahasa">
                         Demam Berdarah (DB)
                     </span>
-                    <span class="option-label " data-itext-id="/kunjungan_anc_reviewed_anc_visit/komplikasi_dalam_kehamilan/demam_berdarah:label"
+                    <span class="option-label "
+                        data-itext-id="/kunjungan_anc_reviewed_anc_visit/komplikasi_dalam_kehamilan/demam_berdarah:label"
                         lang="en">
                         Dengue Hemorrhagic Fever
                     </span>
                 </label>
                 <label class="">
                     <input name="/kunjungan_anc_reviewed_anc_visit/komplikasi_dalam_kehamilan"
-                        data-type-xml="select"
-                        type="checkbox" value="tifus_abdominalis" />
-                    <span class="option-label active" data-itext-id="/kunjungan_anc_reviewed_anc_visit/komplikasi_dalam_kehamilan/tifus_abdominalis:label"
+                        data-type-xml="select" type="checkbox" value="tifus_abdominalis" />
+                    <span class="option-label active"
+                        data-itext-id="/kunjungan_anc_reviewed_anc_visit/komplikasi_dalam_kehamilan/tifus_abdominalis:label"
                         lang="Bahasa">
                         Tifus Abdominalis (TA)
                     </span>
-                    <span class="option-label " data-itext-id="/kunjungan_anc_reviewed_anc_visit/komplikasi_dalam_kehamilan/tifus_abdominalis:label"
+                    <span class="option-label "
+                        data-itext-id="/kunjungan_anc_reviewed_anc_visit/komplikasi_dalam_kehamilan/tifus_abdominalis:label"
                         lang="en">
                         Typhus Abdominalis
                     </span>
                 </label>
                 <label class="">
                     <input name="/kunjungan_anc_reviewed_anc_visit/komplikasi_dalam_kehamilan"
-                        data-type-xml="select"
-                        type="checkbox" value="sepsis" />
-                    <span class="option-label active" data-itext-id="/kunjungan_anc_reviewed_anc_visit/komplikasi_dalam_kehamilan/sepsis:label"
+                        data-type-xml="select" type="checkbox" value="sepsis" />
+                    <span class="option-label active"
+                        data-itext-id="/kunjungan_anc_reviewed_anc_visit/komplikasi_dalam_kehamilan/sepsis:label"
                         lang="Bahasa">
                         Sepsis (S)
                     </span>
-                    <span class="option-label " data-itext-id="/kunjungan_anc_reviewed_anc_visit/komplikasi_dalam_kehamilan/sepsis:label"
+                    <span class="option-label "
+                        data-itext-id="/kunjungan_anc_reviewed_anc_visit/komplikasi_dalam_kehamilan/sepsis:label"
                         lang="en">
                         Sepsis
                     </span>
                 </label>
                 <label class="">
                     <input name="/kunjungan_anc_reviewed_anc_visit/komplikasi_dalam_kehamilan"
-                        data-type-xml="select"
-                        type="checkbox" value="tidak_ada_komplikasi" />
-                    <span class="option-label active" data-itext-id="/kunjungan_anc_reviewed_anc_visit/komplikasi_dalam_kehamilan/tidak_ada_komplikasi:label"
+                        data-type-xml="select" type="checkbox" value="tidak_ada_komplikasi" />
+                    <span class="option-label active"
+                        data-itext-id="/kunjungan_anc_reviewed_anc_visit/komplikasi_dalam_kehamilan/tidak_ada_komplikasi:label"
                         lang="Bahasa">
                         Tidak ada komplikasi kehamilan
                     </span>
-                    <span class="option-label " data-itext-id="/kunjungan_anc_reviewed_anc_visit/komplikasi_dalam_kehamilan/tidak_ada_komplikasi:label"
+                    <span class="option-label "
+                        data-itext-id="/kunjungan_anc_reviewed_anc_visit/komplikasi_dalam_kehamilan/tidak_ada_komplikasi:label"
                         lang="en">
                         No pregnancy complication
                     </span>
@@ -1362,43 +1557,51 @@
     <fieldset class="question ">
         <fieldset>
             <legend>
-                <span class="question-label active" data-itext-id="/kunjungan_anc_reviewed_anc_visit/rujukan:label"
-                    lang="Bahasa">Apakah Anda
+                <span class="question-label active"
+                    data-itext-id="/kunjungan_anc_reviewed_anc_visit/rujukan:label" lang="Bahasa">
+                    Apakah Anda
                     merujuk Ibu hamil ke fasilitas kesehatan lainnya?
                 </span>
-                <span class="question-label " data-itext-id="/kunjungan_anc_reviewed_anc_visit/rujukan:label"
-                    lang="en">Do you refer the
+                <span class="question-label "
+                    data-itext-id="/kunjungan_anc_reviewed_anc_visit/rujukan:label" lang="en">Do you
+                    refer the
                     mother to other health facility?
                 </span>
-                <span class="or-hint active" data-itext-id="/kunjungan_anc_reviewed_anc_visit/rujukan:hint"
-                    lang="Bahasa">Menunjukkan bahwa
+                <span class="or-hint active"
+                    data-itext-id="/kunjungan_anc_reviewed_anc_visit/rujukan:hint" lang="Bahasa">
+                    Menunjukkan bahwa
                     bidan merujuk Ibu hamil ke ke tempat fasilitas kesehatan lainnya
                 </span>
-                <span class="or-hint " data-itext-id="/kunjungan_anc_reviewed_anc_visit/rujukan:hint"
-                    lang="en">Indicating
+                <span class="or-hint "
+                    data-itext-id="/kunjungan_anc_reviewed_anc_visit/rujukan:hint" lang="en">
+                    Indicating
                     whether midwife refers pregnant mother to other health facility
                 </span>
             </legend>
             <div class="option-wrapper">
                 <label class="">
-                    <input name="/kunjungan_anc_reviewed_anc_visit/rujukan" data-name="/kunjungan_anc_reviewed_anc_visit/rujukan"
-                        data-type-xml="select1" type="radio"
-                        value="Ya" />
-                    <span class="option-label active" data-itext-id="/kunjungan_anc_reviewed_anc_visit/rujukan/Ya:label"
+                    <input name="/kunjungan_anc_reviewed_anc_visit/rujukan"
+                        data-name="/kunjungan_anc_reviewed_anc_visit/rujukan"
+                        data-type-xml="select1" type="radio" value="Ya" />
+                    <span class="option-label active"
+                        data-itext-id="/kunjungan_anc_reviewed_anc_visit/rujukan/Ya:label"
                         lang="Bahasa">Ya
                     </span>
-                    <span class="option-label " data-itext-id="/kunjungan_anc_reviewed_anc_visit/rujukan/Ya:label"
+                    <span class="option-label "
+                        data-itext-id="/kunjungan_anc_reviewed_anc_visit/rujukan/Ya:label"
                         lang="en">Yes
                     </span>
                 </label>
                 <label class="">
-                    <input name="/kunjungan_anc_reviewed_anc_visit/rujukan" data-name="/kunjungan_anc_reviewed_anc_visit/rujukan"
-                        data-type-xml="select1" type="radio"
-                        value="Tidak" />
-                    <span class="option-label active" data-itext-id="/kunjungan_anc_reviewed_anc_visit/rujukan/Tidak:label"
+                    <input name="/kunjungan_anc_reviewed_anc_visit/rujukan"
+                        data-name="/kunjungan_anc_reviewed_anc_visit/rujukan"
+                        data-type-xml="select1" type="radio" value="Tidak" />
+                    <span class="option-label active"
+                        data-itext-id="/kunjungan_anc_reviewed_anc_visit/rujukan/Tidak:label"
                         lang="Bahasa">Tidak
                     </span>
-                    <span class="option-label " data-itext-id="/kunjungan_anc_reviewed_anc_visit/rujukan/Tidak:label"
+                    <span class="option-label "
+                        data-itext-id="/kunjungan_anc_reviewed_anc_visit/rujukan/Tidak:label"
                         lang="en">No
                     </span>
                 </label>
@@ -1406,14 +1609,16 @@
         </fieldset>
     </fieldset>
     <label class="question or-appearance-minimal  or-branch pre-init ">
-        <span class="question-label active" data-itext-id="/kunjungan_anc_reviewed_anc_visit/dirujuk_ke:label"
-            lang="Bahasa">Dirujuk ke
+        <span class="question-label active"
+            data-itext-id="/kunjungan_anc_reviewed_anc_visit/dirujuk_ke:label" lang="Bahasa">Dirujuk
+            ke
         </span>
-        <span class="question-label " data-itext-id="/kunjungan_anc_reviewed_anc_visit/dirujuk_ke:label"
-            lang="en">Referred to
+        <span class="question-label "
+            data-itext-id="/kunjungan_anc_reviewed_anc_visit/dirujuk_ke:label" lang="en">Referred to
         </span>
-        <span class="or-hint active" data-itext-id="/kunjungan_anc_reviewed_anc_visit/dirujuk_ke:hint"
-            lang="Bahasa">Lokasi tujuan rujukan
+        <span class="or-hint active"
+            data-itext-id="/kunjungan_anc_reviewed_anc_visit/dirujuk_ke:hint" lang="Bahasa">Lokasi
+            tujuan rujukan
             Ibu jika mengalami komplikasi kehamilan
         </span>
         <span class="or-hint " data-itext-id="/kunjungan_anc_reviewed_anc_visit/dirujuk_ke:hint"
@@ -1454,40 +1659,46 @@
         </span>
     </label>
     <label class="question or-branch pre-init non-select ">
-        <span class="question-label active" data-itext-id="/kunjungan_anc_reviewed_anc_visit/dirujuk_keL:label"
-            lang="Bahasa">lain-lain
+        <span class="question-label active"
+            data-itext-id="/kunjungan_anc_reviewed_anc_visit/dirujuk_keL:label" lang="Bahasa">
+            lain-lain
         </span>
-        <span class="question-label " data-itext-id="/kunjungan_anc_reviewed_anc_visit/dirujuk_keL:label"
-            lang="en">Other
+        <span class="question-label "
+            data-itext-id="/kunjungan_anc_reviewed_anc_visit/dirujuk_keL:label" lang="en">Other
         </span>
-        <span class="or-hint active" data-itext-id="/kunjungan_anc_reviewed_anc_visit/dirujuk_keL:hint"
-            lang="Bahasa">Diisi dengan lokasi
+        <span class="or-hint active"
+            data-itext-id="/kunjungan_anc_reviewed_anc_visit/dirujuk_keL:hint" lang="Bahasa">Diisi
+            dengan lokasi
             tujuan rujukan selain yang disebutkan jika Ibu mengalami komplikasi kehamilan
         </span>
         <span class="or-hint " data-itext-id="/kunjungan_anc_reviewed_anc_visit/dirujuk_keL:hint"
             lang="en">Write other location
             of facility where mother with pregnancy complication is referred to
         </span>
-        <input name="/kunjungan_anc_reviewed_anc_visit/dirujuk_keL" data-relevant=" /kunjungan_anc_reviewed_anc_visit/dirujuk_ke  = 'lain_lain'"
-            data-type-xml="string"
-            type="text" />
+        <input name="/kunjungan_anc_reviewed_anc_visit/dirujuk_keL"
+            data-relevant=" /kunjungan_anc_reviewed_anc_visit/dirujuk_ke  = 'lain_lain'"
+            data-type-xml="string" type="text" />
     </label>
     <fieldset class="question or-branch pre-init ">
         <fieldset>
             <legend>
-                <span class="question-label active" data-itext-id="/kunjungan_anc_reviewed_anc_visit/keadaan_ibu_saat_tiba:label"
+                <span class="question-label active"
+                    data-itext-id="/kunjungan_anc_reviewed_anc_visit/keadaan_ibu_saat_tiba:label"
                     lang="Bahasa">
                     Keadaan Ibu saat tiba
                 </span>
-                <span class="question-label " data-itext-id="/kunjungan_anc_reviewed_anc_visit/keadaan_ibu_saat_tiba:label"
+                <span class="question-label "
+                    data-itext-id="/kunjungan_anc_reviewed_anc_visit/keadaan_ibu_saat_tiba:label"
                     lang="en">
                     Mother's condition when arrives at referred facilty
                 </span>
-                <span class="or-hint active" data-itext-id="/kunjungan_anc_reviewed_anc_visit/keadaan_ibu_saat_tiba:hint"
+                <span class="or-hint active"
+                    data-itext-id="/kunjungan_anc_reviewed_anc_visit/keadaan_ibu_saat_tiba:hint"
                     lang="Bahasa">
                     Keadaan saat ibu tiba tempat rujukan
                 </span>
-                <span class="or-hint " data-itext-id="/kunjungan_anc_reviewed_anc_visit/keadaan_ibu_saat_tiba:hint"
+                <span class="or-hint "
+                    data-itext-id="/kunjungan_anc_reviewed_anc_visit/keadaan_ibu_saat_tiba:hint"
                     lang="en">
                     Mother's condition when arrives at referred facility
                 </span>
@@ -1497,14 +1708,14 @@
                     <input name="/kunjungan_anc_reviewed_anc_visit/keadaan_ibu_saat_tiba"
                         data-name="/kunjungan_anc_reviewed_anc_visit/keadaan_ibu_saat_tiba"
                         data-relevant=" /kunjungan_anc_reviewed_anc_visit/rujukan  = 'Ya'"
-                        data-type-xml="select1"
-                        type="radio"
-                        value="hidup" />
-                    <span class="option-label active" data-itext-id="/kunjungan_anc_reviewed_anc_visit/keadaan_ibu_saat_tiba/hidup:label"
+                        data-type-xml="select1" type="radio" value="hidup" />
+                    <span class="option-label active"
+                        data-itext-id="/kunjungan_anc_reviewed_anc_visit/keadaan_ibu_saat_tiba/hidup:label"
                         lang="Bahasa">
                         Hidup (H)
                     </span>
-                    <span class="option-label " data-itext-id="/kunjungan_anc_reviewed_anc_visit/keadaan_ibu_saat_tiba/hidup:label"
+                    <span class="option-label "
+                        data-itext-id="/kunjungan_anc_reviewed_anc_visit/keadaan_ibu_saat_tiba/hidup:label"
                         lang="en">
                         Alive (A);
                     </span>
@@ -1513,14 +1724,14 @@
                     <input name="/kunjungan_anc_reviewed_anc_visit/keadaan_ibu_saat_tiba"
                         data-name="/kunjungan_anc_reviewed_anc_visit/keadaan_ibu_saat_tiba"
                         data-relevant=" /kunjungan_anc_reviewed_anc_visit/rujukan  = 'Ya'"
-                        data-type-xml="select1"
-                        type="radio"
-                        value="mati" />
-                    <span class="option-label active" data-itext-id="/kunjungan_anc_reviewed_anc_visit/keadaan_ibu_saat_tiba/mati:label"
+                        data-type-xml="select1" type="radio" value="mati" />
+                    <span class="option-label active"
+                        data-itext-id="/kunjungan_anc_reviewed_anc_visit/keadaan_ibu_saat_tiba/mati:label"
                         lang="Bahasa">
                         Mati (M)
                     </span>
-                    <span class="option-label " data-itext-id="/kunjungan_anc_reviewed_anc_visit/keadaan_ibu_saat_tiba/mati:label"
+                    <span class="option-label "
+                        data-itext-id="/kunjungan_anc_reviewed_anc_visit/keadaan_ibu_saat_tiba/mati:label"
                         lang="en">
                         Dead (M)
                     </span>
@@ -1531,19 +1742,23 @@
     <fieldset class="question or-branch pre-init ">
         <fieldset>
             <legend>
-                <span class="question-label active" data-itext-id="/kunjungan_anc_reviewed_anc_visit/keadaan_ibu_saat_pulang:label"
+                <span class="question-label active"
+                    data-itext-id="/kunjungan_anc_reviewed_anc_visit/keadaan_ibu_saat_pulang:label"
                     lang="Bahasa">
                     Keadaan Ibu saat pulang
                 </span>
-                <span class="question-label " data-itext-id="/kunjungan_anc_reviewed_anc_visit/keadaan_ibu_saat_pulang:label"
+                <span class="question-label "
+                    data-itext-id="/kunjungan_anc_reviewed_anc_visit/keadaan_ibu_saat_pulang:label"
                     lang="en">
                     Mother's condition when discharges from referred facility
                 </span>
-                <span class="or-hint active" data-itext-id="/kunjungan_anc_reviewed_anc_visit/keadaan_ibu_saat_pulang:hint"
+                <span class="or-hint active"
+                    data-itext-id="/kunjungan_anc_reviewed_anc_visit/keadaan_ibu_saat_pulang:hint"
                     lang="Bahasa">
                     Keadaan saat ibu pulang dari tempat rujukan
                 </span>
-                <span class="or-hint " data-itext-id="/kunjungan_anc_reviewed_anc_visit/keadaan_ibu_saat_pulang:hint"
+                <span class="or-hint "
+                    data-itext-id="/kunjungan_anc_reviewed_anc_visit/keadaan_ibu_saat_pulang:hint"
                     lang="en">
                     Mother's condition when returns home from referred facility
                 </span>
@@ -1553,14 +1768,14 @@
                     <input name="/kunjungan_anc_reviewed_anc_visit/keadaan_ibu_saat_pulang"
                         data-name="/kunjungan_anc_reviewed_anc_visit/keadaan_ibu_saat_pulang"
                         data-relevant=" /kunjungan_anc_reviewed_anc_visit/rujukan  = 'Ya'"
-                        data-type-xml="select1"
-                        type="radio"
-                        value="hidup" />
-                    <span class="option-label active" data-itext-id="/kunjungan_anc_reviewed_anc_visit/keadaan_ibu_saat_pulang/hidup:label"
+                        data-type-xml="select1" type="radio" value="hidup" />
+                    <span class="option-label active"
+                        data-itext-id="/kunjungan_anc_reviewed_anc_visit/keadaan_ibu_saat_pulang/hidup:label"
                         lang="Bahasa">
                         Hidup (H)
                     </span>
-                    <span class="option-label " data-itext-id="/kunjungan_anc_reviewed_anc_visit/keadaan_ibu_saat_pulang/hidup:label"
+                    <span class="option-label "
+                        data-itext-id="/kunjungan_anc_reviewed_anc_visit/keadaan_ibu_saat_pulang/hidup:label"
                         lang="en">
                         Alive (A);
                     </span>
@@ -1569,14 +1784,14 @@
                     <input name="/kunjungan_anc_reviewed_anc_visit/keadaan_ibu_saat_pulang"
                         data-name="/kunjungan_anc_reviewed_anc_visit/keadaan_ibu_saat_pulang"
                         data-relevant=" /kunjungan_anc_reviewed_anc_visit/rujukan  = 'Ya'"
-                        data-type-xml="select1"
-                        type="radio"
-                        value="mati" />
-                    <span class="option-label active" data-itext-id="/kunjungan_anc_reviewed_anc_visit/keadaan_ibu_saat_pulang/mati:label"
+                        data-type-xml="select1" type="radio" value="mati" />
+                    <span class="option-label active"
+                        data-itext-id="/kunjungan_anc_reviewed_anc_visit/keadaan_ibu_saat_pulang/mati:label"
                         lang="Bahasa">
                         Mati (M)
                     </span>
-                    <span class="option-label " data-itext-id="/kunjungan_anc_reviewed_anc_visit/keadaan_ibu_saat_pulang/mati:label"
+                    <span class="option-label "
+                        data-itext-id="/kunjungan_anc_reviewed_anc_visit/keadaan_ibu_saat_pulang/mati:label"
                         lang="en">
                         Dead (M)
                     </span>
@@ -1585,23 +1800,25 @@
         </fieldset>
     </fieldset>
     <label class="question or-branch pre-init non-select ">
-        <span class="question-label active" data-itext-id="/kunjungan_anc_reviewed_anc_visit/keterangan:label"
-            lang="Bahasa">Keterangan
+        <span class="question-label active"
+            data-itext-id="/kunjungan_anc_reviewed_anc_visit/keterangan:label" lang="Bahasa">
+            Keterangan
         </span>
-        <span class="question-label " data-itext-id="/kunjungan_anc_reviewed_anc_visit/keterangan:label"
-            lang="en">Notes
+        <span class="question-label "
+            data-itext-id="/kunjungan_anc_reviewed_anc_visit/keterangan:label" lang="en">Notes
         </span>
-        <span class="or-hint active" data-itext-id="/kunjungan_anc_reviewed_anc_visit/keterangan:hint"
-            lang="Bahasa">Diisi dengan
+        <span class="or-hint active"
+            data-itext-id="/kunjungan_anc_reviewed_anc_visit/keterangan:hint" lang="Bahasa">Diisi
+            dengan
             keterangan terkait rujukan
         </span>
         <span class="or-hint " data-itext-id="/kunjungan_anc_reviewed_anc_visit/keterangan:hint"
             lang="en">Write any additional
             information related to the referred facility
         </span>
-        <input name="/kunjungan_anc_reviewed_anc_visit/keterangan" data-relevant=" /kunjungan_anc_reviewed_anc_visit/rujukan  = 'Ya'"
-            data-type-xml="string"
-            type="text" />
+        <input name="/kunjungan_anc_reviewed_anc_visit/keterangan"
+            data-relevant=" /kunjungan_anc_reviewed_anc_visit/rujukan  = 'Ya'"
+            data-type-xml="string" type="text" />
     </label>
 
     <fieldset style="display:none;" id="or-preload-items">
@@ -1610,8 +1827,8 @@
                 data-preload-params="start" data-type-xml="dateTime" type="hidden" />
         </label>
         <label class="calculation non-select ">
-            <input name="/kunjungan_anc_reviewed_anc_visit/today" data-preload="date" data-preload-params="today"
-                data-type-xml="date" type="hidden" />
+            <input name="/kunjungan_anc_reviewed_anc_visit/today" data-preload="date"
+                data-preload-params="today" data-type-xml="date" type="hidden" />
         </label>
         <label class="calculation non-select ">
             <input name="/kunjungan_anc_reviewed_anc_visit/deviceid" data-preload="property"
@@ -1632,61 +1849,59 @@
     </fieldset>
     <fieldset style="display:none;" id="or-calculated-items">
         <label class="calculation non-select ">
-            <input name="/kunjungan_anc_reviewed_anc_visit/usia_klinis" data-calculate="int((( /kunjungan_anc_reviewed_anc_visit/today  -  /kunjungan_anc_reviewed_anc_visit/hpht ) div 7)+1)"
-                data-type-xml="string"
-                type="hidden" />
+            <input name="/kunjungan_anc_reviewed_anc_visit/usia_klinis"
+                data-calculate="int((( /kunjungan_anc_reviewed_anc_visit/today  -  /kunjungan_anc_reviewed_anc_visit/hpht ) div 7)+1)"
+                data-type-xml="string" type="hidden" />
         </label>
         <label class="calculation non-select ">
-            <input name="/kunjungan_anc_reviewed_anc_visit/trimester_ke" data-calculate="if(( /kunjungan_anc_reviewed_anc_visit/usia_klinis &lt;='14'), 1, (if( /kunjungan_anc_reviewed_anc_visit/usia_klinis &gt;'14' and  /kunjungan_anc_reviewed_anc_visit/usia_klinis &lt;='28', 2, (if( /kunjungan_anc_reviewed_anc_visit/usia_klinis &gt;'28', 3, '')))))"
-                data-type-xml="string"
-                type="hidden" />
+            <input name="/kunjungan_anc_reviewed_anc_visit/trimester_ke"
+                data-calculate="if(( /kunjungan_anc_reviewed_anc_visit/usia_klinis &lt;='14'), 1, (if( /kunjungan_anc_reviewed_anc_visit/usia_klinis &gt;'14' and  /kunjungan_anc_reviewed_anc_visit/usia_klinis &lt;='28', 2, (if( /kunjungan_anc_reviewed_anc_visit/usia_klinis &gt;'28', 3, '')))))"
+                data-type-xml="string" type="hidden" />
         </label>
         <label class="calculation non-select ">
-            <input name="/kunjungan_anc_reviewed_anc_visit/hidden_anc_ke" data-calculate="if(( /kunjungan_anc_reviewed_anc_visit/trimester_ke ='1'), 1, (if( /kunjungan_anc_reviewed_anc_visit/trimester_ke ='2', 2, (if( /kunjungan_anc_reviewed_anc_visit/trimester_ke ='3', 3, '')))))"
-                data-type-xml="string"
-                type="hidden" />
+            <input name="/kunjungan_anc_reviewed_anc_visit/hidden_anc_ke"
+                data-calculate="if(( /kunjungan_anc_reviewed_anc_visit/trimester_ke ='1'), 1, (if( /kunjungan_anc_reviewed_anc_visit/trimester_ke ='2', 2, (if( /kunjungan_anc_reviewed_anc_visit/trimester_ke ='3', 3, '')))))"
+                data-type-xml="string" type="hidden" />
         </label>
         <label class="calculation non-select ">
-            <input name="/kunjungan_anc_reviewed_anc_visit/taksiran_berat_janin" data-calculate="if(selected( /kunjungan_anc_reviewed_anc_visit/kepala_terhadap_janin_pap ,'masuk'), (( /kunjungan_anc_reviewed_anc_visit/tfu -11)*155), (if(selected( /kunjungan_anc_reviewed_anc_visit/kepala_terhadap_janin_pap ,'belum_masuk'), (( /kunjungan_anc_reviewed_anc_visit/tfu -12)*155), 0)))"
-                data-type-xml="string"
-                type="hidden" />
+            <input name="/kunjungan_anc_reviewed_anc_visit/taksiran_berat_janin"
+                data-calculate="if(selected( /kunjungan_anc_reviewed_anc_visit/kepala_terhadap_janin_pap ,'masuk'), (( /kunjungan_anc_reviewed_anc_visit/tfu -11)*155), (if(selected( /kunjungan_anc_reviewed_anc_visit/kepala_terhadap_janin_pap ,'belum_masuk'), (( /kunjungan_anc_reviewed_anc_visit/tfu -12)*155), 0)))"
+                data-type-xml="string" type="hidden" />
         </label>
         <label class="calculation non-select ">
-            <input name="/kunjungan_anc_reviewed_anc_visit/High_Risk_Pregnancy_Protein_energy_Malnutrition"
+            <input
+                name="/kunjungan_anc_reviewed_anc_visit/High_Risk_Pregnancy_Protein_energy_Malnutrition"
                 data-calculate="if( /kunjungan_anc_reviewed_anc_visit/lila_cm  &lt; 23.5, 'yes', 'no')"
-                data-type-xml="string"
-                type="hidden" />
+                data-type-xml="string" type="hidden" />
         </label>
         <label class="calculation non-select ">
-            <input name="/kunjungan_anc_reviewed_anc_visit/High_Risk_Pregnancy_PIH" data-calculate="if( /kunjungan_anc_reviewed_anc_visit/td_sistolik  &gt;= 140 or  /kunjungan_anc_reviewed_anc_visit/td_diastolik  &gt;= 90, 'yes', 'no')"
-                data-type-xml="string"
-                type="hidden" />
+            <input name="/kunjungan_anc_reviewed_anc_visit/High_Risk_Pregnancy_PIH"
+                data-calculate="if( /kunjungan_anc_reviewed_anc_visit/td_sistolik  &gt;= 140 or  /kunjungan_anc_reviewed_anc_visit/td_diastolik  &gt;= 90, 'yes', 'no')"
+                data-type-xml="string" type="hidden" />
         </label>
         <label class="calculation non-select ">
             <input name="/kunjungan_anc_reviewed_anc_visit/High_Risk_Labour_fetus_number"
                 data-calculate="if( /kunjungan_anc_reviewed_anc_visit/jumlah_janin  ='ganda', 'yes', 'no')"
-                data-type-xml="string"
-                type="hidden" />
+                data-type-xml="string" type="hidden" />
         </label>
         <label class="calculation non-select ">
             <input name="/kunjungan_anc_reviewed_anc_visit/High_Risk_Labour_fetus_size"
                 data-calculate="if( /kunjungan_anc_reviewed_anc_visit/taksiran_berat_janin  &gt;4000, 'yes', 'no')"
-                data-type-xml="string"
-                type="hidden" />
+                data-type-xml="string" type="hidden" />
         </label>
         <label class="calculation non-select ">
             <input name="/kunjungan_anc_reviewed_anc_visit/High_Risk_Labour_fetus_Malpresentation"
                 data-calculate="if( /kunjungan_anc_reviewed_anc_visit/taksiran_berat_janin  ='bokong_sungsang' or  /kunjungan_anc_reviewed_anc_visit/taksiran_berat_janin  ='letak_lintang_obligue', 'yes', 'no')"
-                data-type-xml="string"
+                data-type-xml="string" type="hidden" />
+        </label>
+        <label class="calculation non-select ">
+            <input name="/kunjungan_anc_reviewed_anc_visit/meta/instanceID"
+                data-calculate="concat('uuid:', uuid())" data-type-xml="string" type="hidden" />
+        </label>
+        <label class="calculation non-select ">
+            <input name="/kunjungan_anc_reviewed_anc_visit/formhub/uuid"
+                data-calculate="'6af1e8a1de074f4d98f484aad9aea7af'" data-type-xml="string"
                 type="hidden" />
-        </label>
-        <label class="calculation non-select ">
-            <input name="/kunjungan_anc_reviewed_anc_visit/meta/instanceID" data-calculate="concat('uuid:', uuid())"
-                data-type-xml="string" type="hidden" />
-        </label>
-        <label class="calculation non-select ">
-            <input name="/kunjungan_anc_reviewed_anc_visit/formhub/uuid" data-calculate="'6af1e8a1de074f4d98f484aad9aea7af'"
-                data-type-xml="string" type="hidden" />
         </label>
     </fieldset>
 </form>

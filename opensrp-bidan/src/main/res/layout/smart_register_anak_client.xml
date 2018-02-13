@@ -19,7 +19,6 @@
         android:src="@color/smart_register_client_divider_color" />
 
     <LinearLayout
-        android:id="@+id/anak_register_service_mode_options_view"
         android:layout_width="0dp"
         android:layout_height="match_parent"
         android:layout_weight="73"

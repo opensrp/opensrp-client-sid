@@ -28,7 +28,6 @@
             android:paddingTop="@dimen/client_profile_badge_layout_margin_top">
 
             <ImageView
-                android:id="@+id/iv_hp_badge"
                 android:layout_width="@dimen/client_profile_badge_width"
                 android:layout_height="@dimen/client_profile_badge_height"
                 android:layout_marginBottom="-5dp"
@@ -83,7 +82,6 @@
                 android:visibility="gone" />
 
             <ImageView
-                android:id="@+id/iv_sc_badge"
                 android:layout_width="@dimen/client_profile_badge_width"
                 android:layout_height="@dimen/client_profile_badge_height"
                 android:layout_marginBottom="-5dp"
@@ -92,7 +90,6 @@
                 android:visibility="gone" />
 
             <ImageView
-                android:id="@+id/iv_st_badge"
                 android:layout_width="@dimen/client_profile_badge_width"
                 android:layout_height="@dimen/client_profile_badge_height"
                 android:layout_marginBottom="-5dp"

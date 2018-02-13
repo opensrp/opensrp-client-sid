@@ -34,9 +34,9 @@ import static android.view.ViewGroup.LayoutParams.MATCH_PARENT;
 /**
  * Created by Dimas Ciputra on 2/16/15.
  */
-public class KIANCClientsProvider extends BaseClientsProvider {
+public class ANCClientsProvider extends BaseClientsProvider {
 
-    private static final String TAG = KIANCClientsProvider.class.getName();
+    private static final String TAG = ANCClientsProvider.class.getName();
     private final Context context;
     private final View.OnClickListener onClickListener;
     private final AbsListView.LayoutParams clientViewLayoutParams;
@@ -94,7 +94,7 @@ public class KIANCClientsProvider extends BaseClientsProvider {
     ImageButton follow_up;
     private Drawable iconPencilDrawable;
 
-    public KIANCClientsProvider(Context context, View.OnClickListener onClickListener, AlertService alertService) {
+    public ANCClientsProvider(Context context, View.OnClickListener onClickListener, AlertService alertService) {
         super(context);
         this.onClickListener = onClickListener;
         this.context = context;

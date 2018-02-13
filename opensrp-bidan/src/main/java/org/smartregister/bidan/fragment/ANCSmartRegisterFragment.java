@@ -6,7 +6,6 @@ import android.os.AsyncTask;
 import android.os.Build;
 import android.text.Editable;
 import android.text.TextWatcher;
-import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
@@ -22,10 +21,12 @@ import org.smartregister.bidan.activity.BaseRegisterActivity;
 import org.smartregister.bidan.activity.DetailANCActivity;
 import org.smartregister.bidan.activity.DetailMotherActivity;
 import org.smartregister.bidan.activity.NativeKIANCSmartRegisterActivity;
+import org.smartregister.bidan.activity.NativeKIPNCSmartRegisterActivity;
 import org.smartregister.bidan.activity.NativeKIbuSmartRegisterActivity;
 import org.smartregister.bidan.options.KIANCOverviewServiceMode;
 import org.smartregister.bidan.options.MotherFilterOption;
-import org.smartregister.bidan.provider.KIANCClientsProvider;
+import org.smartregister.bidan.provider.ANCClientsProvider;
+import org.smartregister.bidan.utils.AllConstantsINA;
 import org.smartregister.commonregistry.AllCommonsRepository;
 import org.smartregister.commonregistry.CommonPersonObject;
 import org.smartregister.commonregistry.CommonPersonObjectClient;
@@ -197,7 +198,7 @@ public class ANCSmartRegisterFragment extends BaseSmartRegisterFragment {
     public void initializeQueries(String s) {
         try {
 
-            KIANCClientsProvider kiscp = new KIANCClientsProvider(getActivity(), clientActionHandler, context().alertService());
+            ANCClientsProvider kiscp = new ANCClientsProvider(getActivity(), clientActionHandler, context().alertService());
             clientAdapter = new SmartRegisterPaginatedCursorAdapter(getActivity(), null, kiscp, new CommonRepository("ec_ibu", new String[]{"ec_ibu.is_closed", "ec_kartu_ibu.namalengkap", "ec_kartu_ibu.namaSuami"}));
             clientsView.setAdapter(clientAdapter);
 
@@ -205,14 +206,7 @@ public class ANCSmartRegisterFragment extends BaseSmartRegisterFragment {
             SmartRegisterQueryBuilder countqueryBuilder = new SmartRegisterQueryBuilder();
             countqueryBuilder.SelectInitiateMainTableCounts("ec_ibu");
 
-            if (s != null && !s.isEmpty()) {
-                Log.e(TAG, "initializeQueries with ID = " + s);
-                mainCondition = "is_closed = 0 AND namalengkap != '' AND object_id LIKE '%" + s + "%'";
-
-            } else {
-                mainCondition = "is_closed = 0 AND namalengkap != '' ";
-                Log.e(TAG, "initializeQueries: Not Initialized");
-            }
+            mainCondition = "is_closed = 0 AND namalengkap != '' ";
 
             joinTable = "";
             countSelect = countqueryBuilder.mainCondition(mainCondition);
@@ -273,8 +267,7 @@ public class ANCSmartRegisterFragment extends BaseSmartRegisterFragment {
     }
 
     private void updateSearchView() {
-        getSearchView().removeTextChangedListener(textWatcher);
-        getSearchView().addTextChangedListener(textWatcher);
+        textWatcher(AllConstantsINA.Register.ANC);
     }
 
     public void addChildToList(ArrayList<DialogOption> dialogOptionslist, Map<String, TreeNode<String, Location>> locationMap) {
@@ -364,7 +357,7 @@ public class ANCSmartRegisterFragment extends BaseSmartRegisterFragment {
                 case R.id.ib_btn_edit:
                     DetailANCActivity.ancClient = (CommonPersonObjectClient) view.getTag();
 //                    showFragmentDialog(new EditDialogOptionModel(), view.getTag());
-                    showFragmentDialog(((NativeKIANCSmartRegisterActivity) getActivity()).new EditDialogOptionModel(), view.getTag());
+                    showFragmentDialog(((NativeKIANCSmartRegisterActivity) getActivity()).new EditDialogOptionModelNew(), view.getTag());
 
                     break;
             }
@@ -380,6 +373,7 @@ public class ANCSmartRegisterFragment extends BaseSmartRegisterFragment {
 
         @Override
         public void onDialogOptionSelection(DialogOption option, Object tag) {
+            android.util.Log.e(TAG, "onDialogOptionSelection: EDIT");
 
             if (option.name().equalsIgnoreCase(getString(R.string.str_register_anc_form))) {
                 CommonPersonObjectClient pc = DetailMotherActivity.motherClient;

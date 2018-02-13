@@ -128,7 +128,8 @@ public class ClientProcessor {
 
     public Boolean processEvent(JSONObject event, JSONObject clientClassificationJson) throws Exception {
 
-        Log.e(TAG, "processEvent:event, client " );
+        Log.e(TAG, "processEvent:event " + event);
+        Log.e(TAG, "processEvent:clientClassificationJson " + clientClassificationJson);
 
         try {
             String baseEntityId = event.getString(baseEntityIdJSONKey);
@@ -140,7 +141,7 @@ public class ClientProcessor {
             // For data integrity check if a client exists, if not pull one from cloudant and
             // insert in drishti sqlite db
             JSONObject client = getClient(baseEntityId);
-            Log.e(TAG, "processEvent: "+ client );
+            Log.e(TAG, "processEvent: " + client);
             if (isNullOrEmptyJSONObject(client)) {
                 return false;
             }
@@ -152,7 +153,7 @@ public class ClientProcessor {
 
             // Get the client type classification
             JSONArray clientClasses = clientClassificationJson.getJSONArray("case_classification_rules");
-            Log.e(TAG, "processEvent:clientClasses "+ clientClasses );
+            Log.e(TAG, "processEvent:clientClasses " + clientClasses);
             if (isNullOrEmptyJSONArray(clientClasses)) {
 
                 return false;
@@ -160,7 +161,7 @@ public class ClientProcessor {
 
             for (int i = 0; i < clientClasses.length(); i++) {
                 JSONObject clientClass = clientClasses.getJSONObject(i);
-                Log.e(TAG, "processEvent: clientClass "+ clientClass );
+                Log.e(TAG, "processEvent: clientClass " + clientClass);
                 processClientClass(clientClass, event, client);
             }
 
@@ -180,7 +181,7 @@ public class ClientProcessor {
 
     public Boolean processEvent(JSONObject event, JSONObject client, JSONObject clientClassificationJson) throws Exception {
 
-        Log.e(TAG, "processEvent:event, client, clientClassification " );
+        Log.e(TAG, "processEvent:event, client, clientClassification ");
 
         try {
             String baseEntityId = event.getString(baseEntityIdJSONKey);
@@ -396,7 +397,7 @@ public class ClientProcessor {
 
             // save the values to db
             if (contentValues.size() > 0) {
-                Log.e(TAG, "processAlert: contentValues "+ contentValues );
+                Log.e(TAG, "processAlert: contentValues " + contentValues);
                 executeInsertAlert(contentValues);
             }
 
@@ -566,7 +567,7 @@ public class ClientProcessor {
                         JSONObject jsonDocSegmentObject = (JSONObject) jsonDocSegment;
                         columnValue = jsonDocSegmentObject.has(fieldName) ? jsonDocSegmentObject.getString(fieldName) : "";
 
-                        Log.e(TAG, "processCaseModel:columnValue " );
+                        Log.e(TAG, "processCaseModel:columnValue ");
 
                         // after successfully retrieving the column name and value store it in
                         // Content value
@@ -582,7 +583,7 @@ public class ClientProcessor {
                 updateIdenitifier(contentValues);
 
                 // save the values to db
-                Log.e(TAG, "processCaseModel:contentValues "+ contentValues );
+                Log.e(TAG, "processCaseModel:contentValues " + contentValues);
                 Long id = executeInsertStatement(contentValues, clientType);
                 updateFTSsearch(clientType, baseEntityId, contentValues);
                 Long timestamp = getEventDate(event.get("eventDate"));
@@ -948,7 +949,7 @@ public class ClientProcessor {
 
     private JSONObject getClient(String baseEntityId) {
         try {
-            Log.e(TAG, "getClient: "+mCloudantDataHandler.getClientByBaseEntityId(baseEntityId) );
+            Log.e(TAG, "getClient: " + mCloudantDataHandler.getClientByBaseEntityId(baseEntityId));
             return mCloudantDataHandler.getClientByBaseEntityId(baseEntityId);
         } catch (Exception e) {
             Log.e(getClass().getName(), "", e);

@@ -14,7 +14,6 @@
         <TableRow>
 
             <org.smartregister.view.customcontrols.CustomFontTextView
-                android:id="@+id/lbl_noBayi"
                 style="@style/CustomFontTextViewStyle.ListView.Medium"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -41,7 +40,6 @@
         <TableRow>
 
             <org.smartregister.view.customcontrols.CustomFontTextView
-                android:id="@+id/lbl_jenisKelamin"
                 style="@style/CustomFontTextViewStyle.ListView.Medium"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -67,7 +65,6 @@
         <TableRow>
 
             <org.smartregister.view.customcontrols.CustomFontTextView
-                android:id="@+id/lbl_beratLahir"
                 style="@style/CustomFontTextViewStyle.ListView.Medium"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -94,7 +91,6 @@
 
 
             <org.smartregister.view.customcontrols.CustomFontTextView
-                android:id="@+id/lbl_hasilPengukuranTinggiBayi"
                 style="@style/CustomFontTextViewStyle.ListView.Medium"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -122,7 +118,6 @@
 
 
             <org.smartregister.view.customcontrols.CustomFontTextView
-                android:id="@+id/lbl_indikatorBeratBedanBayi"
                 style="@style/CustomFontTextViewStyle.ListView.Medium"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -149,7 +144,6 @@
         <TableRow>
 
             <org.smartregister.view.customcontrols.CustomFontTextView
-                android:id="@+id/lbl_pemberianAsiEksklusif"
                 style="@style/CustomFontTextViewStyle.ListView.Medium"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -175,7 +169,6 @@
         <TableRow>
 
             <org.smartregister.view.customcontrols.CustomFontTextView
-                android:id="@+id/lbl_statusGizi"
                 style="@style/CustomFontTextViewStyle.ListView.Medium"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -201,7 +194,6 @@
         <TableRow>
 
             <org.smartregister.view.customcontrols.CustomFontTextView
-                android:id="@+id/lbl_hasilDilakukannyaKPSP"
                 style="@style/CustomFontTextViewStyle.ListView.Medium"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -227,7 +219,6 @@
         <TableRow>
 
             <org.smartregister.view.customcontrols.CustomFontTextView
-                android:id="@+id/lbl_pelayananVita"
                 style="@style/CustomFontTextViewStyle.ListView.Medium"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -253,7 +244,6 @@
         <TableRow>
 
             <org.smartregister.view.customcontrols.CustomFontTextView
-                android:id="@+id/lbl_tanggalpemberianimunisasiHb07"
                 style="@style/CustomFontTextViewStyle.ListView.Medium"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -279,7 +269,6 @@
         <TableRow>
 
             <org.smartregister.view.customcontrols.CustomFontTextView
-                android:id="@+id/lbl_tanggalpemberianimunisasiBCGdanPolio1"
                 style="@style/CustomFontTextViewStyle.ListView.Medium"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -305,7 +294,6 @@
         <TableRow>
 
             <org.smartregister.view.customcontrols.CustomFontTextView
-                android:id="@+id/lbl_tanggalpemberianimunisasiDPTHB1Polio2"
                 style="@style/CustomFontTextViewStyle.ListView.Medium"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -331,7 +319,6 @@
         <TableRow>
 
             <org.smartregister.view.customcontrols.CustomFontTextView
-                android:id="@+id/lbl_tanggalpemberianimunisasiDPTHB2Polio3"
                 style="@style/CustomFontTextViewStyle.ListView.Medium"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -357,7 +344,6 @@
         <TableRow>
 
             <org.smartregister.view.customcontrols.CustomFontTextView
-                android:id="@+id/lbl_tanggalpemberianimunisasiDPTHB3Polio4"
                 style="@style/CustomFontTextViewStyle.ListView.Medium"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -383,7 +369,6 @@
         <TableRow>
 
             <org.smartregister.view.customcontrols.CustomFontTextView
-                android:id="@+id/lbl_tanggalpemberianimunisasiCampak"
                 style="@style/CustomFontTextViewStyle.ListView.Medium"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"

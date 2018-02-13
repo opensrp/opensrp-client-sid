@@ -17,7 +17,6 @@
         "name": "referenceDate",
         "bind": "/model/instance/anc_registration/tanggal_periksa",
         "shouldLoadValue": true
-
       },
       {
         "name": "gravida",
@@ -47,13 +46,11 @@
         "name": "persalinanSebelumnya",
         "bind": "/model/instance/anc_registration/persalinan_sebelumnya",
         "shouldLoadValue": true
-
       },
       {
         "name": "riwayatKomplikasiKebidanan",
         "bind": "/model/instance/anc_registration/riwayat_komplikasi_kebidanan",
         "shouldLoadValue": true
-
       },
       {
         "name": "rkklainnya",
@@ -69,19 +66,16 @@
         "name": "rpkLainnya",
         "bind": "/model/instance/anc_registration/penyakit_kronisL",
         "shouldLoadValue": true
-
       },
       {
         "name": "Alergi",
         "bind": "/model/instance/anc_registration/alergi",
         "shouldLoadValue": true
-
       },
       {
         "name": "tanggalHPHT",
         "bind": "/model/instance/anc_registration/hpht",
         "shouldLoadValue": true
-
       },
       {
         "name": "htp",
@@ -129,7 +123,6 @@
         "bind": "/model/instance/anc_registration/reg_date",
         "source": "ibu.kartu_ibu.registrationDate"
       },
-
       {
         "name": "type",
         "value": "anc",

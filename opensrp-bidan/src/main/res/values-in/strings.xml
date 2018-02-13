@@ -16,11 +16,11 @@
     <string name="form_back_confirm_dialog_title">Konfirmasi penutupan form</string>
     <string name="yes_button_label">Iya</string>
     <string name="no_button_label">Tidak</string>
-    <string name="anc_ke">ANC Ke: …</string>
-    <string name="pnc_ke">PNC Visit</string>
+    <string name="anc_ke">ANC Ke</string>
+    <string name="pnc_ke">PNC Ke</string>
     <string name="sort_by_name_label_reverse">Nama (Z ke A)</string>
     <string name="sort_by_wife_age_label">Umur</string>
-    <string name="sort_by_ec_number_label">EC Number</string>
+    <string name="sort_by_ec_number_label">Nomor EC</string>
     <string name="sort_by_date_of_delivery_label">Tanggal Persalinan</string>
     <string name="sort_by_sc_label">SC</string>
     <string name="sort_by_st_label">ST</string>
@@ -149,8 +149,8 @@
     </string>
     <string name="unsynced_forms_count_message">forms unsynced</string>
 
-    <string name="str_next">"Next &gt;&gt;"</string>
-    <string name="str_previous">"&lt;&lt; Previous"</string>
+    <string name="str_next">"Next …"</string>
+    <string name="str_previous">"… Previous"</string>
     <string name="str_page_info">Page {0} of {1}</string>
 
     <string name="str_gravida_full">Gravida</string>
@@ -215,7 +215,7 @@
     <string name="service_type_mmr">MMR</string>
     <string name="service_type_vitamin_a">Vitamin A</string>
     <string name="service_type_illness_visit">Illness Visit</string>
-    <string name="service_type_empty"/>
+    <string name="service_type_empty" />
     <string name="sick_visit">Sick Visit</string>
     <string name="illness_report"><b>Illness Report:</b> %s</string>
     <string name="illness_date">Date:</string>
@@ -265,7 +265,7 @@
     <string name="fp_prioritization_one_child_service_mode">1 Child</string>
     <string name="fp_register_child_details">Anak</string>
     <string name="str_due">"Due "</string>
-    <string name="fp_methods">Jenis: …</string>
+    <string name="fp_methods">Jenis </string>
     <string name="fp_prioritization">FP Prioritization</string>
     <string name="fp_prioritization_add_fp">Add FP</string>
     <string name="fp_prioritization_fp_videos">FP Videos</string>
@@ -290,7 +290,7 @@
     <string name="hb_test_label">Hb Test</string>
     <string name="str_days_past_due">day (s) past due</string>
     <string name="lmp_label">LMP:</string>
-    <string name="str_weeks"> …Minggu</string>
+    <string name="str_weeks"> Minggu</string>
     <string name="anc_register_title_in_short">ANC</string>
     <string name="str_bp">BP</string>
     <string name="str_weight">Berat</string>
@@ -341,7 +341,7 @@
     <string name="str_pnc_visit_button_label">PNC Visit</string>
 
     <string name="show_more_button">Lihat lebih …</string>
-    <string name="show_less_button">Sembunyikan  . . .</string>
+    <string name="show_less_button">Sembunyikan …</string>
     <string name="mother_already_registered">Ibu sudah terdaftar di ANC</string>
     <string name="anc_visit_integrasi">Kunjungan ANC Integrasi</string>
     <string name="anc_visit_labtest">Kunjungan ANC Tes Lab</string>
@@ -365,11 +365,11 @@
     <string name="service_fp">Status Pelayanan: KB </string>
     <string name="service_anc">Status Pelayanan: ANC</string>
     <string name="service_pnc">Status Pelayanan: PNC</string>
-    <string name="name">NAMA:  …</string>
-    <string name="nik">NIK: … </string>
-    <string name="husband_name">Nama Suami: … </string>
-    <string name="dob">Tanggal Lahir:  …</string>
-    <string name="phone">No HP: …</string>
+    <string name="name">NAMA: </string>
+    <string name="nik">NIK: </string>
+    <string name="husband_name">Nama Suami: </string>
+    <string name="dob">Tanggal Lahir: </string>
+    <string name="phone">No HP: </string>
 
     <!-- Mother detail -->
     <string name="basic_information">Informasi Dasar</string>

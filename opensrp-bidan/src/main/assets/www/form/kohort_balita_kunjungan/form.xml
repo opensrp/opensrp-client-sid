@@ -1,123 +1,286 @@
-<form autocomplete="off" novalidate="novalidate" class="or clearfix" id="kunjungan_balita">
+<form autocomplete="off" class="or clearfix" id="kunjungan_balita" novalidate="novalidate">
     <!--This form was created by transforming a OpenRosa-flavored (X)Form using an XSLT sheet created by Enketo LLC.-->
     <section class="form-logo"></section>
     <h3 id="form-title">Kunjungan Balita</h3>
-    <select id="form-languages" data-default-lang="Bahasa">
+    <select data-default-lang="Bahasa" id="form-languages">
         <option value="Bahasa">Bahasa</option>
         <option value="en">English</option>
     </select>
     <label class="note non-select ">
-        <span lang="Bahasa" class="question-label active" data-itext-id="/kunjungan_balita_reviewed/generated_note_name_13:label">Desa :
+        <span class="question-label active" data-itext-id="/kunjungan_balita_reviewed/generated_note_name_13:label"
+            lang="Bahasa">Desa :
             <span class="or-output" data-value=" /kunjungan_balita_reviewed/Village "></span>
         </span>
-        <span lang="en" class="question-label " data-itext-id="/kunjungan_balita_reviewed/generated_note_name_13:label">-</span>
-        <input type="text" name="/kunjungan_balita_reviewed/generated_note_name_13" data-type-xml="string" readonly="readonly"/>
+        <span class="question-label " data-itext-id="/kunjungan_balita_reviewed/generated_note_name_13:label"
+            lang="en">-
+        </span>
+        <input name="/kunjungan_balita_reviewed/generated_note_name_13" data-type-xml="string"
+            readonly="readonly" type="text" />
     </label>
     <label class="note non-select ">
-        <span lang="Bahasa" class="question-label active" data-itext-id="/kunjungan_balita_reviewed/generated_note_name_14:label">Dusun :
+        <span class="question-label active" data-itext-id="/kunjungan_balita_reviewed/generated_note_name_14:label"
+            lang="Bahasa">Dusun :
             <span class="or-output" data-value=" /kunjungan_balita_reviewed/Sub-village "></span>
         </span>
-        <span lang="en" class="question-label " data-itext-id="/kunjungan_balita_reviewed/generated_note_name_14:label">-</span>
-        <input type="text" name="/kunjungan_balita_reviewed/generated_note_name_14" data-type-xml="string" readonly="readonly"/>
+        <span class="question-label " data-itext-id="/kunjungan_balita_reviewed/generated_note_name_14:label"
+            lang="en">-
+        </span>
+        <input name="/kunjungan_balita_reviewed/generated_note_name_14" data-type-xml="string"
+            readonly="readonly" type="text" />
     </label>
     <fieldset class="question ">
         <fieldset>
             <legend>
-                <span lang="Bahasa" class="question-label active" data-itext-id="/kunjungan_balita_reviewed/Lokasi_periksa:label">Lokasi Periksa</span>
-                <span lang="en" class="question-label " data-itext-id="/kunjungan_balita_reviewed/Lokasi_periksa:label">Location of Service</span>
+                <span class="question-label active" data-itext-id="/kunjungan_balita_reviewed/Lokasi_periksa:label"
+                    lang="Bahasa">Lokasi Periksa
+                </span>
+                <span class="question-label " data-itext-id="/kunjungan_balita_reviewed/Lokasi_periksa:label"
+                    lang="en">Location of
+                    Service
+                </span>
 
             </legend>
             <div class="option-wrapper">
                 <label class="">
-                    <input type="radio" name="/kunjungan_balita_reviewed/Lokasi_periksa" data-name="/kunjungan_balita_reviewed/Lokasi_periksa" value="Posyandu"  data-type-xml="select1"/>
-                    <span lang="Bahasa" class="option-label active" data-itext-id="/kunjungan_balita_reviewed/Lokasi_periksa/Posyandu:label">Posyandu</span>
-                    <span lang="en" class="option-label " data-itext-id="/kunjungan_balita_reviewed/Lokasi_periksa/Posyandu:label">Village Outreach Post</span>
+                    <input name="/kunjungan_balita_reviewed/Lokasi_periksa" data-name="/kunjungan_balita_reviewed/Lokasi_periksa"
+                        data-type-xml="select1" type="radio"
+                        value="Posyandu" />
+                    <span class="option-label active" data-itext-id="/kunjungan_balita_reviewed/Lokasi_periksa/Posyandu:label"
+                        lang="Bahasa">
+                        Posyandu
+                    </span>
+                    <span class="option-label " data-itext-id="/kunjungan_balita_reviewed/Lokasi_periksa/Posyandu:label"
+                        lang="en">
+                        Village Outreach Post
+                    </span>
                 </label>
                 <label class="">
-                    <input type="radio" name="/kunjungan_balita_reviewed/Lokasi_periksa" data-name="/kunjungan_balita_reviewed/Lokasi_periksa" value="Polindes"  data-type-xml="select1"/>
-                    <span lang="Bahasa" class="option-label active" data-itext-id="/kunjungan_balita_reviewed/Lokasi_periksa/Polindes:label">Polindes</span>
-                    <span lang="en" class="option-label " data-itext-id="/kunjungan_balita_reviewed/Lokasi_periksa/Polindes:label">Health Clinic Post</span>
+                    <input name="/kunjungan_balita_reviewed/Lokasi_periksa" data-name="/kunjungan_balita_reviewed/Lokasi_periksa"
+                        data-type-xml="select1" type="radio"
+                        value="Polindes" />
+                    <span class="option-label active" data-itext-id="/kunjungan_balita_reviewed/Lokasi_periksa/Polindes:label"
+                        lang="Bahasa">
+                        Polindes
+                    </span>
+                    <span class="option-label " data-itext-id="/kunjungan_balita_reviewed/Lokasi_periksa/Polindes:label"
+                        lang="en">
+                        Health Clinic Post
+                    </span>
                 </label>
                 <label class="">
-                    <input type="radio" name="/kunjungan_balita_reviewed/Lokasi_periksa" data-name="/kunjungan_balita_reviewed/Lokasi_periksa" value="Puskesmas"  data-type-xml="select1"/>
-                    <span lang="Bahasa" class="option-label active" data-itext-id="/kunjungan_balita_reviewed/Lokasi_periksa/Puskesmas:label">Puskesmas</span>
-                    <span lang="en" class="option-label " data-itext-id="/kunjungan_balita_reviewed/Lokasi_periksa/Puskesmas:label">Health Facility</span>
+                    <input name="/kunjungan_balita_reviewed/Lokasi_periksa" data-name="/kunjungan_balita_reviewed/Lokasi_periksa"
+                        data-type-xml="select1" type="radio"
+                        value="Puskesmas" />
+                    <span class="option-label active" data-itext-id="/kunjungan_balita_reviewed/Lokasi_periksa/Puskesmas:label"
+                        lang="Bahasa">
+                        Puskesmas
+                    </span>
+                    <span class="option-label " data-itext-id="/kunjungan_balita_reviewed/Lokasi_periksa/Puskesmas:label"
+                        lang="en">
+                        Health Facility
+                    </span>
                 </label>
                 <label class="">
-                    <input type="radio" name="/kunjungan_balita_reviewed/Lokasi_periksa" data-name="/kunjungan_balita_reviewed/Lokasi_periksa" value="Ibu_rumah"  data-type-xml="select1"/>
-                    <span lang="Bahasa" class="option-label active" data-itext-id="/kunjungan_balita_reviewed/Lokasi_periksa/Ibu_rumah:label">Rumah Ibu</span>
-                    <span lang="en" class="option-label " data-itext-id="/kunjungan_balita_reviewed/Lokasi_periksa/Ibu_rumah:label">Mother House</span>
+                    <input name="/kunjungan_balita_reviewed/Lokasi_periksa" data-name="/kunjungan_balita_reviewed/Lokasi_periksa"
+                        data-type-xml="select1" type="radio"
+                        value="Ibu_rumah" />
+                    <span class="option-label active" data-itext-id="/kunjungan_balita_reviewed/Lokasi_periksa/Ibu_rumah:label"
+                        lang="Bahasa">
+                        Rumah Ibu
+                    </span>
+                    <span class="option-label " data-itext-id="/kunjungan_balita_reviewed/Lokasi_periksa/Ibu_rumah:label"
+                        lang="en">
+                        Mother House
+                    </span>
                 </label>
                 <label class="">
-                    <input type="radio" name="/kunjungan_balita_reviewed/Lokasi_periksa" data-name="/kunjungan_balita_reviewed/Lokasi_periksa" value="Rumah_Sakit"  data-type-xml="select1"/>
-                    <span lang="Bahasa" class="option-label active" data-itext-id="/kunjungan_balita_reviewed/Lokasi_periksa/Rumah_Sakit:label">Rumah Sakit</span>
-                    <span lang="en" class="option-label " data-itext-id="/kunjungan_balita_reviewed/Lokasi_periksa/Rumah_Sakit:label">Hospital</span>
+                    <input name="/kunjungan_balita_reviewed/Lokasi_periksa" data-name="/kunjungan_balita_reviewed/Lokasi_periksa"
+                        data-type-xml="select1" type="radio"
+                        value="Rumah_Sakit" />
+                    <span class="option-label active" data-itext-id="/kunjungan_balita_reviewed/Lokasi_periksa/Rumah_Sakit:label"
+                        lang="Bahasa">
+                        Rumah Sakit
+                    </span>
+                    <span class="option-label " data-itext-id="/kunjungan_balita_reviewed/Lokasi_periksa/Rumah_Sakit:label"
+                        lang="en">
+                        Hospital
+                    </span>
                 </label>
                 <label class="">
-                    <input type="radio" name="/kunjungan_balita_reviewed/Lokasi_periksa" data-name="/kunjungan_balita_reviewed/Lokasi_periksa" value="lainya"  data-type-xml="select1"/>
-                    <span lang="Bahasa" class="option-label active" data-itext-id="/kunjungan_balita_reviewed/Lokasi_periksa/lainya:label">Lainnya</span>
-                    <span lang="en" class="option-label " data-itext-id="/kunjungan_balita_reviewed/Lokasi_periksa/lainya:label">Other</span>
+                    <input name="/kunjungan_balita_reviewed/Lokasi_periksa" data-name="/kunjungan_balita_reviewed/Lokasi_periksa"
+                        data-type-xml="select1" type="radio"
+                        value="lainya" />
+                    <span class="option-label active" data-itext-id="/kunjungan_balita_reviewed/Lokasi_periksa/lainya:label"
+                        lang="Bahasa">
+                        Lainnya
+                    </span>
+                    <span class="option-label " data-itext-id="/kunjungan_balita_reviewed/Lokasi_periksa/lainya:label"
+                        lang="en">Other
+                    </span>
                 </label>
             </div>
         </fieldset>
     </fieldset>
     <label class="question non-select ">
-        <span lang="Bahasa" class="or-constraint-msg active" data-itext-id="/kunjungan_balita_reviewed/tanggal_pemeriksaan_anak_balita:jr:constraintMsg">diisi dengan tanggal hari ini atau sebelumnya</span>
-        <span lang="en" class="or-constraint-msg " data-itext-id="/kunjungan_balita_reviewed/tanggal_pemeriksaan_anak_balita:jr:constraintMsg">Fill in the date of today or the days before</span>
-        <span lang="Bahasa" class="question-label active" data-itext-id="/kunjungan_balita_reviewed/tanggal_pemeriksaan_anak_balita:label">Tanggal diperiksa</span>
-        <span lang="en" class="question-label " data-itext-id="/kunjungan_balita_reviewed/tanggal_pemeriksaan_anak_balita:label">Date of child check-up</span>
+        <span class="or-constraint-msg active" data-itext-id="/kunjungan_balita_reviewed/tanggal_pemeriksaan_anak_balita:jr:constraintMsg"
+            lang="Bahasa">
+            diisi dengan tanggal hari ini atau sebelumnya
+        </span>
+        <span class="or-constraint-msg " data-itext-id="/kunjungan_balita_reviewed/tanggal_pemeriksaan_anak_balita:jr:constraintMsg"
+            lang="en">
+            Fill in the date of today or the days before
+        </span>
+        <span class="question-label active" data-itext-id="/kunjungan_balita_reviewed/tanggal_pemeriksaan_anak_balita:label"
+            lang="Bahasa">Tanggal
+            diperiksa
+        </span>
+        <span class="question-label " data-itext-id="/kunjungan_balita_reviewed/tanggal_pemeriksaan_anak_balita:label"
+            lang="en">Date of
+            child check-up
+        </span>
         <span class="required">*</span>
-        <span lang="Bahasa" class="or-hint active" data-itext-id="/kunjungan_balita_reviewed/tanggal_pemeriksaan_anak_balita:hint">Diisi tanggal kunjungan</span>
-        <span lang="en" class="or-hint " data-itext-id="/kunjungan_balita_reviewed/tanggal_pemeriksaan_anak_balita:hint">Fill in the date of check-up</span>
-        <input type="date" name="/kunjungan_balita_reviewed/tanggal_pemeriksaan_anak_balita" required="required" data-constraint=".&lt;= /kunjungan_balita_reviewed/today " data-calculate=" /kunjungan_balita_reviewed/today " data-type-xml="date"/>
+        <span class="or-hint active" data-itext-id="/kunjungan_balita_reviewed/tanggal_pemeriksaan_anak_balita:hint"
+            lang="Bahasa">Diisi
+            tanggal kunjungan
+        </span>
+        <span class="or-hint " data-itext-id="/kunjungan_balita_reviewed/tanggal_pemeriksaan_anak_balita:hint"
+            lang="en">Fill in
+            the date of check-up
+        </span>
+        <input name="/kunjungan_balita_reviewed/tanggal_pemeriksaan_anak_balita" data-calculate=" /kunjungan_balita_reviewed/today "
+            data-constraint=".&lt;= /kunjungan_balita_reviewed/today " data-type-xml="date"
+            required="required" type="date" />
     </label>
     <label class="question non-select ">
-        <span lang="Bahasa" class="or-constraint-msg active" data-itext-id="/kunjungan_balita_reviewed/hasil_penimbangan_anak_balita:jr:constraintMsg">nilai tidak boleh minus</span>
-        <span lang="en" class="or-constraint-msg " data-itext-id="/kunjungan_balita_reviewed/hasil_penimbangan_anak_balita:jr:constraintMsg">Minus value is not allowed</span>
-        <span lang="Bahasa" class="question-label active" data-itext-id="/kunjungan_balita_reviewed/hasil_penimbangan_anak_balita:label">Berat badan (BB) anak Balita</span>
-        <span lang="en" class="question-label " data-itext-id="/kunjungan_balita_reviewed/hasil_penimbangan_anak_balita:label">Result of baby weighing</span>
-        <span lang="Bahasa" class="or-hint active" data-itext-id="/kunjungan_balita_reviewed/hasil_penimbangan_anak_balita:hint">Diisi dengan hasil penimbangan berat badan saat pemeriksaan</span>
-        <span lang="en" class="or-hint " data-itext-id="/kunjungan_balita_reviewed/hasil_penimbangan_anak_balita:hint">Fill in the child's weight on the check-up</span>
-        <input type="number" name="/kunjungan_balita_reviewed/hasil_penimbangan_anak_balita" data-constraint=".&gt;0" data-type-xml="decimal" step="any"/>
+        <span class="or-constraint-msg active" data-itext-id="/kunjungan_balita_reviewed/hasil_penimbangan_anak_balita:jr:constraintMsg"
+            lang="Bahasa">
+            nilai tidak boleh minus
+        </span>
+        <span class="or-constraint-msg " data-itext-id="/kunjungan_balita_reviewed/hasil_penimbangan_anak_balita:jr:constraintMsg"
+            lang="en">
+            Minus value is not allowed
+        </span>
+        <span class="question-label active" data-itext-id="/kunjungan_balita_reviewed/hasil_penimbangan_anak_balita:label"
+            lang="Bahasa">Berat
+            badan (BB) anak Balita
+        </span>
+        <span class="question-label " data-itext-id="/kunjungan_balita_reviewed/hasil_penimbangan_anak_balita:label"
+            lang="en">Result of
+            baby weighing
+        </span>
+        <span class="or-hint active" data-itext-id="/kunjungan_balita_reviewed/hasil_penimbangan_anak_balita:hint"
+            lang="Bahasa">Diisi
+            dengan hasil penimbangan berat badan saat pemeriksaan
+        </span>
+        <span class="or-hint " data-itext-id="/kunjungan_balita_reviewed/hasil_penimbangan_anak_balita:hint"
+            lang="en">Fill in
+            the child's weight on the check-up
+        </span>
+        <input name="/kunjungan_balita_reviewed/hasil_penimbangan_anak_balita" data-constraint=".&gt;0"
+            data-type-xml="decimal" step="any" type="number" />
     </label>
     <label class="question non-select ">
-        <span lang="Bahasa" class="or-constraint-msg active" data-itext-id="/kunjungan_balita_reviewed/hasil_pengukuran_tinggi_anak_balita:jr:constraintMsg">nilai tidak boleh minus</span>
-        <span lang="en" class="or-constraint-msg " data-itext-id="/kunjungan_balita_reviewed/hasil_pengukuran_tinggi_anak_balita:jr:constraintMsg">Minus value is not allowed</span>
-        <span lang="Bahasa" class="question-label active" data-itext-id="/kunjungan_balita_reviewed/hasil_pengukuran_tinggi_anak_balita:label">Tinggi badan (TB) anak Balita</span>
-        <span lang="en" class="question-label " data-itext-id="/kunjungan_balita_reviewed/hasil_pengukuran_tinggi_anak_balita:label">Length/Height (cm)</span>
-        <span lang="Bahasa" class="or-hint active" data-itext-id="/kunjungan_balita_reviewed/hasil_pengukuran_tinggi_anak_balita:hint">Diisi dengan hasil pengukuran tinggi badan saat pemeriksaan</span>
-        <span lang="en" class="or-hint " data-itext-id="/kunjungan_balita_reviewed/hasil_pengukuran_tinggi_anak_balita:hint">Fill in the child's height on the check-up</span>
-        <input type="number" name="/kunjungan_balita_reviewed/hasil_pengukuran_tinggi_anak_balita" data-constraint=".&gt;0" data-type-xml="decimal" step="any"/>
+        <span class="or-constraint-msg active" data-itext-id="/kunjungan_balita_reviewed/hasil_pengukuran_tinggi_anak_balita:jr:constraintMsg"
+            lang="Bahasa">
+            nilai tidak boleh minus
+        </span>
+        <span class="or-constraint-msg " data-itext-id="/kunjungan_balita_reviewed/hasil_pengukuran_tinggi_anak_balita:jr:constraintMsg"
+            lang="en">
+            Minus value is not allowed
+        </span>
+        <span class="question-label active" data-itext-id="/kunjungan_balita_reviewed/hasil_pengukuran_tinggi_anak_balita:label"
+            lang="Bahasa">
+            Tinggi badan (TB) anak Balita
+        </span>
+        <span class="question-label " data-itext-id="/kunjungan_balita_reviewed/hasil_pengukuran_tinggi_anak_balita:label"
+            lang="en">
+            Length/Height (cm)
+        </span>
+        <span class="or-hint active" data-itext-id="/kunjungan_balita_reviewed/hasil_pengukuran_tinggi_anak_balita:hint"
+            lang="Bahasa">
+            Diisi dengan hasil pengukuran tinggi badan saat pemeriksaan
+        </span>
+        <span class="or-hint " data-itext-id="/kunjungan_balita_reviewed/hasil_pengukuran_tinggi_anak_balita:hint"
+            lang="en">Fill
+            in the child's height on the check-up
+        </span>
+        <input name="/kunjungan_balita_reviewed/hasil_pengukuran_tinggi_anak_balita" data-constraint=".&gt;0"
+            data-type-xml="decimal" step="any" type="number" />
     </label>
     <fieldset class="question ">
         <fieldset>
             <legend>
-                <span lang="Bahasa" class="question-label active" data-itext-id="/kunjungan_balita_reviewed/indikator_berat_badan_bayi:label">Indikator pertumbuhan balita (monitor berat badan)</span>
-                <span lang="en" class="question-label " data-itext-id="/kunjungan_balita_reviewed/indikator_berat_badan_bayi:label">Indicator of baby's growth (weight monitoring)</span>
+                <span class="question-label active" data-itext-id="/kunjungan_balita_reviewed/indikator_berat_badan_bayi:label"
+                    lang="Bahasa">
+                    Indikator pertumbuhan balita (monitor berat badan)
+                </span>
+                <span class="question-label " data-itext-id="/kunjungan_balita_reviewed/indikator_berat_badan_bayi:label"
+                    lang="en">
+                    Indicator of baby's growth (weight monitoring)
+                </span>
 
-                <span lang="Bahasa" class="or-hint active" data-itext-id="/kunjungan_balita_reviewed/indikator_berat_badan_bayi:hint">Diisi dengan indikator berat badan naik, turun, tidak ditimbang atau baru ditimbang</span>
-                <span lang="en" class="or-hint " data-itext-id="/kunjungan_balita_reviewed/indikator_berat_badan_bayi:hint">Fill in the indicator whether the child's weight is increased, decreased/constant, not weighed or it's child first weight measurement</span>
+                <span class="or-hint active" data-itext-id="/kunjungan_balita_reviewed/indikator_berat_badan_bayi:hint"
+                    lang="Bahasa">Diisi
+                    dengan indikator berat badan naik, turun, tidak ditimbang atau baru ditimbang
+                </span>
+                <span class="or-hint " data-itext-id="/kunjungan_balita_reviewed/indikator_berat_badan_bayi:hint"
+                    lang="en">Fill
+                    in the indicator whether the child's weight is increased, decreased/constant,
+                    not weighed or it's child first weight measurement
+                </span>
             </legend>
             <div class="option-wrapper">
                 <label class="">
-                    <input type="radio" name="/kunjungan_balita_reviewed/indikator_berat_badan_bayi" data-name="/kunjungan_balita_reviewed/indikator_berat_badan_bayi" value="N"  data-type-xml="select1"/>
-                    <span lang="Bahasa" class="option-label active" data-itext-id="/kunjungan_balita_reviewed/indikator_berat_badan_bayi/N:label">N (jika berat bedan naik sesuai garis pertumbuhan)</span>
-                    <span lang="en" class="option-label " data-itext-id="/kunjungan_balita_reviewed/indikator_berat_badan_bayi/N:label">N (in line with healthy growth)</span>
+                    <input name="/kunjungan_balita_reviewed/indikator_berat_badan_bayi" data-name="/kunjungan_balita_reviewed/indikator_berat_badan_bayi"
+                        data-type-xml="select1" type="radio"
+                        value="N" />
+                    <span class="option-label active" data-itext-id="/kunjungan_balita_reviewed/indikator_berat_badan_bayi/N:label"
+                        lang="Bahasa">
+                        N (jika berat bedan naik sesuai garis pertumbuhan)
+                    </span>
+                    <span class="option-label " data-itext-id="/kunjungan_balita_reviewed/indikator_berat_badan_bayi/N:label"
+                        lang="en">
+                        N (in line with healthy growth)
+                    </span>
                 </label>
                 <label class="">
-                    <input type="radio" name="/kunjungan_balita_reviewed/indikator_berat_badan_bayi" data-name="/kunjungan_balita_reviewed/indikator_berat_badan_bayi" value="T"  data-type-xml="select1"/>
-                    <span lang="Bahasa" class="option-label active" data-itext-id="/kunjungan_balita_reviewed/indikator_berat_badan_bayi/T:label">T (tidak naik berat badannya, berat badan tetap)</span>
-                    <span lang="en" class="option-label " data-itext-id="/kunjungan_balita_reviewed/indikator_berat_badan_bayi/T:label">T (weight not increasing in line with growth chart)</span>
+                    <input name="/kunjungan_balita_reviewed/indikator_berat_badan_bayi" data-name="/kunjungan_balita_reviewed/indikator_berat_badan_bayi"
+                        data-type-xml="select1" type="radio"
+                        value="T" />
+                    <span class="option-label active" data-itext-id="/kunjungan_balita_reviewed/indikator_berat_badan_bayi/T:label"
+                        lang="Bahasa">
+                        T (tidak naik berat badannya, berat badan tetap)
+                    </span>
+                    <span class="option-label " data-itext-id="/kunjungan_balita_reviewed/indikator_berat_badan_bayi/T:label"
+                        lang="en">
+                        T (weight not increasing in line with growth chart)
+                    </span>
                 </label>
                 <label class="">
-                    <input type="radio" name="/kunjungan_balita_reviewed/indikator_berat_badan_bayi" data-name="/kunjungan_balita_reviewed/indikator_berat_badan_bayi" value="O"  data-type-xml="select1"/>
-                    <span lang="Bahasa" class="option-label active" data-itext-id="/kunjungan_balita_reviewed/indikator_berat_badan_bayi/O:label">O (tidak ditimbang pada bulan lalu)</span>
-                    <span lang="en" class="option-label " data-itext-id="/kunjungan_balita_reviewed/indikator_berat_badan_bayi/O:label">O (child wasn't weighed last month)</span>
+                    <input name="/kunjungan_balita_reviewed/indikator_berat_badan_bayi" data-name="/kunjungan_balita_reviewed/indikator_berat_badan_bayi"
+                        data-type-xml="select1" type="radio"
+                        value="O" />
+                    <span class="option-label active" data-itext-id="/kunjungan_balita_reviewed/indikator_berat_badan_bayi/O:label"
+                        lang="Bahasa">
+                        O (tidak ditimbang pada bulan lalu)
+                    </span>
+                    <span class="option-label " data-itext-id="/kunjungan_balita_reviewed/indikator_berat_badan_bayi/O:label"
+                        lang="en">
+                        O (child wasn't weighed last month)
+                    </span>
                 </label>
                 <label class="">
-                    <input type="radio" name="/kunjungan_balita_reviewed/indikator_berat_badan_bayi" data-name="/kunjungan_balita_reviewed/indikator_berat_badan_bayi" value="B" data-type-xml="select1"/>
-                    <span lang="Bahasa" class="option-label active" data-itext-id="/kunjungan_balita_reviewed/indikator_berat_badan_bayi/B:label">B (baru pertama kali ditimbang)</span>
-                    <span lang="en" class="option-label " data-itext-id="/kunjungan_balita_reviewed/indikator_berat_badan_bayi/B:label">B (it is the first time the child is weighed)</span>
+                    <input name="/kunjungan_balita_reviewed/indikator_berat_badan_bayi" data-name="/kunjungan_balita_reviewed/indikator_berat_badan_bayi"
+                        data-type-xml="select1" type="radio"
+                        value="B" />
+                    <span class="option-label active" data-itext-id="/kunjungan_balita_reviewed/indikator_berat_badan_bayi/B:label"
+                        lang="Bahasa">
+                        B (baru pertama kali ditimbang)
+                    </span>
+                    <span class="option-label " data-itext-id="/kunjungan_balita_reviewed/indikator_berat_badan_bayi/B:label"
+                        lang="en">
+                        B (it is the first time the child is weighed)
+                    </span>
                 </label>
             </div>
         </fieldset>
@@ -125,31 +288,76 @@
     <fieldset class="question ">
         <fieldset>
             <legend>
-                <span lang="Bahasa" class="question-label active" data-itext-id="/kunjungan_balita_reviewed/hasil_dilakukannya_kpsp:label">Hasil dilakukannya KPSP</span>
-                <span lang="en" class="question-label " data-itext-id="/kunjungan_balita_reviewed/hasil_dilakukannya_kpsp:label">Result of Pra Screening Development Questionnaire</span>
-                <span lang="Bahasa" class="or-hint active" data-itext-id="/kunjungan_balita_reviewed/hasil_dilakukannya_kpsp:hint">Hasil yang didapatkan setelah dilakukan Kuesioner Pra Skrining Perkembangan (KPSP) per Bulan selama 5 tahun</span>
-                <span lang="en" class="or-hint " data-itext-id="/kunjungan_balita_reviewed/hasil_dilakukannya_kpsp:hint">The result of Pre-Screening Questionnaire of Development per month for 5 years</span>
+                <span class="question-label active" data-itext-id="/kunjungan_balita_reviewed/hasil_dilakukannya_kpsp:label"
+                    lang="Bahasa">Hasil
+                    dilakukannya KPSP
+                </span>
+                <span class="question-label " data-itext-id="/kunjungan_balita_reviewed/hasil_dilakukannya_kpsp:label"
+                    lang="en">Result
+                    of Pra Screening Development Questionnaire
+                </span>
+                <span class="or-hint active" data-itext-id="/kunjungan_balita_reviewed/hasil_dilakukannya_kpsp:hint"
+                    lang="Bahasa">Hasil
+                    yang didapatkan setelah dilakukan Kuesioner Pra Skrining Perkembangan (KPSP) per
+                    Bulan selama 5 tahun
+                </span>
+                <span class="or-hint " data-itext-id="/kunjungan_balita_reviewed/hasil_dilakukannya_kpsp:hint"
+                    lang="en">The
+                    result of Pre-Screening Questionnaire of Development per month for 5 years
+                </span>
             </legend>
             <div class="option-wrapper">
                 <label class="">
-                    <input type="radio" name="/kunjungan_balita_reviewed/hasil_dilakukannya_kpsp" data-name="/kunjungan_balita_reviewed/hasil_dilakukannya_kpsp" value="DS" data-type-xml="select1"/>
-                    <span lang="Bahasa" class="option-label active" data-itext-id="/kunjungan_balita_reviewed/hasil_dilakukannya_kpsp/DS:label">KPSP dilakukan dan hasilnya sesuai (DS)</span>
-                    <span lang="en" class="option-label " data-itext-id="/kunjungan_balita_reviewed/hasil_dilakukannya_kpsp/DS:label">Result of Pra Screening Development Questionnaire is matched</span>
+                    <input name="/kunjungan_balita_reviewed/hasil_dilakukannya_kpsp" data-name="/kunjungan_balita_reviewed/hasil_dilakukannya_kpsp"
+                        data-type-xml="select1" type="radio"
+                        value="DS" />
+                    <span class="option-label active" data-itext-id="/kunjungan_balita_reviewed/hasil_dilakukannya_kpsp/DS:label"
+                        lang="Bahasa">
+                        KPSP dilakukan dan hasilnya sesuai (DS)
+                    </span>
+                    <span class="option-label " data-itext-id="/kunjungan_balita_reviewed/hasil_dilakukannya_kpsp/DS:label"
+                        lang="en">
+                        Result of Pra Screening Development Questionnaire is matched
+                    </span>
                 </label>
                 <label class="">
-                    <input type="radio" name="/kunjungan_balita_reviewed/hasil_dilakukannya_kpsp" data-name="/kunjungan_balita_reviewed/hasil_dilakukannya_kpsp" value="Dm" data-type-xml="select1"/>
-                    <span lang="Bahasa" class="option-label active" data-itext-id="/kunjungan_balita_reviewed/hasil_dilakukannya_kpsp/Dm:label">KPSP dilakukan dan hasilnya meragukan (Dm)</span>
-                    <span lang="en" class="option-label " data-itext-id="/kunjungan_balita_reviewed/hasil_dilakukannya_kpsp/Dm:label">Result of Pra Screening Development Questionnaire is inconclusive</span>
+                    <input name="/kunjungan_balita_reviewed/hasil_dilakukannya_kpsp" data-name="/kunjungan_balita_reviewed/hasil_dilakukannya_kpsp"
+                        data-type-xml="select1" type="radio"
+                        value="Dm" />
+                    <span class="option-label active" data-itext-id="/kunjungan_balita_reviewed/hasil_dilakukannya_kpsp/Dm:label"
+                        lang="Bahasa">
+                        KPSP dilakukan dan hasilnya meragukan (Dm)
+                    </span>
+                    <span class="option-label " data-itext-id="/kunjungan_balita_reviewed/hasil_dilakukannya_kpsp/Dm:label"
+                        lang="en">
+                        Result of Pra Screening Development Questionnaire is inconclusive
+                    </span>
                 </label>
                 <label class="">
-                    <input type="radio" name="/kunjungan_balita_reviewed/hasil_dilakukannya_kpsp" data-name="/kunjungan_balita_reviewed/hasil_dilakukannya_kpsp" value="Dp" data-type-xml="select1"/>
-                    <span lang="Bahasa" class="option-label active" data-itext-id="/kunjungan_balita_reviewed/hasil_dilakukannya_kpsp/Dp:label">KPSP dilakukan dan hasilnya penyimpangan (Dp)</span>
-                    <span lang="en" class="option-label " data-itext-id="/kunjungan_balita_reviewed/hasil_dilakukannya_kpsp/Dp:label">Result of Pra Screening Development Questionnaire shows deviation</span>
+                    <input name="/kunjungan_balita_reviewed/hasil_dilakukannya_kpsp" data-name="/kunjungan_balita_reviewed/hasil_dilakukannya_kpsp"
+                        data-type-xml="select1" type="radio"
+                        value="Dp" />
+                    <span class="option-label active" data-itext-id="/kunjungan_balita_reviewed/hasil_dilakukannya_kpsp/Dp:label"
+                        lang="Bahasa">
+                        KPSP dilakukan dan hasilnya penyimpangan (Dp)
+                    </span>
+                    <span class="option-label " data-itext-id="/kunjungan_balita_reviewed/hasil_dilakukannya_kpsp/Dp:label"
+                        lang="en">
+                        Result of Pra Screening Development Questionnaire shows deviation
+                    </span>
                 </label>
                 <label class="">
-                    <input type="radio" name="/kunjungan_balita_reviewed/hasil_dilakukannya_kpsp" data-name="/kunjungan_balita_reviewed/hasil_dilakukannya_kpsp" value="NA" data-type-xml="select1"/>
-                    <span lang="Bahasa" class="option-label active" data-itext-id="/kunjungan_balita_reviewed/hasil_dilakukannya_kpsp/NA:label">KPSP tidak dilakukan</span>
-                    <span lang="en" class="option-label " data-itext-id="/kunjungan_balita_reviewed/hasil_dilakukannya_kpsp/NA:label">Midwide doesn't provide Pra Screening Development Questionnaire</span>
+                    <input name="/kunjungan_balita_reviewed/hasil_dilakukannya_kpsp" data-name="/kunjungan_balita_reviewed/hasil_dilakukannya_kpsp"
+                        data-type-xml="select1" type="radio"
+                        value="NA" />
+                    <span class="option-label active" data-itext-id="/kunjungan_balita_reviewed/hasil_dilakukannya_kpsp/NA:label"
+                        lang="Bahasa">
+                        KPSP tidak dilakukan
+                    </span>
+                    <span class="option-label " data-itext-id="/kunjungan_balita_reviewed/hasil_dilakukannya_kpsp/NA:label"
+                        lang="en">
+                        Midwide doesn't provide Pra Screening Development Questionnaire
+                    </span>
                 </label>
             </div>
         </fieldset>
@@ -157,21 +365,49 @@
     <fieldset class="question ">
         <fieldset>
             <legend>
-                <span lang="Bahasa" class="question-label active" data-itext-id="/kunjungan_balita_reviewed/pelayanan_vita:label">Apakah Vitamin A diberikan saat pelayanan</span>
-                <span lang="en" class="question-label " data-itext-id="/kunjungan_balita_reviewed/pelayanan_vita:label">Is Vitamin A given during visit?</span>
-                <span lang="Bahasa" class="or-hint active" data-itext-id="/kunjungan_balita_reviewed/pelayanan_vita:hint">Menunjukkan apakah pelayanan Vitamin A diberikan saat kunjungan balita</span>
-                <span lang="en" class="or-hint " data-itext-id="/kunjungan_balita_reviewed/pelayanan_vita:hint">Indicating that Vitamin A service is given during child's visit</span>
+                <span class="question-label active" data-itext-id="/kunjungan_balita_reviewed/pelayanan_vita:label"
+                    lang="Bahasa">Apakah Vitamin A
+                    diberikan saat pelayanan
+                </span>
+                <span class="question-label " data-itext-id="/kunjungan_balita_reviewed/pelayanan_vita:label"
+                    lang="en">Is Vitamin A
+                    given during visit?
+                </span>
+                <span class="or-hint active" data-itext-id="/kunjungan_balita_reviewed/pelayanan_vita:hint"
+                    lang="Bahasa">Menunjukkan
+                    apakah pelayanan Vitamin A diberikan saat kunjungan balita
+                </span>
+                <span class="or-hint " data-itext-id="/kunjungan_balita_reviewed/pelayanan_vita:hint"
+                    lang="en">Indicating that
+                    Vitamin A service is given during child's visit
+                </span>
             </legend>
             <div class="option-wrapper">
                 <label class="">
-                    <input type="radio" name="/kunjungan_balita_reviewed/pelayanan_vita" data-name="/kunjungan_balita_reviewed/pelayanan_vita" value="jika_dilakukan" data-type-xml="select1"/>
-                    <span lang="Bahasa" class="option-label active" data-itext-id="/kunjungan_balita_reviewed/pelayanan_vita/jika_dilakukan:label">Jika dilakukan (&#x221A;)</span>
-                    <span lang="en" class="option-label " data-itext-id="/kunjungan_balita_reviewed/pelayanan_vita/jika_dilakukan:label">Yes</span>
+                    <input name="/kunjungan_balita_reviewed/pelayanan_vita" data-name="/kunjungan_balita_reviewed/pelayanan_vita"
+                        data-type-xml="select1" type="radio"
+                        value="jika_dilakukan" />
+                    <span class="option-label active" data-itext-id="/kunjungan_balita_reviewed/pelayanan_vita/jika_dilakukan:label"
+                        lang="Bahasa">
+                        Jika dilakukan (&#x221A;)
+                    </span>
+                    <span class="option-label " data-itext-id="/kunjungan_balita_reviewed/pelayanan_vita/jika_dilakukan:label"
+                        lang="en">
+                        Yes
+                    </span>
                 </label>
                 <label class="">
-                    <input type="radio" name="/kunjungan_balita_reviewed/pelayanan_vita" data-name="/kunjungan_balita_reviewed/pelayanan_vita" value="jika_tidak_dilakukan" data-type-xml="select1"/>
-                    <span lang="Bahasa" class="option-label active" data-itext-id="/kunjungan_balita_reviewed/pelayanan_vita/jika_tidak_dilakukan:label">Jika tidak dilakukan (x)</span>
-                    <span lang="en" class="option-label " data-itext-id="/kunjungan_balita_reviewed/pelayanan_vita/jika_tidak_dilakukan:label">No</span>
+                    <input name="/kunjungan_balita_reviewed/pelayanan_vita" data-name="/kunjungan_balita_reviewed/pelayanan_vita"
+                        data-type-xml="select1"
+                        type="radio" value="jika_tidak_dilakukan" />
+                    <span class="option-label active" data-itext-id="/kunjungan_balita_reviewed/pelayanan_vita/jika_tidak_dilakukan:label"
+                        lang="Bahasa">
+                        Jika tidak dilakukan (x)
+                    </span>
+                    <span class="option-label " data-itext-id="/kunjungan_balita_reviewed/pelayanan_vita/jika_tidak_dilakukan:label"
+                        lang="en">
+                        No
+                    </span>
                 </label>
             </div>
         </fieldset>
@@ -179,19 +415,41 @@
     <fieldset class="question ">
         <fieldset>
             <legend>
-                <span lang="Bahasa" class="question-label active" data-itext-id="/kunjungan_balita_reviewed/status_kesehatan_bayi:label">Status kesehatan bayi</span>
-                <span lang="en" class="question-label " data-itext-id="/kunjungan_balita_reviewed/status_kesehatan_bayi:label">Baby's health status</span>
+                <span class="question-label active" data-itext-id="/kunjungan_balita_reviewed/status_kesehatan_bayi:label"
+                    lang="Bahasa">Status
+                    kesehatan bayi
+                </span>
+                <span class="question-label " data-itext-id="/kunjungan_balita_reviewed/status_kesehatan_bayi:label"
+                    lang="en">Baby's
+                    health status
+                </span>
             </legend>
             <div class="option-wrapper">
                 <label class="">
-                    <input type="radio" name="/kunjungan_balita_reviewed/status_kesehatan_bayi" data-name="/kunjungan_balita_reviewed/status_kesehatan_bayi" value="Sehat" data-type-xml="select1"/>
-                    <span lang="Bahasa" class="option-label active" data-itext-id="/kunjungan_balita_reviewed/status_kesehatan_bayi/Sehat:label">Sehat</span>
-                    <span lang="en" class="option-label " data-itext-id="/kunjungan_balita_reviewed/status_kesehatan_bayi/Sehat:label">Healthy</span>
+                    <input name="/kunjungan_balita_reviewed/status_kesehatan_bayi" data-name="/kunjungan_balita_reviewed/status_kesehatan_bayi"
+                        data-type-xml="select1" type="radio"
+                        value="Sehat" />
+                    <span class="option-label active" data-itext-id="/kunjungan_balita_reviewed/status_kesehatan_bayi/Sehat:label"
+                        lang="Bahasa">
+                        Sehat
+                    </span>
+                    <span class="option-label " data-itext-id="/kunjungan_balita_reviewed/status_kesehatan_bayi/Sehat:label"
+                        lang="en">
+                        Healthy
+                    </span>
                 </label>
                 <label class="">
-                    <input type="radio" name="/kunjungan_balita_reviewed/status_kesehatan_bayi" data-name="/kunjungan_balita_reviewed/status_kesehatan_bayi" value="Sakit" data-type-xml="select1"/>
-                    <span lang="Bahasa" class="option-label active" data-itext-id="/kunjungan_balita_reviewed/status_kesehatan_bayi/Sakit:label">Sakit</span>
-                    <span lang="en" class="option-label " data-itext-id="/kunjungan_balita_reviewed/status_kesehatan_bayi/Sakit:label">Sick</span>
+                    <input name="/kunjungan_balita_reviewed/status_kesehatan_bayi" data-name="/kunjungan_balita_reviewed/status_kesehatan_bayi"
+                        data-type-xml="select1" type="radio"
+                        value="Sakit" />
+                    <span class="option-label active" data-itext-id="/kunjungan_balita_reviewed/status_kesehatan_bayi/Sakit:label"
+                        lang="Bahasa">
+                        Sakit
+                    </span>
+                    <span class="option-label " data-itext-id="/kunjungan_balita_reviewed/status_kesehatan_bayi/Sakit:label"
+                        lang="en">
+                        Sick
+                    </span>
                 </label>
             </div>
         </fieldset>
@@ -199,64 +457,146 @@
     <fieldset class="question ">
         <fieldset>
             <legend>
-                <span lang="Bahasa" class="question-label active" data-itext-id="/kunjungan_balita_reviewed/penyakit:label">Penyakit</span>
-                <span lang="en" class="question-label " data-itext-id="/kunjungan_balita_reviewed/penyakit:label">Diseases</span>
+                <span class="question-label active" data-itext-id="/kunjungan_balita_reviewed/penyakit:label"
+                    lang="Bahasa">Penyakit
+                </span>
+                <span class="question-label " data-itext-id="/kunjungan_balita_reviewed/penyakit:label"
+                    lang="en">Diseases
+                </span>
             </legend>
             <div class="option-wrapper">
                 <label class="">
-                    <input type="radio" name="/kunjungan_balita_reviewed/penyakit" data-name="/kunjungan_balita_reviewed/penyakit" value="pneumonia" data-type-xml="select1"/>
-                    <span lang="Bahasa" class="option-label active" data-itext-id="/kunjungan_balita_reviewed/penyakit/pneumonia:label">Pneumonia</span>
-                    <span lang="en" class="option-label " data-itext-id="/kunjungan_balita_reviewed/penyakit/pneumonia:label">Pneumonia</span>
+                    <input name="/kunjungan_balita_reviewed/penyakit" data-name="/kunjungan_balita_reviewed/penyakit"
+                        data-type-xml="select1" type="radio"
+                        value="pneumonia" />
+                    <span class="option-label active" data-itext-id="/kunjungan_balita_reviewed/penyakit/pneumonia:label"
+                        lang="Bahasa">
+                        Pneumonia
+                    </span>
+                    <span class="option-label " data-itext-id="/kunjungan_balita_reviewed/penyakit/pneumonia:label"
+                        lang="en">
+                        Pneumonia
+                    </span>
                 </label>
                 <label class="">
-                    <input type="radio" name="/kunjungan_balita_reviewed/penyakit" data-name="/kunjungan_balita_reviewed/penyakit" value="diarrhea" data-type-xml="select1"/>
-                    <span lang="Bahasa" class="option-label active" data-itext-id="/kunjungan_balita_reviewed/penyakit/diarrhea:label">Diare</span>
-                    <span lang="en" class="option-label " data-itext-id="/kunjungan_balita_reviewed/penyakit/diarrhea:label">Diarrhea</span>
+                    <input name="/kunjungan_balita_reviewed/penyakit" data-name="/kunjungan_balita_reviewed/penyakit"
+                        data-type-xml="select1" type="radio"
+                        value="diarrhea" />
+                    <span class="option-label active" data-itext-id="/kunjungan_balita_reviewed/penyakit/diarrhea:label"
+                        lang="Bahasa">Diare
+                    </span>
+                    <span class="option-label " data-itext-id="/kunjungan_balita_reviewed/penyakit/diarrhea:label"
+                        lang="en">Diarrhea
+                    </span>
                 </label>
                 <label class="">
-                    <input type="radio" name="/kunjungan_balita_reviewed/penyakit" data-name="/kunjungan_balita_reviewed/penyakit" value="measles" data-type-xml="select1"/>
-                    <span lang="Bahasa" class="option-label active" data-itext-id="/kunjungan_balita_reviewed/penyakit/measles:label">Campak</span>
-                    <span lang="en" class="option-label " data-itext-id="/kunjungan_balita_reviewed/penyakit/measles:label">Measles</span>
+                    <input name="/kunjungan_balita_reviewed/penyakit" data-name="/kunjungan_balita_reviewed/penyakit"
+                        data-type-xml="select1" type="radio"
+                        value="measles" />
+                    <span class="option-label active" data-itext-id="/kunjungan_balita_reviewed/penyakit/measles:label"
+                        lang="Bahasa">Campak
+                    </span>
+                    <span class="option-label " data-itext-id="/kunjungan_balita_reviewed/penyakit/measles:label"
+                        lang="en">Measles
+                    </span>
                 </label>
                 <label class="">
-                    <input type="radio" name="/kunjungan_balita_reviewed/penyakit" data-name="/kunjungan_balita_reviewed/penyakit" value="infeksi_pernapasan_atas" data-type-xml="select1"/>
-                    <span lang="Bahasa" class="option-label active" data-itext-id="/kunjungan_balita_reviewed/penyakit/infeksi_pernapasan_atas:label">Infeksi Saluran Pernapasan Atas</span>
-                    <span lang="en" class="option-label " data-itext-id="/kunjungan_balita_reviewed/penyakit/infeksi_pernapasan_atas:label">Upper Respiratory Infection</span>
+                    <input name="/kunjungan_balita_reviewed/penyakit" data-name="/kunjungan_balita_reviewed/penyakit"
+                        data-type-xml="select1"
+                        type="radio" value="infeksi_pernapasan_atas" />
+                    <span class="option-label active" data-itext-id="/kunjungan_balita_reviewed/penyakit/infeksi_pernapasan_atas:label"
+                        lang="Bahasa">
+                        Infeksi Saluran Pernapasan Atas
+                    </span>
+                    <span class="option-label " data-itext-id="/kunjungan_balita_reviewed/penyakit/infeksi_pernapasan_atas:label"
+                        lang="en">
+                        Upper Respiratory Infection
+                    </span>
                 </label>
                 <label class="">
-                    <input type="radio" name="/kunjungan_balita_reviewed/penyakit" data-name="/kunjungan_balita_reviewed/penyakit" value="malaria" data-type-xml="select1"/>
-                    <span lang="Bahasa" class="option-label active" data-itext-id="/kunjungan_balita_reviewed/penyakit/malaria:label">Malaria</span>
-                    <span lang="en" class="option-label " data-itext-id="/kunjungan_balita_reviewed/penyakit/malaria:label">Malaria</span>
+                    <input name="/kunjungan_balita_reviewed/penyakit" data-name="/kunjungan_balita_reviewed/penyakit"
+                        data-type-xml="select1" type="radio"
+                        value="malaria" />
+                    <span class="option-label active" data-itext-id="/kunjungan_balita_reviewed/penyakit/malaria:label"
+                        lang="Bahasa">Malaria
+                    </span>
+                    <span class="option-label " data-itext-id="/kunjungan_balita_reviewed/penyakit/malaria:label"
+                        lang="en">Malaria
+                    </span>
                 </label>
                 <label class="">
-                    <input type="radio" name="/kunjungan_balita_reviewed/penyakit" data-name="/kunjungan_balita_reviewed/penyakit" value="tetanus" data-type-xml="select1"/>
-                    <span lang="Bahasa" class="option-label active" data-itext-id="/kunjungan_balita_reviewed/penyakit/tetanus:label">Tetanus</span>
-                    <span lang="en" class="option-label " data-itext-id="/kunjungan_balita_reviewed/penyakit/tetanus:label">Tetanus</span>
+                    <input name="/kunjungan_balita_reviewed/penyakit" data-name="/kunjungan_balita_reviewed/penyakit"
+                        data-type-xml="select1" type="radio"
+                        value="tetanus" />
+                    <span class="option-label active" data-itext-id="/kunjungan_balita_reviewed/penyakit/tetanus:label"
+                        lang="Bahasa">Tetanus
+                    </span>
+                    <span class="option-label " data-itext-id="/kunjungan_balita_reviewed/penyakit/tetanus:label"
+                        lang="en">Tetanus
+                    </span>
                 </label>
                 <label class="">
-                    <input type="radio" name="/kunjungan_balita_reviewed/penyakit" data-name="/kunjungan_balita_reviewed/penyakit" value="demam_berdarah" data-type-xml="select1"/>
-                    <span lang="Bahasa" class="option-label active" data-itext-id="/kunjungan_balita_reviewed/penyakit/demam_berdarah:label">Demam Berdarah</span>
-                    <span lang="en" class="option-label " data-itext-id="/kunjungan_balita_reviewed/penyakit/demam_berdarah:label">Dengue Fever</span>
+                    <input name="/kunjungan_balita_reviewed/penyakit" data-name="/kunjungan_balita_reviewed/penyakit"
+                        data-type-xml="select1" type="radio"
+                        value="demam_berdarah" />
+                    <span class="option-label active" data-itext-id="/kunjungan_balita_reviewed/penyakit/demam_berdarah:label"
+                        lang="Bahasa">
+                        Demam Berdarah
+                    </span>
+                    <span class="option-label " data-itext-id="/kunjungan_balita_reviewed/penyakit/demam_berdarah:label"
+                        lang="en">
+                        Dengue Fever
+                    </span>
                 </label>
                 <label class="">
-                    <input type="radio" name="/kunjungan_balita_reviewed/penyakit" data-name="/kunjungan_balita_reviewed/penyakit" value="gizi_buruk" data-type-xml="select1"/>
-                    <span lang="Bahasa" class="option-label active" data-itext-id="/kunjungan_balita_reviewed/penyakit/gizi_buruk:label">Malnutrisi</span>
-                    <span lang="en" class="option-label " data-itext-id="/kunjungan_balita_reviewed/penyakit/gizi_buruk:label">Malnutrition</span>
+                    <input name="/kunjungan_balita_reviewed/penyakit" data-name="/kunjungan_balita_reviewed/penyakit"
+                        data-type-xml="select1" type="radio"
+                        value="gizi_buruk" />
+                    <span class="option-label active" data-itext-id="/kunjungan_balita_reviewed/penyakit/gizi_buruk:label"
+                        lang="Bahasa">
+                        Malnutrisi
+                    </span>
+                    <span class="option-label " data-itext-id="/kunjungan_balita_reviewed/penyakit/gizi_buruk:label"
+                        lang="en">
+                        Malnutrition
+                    </span>
                 </label>
                 <label class="">
-                    <input type="radio" name="/kunjungan_balita_reviewed/penyakit" data-name="/kunjungan_balita_reviewed/penyakit" value="kelainan_saluran_cerna" data-type-xml="select1"/>
-                    <span lang="Bahasa" class="option-label active" data-itext-id="/kunjungan_balita_reviewed/penyakit/kelainan_saluran_cerna:label">Kelainan Saluran Cerna</span>
-                    <span lang="en" class="option-label " data-itext-id="/kunjungan_balita_reviewed/penyakit/kelainan_saluran_cerna:label">Gastrointestinal Abnormality</span>
+                    <input name="/kunjungan_balita_reviewed/penyakit" data-name="/kunjungan_balita_reviewed/penyakit"
+                        data-type-xml="select1"
+                        type="radio" value="kelainan_saluran_cerna" />
+                    <span class="option-label active" data-itext-id="/kunjungan_balita_reviewed/penyakit/kelainan_saluran_cerna:label"
+                        lang="Bahasa">
+                        Kelainan Saluran Cerna
+                    </span>
+                    <span class="option-label " data-itext-id="/kunjungan_balita_reviewed/penyakit/kelainan_saluran_cerna:label"
+                        lang="en">
+                        Gastrointestinal Abnormality
+                    </span>
                 </label>
                 <label class="">
-                    <input type="radio" name="/kunjungan_balita_reviewed/penyakit" data-name="/kunjungan_balita_reviewed/penyakit" value="Kelainan_syaraf" data-type-xml="select1"/>
-                    <span lang="Bahasa" class="option-label active" data-itext-id="/kunjungan_balita_reviewed/penyakit/Kelainan_syaraf:label">Kelainan Syaraf</span>
-                    <span lang="en" class="option-label " data-itext-id="/kunjungan_balita_reviewed/penyakit/Kelainan_syaraf:label">Neurological Abnormality</span>
+                    <input name="/kunjungan_balita_reviewed/penyakit" data-name="/kunjungan_balita_reviewed/penyakit"
+                        data-type-xml="select1" type="radio"
+                        value="Kelainan_syaraf" />
+                    <span class="option-label active" data-itext-id="/kunjungan_balita_reviewed/penyakit/Kelainan_syaraf:label"
+                        lang="Bahasa">
+                        Kelainan Syaraf
+                    </span>
+                    <span class="option-label " data-itext-id="/kunjungan_balita_reviewed/penyakit/Kelainan_syaraf:label"
+                        lang="en">
+                        Neurological Abnormality
+                    </span>
                 </label>
                 <label class="">
-                    <input type="radio" name="/kunjungan_balita_reviewed/penyakit" data-name="/kunjungan_balita_reviewed/penyakit" value="others" data-type-xml="select1"/>
-                    <span lang="Bahasa" class="option-label active" data-itext-id="/kunjungan_balita_reviewed/penyakit/others:label">Lainnya</span>
-                    <span lang="en" class="option-label " data-itext-id="/kunjungan_balita_reviewed/penyakit/others:label">Other</span>
+                    <input name="/kunjungan_balita_reviewed/penyakit" data-name="/kunjungan_balita_reviewed/penyakit"
+                        data-type-xml="select1" type="radio"
+                        value="others" />
+                    <span class="option-label active" data-itext-id="/kunjungan_balita_reviewed/penyakit/others:label"
+                        lang="Bahasa">Lainnya
+                    </span>
+                    <span class="option-label " data-itext-id="/kunjungan_balita_reviewed/penyakit/others:label"
+                        lang="en">Other
+                    </span>
                 </label>
             </div>
         </fieldset>
@@ -264,19 +604,36 @@
     <fieldset class="question ">
         <fieldset>
             <legend>
-                <span lang="Bahasa" class="question-label active" data-itext-id="/kunjungan_balita_reviewed/mtbs:label">MTBS dilakukan?</span>
-                <span lang="en" class="question-label " data-itext-id="/kunjungan_balita_reviewed/mtbs:label">Does health worker perform Treatment Management for Sick Child?</span>
+                <span class="question-label active" data-itext-id="/kunjungan_balita_reviewed/mtbs:label"
+                    lang="Bahasa">MTBS dilakukan?
+                </span>
+                <span class="question-label " data-itext-id="/kunjungan_balita_reviewed/mtbs:label"
+                    lang="en">Does health worker perform
+                    Treatment Management for Sick Child?
+                </span>
             </legend>
             <div class="option-wrapper">
                 <label class="">
-                    <input type="radio" name="/kunjungan_balita_reviewed/mtbs" data-name="/kunjungan_balita_reviewed/mtbs" value="Ya" data-type-xml="select1"/>
-                    <span lang="Bahasa" class="option-label active" data-itext-id="/kunjungan_balita_reviewed/mtbs/Ya:label">Ya</span>
-                    <span lang="en" class="option-label " data-itext-id="/kunjungan_balita_reviewed/mtbs/Ya:label">Yes (+)</span>
+                    <input name="/kunjungan_balita_reviewed/mtbs" data-name="/kunjungan_balita_reviewed/mtbs"
+                        data-type-xml="select1" type="radio"
+                        value="Ya" />
+                    <span class="option-label active" data-itext-id="/kunjungan_balita_reviewed/mtbs/Ya:label"
+                        lang="Bahasa">Ya
+                    </span>
+                    <span class="option-label " data-itext-id="/kunjungan_balita_reviewed/mtbs/Ya:label"
+                        lang="en">Yes (+)
+                    </span>
                 </label>
                 <label class="">
-                    <input type="radio" name="/kunjungan_balita_reviewed/mtbs" data-name="/kunjungan_balita_reviewed/mtbs" value="Tidak" data-type-xml="select1"/>
-                    <span lang="Bahasa" class="option-label active" data-itext-id="/kunjungan_balita_reviewed/mtbs/Tidak:label">Tidak</span>
-                    <span lang="en" class="option-label " data-itext-id="/kunjungan_balita_reviewed/mtbs/Tidak:label">No (-)</span>
+                    <input name="/kunjungan_balita_reviewed/mtbs" data-name="/kunjungan_balita_reviewed/mtbs"
+                        data-type-xml="select1" type="radio"
+                        value="Tidak" />
+                    <span class="option-label active" data-itext-id="/kunjungan_balita_reviewed/mtbs/Tidak:label"
+                        lang="Bahasa">Tidak
+                    </span>
+                    <span class="option-label " data-itext-id="/kunjungan_balita_reviewed/mtbs/Tidak:label"
+                        lang="en">No (-)
+                    </span>
                 </label>
             </div>
         </fieldset>
@@ -284,45 +641,88 @@
     <fieldset class="question ">
         <fieldset>
             <legend>
-                <span lang="Bahasa" class="question-label active" data-itext-id="/kunjungan_balita_reviewed/rujukan_bayi:label">Apakah Anda merujuk bayi ke fasilitas kesehatan lainnya?</span>
-                <span lang="en" class="question-label " data-itext-id="/kunjungan_balita_reviewed/rujukan_bayi:label">Do you refer the baby to other facility?</span>
-                <span lang="Bahasa" class="or-hint active" data-itext-id="/kunjungan_balita_reviewed/rujukan_bayi:hint">Menunjukkan bahwa bidan merujuk bayi ke ke tempat fasilitas kesehatan lainnya</span>
-                <span lang="en" class="or-hint " data-itext-id="/kunjungan_balita_reviewed/rujukan_bayi:hint">Indicating whether midwife refers bayi to other health facility</span>
+                <span class="question-label active" data-itext-id="/kunjungan_balita_reviewed/rujukan_bayi:label"
+                    lang="Bahasa">Apakah Anda
+                    merujuk bayi ke fasilitas kesehatan lainnya?
+                </span>
+                <span class="question-label " data-itext-id="/kunjungan_balita_reviewed/rujukan_bayi:label"
+                    lang="en">Do you refer the
+                    baby to other facility?
+                </span>
+                <span class="or-hint active" data-itext-id="/kunjungan_balita_reviewed/rujukan_bayi:hint"
+                    lang="Bahasa">Menunjukkan bahwa
+                    bidan merujuk bayi ke ke tempat fasilitas kesehatan lainnya
+                </span>
+                <span class="or-hint " data-itext-id="/kunjungan_balita_reviewed/rujukan_bayi:hint"
+                    lang="en">Indicating whether
+                    midwife refers bayi to other health facility
+                </span>
             </legend>
             <div class="option-wrapper">
                 <label class="">
-                    <input type="radio" name="/kunjungan_balita_reviewed/rujukan_bayi" data-name="/kunjungan_balita_reviewed/rujukan_bayi" value="Ya" data-type-xml="select1"/>
-                    <span lang="Bahasa" class="option-label active" data-itext-id="/kunjungan_balita_reviewed/rujukan_bayi/Ya:label">Ya</span>
-                    <span lang="en" class="option-label " data-itext-id="/kunjungan_balita_reviewed/rujukan_bayi/Ya:label">Yes (+)</span>
+                    <input name="/kunjungan_balita_reviewed/rujukan_bayi" data-name="/kunjungan_balita_reviewed/rujukan_bayi"
+                        data-type-xml="select1" type="radio"
+                        value="Ya" />
+                    <span class="option-label active" data-itext-id="/kunjungan_balita_reviewed/rujukan_bayi/Ya:label"
+                        lang="Bahasa">Ya
+                    </span>
+                    <span class="option-label " data-itext-id="/kunjungan_balita_reviewed/rujukan_bayi/Ya:label"
+                        lang="en">Yes (+)
+                    </span>
                 </label>
                 <label class="">
-                    <input type="radio" name="/kunjungan_balita_reviewed/rujukan_bayi" data-name="/kunjungan_balita_reviewed/rujukan_bayi" value="Tidak" data-type-xml="select1"/>
-                    <span lang="Bahasa" class="option-label active" data-itext-id="/kunjungan_balita_reviewed/rujukan_bayi/Tidak:label">Tidak</span>
-                    <span lang="en" class="option-label " data-itext-id="/kunjungan_balita_reviewed/rujukan_bayi/Tidak:label">No (-)</span>
+                    <input name="/kunjungan_balita_reviewed/rujukan_bayi" data-name="/kunjungan_balita_reviewed/rujukan_bayi"
+                        data-type-xml="select1" type="radio"
+                        value="Tidak" />
+                    <span class="option-label active" data-itext-id="/kunjungan_balita_reviewed/rujukan_bayi/Tidak:label"
+                        lang="Bahasa">Tidak
+                    </span>
+                    <span class="option-label " data-itext-id="/kunjungan_balita_reviewed/rujukan_bayi/Tidak:label"
+                        lang="en">No (-)
+                    </span>
                 </label>
             </div>
         </fieldset>
     </fieldset>
     <label class="question or-appearance-minimal  or-branch pre-init ">
-        <span lang="Bahasa" class="question-label active" data-itext-id="/kunjungan_balita_reviewed/dirujuk_ke_bayi:label">Dirujuk Ke</span>
-        <span lang="en" class="question-label " data-itext-id="/kunjungan_balita_reviewed/dirujuk_ke_bayi:label">Place of referral</span>
-        <span lang="Bahasa" class="or-hint active" data-itext-id="/kunjungan_balita_reviewed/dirujuk_ke_bayi:hint">Menunjukkan tempat rujukan</span>
-        <span lang="en" class="or-hint " data-itext-id="/kunjungan_balita_reviewed/dirujuk_ke_bayi:hint">Indicating location of referred facility</span>
-        <select name="/kunjungan_balita_reviewed/dirujuk_ke_bayi" data-name="/kunjungan_balita_reviewed/dirujuk_ke_bayi" data-relevant=" /kunjungan_balita_reviewed/rujukan_bayi  = 'Ya'" data-type-xml="select1">
+        <span class="question-label active" data-itext-id="/kunjungan_balita_reviewed/dirujuk_ke_bayi:label"
+            lang="Bahasa">Dirujuk Ke
+        </span>
+        <span class="question-label " data-itext-id="/kunjungan_balita_reviewed/dirujuk_ke_bayi:label"
+            lang="en">Place of referral
+        </span>
+        <span class="or-hint active" data-itext-id="/kunjungan_balita_reviewed/dirujuk_ke_bayi:hint"
+            lang="Bahasa">Menunjukkan tempat
+            rujukan
+        </span>
+        <span class="or-hint " data-itext-id="/kunjungan_balita_reviewed/dirujuk_ke_bayi:hint"
+            lang="en">Indicating location of
+            referred facility
+        </span>
+        <select name="/kunjungan_balita_reviewed/dirujuk_ke_bayi"
+            data-name="/kunjungan_balita_reviewed/dirujuk_ke_bayi"
+            data-relevant=" /kunjungan_balita_reviewed/rujukan_bayi  = 'Ya'"
+            data-type-xml="select1">
             <option value="">...</option>
             <option value="pusat_kesehatan_masyarakat">Pusat Kesehatan Masyarakat (PKM)</option>
             <option value="rumah_bersalin">Rumah Bersalin (RB)</option>
-            <option value="RSIA_RSB">Rumah Sakit Ibu dan Anak / Rumah Sakit Bersalin  (RSIA / RSB)</option>
+            <option value="RSIA_RSB">Rumah Sakit Ibu dan Anak / Rumah Sakit Bersalin (RSIA / RSB)
+            </option>
             <option value="RS">Rumah Sakit</option>
             <option value="lainnya">Lain-Lain</option>
             <option value="tidak_diujuk">Tidak Diujuk (TD)</option>
         </select>
-        <span class="or-option-translations" style="display:none;">
-            <span data-option-value="pusat_kesehatan_masyarakat" lang="Bahasa">Pusat Kesehatan Masyarakat (PKM)</span>
-            <span data-option-value="pusat_kesehatan_masyarakat" lang="en">Primary Health center</span>
+        <span style="display:none;" class="or-option-translations">
+            <span data-option-value="pusat_kesehatan_masyarakat" lang="Bahasa">Pusat Kesehatan
+                Masyarakat (PKM)
+            </span>
+            <span data-option-value="pusat_kesehatan_masyarakat" lang="en">Primary Health center
+            </span>
             <span data-option-value="rumah_bersalin" lang="Bahasa">Rumah Bersalin (RB)</span>
             <span data-option-value="rumah_bersalin" lang="en">Maternity Hospital</span>
-            <span data-option-value="RSIA_RSB" lang="Bahasa">Rumah Sakit Ibu dan Anak / Rumah Sakit Bersalin  (RSIA / RSB)</span>
+            <span data-option-value="RSIA_RSB" lang="Bahasa">Rumah Sakit Ibu dan Anak / Rumah Sakit
+                Bersalin (RSIA / RSB)
+            </span>
             <span data-option-value="RSIA_RSB" lang="en">maternal and child hospital</span>
             <span data-option-value="RS" lang="Bahasa">Rumah Sakit</span>
             <span data-option-value="RS" lang="en">Hospital</span>
@@ -333,66 +733,103 @@
         </span>
     </label>
     <label class="question or-branch pre-init non-select ">
-        <span lang="Bahasa" class="question-label active" data-itext-id="/kunjungan_balita_reviewed/dirujukkelainnya_bayi:label">Lainnya</span>
-        <span lang="en" class="question-label " data-itext-id="/kunjungan_balita_reviewed/dirujukkelainnya_bayi:label">Other</span>
-        <span lang="Bahasa" class="or-hint active" data-itext-id="/kunjungan_balita_reviewed/dirujukkelainnya_bayi:hint">Menunjukkan tempat rujukan selain yang disebutkan</span>
-        <span lang="en" class="or-hint " data-itext-id="/kunjungan_balita_reviewed/dirujukkelainnya_bayi:hint">Indicating other location of referred facility</span>
-        <input type="text" name="/kunjungan_balita_reviewed/dirujukkelainnya_bayi" data-relevant=" /kunjungan_balita_reviewed/rujukan_bayi  = 'lainnya'" data-type-xml="string"/>
+        <span class="question-label active" data-itext-id="/kunjungan_balita_reviewed/dirujukkelainnya_bayi:label"
+            lang="Bahasa">Lainnya
+        </span>
+        <span class="question-label " data-itext-id="/kunjungan_balita_reviewed/dirujukkelainnya_bayi:label"
+            lang="en">Other
+        </span>
+        <span class="or-hint active" data-itext-id="/kunjungan_balita_reviewed/dirujukkelainnya_bayi:hint"
+            lang="Bahasa">Menunjukkan tempat
+            rujukan selain yang disebutkan
+        </span>
+        <span class="or-hint " data-itext-id="/kunjungan_balita_reviewed/dirujukkelainnya_bayi:hint"
+            lang="en">Indicating other
+            location of referred facility
+        </span>
+        <input name="/kunjungan_balita_reviewed/dirujukkelainnya_bayi" data-relevant=" /kunjungan_balita_reviewed/rujukan_bayi  = 'lainnya'"
+            data-type-xml="string"
+            type="text" />
     </label>
     <label class="question non-select ">
-        <span lang="Bahasa" class="question-label active" data-itext-id="/kunjungan_balita_reviewed/keterangan:label">Keterangan</span>
-        <span lang="en" class="question-label " data-itext-id="/kunjungan_balita_reviewed/keterangan:label">notes</span>
-        <span lang="Bahasa" class="or-hint active" data-itext-id="/kunjungan_balita_reviewed/keterangan:hint">Diisi keterangan, pindah domisili atau informasi lainnya</span>
-        <span lang="en" class="or-hint " data-itext-id="/kunjungan_balita_reviewed/keterangan:hint">Fill in the information whether the baby moves to other area, or other information</span>
-        <input type="text" name="/kunjungan_balita_reviewed/keterangan" data-type-xml="string"/>
+        <span class="question-label active" data-itext-id="/kunjungan_balita_reviewed/keterangan:label"
+            lang="Bahasa">Keterangan
+        </span>
+        <span class="question-label " data-itext-id="/kunjungan_balita_reviewed/keterangan:label"
+            lang="en">notes
+        </span>
+        <span class="or-hint active" data-itext-id="/kunjungan_balita_reviewed/keterangan:hint"
+            lang="Bahasa">Diisi keterangan, pindah
+            domisili atau informasi lainnya
+        </span>
+        <span class="or-hint " data-itext-id="/kunjungan_balita_reviewed/keterangan:hint" lang="en">
+            Fill in the information whether the baby moves to other area, or other information
+        </span>
+        <input name="/kunjungan_balita_reviewed/keterangan" data-type-xml="string" type="text" />
     </label>
-    <fieldset id="or-preload-items" style="display:none;">
+    <fieldset style="display:none;" id="or-preload-items">
         <label class="calculation non-select ">
-            <input type="hidden" name="/kunjungan_balita_reviewed/start" data-preload="timestamp" data-preload-params="start" data-type-xml="dateTime"/>
+            <input name="/kunjungan_balita_reviewed/start" data-preload="timestamp" data-preload-params="start"
+                data-type-xml="dateTime" type="hidden" />
         </label>
         <label class="calculation non-select ">
-            <input type="hidden" name="/kunjungan_balita_reviewed/today" data-preload="date" data-preload-params="today" data-type-xml="date"/>
+            <input name="/kunjungan_balita_reviewed/today" data-preload="date" data-preload-params="today"
+                data-type-xml="date" type="hidden" />
         </label>
         <label class="calculation non-select ">
-            <input type="hidden" name="/kunjungan_balita_reviewed/deviceid" data-preload="property" data-preload-params="deviceid" data-type-xml="string"/>
+            <input name="/kunjungan_balita_reviewed/deviceid" data-preload="property" data-preload-params="deviceid"
+                data-type-xml="string" type="hidden" />
         </label>
         <label class="calculation non-select ">
-            <input type="hidden" name="/kunjungan_balita_reviewed/simserial" data-preload="property" data-preload-params="simserial" data-type-xml="string"/>
+            <input name="/kunjungan_balita_reviewed/simserial" data-preload="property" data-preload-params="simserial"
+                data-type-xml="string" type="hidden" />
         </label>
         <label class="calculation non-select ">
-            <input type="hidden" name="/kunjungan_balita_reviewed/phonenumber" data-preload="property" data-preload-params="phonenumber" data-type-xml="string"/>
+            <input name="/kunjungan_balita_reviewed/phonenumber" data-preload="property"
+                data-preload-params="phonenumber" data-type-xml="string" type="hidden" />
         </label>
         <label class="calculation non-select ">
-            <input type="hidden" name="/kunjungan_balita_reviewed/end" data-preload="timestamp" data-preload-params="end" data-type-xml="dateTime"/>
+            <input name="/kunjungan_balita_reviewed/end" data-preload="timestamp" data-preload-params="end"
+                data-type-xml="dateTime" type="hidden" />
         </label>
     </fieldset>
-    <fieldset id="or-calculated-items" style="display:none;">
+    <fieldset style="display:none;" id="or-calculated-items">
         <label class="calculation non-select ">
-            <input type="hidden" name="/kunjungan_balita_reviewed/existing_location" data-calculate=" /kunjungan_balita_reviewed/Village " data-type-xml="string"/>
+            <input name="/kunjungan_balita_reviewed/existing_location" data-calculate=" /kunjungan_balita_reviewed/Village "
+                data-type-xml="string" type="hidden" />
         </label>
         <label class="calculation non-select ">
-            <input type="hidden" name="/kunjungan_balita_reviewed/provinsi" data-calculate=" /kunjungan_balita_reviewed/Province " data-type-xml="string"/>
+            <input name="/kunjungan_balita_reviewed/provinsi" data-calculate=" /kunjungan_balita_reviewed/Province "
+                data-type-xml="string" type="hidden" />
         </label>
         <label class="calculation non-select ">
-            <input type="hidden" name="/kunjungan_balita_reviewed/kabupaten" data-calculate=" /kunjungan_balita_reviewed/District " data-type-xml="string"/>
+            <input name="/kunjungan_balita_reviewed/kabupaten" data-calculate=" /kunjungan_balita_reviewed/District "
+                data-type-xml="string" type="hidden" />
         </label>
         <label class="calculation non-select ">
-            <input type="hidden" name="/kunjungan_balita_reviewed/desa" data-calculate=" /kunjungan_balita_reviewed/Village " data-type-xml="string"/>
+            <input name="/kunjungan_balita_reviewed/desa" data-calculate=" /kunjungan_balita_reviewed/Village "
+                data-type-xml="string" type="hidden" />
         </label>
         <label class="calculation non-select ">
-            <input type="hidden" name="/kunjungan_balita_reviewed/dusun" data-calculate=" /kunjungan_balita_reviewed/Sub-village " data-type-xml="string"/>
+            <input name="/kunjungan_balita_reviewed/dusun" data-calculate=" /kunjungan_balita_reviewed/Sub-village "
+                data-type-xml="string" type="hidden" />
         </label>
         <label class="calculation non-select ">
-            <input type="hidden" name="/kunjungan_balita_reviewed/kecamatan" data-calculate=" /kunjungan_balita_reviewed/Sub-district " data-type-xml="string"/>
+            <input name="/kunjungan_balita_reviewed/kecamatan" data-calculate=" /kunjungan_balita_reviewed/Sub-district "
+                data-type-xml="string" type="hidden" />
         </label>
         <label class="calculation non-select ">
-            <input type="hidden" name="/kunjungan_balita_reviewed/baby_age" data-calculate="int(( /kunjungan_balita_reviewed/today  -  /kunjungan_balita_reviewed/tanggal_lahir ) div 30)" data-type-xml="string"/>
+            <input name="/kunjungan_balita_reviewed/baby_age" data-calculate="int(( /kunjungan_balita_reviewed/today  -  /kunjungan_balita_reviewed/tanggal_lahir ) div 30)"
+                data-type-xml="string"
+                type="hidden" />
         </label>
         <label class="calculation non-select ">
-            <input type="hidden" name="/kunjungan_balita_reviewed/meta/instanceID" data-calculate="concat('uuid:', uuid())" data-type-xml="string"/>
+            <input name="/kunjungan_balita_reviewed/meta/instanceID" data-calculate="concat('uuid:', uuid())"
+                data-type-xml="string" type="hidden" />
         </label>
         <label class="calculation non-select ">
-            <input type="hidden" name="/kunjungan_balita_reviewed/formhub/uuid" data-calculate="'5b399592b3a447dbab705afbc670e5ae'" data-type-xml="string"/>
+            <input name="/kunjungan_balita_reviewed/formhub/uuid" data-calculate="'5b399592b3a447dbab705afbc670e5ae'"
+                data-type-xml="string" type="hidden" />
         </label>
     </fieldset>
 </form>

@@ -26,13 +26,13 @@ import org.smartregister.bidan.activity.NativeKISmartRegisterActivity;
 import org.smartregister.bidan.options.AllKartuIbuServiceMode;
 import org.smartregister.bidan.options.KICommonObjectFilterOption;
 import org.smartregister.bidan.provider.KIClientsProvider;
+import org.smartregister.bidan.utils.AllConstantsINA;
 import org.smartregister.commonregistry.AllCommonsRepository;
 import org.smartregister.commonregistry.CommonPersonObject;
 import org.smartregister.commonregistry.CommonPersonObjectClient;
 import org.smartregister.commonregistry.CommonRepository;
 import org.smartregister.cursoradapter.CursorCommonObjectFilterOption;
 import org.smartregister.cursoradapter.CursorCommonObjectSort;
-import org.smartregister.cursoradapter.SecuredNativeSmartRegisterCursorAdapterFragment;
 import org.smartregister.cursoradapter.SmartRegisterPaginatedCursorAdapter;
 import org.smartregister.cursoradapter.SmartRegisterQueryBuilder;
 import org.smartregister.provider.SmartRegisterClientsProvider;
@@ -56,13 +56,11 @@ import java.util.HashMap;
 import java.util.Map;
 
 import static android.view.View.INVISIBLE;
-import static android.view.View.VISIBLE;
-import static org.apache.commons.lang3.StringUtils.isEmpty;
 
 /**
  * Created by Dimas Ciputra on 2/18/15.
  */
-public class KISmartRegisterFragment extends SecuredNativeSmartRegisterCursorAdapterFragment {
+public class KISmartRegisterFragment extends BaseSmartRegisterFragment {
 
     private static final String TAG = KISmartRegisterFragment.class.getName();
     //    WD
@@ -124,8 +122,7 @@ public class KISmartRegisterFragment extends SecuredNativeSmartRegisterCursorAda
                 String locationjson = context().anmLocationController().get();
                 LocationTree locationTree = EntityUtils.fromJson(locationjson, LocationTree.class);
 
-                Map<String, TreeNode<String, Location>> locationMap =
-                        locationTree.getLocationsHierarchy();
+                Map<String, TreeNode<String, Location>> locationMap = locationTree.getLocationsHierarchy();
                 addChildToList(dialogOptionslist, locationMap);
                 DialogOption[] dialogOptions = new DialogOption[dialogOptionslist.size()];
                 for (int i = 0; i < dialogOptionslist.size(); i++) {
@@ -196,7 +193,8 @@ public class KISmartRegisterFragment extends SecuredNativeSmartRegisterCursorAda
         ft.addToBackStack(null);
         LocationSelectorDialogFragment
                 .newInstance((BaseRegisterActivity) getActivity(),
-                        ((NativeKISmartRegisterActivity) getActivity()).new EditDialogOptionModel(), context().anmLocationController().get(),
+                        ((BaseRegisterActivity) getActivity()).new EditDialogOptionModelNew(),
+                        context().anmLocationController().get(),
                         "kartu_ibu_registration")
                 .show(ft, locationDialogTAG);
     }
@@ -233,14 +231,8 @@ public class KISmartRegisterFragment extends SecuredNativeSmartRegisterCursorAda
             SmartRegisterQueryBuilder countqueryBUilder = new SmartRegisterQueryBuilder();
             countqueryBUilder.SelectInitiateMainTableCounts("ec_kartu_ibu");
 
-            if (s != null && !s.isEmpty()) {
-                Log.e(TAG, "initializeQueries with ID = " + s);
-                mainCondition = "is_closed = 0 AND namalengkap != '' AND object_id LIKE '%" + s + "%'";
-
-            } else {
-                mainCondition = "is_closed = 0 AND namalengkap != '' ";
-                Log.e(TAG, "initializeQueries: Not Initialized");
-            }
+            mainCondition = "is_closed = 0 AND namalengkap IS NOT NULL AND namalengkap != '' ";
+            Log.e(TAG, "initializeQueries: Not Initialized");
 
             joinTable = "";
             countSelect = countqueryBUilder.mainCondition(mainCondition);
@@ -301,29 +293,7 @@ public class KISmartRegisterFragment extends SecuredNativeSmartRegisterCursorAda
     }
 
     public void updateSearchView() {
-        getSearchView().addTextChangedListener(new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence charSequence, int i, int i2, int i3) {
-            }
-
-            @Override
-            public void onTextChanged(final CharSequence cs, int start, int before, int count) {
-
-                filters = cs.toString();
-                joinTable = "";
-                mainCondition = "is_closed = 0 ";
-
-                getSearchCancelView().setVisibility(isEmpty(cs) ? INVISIBLE : VISIBLE);
-                CountExecute();
-                filterandSortExecute();
-
-            }
-
-            @Override
-            public void afterTextChanged(Editable editable) {
-
-            }
-        });
+        textWatcher(AllConstantsINA.Register.KI);
     }
 
     public void addChildToList(ArrayList<DialogOption> dialogOptionslist, Map<String, TreeNode<String, Location>> locationMap) {
@@ -430,6 +400,7 @@ public class KISmartRegisterFragment extends SecuredNativeSmartRegisterCursorAda
 
         @Override
         public void onDialogOptionSelection(DialogOption option, Object tag) {
+            android.util.Log.e(TAG, "onDialogOptionSelection: EDIT");
 
             if (option.name().equalsIgnoreCase(getString(R.string.str_register_anc_form))) {
                 CommonPersonObjectClient pc = DetailMotherActivity.motherClient;

@@ -22,7 +22,8 @@
             </intent-filter>
         </activity>
 
-        <activity android:name=".activity.BidanHomeActivity"
+        <activity
+            android:name=".activity.BidanHomeActivity"
             android:screenOrientation="landscape"
             android:theme="@style/AppTheme" />
 
@@ -65,7 +66,8 @@
             android:screenOrientation="landscape"
             android:theme="@style/AppThemeNoTitle" />
 
-        <activity android:name=".activity.NativeKIANCSmartRegisterActivity"
+        <activity
+            android:name=".activity.NativeKIANCSmartRegisterActivity"
             android:configChanges="keyboardHidden|orientation|screenSize"
             android:screenOrientation="landscape"
             android:theme="@style/AppThemeNoActionBarAndTitle"
@@ -75,7 +77,8 @@
             android:screenOrientation="landscape"
             android:theme="@style/AppThemeNoTitle" />
 
-        <activity android:name=".activity.NativeKIAnakSmartRegisterActivity"
+        <activity
+            android:name=".activity.NativeKIAnakSmartRegisterActivity"
             android:configChanges="keyboardHidden|orientation|screenSize"
             android:screenOrientation="landscape"
             android:theme="@style/AppThemeNoActionBarAndTitle"
@@ -91,7 +94,8 @@
             android:screenOrientation="landscape"
             android:theme="@style/AppThemeNoTitle" />
 
-        <activity android:name=".activity.NativeKBSmartRegisterActivity"
+        <activity
+            android:name=".activity.NativeKBSmartRegisterActivity"
             android:configChanges="keyboardHidden|orientation|screenSize"
             android:screenOrientation="landscape"
             android:theme="@style/AppThemeNoActionBarAndTitle"
@@ -101,8 +105,9 @@
             android:screenOrientation="landscape"
             android:theme="@style/AppThemeNoTitle" />
 
-        <activity android:name=".activity.SettingsActivity"
-            android:screenOrientation="landscape"/>
+        <activity
+            android:name=".activity.SettingsActivity"
+            android:screenOrientation="landscape" />
         <activity android:name=".utils.CameraPreviewActivity" />
         <activity android:name=".utils.Camera2PreviewActivity" />
 

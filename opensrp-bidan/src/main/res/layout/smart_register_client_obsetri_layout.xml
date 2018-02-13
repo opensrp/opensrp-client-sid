@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/obsetri_layout"
     android:layout_width="@dimen/list_gplsa_view_width"
     android:layout_height="wrap_content"
     android:layout_marginLeft="5dp"

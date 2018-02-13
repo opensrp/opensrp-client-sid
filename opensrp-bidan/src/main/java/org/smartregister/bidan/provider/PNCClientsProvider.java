@@ -36,7 +36,7 @@ import static org.smartregister.util.StringUtil.humanizeAndDoUPPERCASE;
  * Created by sid-tech on 11/30/17.
  */
 
-public class KIPNCClientsProvider extends BaseClientsProvider {
+public class PNCClientsProvider extends BaseClientsProvider {
 
     private final Context context;
     private final View.OnClickListener onClickListener;
@@ -96,7 +96,7 @@ public class KIPNCClientsProvider extends BaseClientsProvider {
     ImageButton follow_up;
     private Drawable iconPencilDrawable;
 
-    public KIPNCClientsProvider(Context context, View.OnClickListener onClickListener, AlertService alertService) {
+    public PNCClientsProvider(Context context, View.OnClickListener onClickListener, AlertService alertService) {
 
         super(context);
         this.onClickListener = onClickListener;

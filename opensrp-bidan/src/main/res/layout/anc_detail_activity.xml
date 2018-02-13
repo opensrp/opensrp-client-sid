@@ -70,7 +70,6 @@
     </LinearLayout>
 
     <ImageView
-        android:id="@+id/imageView4"
         android:layout_width="match_parent"
         android:layout_height="@dimen/smart_register_client_divider_height"
         android:src="@color/smart_register_client_divider_color" />
@@ -81,7 +80,6 @@
         android:layout_height="wrap_content" />
 
     <ImageView
-        android:id="@+id/imageView3"
         android:layout_width="match_parent"
         android:layout_height="@dimen/smart_register_client_divider_height"
         android:src="@color/smart_register_client_divider_color" />

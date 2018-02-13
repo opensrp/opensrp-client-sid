@@ -32,7 +32,6 @@
         android:src="@color/smart_register_client_divider_color" />
 
     <RelativeLayout
-        android:id="@+id/dokumentasi_persalinan"
         android:layout_width="0dp"
         android:layout_height="match_parent"
         android:layout_weight="125"
@@ -118,7 +117,6 @@
 
 
     <RelativeLayout
-        android:id="@+id/kondisi_persalinan"
         android:layout_width="0dp"
         android:layout_height="match_parent"
         android:layout_weight="125"
@@ -167,7 +165,6 @@
 
 
     <RelativeLayout
-        android:id="@+id/tanda_vital_layout"
         android:layout_width="0dp"
         android:layout_height="match_parent"
         android:layout_weight="175"

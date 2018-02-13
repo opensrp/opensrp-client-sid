@@ -14,11 +14,14 @@ import org.opensrp.api.util.LocationTree;
 import org.opensrp.api.util.TreeNode;
 import org.smartregister.Context;
 import org.smartregister.bidan.R;
+import org.smartregister.bidan.activity.BaseRegisterActivity;
 import org.smartregister.bidan.activity.DetailChildActivity;
+import org.smartregister.bidan.activity.NativeKIANCSmartRegisterActivity;
 import org.smartregister.bidan.activity.NativeKIAnakSmartRegisterActivity;
 import org.smartregister.bidan.options.AnakOverviewServiceMode;
 import org.smartregister.bidan.options.ChildFilterOption;
 import org.smartregister.bidan.provider.ChildClientsProvider;
+import org.smartregister.bidan.utils.AllConstantsINA;
 import org.smartregister.commonregistry.CommonPersonObjectClient;
 import org.smartregister.cursoradapter.CursorCommonObjectFilterOption;
 import org.smartregister.cursoradapter.CursorCommonObjectSort;
@@ -164,14 +167,7 @@ public class AnakSmartRegisterFragment extends BaseSmartRegisterFragment {
         countqueryBuilder.SelectInitiateMainTableCounts(tableName);
         countqueryBuilder.customJoin("LEFT JOIN ec_ibu ON ec_ibu.id = ec_anak.relational_id");
 
-        if (s != null && !s.isEmpty()) {
-            Log.e(TAG, "initializeQueries with ID = " + s);
-            mainCondition = "is_closed = 0 AND object_id LIKE '%" + s + "%'";
-
-        } else {
-            mainCondition = "is_closed = 0";
-            Log.e(TAG, "initializeQueries: Not Initialized");
-        }
+        mainCondition = "is_closed = 0";
 
         countSelect = countqueryBuilder.mainCondition(mainCondition);
         super.CountExecute();
@@ -191,14 +187,7 @@ public class AnakSmartRegisterFragment extends BaseSmartRegisterFragment {
 
 //        mainSelect = queryBuilder.mainCondition("ec_anak.is_closed = 0 and relationalid != ''");
         mainSelect = queryBuilder.mainCondition(mainCondition);
-        if (s != null && !s.isEmpty()) {
-            Log.e(TAG, "initializeQueries with ID = " + s);
-            mainCondition = "is_closed = 0 AND object_id LIKE '%" + s + "%'";
-
-        } else {
-            mainCondition = "is_closed = 0";
-            Log.e(TAG, "initializeQueries: Not Initialized");
-        }
+        mainCondition = "is_closed = 0";
 
         Sortqueries = AnakNameShort();
 //        Sortqueries = ((CursorSortOption) getDefaultOptionsProvider().sortOption()).sort();
@@ -222,7 +211,7 @@ public class AnakSmartRegisterFragment extends BaseSmartRegisterFragment {
 
     @Override
     protected void onResumption() {
-        super.onResumption();
+//        super.onResumption();
         getDefaultOptionsProvider();
         if (isPausedOrRefreshList()) {
             initializeQueries("!");
@@ -231,8 +220,7 @@ public class AnakSmartRegisterFragment extends BaseSmartRegisterFragment {
     }
 
     private void updateSearchView() {
-        getSearchView().removeTextChangedListener(textWatcher);
-        getSearchView().addTextChangedListener(textWatcher);
+        textWatcher(AllConstantsINA.Register.KI);
     }
 
     public void addChildToList(ArrayList<DialogOption> dialogOptionslist, Map<String, TreeNode<String, Location>> locationMap) {
@@ -325,7 +313,7 @@ public class AnakSmartRegisterFragment extends BaseSmartRegisterFragment {
                 case R.id.ib_btn_edit:
 //                    FlurryFacade.logEvent("click_visit_button_on_kohort_anak_dashboard");
 //                    showFragmentDialog(new EditDialogOptionModel(), view.getTag());
-                    showFragmentDialog(((NativeKIAnakSmartRegisterActivity) getActivity()).new EditDialogOptionModel(), view.getTag());
+                    showFragmentDialog(((NativeKIANCSmartRegisterActivity) getActivity()).new EditDialogOptionModelNew(), view.getTag());
 
                     break;
             }

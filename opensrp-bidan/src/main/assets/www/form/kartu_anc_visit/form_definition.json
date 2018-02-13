@@ -253,17 +253,14 @@
       {
         "name": "highRisklabourFetusNumber",
         "bind": "/model/instance/kunjungan_anc_reviewed_anc_visit/High_Risk_Labour_fetus_number"
-
       },
       {
         "name": "highRiskLabourFetusSize",
         "bind": "/model/instance/kunjungan_anc_reviewed_anc_visit/High_Risk_Labour_fetus_size"
-
       },
       {
         "name": "highRiskLabourFetusMalpresentation",
         "bind": "/model/instance/kunjungan_anc_reviewed_anc_visit/High_Risk_Labour_fetus_Malpresentation"
-
       },
       {
         "name": "submissionDate",

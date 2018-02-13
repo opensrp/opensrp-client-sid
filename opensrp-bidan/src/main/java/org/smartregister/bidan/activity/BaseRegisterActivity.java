@@ -50,6 +50,7 @@ import static org.smartregister.util.Utils.getValue;
 
 public class BaseRegisterActivity extends SecuredNativeSmartRegisterActivity implements DisplayFormListener {
 
+    private final String TAG = BaseRegisterActivity.class.getName();
     protected SimpleDateFormat timer = new SimpleDateFormat("hh:mm:ss");
     protected List<String> formNames;
 
@@ -58,6 +59,8 @@ public class BaseRegisterActivity extends SecuredNativeSmartRegisterActivity imp
 
     protected int currentPage;
     protected FragmentPagerAdapter mPagerAdapter;
+    DisplayFormFragment displayFormFragment;
+    DisplayFormFragment formFragment;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -159,7 +162,7 @@ public class BaseRegisterActivity extends SecuredNativeSmartRegisterActivity imp
                 }
 
                 //hack reset the form
-                DisplayFormFragment displayFormFragment = getDisplayFormFragmentAtIndex(prevPageIndex);
+                displayFormFragment = getDisplayFormFragmentAtIndex(prevPageIndex);
                 if (displayFormFragment != null) {
                     displayFormFragment.hideTranslucentProgressDialog();
                     displayFormFragment.setFormData(null);
@@ -186,7 +189,7 @@ public class BaseRegisterActivity extends SecuredNativeSmartRegisterActivity imp
 
     public void retrieveAndSaveUnsubmittedFormData() {
         if (currentActivityIsShowingForm()) {
-            DisplayFormFragment formFragment = getDisplayFormFragmentAtIndex(currentPage);
+            formFragment = getDisplayFormFragmentAtIndex(currentPage);
             formFragment.saveCurrentFormData();
         }
     }
@@ -230,12 +233,12 @@ public class BaseRegisterActivity extends SecuredNativeSmartRegisterActivity imp
                 if (data == null) {
                     data = BidanFormUtils.getInstance(getApplicationContext())
                             .generateXMLInputForFormWithEntityId(entityId, formName, metaData);
-                    android.util.Log.e(TAG, "startFormActivity: entityId "+ entityId );
-                    android.util.Log.e(TAG, "startFormActivity: formName "+ formName );
-                    android.util.Log.e(TAG, "startFormActivity: metaData "+ metaData );
+                    android.util.Log.e(TAG, "startFormActivity: entityId " + entityId);
+                    android.util.Log.e(TAG, "startFormActivity: formName " + formName);
+                    android.util.Log.e(TAG, "startFormActivity: metaData " + metaData);
                 }
 
-                DisplayFormFragment displayFormFragment = getDisplayFormFragmentAtIndex(formIndex);
+                displayFormFragment = getDisplayFormFragmentAtIndex(formIndex);
                 if (displayFormFragment != null) {
                     displayFormFragment.setFormData(data);
                     displayFormFragment.setRecordId(entityId);
@@ -274,7 +277,7 @@ public class BaseRegisterActivity extends SecuredNativeSmartRegisterActivity imp
 
         } catch (Exception e) {
             // TODO: show error dialog on the formfragment if the submission fails
-            DisplayFormFragment displayFormFragment = getDisplayFormFragmentAtIndex(currentPage);
+            displayFormFragment = getDisplayFormFragmentAtIndex(currentPage);
             if (displayFormFragment != null) {
                 displayFormFragment.hideTranslucentProgressDialog();
             }
@@ -300,36 +303,37 @@ public class BaseRegisterActivity extends SecuredNativeSmartRegisterActivity imp
     /**
      * Follow Up without Edit
      */
-    public class EditDialogOptionModel implements DialogOptionModel {
-
-        @Override
-        public DialogOption[] getDialogOptions() {
-            return getEditOptions();
-        }
-
-        @Override
-        public void onDialogOptionSelection(DialogOption option, Object tag) {
-            CommonPersonObjectClient pc = (CommonPersonObjectClient) tag;
-            DetailsRepository detailsRepository = org.smartregister.Context.getInstance().detailsRepository();
-            detailsRepository.updateDetails(pc);
-            String ibuCaseId = getValue(pc.getColumnmaps(), "_id", true).toLowerCase();
-            JSONObject fieldOverrides = new JSONObject();
-            try {
-                fieldOverrides.put("Province", pc.getDetails().get("stateProvince"));
-                fieldOverrides.put("District", pc.getDetails().get("countyDistrict"));
-                fieldOverrides.put("Sub-district", pc.getDetails().get("address2"));
-                fieldOverrides.put("Village", pc.getDetails().get("cityVillage"));
-                fieldOverrides.put("Sub-village", pc.getDetails().get("address1"));
-                fieldOverrides.put("jenis_kelamin", pc.getDetails().get("gender"));
-                fieldOverrides.put("ibuCaseId", ibuCaseId);
-            } catch (JSONException e) {
-                e.printStackTrace();
-            }
-
-            FieldOverrides fo = new FieldOverrides(fieldOverrides.toString());
-            onEditSelectionWithMetadata((EditOption) option, (SmartRegisterClient) tag, fo.getJSONString());
-        }
-    }
+//    public class EditDialogOptionModel implements DialogOptionModel {
+//
+//        @Override
+//        public DialogOption[] getDialogOptions() {
+//            return getEditOptions();
+//        }
+//
+//        @Override
+//        public void onDialogOptionSelection(DialogOption option, Object tag) {
+//            android.util.Log.e(TAG, "onDialogOptionSelection: NOEDIT" );
+//            CommonPersonObjectClient pc = (CommonPersonObjectClient) tag;
+//            DetailsRepository detailsRepository = org.smartregister.Context.getInstance().detailsRepository();
+//            detailsRepository.updateDetails(pc);
+//            String ibuCaseId = getValue(pc.getColumnmaps(), "_id", true).toLowerCase();
+//            JSONObject fieldOverrides = new JSONObject();
+//            try {
+//                fieldOverrides.put("Province", pc.getDetails().get("stateProvince"));
+//                fieldOverrides.put("District", pc.getDetails().get("countyDistrict"));
+//                fieldOverrides.put("Sub-district", pc.getDetails().get("address2"));
+//                fieldOverrides.put("Village", pc.getDetails().get("cityVillage"));
+//                fieldOverrides.put("Sub-village", pc.getDetails().get("address1"));
+//                fieldOverrides.put("jenis_kelamin", pc.getDetails().get("gender"));
+//                fieldOverrides.put("ibuCaseId", ibuCaseId);
+//            } catch (JSONException e) {
+//                e.printStackTrace();
+//            }
+//
+//            FieldOverrides fo = new FieldOverrides(fieldOverrides.toString());
+//            onEditSelectionWithMetadata((EditOption) option, (SmartRegisterClient) tag, fo.getJSONString());
+//        }
+//    }
 
     /**
      * Inner class for Edit and Followup
@@ -356,7 +360,6 @@ public class BaseRegisterActivity extends SecuredNativeSmartRegisterActivity imp
 
             if (option.name().equalsIgnoreCase(getString(R.string.str_edit_ki_form))) {
                 // Edit Form Ibu
-                Log.logError(TAG, "update_ibu_form");
                 detailsRepository.updateDetails(pc);
                 String ibuCaseId = getValue(pc.getColumnmaps(), "_id", true).toLowerCase();
                 JSONObject fieldOverrides = new JSONObject();
@@ -374,6 +377,29 @@ public class BaseRegisterActivity extends SecuredNativeSmartRegisterActivity imp
                 }
 
                 FieldOverrides fo = new FieldOverrides(fieldOverrides.toString());
+                onEditSelectionWithMetadata((EditOption) option, (SmartRegisterClient) tag, fo.getJSONString());
+
+            } else if (option.name().equalsIgnoreCase(getString(R.string.str_anak_edit))) {
+                // Edit Form Ibu
+                Log.logError(TAG, "kohort_bayi_edit");
+                detailsRepository.updateDetails(pc);
+                String ibuCaseId = getValue(pc.getColumnmaps(), "_id", true).toLowerCase();
+                JSONObject fieldOverrides = new JSONObject();
+
+                try {
+                    fieldOverrides.put("Province", pc.getDetails().get("stateProvince"));
+                    fieldOverrides.put("District", pc.getDetails().get("countyDistrict"));
+                    fieldOverrides.put("Sub-district", pc.getDetails().get("address2"));
+                    fieldOverrides.put("Village", pc.getDetails().get("cityVillage"));
+                    fieldOverrides.put("Sub-village", pc.getDetails().get("address1"));
+                    fieldOverrides.put("jenis_kelamin", pc.getDetails().get("gender"));
+                    fieldOverrides.put("ibuCaseId", ibuCaseId);
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+
+                FieldOverrides fo = new FieldOverrides(fieldOverrides.toString());
+                android.util.Log.e(TAG, "onDialogOptionSelection:fo.getJSONString() " + fo.getJSONString());
                 onEditSelectionWithMetadata((EditOption) option, (SmartRegisterClient) tag, fo.getJSONString());
 
             } else {

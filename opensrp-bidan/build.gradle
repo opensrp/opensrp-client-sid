@@ -139,10 +139,10 @@ dependencies {
     testCompile "org.powermock:powermock-module-junit4-rule:$powerMockVersion"
     testCompile "org.powermock:powermock-module-junit4-rule-agent:$powerMockVersion"
     testCompile("org.powermock:powermock-classloading-xstream:$powerMockVersion")
-    {
+            {
 
-        exclude group: 'com.thoughtworks.xstream', module: 'xstream'
-    }
+                exclude group: 'com.thoughtworks.xstream', module: 'xstream'
+            }
 //    compile project(':lib:opensrp-device:opensrp-deviceinterface')
 }
 

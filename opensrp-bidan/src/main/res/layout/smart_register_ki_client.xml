@@ -15,7 +15,6 @@
         android:src="@color/smart_register_client_divider_color" />
 
     <RelativeLayout
-        android:id="@+id/id_detail_layout"
         android:layout_width="0dp"
         android:layout_height="fill_parent"
         android:layout_weight="@integer/ec_list_ec_no_view_weight"

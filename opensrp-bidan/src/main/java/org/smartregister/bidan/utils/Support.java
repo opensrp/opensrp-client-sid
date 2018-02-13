@@ -14,7 +14,6 @@ import org.joda.time.format.DateTimeFormatter;
 import org.smartregister.bidan.R;
 import org.smartregister.commonregistry.CommonPersonObject;
 import org.smartregister.commonregistry.CommonPersonObjectClient;
-import org.smartregister.util.Log;
 import org.smartregister.view.activity.DrishtiApplication;
 
 import java.io.File;

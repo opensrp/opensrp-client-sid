@@ -1,6 +1,7 @@
 package org.smartregister.bidan.activity;
 
 import android.support.v4.app.Fragment;
+import android.util.Log;
 
 import org.smartregister.bidan.R;
 import org.smartregister.bidan.fragment.AnakSmartRegisterFragment;
@@ -28,11 +29,13 @@ import static org.smartregister.bidan.utils.AllConstantsINA.FormNames.KOHORT_BAY
  */
 public class NativeKIAnakSmartRegisterActivity extends BaseRegisterActivity {
 
-    public static final String TAG = AnakSmartRegisterFragment.class.getName();
+    public static final String TAG = NativeKIAnakSmartRegisterActivity.class.getName();
+
 
     @Override
     protected Fragment mBaseFragment() {
 
+        Log.e(TAG, "mBaseFragment: ");
         return new AnakSmartRegisterFragment();
     }
 

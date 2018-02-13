@@ -3,24 +3,24 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <item
         android:id="@+id/remainingFormsToSyncMenuItem"
-        app:showAsAction="ifRoom"
         android:orderInCategory="100"
-        android:visible="false"/>
+        android:visible="false"
+        app:showAsAction="ifRoom" />
     <item
         android:id="@+id/updateMenuItem"
         android:icon="@drawable/refresh"
-        app:showAsAction="always"
         android:orderInCategory="100"
-        android:title="" />
+        android:title=""
+        app:showAsAction="always" />
     <item
         android:id="@+id/help"
-        app:showAsAction="always"
-        android:orderInCategory="101"
         android:icon="@mipmap/info"
-        android:title="" />
+        android:orderInCategory="101"
+        android:title=""
+        app:showAsAction="always" />
     <item
         android:id="@+id/switchLanguageMenuItem"
-        android:title="@string/str_switch_language"
-        android:icon="@drawable/ic_menu_edit"/>
+        android:icon="@drawable/ic_menu_edit"
+        android:title="@string/str_switch_language" />
 
 </menu>

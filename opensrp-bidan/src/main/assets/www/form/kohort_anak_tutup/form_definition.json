@@ -1,8 +1,8 @@
 {
   "form_data_definition_version": "3",
   "form": {
-    "bind_type":"anak",
-    "ec_bind_type":"ec_anak",
+    "bind_type": "anak",
+    "ec_bind_type": "ec_anak",
     "default_bind_path": "/model/instance/penutupan_anak_mapped/",
     "fields": [
       {

@@ -5,6 +5,7 @@ import android.text.TextWatcher;
 import android.util.Log;
 
 import org.smartregister.bidan.activity.LoginActivity;
+import org.smartregister.bidan.utils.AllConstantsINA;
 import org.smartregister.cursoradapter.SecuredNativeSmartRegisterCursorAdapterFragment;
 import org.smartregister.provider.SmartRegisterClientsProvider;
 import org.smartregister.view.activity.SecuredNativeSmartRegisterActivity;
@@ -19,7 +20,7 @@ import static org.apache.commons.lang3.StringUtils.isEmpty;
 
 public class BaseSmartRegisterFragment extends SecuredNativeSmartRegisterCursorAdapterFragment {
     private static final String TAG = BaseSmartRegisterFragment.class.getName();
-
+    private String customMainCondition;
     protected final TextWatcher textWatcher = new TextWatcher() {
         @Override
         public void beforeTextChanged(CharSequence charSequence, int i, int i2, int i3) {
@@ -27,7 +28,14 @@ public class BaseSmartRegisterFragment extends SecuredNativeSmartRegisterCursorA
 
         @Override
         public void onTextChanged(final CharSequence cs, int start, int before, int count) {
-            filter(cs.toString(), "", "");
+//            filter(cs.toString(), "", "");
+            filters = cs.toString();
+            joinTable = "";
+            mainCondition = customMainCondition;
+
+            getSearchCancelView().setVisibility(isEmpty(cs) ? INVISIBLE : VISIBLE);
+            CountExecute();
+            filterandSortExecute();
         }
 
         @Override
@@ -35,6 +43,31 @@ public class BaseSmartRegisterFragment extends SecuredNativeSmartRegisterCursorA
 
         }
     };
+
+    protected final void textWatcher(int i) {
+        switch (i) {
+            case AllConstantsINA.Register.KI:
+                customMainCondition = "is_closed = 0 AND namalengkap IS NOT NULL AND namalengkap != '' ";
+                break;
+            case AllConstantsINA.Register.FP:
+                customMainCondition = "is_closed = 0 and namalengkap != '' and jenisKontrasepsi !='' ";
+                break;
+            case AllConstantsINA.Register.ANC:
+                customMainCondition = " is_closed = 0 ";
+                break;
+            case AllConstantsINA.Register.PNC:
+                customMainCondition = " is_closed = 0 and (keadaanIbu ='hidup' OR keadaanIbu IS NULL) ";
+                break;
+            case AllConstantsINA.Register.CHILD:
+                customMainCondition = " is_closed = 0 and relational_id != '' ";
+                break;
+            default:
+                break;
+        }
+
+        getSearchView().removeTextChangedListener(textWatcher);
+        getSearchView().addTextChangedListener(textWatcher);
+    }
 
     @Override
     protected SecuredNativeSmartRegisterActivity.DefaultOptionsProvider getDefaultOptionsProvider() {
@@ -78,7 +111,7 @@ public class BaseSmartRegisterFragment extends SecuredNativeSmartRegisterCursorA
     @Override
     protected void onResumption() {
         super.onResumption();
-        Log.e(TAG, "onResumption: " );
+        Log.e(TAG, "onResumption: ");
         LoginActivity.setLanguage();
     }
 }

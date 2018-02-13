@@ -21,7 +21,8 @@ import org.smartregister.bidan.activity.DetailPNCActivity;
 import org.smartregister.bidan.activity.NativeKIPNCSmartRegisterActivity;
 import org.smartregister.bidan.options.KIPNCOverviewServiceMode;
 import org.smartregister.bidan.options.MotherFilterOption;
-import org.smartregister.bidan.provider.KIPNCClientsProvider;
+import org.smartregister.bidan.provider.PNCClientsProvider;
+import org.smartregister.bidan.utils.AllConstantsINA;
 import org.smartregister.commonregistry.CommonPersonObjectClient;
 import org.smartregister.commonregistry.CommonPersonObjectController;
 import org.smartregister.commonregistry.CommonRepository;
@@ -200,7 +201,7 @@ public class PNCSmartRegisterFragment extends BaseSmartRegisterFragment {
     @TargetApi(Build.VERSION_CODES.KITKAT)
     public void initializeQueries(String s) {
         try {
-            KIPNCClientsProvider kiscp = new KIPNCClientsProvider(getActivity(), clientActionHandler, context().alertService());
+            PNCClientsProvider kiscp = new PNCClientsProvider(getActivity(), clientActionHandler, context().alertService());
             clientAdapter = new SmartRegisterPaginatedCursorAdapter(getActivity(), null, kiscp, new CommonRepository("ec_pnc", new String[]{"ec_kartu_ibu.namalengkap", "ec_kartu_ibu.namaSuami"}));
             clientsView.setAdapter(clientAdapter);
 
@@ -278,8 +279,9 @@ public class PNCSmartRegisterFragment extends BaseSmartRegisterFragment {
     }
 
     private void updateSearchView() {
-        getSearchView().removeTextChangedListener(textWatcher);
-        getSearchView().addTextChangedListener(textWatcher);
+        textWatcher(AllConstantsINA.Register.PNC);
+//        getSearchView().removeTextChangedListener();
+//        getSearchView().addTextChangedListener(textWatcher);
     }
 
     public void addChildToList(ArrayList<DialogOption> dialogOptionslist, Map<String, TreeNode<String, Location>> locationMap) {
@@ -370,7 +372,7 @@ public class PNCSmartRegisterFragment extends BaseSmartRegisterFragment {
                 case R.id.ib_btn_edit:
 //                    //FlurryFacade.logEvent("click_visit_button_on_kohort_pnc_dashboard");
 //                    showFragmentDialog(new EditDialogOptionModel(), view.getTag());
-                    showFragmentDialog(((NativeKIPNCSmartRegisterActivity) getActivity()).new EditDialogOptionModel(), view.getTag());
+                    showFragmentDialog(((NativeKIPNCSmartRegisterActivity) getActivity()).new EditDialogOptionModelNew(), view.getTag());
 
                     break;
             }

@@ -22,7 +22,6 @@ import org.smartregister.bidan.activity.BaseRegisterActivity;
 import org.smartregister.bidan.activity.DetailFPActivity;
 import org.smartregister.bidan.activity.NativeKIFPSmartRegisterActivity;
 import org.smartregister.bidan.activity.NativeKISmartRegisterActivity;
-import org.smartregister.bidan.activity.NativeKIbuSmartRegisterActivity;
 import org.smartregister.bidan.options.AllKBServiceMode;
 import org.smartregister.bidan.options.MotherFilterOption;
 import org.smartregister.bidan.provider.KBClientsProvider;
@@ -43,6 +42,7 @@ import org.smartregister.view.dialog.LocationSelectorDialogFragment;
 import org.smartregister.view.dialog.NameSort;
 import org.smartregister.view.dialog.ServiceModeOption;
 import org.smartregister.view.dialog.SortOption;
+import org.smartregister.view.viewholder.NativeFPSmartRegisterViewHolder;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -51,6 +51,8 @@ import java.util.HashMap;
 import java.util.Map;
 
 import static android.view.View.INVISIBLE;
+import static android.view.View.VISIBLE;
+import static org.apache.commons.lang3.StringUtils.isEmpty;
 import static org.smartregister.bidan.utils.AllConstantsINA.FormNames.KOHORT_KB_REGISTER;
 
 /**
@@ -224,15 +226,7 @@ public class FPSmartRegisterFragment extends BaseSmartRegisterFragment {
             SmartRegisterQueryBuilder countqueryBuilder = new SmartRegisterQueryBuilder();
             countqueryBuilder.SelectInitiateMainTableCounts("ec_kartu_ibu");
 
-            if (s != null && !s.isEmpty()) {
-                Log.e(TAG, "initializeQueries with ID = " + s);
-                mainCondition = " is_closed = 0 AND jenisKontrasepsi !=0 AND namalengkap != '' AND object_id LIKE '%" + s + "%'";
-
-            } else {
-                mainCondition = " is_closed = 0 AND jenisKontrasepsi != '0' AND namalengkap != '' ";
-                Log.e(TAG, "initializeQueries: Not Initialized");
-            }
-
+            mainCondition = "is_closed = 0 and namalengkap != '' and jenisKontrasepsi !='' ";
 
             joinTable = "";
             countSelect = countqueryBuilder.mainCondition(mainCondition);
@@ -260,24 +254,24 @@ public class FPSmartRegisterFragment extends BaseSmartRegisterFragment {
 
     }
 
-    @Override
-    public void startRegistration() {
-        Log.e(TAG, "startRegistration: ");
-//        FlurryFacade.logEvent("click_start_registration_on_kohort_kb_dashboard");
-        FragmentTransaction ft = getActivity().getFragmentManager().beginTransaction();
-        Fragment prev = getActivity().getFragmentManager().findFragmentByTag(locationDialogTAG);
-        if (prev != null) {
-            ft.remove(prev);
-        }
-        ft.addToBackStack(null);
-
-        LocationSelectorDialogFragment
-                .newInstance((NativeKISmartRegisterActivity) getActivity(),
-                        ((NativeKISmartRegisterActivity) getActivity()).new EditDialogOptionModel(), context().anmLocationController().get(),
-                        KOHORT_KB_REGISTER)
-                .show(ft, locationDialogTAG);
-
-    }
+//    @Override
+//    public void startRegistration() {
+//        Log.e(TAG, "startRegistration: ");
+////        FlurryFacade.logEvent("click_start_registration_on_kohort_kb_dashboard");
+//        FragmentTransaction ft = getActivity().getFragmentManager().beginTransaction();
+//        Fragment prev = getActivity().getFragmentManager().findFragmentByTag(locationDialogTAG);
+//        if (prev != null) {
+//            ft.remove(prev);
+//        }
+//        ft.addToBackStack(null);
+//
+//        LocationSelectorDialogFragment
+//                .newInstance((NativeKISmartRegisterActivity) getActivity(),
+//                        ((NativeKIFPSmartRegisterActivity) getActivity()).EditDialogOptionModelNew(), context().anmLocationController().get(),
+//                        KOHORT_KB_REGISTER)
+//                .show(ft, locationDialogTAG);
+//
+//    }
 
     private String KiSortByNameAZ() {
         return "namalengkap ASC";
@@ -318,8 +312,29 @@ public class FPSmartRegisterFragment extends BaseSmartRegisterFragment {
     }
 
     private void updateSearchView() {
-        getSearchView().removeTextChangedListener(textWatcher);
-        getSearchView().addTextChangedListener(textWatcher);
+        getSearchView().addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i2, int i3) {
+            }
+
+            @Override
+            public void onTextChanged(final CharSequence cs, int start, int before, int count) {
+
+                filters = cs.toString();
+                joinTable = "";
+                mainCondition = "is_closed = 0 and namalengkap != '' and jenisKontrasepsi !='' ";
+
+                getSearchCancelView().setVisibility(isEmpty(cs) ? INVISIBLE : VISIBLE);
+                CountExecute();
+                filterandSortExecute();
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+
+            }
+        });
     }
 
     public void addChildToList(ArrayList<DialogOption> dialogOptionslist, Map<String, TreeNode<String, Location>> locationMap) {
@@ -411,7 +426,8 @@ public class FPSmartRegisterFragment extends BaseSmartRegisterFragment {
                 case R.id.ib_btn_edit:
 //                    FlurryFacade.logEvent("click_visit_button_on_kohort_kb_dashboard");
 //                    showFragmentDialog(new EditDialogOptionModel(), view.getTag());
-                    showFragmentDialog(((NativeKIFPSmartRegisterActivity) getActivity()).new EditDialogOptionModel(), view.getTag());
+//                    showFragmentDialog(new BaseRegisterActivity.EditDialogOptionModelNew(), view.getTag());
+                    showFragmentDialog(((NativeKIFPSmartRegisterActivity) getActivity()).new EditDialogOptionModelNew(), view.getTag());
 
                     break;
             }
