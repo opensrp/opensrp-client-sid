@@ -5,14 +5,15 @@ import android.content.Intent;
 import android.os.Build;
 import android.util.Log;
 import android.view.View;
+
 import org.opensrp.api.domain.Location;
 import org.opensrp.api.util.EntityUtils;
 import org.opensrp.api.util.LocationTree;
 import org.opensrp.api.util.TreeNode;
 import org.smartregister.Context;
 import org.smartregister.bidan.R;
-import org.smartregister.bidan.activity.DetailANCActivity;
 import org.smartregister.bidan.activity.ANCSmartRegisterActivity;
+import org.smartregister.bidan.activity.DetailANCActivity;
 import org.smartregister.bidan.options.KIANCOverviewServiceMode;
 import org.smartregister.bidan.options.MotherFilterOption;
 import org.smartregister.bidan.provider.ANCClientsProvider;
@@ -41,11 +42,11 @@ import static android.view.View.INVISIBLE;
 public class ANCSmartRegisterFragment extends BaseSmartRegisterFragment {
 
     private static final String TAG = ANCSmartRegisterFragment.class.getName();
+    public static String criteria;
     private final ClientActionHandler clientActionHandler = new ClientActionHandler();
     String tableName = "ec_kartu_ibu";
     String tableEcIbu = "ec_ibu";
 
-    public static String criteria;
     public static String getCriteria() {
         return criteria;
     }
@@ -157,7 +158,7 @@ public class ANCSmartRegisterFragment extends BaseSmartRegisterFragment {
 
     @TargetApi(Build.VERSION_CODES.KITKAT)
     public void initializeQueries(String s) {
-        Log.e(TAG, "initializeQueries:key "+ s );
+        Log.e(TAG, "initializeQueries:key " + s);
         try {
 
             ANCClientsProvider kiscp = new ANCClientsProvider(getActivity(), clientActionHandler, context().alertService());
@@ -178,7 +179,7 @@ public class ANCSmartRegisterFragment extends BaseSmartRegisterFragment {
             super.CountExecute();
 
             SmartRegisterQueryBuilder queryBuilder = new SmartRegisterQueryBuilder();
-            queryBuilder.SelectInitiateMainTable(tableEcIbu, new String[]{"ec_ibu.relationalid", "ec_ibu.is_closed", "ec_ibu.details",  "ec_kartu_ibu.namalengkap","ec_kartu_ibu.namaSuami","imagelist.imageid"});
+            queryBuilder.SelectInitiateMainTable(tableEcIbu, new String[]{"ec_ibu.relationalid", "ec_ibu.is_closed", "ec_ibu.details", "ec_kartu_ibu.namalengkap", "ec_kartu_ibu.namaSuami", "imagelist.imageid"});
             queryBuilder.customJoin("LEFT JOIN ec_kartu_ibu on ec_kartu_ibu.id = ec_ibu.id LEFT JOIN ImageList imagelist ON ec_ibu.id=imagelist.entityID");
             mainSelect = queryBuilder.mainCondition("ec_kartu_ibu.is_closed = 0 AND namalengkap != '' AND namalengkap IS NOT NULL");
             Sortqueries = KiSortByNameAZ();

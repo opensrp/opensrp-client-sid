@@ -3,6 +3,7 @@ package org.smartregister.bidan.fragment;
 import android.annotation.TargetApi;
 import android.content.Intent;
 import android.os.Build;
+import android.util.Log;
 import android.view.View;
 
 import org.opensrp.api.domain.Location;
@@ -11,7 +12,6 @@ import org.opensrp.api.util.LocationTree;
 import org.opensrp.api.util.TreeNode;
 import org.smartregister.Context;
 import org.smartregister.bidan.R;
-import org.smartregister.bidan.activity.BaseRegisterActivity;
 import org.smartregister.bidan.activity.DetailFPActivity;
 import org.smartregister.bidan.activity.FPSmartRegisterActivity;
 import org.smartregister.bidan.options.AllKBServiceMode;
@@ -27,7 +27,6 @@ import org.smartregister.cursoradapter.SmartRegisterQueryBuilder;
 import org.smartregister.provider.SmartRegisterClientsProvider;
 import org.smartregister.util.StringUtil;
 import org.smartregister.view.activity.SecuredNativeSmartRegisterActivity;
-import org.smartregister.view.contract.ECClient;
 import org.smartregister.view.dialog.AllClientsFilter;
 import org.smartregister.view.dialog.DialogOption;
 import org.smartregister.view.dialog.FilterOption;
@@ -57,12 +56,7 @@ public class FPSmartRegisterFragment extends BaseSmartRegisterFragment {
     }
 
     public void setCriteria(String criteria) {
-        this.criteria = criteria;
-    }
-
-    @Override
-    protected void onCreation() {
-
+        FPSmartRegisterFragment.criteria = criteria;
     }
 
     @Override
@@ -145,10 +139,6 @@ public class FPSmartRegisterFragment extends BaseSmartRegisterFragment {
         return null;
     }
 
-    private DialogOption[] getEditOptions() {
-        return ((BaseRegisterActivity) getActivity()).getEditOptions();
-    }
-
     @Override
     protected void onInitialization() {
     }
@@ -170,22 +160,9 @@ public class FPSmartRegisterFragment extends BaseSmartRegisterFragment {
         return "";
     }
 
-    private String sortByAlertmethod() {
-        return "CASE WHEN alerts.status = 'urgent' THEN '1'" +
-                "WHEN alerts.status = 'upcoming' THEN '2'\n" +
-                "WHEN alerts.status = 'normal' THEN '3'\n" +
-                "WHEN alerts.status = 'expired' THEN '4'\n" +
-                "WHEN alerts.status is Null THEN '5'\n" +
-                "Else alerts.status END ASC";
-    }
-
-    public String KartuIbuMainCount() {
-        return "Select Count(*) from ec_kartu_ibu";
-    }
-
     @TargetApi(Build.VERSION_CODES.KITKAT)
     public void initializeQueries(String s) {
-
+        Log.d(TAG, "initializeQueries: key "+ s);
         try {
             KBClientsProvider kiscp = new KBClientsProvider(getActivity(), clientActionHandler, context().alertService());
             clientAdapter = new SmartRegisterPaginatedCursorAdapter(
@@ -328,9 +305,6 @@ public class FPSmartRegisterFragment extends BaseSmartRegisterFragment {
             }
         }
 
-        private void showProfileView(ECClient client) {
-            navigationController.startEC(client.entityId());
-        }
     }
 
 }

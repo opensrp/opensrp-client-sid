@@ -55,8 +55,6 @@ import static org.smartregister.util.Log.logError;
 import static org.smartregister.util.Log.logVerbose;
 
 public class LoginActivity extends Activity {
-    private static final String TAG = LoginActivity.class.getName();
-
     public static final String ENGLISH_LOCALE = "en";
     public static final String KANNADA_LOCALE = "kn";
     public static final String BENGALI_LOCALE = "bn";
@@ -65,6 +63,7 @@ public class LoginActivity extends Activity {
     public static final String KANNADA_LANGUAGE = "Kannada";
     public static final String Bengali_LANGUAGE = "Bengali";
     public static final String Bahasa_LANGUAGE = "Bahasa";
+    private static final String TAG = LoginActivity.class.getName();
     private Context context = BidanApplication.getInstance().context();
     private EditText userNameEditText;
     private EditText passwordEditText;
@@ -86,7 +85,7 @@ public class LoginActivity extends Activity {
 //        conf.locale = new Locale(preferredLocale);
         conf.locale = new Locale(BAHASA_LOCALE);
         res.updateConfiguration(conf, dm);
-        Log.e(TAG, "setLanguage: "+ res.getConfiguration().locale.toString());
+        Log.e(TAG, "setLanguage: " + res.getConfiguration().locale.toString());
 
     }
 

@@ -10,8 +10,8 @@ import org.smartregister.Context;
 import org.smartregister.bidan.activity.ANCSmartRegisterActivity;
 import org.smartregister.bidan.activity.AnakSmartRegisterActivity;
 import org.smartregister.bidan.activity.FPSmartRegisterActivity;
-import org.smartregister.bidan.activity.PNCSmartRegisterActivity;
 import org.smartregister.bidan.activity.KISmartRegisterActivity;
+import org.smartregister.bidan.activity.PNCSmartRegisterActivity;
 import org.smartregister.view.controller.ANMController;
 
 import static android.preference.PreferenceManager.getDefaultSharedPreferences;

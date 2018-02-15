@@ -112,7 +112,7 @@ public class BaseRegisterActivity extends SecuredNativeSmartRegisterActivity imp
 
     @Override
     protected void onInitialization() {
-        android.util.Log.e(TAG, "onInitialization: " );
+        android.util.Log.e(TAG, "onInitialization: ");
     }
 
     @Override
@@ -127,7 +127,7 @@ public class BaseRegisterActivity extends SecuredNativeSmartRegisterActivity imp
 
     @Override
     protected void onResumption() {
-        android.util.Log.e(TAG, "onResumption: " );
+        android.util.Log.e(TAG, "onResumption: ");
     }
 
     @Override
@@ -144,7 +144,7 @@ public class BaseRegisterActivity extends SecuredNativeSmartRegisterActivity imp
     public void onBackPressed() {
 //        nf.setCriteria("");
 //        Log.e(TAG, "onBackPressed: "+currentPage );
-        android.util.Log.e(TAG, "onBackPressed: " );
+        android.util.Log.e(TAG, "onBackPressed: ");
         LoginActivity.setLanguage();
 
         if (currentPage != 0) {
@@ -254,7 +254,7 @@ public class BaseRegisterActivity extends SecuredNativeSmartRegisterActivity imp
 
         } catch (Exception e) {
             e.printStackTrace();
-            android.util.Log.e(TAG, "startFormActivity: "+ e.getMessage() );
+            android.util.Log.e(TAG, "startFormActivity: " + e.getMessage());
         }
 
     }
@@ -289,7 +289,7 @@ public class BaseRegisterActivity extends SecuredNativeSmartRegisterActivity imp
                 displayFormFragment.hideTranslucentProgressDialog();
             }
             e.printStackTrace();
-            android.util.Log.e(TAG, "saveFormSubmission: "+ e.getCause() );
+            android.util.Log.e(TAG, "saveFormSubmission: " + e.getCause());
         }
         //end capture flurry log for FS
         String end = timer.format(new Date());

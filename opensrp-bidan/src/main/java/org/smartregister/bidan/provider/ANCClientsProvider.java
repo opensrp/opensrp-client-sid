@@ -3,7 +3,6 @@ package org.smartregister.bidan.provider;
 import android.app.Activity;
 import android.content.Context;
 import android.database.Cursor;
-import android.graphics.drawable.Drawable;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -49,10 +48,8 @@ public class ANCClientsProvider extends BaseClientsProvider {
     private final Context context;
     private final View.OnClickListener onClickListener;
     private final AbsListView.LayoutParams clientViewLayoutParams;
-    protected CommonPersonObjectController controller;
-    private AlertService alertService;
     private final LayoutInflater inflater;
-
+    protected CommonPersonObjectController controller;
     @Bind(R.id.profile_info_layout)
     LinearLayout profilelayout;
     @Bind(R.id.iv_mother_photo)
@@ -69,7 +66,6 @@ public class ANCClientsProvider extends BaseClientsProvider {
     TextView no_ibu;
     @Bind(R.id.unique_id)
     TextView unique_id;
-    
     @Bind(R.id.iv_hr_badge)
     ImageView hr_badge;
     @Bind(R.id.iv_hrl_badge)
@@ -104,9 +100,9 @@ public class ANCClientsProvider extends BaseClientsProvider {
     TextView status_date;
     @Bind(R.id.txt_alert_status)
     TextView alert_status;
-
     @Bind(R.id.btn_anc_edit)
     ImageButton follow_up;
+    private AlertService alertService;
 
     public ANCClientsProvider(Context context, View.OnClickListener onClickListener, AlertService alertService) {
         super(context);
@@ -127,7 +123,7 @@ public class ANCClientsProvider extends BaseClientsProvider {
 
         } catch (Exception e) {
             e.getCause().printStackTrace();
-            Log.e(TAG, "getView: "+ e.getMessage() );
+            Log.e(TAG, "getView: " + e.getMessage());
         }
 //        // Load data from DB
         profilelayout.setOnClickListener(onClickListener);

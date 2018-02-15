@@ -2,13 +2,9 @@ package org.smartregister.bidan.fragment;
 
 import android.annotation.TargetApi;
 import android.content.Intent;
-import android.os.AsyncTask;
 import android.os.Build;
-import android.text.Editable;
-import android.text.TextWatcher;
 import android.util.Log;
 import android.view.View;
-import android.widget.EditText;
 
 import org.opensrp.api.domain.Location;
 import org.opensrp.api.util.EntityUtils;
@@ -16,7 +12,6 @@ import org.opensrp.api.util.LocationTree;
 import org.opensrp.api.util.TreeNode;
 import org.smartregister.Context;
 import org.smartregister.bidan.R;
-import org.smartregister.bidan.activity.BaseRegisterActivity;
 import org.smartregister.bidan.activity.DetailPNCActivity;
 import org.smartregister.bidan.activity.PNCSmartRegisterActivity;
 import org.smartregister.bidan.options.KIPNCOverviewServiceMode;
@@ -24,7 +19,6 @@ import org.smartregister.bidan.options.MotherFilterOption;
 import org.smartregister.bidan.provider.PNCClientsProvider;
 import org.smartregister.bidan.utils.AllConstantsINA;
 import org.smartregister.commonregistry.CommonPersonObjectClient;
-import org.smartregister.commonregistry.CommonPersonObjectController;
 import org.smartregister.commonregistry.CommonRepository;
 import org.smartregister.cursoradapter.CursorCommonObjectFilterOption;
 import org.smartregister.cursoradapter.CursorCommonObjectSort;
@@ -33,28 +27,17 @@ import org.smartregister.cursoradapter.SmartRegisterQueryBuilder;
 import org.smartregister.provider.SmartRegisterClientsProvider;
 import org.smartregister.util.StringUtil;
 import org.smartregister.view.activity.SecuredNativeSmartRegisterActivity;
-import org.smartregister.view.contract.ECClient;
-import org.smartregister.view.controller.VillageController;
 import org.smartregister.view.dialog.AllClientsFilter;
 import org.smartregister.view.dialog.DialogOption;
-import org.smartregister.view.dialog.DialogOptionMapper;
 import org.smartregister.view.dialog.FilterOption;
 import org.smartregister.view.dialog.NameSort;
 import org.smartregister.view.dialog.ServiceModeOption;
 import org.smartregister.view.dialog.SortOption;
 
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
-import java.util.HashMap;
 import java.util.Map;
-import java.util.Objects;
 
 import static android.view.View.INVISIBLE;
-
-/**
- * Created by sid-tech on 11/30/17.
- */
 
 public class PNCSmartRegisterFragment extends BaseSmartRegisterFragment {
     private static final String TAG = PNCSmartRegisterFragment.class.getName();
@@ -69,7 +52,7 @@ public class PNCSmartRegisterFragment extends BaseSmartRegisterFragment {
     }
 
     public void setCriteria(String criteria) {
-        this.criteria = criteria;
+        PNCSmartRegisterFragment.criteria = criteria;
     }
 
     @Override
@@ -111,7 +94,7 @@ public class PNCSmartRegisterFragment extends BaseSmartRegisterFragment {
             @Override
             public DialogOption[] filterOptions() {
                 //FlurryFacade.logEvent("click_filter_option_on_kohort_pnc_dashboard");
-                ArrayList<DialogOption> dialogOptionslist = new ArrayList<DialogOption>();
+                ArrayList<DialogOption> dialogOptionslist = new ArrayList<>();
 
                 dialogOptionslist.add(new CursorCommonObjectFilterOption(getString(R.string.filter_by_all_label), filterStringForAll()));
 
@@ -160,10 +143,6 @@ public class PNCSmartRegisterFragment extends BaseSmartRegisterFragment {
         return null;
     }
 
-    private DialogOption[] getEditOptions() {
-        return ((BaseRegisterActivity) getActivity()).getEditOptions();
-    }
-
 
     @Override
     public void setupViews(View view) {
@@ -185,10 +164,11 @@ public class PNCSmartRegisterFragment extends BaseSmartRegisterFragment {
     }
 
     @TargetApi(Build.VERSION_CODES.KITKAT)
-    public void initializeQueries(String s){
+    public void initializeQueries(String s) {
+        Log.d(TAG, "initializeQueries: key "+ s);
         try {
-            PNCClientsProvider kiscp = new PNCClientsProvider(getActivity(),clientActionHandler,context().alertService());
-            clientAdapter = new SmartRegisterPaginatedCursorAdapter(getActivity(), null, kiscp, new CommonRepository(tableEcPnc,new String []{"ec_kartu_ibu.namalengkap", "ec_kartu_ibu.namaSuami"}));
+            PNCClientsProvider kiscp = new PNCClientsProvider(getActivity(), clientActionHandler, context().alertService());
+            clientAdapter = new SmartRegisterPaginatedCursorAdapter(getActivity(), null, kiscp, new CommonRepository(tableEcPnc, new String[]{"ec_kartu_ibu.namalengkap", "ec_kartu_ibu.namaSuami"}));
             clientsView.setAdapter(clientAdapter);
 
             setTablename(tableEcPnc);
@@ -203,7 +183,7 @@ public class PNCSmartRegisterFragment extends BaseSmartRegisterFragment {
             super.CountExecute();
 
             SmartRegisterQueryBuilder queryBUilder = new SmartRegisterQueryBuilder();
-            queryBUilder.SelectInitiateMainTable(tableEcPnc, new String[]{"ec_pnc.relationalid", "ec_pnc.details",  "ec_kartu_ibu.namalengkap","ec_kartu_ibu.namaSuami","imagelist.imageid"});
+            queryBUilder.SelectInitiateMainTable(tableEcPnc, new String[]{"ec_pnc.relationalid", "ec_pnc.details", "ec_kartu_ibu.namalengkap", "ec_kartu_ibu.namaSuami", "imagelist.imageid"});
             queryBUilder.customJoin("LEFT JOIN ec_kartu_ibu on ec_kartu_ibu.id = ec_pnc.id LEFT JOIN ImageList imagelist ON ec_pnc.id=imagelist.entityID");
             mainSelect = queryBUilder.mainCondition("ec_kartu_ibu.is_closed = 0 and (keadaanIbu ='hidup' OR keadaanIbu IS NULL) ");
 
@@ -216,10 +196,8 @@ public class PNCSmartRegisterFragment extends BaseSmartRegisterFragment {
             CountExecute();
             updateSearchView();
             refresh();
-        } catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
-        }
-        finally {
         }
 
     }
@@ -238,10 +216,6 @@ public class PNCSmartRegisterFragment extends BaseSmartRegisterFragment {
 
     private String KiSortByNoIbu() {
         return " noIbu ASC";
-    }
-
-    private String KiSortByEdd() {
-        return " htp IS NULL, htp";
     }
 
     @Override
@@ -293,9 +267,6 @@ public class PNCSmartRegisterFragment extends BaseSmartRegisterFragment {
             }
         }
 
-        private void showProfileView(ECClient client) {
-            navigationController.startEC(client.entityId());
-        }
     }
 
 }

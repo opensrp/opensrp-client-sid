@@ -148,22 +148,20 @@ public class DetailMotherActivity extends Activity {
     TextView txt_highRiskHIVAIDS;
     @Bind(R.id.btn_back_to_home)
     ImageButton back;
-    //    ImageView kiview;
-    private boolean updateMode = false;
     private String userId;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
-        Context context = Context.getInstance();
+//        Context context = Context.getInstance();
         setContentView(R.layout.ki_detail_activity);
 
         ButterKnife.bind(this);
 
-        String DetailStart = timer.format(new Date());
-        Map<String, String> Detail = new HashMap<>();
-        Detail.put("start", DetailStart);
+//        String DetailStart = timer.format(new Date());
+//        Map<String, String> Detail = new HashMap<>();
+//        Detail.put("start", DetailStart);
 //        FlurryAgent.logEvent("KI_detail_view",Detail, true );
 
         userId = motherClient.getDetails().get("base_entity_id");
@@ -174,9 +172,9 @@ public class DetailMotherActivity extends Activity {
                 startActivity(new Intent(DetailMotherActivity.this, KISmartRegisterActivity.class));
                 overridePendingTransition(0, 0);
 
-                String DetailEnd = timer.format(new Date());
-                Map<String, String> Detail = new HashMap<>();
-                Detail.put("end", DetailEnd);
+//                String DetailEnd = timer.format(new Date());
+//                Map<String, String> Detail = new HashMap<>();
+//                Detail.put("end", DetailEnd);
 //                FlurryAgent.logEvent("KI_detail_view", Detail, true);
             }
         });

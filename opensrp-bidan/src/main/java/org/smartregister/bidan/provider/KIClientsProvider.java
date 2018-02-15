@@ -32,10 +32,6 @@ import butterknife.ButterKnife;
 import static android.view.ViewGroup.LayoutParams.MATCH_PARENT;
 import static org.smartregister.bidan.R.layout.smart_register_ki_client;
 
-/**
- * Created by Dimas Ciputra on 2/16/15.
- */
-
 public class KIClientsProvider extends BaseClientsProvider {
 
     private static final String TAG = KIClientsProvider.class.getName();

@@ -3,13 +3,11 @@ package org.smartregister.bidan.activity;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import org.json.JSONObject;
 import org.smartregister.Context;
 import org.smartregister.bidan.R;
 import org.smartregister.bidan.utils.Support;
@@ -17,13 +15,11 @@ import org.smartregister.commonregistry.AllCommonsRepository;
 import org.smartregister.commonregistry.CommonPersonObject;
 import org.smartregister.commonregistry.CommonPersonObjectClient;
 import org.smartregister.repository.DetailsRepository;
-import org.smartregister.util.FormUtils;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.UUID;
 
 import static org.smartregister.util.StringUtil.humanize;
 import static org.smartregister.util.StringUtil.humanizeAndDoUPPERCASE;

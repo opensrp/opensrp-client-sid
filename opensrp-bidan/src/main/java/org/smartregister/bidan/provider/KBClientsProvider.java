@@ -26,10 +26,7 @@ import butterknife.Bind;
 import butterknife.ButterKnife;
 
 import static android.view.ViewGroup.LayoutParams.MATCH_PARENT;
-
-/**
- * Created by sid-tech on 11/30/17.
- */
+import static org.smartregister.bidan.R.layout.smart_register_kb_client;
 
 public class KBClientsProvider extends BaseClientsProvider {
 
@@ -99,7 +96,6 @@ public class KBClientsProvider extends BaseClientsProvider {
     private Drawable iconPencilDrawable;
 
     public KBClientsProvider(Context context, View.OnClickListener onClickListener, AlertService alertService) {
-
         super(context);
         this.onClickListener = onClickListener;
         this.context = context;
@@ -165,28 +161,6 @@ public class KBClientsProvider extends BaseClientsProvider {
         hrp_badge.setVisibility(View.INVISIBLE);
         img_hrl_badge.setVisibility(View.INVISIBLE);
 
-/*        AllCommonsRepository iburep = Context.getInstance().allCommonsRepositoryobjects("ibu");
-        if(pc.getColumnmaps().get("ibu.id") != null) {
-            final CommonPersonObject ibuparent = iburep.findByCaseID(pc.getColumnmaps().get("ibu.id"));*//*
-
-            //Risk flag
-            if (ibuparent.getDetails().get("highRiskPregnancyPIH") != null && ibuparent.getDetails().get("highRiskPregnancyPIH").equals("yes")
-                    || pc.getDetails().get("highRiskPregnancyPIH") != null && pc.getDetails().get("highRiskPregnancyPIH").equals("yes")
-                    || ibuparent.getDetails().get("highRiskPregnancyProteinEnergyMalnutrition") != null && ibuparent.getDetails().get("highRiskPregnancyProteinEnergyMalnutrition").equals("yes")
-                    || pc.getDetails().get("HighRiskPregnancyTooManyChildren") != null && pc.getDetails().get("HighRiskPregnancyTooManyChildren").equals("yes")
-                    || ibuparent.getDetails().get("highRiskPregnancyDiabetes") != null && ibuparent.getDetails().get("highRiskPregnancyDiabetes").equals("yes")
-                    || ibuparent.getDetails().get("highRiskPregnancyAnemia") != null && ibuparent.getDetails().get("highRiskPregnancyAnemia").equals("yes")) {
-                viewHolder.hrp_badge.setVisibility(View.VISIBLE);
-            }
-            if (ibuparent.getDetails().get("highRiskLabourFetusMalpresentation") != null && ibuparent.getDetails().get("highRiskLabourFetusMalpresentation").equals("yes")
-                    || ibuparent.getDetails().get("highRiskLabourFetusSize") != null && ibuparent.getDetails().get("highRiskLabourFetusSize").equals("yes")
-                    || ibuparent.getDetails().get("highRisklabourFetusNumber") != null && ibuparent.getDetails().get("highRisklabourFetusNumber").equals("yes")
-                    || pc.getDetails().get("HighRiskLabourSectionCesareaRecord") != null && pc.getDetails().get("HighRiskLabourSectionCesareaRecord").equals("yes")
-                    || ibuparent.getDetails().get("highRiskLabourTBRisk") != null && ibuparent.getDetails().get("highRiskLabourTBRisk").equals("yes")) {
-                viewHolder.img_hrl_badge.setVisibility(View.VISIBLE);
-            }
-        }*/
-
         follow_due.setText("");
         follow_up_due.setText("");
         follow_layout.setBackgroundColor(context.getResources().getColor(R.color.status_bar_text_almost_white));
@@ -201,7 +175,7 @@ public class KBClientsProvider extends BaseClientsProvider {
                 follow_layout.setBackgroundColor(context.getResources().getColor(R.color.status_bar_text_almost_white));
             }
             for (int i = 0; i < alertlist_for_client.size(); i++) {
-                follow_due.setText("Follow up due");
+                follow_due.setText(R.string.followUpDue);
                 if (alertlist_for_client.get(i).status().value().equalsIgnoreCase("normal")) {
                     follow_up_due.setText(alertlist_for_client.get(i).expiryDate());
                     follow_layout.setBackgroundColor(context.getResources().getColor(R.color.alert_upcoming_light_blue));
@@ -232,7 +206,6 @@ public class KBClientsProvider extends BaseClientsProvider {
         }
 
         convertView.setLayoutParams(clientViewLayoutParams);
-        //   return convertView;
     }
 
     @Override
@@ -259,7 +232,6 @@ public class KBClientsProvider extends BaseClientsProvider {
 
     @Override
     public View inflatelayoutForCursorAdapter() {
-        View view = inflater().inflate(R.layout.smart_register_kb_client, null);
-        return view;
+        return inflater().inflate(smart_register_kb_client, null);
     }
 }

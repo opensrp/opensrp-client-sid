@@ -4,15 +4,10 @@ import android.annotation.TargetApi;
 import android.app.Fragment;
 import android.app.FragmentTransaction;
 import android.content.Intent;
-import android.os.AsyncTask;
 import android.os.Build;
-import android.text.Editable;
-import android.text.TextWatcher;
+import android.util.Log;
 import android.view.View;
-import android.widget.EditText;
-import android.widget.Toast;
 
-import org.apache.commons.lang3.StringUtils;
 import org.opensrp.api.domain.Location;
 import org.opensrp.api.util.EntityUtils;
 import org.opensrp.api.util.LocationTree;
@@ -21,13 +16,10 @@ import org.smartregister.Context;
 import org.smartregister.bidan.R;
 import org.smartregister.bidan.activity.BaseRegisterActivity;
 import org.smartregister.bidan.activity.DetailMotherActivity;
-import org.smartregister.bidan.activity.KISmartRegisterActivity;
 import org.smartregister.bidan.options.AllKartuIbuServiceMode;
 import org.smartregister.bidan.options.MotherFilterOption;
 import org.smartregister.bidan.provider.KIClientsProvider;
 import org.smartregister.bidan.utils.AllConstantsINA;
-import org.smartregister.commonregistry.AllCommonsRepository;
-import org.smartregister.commonregistry.CommonPersonObject;
 import org.smartregister.commonregistry.CommonPersonObjectClient;
 import org.smartregister.commonregistry.CommonRepository;
 import org.smartregister.cursoradapter.CursorCommonObjectFilterOption;
@@ -36,11 +28,8 @@ import org.smartregister.cursoradapter.SmartRegisterPaginatedCursorAdapter;
 import org.smartregister.cursoradapter.SmartRegisterQueryBuilder;
 import org.smartregister.util.StringUtil;
 import org.smartregister.view.activity.SecuredNativeSmartRegisterActivity;
-import org.smartregister.view.contract.SmartRegisterClient;
 import org.smartregister.view.dialog.AllClientsFilter;
 import org.smartregister.view.dialog.DialogOption;
-import org.smartregister.view.dialog.DialogOptionModel;
-import org.smartregister.view.dialog.EditOption;
 import org.smartregister.view.dialog.FilterOption;
 import org.smartregister.view.dialog.LocationSelectorDialogFragment;
 import org.smartregister.view.dialog.NameSort;
@@ -52,9 +41,6 @@ import java.util.Map;
 
 import static android.view.View.INVISIBLE;
 
-/**
- * Created by Dimas Ciputra on 2/18/15.
- */
 public class KISmartRegisterFragment extends BaseSmartRegisterFragment {
 
     private static final String TAG = KISmartRegisterFragment.class.getName();
@@ -68,10 +54,6 @@ public class KISmartRegisterFragment extends BaseSmartRegisterFragment {
     public void setCriteria(String criteria) {
         KISmartRegisterFragment.criteria = criteria;
     }
-
-//    @Override
-//    protected void onCreation() {
-//    }
 
     @Override
     protected SecuredNativeSmartRegisterActivity.DefaultOptionsProvider getDefaultOptionsProvider() {
@@ -147,21 +129,6 @@ public class KISmartRegisterFragment extends BaseSmartRegisterFragment {
         };
     }
 
-//    @Override
-//    protected SmartRegisterClientsProvider clientsProvider() {
-//        Log.e(TAG, "clientsProvider: here");
-//        return null;
-//    }
-
-    private DialogOption[] getEditOptions() {
-        return ((BaseRegisterActivity) getActivity()).getEditOptions();
-    }
-
-//    @Override
-//    protected void onInitialization() {
-//        //  context.formSubmissionRouter().getHandlerMap().put("census_enrollment_form", new CensusEnrollmentHandler());
-//    }
-
     @Override
     public void startRegistration() {
 //        if(Support.ONSYNC) {
@@ -210,6 +177,7 @@ public class KISmartRegisterFragment extends BaseSmartRegisterFragment {
 
     @TargetApi(Build.VERSION_CODES.KITKAT)
     public void initializeQueries(String s) {
+        Log.e(TAG, "initializeQueries: key "+ s );
         try {
 
             KIClientsProvider kiscp = new KIClientsProvider(getActivity(), clientActionHandler, context().alertService());
@@ -223,7 +191,6 @@ public class KISmartRegisterFragment extends BaseSmartRegisterFragment {
             countqueryBUilder.SelectInitiateMainTableCounts("ec_kartu_ibu");
 
             mainCondition = "is_closed = 0 AND namalengkap IS NOT NULL AND namalengkap != '' ";
-//            Log.e(TAG, "initializeQueries: Not Initialized");
 
             joinTable = "";
             countSelect = countqueryBUilder.mainCondition(mainCondition);
@@ -302,53 +269,6 @@ public class KISmartRegisterFragment extends BaseSmartRegisterFragment {
         }
     }
 
-
-    @Override
-    public void setupSearchView(final View view) {
-        searchView = (EditText) view.findViewById(org.smartregister.R.id.edt_search);
-        searchView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                searchTextChangeListener("");
-
-            }
-        });
-
-        searchCancelView = view.findViewById(org.smartregister.R.id.btn_search_cancel);
-        searchCancelView.setOnClickListener(searchCancelHandler);
-    }
-
-    public void searchTextChangeListener(String s) {
-
-        if (s != null) {
-            filters = s;
-        } else {
-            searchView.addTextChangedListener(new TextWatcher() {
-                @Override
-                public void beforeTextChanged(CharSequence charSequence, int i, int i2, int i3) {
-                }
-
-                @Override
-                public void onTextChanged(final CharSequence cs, int start, int before, int count) {
-
-                    (new AsyncTask() {
-
-                        @Override
-                        protected Object doInBackground(Object[] params) {
-                            filters = cs.toString();
-                            return null;
-                        }
-                    }).execute();
-                }
-
-                @Override
-                public void afterTextChanged(Editable editable) {
-                }
-            });
-        }
-    }
-
     private class ClientActionHandler implements View.OnClickListener {
         @Override
         public void onClick(View view) {
@@ -362,7 +282,6 @@ public class KISmartRegisterFragment extends BaseSmartRegisterFragment {
                     break;
 
                 case R.id.ib_btn_edit:
-                    DetailMotherActivity.motherClient = (CommonPersonObjectClient) view.getTag();
                     showFragmentDialog(((BaseRegisterActivity) getActivity()).new EditDialogOptionModelNew(), view.getTag());
                     break;
             }

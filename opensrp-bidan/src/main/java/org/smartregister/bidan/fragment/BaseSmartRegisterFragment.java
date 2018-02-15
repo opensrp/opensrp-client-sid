@@ -21,6 +21,29 @@ import static org.apache.commons.lang3.StringUtils.isEmpty;
 public class BaseSmartRegisterFragment extends SecuredNativeSmartRegisterCursorAdapterFragment {
     private static final String TAG = BaseSmartRegisterFragment.class.getName();
     private String customMainCondition;
+    protected final TextWatcher textWatcher = new TextWatcher() {
+        @Override
+        public void beforeTextChanged(CharSequence charSequence, int i, int i2, int i3) {
+        }
+
+        @Override
+        public void onTextChanged(final CharSequence cs, int start, int before, int count) {
+//            filter(cs.toString(), "", "");
+            filters = cs.toString();
+            joinTable = "";
+            Log.e(TAG, "onTextChanged: " + customMainCondition);
+            mainCondition = customMainCondition;
+
+            getSearchCancelView().setVisibility(isEmpty(cs) ? INVISIBLE : VISIBLE);
+            CountExecute();
+            filterandSortExecute();
+        }
+
+        @Override
+        public void afterTextChanged(Editable editable) {
+
+        }
+    };
 
     protected final void textWatcher(int i) {
         switch (i) {
@@ -46,30 +69,6 @@ public class BaseSmartRegisterFragment extends SecuredNativeSmartRegisterCursorA
         getSearchView().removeTextChangedListener(textWatcher);
         getSearchView().addTextChangedListener(textWatcher);
     }
-
-    protected final TextWatcher textWatcher = new TextWatcher() {
-        @Override
-        public void beforeTextChanged(CharSequence charSequence, int i, int i2, int i3) {
-        }
-
-        @Override
-        public void onTextChanged(final CharSequence cs, int start, int before, int count) {
-//            filter(cs.toString(), "", "");
-            filters = cs.toString();
-            joinTable = "";
-            Log.e(TAG, "onTextChanged: "+ customMainCondition );
-            mainCondition = customMainCondition;
-
-            getSearchCancelView().setVisibility(isEmpty(cs) ? INVISIBLE : VISIBLE);
-            CountExecute();
-            filterandSortExecute();
-        }
-
-        @Override
-        public void afterTextChanged(Editable editable) {
-
-        }
-    };
 
     @Override
     protected SecuredNativeSmartRegisterActivity.DefaultOptionsProvider getDefaultOptionsProvider() {

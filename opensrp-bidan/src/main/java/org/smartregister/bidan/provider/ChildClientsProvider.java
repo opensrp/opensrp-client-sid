@@ -46,7 +46,6 @@ public class ChildClientsProvider implements SmartRegisterCLientsProviderForCurs
     private final Context context;
     private final View.OnClickListener onClickListener;
     private final AlertService alertService;
-    private final AbsListView.LayoutParams clientViewLayoutParams;
     private final CommonRepository commonRepository;
     private Drawable iconPencilDrawable;
     private String str_firstName;
@@ -70,7 +69,7 @@ public class ChildClientsProvider implements SmartRegisterCLientsProviderForCurs
         this.commonRepository = commonRepository;
         this.inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 
-        clientViewLayoutParams = new AbsListView.LayoutParams(MATCH_PARENT, (int) context.getResources().getDimension(org.smartregister.R.dimen.list_item_height));
+//        AbsListView.LayoutParams clientViewLayoutParams = new AbsListView.LayoutParams(MATCH_PARENT, (int) context.getResources().getDimension(org.smartregister.R.dimen.list_item_height));
     }
 
 //    public static void setPhoto(Activity activity, String file, ImageView view, int placeholder) {
@@ -209,7 +208,7 @@ public class ChildClientsProvider implements SmartRegisterCLientsProviderForCurs
 
     }
 
-    void checkVisibility(String immunization1, String immunization2, ImageView no, ImageView yes) {
+    private void checkVisibility(String immunization1, String immunization2, ImageView no, ImageView yes) {
         if (immunization1 != null || immunization2 != null) {
             no.setVisibility(View.INVISIBLE);
             yes.setVisibility(View.VISIBLE);

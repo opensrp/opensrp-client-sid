@@ -1,5 +1,6 @@
 package org.smartregister.bidan.provider;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.database.Cursor;
 import android.view.LayoutInflater;
@@ -14,10 +15,6 @@ import org.smartregister.view.dialog.FilterOption;
 import org.smartregister.view.dialog.ServiceModeOption;
 import org.smartregister.view.dialog.SortOption;
 import org.smartregister.view.viewholder.OnClickFormLauncher;
-
-/**
- * Created by sid-tech on 12/12/17.
- */
 
 public class BaseClientsProvider implements SmartRegisterCLientsProviderForCursorAdapter {
 
@@ -49,10 +46,10 @@ public class BaseClientsProvider implements SmartRegisterCLientsProviderForCurso
         return null;
     }
 
+    @SuppressLint("InflateParams")
     @Override
     public View inflatelayoutForCursorAdapter() {
         return inflater().inflate(R.layout.smart_register_ki_client, null);
-//        return null;
     }
 
     public SmartRegisterClients getClients() {
