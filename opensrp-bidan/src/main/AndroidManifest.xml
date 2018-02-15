@@ -28,24 +28,24 @@
             android:theme="@style/AppTheme" />
 
         <activity
-            android:name=".activity.NativeKISmartRegisterActivity"
+            android:name=".activity.KISmartRegisterActivity"
             android:configChanges="keyboardHidden|orientation|screenSize"
             android:screenOrientation="landscape"
             android:theme="@style/AppThemeNoActionBarAndTitle"
             android:windowSoftInputMode="adjustResize" />
-        <activity
-            android:name=".activity.NativeKIbuSmartRegisterActivity"
-            android:configChanges="keyboardHidden|orientation|screenSize"
-            android:screenOrientation="landscape"
-            android:theme="@style/AppThemeNoActionBarAndTitle"
-            android:windowSoftInputMode="adjustResize" />
+        <!--<activity-->
+            <!--android:name=".activity.NativeKIbuSmartRegisterActivity"-->
+            <!--android:configChanges="keyboardHidden|orientation|screenSize"-->
+            <!--android:screenOrientation="landscape"-->
+            <!--android:theme="@style/AppThemeNoActionBarAndTitle"-->
+            <!--android:windowSoftInputMode="adjustResize" />-->
         <activity
             android:name=".activity.DetailMotherActivity"
             android:screenOrientation="landscape"
             android:theme="@style/AppThemeNoTitle" />
 
         <activity
-            android:name=".activity.NativeKIFPSmartRegisterActivity"
+            android:name=".activity.FPSmartRegisterActivity"
             android:configChanges="keyboardHidden|orientation|screenSize"
             android:screenOrientation="landscape"
             android:theme="@style/AppThemeNoActionBarAndTitle"
@@ -56,7 +56,7 @@
             android:theme="@style/AppThemeNoTitle" />
 
         <activity
-            android:name=".activity.NativeKIPNCSmartRegisterActivity"
+            android:name=".activity.PNCSmartRegisterActivity"
             android:configChanges="keyboardHidden|orientation|screenSize"
             android:screenOrientation="landscape"
             android:theme="@style/AppThemeNoActionBarAndTitle"
@@ -67,7 +67,7 @@
             android:theme="@style/AppThemeNoTitle" />
 
         <activity
-            android:name=".activity.NativeKIANCSmartRegisterActivity"
+            android:name=".activity.ANCSmartRegisterActivity"
             android:configChanges="keyboardHidden|orientation|screenSize"
             android:screenOrientation="landscape"
             android:theme="@style/AppThemeNoActionBarAndTitle"
@@ -78,7 +78,7 @@
             android:theme="@style/AppThemeNoTitle" />
 
         <activity
-            android:name=".activity.NativeKIAnakSmartRegisterActivity"
+            android:name=".activity.AnakSmartRegisterActivity"
             android:configChanges="keyboardHidden|orientation|screenSize"
             android:screenOrientation="landscape"
             android:theme="@style/AppThemeNoActionBarAndTitle"

@@ -8,7 +8,6 @@ import android.os.AsyncTask;
 import android.os.Build;
 import android.text.Editable;
 import android.text.TextWatcher;
-import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
@@ -22,7 +21,7 @@ import org.smartregister.Context;
 import org.smartregister.bidan.R;
 import org.smartregister.bidan.activity.BaseRegisterActivity;
 import org.smartregister.bidan.activity.DetailMotherActivity;
-import org.smartregister.bidan.activity.NativeKISmartRegisterActivity;
+import org.smartregister.bidan.activity.KISmartRegisterActivity;
 import org.smartregister.bidan.options.AllKartuIbuServiceMode;
 import org.smartregister.bidan.options.KICommonObjectFilterOption;
 import org.smartregister.bidan.provider.KIClientsProvider;
@@ -35,7 +34,6 @@ import org.smartregister.cursoradapter.CursorCommonObjectFilterOption;
 import org.smartregister.cursoradapter.CursorCommonObjectSort;
 import org.smartregister.cursoradapter.SmartRegisterPaginatedCursorAdapter;
 import org.smartregister.cursoradapter.SmartRegisterQueryBuilder;
-import org.smartregister.provider.SmartRegisterClientsProvider;
 import org.smartregister.util.StringUtil;
 import org.smartregister.view.activity.SecuredNativeSmartRegisterActivity;
 import org.smartregister.view.contract.SmartRegisterClient;
@@ -49,10 +47,7 @@ import org.smartregister.view.dialog.NameSort;
 import org.smartregister.view.dialog.ServiceModeOption;
 import org.smartregister.view.dialog.SortOption;
 
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
-import java.util.HashMap;
 import java.util.Map;
 
 import static android.view.View.INVISIBLE;
@@ -63,12 +58,8 @@ import static android.view.View.INVISIBLE;
 public class KISmartRegisterFragment extends BaseSmartRegisterFragment {
 
     private static final String TAG = KISmartRegisterFragment.class.getName();
-    //    WD
     public static String criteria;
     private final ClientActionHandler clientActionHandler = new ClientActionHandler();
-    Date date = new Date();
-    SimpleDateFormat sdf;
-    Map<String, String> FS = new HashMap<>();
 
     public static String getCriteria() {
         return criteria;
@@ -78,9 +69,9 @@ public class KISmartRegisterFragment extends BaseSmartRegisterFragment {
         KISmartRegisterFragment.criteria = criteria;
     }
 
-    @Override
-    protected void onCreation() {
-    }
+//    @Override
+//    protected void onCreation() {
+//    }
 
     @Override
     protected SecuredNativeSmartRegisterActivity.DefaultOptionsProvider getDefaultOptionsProvider() {
@@ -156,20 +147,20 @@ public class KISmartRegisterFragment extends BaseSmartRegisterFragment {
         };
     }
 
-    @Override
-    protected SmartRegisterClientsProvider clientsProvider() {
-        Log.e(TAG, "clientsProvider: here");
-        return null;
-    }
+//    @Override
+//    protected SmartRegisterClientsProvider clientsProvider() {
+//        Log.e(TAG, "clientsProvider: here");
+//        return null;
+//    }
 
     private DialogOption[] getEditOptions() {
         return ((BaseRegisterActivity) getActivity()).getEditOptions();
     }
 
-    @Override
-    protected void onInitialization() {
-        //  context.formSubmissionRouter().getHandlerMap().put("census_enrollment_form", new CensusEnrollmentHandler());
-    }
+//    @Override
+//    protected void onInitialization() {
+//        //  context.formSubmissionRouter().getHandlerMap().put("census_enrollment_form", new CensusEnrollmentHandler());
+//    }
 
     @Override
     public void startRegistration() {
@@ -232,7 +223,7 @@ public class KISmartRegisterFragment extends BaseSmartRegisterFragment {
             countqueryBUilder.SelectInitiateMainTableCounts("ec_kartu_ibu");
 
             mainCondition = "is_closed = 0 AND namalengkap IS NOT NULL AND namalengkap != '' ";
-            Log.e(TAG, "initializeQueries: Not Initialized");
+//            Log.e(TAG, "initializeQueries: Not Initialized");
 
             joinTable = "";
             countSelect = countqueryBUilder.mainCondition(mainCondition);
@@ -362,7 +353,7 @@ public class KISmartRegisterFragment extends BaseSmartRegisterFragment {
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
 
-        Intent myIntent = new Intent(getActivity(), NativeKISmartRegisterActivity.class);
+        Intent myIntent = new Intent(getActivity(), KISmartRegisterActivity.class);
         if (data != null) {
             myIntent.putExtra("org.smartregister.bidan.face.face_mode", true);
             myIntent.putExtra("org.smartregister.bidan.face.base_id", data.getStringExtra("org.smartregister.indonesia.face.base_id"));

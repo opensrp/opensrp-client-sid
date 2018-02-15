@@ -18,7 +18,7 @@ import org.smartregister.Context;
 import org.smartregister.bidan.R;
 import org.smartregister.bidan.activity.BaseRegisterActivity;
 import org.smartregister.bidan.activity.DetailPNCActivity;
-import org.smartregister.bidan.activity.NativeKIPNCSmartRegisterActivity;
+import org.smartregister.bidan.activity.PNCSmartRegisterActivity;
 import org.smartregister.bidan.options.KIPNCOverviewServiceMode;
 import org.smartregister.bidan.options.MotherFilterOption;
 import org.smartregister.bidan.provider.PNCClientsProvider;
@@ -216,7 +216,7 @@ public class PNCSmartRegisterFragment extends BaseSmartRegisterFragment {
 
             } else {
                 mainCondition = "is_closed = 0 AND (keadaanIbu ='hidup' OR keadaanIbu IS NULL) AND namalengkap != '' ";
-                Log.e(TAG, "initializeQueries: Not Initialized");
+//                Log.e(TAG, "initializeQueries: Not Initialized");
             }
 
             joinTable = "";
@@ -349,7 +349,7 @@ public class PNCSmartRegisterFragment extends BaseSmartRegisterFragment {
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
 
-        Intent myIntent = new Intent(getActivity(), NativeKIPNCSmartRegisterActivity.class);
+        Intent myIntent = new Intent(getActivity(), PNCSmartRegisterActivity.class);
         if (data != null) {
             myIntent.putExtra("indonesia.face.face_mode", true);
             myIntent.putExtra("indonesia.face.base_id", data.getStringExtra("indonesia.face.base_id"));
@@ -372,7 +372,7 @@ public class PNCSmartRegisterFragment extends BaseSmartRegisterFragment {
                 case R.id.ib_btn_edit:
 //                    //FlurryFacade.logEvent("click_visit_button_on_kohort_pnc_dashboard");
 //                    showFragmentDialog(new EditDialogOptionModel(), view.getTag());
-                    showFragmentDialog(((NativeKIPNCSmartRegisterActivity) getActivity()).new EditDialogOptionModelNew(), view.getTag());
+                    showFragmentDialog(((PNCSmartRegisterActivity) getActivity()).new EditDialogOptionModelNew(), view.getTag());
 
                     break;
             }

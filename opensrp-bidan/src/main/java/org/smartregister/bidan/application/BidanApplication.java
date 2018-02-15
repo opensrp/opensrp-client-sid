@@ -114,7 +114,6 @@ public class BidanApplication extends DrishtiApplication {
 
         //Initialize Modules
         CoreLibrary.init(context());
-
         DrishtiSyncScheduler.setReceiverClass(SyncBroadcastReceiver.class);
 
         applyUserLanguagePreference();

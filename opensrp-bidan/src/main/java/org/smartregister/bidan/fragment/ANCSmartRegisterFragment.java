@@ -6,6 +6,7 @@ import android.os.AsyncTask;
 import android.os.Build;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
@@ -20,9 +21,8 @@ import org.smartregister.bidan.R;
 import org.smartregister.bidan.activity.BaseRegisterActivity;
 import org.smartregister.bidan.activity.DetailANCActivity;
 import org.smartregister.bidan.activity.DetailMotherActivity;
-import org.smartregister.bidan.activity.NativeKIANCSmartRegisterActivity;
-import org.smartregister.bidan.activity.NativeKIPNCSmartRegisterActivity;
-import org.smartregister.bidan.activity.NativeKIbuSmartRegisterActivity;
+import org.smartregister.bidan.activity.ANCSmartRegisterActivity;
+import org.smartregister.bidan.activity.KISmartRegisterActivity;
 import org.smartregister.bidan.options.KIANCOverviewServiceMode;
 import org.smartregister.bidan.options.MotherFilterOption;
 import org.smartregister.bidan.provider.ANCClientsProvider;
@@ -285,60 +285,61 @@ public class ANCSmartRegisterFragment extends BaseSmartRegisterFragment {
         }
     }
 
-    @Override
-    public void setupSearchView(final View view) {
-        searchView = (EditText) view.findViewById(org.smartregister.R.id.edt_search);
-        searchView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                searchTextChangeListener("");
-            }
-        });
-
-        searchCancelView = view.findViewById(org.smartregister.R.id.btn_search_cancel);
-        searchCancelView.setOnClickListener(searchCancelHandler);
-    }
-
-    public void searchTextChangeListener(String s) {
-
-        if (s != null) {
-            filters = s;
-        } else {
-            searchView.addTextChangedListener(new TextWatcher() {
-                @Override
-                public void beforeTextChanged(CharSequence charSequence, int i, int i2, int i3) {
-                }
-
-                @Override
-                public void onTextChanged(final CharSequence cs, int start, int before, int count) {
-
-                    (new AsyncTask() {
-
-                        @Override
-                        protected Object doInBackground(Object[] params) {
-                            filters = cs.toString();
-                            return null;
-                        }
-                    }).execute();
-                }
-
-                @Override
-                public void afterTextChanged(Editable editable) {
-                }
-            });
-        }
-    }
+//    @Override
+//    public void setupSearchView(final View view) {
+//        searchView = (EditText) view.findViewById(org.smartregister.R.id.edt_search);
+//        searchView.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                searchTextChangeListener("");
+//            }
+//        });
+//
+//        searchCancelView = view.findViewById(org.smartregister.R.id.btn_search_cancel);
+//        searchCancelView.setOnClickListener(searchCancelHandler);
+//    }
+//
+//    public void searchTextChangeListener(String s) {
+//        Log.e(TAG, "searchTextChangeListener: " );
+//
+//        if (s != null) {
+//            filters = s;
+//        } else {
+//            searchView.addTextChangedListener(new TextWatcher() {
+//                @Override
+//                public void beforeTextChanged(CharSequence charSequence, int i, int i2, int i3) {
+//                }
+//
+//                @Override
+//                public void onTextChanged(final CharSequence cs, int start, int before, int count) {
+//
+//                    (new AsyncTask() {
+//
+//                        @Override
+//                        protected Object doInBackground(Object[] params) {
+//                            filters = cs.toString();
+//                            return null;
+//                        }
+//                    }).execute();
+//                }
+//
+//                @Override
+//                public void afterTextChanged(Editable editable) {
+//                }
+//            });
+//        }
+//    }
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
 
-        Intent myIntent = new Intent(getActivity(), NativeKIbuSmartRegisterActivity.class);
-        if (data != null) {
-            myIntent.putExtra("org.smartregister.bidan_cloudant.face.face_mode", true);
-            myIntent.putExtra("org.smartregister.bidan_cloudant.face.base_id", data.getStringExtra("org.smartregister.bidan_cloudant.face.base_id"));
-        }
-        getActivity().startActivity(myIntent);
+//        Intent myIntent = new Intent(getActivity(), KISmartRegisterActivity.class);
+//        if (data != null) {
+//            myIntent.putExtra("org.smartregister.bidan_cloudant.face.face_mode", true);
+//            myIntent.putExtra("org.smartregister.bidan_cloudant.face.base_id", data.getStringExtra("org.smartregister.bidan_cloudant.face.base_id"));
+//        }
+//        getActivity().startActivity(myIntent);
 
     }
 
@@ -354,10 +355,10 @@ public class ANCSmartRegisterFragment extends BaseSmartRegisterFragment {
                     getActivity().finish();
                     break;
 
-                case R.id.ib_btn_edit:
+                case R.id.btn_anc_edit:
                     DetailANCActivity.ancClient = (CommonPersonObjectClient) view.getTag();
 //                    showFragmentDialog(new EditDialogOptionModel(), view.getTag());
-                    showFragmentDialog(((NativeKIANCSmartRegisterActivity) getActivity()).new EditDialogOptionModelNew(), view.getTag());
+                    showFragmentDialog(((ANCSmartRegisterActivity) getActivity()).new EditDialogOptionModelNew(), view.getTag());
 
                     break;
             }

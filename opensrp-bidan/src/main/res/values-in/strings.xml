@@ -434,4 +434,8 @@
 
     <string name="mother_already_registered_in_fp">Mother already registered</string>
     <string name="str_month">Bln</string>
+    <string name="lila">LILA:</string>
+    <string name="mother_weight">Berat badan</string>
+    <string name="usia">Umur</string>
+    <string name="last_visit_date">Tgl Kunjungan Terakhir</string>
 </resources>

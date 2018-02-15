@@ -13,6 +13,7 @@ import android.os.Bundle;
 import android.support.v4.content.res.ResourcesCompat;
 import android.text.InputType;
 import android.util.DisplayMetrics;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -54,6 +55,7 @@ import static org.smartregister.util.Log.logError;
 import static org.smartregister.util.Log.logVerbose;
 
 public class LoginActivity extends Activity {
+    private static final String TAG = LoginActivity.class.getName();
 
     public static final String ENGLISH_LOCALE = "en";
     public static final String KANNADA_LOCALE = "kn";
@@ -63,7 +65,6 @@ public class LoginActivity extends Activity {
     public static final String KANNADA_LANGUAGE = "Kannada";
     public static final String Bengali_LANGUAGE = "Bengali";
     public static final String Bahasa_LANGUAGE = "Bahasa";
-    private final String TAG = LoginActivity.class.getName();
     private Context context = BidanApplication.getInstance().context();
     private EditText userNameEditText;
     private EditText passwordEditText;
@@ -74,6 +75,7 @@ public class LoginActivity extends Activity {
     }
 
     public static void setLanguage() {
+
         AllSharedPreferences allSharedPreferences = new AllSharedPreferences(getDefaultSharedPreferences(Context.getInstance().applicationContext()));
         String preferredLocale = allSharedPreferences.fetchLanguagePreference();
 
@@ -84,6 +86,7 @@ public class LoginActivity extends Activity {
 //        conf.locale = new Locale(preferredLocale);
         conf.locale = new Locale(BAHASA_LOCALE);
         res.updateConfiguration(conf, dm);
+        Log.e(TAG, "setLanguage: "+ res.getConfiguration().locale.toString());
 
     }
 
@@ -300,7 +303,7 @@ public class LoginActivity extends Activity {
 
     private void goToHome() {
         startActivity(new Intent(this, BidanHomeActivity.class));
-//        startActivity(new Intent(this, NativeKIFPSmartRegisterActivity.class));
+//        startActivity(new Intent(this, FPSmartRegisterActivity.class));
         finish();
     }
 

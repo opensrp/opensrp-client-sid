@@ -19,9 +19,9 @@ import static org.smartregister.bidan.utils.AllConstantsINA.FormNames.KARTU_IBU_
  * Created by sid-tech on 11/28/17.
  */
 
-public class NativeKIPNCSmartRegisterActivity extends BaseRegisterActivity {
+public class PNCSmartRegisterActivity extends BaseRegisterActivity {
 
-    public static final String TAG = NativeKIPNCSmartRegisterActivity.class.getName();
+    public static final String TAG = PNCSmartRegisterActivity.class.getName();
 
     @Override
     protected Fragment mBaseFragment() {

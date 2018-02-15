@@ -93,7 +93,7 @@ public class DetailChildActivity extends Activity {
             @Override
             public void onClick(View v) {
                 finish();
-                startActivity(new Intent(DetailChildActivity.this, NativeKIAnakSmartRegisterActivity.class));
+                startActivity(new Intent(DetailChildActivity.this, AnakSmartRegisterActivity.class));
                 overridePendingTransition(0, 0);
             }
         });
@@ -174,7 +174,7 @@ public class DetailChildActivity extends Activity {
     @Override
     public void onBackPressed() {
         finish();
-        startActivity(new Intent(this, NativeKIAnakSmartRegisterActivity.class));
+        startActivity(new Intent(this, AnakSmartRegisterActivity.class));
         overridePendingTransition(0, 0);
     }
 

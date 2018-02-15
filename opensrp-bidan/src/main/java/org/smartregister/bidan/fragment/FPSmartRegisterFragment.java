@@ -1,8 +1,6 @@
 package org.smartregister.bidan.fragment;
 
 import android.annotation.TargetApi;
-import android.app.Fragment;
-import android.app.FragmentTransaction;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Build;
@@ -20,8 +18,7 @@ import org.smartregister.Context;
 import org.smartregister.bidan.R;
 import org.smartregister.bidan.activity.BaseRegisterActivity;
 import org.smartregister.bidan.activity.DetailFPActivity;
-import org.smartregister.bidan.activity.NativeKIFPSmartRegisterActivity;
-import org.smartregister.bidan.activity.NativeKISmartRegisterActivity;
+import org.smartregister.bidan.activity.FPSmartRegisterActivity;
 import org.smartregister.bidan.options.AllKBServiceMode;
 import org.smartregister.bidan.options.MotherFilterOption;
 import org.smartregister.bidan.provider.KBClientsProvider;
@@ -38,11 +35,9 @@ import org.smartregister.view.contract.ECClient;
 import org.smartregister.view.dialog.AllClientsFilter;
 import org.smartregister.view.dialog.DialogOption;
 import org.smartregister.view.dialog.FilterOption;
-import org.smartregister.view.dialog.LocationSelectorDialogFragment;
 import org.smartregister.view.dialog.NameSort;
 import org.smartregister.view.dialog.ServiceModeOption;
 import org.smartregister.view.dialog.SortOption;
-import org.smartregister.view.viewholder.NativeFPSmartRegisterViewHolder;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -53,7 +48,6 @@ import java.util.Map;
 import static android.view.View.INVISIBLE;
 import static android.view.View.VISIBLE;
 import static org.apache.commons.lang3.StringUtils.isEmpty;
-import static org.smartregister.bidan.utils.AllConstantsINA.FormNames.KOHORT_KB_REGISTER;
 
 /**
  * Created by sid-tech on 11/30/17.
@@ -266,8 +260,8 @@ public class FPSmartRegisterFragment extends BaseSmartRegisterFragment {
 //        ft.addToBackStack(null);
 //
 //        LocationSelectorDialogFragment
-//                .newInstance((NativeKISmartRegisterActivity) getActivity(),
-//                        ((NativeKIFPSmartRegisterActivity) getActivity()).EditDialogOptionModelNew(), context().anmLocationController().get(),
+//                .newInstance((KISmartRegisterActivity) getActivity(),
+//                        ((FPSmartRegisterActivity) getActivity()).EditDialogOptionModelNew(), context().anmLocationController().get(),
 //                        KOHORT_KB_REGISTER)
 //                .show(ft, locationDialogTAG);
 //
@@ -402,7 +396,7 @@ public class FPSmartRegisterFragment extends BaseSmartRegisterFragment {
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
 
-        Intent myIntent = new Intent(getActivity(), NativeKIFPSmartRegisterActivity.class);
+        Intent myIntent = new Intent(getActivity(), FPSmartRegisterActivity.class);
         if (data != null) {
             myIntent.putExtra("indonesia.face.face_mode", true);
             myIntent.putExtra("indonesia.face.base_id", data.getStringExtra("indonesia.face.base_id"));
@@ -427,7 +421,7 @@ public class FPSmartRegisterFragment extends BaseSmartRegisterFragment {
 //                    FlurryFacade.logEvent("click_visit_button_on_kohort_kb_dashboard");
 //                    showFragmentDialog(new EditDialogOptionModel(), view.getTag());
 //                    showFragmentDialog(new BaseRegisterActivity.EditDialogOptionModelNew(), view.getTag());
-                    showFragmentDialog(((NativeKIFPSmartRegisterActivity) getActivity()).new EditDialogOptionModelNew(), view.getTag());
+                    showFragmentDialog(((FPSmartRegisterActivity) getActivity()).new EditDialogOptionModelNew(), view.getTag());
 
                     break;
             }

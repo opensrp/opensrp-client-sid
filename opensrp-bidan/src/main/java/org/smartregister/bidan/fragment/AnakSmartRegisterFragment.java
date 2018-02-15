@@ -14,10 +14,9 @@ import org.opensrp.api.util.LocationTree;
 import org.opensrp.api.util.TreeNode;
 import org.smartregister.Context;
 import org.smartregister.bidan.R;
-import org.smartregister.bidan.activity.BaseRegisterActivity;
+import org.smartregister.bidan.activity.AnakSmartRegisterActivity;
 import org.smartregister.bidan.activity.DetailChildActivity;
-import org.smartregister.bidan.activity.NativeKIANCSmartRegisterActivity;
-import org.smartregister.bidan.activity.NativeKIAnakSmartRegisterActivity;
+import org.smartregister.bidan.activity.ANCSmartRegisterActivity;
 import org.smartregister.bidan.options.AnakOverviewServiceMode;
 import org.smartregister.bidan.options.ChildFilterOption;
 import org.smartregister.bidan.provider.ChildClientsProvider;
@@ -220,7 +219,7 @@ public class AnakSmartRegisterFragment extends BaseSmartRegisterFragment {
     }
 
     private void updateSearchView() {
-        textWatcher(AllConstantsINA.Register.KI);
+        textWatcher(AllConstantsINA.Register.CHILD);
     }
 
     public void addChildToList(ArrayList<DialogOption> dialogOptionslist, Map<String, TreeNode<String, Location>> locationMap) {
@@ -290,7 +289,7 @@ public class AnakSmartRegisterFragment extends BaseSmartRegisterFragment {
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
 
-        Intent myIntent = new Intent(getActivity(), NativeKIAnakSmartRegisterActivity.class);
+        Intent myIntent = new Intent(getActivity(), AnakSmartRegisterActivity.class);
         if (data != null) {
             myIntent.putExtra("org.smartregister.bidan.face.face_mode", true);
             myIntent.putExtra("org.smartregister.bidan.face.base_id", data.getStringExtra("org.smartregister.bidan.face.base_id"));
@@ -313,7 +312,7 @@ public class AnakSmartRegisterFragment extends BaseSmartRegisterFragment {
                 case R.id.ib_btn_edit:
 //                    FlurryFacade.logEvent("click_visit_button_on_kohort_anak_dashboard");
 //                    showFragmentDialog(new EditDialogOptionModel(), view.getTag());
-                    showFragmentDialog(((NativeKIANCSmartRegisterActivity) getActivity()).new EditDialogOptionModelNew(), view.getTag());
+                    showFragmentDialog(((ANCSmartRegisterActivity) getActivity()).new EditDialogOptionModelNew(), view.getTag());
 
                     break;
             }

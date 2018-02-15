@@ -24,9 +24,9 @@ import static org.smartregister.bidan.utils.AllConstantsINA.FormNames.KOHORT_KB_
 /**
  * Created by Dimas Ciputra on 2/18/15.
  */
-public class NativeKISmartRegisterActivity extends BaseRegisterActivity implements LocationSelectorDialogFragment.OnLocationSelectedListener {
+public class KISmartRegisterActivity extends BaseRegisterActivity implements LocationSelectorDialogFragment.OnLocationSelectedListener {
 
-    public static final String TAG = NativeKISmartRegisterActivity.class.getName();
+    public static final String TAG = KISmartRegisterActivity.class.getName();
 
 
     @Override

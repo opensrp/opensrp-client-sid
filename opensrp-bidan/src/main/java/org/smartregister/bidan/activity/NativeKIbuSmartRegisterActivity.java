@@ -26,8 +26,6 @@ import static org.smartregister.bidan.utils.AllConstantsINA.FormNames.KOHORT_KB_
 
 public class NativeKIbuSmartRegisterActivity extends BaseRegisterActivity implements LocationSelectorDialogFragment.OnLocationSelectedListener {
 
-    public static final String TAG = NativeKIbuSmartRegisterActivity.class.getName();
-
     @Override
     protected Fragment mBaseFragment() {
 

@@ -447,6 +447,11 @@
     <string name="header_neonatal">NEONATAL VISIT</string>
     <string name="header_immunizations">IMMUNIZATIONS</string>
     <string name="str_month">Month</string>
+    <string name="lila">MUAC:</string>
+    <string name="mother_weight">Mother Weight</string>
+    <string name="usia">Umur</string>
+    <string name="last_visit_date">Tgl Kunjungan Terakhir</string>
+    <string name="visit_number">Kunjungan Ke</string>
 
 
 </resources>

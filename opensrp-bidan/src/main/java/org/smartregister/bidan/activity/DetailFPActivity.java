@@ -128,7 +128,7 @@ public class DetailFPActivity extends Activity {
             @Override
             public void onClick(View v) {
                 finish();
-                startActivity(new Intent(DetailFPActivity.this, NativeKIFPSmartRegisterActivity.class));
+                startActivity(new Intent(DetailFPActivity.this, FPSmartRegisterActivity.class));
                 overridePendingTransition(0, 0);
                 String DetailEnd = timer.format(new Date());
                 Map<String, String> Detail = new HashMap<>();
@@ -268,7 +268,7 @@ public class DetailFPActivity extends Activity {
     @Override
     public void onBackPressed() {
         finish();
-        startActivity(new Intent(this, NativeKIFPSmartRegisterActivity.class));
+        startActivity(new Intent(this, FPSmartRegisterActivity.class));
         overridePendingTransition(0, 0);
     }
 }

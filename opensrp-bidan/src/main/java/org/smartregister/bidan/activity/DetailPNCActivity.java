@@ -163,7 +163,7 @@ public class DetailPNCActivity extends Activity {
             @Override
             public void onClick(View v) {
                 finish();
-                startActivity(new Intent(DetailPNCActivity.this, NativeKIPNCSmartRegisterActivity.class));
+                startActivity(new Intent(DetailPNCActivity.this, PNCSmartRegisterActivity.class));
                 overridePendingTransition(0, 0);
                 String DetailEnd = timer.format(new Date());
                 Map<String, String> Detail = new HashMap<String, String>();

@@ -18,9 +18,9 @@ import static org.smartregister.bidan.utils.AllConstantsINA.FormNames.KOHORT_KB_
  * Created by sid-tech on 11/30/17.
  */
 
-public class NativeKIFPSmartRegisterActivity extends BaseRegisterActivity {
+public class FPSmartRegisterActivity extends BaseRegisterActivity {
 
-    public static final String TAG = NativeKIFPSmartRegisterActivity.class.getName();
+    public static final String TAG = FPSmartRegisterActivity.class.getName();
 
     @Override
     protected Fragment mBaseFragment() {

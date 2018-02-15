@@ -23,9 +23,9 @@ public class ChildFilterOption implements CursorFilterOption {
     @Override
     public String filter() {
         if (StringUtils.isNotBlank(fieldname) && !fieldname.equals("location_name")) {
-            return " AND " + tablename + ".base_entity_id IN ( SELECT DISTINCT base_entity_id FROM ec_details WHERE key MATCH '" + fieldname + "' INTERSECT SELECT DISTINCT base_entity_id FROM ec_details WHERE value MATCH '" + criteria + "' ) ";
+            return "AND " + tablename + ".base_entity_id IN (SELECT DISTINCT base_entity_id FROM ec_details WHERE key MATCH '" + fieldname + "' INTERSECT SELECT DISTINCT base_entity_id FROM ec_details WHERE value MATCH '" + criteria + "' ) ";
         } else {
-            return " AND " + tablename + ".base_entity_id IN ( SELECT DISTINCT base_entity_id FROM ec_details WHERE value MATCH '" + criteria + "' ) ";
+            return "AND " + tablename + ".base_entity_id IN (SELECT DISTINCT base_entity_id FROM ec_details WHERE value MATCH '" + criteria + "' ) ";
         }
     }
 
