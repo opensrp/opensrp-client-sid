@@ -48,6 +48,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Objects;
 
 import static android.view.View.INVISIBLE;
 
@@ -60,14 +61,8 @@ public class PNCSmartRegisterFragment extends BaseSmartRegisterFragment {
     //    WD
     public static String criteria;
     private final ClientActionHandler clientActionHandler = new ClientActionHandler();
-    Date date = new Date();
-    SimpleDateFormat sdf;
-    Map<String, String> FS = new HashMap<>();
-    private SmartRegisterClientsProvider clientProvider = null;
-    private CommonPersonObjectController controller;
-    private VillageController villageController;
-    private DialogOptionMapper dialogOptionMapper;
-    private String locationDialogTAG = "locationDialogTAG";
+    String tableName = "ec_kartu_ibu";
+    String tableEcPnc = "ec_pnc";
 
     public static String getCriteria() {
         return criteria;
@@ -189,44 +184,28 @@ public class PNCSmartRegisterFragment extends BaseSmartRegisterFragment {
         return "";
     }
 
-    private String sortByAlertmethod() {
-        return " CASE WHEN alerts.status = 'urgent' THEN '1'" +
-                "WHEN alerts.status = 'upcoming' THEN '2'\n" +
-                "WHEN alerts.status = 'normal' THEN '3'\n" +
-                "WHEN alerts.status = 'expired' THEN '4'\n" +
-                "WHEN alerts.status is Null THEN '5'\n" +
-                "Else alerts.status END ASC";
-    }
-
     @TargetApi(Build.VERSION_CODES.KITKAT)
-    public void initializeQueries(String s) {
+    public void initializeQueries(String s){
         try {
-            PNCClientsProvider kiscp = new PNCClientsProvider(getActivity(), clientActionHandler, context().alertService());
-            clientAdapter = new SmartRegisterPaginatedCursorAdapter(getActivity(), null, kiscp, new CommonRepository("ec_pnc", new String[]{"ec_kartu_ibu.namalengkap", "ec_kartu_ibu.namaSuami"}));
+            PNCClientsProvider kiscp = new PNCClientsProvider(getActivity(),clientActionHandler,context().alertService());
+            clientAdapter = new SmartRegisterPaginatedCursorAdapter(getActivity(), null, kiscp, new CommonRepository(tableEcPnc,new String []{"ec_kartu_ibu.namalengkap", "ec_kartu_ibu.namaSuami"}));
             clientsView.setAdapter(clientAdapter);
 
-            setTablename("ec_pnc");
-            SmartRegisterQueryBuilder countqueryBuilder = new SmartRegisterQueryBuilder();
-            countqueryBuilder.SelectInitiateMainTableCounts("ec_pnc");
-            countqueryBuilder.customJoin("LEFT JOIN ec_kartu_ibu on ec_kartu_ibu.id = ec_pnc.id");
+            setTablename(tableEcPnc);
+            SmartRegisterQueryBuilder countqueryBUilder = new SmartRegisterQueryBuilder();
+            countqueryBUilder.SelectInitiateMainTableCounts(tableEcPnc);
+            countqueryBUilder.customJoin("LEFT JOIN ec_kartu_ibu on ec_kartu_ibu.id = ec_pnc.id");
 
-            if (s != null && !s.isEmpty()) {
-                Log.e(TAG, "initializeQueries with ID = " + s);
-                mainCondition = "is_closed = 0 AND (keadaanIbu ='hidup' OR keadaanIbu IS NULL) AND namalengkap != '' AND object_id LIKE '%" + s + "%'";
-
-            } else {
-                mainCondition = "is_closed = 0 AND (keadaanIbu ='hidup' OR keadaanIbu IS NULL) AND namalengkap != '' ";
-//                Log.e(TAG, "initializeQueries: Not Initialized");
-            }
+            mainCondition = "is_closed = 0 AND (keadaanIbu ='hidup' OR keadaanIbu IS NULL) AND namalengkap != '' AND namalengkap IS NOT NULL";
 
             joinTable = "";
-            countSelect = countqueryBuilder.mainCondition(mainCondition);
+            countSelect = countqueryBUilder.mainCondition(mainCondition);
             super.CountExecute();
 
-            SmartRegisterQueryBuilder queryBuilder = new SmartRegisterQueryBuilder();
-            queryBuilder.SelectInitiateMainTable("ec_pnc", new String[]{"ec_pnc.relationalid", "ec_pnc.details", "ec_kartu_ibu.namalengkap", "ec_kartu_ibu.namaSuami", "imagelist.imageid"});
-            queryBuilder.customJoin("LEFT JOIN ec_kartu_ibu on ec_kartu_ibu.id = ec_pnc.id LEFT JOIN ImageList imagelist ON ec_pnc.id=imagelist.entityID");
-            mainSelect = queryBuilder.mainCondition(mainCondition);
+            SmartRegisterQueryBuilder queryBUilder = new SmartRegisterQueryBuilder();
+            queryBUilder.SelectInitiateMainTable(tableEcPnc, new String[]{"ec_pnc.relationalid", "ec_pnc.details",  "ec_kartu_ibu.namalengkap","ec_kartu_ibu.namaSuami","imagelist.imageid"});
+            queryBUilder.customJoin("LEFT JOIN ec_kartu_ibu on ec_kartu_ibu.id = ec_pnc.id LEFT JOIN ImageList imagelist ON ec_pnc.id=imagelist.entityID");
+            mainSelect = queryBUilder.mainCondition("ec_kartu_ibu.is_closed = 0 and (keadaanIbu ='hidup' OR keadaanIbu IS NULL) ");
 
             Sortqueries = KiSortByNameAZ();
 
@@ -237,15 +216,12 @@ public class PNCSmartRegisterFragment extends BaseSmartRegisterFragment {
             CountExecute();
             updateSearchView();
             refresh();
-        } catch (Exception e) {
+        } catch (Exception e){
             e.printStackTrace();
-        } finally {
+        }
+        finally {
         }
 
-    }
-
-    private String KiSortByName() {
-        return " namalengkap ASC";
     }
 
     private String KiSortByNameAZ() {
@@ -280,8 +256,6 @@ public class PNCSmartRegisterFragment extends BaseSmartRegisterFragment {
 
     private void updateSearchView() {
         textWatcher(AllConstantsINA.Register.PNC);
-//        getSearchView().removeTextChangedListener();
-//        getSearchView().addTextChangedListener(textWatcher);
     }
 
     public void addChildToList(ArrayList<DialogOption> dialogOptionslist, Map<String, TreeNode<String, Location>> locationMap) {
@@ -293,69 +267,10 @@ public class PNCSmartRegisterFragment extends BaseSmartRegisterFragment {
             } else {
                 StringUtil.humanize(entry.getValue().getLabel());
                 String name = StringUtil.humanize(entry.getValue().getLabel());
-                dialogOptionslist.add(new MotherFilterOption(name, "location_name", name, "ec_kartu_ibu"));
+                dialogOptionslist.add(new MotherFilterOption(name, "location_name", name, tableName));
 
             }
         }
-    }
-
-    //    WD
-    @Override
-    public void setupSearchView(final View view) {
-        searchView = (EditText) view.findViewById(R.id.edt_search);
-        searchView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                searchTextChangeListener("");
-            }
-        });
-
-        searchCancelView = view.findViewById(R.id.btn_search_cancel);
-        searchCancelView.setOnClickListener(searchCancelHandler);
-    }
-
-    public void searchTextChangeListener(String s) {
-        Log.e(TAG, "searchTextChangeListener: " + s);
-        if (s != null) {
-            filters = s;
-        } else {
-            searchView.addTextChangedListener(new TextWatcher() {
-                @Override
-                public void beforeTextChanged(CharSequence charSequence, int i, int i2, int i3) {
-                }
-
-                @Override
-                public void onTextChanged(final CharSequence cs, int start, int before, int count) {
-
-                    Log.e(TAG, "onTextChanged: " + searchView.getText());
-                    (new AsyncTask() {
-                        @Override
-                        protected Object doInBackground(Object[] params) {
-                            filters = cs.toString();
-                            return null;
-                        }
-//
-                    }).execute();
-                }
-
-                @Override
-                public void afterTextChanged(Editable editable) {
-                }
-            });
-        }
-    }
-
-    @Override
-    public void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-
-        Intent myIntent = new Intent(getActivity(), PNCSmartRegisterActivity.class);
-        if (data != null) {
-            myIntent.putExtra("indonesia.face.face_mode", true);
-            myIntent.putExtra("indonesia.face.base_id", data.getStringExtra("indonesia.face.base_id"));
-        }
-        getActivity().startActivity(myIntent);
-
     }
 
     private class ClientActionHandler implements View.OnClickListener {

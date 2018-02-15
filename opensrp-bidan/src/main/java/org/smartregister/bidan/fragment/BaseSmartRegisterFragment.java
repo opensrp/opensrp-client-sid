@@ -34,7 +34,7 @@ public class BaseSmartRegisterFragment extends SecuredNativeSmartRegisterCursorA
                 customMainCondition = "is_closed = 0 AND namalengkap IS NOT NULL AND namalengkap != ''";
                 break;
             case AllConstantsINA.Register.PNC:
-                customMainCondition = "is_closed = 0 AND (keadaanIbu ='hidup' OR keadaanIbu IS NULL)";
+                customMainCondition = "is_closed = 0 AND namalengkap IS NOT NULL AND namalengkap != '' AND (keadaanIbu ='hidup' OR keadaanIbu IS NULL)";
                 break;
             case AllConstantsINA.Register.CHILD:
                 customMainCondition = "is_closed = 0 AND relational_id != '' ";

@@ -10,6 +10,7 @@ import android.widget.Toast;
 import org.apache.commons.lang3.StringUtils;
 import org.json.JSONException;
 import org.json.JSONObject;
+import org.smartregister.adapter.SmartRegisterPaginatedAdapter;
 import org.smartregister.bidan.R;
 import org.smartregister.bidan.sync.ClientProcessor;
 import org.smartregister.bidan.utils.BidanFormUtils;
@@ -256,6 +257,11 @@ public class BaseRegisterActivity extends SecuredNativeSmartRegisterActivity imp
             android.util.Log.e(TAG, "startFormActivity: "+ e.getMessage() );
         }
 
+    }
+
+    @Override
+    protected SmartRegisterPaginatedAdapter adapter() {
+        return new SmartRegisterPaginatedAdapter(clientsProvider());
     }
 
     @Override

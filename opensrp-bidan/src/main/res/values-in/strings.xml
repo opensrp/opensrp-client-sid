@@ -417,13 +417,13 @@
     <string name="highRiskPostPartumPIH">Resiko Tinggi PostPartum PIH</string>
     <string name="highRiskPostPartumDistosia">Resiko Tinggi PostPartum Distosia</string>
     <string name="highRiskPostPartumSectioCaesaria">Resiko Tinggi PostPartum Sectio Caesaria</string>
-    <string name="contraseption">Jenis Kontrasepsi</string>
-    <string name="sistolic">Systolic</string>
-    <string name="diastolic">Diastolic</string>
-    <string name="alki_hb">ALKI /HB</string>
-    <string name="alkilila">ALKI / LILA</string>
-    <string name="ALKI_Penyakin_kronis">ALKI / Penyakit Kronis</string>
-    <string name="alkiims">ALKI /Ims</string>
+    <string name="contraseption">Jenis Kontrasepsi:</string>
+    <string name="sistolic">Systole:</string>
+    <string name="diastolic">Diastole:</string>
+    <string name="alki_hb">ALKI/HB:</string>
+    <string name="alkilila">ALKI/LILA:</string>
+    <string name="ALKI_Penyakin_kronis">ALKI/Penyakit Kronis:</string>
+    <string name="alkiims">ALKI/Ims</string>
     <string name="kb_ket">Keterangan tentang peserta KB</string>
     <string name="ganti_cara">Keterangan Ganti Cara</string>
     <string name="elco_details_summary">Ringkasan</string>
@@ -433,9 +433,9 @@
     <string name="fe">FE:</string>
 
     <string name="mother_already_registered_in_fp">Mother already registered</string>
-    <string name="str_month">Bln</string>
+    <string name="str_month">Bln:</string>
     <string name="lila">LILA:</string>
-    <string name="mother_weight">Berat badan</string>
-    <string name="usia">Umur</string>
-    <string name="last_visit_date">Tgl Kunjungan Terakhir</string>
+    <string name="mother_weight">Berat badan:</string>
+    <string name="usia">Umur:</string>
+    <string name="last_visit_date">Tgl Kunjungan Terakhir:</string>
 </resources>

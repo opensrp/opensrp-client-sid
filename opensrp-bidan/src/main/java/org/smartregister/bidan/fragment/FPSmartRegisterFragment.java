@@ -2,13 +2,8 @@ package org.smartregister.bidan.fragment;
 
 import android.annotation.TargetApi;
 import android.content.Intent;
-import android.os.AsyncTask;
 import android.os.Build;
-import android.text.Editable;
-import android.text.TextWatcher;
-import android.util.Log;
 import android.view.View;
-import android.widget.EditText;
 
 import org.opensrp.api.domain.Location;
 import org.opensrp.api.util.EntityUtils;
@@ -22,6 +17,7 @@ import org.smartregister.bidan.activity.FPSmartRegisterActivity;
 import org.smartregister.bidan.options.AllKBServiceMode;
 import org.smartregister.bidan.options.MotherFilterOption;
 import org.smartregister.bidan.provider.KBClientsProvider;
+import org.smartregister.bidan.utils.AllConstantsINA;
 import org.smartregister.commonregistry.CommonPersonObjectClient;
 import org.smartregister.commonregistry.CommonRepository;
 import org.smartregister.cursoradapter.CursorCommonObjectFilterOption;
@@ -39,32 +35,17 @@ import org.smartregister.view.dialog.NameSort;
 import org.smartregister.view.dialog.ServiceModeOption;
 import org.smartregister.view.dialog.SortOption;
 
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
-import java.util.HashMap;
 import java.util.Map;
 
 import static android.view.View.INVISIBLE;
-import static android.view.View.VISIBLE;
-import static org.apache.commons.lang3.StringUtils.isEmpty;
-
-/**
- * Created by sid-tech on 11/30/17.
- */
 
 public class FPSmartRegisterFragment extends BaseSmartRegisterFragment {
 
     private static final String TAG = FPSmartRegisterFragment.class.getName();
-    //    WD
     public static String criteria;
     private final ClientActionHandler clientActionHandler = new ClientActionHandler();
-    Date date = new Date();
-    SimpleDateFormat sdf;
-    Map<String, String> FS = new HashMap<>();
-
     String tableName = "ec_kartu_ibu";
-    private String locationDialogTAG = "locationDialogTAG";
 
 //    @Override
 //    protected SmartRegisterPaginatedAdapter adapter() {
@@ -212,15 +193,15 @@ public class FPSmartRegisterFragment extends BaseSmartRegisterFragment {
                     null,
                     kiscp,
                     new CommonRepository(
-                            "ec_kartu_ibu",
+                            tableName,
                             new String[]{"ec_kartu_ibu.is_closed", "ec_kartu_ibu.namalengkap", "ec_kartu_ibu.umur", "ec_kartu_ibu.namaSuami", "noIbu", "jenisKontrasepsi"}));
             clientsView.setAdapter(clientAdapter);
 
-            setTablename("ec_kartu_ibu");
+            setTablename(tableName);
             SmartRegisterQueryBuilder countqueryBuilder = new SmartRegisterQueryBuilder();
-            countqueryBuilder.SelectInitiateMainTableCounts("ec_kartu_ibu");
+            countqueryBuilder.SelectInitiateMainTableCounts(tableName);
 
-            mainCondition = "is_closed = 0 and namalengkap != '' and jenisKontrasepsi !='' ";
+            mainCondition = "is_closed = 0 AND namalengkap != '' AND jenisKontrasepsi !=''";
 
             joinTable = "";
             countSelect = countqueryBuilder.mainCondition(mainCondition);
@@ -228,7 +209,7 @@ public class FPSmartRegisterFragment extends BaseSmartRegisterFragment {
 
             SmartRegisterQueryBuilder queryBuilder = new SmartRegisterQueryBuilder();
 
-            queryBuilder.SelectInitiateMainTable("ec_kartu_ibu", new String[]{"ec_kartu_ibu.relationalid", "ec_kartu_ibu.is_closed", "ec_kartu_ibu.details", "ec_kartu_ibu.isOutOfArea", "ec_kartu_ibu.namalengkap", "ec_kartu_ibu.umur", "ec_kartu_ibu.namaSuami", "noIbu"});
+            queryBuilder.SelectInitiateMainTable(tableName, new String[]{"ec_kartu_ibu.relationalid", "ec_kartu_ibu.is_closed", "ec_kartu_ibu.details", "ec_kartu_ibu.isOutOfArea", "ec_kartu_ibu.namalengkap", "ec_kartu_ibu.umur", "ec_kartu_ibu.namaSuami", "noIbu"});
             //   queryBuilder.customJoin("LEFT JOIN ec_anak ON ec_kartu_ibu.id = ec_anak.relational_id ");
             mainSelect = queryBuilder.mainCondition(mainCondition);
             Sortqueries = KiSortByNameAZ();
@@ -305,32 +286,6 @@ public class FPSmartRegisterFragment extends BaseSmartRegisterFragment {
 
     }
 
-    private void updateSearchView() {
-        getSearchView().addTextChangedListener(new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence charSequence, int i, int i2, int i3) {
-            }
-
-            @Override
-            public void onTextChanged(final CharSequence cs, int start, int before, int count) {
-
-                filters = cs.toString();
-                joinTable = "";
-                mainCondition = "is_closed = 0 and namalengkap != '' and jenisKontrasepsi !='' ";
-
-                getSearchCancelView().setVisibility(isEmpty(cs) ? INVISIBLE : VISIBLE);
-                CountExecute();
-                filterandSortExecute();
-
-            }
-
-            @Override
-            public void afterTextChanged(Editable editable) {
-
-            }
-        });
-    }
-
     public void addChildToList(ArrayList<DialogOption> dialogOptionslist, Map<String, TreeNode<String, Location>> locationMap) {
         for (Map.Entry<String, TreeNode<String, Location>> entry : locationMap.entrySet()) {
 
@@ -346,62 +301,8 @@ public class FPSmartRegisterFragment extends BaseSmartRegisterFragment {
         }
     }
 
-    //    WD
-    @Override
-    public void setupSearchView(final View view) {
-        searchView = (EditText) view.findViewById(R.id.edt_search);
-        searchView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                searchTextChangeListener("");
-            }
-        });
-
-        searchCancelView = view.findViewById(R.id.btn_search_cancel);
-        searchCancelView.setOnClickListener(searchCancelHandler);
-    }
-
-    public void searchTextChangeListener(String s) {
-        Log.e(TAG, "searchTextChangeListener: " + s);
-        if (s != null) {
-            filters = s;
-        } else {
-            searchView.addTextChangedListener(new TextWatcher() {
-                @Override
-                public void beforeTextChanged(CharSequence charSequence, int i, int i2, int i3) {
-                }
-
-                @Override
-                public void onTextChanged(final CharSequence cs, int start, int before, int count) {
-
-                    (new AsyncTask() {
-                        @Override
-                        protected Object doInBackground(Object[] params) {
-                            filters = cs.toString();
-                            joinTable = "";
-                            mainCondition = "isClosed !='true' and ibuCaseId !='' ";
-                            return null;
-                        }
-                    }).execute();
-                }
-
-                @Override
-                public void afterTextChanged(Editable editable) {
-                }
-            });
-        }
-    }
-
-    @Override
-    public void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-
-        Intent myIntent = new Intent(getActivity(), FPSmartRegisterActivity.class);
-        if (data != null) {
-            myIntent.putExtra("indonesia.face.face_mode", true);
-            myIntent.putExtra("indonesia.face.base_id", data.getStringExtra("indonesia.face.base_id"));
-        }
-        getActivity().startActivity(myIntent);
+    private void updateSearchView() {
+        textWatcher(AllConstantsINA.Register.FP);
 
     }
 

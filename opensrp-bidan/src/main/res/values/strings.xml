@@ -452,6 +452,10 @@
     <string name="usia">Umur</string>
     <string name="last_visit_date">Tgl Kunjungan Terakhir</string>
     <string name="visit_number">Kunjungan Ke</string>
+    <string name="ANC3">ANC 3</string>
+    <string name="ANC2">ANC 2</string>
+    <string name="ANC1">ANC</string>
+    <string name="ANC4">ANC 4</string>
 
 
 </resources>

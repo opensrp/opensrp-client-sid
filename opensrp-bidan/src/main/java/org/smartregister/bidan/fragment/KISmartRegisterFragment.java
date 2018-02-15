@@ -23,7 +23,7 @@ import org.smartregister.bidan.activity.BaseRegisterActivity;
 import org.smartregister.bidan.activity.DetailMotherActivity;
 import org.smartregister.bidan.activity.KISmartRegisterActivity;
 import org.smartregister.bidan.options.AllKartuIbuServiceMode;
-import org.smartregister.bidan.options.KICommonObjectFilterOption;
+import org.smartregister.bidan.options.MotherFilterOption;
 import org.smartregister.bidan.provider.KIClientsProvider;
 import org.smartregister.bidan.utils.AllConstantsINA;
 import org.smartregister.commonregistry.AllCommonsRepository;
@@ -296,7 +296,7 @@ public class KISmartRegisterFragment extends BaseSmartRegisterFragment {
             } else {
                 StringUtil.humanize(entry.getValue().getLabel());
                 String name = StringUtil.humanize(entry.getValue().getLabel());
-                dialogOptionslist.add(new KICommonObjectFilterOption(name, "location_name", name, "ec_kartu_ibu"));
+                dialogOptionslist.add(new MotherFilterOption(name, "location_name", name, "ec_kartu_ibu"));
 
             }
         }
@@ -349,19 +349,6 @@ public class KISmartRegisterFragment extends BaseSmartRegisterFragment {
         }
     }
 
-    @Override
-    public void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-
-        Intent myIntent = new Intent(getActivity(), KISmartRegisterActivity.class);
-        if (data != null) {
-            myIntent.putExtra("org.smartregister.bidan.face.face_mode", true);
-            myIntent.putExtra("org.smartregister.bidan.face.base_id", data.getStringExtra("org.smartregister.indonesia.face.base_id"));
-        }
-        getActivity().startActivity(myIntent);
-
-    }
-
     private class ClientActionHandler implements View.OnClickListener {
         @Override
         public void onClick(View view) {
@@ -381,51 +368,6 @@ public class KISmartRegisterFragment extends BaseSmartRegisterFragment {
             }
         }
 
-    }
-
-    private class EditDialogOptionModel implements DialogOptionModel {
-        @Override
-        public DialogOption[] getDialogOptions() {
-            return getEditOptions();
-        }
-
-        @Override
-        public void onDialogOptionSelection(DialogOption option, Object tag) {
-            android.util.Log.e(TAG, "onDialogOptionSelection: EDIT");
-
-            if (option.name().equalsIgnoreCase(getString(R.string.str_register_anc_form))) {
-                CommonPersonObjectClient pc = DetailMotherActivity.motherClient;
-                AllCommonsRepository iburep = org.smartregister.Context.getInstance().allCommonsRepositoryobjects("ec_ibu");
-                final CommonPersonObject ibuparent = iburep.findByCaseID(pc.entityId());
-                if (ibuparent != null) {
-                    short anc_isclosed = ibuparent.getClosed();
-                    if (anc_isclosed == 0) {
-                        Toast.makeText(getActivity().getApplicationContext(), getString(R.string.mother_already_registered), Toast.LENGTH_SHORT).show();
-                        return;
-                    }
-                }
-            }
-            if (option.name().equalsIgnoreCase(getString(R.string.str_register_fp_form))) {
-                CommonPersonObjectClient pc = DetailMotherActivity.motherClient;
-
-                if (!StringUtils.isNumeric(pc.getDetails().get("jenisKontrasepsi"))) {
-                    Toast.makeText(getActivity().getApplicationContext(), getString(R.string.mother_already_registered_in_fp), Toast.LENGTH_SHORT).show();
-                    return;
-                }
-
-                AllCommonsRepository iburep = org.smartregister.Context.getInstance().allCommonsRepositoryobjects("ec_ibu");
-                final CommonPersonObject ibuparent = iburep.findByCaseID(pc.entityId());
-                if (ibuparent != null) {
-                    short anc_isclosed = ibuparent.getClosed();
-                    if (anc_isclosed == 0) {
-                        Toast.makeText(getActivity().getApplicationContext(), getString(R.string.mother_already_registered), Toast.LENGTH_SHORT).show();
-                        return;
-                    }
-                }
-            }
-
-            onEditSelection((EditOption) option, (SmartRegisterClient) tag);
-        }
     }
 
 }

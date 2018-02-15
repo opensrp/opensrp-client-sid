@@ -4,27 +4,25 @@ import org.apache.commons.lang3.StringUtils;
 import org.smartregister.cursoradapter.CursorFilterOption;
 import org.smartregister.view.contract.SmartRegisterClient;
 
-/**
- */
 public class MotherFilterOption implements CursorFilterOption {
     public final String criteria;
-    public final String fieldname;
+    private final String fieldName;
     private final String filterOptionName;
-    private final String tablename;
+    private final String tableName;
 
     public MotherFilterOption(String criteria, String fieldname, String filteroptionname, String tablename) {
         this.criteria = criteria;
-        this.fieldname = fieldname;
+        this.fieldName = fieldname;
         this.filterOptionName = filteroptionname;
-        this.tablename = tablename;
+        this.tableName = tablename;
     }
 
     @Override
     public String filter() {
-        if (StringUtils.isNotBlank(fieldname) && !fieldname.equals("location_name")) {
-            return "AND " + tablename + ".base_entity_id IN (SELECT DISTINCT base_entity_id FROM ec_details WHERE key MATCH '" + fieldname + "' INTERSECT SELECT DISTINCT base_entity_id FROM ec_details WHERE value MATCH '" + criteria + "' ) ";
+        if (StringUtils.isNotBlank(fieldName) && !fieldName.equals("location_name")) {
+            return "AND " + tableName + ".base_entity_id IN (SELECT DISTINCT base_entity_id FROM ec_details WHERE key MATCH '" + fieldName + "' INTERSECT SELECT DISTINCT base_entity_id FROM ec_details WHERE value MATCH '" + criteria + "') ";
         } else {
-            return "AND " + tablename + ".base_entity_id IN (SELECT DISTINCT base_entity_id FROM ec_details WHERE value MATCH '" + criteria + "' ) ";
+            return "AND " + tableName + ".base_entity_id IN (SELECT DISTINCT base_entity_id FROM ec_details WHERE value MATCH '" + criteria + "') ";
         }
     }
 
