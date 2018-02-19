@@ -33,11 +33,12 @@ import org.smartregister.view.dialog.EditOption;
 import org.smartregister.view.fragment.SecuredNativeSmartRegisterFragment;
 import org.smartregister.view.viewpager.OpenSRPViewPager;
 
-import java.text.SimpleDateFormat;
+import java.text.DateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
 
 import butterknife.Bind;
@@ -46,13 +47,19 @@ import butterknife.ButterKnife;
 import static org.smartregister.util.Utils.getValue;
 
 /**
- * Created by sid-tech on 12/7/17.
+ * Created by SID
  */
 
 public class BaseRegisterActivity extends SecuredNativeSmartRegisterActivity implements DisplayFormListener {
 
     private final String TAG = BaseRegisterActivity.class.getName();
-    protected SimpleDateFormat timer = new SimpleDateFormat("hh:mm:ss");
+
+//    protected SimpleDateFormat timer = new SimpleDateFormat("hh:mm:ss");
+    int style = DateFormat.MEDIUM;
+    //Also try with style = DateFormat.FULL and DateFormat.SHORT
+    Date date = new Date();
+    DateFormat timer = DateFormat.getDateInstance(style, Locale.US);
+
     protected List<String> formNames;
 
     @Bind(R.id.view_pager)
@@ -60,8 +67,9 @@ public class BaseRegisterActivity extends SecuredNativeSmartRegisterActivity imp
 
     protected int currentPage;
     protected FragmentPagerAdapter mPagerAdapter;
-    DisplayFormFragment displayFormFragment;
-    DisplayFormFragment formFragment;
+    protected DisplayFormFragment displayFormFragment;
+    protected DisplayFormFragment formFragment;
+    Map<String, String> formTime = new HashMap<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -76,13 +84,38 @@ public class BaseRegisterActivity extends SecuredNativeSmartRegisterActivity imp
         mPagerAdapter = new EnketoRegisterPagerAdapter(getSupportFragmentManager(), formNames.toArray(new String[formNames.size()]), mBaseFragment());
         mPager.setOffscreenPageLimit(formNames.size());
         mPager.setAdapter(mPagerAdapter);
-        mPager.setOnPageChangeListener(new ViewPager.SimpleOnPageChangeListener() {
+//        mPager.setOnPageChangeListener(new ViewPager.SimpleOnPageChangeListener() {
+//            @Override
+//            public void onPageSelected(int position) {
+//                currentPage = position;
+//                onPageChanged(position);
+//            }
+//        });
+//
+        mPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+            @Override
+            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+
+            }
+
             @Override
             public void onPageSelected(int position) {
                 currentPage = position;
                 onPageChanged(position);
+
+            }
+
+            @Override
+            public void onPageScrollStateChanged(int state) {
+
             }
         });
+
+    }
+
+    @Override
+    protected void setupViews() {
+        android.util.Log.d(TAG, "setupViews: Initialize NavBar");
 
     }
 
@@ -115,14 +148,8 @@ public class BaseRegisterActivity extends SecuredNativeSmartRegisterActivity imp
         android.util.Log.e(TAG, "onInitialization: ");
     }
 
-    @Override
     public void startRegistration() {
-
-    }
-
-    @Override
-    protected void setupViews() {
-
+        android.util.Log.d(TAG, "startRegistration: ");
     }
 
     @Override
@@ -135,9 +162,9 @@ public class BaseRegisterActivity extends SecuredNativeSmartRegisterActivity imp
         super.onPause();
         retrieveAndSaveUnsubmittedFormData();
 
-        String KIEnd = timer.format(new Date());
-        Map<String, String> KI = new HashMap<>();
-        KI.put("end", KIEnd);
+//        String KIEnd = timer.format(new Date());
+//        Map<String, String> KI = new HashMap<>();
+//        KI.put("end", KIEnd);
     }
 
     @Override
@@ -214,6 +241,7 @@ public class BaseRegisterActivity extends SecuredNativeSmartRegisterActivity imp
 //        }
     }
 
+
     @Override
     public void startFormActivity(String formName, String entityId, String metaData) {
         //  FlurryFacade.logEvent(formName);
@@ -221,15 +249,14 @@ public class BaseRegisterActivity extends SecuredNativeSmartRegisterActivity imp
 //            Toast.makeText(this,"Data still Synchronizing, please wait",Toast.LENGTH_SHORT).show();
 //            return;
 //        }
-        String start = timer.format(new Date());
-        Map<String, String> FS = new HashMap<>();
-        FS.put("start", start);
+        android.util.Log.e(TAG, "startFormActivity: timer "+ timer.format(date));
+        formTime.put("start", timer.format(date));
 //        FlurryAgent.logEvent(formName,FS, true );
 //        Log.v("fieldoverride", metaData);
         try {
             int formIndex = formNames.indexOf(formName) + 1;// add the offset
             if (entityId != null || metaData != null) {
-                String data = null;
+                String data;
                 //check if there is previously saved data for the form
                 data = getPreviouslySavedDataForForm(formName, metaData, entityId);
 
@@ -276,7 +303,7 @@ public class BaseRegisterActivity extends SecuredNativeSmartRegisterActivity imp
             context().formSubmissionService().updateFTSsearch(submission);
             context().formSubmissionRouter().handleSubmission(submission, formName);
 
-            if (formName.equals("kartu_ibu_registration")) {
+            if ("kartu_ibu_registration".equals(formName)) {
                 saveuniqueid();
             }
             //switch to forms list fragment
@@ -292,9 +319,7 @@ public class BaseRegisterActivity extends SecuredNativeSmartRegisterActivity imp
             android.util.Log.e(TAG, "saveFormSubmission: " + e.getCause());
         }
         //end capture flurry log for FS
-        String end = timer.format(new Date());
-        Map<String, String> FS = new HashMap<>();
-        FS.put("end", end);
+        formTime.put("end", timer.format(new Date()));
 //        FlurryAgent.logEvent(formName,FS, true);
     }
 
@@ -302,15 +327,6 @@ public class BaseRegisterActivity extends SecuredNativeSmartRegisterActivity imp
         return new DialogOption[]{};
     }
 
-    private String getDetailsPc(Object tag, String key) {
-        CommonPersonObjectClient pc = (CommonPersonObjectClient) tag;
-
-        return pc.getDetails().get(key);
-    }
-
-    /**
-     * Follow Up without Edit
-     */
 //    public class EditDialogOptionModel implements DialogOptionModel {
 //
 //        @Override
@@ -357,8 +373,8 @@ public class BaseRegisterActivity extends SecuredNativeSmartRegisterActivity imp
         /**
          * Method
          *
-         * @param option
-         * @param tag
+         * @param option DialogOption
+         * @param tag Object Tag
          */
         @Override
         public void onDialogOptionSelection(DialogOption option, Object tag) {

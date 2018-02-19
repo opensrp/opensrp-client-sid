@@ -18,7 +18,7 @@ import static org.smartregister.bidan.utils.AllConstantsINA.FormNames.KARTU_IBU_
 import static org.smartregister.bidan.utils.AllConstantsINA.FormNames.KARTU_IBU_PNC_REGISTRATION;
 
 /**
- * Created by sid-tech on 11/28/17.
+ * Created by sid-tech on 11/28/17
  */
 
 public class ANCSmartRegisterActivity extends BaseRegisterActivity {

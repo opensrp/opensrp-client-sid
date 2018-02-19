@@ -178,7 +178,7 @@ public class FPSmartRegisterFragment extends BaseSmartRegisterFragment {
             SmartRegisterQueryBuilder countqueryBuilder = new SmartRegisterQueryBuilder();
             countqueryBuilder.SelectInitiateMainTableCounts(tableName);
 
-            mainCondition = "is_closed = 0 AND namalengkap != '' AND jenisKontrasepsi !=''";
+            mainCondition = "is_closed = 0 AND namalengkap != '' AND jenisKontrasepsi !='0'";
 
             joinTable = "";
             countSelect = countqueryBuilder.mainCondition(mainCondition);

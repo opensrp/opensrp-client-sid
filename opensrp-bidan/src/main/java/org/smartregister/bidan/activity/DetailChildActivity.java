@@ -30,7 +30,7 @@ import static org.smartregister.util.StringUtil.humanize;
 //import org.smartregister.bidan.lib.FlurryFacade;
 
 /**
- * Created by Iq on 07/09/16.
+ * Created by Iq on 07/09/16
  */
 public class DetailChildActivity extends Activity {
 

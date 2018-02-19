@@ -10,7 +10,6 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import org.smartregister.Context;
 import org.smartregister.bidan.R;
 import org.smartregister.bidan.utils.CameraPreviewActivity;
 import org.smartregister.bidan.utils.Support;
@@ -18,22 +17,16 @@ import org.smartregister.bidan.utils.Tools;
 import org.smartregister.commonregistry.CommonPersonObjectClient;
 import org.smartregister.repository.DetailsRepository;
 import org.smartregister.view.activity.DrishtiApplication;
+import static org.smartregister.util.StringUtil.humanize;
 
 import java.io.File;
-import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.Locale;
-import java.util.Map;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
 
-import static org.smartregister.util.StringUtil.humanize;
-
-//import org.smartregister.bidan.lib.FlurryFacade;
 
 /**
+ * Created by SID
  */
 public class DetailMotherActivity extends Activity {
 
@@ -41,8 +34,6 @@ public class DetailMotherActivity extends Activity {
     private static final String TAG = DetailMotherActivity.class.getName();
     public static CommonPersonObjectClient motherClient;
     static String entityid;
-    private static HashMap<String, String> hash;
-    SimpleDateFormat timer = new SimpleDateFormat("hh:mm:ss", Locale.US);
     // Main Profile
     @Bind(R.id.tv_mother_detail_profile_view)
     ImageView kiview;
@@ -154,38 +145,26 @@ public class DetailMotherActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
-//        Context context = Context.getInstance();
         setContentView(R.layout.ki_detail_activity);
 
         ButterKnife.bind(this);
 
-//        String DetailStart = timer.format(new Date());
-//        Map<String, String> Detail = new HashMap<>();
-//        Detail.put("start", DetailStart);
-//        FlurryAgent.logEvent("KI_detail_view",Detail, true );
-
         userId = motherClient.getDetails().get("base_entity_id");
+
         back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 finish();
                 startActivity(new Intent(DetailMotherActivity.this, KISmartRegisterActivity.class));
                 overridePendingTransition(0, 0);
-
-//                String DetailEnd = timer.format(new Date());
-//                Map<String, String> Detail = new HashMap<>();
-//                Detail.put("end", DetailEnd);
-//                FlurryAgent.logEvent("KI_detail_view", Detail, true);
             }
         });
 
         DetailsRepository detailsRepository = org.smartregister.Context.getInstance().detailsRepository();
         detailsRepository.updateDetails(motherClient);
 
-        //set profile image by passing the client id.If the image doesn't exist in the image repository then download and save locally
-//        DrishtiApplicatio n.getCachedImageLoaderInstance().getImageByClientId(motherClient.getCaseId(), OpenSRPImageLoader.getStaticImageListener(kiview, R.mipmap.woman_placeholder, R.mipmap.woman_placeholder));
-
-        Support.setImagetoHolderFromUri(this, motherClient.getDetails().get("base_entity_id"), kiview, R.mipmap.woman_placeholder);
+        Support.setImagetoHolderFromUri(this, getObjValue(motherClient, "base_entity_id"), kiview, R.mipmap.woman_placeholder);
+//        motherClient.getDetails().get("base_entity_id"), kiview, R.mipmap.woman_placeholder);
 
         nama.setText(String.format("%s%s", getResources().getString(R.string.name), motherClient.getColumnmaps().get("namalengkap") != null ? motherClient.getColumnmaps().get("namalengkap") : "-"));
         nik.setText(String.format("%s%s", getResources().getString(R.string.nik), motherClient.getDetails().get("nik") != null ? motherClient.getDetails().get("nik") : "-"));
@@ -222,8 +201,8 @@ public class DetailMotherActivity extends Activity {
         //detail
         village.setText(String.format(": %s", humanize(motherClient.getDetails().get("cityVillage") != null ? motherClient.getDetails().get("cityVillage") : "-")));
         subvillage.setText(String.format(": %s", humanize(motherClient.getDetails().get("address1") != null ? motherClient.getDetails().get("address1") : "-")));
-        age.setText(String.format(": %s", humanize(motherClient.getColumnmaps().get("umur") != null ? motherClient.getColumnmaps().get("umur") : "-")));
         alamat.setText(String.format(": %s", humanize(motherClient.getDetails().get("address3") != null ? motherClient.getDetails().get("address3") : "-")));
+        age.setText(String.format(": %s", humanize(motherClient.getColumnmaps().get("umur") != null ? motherClient.getColumnmaps().get("umur") : "-")));
         education.setText(String.format(": %s", humanize(motherClient.getDetails().get("pendidikan") != null ? motherClient.getDetails().get("pendidikan") : "-")));
         religion.setText(String.format(": %s", humanize(motherClient.getDetails().get("agama") != null ? motherClient.getDetails().get("agama") : "-")));
         job.setText(String.format(": %s", humanize(motherClient.getDetails().get("pekerjaan") != null ? motherClient.getDetails().get("pekerjaan") : "-")));
@@ -231,7 +210,9 @@ public class DetailMotherActivity extends Activity {
         blood_type.setText(String.format(": %s", humanize(motherClient.getDetails().get("golonganDarah") != null ? motherClient.getDetails().get("golonganDarah") : "-")));
         asuransi.setText(String.format(": %s", humanize(motherClient.getDetails().get("asuransiJiwa") != null ? motherClient.getDetails().get("asuransiJiwa") : "-")));
 
-        //risk detail
+        // ========================================================================================|
+        // Risks Detail                                                                            |
+        // ========================================================================================|
         highRiskSTIBBVs.setText(humanize(motherClient.getDetails().get("highRiskSTIBBVs") != null ? motherClient.getDetails().get("highRiskSTIBBVs") : "-"));
         highRiskEctopicPregnancy.setText(humanize(motherClient.getDetails().get("highRiskEctopicPregnancy") != null ? motherClient.getDetails().get("highRiskEctopicPregnancy") : "-"));
         highRiskCardiovascularDiseaseRecord.setText(humanize(motherClient.getDetails().get("highRiskCardiovascularDiseaseRecord") != null ? motherClient.getDetails().get("highRiskCardiovascularDiseaseRecord") : "-"));
@@ -284,12 +265,9 @@ public class DetailMotherActivity extends Activity {
             }
         });
 
-//        hash = Tools.retrieveHash(context.applicationContext());
-
         kiview.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // FlurryFacade.logEvent("taking_mother_pictures_on_kohort_ibu_detail_view");
                 entityid = motherClient.entityId();
 
                 Intent intent = new Intent(DetailMotherActivity.this, CameraPreviewActivity.class);
@@ -298,6 +276,12 @@ public class DetailMotherActivity extends Activity {
 
             }
         });
+
+    }
+
+    private String getObjValue(CommonPersonObjectClient motherClient, String base_entity_id) {
+
+        return motherClient.getDetails().get(base_entity_id);
 
     }
 
@@ -311,12 +295,13 @@ public class DetailMotherActivity extends Activity {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent intent) {
         if (requestCode == 201) {
-
+            Log.d(TAG, "onActivityResult: Process Photo");
             StringBuilder path = new StringBuilder();
             path.append(DrishtiApplication.getAppDir());
 
             File file = new File(path.toString());
             if (!file.exists()) {
+                //noinspection ResultOfMethodCallIgnored
                 file.mkdir();
             }
             if (file.canWrite()) {
@@ -326,8 +311,7 @@ public class DetailMotherActivity extends Activity {
 
             finish();
         }
-        //        refresh
-        Log.e(TAG, "onActivityResult: refresh");
+
         finish();
         startActivity(getIntent());
 

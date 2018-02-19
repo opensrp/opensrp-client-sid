@@ -60,23 +60,11 @@ public class KISmartRegisterActivity extends BaseRegisterActivity implements Loc
 
     @Override
     public void OnLocationSelected(String locationJSONString) {
-//        if(Support.ONSYNC) {
-//            Toast.makeText(this,"Data still Synchronizing, please wait",Toast.LENGTH_SHORT).show();
-//            return;
-//        }
         JSONObject combined = null;
 
         try {
-            JSONObject locationJSON = new JSONObject(locationJSONString);
-//            JSONObject uniqueId = new JSONObject(LoginActivity.generator.uniqueIdController().getUniqueIdJson());
 
-            combined = locationJSON;
-//            Iterator<String> iter = uniqueId.keys();
-
-//            while (iter.hasNext()) {
-//                String key = iter.next();
-//                combined.put(key, uniqueId.get(key));
-//            }
+            combined = new JSONObject(locationJSONString);
 
         } catch (JSONException e) {
             e.printStackTrace();

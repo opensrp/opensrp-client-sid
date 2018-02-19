@@ -18,19 +18,15 @@ import static org.smartregister.bidan.utils.AllConstantsINA.FormNames.KARTU_IBU_
 import static org.smartregister.bidan.utils.AllConstantsINA.FormNames.KOHORT_BAYI_EDIT;
 import static org.smartregister.bidan.utils.AllConstantsINA.FormNames.KOHORT_BAYI_KUNJUNGAN;
 
-/**
- * Created by sid-tech on 11/28/17.
- */
 //import com.flurry.android.FlurryAgent;
 //import org.smartregister.bidan.lib.FlurryFacade;
 
 /**
- * Created by Dimas Ciputra on 4/7/15.
+ * Created by sid-tech on 11/28/17
  */
 public class AnakSmartRegisterActivity extends BaseRegisterActivity {
 
     public static final String TAG = AnakSmartRegisterActivity.class.getName();
-
 
     @Override
     protected Fragment mBaseFragment() {
