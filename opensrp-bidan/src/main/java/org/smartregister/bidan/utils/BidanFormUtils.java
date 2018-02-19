@@ -13,6 +13,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 import org.json.XML;
 import org.smartregister.CoreLibrary;
+import org.smartregister.bidan.activity.LoginActivity;
 import org.smartregister.bidan.sync.CloudantDataHandler;
 import org.smartregister.clientandeventmodel.Client;
 import org.smartregister.clientandeventmodel.Event;
@@ -388,6 +389,7 @@ public class BidanFormUtils {
 //        android.util.Log.e(TAG, "generateXMLInputForFormWithEntityId: " + overrides);
         android.util.Log.e(TAG, "generateXMLInputForFormWithEntityId: formname " + formName);
 //        android.util.Log.e(TAG, "generateXMLInputForFormWithEntityId: " + entityId);
+
         try {
             // get the field overrides map
             JSONObject fieldOverrides = new JSONObject();
@@ -410,7 +412,7 @@ public class BidanFormUtils {
             detailsMap.putAll(dbEntity);
 
             JSONObject entityJson = new JSONObject();
-            if (detailsMap != null && !detailsMap.isEmpty()) {
+            if (!detailsMap.isEmpty()) {
                 entityJson = new JSONObject(detailsMap);
             }
 
@@ -429,8 +431,7 @@ public class BidanFormUtils {
             serializer.startDocument("UTF-8", true);
 
             //skip processing <model><instance>
-            NodeList els = ((Element) document.getElementsByTagName("model").item(0)).
-                    getElementsByTagName("instance");
+            NodeList els = ((Element) document.getElementsByTagName("model").item(0)).getElementsByTagName("instance");
             Element el = (Element) els.item(0);
             NodeList entries = el.getChildNodes();
             int num = entries.getLength();

@@ -19,6 +19,7 @@ import org.joda.time.Months;
 import org.joda.time.format.DateTimeFormat;
 import org.joda.time.format.DateTimeFormatter;
 import org.smartregister.bidan.R;
+import org.smartregister.bidan.activity.LoginActivity;
 import org.smartregister.bidan.utils.AllConstantsINA;
 import org.smartregister.bidan.utils.Support;
 import org.smartregister.commonregistry.AllCommonsRepository;
@@ -40,12 +41,12 @@ import static android.view.ViewGroup.LayoutParams.MATCH_PARENT;
 import static org.joda.time.LocalDateTime.parse;
 
 /**
- * Created by Dimas Ciputra on 2/16/15.
+ * Created by Dimas Ciputra on 2/16/15
  */
 public class ANCClientsProvider extends BaseClientsProvider {
 
     private static final String TAG = ANCClientsProvider.class.getName();
-    private final Context context;
+    private final Context mContext;
     private final View.OnClickListener onClickListener;
     private final AbsListView.LayoutParams clientViewLayoutParams;
     private final LayoutInflater inflater;
@@ -107,7 +108,7 @@ public class ANCClientsProvider extends BaseClientsProvider {
     public ANCClientsProvider(Context context, View.OnClickListener onClickListener, AlertService alertService) {
         super(context);
         this.onClickListener = onClickListener;
-        this.context = context;
+        this.mContext = context;
         this.alertService = alertService;
         this.inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 
@@ -172,7 +173,7 @@ public class ANCClientsProvider extends BaseClientsProvider {
         //start profile image
         profilepic.setTag(R.id.entity_id, pc.getColumnmaps().get("_id"));//required when saving file to disk
 
-        Support.setImagetoHolderFromUri((Activity) context, pc.getDetails().get("base_entity_id"), profilepic, R.mipmap.woman_placeholder);
+        Support.setImagetoHolderFromUri((Activity) mContext, pc.getDetails().get("base_entity_id"), profilepic, R.mipmap.woman_placeholder);
 
         wife_name.setText(pc.getColumnmaps().get("namalengkap") != null ? pc.getColumnmaps().get("namalengkap") : "");
         husband_name.setText(pc.getColumnmaps().get("namaSuami") != null ? pc.getColumnmaps().get("namaSuami") : "");
@@ -181,7 +182,7 @@ public class ANCClientsProvider extends BaseClientsProvider {
         no_ibu.setText(pc.getDetails().get("noIbu") != null ? pc.getDetails().get("noIbu") : "");
         unique_id.setText(pc.getDetails().get(AllConstantsINA.CommonFormFields.UNIQUE_ID) != null ? pc.getDetails().get(AllConstantsINA.CommonFormFields.UNIQUE_ID) : "");
 
-        usia_klinis.setText(pc.getDetails().get("usiaKlinis") != null ? context.getString(R.string.usia) + pc.getDetails().get("usiaKlinis") + context.getString(R.string.str_weeks) : "-");
+        usia_klinis.setText(pc.getDetails().get("usiaKlinis") != null ? mContext.getString(R.string.usia) + pc.getDetails().get("usiaKlinis") + mContext.getString(R.string.str_weeks) : "-");
         htpt.setText(pc.getDetails().get("htp") != null ? pc.getDetails().get("htp") : "-");
 
         String edd = pc.getDetails().get("htp");
@@ -194,14 +195,14 @@ public class ANCClientsProvider extends BaseClientsProvider {
             dateNow = dateNow.withDayOfMonth(1);
             int months = Months.monthsBetween(dateNow, date).getMonths();
             if (months >= 1) {
-                edd_due.setTextColor(context.getResources().getColor(R.color.alert_in_progress_blue));
-                _dueEdd = "" + months + " " + context.getString(R.string.months_away);
+                edd_due.setTextColor(mContext.getResources().getColor(R.color.alert_in_progress_blue));
+                _dueEdd = "" + months + " " + mContext.getString(R.string.months_away);
             } else if (months == 0) {
-                edd_due.setTextColor(context.getResources().getColor(R.color.light_blue));
-                _dueEdd = context.getString(R.string.this_month);
+                edd_due.setTextColor(mContext.getResources().getColor(R.color.light_blue));
+                _dueEdd = mContext.getString(R.string.this_month);
             } else if (months < 0) {
-                edd_due.setTextColor(context.getResources().getColor(R.color.alert_urgent_red));
-                _dueEdd = context.getString(R.string.edd_passed);
+                edd_due.setTextColor(mContext.getResources().getColor(R.color.alert_urgent_red));
+                _dueEdd = mContext.getString(R.string.edd_passed);
             }
 
             edd_due.setText(_dueEdd);
@@ -219,13 +220,13 @@ public class ANCClientsProvider extends BaseClientsProvider {
         String ancKe = pc.getDetails().get("ancKe") != null ? pc.getDetails().get("ancKe") : "-";
         String kunjunganKe = pc.getDetails().get("kunjunganKe") != null ? pc.getDetails().get("kunjunganKe") : "-";
 
-        tanggal_kunjungan_anc.setText(String.format("%s%s", context.getString(R.string.last_visit_date), ancDate));
-        anc_number.setText(String.format("%s%s", context.getString(R.string.anc_ke), ancKe));
-        kunjugan_ke.setText(String.format("%s%s", context.getString(R.string.visit_number), kunjunganKe));
+        tanggal_kunjungan_anc.setText(String.format("%s%s", mContext.getString(R.string.last_visit_date), ancDate));
+        anc_number.setText(String.format("%s%s", mContext.getString(R.string.anc_ke), ancKe));
+        kunjugan_ke.setText(String.format("%s%s", mContext.getString(R.string.visit_number), kunjunganKe));
 
         status_type.setText("");
         status_date.setText("");
-        status_layout.setBackgroundColor(context.getResources().getColor(org.smartregister.R.color.status_bar_text_almost_white));
+        status_layout.setBackgroundColor(mContext.getResources().getColor(org.smartregister.R.color.status_bar_text_almost_white));
         alert_status.setText("");
 
         if (ancKe.equals("-") || ancKe.equals("")) {
@@ -237,36 +238,36 @@ public class ANCClientsProvider extends BaseClientsProvider {
             //alertlist_for_client.get(i).
             if (alertlist_for_client.size() == 0) {
                 //  due_visit_date.setText("Not Synced to Server");
-                status_layout.setBackgroundColor(context.getResources().getColor(R.color.status_bar_text_almost_white));
+                status_layout.setBackgroundColor(mContext.getResources().getColor(R.color.status_bar_text_almost_white));
             }
             for (int i = 0; i < alertlist_for_client.size(); i++) {
 
                 //  status_date.setText(alertlist_for_client.get(i).startDate());
                 if (alertlist_for_client.get(i).status().value().equalsIgnoreCase("normal")) {
                     status_date.setText(alertlist_for_client.get(i).startDate());
-                    status_layout.setBackgroundColor(context.getResources().getColor(org.smartregister.R.color.alert_upcoming_light_blue));
+                    status_layout.setBackgroundColor(mContext.getResources().getColor(org.smartregister.R.color.alert_upcoming_light_blue));
                     alert_status.setText(alertlist_for_client.get(i).status().value());
                 }
                 if (alertlist_for_client.get(i).status().value().equalsIgnoreCase("upcoming")) {
                     status_date.setText(alertlist_for_client.get(i).startDate());
-                    status_layout.setBackgroundColor(context.getResources().getColor(org.smartregister.R.color.alert_upcoming_light_blue));
+                    status_layout.setBackgroundColor(mContext.getResources().getColor(org.smartregister.R.color.alert_upcoming_light_blue));
                     alert_status.setText(alertlist_for_client.get(i).status().value());
 
                 }
                 if (alertlist_for_client.get(i).status().value().equalsIgnoreCase("urgent")) {
                     status_date.setText(alertlist_for_client.get(i).startDate());
-                    status_layout.setBackgroundColor(context.getResources().getColor(org.smartregister.R.color.alert_urgent_red));
+                    status_layout.setBackgroundColor(mContext.getResources().getColor(org.smartregister.R.color.alert_urgent_red));
                     alert_status.setText(alertlist_for_client.get(i).status().value());
 
                 }
                 if (alertlist_for_client.get(i).status().value().equalsIgnoreCase("expired")) {
                     status_date.setText(alertlist_for_client.get(i).startDate());
-                    status_layout.setBackgroundColor(context.getResources().getColor(org.smartregister.R.color.client_list_header_dark_grey));
+                    status_layout.setBackgroundColor(mContext.getResources().getColor(org.smartregister.R.color.client_list_header_dark_grey));
                     alert_status.setText(alertlist_for_client.get(i).status().value());
                 }
                 if (alertlist_for_client.get(i).isComplete()) {
                     status_date.setText(alertlist_for_client.get(i).startDate());
-                    status_layout.setBackgroundColor(context.getResources().getColor(org.smartregister.R.color.status_bar_text_almost_white));
+                    status_layout.setBackgroundColor(mContext.getResources().getColor(org.smartregister.R.color.status_bar_text_almost_white));
                     alert_status.setText(alertlist_for_client.get(i).status().value());
                 }
             }
@@ -278,36 +279,36 @@ public class ANCClientsProvider extends BaseClientsProvider {
             //alertlist_for_client.get(i).
             if (alertlist_for_client.size() == 0) {
                 //  due_visit_date.setText("Not Synced to Server");
-                status_layout.setBackgroundColor(context.getResources().getColor(R.color.status_bar_text_almost_white));
+                status_layout.setBackgroundColor(mContext.getResources().getColor(R.color.status_bar_text_almost_white));
             }
             for (int i = 0; i < alertlist_for_client.size(); i++) {
 
                 // status_date.setText(alertlist_for_client.get(i).startDate());
                 if (alertlist_for_client.get(i).status().value().equalsIgnoreCase("normal")) {
                     status_date.setText(alertlist_for_client.get(i).startDate());
-                    status_layout.setBackgroundColor(context.getResources().getColor(org.smartregister.R.color.alert_upcoming_light_blue));
+                    status_layout.setBackgroundColor(mContext.getResources().getColor(org.smartregister.R.color.alert_upcoming_light_blue));
                     alert_status.setText(alertlist_for_client.get(i).status().value());
                 }
                 if (alertlist_for_client.get(i).status().value().equalsIgnoreCase("upcoming")) {
                     status_date.setText(alertlist_for_client.get(i).startDate());
-                    status_layout.setBackgroundColor(context.getResources().getColor(org.smartregister.R.color.alert_upcoming_light_blue));
+                    status_layout.setBackgroundColor(mContext.getResources().getColor(org.smartregister.R.color.alert_upcoming_light_blue));
                     alert_status.setText(alertlist_for_client.get(i).status().value());
 
                 }
                 if (alertlist_for_client.get(i).status().value().equalsIgnoreCase("urgent")) {
                     status_date.setText(alertlist_for_client.get(i).startDate());
-                    status_layout.setBackgroundColor(context.getResources().getColor(org.smartregister.R.color.alert_urgent_red));
+                    status_layout.setBackgroundColor(mContext.getResources().getColor(org.smartregister.R.color.alert_urgent_red));
                     alert_status.setText(alertlist_for_client.get(i).status().value());
 
                 }
                 if (alertlist_for_client.get(i).status().value().equalsIgnoreCase("expired")) {
                     status_date.setText(alertlist_for_client.get(i).startDate());
-                    status_layout.setBackgroundColor(context.getResources().getColor(org.smartregister.R.color.client_list_header_dark_grey));
+                    status_layout.setBackgroundColor(mContext.getResources().getColor(org.smartregister.R.color.client_list_header_dark_grey));
                     alert_status.setText(alertlist_for_client.get(i).status().value());
                 }
                 if (alertlist_for_client.get(i).isComplete()) {
                     status_date.setText(alertlist_for_client.get(i).startDate());
-                    status_layout.setBackgroundColor(context.getResources().getColor(org.smartregister.R.color.status_bar_text_almost_white));
+                    status_layout.setBackgroundColor(mContext.getResources().getColor(org.smartregister.R.color.status_bar_text_almost_white));
                     alert_status.setText(alertlist_for_client.get(i).status().value());
                 }
             }
@@ -318,36 +319,36 @@ public class ANCClientsProvider extends BaseClientsProvider {
             //alertlist_for_client.get(i).
             if (alertlist_for_client.size() == 0) {
                 //  due_visit_date.setText("Not Synced to Server");
-                status_layout.setBackgroundColor(context.getResources().getColor(R.color.status_bar_text_almost_white));
+                status_layout.setBackgroundColor(mContext.getResources().getColor(R.color.status_bar_text_almost_white));
             }
             for (int i = 0; i < alertlist_for_client.size(); i++) {
 
                 //   status_date.setText(alertlist_for_client.get(i).startDate());
                 if (alertlist_for_client.get(i).status().value().equalsIgnoreCase("normal")) {
                     status_date.setText(alertlist_for_client.get(i).startDate());
-                    status_layout.setBackgroundColor(context.getResources().getColor(org.smartregister.R.color.alert_upcoming_light_blue));
+                    status_layout.setBackgroundColor(mContext.getResources().getColor(org.smartregister.R.color.alert_upcoming_light_blue));
                     alert_status.setText(alertlist_for_client.get(i).status().value());
                 }
                 if (alertlist_for_client.get(i).status().value().equalsIgnoreCase("upcoming")) {
                     status_date.setText(alertlist_for_client.get(i).startDate());
-                    status_layout.setBackgroundColor(context.getResources().getColor(org.smartregister.R.color.alert_upcoming_light_blue));
+                    status_layout.setBackgroundColor(mContext.getResources().getColor(org.smartregister.R.color.alert_upcoming_light_blue));
                     alert_status.setText(alertlist_for_client.get(i).status().value());
 
                 }
                 if (alertlist_for_client.get(i).status().value().equalsIgnoreCase("urgent")) {
                     status_date.setText(alertlist_for_client.get(i).startDate());
-                    status_layout.setBackgroundColor(context.getResources().getColor(org.smartregister.R.color.alert_urgent_red));
+                    status_layout.setBackgroundColor(mContext.getResources().getColor(org.smartregister.R.color.alert_urgent_red));
                     alert_status.setText(alertlist_for_client.get(i).status().value());
 
                 }
                 if (alertlist_for_client.get(i).status().value().equalsIgnoreCase("expired")) {
                     status_date.setText(alertlist_for_client.get(i).startDate());
-                    status_layout.setBackgroundColor(context.getResources().getColor(org.smartregister.R.color.client_list_header_dark_grey));
+                    status_layout.setBackgroundColor(mContext.getResources().getColor(org.smartregister.R.color.client_list_header_dark_grey));
                     alert_status.setText(alertlist_for_client.get(i).status().value());
                 }
                 if (alertlist_for_client.get(i).isComplete()) {
                     status_date.setText(alertlist_for_client.get(i).startDate());
-                    status_layout.setBackgroundColor(context.getResources().getColor(org.smartregister.R.color.status_bar_text_almost_white));
+                    status_layout.setBackgroundColor(mContext.getResources().getColor(org.smartregister.R.color.status_bar_text_almost_white));
                     alert_status.setText(alertlist_for_client.get(i).status().value());
                 }
             }
@@ -359,6 +360,8 @@ public class ANCClientsProvider extends BaseClientsProvider {
 
     @Override
     public void getView(Cursor cursor, SmartRegisterClient smartRegisterClient, View view) {
+        LoginActivity.setLanguage();
+//        Log.e(TAG, "getView: "+ mContext.getResources().getConfiguration().locale );
         getView(smartRegisterClient, view);
     }
 

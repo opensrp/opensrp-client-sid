@@ -1,6 +1,7 @@
 package org.smartregister.bidan.activity;
 
 import android.content.pm.ActivityInfo;
+//import android.content.res.Configuration;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentPagerAdapter;
@@ -10,6 +11,7 @@ import android.widget.Toast;
 import org.apache.commons.lang3.StringUtils;
 import org.json.JSONException;
 import org.json.JSONObject;
+//import org.smartregister.Context;
 import org.smartregister.adapter.SmartRegisterPaginatedAdapter;
 import org.smartregister.bidan.R;
 import org.smartregister.bidan.sync.ClientProcessor;
@@ -23,6 +25,7 @@ import org.smartregister.enketo.adapter.pager.EnketoRegisterPagerAdapter;
 import org.smartregister.enketo.listener.DisplayFormListener;
 import org.smartregister.enketo.view.fragment.DisplayFormFragment;
 import org.smartregister.provider.SmartRegisterClientsProvider;
+//import org.smartregister.repository.AllSharedPreferences;
 import org.smartregister.repository.DetailsRepository;
 import org.smartregister.util.Log;
 import org.smartregister.view.activity.SecuredNativeSmartRegisterActivity;
@@ -44,6 +47,7 @@ import java.util.Map;
 import butterknife.Bind;
 import butterknife.ButterKnife;
 
+//import static android.preference.PreferenceManager.getDefaultSharedPreferences;
 import static org.smartregister.util.Utils.getValue;
 
 /**
@@ -102,7 +106,6 @@ public class BaseRegisterActivity extends SecuredNativeSmartRegisterActivity imp
             public void onPageSelected(int position) {
                 currentPage = position;
                 onPageChanged(position);
-
             }
 
             @Override
@@ -171,8 +174,19 @@ public class BaseRegisterActivity extends SecuredNativeSmartRegisterActivity imp
     public void onBackPressed() {
 //        nf.setCriteria("");
 //        Log.e(TAG, "onBackPressed: "+currentPage );
-        android.util.Log.e(TAG, "onBackPressed: ");
-        LoginActivity.setLanguage();
+        // TODO: Set Language from Enketo
+//        android.util.Log.e(TAG, "getView: lang 2 "+ getApplicationContext().getResources().getConfiguration().locale );
+//        android.util.Log.e(TAG, "onBackPressed: ");
+//        if (Locale.US.equals(getApplicationContext().getResources().getConfiguration().locale)){
+//            AllSharedPreferences allSharedPreferences = new AllSharedPreferences(getDefaultSharedPreferences(Context.getInstance().applicationContext()));
+//            android.util.Log.e(TAG, "onBackPressed:change Language " + allSharedPreferences.fetchLanguagePreference() );
+//            Configuration cfg = new Configuration();
+//            cfg.locale = new Locale("in");
+//            getApplicationContext().getResources().updateConfiguration(cfg, null);
+////            LoginActivity.switchLanguagePreference();
+//        } else {
+//            android.util.Log.e(TAG, "onBackPressed: onLang " );
+//        }
 
         if (currentPage != 0) {
             switchToBaseFragment(null);
@@ -251,8 +265,11 @@ public class BaseRegisterActivity extends SecuredNativeSmartRegisterActivity imp
 //        }
         android.util.Log.e(TAG, "startFormActivity: timer "+ timer.format(date));
         formTime.put("start", timer.format(date));
+
+
 //        FlurryAgent.logEvent(formName,FS, true );
 //        Log.v("fieldoverride", metaData);
+
         try {
             int formIndex = formNames.indexOf(formName) + 1;// add the offset
             if (entityId != null || metaData != null) {

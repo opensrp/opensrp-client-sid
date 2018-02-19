@@ -1,8 +1,6 @@
 package org.smartregister.bidan.fragment;
 
-import android.annotation.TargetApi;
 import android.content.Intent;
-import android.os.Build;
 import android.util.Log;
 import android.view.View;
 
@@ -24,7 +22,6 @@ import org.smartregister.cursoradapter.CursorCommonObjectFilterOption;
 import org.smartregister.cursoradapter.CursorCommonObjectSort;
 import org.smartregister.cursoradapter.SmartRegisterPaginatedCursorAdapter;
 import org.smartregister.cursoradapter.SmartRegisterQueryBuilder;
-import org.smartregister.provider.SmartRegisterClientsProvider;
 import org.smartregister.util.StringUtil;
 import org.smartregister.view.activity.SecuredNativeSmartRegisterActivity;
 import org.smartregister.view.dialog.AllClientsFilter;
@@ -43,21 +40,21 @@ public class ANCSmartRegisterFragment extends BaseSmartRegisterFragment {
 
     private static final String TAG = ANCSmartRegisterFragment.class.getName();
     public static String criteria;
-    private final ClientActionHandler clientActionHandler = new ClientActionHandler();
-    String tableName = "ec_kartu_ibu";
-    String tableEcIbu = "ec_ibu";
+//    private final ClientActionHandler clientActionHandler = new ClientActionHandler();
+//    private ANCClientsProvider kiSCP = new ANCClientsProvider(getActivity(), new ClientActionHandler(), context().alertService());
+    private String tableName = "ec_kartu_ibu";
 
-    public static String getCriteria() {
-        return criteria;
-    }
+//    public static String getCriteria() {
+//        return criteria;
+//    }
+//
+//    public void setCriteria(String criteria) {
+//        ANCSmartRegisterFragment.criteria = criteria;
+//    }
 
-    public void setCriteria(String criteria) {
-        ANCSmartRegisterFragment.criteria = criteria;
-    }
-
-    @Override
-    protected void onCreation() {
-    }
+//    @Override
+//    protected void onCreation() {
+//    }
 
     @Override
     protected SecuredNativeSmartRegisterActivity.DefaultOptionsProvider getDefaultOptionsProvider() {
@@ -94,7 +91,7 @@ public class ANCSmartRegisterFragment extends BaseSmartRegisterFragment {
 //                FlurryFacade.logEvent("click_filter_option_on_kohort_ibu_dashboard");
                 ArrayList<DialogOption> dialogOptionslist = new ArrayList<>();
 
-                dialogOptionslist.add(new CursorCommonObjectFilterOption(getString(R.string.filter_by_all_label), filterStringForAll()));
+                dialogOptionslist.add(new CursorCommonObjectFilterOption(getString(R.string.filter_by_all_label), ""));
 
                 String locationJSON = context().anmLocationController().get();
                 LocationTree locationTree = EntityUtils.fromJson(locationJSON, LocationTree.class);
@@ -136,10 +133,10 @@ public class ANCSmartRegisterFragment extends BaseSmartRegisterFragment {
         };
     }
 
-    @Override
-    protected SmartRegisterClientsProvider clientsProvider() {
-        return null;
-    }
+//    @Override
+//    protected SmartRegisterClientsProvider clientsProvider() {
+//        return null;
+//    }
 
     @Override
     public void setupViews(View view) {
@@ -149,33 +146,31 @@ public class ANCSmartRegisterFragment extends BaseSmartRegisterFragment {
         view.findViewById(R.id.service_mode_selection).setVisibility(View.GONE);
         clientsView.setVisibility(View.VISIBLE);
         clientsProgressView.setVisibility(View.INVISIBLE);
-        initializeQueries(getCriteria());
+        initializeQueries();
+        Log.e(TAG, "setupViews: "+ getResources().getConfiguration().locale );
     }
 
-    private String filterStringForAll() {
-        return "";
-    }
+    public void initializeQueries() {
+        Log.e(TAG, "initializeQueries: " );
+        String tableEcIbu = "ec_ibu";
 
-    @TargetApi(Build.VERSION_CODES.KITKAT)
-    public void initializeQueries(String s) {
-        Log.e(TAG, "initializeQueries:key " + s);
         try {
 
-            ANCClientsProvider kiscp = new ANCClientsProvider(getActivity(), clientActionHandler, context().alertService());
-            clientAdapter = new SmartRegisterPaginatedCursorAdapter(getActivity(), null, kiscp,
+            clientAdapter = new SmartRegisterPaginatedCursorAdapter(getActivity(), null,
+                    new ANCClientsProvider(getActivity(), new ClientActionHandler(), context().alertService()),
                     new CommonRepository(tableName, new String[]{"ec_ibu.is_closed", "ec_kartu_ibu.namalengkap", "ec_kartu_ibu.namaSuami"}));
             clientsView.setAdapter(clientAdapter);
 
             setTablename(tableEcIbu);
-            SmartRegisterQueryBuilder countqueryBuilder = new SmartRegisterQueryBuilder();
-            countqueryBuilder.SelectInitiateMainTableCounts(tableEcIbu);
-            countqueryBuilder.customJoin("LEFT JOIN ec_kartu_ibu on ec_kartu_ibu.id = ec_ibu.id");
+            SmartRegisterQueryBuilder countQueryBuilder = new SmartRegisterQueryBuilder();
+            countQueryBuilder.SelectInitiateMainTableCounts(tableEcIbu);
+            countQueryBuilder.customJoin("LEFT JOIN ec_kartu_ibu on ec_kartu_ibu.id = ec_ibu.id");
 
 //            mainCondition = "is_closed = 0";
             mainCondition = "is_closed = 0 AND namalengkap != '' AND namalengkap IS NOT NULL";
 
             joinTable = "";
-            countSelect = countqueryBuilder.mainCondition(mainCondition);
+            countSelect = countQueryBuilder.mainCondition(mainCondition);
             super.CountExecute();
 
             SmartRegisterQueryBuilder queryBuilder = new SmartRegisterQueryBuilder();
@@ -194,6 +189,7 @@ public class ANCSmartRegisterFragment extends BaseSmartRegisterFragment {
 
         } catch (Exception e) {
             e.printStackTrace();
+            Log.e(TAG, "initializeQueries: "+ e.getCause() );
         }
 
     }
@@ -222,9 +218,9 @@ public class ANCSmartRegisterFragment extends BaseSmartRegisterFragment {
     protected void onResumption() {
         getDefaultOptionsProvider();
         if (isPausedOrRefreshList()) {
-            initializeQueries("");
+            initializeQueries();
         }
-
+        Log.e(TAG, "onResumption: "+ getResources().getConfiguration().locale );
     }
 
     private void updateSearchView() {

@@ -15,12 +15,13 @@ import static android.view.View.VISIBLE;
 import static org.apache.commons.lang3.StringUtils.isEmpty;
 
 /**
- * Created by sid-tech on 11/29/17.
+ * Created by sid-tech on 11/29/17
  */
 
 public class BaseSmartRegisterFragment extends SecuredNativeSmartRegisterCursorAdapterFragment {
     private static final String TAG = BaseSmartRegisterFragment.class.getName();
     private String customMainCondition;
+
     protected final TextWatcher textWatcher = new TextWatcher() {
         @Override
         public void beforeTextChanged(CharSequence charSequence, int i, int i2, int i3) {
@@ -87,6 +88,7 @@ public class BaseSmartRegisterFragment extends SecuredNativeSmartRegisterCursorA
 
     @Override
     protected void onInitialization() {
+        Log.e(TAG, "onInitialization: " );
 
     }
 
@@ -97,7 +99,7 @@ public class BaseSmartRegisterFragment extends SecuredNativeSmartRegisterCursorA
 
     @Override
     protected void onCreation() {
-
+        Log.e(TAG, "onCreation: " );
     }
 
     protected void filter(String filterString, String joinTableString, String mainConditionString) {
@@ -112,7 +114,8 @@ public class BaseSmartRegisterFragment extends SecuredNativeSmartRegisterCursorA
     @Override
     protected void onResumption() {
         super.onResumption();
-        Log.e(TAG, "onResumption: ");
-        LoginActivity.setLanguage();
+        Log.e(TAG, "onResumption: "+ getResources().getConfiguration().locale);
+//        LoginActivity.setLanguage();
     }
+
 }
