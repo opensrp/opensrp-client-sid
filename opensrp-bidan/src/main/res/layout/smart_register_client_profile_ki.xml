@@ -132,7 +132,7 @@
             android:layout_below="@id/tv_husband_name"
             android:layout_marginBottom="@dimen/client_profile_village_margin"
             android:layout_marginTop="@dimen/client_profile_village_margin"
-            android:layout_toLeftOf="@+id/txt_out_of_area" />
+            android:layout_toLeftOf="@id/tv_is_out_of_area" />
 
         <org.smartregister.view.customcontrols.CustomFontTextView
             android:id="@+id/tv_wife_age"

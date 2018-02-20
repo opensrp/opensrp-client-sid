@@ -446,7 +446,8 @@ public class BaseRegisterActivity extends SecuredNativeSmartRegisterActivity imp
             } else {
 
                 if (option.name().equalsIgnoreCase(getString(R.string.str_register_fp_form))) {
-                    pc = DetailMotherActivity.motherClient;
+//                    pc = DetailMotherActivity.motherClient;
+                    android.util.Log.e(TAG, "onDialogOptionSelection: pc "+ pc );
 
                     if (!StringUtils.isNumeric(pc.getDetails().get("jenisKontrasepsi"))) {
                         Toast.makeText(BaseRegisterActivity.this, getString(R.string.mother_already_registered_in_fp), Toast.LENGTH_SHORT).show();

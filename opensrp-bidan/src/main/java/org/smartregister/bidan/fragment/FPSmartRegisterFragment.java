@@ -1,8 +1,6 @@
 package org.smartregister.bidan.fragment;
 
-import android.annotation.TargetApi;
 import android.content.Intent;
-import android.os.Build;
 import android.util.Log;
 import android.view.View;
 
@@ -43,21 +41,13 @@ public class FPSmartRegisterFragment extends BaseSmartRegisterFragment {
 
     private static final String TAG = FPSmartRegisterFragment.class.getName();
     public static String criteria;
-    private final ClientActionHandler clientActionHandler = new ClientActionHandler();
+    //    private final ClientActionHandler clientActionHandler = new ClientActionHandler();
     String tableName = "ec_kartu_ibu";
 
 //    @Override
 //    protected SmartRegisterPaginatedAdapter adapter() {
 //        return new SmartRegisterPaginatedAdapter(clientsProvider());
 //    }
-
-    public static String getCriteria() {
-        return criteria;
-    }
-
-    public void setCriteria(String criteria) {
-        FPSmartRegisterFragment.criteria = criteria;
-    }
 
     @Override
     protected SecuredNativeSmartRegisterActivity.DefaultOptionsProvider getDefaultOptionsProvider() {
@@ -153,42 +143,78 @@ public class FPSmartRegisterFragment extends BaseSmartRegisterFragment {
         view.findViewById(R.id.register_client).setVisibility(View.GONE);
         clientsView.setVisibility(View.VISIBLE);
         clientsProgressView.setVisibility(View.INVISIBLE);
-        initializeQueries(getCriteria());
+        initializeQueries();
     }
 
     private String filterStringForAll() {
         return "";
     }
 
-    @TargetApi(Build.VERSION_CODES.KITKAT)
-    public void initializeQueries(String s) {
-        Log.d(TAG, "initializeQueries: key "+ s);
+//    public void initializeQueries() {
+//        Log.e(TAG, "initializeQueries: " );
+//        try {
+//            clientAdapter = new SmartRegisterPaginatedCursorAdapter(getActivity(), null,
+//                    new KBClientsProvider(getActivity(), new ClientActionHandler(), context().alertService()),
+//                    new CommonRepository(tableName,
+//                            new String[]{"ec_kartu_ibu.is_closed", "ec_kartu_ibu.namalengkap", "ec_kartu_ibu.umur", "ec_kartu_ibu.namaSuami", "noIbu", "jenisKontrasepsi"}));
+//            clientsView.setAdapter(clientAdapter);
+//
+//            setTablename(tableName);
+//            SmartRegisterQueryBuilder countQueryBuilder = new SmartRegisterQueryBuilder();
+//            countQueryBuilder.SelectInitiateMainTableCounts(tableName);
+//
+//            mainCondition = "is_closed = 0 AND namalengkap != '' AND jenisKontrasepsi !='0'";
+//
+//            joinTable = "";
+//            countSelect = countQueryBuilder.mainCondition(mainCondition);
+//            super.CountExecute();
+//
+//            SmartRegisterQueryBuilder queryBuilder = new SmartRegisterQueryBuilder();
+//
+//            queryBuilder.SelectInitiateMainTable(tableName, new String[]{"ec_kartu_ibu.relationalid", "ec_kartu_ibu.is_closed", "ec_kartu_ibu.details", "ec_kartu_ibu.isOutOfArea", "ec_kartu_ibu.namalengkap", "ec_kartu_ibu.umur", "ec_kartu_ibu.namaSuami", "noIbu"});
+//            //   queryBuilder.customJoin("LEFT JOIN ec_anak ON ec_kartu_ibu.id = ec_anak.relational_id ");
+//            mainSelect = queryBuilder.mainCondition(mainCondition);
+//            Sortqueries = KiSortByNameAZ();
+//
+//            currentlimit = 20;
+//            currentoffset = 0;
+//
+//            super.filterandSortInInitializeQueries();
+//            CountExecute();
+//            updateSearchView();
+//
+//            refresh();
+//
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//        }
+//
+//    }
+
+    public void initializeQueries() {
         try {
-            KBClientsProvider kiscp = new KBClientsProvider(getActivity(), clientActionHandler, context().alertService());
-            clientAdapter = new SmartRegisterPaginatedCursorAdapter(
-                    getActivity(),
-                    null,
-                    kiscp,
-                    new CommonRepository(
-                            tableName,
-                            new String[]{"ec_kartu_ibu.is_closed", "ec_kartu_ibu.namalengkap", "ec_kartu_ibu.umur", "ec_kartu_ibu.namaSuami", "noIbu", "jenisKontrasepsi"}));
+            clientAdapter = new SmartRegisterPaginatedCursorAdapter(getActivity(), null,
+                    new KBClientsProvider(getActivity(), new ClientActionHandler(), context().alertService()),
+                    new CommonRepository("ec_kartu_ibu",
+                            new String[]{"ec_kartu_ibu.is_closed", "namalengkap", "umur", "namaSuami", "ec_kartu_ibu.isOutOfArea"}));
             clientsView.setAdapter(clientAdapter);
 
-            setTablename(tableName);
-            SmartRegisterQueryBuilder countqueryBuilder = new SmartRegisterQueryBuilder();
-            countqueryBuilder.SelectInitiateMainTableCounts(tableName);
-
-            mainCondition = "is_closed = 0 AND namalengkap != '' AND jenisKontrasepsi !='0'";
+            setTablename("ec_kartu_ibu");
+            SmartRegisterQueryBuilder countQueryBuilder = new SmartRegisterQueryBuilder();
+            countQueryBuilder.SelectInitiateMainTableCounts("ec_kartu_ibu");
+            //countQueryBuilder.customJoin("LEFT JOIN ec_ibu on ec_kartu_ibu.id = ec_ibu.base_entity_id");
+            Log.e(TAG, "initializeQueries: " + "Not Initialized");
+            mainCondition = "is_closed = 0 AND jenisKontrasepsi='0' AND namalengkap != '' AND namalengkap IS NOT NULL";
 
             joinTable = "";
-            countSelect = countqueryBuilder.mainCondition(mainCondition);
+            countSelect = countQueryBuilder.mainCondition(mainCondition);
             super.CountExecute();
 
             SmartRegisterQueryBuilder queryBuilder = new SmartRegisterQueryBuilder();
+            queryBuilder.SelectInitiateMainTable("ec_kartu_ibu", new String[]{"ec_kartu_ibu.relationalid", "ec_kartu_ibu.is_closed", "ec_kartu_ibu.details", "ec_kartu_ibu.isOutOfArea", "namalengkap", "umur", "namaSuami", "imagelist.imageid"});
+            queryBuilder.customJoin("LEFT JOIN ec_ibu on ec_kartu_ibu.id = ec_ibu.base_entity_id LEFT JOIN ImageList imagelist ON ec_ibu.base_entity_id=imagelist.entityID ");
 
-            queryBuilder.SelectInitiateMainTable(tableName, new String[]{"ec_kartu_ibu.relationalid", "ec_kartu_ibu.is_closed", "ec_kartu_ibu.details", "ec_kartu_ibu.isOutOfArea", "ec_kartu_ibu.namalengkap", "ec_kartu_ibu.umur", "ec_kartu_ibu.namaSuami", "noIbu"});
-            //   queryBuilder.customJoin("LEFT JOIN ec_anak ON ec_kartu_ibu.id = ec_anak.relational_id ");
-            mainSelect = queryBuilder.mainCondition(mainCondition);
+            mainSelect = queryBuilder.mainCondition("ec_kartu_ibu.is_closed = 0 and jenisKontrasepsi !='0' AND namalengkap != '' AND namalengkap IS NOT NULL");
             Sortqueries = KiSortByNameAZ();
 
             currentlimit = 20;
@@ -197,33 +223,13 @@ public class FPSmartRegisterFragment extends BaseSmartRegisterFragment {
             super.filterandSortInInitializeQueries();
             CountExecute();
             updateSearchView();
-
             refresh();
-
         } catch (Exception e) {
             e.printStackTrace();
         }
 
     }
 
-//    @Override
-//    public void startRegistration() {
-//        Log.e(TAG, "startRegistration: ");
-////        FlurryFacade.logEvent("click_start_registration_on_kohort_kb_dashboard");
-//        FragmentTransaction ft = getActivity().getFragmentManager().beginTransaction();
-//        Fragment prev = getActivity().getFragmentManager().findFragmentByTag(locationDialogTAG);
-//        if (prev != null) {
-//            ft.remove(prev);
-//        }
-//        ft.addToBackStack(null);
-//
-//        LocationSelectorDialogFragment
-//                .newInstance((KISmartRegisterActivity) getActivity(),
-//                        ((FPSmartRegisterActivity) getActivity()).EditDialogOptionModelNew(), context().anmLocationController().get(),
-//                        KOHORT_KB_REGISTER)
-//                .show(ft, locationDialogTAG);
-//
-//    }
 
     private String KiSortByNameAZ() {
         return "namalengkap ASC";
@@ -247,20 +253,16 @@ public class FPSmartRegisterFragment extends BaseSmartRegisterFragment {
 
     @Override
     protected void onResumption() {
-//        super.onResumption();
         getDefaultOptionsProvider();
         if (isPausedOrRefreshList()) {
-            initializeQueries("!");
+            initializeQueries();
         }
-        //     updateSearchView();
-        //   checkforNidMissing(mView);
-//
-//        try{
-//            LoginActivity.setLanguage();
-//        }catch (Exception e){
-//
-//        }
+        Log.e(TAG, "onResumption: ");
 
+    }
+
+    private void updateSearchView() {
+        textWatcher(AllConstantsINA.Register.FP);
     }
 
     public void addChildToList(ArrayList<DialogOption> dialogOptionslist, Map<String, TreeNode<String, Location>> locationMap) {
@@ -276,11 +278,6 @@ public class FPSmartRegisterFragment extends BaseSmartRegisterFragment {
 
             }
         }
-    }
-
-    private void updateSearchView() {
-        textWatcher(AllConstantsINA.Register.FP);
-
     }
 
     private class ClientActionHandler implements View.OnClickListener {

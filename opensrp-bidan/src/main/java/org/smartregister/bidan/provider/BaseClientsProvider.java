@@ -8,6 +8,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 
 import org.smartregister.bidan.R;
+import org.smartregister.bidan.activity.LoginActivity;
 import org.smartregister.commonregistry.CommonPersonObjectController;
 import org.smartregister.cursoradapter.SmartRegisterCLientsProviderForCursorAdapter;
 import org.smartregister.view.contract.SmartRegisterClient;
@@ -27,6 +28,7 @@ public class BaseClientsProvider implements SmartRegisterCLientsProviderForCurso
     BaseClientsProvider(Context context) {
         this.inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         mContext = context;
+        LoginActivity.setLanguage();
         Log.e(TAG, "BaseClientsProvider: " );
     }
 
@@ -34,6 +36,7 @@ public class BaseClientsProvider implements SmartRegisterCLientsProviderForCurso
     @Override
     public void getView(Cursor cursor, SmartRegisterClient smartRegisterClient, View view) {
         Log.e(TAG, "getView: ");
+        Log.e(TAG, "getView: "+ mContext.getResources().getConfiguration().locale );
     }
 
     @Override
@@ -57,7 +60,8 @@ public class BaseClientsProvider implements SmartRegisterCLientsProviderForCurso
     @Override
     public View inflatelayoutForCursorAdapter() {
         Log.e(TAG, "inflatelayoutForCursorAdapter: " );
-        return inflater().inflate(R.layout.smart_register_ki_client, null);
+//        return inflater().inflate(R.layout.smart_register_ki_client, null);
+        return null;
     }
 
     public SmartRegisterClients getClients() {

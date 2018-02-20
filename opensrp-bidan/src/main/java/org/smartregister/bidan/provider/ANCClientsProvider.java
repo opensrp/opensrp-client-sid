@@ -51,6 +51,7 @@ public class ANCClientsProvider extends BaseClientsProvider {
     private final AbsListView.LayoutParams clientViewLayoutParams;
     private final LayoutInflater inflater;
     protected CommonPersonObjectController controller;
+
     @Bind(R.id.profile_info_layout)
     LinearLayout profilelayout;
     @Bind(R.id.iv_mother_photo)
@@ -112,8 +113,7 @@ public class ANCClientsProvider extends BaseClientsProvider {
         this.alertService = alertService;
         this.inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 
-        clientViewLayoutParams = new AbsListView.LayoutParams(MATCH_PARENT,
-                (int) context.getResources().getDimension(org.smartregister.R.dimen.list_item_height));
+        clientViewLayoutParams = new AbsListView.LayoutParams(MATCH_PARENT, (int) context.getResources().getDimension(org.smartregister.R.dimen.list_item_height));
 
     }
 

@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Context;
 import android.database.Cursor;
 import android.graphics.drawable.Drawable;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.AbsListView;
 import android.widget.ImageButton;
@@ -12,6 +13,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import org.smartregister.bidan.R;
+import org.smartregister.bidan.activity.LoginActivity;
 import org.smartregister.bidan.utils.Support;
 import org.smartregister.commonregistry.AllCommonsRepository;
 import org.smartregister.commonregistry.CommonPersonObject;
@@ -38,7 +40,7 @@ import static org.smartregister.util.StringUtil.humanizeAndDoUPPERCASE;
 
 public class PNCClientsProvider extends BaseClientsProvider {
 
-    private final Context context;
+    private final Context mContext;
     private final View.OnClickListener onClickListener;
     private final OpenSRPImageLoader mImageLoader;
     private final int txtColorBlack;
@@ -95,16 +97,18 @@ public class PNCClientsProvider extends BaseClientsProvider {
     @Bind(R.id.ib_btn_edit)
     ImageButton follow_up;
     private Drawable iconPencilDrawable;
+    private final LayoutInflater inflater;
 
     public PNCClientsProvider(Context context, View.OnClickListener onClickListener, AlertService alertService) {
 
         super(context);
         this.onClickListener = onClickListener;
-        this.context = context;
+        this.mContext = context;
         this.alertService = alertService;
         clientViewLayoutParams = new AbsListView.LayoutParams(MATCH_PARENT, (int) context.getResources().getDimension(R.dimen.list_item_height));
-        txtColorBlack = context.getResources().getColor(R.color.text_black);
+        this.inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 
+        txtColorBlack = context.getResources().getColor(R.color.text_black);
         mImageLoader = DrishtiApplication.getCachedImageLoaderInstance();
 
     }
@@ -135,14 +139,14 @@ public class PNCClientsProvider extends BaseClientsProvider {
         // ========================================================================================
         // Set Value
         // ========================================================================================
-        profilepic.setImageDrawable(context.getResources().getDrawable(R.mipmap.woman_placeholder));
+        profilepic.setImageDrawable(mContext.getResources().getDrawable(R.mipmap.woman_placeholder));
         follow_up.setOnClickListener(onClickListener);
         follow_up.setTag(smartRegisterClient);
         profilelayout.setOnClickListener(onClickListener);
         profilelayout.setTag(smartRegisterClient);
 
         if (iconPencilDrawable == null) {
-            iconPencilDrawable = context.getResources().getDrawable(R.drawable.ic_pencil);
+            iconPencilDrawable = mContext.getResources().getDrawable(R.drawable.ic_pencil);
         }
         follow_up.setImageDrawable(iconPencilDrawable);
         follow_up.setOnClickListener(onClickListener);
@@ -162,9 +166,9 @@ public class PNCClientsProvider extends BaseClientsProvider {
 
         String date = pc.getDetails().get("PNCDate") != null ? pc.getDetails().get("PNCDate") : "";
         String str_vit_a = pc.getDetails().get("pelayananfe") != null ? pc.getDetails().get("pelayananfe") : "";
-        tanggal_kunjungan.setText(String.format("%s %s", context.getString(R.string.str_pnc_delivery_date), date));
+        tanggal_kunjungan.setText(String.format("%s %s", mContext.getString(R.string.str_pnc_delivery_date), date));
 
-        vit_a.setText(String.format("%s %s", context.getString(R.string.fe), yesNo(str_vit_a)));
+        vit_a.setText(String.format("%s %s", mContext.getString(R.string.fe), yesNo(str_vit_a)));
         td_suhu.setText(humanize(pc.getDetails().get("tandaVitalSuhu") != null ? pc.getDetails().get("tandaVitalSuhu") : ""));
         td_sistolik.setText(humanize(pc.getDetails().get("tandaVitalTDSistolik") != null ? pc.getDetails().get("tandaVitalTDSistolik") : ""));
         td_diastolik.setText(humanize(pc.getDetails().get("tandaVitalTDDiastolik") != null ? pc.getDetails().get("tandaVitalTDDiastolik") : ""));
@@ -187,7 +191,7 @@ public class PNCClientsProvider extends BaseClientsProvider {
                 pc.getDetails().get("highRiskLabourTBRisk"), null, null, null, null, null, img_hrl_badge);
 
         String kf_ke = pc.getDetails().get("hariKeKF") != null ? pc.getDetails().get("hariKeKF") : "";
-        KF.setText(String.format("%s %s", context.getString(R.string.hari_ke_kf), humanizeAndDoUPPERCASE(kf_ke)));
+        KF.setText(String.format("%s %s", mContext.getString(R.string.hari_ke_kf), humanizeAndDoUPPERCASE(kf_ke)));
         wife_name.setText(pc.getColumnmaps().get("namalengkap") != null ? pc.getColumnmaps().get("namalengkap") : "");
         husband_name.setText(pc.getColumnmaps().get("namaSuami") != null ? pc.getColumnmaps().get("namaSuami") : "");
         village_name.setText(pc.getDetails().get("address1") != null ? pc.getDetails().get("address1") : "");
@@ -196,22 +200,23 @@ public class PNCClientsProvider extends BaseClientsProvider {
 
         // Photo
         profilepic.setTag(R.id.entity_id, pc.getColumnmaps().get("_id"));//required when saving file to disk
-        Support.setImagetoHolderFromUri((Activity) context, pc.getDetails().get("base_entity_id"), profilepic, R.mipmap.woman_placeholder);
+        Support.setImagetoHolderFromUri((Activity) mContext, pc.getDetails().get("base_entity_id"), profilepic, R.mipmap.woman_placeholder);
 
         convertView.setLayoutParams(clientViewLayoutParams);
     }
 
     @Override
     public void getView(Cursor cursor, SmartRegisterClient smartRegisterClient, View view) {
+        LoginActivity.setLanguage();
         getView(smartRegisterClient, view);
     }
 
     private String yesNo(String text) {
-        return context.getString(text.toLowerCase().contains("y") ? R.string.mcareyes_button_label : R.string.mcareno_button_label);
+        return mContext.getString(text.toLowerCase().contains("y") ? R.string.mcareyes_button_label : R.string.mcareno_button_label);
     }
 
     private String translateComplication(String text) {
-        return text.toLowerCase().contains("dak_ada_kompli") ? context.getString(R.string.no_complication) : text;
+        return text.toLowerCase().contains("dak_ada_kompli") ? mContext.getString(R.string.no_complication) : text;
     }
 
     public void risk(String risk1, String risk2, String risk3, String risk4, String risk5, String risk6, String risk7, String risk8, String risk9, String risk10, ImageView riskview) {

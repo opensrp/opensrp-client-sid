@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Context;
 import android.database.Cursor;
 import android.graphics.drawable.Drawable;
+import android.util.Log;
 import android.view.View;
 import android.widget.AbsListView;
 import android.widget.ImageButton;
@@ -13,6 +14,7 @@ import android.widget.TextView;
 
 import org.apache.commons.lang3.StringUtils;
 import org.smartregister.bidan.R;
+import org.smartregister.bidan.activity.LoginActivity;
 import org.smartregister.bidan.utils.AllConstantsINA;
 import org.smartregister.bidan.utils.Support;
 import org.smartregister.commonregistry.AllCommonsRepository;
@@ -36,7 +38,7 @@ public class KIClientsProvider extends BaseClientsProvider {
 
     private static final String TAG = KIClientsProvider.class.getName();
 
-    private final Context context;
+    private final Context mContext;
     private final View.OnClickListener onClickListener;
     private final AbsListView.LayoutParams clientViewLayoutParams;
     protected CommonPersonObjectController controller;
@@ -97,7 +99,7 @@ public class KIClientsProvider extends BaseClientsProvider {
     public KIClientsProvider(Context context, View.OnClickListener onClickListener, AlertService alertService) {
         super(context);
         this.onClickListener = onClickListener;
-        this.context = context;
+        this.mContext = context;
         this.alertService = alertService;
 
         clientViewLayoutParams = new AbsListView.LayoutParams(MATCH_PARENT, (int) context.getResources().getDimension(org.smartregister.R.dimen.list_item_height));
@@ -108,6 +110,8 @@ public class KIClientsProvider extends BaseClientsProvider {
 
         try {
             ButterKnife.bind(this, convertView);
+            Log.e(TAG, "getView: " );
+
         } catch (Exception e) {
             e.getCause().printStackTrace();
         }
@@ -119,17 +123,16 @@ public class KIClientsProvider extends BaseClientsProvider {
         DetailsRepository detailsRepository = org.smartregister.Context.getInstance().detailsRepository();
         detailsRepository.updateDetails(pc);
 //        Log.e(TAG, "getView:CommonPersonObjectClient "+ pc.getDetails());
-
 //        System.out.println("client : " + pc.getColumnmaps().toString());
 //        System.out.println("event : " + pc.getDetails().toString());
-        AllCommonsRepository iburep = org.smartregister.Context.getInstance().allCommonsRepositoryobjects("ec_ibu");
+        AllCommonsRepository ibuRep = org.smartregister.Context.getInstance().allCommonsRepositoryobjects("ec_ibu");
         AllCommonsRepository ancrep = org.smartregister.Context.getInstance().allCommonsRepositoryobjects("ec_anc");
-        AllCommonsRepository pncrep = org.smartregister.Context.getInstance().allCommonsRepositoryobjects("ec_pnc");
-        AllCommonsRepository anakrep = org.smartregister.Context.getInstance().allCommonsRepositoryobjects("ec_anak");
+        AllCommonsRepository pncRep = org.smartregister.Context.getInstance().allCommonsRepositoryobjects("ec_pnc");
+        AllCommonsRepository anakRep = org.smartregister.Context.getInstance().allCommonsRepositoryobjects("ec_anak");
         ArrayList<String> list = new ArrayList<>();
         list.add((pc.entityId()));
-        List<CommonPersonObject> allchild = anakrep.findByRelational_IDs(list);
-        final CommonPersonObject ibuparent = iburep.findByCaseID(pc.entityId());
+        List<CommonPersonObject> allchild = anakRep.findByRelational_IDs(list);
+        final CommonPersonObject ibuparent = ibuRep.findByCaseID(pc.entityId());
 
         // ========================================================================================
         // Set Value
@@ -138,7 +141,7 @@ public class KIClientsProvider extends BaseClientsProvider {
         profilelayout.setTag(smartRegisterClient);
 
         if (iconPencilDrawable == null) {
-            iconPencilDrawable = context.getResources().getDrawable(R.drawable.ic_pencil);
+            iconPencilDrawable = mContext.getResources().getDrawable(R.drawable.ic_pencil);
         }
         follow_up.setImageDrawable(iconPencilDrawable);
         follow_up.setOnClickListener(onClickListener);
@@ -146,7 +149,7 @@ public class KIClientsProvider extends BaseClientsProvider {
 
         //start profile image
         profilepic.setTag(R.id.entity_id, pc.getColumnmaps().get("_id"));//required when saving file to disk
-        Support.setImagetoHolderFromUri((Activity) context, pc.getDetails().get("base_entity_id"), profilepic, R.mipmap.woman_placeholder);
+        Support.setImagetoHolderFromUri((Activity) mContext, pc.getDetails().get("base_entity_id"), profilepic, R.mipmap.woman_placeholder);
 //        profilepic.setTag(smartRegisterClient);
         //end profile image
 
@@ -178,26 +181,26 @@ public class KIClientsProvider extends BaseClientsProvider {
                 detailsRepository.updateDetails(ibuparent);
                 if (pc.getDetails().get("htp") == null) {
 
-                    Support.checkMonth(context, pc.getDetails().get("htp"), edd_due);
+                    Support.checkMonth(mContext, pc.getDetails().get("htp"), edd_due);
 
                 }
                 checkLastVisit(pc.getDetails().get("ancDate"),
-                        context.getString(R.string.anc_ke) + ": " + pc.getDetails().get("ancKe"),
-                        context.getString(R.string.service_anc),
+                        mContext.getString(R.string.anc_ke) + ": " + pc.getDetails().get("ancKe"),
+                        mContext.getString(R.string.service_anc),
                         anc_status_layout, date_status, visit_status);
             }
             //if anc is 1(closed) set status to pnc
             else if (anc_isclosed == 1) {
-                final CommonPersonObject pncparent = pncrep.findByCaseID(pc.entityId());
+                final CommonPersonObject pncparent = pncRep.findByCaseID(pc.entityId());
                 if (pncparent != null) {
                     short pnc_isclosed = pncparent.getClosed();
                     if (pnc_isclosed == 0) {
                         detailsRepository.updateDetails(pncparent);
                   /*  checkMonth("delivered",edd_due);*/
-                        edd_due.setTextColor(context.getResources().getColor(R.color.alert_complete_green));
-                        String deliver = context.getString(R.string.delivered);
+                        edd_due.setTextColor(mContext.getResources().getColor(R.color.alert_complete_green));
+                        String deliver = mContext.getString(R.string.delivered);
                         edd_due.setText(deliver);
-                        checkLastVisit(pc.getDetails().get("PNCDate"), context.getString(R.string.pnc_ke) + " " + pc.getDetails().get("hariKeKF"), context.getString(R.string.service_pnc),
+                        checkLastVisit(pc.getDetails().get("PNCDate"), mContext.getString(R.string.pnc_ke) + " " + pc.getDetails().get("hariKeKF"), mContext.getString(R.string.service_pnc),
                                 anc_status_layout, date_status, visit_status);
                     }
                 }
@@ -207,8 +210,8 @@ public class KIClientsProvider extends BaseClientsProvider {
             //last check if mother in PF (KB) service
             if (!StringUtils.isNumeric(pc.getDetails().get("jenisKontrasepsi"))) {
                 checkLastVisit(pc.getDetails().get("tanggalkunjungan"),
-                        context.getString(R.string.fp_methods) + ": " + pc.getDetails().get("jenisKontrasepsi"),
-                        context.getString(R.string.service_fp), anc_status_layout, date_status, visit_status);
+                        mContext.getString(R.string.fp_methods) + ": " + pc.getDetails().get("jenisKontrasepsi"),
+                        mContext.getString(R.string.service_fp), anc_status_layout, date_status, visit_status);
             }
 
         //anak
@@ -245,6 +248,7 @@ public class KIClientsProvider extends BaseClientsProvider {
 
     @Override
     public void getView(Cursor cursor, SmartRegisterClient smartRegisterClient, View view) {
+        LoginActivity.setLanguage();
         getView(smartRegisterClient, view);
     }
 
@@ -265,7 +269,7 @@ public class KIClientsProvider extends BaseClientsProvider {
     }
 
     private void checkLastVisit(String date, String visitNumber, String status, TextView tvVisitStatus, TextView tvVisitDate, TextView tvVisitNumber) {
-        String visit_date = date != null ? context.getString(R.string.date_visit_title) + " " + date : "";
+        String visit_date = date != null ? mContext.getString(R.string.date_visit_title) + " " + date : "";
 
         tvVisitNumber.setText(visitNumber);
         tvVisitDate.setText(visit_date);

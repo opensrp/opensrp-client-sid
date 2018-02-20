@@ -236,22 +236,22 @@ public class BidanHomeActivity extends SecuredActivity {
             public void afterFetch(HomeContext anmDetails) {
                 Log.d(TAG, "afterFetch: "+anmDetails);
                 SmartRegisterQueryBuilder sqb = new SmartRegisterQueryBuilder();
-                Cursor kiCountCursor = context().commonrepository("ec_kartu_ibu").rawCustomQueryForAdapter(sqb.queryForCountOnRegisters("ec_kartu_ibu_search", "ec_kartu_ibu_search.is_closed=0 AND namalengkap != ''"));
+                Cursor kiCountCursor = context().commonrepository("ec_kartu_ibu").rawCustomQueryForAdapter(sqb.queryForCountOnRegisters("ec_kartu_ibu_search", "ec_kartu_ibu_search.is_closed=0 AND namalengkap != '' AND namalengkap IS NOT NULL"));
                 kiCountCursor.moveToFirst();
                 kicount = kiCountCursor.getInt(0);
                 kiCountCursor.close();
 
-                Cursor kbCountCursor = context().commonrepository("ec_kartu_ibu").rawCustomQueryForAdapter(sqb.queryForCountOnRegisters("ec_kartu_ibu_search", "ec_kartu_ibu_search.is_closed=0 AND jenisKontrasepsi !='0' AND namalengkap != ''"));
+                Cursor kbCountCursor = context().commonrepository("ec_kartu_ibu").rawCustomQueryForAdapter(sqb.queryForCountOnRegisters("ec_kartu_ibu_search", "ec_kartu_ibu_search.is_closed=0 AND jenisKontrasepsi !=''"));
                 kbCountCursor.moveToFirst();
                 int kbcount = kbCountCursor.getInt(0);
                 kbCountCursor.close();
 
-                Cursor anccountcursor = context().commonrepository("ec_ibu").rawCustomQueryForAdapter(sqb.queryForCountOnRegisters("ec_ibu_search", "ec_ibu_search.is_closed=0 AND namalengkap != '' "));
+                Cursor anccountcursor = context().commonrepository("ec_ibu").rawCustomQueryForAdapter(sqb.queryForCountOnRegisters("ec_ibu_search", "ec_ibu_search.is_closed=0 AND namalengkap !='' AND namalengkap IS NOT NULL"));
                 anccountcursor.moveToFirst();
                 int anccount = anccountcursor.getInt(0);
                 anccountcursor.close();
 
-                Cursor pnccountcursor = context().commonrepository("ec_pnc").rawCustomQueryForAdapter(sqb.queryForCountOnRegisters("ec_pnc_search", "ec_pnc_search.is_closed=0 AND (ec_pnc_search.keadaanIbu ='hidup' OR ec_pnc_search.keadaanIbu IS NULL) AND namalengkap != ''")); // and ec_pnc_search.keadaanIbu LIKE '%hidup%'
+                Cursor pnccountcursor = context().commonrepository("ec_pnc").rawCustomQueryForAdapter(sqb.queryForCountOnRegisters("ec_pnc_search", "ec_pnc_search.is_closed=0 AND (ec_pnc_search.keadaanIbu ='hidup' OR ec_pnc_search.keadaanIbu IS NULL) AND namalengkap !='' AND namalengkap IS NOT NULL")); // and ec_pnc_search.keadaanIbu LIKE '%hidup%'
                 pnccountcursor.moveToFirst();
                 int pnccount = pnccountcursor.getInt(0);
                 pnccountcursor.close();

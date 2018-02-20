@@ -4,6 +4,9 @@ import android.app.Activity;
 import android.content.Context;
 import android.database.Cursor;
 import android.graphics.drawable.Drawable;
+import android.support.annotation.Nullable;
+import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.AbsListView;
 import android.widget.ImageButton;
@@ -12,6 +15,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import org.smartregister.bidan.R;
+import org.smartregister.bidan.activity.LoginActivity;
 import org.smartregister.bidan.utils.Support;
 import org.smartregister.commonregistry.CommonPersonObjectClient;
 import org.smartregister.commonregistry.CommonPersonObjectController;
@@ -26,18 +30,33 @@ import butterknife.Bind;
 import butterknife.ButterKnife;
 
 import static android.view.ViewGroup.LayoutParams.MATCH_PARENT;
-import static org.smartregister.bidan.R.layout.smart_register_kb_client;
 
 public class KBClientsProvider extends BaseClientsProvider {
 
     private static final String TAG = KBClientsProvider.class.getName();
 
     private final View.OnClickListener onClickListener;
-    private final Context context;
+    private final Context mContext;
     private final AbsListView.LayoutParams clientViewLayoutParams;
     protected CommonPersonObjectController controller;
     AlertService alertService;
 
+    // layout/smart_register_kb_client.xml
+    @Bind(R.id.tv_no_ibu_kb)
+    TextView no_ibu;
+
+    // layout/smart_register_client_obsetri_layout
+    @Bind(R.id.tv_gravida)
+    TextView gravida;
+    @Bind(R.id.tv_parity)
+    TextView parity;
+    @Bind(R.id.tv_number_of_abortus)
+    TextView number_of_abortus;
+    @Bind(R.id.tv_number_of_alive)
+    TextView number_of_alive;
+
+    // Profile KI
+    // layout/smart_register_client_profile_ki
     @Bind(R.id.profile_info_layout)
     LinearLayout profilelayout;
     @Bind(R.id.tv_wife_name)
@@ -48,16 +67,6 @@ public class KBClientsProvider extends BaseClientsProvider {
     TextView village_name;
     @Bind(R.id.tv_wife_age)
     TextView wife_age;
-    @Bind(R.id.tv_no_ibu)
-    TextView no_ibu;
-    @Bind(R.id.tv_gravida)
-    TextView gravida;
-    @Bind(R.id.tv_parity)
-    TextView parity;
-    @Bind(R.id.tv_number_of_abortus)
-    TextView number_of_abortus;
-    @Bind(R.id.tv_number_of_alive)
-    TextView number_of_alive;
     @Bind(R.id.iv_hr_badge)
     ImageView hr_badge;
     @Bind(R.id.iv_hrl_badge)
@@ -93,46 +102,50 @@ public class KBClientsProvider extends BaseClientsProvider {
     @Bind(R.id.ib_btn_edit)
     ImageButton follow_up;
 
-    private Drawable iconPencilDrawable;
-
     public KBClientsProvider(Context context, View.OnClickListener onClickListener, AlertService alertService) {
         super(context);
         this.onClickListener = onClickListener;
-        this.context = context;
+        this.mContext = context;
         this.alertService = alertService;
+//        LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 
         clientViewLayoutParams = new AbsListView.LayoutParams(MATCH_PARENT, (int) context.getResources().getDimension(R.dimen.list_item_height));
+        Log.e(TAG, "KBClientsProvider: " );
     }
 
     private void getView(SmartRegisterClient smartRegisterClient, View convertView) {
+        Log.e(TAG, "getView: " );
         try {
+
             ButterKnife.bind(this, convertView);
+
         } catch (Exception e) {
             e.getCause().printStackTrace();
+            Log.e(TAG, "getView: " + e.getMessage());
         }
 
         CommonPersonObjectClient pc = (CommonPersonObjectClient) smartRegisterClient;
         DetailsRepository detailsRepository = org.smartregister.Context.getInstance().detailsRepository();
         detailsRepository.updateDetails(pc);
 
-        System.out.println("client : " + pc.getColumnmaps().toString());
-        System.out.println("event : " + pc.getDetails().toString());
+//        System.out.println("client : " + pc.getColumnmaps().toString());
+//        System.out.println("event : " + pc.getDetails().toString());
 
-//        Log.e(TAG, "getView: " + pc.getDetails().toString());
-//        Log.e(TAG, "getView: " + pc.getColumnmaps().toString());
+        Log.e(TAG, "getView: " + pc.getDetails().toString());
+        Log.e(TAG, "getView: " + pc.getColumnmaps().toString());
 
         profilelayout.setOnClickListener(onClickListener);
         profilelayout.setTag(smartRegisterClient);
 
-        if (iconPencilDrawable == null) {
-            iconPencilDrawable = context.getResources().getDrawable(R.drawable.ic_pencil);
-        }
+//        if (iconPencilDrawable == null) {
+//            iconPencilDrawable = mContext.getResources().getDrawable(R.drawable.ic_pencil);
+//        }
 
-        follow_up.setOnClickListener(onClickListener);
-        follow_up.setTag(smartRegisterClient);
-        follow_up.setImageDrawable(iconPencilDrawable);
+//        follow_up.setOnClickListener(onClickListener);
+//        follow_up.setTag(smartRegisterClient);
+//        follow_up.setImageDrawable(iconPencilDrawable);
 
-        hr_badge.setVisibility(View.INVISIBLE);
+//        hr_badge.setVisibility(View.INVISIBLE);
 
         //Risk flag
         risk(pc.getDetails().get("highRiskSTIBBVs"), pc.getDetails().get("highRiskEctopicPregnancy"), pc.getDetails().get("highRiskCardiovascularDiseaseRecord"),
@@ -141,7 +154,7 @@ public class KBClientsProvider extends BaseClientsProvider {
                 pc.getDetails().get("highRiskPregnancyOldMaternalAge"), hr_badge);
 
         profilepic.setTag(R.id.entity_id, pc.getColumnmaps().get("_id"));//required when saving file to disk
-        Support.setImagetoHolderFromUri((Activity) context, pc.getDetails().get("base_entity_id"), profilepic, R.mipmap.woman_placeholder);
+        Support.setImagetoHolderFromUri((Activity) mContext, pc.getDetails().get("base_entity_id"), profilepic, R.mipmap.woman_placeholder);
 
         wife_name.setText(pc.getColumnmaps().get("namalengkap") != null ? pc.getColumnmaps().get("namalengkap") : "null");
         husband_name.setText(pc.getColumnmaps().get("namaSuami") != null ? pc.getColumnmaps().get("namaSuami") : "null");
@@ -163,7 +176,7 @@ public class KBClientsProvider extends BaseClientsProvider {
 
         follow_due.setText("");
         follow_up_due.setText("");
-        follow_layout.setBackgroundColor(context.getResources().getColor(R.color.status_bar_text_almost_white));
+        follow_layout.setBackgroundColor(mContext.getResources().getColor(R.color.status_bar_text_almost_white));
         follow_status.setText("");
 
         String jenis = pc.getDetails().get("jenisKontrasepsi") != null ? pc.getDetails().get("jenisKontrasepsi") : "-";
@@ -172,34 +185,34 @@ public class KBClientsProvider extends BaseClientsProvider {
             //alertlist_for_client.get(i).
             if (alertlist_for_client.size() == 0) {
                 // viewHolder.follow_up_due.setText("Not Synced");
-                follow_layout.setBackgroundColor(context.getResources().getColor(R.color.status_bar_text_almost_white));
+                follow_layout.setBackgroundColor(mContext.getResources().getColor(R.color.status_bar_text_almost_white));
             }
             for (int i = 0; i < alertlist_for_client.size(); i++) {
                 follow_due.setText(R.string.followUpDue);
                 if (alertlist_for_client.get(i).status().value().equalsIgnoreCase("normal")) {
                     follow_up_due.setText(alertlist_for_client.get(i).expiryDate());
-                    follow_layout.setBackgroundColor(context.getResources().getColor(R.color.alert_upcoming_light_blue));
+                    follow_layout.setBackgroundColor(mContext.getResources().getColor(R.color.alert_upcoming_light_blue));
                     follow_status.setText(alertlist_for_client.get(i).status().value());
                 }
                 if (alertlist_for_client.get(i).status().value().equalsIgnoreCase("upcoming")) {
                     follow_up_due.setText(alertlist_for_client.get(i).expiryDate());
-                    follow_layout.setBackgroundColor(context.getResources().getColor(R.color.alert_upcoming_light_blue));
+                    follow_layout.setBackgroundColor(mContext.getResources().getColor(R.color.alert_upcoming_light_blue));
                     follow_status.setText(alertlist_for_client.get(i).status().value());
                 }
                 if (alertlist_for_client.get(i).status().value().equalsIgnoreCase("urgent")) {
                     follow_up_due.setText(alertlist_for_client.get(i).expiryDate());
-                    follow_layout.setBackgroundColor(context.getResources().getColor(R.color.alert_urgent_red));
+                    follow_layout.setBackgroundColor(mContext.getResources().getColor(R.color.alert_urgent_red));
                     follow_status.setText(alertlist_for_client.get(i).status().value());
 
                 }
                 if (alertlist_for_client.get(i).status().value().equalsIgnoreCase("expired")) {
                     follow_up_due.setText(alertlist_for_client.get(i).expiryDate());
-                    follow_layout.setBackgroundColor(context.getResources().getColor(R.color.client_list_header_dark_grey));
+                    follow_layout.setBackgroundColor(mContext.getResources().getColor(R.color.client_list_header_dark_grey));
                     follow_status.setText(alertlist_for_client.get(i).status().value());
                 }
                 if (alertlist_for_client.get(i).isComplete()) {
                     follow_up_due.setText(alertlist_for_client.get(i).expiryDate());
-                    follow_layout.setBackgroundColor(context.getResources().getColor(R.color.status_bar_text_almost_white));
+                    follow_layout.setBackgroundColor(mContext.getResources().getColor(R.color.status_bar_text_almost_white));
                     follow_status.setText(alertlist_for_client.get(i).status().value());
                 }
             }
@@ -210,6 +223,8 @@ public class KBClientsProvider extends BaseClientsProvider {
 
     @Override
     public void getView(Cursor cursor, SmartRegisterClient smartRegisterClient, View view) {
+        Log.e(TAG, "getView: " );
+        LoginActivity.setLanguage();
         getView(smartRegisterClient, view);
     }
 
@@ -232,6 +247,6 @@ public class KBClientsProvider extends BaseClientsProvider {
 
     @Override
     public View inflatelayoutForCursorAdapter() {
-        return inflater().inflate(smart_register_kb_client, null);
+        return inflater().inflate(R.layout.smart_register_kb_client, null);
     }
 }
