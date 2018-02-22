@@ -11,22 +11,26 @@ import org.smartregister.gizi.sync.CloudantSyncHandler;
 
 import java.util.concurrent.CountDownLatch;
 
+import util.ServiceTools;
+
 public class FormSubmissionSyncService {
     private Context context;
-
+    //private SyncService syncService;
     public FormSubmissionSyncService(Context context) {
         this.context = context;
     }
 
     public FetchStatus sync() {
         try {
-            CloudantSyncHandler mCloudantSyncHandler = CloudantSyncHandler.getInstance(context.getApplicationContext());
+            ServiceTools.startService(context, SyncService.class);
+
+            /*CloudantSyncHandler mCloudantSyncHandler = CloudantSyncHandler.getInstance(context.getApplicationContext());
             CountDownLatch mCountDownLatch = new CountDownLatch(2);
             mCloudantSyncHandler.setCountDownLatch(mCountDownLatch);
             mCloudantSyncHandler.startPullReplication();
             mCloudantSyncHandler.startPushReplication();
 
-            mCountDownLatch.await();
+            mCountDownLatch.await();*/
 
 //            Intent intent = new Intent(DrishtiApplication.getInstance().getApplicationContext(),
 //                    ImageUploadSyncService.class);

@@ -5,11 +5,13 @@ import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.content.res.Resources;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.support.v7.app.AppCompatActivity;
 import android.text.InputType;
 import android.util.DisplayMetrics;
@@ -24,6 +26,7 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import org.apache.commons.lang3.StringUtils;
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.smartregister.Context;
@@ -36,9 +39,11 @@ import org.smartregister.domain.Response;
 import org.smartregister.domain.ResponseStatus;
 import org.smartregister.event.Listener;
 //import org.smartregister.vaksinator.lib.ErrorReportingFacade;
+import org.smartregister.gizi.service.SyncService;
 import org.smartregister.repository.AllSharedPreferences;
 import org.smartregister.sync.DrishtiSyncScheduler;
 import org.smartregister.util.Log;
+import org.smartregister.util.Utils;
 import org.smartregister.view.BackgroundAction;
 import org.smartregister.view.LockingBackgroundTask;
 import org.smartregister.view.ProgressIndicator;
@@ -75,9 +80,8 @@ public class LoginActivity extends AppCompatActivity {
     public static final String KANNADA_LANGUAGE = "Kannada";
     public static final String Bengali_LANGUAGE = "Bengali";
     public static final String Bahasa_LANGUAGE = "Bahasa";
-
  //   public static Generator generator;
-
+    public static final String PREF_TEAM_LOCATIONS = "PREF_TEAM_LOCATIONS";
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -362,11 +366,16 @@ public class LoginActivity extends AppCompatActivity {
     private void remoteLoginWith(String userName, String password, String userInfo) {
         context.userService().remoteLogin(userName, password, userInfo);
         String locationId = getUserDefaultLocationId(userInfo);
+        Utils.writePreference(GiziApplication.getInstance().getApplicationContext(), PREF_TEAM_LOCATIONS, locationId);
+
         saveDefaultLocationId(userName,locationId);
        // LoginActivity.generator = new Generator(context, userName, password);
         goToHome();
+        String locations = Utils.getPreference(GiziApplication.getInstance().getApplicationContext(), PREF_TEAM_LOCATIONS, "");
+        Log.logInfo("USERINFO"+locations);
         //DrishtiSyncScheduler.startOnlyIfConnectedToNetwork(getApplicationContext());
     }
+
 
     private void goToHome() {
         startActivity(new Intent(this, GiziHomeActivity.class));
@@ -435,6 +444,7 @@ public class LoginActivity extends AppCompatActivity {
     public void saveDefaultLocationId(String userName, String locationId) {
         if (userName != null) {
             context.userService().getAllSharedPreferences().savePreference(userName + "-locationid", locationId);
+            Log.logInfo("LOKASI "+locationId);
         }
     }
 

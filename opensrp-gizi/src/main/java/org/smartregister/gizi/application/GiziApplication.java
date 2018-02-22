@@ -3,12 +3,14 @@ package org.smartregister.gizi.application;
 import android.content.Intent;
 import android.content.res.Configuration;
 
+import org.smartregister.gizi.receiver.PathSyncBroadcastReceiver;
 import org.smartregister.gizi.repository.GiziRepository;
 import org.smartregister.Context;
 import org.smartregister.CoreLibrary;
 import org.smartregister.commonregistry.CommonFtsObject;
 import org.smartregister.gizi.activity.LoginActivity;
 import org.smartregister.gizi.libs.FlurryFacade;
+import org.smartregister.repository.EventClientRepository;
 import org.smartregister.repository.Repository;
 import org.smartregister.gizi.sync.DrishtiSyncScheduler;
 import org.smartregister.view.activity.DrishtiApplication;
@@ -25,6 +27,7 @@ import java.util.Locale;
 
 public class GiziApplication extends DrishtiApplication {
 
+    private EventClientRepository eventClientRepository;
     @Override
     public void onCreate() {
 
@@ -37,10 +40,11 @@ public class GiziApplication extends DrishtiApplication {
         CoreLibrary.init(context);
 
 
-        DrishtiSyncScheduler.setReceiverClass(SyncBroadcastReceiver.class);
+      //  DrishtiSyncScheduler.setReceiverClass(SyncBroadcastReceiver.class);
+        DrishtiSyncScheduler.setReceiverClass(PathSyncBroadcastReceiver.class);
         super.onCreate();
         //  ACRA.init(this);
-        DrishtiSyncScheduler.setReceiverClass(SyncBroadcastReceiver.class);
+     //   DrishtiSyncScheduler.setReceiverClass(SyncBroadcastReceiver.class);
       //  ErrorReportingFacade.initErrorHandler(getApplicationContext());
         /**
          * ENABLE THIS AGAIN AFTER FINISH TESTING*/
@@ -67,7 +71,7 @@ public class GiziApplication extends DrishtiApplication {
         try {
             if (repository == null) {
                 repository = new GiziRepository(getInstance().getApplicationContext(), context());
-
+                eventClientRepository();
             }
         } catch (UnsatisfiedLinkError e) {
             logError("Error on getRepository: " + e);
@@ -172,5 +176,10 @@ public class GiziApplication extends DrishtiApplication {
         return commonFtsObject;
     }
 
-
+    public EventClientRepository eventClientRepository() {
+        if (eventClientRepository == null) {
+            eventClientRepository = new EventClientRepository(getRepository());
+        }
+        return eventClientRepository;
+    }
 }
