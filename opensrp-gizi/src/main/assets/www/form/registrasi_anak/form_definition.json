@@ -11,10 +11,15 @@
             "shouldLoadValue": true
           },
           {
-                        "name": "ibu_entity_id",
-                     "source": "kartu_ibu.id",
-                     "shouldLoadValue": true
-                    },
+            "name": "ibu_entity_id",
+            "source": "kartu_ibu.id",
+            "shouldLoadValue": true
+          },
+          {
+            "name": "existing_location",
+            "bind": "/model/instance/registrasi_vaksinator/existing_location",
+            "shouldLoadValue": true
+          },
           {
             "name": "existing_Village",
             "bind": "/model/instance/registrasi_anak/Village",

@@ -24,6 +24,7 @@ import org.smartregister.clientandeventmodel.SubFormData;
 import org.smartregister.domain.SyncStatus;
 import org.smartregister.domain.form.FormSubmission;
 import org.smartregister.domain.form.SubForm;
+import org.smartregister.gizi.activity.LoginActivity;
 import org.smartregister.gizi.application.GiziApplication;
 import org.smartregister.gizi.sync.ClientProcessor;
 import org.smartregister.repository.AllSharedPreferences;
@@ -31,8 +32,7 @@ import org.smartregister.repository.BaseRepository;
 import org.smartregister.repository.EventClientRepository;
 import org.smartregister.service.intentservices.ReplicationIntentService;
 import org.smartregister.gizi.sync.CloudantDataHandler;
-import org.smartregister.util.AssetHandler;
-import org.smartregister.util.Log;
+import org.smartregister.util.*;
 import org.w3c.dom.Attr;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
@@ -1127,7 +1127,8 @@ public class EnketoFormUtils {
     }*/
     private Event tagSyncMetadata(Event event) {
         AllSharedPreferences sharedPreferences = GiziApplication.getInstance().getContext().userService().getAllSharedPreferences();
-        event.setLocationId(sharedPreferences.fetchDefaultLocalityId(sharedPreferences.fetchRegisteredANM()));
+        String locations = org.smartregister.util.Utils.getPreference(mContext, LoginActivity.PREF_TEAM_LOCATIONS, "");
+        event.setLocationId(locations);
 
         return event;
     }
