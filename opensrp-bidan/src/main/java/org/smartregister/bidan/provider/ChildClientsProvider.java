@@ -7,7 +7,6 @@ import android.graphics.drawable.Drawable;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.widget.AbsListView;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -31,7 +30,6 @@ import org.smartregister.view.viewholder.OnClickFormLauncher;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-import static android.view.ViewGroup.LayoutParams.MATCH_PARENT;
 import static org.smartregister.util.Utils.fillValue;
 import static org.smartregister.util.Utils.getValue;
 

@@ -173,7 +173,7 @@ public class KISmartRegisterFragment extends BaseSmartRegisterFragment {
 
     @TargetApi(Build.VERSION_CODES.KITKAT)
     public void initializeQueries(String s) {
-        Log.e(TAG, "initializeQueries: key "+ s );
+        Log.e(TAG, "initializeQueries: key " + s);
         try {
 
             KIClientsProvider kiscp = new KIClientsProvider(getActivity(), clientActionHandler, context().alertService());

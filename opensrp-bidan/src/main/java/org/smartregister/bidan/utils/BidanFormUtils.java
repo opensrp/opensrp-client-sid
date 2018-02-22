@@ -13,7 +13,6 @@ import org.json.JSONException;
 import org.json.JSONObject;
 import org.json.XML;
 import org.smartregister.CoreLibrary;
-import org.smartregister.bidan.activity.LoginActivity;
 import org.smartregister.bidan.sync.CloudantDataHandler;
 import org.smartregister.clientandeventmodel.Client;
 import org.smartregister.clientandeventmodel.Event;

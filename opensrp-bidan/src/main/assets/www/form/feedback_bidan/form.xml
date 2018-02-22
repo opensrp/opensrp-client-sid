@@ -12,8 +12,8 @@
     <label class="question non-select ">
         <span class="question-label active" lang="">Isi dengan nama responden:</span>
         <span class="required">*</span>
-        <input name="/data_entry_feedback_form/respondent_name" data-type-xml="string" required="required"
-            type="text" />
+        <input name="/data_entry_feedback_form/respondent_name" data-type-xml="string"
+            required="required" type="text" />
     </label>
     <label class="question non-select ">
         <span class="question-label active" lang="">Masukkan tanggal coaching:</span>
@@ -46,8 +46,7 @@
                 </label>
                 <label class="">
                     <input name="/data_entry_feedback_form/masalah" data-type-xml="select"
-                        type="checkbox"
-                        value="Masalah_penggunaan_langsung_saat_kunjungan1" />
+                        type="checkbox" value="Masalah_penggunaan_langsung_saat_kunjungan1" />
                     <span class="option-label active" lang="">Masalah penggunaan langsung saat
                         kunjungan
                     </span>
@@ -95,41 +94,38 @@
             </legend>
             <div class="option-wrapper">
                 <label class="">
-                    <input name="/data_entry_feedback_form/Masalah_koneksi_internet" data-relevant="selected( /data_entry_feedback_form/masalah ,'Masalah_koneksi_internet1')"
-                        data-type-xml="select"
-                        type="checkbox"
+                    <input name="/data_entry_feedback_form/Masalah_koneksi_internet"
+                        data-relevant="selected( /data_entry_feedback_form/masalah ,'Masalah_koneksi_internet1')"
+                        data-type-xml="select" type="checkbox"
                         value="Koneksi_internet_di_polindes_puskesmas_lemah" />
                     <span class="option-label active" lang="">Koneksi internet di polindes/puskesmas
                         lemah
                     </span>
                 </label>
                 <label class="">
-                    <input name="/data_entry_feedback_form/Masalah_koneksi_internet" data-relevant="selected( /data_entry_feedback_form/masalah ,'Masalah_koneksi_internet1')"
-                        data-type-xml="select"
-                        type="checkbox"
+                    <input name="/data_entry_feedback_form/Masalah_koneksi_internet"
+                        data-relevant="selected( /data_entry_feedback_form/masalah ,'Masalah_koneksi_internet1')"
+                        data-type-xml="select" type="checkbox"
                         value="Koneksi_internet_di_posyandu_lemah" />
                     <span class="option-label active" lang="">Koneksi internet di posyandu lemah
                     </span>
                 </label>
                 <label class="">
-                    <input name="/data_entry_feedback_form/Masalah_koneksi_internet" data-relevant="selected( /data_entry_feedback_form/masalah ,'Masalah_koneksi_internet1')"
-                        data-type-xml="select"
-                        type="checkbox"
-                        value="Kuota_internet_telah_habis" />
+                    <input name="/data_entry_feedback_form/Masalah_koneksi_internet"
+                        data-relevant="selected( /data_entry_feedback_form/masalah ,'Masalah_koneksi_internet1')"
+                        data-type-xml="select" type="checkbox" value="Kuota_internet_telah_habis" />
                     <span class="option-label active" lang="">Kuota internet telah habis</span>
                 </label>
                 <label class="">
-                    <input name="/data_entry_feedback_form/Masalah_koneksi_internet" data-relevant="selected( /data_entry_feedback_form/masalah ,'Masalah_koneksi_internet1')"
-                        data-type-xml="select"
-                        type="checkbox"
-                        value="Tidak_dapat_log_in" />
+                    <input name="/data_entry_feedback_form/Masalah_koneksi_internet"
+                        data-relevant="selected( /data_entry_feedback_form/masalah ,'Masalah_koneksi_internet1')"
+                        data-type-xml="select" type="checkbox" value="Tidak_dapat_log_in" />
                     <span class="option-label active" lang="">Tidak dapat log in</span>
                 </label>
                 <label class="">
-                    <input name="/data_entry_feedback_form/Masalah_koneksi_internet" data-relevant="selected( /data_entry_feedback_form/masalah ,'Masalah_koneksi_internet1')"
-                        data-type-xml="select"
-                        type="checkbox"
-                        value="Masalah_lainnya" />
+                    <input name="/data_entry_feedback_form/Masalah_koneksi_internet"
+                        data-relevant="selected( /data_entry_feedback_form/masalah ,'Masalah_koneksi_internet1')"
+                        data-type-xml="select" type="checkbox" value="Masalah_lainnya" />
                     <span class="option-label active" lang="">Masalah lainnya</span>
                 </label>
             </div>
@@ -141,15 +137,14 @@
         </span>
         <input name="/data_entry_feedback_form/Koneksi_internet_di_polindes_puskesmas_lemah"
             data-relevant="selected( /data_entry_feedback_form/Masalah_koneksi_internet ,'Koneksi_internet_di_polindes_puskesmas_lemah')"
-            data-type-xml="string"
-            type="text" />
+            data-type-xml="string" type="text" />
     </label>
     <label class="question or-branch pre-init non-select ">
         <span class="question-label active" lang="">Tuliskan masalah koneksi internet di posyandu:
         </span>
-        <input name="/data_entry_feedback_form/Koneksi_internet_di_posyandu_lemah" data-relevant="selected( /data_entry_feedback_form/Masalah_koneksi_internet ,'Koneksi_internet_di_posyandu_lemah')"
-            data-type-xml="string"
-            type="text" />
+        <input name="/data_entry_feedback_form/Koneksi_internet_di_posyandu_lemah"
+            data-relevant="selected( /data_entry_feedback_form/Masalah_koneksi_internet ,'Koneksi_internet_di_posyandu_lemah')"
+            data-type-xml="string" type="text" />
     </label>
     <label class="question or-branch pre-init non-select ">
         <span class="question-label active" lang="">Tuliskan masalah kuota internet yang telah
@@ -158,31 +153,31 @@
         <span class="or-hint active" lang="">(Misal: hari terakhir bisa online, sejak kapan internet
             tidak bisa diakses, dsb.)
         </span>
-        <input name="/data_entry_feedback_form/Kuota_internet_telah_habis" data-relevant="selected( /data_entry_feedback_form/Masalah_koneksi_internet ,'Kuota_internet_telah_habis')"
-            data-type-xml="string"
-            type="text" />
+        <input name="/data_entry_feedback_form/Kuota_internet_telah_habis"
+            data-relevant="selected( /data_entry_feedback_form/Masalah_koneksi_internet ,'Kuota_internet_telah_habis')"
+            data-type-xml="string" type="text" />
     </label>
     <label class="question or-branch pre-init non-select ">
         <span class="question-label active" lang="">Tuliskan masalah tidak dapat log in:</span>
         <span class="or-hint active" lang="">(Misal: kapan bidan tidak dapat log in ke aplikasi)
         </span>
-        <input name="/data_entry_feedback_form/Tidak_dapat_log_in" data-relevant="selected( /data_entry_feedback_form/Masalah_koneksi_internet ,'Tidak_dapat_log_in')"
-            data-type-xml="string"
-            type="text" />
+        <input name="/data_entry_feedback_form/Tidak_dapat_log_in"
+            data-relevant="selected( /data_entry_feedback_form/Masalah_koneksi_internet ,'Tidak_dapat_log_in')"
+            data-type-xml="string" type="text" />
     </label>
     <label class="question or-branch pre-init non-select ">
         <span class="question-label active" lang="">Tuliskan masalah lainnya seputar koneksi
             internet:
         </span>
-        <input name="/data_entry_feedback_form/Masalah_lainnya_koneksi_internet" data-relevant="selected( /data_entry_feedback_form/Masalah_koneksi_internet ,'Masalah_lainnya')"
-            data-type-xml="string"
-            type="text" />
+        <input name="/data_entry_feedback_form/Masalah_lainnya_koneksi_internet"
+            data-relevant="selected( /data_entry_feedback_form/Masalah_koneksi_internet ,'Masalah_lainnya')"
+            data-type-xml="string" type="text" />
     </label>
     <label class="note or-branch pre-init non-select ">
         <span class="question-label active" lang="">Baterai</span>
-        <input name="/data_entry_feedback_form/Baterai" data-relevant="selected( /data_entry_feedback_form/masalah ,'Masalah_baterai1')"
-            data-type-xml="string"
-            readonly="readonly" type="text" />
+        <input name="/data_entry_feedback_form/Baterai"
+            data-relevant="selected( /data_entry_feedback_form/masalah ,'Masalah_baterai1')"
+            data-type-xml="string" readonly="readonly" type="text" />
     </label>
     <fieldset class="question or-branch pre-init ">
         <fieldset>
@@ -193,39 +188,35 @@
             </legend>
             <div class="option-wrapper">
                 <label class="">
-                    <input name="/data_entry_feedback_form/Masalah_baterai" data-relevant="selected( /data_entry_feedback_form/masalah ,'Masalah_baterai1')"
-                        data-type-xml="select"
-                        type="checkbox"
-                        value="Pengisian_baterai_lama" />
+                    <input name="/data_entry_feedback_form/Masalah_baterai"
+                        data-relevant="selected( /data_entry_feedback_form/masalah ,'Masalah_baterai1')"
+                        data-type-xml="select" type="checkbox" value="Pengisian_baterai_lama" />
                     <span class="option-label active" lang="">Pengisian baterai lama</span>
                 </label>
                 <label class="">
-                    <input name="/data_entry_feedback_form/Masalah_baterai" data-relevant="selected( /data_entry_feedback_form/masalah ,'Masalah_baterai1')"
-                        data-type-xml="select"
-                        type="checkbox"
-                        value="Baterai_cepat_habis" />
+                    <input name="/data_entry_feedback_form/Masalah_baterai"
+                        data-relevant="selected( /data_entry_feedback_form/masalah ,'Masalah_baterai1')"
+                        data-type-xml="select" type="checkbox" value="Baterai_cepat_habis" />
                     <span class="option-label active" lang="">Baterai cepat habis</span>
                 </label>
                 <label class="">
-                    <input name="/data_entry_feedback_form/Masalah_baterai" data-relevant="selected( /data_entry_feedback_form/masalah ,'Masalah_baterai1')"
-                        data-type-xml="select"
-                        type="checkbox"
-                        value="Tablet_tiba-tiba_mati" />
+                    <input name="/data_entry_feedback_form/Masalah_baterai"
+                        data-relevant="selected( /data_entry_feedback_form/masalah ,'Masalah_baterai1')"
+                        data-type-xml="select" type="checkbox" value="Tablet_tiba-tiba_mati" />
                     <span class="option-label active" lang="">Tablet tiba-tiba mati</span>
                 </label>
                 <label class="">
-                    <input name="/data_entry_feedback_form/Masalah_baterai" data-relevant="selected( /data_entry_feedback_form/masalah ,'Masalah_baterai1')"
-                        data-type-xml="select"
-                        type="checkbox"
+                    <input name="/data_entry_feedback_form/Masalah_baterai"
+                        data-relevant="selected( /data_entry_feedback_form/masalah ,'Masalah_baterai1')"
+                        data-type-xml="select" type="checkbox"
                         value="Pengisi_daya_rusak_tidak_berfungsi" />
                     <span class="option-label active" lang="">Pengisi daya rusak/tidak berfungsi
                     </span>
                 </label>
                 <label class="">
-                    <input name="/data_entry_feedback_form/Masalah_baterai" data-relevant="selected( /data_entry_feedback_form/masalah ,'Masalah_baterai1')"
-                        data-type-xml="select"
-                        type="checkbox"
-                        value="Masalah_lainnya" />
+                    <input name="/data_entry_feedback_form/Masalah_baterai"
+                        data-relevant="selected( /data_entry_feedback_form/masalah ,'Masalah_baterai1')"
+                        data-type-xml="select" type="checkbox" value="Masalah_lainnya" />
                     <span class="option-label active" lang="">Masalah lainnya</span>
                 </label>
             </div>
@@ -236,18 +227,18 @@
         </span>
         <span class="or-hint active" lang="">(Misal: butuh berapa jam agar baterai terisi penuh)
         </span>
-        <input name="/data_entry_feedback_form/Pengisian_baterai_lama" data-relevant="selected( /data_entry_feedback_form/Masalah_baterai ,'Pengisian_baterai_lama')"
-            data-type-xml="string"
-            type="text" />
+        <input name="/data_entry_feedback_form/Pengisian_baterai_lama"
+            data-relevant="selected( /data_entry_feedback_form/Masalah_baterai ,'Pengisian_baterai_lama')"
+            data-type-xml="string" type="text" />
     </label>
     <label class="question or-branch pre-init non-select ">
         <span class="question-label active" lang="">Tuliskan masalah baterai yang cepat habis:
         </span>
         <span class="or-hint active" lang="">(Misal: baterai habis setelah berapa jam pemakaian)
         </span>
-        <input name="/data_entry_feedback_form/Baterai_cepat_habis" data-relevant="selected( /data_entry_feedback_form/Masalah_baterai ,'Baterai_cepat_habis')"
-            data-type-xml="string"
-            type="text" />
+        <input name="/data_entry_feedback_form/Baterai_cepat_habis"
+            data-relevant="selected( /data_entry_feedback_form/Masalah_baterai ,'Baterai_cepat_habis')"
+            data-type-xml="string" type="text" />
     </label>
     <label class="question or-branch pre-init non-select ">
         <span class="question-label active" lang="">Tuliskan masalah tablet yang tiba-tiba mati:
@@ -255,9 +246,9 @@
         <span class="or-hint active" lang="">(Misal: kapan tablet tiba-tiba mati dengan sendirinya,
             apa pemicunya, dsb.)
         </span>
-        <input name="/data_entry_feedback_form/Tablet_tiba-tiba_mati" data-relevant="selected( /data_entry_feedback_form/Masalah_baterai ,'Tablet_tiba-tiba_mati')"
-            data-type-xml="string"
-            type="text" />
+        <input name="/data_entry_feedback_form/Tablet_tiba-tiba_mati"
+            data-relevant="selected( /data_entry_feedback_form/Masalah_baterai ,'Tablet_tiba-tiba_mati')"
+            data-type-xml="string" type="text" />
     </label>
     <label class="question or-branch pre-init non-select ">
         <span class="question-label active" lang="">Tuliskan masalah pengisi daya yang tidak
@@ -266,21 +257,21 @@
         <span class="or-hint active" lang="">(Misal: penjelasan lebih spesifik, apakah pengisi daya
             bidan diganti)
         </span>
-        <input name="/data_entry_feedback_form/Pengisi_daya_rusak_tidak_berfungsi" data-relevant="selected( /data_entry_feedback_form/Masalah_baterai ,'Pengisi_daya_rusak_tidak_berfungsi')"
-            data-type-xml="string"
-            type="text" />
+        <input name="/data_entry_feedback_form/Pengisi_daya_rusak_tidak_berfungsi"
+            data-relevant="selected( /data_entry_feedback_form/Masalah_baterai ,'Pengisi_daya_rusak_tidak_berfungsi')"
+            data-type-xml="string" type="text" />
     </label>
     <label class="question or-branch pre-init non-select ">
         <span class="question-label active" lang="">Tuliskan masalah lainnya seputar baterai:</span>
-        <input name="/data_entry_feedback_form/Masalah_lainnya_baterai" data-relevant="selected( /data_entry_feedback_form/Masalah_baterai ,'Masalah_lainnya')"
-            data-type-xml="string"
-            type="text" />
+        <input name="/data_entry_feedback_form/Masalah_lainnya_baterai"
+            data-relevant="selected( /data_entry_feedback_form/Masalah_baterai ,'Masalah_lainnya')"
+            data-type-xml="string" type="text" />
     </label>
     <label class="note or-branch pre-init non-select ">
         <span class="question-label active" lang="">Pengunaan aplikasi</span>
-        <input name="/data_entry_feedback_form/Pengunaan_aplikasi" data-relevant="selected( /data_entry_feedback_form/masalah ,'Masalah_penggunaan_aplikasi1')"
-            data-type-xml="string"
-            readonly="readonly" type="text" />
+        <input name="/data_entry_feedback_form/Pengunaan_aplikasi"
+            data-relevant="selected( /data_entry_feedback_form/masalah ,'Masalah_penggunaan_aplikasi1')"
+            data-type-xml="string" readonly="readonly" type="text" />
     </label>
     <fieldset class="question or-branch pre-init ">
         <fieldset>
@@ -293,33 +284,25 @@
                 <label class="">
                     <input name="/data_entry_feedback_form/Masalah_penggunaan_aplikasi"
                         data-relevant="selected( /data_entry_feedback_form/masalah ,'Masalah_penggunaan_aplikasi1')"
-                        data-type-xml="select"
-                        type="checkbox"
-                        value="Waktu_loading_form_lama" />
+                        data-type-xml="select" type="checkbox" value="Waktu_loading_form_lama" />
                     <span class="option-label active" lang="">Waktu loading form lama</span>
                 </label>
                 <label class="">
                     <input name="/data_entry_feedback_form/Masalah_penggunaan_aplikasi"
                         data-relevant="selected( /data_entry_feedback_form/masalah ,'Masalah_penggunaan_aplikasi1')"
-                        data-type-xml="select"
-                        type="checkbox"
-                        value="Waktu_menyimpan_form_lama" />
+                        data-type-xml="select" type="checkbox" value="Waktu_menyimpan_form_lama" />
                     <span class="option-label active" lang="">Waktu menyimpan form lama</span>
                 </label>
                 <label class="">
                     <input name="/data_entry_feedback_form/Masalah_penggunaan_aplikasi"
                         data-relevant="selected( /data_entry_feedback_form/masalah ,'Masalah_penggunaan_aplikasi1')"
-                        data-type-xml="select"
-                        type="checkbox"
-                        value="Respon_layar_sentuh_lama" />
+                        data-type-xml="select" type="checkbox" value="Respon_layar_sentuh_lama" />
                     <span class="option-label active" lang="">Respon layar sentuh lama</span>
                 </label>
                 <label class="">
                     <input name="/data_entry_feedback_form/Masalah_penggunaan_aplikasi"
                         data-relevant="selected( /data_entry_feedback_form/masalah ,'Masalah_penggunaan_aplikasi1')"
-                        data-type-xml="select"
-                        type="checkbox"
-                        value="Masalah_lainnya" />
+                        data-type-xml="select" type="checkbox" value="Masalah_lainnya" />
                     <span class="option-label active" lang="">Masalah lainnya</span>
                 </label>
             </div>
@@ -331,9 +314,9 @@
         <span class="or-hint active" lang="">(Misal: nama form, perkiraan waktu yg dibutuhkan untuk
             loading, dsb.)
         </span>
-        <input name="/data_entry_feedback_form/Waktu_loading_form_lama" data-relevant="selected( /data_entry_feedback_form/Masalah_penggunaan_aplikasi ,'Waktu_loading_form_lama')"
-            data-type-xml="string"
-            type="text" />
+        <input name="/data_entry_feedback_form/Waktu_loading_form_lama"
+            data-relevant="selected( /data_entry_feedback_form/Masalah_penggunaan_aplikasi ,'Waktu_loading_form_lama')"
+            data-type-xml="string" type="text" />
     </label>
     <label class="question or-branch pre-init non-select ">
         <span class="question-label active" lang="">Tuliskan masalah waktu menyimpan form yang
@@ -342,9 +325,9 @@
         <span class="or-hint active" lang="">(Misal: nama form, perkiraan waktu yg dibutuhkan untuk
             loading, dsb.)
         </span>
-        <input name="/data_entry_feedback_form/Waktu_menyimpan_form_lama" data-relevant="selected( /data_entry_feedback_form/Masalah_penggunaan_aplikasi ,'Waktu_menyimpan_form_lama')"
-            data-type-xml="string"
-            type="text" />
+        <input name="/data_entry_feedback_form/Waktu_menyimpan_form_lama"
+            data-relevant="selected( /data_entry_feedback_form/Masalah_penggunaan_aplikasi ,'Waktu_menyimpan_form_lama')"
+            data-type-xml="string" type="text" />
     </label>
     <label class="question or-branch pre-init non-select ">
         <span class="question-label active" lang="">Tuliskan masalah respon layar sentuh yang
@@ -353,23 +336,23 @@
         <span class="or-hint active" lang="">(Misal: bagian aplikasi yang tidak responsif atau butuh
             waktu lama untuk merespon)
         </span>
-        <input name="/data_entry_feedback_form/Respon_layar_sentuh_lama" data-relevant="selected( /data_entry_feedback_form/Masalah_penggunaan_aplikasi ,'Respon_layar_sentuh_lama')"
-            data-type-xml="string"
-            type="text" />
+        <input name="/data_entry_feedback_form/Respon_layar_sentuh_lama"
+            data-relevant="selected( /data_entry_feedback_form/Masalah_penggunaan_aplikasi ,'Respon_layar_sentuh_lama')"
+            data-type-xml="string" type="text" />
     </label>
     <label class="question or-branch pre-init non-select ">
         <span class="question-label active" lang="">Tuliskan masalah lainnya seputar penggunaan
             aplikasi:
         </span>
-        <input name="/data_entry_feedback_form/Masalah_lainnya_penggunaan_aplikasi" data-relevant="selected( /data_entry_feedback_form/Masalah_penggunaan_aplikasi ,'Masalah_lainnya')"
-            data-type-xml="string"
-            type="text" />
+        <input name="/data_entry_feedback_form/Masalah_lainnya_penggunaan_aplikasi"
+            data-relevant="selected( /data_entry_feedback_form/Masalah_penggunaan_aplikasi ,'Masalah_lainnya')"
+            data-type-xml="string" type="text" />
     </label>
     <label class="note or-branch pre-init non-select ">
         <span class="question-label active" lang="">Penggunaan langsung saat kunjungan</span>
-        <input name="/data_entry_feedback_form/Penggunaan_langsung_saat_kunjungan" data-relevant="selected( /data_entry_feedback_form/masalah ,'Masalah_penggunaan_langsung_saat_kunjungan1')"
-            data-type-xml="string"
-            readonly="readonly" type="text" />
+        <input name="/data_entry_feedback_form/Penggunaan_langsung_saat_kunjungan"
+            data-relevant="selected( /data_entry_feedback_form/masalah ,'Masalah_penggunaan_langsung_saat_kunjungan1')"
+            data-type-xml="string" readonly="readonly" type="text" />
     </label>
     <fieldset class="question or-branch pre-init ">
         <fieldset>
@@ -380,53 +363,48 @@
             </legend>
             <div class="option-wrapper">
                 <label class="">
-                    <input name="/data_entry_feedback_form/Masalah_penggunaan_langsung_saat_kunjungan"
+                    <input
+                        name="/data_entry_feedback_form/Masalah_penggunaan_langsung_saat_kunjungan"
                         data-relevant="selected( /data_entry_feedback_form/masalah ,'Masalah_penggunaan_langsung_saat_kunjungan1')"
-                        data-type-xml="select"
-                        type="checkbox"
-                        value="Rumit_ribet" />
+                        data-type-xml="select" type="checkbox" value="Rumit_ribet" />
                     <span class="option-label active" lang="">Rumit/ribet</span>
                 </label>
                 <label class="">
-                    <input name="/data_entry_feedback_form/Masalah_penggunaan_langsung_saat_kunjungan"
+                    <input
+                        name="/data_entry_feedback_form/Masalah_penggunaan_langsung_saat_kunjungan"
                         data-relevant="selected( /data_entry_feedback_form/masalah ,'Masalah_penggunaan_langsung_saat_kunjungan1')"
-                        data-type-xml="select"
-                        type="checkbox"
-                        value="Makan_waktu_lama" />
+                        data-type-xml="select" type="checkbox" value="Makan_waktu_lama" />
                     <span class="option-label active" lang="">Makan waktu lama</span>
                 </label>
                 <label class="">
-                    <input name="/data_entry_feedback_form/Masalah_penggunaan_langsung_saat_kunjungan"
+                    <input
+                        name="/data_entry_feedback_form/Masalah_penggunaan_langsung_saat_kunjungan"
                         data-relevant="selected( /data_entry_feedback_form/masalah ,'Masalah_penggunaan_langsung_saat_kunjungan1')"
-                        data-type-xml="select"
-                        type="checkbox"
-                        value="Pasien_komplain" />
+                        data-type-xml="select" type="checkbox" value="Pasien_komplain" />
                     <span class="option-label active" lang="">Pasien komplain</span>
                 </label>
                 <label class="">
-                    <input name="/data_entry_feedback_form/Masalah_penggunaan_langsung_saat_kunjungan"
+                    <input
+                        name="/data_entry_feedback_form/Masalah_penggunaan_langsung_saat_kunjungan"
                         data-relevant="selected( /data_entry_feedback_form/masalah ,'Masalah_penggunaan_langsung_saat_kunjungan1')"
-                        data-type-xml="select"
-                        type="checkbox"
-                        value="Terlalu_banyak_pasien" />
+                        data-type-xml="select" type="checkbox" value="Terlalu_banyak_pasien" />
                     <span class="option-label active" lang="">Terlalu banyak pasien</span>
                 </label>
                 <label class="">
-                    <input name="/data_entry_feedback_form/Masalah_penggunaan_langsung_saat_kunjungan"
+                    <input
+                        name="/data_entry_feedback_form/Masalah_penggunaan_langsung_saat_kunjungan"
                         data-relevant="selected( /data_entry_feedback_form/masalah ,'Masalah_penggunaan_langsung_saat_kunjungan1')"
-                        data-type-xml="select"
-                        type="checkbox"
+                        data-type-xml="select" type="checkbox"
                         value="Belum_pernah_menggunakan_langsung_saat_kunjungan" />
                     <span class="option-label active" lang="">Belum pernah menggunakan langsung saat
                         kunjungan
                     </span>
                 </label>
                 <label class="">
-                    <input name="/data_entry_feedback_form/Masalah_penggunaan_langsung_saat_kunjungan"
+                    <input
+                        name="/data_entry_feedback_form/Masalah_penggunaan_langsung_saat_kunjungan"
                         data-relevant="selected( /data_entry_feedback_form/masalah ,'Masalah_penggunaan_langsung_saat_kunjungan1')"
-                        data-type-xml="select"
-                        type="checkbox"
-                        value="Masalah_lainnya" />
+                        data-type-xml="select" type="checkbox" value="Masalah_lainnya" />
                     <span class="option-label active" lang="">Masalah lainnya</span>
                 </label>
             </div>
@@ -436,15 +414,15 @@
         <span class="question-label active" lang="">Tuliskan masalah seputar penggunaan langsung
             saat kunjungan lainnya:
         </span>
-        <input name="/data_entry_feedback_form/Masalah_lainnya_penggunaan_langsung" data-relevant="selected( /data_entry_feedback_form/Masalah_penggunaan_langsung_saat_kunjungan ,'Masalah_lainnya')"
-            data-type-xml="string"
-            type="text" />
+        <input name="/data_entry_feedback_form/Masalah_lainnya_penggunaan_langsung"
+            data-relevant="selected( /data_entry_feedback_form/Masalah_penggunaan_langsung_saat_kunjungan ,'Masalah_lainnya')"
+            data-type-xml="string" type="text" />
     </label>
     <label class="note or-branch pre-init non-select ">
         <span class="question-label active" lang="">Aplikasi error</span>
-        <input name="/data_entry_feedback_form/Aplikasi_error" data-relevant="selected( /data_entry_feedback_form/masalah ,'Masalah_aplikasi_error1')"
-            data-type-xml="string"
-            readonly="readonly" type="text" />
+        <input name="/data_entry_feedback_form/Aplikasi_error"
+            data-relevant="selected( /data_entry_feedback_form/masalah ,'Masalah_aplikasi_error1')"
+            data-type-xml="string" readonly="readonly" type="text" />
     </label>
     <fieldset class="question or-branch pre-init ">
         <fieldset>
@@ -455,24 +433,21 @@
             </legend>
             <div class="option-wrapper">
                 <label class="">
-                    <input name="/data_entry_feedback_form/Masalah_aplikasi_error" data-relevant="selected( /data_entry_feedback_form/masalah ,'Masalah_aplikasi_error1')"
-                        data-type-xml="select"
-                        type="checkbox"
-                        value="Aplikasi_menutup_sendiri" />
+                    <input name="/data_entry_feedback_form/Masalah_aplikasi_error"
+                        data-relevant="selected( /data_entry_feedback_form/masalah ,'Masalah_aplikasi_error1')"
+                        data-type-xml="select" type="checkbox" value="Aplikasi_menutup_sendiri" />
                     <span class="option-label active" lang="">Aplikasi menutup sendiri</span>
                 </label>
                 <label class="">
-                    <input name="/data_entry_feedback_form/Masalah_aplikasi_error" data-relevant="selected( /data_entry_feedback_form/masalah ,'Masalah_aplikasi_error1')"
-                        data-type-xml="select"
-                        type="checkbox"
-                        value="Masalah_sinkronisasi_data" />
+                    <input name="/data_entry_feedback_form/Masalah_aplikasi_error"
+                        data-relevant="selected( /data_entry_feedback_form/masalah ,'Masalah_aplikasi_error1')"
+                        data-type-xml="select" type="checkbox" value="Masalah_sinkronisasi_data" />
                     <span class="option-label active" lang="">Masalah sinkronisasi data</span>
                 </label>
                 <label class="">
-                    <input name="/data_entry_feedback_form/Masalah_aplikasi_error" data-relevant="selected( /data_entry_feedback_form/masalah ,'Masalah_aplikasi_error1')"
-                        data-type-xml="select"
-                        type="checkbox"
-                        value="Masalah_lainnya" />
+                    <input name="/data_entry_feedback_form/Masalah_aplikasi_error"
+                        data-relevant="selected( /data_entry_feedback_form/masalah ,'Masalah_aplikasi_error1')"
+                        data-type-xml="select" type="checkbox" value="Masalah_lainnya" />
                     <span class="option-label active" lang="">Masalah lainnya</span>
                 </label>
             </div>
@@ -485,23 +460,23 @@
         <span class="or-hint active" lang="">(Misal: apa yang memicu aplikasi tiba-tiba menutup
             sendiri)
         </span>
-        <input name="/data_entry_feedback_form/Aplikasi_menutup_sendiri" data-relevant="selected( /data_entry_feedback_form/Masalah_aplikasi_error ,'Aplikasi_menutup_sendiri')"
-            data-type-xml="string"
-            type="text" />
+        <input name="/data_entry_feedback_form/Aplikasi_menutup_sendiri"
+            data-relevant="selected( /data_entry_feedback_form/Masalah_aplikasi_error ,'Aplikasi_menutup_sendiri')"
+            data-type-xml="string" type="text" />
     </label>
     <label class="question or-branch pre-init non-select ">
         <span class="question-label active" lang="">Tuliskan masalah sinkronisasi data:</span>
-        <input name="/data_entry_feedback_form/Masalah_sinkronisasi_data" data-relevant="selected( /data_entry_feedback_form/Masalah_aplikasi_error ,'Masalah_sinkronisasi_data')"
-            data-type-xml="string"
-            type="text" />
+        <input name="/data_entry_feedback_form/Masalah_sinkronisasi_data"
+            data-relevant="selected( /data_entry_feedback_form/Masalah_aplikasi_error ,'Masalah_sinkronisasi_data')"
+            data-type-xml="string" type="text" />
     </label>
     <label class="question or-branch pre-init non-select ">
         <span class="question-label active" lang="">Tuliskan masalah lainnya seputar aplikasi
             error:
         </span>
-        <input name="/data_entry_feedback_form/Masalah_lainnya_aplikasi_error" data-relevant="selected( /data_entry_feedback_form/Masalah_aplikasi_error ,'Masalah_lainnya')"
-            data-type-xml="string"
-            type="text" />
+        <input name="/data_entry_feedback_form/Masalah_lainnya_aplikasi_error"
+            data-relevant="selected( /data_entry_feedback_form/Masalah_aplikasi_error ,'Masalah_lainnya')"
+            data-type-xml="string" type="text" />
     </label>
 
     <fieldset class="question or-branch pre-init ">
@@ -511,66 +486,64 @@
             </legend>
             <div class="option-wrapper">
                 <label class="">
-                    <input name="/data_entry_feedback_form/Masalah_Kartu_Ibu" data-relevant="selected( /data_entry_feedback_form/masalah ,'Masalah_Kartu_Ibu1')"
-                        data-type-xml="select"
-                        type="checkbox"
+                    <input name="/data_entry_feedback_form/Masalah_Kartu_Ibu"
+                        data-relevant="selected( /data_entry_feedback_form/masalah ,'Masalah_Kartu_Ibu1')"
+                        data-type-xml="select" type="checkbox"
                         value="Pilihan_variabel_yang_ada_tidak_sesuai" />
                     <span class="option-label active" lang="">Pilihan variabel yang ada tidak
                         sesuai
                     </span>
                 </label>
                 <label class="">
-                    <input name="/data_entry_feedback_form/Masalah_Kartu_Ibu" data-relevant="selected( /data_entry_feedback_form/masalah ,'Masalah_Kartu_Ibu1')"
-                        data-type-xml="select"
-                        type="checkbox"
+                    <input name="/data_entry_feedback_form/Masalah_Kartu_Ibu"
+                        data-relevant="selected( /data_entry_feedback_form/masalah ,'Masalah_Kartu_Ibu1')"
+                        data-type-xml="select" type="checkbox"
                         value="Kalkulasi_variabel_tidak_sesuai" />
                     <span class="option-label active" lang="">Kalkulasi variabel tidak sesuai</span>
                 </label>
                 <label class="">
-                    <input name="/data_entry_feedback_form/Masalah_Kartu_Ibu" data-relevant="selected( /data_entry_feedback_form/masalah ,'Masalah_Kartu_Ibu1')"
-                        data-type-xml="select"
-                        type="checkbox"
+                    <input name="/data_entry_feedback_form/Masalah_Kartu_Ibu"
+                        data-relevant="selected( /data_entry_feedback_form/masalah ,'Masalah_Kartu_Ibu1')"
+                        data-type-xml="select" type="checkbox"
                         value="Data_variabel_yang_dimasukkan_hilang" />
                     <span class="option-label active" lang="">Data variabel yang dimasukkan hilang
                     </span>
                 </label>
                 <label class="">
-                    <input name="/data_entry_feedback_form/Masalah_Kartu_Ibu" data-relevant="selected( /data_entry_feedback_form/masalah ,'Masalah_Kartu_Ibu1')"
-                        data-type-xml="select"
-                        type="checkbox"
+                    <input name="/data_entry_feedback_form/Masalah_Kartu_Ibu"
+                        data-relevant="selected( /data_entry_feedback_form/masalah ,'Masalah_Kartu_Ibu1')"
+                        data-type-xml="select" type="checkbox"
                         value="Rentang_data_variabel_tidak_sesuai" />
                     <span class="option-label active" lang="">Rentang data variabel tidak sesuai
                     </span>
                 </label>
                 <label class="">
-                    <input name="/data_entry_feedback_form/Masalah_Kartu_Ibu" data-relevant="selected( /data_entry_feedback_form/masalah ,'Masalah_Kartu_Ibu1')"
-                        data-type-xml="select"
-                        type="checkbox"
+                    <input name="/data_entry_feedback_form/Masalah_Kartu_Ibu"
+                        data-relevant="selected( /data_entry_feedback_form/masalah ,'Masalah_Kartu_Ibu1')"
+                        data-type-xml="select" type="checkbox"
                         value="Data_yang_ditampilkan_tidak_sesuai_dengan_yang_dimasukkan" />
                     <span class="option-label active" lang="">Data yang ditampilkan tidak sesuai
                         dengan yang dimasukkan
                     </span>
                 </label>
                 <label class="">
-                    <input name="/data_entry_feedback_form/Masalah_Kartu_Ibu" data-relevant="selected( /data_entry_feedback_form/masalah ,'Masalah_Kartu_Ibu1')"
-                        data-type-xml="select"
-                        type="checkbox"
+                    <input name="/data_entry_feedback_form/Masalah_Kartu_Ibu"
+                        data-relevant="selected( /data_entry_feedback_form/masalah ,'Masalah_Kartu_Ibu1')"
+                        data-type-xml="select" type="checkbox"
                         value="Tidak_dapat_memasukkan_data_tertentu" />
                     <span class="option-label active" lang="">Tidak dapat memasukkan data tertentu
                     </span>
                 </label>
                 <label class="">
-                    <input name="/data_entry_feedback_form/Masalah_Kartu_Ibu" data-relevant="selected( /data_entry_feedback_form/masalah ,'Masalah_Kartu_Ibu1')"
-                        data-type-xml="select"
-                        type="checkbox"
-                        value="Tidak_dapat_mengedit_data" />
+                    <input name="/data_entry_feedback_form/Masalah_Kartu_Ibu"
+                        data-relevant="selected( /data_entry_feedback_form/masalah ,'Masalah_Kartu_Ibu1')"
+                        data-type-xml="select" type="checkbox" value="Tidak_dapat_mengedit_data" />
                     <span class="option-label active" lang="">Tidak dapat mengedit data</span>
                 </label>
                 <label class="">
-                    <input name="/data_entry_feedback_form/Masalah_Kartu_Ibu" data-relevant="selected( /data_entry_feedback_form/masalah ,'Masalah_Kartu_Ibu1')"
-                        data-type-xml="select"
-                        type="checkbox"
-                        value="Masalah_lainnya" />
+                    <input name="/data_entry_feedback_form/Masalah_Kartu_Ibu"
+                        data-relevant="selected( /data_entry_feedback_form/masalah ,'Masalah_Kartu_Ibu1')"
+                        data-type-xml="select" type="checkbox" value="Masalah_lainnya" />
                     <span class="option-label active" lang="">Masalah lainnya</span>
                 </label>
             </div>
@@ -583,8 +556,7 @@
         <span class="or-hint active" lang="">(Misal: ada nama dusun yang belum ada, dsb.)</span>
         <input name="/data_entry_feedback_form/Pilihan_variabel_yang_ada_tidak_sesuai_kartu_ibu"
             data-relevant="selected( /data_entry_feedback_form/Masalah_Kartu_Ibu ,'Pilihan_variabel_yang_ada_tidak_sesuai')"
-            data-type-xml="string"
-            type="text" />
+            data-type-xml="string" type="text" />
     </label>
     <label class="question or-branch pre-init non-select ">
         <span class="question-label active" lang="">Tuliskan masalah kalkulasi variabel yang tidak
@@ -594,8 +566,7 @@
         </span>
         <input name="/data_entry_feedback_form/Kalkulasi_variabel_tidak_sesuai_kartu_ibu"
             data-relevant="selected( /data_entry_feedback_form/Masalah_Kartu_Ibu ,'Kalkulasi_variabel_tidak_sesuai')"
-            data-type-xml="string"
-            type="text" />
+            data-type-xml="string" type="text" />
     </label>
     <label class="question or-branch pre-init non-select ">
         <span class="question-label active" lang="">Tuliskan masalah data variabel yang sering
@@ -607,8 +578,7 @@
         </span>
         <input name="/data_entry_feedback_form/Data_variabel_yang_dimasukkan_hilang_kartu_ibu"
             data-relevant="selected( /data_entry_feedback_form/Masalah_Kartu_Ibu ,'Data_variabel_yang_dimasukkan_hilang')"
-            data-type-xml="string"
-            type="text" />
+            data-type-xml="string" type="text" />
     </label>
     <label class="question or-branch pre-init non-select ">
         <span class="question-label active" lang="">Tuliskan masalah rentang data variabel yang
@@ -619,8 +589,7 @@
         </span>
         <input name="/data_entry_feedback_form/Rentang_data_variabel_tidak_sesuai_kartu_ibu"
             data-relevant="selected( /data_entry_feedback_form/Masalah_Kartu_Ibu ,'Rentang_data_variabel_tidak_sesuai')"
-            data-type-xml="string"
-            type="text" />
+            data-type-xml="string" type="text" />
     </label>
     <label class="question or-branch pre-init non-select ">
         <span class="question-label active" lang="">Tuliskan masalah tampilan data yang tidak
@@ -629,10 +598,10 @@
         <span class="or-hint active" lang="">(Misal: data yang sudah dimasukkan tidak terlihat di
             dashboard, angka yang muncul berbeda dari yang dimasukkan, dsb.)
         </span>
-        <input name="/data_entry_feedback_form/Data_yang_ditampilkan_tidak_sesuai_dengan_yang_dimasukkan_kartu_ibu"
+        <input
+            name="/data_entry_feedback_form/Data_yang_ditampilkan_tidak_sesuai_dengan_yang_dimasukkan_kartu_ibu"
             data-relevant="selected( /data_entry_feedback_form/Masalah_Kartu_Ibu ,'Data_yang_ditampilkan_tidak_sesuai_dengan_yang_dimasukkan')"
-            data-type-xml="string"
-            type="text" />
+            data-type-xml="string" type="text" />
     </label>
     <label class="question or-branch pre-init non-select ">
         <span class="question-label active" lang="">Tuliskan masalah data variabel tertentu yang
@@ -640,20 +609,19 @@
         </span>
         <input name="/data_entry_feedback_form/Tidak_dapat_memasukkan_data_tertentu_kartu_ibu"
             data-relevant="selected( /data_entry_feedback_form/Masalah_Kartu_Ibu ,'Tidak_dapat_memasukkan_data_tertentu')"
-            data-type-xml="string"
-            type="text" />
+            data-type-xml="string" type="text" />
     </label>
     <label class="question or-branch pre-init non-select ">
         <span class="question-label active" lang="">Tuliskan variabel yang tidak bisa diedit:</span>
-        <input name="/data_entry_feedback_form/Tidak_dapat_mengedit_data_kartu_ibu" data-relevant="selected( /data_entry_feedback_form/Masalah_Kartu_Ibu ,'Tidak_dapat_mengedit_data')"
-            data-type-xml="string"
-            type="text" />
+        <input name="/data_entry_feedback_form/Tidak_dapat_mengedit_data_kartu_ibu"
+            data-relevant="selected( /data_entry_feedback_form/Masalah_Kartu_Ibu ,'Tidak_dapat_mengedit_data')"
+            data-type-xml="string" type="text" />
     </label>
     <label class="question or-branch pre-init non-select ">
         <span class="question-label active" lang="">Tuliskan masalah lainnya di form ini:</span>
-        <input name="/data_entry_feedback_form/Masalah_lainnya_kartu_ibu" data-relevant="selected( /data_entry_feedback_form/Masalah_Kartu_Ibu ,'Masalah_lainnya')"
-            data-type-xml="string"
-            type="text" />
+        <input name="/data_entry_feedback_form/Masalah_lainnya_kartu_ibu"
+            data-relevant="selected( /data_entry_feedback_form/Masalah_Kartu_Ibu ,'Masalah_lainnya')"
+            data-type-xml="string" type="text" />
     </label>
 
     <fieldset class="question or-branch pre-init ">
@@ -663,66 +631,64 @@
             </legend>
             <div class="option-wrapper">
                 <label class="">
-                    <input name="/data_entry_feedback_form/Masalah_Kohort_KB" data-relevant="selected( /data_entry_feedback_form/masalah ,'Masalah_Kohort_KB1')"
-                        data-type-xml="select"
-                        type="checkbox"
+                    <input name="/data_entry_feedback_form/Masalah_Kohort_KB"
+                        data-relevant="selected( /data_entry_feedback_form/masalah ,'Masalah_Kohort_KB1')"
+                        data-type-xml="select" type="checkbox"
                         value="Pilihan_variabel_yang_ada_tidak_sesuai" />
                     <span class="option-label active" lang="">Pilihan variabel yang ada tidak
                         sesuai
                     </span>
                 </label>
                 <label class="">
-                    <input name="/data_entry_feedback_form/Masalah_Kohort_KB" data-relevant="selected( /data_entry_feedback_form/masalah ,'Masalah_Kohort_KB1')"
-                        data-type-xml="select"
-                        type="checkbox"
+                    <input name="/data_entry_feedback_form/Masalah_Kohort_KB"
+                        data-relevant="selected( /data_entry_feedback_form/masalah ,'Masalah_Kohort_KB1')"
+                        data-type-xml="select" type="checkbox"
                         value="Kalkulasi_variabel_tidak_sesuai" />
                     <span class="option-label active" lang="">Kalkulasi variabel tidak sesuai</span>
                 </label>
                 <label class="">
-                    <input name="/data_entry_feedback_form/Masalah_Kohort_KB" data-relevant="selected( /data_entry_feedback_form/masalah ,'Masalah_Kohort_KB1')"
-                        data-type-xml="select"
-                        type="checkbox"
+                    <input name="/data_entry_feedback_form/Masalah_Kohort_KB"
+                        data-relevant="selected( /data_entry_feedback_form/masalah ,'Masalah_Kohort_KB1')"
+                        data-type-xml="select" type="checkbox"
                         value="Data_variabel_yang_dimasukkan_hilang" />
                     <span class="option-label active" lang="">Data variabel yang dimasukkan hilang
                     </span>
                 </label>
                 <label class="">
-                    <input name="/data_entry_feedback_form/Masalah_Kohort_KB" data-relevant="selected( /data_entry_feedback_form/masalah ,'Masalah_Kohort_KB1')"
-                        data-type-xml="select"
-                        type="checkbox"
+                    <input name="/data_entry_feedback_form/Masalah_Kohort_KB"
+                        data-relevant="selected( /data_entry_feedback_form/masalah ,'Masalah_Kohort_KB1')"
+                        data-type-xml="select" type="checkbox"
                         value="Rentang_data_variabel_tidak_sesuai" />
                     <span class="option-label active" lang="">Rentang data variabel tidak sesuai
                     </span>
                 </label>
                 <label class="">
-                    <input name="/data_entry_feedback_form/Masalah_Kohort_KB" data-relevant="selected( /data_entry_feedback_form/masalah ,'Masalah_Kohort_KB1')"
-                        data-type-xml="select"
-                        type="checkbox"
+                    <input name="/data_entry_feedback_form/Masalah_Kohort_KB"
+                        data-relevant="selected( /data_entry_feedback_form/masalah ,'Masalah_Kohort_KB1')"
+                        data-type-xml="select" type="checkbox"
                         value="Data_yang_ditampilkan_tidak_sesuai_dengan_yang_dimasukkan" />
                     <span class="option-label active" lang="">Data yang ditampilkan tidak sesuai
                         dengan yang dimasukkan
                     </span>
                 </label>
                 <label class="">
-                    <input name="/data_entry_feedback_form/Masalah_Kohort_KB" data-relevant="selected( /data_entry_feedback_form/masalah ,'Masalah_Kohort_KB1')"
-                        data-type-xml="select"
-                        type="checkbox"
+                    <input name="/data_entry_feedback_form/Masalah_Kohort_KB"
+                        data-relevant="selected( /data_entry_feedback_form/masalah ,'Masalah_Kohort_KB1')"
+                        data-type-xml="select" type="checkbox"
                         value="Tidak_dapat_memasukkan_data_tertentu" />
                     <span class="option-label active" lang="">Tidak dapat memasukkan data tertentu
                     </span>
                 </label>
                 <label class="">
-                    <input name="/data_entry_feedback_form/Masalah_Kohort_KB" data-relevant="selected( /data_entry_feedback_form/masalah ,'Masalah_Kohort_KB1')"
-                        data-type-xml="select"
-                        type="checkbox"
-                        value="Tidak_dapat_mengedit_data" />
+                    <input name="/data_entry_feedback_form/Masalah_Kohort_KB"
+                        data-relevant="selected( /data_entry_feedback_form/masalah ,'Masalah_Kohort_KB1')"
+                        data-type-xml="select" type="checkbox" value="Tidak_dapat_mengedit_data" />
                     <span class="option-label active" lang="">Tidak dapat mengedit data</span>
                 </label>
                 <label class="">
-                    <input name="/data_entry_feedback_form/Masalah_Kohort_KB" data-relevant="selected( /data_entry_feedback_form/masalah ,'Masalah_Kohort_KB1')"
-                        data-type-xml="select"
-                        type="checkbox"
-                        value="Masalah_lainnya" />
+                    <input name="/data_entry_feedback_form/Masalah_Kohort_KB"
+                        data-relevant="selected( /data_entry_feedback_form/masalah ,'Masalah_Kohort_KB1')"
+                        data-type-xml="select" type="checkbox" value="Masalah_lainnya" />
                     <span class="option-label active" lang="">Masalah lainnya</span>
                 </label>
             </div>
@@ -735,8 +701,7 @@
         <span class="or-hint active" lang="">(Misal: ada nama dusun yang belum ada, dsb.)</span>
         <input name="/data_entry_feedback_form/Pilihan_variabel_yang_ada_tidak_sesuai_kohort_kb"
             data-relevant="selected( /data_entry_feedback_form/Masalah_Kohort_KB ,'Pilihan_variabel_yang_ada_tidak_sesuai')"
-            data-type-xml="string"
-            type="text" />
+            data-type-xml="string" type="text" />
     </label>
     <label class="question or-branch pre-init non-select ">
         <span class="question-label active" lang="">Tuliskan masalah kalkulasi variabel yang tidak
@@ -746,8 +711,7 @@
         </span>
         <input name="/data_entry_feedback_form/Kalkulasi_variabel_tidak_sesuai_kohort_kb"
             data-relevant="selected( /data_entry_feedback_form/Masalah_Kohort_KB ,'Kalkulasi_variabel_tidak_sesuai')"
-            data-type-xml="string"
-            type="text" />
+            data-type-xml="string" type="text" />
     </label>
     <label class="question or-branch pre-init non-select ">
         <span class="question-label active" lang="">Tuliskan masalah data variabel yang sering
@@ -759,8 +723,7 @@
         </span>
         <input name="/data_entry_feedback_form/Data_variabel_yang_dimasukkan_hilang_kohort_kb"
             data-relevant="selected( /data_entry_feedback_form/Masalah_Kohort_KB ,'Data_variabel_yang_dimasukkan_hilang')"
-            data-type-xml="string"
-            type="text" />
+            data-type-xml="string" type="text" />
     </label>
     <label class="question or-branch pre-init non-select ">
         <span class="question-label active" lang="">Tuliskan masalah rentang data variabel yang
@@ -771,8 +734,7 @@
         </span>
         <input name="/data_entry_feedback_form/Rentang_data_variabel_tidak_sesuai_kohort_kb"
             data-relevant="selected( /data_entry_feedback_form/Masalah_Kohort_KB ,'Rentang_data_variabel_tidak_sesuai')"
-            data-type-xml="string"
-            type="text" />
+            data-type-xml="string" type="text" />
     </label>
     <label class="question or-branch pre-init non-select ">
         <span class="question-label active" lang="">Tuliskan masalah tampilan data yang tidak
@@ -781,10 +743,10 @@
         <span class="or-hint active" lang="">(Misal: data yang sudah dimasukkan tidak terlihat di
             dashboard, angka yang muncul berbeda dari yang dimasukkan, dsb.)
         </span>
-        <input name="/data_entry_feedback_form/Data_yang_ditampilkan_tidak_sesuai_dengan_yang_dimasukkan_kohort_kb"
+        <input
+            name="/data_entry_feedback_form/Data_yang_ditampilkan_tidak_sesuai_dengan_yang_dimasukkan_kohort_kb"
             data-relevant="selected( /data_entry_feedback_form/Masalah_Kohort_KB ,'Data_yang_ditampilkan_tidak_sesuai_dengan_yang_dimasukkan')"
-            data-type-xml="string"
-            type="text" />
+            data-type-xml="string" type="text" />
     </label>
     <label class="question or-branch pre-init non-select ">
         <span class="question-label active" lang="">Tuliskan masalah data variabel tertentu yang
@@ -792,20 +754,19 @@
         </span>
         <input name="/data_entry_feedback_form/Tidak_dapat_memasukkan_data_tertentu_kohort_kb"
             data-relevant="selected( /data_entry_feedback_form/Masalah_Kohort_KB ,'Tidak_dapat_memasukkan_data_tertentu')"
-            data-type-xml="string"
-            type="text" />
+            data-type-xml="string" type="text" />
     </label>
     <label class="question or-branch pre-init non-select ">
         <span class="question-label active" lang="">Tuliskan variabel yang tidak bisa diedit:</span>
-        <input name="/data_entry_feedback_form/Tidak_dapat_mengedit_data_kohort_kb" data-relevant="selected( /data_entry_feedback_form/Masalah_Kohort_KB ,'Tidak_dapat_mengedit_data')"
-            data-type-xml="string"
-            type="text" />
+        <input name="/data_entry_feedback_form/Tidak_dapat_mengedit_data_kohort_kb"
+            data-relevant="selected( /data_entry_feedback_form/Masalah_Kohort_KB ,'Tidak_dapat_mengedit_data')"
+            data-type-xml="string" type="text" />
     </label>
     <label class="question or-branch pre-init non-select ">
         <span class="question-label active" lang="">Tuliskan masalah lainnya di form ini:</span>
-        <input name="/data_entry_feedback_form/Masalah_lainnya_kohort_kb" data-relevant="selected( /data_entry_feedback_form/Masalah_Kohort_KB ,'Masalah_lainnya')"
-            data-type-xml="string"
-            type="text" />
+        <input name="/data_entry_feedback_form/Masalah_lainnya_kohort_kb"
+            data-relevant="selected( /data_entry_feedback_form/Masalah_Kohort_KB ,'Masalah_lainnya')"
+            data-type-xml="string" type="text" />
     </label>
 
     <fieldset class="question or-branch pre-init ">
@@ -815,66 +776,64 @@
             </legend>
             <div class="option-wrapper">
                 <label class="">
-                    <input name="/data_entry_feedback_form/Masalah_Register_ANC" data-relevant="selected( /data_entry_feedback_form/masalah ,'Masalah_Register_ANC1')"
-                        data-type-xml="select"
-                        type="checkbox"
+                    <input name="/data_entry_feedback_form/Masalah_Register_ANC"
+                        data-relevant="selected( /data_entry_feedback_form/masalah ,'Masalah_Register_ANC1')"
+                        data-type-xml="select" type="checkbox"
                         value="Pilihan_variabel_yang_ada_tidak_sesuai" />
                     <span class="option-label active" lang="">Pilihan variabel yang ada tidak
                         sesuai
                     </span>
                 </label>
                 <label class="">
-                    <input name="/data_entry_feedback_form/Masalah_Register_ANC" data-relevant="selected( /data_entry_feedback_form/masalah ,'Masalah_Register_ANC1')"
-                        data-type-xml="select"
-                        type="checkbox"
+                    <input name="/data_entry_feedback_form/Masalah_Register_ANC"
+                        data-relevant="selected( /data_entry_feedback_form/masalah ,'Masalah_Register_ANC1')"
+                        data-type-xml="select" type="checkbox"
                         value="Kalkulasi_variabel_tidak_sesuai" />
                     <span class="option-label active" lang="">Kalkulasi variabel tidak sesuai</span>
                 </label>
                 <label class="">
-                    <input name="/data_entry_feedback_form/Masalah_Register_ANC" data-relevant="selected( /data_entry_feedback_form/masalah ,'Masalah_Register_ANC1')"
-                        data-type-xml="select"
-                        type="checkbox"
+                    <input name="/data_entry_feedback_form/Masalah_Register_ANC"
+                        data-relevant="selected( /data_entry_feedback_form/masalah ,'Masalah_Register_ANC1')"
+                        data-type-xml="select" type="checkbox"
                         value="Data_variabel_yang_dimasukkan_hilang" />
                     <span class="option-label active" lang="">Data variabel yang dimasukkan hilang
                     </span>
                 </label>
                 <label class="">
-                    <input name="/data_entry_feedback_form/Masalah_Register_ANC" data-relevant="selected( /data_entry_feedback_form/masalah ,'Masalah_Register_ANC1')"
-                        data-type-xml="select"
-                        type="checkbox"
+                    <input name="/data_entry_feedback_form/Masalah_Register_ANC"
+                        data-relevant="selected( /data_entry_feedback_form/masalah ,'Masalah_Register_ANC1')"
+                        data-type-xml="select" type="checkbox"
                         value="Rentang_data_variabel_tidak_sesuai" />
                     <span class="option-label active" lang="">Rentang data variabel tidak sesuai
                     </span>
                 </label>
                 <label class="">
-                    <input name="/data_entry_feedback_form/Masalah_Register_ANC" data-relevant="selected( /data_entry_feedback_form/masalah ,'Masalah_Register_ANC1')"
-                        data-type-xml="select"
-                        type="checkbox"
+                    <input name="/data_entry_feedback_form/Masalah_Register_ANC"
+                        data-relevant="selected( /data_entry_feedback_form/masalah ,'Masalah_Register_ANC1')"
+                        data-type-xml="select" type="checkbox"
                         value="Data_yang_ditampilkan_tidak_sesuai_dengan_yang_dimasukkan" />
                     <span class="option-label active" lang="">Data yang ditampilkan tidak sesuai
                         dengan yang dimasukkan
                     </span>
                 </label>
                 <label class="">
-                    <input name="/data_entry_feedback_form/Masalah_Register_ANC" data-relevant="selected( /data_entry_feedback_form/masalah ,'Masalah_Register_ANC1')"
-                        data-type-xml="select"
-                        type="checkbox"
+                    <input name="/data_entry_feedback_form/Masalah_Register_ANC"
+                        data-relevant="selected( /data_entry_feedback_form/masalah ,'Masalah_Register_ANC1')"
+                        data-type-xml="select" type="checkbox"
                         value="Tidak_dapat_memasukkan_data_tertentu" />
                     <span class="option-label active" lang="">Tidak dapat memasukkan data tertentu
                     </span>
                 </label>
                 <label class="">
-                    <input name="/data_entry_feedback_form/Masalah_Register_ANC" data-relevant="selected( /data_entry_feedback_form/masalah ,'Masalah_Register_ANC1')"
-                        data-type-xml="select"
-                        type="checkbox"
-                        value="Tidak_dapat_mengedit_data" />
+                    <input name="/data_entry_feedback_form/Masalah_Register_ANC"
+                        data-relevant="selected( /data_entry_feedback_form/masalah ,'Masalah_Register_ANC1')"
+                        data-type-xml="select" type="checkbox" value="Tidak_dapat_mengedit_data" />
                     <span class="option-label active" lang="">Tidak dapat mengedit data</span>
                 </label>
                 <label class="">
-                    <input name="/data_entry_feedback_form/Masalah_Register_ANC" data-relevant="selected( /data_entry_feedback_form/masalah ,'Masalah_Register_ANC1')"
-                        data-type-xml="select"
-                        type="checkbox"
-                        value="Masalah_lainnya" />
+                    <input name="/data_entry_feedback_form/Masalah_Register_ANC"
+                        data-relevant="selected( /data_entry_feedback_form/masalah ,'Masalah_Register_ANC1')"
+                        data-type-xml="select" type="checkbox" value="Masalah_lainnya" />
                     <span class="option-label active" lang="">Masalah lainnya</span>
                 </label>
             </div>
@@ -887,8 +846,7 @@
         <span class="or-hint active" lang="">(Misal: ada nama dusun yang belum ada, dsb.)</span>
         <input name="/data_entry_feedback_form/Pilihan_variabel_yang_ada_tidak_sesuai_Register_ANC"
             data-relevant="selected( /data_entry_feedback_form/Masalah_Register_ANC ,'Pilihan_variabel_yang_ada_tidak_sesuai')"
-            data-type-xml="string"
-            type="text" />
+            data-type-xml="string" type="text" />
     </label>
     <label class="question or-branch pre-init non-select ">
         <span class="question-label active" lang="">Tuliskan masalah kalkulasi variabel yang tidak
@@ -898,8 +856,7 @@
         </span>
         <input name="/data_entry_feedback_form/Kalkulasi_variabel_tidak_sesuai_Register_ANC"
             data-relevant="selected( /data_entry_feedback_form/Masalah_Register_ANC ,'Kalkulasi_variabel_tidak_sesuai')"
-            data-type-xml="string"
-            type="text" />
+            data-type-xml="string" type="text" />
     </label>
     <label class="question or-branch pre-init non-select ">
         <span class="question-label active" lang="">Tuliskan masalah data variabel yang sering
@@ -911,8 +868,7 @@
         </span>
         <input name="/data_entry_feedback_form/Data_variabel_yang_dimasukkan_hilang_Register_ANC"
             data-relevant="selected( /data_entry_feedback_form/Masalah_Register_ANC ,'Data_variabel_yang_dimasukkan_hilang')"
-            data-type-xml="string"
-            type="text" />
+            data-type-xml="string" type="text" />
     </label>
     <label class="question or-branch pre-init non-select ">
         <span class="question-label active" lang="">Tuliskan masalah rentang data variabel yang
@@ -923,8 +879,7 @@
         </span>
         <input name="/data_entry_feedback_form/Rentang_data_variabel_tidak_sesuai_Register_ANC"
             data-relevant="selected( /data_entry_feedback_form/Masalah_Register_ANC ,'Rentang_data_variabel_tidak_sesuai')"
-            data-type-xml="string"
-            type="text" />
+            data-type-xml="string" type="text" />
     </label>
     <label class="question or-branch pre-init non-select ">
         <span class="question-label active" lang="">Tuliskan masalah tampilan data yang tidak
@@ -933,10 +888,10 @@
         <span class="or-hint active" lang="">(Misal: data yang sudah dimasukkan tidak terlihat di
             dashboard, angka yang muncul berbeda dari yang dimasukkan, dsb.)
         </span>
-        <input name="/data_entry_feedback_form/Data_yang_ditampilkan_tidak_sesuai_dengan_yang_dimasukkan_Register_ANC"
+        <input
+            name="/data_entry_feedback_form/Data_yang_ditampilkan_tidak_sesuai_dengan_yang_dimasukkan_Register_ANC"
             data-relevant="selected( /data_entry_feedback_form/Masalah_Register_ANC ,'Data_yang_ditampilkan_tidak_sesuai_dengan_yang_dimasukkan')"
-            data-type-xml="string"
-            type="text" />
+            data-type-xml="string" type="text" />
     </label>
     <label class="question or-branch pre-init non-select ">
         <span class="question-label active" lang="">Tuliskan masalah data variabel tertentu yang
@@ -944,20 +899,19 @@
         </span>
         <input name="/data_entry_feedback_form/Tidak_dapat_memasukkan_data_tertentu_Register_ANC"
             data-relevant="selected( /data_entry_feedback_form/Masalah_Register_ANC ,'Tidak_dapat_memasukkan_data_tertentu')"
-            data-type-xml="string"
-            type="text" />
+            data-type-xml="string" type="text" />
     </label>
     <label class="question or-branch pre-init non-select ">
         <span class="question-label active" lang="">Tuliskan variabel yang tidak bisa diedit:</span>
-        <input name="/data_entry_feedback_form/Tidak_dapat_mengedit_data_Register_ANC" data-relevant="selected( /data_entry_feedback_form/Masalah_Register_ANC ,'Tidak_dapat_mengedit_data')"
-            data-type-xml="string"
-            type="text" />
+        <input name="/data_entry_feedback_form/Tidak_dapat_mengedit_data_Register_ANC"
+            data-relevant="selected( /data_entry_feedback_form/Masalah_Register_ANC ,'Tidak_dapat_mengedit_data')"
+            data-type-xml="string" type="text" />
     </label>
     <label class="question or-branch pre-init non-select ">
         <span class="question-label active" lang="">Tuliskan masalah lainnya di form ini:</span>
-        <input name="/data_entry_feedback_form/Masalah_lainnya_register_anc" data-relevant="selected( /data_entry_feedback_form/Masalah_Register_ANC ,'Masalah_lainnya')"
-            data-type-xml="string"
-            type="text" />
+        <input name="/data_entry_feedback_form/Masalah_lainnya_register_anc"
+            data-relevant="selected( /data_entry_feedback_form/Masalah_Register_ANC ,'Masalah_lainnya')"
+            data-type-xml="string" type="text" />
     </label>
     <fieldset class="question or-branch pre-init ">
         <fieldset>
@@ -966,66 +920,64 @@
             </legend>
             <div class="option-wrapper">
                 <label class="">
-                    <input name="/data_entry_feedback_form/Masalah_Register_PNC" data-relevant="selected( /data_entry_feedback_form/masalah ,'Masalah_Register_PNC1')"
-                        data-type-xml="select"
-                        type="checkbox"
+                    <input name="/data_entry_feedback_form/Masalah_Register_PNC"
+                        data-relevant="selected( /data_entry_feedback_form/masalah ,'Masalah_Register_PNC1')"
+                        data-type-xml="select" type="checkbox"
                         value="Pilihan_variabel_yang_ada_tidak_sesuai" />
                     <span class="option-label active" lang="">Pilihan variabel yang ada tidak
                         sesuai
                     </span>
                 </label>
                 <label class="">
-                    <input name="/data_entry_feedback_form/Masalah_Register_PNC" data-relevant="selected( /data_entry_feedback_form/masalah ,'Masalah_Register_PNC1')"
-                        data-type-xml="select"
-                        type="checkbox"
+                    <input name="/data_entry_feedback_form/Masalah_Register_PNC"
+                        data-relevant="selected( /data_entry_feedback_form/masalah ,'Masalah_Register_PNC1')"
+                        data-type-xml="select" type="checkbox"
                         value="Kalkulasi_variabel_tidak_sesuai" />
                     <span class="option-label active" lang="">Kalkulasi variabel tidak sesuai</span>
                 </label>
                 <label class="">
-                    <input name="/data_entry_feedback_form/Masalah_Register_PNC" data-relevant="selected( /data_entry_feedback_form/masalah ,'Masalah_Register_PNC1')"
-                        data-type-xml="select"
-                        type="checkbox"
+                    <input name="/data_entry_feedback_form/Masalah_Register_PNC"
+                        data-relevant="selected( /data_entry_feedback_form/masalah ,'Masalah_Register_PNC1')"
+                        data-type-xml="select" type="checkbox"
                         value="Data_variabel_yang_dimasukkan_hilang" />
                     <span class="option-label active" lang="">Data variabel yang dimasukkan hilang
                     </span>
                 </label>
                 <label class="">
-                    <input name="/data_entry_feedback_form/Masalah_Register_PNC" data-relevant="selected( /data_entry_feedback_form/masalah ,'Masalah_Register_PNC1')"
-                        data-type-xml="select"
-                        type="checkbox"
+                    <input name="/data_entry_feedback_form/Masalah_Register_PNC"
+                        data-relevant="selected( /data_entry_feedback_form/masalah ,'Masalah_Register_PNC1')"
+                        data-type-xml="select" type="checkbox"
                         value="Rentang_data_variabel_tidak_sesuai" />
                     <span class="option-label active" lang="">Rentang data variabel tidak sesuai
                     </span>
                 </label>
                 <label class="">
-                    <input name="/data_entry_feedback_form/Masalah_Register_PNC" data-relevant="selected( /data_entry_feedback_form/masalah ,'Masalah_Register_PNC1')"
-                        data-type-xml="select"
-                        type="checkbox"
+                    <input name="/data_entry_feedback_form/Masalah_Register_PNC"
+                        data-relevant="selected( /data_entry_feedback_form/masalah ,'Masalah_Register_PNC1')"
+                        data-type-xml="select" type="checkbox"
                         value="Data_yang_ditampilkan_tidak_sesuai_dengan_yang_dimasukkan" />
                     <span class="option-label active" lang="">Data yang ditampilkan tidak sesuai
                         dengan yang dimasukkan
                     </span>
                 </label>
                 <label class="">
-                    <input name="/data_entry_feedback_form/Masalah_Register_PNC" data-relevant="selected( /data_entry_feedback_form/masalah ,'Masalah_Register_PNC1')"
-                        data-type-xml="select"
-                        type="checkbox"
+                    <input name="/data_entry_feedback_form/Masalah_Register_PNC"
+                        data-relevant="selected( /data_entry_feedback_form/masalah ,'Masalah_Register_PNC1')"
+                        data-type-xml="select" type="checkbox"
                         value="Tidak_dapat_memasukkan_data_tertentu" />
                     <span class="option-label active" lang="">Tidak dapat memasukkan data tertentu
                     </span>
                 </label>
                 <label class="">
-                    <input name="/data_entry_feedback_form/Masalah_Register_PNC" data-relevant="selected( /data_entry_feedback_form/masalah ,'Masalah_Register_PNC1')"
-                        data-type-xml="select"
-                        type="checkbox"
-                        value="Tidak_dapat_mengedit_data" />
+                    <input name="/data_entry_feedback_form/Masalah_Register_PNC"
+                        data-relevant="selected( /data_entry_feedback_form/masalah ,'Masalah_Register_PNC1')"
+                        data-type-xml="select" type="checkbox" value="Tidak_dapat_mengedit_data" />
                     <span class="option-label active" lang="">Tidak dapat mengedit data</span>
                 </label>
                 <label class="">
-                    <input name="/data_entry_feedback_form/Masalah_Register_PNC" data-relevant="selected( /data_entry_feedback_form/masalah ,'Masalah_Register_PNC1')"
-                        data-type-xml="select"
-                        type="checkbox"
-                        value="Masalah_lainnya" />
+                    <input name="/data_entry_feedback_form/Masalah_Register_PNC"
+                        data-relevant="selected( /data_entry_feedback_form/masalah ,'Masalah_Register_PNC1')"
+                        data-type-xml="select" type="checkbox" value="Masalah_lainnya" />
                     <span class="option-label active" lang="">Masalah lainnya</span>
                 </label>
             </div>
@@ -1038,8 +990,7 @@
         <span class="or-hint active" lang="">(Misal: ada nama dusun yang belum ada, dsb.)</span>
         <input name="/data_entry_feedback_form/Pilihan_variabel_yang_ada_tidak_sesuai_Register_PNC"
             data-relevant="selected( /data_entry_feedback_form/Masalah_Register_PNC ,'Pilihan_variabel_yang_ada_tidak_sesuai')"
-            data-type-xml="string"
-            type="text" />
+            data-type-xml="string" type="text" />
     </label>
     <label class="question or-branch pre-init non-select ">
         <span class="question-label active" lang="">Tuliskan masalah kalkulasi variabel yang tidak
@@ -1049,8 +1000,7 @@
         </span>
         <input name="/data_entry_feedback_form/Kalkulasi_variabel_tidak_sesuai_Register_PNC"
             data-relevant="selected( /data_entry_feedback_form/Masalah_Register_PNC ,'Kalkulasi_variabel_tidak_sesuai')"
-            data-type-xml="string"
-            type="text" />
+            data-type-xml="string" type="text" />
     </label>
     <label class="question or-branch pre-init non-select ">
         <span class="question-label active" lang="">Tuliskan masalah data variabel yang sering
@@ -1062,8 +1012,7 @@
         </span>
         <input name="/data_entry_feedback_form/Data_variabel_yang_dimasukkan_hilang_Register_PNC"
             data-relevant="selected( /data_entry_feedback_form/Masalah_Register_PNC ,'Data_variabel_yang_dimasukkan_hilang')"
-            data-type-xml="string"
-            type="text" />
+            data-type-xml="string" type="text" />
     </label>
     <label class="question or-branch pre-init non-select ">
         <span class="question-label active" lang="">Tuliskan masalah rentang data variabel yang
@@ -1074,8 +1023,7 @@
         </span>
         <input name="/data_entry_feedback_form/Rentang_data_variabel_tidak_sesuai_Register_PNC"
             data-relevant="selected( /data_entry_feedback_form/Masalah_Register_PNC ,'Rentang_data_variabel_tidak_sesuai')"
-            data-type-xml="string"
-            type="text" />
+            data-type-xml="string" type="text" />
     </label>
     <label class="question or-branch pre-init non-select ">
         <span class="question-label active" lang="">Tuliskan masalah tampilan data yang tidak
@@ -1084,10 +1032,10 @@
         <span class="or-hint active" lang="">(Misal: data yang sudah dimasukkan tidak terlihat di
             dashboard, angka yang muncul berbeda dari yang dimasukkan, dsb.)
         </span>
-        <input name="/data_entry_feedback_form/Data_yang_ditampilkan_tidak_sesuai_dengan_yang_dimasukkan_Register_PNC"
+        <input
+            name="/data_entry_feedback_form/Data_yang_ditampilkan_tidak_sesuai_dengan_yang_dimasukkan_Register_PNC"
             data-relevant="selected( /data_entry_feedback_form/Masalah_Register_PNC ,'Data_yang_ditampilkan_tidak_sesuai_dengan_yang_dimasukkan')"
-            data-type-xml="string"
-            type="text" />
+            data-type-xml="string" type="text" />
     </label>
     <label class="question or-branch pre-init non-select ">
         <span class="question-label active" lang="">Tuliskan masalah data variabel tertentu yang
@@ -1095,20 +1043,19 @@
         </span>
         <input name="/data_entry_feedback_form/Tidak_dapat_memasukkan_data_tertentu_Register_PNC"
             data-relevant="selected( /data_entry_feedback_form/Masalah_Register_PNC ,'Tidak_dapat_memasukkan_data_tertentu')"
-            data-type-xml="string"
-            type="text" />
+            data-type-xml="string" type="text" />
     </label>
     <label class="question or-branch pre-init non-select ">
         <span class="question-label active" lang="">Tuliskan variabel yang tidak bisa diedit:</span>
-        <input name="/data_entry_feedback_form/Tidak_dapat_mengedit_data_Register_PNC" data-relevant="selected( /data_entry_feedback_form/Masalah_Register_PNC ,'Tidak_dapat_mengedit_data')"
-            data-type-xml="string"
-            type="text" />
+        <input name="/data_entry_feedback_form/Tidak_dapat_mengedit_data_Register_PNC"
+            data-relevant="selected( /data_entry_feedback_form/Masalah_Register_PNC ,'Tidak_dapat_mengedit_data')"
+            data-type-xml="string" type="text" />
     </label>
     <label class="question or-branch pre-init non-select ">
         <span class="question-label active" lang="">Tuliskan masalah lainnya di form ini:</span>
-        <input name="/data_entry_feedback_form/Masalah_lainnya_register_pnc" data-relevant="selected( /data_entry_feedback_form/Masalah_Register_PNC ,'Masalah_lainnya')"
-            data-type-xml="string"
-            type="text" />
+        <input name="/data_entry_feedback_form/Masalah_lainnya_register_pnc"
+            data-relevant="selected( /data_entry_feedback_form/Masalah_Register_PNC ,'Masalah_lainnya')"
+            data-type-xml="string" type="text" />
     </label>
     <fieldset class="question or-branch pre-init ">
         <fieldset>
@@ -1117,66 +1064,64 @@
             </legend>
             <div class="option-wrapper">
                 <label class="">
-                    <input name="/data_entry_feedback_form/Masalah_Kohort_Anak" data-relevant="selected( /data_entry_feedback_form/masalah ,'Masalah_Kohort_Anak1')"
-                        data-type-xml="select"
-                        type="checkbox"
+                    <input name="/data_entry_feedback_form/Masalah_Kohort_Anak"
+                        data-relevant="selected( /data_entry_feedback_form/masalah ,'Masalah_Kohort_Anak1')"
+                        data-type-xml="select" type="checkbox"
                         value="Pilihan_variabel_yang_ada_tidak_sesuai" />
                     <span class="option-label active" lang="">Pilihan variabel yang ada tidak
                         sesuai
                     </span>
                 </label>
                 <label class="">
-                    <input name="/data_entry_feedback_form/Masalah_Kohort_Anak" data-relevant="selected( /data_entry_feedback_form/masalah ,'Masalah_Kohort_Anak1')"
-                        data-type-xml="select"
-                        type="checkbox"
+                    <input name="/data_entry_feedback_form/Masalah_Kohort_Anak"
+                        data-relevant="selected( /data_entry_feedback_form/masalah ,'Masalah_Kohort_Anak1')"
+                        data-type-xml="select" type="checkbox"
                         value="Kalkulasi_variabel_tidak_sesuai" />
                     <span class="option-label active" lang="">Kalkulasi variabel tidak sesuai</span>
                 </label>
                 <label class="">
-                    <input name="/data_entry_feedback_form/Masalah_Kohort_Anak" data-relevant="selected( /data_entry_feedback_form/masalah ,'Masalah_Kohort_Anak1')"
-                        data-type-xml="select"
-                        type="checkbox"
+                    <input name="/data_entry_feedback_form/Masalah_Kohort_Anak"
+                        data-relevant="selected( /data_entry_feedback_form/masalah ,'Masalah_Kohort_Anak1')"
+                        data-type-xml="select" type="checkbox"
                         value="Data_variabel_yang_dimasukkan_hilang" />
                     <span class="option-label active" lang="">Data variabel yang dimasukkan hilang
                     </span>
                 </label>
                 <label class="">
-                    <input name="/data_entry_feedback_form/Masalah_Kohort_Anak" data-relevant="selected( /data_entry_feedback_form/masalah ,'Masalah_Kohort_Anak1')"
-                        data-type-xml="select"
-                        type="checkbox"
+                    <input name="/data_entry_feedback_form/Masalah_Kohort_Anak"
+                        data-relevant="selected( /data_entry_feedback_form/masalah ,'Masalah_Kohort_Anak1')"
+                        data-type-xml="select" type="checkbox"
                         value="Rentang_data_variabel_tidak_sesuai" />
                     <span class="option-label active" lang="">Rentang data variabel tidak sesuai
                     </span>
                 </label>
                 <label class="">
-                    <input name="/data_entry_feedback_form/Masalah_Kohort_Anak" data-relevant="selected( /data_entry_feedback_form/masalah ,'Masalah_Kohort_Anak1')"
-                        data-type-xml="select"
-                        type="checkbox"
+                    <input name="/data_entry_feedback_form/Masalah_Kohort_Anak"
+                        data-relevant="selected( /data_entry_feedback_form/masalah ,'Masalah_Kohort_Anak1')"
+                        data-type-xml="select" type="checkbox"
                         value="Data_yang_ditampilkan_tidak_sesuai_dengan_yang_dimasukkan" />
                     <span class="option-label active" lang="">Data yang ditampilkan tidak sesuai
                         dengan yang dimasukkan
                     </span>
                 </label>
                 <label class="">
-                    <input name="/data_entry_feedback_form/Masalah_Kohort_Anak" data-relevant="selected( /data_entry_feedback_form/masalah ,'Masalah_Kohort_Anak1')"
-                        data-type-xml="select"
-                        type="checkbox"
+                    <input name="/data_entry_feedback_form/Masalah_Kohort_Anak"
+                        data-relevant="selected( /data_entry_feedback_form/masalah ,'Masalah_Kohort_Anak1')"
+                        data-type-xml="select" type="checkbox"
                         value="Tidak_dapat_memasukkan_data_tertentu" />
                     <span class="option-label active" lang="">Tidak dapat memasukkan data tertentu
                     </span>
                 </label>
                 <label class="">
-                    <input name="/data_entry_feedback_form/Masalah_Kohort_Anak" data-relevant="selected( /data_entry_feedback_form/masalah ,'Masalah_Kohort_Anak1')"
-                        data-type-xml="select"
-                        type="checkbox"
-                        value="Tidak_dapat_mengedit_data" />
+                    <input name="/data_entry_feedback_form/Masalah_Kohort_Anak"
+                        data-relevant="selected( /data_entry_feedback_form/masalah ,'Masalah_Kohort_Anak1')"
+                        data-type-xml="select" type="checkbox" value="Tidak_dapat_mengedit_data" />
                     <span class="option-label active" lang="">Tidak dapat mengedit data</span>
                 </label>
                 <label class="">
-                    <input name="/data_entry_feedback_form/Masalah_Kohort_Anak" data-relevant="selected( /data_entry_feedback_form/masalah ,'Masalah_Kohort_Anak1')"
-                        data-type-xml="select"
-                        type="checkbox"
-                        value="Masalah_lainnya" />
+                    <input name="/data_entry_feedback_form/Masalah_Kohort_Anak"
+                        data-relevant="selected( /data_entry_feedback_form/masalah ,'Masalah_Kohort_Anak1')"
+                        data-type-xml="select" type="checkbox" value="Masalah_lainnya" />
                     <span class="option-label active" lang="">Masalah lainnya</span>
                 </label>
             </div>
@@ -1187,8 +1132,7 @@
         <span class="or-hint active" lang="">(Misal: ada nama dusun yang belum ada, dsb.)</span>
         <input name="/data_entry_feedback_form/Pilihan_variabel_yang_ada_tidak_sesuai_Kohort_Anak"
             data-relevant="selected( /data_entry_feedback_form/Masalah_Kohort_Anak ,'Pilihan_variabel_yang_ada_tidak_sesuai')"
-            data-type-xml="string"
-            type="text" />
+            data-type-xml="string" type="text" />
     </label>
     <label class="question or-branch pre-init non-select ">
         <span class="question-label active" lang="">Kalkulasi variabel tidak sesuai</span>
@@ -1196,8 +1140,7 @@
         </span>
         <input name="/data_entry_feedback_form/Kalkulasi_variabel_tidak_sesuai_Kohort_Anak"
             data-relevant="selected( /data_entry_feedback_form/Masalah_Kohort_Anak ,'Kalkulasi_variabel_tidak_sesuai')"
-            data-type-xml="string"
-            type="text" />
+            data-type-xml="string" type="text" />
     </label>
     <label class="question or-branch pre-init non-select ">
         <span class="question-label active" lang="">Data variabel yang dimasukkan hilang</span>
@@ -1207,8 +1150,7 @@
         </span>
         <input name="/data_entry_feedback_form/Data_variabel_yang_dimasukkan_hilang_Kohort_Anak"
             data-relevant="selected( /data_entry_feedback_form/Masalah_Kohort_Anak ,'Data_variabel_yang_dimasukkan_hilang')"
-            data-type-xml="string"
-            type="text" />
+            data-type-xml="string" type="text" />
     </label>
     <label class="question or-branch pre-init non-select ">
         <span class="question-label active" lang="">Tuliskan masalah rentang data variabel yang
@@ -1219,8 +1161,7 @@
         </span>
         <input name="/data_entry_feedback_form/Rentang_data_variabel_tidak_sesuai_Kohort_Anak"
             data-relevant="selected( /data_entry_feedback_form/Masalah_Kohort_Anak ,'Rentang_data_variabel_tidak_sesuai')"
-            data-type-xml="string"
-            type="text" />
+            data-type-xml="string" type="text" />
     </label>
     <label class="question or-branch pre-init non-select ">
         <span class="question-label active" lang="">Data yang ditampilkan tidak sesuai dengan yang
@@ -1229,29 +1170,28 @@
         <span class="or-hint active" lang="">(Misal: data yang sudah dimasukkan tidak terlihat di
             dashboard, angka yang muncul berbeda dari yang dimasukkan, dsb.)
         </span>
-        <input name="/data_entry_feedback_form/Data_yang_ditampilkan_tidak_sesuai_dengan_yang_dimasukkan_Kohort_Anak"
+        <input
+            name="/data_entry_feedback_form/Data_yang_ditampilkan_tidak_sesuai_dengan_yang_dimasukkan_Kohort_Anak"
             data-relevant="selected( /data_entry_feedback_form/Masalah_Kohort_Anak ,'Data_yang_ditampilkan_tidak_sesuai_dengan_yang_dimasukkan')"
-            data-type-xml="string"
-            type="text" />
+            data-type-xml="string" type="text" />
     </label>
     <label class="question or-branch pre-init non-select ">
         <span class="question-label active" lang="">Tidak dapat memasukkan data tertentu</span>
         <input name="/data_entry_feedback_form/Tidak_dapat_memasukkan_data_tertentu_Kohort_Anak"
             data-relevant="selected( /data_entry_feedback_form/Masalah_Kohort_Anak ,'Tidak_dapat_memasukkan_data_tertentu')"
-            data-type-xml="string"
-            type="text" />
+            data-type-xml="string" type="text" />
     </label>
     <label class="question or-branch pre-init non-select ">
         <span class="question-label active" lang="">Tidak dapat mengedit data</span>
-        <input name="/data_entry_feedback_form/Tidak_dapat_mengedit_data_Kohort_Anak" data-relevant="selected( /data_entry_feedback_form/Masalah_Kohort_Anak ,'Tidak_dapat_mengedit_data')"
-            data-type-xml="string"
-            type="text" />
+        <input name="/data_entry_feedback_form/Tidak_dapat_mengedit_data_Kohort_Anak"
+            data-relevant="selected( /data_entry_feedback_form/Masalah_Kohort_Anak ,'Tidak_dapat_mengedit_data')"
+            data-type-xml="string" type="text" />
     </label>
     <label class="question or-branch pre-init non-select ">
         <span class="question-label active" lang="">Masalah lainnya</span>
-        <input name="/data_entry_feedback_form/Masalah_lainnya_kohort_anak" data-relevant="selected( /data_entry_feedback_form/Masalah_Kohort_Anak ,'Masalah_lainnya')"
-            data-type-xml="string"
-            type="text" />
+        <input name="/data_entry_feedback_form/Masalah_lainnya_kohort_anak"
+            data-relevant="selected( /data_entry_feedback_form/Masalah_Kohort_Anak ,'Masalah_lainnya')"
+            data-type-xml="string" type="text" />
     </label>
     <fieldset class="question ">
         <fieldset>
@@ -1262,15 +1202,15 @@
             </legend>
             <div class="option-wrapper">
                 <label class="">
-                    <input name="/data_entry_feedback_form/Umpan_balik_lainnya" data-name="/data_entry_feedback_form/Umpan_balik_lainnya"
-                        data-type-xml="select1" type="radio"
-                        value="ya" />
+                    <input name="/data_entry_feedback_form/Umpan_balik_lainnya"
+                        data-name="/data_entry_feedback_form/Umpan_balik_lainnya"
+                        data-type-xml="select1" type="radio" value="ya" />
                     <span class="option-label active" lang="">ya</span>
                 </label>
                 <label class="">
-                    <input name="/data_entry_feedback_form/Umpan_balik_lainnya" data-name="/data_entry_feedback_form/Umpan_balik_lainnya"
-                        data-type-xml="select1" type="radio"
-                        value="tidak" />
+                    <input name="/data_entry_feedback_form/Umpan_balik_lainnya"
+                        data-name="/data_entry_feedback_form/Umpan_balik_lainnya"
+                        data-type-xml="select1" type="radio" value="tidak" />
                     <span class="option-label active" lang="">tidak</span>
                 </label>
             </div>
@@ -1278,44 +1218,45 @@
     </fieldset>
     <label class="question or-branch pre-init non-select ">
         <span class="question-label active" lang="">Tuliskan pendapat dari bidan di sini:</span>
-        <input name="/data_entry_feedback_form/Keterangan_umpan_balik_lainnya" data-relevant="selected( /data_entry_feedback_form/Umpan_balik_lainnya ,'ya')"
-            data-type-xml="string"
-            type="text" />
+        <input name="/data_entry_feedback_form/Keterangan_umpan_balik_lainnya"
+            data-relevant="selected( /data_entry_feedback_form/Umpan_balik_lainnya ,'ya')"
+            data-type-xml="string" type="text" />
     </label>
     <fieldset style="display:none;" id="or-preload-items">
         <label class="calculation non-select ">
-            <input name="/data_entry_feedback_form/start" data-preload="timestamp" data-preload-params="start"
-                data-type-xml="dateTime" type="hidden" />
+            <input name="/data_entry_feedback_form/start" data-preload="timestamp"
+                data-preload-params="start" data-type-xml="dateTime" type="hidden" />
         </label>
         <label class="calculation non-select ">
-            <input name="/data_entry_feedback_form/today" data-preload="date" data-preload-params="today"
-                data-type-xml="date" type="hidden" />
+            <input name="/data_entry_feedback_form/today" data-preload="date"
+                data-preload-params="today" data-type-xml="date" type="hidden" />
         </label>
         <label class="calculation non-select ">
-            <input name="/data_entry_feedback_form/deviceid" data-preload="property" data-preload-params="deviceid"
-                data-type-xml="string" type="hidden" />
+            <input name="/data_entry_feedback_form/deviceid" data-preload="property"
+                data-preload-params="deviceid" data-type-xml="string" type="hidden" />
         </label>
         <label class="calculation non-select ">
-            <input name="/data_entry_feedback_form/simserial" data-preload="property" data-preload-params="simserial"
-                data-type-xml="string" type="hidden" />
+            <input name="/data_entry_feedback_form/simserial" data-preload="property"
+                data-preload-params="simserial" data-type-xml="string" type="hidden" />
         </label>
         <label class="calculation non-select ">
             <input name="/data_entry_feedback_form/phonenumber" data-preload="property"
                 data-preload-params="phonenumber" data-type-xml="string" type="hidden" />
         </label>
         <label class="calculation non-select ">
-            <input name="/data_entry_feedback_form/end" data-preload="timestamp" data-preload-params="end"
-                data-type-xml="dateTime" type="hidden" />
+            <input name="/data_entry_feedback_form/end" data-preload="timestamp"
+                data-preload-params="end" data-type-xml="dateTime" type="hidden" />
         </label>
     </fieldset>
     <fieldset style="display:none;" id="or-calculated-items">
         <label class="calculation non-select ">
-            <input name="/data_entry_feedback_form/meta/instanceID" data-calculate="concat('uuid:', uuid())"
-                data-type-xml="string" type="hidden" />
+            <input name="/data_entry_feedback_form/meta/instanceID"
+                data-calculate="concat('uuid:', uuid())" data-type-xml="string" type="hidden" />
         </label>
         <label class="calculation non-select ">
-            <input name="/data_entry_feedback_form/formhub/uuid" data-calculate="'bc355a523a624051924bd553b3f9298a'"
-                data-type-xml="string" type="hidden" />
+            <input name="/data_entry_feedback_form/formhub/uuid"
+                data-calculate="'bc355a523a624051924bd553b3f9298a'" data-type-xml="string"
+                type="hidden" />
         </label>
     </fieldset>
 </form>

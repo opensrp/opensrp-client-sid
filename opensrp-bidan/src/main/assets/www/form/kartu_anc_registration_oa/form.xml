@@ -15,8 +15,8 @@
         <input name="/Register_ANC/tanggal_periksa" data-type-xml="date" type="date" />
     </label>
     <label class="note non-select ">
-        <span class="question-label active" data-itext-id="/Register_ANC/generated_note_name_8:label"
-            lang="Bahasa">Identitas Ibu
+        <span class="question-label active"
+            data-itext-id="/Register_ANC/generated_note_name_8:label" lang="Bahasa">Identitas Ibu
         </span>
         <input name="/Register_ANC/generated_note_name_8" data-type-xml="string" readonly="readonly"
             type="text" />
@@ -64,13 +64,13 @@
             type="date" />
     </label>
     <label class="note non-select ">
-        <span class="question-label active" data-itext-id="/Register_ANC/generated_note_name_15:label"
-            lang="Bahasa">
+        <span class="question-label active"
+            data-itext-id="/Register_ANC/generated_note_name_15:label" lang="Bahasa">
             Umur:
             <span class="or-output" data-value=" /Register_ANC/umur " />
         </span>
-        <input name="/Register_ANC/generated_note_name_15" data-type-xml="string" readonly="readonly"
-            type="text" />
+        <input name="/Register_ANC/generated_note_name_15" data-type-xml="string"
+            readonly="readonly" type="text" />
     </label>
     <label class="question non-select ">
         <span class="question-label active" data-itext-id="/Register_ANC/alamat_domisili:label"
@@ -97,26 +97,26 @@
             <div class="option-wrapper">
                 <label class="">
                     <input name="/Register_ANC/kabupaten" data-name="/Register_ANC/kabupaten"
-                        data-type-xml="select1" type="radio"
-                        value="Lombok Barat" />
-                    <span class="option-label active" data-itext-id="/Register_ANC/kabupaten/Lombok Barat:label"
-                        lang="Bahasa">Lombok Barat
+                        data-type-xml="select1" type="radio" value="Lombok Barat" />
+                    <span class="option-label active"
+                        data-itext-id="/Register_ANC/kabupaten/Lombok Barat:label" lang="Bahasa">
+                        Lombok Barat
                     </span>
                 </label>
                 <label class="">
                     <input name="/Register_ANC/kabupaten" data-name="/Register_ANC/kabupaten"
-                        data-type-xml="select1" type="radio"
-                        value="Lombok Tengah" />
-                    <span class="option-label active" data-itext-id="/Register_ANC/kabupaten/Lombok Tengah:label"
-                        lang="Bahasa">Lombok Tengah
+                        data-type-xml="select1" type="radio" value="Lombok Tengah" />
+                    <span class="option-label active"
+                        data-itext-id="/Register_ANC/kabupaten/Lombok Tengah:label" lang="Bahasa">
+                        Lombok Tengah
                     </span>
                 </label>
                 <label class="">
                     <input name="/Register_ANC/kabupaten" data-name="/Register_ANC/kabupaten"
-                        data-type-xml="select1" type="radio"
-                        value="Lombok Timur" />
-                    <span class="option-label active" data-itext-id="/Register_ANC/kabupaten/Lombok Timur:label"
-                        lang="Bahasa">Lombok Timur
+                        data-type-xml="select1" type="radio" value="Lombok Timur" />
+                    <span class="option-label active"
+                        data-itext-id="/Register_ANC/kabupaten/Lombok Timur:label" lang="Bahasa">
+                        Lombok Timur
                     </span>
                 </label>
             </div>
@@ -133,29 +133,27 @@
             <div class="option-wrapper">
                 <label class="">
                     <input name="/Register_ANC/kecamatan" data-name="/Register_ANC/kecamatan"
-                        data-relevant=" /Register_ANC/kabupaten ='Lombok Tengah'" data-type-xml="select1"
-                        type="radio"
-                        value="Pujut" />
-                    <span class="option-label active" data-itext-id="/Register_ANC/kecamatan/Pujut:label"
-                        lang="Bahasa">Pujut
+                        data-relevant=" /Register_ANC/kabupaten ='Lombok Tengah'"
+                        data-type-xml="select1" type="radio" value="Pujut" />
+                    <span class="option-label active"
+                        data-itext-id="/Register_ANC/kecamatan/Pujut:label" lang="Bahasa">Pujut
                     </span>
                 </label>
                 <label class="">
                     <input name="/Register_ANC/kecamatan" data-name="/Register_ANC/kecamatan"
-                        data-relevant=" /Register_ANC/kabupaten ='Lombok Tengah'" data-type-xml="select1"
-                        type="radio"
-                        value="Janapria" />
-                    <span class="option-label active" data-itext-id="/Register_ANC/kecamatan/Janapria:label"
-                        lang="Bahasa">Janapria
+                        data-relevant=" /Register_ANC/kabupaten ='Lombok Tengah'"
+                        data-type-xml="select1" type="radio" value="Janapria" />
+                    <span class="option-label active"
+                        data-itext-id="/Register_ANC/kecamatan/Janapria:label" lang="Bahasa">
+                        Janapria
                     </span>
                 </label>
                 <label class="">
                     <input name="/Register_ANC/kecamatan" data-name="/Register_ANC/kecamatan"
-                        data-relevant=" /Register_ANC/kabupaten ='Lombok Tengah'" data-type-xml="select1"
-                        type="radio"
-                        value="Lainnya" />
-                    <span class="option-label active" data-itext-id="/Register_ANC/kecamatan/Lainnya:label"
-                        lang="Bahasa">Lainnya
+                        data-relevant=" /Register_ANC/kabupaten ='Lombok Tengah'"
+                        data-type-xml="select1" type="radio" value="Lainnya" />
+                    <span class="option-label active"
+                        data-itext-id="/Register_ANC/kecamatan/Lainnya:label" lang="Bahasa">Lainnya
                     </span>
                 </label>
             </div>
@@ -166,9 +164,9 @@
             lang="Bahasa">kecamatan
         </span>
         <span class="or-hint active" lang="">Kecamatan tempat tinggal Ibu</span>
-        <input name="/Register_ANC/kecamatanl" data-relevant=" /Register_ANC/kabupaten ='Lombok Barat' or  /Register_ANC/kabupaten ='Lombok Timur' or  /Register_ANC/kecamatan ='Lainnya'"
-            data-type-xml="string"
-            type="text" />
+        <input name="/Register_ANC/kecamatanl"
+            data-relevant=" /Register_ANC/kabupaten ='Lombok Barat' or  /Register_ANC/kabupaten ='Lombok Timur' or  /Register_ANC/kecamatan ='Lainnya'"
+            data-type-xml="string" type="text" />
     </label>
     <label class="question or-appearance-minimal  or-branch pre-init ">
         <span class="or-constraint-msg active" lang="">desa Tempat tinggal Ibu</span>
@@ -178,7 +176,8 @@
         <select name="/Register_ANC/desa1" data-name="/Register_ANC/desa1"
             data-relevant=" /Register_ANC/kabupaten ='Lombok Tengah' and  /Register_ANC/kecamatan  != 'Lainnya'"
             data-type-xml="select1">
-            <option class="itemset-template" data-items-path="instance('desa')/root/item[kecamatan= /Register_ANC/kecamatan ]"
+            <option class="itemset-template"
+                data-items-path="instance('desa')/root/item[kecamatan= /Register_ANC/kecamatan ]"
                 value="">
                 ...
             </option>
@@ -238,9 +237,9 @@
         <span class="question-label active" data-itext-id="/Register_ANC/desa2:label" lang="Bahasa">
             Desa
         </span>
-        <input name="/Register_ANC/desa2" data-relevant=" /Register_ANC/kabupaten ='Lombok Barat' or  /Register_ANC/kabupaten ='Lombok Timur' or  /Register_ANC/kecamatan ='Lainnya' or  /Register_ANC/desa1 ='Lainnya'"
-            data-type-xml="string"
-            type="text" />
+        <input name="/Register_ANC/desa2"
+            data-relevant=" /Register_ANC/kabupaten ='Lombok Barat' or  /Register_ANC/kabupaten ='Lombok Timur' or  /Register_ANC/kecamatan ='Lainnya' or  /Register_ANC/desa1 ='Lainnya'"
+            data-type-xml="string" type="text" />
     </label>
     <label class="question or-appearance-minimal  or-branch pre-init ">
         <span class="or-constraint-msg active" lang="">dusun Tempat tinggal Ibu</span>
@@ -250,7 +249,8 @@
         <select name="/Register_ANC/dusun1" data-name="/Register_ANC/dusun1"
             data-relevant=" /Register_ANC/kabupaten ='Lombok Tengah' and  /Register_ANC/kecamatan  != 'Lainnya'"
             data-type-xml="select1">
-            <option class="itemset-template" data-items-path="instance('dusun')/root/item[kecamatan= /Register_ANC/kecamatan  and desa1= /Register_ANC/desa1 ]"
+            <option class="itemset-template"
+                data-items-path="instance('dusun')/root/item[kecamatan= /Register_ANC/kecamatan  and desa1= /Register_ANC/desa1 ]"
                 value="">
                 ...
             </option>
@@ -838,9 +838,9 @@
         <span class="question-label active" data-itext-id="/Register_ANC/dusun2:label"
             lang="Bahasa">Dusun
         </span>
-        <input name="/Register_ANC/dusun2" data-relevant=" /Register_ANC/kabupaten ='Lombok Barat' or  /Register_ANC/kabupaten ='Lombok Timur' or  /Register_ANC/kecamatan ='Lainnya' or  /Register_ANC/desa1 ='Lainnya' or  /Register_ANC/dusun1 ='Lainnya'"
-            data-type-xml="string"
-            type="text" />
+        <input name="/Register_ANC/dusun2"
+            data-relevant=" /Register_ANC/kabupaten ='Lombok Barat' or  /Register_ANC/kabupaten ='Lombok Timur' or  /Register_ANC/kecamatan ='Lainnya' or  /Register_ANC/desa1 ='Lainnya' or  /Register_ANC/dusun1 ='Lainnya'"
+            data-type-xml="string" type="text" />
     </label>
     <label class="question or-appearance-minimal ">
         <span class="question-label active" data-itext-id="/Register_ANC/pendidikan:label"
@@ -895,16 +895,16 @@
                 <label class="">
                     <input name="/Register_ANC/gakin_tidak" data-name="/Register_ANC/gakin_tidak"
                         data-type-xml="select1" type="radio" value="ya" />
-                    <span class="option-label active" data-itext-id="/Register_ANC/gakin_tidak/ya:label"
-                        lang="Bahasa">Ya (Y)
+                    <span class="option-label active"
+                        data-itext-id="/Register_ANC/gakin_tidak/ya:label" lang="Bahasa">Ya (Y)
                     </span>
                 </label>
                 <label class="">
                     <input name="/Register_ANC/gakin_tidak" data-name="/Register_ANC/gakin_tidak"
-                        data-type-xml="select1" type="radio"
-                        value="tidak" />
-                    <span class="option-label active" data-itext-id="/Register_ANC/gakin_tidak/tidak:label"
-                        lang="Bahasa">Tidak (T)
+                        data-type-xml="select1" type="radio" value="tidak" />
+                    <span class="option-label active"
+                        data-itext-id="/Register_ANC/gakin_tidak/tidak:label" lang="Bahasa">Tidak
+                        (T)
                     </span>
                 </label>
             </div>
@@ -990,18 +990,16 @@
             <div class="option-wrapper">
                 <label class="">
                     <input name="/Register_ANC/nomortelpon" data-name="/Register_ANC/nomortelpon"
-                        data-type-xml="select1" required="required" type="radio"
-                        value="Ya" />
-                    <span class="option-label active" data-itext-id="/Register_ANC/nomortelpon/Ya:label"
-                        lang="Bahasa">Ya
+                        data-type-xml="select1" required="required" type="radio" value="Ya" />
+                    <span class="option-label active"
+                        data-itext-id="/Register_ANC/nomortelpon/Ya:label" lang="Bahasa">Ya
                     </span>
                 </label>
                 <label class="">
                     <input name="/Register_ANC/nomortelpon" data-name="/Register_ANC/nomortelpon"
-                        data-type-xml="select1" required="required" type="radio"
-                        value="Tidak" />
-                    <span class="option-label active" data-itext-id="/Register_ANC/nomortelpon/Tidak:label"
-                        lang="Bahasa">Tidak
+                        data-type-xml="select1" required="required" type="radio" value="Tidak" />
+                    <span class="option-label active"
+                        data-itext-id="/Register_ANC/nomortelpon/Tidak:label" lang="Bahasa">Tidak
                     </span>
                 </label>
             </div>
@@ -1016,16 +1014,17 @@
         </span>
         <span class="required">*</span>
         <span class="or-hint active" lang="">Nomor telpon/Hp yang dimiliki oleh Ibu</span>
-        <input name="/Register_ANC/nomor_telpon_hp" data-constraint=".&gt;0 and .&lt;100000000000" data-relevant=" /Register_ANC/nomortelpon  = 'Ya'"
-            data-type-xml="string"
+        <input name="/Register_ANC/nomor_telpon_hp" data-constraint=".&gt;0 and .&lt;100000000000"
+            data-relevant=" /Register_ANC/nomortelpon  = 'Ya'" data-type-xml="string"
             required="required" type="text" />
     </label>
     <label class="note non-select ">
-        <span class="question-label active" data-itext-id="/Register_ANC/generated_note_name_38:label"
-            lang="Bahasa">Riwayat Obstetric
+        <span class="question-label active"
+            data-itext-id="/Register_ANC/generated_note_name_38:label" lang="Bahasa">Riwayat
+            Obstetric
         </span>
-        <input name="/Register_ANC/generated_note_name_38" data-type-xml="string" readonly="readonly"
-            type="text" />
+        <input name="/Register_ANC/generated_note_name_38" data-type-xml="string"
+            readonly="readonly" type="text" />
     </label>
     <label class="question non-select ">
         <span class="or-constraint-msg active" lang="">Nilai yang dimasukkan tidak memenuhi syarat,
@@ -1035,8 +1034,8 @@
             lang="Bahasa">Gravida
         </span>
         <span class="or-hint active" lang="">Menunjukkan jumlah kehamilan Ibu</span>
-        <input name="/Register_ANC/gravida" data-constraint=".&gt;-1 and .&lt;100" data-type-xml="int"
-            type="number" />
+        <input name="/Register_ANC/gravida" data-constraint=".&gt;-1 and .&lt;100"
+            data-type-xml="int" type="number" />
     </label>
     <label class="question non-select ">
         <span class="or-constraint-msg active" lang="">Nilai yang dimasukkan tidak memenuhi syarat,
@@ -1046,8 +1045,8 @@
             lang="Bahasa">Partus
         </span>
         <span class="or-hint active" lang="">Menunjukkan jumlah kelahiran / persalinan Ibu</span>
-        <input name="/Register_ANC/partus" data-constraint=".&gt;-1 and .&lt;100" data-type-xml="int"
-            type="number" />
+        <input name="/Register_ANC/partus" data-constraint=".&gt;-1 and .&lt;100"
+            data-type-xml="int" type="number" />
     </label>
     <label class="question non-select ">
         <span class="or-constraint-msg active" lang="">abortus tidak boleh lebih dari Gravida -
@@ -1057,8 +1056,8 @@
             lang="Bahasa">Abortus
         </span>
         <span class="or-hint active" lang="">Menunjukkan jumlah berapa kali Ibu keguguran</span>
-        <input name="/Register_ANC/abortus" data-constraint=".&gt;-1 and .&lt;=100" data-type-xml="int"
-            type="number" />
+        <input name="/Register_ANC/abortus" data-constraint=".&gt;-1 and .&lt;=100"
+            data-type-xml="int" type="number" />
     </label>
     <label class="question non-select ">
         <span class="or-constraint-msg active" lang="">Nilai yang dimasukkan tidak memenuhi syarat,
@@ -1076,8 +1075,9 @@
     <fieldset class="question or-branch pre-init ">
         <fieldset>
             <legend>
-                <span class="question-label active" data-itext-id="/Register_ANC/persalinan_sebelumnya:label"
-                    lang="Bahasa">Persalinan sebelumnya
+                <span class="question-label active"
+                    data-itext-id="/Register_ANC/persalinan_sebelumnya:label" lang="Bahasa">
+                    Persalinan sebelumnya
                 </span>
                 <span class="or-hint active" lang="">Riwayat persalinan sebelumnya normal atau
                     dengan komplikasi
@@ -1085,45 +1085,54 @@
             </legend>
             <div class="option-wrapper">
                 <label class="">
-                    <input name="/Register_ANC/persalinan_sebelumnya" data-name="/Register_ANC/persalinan_sebelumnya"
+                    <input name="/Register_ANC/persalinan_sebelumnya"
+                        data-name="/Register_ANC/persalinan_sebelumnya"
                         data-relevant=" /Register_ANC/gravida  != '1'" data-type-xml="select1"
                         type="radio" value="normal" />
-                    <span class="option-label active" data-itext-id="/Register_ANC/persalinan_sebelumnya/normal:label"
+                    <span class="option-label active"
+                        data-itext-id="/Register_ANC/persalinan_sebelumnya/normal:label"
                         lang="Bahasa">Normal (N)
                     </span>
                 </label>
                 <label class="">
-                    <input name="/Register_ANC/persalinan_sebelumnya" data-name="/Register_ANC/persalinan_sebelumnya"
+                    <input name="/Register_ANC/persalinan_sebelumnya"
+                        data-name="/Register_ANC/persalinan_sebelumnya"
                         data-relevant=" /Register_ANC/gravida  != '1'" data-type-xml="select1"
                         type="radio" value="tidak_normal" />
-                    <span class="option-label active" data-itext-id="/Register_ANC/persalinan_sebelumnya/tidak_normal:label"
+                    <span class="option-label active"
+                        data-itext-id="/Register_ANC/persalinan_sebelumnya/tidak_normal:label"
                         lang="Bahasa">Tidak
                         Normal (dengan tindakan) (TN)
                     </span>
                 </label>
                 <label class="">
-                    <input name="/Register_ANC/persalinan_sebelumnya" data-name="/Register_ANC/persalinan_sebelumnya"
-                        data-relevant=" /Register_ANC/gravida  != '1'"
-                        data-type-xml="select1"
+                    <input name="/Register_ANC/persalinan_sebelumnya"
+                        data-name="/Register_ANC/persalinan_sebelumnya"
+                        data-relevant=" /Register_ANC/gravida  != '1'" data-type-xml="select1"
                         type="radio" value="tidak_ada_persalinan_sebelumnya" />
-                    <span class="option-label active" data-itext-id="/Register_ANC/persalinan_sebelumnya/tidak_ada_persalinan_sebelumnya:label"
+                    <span class="option-label active"
+                        data-itext-id="/Register_ANC/persalinan_sebelumnya/tidak_ada_persalinan_sebelumnya:label"
                         lang="Bahasa">
                         Tidak pernah bersalin sebelumnya
                     </span>
                 </label>
                 <label class="">
-                    <input name="/Register_ANC/persalinan_sebelumnya" data-name="/Register_ANC/persalinan_sebelumnya"
+                    <input name="/Register_ANC/persalinan_sebelumnya"
+                        data-name="/Register_ANC/persalinan_sebelumnya"
                         data-relevant=" /Register_ANC/gravida  != '1'" data-type-xml="select1"
                         type="radio" value="normal" />
-                    <span class="option-label active" data-itext-id="/Register_ANC/persalinan_sebelumnya/normal:label"
+                    <span class="option-label active"
+                        data-itext-id="/Register_ANC/persalinan_sebelumnya/normal:label"
                         lang="Bahasa">Normal (N)
                     </span>
                 </label>
                 <label class="">
-                    <input name="/Register_ANC/persalinan_sebelumnya" data-name="/Register_ANC/persalinan_sebelumnya"
+                    <input name="/Register_ANC/persalinan_sebelumnya"
+                        data-name="/Register_ANC/persalinan_sebelumnya"
                         data-relevant=" /Register_ANC/gravida  != '1'" data-type-xml="select1"
                         type="radio" value="tidak_normal" />
-                    <span class="option-label active" data-itext-id="/Register_ANC/persalinan_sebelumnya/tidak_normal:label"
+                    <span class="option-label active"
+                        data-itext-id="/Register_ANC/persalinan_sebelumnya/tidak_normal:label"
                         lang="Bahasa">Tidak
                         Normal (dengan tindakan) (TN)
                     </span>
@@ -1144,15 +1153,15 @@
             </legend>
             <div class="option-wrapper">
                 <label class="">
-                    <input name="/Register_ANC/rkk" data-name="/Register_ANC/rkk" data-type-xml="select1"
-                        type="radio" value="Ya" />
+                    <input name="/Register_ANC/rkk" data-name="/Register_ANC/rkk"
+                        data-type-xml="select1" type="radio" value="Ya" />
                     <span class="option-label active" data-itext-id="/Register_ANC/rkk/Ya:label"
                         lang="Bahasa">Ya
                     </span>
                 </label>
                 <label class="">
-                    <input name="/Register_ANC/rkk" data-name="/Register_ANC/rkk" data-type-xml="select1"
-                        type="radio" value="Tidak" />
+                    <input name="/Register_ANC/rkk" data-name="/Register_ANC/rkk"
+                        data-type-xml="select1" type="radio" value="Tidak" />
                     <span class="option-label active" data-itext-id="/Register_ANC/rkk/Tidak:label"
                         lang="Bahasa">Tidak
                     </span>
@@ -1161,14 +1170,16 @@
         </fieldset>
     </fieldset>
     <label class="question or-appearance-minimal  or-branch pre-init ">
-        <span class="question-label active" data-itext-id="/Register_ANC/riwayat_komplikasi_kebidanan:label"
-            lang="Bahasa">Riwayat Komplikasi
+        <span class="question-label active"
+            data-itext-id="/Register_ANC/riwayat_komplikasi_kebidanan:label" lang="Bahasa">Riwayat
+            Komplikasi
             Kebidanan
         </span>
         <span class="required">*</span>
         <span class="or-hint active" lang="">Riwayat komplikasi yang dimiliki Ibu sebelumnya</span>
-        <select name="/Register_ANC/riwayat_komplikasi_kebidanan" data-relevant=" /Register_ANC/rkk  = 'Ya'"
-            data-type-xml="select" multiple="multiple" required="required">
+        <select name="/Register_ANC/riwayat_komplikasi_kebidanan"
+            data-relevant=" /Register_ANC/rkk  = 'Ya'" data-type-xml="select" multiple="multiple"
+            required="required">
             <option value="">...</option>
             <option value="abortus_berulang">Abortus Berulang</option>
             <option value="ket">KET</option>
@@ -1189,9 +1200,9 @@
         <span class="or-hint active" lang="">Menunjukkan keterangan komplikasi lain yang diderita
             Ibu hamil
         </span>
-        <input name="/Register_ANC/rkklainnya" data-relevant="selected( /Register_ANC/riwayat_komplikasi_kebidanan , 'lainnya')" data-type-xml="string"
-            required="required"
-            type="text" />
+        <input name="/Register_ANC/rkklainnya"
+            data-relevant="selected( /Register_ANC/riwayat_komplikasi_kebidanan , 'lainnya')"
+            data-type-xml="string" required="required" type="text" />
     </label>
     <fieldset class="question ">
         <fieldset>
@@ -1206,17 +1217,17 @@
             </legend>
             <div class="option-wrapper">
                 <label class="">
-                    <input name="/Register_ANC/kronis" data-name="/Register_ANC/kronis" data-type-xml="select1"
-                        type="radio" value="Ya" />
+                    <input name="/Register_ANC/kronis" data-name="/Register_ANC/kronis"
+                        data-type-xml="select1" type="radio" value="Ya" />
                     <span class="option-label active" data-itext-id="/Register_ANC/kronis/Ya:label"
                         lang="Bahasa">Ya
                     </span>
                 </label>
                 <label class="">
-                    <input name="/Register_ANC/kronis" data-name="/Register_ANC/kronis" data-type-xml="select1"
-                        type="radio" value="Tidak" />
-                    <span class="option-label active" data-itext-id="/Register_ANC/kronis/Tidak:label"
-                        lang="Bahasa">Tidak
+                    <input name="/Register_ANC/kronis" data-name="/Register_ANC/kronis"
+                        data-type-xml="select1" type="radio" value="Tidak" />
+                    <span class="option-label active"
+                        data-itext-id="/Register_ANC/kronis/Tidak:label" lang="Bahasa">Tidak
                     </span>
                 </label>
             </div>
@@ -1230,8 +1241,8 @@
         <span class="or-hint active" lang="">Penyakit yang pernah atau sedang dimiliki oleh Ibu (Isi
             NA jika tidak ada penyakit kronis)
         </span>
-        <select name="/Register_ANC/penyakit_kronis" data-relevant=" /Register_ANC/kronis  = 'Ya'" data-type-xml="select"
-            multiple="multiple" required="required">
+        <select name="/Register_ANC/penyakit_kronis" data-relevant=" /Register_ANC/kronis  = 'Ya'"
+            data-type-xml="select" multiple="multiple" required="required">
             <option value="">...</option>
             <option value="hipertensi">Hipertensi</option>
             <option value="diabetes_melitus">Diabetes Melitus</option>
@@ -1267,34 +1278,36 @@
             lang="Bahasa">Penyakit Kronis Lainnya
         </span>
         <span class="or-hint active" lang="">Menunjukkan keterangan penyakit kronis</span>
-        <input name="/Register_ANC/rpklainnya" data-relevant="selected( /Register_ANC/penyakit_kronis , 'lainnya')"
-            data-type-xml="string"
-            type="text" />
+        <input name="/Register_ANC/rpklainnya"
+            data-relevant="selected( /Register_ANC/penyakit_kronis , 'lainnya')"
+            data-type-xml="string" type="text" />
     </label>
     <fieldset class="question ">
         <fieldset>
             <legend>
-                <span class="question-label active" data-itext-id="/Register_ANC/memiliki_alergi:label"
-                    lang="Bahasa">Apakah ibu memiliki alergi
+                <span class="question-label active"
+                    data-itext-id="/Register_ANC/memiliki_alergi:label" lang="Bahasa">Apakah ibu
+                    memiliki alergi
                 </span>
                 <span class="required">*</span>
                 <span class="or-hint active" lang="">Diisi 'ya' jika ibu memiliki alergi</span>
             </legend>
             <div class="option-wrapper">
                 <label class="">
-                    <input name="/Register_ANC/memiliki_alergi" data-name="/Register_ANC/memiliki_alergi"
-                        data-type-xml="select1" required="required" type="radio"
-                        value="Ya" />
-                    <span class="option-label active" data-itext-id="/Register_ANC/memiliki_alergi/Ya:label"
-                        lang="Bahasa">Ya
+                    <input name="/Register_ANC/memiliki_alergi"
+                        data-name="/Register_ANC/memiliki_alergi" data-type-xml="select1"
+                        required="required" type="radio" value="Ya" />
+                    <span class="option-label active"
+                        data-itext-id="/Register_ANC/memiliki_alergi/Ya:label" lang="Bahasa">Ya
                     </span>
                 </label>
                 <label class="">
-                    <input name="/Register_ANC/memiliki_alergi" data-name="/Register_ANC/memiliki_alergi"
-                        data-type-xml="select1" required="required" type="radio"
-                        value="Tidak" />
-                    <span class="option-label active" data-itext-id="/Register_ANC/memiliki_alergi/Tidak:label"
-                        lang="Bahasa">Tidak
+                    <input name="/Register_ANC/memiliki_alergi"
+                        data-name="/Register_ANC/memiliki_alergi" data-type-xml="select1"
+                        required="required" type="radio" value="Tidak" />
+                    <span class="option-label active"
+                        data-itext-id="/Register_ANC/memiliki_alergi/Tidak:label" lang="Bahasa">
+                        Tidak
                     </span>
                 </label>
             </div>
@@ -1308,14 +1321,15 @@
         <span class="or-hint active" lang="">Alergi yang dimiliki oleh Ibu (Isi NA jika tidak ada
             alergi)
         </span>
-        <input name="/Register_ANC/alergi" data-relevant=" /Register_ANC/memiliki_alergi  = 'Ya'" data-type-xml="string"
-            required="required" type="text" />
+        <input name="/Register_ANC/alergi" data-relevant=" /Register_ANC/memiliki_alergi  = 'Ya'"
+            data-type-xml="string" required="required" type="text" />
     </label>
     <fieldset class="question ">
         <fieldset>
             <legend>
-                <span class="question-label active" data-itext-id="/Register_ANC/kelainanbentuk:label"
-                    lang="Bahasa">Kelainan Bentuk Panggul
+                <span class="question-label active"
+                    data-itext-id="/Register_ANC/kelainanbentuk:label" lang="Bahasa">Kelainan Bentuk
+                    Panggul
                 </span>
                 <span class="or-hint active" lang="">Menunjukkan apakah panggul Ibu mengalami
                     kelainan atau tidak
@@ -1323,30 +1337,31 @@
             </legend>
             <div class="option-wrapper">
                 <label class="">
-                    <input name="/Register_ANC/kelainanbentuk" data-name="/Register_ANC/kelainanbentuk"
-                        data-type-xml="select1" type="radio"
-                        value="Ya" />
-                    <span class="option-label active" data-itext-id="/Register_ANC/kelainanbentuk/Ya:label"
-                        lang="Bahasa">Ya
+                    <input name="/Register_ANC/kelainanbentuk"
+                        data-name="/Register_ANC/kelainanbentuk" data-type-xml="select1"
+                        type="radio" value="Ya" />
+                    <span class="option-label active"
+                        data-itext-id="/Register_ANC/kelainanbentuk/Ya:label" lang="Bahasa">Ya
                     </span>
                 </label>
                 <label class="">
-                    <input name="/Register_ANC/kelainanbentuk" data-name="/Register_ANC/kelainanbentuk"
-                        data-type-xml="select1" type="radio"
-                        value="Tidak" />
-                    <span class="option-label active" data-itext-id="/Register_ANC/kelainanbentuk/Tidak:label"
-                        lang="Bahasa">Tidak
+                    <input name="/Register_ANC/kelainanbentuk"
+                        data-name="/Register_ANC/kelainanbentuk" data-type-xml="select1"
+                        type="radio" value="Tidak" />
+                    <span class="option-label active"
+                        data-itext-id="/Register_ANC/kelainanbentuk/Tidak:label" lang="Bahasa">Tidak
                     </span>
                 </label>
             </div>
         </fieldset>
     </fieldset>
     <label class="note non-select ">
-        <span class="question-label active" data-itext-id="/Register_ANC/generated_note_name_53:label"
-            lang="Bahasa">Pemeriksaan Bidan
+        <span class="question-label active"
+            data-itext-id="/Register_ANC/generated_note_name_53:label" lang="Bahasa">Pemeriksaan
+            Bidan
         </span>
-        <input name="/Register_ANC/generated_note_name_53" data-type-xml="string" readonly="readonly"
-            type="text" />
+        <input name="/Register_ANC/generated_note_name_53" data-type-xml="string"
+            readonly="readonly" type="text" />
     </label>
     <label class="question non-select ">
         <span class="question-label active" data-itext-id="/Register_ANC/tanggal_hpht:label"
@@ -1365,22 +1380,22 @@
             type="text" />
     </label>
     <label class="note non-select ">
-        <span class="question-label active" data-itext-id="/Register_ANC/generated_note_name_59:label"
-            lang="Bahasa">
+        <span class="question-label active"
+            data-itext-id="/Register_ANC/generated_note_name_59:label" lang="Bahasa">
             Usia Klinis :
             <span class="or-output" data-value=" /Register_ANC/usia_klinis " />
         </span>
-        <input name="/Register_ANC/generated_note_name_59" data-type-xml="string" readonly="readonly"
-            type="text" />
+        <input name="/Register_ANC/generated_note_name_59" data-type-xml="string"
+            readonly="readonly" type="text" />
     </label>
     <label class="note non-select ">
-        <span class="question-label active" data-itext-id="/Register_ANC/generated_note_name_61:label"
-            lang="Bahasa">
+        <span class="question-label active"
+            data-itext-id="/Register_ANC/generated_note_name_61:label" lang="Bahasa">
             Trimester Ke:
             <span class="or-output" data-value=" /Register_ANC/trimester_ke " />
         </span>
-        <input name="/Register_ANC/generated_note_name_61" data-type-xml="string" readonly="readonly"
-            type="text" />
+        <input name="/Register_ANC/generated_note_name_61" data-type-xml="string"
+            readonly="readonly" type="text" />
     </label>
     <label class="question non-select ">
         <span class="or-constraint-msg active" lang="">Kunjungan ANC harus sesuai dengan trimester
@@ -1406,35 +1421,35 @@
             <div class="option-wrapper">
                 <label class="">
                     <input name="/Register_ANC/buku_kia" data-name="/Register_ANC/buku_kia"
-                        data-type-xml="select1" type="radio"
-                        value="memiliki" />
-                    <span class="option-label active" data-itext-id="/Register_ANC/buku_kia/memiliki:label"
-                        lang="Bahasa">Memiliki (M)
+                        data-type-xml="select1" type="radio" value="memiliki" />
+                    <span class="option-label active"
+                        data-itext-id="/Register_ANC/buku_kia/memiliki:label" lang="Bahasa">Memiliki
+                        (M)
                     </span>
                 </label>
                 <label class="">
                     <input name="/Register_ANC/buku_kia" data-name="/Register_ANC/buku_kia"
-                        data-type-xml="select1" type="radio"
-                        value="tidak_memiliki" />
-                    <span class="option-label active" data-itext-id="/Register_ANC/buku_kia/tidak_memiliki:label"
-                        lang="Bahasa">Tidak Memiliki
+                        data-type-xml="select1" type="radio" value="tidak_memiliki" />
+                    <span class="option-label active"
+                        data-itext-id="/Register_ANC/buku_kia/tidak_memiliki:label" lang="Bahasa">
+                        Tidak Memiliki
                         (TM)
                     </span>
                 </label>
                 <label class="">
                     <input name="/Register_ANC/buku_kia" data-name="/Register_ANC/buku_kia"
-                        data-type-xml="select1" type="radio"
-                        value="memiliki" />
-                    <span class="option-label active" data-itext-id="/Register_ANC/buku_kia/memiliki:label"
-                        lang="Bahasa">Memiliki (M)
+                        data-type-xml="select1" type="radio" value="memiliki" />
+                    <span class="option-label active"
+                        data-itext-id="/Register_ANC/buku_kia/memiliki:label" lang="Bahasa">Memiliki
+                        (M)
                     </span>
                 </label>
                 <label class="">
                     <input name="/Register_ANC/buku_kia" data-name="/Register_ANC/buku_kia"
-                        data-type-xml="select1" type="radio"
-                        value="tidak_memiliki" />
-                    <span class="option-label active" data-itext-id="/Register_ANC/buku_kia/tidak_memiliki:label"
-                        lang="Bahasa">Tidak Memiliki
+                        data-type-xml="select1" type="radio" value="tidak_memiliki" />
+                    <span class="option-label active"
+                        data-itext-id="/Register_ANC/buku_kia/tidak_memiliki:label" lang="Bahasa">
+                        Tidak Memiliki
                         (TM)
                     </span>
                 </label>
@@ -1442,12 +1457,14 @@
         </fieldset>
     </fieldset>
     <label class="question or-branch pre-init non-select ">
-        <span class="question-label active" data-itext-id="/Register_ANC/tanggal_memperoleh_buku_kia:label"
-            lang="Bahasa">Tanggal memperoleh Buku
+        <span class="question-label active"
+            data-itext-id="/Register_ANC/tanggal_memperoleh_buku_kia:label" lang="Bahasa">Tanggal
+            memperoleh Buku
             KIA
         </span>
-        <input name="/Register_ANC/tanggal_memperoleh_buku_kia" data-relevant=" /Register_ANC/buku_kia  = 'memiliki'"
-            data-type-xml="date" type="date" />
+        <input name="/Register_ANC/tanggal_memperoleh_buku_kia"
+            data-relevant=" /Register_ANC/buku_kia  = 'memiliki'" data-type-xml="date"
+            type="date" />
     </label>
     <fieldset class="question ">
         <fieldset>
@@ -1460,72 +1477,72 @@
             <div class="option-wrapper">
                 <label class="">
                     <input name="/Register_ANC/jamkesmas" data-name="/Register_ANC/jamkesmas"
-                        data-type-xml="select1" type="radio"
-                        value="jaminan_kesehatan_masyarakat" />
-                    <span class="option-label active" data-itext-id="/Register_ANC/jamkesmas/jaminan_kesehatan_masyarakat:label"
+                        data-type-xml="select1" type="radio" value="jaminan_kesehatan_masyarakat" />
+                    <span class="option-label active"
+                        data-itext-id="/Register_ANC/jamkesmas/jaminan_kesehatan_masyarakat:label"
                         lang="Bahasa">
                         Jaminan Kesehatan Masyarakat (Jamkesmas)
                     </span>
                 </label>
                 <label class="">
                     <input name="/Register_ANC/jamkesmas" data-name="/Register_ANC/jamkesmas"
-                        data-type-xml="select1" type="radio"
-                        value="Jamsostek" />
-                    <span class="option-label active" data-itext-id="/Register_ANC/jamkesmas/Jamsostek:label"
-                        lang="Bahasa">Jaminan Sosial dan
+                        data-type-xml="select1" type="radio" value="Jamsostek" />
+                    <span class="option-label active"
+                        data-itext-id="/Register_ANC/jamkesmas/Jamsostek:label" lang="Bahasa">
+                        Jaminan Sosial dan
                         Ketenagakerjaan (Jamsostek)
                     </span>
                 </label>
                 <label class="">
                     <input name="/Register_ANC/jamkesmas" data-name="/Register_ANC/jamkesmas"
-                        data-type-xml="select1" type="radio"
-                        value="jaminan_kesehatan_daerah" />
-                    <span class="option-label active" data-itext-id="/Register_ANC/jamkesmas/jaminan_kesehatan_daerah:label"
+                        data-type-xml="select1" type="radio" value="jaminan_kesehatan_daerah" />
+                    <span class="option-label active"
+                        data-itext-id="/Register_ANC/jamkesmas/jaminan_kesehatan_daerah:label"
                         lang="Bahasa">
                         Jaminan Kesehatan Daerah (Jamkesda)
                     </span>
                 </label>
                 <label class="">
                     <input name="/Register_ANC/jamkesmas" data-name="/Register_ANC/jamkesmas"
-                        data-type-xml="select1" type="radio"
-                        value="asuransi_kesehatan" />
-                    <span class="option-label active" data-itext-id="/Register_ANC/jamkesmas/asuransi_kesehatan:label"
+                        data-type-xml="select1" type="radio" value="asuransi_kesehatan" />
+                    <span class="option-label active"
+                        data-itext-id="/Register_ANC/jamkesmas/asuransi_kesehatan:label"
                         lang="Bahasa">Asuransi
                         Kesehatan (Askes)
                     </span>
                 </label>
                 <label class="">
                     <input name="/Register_ANC/jamkesmas" data-name="/Register_ANC/jamkesmas"
-                        data-type-xml="select1" type="radio"
-                        value="jaminan_persalinan" />
-                    <span class="option-label active" data-itext-id="/Register_ANC/jamkesmas/jaminan_persalinan:label"
+                        data-type-xml="select1" type="radio" value="jaminan_persalinan" />
+                    <span class="option-label active"
+                        data-itext-id="/Register_ANC/jamkesmas/jaminan_persalinan:label"
                         lang="Bahasa">Jaminan
                         Persalinan (Jampersal)
                     </span>
                 </label>
                 <label class="">
                     <input name="/Register_ANC/jamkesmas" data-name="/Register_ANC/jamkesmas"
-                        data-type-xml="select1" type="radio"
-                        value="tidak_ada_asuransi" />
-                    <span class="option-label active" data-itext-id="/Register_ANC/jamkesmas/tidak_ada_asuransi:label"
+                        data-type-xml="select1" type="radio" value="tidak_ada_asuransi" />
+                    <span class="option-label active"
+                        data-itext-id="/Register_ANC/jamkesmas/tidak_ada_asuransi:label"
                         lang="Bahasa">Tidak
                         memiliki asuransi/pembiayaan
                     </span>
                 </label>
                 <label class="">
                     <input name="/Register_ANC/jamkesmas" data-name="/Register_ANC/jamkesmas"
-                        data-type-xml="select1" type="radio"
-                        value="jika_ya" />
-                    <span class="option-label active" data-itext-id="/Register_ANC/jamkesmas/jika_ya:label"
-                        lang="Bahasa">Jika Ya (√)
+                        data-type-xml="select1" type="radio" value="jika_ya" />
+                    <span class="option-label active"
+                        data-itext-id="/Register_ANC/jamkesmas/jika_ya:label" lang="Bahasa">Jika Ya
+                        (√)
                     </span>
                 </label>
                 <label class="">
                     <input name="/Register_ANC/jamkesmas" data-name="/Register_ANC/jamkesmas"
-                        data-type-xml="select1" type="radio"
-                        value="jika_tidak" />
-                    <span class="option-label active" data-itext-id="/Register_ANC/jamkesmas/jika_tidak:label"
-                        lang="Bahasa">Jika Tidak (x)
+                        data-type-xml="select1" type="radio" value="jika_tidak" />
+                    <span class="option-label active"
+                        data-itext-id="/Register_ANC/jamkesmas/jika_tidak:label" lang="Bahasa">Jika
+                        Tidak (x)
                     </span>
                 </label>
             </div>
@@ -1534,90 +1551,100 @@
     <fieldset class="question or-appearance-normal ">
         <fieldset>
             <legend>
-                <span class="question-label active" data-itext-id="/Register_ANC/cara_masuk_tempat_pelayanan:label"
-                    lang="Bahasa">Cara Masuk
+                <span class="question-label active"
+                    data-itext-id="/Register_ANC/cara_masuk_tempat_pelayanan:label" lang="Bahasa">
+                    Cara Masuk
                     Tempat Pelayanan
                 </span>
                 <span class="or-hint active" lang="">Cara Ibu untuk masuk ke tempat pelayanan</span>
             </legend>
             <div class="option-wrapper">
                 <label class="">
-                    <input name="/Register_ANC/cara_masuk_tempat_pelayanan" data-name="/Register_ANC/cara_masuk_tempat_pelayanan"
-                        data-type-xml="select1"
-                        type="radio" value="atas_permintaan_sendiri" />
-                    <span class="option-label active" data-itext-id="/Register_ANC/cara_masuk_tempat_pelayanan/atas_permintaan_sendiri:label"
+                    <input name="/Register_ANC/cara_masuk_tempat_pelayanan"
+                        data-name="/Register_ANC/cara_masuk_tempat_pelayanan"
+                        data-type-xml="select1" type="radio" value="atas_permintaan_sendiri" />
+                    <span class="option-label active"
+                        data-itext-id="/Register_ANC/cara_masuk_tempat_pelayanan/atas_permintaan_sendiri:label"
                         lang="Bahasa">
                         Atas Permintaan Sendiri (APS)
                     </span>
                 </label>
                 <label class="">
-                    <input name="/Register_ANC/cara_masuk_tempat_pelayanan" data-name="/Register_ANC/cara_masuk_tempat_pelayanan"
-                        data-type-xml="select1" type="radio"
-                        value="rujukan_dokter" />
-                    <span class="option-label active" data-itext-id="/Register_ANC/cara_masuk_tempat_pelayanan/rujukan_dokter:label"
+                    <input name="/Register_ANC/cara_masuk_tempat_pelayanan"
+                        data-name="/Register_ANC/cara_masuk_tempat_pelayanan"
+                        data-type-xml="select1" type="radio" value="rujukan_dokter" />
+                    <span class="option-label active"
+                        data-itext-id="/Register_ANC/cara_masuk_tempat_pelayanan/rujukan_dokter:label"
                         lang="Bahasa">
                         Rujukan Dokter (Dr)
                     </span>
                 </label>
                 <label class="">
-                    <input name="/Register_ANC/cara_masuk_tempat_pelayanan" data-name="/Register_ANC/cara_masuk_tempat_pelayanan"
-                        data-type-xml="select1" type="radio"
-                        value="rujukan_bidan" />
-                    <span class="option-label active" data-itext-id="/Register_ANC/cara_masuk_tempat_pelayanan/rujukan_bidan:label"
+                    <input name="/Register_ANC/cara_masuk_tempat_pelayanan"
+                        data-name="/Register_ANC/cara_masuk_tempat_pelayanan"
+                        data-type-xml="select1" type="radio" value="rujukan_bidan" />
+                    <span class="option-label active"
+                        data-itext-id="/Register_ANC/cara_masuk_tempat_pelayanan/rujukan_bidan:label"
                         lang="Bahasa">
                         Rujukan Bidan (Bd)
                     </span>
                 </label>
                 <label class="">
-                    <input name="/Register_ANC/cara_masuk_tempat_pelayanan" data-name="/Register_ANC/cara_masuk_tempat_pelayanan"
-                        data-type-xml="select1" type="radio"
-                        value="rujukan_dukun" />
-                    <span class="option-label active" data-itext-id="/Register_ANC/cara_masuk_tempat_pelayanan/rujukan_dukun:label"
+                    <input name="/Register_ANC/cara_masuk_tempat_pelayanan"
+                        data-name="/Register_ANC/cara_masuk_tempat_pelayanan"
+                        data-type-xml="select1" type="radio" value="rujukan_dukun" />
+                    <span class="option-label active"
+                        data-itext-id="/Register_ANC/cara_masuk_tempat_pelayanan/rujukan_dukun:label"
                         lang="Bahasa">
                         Rujukan Dukun (RD)
                     </span>
                 </label>
                 <label class="">
-                    <input name="/Register_ANC/cara_masuk_tempat_pelayanan" data-name="/Register_ANC/cara_masuk_tempat_pelayanan"
-                        data-type-xml="select1"
-                        type="radio" value="rujukan_polindes" />
-                    <span class="option-label active" data-itext-id="/Register_ANC/cara_masuk_tempat_pelayanan/rujukan_polindes:label"
+                    <input name="/Register_ANC/cara_masuk_tempat_pelayanan"
+                        data-name="/Register_ANC/cara_masuk_tempat_pelayanan"
+                        data-type-xml="select1" type="radio" value="rujukan_polindes" />
+                    <span class="option-label active"
+                        data-itext-id="/Register_ANC/cara_masuk_tempat_pelayanan/rujukan_polindes:label"
                         lang="Bahasa">
                         Rujukan Polindes (Pol)
                     </span>
                 </label>
                 <label class="">
-                    <input name="/Register_ANC/cara_masuk_tempat_pelayanan" data-name="/Register_ANC/cara_masuk_tempat_pelayanan"
-                        data-type-xml="select1"
-                        type="radio" value="rujukan_puskesmas_pembantu" />
-                    <span class="option-label active" data-itext-id="/Register_ANC/cara_masuk_tempat_pelayanan/rujukan_puskesmas_pembantu:label"
+                    <input name="/Register_ANC/cara_masuk_tempat_pelayanan"
+                        data-name="/Register_ANC/cara_masuk_tempat_pelayanan"
+                        data-type-xml="select1" type="radio" value="rujukan_puskesmas_pembantu" />
+                    <span class="option-label active"
+                        data-itext-id="/Register_ANC/cara_masuk_tempat_pelayanan/rujukan_puskesmas_pembantu:label"
                         lang="Bahasa">
                         Rujukan Puskesmas Pembantu ( PST)
                     </span>
                 </label>
                 <label class="">
-                    <input name="/Register_ANC/cara_masuk_tempat_pelayanan" data-name="/Register_ANC/cara_masuk_tempat_pelayanan"
-                        data-type-xml="select1"
-                        type="radio" value="rujukan_puskesmas" />
-                    <span class="option-label active" data-itext-id="/Register_ANC/cara_masuk_tempat_pelayanan/rujukan_puskesmas:label"
+                    <input name="/Register_ANC/cara_masuk_tempat_pelayanan"
+                        data-name="/Register_ANC/cara_masuk_tempat_pelayanan"
+                        data-type-xml="select1" type="radio" value="rujukan_puskesmas" />
+                    <span class="option-label active"
+                        data-itext-id="/Register_ANC/cara_masuk_tempat_pelayanan/rujukan_puskesmas:label"
                         lang="Bahasa">
                         Rujukan Puskesmas (PKS)
                     </span>
                 </label>
                 <label class="">
-                    <input name="/Register_ANC/cara_masuk_tempat_pelayanan" data-name="/Register_ANC/cara_masuk_tempat_pelayanan"
-                        data-type-xml="select1"
-                        type="radio" value="rujukan_rumah_bersalin" />
-                    <span class="option-label active" data-itext-id="/Register_ANC/cara_masuk_tempat_pelayanan/rujukan_rumah_bersalin:label"
+                    <input name="/Register_ANC/cara_masuk_tempat_pelayanan"
+                        data-name="/Register_ANC/cara_masuk_tempat_pelayanan"
+                        data-type-xml="select1" type="radio" value="rujukan_rumah_bersalin" />
+                    <span class="option-label active"
+                        data-itext-id="/Register_ANC/cara_masuk_tempat_pelayanan/rujukan_rumah_bersalin:label"
                         lang="Bahasa">
                         Rujukan Rumah Bersalin (RB)
                     </span>
                 </label>
                 <label class="">
-                    <input name="/Register_ANC/cara_masuk_tempat_pelayanan" data-name="/Register_ANC/cara_masuk_tempat_pelayanan"
-                        data-type-xml="select1" type="radio"
-                        value="RSIA" />
-                    <span class="option-label active" data-itext-id="/Register_ANC/cara_masuk_tempat_pelayanan/RSIA:label"
+                    <input name="/Register_ANC/cara_masuk_tempat_pelayanan"
+                        data-name="/Register_ANC/cara_masuk_tempat_pelayanan"
+                        data-type-xml="select1" type="radio" value="RSIA" />
+                    <span class="option-label active"
+                        data-itext-id="/Register_ANC/cara_masuk_tempat_pelayanan/RSIA:label"
                         lang="Bahasa">Rujukan
                         Rumah Sakit Ibu dan Anak (RSIA)
                     </span>
@@ -1643,8 +1670,8 @@
         <span class="required">*</span>
         <span class="or-hint active" lang="">Menunjukkan berat badan Ibu sebelum kehamilan (kg)
         </span>
-        <input name="/Register_ANC/bb_kg_1" data-constraint=".&gt;0 and .&lt;150" data-type-xml="decimal"
-            required="required" step="any" type="number" />
+        <input name="/Register_ANC/bb_kg_1" data-constraint=".&gt;0 and .&lt;150"
+            data-type-xml="decimal" required="required" step="any" type="number" />
     </label>
     <label class="question non-select ">
         <span class="or-constraint-msg active" lang="">Tinggi badan tidak boleh kurang dari nol
@@ -1653,8 +1680,8 @@
             TB (Cm)
         </span>
         <span class="or-hint active" lang="">Menunjukkan tinggi badan Ibu (CM)</span>
-        <input name="/Register_ANC/tb_cm" data-constraint=".&gt;0 and .&lt;200" data-type-xml="decimal"
-            step="any" type="number" />
+        <input name="/Register_ANC/tb_cm" data-constraint=".&gt;0 and .&lt;200"
+            data-type-xml="decimal" step="any" type="number" />
     </label>
     <label class="question non-select ">
         <span class="or-constraint-msg active" lang="">Nilai yang dimasukkan tidak memenuhi syarat,
@@ -1666,8 +1693,8 @@
         <span class="or-hint active" lang="">Menunjukkan berat badan Ibu pada saat kunjungan ANC
             (kg)
         </span>
-        <input name="/Register_ANC/bb_kg_2" data-constraint=".&gt;0 and .&lt;200" data-type-xml="decimal"
-            step="any" type="number" />
+        <input name="/Register_ANC/bb_kg_2" data-constraint=".&gt;0 and .&lt;200"
+            data-type-xml="decimal" step="any" type="number" />
     </label>
     <label class="question non-select ">
         <span class="or-constraint-msg active" lang="">Nilai yang dimasukkan tidak memenuhi syarat,
@@ -1679,8 +1706,8 @@
         <span class="or-hint active" lang="">Menunjukkan tekanan darah (Sistolik) Ibu pada saat
             kunjungan ANC (mmHg)
         </span>
-        <input name="/Register_ANC/td_sistolik" data-constraint=".&gt;0 and .&lt;1000" data-type-xml="int"
-            type="number" />
+        <input name="/Register_ANC/td_sistolik" data-constraint=".&gt;0 and .&lt;1000"
+            data-type-xml="int" type="number" />
     </label>
     <label class="question non-select ">
         <span class="or-constraint-msg active" lang="">Nilai yang dimasukkan tidak memenuhi syarat,
@@ -1705,14 +1732,15 @@
         <span class="or-hint active" lang="">Menunjukkan lingkar lengan Ibu pada saat kunjungan ANC
             (cm)
         </span>
-        <input name="/Register_ANC/lila_cm" data-constraint=".&gt;0 and .&lt;200" data-type-xml="decimal"
-            step="any" type="number" />
+        <input name="/Register_ANC/lila_cm" data-constraint=".&gt;0 and .&lt;200"
+            data-type-xml="decimal" step="any" type="number" />
     </label>
     <fieldset class="question ">
         <fieldset>
             <legend>
-                <span class="question-label active" data-itext-id="/Register_ANC/status_gizi_ibu:label"
-                    lang="Bahasa">Status Gizi ibu
+                <span class="question-label active"
+                    data-itext-id="/Register_ANC/status_gizi_ibu:label" lang="Bahasa">Status Gizi
+                    ibu
                 </span>
                 <span class="or-hint active" lang="">Menunjukkan status gizi Ibu pada saat kunjungan
                     ANC (Kg)
@@ -1720,20 +1748,22 @@
             </legend>
             <div class="option-wrapper">
                 <label class="">
-                    <input name="/Register_ANC/status_gizi_ibu" data-name="/Register_ANC/status_gizi_ibu"
-                        data-type-xml="select1" type="radio"
-                        value="kekurangan_energi_kronis" />
-                    <span class="option-label active" data-itext-id="/Register_ANC/status_gizi_ibu/kekurangan_energi_kronis:label"
+                    <input name="/Register_ANC/status_gizi_ibu"
+                        data-name="/Register_ANC/status_gizi_ibu" data-type-xml="select1"
+                        type="radio" value="kekurangan_energi_kronis" />
+                    <span class="option-label active"
+                        data-itext-id="/Register_ANC/status_gizi_ibu/kekurangan_energi_kronis:label"
                         lang="Bahasa">
                         Kekurangan Energi Kronis (KEK)
                     </span>
                 </label>
                 <label class="">
-                    <input name="/Register_ANC/status_gizi_ibu" data-name="/Register_ANC/status_gizi_ibu"
-                        data-type-xml="select1" type="radio"
-                        value="normal" />
-                    <span class="option-label active" data-itext-id="/Register_ANC/status_gizi_ibu/normal:label"
-                        lang="Bahasa">Normal (N)
+                    <input name="/Register_ANC/status_gizi_ibu"
+                        data-name="/Register_ANC/status_gizi_ibu" data-type-xml="select1"
+                        type="radio" value="normal" />
+                    <span class="option-label active"
+                        data-itext-id="/Register_ANC/status_gizi_ibu/normal:label" lang="Bahasa">
+                        Normal (N)
                     </span>
                 </label>
             </div>
@@ -1749,14 +1779,15 @@
         <span class="or-hint active" lang="">Menunjukkan Tinggi Fundus Uteri Ibu pada saat Kunjungan
             ANC (cm)
         </span>
-        <input name="/Register_ANC/tfu" data-constraint=".&gt;0 and .&lt;50" data-relevant=" /Register_ANC/usia_klinis &gt;=20"
-            data-type-xml="int" type="number" />
+        <input name="/Register_ANC/tfu" data-constraint=".&gt;0 and .&lt;50"
+            data-relevant=" /Register_ANC/usia_klinis &gt;=20" data-type-xml="int" type="number" />
     </label>
     <fieldset class="question or-branch pre-init ">
         <fieldset>
             <legend>
-                <span class="question-label active" data-itext-id="/Register_ANC/refleks_patela_ibu:label"
-                    lang="Bahasa">Refleks Patela Ibu
+                <span class="question-label active"
+                    data-itext-id="/Register_ANC/refleks_patela_ibu:label" lang="Bahasa">Refleks
+                    Patela Ibu
                 </span>
                 <span class="or-hint active" lang="">Menunjukkan hasil pemeriksaan Refleks Patella
                     Ibu pada saat kunjungan ANC
@@ -1764,21 +1795,23 @@
             </legend>
             <div class="option-wrapper">
                 <label class="">
-                    <input name="/Register_ANC/refleks_patela_ibu" data-name="/Register_ANC/refleks_patela_ibu"
+                    <input name="/Register_ANC/refleks_patela_ibu"
+                        data-name="/Register_ANC/refleks_patela_ibu"
                         data-relevant=" /Register_ANC/usia_klinis &gt;=20" data-type-xml="select1"
-                        type="radio"
-                        value="ada" />
-                    <span class="option-label active" data-itext-id="/Register_ANC/refleks_patela_ibu/ada:label"
-                        lang="Bahasa">Ada (+)
+                        type="radio" value="ada" />
+                    <span class="option-label active"
+                        data-itext-id="/Register_ANC/refleks_patela_ibu/ada:label" lang="Bahasa">Ada
+                        (+)
                     </span>
                 </label>
                 <label class="">
-                    <input name="/Register_ANC/refleks_patela_ibu" data-name="/Register_ANC/refleks_patela_ibu"
+                    <input name="/Register_ANC/refleks_patela_ibu"
+                        data-name="/Register_ANC/refleks_patela_ibu"
                         data-relevant=" /Register_ANC/usia_klinis &gt;=20" data-type-xml="select1"
-                        type="radio"
-                        value="tidak" />
-                    <span class="option-label active" data-itext-id="/Register_ANC/refleks_patela_ibu/tidak:label"
-                        lang="Bahasa">Tidak (-)
+                        type="radio" value="tidak" />
+                    <span class="option-label active"
+                        data-itext-id="/Register_ANC/refleks_patela_ibu/tidak:label" lang="Bahasa">
+                        Tidak (-)
                     </span>
                 </label>
             </div>
@@ -1794,14 +1827,15 @@
         <span class="or-hint active" lang="">Menunjukkan hasil perhitungan Denyut Jantung Janin per
             menit pada saat kunjungan ANC
         </span>
-        <input name="/Register_ANC/djj" data-constraint=".&gt;0 and .&lt;1000" data-relevant=" /Register_ANC/usia_klinis &gt;=20"
-            data-type-xml="int" type="number" />
+        <input name="/Register_ANC/djj" data-constraint=".&gt;0 and .&lt;1000"
+            data-relevant=" /Register_ANC/usia_klinis &gt;=20" data-type-xml="int" type="number" />
     </label>
     <fieldset class="question or-branch pre-init ">
         <fieldset>
             <legend>
-                <span class="question-label active" data-itext-id="/Register_ANC/kepala_terhadap_janin_pap:label"
-                    lang="Bahasa">Kepala Janin
+                <span class="question-label active"
+                    data-itext-id="/Register_ANC/kepala_terhadap_janin_pap:label" lang="Bahasa">
+                    Kepala Janin
                     Terhadap PAP
                 </span>
                 <span class="required">*</span>
@@ -1811,21 +1845,23 @@
             </legend>
             <div class="option-wrapper">
                 <label class="">
-                    <input name="/Register_ANC/kepala_terhadap_janin_pap" data-name="/Register_ANC/kepala_terhadap_janin_pap"
+                    <input name="/Register_ANC/kepala_terhadap_janin_pap"
+                        data-name="/Register_ANC/kepala_terhadap_janin_pap"
                         data-relevant=" /Register_ANC/usia_klinis &gt;=20" data-type-xml="select1"
-                        required="required" type="radio"
-                        value="masuk" />
-                    <span class="option-label active" data-itext-id="/Register_ANC/kepala_terhadap_janin_pap/masuk:label"
+                        required="required" type="radio" value="masuk" />
+                    <span class="option-label active"
+                        data-itext-id="/Register_ANC/kepala_terhadap_janin_pap/masuk:label"
                         lang="Bahasa">Masuk
                         (M)
                     </span>
                 </label>
                 <label class="">
-                    <input name="/Register_ANC/kepala_terhadap_janin_pap" data-name="/Register_ANC/kepala_terhadap_janin_pap"
+                    <input name="/Register_ANC/kepala_terhadap_janin_pap"
+                        data-name="/Register_ANC/kepala_terhadap_janin_pap"
                         data-relevant=" /Register_ANC/usia_klinis &gt;=20" data-type-xml="select1"
-                        required="required" type="radio"
-                        value="belum_masuk" />
-                    <span class="option-label active" data-itext-id="/Register_ANC/kepala_terhadap_janin_pap/belum_masuk:label"
+                        required="required" type="radio" value="belum_masuk" />
+                    <span class="option-label active"
+                        data-itext-id="/Register_ANC/kepala_terhadap_janin_pap/belum_masuk:label"
                         lang="Bahasa">
                         Belum Masuk (BM)
                     </span>
@@ -1847,35 +1883,39 @@
     <fieldset class="question ">
         <fieldset>
             <legend>
-                <span class="question-label active" data-itext-id="/Register_ANC/persentasi_janin:label"
-                    lang="Bahasa">Persentasi Janin
+                <span class="question-label active"
+                    data-itext-id="/Register_ANC/persentasi_janin:label" lang="Bahasa">Persentasi
+                    Janin
                 </span>
                 <span class="or-hint active" lang="">Bagian terendah dari janin dalam perut Ibu
                 </span>
             </legend>
             <div class="option-wrapper">
                 <label class="">
-                    <input name="/Register_ANC/persentasi_janin" data-name="/Register_ANC/persentasi_janin"
-                        data-type-xml="select1" type="radio"
-                        value="kepala" />
-                    <span class="option-label active" data-itext-id="/Register_ANC/persentasi_janin/kepala:label"
-                        lang="Bahasa">Kepala (KP)
+                    <input name="/Register_ANC/persentasi_janin"
+                        data-name="/Register_ANC/persentasi_janin" data-type-xml="select1"
+                        type="radio" value="kepala" />
+                    <span class="option-label active"
+                        data-itext-id="/Register_ANC/persentasi_janin/kepala:label" lang="Bahasa">
+                        Kepala (KP)
                     </span>
                 </label>
                 <label class="">
-                    <input name="/Register_ANC/persentasi_janin" data-name="/Register_ANC/persentasi_janin"
-                        data-type-xml="select1" type="radio"
-                        value="bokong___sungsang" />
-                    <span class="option-label active" data-itext-id="/Register_ANC/persentasi_janin/bokong___sungsang:label"
+                    <input name="/Register_ANC/persentasi_janin"
+                        data-name="/Register_ANC/persentasi_janin" data-type-xml="select1"
+                        type="radio" value="bokong___sungsang" />
+                    <span class="option-label active"
+                        data-itext-id="/Register_ANC/persentasi_janin/bokong___sungsang:label"
                         lang="Bahasa">
                         Bokong / Sungsang (BS)
                     </span>
                 </label>
                 <label class="">
-                    <input name="/Register_ANC/persentasi_janin" data-name="/Register_ANC/persentasi_janin"
-                        data-type-xml="select1" type="radio"
-                        value="letak_lintang___obligue" />
-                    <span class="option-label active" data-itext-id="/Register_ANC/persentasi_janin/letak_lintang___obligue:label"
+                    <input name="/Register_ANC/persentasi_janin"
+                        data-name="/Register_ANC/persentasi_janin" data-type-xml="select1"
+                        type="radio" value="letak_lintang___obligue" />
+                    <span class="option-label active"
+                        data-itext-id="/Register_ANC/persentasi_janin/letak_lintang___obligue:label"
                         lang="Bahasa">
                         Letak Lintang / Obligue (LLO)
                     </span>
@@ -1895,18 +1935,18 @@
             <div class="option-wrapper">
                 <label class="">
                     <input name="/Register_ANC/jumlah_janin" data-name="/Register_ANC/jumlah_janin"
-                        data-type-xml="select1" type="radio"
-                        value="tunggal" />
-                    <span class="option-label active" data-itext-id="/Register_ANC/jumlah_janin/tunggal:label"
-                        lang="Bahasa">Tunggal (T)
+                        data-type-xml="select1" type="radio" value="tunggal" />
+                    <span class="option-label active"
+                        data-itext-id="/Register_ANC/jumlah_janin/tunggal:label" lang="Bahasa">
+                        Tunggal (T)
                     </span>
                 </label>
                 <label class="">
                     <input name="/Register_ANC/jumlah_janin" data-name="/Register_ANC/jumlah_janin"
-                        data-type-xml="select1" type="radio"
-                        value="ganda" />
-                    <span class="option-label active" data-itext-id="/Register_ANC/jumlah_janin/ganda:label"
-                        lang="Bahasa">Ganda (G)
+                        data-type-xml="select1" type="radio" value="ganda" />
+                    <span class="option-label active"
+                        data-itext-id="/Register_ANC/jumlah_janin/ganda:label" lang="Bahasa">Ganda
+                        (G)
                     </span>
                 </label>
             </div>
@@ -1934,8 +1974,9 @@
     <fieldset class="question ">
         <fieldset>
             <legend>
-                <span class="question-label active" data-itext-id="/Register_ANC/pelayanan_injeksi_tt:label"
-                    lang="Bahasa">Injeksi TT dilakukan
+                <span class="question-label active"
+                    data-itext-id="/Register_ANC/pelayanan_injeksi_tt:label" lang="Bahasa">Injeksi
+                    TT dilakukan
                 </span>
                 <span class="or-hint active" lang="">Menunjukkan apakah ibu mendapatkan suntik TT
                     pada saat kunjungan ANC atau tidak
@@ -1943,19 +1984,21 @@
             </legend>
             <div class="option-wrapper">
                 <label class="">
-                    <input name="/Register_ANC/pelayanan_injeksi_tt" data-name="/Register_ANC/pelayanan_injeksi_tt"
-                        data-type-xml="select1" type="radio"
-                        value="jika_dilakukan" />
-                    <span class="option-label active" data-itext-id="/Register_ANC/pelayanan_injeksi_tt/jika_dilakukan:label"
+                    <input name="/Register_ANC/pelayanan_injeksi_tt"
+                        data-name="/Register_ANC/pelayanan_injeksi_tt" data-type-xml="select1"
+                        type="radio" value="jika_dilakukan" />
+                    <span class="option-label active"
+                        data-itext-id="/Register_ANC/pelayanan_injeksi_tt/jika_dilakukan:label"
                         lang="Bahasa">Jika
                         dilakukan (√)
                     </span>
                 </label>
                 <label class="">
-                    <input name="/Register_ANC/pelayanan_injeksi_tt" data-name="/Register_ANC/pelayanan_injeksi_tt"
-                        data-type-xml="select1" type="radio"
-                        value="jika_tidak_dilakukan" />
-                    <span class="option-label active" data-itext-id="/Register_ANC/pelayanan_injeksi_tt/jika_tidak_dilakukan:label"
+                    <input name="/Register_ANC/pelayanan_injeksi_tt"
+                        data-name="/Register_ANC/pelayanan_injeksi_tt" data-type-xml="select1"
+                        type="radio" value="jika_tidak_dilakukan" />
+                    <span class="option-label active"
+                        data-itext-id="/Register_ANC/pelayanan_injeksi_tt/jika_tidak_dilakukan:label"
                         lang="Bahasa">
                         Jika tidak dilakukan (x)
                     </span>
@@ -1966,27 +2009,30 @@
     <fieldset class="question ">
         <fieldset>
             <legend>
-                <span class="question-label active" data-itext-id="/Register_ANC/pelayanan_catat_buku_kia:label"
-                    lang="Bahasa">Catat di Buku Kia
+                <span class="question-label active"
+                    data-itext-id="/Register_ANC/pelayanan_catat_buku_kia:label" lang="Bahasa">Catat
+                    di Buku Kia
                 </span>
                 <span class="or-hint active" lang="">Semua Hasil Pemeriksaan dicatat dibuku KIA
                 </span>
             </legend>
             <div class="option-wrapper">
                 <label class="">
-                    <input name="/Register_ANC/pelayanan_catat_buku_kia" data-name="/Register_ANC/pelayanan_catat_buku_kia"
-                        data-type-xml="select1" type="radio"
-                        value="jika_dilakukan" />
-                    <span class="option-label active" data-itext-id="/Register_ANC/pelayanan_catat_buku_kia/jika_dilakukan:label"
+                    <input name="/Register_ANC/pelayanan_catat_buku_kia"
+                        data-name="/Register_ANC/pelayanan_catat_buku_kia" data-type-xml="select1"
+                        type="radio" value="jika_dilakukan" />
+                    <span class="option-label active"
+                        data-itext-id="/Register_ANC/pelayanan_catat_buku_kia/jika_dilakukan:label"
                         lang="Bahasa">
                         Jika dilakukan (√)
                     </span>
                 </label>
                 <label class="">
-                    <input name="/Register_ANC/pelayanan_catat_buku_kia" data-name="/Register_ANC/pelayanan_catat_buku_kia"
-                        data-type-xml="select1"
+                    <input name="/Register_ANC/pelayanan_catat_buku_kia"
+                        data-name="/Register_ANC/pelayanan_catat_buku_kia" data-type-xml="select1"
                         type="radio" value="jika_tidak_dilakukan" />
-                    <span class="option-label active" data-itext-id="/Register_ANC/pelayanan_catat_buku_kia/jika_tidak_dilakukan:label"
+                    <span class="option-label active"
+                        data-itext-id="/Register_ANC/pelayanan_catat_buku_kia/jika_tidak_dilakukan:label"
                         lang="Bahasa">
                         Jika tidak dilakukan (x)
                     </span>
@@ -2007,16 +2053,15 @@
                 <label class="">
                     <input name="/Register_ANC/pelayananfe" data-name="/Register_ANC/pelayananfe"
                         data-type-xml="select1" type="radio" value="Ya" />
-                    <span class="option-label active" data-itext-id="/Register_ANC/pelayananfe/Ya:label"
-                        lang="Bahasa">Ya
+                    <span class="option-label active"
+                        data-itext-id="/Register_ANC/pelayananfe/Ya:label" lang="Bahasa">Ya
                     </span>
                 </label>
                 <label class="">
                     <input name="/Register_ANC/pelayananfe" data-name="/Register_ANC/pelayananfe"
-                        data-type-xml="select1" type="radio"
-                        value="Tidak" />
-                    <span class="option-label active" data-itext-id="/Register_ANC/pelayananfe/Tidak:label"
-                        lang="Bahasa">Tidak
+                        data-type-xml="select1" type="radio" value="Tidak" />
+                    <span class="option-label active"
+                        data-itext-id="/Register_ANC/pelayananfe/Tidak:label" lang="Bahasa">Tidak
                     </span>
                 </label>
             </div>
@@ -2032,8 +2077,8 @@
         <span class="or-hint active" lang="">Menunjukkan jumlah Fe yang diberikan saat kunjungan ANC
             (tab/botol)
         </span>
-        <input name="/Register_ANC/pelayanan_fe" data-constraint=".&gt;0 and .&lt;100" data-relevant=" /Register_ANC/pelayananfe ='Ya'"
-            data-type-xml="int" type="number" />
+        <input name="/Register_ANC/pelayanan_fe" data-constraint=".&gt;0 and .&lt;100"
+            data-relevant=" /Register_ANC/pelayananfe ='Ya'" data-type-xml="int" type="number" />
     </label>
     <fieldset class="question ">
         <fieldset>
@@ -2050,15 +2095,15 @@
                 <label class="">
                     <input name="/Register_ANC/Labcheck" data-name="/Register_ANC/Labcheck"
                         data-type-xml="select1" type="radio" value="Ya" />
-                    <span class="option-label active" data-itext-id="/Register_ANC/Labcheck/Ya:label"
-                        lang="Bahasa">Ya
+                    <span class="option-label active"
+                        data-itext-id="/Register_ANC/Labcheck/Ya:label" lang="Bahasa">Ya
                     </span>
                 </label>
                 <label class="">
                     <input name="/Register_ANC/Labcheck" data-name="/Register_ANC/Labcheck"
                         data-type-xml="select1" type="radio" value="Tidak" />
-                    <span class="option-label active" data-itext-id="/Register_ANC/Labcheck/Tidak:label"
-                        lang="Bahasa">Tidak
+                    <span class="option-label active"
+                        data-itext-id="/Register_ANC/Labcheck/Tidak:label" lang="Bahasa">Tidak
                     </span>
                 </label>
             </div>
@@ -2067,7 +2112,8 @@
     <fieldset class="question or-branch pre-init ">
         <fieldset>
             <legend>
-                <span class="question-label active" data-itext-id="/Register_ANC/laboratorium_periksa_hb_dilakukan:label"
+                <span class="question-label active"
+                    data-itext-id="/Register_ANC/laboratorium_periksa_hb_dilakukan:label"
                     lang="Bahasa">Periksa Hb
                     dilakukan
                 </span>
@@ -2078,21 +2124,23 @@
             </legend>
             <div class="option-wrapper">
                 <label class="">
-                    <input name="/Register_ANC/laboratorium_periksa_hb_dilakukan" data-name="/Register_ANC/laboratorium_periksa_hb_dilakukan"
+                    <input name="/Register_ANC/laboratorium_periksa_hb_dilakukan"
+                        data-name="/Register_ANC/laboratorium_periksa_hb_dilakukan"
                         data-relevant=" /Register_ANC/Labcheck ='Ya'" data-type-xml="select1"
-                        required="required" type="radio"
-                        value="Ya" />
-                    <span class="option-label active" data-itext-id="/Register_ANC/laboratorium_periksa_hb_dilakukan/Ya:label"
+                        required="required" type="radio" value="Ya" />
+                    <span class="option-label active"
+                        data-itext-id="/Register_ANC/laboratorium_periksa_hb_dilakukan/Ya:label"
                         lang="Bahasa">
                         Jika dilakukan (√)
                     </span>
                 </label>
                 <label class="">
-                    <input name="/Register_ANC/laboratorium_periksa_hb_dilakukan" data-name="/Register_ANC/laboratorium_periksa_hb_dilakukan"
+                    <input name="/Register_ANC/laboratorium_periksa_hb_dilakukan"
+                        data-name="/Register_ANC/laboratorium_periksa_hb_dilakukan"
                         data-relevant=" /Register_ANC/Labcheck ='Ya'" data-type-xml="select1"
-                        required="required" type="radio"
-                        value="Tidak" />
-                    <span class="option-label active" data-itext-id="/Register_ANC/laboratorium_periksa_hb_dilakukan/Tidak:label"
+                        required="required" type="radio" value="Tidak" />
+                    <span class="option-label active"
+                        data-itext-id="/Register_ANC/laboratorium_periksa_hb_dilakukan/Tidak:label"
                         lang="Bahasa">
                         Jika tidak dilakukan (x)
                     </span>
@@ -2104,19 +2152,21 @@
         <span class="or-constraint-msg active" lang="">Nilai yang dimasukkan tidak memenuhi syarat,
             mohon periksa kembali
         </span>
-        <span class="question-label active" data-itext-id="/Register_ANC/laboratorium_periksa_hb_hasil:label"
-            lang="Bahasa">Hasil periksa Hb
+        <span class="question-label active"
+            data-itext-id="/Register_ANC/laboratorium_periksa_hb_hasil:label" lang="Bahasa">Hasil
+            periksa Hb
         </span>
         <span class="or-hint active" lang="">Hasil pemeriksaan Hb Ibu dari laboratorium</span>
-        <input name="/Register_ANC/laboratorium_periksa_hb_hasil" data-constraint=".&gt;0 and .&lt;1000"
+        <input name="/Register_ANC/laboratorium_periksa_hb_hasil"
+            data-constraint=".&gt;0 and .&lt;1000"
             data-relevant=" /Register_ANC/laboratorium_periksa_hb_dilakukan  = 'Ya'"
-            data-type-xml="decimal"
-            step="any" type="number" />
+            data-type-xml="decimal" step="any" type="number" />
     </label>
     <fieldset class="question or-branch pre-init ">
         <fieldset>
             <legend>
-                <span class="question-label active" data-itext-id="/Register_ANC/laboratorium_periksa_hb_anemia:label"
+                <span class="question-label active"
+                    data-itext-id="/Register_ANC/laboratorium_periksa_hb_anemia:label"
                     lang="Bahasa">Anemia?
                 </span>
                 <span class="or-hint active" lang="">Menunjukkan apakah Ibu mengalami anemia atau
@@ -2125,21 +2175,23 @@
             </legend>
             <div class="option-wrapper">
                 <label class="">
-                    <input name="/Register_ANC/laboratorium_periksa_hb_anemia" data-name="/Register_ANC/laboratorium_periksa_hb_anemia"
-                        data-relevant=" /Register_ANC/laboratorium_periksa_hb_dilakukan  = 'Ya'" data-type-xml="select1"
-                        type="radio"
-                        value="positif" />
-                    <span class="option-label active" data-itext-id="/Register_ANC/laboratorium_periksa_hb_anemia/positif:label"
+                    <input name="/Register_ANC/laboratorium_periksa_hb_anemia"
+                        data-name="/Register_ANC/laboratorium_periksa_hb_anemia"
+                        data-relevant=" /Register_ANC/laboratorium_periksa_hb_dilakukan  = 'Ya'"
+                        data-type-xml="select1" type="radio" value="positif" />
+                    <span class="option-label active"
+                        data-itext-id="/Register_ANC/laboratorium_periksa_hb_anemia/positif:label"
                         lang="Bahasa">
                         Positif (+)
                     </span>
                 </label>
                 <label class="">
-                    <input name="/Register_ANC/laboratorium_periksa_hb_anemia" data-name="/Register_ANC/laboratorium_periksa_hb_anemia"
-                        data-relevant=" /Register_ANC/laboratorium_periksa_hb_dilakukan  = 'Ya'" data-type-xml="select1"
-                        type="radio"
-                        value="negatif" />
-                    <span class="option-label active" data-itext-id="/Register_ANC/laboratorium_periksa_hb_anemia/negatif:label"
+                    <input name="/Register_ANC/laboratorium_periksa_hb_anemia"
+                        data-name="/Register_ANC/laboratorium_periksa_hb_anemia"
+                        data-relevant=" /Register_ANC/laboratorium_periksa_hb_dilakukan  = 'Ya'"
+                        data-type-xml="select1" type="radio" value="negatif" />
+                    <span class="option-label active"
+                        data-itext-id="/Register_ANC/laboratorium_periksa_hb_anemia/negatif:label"
                         lang="Bahasa">
                         Negatif (-)
                     </span>
@@ -2150,26 +2202,31 @@
     <fieldset class="question or-branch pre-init ">
         <fieldset>
             <legend>
-                <span class="question-label active" data-itext-id="/Register_ANC/laboratorium_protein_uria:label"
-                    lang="Bahasa">Protein Uria
+                <span class="question-label active"
+                    data-itext-id="/Register_ANC/laboratorium_protein_uria:label" lang="Bahasa">
+                    Protein Uria
                 </span>
                 <span class="or-hint active" lang="">Menunjukkan kadar protein pada urine Ibu</span>
             </legend>
             <div class="option-wrapper">
                 <label class="">
-                    <input name="/Register_ANC/laboratorium_protein_uria" data-name="/Register_ANC/laboratorium_protein_uria"
+                    <input name="/Register_ANC/laboratorium_protein_uria"
+                        data-name="/Register_ANC/laboratorium_protein_uria"
                         data-relevant=" /Register_ANC/Labcheck ='Ya'" data-type-xml="select1"
                         type="radio" value="positif" />
-                    <span class="option-label active" data-itext-id="/Register_ANC/laboratorium_protein_uria/positif:label"
+                    <span class="option-label active"
+                        data-itext-id="/Register_ANC/laboratorium_protein_uria/positif:label"
                         lang="Bahasa">
                         Positif (+)
                     </span>
                 </label>
                 <label class="">
-                    <input name="/Register_ANC/laboratorium_protein_uria" data-name="/Register_ANC/laboratorium_protein_uria"
+                    <input name="/Register_ANC/laboratorium_protein_uria"
+                        data-name="/Register_ANC/laboratorium_protein_uria"
                         data-relevant=" /Register_ANC/Labcheck ='Ya'" data-type-xml="select1"
                         type="radio" value="negatif" />
-                    <span class="option-label active" data-itext-id="/Register_ANC/laboratorium_protein_uria/negatif:label"
+                    <span class="option-label active"
+                        data-itext-id="/Register_ANC/laboratorium_protein_uria/negatif:label"
                         lang="Bahasa">
                         Negatif (-)
                     </span>
@@ -2180,8 +2237,9 @@
     <fieldset class="question or-branch pre-init ">
         <fieldset>
             <legend>
-                <span class="question-label active" data-itext-id="/Register_ANC/laboratorium_gula_darah:label"
-                    lang="Bahasa">Gula Darah
+                <span class="question-label active"
+                    data-itext-id="/Register_ANC/laboratorium_gula_darah:label" lang="Bahasa">Gula
+                    Darah
                 </span>
                 <span class="or-hint active" lang="">Menunjukkan tingkat gula darah Ibu apakah &gt;140
                     mg/dl atau &lt; 140 mg/dl
@@ -2189,19 +2247,23 @@
             </legend>
             <div class="option-wrapper">
                 <label class="">
-                    <input name="/Register_ANC/laboratorium_gula_darah" data-name="/Register_ANC/laboratorium_gula_darah"
+                    <input name="/Register_ANC/laboratorium_gula_darah"
+                        data-name="/Register_ANC/laboratorium_gula_darah"
                         data-relevant=" /Register_ANC/Labcheck ='Ya'" data-type-xml="select1"
                         type="radio" value="&gt;_140_mg_dl" />
-                    <span class="option-label active" data-itext-id="/Register_ANC/laboratorium_gula_darah/&gt;_140_mg_dl:label"
+                    <span class="option-label active"
+                        data-itext-id="/Register_ANC/laboratorium_gula_darah/&gt;_140_mg_dl:label"
                         lang="Bahasa">
                         &gt; 140 mg/dl (+)
                     </span>
                 </label>
                 <label class="">
-                    <input name="/Register_ANC/laboratorium_gula_darah" data-name="/Register_ANC/laboratorium_gula_darah"
+                    <input name="/Register_ANC/laboratorium_gula_darah"
+                        data-name="/Register_ANC/laboratorium_gula_darah"
                         data-relevant=" /Register_ANC/Labcheck ='Ya'" data-type-xml="select1"
                         type="radio" value="&lt;_140_mg_dl" />
-                    <span class="option-label active" data-itext-id="/Register_ANC/laboratorium_gula_darah/&lt;_140_mg_dl:label"
+                    <span class="option-label active"
+                        data-itext-id="/Register_ANC/laboratorium_gula_darah/&lt;_140_mg_dl:label"
                         lang="Bahasa">
                         &lt; 140 mg/dl (-)
                     </span>
@@ -2212,8 +2274,9 @@
     <fieldset class="question or-branch pre-init ">
         <fieldset>
             <legend>
-                <span class="question-label active" data-itext-id="/Register_ANC/laboratorium_thalasemia:label"
-                    lang="Bahasa">Thalasemia
+                <span class="question-label active"
+                    data-itext-id="/Register_ANC/laboratorium_thalasemia:label" lang="Bahasa">
+                    Thalasemia
                 </span>
                 <span class="or-hint active" lang="">Menunjukkan apakah Ibu mengidap penyakit
                     Thalasemia atau tidak
@@ -2221,19 +2284,23 @@
             </legend>
             <div class="option-wrapper">
                 <label class="">
-                    <input name="/Register_ANC/laboratorium_thalasemia" data-name="/Register_ANC/laboratorium_thalasemia"
+                    <input name="/Register_ANC/laboratorium_thalasemia"
+                        data-name="/Register_ANC/laboratorium_thalasemia"
                         data-relevant=" /Register_ANC/Labcheck ='Ya'" data-type-xml="select1"
                         type="radio" value="positif" />
-                    <span class="option-label active" data-itext-id="/Register_ANC/laboratorium_thalasemia/positif:label"
+                    <span class="option-label active"
+                        data-itext-id="/Register_ANC/laboratorium_thalasemia/positif:label"
                         lang="Bahasa">Positif
                         (+)
                     </span>
                 </label>
                 <label class="">
-                    <input name="/Register_ANC/laboratorium_thalasemia" data-name="/Register_ANC/laboratorium_thalasemia"
+                    <input name="/Register_ANC/laboratorium_thalasemia"
+                        data-name="/Register_ANC/laboratorium_thalasemia"
                         data-relevant=" /Register_ANC/Labcheck ='Ya'" data-type-xml="select1"
                         type="radio" value="negatif" />
-                    <span class="option-label active" data-itext-id="/Register_ANC/laboratorium_thalasemia/negatif:label"
+                    <span class="option-label active"
+                        data-itext-id="/Register_ANC/laboratorium_thalasemia/negatif:label"
                         lang="Bahasa">Negatif
                         (-)
                     </span>
@@ -2244,8 +2311,8 @@
     <fieldset class="question or-branch pre-init ">
         <fieldset>
             <legend>
-                <span class="question-label active" data-itext-id="/Register_ANC/laboratorium_sifilis:label"
-                    lang="Bahasa">Sifilis
+                <span class="question-label active"
+                    data-itext-id="/Register_ANC/laboratorium_sifilis:label" lang="Bahasa">Sifilis
                 </span>
                 <span class="or-hint active" lang="">Menunjukkan apakah Ibu mengidap Sifilis atau
                     tidak
@@ -2253,18 +2320,22 @@
             </legend>
             <div class="option-wrapper">
                 <label class="">
-                    <input name="/Register_ANC/laboratorium_sifilis" data-name="/Register_ANC/laboratorium_sifilis"
+                    <input name="/Register_ANC/laboratorium_sifilis"
+                        data-name="/Register_ANC/laboratorium_sifilis"
                         data-relevant=" /Register_ANC/Labcheck ='Ya'" data-type-xml="select1"
                         type="radio" value="positif" />
-                    <span class="option-label active" data-itext-id="/Register_ANC/laboratorium_sifilis/positif:label"
+                    <span class="option-label active"
+                        data-itext-id="/Register_ANC/laboratorium_sifilis/positif:label"
                         lang="Bahasa">Positif (+)
                     </span>
                 </label>
                 <label class="">
-                    <input name="/Register_ANC/laboratorium_sifilis" data-name="/Register_ANC/laboratorium_sifilis"
+                    <input name="/Register_ANC/laboratorium_sifilis"
+                        data-name="/Register_ANC/laboratorium_sifilis"
                         data-relevant=" /Register_ANC/Labcheck ='Ya'" data-type-xml="select1"
                         type="radio" value="negatif" />
-                    <span class="option-label active" data-itext-id="/Register_ANC/laboratorium_sifilis/negatif:label"
+                    <span class="option-label active"
+                        data-itext-id="/Register_ANC/laboratorium_sifilis/negatif:label"
                         lang="Bahasa">Negatif (-)
                     </span>
                 </label>
@@ -2274,8 +2345,8 @@
     <fieldset class="question or-branch pre-init ">
         <fieldset>
             <legend>
-                <span class="question-label active" data-itext-id="/Register_ANC/laboratorium_hbsag:label"
-                    lang="Bahasa">HbsAg
+                <span class="question-label active"
+                    data-itext-id="/Register_ANC/laboratorium_hbsag:label" lang="Bahasa">HbsAg
                 </span>
                 <span class="or-hint active" lang="">Menunjukkan apakah Ibu mengidap Hepatitis B
                     surface Antigen
@@ -2283,18 +2354,22 @@
             </legend>
             <div class="option-wrapper">
                 <label class="">
-                    <input name="/Register_ANC/laboratorium_hbsag" data-name="/Register_ANC/laboratorium_hbsag"
+                    <input name="/Register_ANC/laboratorium_hbsag"
+                        data-name="/Register_ANC/laboratorium_hbsag"
                         data-relevant=" /Register_ANC/Labcheck ='Ya'" data-type-xml="select1"
                         type="radio" value="positif" />
-                    <span class="option-label active" data-itext-id="/Register_ANC/laboratorium_hbsag/positif:label"
+                    <span class="option-label active"
+                        data-itext-id="/Register_ANC/laboratorium_hbsag/positif:label"
                         lang="Bahasa">Positif (+)
                     </span>
                 </label>
                 <label class="">
-                    <input name="/Register_ANC/laboratorium_hbsag" data-name="/Register_ANC/laboratorium_hbsag"
+                    <input name="/Register_ANC/laboratorium_hbsag"
+                        data-name="/Register_ANC/laboratorium_hbsag"
                         data-relevant=" /Register_ANC/Labcheck ='Ya'" data-type-xml="select1"
                         type="radio" value="negatif" />
-                    <span class="option-label active" data-itext-id="/Register_ANC/laboratorium_hbsag/negatif:label"
+                    <span class="option-label active"
+                        data-itext-id="/Register_ANC/laboratorium_hbsag/negatif:label"
                         lang="Bahasa">Negatif (-)
                     </span>
                 </label>
@@ -2304,8 +2379,9 @@
     <fieldset class="question ">
         <fieldset>
             <legend>
-                <span class="question-label active" data-itext-id="/Register_ANC/program_integration:label"
-                    lang="Bahasa">Apakah anda melakukan
+                <span class="question-label active"
+                    data-itext-id="/Register_ANC/program_integration:label" lang="Bahasa">Apakah
+                    anda melakukan
                     Integrasi Program terhadap Ibu Hamil?
                 </span>
                 <span class="or-hint active" lang="">Menunjukan detail Integrasi Program yang
@@ -2314,19 +2390,20 @@
             </legend>
             <div class="option-wrapper">
                 <label class="">
-                    <input name="/Register_ANC/program_integration" data-name="/Register_ANC/program_integration"
-                        data-type-xml="select1" type="radio"
-                        value="Ya" />
-                    <span class="option-label active" data-itext-id="/Register_ANC/program_integration/Ya:label"
-                        lang="Bahasa">Ya
+                    <input name="/Register_ANC/program_integration"
+                        data-name="/Register_ANC/program_integration" data-type-xml="select1"
+                        type="radio" value="Ya" />
+                    <span class="option-label active"
+                        data-itext-id="/Register_ANC/program_integration/Ya:label" lang="Bahasa">Ya
                     </span>
                 </label>
                 <label class="">
-                    <input name="/Register_ANC/program_integration" data-name="/Register_ANC/program_integration"
-                        data-type-xml="select1" type="radio"
-                        value="Tidak" />
-                    <span class="option-label active" data-itext-id="/Register_ANC/program_integration/Tidak:label"
-                        lang="Bahasa">Tidak
+                    <input name="/Register_ANC/program_integration"
+                        data-name="/Register_ANC/program_integration" data-type-xml="select1"
+                        type="radio" value="Tidak" />
+                    <span class="option-label active"
+                        data-itext-id="/Register_ANC/program_integration/Tidak:label" lang="Bahasa">
+                        Tidak
                     </span>
                 </label>
             </div>
@@ -2335,8 +2412,9 @@
     <fieldset class="question or-branch pre-init ">
         <fieldset>
             <legend>
-                <span class="question-label active" data-itext-id="/Register_ANC/integrasi_program_pmtct_vct:label"
-                    lang="Bahasa">VCT
+                <span class="question-label active"
+                    data-itext-id="/Register_ANC/integrasi_program_pmtct_vct:label" lang="Bahasa">
+                    VCT
                 </span>
                 <span class="or-hint active" lang="">Menunjukkan apakah Ibu melakukan Voluntary
                     Counseling Test atau tidak
@@ -2344,22 +2422,23 @@
             </legend>
             <div class="option-wrapper">
                 <label class="">
-                    <input name="/Register_ANC/integrasi_program_pmtct_vct" data-name="/Register_ANC/integrasi_program_pmtct_vct"
-                        data-relevant=" /Register_ANC/program_integration ='Ya'" data-type-xml="select1"
-                        type="radio"
-                        value="jika_dilakukan" />
-                    <span class="option-label active" data-itext-id="/Register_ANC/integrasi_program_pmtct_vct/jika_dilakukan:label"
+                    <input name="/Register_ANC/integrasi_program_pmtct_vct"
+                        data-name="/Register_ANC/integrasi_program_pmtct_vct"
+                        data-relevant=" /Register_ANC/program_integration ='Ya'"
+                        data-type-xml="select1" type="radio" value="jika_dilakukan" />
+                    <span class="option-label active"
+                        data-itext-id="/Register_ANC/integrasi_program_pmtct_vct/jika_dilakukan:label"
                         lang="Bahasa">
                         Jika dilakukan (√)
                     </span>
                 </label>
                 <label class="">
-                    <input name="/Register_ANC/integrasi_program_pmtct_vct" data-name="/Register_ANC/integrasi_program_pmtct_vct"
+                    <input name="/Register_ANC/integrasi_program_pmtct_vct"
+                        data-name="/Register_ANC/integrasi_program_pmtct_vct"
                         data-relevant=" /Register_ANC/program_integration ='Ya'"
-                        data-type-xml="select1"
-                        type="radio"
-                        value="jika_tidak_dilakukan" />
-                    <span class="option-label active" data-itext-id="/Register_ANC/integrasi_program_pmtct_vct/jika_tidak_dilakukan:label"
+                        data-type-xml="select1" type="radio" value="jika_tidak_dilakukan" />
+                    <span class="option-label active"
+                        data-itext-id="/Register_ANC/integrasi_program_pmtct_vct/jika_tidak_dilakukan:label"
                         lang="Bahasa">
                         Jika tidak dilakukan (x)
                     </span>
@@ -2370,7 +2449,8 @@
     <fieldset class="question or-branch pre-init ">
         <fieldset>
             <legend>
-                <span class="question-label active" data-itext-id="/Register_ANC/integrasi_program_pmtct_periksa_darah:label"
+                <span class="question-label active"
+                    data-itext-id="/Register_ANC/integrasi_program_pmtct_periksa_darah:label"
                     lang="Bahasa">
                     Periksa darah untuk uji PMTCT
                 </span>
@@ -2380,23 +2460,23 @@
             </legend>
             <div class="option-wrapper">
                 <label class="">
-                    <input name="/Register_ANC/integrasi_program_pmtct_periksa_darah" data-name="/Register_ANC/integrasi_program_pmtct_periksa_darah"
+                    <input name="/Register_ANC/integrasi_program_pmtct_periksa_darah"
+                        data-name="/Register_ANC/integrasi_program_pmtct_periksa_darah"
                         data-relevant=" /Register_ANC/program_integration ='Ya'"
-                        data-type-xml="select1"
-                        type="radio"
-                        value="jika_dilakukan" />
-                    <span class="option-label active" data-itext-id="/Register_ANC/integrasi_program_pmtct_periksa_darah/jika_dilakukan:label"
+                        data-type-xml="select1" type="radio" value="jika_dilakukan" />
+                    <span class="option-label active"
+                        data-itext-id="/Register_ANC/integrasi_program_pmtct_periksa_darah/jika_dilakukan:label"
                         lang="Bahasa">
                         Jika dilakukan (√)
                     </span>
                 </label>
                 <label class="">
-                    <input name="/Register_ANC/integrasi_program_pmtct_periksa_darah" data-name="/Register_ANC/integrasi_program_pmtct_periksa_darah"
+                    <input name="/Register_ANC/integrasi_program_pmtct_periksa_darah"
+                        data-name="/Register_ANC/integrasi_program_pmtct_periksa_darah"
                         data-relevant=" /Register_ANC/program_integration ='Ya'"
-                        data-type-xml="select1"
-                        type="radio"
-                        value="jika_tidak_dilakukan" />
-                    <span class="option-label active" data-itext-id="/Register_ANC/integrasi_program_pmtct_periksa_darah/jika_tidak_dilakukan:label"
+                        data-type-xml="select1" type="radio" value="jika_tidak_dilakukan" />
+                    <span class="option-label active"
+                        data-itext-id="/Register_ANC/integrasi_program_pmtct_periksa_darah/jika_tidak_dilakukan:label"
                         lang="Bahasa">
                         Jika tidak dilakukan (x)
                     </span>
@@ -2407,7 +2487,8 @@
     <fieldset class="question or-branch pre-init ">
         <fieldset>
             <legend>
-                <span class="question-label active" data-itext-id="/Register_ANC/integrasi_program_pmtct_serologi:label"
+                <span class="question-label active"
+                    data-itext-id="/Register_ANC/integrasi_program_pmtct_serologi:label"
                     lang="Bahasa">Serologi
                 </span>
                 <span class="or-hint active" lang="">Menunjukkan hasil pemeriksaan Serologi pada Ibu
@@ -2416,21 +2497,23 @@
             </legend>
             <div class="option-wrapper">
                 <label class="">
-                    <input name="/Register_ANC/integrasi_program_pmtct_serologi" data-name="/Register_ANC/integrasi_program_pmtct_serologi"
-                        data-relevant=" /Register_ANC/program_integration ='Ya'" data-type-xml="select1"
-                        type="radio"
-                        value="positif" />
-                    <span class="option-label active" data-itext-id="/Register_ANC/integrasi_program_pmtct_serologi/positif:label"
+                    <input name="/Register_ANC/integrasi_program_pmtct_serologi"
+                        data-name="/Register_ANC/integrasi_program_pmtct_serologi"
+                        data-relevant=" /Register_ANC/program_integration ='Ya'"
+                        data-type-xml="select1" type="radio" value="positif" />
+                    <span class="option-label active"
+                        data-itext-id="/Register_ANC/integrasi_program_pmtct_serologi/positif:label"
                         lang="Bahasa">
                         Positif (+)
                     </span>
                 </label>
                 <label class="">
-                    <input name="/Register_ANC/integrasi_program_pmtct_serologi" data-name="/Register_ANC/integrasi_program_pmtct_serologi"
-                        data-relevant=" /Register_ANC/program_integration ='Ya'" data-type-xml="select1"
-                        type="radio"
-                        value="negatif" />
-                    <span class="option-label active" data-itext-id="/Register_ANC/integrasi_program_pmtct_serologi/negatif:label"
+                    <input name="/Register_ANC/integrasi_program_pmtct_serologi"
+                        data-name="/Register_ANC/integrasi_program_pmtct_serologi"
+                        data-relevant=" /Register_ANC/program_integration ='Ya'"
+                        data-type-xml="select1" type="radio" value="negatif" />
+                    <span class="option-label active"
+                        data-itext-id="/Register_ANC/integrasi_program_pmtct_serologi/negatif:label"
                         lang="Bahasa">
                         Negatif (-)
                     </span>
@@ -2439,18 +2522,21 @@
         </fieldset>
     </fieldset>
     <label class="question or-branch pre-init non-select ">
-        <span class="question-label active" data-itext-id="/Register_ANC/integrasi_program_pmtct_arv:label"
-            lang="Bahasa">ARV Profilaksis
+        <span class="question-label active"
+            data-itext-id="/Register_ANC/integrasi_program_pmtct_arv:label" lang="Bahasa">ARV
+            Profilaksis
         </span>
         <span class="or-hint active" lang="">Menunjukkan jenis obat pada Ibu yang mengalami PMTCT
         </span>
-        <input name="/Register_ANC/integrasi_program_pmtct_arv" data-relevant=" /Register_ANC/program_integration ='Ya'"
-            data-type-xml="string" type="text" />
+        <input name="/Register_ANC/integrasi_program_pmtct_arv"
+            data-relevant=" /Register_ANC/program_integration ='Ya'" data-type-xml="string"
+            type="text" />
     </label>
     <fieldset class="question or-branch pre-init ">
         <fieldset>
             <legend>
-                <span class="question-label active" data-itext-id="/Register_ANC/integrasi_program_malaria_periksa_darah:label"
+                <span class="question-label active"
+                    data-itext-id="/Register_ANC/integrasi_program_malaria_periksa_darah:label"
                     lang="Bahasa">
                     Periksa darah untuk uji Malaria
                 </span>
@@ -2462,22 +2548,23 @@
             </legend>
             <div class="option-wrapper">
                 <label class="">
-                    <input name="/Register_ANC/integrasi_program_malaria_periksa_darah" data-name="/Register_ANC/integrasi_program_malaria_periksa_darah"
-                        data-relevant=" /Register_ANC/program_integration ='Ya'" data-type-xml="select1"
-                        required="required" type="radio"
-                        value="Ya" />
-                    <span class="option-label active" data-itext-id="/Register_ANC/integrasi_program_malaria_periksa_darah/Ya:label"
+                    <input name="/Register_ANC/integrasi_program_malaria_periksa_darah"
+                        data-name="/Register_ANC/integrasi_program_malaria_periksa_darah"
+                        data-relevant=" /Register_ANC/program_integration ='Ya'"
+                        data-type-xml="select1" required="required" type="radio" value="Ya" />
+                    <span class="option-label active"
+                        data-itext-id="/Register_ANC/integrasi_program_malaria_periksa_darah/Ya:label"
                         lang="Bahasa">
                         Jika dilakukan (√)
                     </span>
                 </label>
                 <label class="">
-                    <input name="/Register_ANC/integrasi_program_malaria_periksa_darah" data-name="/Register_ANC/integrasi_program_malaria_periksa_darah"
+                    <input name="/Register_ANC/integrasi_program_malaria_periksa_darah"
+                        data-name="/Register_ANC/integrasi_program_malaria_periksa_darah"
                         data-relevant=" /Register_ANC/program_integration ='Ya'"
-                        data-type-xml="select1" required="required"
-                        type="radio"
-                        value="Tidak" />
-                    <span class="option-label active" data-itext-id="/Register_ANC/integrasi_program_malaria_periksa_darah/Tidak:label"
+                        data-type-xml="select1" required="required" type="radio" value="Tidak" />
+                    <span class="option-label active"
+                        data-itext-id="/Register_ANC/integrasi_program_malaria_periksa_darah/Tidak:label"
                         lang="Bahasa">
                         Jika tidak dilakukan (x)
                     </span>
@@ -2488,7 +2575,8 @@
     <fieldset class="question or-branch pre-init ">
         <fieldset>
             <legend>
-                <span class="question-label active" data-itext-id="/Register_ANC/integrasi_program_malaria_malaria:label"
+                <span class="question-label active"
+                    data-itext-id="/Register_ANC/integrasi_program_malaria_malaria:label"
                     lang="Bahasa">Malaria
                 </span>
                 <span class="or-hint active" lang="">Menunjukkan Apakah ibu Mengidap Malaria atau
@@ -2497,21 +2585,23 @@
             </legend>
             <div class="option-wrapper">
                 <label class="">
-                    <input name="/Register_ANC/integrasi_program_malaria_malaria" data-name="/Register_ANC/integrasi_program_malaria_malaria"
-                        data-relevant=" /Register_ANC/integrasi_program_malaria_periksa_darah  = 'Ya'" data-type-xml="select1"
-                        type="radio"
-                        value="positif" />
-                    <span class="option-label active" data-itext-id="/Register_ANC/integrasi_program_malaria_malaria/positif:label"
+                    <input name="/Register_ANC/integrasi_program_malaria_malaria"
+                        data-name="/Register_ANC/integrasi_program_malaria_malaria"
+                        data-relevant=" /Register_ANC/integrasi_program_malaria_periksa_darah  = 'Ya'"
+                        data-type-xml="select1" type="radio" value="positif" />
+                    <span class="option-label active"
+                        data-itext-id="/Register_ANC/integrasi_program_malaria_malaria/positif:label"
                         lang="Bahasa">
                         Positif (+)
                     </span>
                 </label>
                 <label class="">
-                    <input name="/Register_ANC/integrasi_program_malaria_malaria" data-name="/Register_ANC/integrasi_program_malaria_malaria"
-                        data-relevant=" /Register_ANC/integrasi_program_malaria_periksa_darah  = 'Ya'" data-type-xml="select1"
-                        type="radio"
-                        value="negatif" />
-                    <span class="option-label active" data-itext-id="/Register_ANC/integrasi_program_malaria_malaria/negatif:label"
+                    <input name="/Register_ANC/integrasi_program_malaria_malaria"
+                        data-name="/Register_ANC/integrasi_program_malaria_malaria"
+                        data-relevant=" /Register_ANC/integrasi_program_malaria_periksa_darah  = 'Ya'"
+                        data-type-xml="select1" type="radio" value="negatif" />
+                    <span class="option-label active"
+                        data-itext-id="/Register_ANC/integrasi_program_malaria_malaria/negatif:label"
                         lang="Bahasa">
                         Negatif (-)
                     </span>
@@ -2522,7 +2612,8 @@
     <fieldset class="question or-branch pre-init ">
         <fieldset>
             <legend>
-                <span class="question-label active" data-itext-id="/Register_ANC/integrasi_program_malaria_obat:label"
+                <span class="question-label active"
+                    data-itext-id="/Register_ANC/integrasi_program_malaria_obat:label"
                     lang="Bahasa">Obat malaria
                 </span>
                 <span class="or-hint active" lang="">Menunjukkan Jenis Obat Malaria yang Diberikan
@@ -2531,29 +2622,32 @@
             </legend>
             <div class="option-wrapper">
                 <label class="">
-                    <input name="/Register_ANC/integrasi_program_malaria_obat" data-name="/Register_ANC/integrasi_program_malaria_obat"
-                        data-relevant=" /Register_ANC/integrasi_program_malaria_periksa_darah  = 'Ya'" data-type-xml="select1"
-                        type="radio"
-                        value="ZDV" />
-                    <span class="option-label active" data-itext-id="/Register_ANC/integrasi_program_malaria_obat/ZDV:label"
+                    <input name="/Register_ANC/integrasi_program_malaria_obat"
+                        data-name="/Register_ANC/integrasi_program_malaria_obat"
+                        data-relevant=" /Register_ANC/integrasi_program_malaria_periksa_darah  = 'Ya'"
+                        data-type-xml="select1" type="radio" value="ZDV" />
+                    <span class="option-label active"
+                        data-itext-id="/Register_ANC/integrasi_program_malaria_obat/ZDV:label"
                         lang="Bahasa">(ZDV)
                     </span>
                 </label>
                 <label class="">
-                    <input name="/Register_ANC/integrasi_program_malaria_obat" data-name="/Register_ANC/integrasi_program_malaria_obat"
-                        data-relevant=" /Register_ANC/integrasi_program_malaria_periksa_darah  = 'Ya'" data-type-xml="select1"
-                        type="radio"
-                        value="NVP" />
-                    <span class="option-label active" data-itext-id="/Register_ANC/integrasi_program_malaria_obat/NVP:label"
+                    <input name="/Register_ANC/integrasi_program_malaria_obat"
+                        data-name="/Register_ANC/integrasi_program_malaria_obat"
+                        data-relevant=" /Register_ANC/integrasi_program_malaria_periksa_darah  = 'Ya'"
+                        data-type-xml="select1" type="radio" value="NVP" />
+                    <span class="option-label active"
+                        data-itext-id="/Register_ANC/integrasi_program_malaria_obat/NVP:label"
                         lang="Bahasa">(NVP)
                     </span>
                 </label>
                 <label class="">
-                    <input name="/Register_ANC/integrasi_program_malaria_obat" data-name="/Register_ANC/integrasi_program_malaria_obat"
-                        data-relevant=" /Register_ANC/integrasi_program_malaria_periksa_darah  = 'Ya'" data-type-xml="select1"
-                        type="radio"
-                        value="TC" />
-                    <span class="option-label active" data-itext-id="/Register_ANC/integrasi_program_malaria_obat/TC:label"
+                    <input name="/Register_ANC/integrasi_program_malaria_obat"
+                        data-name="/Register_ANC/integrasi_program_malaria_obat"
+                        data-relevant=" /Register_ANC/integrasi_program_malaria_periksa_darah  = 'Ya'"
+                        data-type-xml="select1" type="radio" value="TC" />
+                    <span class="option-label active"
+                        data-itext-id="/Register_ANC/integrasi_program_malaria_obat/TC:label"
                         lang="Bahasa">(TC)
                     </span>
                 </label>
@@ -2563,7 +2657,8 @@
     <fieldset class="question or-branch pre-init ">
         <fieldset>
             <legend>
-                <span class="question-label active" data-itext-id="/Register_ANC/integrasi_program_malaria_kelambu:label"
+                <span class="question-label active"
+                    data-itext-id="/Register_ANC/integrasi_program_malaria_kelambu:label"
                     lang="Bahasa">memasang
                     kelambu Berinsektisida
                 </span>
@@ -2573,23 +2668,23 @@
             </legend>
             <div class="option-wrapper">
                 <label class="">
-                    <input name="/Register_ANC/integrasi_program_malaria_kelambu" data-name="/Register_ANC/integrasi_program_malaria_kelambu"
+                    <input name="/Register_ANC/integrasi_program_malaria_kelambu"
+                        data-name="/Register_ANC/integrasi_program_malaria_kelambu"
                         data-relevant=" /Register_ANC/integrasi_program_malaria_periksa_darah  = 'Ya'"
-                        data-type-xml="select1"
-                        type="radio"
-                        value="jika_dilakukan" />
-                    <span class="option-label active" data-itext-id="/Register_ANC/integrasi_program_malaria_kelambu/jika_dilakukan:label"
+                        data-type-xml="select1" type="radio" value="jika_dilakukan" />
+                    <span class="option-label active"
+                        data-itext-id="/Register_ANC/integrasi_program_malaria_kelambu/jika_dilakukan:label"
                         lang="Bahasa">
                         Jika dilakukan (√)
                     </span>
                 </label>
                 <label class="">
-                    <input name="/Register_ANC/integrasi_program_malaria_kelambu" data-name="/Register_ANC/integrasi_program_malaria_kelambu"
+                    <input name="/Register_ANC/integrasi_program_malaria_kelambu"
+                        data-name="/Register_ANC/integrasi_program_malaria_kelambu"
                         data-relevant=" /Register_ANC/integrasi_program_malaria_periksa_darah  = 'Ya'"
-                        data-type-xml="select1"
-                        type="radio"
-                        value="jika_tidak_dilakukan" />
-                    <span class="option-label active" data-itext-id="/Register_ANC/integrasi_program_malaria_kelambu/jika_tidak_dilakukan:label"
+                        data-type-xml="select1" type="radio" value="jika_tidak_dilakukan" />
+                    <span class="option-label active"
+                        data-itext-id="/Register_ANC/integrasi_program_malaria_kelambu/jika_tidak_dilakukan:label"
                         lang="Bahasa">
                         Jika tidak dilakukan (x)
                     </span>
@@ -2600,8 +2695,9 @@
     <fieldset class="question or-branch pre-init ">
         <fieldset>
             <legend>
-                <span class="question-label active" data-itext-id="/Register_ANC/integrasi_program_tb_dahak:label"
-                    lang="Bahasa">Periksa dahak
+                <span class="question-label active"
+                    data-itext-id="/Register_ANC/integrasi_program_tb_dahak:label" lang="Bahasa">
+                    Periksa dahak
                 </span>
                 <span class="or-hint active" lang="">Menunjukkan Apakah Ibu melakukan Pemeriksaan
                     Dahak Untuk tes TB
@@ -2609,21 +2705,23 @@
             </legend>
             <div class="option-wrapper">
                 <label class="">
-                    <input name="/Register_ANC/integrasi_program_tb_dahak" data-name="/Register_ANC/integrasi_program_tb_dahak"
-                        data-relevant=" /Register_ANC/program_integration ='Ya'" data-type-xml="select1"
-                        type="radio"
-                        value="Ya" />
-                    <span class="option-label active" data-itext-id="/Register_ANC/integrasi_program_tb_dahak/Ya:label"
+                    <input name="/Register_ANC/integrasi_program_tb_dahak"
+                        data-name="/Register_ANC/integrasi_program_tb_dahak"
+                        data-relevant=" /Register_ANC/program_integration ='Ya'"
+                        data-type-xml="select1" type="radio" value="Ya" />
+                    <span class="option-label active"
+                        data-itext-id="/Register_ANC/integrasi_program_tb_dahak/Ya:label"
                         lang="Bahasa">JIka
                         dilakukan (√)
                     </span>
                 </label>
                 <label class="">
-                    <input name="/Register_ANC/integrasi_program_tb_dahak" data-name="/Register_ANC/integrasi_program_tb_dahak"
-                        data-relevant=" /Register_ANC/program_integration ='Ya'" data-type-xml="select1"
-                        type="radio"
-                        value="Tidak" />
-                    <span class="option-label active" data-itext-id="/Register_ANC/integrasi_program_tb_dahak/Tidak:label"
+                    <input name="/Register_ANC/integrasi_program_tb_dahak"
+                        data-name="/Register_ANC/integrasi_program_tb_dahak"
+                        data-relevant=" /Register_ANC/program_integration ='Ya'"
+                        data-type-xml="select1" type="radio" value="Tidak" />
+                    <span class="option-label active"
+                        data-itext-id="/Register_ANC/integrasi_program_tb_dahak/Tidak:label"
                         lang="Bahasa">Jika
                         Tidak dilakukan (x)
                     </span>
@@ -2634,8 +2732,8 @@
     <fieldset class="question or-branch pre-init ">
         <fieldset>
             <legend>
-                <span class="question-label active" data-itext-id="/Register_ANC/integrasi_program_tb_tbc:label"
-                    lang="Bahasa">TBC
+                <span class="question-label active"
+                    data-itext-id="/Register_ANC/integrasi_program_tb_tbc:label" lang="Bahasa">TBC
                 </span>
                 <span class="or-hint active" lang="">Menunjukkan Apakah Ibu Mengidap TBC atau
                     tidak
@@ -2643,21 +2741,23 @@
             </legend>
             <div class="option-wrapper">
                 <label class="">
-                    <input name="/Register_ANC/integrasi_program_tb_tbc" data-name="/Register_ANC/integrasi_program_tb_tbc"
-                        data-relevant=" /Register_ANC/integrasi_program_tb_dahak  = 'Ya'" data-type-xml="select1"
-                        type="radio"
-                        value="positif" />
-                    <span class="option-label active" data-itext-id="/Register_ANC/integrasi_program_tb_tbc/positif:label"
+                    <input name="/Register_ANC/integrasi_program_tb_tbc"
+                        data-name="/Register_ANC/integrasi_program_tb_tbc"
+                        data-relevant=" /Register_ANC/integrasi_program_tb_dahak  = 'Ya'"
+                        data-type-xml="select1" type="radio" value="positif" />
+                    <span class="option-label active"
+                        data-itext-id="/Register_ANC/integrasi_program_tb_tbc/positif:label"
                         lang="Bahasa">Positif
                         (+)
                     </span>
                 </label>
                 <label class="">
-                    <input name="/Register_ANC/integrasi_program_tb_tbc" data-name="/Register_ANC/integrasi_program_tb_tbc"
-                        data-relevant=" /Register_ANC/integrasi_program_tb_dahak  = 'Ya'" data-type-xml="select1"
-                        type="radio"
-                        value="negatif" />
-                    <span class="option-label active" data-itext-id="/Register_ANC/integrasi_program_tb_tbc/negatif:label"
+                    <input name="/Register_ANC/integrasi_program_tb_tbc"
+                        data-name="/Register_ANC/integrasi_program_tb_tbc"
+                        data-relevant=" /Register_ANC/integrasi_program_tb_dahak  = 'Ya'"
+                        data-type-xml="select1" type="radio" value="negatif" />
+                    <span class="option-label active"
+                        data-itext-id="/Register_ANC/integrasi_program_tb_tbc/negatif:label"
                         lang="Bahasa">Negatif
                         (-)
                     </span>
@@ -2668,47 +2768,52 @@
     <fieldset class="question or-branch pre-init ">
         <fieldset>
             <legend>
-                <span class="question-label active" data-itext-id="/Register_ANC/integrasi_program_tb_obat:label"
-                    lang="Bahasa">Obat TBC
+                <span class="question-label active"
+                    data-itext-id="/Register_ANC/integrasi_program_tb_obat:label" lang="Bahasa">Obat
+                    TBC
                 </span>
                 <span class="or-hint active" lang="">Nama Obat TBC yang diberikan Kepada Ibu</span>
             </legend>
             <div class="option-wrapper">
                 <label class="">
-                    <input name="/Register_ANC/integrasi_program_tb_obat" data-name="/Register_ANC/integrasi_program_tb_obat"
-                        data-relevant=" /Register_ANC/integrasi_program_tb_dahak  = 'Ya'" data-type-xml="select1"
-                        type="radio"
-                        value="rifampisin" />
-                    <span class="option-label active" data-itext-id="/Register_ANC/integrasi_program_tb_obat/rifampisin:label"
+                    <input name="/Register_ANC/integrasi_program_tb_obat"
+                        data-name="/Register_ANC/integrasi_program_tb_obat"
+                        data-relevant=" /Register_ANC/integrasi_program_tb_dahak  = 'Ya'"
+                        data-type-xml="select1" type="radio" value="rifampisin" />
+                    <span class="option-label active"
+                        data-itext-id="/Register_ANC/integrasi_program_tb_obat/rifampisin:label"
                         lang="Bahasa">
                         Rifampisin (R)
                     </span>
                 </label>
                 <label class="">
-                    <input name="/Register_ANC/integrasi_program_tb_obat" data-name="/Register_ANC/integrasi_program_tb_obat"
-                        data-relevant=" /Register_ANC/integrasi_program_tb_dahak  = 'Ya'" data-type-xml="select1"
-                        type="radio"
-                        value="inh" />
-                    <span class="option-label active" data-itext-id="/Register_ANC/integrasi_program_tb_obat/inh:label"
+                    <input name="/Register_ANC/integrasi_program_tb_obat"
+                        data-name="/Register_ANC/integrasi_program_tb_obat"
+                        data-relevant=" /Register_ANC/integrasi_program_tb_dahak  = 'Ya'"
+                        data-type-xml="select1" type="radio" value="inh" />
+                    <span class="option-label active"
+                        data-itext-id="/Register_ANC/integrasi_program_tb_obat/inh:label"
                         lang="Bahasa">INH (H)
                     </span>
                 </label>
                 <label class="">
-                    <input name="/Register_ANC/integrasi_program_tb_obat" data-name="/Register_ANC/integrasi_program_tb_obat"
-                        data-relevant=" /Register_ANC/integrasi_program_tb_dahak  = 'Ya'" data-type-xml="select1"
-                        type="radio"
-                        value="pyrazinamid" />
-                    <span class="option-label active" data-itext-id="/Register_ANC/integrasi_program_tb_obat/pyrazinamid:label"
+                    <input name="/Register_ANC/integrasi_program_tb_obat"
+                        data-name="/Register_ANC/integrasi_program_tb_obat"
+                        data-relevant=" /Register_ANC/integrasi_program_tb_dahak  = 'Ya'"
+                        data-type-xml="select1" type="radio" value="pyrazinamid" />
+                    <span class="option-label active"
+                        data-itext-id="/Register_ANC/integrasi_program_tb_obat/pyrazinamid:label"
                         lang="Bahasa">
                         Pyrazinamid (Z)
                     </span>
                 </label>
                 <label class="">
-                    <input name="/Register_ANC/integrasi_program_tb_obat" data-name="/Register_ANC/integrasi_program_tb_obat"
-                        data-relevant=" /Register_ANC/integrasi_program_tb_dahak  = 'Ya'" data-type-xml="select1"
-                        type="radio"
-                        value="etahmbutol" />
-                    <span class="option-label active" data-itext-id="/Register_ANC/integrasi_program_tb_obat/etahmbutol:label"
+                    <input name="/Register_ANC/integrasi_program_tb_obat"
+                        data-name="/Register_ANC/integrasi_program_tb_obat"
+                        data-relevant=" /Register_ANC/integrasi_program_tb_dahak  = 'Ya'"
+                        data-type-xml="select1" type="radio" value="etahmbutol" />
+                    <span class="option-label active"
+                        data-itext-id="/Register_ANC/integrasi_program_tb_obat/etahmbutol:label"
                         lang="Bahasa">
                         Etahmbutol
                     </span>
@@ -2717,8 +2822,9 @@
         </fieldset>
     </fieldset>
     <label class="question or-appearance-minimal ">
-        <span class="question-label active" data-itext-id="/Register_ANC/resiko_terdeksi_pertama_kali:label"
-            lang="Bahasa">Resiko Terdeteksi
+        <span class="question-label active"
+            data-itext-id="/Register_ANC/resiko_terdeksi_pertama_kali:label" lang="Bahasa">Resiko
+            Terdeteksi
             Pertama Kali Oleh
         </span>
         <span class="or-hint active" lang="">Pendeteksi pertama komplikasi pada kehamilan Ibu</span>
@@ -2738,8 +2844,9 @@
         <span style="display:none;" class="or-option-translations" />
     </label>
     <label class="question or-appearance-minimal ">
-        <span class="question-label active" data-itext-id="/Register_ANC/komplikasi_dalam_kehamilan:label"
-            lang="Bahasa">Komplikasi dalam
+        <span class="question-label active"
+            data-itext-id="/Register_ANC/komplikasi_dalam_kehamilan:label" lang="Bahasa">Komplikasi
+            dalam
             Kehamilan
         </span>
         <span class="or-hint active" lang="">Menunjukkan Komplikasi Kehamilan pada Ibu</span>
@@ -2784,8 +2891,8 @@
                 <label class="">
                     <input name="/Register_ANC/rujukan" data-name="/Register_ANC/rujukan"
                         data-type-xml="select1" type="radio" value="Tidak" />
-                    <span class="option-label active" data-itext-id="/Register_ANC/rujukan/Tidak:label"
-                        lang="Bahasa">Tidak
+                    <span class="option-label active"
+                        data-itext-id="/Register_ANC/rujukan/Tidak:label" lang="Bahasa">Tidak
                     </span>
                 </label>
             </div>
@@ -2817,31 +2924,37 @@
         <span class="or-hint active" lang="">Lokasi Tujuan Rujukan selain yang disebutkan Jika ibu
             Mengalami Komplikasi Kehamilan
         </span>
-        <input name="/Register_ANC/dirujuk_keL" data-relevant=" /Register_ANC/dirujuk_ke  = 'lain_lain'"
-            data-type-xml="string" type="text" />
+        <input name="/Register_ANC/dirujuk_keL"
+            data-relevant=" /Register_ANC/dirujuk_ke  = 'lain_lain'" data-type-xml="string"
+            type="text" />
     </label>
     <fieldset class="question or-branch pre-init ">
         <fieldset>
             <legend>
-                <span class="question-label active" data-itext-id="/Register_ANC/keadaan_ibu_saat_tiba:label"
-                    lang="Bahasa">Keadaan Ibu saat Tiba
+                <span class="question-label active"
+                    data-itext-id="/Register_ANC/keadaan_ibu_saat_tiba:label" lang="Bahasa">Keadaan
+                    Ibu saat Tiba
                 </span>
                 <span class="or-hint active" lang="">Keadaan saat ibu tiba Tempat rujukan</span>
             </legend>
             <div class="option-wrapper">
                 <label class="">
-                    <input name="/Register_ANC/keadaan_ibu_saat_tiba" data-name="/Register_ANC/keadaan_ibu_saat_tiba"
+                    <input name="/Register_ANC/keadaan_ibu_saat_tiba"
+                        data-name="/Register_ANC/keadaan_ibu_saat_tiba"
                         data-relevant=" /Register_ANC/rujukan  = 'Ya'" data-type-xml="select1"
                         type="radio" value="hidup" />
-                    <span class="option-label active" data-itext-id="/Register_ANC/keadaan_ibu_saat_tiba/hidup:label"
+                    <span class="option-label active"
+                        data-itext-id="/Register_ANC/keadaan_ibu_saat_tiba/hidup:label"
                         lang="Bahasa">Hidup (H)
                     </span>
                 </label>
                 <label class="">
-                    <input name="/Register_ANC/keadaan_ibu_saat_tiba" data-name="/Register_ANC/keadaan_ibu_saat_tiba"
+                    <input name="/Register_ANC/keadaan_ibu_saat_tiba"
+                        data-name="/Register_ANC/keadaan_ibu_saat_tiba"
                         data-relevant=" /Register_ANC/rujukan  = 'Ya'" data-type-xml="select1"
                         type="radio" value="mati" />
-                    <span class="option-label active" data-itext-id="/Register_ANC/keadaan_ibu_saat_tiba/mati:label"
+                    <span class="option-label active"
+                        data-itext-id="/Register_ANC/keadaan_ibu_saat_tiba/mati:label"
                         lang="Bahasa">Mati (M)
                     </span>
                 </label>
@@ -2851,8 +2964,9 @@
     <fieldset class="question or-branch pre-init ">
         <fieldset>
             <legend>
-                <span class="question-label active" data-itext-id="/Register_ANC/keadaan_ibu_saat_pulang:label"
-                    lang="Bahasa">Keadaan Ibu saat
+                <span class="question-label active"
+                    data-itext-id="/Register_ANC/keadaan_ibu_saat_pulang:label" lang="Bahasa">
+                    Keadaan Ibu saat
                     Pulang
                 </span>
                 <span class="or-hint active" lang="">Keadaan saat ibu Pulang dari Tempat Rujukan
@@ -2860,18 +2974,22 @@
             </legend>
             <div class="option-wrapper">
                 <label class="">
-                    <input name="/Register_ANC/keadaan_ibu_saat_pulang" data-name="/Register_ANC/keadaan_ibu_saat_pulang"
+                    <input name="/Register_ANC/keadaan_ibu_saat_pulang"
+                        data-name="/Register_ANC/keadaan_ibu_saat_pulang"
                         data-relevant=" /Register_ANC/rujukan  = 'Ya'" data-type-xml="select1"
                         type="radio" value="hidup" />
-                    <span class="option-label active" data-itext-id="/Register_ANC/keadaan_ibu_saat_pulang/hidup:label"
+                    <span class="option-label active"
+                        data-itext-id="/Register_ANC/keadaan_ibu_saat_pulang/hidup:label"
                         lang="Bahasa">Hidup (H)
                     </span>
                 </label>
                 <label class="">
-                    <input name="/Register_ANC/keadaan_ibu_saat_pulang" data-name="/Register_ANC/keadaan_ibu_saat_pulang"
+                    <input name="/Register_ANC/keadaan_ibu_saat_pulang"
+                        data-name="/Register_ANC/keadaan_ibu_saat_pulang"
                         data-relevant=" /Register_ANC/rujukan  = 'Ya'" data-type-xml="select1"
                         type="radio" value="mati" />
-                    <span class="option-label active" data-itext-id="/Register_ANC/keadaan_ibu_saat_pulang/mati:label"
+                    <span class="option-label active"
+                        data-itext-id="/Register_ANC/keadaan_ibu_saat_pulang/mati:label"
                         lang="Bahasa">Mati (M)
                     </span>
                 </label>
@@ -2889,8 +3007,8 @@
     <fieldset class="question or-branch pre-init ">
         <fieldset>
             <legend>
-                <span class="question-label active" data-itext-id="/Register_ANC/high_risk_note:label"
-                    lang="Bahasa">
+                <span class="question-label active"
+                    data-itext-id="/Register_ANC/high_risk_note:label" lang="Bahasa">
                     masuk kategori RT (Resiko Tinggi), karena:
                     <span class="or-output" data-value=" /Register_ANC/high_risk_reason " />
                     ,
@@ -2904,10 +3022,9 @@
             </legend>
             <div class="option-wrapper">
                 <label>
-                    <input name="/Register_ANC/high_risk_note" data-relevant=" /Register_ANC/is_high_risk_pregnancy  = 'yes' or  /Register_ANC/is_high_risk  = 'yes' or  /Register_ANC/is_high_risk_labour  = 'yes' or  /Register_ANC/is_other_risk  = 'yes' or  /Register_ANC/is_high_risk  = 'yes' or  /Register_ANC/is_high_risk_pregnancy  = 'yes' or  /Register_ANC/is_high_risk_labour  = 'yes'" data-type-xml="string"
-                        required="required"
-                        type="radio"
-                        value="OK" />
+                    <input name="/Register_ANC/high_risk_note"
+                        data-relevant=" /Register_ANC/is_high_risk_pregnancy  = 'yes' or  /Register_ANC/is_high_risk  = 'yes' or  /Register_ANC/is_high_risk_labour  = 'yes' or  /Register_ANC/is_other_risk  = 'yes' or  /Register_ANC/is_high_risk  = 'yes' or  /Register_ANC/is_high_risk_pregnancy  = 'yes' or  /Register_ANC/is_high_risk_labour  = 'yes'"
+                        data-type-xml="string" required="required" type="radio" value="OK" />
                     <span class="option-label active" lang="">OK</span>
                 </label>
             </div>
@@ -2923,16 +3040,16 @@
                 data-type-xml="date" type="hidden" />
         </label>
         <label class="calculation non-select ">
-            <input name="/Register_ANC/deviceid" data-preload="property" data-preload-params="deviceid"
-                data-type-xml="string" type="hidden" />
+            <input name="/Register_ANC/deviceid" data-preload="property"
+                data-preload-params="deviceid" data-type-xml="string" type="hidden" />
         </label>
         <label class="calculation non-select ">
-            <input name="/Register_ANC/simserial" data-preload="property" data-preload-params="simserial"
-                data-type-xml="string" type="hidden" />
+            <input name="/Register_ANC/simserial" data-preload="property"
+                data-preload-params="simserial" data-type-xml="string" type="hidden" />
         </label>
         <label class="calculation non-select ">
-            <input name="/Register_ANC/phonenumber" data-preload="property" data-preload-params="phonenumber"
-                data-type-xml="string" type="hidden" />
+            <input name="/Register_ANC/phonenumber" data-preload="property"
+                data-preload-params="phonenumber" data-type-xml="string" type="hidden" />
         </label>
         <label class="calculation non-select ">
             <input name="/Register_ANC/end" data-preload="timestamp" data-preload-params="end"
@@ -2941,235 +3058,236 @@
     </fieldset>
     <fieldset style="display:none;" id="or-calculated-items">
         <label class="calculation non-select ">
-            <input name="/Register_ANC/reg_date" autocomplete="off" data-calculate=" /Register_ANC/today "
-                data-type-xml="date" type="hidden" />
+            <input name="/Register_ANC/reg_date" autocomplete="off"
+                data-calculate=" /Register_ANC/today " data-type-xml="date" type="hidden" />
         </label>
         <label class="calculation non-select ">
-            <input name="/Register_ANC/umur" data-calculate="int(( /Register_ANC/today  -  /Register_ANC/tanggal_lahir_ibu ) div 365)"
-                data-type-xml="string"
-                type="hidden" />
+            <input name="/Register_ANC/umur"
+                data-calculate="int(( /Register_ANC/today  -  /Register_ANC/tanggal_lahir_ibu ) div 365)"
+                data-type-xml="string" type="hidden" />
         </label>
         <label class="calculation non-select ">
-            <input name="/Register_ANC/desa" data-calculate="if(( /Register_ANC/desa1  != '' and  /Register_ANC/desa1  != 'Lainnya'),  /Register_ANC/desa1 ,  /Register_ANC/desa2 )"
-                data-type-xml="string"
-                type="hidden" />
+            <input name="/Register_ANC/desa"
+                data-calculate="if(( /Register_ANC/desa1  != '' and  /Register_ANC/desa1  != 'Lainnya'),  /Register_ANC/desa1 ,  /Register_ANC/desa2 )"
+                data-type-xml="string" type="hidden" />
         </label>
         <label class="calculation non-select ">
-            <input name="/Register_ANC/dusun" data-calculate="if(( /Register_ANC/dusun1  != '' and  /Register_ANC/dusun1  != 'Lainnya'),  /Register_ANC/dusun1 ,  /Register_ANC/dusun2 )"
-                data-type-xml="string"
-                type="hidden" />
+            <input name="/Register_ANC/dusun"
+                data-calculate="if(( /Register_ANC/dusun1  != '' and  /Register_ANC/dusun1  != 'Lainnya'),  /Register_ANC/dusun1 ,  /Register_ANC/dusun2 )"
+                data-type-xml="string" type="hidden" />
         </label>
         <label class="calculation non-select ">
             <input name="/Register_ANC/edd" data-calculate="date( /Register_ANC/tanggal_hpht +280)"
                 data-type-xml="string" type="hidden" />
         </label>
         <label class="calculation non-select ">
-            <input name="/Register_ANC/htp" data-calculate="format-date( /Register_ANC/edd , '%Y-%n-%e')"
-                data-type-xml="string"
+            <input name="/Register_ANC/htp"
+                data-calculate="format-date( /Register_ANC/edd , '%Y-%n-%e')" data-type-xml="string"
                 type="hidden" />
         </label>
         <label class="calculation non-select ">
-            <input name="/Register_ANC/usia_klinis" data-calculate="int((( /Register_ANC/today  -  /Register_ANC/tanggal_hpht ) div 7)+1)"
-                data-type-xml="string"
-                type="hidden" />
+            <input name="/Register_ANC/usia_klinis"
+                data-calculate="int((( /Register_ANC/today  -  /Register_ANC/tanggal_hpht ) div 7)+1)"
+                data-type-xml="string" type="hidden" />
         </label>
         <label class="calculation non-select ">
-            <input name="/Register_ANC/trimester_ke" data-calculate="if(( /Register_ANC/usia_klinis &lt;='14'), 1, (if( /Register_ANC/usia_klinis &gt;='15' and  /Register_ANC/usia_klinis &lt;='28', 2, (if( /Register_ANC/usia_klinis &gt;'29', 3, '')))))"
-                data-type-xml="string"
-                type="hidden" />
+            <input name="/Register_ANC/trimester_ke"
+                data-calculate="if(( /Register_ANC/usia_klinis &lt;='14'), 1, (if( /Register_ANC/usia_klinis &gt;='15' and  /Register_ANC/usia_klinis &lt;='28', 2, (if( /Register_ANC/usia_klinis &gt;'29', 3, '')))))"
+                data-type-xml="string" type="hidden" />
         </label>
         <label class="calculation non-select ">
-            <input name="/Register_ANC/hidden_anc_ke" data-calculate="if(( /Register_ANC/trimester_ke ='1'), 1, (if( /Register_ANC/trimester_ke ='2', 2, (if( /Register_ANC/trimester_ke ='3', 3, '')))))"
-                data-type-xml="string"
-                type="hidden" />
+            <input name="/Register_ANC/hidden_anc_ke"
+                data-calculate="if(( /Register_ANC/trimester_ke ='1'), 1, (if( /Register_ANC/trimester_ke ='2', 2, (if( /Register_ANC/trimester_ke ='3', 3, '')))))"
+                data-type-xml="string" type="hidden" />
         </label>
         <label class="calculation non-select ">
-            <input name="/Register_ANC/taksiran_berat_janin" data-calculate="if(selected( /Register_ANC/kepala_terhadap_janin_pap ,'masuk'), (( /Register_ANC/tfu -11)*155), (if(selected( /Register_ANC/kepala_terhadap_janin_pap ,'belum_masuk'), (( /Register_ANC/tfu -12)*155), 0)))"
-                data-type-xml="string"
-                type="hidden" />
+            <input name="/Register_ANC/taksiran_berat_janin"
+                data-calculate="if(selected( /Register_ANC/kepala_terhadap_janin_pap ,'masuk'), (( /Register_ANC/tfu -11)*155), (if(selected( /Register_ANC/kepala_terhadap_janin_pap ,'belum_masuk'), (( /Register_ANC/tfu -12)*155), 0)))"
+                data-type-xml="string" type="hidden" />
         </label>
         <label class="calculation non-select ">
-            <input name="/Register_ANC/Protein_energy_Malnutrition_risk" data-calculate="if( /Register_ANC/lila_cm  &lt; 23.5, 'kekurangan_energi_kronis', '')"
-                data-type-xml="string"
-                type="hidden" />
+            <input name="/Register_ANC/Protein_energy_Malnutrition_risk"
+                data-calculate="if( /Register_ANC/lila_cm  &lt; 23.5, 'kekurangan_energi_kronis', '')"
+                data-type-xml="string" type="hidden" />
         </label>
         <label class="calculation non-select ">
-            <input name="/Register_ANC/anemia_risk" data-calculate="if( /Register_ANC/laboratorium_periksa_hb_hasil  &gt;= 7 and  /Register_ANC/laboratorium_periksa_hb_hasil  &lt; 11, 'anemia', (if ( /Register_ANC/laboratorium_periksa_hb_hasil  &lt; 7, 'severe_anemia', '')))"
-                data-type-xml="string"
-                type="hidden" />
+            <input name="/Register_ANC/anemia_risk"
+                data-calculate="if( /Register_ANC/laboratorium_periksa_hb_hasil  &gt;= 7 and  /Register_ANC/laboratorium_periksa_hb_hasil  &lt; 11, 'anemia', (if ( /Register_ANC/laboratorium_periksa_hb_hasil  &lt; 7, 'severe_anemia', '')))"
+                data-type-xml="string" type="hidden" />
         </label>
         <label class="calculation non-select ">
-            <input name="/Register_ANC/PIH_risk" data-calculate="if( /Register_ANC/td_sistolik  &gt;= 140 and  /Register_ANC/td_diastolik  &gt;= 90, 'PIH', '')"
-                data-type-xml="string"
-                type="hidden" />
+            <input name="/Register_ANC/PIH_risk"
+                data-calculate="if( /Register_ANC/td_sistolik  &gt;= 140 and  /Register_ANC/td_diastolik  &gt;= 90, 'PIH', '')"
+                data-type-xml="string" type="hidden" />
         </label>
         <label class="calculation non-select ">
-            <input name="/Register_ANC/diabetes_risk" data-calculate="if( /Register_ANC/laboratorium_gula_darah  = '&gt;_140_mg_dl', 'Diabetes', '')"
-                data-type-xml="string"
-                type="hidden" />
+            <input name="/Register_ANC/diabetes_risk"
+                data-calculate="if( /Register_ANC/laboratorium_gula_darah  = '&gt;_140_mg_dl', 'Diabetes', '')"
+                data-type-xml="string" type="hidden" />
         </label>
         <label class="calculation non-select ">
-            <input name="/Register_ANC/fetus_number_risk" data-calculate="if( /Register_ANC/jumlah_janin  ='ganda', 'Kelainan jumlah janin', '')"
-                data-type-xml="string"
-                type="hidden" />
+            <input name="/Register_ANC/fetus_number_risk"
+                data-calculate="if( /Register_ANC/jumlah_janin  ='ganda', 'Kelainan jumlah janin', '')"
+                data-type-xml="string" type="hidden" />
         </label>
         <label class="calculation non-select ">
-            <input name="/Register_ANC/fetus_size_risk" data-calculate="if( /Register_ANC/taksiran_berat_janin  &gt;4000, 'Kelainan Berat janin', '')"
-                data-type-xml="string"
-                type="hidden" />
+            <input name="/Register_ANC/fetus_size_risk"
+                data-calculate="if( /Register_ANC/taksiran_berat_janin  &gt;4000, 'Kelainan Berat janin', '')"
+                data-type-xml="string" type="hidden" />
         </label>
         <label class="calculation non-select ">
-            <input name="/Register_ANC/fetus_Malpresentation_risk" data-calculate="if( /Register_ANC/persentasi_janin  ='bokong___sungsang' or  /Register_ANC/persentasi_janin  ='letak_lintang___obligue', 'Malpresentasi janin', '')"
-                data-type-xml="string"
-                type="hidden" />
+            <input name="/Register_ANC/fetus_Malpresentation_risk"
+                data-calculate="if( /Register_ANC/persentasi_janin  ='bokong___sungsang' or  /Register_ANC/persentasi_janin  ='letak_lintang___obligue', 'Malpresentasi janin', '')"
+                data-type-xml="string" type="hidden" />
         </label>
         <label class="calculation non-select ">
-            <input name="/Register_ANC/TBC_risk" data-calculate="if( /Register_ANC/integrasi_program_tb_tbc  ='positif', 'Tuberculosis', '')"
-                data-type-xml="string"
-                type="hidden" />
+            <input name="/Register_ANC/TBC_risk"
+                data-calculate="if( /Register_ANC/integrasi_program_tb_tbc  ='positif', 'Tuberculosis', '')"
+                data-type-xml="string" type="hidden" />
         </label>
         <label class="calculation non-select ">
-            <input name="/Register_ANC/malaria_risk" data-calculate="if( /Register_ANC/integrasi_program_malaria_malaria  ='positif', 'Malaria', '')"
-                data-type-xml="string"
-                type="hidden" />
+            <input name="/Register_ANC/malaria_risk"
+                data-calculate="if( /Register_ANC/integrasi_program_malaria_malaria  ='positif', 'Malaria', '')"
+                data-type-xml="string" type="hidden" />
         </label>
         <label class="calculation non-select ">
-            <input name="/Register_ANC/Too_young_risk" data-calculate="if( /Register_ANC/umur  &lt;20, 'Ibu Terlalu muda','')"
-                data-type-xml="string"
-                type="hidden" />
+            <input name="/Register_ANC/Too_young_risk"
+                data-calculate="if( /Register_ANC/umur  &lt;20, 'Ibu Terlalu muda','')"
+                data-type-xml="string" type="hidden" />
         </label>
         <label class="calculation non-select ">
-            <input name="/Register_ANC/Too_old_mother" data-calculate="if( /Register_ANC/umur  &gt;35, 'Ibu Terlalu tua','')"
-                data-type-xml="string"
-                type="hidden" />
+            <input name="/Register_ANC/Too_old_mother"
+                data-calculate="if( /Register_ANC/umur  &gt;35, 'Ibu Terlalu tua','')"
+                data-type-xml="string" type="hidden" />
         </label>
         <label class="calculation non-select ">
-            <input name="/Register_ANC/TB_risk" data-calculate="if( /Register_ANC/tb_cm  &lt;= 145, 'Tinggi_badan_kurang', '')"
-                data-type-xml="string"
-                type="hidden" />
+            <input name="/Register_ANC/TB_risk"
+                data-calculate="if( /Register_ANC/tb_cm  &lt;= 145, 'Tinggi_badan_kurang', '')"
+                data-type-xml="string" type="hidden" />
         </label>
         <label class="calculation non-select ">
-            <input name="/Register_ANC/Too_many_children_risk" data-calculate="if( /Register_ANC/partus  &gt;3, 'Anak Lebih dari 3', '')"
-                data-type-xml="string"
-                type="hidden" />
+            <input name="/Register_ANC/Too_many_children_risk"
+                data-calculate="if( /Register_ANC/partus  &gt;3, 'Anak Lebih dari 3', '')"
+                data-type-xml="string" type="hidden" />
         </label>
         <label class="calculation non-select ">
-            <input name="/Register_ANC/abortus_risk" data-calculate="if( /Register_ANC/abortus  &gt; 3, 'Riwayat aborsi', '')"
-                data-type-xml="string"
-                type="hidden" />
+            <input name="/Register_ANC/abortus_risk"
+                data-calculate="if( /Register_ANC/abortus  &gt; 3, 'Riwayat aborsi', '')"
+                data-type-xml="string" type="hidden" />
         </label>
         <label class="calculation non-select ">
-            <input name="/Register_ANC/Section_Cesarea_record_risk" data-calculate="(if(selected( /Register_ANC/riwayat_komplikasi_kebidanan ,'riwayat_sc'), 'Riwayat SC',''))"
-                data-type-xml="string"
-                type="hidden" />
+            <input name="/Register_ANC/Section_Cesarea_record_risk"
+                data-calculate="(if(selected( /Register_ANC/riwayat_komplikasi_kebidanan ,'riwayat_sc'), 'Riwayat SC',''))"
+                data-type-xml="string" type="hidden" />
         </label>
         <label class="calculation non-select ">
-            <input name="/Register_ANC/STI_BBVs_risk" data-calculate="(if(selected( /Register_ANC/penyakit_kronis ,'STI/BBVs'), 'STI/BBVs',''))"
-                data-type-xml="string"
-                type="hidden" />
+            <input name="/Register_ANC/STI_BBVs_risk"
+                data-calculate="(if(selected( /Register_ANC/penyakit_kronis ,'STI/BBVs'), 'STI/BBVs',''))"
+                data-type-xml="string" type="hidden" />
         </label>
         <label class="calculation non-select ">
-            <input name="/Register_ANC/Ectopic_Pregnancy_risk" data-calculate="(if(selected( /Register_ANC/riwayat_komplikasi_kebidanan ,'ket'), 'KET',''))"
-                data-type-xml="string"
-                type="hidden" />
+            <input name="/Register_ANC/Ectopic_Pregnancy_risk"
+                data-calculate="(if(selected( /Register_ANC/riwayat_komplikasi_kebidanan ,'ket'), 'KET',''))"
+                data-type-xml="string" type="hidden" />
         </label>
         <label class="calculation non-select ">
-            <input name="/Register_ANC/Mola_Hidatidosa_risk" data-calculate="(if(selected( /Register_ANC/riwayat_komplikasi_kebidanan ,'mola'), 'mola',''))"
-                data-type-xml="string"
-                type="hidden" />
+            <input name="/Register_ANC/Mola_Hidatidosa_risk"
+                data-calculate="(if(selected( /Register_ANC/riwayat_komplikasi_kebidanan ,'mola'), 'mola',''))"
+                data-type-xml="string" type="hidden" />
         </label>
         <label class="calculation non-select ">
-            <input name="/Register_ANC/congenital_abnormality_risk" data-calculate="(if(selected( /Register_ANC/riwayat_komplikasi_kebidanan ,'cacat_kongenital'), 'cacat_kongenital',''))"
-                data-type-xml="string"
-                type="hidden" />
+            <input name="/Register_ANC/congenital_abnormality_risk"
+                data-calculate="(if(selected( /Register_ANC/riwayat_komplikasi_kebidanan ,'cacat_kongenital'), 'cacat_kongenital',''))"
+                data-type-xml="string" type="hidden" />
         </label>
         <label class="calculation non-select ">
-            <input name="/Register_ANC/early_waterbreak_risk" data-calculate="(if(selected( /Register_ANC/riwayat_komplikasi_kebidanan ,'kpd'), 'kpd',''))"
-                data-type-xml="string"
-                type="hidden" />
+            <input name="/Register_ANC/early_waterbreak_risk"
+                data-calculate="(if(selected( /Register_ANC/riwayat_komplikasi_kebidanan ,'kpd'), 'kpd',''))"
+                data-type-xml="string" type="hidden" />
         </label>
         <label class="calculation non-select ">
-            <input name="/Register_ANC/Cardiovascular_Disease_Record_risk" data-calculate="(if(selected( /Register_ANC/penyakit_kronis ,'kelainan_jantung'), 'kelainan_jantung',''))"
-                data-type-xml="string"
-                type="hidden" />
+            <input name="/Register_ANC/Cardiovascular_Disease_Record_risk"
+                data-calculate="(if(selected( /Register_ANC/penyakit_kronis ,'kelainan_jantung'), 'kelainan_jantung',''))"
+                data-type-xml="string" type="hidden" />
         </label>
         <label class="calculation non-select ">
-            <input name="/Register_ANC/Kidney_Disorder_risk" data-calculate="(if(selected( /Register_ANC/penyakit_kronis ,'kelainan_ginjal'), 'kelainan_ginjal',''))"
-                data-type-xml="string"
-                type="hidden" />
+            <input name="/Register_ANC/Kidney_Disorder_risk"
+                data-calculate="(if(selected( /Register_ANC/penyakit_kronis ,'kelainan_ginjal'), 'kelainan_ginjal',''))"
+                data-type-xml="string" type="hidden" />
         </label>
         <label class="calculation non-select ">
-            <input name="/Register_ANC/Heart_Disorder_risk" data-calculate="(if(selected( /Register_ANC/penyakit_kronis ,'kelainan_hati'), 'kelainan_hati',''))"
-                data-type-xml="string"
-                type="hidden" />
+            <input name="/Register_ANC/Heart_Disorder_risk"
+                data-calculate="(if(selected( /Register_ANC/penyakit_kronis ,'kelainan_hati'), 'kelainan_hati',''))"
+                data-type-xml="string" type="hidden" />
         </label>
         <label class="calculation non-select ">
-            <input name="/Register_ANC/Asthma_risk" data-calculate="(if(selected( /Register_ANC/penyakit_kronis ,'asma'), 'asma',''))"
-                data-type-xml="string"
-                type="hidden" />
+            <input name="/Register_ANC/Asthma_risk"
+                data-calculate="(if(selected( /Register_ANC/penyakit_kronis ,'asma'), 'asma',''))"
+                data-type-xml="string" type="hidden" />
         </label>
         <label class="calculation non-select ">
-            <input name="/Register_ANC/Tuberculosis_risk" data-calculate="(if(selected( /Register_ANC/penyakit_kronis ,'tbc'), 'tbc',''))"
-                data-type-xml="string"
-                type="hidden" />
+            <input name="/Register_ANC/Tuberculosis_risk"
+                data-calculate="(if(selected( /Register_ANC/penyakit_kronis ,'tbc'), 'tbc',''))"
+                data-type-xml="string" type="hidden" />
         </label>
         <label class="calculation non-select ">
-            <input name="/Register_ANC/Malaria_risk" data-calculate="(if(selected( /Register_ANC/penyakit_kronis ,'malaria'), 'malaria',''))"
-                data-type-xml="string"
-                type="hidden" />
+            <input name="/Register_ANC/Malaria_risk"
+                data-calculate="(if(selected( /Register_ANC/penyakit_kronis ,'malaria'), 'malaria',''))"
+                data-type-xml="string" type="hidden" />
         </label>
         <label class="calculation non-select ">
-            <input name="/Register_ANC/HIV_AIDS_risk" data-calculate="(if(selected( /Register_ANC/penyakit_kronis ,'hiv_aids'), 'hiv_aids',''))"
-                data-type-xml="string"
-                type="hidden" />
+            <input name="/Register_ANC/HIV_AIDS_risk"
+                data-calculate="(if(selected( /Register_ANC/penyakit_kronis ,'hiv_aids'), 'hiv_aids',''))"
+                data-type-xml="string" type="hidden" />
         </label>
         <label class="calculation non-select ">
-            <input name="/Register_ANC/is_high_risk" data-calculate="if(( /Register_ANC/Cardiovascular_Disease_Record_risk  != '' or  /Register_ANC/Kidney_Disorder_risk  != '' or  /Register_ANC/Heart_Disorder_risk  != '' or  /Register_ANC/Asthma_risk  != '' or  /Register_ANC/Tuberculosis_risk  != '' or  /Register_ANC/Malaria_risk  != '' or  /Register_ANC/HIV_AIDS_risk  != '' or  /Register_ANC/STI_BBVs_risk  != '' or  /Register_ANC/Ectopic_Pregnancy_risk  != ''or  /Register_ANC/TBC_risk  !='' or  /Register_ANC/malaria_risk  !='' or  /Register_ANC/Too_young_risk  !='' or  /Register_ANC/Too_old_mother  !=''), 'yes', 'no')"
-                data-type-xml="string"
-                type="hidden" />
+            <input name="/Register_ANC/is_high_risk"
+                data-calculate="if(( /Register_ANC/Cardiovascular_Disease_Record_risk  != '' or  /Register_ANC/Kidney_Disorder_risk  != '' or  /Register_ANC/Heart_Disorder_risk  != '' or  /Register_ANC/Asthma_risk  != '' or  /Register_ANC/Tuberculosis_risk  != '' or  /Register_ANC/Malaria_risk  != '' or  /Register_ANC/HIV_AIDS_risk  != '' or  /Register_ANC/STI_BBVs_risk  != '' or  /Register_ANC/Ectopic_Pregnancy_risk  != ''or  /Register_ANC/TBC_risk  !='' or  /Register_ANC/malaria_risk  !='' or  /Register_ANC/Too_young_risk  !='' or  /Register_ANC/Too_old_mother  !=''), 'yes', 'no')"
+                data-type-xml="string" type="hidden" />
         </label>
         <label class="calculation non-select ">
-            <input name="/Register_ANC/high_risk_reason" data-calculate="concat( /Register_ANC/Cardiovascular_Disease_Record_risk , ' ',  /Register_ANC/Kidney_Disorder_risk , ' ',  /Register_ANC/Heart_Disorder_risk , ' ',  /Register_ANC/Asthma_risk , ' ',  /Register_ANC/Tuberculosis_risk , ' ',  /Register_ANC/Malaria_risk , ' ',  /Register_ANC/HIV_AIDS_risk , ' ',  /Register_ANC/STI_BBVs_risk , ' ',  /Register_ANC/Ectopic_Pregnancy_risk , ' ',  /Register_ANC/TBC_risk , ' ',  /Register_ANC/malaria_risk , ' ',  /Register_ANC/Too_young_risk , ' ',  /Register_ANC/Too_old_mother )"
-                data-type-xml="string"
-                type="hidden" />
+            <input name="/Register_ANC/high_risk_reason"
+                data-calculate="concat( /Register_ANC/Cardiovascular_Disease_Record_risk , ' ',  /Register_ANC/Kidney_Disorder_risk , ' ',  /Register_ANC/Heart_Disorder_risk , ' ',  /Register_ANC/Asthma_risk , ' ',  /Register_ANC/Tuberculosis_risk , ' ',  /Register_ANC/Malaria_risk , ' ',  /Register_ANC/HIV_AIDS_risk , ' ',  /Register_ANC/STI_BBVs_risk , ' ',  /Register_ANC/Ectopic_Pregnancy_risk , ' ',  /Register_ANC/TBC_risk , ' ',  /Register_ANC/malaria_risk , ' ',  /Register_ANC/Too_young_risk , ' ',  /Register_ANC/Too_old_mother )"
+                data-type-xml="string" type="hidden" />
         </label>
         <label class="calculation non-select ">
-            <input name="/Register_ANC/is_high_risk_pregnancy" data-calculate="if(( /Register_ANC/Too_many_children_risk  != '' or  /Register_ANC/Protein_energy_Malnutrition_risk  != '' or  /Register_ANC/abortus_risk  != '' or  /Register_ANC/Protein_energy_Malnutrition_risk  != '' or  /Register_ANC/anemia_risk  != '' or  /Register_ANC/PIH_risk  != '' or  /Register_ANC/diabetes_risk  != ''), 'yes', 'no')"
-                data-type-xml="string"
-                type="hidden" />
+            <input name="/Register_ANC/is_high_risk_pregnancy"
+                data-calculate="if(( /Register_ANC/Too_many_children_risk  != '' or  /Register_ANC/Protein_energy_Malnutrition_risk  != '' or  /Register_ANC/abortus_risk  != '' or  /Register_ANC/Protein_energy_Malnutrition_risk  != '' or  /Register_ANC/anemia_risk  != '' or  /Register_ANC/PIH_risk  != '' or  /Register_ANC/diabetes_risk  != ''), 'yes', 'no')"
+                data-type-xml="string" type="hidden" />
         </label>
         <label class="calculation non-select ">
-            <input name="/Register_ANC/high_risk_pregnancy_reason" data-calculate="concat( /Register_ANC/Too_many_children_risk , ' ,',  /Register_ANC/Protein_energy_Malnutrition_risk , ' ,',  /Register_ANC/abortus_risk , ' ,',  /Register_ANC/Protein_energy_Malnutrition_risk , ' ,',  /Register_ANC/anemia_risk , ' ,',  /Register_ANC/PIH_risk , ' ,',  /Register_ANC/diabetes_risk )"
-                data-type-xml="string"
-                type="hidden" />
+            <input name="/Register_ANC/high_risk_pregnancy_reason"
+                data-calculate="concat( /Register_ANC/Too_many_children_risk , ' ,',  /Register_ANC/Protein_energy_Malnutrition_risk , ' ,',  /Register_ANC/abortus_risk , ' ,',  /Register_ANC/Protein_energy_Malnutrition_risk , ' ,',  /Register_ANC/anemia_risk , ' ,',  /Register_ANC/PIH_risk , ' ,',  /Register_ANC/diabetes_risk )"
+                data-type-xml="string" type="hidden" />
         </label>
         <label class="calculation non-select ">
-            <input name="/Register_ANC/is_high_risk_labour" data-calculate="if(( /Register_ANC/TB_risk  !='' or  /Register_ANC/Section_Cesarea_record_risk  !='' or  /Register_ANC/fetus_number_risk  != '' or  /Register_ANC/fetus_size_risk  != '' or  /Register_ANC/fetus_Malpresentation_risk  != '' or  /Register_ANC/PIH_risk  != ''), 'yes', 'no')"
-                data-type-xml="string"
-                type="hidden" />
+            <input name="/Register_ANC/is_high_risk_labour"
+                data-calculate="if(( /Register_ANC/TB_risk  !='' or  /Register_ANC/Section_Cesarea_record_risk  !='' or  /Register_ANC/fetus_number_risk  != '' or  /Register_ANC/fetus_size_risk  != '' or  /Register_ANC/fetus_Malpresentation_risk  != '' or  /Register_ANC/PIH_risk  != ''), 'yes', 'no')"
+                data-type-xml="string" type="hidden" />
         </label>
         <label class="calculation non-select ">
-            <input name="/Register_ANC/high_risk_labour_reason" data-calculate="concat( /Register_ANC/TB_risk , ' ,',  /Register_ANC/Section_Cesarea_record_risk , ' ,',  /Register_ANC/fetus_number_risk , ' ,',  /Register_ANC/fetus_size_risk , ' ,',  /Register_ANC/fetus_Malpresentation_risk , ' ,',  /Register_ANC/PIH_risk )"
-                data-type-xml="string"
-                type="hidden" />
+            <input name="/Register_ANC/high_risk_labour_reason"
+                data-calculate="concat( /Register_ANC/TB_risk , ' ,',  /Register_ANC/Section_Cesarea_record_risk , ' ,',  /Register_ANC/fetus_number_risk , ' ,',  /Register_ANC/fetus_size_risk , ' ,',  /Register_ANC/fetus_Malpresentation_risk , ' ,',  /Register_ANC/PIH_risk )"
+                data-type-xml="string" type="hidden" />
         </label>
         <label class="calculation non-select ">
-            <input name="/Register_ANC/is_other_risk" data-calculate="if(( /Register_ANC/Mola_Hidatidosa_risk  != '' or  /Register_ANC/congenital_abnormality_risk  != '' or  /Register_ANC/early_waterbreak_risk  != ''), 'yes', 'no')"
-                data-type-xml="string"
-                type="hidden" />
+            <input name="/Register_ANC/is_other_risk"
+                data-calculate="if(( /Register_ANC/Mola_Hidatidosa_risk  != '' or  /Register_ANC/congenital_abnormality_risk  != '' or  /Register_ANC/early_waterbreak_risk  != ''), 'yes', 'no')"
+                data-type-xml="string" type="hidden" />
         </label>
         <label class="calculation non-select ">
-            <input name="/Register_ANC/other_risk_reason" data-calculate="concat( /Register_ANC/Mola_Hidatidosa_risk , ' ,',  /Register_ANC/congenital_abnormality_risk , ' ,',  /Register_ANC/early_waterbreak_risk )"
-                data-type-xml="string"
-                type="hidden" />
+            <input name="/Register_ANC/other_risk_reason"
+                data-calculate="concat( /Register_ANC/Mola_Hidatidosa_risk , ' ,',  /Register_ANC/congenital_abnormality_risk , ' ,',  /Register_ANC/early_waterbreak_risk )"
+                data-type-xml="string" type="hidden" />
         </label>
         <label class="calculation non-select ">
             <input name="/Register_ANC/meta/instanceID" data-calculate="concat('uuid:', uuid())"
                 data-type-xml="string" type="hidden" />
         </label>
         <label class="calculation non-select ">
-            <input name="/Register_ANC/formhub/uuid" data-calculate="'ebc2dcf535f34d6ebffa04fce5fdbd90'"
-                data-type-xml="string" type="hidden" />
+            <input name="/Register_ANC/formhub/uuid"
+                data-calculate="'ebc2dcf535f34d6ebffa04fce5fdbd90'" data-type-xml="string"
+                type="hidden" />
         </label>
     </fieldset>
 </form>

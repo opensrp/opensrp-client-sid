@@ -110,7 +110,7 @@ public class KIClientsProvider extends BaseClientsProvider {
 
         try {
             ButterKnife.bind(this, convertView);
-            Log.e(TAG, "getView: " );
+            Log.e(TAG, "getView: ");
 
         } catch (Exception e) {
             e.getCause().printStackTrace();

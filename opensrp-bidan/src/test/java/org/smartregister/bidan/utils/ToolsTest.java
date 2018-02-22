@@ -17,11 +17,9 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.InputStream;
 
-import static java.security.AccessController.getContext;
 import static javolution.util.stripped.FastMap.logger;
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertTrue;
 import static org.mockito.MockitoAnnotations.initMocks;
-import static org.mockito.internal.util.io.IOUtil.closeQuietly;
 
 /**
  * Created by sid-tech on 1/25/18.
@@ -60,7 +58,7 @@ public class ToolsTest {
     }
 
     @Test
-    public void scaleDown(){
+    public void scaleDown() {
         logger.info("### TEST > Openshift 2 > scaleDown()");
 
         assertTrue(true);
@@ -68,7 +66,7 @@ public class ToolsTest {
     }
 
     @Test
-    public void getThumbnailBitmap(){
+    public void getThumbnailBitmap() {
 
     }
 

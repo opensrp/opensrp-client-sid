@@ -60,8 +60,9 @@
             </legend>
             <div class="option-wrapper">
                 <label class="">
-                    <input name="/tambah_bayi_reviewed/Lokasi_periksa" data-name="/tambah_bayi_reviewed/Lokasi_periksa"
-                        data-type-xml="select1" type="radio" value="Posyandu" />
+                    <input name="/tambah_bayi_reviewed/Lokasi_periksa"
+                        data-name="/tambah_bayi_reviewed/Lokasi_periksa" data-type-xml="select1"
+                        type="radio" value="Posyandu" />
                     <span class="option-label active"
                         data-itext-id="/tambah_bayi_reviewed/Lokasi_periksa/Posyandu:label"
                         lang="Bahasa">Posyandu
@@ -72,8 +73,9 @@
                     </span>
                 </label>
                 <label class="">
-                    <input name="/tambah_bayi_reviewed/Lokasi_periksa" data-name="/tambah_bayi_reviewed/Lokasi_periksa"
-                        data-type-xml="select1" type="radio" value="Polindes" />
+                    <input name="/tambah_bayi_reviewed/Lokasi_periksa"
+                        data-name="/tambah_bayi_reviewed/Lokasi_periksa" data-type-xml="select1"
+                        type="radio" value="Polindes" />
                     <span class="option-label active"
                         data-itext-id="/tambah_bayi_reviewed/Lokasi_periksa/Polindes:label"
                         lang="Bahasa">Polindes
@@ -84,9 +86,9 @@
                     </span>
                 </label>
                 <label class="">
-                    <input name="/tambah_bayi_reviewed/Lokasi_periksa" data-name="/tambah_bayi_reviewed/Lokasi_periksa"
-                        data-type-xml="select1" type="radio"
-                        value="Puskesmas" />
+                    <input name="/tambah_bayi_reviewed/Lokasi_periksa"
+                        data-name="/tambah_bayi_reviewed/Lokasi_periksa" data-type-xml="select1"
+                        type="radio" value="Puskesmas" />
                     <span class="option-label active"
                         data-itext-id="/tambah_bayi_reviewed/Lokasi_periksa/Puskesmas:label"
                         lang="Bahasa">Puskesmas
@@ -97,9 +99,9 @@
                     </span>
                 </label>
                 <label class="">
-                    <input name="/tambah_bayi_reviewed/Lokasi_periksa" data-name="/tambah_bayi_reviewed/Lokasi_periksa"
-                        data-type-xml="select1" type="radio"
-                        value="Rumah_Ibu" />
+                    <input name="/tambah_bayi_reviewed/Lokasi_periksa"
+                        data-name="/tambah_bayi_reviewed/Lokasi_periksa" data-type-xml="select1"
+                        type="radio" value="Rumah_Ibu" />
                     <span class="option-label active"
                         data-itext-id="/tambah_bayi_reviewed/Lokasi_periksa/Rumah_Ibu:label"
                         lang="Bahasa">Rumah Ibu
@@ -110,9 +112,9 @@
                     </span>
                 </label>
                 <label class="">
-                    <input name="/tambah_bayi_reviewed/Lokasi_periksa" data-name="/tambah_bayi_reviewed/Lokasi_periksa"
-                        data-type-xml="select1" type="radio"
-                        value="Rumah_Sakit" />
+                    <input name="/tambah_bayi_reviewed/Lokasi_periksa"
+                        data-name="/tambah_bayi_reviewed/Lokasi_periksa" data-type-xml="select1"
+                        type="radio" value="Rumah_Sakit" />
                     <span class="option-label active"
                         data-itext-id="/tambah_bayi_reviewed/Lokasi_periksa/Rumah_Sakit:label"
                         lang="Bahasa">Rumah Sakit
@@ -123,8 +125,9 @@
                     </span>
                 </label>
                 <label class="">
-                    <input name="/tambah_bayi_reviewed/Lokasi_periksa" data-name="/tambah_bayi_reviewed/Lokasi_periksa"
-                        data-type-xml="select1" type="radio" value="Lainnya" />
+                    <input name="/tambah_bayi_reviewed/Lokasi_periksa"
+                        data-name="/tambah_bayi_reviewed/Lokasi_periksa" data-type-xml="select1"
+                        type="radio" value="Lainnya" />
                     <span class="option-label active"
                         data-itext-id="/tambah_bayi_reviewed/Lokasi_periksa/Lainnya:label"
                         lang="Bahasa">Lainnya
@@ -186,8 +189,7 @@
                     lang="en">-
                 </span>
                 <input name="/tambah_bayi_reviewed/child_registration/generated_note_name_31"
-                    data-type-xml="string"
-                    readonly="readonly" type="text" />
+                    data-type-xml="string" readonly="readonly" type="text" />
             </label>
             <label class="question non-select ">
                 <span class="question-label active"
@@ -230,8 +232,7 @@
                     example, the mother's name is Ratna, then fill in Baby Ratna
                 </span>
                 <input name="/tambah_bayi_reviewed/child_registration/nama_bayi"
-                    data-type-xml="string" required="required"
-                    type="text" />
+                    data-type-xml="string" required="required" type="text" />
             </label>
             <label class="question non-select ">
                 <span class="or-constraint-msg active"
@@ -262,8 +263,7 @@
                 </span>
                 <input name="/tambah_bayi_reviewed/child_registration/tanggal_lahir_anak"
                     data-constraint=".&lt;=  /tambah_bayi_reviewed/tanggal_pendaftaran "
-                    data-type-xml="date"
-                    required="required" type="date" />
+                    data-type-xml="date" required="required" type="date" />
             </label>
             <fieldset class="question ">
                 <fieldset>
@@ -288,11 +288,10 @@
                     </legend>
                     <div class="option-wrapper">
                         <label class="">
-                            <input
-                                name="/tambah_bayi_reviewed/child_registration/jenis_kelamin"
+                            <input name="/tambah_bayi_reviewed/child_registration/jenis_kelamin"
                                 data-name="/tambah_bayi_reviewed/child_registration/jenis_kelamin"
-                                data-type-xml="select1"
-                                required="required" type="radio" value="male" />
+                                data-type-xml="select1" required="required" type="radio"
+                                value="male" />
                             <span class="option-label active"
                                 data-itext-id="/tambah_bayi_reviewed/child_registration/jenis_kelamin/male:label"
                                 lang="Bahasa">Laki-Laki (L)
@@ -303,11 +302,10 @@
                             </span>
                         </label>
                         <label class="">
-                            <input
-                                name="/tambah_bayi_reviewed/child_registration/jenis_kelamin"
+                            <input name="/tambah_bayi_reviewed/child_registration/jenis_kelamin"
                                 data-name="/tambah_bayi_reviewed/child_registration/jenis_kelamin"
-                                data-type-xml="select1"
-                                required="required" type="radio" value="female" />
+                                data-type-xml="select1" required="required" type="radio"
+                                value="female" />
                             <span class="option-label active"
                                 data-itext-id="/tambah_bayi_reviewed/child_registration/jenis_kelamin/female:label"
                                 lang="Bahasa">Perempuan ( P)
@@ -345,8 +343,7 @@
                             <input
                                 name="/tambah_bayi_reviewed/child_registration/kepemilikan_buku_kia"
                                 data-name="/tambah_bayi_reviewed/child_registration/kepemilikan_buku_kia"
-                                data-type-xml="select1"
-                                type="radio" value="Ya" />
+                                data-type-xml="select1" type="radio" value="Ya" />
                             <span class="option-label active"
                                 data-itext-id="/tambah_bayi_reviewed/child_registration/kepemilikan_buku_kia/Ya:label"
                                 lang="Bahasa">Ya
@@ -360,8 +357,7 @@
                             <input
                                 name="/tambah_bayi_reviewed/child_registration/kepemilikan_buku_kia"
                                 data-name="/tambah_bayi_reviewed/child_registration/kepemilikan_buku_kia"
-                                data-type-xml="select1"
-                                type="radio" value="Tidak" />
+                                data-type-xml="select1" type="radio" value="Tidak" />
                             <span class="option-label active"
                                 data-itext-id="/tambah_bayi_reviewed/child_registration/kepemilikan_buku_kia/Tidak:label"
                                 lang="Bahasa">Tidak
@@ -399,8 +395,8 @@
                     data-itext-id="/tambah_bayi_reviewed/child_registration/berat_lahir:hint"
                     lang="en">Fill in baby's birthweight (gram)
                 </span>
-                <input name="/tambah_bayi_reviewed/child_registration/berat_lahir" data-constraint=".&gt;0 and .&lt;5000"
-                    data-type-xml="int" type="number" />
+                <input name="/tambah_bayi_reviewed/child_registration/berat_lahir"
+                    data-constraint=".&gt;0 and .&lt;5000" data-type-xml="int" type="number" />
             </label>
         </section>
         <!--end of repeat fieldset with name /tambah_bayi_reviewed/child_registration-->
@@ -408,78 +404,84 @@
     <!--end of group -->
     <fieldset style="display:none;" id="or-preload-items">
         <label class="calculation non-select ">
-            <input name="/tambah_bayi_reviewed/start" data-preload="timestamp" data-preload-params="start"
-                data-type-xml="dateTime" type="hidden" />
+            <input name="/tambah_bayi_reviewed/start" data-preload="timestamp"
+                data-preload-params="start" data-type-xml="dateTime" type="hidden" />
         </label>
         <label class="calculation non-select ">
-            <input name="/tambah_bayi_reviewed/today" data-preload="date" data-preload-params="today"
-                data-type-xml="date" type="hidden" />
+            <input name="/tambah_bayi_reviewed/today" data-preload="date"
+                data-preload-params="today" data-type-xml="date" type="hidden" />
         </label>
         <label class="calculation non-select ">
-            <input name="/tambah_bayi_reviewed/deviceid" data-preload="property" data-preload-params="deviceid"
-                data-type-xml="string" type="hidden" />
+            <input name="/tambah_bayi_reviewed/deviceid" data-preload="property"
+                data-preload-params="deviceid" data-type-xml="string" type="hidden" />
         </label>
         <label class="calculation non-select ">
-            <input name="/tambah_bayi_reviewed/simserial" data-preload="property" data-preload-params="simserial"
-                data-type-xml="string" type="hidden" />
+            <input name="/tambah_bayi_reviewed/simserial" data-preload="property"
+                data-preload-params="simserial" data-type-xml="string" type="hidden" />
         </label>
         <label class="calculation non-select ">
-            <input name="/tambah_bayi_reviewed/phonenumber" data-preload="property" data-preload-params="phonenumber"
-                data-type-xml="string" type="hidden" />
+            <input name="/tambah_bayi_reviewed/phonenumber" data-preload="property"
+                data-preload-params="phonenumber" data-type-xml="string" type="hidden" />
         </label>
         <label class="calculation non-select ">
-            <input name="/tambah_bayi_reviewed/end" data-preload="timestamp" data-preload-params="end"
-                data-type-xml="dateTime" type="hidden" />
+            <input name="/tambah_bayi_reviewed/end" data-preload="timestamp"
+                data-preload-params="end" data-type-xml="dateTime" type="hidden" />
         </label>
     </fieldset>
     <fieldset style="display:none;" id="or-calculated-items">
         <label class="calculation non-select ">
-            <input name="/tambah_bayi_reviewed/existing_location" data-calculate=" /tambah_bayi_reviewed/Village "
-                data-type-xml="string" type="hidden" />
-        </label>
-        <label class="calculation non-select ">
-            <input name="/tambah_bayi_reviewed/provinsi" data-calculate=" /tambah_bayi_reviewed/Province "
-                data-type-xml="string" type="hidden" />
-        </label>
-        <label class="calculation non-select ">
-            <input name="/tambah_bayi_reviewed/kabupaten" data-calculate=" /tambah_bayi_reviewed/District "
-                data-type-xml="string" type="hidden" />
-        </label>
-        <label class="calculation non-select ">
-            <input name="/tambah_bayi_reviewed/desa" data-calculate=" /tambah_bayi_reviewed/Village "
-                data-type-xml="string" type="hidden" />
-        </label>
-        <label class="calculation non-select ">
-            <input name="/tambah_bayi_reviewed/dusun" data-calculate=" /tambah_bayi_reviewed/Sub-village "
-                data-type-xml="string" type="hidden" />
-        </label>
-        <label class="calculation non-select ">
-            <input name="/tambah_bayi_reviewed/kecamatan" data-calculate=" /tambah_bayi_reviewed/Sub-district "
-                data-type-xml="string" type="hidden" />
-        </label>
-        <label class="calculation non-select ">
-            <input name="/tambah_bayi_reviewed/child_registration/desa_anak" data-calculate=" /tambah_bayi_reviewed/Village "
-                data-type-xml="string" type="hidden" />
-        </label>
-        <label class="calculation non-select ">
-            <input name="/tambah_bayi_reviewed/child_registration/child_existing_location" data-calculate=" /tambah_bayi_reviewed/Village "
-                data-type-xml="string"
+            <input name="/tambah_bayi_reviewed/existing_location"
+                data-calculate=" /tambah_bayi_reviewed/Village " data-type-xml="string"
                 type="hidden" />
         </label>
         <label class="calculation non-select ">
-            <input
-                name="/tambah_bayi_reviewed/child_registration/high_risk_child_Low_Birthweght"
+            <input name="/tambah_bayi_reviewed/provinsi"
+                data-calculate=" /tambah_bayi_reviewed/Province " data-type-xml="string"
+                type="hidden" />
+        </label>
+        <label class="calculation non-select ">
+            <input name="/tambah_bayi_reviewed/kabupaten"
+                data-calculate=" /tambah_bayi_reviewed/District " data-type-xml="string"
+                type="hidden" />
+        </label>
+        <label class="calculation non-select ">
+            <input name="/tambah_bayi_reviewed/desa"
+                data-calculate=" /tambah_bayi_reviewed/Village " data-type-xml="string"
+                type="hidden" />
+        </label>
+        <label class="calculation non-select ">
+            <input name="/tambah_bayi_reviewed/dusun"
+                data-calculate=" /tambah_bayi_reviewed/Sub-village " data-type-xml="string"
+                type="hidden" />
+        </label>
+        <label class="calculation non-select ">
+            <input name="/tambah_bayi_reviewed/kecamatan"
+                data-calculate=" /tambah_bayi_reviewed/Sub-district " data-type-xml="string"
+                type="hidden" />
+        </label>
+        <label class="calculation non-select ">
+            <input name="/tambah_bayi_reviewed/child_registration/desa_anak"
+                data-calculate=" /tambah_bayi_reviewed/Village " data-type-xml="string"
+                type="hidden" />
+        </label>
+        <label class="calculation non-select ">
+            <input name="/tambah_bayi_reviewed/child_registration/child_existing_location"
+                data-calculate=" /tambah_bayi_reviewed/Village " data-type-xml="string"
+                type="hidden" />
+        </label>
+        <label class="calculation non-select ">
+            <input name="/tambah_bayi_reviewed/child_registration/high_risk_child_Low_Birthweght"
                 data-calculate="if( /tambah_bayi_reviewed/child_registration/berat_lahir  &lt; 2500, 'yes', 'no')"
-                data-type-xml="string"
+                data-type-xml="string" type="hidden" />
+        </label>
+        <label class="calculation non-select ">
+            <input name="/tambah_bayi_reviewed/meta/instanceID"
+                data-calculate="concat('uuid:', uuid())" data-type-xml="string" type="hidden" />
+        </label>
+        <label class="calculation non-select ">
+            <input name="/tambah_bayi_reviewed/formhub/uuid"
+                data-calculate="'bfd243a85bea4e6e96dc1ff38497ed0c'" data-type-xml="string"
                 type="hidden" />
-        </label>
-        <label class="calculation non-select ">
-            <input name="/tambah_bayi_reviewed/meta/instanceID" data-calculate="concat('uuid:', uuid())"
-                data-type-xml="string" type="hidden" />
-        </label>
-        <label class="calculation non-select ">
-            <input name="/tambah_bayi_reviewed/formhub/uuid" data-calculate="'bfd243a85bea4e6e96dc1ff38497ed0c'"
-                data-type-xml="string" type="hidden" />
         </label>
     </fieldset>
 </form>

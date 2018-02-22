@@ -4,7 +4,6 @@ import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
 
-import org.smartregister.bidan.activity.LoginActivity;
 import org.smartregister.bidan.utils.AllConstantsINA;
 import org.smartregister.cursoradapter.SecuredNativeSmartRegisterCursorAdapterFragment;
 import org.smartregister.provider.SmartRegisterClientsProvider;
@@ -52,7 +51,7 @@ public class BaseSmartRegisterFragment extends SecuredNativeSmartRegisterCursorA
                 customMainCondition = "is_closed = 0 AND namalengkap IS NOT NULL AND namalengkap != ''";
                 break;
             case AllConstantsINA.Register.FP:
-                customMainCondition = "is_closed = 0 AND namalengkap IS NOT NULL AND namalengkap != '' AND jenisKontrasepsi !=''";
+                customMainCondition = "is_closed = 0 AND namalengkap IS NOT NULL AND namalengkap != '' AND jenisKontrasepsi !='0'";
                 break;
             case AllConstantsINA.Register.ANC:
                 customMainCondition = "is_closed = 0 AND namalengkap IS NOT NULL AND namalengkap != ''";
@@ -88,7 +87,7 @@ public class BaseSmartRegisterFragment extends SecuredNativeSmartRegisterCursorA
 
     @Override
     protected void onInitialization() {
-        Log.e(TAG, "onInitialization: " );
+        Log.e(TAG, "onInitialization: ");
 
     }
 
@@ -99,7 +98,7 @@ public class BaseSmartRegisterFragment extends SecuredNativeSmartRegisterCursorA
 
     @Override
     protected void onCreation() {
-        Log.e(TAG, "onCreation: " );
+        Log.e(TAG, "onCreation: ");
     }
 
     protected void filter(String filterString, String joinTableString, String mainConditionString) {
@@ -114,7 +113,7 @@ public class BaseSmartRegisterFragment extends SecuredNativeSmartRegisterCursorA
     @Override
     protected void onResumption() {
         super.onResumption();
-        Log.e(TAG, "onResumption: "+ getResources().getConfiguration().locale);
+        Log.e(TAG, "onResumption: " + getResources().getConfiguration().locale);
 //        LoginActivity.setLanguage();
     }
 

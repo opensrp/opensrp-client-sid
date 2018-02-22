@@ -1,7 +1,6 @@
 package org.smartregister.bidan.activity;
 
 import android.content.pm.ActivityInfo;
-//import android.content.res.Configuration;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentPagerAdapter;
@@ -11,7 +10,6 @@ import android.widget.Toast;
 import org.apache.commons.lang3.StringUtils;
 import org.json.JSONException;
 import org.json.JSONObject;
-//import org.smartregister.Context;
 import org.smartregister.adapter.SmartRegisterPaginatedAdapter;
 import org.smartregister.bidan.R;
 import org.smartregister.bidan.sync.ClientProcessor;
@@ -25,7 +23,6 @@ import org.smartregister.enketo.adapter.pager.EnketoRegisterPagerAdapter;
 import org.smartregister.enketo.listener.DisplayFormListener;
 import org.smartregister.enketo.view.fragment.DisplayFormFragment;
 import org.smartregister.provider.SmartRegisterClientsProvider;
-//import org.smartregister.repository.AllSharedPreferences;
 import org.smartregister.repository.DetailsRepository;
 import org.smartregister.util.Log;
 import org.smartregister.view.activity.SecuredNativeSmartRegisterActivity;
@@ -47,8 +44,12 @@ import java.util.Map;
 import butterknife.Bind;
 import butterknife.ButterKnife;
 
-//import static android.preference.PreferenceManager.getDefaultSharedPreferences;
 import static org.smartregister.util.Utils.getValue;
+
+//import android.content.res.Configuration;
+//import org.smartregister.Context;
+//import org.smartregister.repository.AllSharedPreferences;
+//import static android.preference.PreferenceManager.getDefaultSharedPreferences;
 
 /**
  * Created by SID
@@ -57,22 +58,18 @@ import static org.smartregister.util.Utils.getValue;
 public class BaseRegisterActivity extends SecuredNativeSmartRegisterActivity implements DisplayFormListener {
 
     private final String TAG = BaseRegisterActivity.class.getName();
-
-//    protected SimpleDateFormat timer = new SimpleDateFormat("hh:mm:ss");
-    int style = DateFormat.MEDIUM;
-    //Also try with style = DateFormat.FULL and DateFormat.SHORT
-    Date date = new Date();
-    DateFormat timer = DateFormat.getDateInstance(style, Locale.US);
-
     protected List<String> formNames;
-
     @Bind(R.id.view_pager)
     protected OpenSRPViewPager mPager;
-
     protected int currentPage;
     protected FragmentPagerAdapter mPagerAdapter;
     protected DisplayFormFragment displayFormFragment;
     protected DisplayFormFragment formFragment;
+    //    protected SimpleDateFormat timer = new SimpleDateFormat("hh:mm:ss");
+    int style = DateFormat.MEDIUM;
+    //Also try with style = DateFormat.FULL and DateFormat.SHORT
+    Date date = new Date();
+    DateFormat timer = DateFormat.getDateInstance(style, Locale.US);
     Map<String, String> formTime = new HashMap<>();
 
     @Override
@@ -263,7 +260,7 @@ public class BaseRegisterActivity extends SecuredNativeSmartRegisterActivity imp
 //            Toast.makeText(this,"Data still Synchronizing, please wait",Toast.LENGTH_SHORT).show();
 //            return;
 //        }
-        android.util.Log.e(TAG, "startFormActivity: timer "+ timer.format(date));
+        android.util.Log.e(TAG, "startFormActivity: timer " + timer.format(date));
         formTime.put("start", timer.format(date));
 
 
@@ -391,7 +388,7 @@ public class BaseRegisterActivity extends SecuredNativeSmartRegisterActivity imp
          * Method
          *
          * @param option DialogOption
-         * @param tag Object Tag
+         * @param tag    Object Tag
          */
         @Override
         public void onDialogOptionSelection(DialogOption option, Object tag) {
@@ -447,7 +444,7 @@ public class BaseRegisterActivity extends SecuredNativeSmartRegisterActivity imp
 
                 if (option.name().equalsIgnoreCase(getString(R.string.str_register_fp_form))) {
 //                    pc = DetailMotherActivity.motherClient;
-                    android.util.Log.e(TAG, "onDialogOptionSelection: pc "+ pc );
+                    android.util.Log.e(TAG, "onDialogOptionSelection: pc " + pc);
 
                     if (!StringUtils.isNumeric(pc.getDetails().get("jenisKontrasepsi"))) {
                         Toast.makeText(BaseRegisterActivity.this, getString(R.string.mother_already_registered_in_fp), Toast.LENGTH_SHORT).show();

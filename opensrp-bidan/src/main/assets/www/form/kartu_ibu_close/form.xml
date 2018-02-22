@@ -9,30 +9,33 @@
 
 
     <label class="note non-select ">
-        <span class="question-label active" data-itext-id="/penutupan_ibu_reviewed/generated_note_name_13:label"
-            lang="Bahasa">Desa :
+        <span class="question-label active"
+            data-itext-id="/penutupan_ibu_reviewed/generated_note_name_13:label" lang="Bahasa">Desa
+            :
             <span class="or-output" data-value=" /penutupan_ibu_reviewed/Village "></span>
         </span>
-        <span class="question-label " data-itext-id="/penutupan_ibu_reviewed/generated_note_name_13:label"
-            lang="en">-
+        <span class="question-label "
+            data-itext-id="/penutupan_ibu_reviewed/generated_note_name_13:label" lang="en">-
         </span>
         <input name="/penutupan_ibu_reviewed/generated_note_name_13" data-type-xml="string"
             readonly="readonly" type="text" />
     </label>
     <label class="note non-select ">
-        <span class="question-label active" data-itext-id="/penutupan_ibu_reviewed/generated_note_name_14:label"
-            lang="Bahasa">Dusun :
+        <span class="question-label active"
+            data-itext-id="/penutupan_ibu_reviewed/generated_note_name_14:label" lang="Bahasa">Dusun
+            :
             <span class="or-output" data-value=" /penutupan_ibu_reviewed/Sub-village "></span>
         </span>
-        <span class="question-label " data-itext-id="/penutupan_ibu_reviewed/generated_note_name_14:label"
-            lang="en">-
+        <span class="question-label "
+            data-itext-id="/penutupan_ibu_reviewed/generated_note_name_14:label" lang="en">-
         </span>
         <input name="/penutupan_ibu_reviewed/generated_note_name_14" data-type-xml="string"
             readonly="readonly" type="text" />
     </label>
     <label class="question or-appearance-minimal ">
-        <span class="question-label active" data-itext-id="/penutupan_ibu_reviewed/close_reason:label"
-            lang="Bahasa">Alasan penutupan Kartu Ibu?
+        <span class="question-label active"
+            data-itext-id="/penutupan_ibu_reviewed/close_reason:label" lang="Bahasa">Alasan
+            penutupan Kartu Ibu?
         </span>
         <span class="question-label " data-itext-id="/penutupan_ibu_reviewed/close_reason:label"
             lang="en">Reason for Mother Card's
@@ -73,11 +76,11 @@
         </span>
     </label>
     <label class="question or-branch pre-init non-select ">
-        <span class="question-label active" data-itext-id="/penutupan_ibu_reviewed/close_reason_other:label"
-            lang="Bahasa">Lainnya
+        <span class="question-label active"
+            data-itext-id="/penutupan_ibu_reviewed/close_reason_other:label" lang="Bahasa">Lainnya
         </span>
-        <span class="question-label " data-itext-id="/penutupan_ibu_reviewed/close_reason_other:label"
-            lang="en">Other
+        <span class="question-label "
+            data-itext-id="/penutupan_ibu_reviewed/close_reason_other:label" lang="en">Other
         </span>
         <span class="or-hint active" data-itext-id="/penutupan_ibu_reviewed/close_reason_other:hint"
             lang="Bahasa">Sebutkan alasan lainnya
@@ -87,74 +90,85 @@
             lang="en">Write other reason, if
             available
         </span>
-        <input name="/penutupan_ibu_reviewed/close_reason_other" data-relevant=" /penutupan_ibu_reviewed/close_reason  = 'others'"
-            data-type-xml="string"
+        <input name="/penutupan_ibu_reviewed/close_reason_other"
+            data-relevant=" /penutupan_ibu_reviewed/close_reason  = 'others'" data-type-xml="string"
             type="text" />
     </label>
     <label class="question or-branch pre-init non-select ">
-        <span class="or-constraint-msg active" data-itext-id="/penutupan_ibu_reviewed/maternal_death_date:jr:constraintMsg"
+        <span class="or-constraint-msg active"
+            data-itext-id="/penutupan_ibu_reviewed/maternal_death_date:jr:constraintMsg"
             lang="Bahasa">Tanggal
             kematian ibu hari ini atau hari-hari sebelumnya
         </span>
-        <span class="or-constraint-msg " data-itext-id="/penutupan_ibu_reviewed/maternal_death_date:jr:constraintMsg"
-            lang="en">Date of
+        <span class="or-constraint-msg "
+            data-itext-id="/penutupan_ibu_reviewed/maternal_death_date:jr:constraintMsg" lang="en">
+            Date of
             mother's death today or the days before
         </span>
-        <span class="question-label active" data-itext-id="/penutupan_ibu_reviewed/maternal_death_date:label"
-            lang="Bahasa">Tanggal kematian ibu?
+        <span class="question-label active"
+            data-itext-id="/penutupan_ibu_reviewed/maternal_death_date:label" lang="Bahasa">Tanggal
+            kematian ibu?
         </span>
-        <span class="question-label " data-itext-id="/penutupan_ibu_reviewed/maternal_death_date:label"
-            lang="en">Date of maternal
+        <span class="question-label "
+            data-itext-id="/penutupan_ibu_reviewed/maternal_death_date:label" lang="en">Date of
+            maternal
             death?
         </span>
-        <span class="or-hint active" data-itext-id="/penutupan_ibu_reviewed/maternal_death_date:hint"
-            lang="Bahasa">Masukkan tanggal
+        <span class="or-hint active"
+            data-itext-id="/penutupan_ibu_reviewed/maternal_death_date:hint" lang="Bahasa">Masukkan
+            tanggal
             kematian Ibu
         </span>
         <span class="or-hint " data-itext-id="/penutupan_ibu_reviewed/maternal_death_date:hint"
             lang="en">Enter date of maternal
             death
         </span>
-        <input name="/penutupan_ibu_reviewed/maternal_death_date" data-constraint=".&lt;= /penutupan_ibu_reviewed/today "
+        <input name="/penutupan_ibu_reviewed/maternal_death_date"
+            data-constraint=".&lt;= /penutupan_ibu_reviewed/today "
             data-relevant=" /penutupan_ibu_reviewed/close_reason  = 'kematian_ibu'"
-            data-type-xml="date"
-            type="date" />
+            data-type-xml="date" type="date" />
     </label>
     <fieldset class="question ">
         <fieldset>
             <legend>
-                <span class="question-label active" data-itext-id="/penutupan_ibu_reviewed/maternal_death_date_estimated:label"
+                <span class="question-label active"
+                    data-itext-id="/penutupan_ibu_reviewed/maternal_death_date_estimated:label"
                     lang="Bahasa">
                     Tanggal kematian ibu estimasi?
                 </span>
-                <span class="question-label " data-itext-id="/penutupan_ibu_reviewed/maternal_death_date_estimated:label"
+                <span class="question-label "
+                    data-itext-id="/penutupan_ibu_reviewed/maternal_death_date_estimated:label"
                     lang="en">Was
                     the date of maternal death estimated?
                 </span>
             </legend>
             <div class="option-wrapper">
                 <label class="">
-                    <input name="/penutupan_ibu_reviewed/maternal_death_date_estimated" data-name="/penutupan_ibu_reviewed/maternal_death_date_estimated"
-                        data-type-xml="select1"
-                        type="radio" value="yes" />
-                    <span class="option-label active" data-itext-id="/penutupan_ibu_reviewed/maternal_death_date_estimated/yes:label"
+                    <input name="/penutupan_ibu_reviewed/maternal_death_date_estimated"
+                        data-name="/penutupan_ibu_reviewed/maternal_death_date_estimated"
+                        data-type-xml="select1" type="radio" value="yes" />
+                    <span class="option-label active"
+                        data-itext-id="/penutupan_ibu_reviewed/maternal_death_date_estimated/yes:label"
                         lang="Bahasa">
                         Ya
                     </span>
-                    <span class="option-label " data-itext-id="/penutupan_ibu_reviewed/maternal_death_date_estimated/yes:label"
+                    <span class="option-label "
+                        data-itext-id="/penutupan_ibu_reviewed/maternal_death_date_estimated/yes:label"
                         lang="en">
                         Yes
                     </span>
                 </label>
                 <label class="">
-                    <input name="/penutupan_ibu_reviewed/maternal_death_date_estimated" data-name="/penutupan_ibu_reviewed/maternal_death_date_estimated"
-                        data-type-xml="select1" type="radio"
-                        value="no" />
-                    <span class="option-label active" data-itext-id="/penutupan_ibu_reviewed/maternal_death_date_estimated/no:label"
+                    <input name="/penutupan_ibu_reviewed/maternal_death_date_estimated"
+                        data-name="/penutupan_ibu_reviewed/maternal_death_date_estimated"
+                        data-type-xml="select1" type="radio" value="no" />
+                    <span class="option-label active"
+                        data-itext-id="/penutupan_ibu_reviewed/maternal_death_date_estimated/no:label"
                         lang="Bahasa">
                         Tidak
                     </span>
-                    <span class="option-label " data-itext-id="/penutupan_ibu_reviewed/maternal_death_date_estimated/no:label"
+                    <span class="option-label "
+                        data-itext-id="/penutupan_ibu_reviewed/maternal_death_date_estimated/no:label"
                         lang="en">
                         No
                     </span>
@@ -165,14 +179,17 @@
     <fieldset class="question or-branch pre-init ">
         <fieldset>
             <legend>
-                <span class="question-label active" data-itext-id="/penutupan_ibu_reviewed/place_of_death:label"
-                    lang="Bahasa">Tempat kematian
+                <span class="question-label active"
+                    data-itext-id="/penutupan_ibu_reviewed/place_of_death:label" lang="Bahasa">
+                    Tempat kematian
                 </span>
-                <span class="question-label " data-itext-id="/penutupan_ibu_reviewed/place_of_death:label"
-                    lang="en">Place of death
+                <span class="question-label "
+                    data-itext-id="/penutupan_ibu_reviewed/place_of_death:label" lang="en">Place of
+                    death
                 </span>
-                <span class="or-hint active" data-itext-id="/penutupan_ibu_reviewed/place_of_death:hint"
-                    lang="Bahasa">Tempat kematian Ibu
+                <span class="or-hint active"
+                    data-itext-id="/penutupan_ibu_reviewed/place_of_death:hint" lang="Bahasa">Tempat
+                    kematian Ibu
                 </span>
                 <span class="or-hint " data-itext-id="/penutupan_ibu_reviewed/place_of_death:hint"
                     lang="en">Place of mother's
@@ -181,86 +198,96 @@
             </legend>
             <div class="option-wrapper">
                 <label class="">
-                    <input name="/penutupan_ibu_reviewed/place_of_death" data-name="/penutupan_ibu_reviewed/place_of_death"
+                    <input name="/penutupan_ibu_reviewed/place_of_death"
+                        data-name="/penutupan_ibu_reviewed/place_of_death"
                         data-relevant=" /penutupan_ibu_reviewed/close_reason  = 'kematian_ibu'"
-                        data-type-xml="select1"
-                        type="radio"
-                        value="Rumah_sendiri/keluarga" />
-                    <span class="option-label active" data-itext-id="/penutupan_ibu_reviewed/place_of_death/Rumah_sendiri/keluarga:label"
+                        data-type-xml="select1" type="radio" value="Rumah_sendiri/keluarga" />
+                    <span class="option-label active"
+                        data-itext-id="/penutupan_ibu_reviewed/place_of_death/Rumah_sendiri/keluarga:label"
                         lang="Bahasa">
                         Rumah sendiri/keluarga
                     </span>
-                    <span class="option-label " data-itext-id="/penutupan_ibu_reviewed/place_of_death/Rumah_sendiri/keluarga:label"
+                    <span class="option-label "
+                        data-itext-id="/penutupan_ibu_reviewed/place_of_death/Rumah_sendiri/keluarga:label"
                         lang="en">
                         Mother/family's house
                     </span>
                 </label>
                 <label class="">
-                    <input name="/penutupan_ibu_reviewed/place_of_death" data-name="/penutupan_ibu_reviewed/place_of_death"
-                        data-relevant=" /penutupan_ibu_reviewed/close_reason  = 'kematian_ibu'" data-type-xml="select1"
-                        type="radio"
-                        value="Polindes" />
-                    <span class="option-label active" data-itext-id="/penutupan_ibu_reviewed/place_of_death/Polindes:label"
+                    <input name="/penutupan_ibu_reviewed/place_of_death"
+                        data-name="/penutupan_ibu_reviewed/place_of_death"
+                        data-relevant=" /penutupan_ibu_reviewed/close_reason  = 'kematian_ibu'"
+                        data-type-xml="select1" type="radio" value="Polindes" />
+                    <span class="option-label active"
+                        data-itext-id="/penutupan_ibu_reviewed/place_of_death/Polindes:label"
                         lang="Bahasa">
                         Polindes
                     </span>
-                    <span class="option-label " data-itext-id="/penutupan_ibu_reviewed/place_of_death/Polindes:label"
+                    <span class="option-label "
+                        data-itext-id="/penutupan_ibu_reviewed/place_of_death/Polindes:label"
                         lang="en">
                         Community-based health post
                     </span>
                 </label>
                 <label class="">
-                    <input name="/penutupan_ibu_reviewed/place_of_death" data-name="/penutupan_ibu_reviewed/place_of_death"
-                        data-relevant=" /penutupan_ibu_reviewed/close_reason  = 'kematian_ibu'" data-type-xml="select1"
-                        type="radio"
-                        value="Puskesmas" />
-                    <span class="option-label active" data-itext-id="/penutupan_ibu_reviewed/place_of_death/Puskesmas:label"
+                    <input name="/penutupan_ibu_reviewed/place_of_death"
+                        data-name="/penutupan_ibu_reviewed/place_of_death"
+                        data-relevant=" /penutupan_ibu_reviewed/close_reason  = 'kematian_ibu'"
+                        data-type-xml="select1" type="radio" value="Puskesmas" />
+                    <span class="option-label active"
+                        data-itext-id="/penutupan_ibu_reviewed/place_of_death/Puskesmas:label"
                         lang="Bahasa">
                         Puskesmas
                     </span>
-                    <span class="option-label " data-itext-id="/penutupan_ibu_reviewed/place_of_death/Puskesmas:label"
+                    <span class="option-label "
+                        data-itext-id="/penutupan_ibu_reviewed/place_of_death/Puskesmas:label"
                         lang="en">
                         Primary Health Center
                     </span>
                 </label>
                 <label class="">
-                    <input name="/penutupan_ibu_reviewed/place_of_death" data-name="/penutupan_ibu_reviewed/place_of_death"
+                    <input name="/penutupan_ibu_reviewed/place_of_death"
+                        data-name="/penutupan_ibu_reviewed/place_of_death"
                         data-relevant=" /penutupan_ibu_reviewed/close_reason  = 'kematian_ibu'"
-                        data-type-xml="select1"
-                        type="radio"
-                        value="Dalam_perjalanan_fasilitas" />
-                    <span class="option-label active" data-itext-id="/penutupan_ibu_reviewed/place_of_death/Dalam_perjalanan_fasilitas:label"
+                        data-type-xml="select1" type="radio" value="Dalam_perjalanan_fasilitas" />
+                    <span class="option-label active"
+                        data-itext-id="/penutupan_ibu_reviewed/place_of_death/Dalam_perjalanan_fasilitas:label"
                         lang="Bahasa">
                         Dalam perjalanan ke fasilitas
                     </span>
-                    <span class="option-label " data-itext-id="/penutupan_ibu_reviewed/place_of_death/Dalam_perjalanan_fasilitas:label"
+                    <span class="option-label "
+                        data-itext-id="/penutupan_ibu_reviewed/place_of_death/Dalam_perjalanan_fasilitas:label"
                         lang="en">
                         On the way to facility
                     </span>
                 </label>
                 <label class="">
-                    <input name="/penutupan_ibu_reviewed/place_of_death" data-name="/penutupan_ibu_reviewed/place_of_death"
-                        data-relevant=" /penutupan_ibu_reviewed/close_reason  = 'kematian_ibu'" data-type-xml="select1"
-                        type="radio"
-                        value="Rumah_Sakit" />
-                    <span class="option-label active" data-itext-id="/penutupan_ibu_reviewed/place_of_death/Rumah_Sakit:label"
+                    <input name="/penutupan_ibu_reviewed/place_of_death"
+                        data-name="/penutupan_ibu_reviewed/place_of_death"
+                        data-relevant=" /penutupan_ibu_reviewed/close_reason  = 'kematian_ibu'"
+                        data-type-xml="select1" type="radio" value="Rumah_Sakit" />
+                    <span class="option-label active"
+                        data-itext-id="/penutupan_ibu_reviewed/place_of_death/Rumah_Sakit:label"
                         lang="Bahasa">
                         Rumah Sakit
                     </span>
-                    <span class="option-label " data-itext-id="/penutupan_ibu_reviewed/place_of_death/Rumah_Sakit:label"
+                    <span class="option-label "
+                        data-itext-id="/penutupan_ibu_reviewed/place_of_death/Rumah_Sakit:label"
                         lang="en">
                         Hospital
                     </span>
                 </label>
                 <label class="">
-                    <input name="/penutupan_ibu_reviewed/place_of_death" data-name="/penutupan_ibu_reviewed/place_of_death"
-                        data-relevant=" /penutupan_ibu_reviewed/close_reason  = 'kematian_ibu'" data-type-xml="select1"
-                        type="radio"
-                        value="Lainnya" />
-                    <span class="option-label active" data-itext-id="/penutupan_ibu_reviewed/place_of_death/Lainnya:label"
+                    <input name="/penutupan_ibu_reviewed/place_of_death"
+                        data-name="/penutupan_ibu_reviewed/place_of_death"
+                        data-relevant=" /penutupan_ibu_reviewed/close_reason  = 'kematian_ibu'"
+                        data-type-xml="select1" type="radio" value="Lainnya" />
+                    <span class="option-label active"
+                        data-itext-id="/penutupan_ibu_reviewed/place_of_death/Lainnya:label"
                         lang="Bahasa">Lainnya
                     </span>
-                    <span class="option-label " data-itext-id="/penutupan_ibu_reviewed/place_of_death/Lainnya:label"
+                    <span class="option-label "
+                        data-itext-id="/penutupan_ibu_reviewed/place_of_death/Lainnya:label"
                         lang="en">Other
                     </span>
                 </label>
@@ -268,24 +295,26 @@
         </fieldset>
     </fieldset>
     <label class="question or-branch pre-init non-select ">
-        <span class="question-label active" data-itext-id="/penutupan_ibu_reviewed/other_place_of_death:label"
-            lang="Bahasa">Tempat kematian
+        <span class="question-label active"
+            data-itext-id="/penutupan_ibu_reviewed/other_place_of_death:label" lang="Bahasa">Tempat
+            kematian
             lainnya
         </span>
-        <span class="question-label " data-itext-id="/penutupan_ibu_reviewed/other_place_of_death:label"
-            lang="en">Other
+        <span class="question-label "
+            data-itext-id="/penutupan_ibu_reviewed/other_place_of_death:label" lang="en">Other
         </span>
-        <span class="or-hint active" data-itext-id="/penutupan_ibu_reviewed/other_place_of_death:hint"
-            lang="Bahasa">Sebutkan tempat
+        <span class="or-hint active"
+            data-itext-id="/penutupan_ibu_reviewed/other_place_of_death:hint" lang="Bahasa">Sebutkan
+            tempat
             kematian lainnya jika ada
         </span>
         <span class="or-hint " data-itext-id="/penutupan_ibu_reviewed/other_place_of_death:hint"
             lang="en">Mention other mother's
             place of death, if available
         </span>
-        <input name="/penutupan_ibu_reviewed/other_place_of_death" data-relevant=" /penutupan_ibu_reviewed/place_of_death  = 'Lainnya'"
-            data-type-xml="string"
-            type="text" />
+        <input name="/penutupan_ibu_reviewed/other_place_of_death"
+            data-relevant=" /penutupan_ibu_reviewed/place_of_death  = 'Lainnya'"
+            data-type-xml="string" type="text" />
     </label>
     <label class="question or-branch pre-init non-select ">
         <span class="question-label active" data-itext-id="/penutupan_ibu_reviewed/address:label"
@@ -300,22 +329,25 @@
         <span class="or-hint " data-itext-id="/penutupan_ibu_reviewed/address:hint" lang="en">Enter
             the mother&#x2019;s address (dusun)
         </span>
-        <input name="/penutupan_ibu_reviewed/address" data-relevant=" /penutupan_ibu_reviewed/close_reason  = 'kematian_ibu'"
-            data-type-xml="string"
-            type="text" />
+        <input name="/penutupan_ibu_reviewed/address"
+            data-relevant=" /penutupan_ibu_reviewed/close_reason  = 'kematian_ibu'"
+            data-type-xml="string" type="text" />
     </label>
     <fieldset class="question or-branch pre-init ">
         <fieldset>
             <legend>
-                <span class="question-label active" data-itext-id="/penutupan_ibu_reviewed/birth_attendant:label"
-                    lang="Bahasa">Penolong
+                <span class="question-label active"
+                    data-itext-id="/penutupan_ibu_reviewed/birth_attendant:label" lang="Bahasa">
+                    Penolong
                     Persalinan
                 </span>
-                <span class="question-label " data-itext-id="/penutupan_ibu_reviewed/birth_attendant:label"
-                    lang="en">Birth Attendant
+                <span class="question-label "
+                    data-itext-id="/penutupan_ibu_reviewed/birth_attendant:label" lang="en">Birth
+                    Attendant
                 </span>
-                <span class="or-hint active" data-itext-id="/penutupan_ibu_reviewed/birth_attendant:hint"
-                    lang="Bahasa">Sebutkan siapa yang
+                <span class="or-hint active"
+                    data-itext-id="/penutupan_ibu_reviewed/birth_attendant:hint" lang="Bahasa">
+                    Sebutkan siapa yang
                     menolong ibu hamil saat bersalin
                 </span>
                 <span class="or-hint " data-itext-id="/penutupan_ibu_reviewed/birth_attendant:hint"
@@ -325,97 +357,111 @@
             </legend>
             <div class="option-wrapper">
                 <label class="">
-                    <input name="/penutupan_ibu_reviewed/birth_attendant" data-name="/penutupan_ibu_reviewed/birth_attendant"
-                        data-relevant=" /penutupan_ibu_reviewed/close_reason  = 'kematian_ibu'" data-type-xml="select1"
-                        type="radio"
-                        value="keluarga" />
-                    <span class="option-label active" data-itext-id="/penutupan_ibu_reviewed/birth_attendant/keluarga:label"
+                    <input name="/penutupan_ibu_reviewed/birth_attendant"
+                        data-name="/penutupan_ibu_reviewed/birth_attendant"
+                        data-relevant=" /penutupan_ibu_reviewed/close_reason  = 'kematian_ibu'"
+                        data-type-xml="select1" type="radio" value="keluarga" />
+                    <span class="option-label active"
+                        data-itext-id="/penutupan_ibu_reviewed/birth_attendant/keluarga:label"
                         lang="Bahasa">
                         Keluarga (K)
                     </span>
-                    <span class="option-label " data-itext-id="/penutupan_ibu_reviewed/birth_attendant/keluarga:label"
+                    <span class="option-label "
+                        data-itext-id="/penutupan_ibu_reviewed/birth_attendant/keluarga:label"
                         lang="en">
                         Family
                     </span>
                 </label>
                 <label class="">
-                    <input name="/penutupan_ibu_reviewed/birth_attendant" data-name="/penutupan_ibu_reviewed/birth_attendant"
-                        data-relevant=" /penutupan_ibu_reviewed/close_reason  = 'kematian_ibu'" data-type-xml="select1"
-                        type="radio"
-                        value="dukun" />
-                    <span class="option-label active" data-itext-id="/penutupan_ibu_reviewed/birth_attendant/dukun:label"
+                    <input name="/penutupan_ibu_reviewed/birth_attendant"
+                        data-name="/penutupan_ibu_reviewed/birth_attendant"
+                        data-relevant=" /penutupan_ibu_reviewed/close_reason  = 'kematian_ibu'"
+                        data-type-xml="select1" type="radio" value="dukun" />
+                    <span class="option-label active"
+                        data-itext-id="/penutupan_ibu_reviewed/birth_attendant/dukun:label"
                         lang="Bahasa">Dukun
                         (D)
                     </span>
-                    <span class="option-label " data-itext-id="/penutupan_ibu_reviewed/birth_attendant/dukun:label"
+                    <span class="option-label "
+                        data-itext-id="/penutupan_ibu_reviewed/birth_attendant/dukun:label"
                         lang="en">
                         Traditional Birth Attendant
                     </span>
                 </label>
                 <label class="">
-                    <input name="/penutupan_ibu_reviewed/birth_attendant" data-name="/penutupan_ibu_reviewed/birth_attendant"
-                        data-relevant=" /penutupan_ibu_reviewed/close_reason  = 'kematian_ibu'" data-type-xml="select1"
-                        type="radio"
-                        value="bidan" />
-                    <span class="option-label active" data-itext-id="/penutupan_ibu_reviewed/birth_attendant/bidan:label"
+                    <input name="/penutupan_ibu_reviewed/birth_attendant"
+                        data-name="/penutupan_ibu_reviewed/birth_attendant"
+                        data-relevant=" /penutupan_ibu_reviewed/close_reason  = 'kematian_ibu'"
+                        data-type-xml="select1" type="radio" value="bidan" />
+                    <span class="option-label active"
+                        data-itext-id="/penutupan_ibu_reviewed/birth_attendant/bidan:label"
                         lang="Bahasa">Bidan
                         (B)
                     </span>
-                    <span class="option-label " data-itext-id="/penutupan_ibu_reviewed/birth_attendant/bidan:label"
+                    <span class="option-label "
+                        data-itext-id="/penutupan_ibu_reviewed/birth_attendant/bidan:label"
                         lang="en">Midwife
                     </span>
                 </label>
                 <label class="">
-                    <input name="/penutupan_ibu_reviewed/birth_attendant" data-name="/penutupan_ibu_reviewed/birth_attendant"
-                        data-relevant=" /penutupan_ibu_reviewed/close_reason  = 'kematian_ibu'" data-type-xml="select1"
-                        type="radio"
-                        value="dr.umum" />
-                    <span class="option-label active" data-itext-id="/penutupan_ibu_reviewed/birth_attendant/dr.umum:label"
+                    <input name="/penutupan_ibu_reviewed/birth_attendant"
+                        data-name="/penutupan_ibu_reviewed/birth_attendant"
+                        data-relevant=" /penutupan_ibu_reviewed/close_reason  = 'kematian_ibu'"
+                        data-type-xml="select1" type="radio" value="dr.umum" />
+                    <span class="option-label active"
+                        data-itext-id="/penutupan_ibu_reviewed/birth_attendant/dr.umum:label"
                         lang="Bahasa">
                         Dr.Umum (DU)
                     </span>
-                    <span class="option-label " data-itext-id="/penutupan_ibu_reviewed/birth_attendant/dr.umum:label"
+                    <span class="option-label "
+                        data-itext-id="/penutupan_ibu_reviewed/birth_attendant/dr.umum:label"
                         lang="en">Doctor
                     </span>
                 </label>
                 <label class="">
-                    <input name="/penutupan_ibu_reviewed/birth_attendant" data-name="/penutupan_ibu_reviewed/birth_attendant"
-                        data-relevant=" /penutupan_ibu_reviewed/close_reason  = 'kematian_ibu'" data-type-xml="select1"
-                        type="radio"
-                        value="dr.spesialis" />
-                    <span class="option-label active" data-itext-id="/penutupan_ibu_reviewed/birth_attendant/dr.spesialis:label"
+                    <input name="/penutupan_ibu_reviewed/birth_attendant"
+                        data-name="/penutupan_ibu_reviewed/birth_attendant"
+                        data-relevant=" /penutupan_ibu_reviewed/close_reason  = 'kematian_ibu'"
+                        data-type-xml="select1" type="radio" value="dr.spesialis" />
+                    <span class="option-label active"
+                        data-itext-id="/penutupan_ibu_reviewed/birth_attendant/dr.spesialis:label"
                         lang="Bahasa">
                         Dr.Spesialis (DS)
                     </span>
-                    <span class="option-label " data-itext-id="/penutupan_ibu_reviewed/birth_attendant/dr.spesialis:label"
+                    <span class="option-label "
+                        data-itext-id="/penutupan_ibu_reviewed/birth_attendant/dr.spesialis:label"
                         lang="en">
                         Obstectric and Gynecology Specialist (OGS)
                     </span>
                 </label>
                 <label class="">
-                    <input name="/penutupan_ibu_reviewed/birth_attendant" data-name="/penutupan_ibu_reviewed/birth_attendant"
-                        data-relevant=" /penutupan_ibu_reviewed/close_reason  = 'kematian_ibu'" data-type-xml="select1"
-                        type="radio"
-                        value="lain-lain" />
-                    <span class="option-label active" data-itext-id="/penutupan_ibu_reviewed/birth_attendant/lain-lain:label"
+                    <input name="/penutupan_ibu_reviewed/birth_attendant"
+                        data-name="/penutupan_ibu_reviewed/birth_attendant"
+                        data-relevant=" /penutupan_ibu_reviewed/close_reason  = 'kematian_ibu'"
+                        data-type-xml="select1" type="radio" value="lain-lain" />
+                    <span class="option-label active"
+                        data-itext-id="/penutupan_ibu_reviewed/birth_attendant/lain-lain:label"
                         lang="Bahasa">
                         Lain-Lain (LN)
                     </span>
-                    <span class="option-label " data-itext-id="/penutupan_ibu_reviewed/birth_attendant/lain-lain:label"
+                    <span class="option-label "
+                        data-itext-id="/penutupan_ibu_reviewed/birth_attendant/lain-lain:label"
                         lang="en">
                         Others
                     </span>
                 </label>
                 <label class="">
-                    <input name="/penutupan_ibu_reviewed/birth_attendant" data-name="/penutupan_ibu_reviewed/birth_attendant"
-                        data-relevant=" /penutupan_ibu_reviewed/close_reason  = 'kematian_ibu'" data-type-xml="select1"
-                        type="radio"
-                        value="tidak_ada" />
-                    <span class="option-label active" data-itext-id="/penutupan_ibu_reviewed/birth_attendant/tidak_ada:label"
+                    <input name="/penutupan_ibu_reviewed/birth_attendant"
+                        data-name="/penutupan_ibu_reviewed/birth_attendant"
+                        data-relevant=" /penutupan_ibu_reviewed/close_reason  = 'kematian_ibu'"
+                        data-type-xml="select1" type="radio" value="tidak_ada" />
+                    <span class="option-label active"
+                        data-itext-id="/penutupan_ibu_reviewed/birth_attendant/tidak_ada:label"
                         lang="Bahasa">
                         Tidak Ada (TA)
                     </span>
-                    <span class="option-label " data-itext-id="/penutupan_ibu_reviewed/birth_attendant/tidak_ada:label"
+                    <span class="option-label "
+                        data-itext-id="/penutupan_ibu_reviewed/birth_attendant/tidak_ada:label"
                         lang="en">None
                     </span>
                 </label>
@@ -425,8 +471,9 @@
     <fieldset class="question or-branch pre-init ">
         <fieldset>
             <legend>
-                <span class="question-label active" data-itext-id="/penutupan_ibu_reviewed/referred:label"
-                    lang="Bahasa">Apakah ibu ini dirujuk?
+                <span class="question-label active"
+                    data-itext-id="/penutupan_ibu_reviewed/referred:label" lang="Bahasa">Apakah ibu
+                    ini dirujuk?
                 </span>
                 <span class="question-label " data-itext-id="/penutupan_ibu_reviewed/referred:label"
                     lang="en">Was this mother referred
@@ -443,38 +490,41 @@
             </legend>
             <div class="option-wrapper">
                 <label class="">
-                    <input name="/penutupan_ibu_reviewed/referred" data-name="/penutupan_ibu_reviewed/referred"
-                        data-relevant=" /penutupan_ibu_reviewed/close_reason  = 'kematian_ibu'" data-type-xml="select1"
-                        type="radio"
-                        value="yes" />
-                    <span class="option-label active" data-itext-id="/penutupan_ibu_reviewed/referred/yes:label"
-                        lang="Bahasa">Ya
+                    <input name="/penutupan_ibu_reviewed/referred"
+                        data-name="/penutupan_ibu_reviewed/referred"
+                        data-relevant=" /penutupan_ibu_reviewed/close_reason  = 'kematian_ibu'"
+                        data-type-xml="select1" type="radio" value="yes" />
+                    <span class="option-label active"
+                        data-itext-id="/penutupan_ibu_reviewed/referred/yes:label" lang="Bahasa">Ya
                     </span>
-                    <span class="option-label " data-itext-id="/penutupan_ibu_reviewed/referred/yes:label"
-                        lang="en">Yes
+                    <span class="option-label "
+                        data-itext-id="/penutupan_ibu_reviewed/referred/yes:label" lang="en">Yes
                     </span>
                 </label>
                 <label class="">
-                    <input name="/penutupan_ibu_reviewed/referred" data-name="/penutupan_ibu_reviewed/referred"
-                        data-relevant=" /penutupan_ibu_reviewed/close_reason  = 'kematian_ibu'" data-type-xml="select1"
-                        type="radio"
-                        value="no" />
-                    <span class="option-label active" data-itext-id="/penutupan_ibu_reviewed/referred/no:label"
-                        lang="Bahasa">Tidak
+                    <input name="/penutupan_ibu_reviewed/referred"
+                        data-name="/penutupan_ibu_reviewed/referred"
+                        data-relevant=" /penutupan_ibu_reviewed/close_reason  = 'kematian_ibu'"
+                        data-type-xml="select1" type="radio" value="no" />
+                    <span class="option-label active"
+                        data-itext-id="/penutupan_ibu_reviewed/referred/no:label" lang="Bahasa">
+                        Tidak
                     </span>
-                    <span class="option-label " data-itext-id="/penutupan_ibu_reviewed/referred/no:label"
-                        lang="en">No
+                    <span class="option-label "
+                        data-itext-id="/penutupan_ibu_reviewed/referred/no:label" lang="en">No
                     </span>
                 </label>
             </div>
         </fieldset>
     </fieldset>
     <label class="question or-branch pre-init non-select ">
-        <span class="question-label active" data-itext-id="/penutupan_ibu_reviewed/referral_location:label"
-            lang="Bahasa">Ibu dirujuk ke
+        <span class="question-label active"
+            data-itext-id="/penutupan_ibu_reviewed/referral_location:label" lang="Bahasa">Ibu
+            dirujuk ke
         </span>
-        <span class="question-label " data-itext-id="/penutupan_ibu_reviewed/referral_location:label"
-            lang="en">Location of referral
+        <span class="question-label "
+            data-itext-id="/penutupan_ibu_reviewed/referral_location:label" lang="en">Location of
+            referral
         </span>
         <span class="or-hint active" data-itext-id="/penutupan_ibu_reviewed/referral_location:hint"
             lang="Bahasa">Untuk mengetahui ibu
@@ -484,39 +534,47 @@
             lang="en">Information related to
             the location of mother's referral
         </span>
-        <input name="/penutupan_ibu_reviewed/referral_location" data-relevant=" /penutupan_ibu_reviewed/referred  = 'yes'"
-            data-type-xml="string" type="text" />
+        <input name="/penutupan_ibu_reviewed/referral_location"
+            data-relevant=" /penutupan_ibu_reviewed/referred  = 'yes'" data-type-xml="string"
+            type="text" />
     </label>
     <label class="question or-branch pre-init non-select ">
-        <span class="question-label active" data-itext-id="/penutupan_ibu_reviewed/prereferral_management:label"
-            lang="Bahasa">Tindakan sebelum
+        <span class="question-label active"
+            data-itext-id="/penutupan_ibu_reviewed/prereferral_management:label" lang="Bahasa">
+            Tindakan sebelum
             dirujuk
         </span>
-        <span class="question-label " data-itext-id="/penutupan_ibu_reviewed/prereferral_management:label"
-            lang="en">Pre-referral
+        <span class="question-label "
+            data-itext-id="/penutupan_ibu_reviewed/prereferral_management:label" lang="en">
+            Pre-referral
             management
         </span>
-        <span class="or-hint active" data-itext-id="/penutupan_ibu_reviewed/prereferral_management:hint"
-            lang="Bahasa">Tuliskan tindakan
+        <span class="or-hint active"
+            data-itext-id="/penutupan_ibu_reviewed/prereferral_management:hint" lang="Bahasa">
+            Tuliskan tindakan
             perawatan yang diberikan kepada ibu sebelum dirujuk
         </span>
         <span class="or-hint " data-itext-id="/penutupan_ibu_reviewed/prereferral_management:hint"
             lang="en">Describe the care
             management provided for the mother prior to referral
         </span>
-        <input name="/penutupan_ibu_reviewed/prereferral_management" data-relevant=" /penutupan_ibu_reviewed/referred  = 'yes'"
-            data-type-xml="string" type="text" />
+        <input name="/penutupan_ibu_reviewed/prereferral_management"
+            data-relevant=" /penutupan_ibu_reviewed/referred  = 'yes'" data-type-xml="string"
+            type="text" />
     </label>
     <label class="question or-appearance-minimal  or-branch pre-init ">
-        <span class="question-label active" data-itext-id="/penutupan_ibu_reviewed/maternal_death_cause:label"
-            lang="Bahasa">Penyebab kematian?
+        <span class="question-label active"
+            data-itext-id="/penutupan_ibu_reviewed/maternal_death_cause:label" lang="Bahasa">
+            Penyebab kematian?
         </span>
-        <span class="question-label " data-itext-id="/penutupan_ibu_reviewed/maternal_death_cause:label"
-            lang="en">Cause of Maternal
+        <span class="question-label "
+            data-itext-id="/penutupan_ibu_reviewed/maternal_death_cause:label" lang="en">Cause of
+            Maternal
             Death
         </span>
-        <span class="or-hint active" data-itext-id="/penutupan_ibu_reviewed/maternal_death_cause:hint"
-            lang="Bahasa">Pilihlah salah satu
+        <span class="or-hint active"
+            data-itext-id="/penutupan_ibu_reviewed/maternal_death_cause:hint" lang="Bahasa">Pilihlah
+            salah satu
             jawaban yang tersedia
         </span>
         <span class="or-hint " data-itext-id="/penutupan_ibu_reviewed/maternal_death_cause:hint"
@@ -545,16 +603,19 @@
         </span>
     </label>
     <label class="question or-appearance-minimal  or-branch pre-init ">
-        <span class="question-label active" data-itext-id="/penutupan_ibu_reviewed/maternal_death_probable:label"
-            lang="Bahasa">Kemungkinan
+        <span class="question-label active"
+            data-itext-id="/penutupan_ibu_reviewed/maternal_death_probable:label" lang="Bahasa">
+            Kemungkinan
             penyebab kematian?
         </span>
-        <span class="question-label " data-itext-id="/penutupan_ibu_reviewed/maternal_death_probable:label"
-            lang="en">Probable Cause of
+        <span class="question-label "
+            data-itext-id="/penutupan_ibu_reviewed/maternal_death_probable:label" lang="en">Probable
+            Cause of
             Direct Maternal Death
         </span>
-        <span class="or-hint active" data-itext-id="/penutupan_ibu_reviewed/maternal_death_probable:hint"
-            lang="Bahasa">Pilihlah salah satu
+        <span class="or-hint active"
+            data-itext-id="/penutupan_ibu_reviewed/maternal_death_probable:hint" lang="Bahasa">
+            Pilihlah salah satu
             jawaban yang tersedia
         </span>
         <span class="or-hint " data-itext-id="/penutupan_ibu_reviewed/maternal_death_probable:hint"
@@ -630,46 +691,53 @@
         </span>
     </label>
     <label class="question or-branch pre-init non-select ">
-        <span class="question-label active" data-itext-id="/penutupan_ibu_reviewed/maternal_death_cause_other:label"
-            lang="Bahasa">Lainnya
+        <span class="question-label active"
+            data-itext-id="/penutupan_ibu_reviewed/maternal_death_cause_other:label" lang="Bahasa">
+            Lainnya
         </span>
-        <span class="question-label " data-itext-id="/penutupan_ibu_reviewed/maternal_death_cause_other:label"
-            lang="en">Other
+        <span class="question-label "
+            data-itext-id="/penutupan_ibu_reviewed/maternal_death_cause_other:label" lang="en">Other
         </span>
-        <span class="or-hint active" data-itext-id="/penutupan_ibu_reviewed/maternal_death_cause_other:hint"
-            lang="Bahasa">Sebutkan alasan
+        <span class="or-hint active"
+            data-itext-id="/penutupan_ibu_reviewed/maternal_death_cause_other:hint" lang="Bahasa">
+            Sebutkan alasan
             lainnya jika ada
         </span>
-        <span class="or-hint " data-itext-id="/penutupan_ibu_reviewed/maternal_death_cause_other:hint"
-            lang="en">Write other
+        <span class="or-hint "
+            data-itext-id="/penutupan_ibu_reviewed/maternal_death_cause_other:hint" lang="en">Write
+            other
             reason, if available
         </span>
-        <input name="/penutupan_ibu_reviewed/maternal_death_cause_other" data-relevant=" /penutupan_ibu_reviewed/maternal_death_probable  = 'others'"
-            data-type-xml="string"
-            type="text" />
+        <input name="/penutupan_ibu_reviewed/maternal_death_cause_other"
+            data-relevant=" /penutupan_ibu_reviewed/maternal_death_probable  = 'others'"
+            data-type-xml="string" type="text" />
     </label>
     <fieldset class="question ">
         <fieldset>
             <legend>
-                <span class="question-label active" data-itext-id="/penutupan_ibu_reviewed/confirm_ec_close:label"
-                    lang="Bahasa">Konfirmasi
+                <span class="question-label active"
+                    data-itext-id="/penutupan_ibu_reviewed/confirm_ec_close:label" lang="Bahasa">
+                    Konfirmasi
                     penutupan Kartu Ibu?
                 </span>
-                <span class="question-label " data-itext-id="/penutupan_ibu_reviewed/confirm_ec_close:label"
-                    lang="en">Confirmation of
+                <span class="question-label "
+                    data-itext-id="/penutupan_ibu_reviewed/confirm_ec_close:label" lang="en">
+                    Confirmation of
                     Mother Card's closure?
                 </span>
                 <span class="required">*</span>
             </legend>
             <div class="option-wrapper">
                 <label class="">
-                    <input name="/penutupan_ibu_reviewed/confirm_ec_close" data-name="/penutupan_ibu_reviewed/confirm_ec_close"
-                        data-type-xml="select1" required="required"
-                        type="radio" value="yes" />
-                    <span class="option-label active" data-itext-id="/penutupan_ibu_reviewed/confirm_ec_close/yes:label"
+                    <input name="/penutupan_ibu_reviewed/confirm_ec_close"
+                        data-name="/penutupan_ibu_reviewed/confirm_ec_close" data-type-xml="select1"
+                        required="required" type="radio" value="yes" />
+                    <span class="option-label active"
+                        data-itext-id="/penutupan_ibu_reviewed/confirm_ec_close/yes:label"
                         lang="Bahasa">Ya
                     </span>
-                    <span class="option-label " data-itext-id="/penutupan_ibu_reviewed/confirm_ec_close/yes:label"
+                    <span class="option-label "
+                        data-itext-id="/penutupan_ibu_reviewed/confirm_ec_close/yes:label"
                         lang="en">Yes
                     </span>
                 </label>
@@ -679,62 +747,69 @@
 
     <fieldset style="display:none;" id="or-preload-items">
         <label class="calculation non-select ">
-            <input name="/penutupan_ibu_reviewed/start" data-preload="timestamp" data-preload-params="start"
-                data-type-xml="dateTime" type="hidden" />
+            <input name="/penutupan_ibu_reviewed/start" data-preload="timestamp"
+                data-preload-params="start" data-type-xml="dateTime" type="hidden" />
         </label>
         <label class="calculation non-select ">
-            <input name="/penutupan_ibu_reviewed/today" data-preload="date" data-preload-params="today"
-                data-type-xml="date" type="hidden" />
+            <input name="/penutupan_ibu_reviewed/today" data-preload="date"
+                data-preload-params="today" data-type-xml="date" type="hidden" />
         </label>
         <label class="calculation non-select ">
-            <input name="/penutupan_ibu_reviewed/deviceid" data-preload="property" data-preload-params="deviceid"
-                data-type-xml="string" type="hidden" />
+            <input name="/penutupan_ibu_reviewed/deviceid" data-preload="property"
+                data-preload-params="deviceid" data-type-xml="string" type="hidden" />
         </label>
         <label class="calculation non-select ">
-            <input name="/penutupan_ibu_reviewed/simserial" data-preload="property" data-preload-params="simserial"
-                data-type-xml="string" type="hidden" />
+            <input name="/penutupan_ibu_reviewed/simserial" data-preload="property"
+                data-preload-params="simserial" data-type-xml="string" type="hidden" />
         </label>
         <label class="calculation non-select ">
-            <input name="/penutupan_ibu_reviewed/phonenumber" data-preload="property" data-preload-params="phonenumber"
-                data-type-xml="string" type="hidden" />
+            <input name="/penutupan_ibu_reviewed/phonenumber" data-preload="property"
+                data-preload-params="phonenumber" data-type-xml="string" type="hidden" />
         </label>
         <label class="calculation non-select ">
-            <input name="/penutupan_ibu_reviewed/end" data-preload="timestamp" data-preload-params="end"
-                data-type-xml="dateTime" type="hidden" />
+            <input name="/penutupan_ibu_reviewed/end" data-preload="timestamp"
+                data-preload-params="end" data-type-xml="dateTime" type="hidden" />
         </label>
     </fieldset>
     <fieldset style="display:none;" id="or-calculated-items">
         <label class="calculation non-select ">
-            <input name="/penutupan_ibu_reviewed/existing_location" data-calculate=" /penutupan_ibu_reviewed/Village "
-                data-type-xml="string" type="hidden" />
+            <input name="/penutupan_ibu_reviewed/existing_location"
+                data-calculate=" /penutupan_ibu_reviewed/Village " data-type-xml="string"
+                type="hidden" />
         </label>
         <label class="calculation non-select ">
-            <input name="/penutupan_ibu_reviewed/provinsi" data-calculate=" /penutupan_ibu_reviewed/Province "
-                data-type-xml="string" type="hidden" />
+            <input name="/penutupan_ibu_reviewed/provinsi"
+                data-calculate=" /penutupan_ibu_reviewed/Province " data-type-xml="string"
+                type="hidden" />
         </label>
         <label class="calculation non-select ">
-            <input name="/penutupan_ibu_reviewed/kabupaten" data-calculate=" /penutupan_ibu_reviewed/District "
-                data-type-xml="string" type="hidden" />
+            <input name="/penutupan_ibu_reviewed/kabupaten"
+                data-calculate=" /penutupan_ibu_reviewed/District " data-type-xml="string"
+                type="hidden" />
         </label>
         <label class="calculation non-select ">
-            <input name="/penutupan_ibu_reviewed/desa" data-calculate=" /penutupan_ibu_reviewed/Village "
-                data-type-xml="string" type="hidden" />
+            <input name="/penutupan_ibu_reviewed/desa"
+                data-calculate=" /penutupan_ibu_reviewed/Village " data-type-xml="string"
+                type="hidden" />
         </label>
         <label class="calculation non-select ">
-            <input name="/penutupan_ibu_reviewed/dusun" data-calculate=" /penutupan_ibu_reviewed/Sub-village "
-                data-type-xml="string" type="hidden" />
+            <input name="/penutupan_ibu_reviewed/dusun"
+                data-calculate=" /penutupan_ibu_reviewed/Sub-village " data-type-xml="string"
+                type="hidden" />
         </label>
         <label class="calculation non-select ">
-            <input name="/penutupan_ibu_reviewed/kecamatan" data-calculate=" /penutupan_ibu_reviewed/Sub-district "
-                data-type-xml="string" type="hidden" />
+            <input name="/penutupan_ibu_reviewed/kecamatan"
+                data-calculate=" /penutupan_ibu_reviewed/Sub-district " data-type-xml="string"
+                type="hidden" />
         </label>
         <label class="calculation non-select ">
-            <input name="/penutupan_ibu_reviewed/meta/instanceID" data-calculate="concat('uuid:', uuid())"
-                data-type-xml="string" type="hidden" />
+            <input name="/penutupan_ibu_reviewed/meta/instanceID"
+                data-calculate="concat('uuid:', uuid())" data-type-xml="string" type="hidden" />
         </label>
         <label class="calculation non-select ">
-            <input name="/penutupan_ibu_reviewed/formhub/uuid" data-calculate="'1baf901932b945118afea7af37f39c21'"
-                data-type-xml="string" type="hidden" />
+            <input name="/penutupan_ibu_reviewed/formhub/uuid"
+                data-calculate="'1baf901932b945118afea7af37f39c21'" data-type-xml="string"
+                type="hidden" />
         </label>
     </fieldset>
 </form>

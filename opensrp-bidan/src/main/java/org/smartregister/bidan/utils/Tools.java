@@ -78,15 +78,15 @@ public class Tools {
         Log.d("GiziApp", "db: " + db);
         if (dbs.moveToFirst()) {
             do {
-                String data = dbs.getString(dbs.getColumnIndex("name"));
-                Log.d("testanak", "table name: " + data);
-                Cursor temp = context.initRepository().getWritableDatabase().rawQuery("SELECT * FROM " + data, null);
+                String tblName = dbs.getString(dbs.getColumnIndex("name"));
+                Log.d("dbBidan ", "table name: " + tblName);
+                Cursor temp = context.initRepository().getWritableDatabase().rawQuery("SELECT * FROM " + tblName, null);
                 temp.moveToFirst();
-                Log.d("testanak", data + ": " + temp.getCount());
+                Log.d("dbBidan ", tblName + " : " + temp.getCount());
                 String output = "";
                 for (String str : temp.getColumnNames())
                     output = output + ", " + str;
-                Log.d("testanak", "getColumnNames: " + output);
+                Log.d("dbBidan ", "getColumnNames: " + tblName + " >> " + output);
 
                 if (temp.getCount() > 0) {
                     if (temp.moveToFirst()) {
@@ -103,7 +103,8 @@ public class Tools {
                                 }
                                 output2 = output2 + ", " + value;
                             }
-                            Log.d("testanak", "getColumnNames: " + output2);
+                            Log.d("dbBidan ", "getColumnNames: " + tblName + " >> " + output2);
+
                         } while (temp.moveToNext());
                     }
 
@@ -112,7 +113,7 @@ public class Tools {
                 temp.close();
             } while (dbs.moveToNext());
         }
-        Log.d("testanak", "getCount: " + dbs.getCount());
+        Log.d("dbBidan", "getCount: " + dbs.getCount());
         dbs.close();
 //        return value;
     }

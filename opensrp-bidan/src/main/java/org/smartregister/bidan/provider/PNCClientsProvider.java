@@ -45,6 +45,7 @@ public class PNCClientsProvider extends BaseClientsProvider {
     private final OpenSRPImageLoader mImageLoader;
     private final int txtColorBlack;
     private final AbsListView.LayoutParams clientViewLayoutParams;
+    private final LayoutInflater inflater;
     protected CommonPersonObjectController controller;
     AlertService alertService;
     @Bind(R.id.profile_info_layout)
@@ -97,7 +98,6 @@ public class PNCClientsProvider extends BaseClientsProvider {
     @Bind(R.id.ib_btn_edit)
     ImageButton follow_up;
     private Drawable iconPencilDrawable;
-    private final LayoutInflater inflater;
 
     public PNCClientsProvider(Context context, View.OnClickListener onClickListener, AlertService alertService) {
 

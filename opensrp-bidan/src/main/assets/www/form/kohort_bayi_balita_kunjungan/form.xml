@@ -97,16 +97,17 @@
     </fieldset>
     <fieldset style="display:none;" id="or-calculated-items">
         <label class="calculation non-select ">
-            <input name="/balita_kunjungan/reg_date" autocomplete="off" data-calculate=" /Bayi_Neonatal_Period/today "
-                data-type-xml="date" type="hidden" />
+            <input name="/balita_kunjungan/reg_date" autocomplete="off"
+                data-calculate=" /Bayi_Neonatal_Period/today " data-type-xml="date" type="hidden" />
         </label>
         <label class="calculation non-select ">
             <input name="/balita_kunjungan/meta/instanceID" data-calculate="concat('uuid:', uuid())"
                 data-type-xml="string" type="hidden" />
         </label>
         <label class="calculation non-select ">
-            <input name="/balita_kunjungan/formhub/uuid" data-calculate="'3c5f10fa093945ec872790eef0bb6f56'"
-                data-type-xml="string" type="hidden" />
+            <input name="/balita_kunjungan/formhub/uuid"
+                data-calculate="'3c5f10fa093945ec872790eef0bb6f56'" data-type-xml="string"
+                type="hidden" />
         </label>
     </fieldset>
 </form>

@@ -9,115 +9,133 @@
 
 
     <label class="note non-select ">
-        <span class="question-label active" data-itext-id="/kunjungan_anc_reviewed_integrasi/generated_note_name_13:label"
+        <span class="question-label active"
+            data-itext-id="/kunjungan_anc_reviewed_integrasi/generated_note_name_13:label"
             lang="Bahasa">Desa :
             <span class="or-output" data-value=" /kunjungan_anc_reviewed_integrasi/Village "></span>
         </span>
-        <span class="question-label " data-itext-id="/kunjungan_anc_reviewed_integrasi/generated_note_name_13:label"
+        <span class="question-label "
+            data-itext-id="/kunjungan_anc_reviewed_integrasi/generated_note_name_13:label"
             lang="en">-
         </span>
-        <input name="/kunjungan_anc_reviewed_integrasi/generated_note_name_13" data-type-xml="string"
-            readonly="readonly" type="text" />
+        <input name="/kunjungan_anc_reviewed_integrasi/generated_note_name_13"
+            data-type-xml="string" readonly="readonly" type="text" />
     </label>
     <label class="note non-select ">
-        <span class="question-label active" data-itext-id="/kunjungan_anc_reviewed_integrasi/generated_note_name_14:label"
+        <span class="question-label active"
+            data-itext-id="/kunjungan_anc_reviewed_integrasi/generated_note_name_14:label"
             lang="Bahasa">Dusun :
             <span class="or-output"
                 data-value=" /kunjungan_anc_reviewed_integrasi/Sub-village "></span>
         </span>
-        <span class="question-label " data-itext-id="/kunjungan_anc_reviewed_integrasi/generated_note_name_14:label"
+        <span class="question-label "
+            data-itext-id="/kunjungan_anc_reviewed_integrasi/generated_note_name_14:label"
             lang="en">-
         </span>
-        <input name="/kunjungan_anc_reviewed_integrasi/generated_note_name_14" data-type-xml="string"
-            readonly="readonly" type="text" />
+        <input name="/kunjungan_anc_reviewed_integrasi/generated_note_name_14"
+            data-type-xml="string" readonly="readonly" type="text" />
     </label>
     <fieldset class="question or-appearance-yes ">
         <fieldset>
             <legend>
-                <span class="question-label active" data-itext-id="/kunjungan_anc_reviewed_integrasi/lokasi_periksa:label"
+                <span class="question-label active"
+                    data-itext-id="/kunjungan_anc_reviewed_integrasi/lokasi_periksa:label"
                     lang="Bahasa">Lokasi
                     Periksa
                 </span>
-                <span class="question-label " data-itext-id="/kunjungan_anc_reviewed_integrasi/lokasi_periksa:label"
+                <span class="question-label "
+                    data-itext-id="/kunjungan_anc_reviewed_integrasi/lokasi_periksa:label"
                     lang="en">Location
                     of Service
                 </span>
             </legend>
             <div class="option-wrapper">
                 <label class="">
-                    <input name="/kunjungan_anc_reviewed_integrasi/lokasi_periksa" data-name="/kunjungan_anc_reviewed_integrasi/lokasi_periksa"
-                        data-type-xml="select1"
-                        type="radio" value="Posyandu" />
-                    <span class="option-label active" data-itext-id="/kunjungan_anc_reviewed_integrasi/lokasi_periksa/Posyandu:label"
+                    <input name="/kunjungan_anc_reviewed_integrasi/lokasi_periksa"
+                        data-name="/kunjungan_anc_reviewed_integrasi/lokasi_periksa"
+                        data-type-xml="select1" type="radio" value="Posyandu" />
+                    <span class="option-label active"
+                        data-itext-id="/kunjungan_anc_reviewed_integrasi/lokasi_periksa/Posyandu:label"
                         lang="Bahasa">
                         Posyandu
                     </span>
-                    <span class="option-label " data-itext-id="/kunjungan_anc_reviewed_integrasi/lokasi_periksa/Posyandu:label"
+                    <span class="option-label "
+                        data-itext-id="/kunjungan_anc_reviewed_integrasi/lokasi_periksa/Posyandu:label"
                         lang="en">
                         Village Outreach Post
                     </span>
                 </label>
                 <label class="">
-                    <input name="/kunjungan_anc_reviewed_integrasi/lokasi_periksa" data-name="/kunjungan_anc_reviewed_integrasi/lokasi_periksa"
-                        data-type-xml="select1"
-                        type="radio" value="Polindes" />
-                    <span class="option-label active" data-itext-id="/kunjungan_anc_reviewed_integrasi/lokasi_periksa/Polindes:label"
+                    <input name="/kunjungan_anc_reviewed_integrasi/lokasi_periksa"
+                        data-name="/kunjungan_anc_reviewed_integrasi/lokasi_periksa"
+                        data-type-xml="select1" type="radio" value="Polindes" />
+                    <span class="option-label active"
+                        data-itext-id="/kunjungan_anc_reviewed_integrasi/lokasi_periksa/Polindes:label"
                         lang="Bahasa">
                         Polindes
                     </span>
-                    <span class="option-label " data-itext-id="/kunjungan_anc_reviewed_integrasi/lokasi_periksa/Polindes:label"
+                    <span class="option-label "
+                        data-itext-id="/kunjungan_anc_reviewed_integrasi/lokasi_periksa/Polindes:label"
                         lang="en">
                         Maternal &amp; Child Health Post
                     </span>
                 </label>
                 <label class="">
-                    <input name="/kunjungan_anc_reviewed_integrasi/lokasi_periksa" data-name="/kunjungan_anc_reviewed_integrasi/lokasi_periksa"
-                        data-type-xml="select1"
-                        type="radio" value="Puskesmas" />
-                    <span class="option-label active" data-itext-id="/kunjungan_anc_reviewed_integrasi/lokasi_periksa/Puskesmas:label"
+                    <input name="/kunjungan_anc_reviewed_integrasi/lokasi_periksa"
+                        data-name="/kunjungan_anc_reviewed_integrasi/lokasi_periksa"
+                        data-type-xml="select1" type="radio" value="Puskesmas" />
+                    <span class="option-label active"
+                        data-itext-id="/kunjungan_anc_reviewed_integrasi/lokasi_periksa/Puskesmas:label"
                         lang="Bahasa">
                         Puskesmas
                     </span>
-                    <span class="option-label " data-itext-id="/kunjungan_anc_reviewed_integrasi/lokasi_periksa/Puskesmas:label"
+                    <span class="option-label "
+                        data-itext-id="/kunjungan_anc_reviewed_integrasi/lokasi_periksa/Puskesmas:label"
                         lang="en">
                         Primary Health Center
                     </span>
                 </label>
                 <label class="">
-                    <input name="/kunjungan_anc_reviewed_integrasi/lokasi_periksa" data-name="/kunjungan_anc_reviewed_integrasi/lokasi_periksa"
-                        data-type-xml="select1"
-                        type="radio" value="Rumah_Ibu" />
-                    <span class="option-label active" data-itext-id="/kunjungan_anc_reviewed_integrasi/lokasi_periksa/Rumah_Ibu:label"
+                    <input name="/kunjungan_anc_reviewed_integrasi/lokasi_periksa"
+                        data-name="/kunjungan_anc_reviewed_integrasi/lokasi_periksa"
+                        data-type-xml="select1" type="radio" value="Rumah_Ibu" />
+                    <span class="option-label active"
+                        data-itext-id="/kunjungan_anc_reviewed_integrasi/lokasi_periksa/Rumah_Ibu:label"
                         lang="Bahasa">
                         Rumah Ibu
                     </span>
-                    <span class="option-label " data-itext-id="/kunjungan_anc_reviewed_integrasi/lokasi_periksa/Rumah_Ibu:label"
+                    <span class="option-label "
+                        data-itext-id="/kunjungan_anc_reviewed_integrasi/lokasi_periksa/Rumah_Ibu:label"
                         lang="en">
                         Mother House
                     </span>
                 </label>
                 <label class="">
-                    <input name="/kunjungan_anc_reviewed_integrasi/lokasi_periksa" data-name="/kunjungan_anc_reviewed_integrasi/lokasi_periksa"
-                        data-type-xml="select1"
-                        type="radio" value="Rumah_Sakit" />
-                    <span class="option-label active" data-itext-id="/kunjungan_anc_reviewed_integrasi/lokasi_periksa/Rumah_Sakit:label"
+                    <input name="/kunjungan_anc_reviewed_integrasi/lokasi_periksa"
+                        data-name="/kunjungan_anc_reviewed_integrasi/lokasi_periksa"
+                        data-type-xml="select1" type="radio" value="Rumah_Sakit" />
+                    <span class="option-label active"
+                        data-itext-id="/kunjungan_anc_reviewed_integrasi/lokasi_periksa/Rumah_Sakit:label"
                         lang="Bahasa">
                         Rumah Sakit
                     </span>
-                    <span class="option-label " data-itext-id="/kunjungan_anc_reviewed_integrasi/lokasi_periksa/Rumah_Sakit:label"
+                    <span class="option-label "
+                        data-itext-id="/kunjungan_anc_reviewed_integrasi/lokasi_periksa/Rumah_Sakit:label"
                         lang="en">
                         Hospital
                     </span>
                 </label>
                 <label class="">
-                    <input name="/kunjungan_anc_reviewed_integrasi/lokasi_periksa" data-name="/kunjungan_anc_reviewed_integrasi/lokasi_periksa"
-                        data-type-xml="select1" type="radio"
-                        value="Lainnya" />
-                    <span class="option-label active" data-itext-id="/kunjungan_anc_reviewed_integrasi/lokasi_periksa/Lainnya:label"
+                    <input name="/kunjungan_anc_reviewed_integrasi/lokasi_periksa"
+                        data-name="/kunjungan_anc_reviewed_integrasi/lokasi_periksa"
+                        data-type-xml="select1" type="radio" value="Lainnya" />
+                    <span class="option-label active"
+                        data-itext-id="/kunjungan_anc_reviewed_integrasi/lokasi_periksa/Lainnya:label"
                         lang="Bahasa">
                         Lainnya
                     </span>
-                    <span class="option-label " data-itext-id="/kunjungan_anc_reviewed_integrasi/lokasi_periksa/Lainnya:label"
+                    <span class="option-label "
+                        data-itext-id="/kunjungan_anc_reviewed_integrasi/lokasi_periksa/Lainnya:label"
                         lang="en">
                         Other
                     </span>
@@ -126,17 +144,19 @@
         </fieldset>
     </fieldset>
     <label class="question non-select ">
-        <span class="question-label active" data-itext-id="/kunjungan_anc_reviewed_integrasi/reference_date:label"
-            lang="Bahasa">Tanggal kunjungan
+        <span class="question-label active"
+            data-itext-id="/kunjungan_anc_reviewed_integrasi/reference_date:label" lang="Bahasa">
+            Tanggal kunjungan
             Program Integrasi
         </span>
-        <span class="question-label " data-itext-id="/kunjungan_anc_reviewed_integrasi/reference_date:label"
-            lang="en">Date of
+        <span class="question-label "
+            data-itext-id="/kunjungan_anc_reviewed_integrasi/reference_date:label" lang="en">Date of
             Integration Program visit
         </span>
         <span class="required">*</span>
-        <span class="or-hint active" data-itext-id="/kunjungan_anc_reviewed_integrasi/reference_date:hint"
-            lang="Bahasa">Diisi dengan
+        <span class="or-hint active"
+            data-itext-id="/kunjungan_anc_reviewed_integrasi/reference_date:hint" lang="Bahasa">
+            Diisi dengan
             tanggal periksa Ibu
         </span>
         <span class="or-hint " data-itext-id="/kunjungan_anc_reviewed_integrasi/reference_date:hint"
@@ -147,41 +167,49 @@
             required="required" type="date" />
     </label>
     <label class="note non-select ">
-        <span class="question-label active" data-itext-id="/kunjungan_anc_reviewed_integrasi/generated_note_name_27:label"
+        <span class="question-label active"
+            data-itext-id="/kunjungan_anc_reviewed_integrasi/generated_note_name_27:label"
             lang="Bahasa">Apakah
             anda melakukan Integrasi Program terhadap Ibu Hamil?
         </span>
-        <span class="question-label " data-itext-id="/kunjungan_anc_reviewed_integrasi/generated_note_name_27:label"
+        <span class="question-label "
+            data-itext-id="/kunjungan_anc_reviewed_integrasi/generated_note_name_27:label"
             lang="en">Do you
             provide Program Integration to the mother?
         </span>
-        <span class="or-hint active" data-itext-id="/kunjungan_anc_reviewed_integrasi/generated_note_name_27:hint"
+        <span class="or-hint active"
+            data-itext-id="/kunjungan_anc_reviewed_integrasi/generated_note_name_27:hint"
             lang="Bahasa">Menunjukan
             detail Integrasi Program yang diberikan kepada Ibu Hamil
         </span>
-        <span class="or-hint " data-itext-id="/kunjungan_anc_reviewed_integrasi/generated_note_name_27:hint"
-            lang="en">Indicating
+        <span class="or-hint "
+            data-itext-id="/kunjungan_anc_reviewed_integrasi/generated_note_name_27:hint" lang="en">
+            Indicating
             details of Program Integration provided for the pregnant mother
         </span>
-        <input name="/kunjungan_anc_reviewed_integrasi/generated_note_name_27" data-type-xml="string"
-            readonly="readonly" type="text" />
+        <input name="/kunjungan_anc_reviewed_integrasi/generated_note_name_27"
+            data-type-xml="string" readonly="readonly" type="text" />
     </label>
     <fieldset class="question ">
         <fieldset>
             <legend>
-                <span class="question-label active" data-itext-id="/kunjungan_anc_reviewed_integrasi/integrasi_program_pmtct_vct:label"
+                <span class="question-label active"
+                    data-itext-id="/kunjungan_anc_reviewed_integrasi/integrasi_program_pmtct_vct:label"
                     lang="Bahasa">
                     VCT
                 </span>
-                <span class="question-label " data-itext-id="/kunjungan_anc_reviewed_integrasi/integrasi_program_pmtct_vct:label"
+                <span class="question-label "
+                    data-itext-id="/kunjungan_anc_reviewed_integrasi/integrasi_program_pmtct_vct:label"
                     lang="en">
                     VCT
                 </span>
-                <span class="or-hint active" data-itext-id="/kunjungan_anc_reviewed_integrasi/integrasi_program_pmtct_vct:hint"
+                <span class="or-hint active"
+                    data-itext-id="/kunjungan_anc_reviewed_integrasi/integrasi_program_pmtct_vct:hint"
                     lang="Bahasa">
                     Menunjukkan apakah Ibu melakukan Voluntary Counseling Test atau tidak
                 </span>
-                <span class="or-hint " data-itext-id="/kunjungan_anc_reviewed_integrasi/integrasi_program_pmtct_vct:hint"
+                <span class="or-hint "
+                    data-itext-id="/kunjungan_anc_reviewed_integrasi/integrasi_program_pmtct_vct:hint"
                     lang="en">
                     Indicating whether mother does a Voluntary Counseling Test
                 </span>
@@ -190,13 +218,14 @@
                 <label class="">
                     <input name="/kunjungan_anc_reviewed_integrasi/integrasi_program_pmtct_vct"
                         data-name="/kunjungan_anc_reviewed_integrasi/integrasi_program_pmtct_vct"
-                        data-type-xml="select1"
-                        type="radio" value="Ya" />
-                    <span class="option-label active" data-itext-id="/kunjungan_anc_reviewed_integrasi/integrasi_program_pmtct_vct/Ya:label"
+                        data-type-xml="select1" type="radio" value="Ya" />
+                    <span class="option-label active"
+                        data-itext-id="/kunjungan_anc_reviewed_integrasi/integrasi_program_pmtct_vct/Ya:label"
                         lang="Bahasa">
                         Ya
                     </span>
-                    <span class="option-label " data-itext-id="/kunjungan_anc_reviewed_integrasi/integrasi_program_pmtct_vct/Ya:label"
+                    <span class="option-label "
+                        data-itext-id="/kunjungan_anc_reviewed_integrasi/integrasi_program_pmtct_vct/Ya:label"
                         lang="en">
                         Yes
                     </span>
@@ -204,13 +233,14 @@
                 <label class="">
                     <input name="/kunjungan_anc_reviewed_integrasi/integrasi_program_pmtct_vct"
                         data-name="/kunjungan_anc_reviewed_integrasi/integrasi_program_pmtct_vct"
-                        data-type-xml="select1"
-                        type="radio" value="Tidak" />
-                    <span class="option-label active" data-itext-id="/kunjungan_anc_reviewed_integrasi/integrasi_program_pmtct_vct/Tidak:label"
+                        data-type-xml="select1" type="radio" value="Tidak" />
+                    <span class="option-label active"
+                        data-itext-id="/kunjungan_anc_reviewed_integrasi/integrasi_program_pmtct_vct/Tidak:label"
                         lang="Bahasa">
                         Tidak
                     </span>
-                    <span class="option-label " data-itext-id="/kunjungan_anc_reviewed_integrasi/integrasi_program_pmtct_vct/Tidak:label"
+                    <span class="option-label "
+                        data-itext-id="/kunjungan_anc_reviewed_integrasi/integrasi_program_pmtct_vct/Tidak:label"
                         lang="en">
                         No
                     </span>
@@ -221,19 +251,23 @@
     <fieldset class="question or-branch pre-init ">
         <fieldset>
             <legend>
-                <span class="question-label active" data-itext-id="/kunjungan_anc_reviewed_integrasi/integrasi_program_pmtct_periksa_darah:label"
+                <span class="question-label active"
+                    data-itext-id="/kunjungan_anc_reviewed_integrasi/integrasi_program_pmtct_periksa_darah:label"
                     lang="Bahasa">
                     Periksa Darah untuk uji PMTCT
                 </span>
-                <span class="question-label " data-itext-id="/kunjungan_anc_reviewed_integrasi/integrasi_program_pmtct_periksa_darah:label"
+                <span class="question-label "
+                    data-itext-id="/kunjungan_anc_reviewed_integrasi/integrasi_program_pmtct_periksa_darah:label"
                     lang="en">
                     Blood checkup for PMTCT test
                 </span>
-                <span class="or-hint active" data-itext-id="/kunjungan_anc_reviewed_integrasi/integrasi_program_pmtct_periksa_darah:hint"
+                <span class="or-hint active"
+                    data-itext-id="/kunjungan_anc_reviewed_integrasi/integrasi_program_pmtct_periksa_darah:hint"
                     lang="Bahasa">
                     Menunjukkan jika Ibu melakukan pemeriksaan darah untuk Uji PMTCT atau tidak
                 </span>
-                <span class="or-hint " data-itext-id="/kunjungan_anc_reviewed_integrasi/integrasi_program_pmtct_periksa_darah:hint"
+                <span class="or-hint "
+                    data-itext-id="/kunjungan_anc_reviewed_integrasi/integrasi_program_pmtct_periksa_darah:hint"
                     lang="en">
                     Indicating whether mother does PMTCT (prevention of mother-to-child
                     transmission) test
@@ -241,33 +275,35 @@
             </legend>
             <div class="option-wrapper">
                 <label class="">
-                    <input name="/kunjungan_anc_reviewed_integrasi/integrasi_program_pmtct_periksa_darah"
+                    <input
+                        name="/kunjungan_anc_reviewed_integrasi/integrasi_program_pmtct_periksa_darah"
                         data-name="/kunjungan_anc_reviewed_integrasi/integrasi_program_pmtct_periksa_darah"
                         data-relevant=" /kunjungan_anc_reviewed_integrasi/integrasi_program_pmtct_vct ='Ya'"
-                        data-type-xml="select1"
-                        type="radio"
-                        value="jika_dilakukan" />
-                    <span class="option-label active" data-itext-id="/kunjungan_anc_reviewed_integrasi/integrasi_program_pmtct_periksa_darah/jika_dilakukan:label"
+                        data-type-xml="select1" type="radio" value="jika_dilakukan" />
+                    <span class="option-label active"
+                        data-itext-id="/kunjungan_anc_reviewed_integrasi/integrasi_program_pmtct_periksa_darah/jika_dilakukan:label"
                         lang="Bahasa">
                         JIka dilakukan (&#x221A;)
                     </span>
-                    <span class="option-label " data-itext-id="/kunjungan_anc_reviewed_integrasi/integrasi_program_pmtct_periksa_darah/jika_dilakukan:label"
+                    <span class="option-label "
+                        data-itext-id="/kunjungan_anc_reviewed_integrasi/integrasi_program_pmtct_periksa_darah/jika_dilakukan:label"
                         lang="en">
                         Yes (&#x221A;)
                     </span>
                 </label>
                 <label class="">
-                    <input name="/kunjungan_anc_reviewed_integrasi/integrasi_program_pmtct_periksa_darah"
+                    <input
+                        name="/kunjungan_anc_reviewed_integrasi/integrasi_program_pmtct_periksa_darah"
                         data-name="/kunjungan_anc_reviewed_integrasi/integrasi_program_pmtct_periksa_darah"
                         data-relevant=" /kunjungan_anc_reviewed_integrasi/integrasi_program_pmtct_vct ='Ya'"
-                        data-type-xml="select1"
-                        type="radio"
-                        value="jika_tidak_dilakukan" />
-                    <span class="option-label active" data-itext-id="/kunjungan_anc_reviewed_integrasi/integrasi_program_pmtct_periksa_darah/jika_tidak_dilakukan:label"
+                        data-type-xml="select1" type="radio" value="jika_tidak_dilakukan" />
+                    <span class="option-label active"
+                        data-itext-id="/kunjungan_anc_reviewed_integrasi/integrasi_program_pmtct_periksa_darah/jika_tidak_dilakukan:label"
                         lang="Bahasa">
                         Jika tidak dilakukan (x)
                     </span>
-                    <span class="option-label " data-itext-id="/kunjungan_anc_reviewed_integrasi/integrasi_program_pmtct_periksa_darah/jika_tidak_dilakukan:label"
+                    <span class="option-label "
+                        data-itext-id="/kunjungan_anc_reviewed_integrasi/integrasi_program_pmtct_periksa_darah/jika_tidak_dilakukan:label"
                         lang="en">
                         No (x)
                     </span>
@@ -278,19 +314,23 @@
     <fieldset class="question or-branch pre-init ">
         <fieldset>
             <legend>
-                <span class="question-label active" data-itext-id="/kunjungan_anc_reviewed_integrasi/integrasi_program_pmtct_serologi:label"
+                <span class="question-label active"
+                    data-itext-id="/kunjungan_anc_reviewed_integrasi/integrasi_program_pmtct_serologi:label"
                     lang="Bahasa">
                     Serologi
                 </span>
-                <span class="question-label " data-itext-id="/kunjungan_anc_reviewed_integrasi/integrasi_program_pmtct_serologi:label"
+                <span class="question-label "
+                    data-itext-id="/kunjungan_anc_reviewed_integrasi/integrasi_program_pmtct_serologi:label"
                     lang="en">
                     Serology
                 </span>
-                <span class="or-hint active" data-itext-id="/kunjungan_anc_reviewed_integrasi/integrasi_program_pmtct_serologi:hint"
+                <span class="or-hint active"
+                    data-itext-id="/kunjungan_anc_reviewed_integrasi/integrasi_program_pmtct_serologi:hint"
                     lang="Bahasa">
                     Menunjukkan hasil pemeriksaan serologi pada Ibu hamil
                 </span>
-                <span class="or-hint " data-itext-id="/kunjungan_anc_reviewed_integrasi/integrasi_program_pmtct_serologi:hint"
+                <span class="or-hint "
+                    data-itext-id="/kunjungan_anc_reviewed_integrasi/integrasi_program_pmtct_serologi:hint"
                     lang="en">
                     Indicating mother's serology test result
                 </span>
@@ -300,14 +340,14 @@
                     <input name="/kunjungan_anc_reviewed_integrasi/integrasi_program_pmtct_serologi"
                         data-name="/kunjungan_anc_reviewed_integrasi/integrasi_program_pmtct_serologi"
                         data-relevant=" /kunjungan_anc_reviewed_integrasi/integrasi_program_pmtct_vct ='Ya'"
-                        data-type-xml="select1"
-                        type="radio"
-                        value="positif" />
-                    <span class="option-label active" data-itext-id="/kunjungan_anc_reviewed_integrasi/integrasi_program_pmtct_serologi/positif:label"
+                        data-type-xml="select1" type="radio" value="positif" />
+                    <span class="option-label active"
+                        data-itext-id="/kunjungan_anc_reviewed_integrasi/integrasi_program_pmtct_serologi/positif:label"
                         lang="Bahasa">
                         Positif (+)
                     </span>
-                    <span class="option-label " data-itext-id="/kunjungan_anc_reviewed_integrasi/integrasi_program_pmtct_serologi/positif:label"
+                    <span class="option-label "
+                        data-itext-id="/kunjungan_anc_reviewed_integrasi/integrasi_program_pmtct_serologi/positif:label"
                         lang="en">
                         Positive (+)
                     </span>
@@ -316,14 +356,14 @@
                     <input name="/kunjungan_anc_reviewed_integrasi/integrasi_program_pmtct_serologi"
                         data-name="/kunjungan_anc_reviewed_integrasi/integrasi_program_pmtct_serologi"
                         data-relevant=" /kunjungan_anc_reviewed_integrasi/integrasi_program_pmtct_vct ='Ya'"
-                        data-type-xml="select1"
-                        type="radio"
-                        value="negatif" />
-                    <span class="option-label active" data-itext-id="/kunjungan_anc_reviewed_integrasi/integrasi_program_pmtct_serologi/negatif:label"
+                        data-type-xml="select1" type="radio" value="negatif" />
+                    <span class="option-label active"
+                        data-itext-id="/kunjungan_anc_reviewed_integrasi/integrasi_program_pmtct_serologi/negatif:label"
                         lang="Bahasa">
                         Negatif (-)
                     </span>
-                    <span class="option-label " data-itext-id="/kunjungan_anc_reviewed_integrasi/integrasi_program_pmtct_serologi/negatif:label"
+                    <span class="option-label "
+                        data-itext-id="/kunjungan_anc_reviewed_integrasi/integrasi_program_pmtct_serologi/negatif:label"
                         lang="en">
                         Negative (-)
                     </span>
@@ -332,14 +372,14 @@
                     <input name="/kunjungan_anc_reviewed_integrasi/integrasi_program_pmtct_serologi"
                         data-name="/kunjungan_anc_reviewed_integrasi/integrasi_program_pmtct_serologi"
                         data-relevant=" /kunjungan_anc_reviewed_integrasi/integrasi_program_pmtct_vct ='Ya'"
-                        data-type-xml="select1"
-                        type="radio"
-                        value="Tidak" />
-                    <span class="option-label active" data-itext-id="/kunjungan_anc_reviewed_integrasi/integrasi_program_pmtct_serologi/Tidak:label"
+                        data-type-xml="select1" type="radio" value="Tidak" />
+                    <span class="option-label active"
+                        data-itext-id="/kunjungan_anc_reviewed_integrasi/integrasi_program_pmtct_serologi/Tidak:label"
                         lang="Bahasa">
                         Tidak dilakukan
                     </span>
-                    <span class="option-label " data-itext-id="/kunjungan_anc_reviewed_integrasi/integrasi_program_pmtct_serologi/Tidak:label"
+                    <span class="option-label "
+                        data-itext-id="/kunjungan_anc_reviewed_integrasi/integrasi_program_pmtct_serologi/Tidak:label"
                         lang="en">
                         No
                     </span>
@@ -350,19 +390,23 @@
     <fieldset class="question or-branch pre-init ">
         <fieldset>
             <legend>
-                <span class="question-label active" data-itext-id="/kunjungan_anc_reviewed_integrasi/integrasi_program_pmtct_arv:label"
+                <span class="question-label active"
+                    data-itext-id="/kunjungan_anc_reviewed_integrasi/integrasi_program_pmtct_arv:label"
                     lang="Bahasa">
                     ARV Profilaksis
                 </span>
-                <span class="question-label " data-itext-id="/kunjungan_anc_reviewed_integrasi/integrasi_program_pmtct_arv:label"
+                <span class="question-label "
+                    data-itext-id="/kunjungan_anc_reviewed_integrasi/integrasi_program_pmtct_arv:label"
                     lang="en">
                     ARV
                 </span>
-                <span class="or-hint active" data-itext-id="/kunjungan_anc_reviewed_integrasi/integrasi_program_pmtct_arv:hint"
+                <span class="or-hint active"
+                    data-itext-id="/kunjungan_anc_reviewed_integrasi/integrasi_program_pmtct_arv:hint"
                     lang="Bahasa">
                     Menunjukkan jenis obat pada Ibu yang mengalami PMTCT
                 </span>
-                <span class="or-hint " data-itext-id="/kunjungan_anc_reviewed_integrasi/integrasi_program_pmtct_arv:hint"
+                <span class="or-hint "
+                    data-itext-id="/kunjungan_anc_reviewed_integrasi/integrasi_program_pmtct_arv:hint"
                     lang="en">
                     Indicating type of medicines that mother with PMTCT receives
                 </span>
@@ -372,14 +416,14 @@
                     <input name="/kunjungan_anc_reviewed_integrasi/integrasi_program_pmtct_arv"
                         data-name="/kunjungan_anc_reviewed_integrasi/integrasi_program_pmtct_arv"
                         data-relevant=" /kunjungan_anc_reviewed_integrasi/integrasi_program_pmtct_vct ='Ya'"
-                        data-type-xml="select1"
-                        type="radio"
-                        value="ZDV" />
-                    <span class="option-label active" data-itext-id="/kunjungan_anc_reviewed_integrasi/integrasi_program_pmtct_arv/ZDV:label"
+                        data-type-xml="select1" type="radio" value="ZDV" />
+                    <span class="option-label active"
+                        data-itext-id="/kunjungan_anc_reviewed_integrasi/integrasi_program_pmtct_arv/ZDV:label"
                         lang="Bahasa">
                         (ZDV)
                     </span>
-                    <span class="option-label " data-itext-id="/kunjungan_anc_reviewed_integrasi/integrasi_program_pmtct_arv/ZDV:label"
+                    <span class="option-label "
+                        data-itext-id="/kunjungan_anc_reviewed_integrasi/integrasi_program_pmtct_arv/ZDV:label"
                         lang="en">
                         (ZDV)
                     </span>
@@ -388,14 +432,14 @@
                     <input name="/kunjungan_anc_reviewed_integrasi/integrasi_program_pmtct_arv"
                         data-name="/kunjungan_anc_reviewed_integrasi/integrasi_program_pmtct_arv"
                         data-relevant=" /kunjungan_anc_reviewed_integrasi/integrasi_program_pmtct_vct ='Ya'"
-                        data-type-xml="select1"
-                        type="radio"
-                        value="NVP" />
-                    <span class="option-label active" data-itext-id="/kunjungan_anc_reviewed_integrasi/integrasi_program_pmtct_arv/NVP:label"
+                        data-type-xml="select1" type="radio" value="NVP" />
+                    <span class="option-label active"
+                        data-itext-id="/kunjungan_anc_reviewed_integrasi/integrasi_program_pmtct_arv/NVP:label"
                         lang="Bahasa">
                         (NVP)
                     </span>
-                    <span class="option-label " data-itext-id="/kunjungan_anc_reviewed_integrasi/integrasi_program_pmtct_arv/NVP:label"
+                    <span class="option-label "
+                        data-itext-id="/kunjungan_anc_reviewed_integrasi/integrasi_program_pmtct_arv/NVP:label"
                         lang="en">
                         (NVP)
                     </span>
@@ -404,14 +448,14 @@
                     <input name="/kunjungan_anc_reviewed_integrasi/integrasi_program_pmtct_arv"
                         data-name="/kunjungan_anc_reviewed_integrasi/integrasi_program_pmtct_arv"
                         data-relevant=" /kunjungan_anc_reviewed_integrasi/integrasi_program_pmtct_vct ='Ya'"
-                        data-type-xml="select1"
-                        type="radio"
-                        value="TC" />
-                    <span class="option-label active" data-itext-id="/kunjungan_anc_reviewed_integrasi/integrasi_program_pmtct_arv/TC:label"
+                        data-type-xml="select1" type="radio" value="TC" />
+                    <span class="option-label active"
+                        data-itext-id="/kunjungan_anc_reviewed_integrasi/integrasi_program_pmtct_arv/TC:label"
                         lang="Bahasa">
                         (TC)
                     </span>
-                    <span class="option-label " data-itext-id="/kunjungan_anc_reviewed_integrasi/integrasi_program_pmtct_arv/TC:label"
+                    <span class="option-label "
+                        data-itext-id="/kunjungan_anc_reviewed_integrasi/integrasi_program_pmtct_arv/TC:label"
                         lang="en">
                         (TC)
                     </span>
@@ -422,64 +466,74 @@
     <fieldset class="question ">
         <fieldset>
             <legend>
-                <span class="question-label active" data-itext-id="/kunjungan_anc_reviewed_integrasi/integrasi_program_malaria_periksa_darah:label"
+                <span class="question-label active"
+                    data-itext-id="/kunjungan_anc_reviewed_integrasi/integrasi_program_malaria_periksa_darah:label"
                     lang="Bahasa">
                     Periksa Darah untuk uji Malaria
                 </span>
-                <span class="question-label " data-itext-id="/kunjungan_anc_reviewed_integrasi/integrasi_program_malaria_periksa_darah:label"
+                <span class="question-label "
+                    data-itext-id="/kunjungan_anc_reviewed_integrasi/integrasi_program_malaria_periksa_darah:label"
                     lang="en">
                     Blood check-up for Malaria
                 </span>
                 <span class="required">*</span>
-                <span class="or-hint active" data-itext-id="/kunjungan_anc_reviewed_integrasi/integrasi_program_malaria_periksa_darah:hint"
+                <span class="or-hint active"
+                    data-itext-id="/kunjungan_anc_reviewed_integrasi/integrasi_program_malaria_periksa_darah:hint"
                     lang="Bahasa">
                     Menunjukkan apakah Ibu melakukan pemeriksaan darah, yang bertujuan memastikan
                     apakah ada parasit penyebab Malaria dalam darah Ibu
                 </span>
-                <span class="or-hint " data-itext-id="/kunjungan_anc_reviewed_integrasi/integrasi_program_malaria_periksa_darah:hint"
+                <span class="or-hint "
+                    data-itext-id="/kunjungan_anc_reviewed_integrasi/integrasi_program_malaria_periksa_darah:hint"
                     lang="en">
                     Indicating whether mother does a blood test for malaria
                 </span>
             </legend>
             <div class="option-wrapper">
                 <label class="">
-                    <input name="/kunjungan_anc_reviewed_integrasi/integrasi_program_malaria_periksa_darah"
+                    <input
+                        name="/kunjungan_anc_reviewed_integrasi/integrasi_program_malaria_periksa_darah"
                         data-name="/kunjungan_anc_reviewed_integrasi/integrasi_program_malaria_periksa_darah"
-                        data-type-xml="select1"
-                        required="required" type="radio" value="positif" />
-                    <span class="option-label active" data-itext-id="/kunjungan_anc_reviewed_integrasi/integrasi_program_malaria_periksa_darah/positif:label"
+                        data-type-xml="select1" required="required" type="radio" value="positif" />
+                    <span class="option-label active"
+                        data-itext-id="/kunjungan_anc_reviewed_integrasi/integrasi_program_malaria_periksa_darah/positif:label"
                         lang="Bahasa">
                         Positif (+)
                     </span>
-                    <span class="option-label " data-itext-id="/kunjungan_anc_reviewed_integrasi/integrasi_program_malaria_periksa_darah/positif:label"
+                    <span class="option-label "
+                        data-itext-id="/kunjungan_anc_reviewed_integrasi/integrasi_program_malaria_periksa_darah/positif:label"
                         lang="en">
                         Positive (+)
                     </span>
                 </label>
                 <label class="">
-                    <input name="/kunjungan_anc_reviewed_integrasi/integrasi_program_malaria_periksa_darah"
+                    <input
+                        name="/kunjungan_anc_reviewed_integrasi/integrasi_program_malaria_periksa_darah"
                         data-name="/kunjungan_anc_reviewed_integrasi/integrasi_program_malaria_periksa_darah"
-                        data-type-xml="select1"
-                        required="required" type="radio" value="negatif" />
-                    <span class="option-label active" data-itext-id="/kunjungan_anc_reviewed_integrasi/integrasi_program_malaria_periksa_darah/negatif:label"
+                        data-type-xml="select1" required="required" type="radio" value="negatif" />
+                    <span class="option-label active"
+                        data-itext-id="/kunjungan_anc_reviewed_integrasi/integrasi_program_malaria_periksa_darah/negatif:label"
                         lang="Bahasa">
                         Negatif (-)
                     </span>
-                    <span class="option-label " data-itext-id="/kunjungan_anc_reviewed_integrasi/integrasi_program_malaria_periksa_darah/negatif:label"
+                    <span class="option-label "
+                        data-itext-id="/kunjungan_anc_reviewed_integrasi/integrasi_program_malaria_periksa_darah/negatif:label"
                         lang="en">
                         Negative (-)
                     </span>
                 </label>
                 <label class="">
-                    <input name="/kunjungan_anc_reviewed_integrasi/integrasi_program_malaria_periksa_darah"
+                    <input
+                        name="/kunjungan_anc_reviewed_integrasi/integrasi_program_malaria_periksa_darah"
                         data-name="/kunjungan_anc_reviewed_integrasi/integrasi_program_malaria_periksa_darah"
-                        data-type-xml="select1"
-                        required="required" type="radio" value="Tidak" />
-                    <span class="option-label active" data-itext-id="/kunjungan_anc_reviewed_integrasi/integrasi_program_malaria_periksa_darah/Tidak:label"
+                        data-type-xml="select1" required="required" type="radio" value="Tidak" />
+                    <span class="option-label active"
+                        data-itext-id="/kunjungan_anc_reviewed_integrasi/integrasi_program_malaria_periksa_darah/Tidak:label"
                         lang="Bahasa">
                         Tidak dilakukan
                     </span>
-                    <span class="option-label " data-itext-id="/kunjungan_anc_reviewed_integrasi/integrasi_program_malaria_periksa_darah/Tidak:label"
+                    <span class="option-label "
+                        data-itext-id="/kunjungan_anc_reviewed_integrasi/integrasi_program_malaria_periksa_darah/Tidak:label"
                         lang="en">
                         No
                     </span>
@@ -490,19 +544,23 @@
     <fieldset class="question or-branch pre-init ">
         <fieldset>
             <legend>
-                <span class="question-label active" data-itext-id="/kunjungan_anc_reviewed_integrasi/integrasi_program_malaria_obat:label"
+                <span class="question-label active"
+                    data-itext-id="/kunjungan_anc_reviewed_integrasi/integrasi_program_malaria_obat:label"
                     lang="Bahasa">
                     Obat Malaria
                 </span>
-                <span class="question-label " data-itext-id="/kunjungan_anc_reviewed_integrasi/integrasi_program_malaria_obat:label"
+                <span class="question-label "
+                    data-itext-id="/kunjungan_anc_reviewed_integrasi/integrasi_program_malaria_obat:label"
                     lang="en">
                     Medicine for malaria
                 </span>
-                <span class="or-hint active" data-itext-id="/kunjungan_anc_reviewed_integrasi/integrasi_program_malaria_obat:hint"
+                <span class="or-hint active"
+                    data-itext-id="/kunjungan_anc_reviewed_integrasi/integrasi_program_malaria_obat:hint"
                     lang="Bahasa">
                     Menunjukkan jenis obat Malaria yang diberikan ke Ibu
                 </span>
-                <span class="or-hint " data-itext-id="/kunjungan_anc_reviewed_integrasi/integrasi_program_malaria_obat:hint"
+                <span class="or-hint "
+                    data-itext-id="/kunjungan_anc_reviewed_integrasi/integrasi_program_malaria_obat:hint"
                     lang="en">
                     Indicating type of medicines that mother with malaria receives
                 </span>
@@ -512,14 +570,14 @@
                     <input name="/kunjungan_anc_reviewed_integrasi/integrasi_program_malaria_obat"
                         data-name="/kunjungan_anc_reviewed_integrasi/integrasi_program_malaria_obat"
                         data-relevant=" /kunjungan_anc_reviewed_integrasi/integrasi_program_malaria_periksa_darah  = 'positif'"
-                        data-type-xml="select1"
-                        type="radio"
-                        value="ART" />
-                    <span class="option-label active" data-itext-id="/kunjungan_anc_reviewed_integrasi/integrasi_program_malaria_obat/ART:label"
+                        data-type-xml="select1" type="radio" value="ART" />
+                    <span class="option-label active"
+                        data-itext-id="/kunjungan_anc_reviewed_integrasi/integrasi_program_malaria_obat/ART:label"
                         lang="Bahasa">
                         (ART)
                     </span>
-                    <span class="option-label " data-itext-id="/kunjungan_anc_reviewed_integrasi/integrasi_program_malaria_obat/ART:label"
+                    <span class="option-label "
+                        data-itext-id="/kunjungan_anc_reviewed_integrasi/integrasi_program_malaria_obat/ART:label"
                         lang="en">
                         (ART)
                     </span>
@@ -528,14 +586,14 @@
                     <input name="/kunjungan_anc_reviewed_integrasi/integrasi_program_malaria_obat"
                         data-name="/kunjungan_anc_reviewed_integrasi/integrasi_program_malaria_obat"
                         data-relevant=" /kunjungan_anc_reviewed_integrasi/integrasi_program_malaria_periksa_darah  = 'positif'"
-                        data-type-xml="select1"
-                        type="radio"
-                        value="AMO" />
-                    <span class="option-label active" data-itext-id="/kunjungan_anc_reviewed_integrasi/integrasi_program_malaria_obat/AMO:label"
+                        data-type-xml="select1" type="radio" value="AMO" />
+                    <span class="option-label active"
+                        data-itext-id="/kunjungan_anc_reviewed_integrasi/integrasi_program_malaria_obat/AMO:label"
                         lang="Bahasa">
                         (AMO)
                     </span>
-                    <span class="option-label " data-itext-id="/kunjungan_anc_reviewed_integrasi/integrasi_program_malaria_obat/AMO:label"
+                    <span class="option-label "
+                        data-itext-id="/kunjungan_anc_reviewed_integrasi/integrasi_program_malaria_obat/AMO:label"
                         lang="en">
                         (AMO)
                     </span>
@@ -544,14 +602,14 @@
                     <input name="/kunjungan_anc_reviewed_integrasi/integrasi_program_malaria_obat"
                         data-name="/kunjungan_anc_reviewed_integrasi/integrasi_program_malaria_obat"
                         data-relevant=" /kunjungan_anc_reviewed_integrasi/integrasi_program_malaria_periksa_darah  = 'positif'"
-                        data-type-xml="select1"
-                        type="radio"
-                        value="KIN" />
-                    <span class="option-label active" data-itext-id="/kunjungan_anc_reviewed_integrasi/integrasi_program_malaria_obat/KIN:label"
+                        data-type-xml="select1" type="radio" value="KIN" />
+                    <span class="option-label active"
+                        data-itext-id="/kunjungan_anc_reviewed_integrasi/integrasi_program_malaria_obat/KIN:label"
                         lang="Bahasa">
                         (KIN)
                     </span>
-                    <span class="option-label " data-itext-id="/kunjungan_anc_reviewed_integrasi/integrasi_program_malaria_obat/KIN:label"
+                    <span class="option-label "
+                        data-itext-id="/kunjungan_anc_reviewed_integrasi/integrasi_program_malaria_obat/KIN:label"
                         lang="en">
                         (KIN)
                     </span>
@@ -562,52 +620,58 @@
     <fieldset class="question or-branch pre-init ">
         <fieldset>
             <legend>
-                <span class="question-label active" data-itext-id="/kunjungan_anc_reviewed_integrasi/integrasi_program_malaria_kelambu:label"
+                <span class="question-label active"
+                    data-itext-id="/kunjungan_anc_reviewed_integrasi/integrasi_program_malaria_kelambu:label"
                     lang="Bahasa">
                     Memasang kelambu berinsektisida
                 </span>
-                <span class="question-label " data-itext-id="/kunjungan_anc_reviewed_integrasi/integrasi_program_malaria_kelambu:label"
+                <span class="question-label "
+                    data-itext-id="/kunjungan_anc_reviewed_integrasi/integrasi_program_malaria_kelambu:label"
                     lang="en">
                     mosquito net
                 </span>
-                <span class="or-hint active" data-itext-id="/kunjungan_anc_reviewed_integrasi/integrasi_program_malaria_kelambu:hint"
+                <span class="or-hint active"
+                    data-itext-id="/kunjungan_anc_reviewed_integrasi/integrasi_program_malaria_kelambu:hint"
                     lang="Bahasa">
                     Menunjukkan apakah Ibu memasang kelambu berinsektisida atau tidak
                 </span>
-                <span class="or-hint " data-itext-id="/kunjungan_anc_reviewed_integrasi/integrasi_program_malaria_kelambu:hint"
+                <span class="or-hint "
+                    data-itext-id="/kunjungan_anc_reviewed_integrasi/integrasi_program_malaria_kelambu:hint"
                     lang="en">
                     Indicating whether mother uses insecticide-treated nets
                 </span>
             </legend>
             <div class="option-wrapper">
                 <label class="">
-                    <input name="/kunjungan_anc_reviewed_integrasi/integrasi_program_malaria_kelambu"
+                    <input
+                        name="/kunjungan_anc_reviewed_integrasi/integrasi_program_malaria_kelambu"
                         data-name="/kunjungan_anc_reviewed_integrasi/integrasi_program_malaria_kelambu"
                         data-relevant=" /kunjungan_anc_reviewed_integrasi/integrasi_program_malaria_periksa_darah  = 'positif'"
-                        data-type-xml="select1"
-                        type="radio"
-                        value="Ya" />
-                    <span class="option-label active" data-itext-id="/kunjungan_anc_reviewed_integrasi/integrasi_program_malaria_kelambu/Ya:label"
+                        data-type-xml="select1" type="radio" value="Ya" />
+                    <span class="option-label active"
+                        data-itext-id="/kunjungan_anc_reviewed_integrasi/integrasi_program_malaria_kelambu/Ya:label"
                         lang="Bahasa">
                         Ya
                     </span>
-                    <span class="option-label " data-itext-id="/kunjungan_anc_reviewed_integrasi/integrasi_program_malaria_kelambu/Ya:label"
+                    <span class="option-label "
+                        data-itext-id="/kunjungan_anc_reviewed_integrasi/integrasi_program_malaria_kelambu/Ya:label"
                         lang="en">
                         Yes
                     </span>
                 </label>
                 <label class="">
-                    <input name="/kunjungan_anc_reviewed_integrasi/integrasi_program_malaria_kelambu"
+                    <input
+                        name="/kunjungan_anc_reviewed_integrasi/integrasi_program_malaria_kelambu"
                         data-name="/kunjungan_anc_reviewed_integrasi/integrasi_program_malaria_kelambu"
                         data-relevant=" /kunjungan_anc_reviewed_integrasi/integrasi_program_malaria_periksa_darah  = 'positif'"
-                        data-type-xml="select1"
-                        type="radio"
-                        value="Tidak" />
-                    <span class="option-label active" data-itext-id="/kunjungan_anc_reviewed_integrasi/integrasi_program_malaria_kelambu/Tidak:label"
+                        data-type-xml="select1" type="radio" value="Tidak" />
+                    <span class="option-label active"
+                        data-itext-id="/kunjungan_anc_reviewed_integrasi/integrasi_program_malaria_kelambu/Tidak:label"
                         lang="Bahasa">
                         Tidak
                     </span>
-                    <span class="option-label " data-itext-id="/kunjungan_anc_reviewed_integrasi/integrasi_program_malaria_kelambu/Tidak:label"
+                    <span class="option-label "
+                        data-itext-id="/kunjungan_anc_reviewed_integrasi/integrasi_program_malaria_kelambu/Tidak:label"
                         lang="en">
                         No
                     </span>
@@ -618,19 +682,23 @@
     <fieldset class="question ">
         <fieldset>
             <legend>
-                <span class="question-label active" data-itext-id="/kunjungan_anc_reviewed_integrasi/integrasi_program_tb_dahak:label"
+                <span class="question-label active"
+                    data-itext-id="/kunjungan_anc_reviewed_integrasi/integrasi_program_tb_dahak:label"
                     lang="Bahasa">
                     Periksa dahak (TBC)
                 </span>
-                <span class="question-label " data-itext-id="/kunjungan_anc_reviewed_integrasi/integrasi_program_tb_dahak:label"
+                <span class="question-label "
+                    data-itext-id="/kunjungan_anc_reviewed_integrasi/integrasi_program_tb_dahak:label"
                     lang="en">
                     Tuberculosis phlegm test
                 </span>
-                <span class="or-hint active" data-itext-id="/kunjungan_anc_reviewed_integrasi/integrasi_program_tb_dahak:hint"
+                <span class="or-hint active"
+                    data-itext-id="/kunjungan_anc_reviewed_integrasi/integrasi_program_tb_dahak:hint"
                     lang="Bahasa">
                     Menunjukkan apakah Ibu melakukan pemeriksaan dahak untuk tes TB
                 </span>
-                <span class="or-hint " data-itext-id="/kunjungan_anc_reviewed_integrasi/integrasi_program_tb_dahak:hint"
+                <span class="or-hint "
+                    data-itext-id="/kunjungan_anc_reviewed_integrasi/integrasi_program_tb_dahak:hint"
                     lang="en">
                     Indicating whether mother does sputum examination for TB test
                 </span>
@@ -639,13 +707,14 @@
                 <label class="">
                     <input name="/kunjungan_anc_reviewed_integrasi/integrasi_program_tb_dahak"
                         data-name="/kunjungan_anc_reviewed_integrasi/integrasi_program_tb_dahak"
-                        data-type-xml="select1"
-                        type="radio" value="positif" />
-                    <span class="option-label active" data-itext-id="/kunjungan_anc_reviewed_integrasi/integrasi_program_tb_dahak/positif:label"
+                        data-type-xml="select1" type="radio" value="positif" />
+                    <span class="option-label active"
+                        data-itext-id="/kunjungan_anc_reviewed_integrasi/integrasi_program_tb_dahak/positif:label"
                         lang="Bahasa">
                         Positif (+)
                     </span>
-                    <span class="option-label " data-itext-id="/kunjungan_anc_reviewed_integrasi/integrasi_program_tb_dahak/positif:label"
+                    <span class="option-label "
+                        data-itext-id="/kunjungan_anc_reviewed_integrasi/integrasi_program_tb_dahak/positif:label"
                         lang="en">
                         Positive (+)
                     </span>
@@ -653,13 +722,14 @@
                 <label class="">
                     <input name="/kunjungan_anc_reviewed_integrasi/integrasi_program_tb_dahak"
                         data-name="/kunjungan_anc_reviewed_integrasi/integrasi_program_tb_dahak"
-                        data-type-xml="select1"
-                        type="radio" value="negatif" />
-                    <span class="option-label active" data-itext-id="/kunjungan_anc_reviewed_integrasi/integrasi_program_tb_dahak/negatif:label"
+                        data-type-xml="select1" type="radio" value="negatif" />
+                    <span class="option-label active"
+                        data-itext-id="/kunjungan_anc_reviewed_integrasi/integrasi_program_tb_dahak/negatif:label"
                         lang="Bahasa">
                         Negatif (-)
                     </span>
-                    <span class="option-label " data-itext-id="/kunjungan_anc_reviewed_integrasi/integrasi_program_tb_dahak/negatif:label"
+                    <span class="option-label "
+                        data-itext-id="/kunjungan_anc_reviewed_integrasi/integrasi_program_tb_dahak/negatif:label"
                         lang="en">
                         Negative (-)
                     </span>
@@ -667,13 +737,14 @@
                 <label class="">
                     <input name="/kunjungan_anc_reviewed_integrasi/integrasi_program_tb_dahak"
                         data-name="/kunjungan_anc_reviewed_integrasi/integrasi_program_tb_dahak"
-                        data-type-xml="select1"
-                        type="radio" value="Tidak" />
-                    <span class="option-label active" data-itext-id="/kunjungan_anc_reviewed_integrasi/integrasi_program_tb_dahak/Tidak:label"
+                        data-type-xml="select1" type="radio" value="Tidak" />
+                    <span class="option-label active"
+                        data-itext-id="/kunjungan_anc_reviewed_integrasi/integrasi_program_tb_dahak/Tidak:label"
                         lang="Bahasa">
                         Tidak dilakukan
                     </span>
-                    <span class="option-label " data-itext-id="/kunjungan_anc_reviewed_integrasi/integrasi_program_tb_dahak/Tidak:label"
+                    <span class="option-label "
+                        data-itext-id="/kunjungan_anc_reviewed_integrasi/integrasi_program_tb_dahak/Tidak:label"
                         lang="en">
                         No
                     </span>
@@ -684,19 +755,23 @@
     <fieldset class="question or-branch pre-init ">
         <fieldset>
             <legend>
-                <span class="question-label active" data-itext-id="/kunjungan_anc_reviewed_integrasi/integrasi_program_tb_obat:label"
+                <span class="question-label active"
+                    data-itext-id="/kunjungan_anc_reviewed_integrasi/integrasi_program_tb_obat:label"
                     lang="Bahasa">
                     Obat TBC
                 </span>
-                <span class="question-label " data-itext-id="/kunjungan_anc_reviewed_integrasi/integrasi_program_tb_obat:label"
+                <span class="question-label "
+                    data-itext-id="/kunjungan_anc_reviewed_integrasi/integrasi_program_tb_obat:label"
                     lang="en">
                     Medicine for TBC
                 </span>
-                <span class="or-hint active" data-itext-id="/kunjungan_anc_reviewed_integrasi/integrasi_program_tb_obat:hint"
+                <span class="or-hint active"
+                    data-itext-id="/kunjungan_anc_reviewed_integrasi/integrasi_program_tb_obat:hint"
                     lang="Bahasa">
                     Menunjukkan nama obat TBC yang diberikan kepada Ibu
                 </span>
-                <span class="or-hint " data-itext-id="/kunjungan_anc_reviewed_integrasi/integrasi_program_tb_obat:hint"
+                <span class="or-hint "
+                    data-itext-id="/kunjungan_anc_reviewed_integrasi/integrasi_program_tb_obat:hint"
                     lang="en">
                     Indicating type of medicines that mother with TB receives
                 </span>
@@ -706,14 +781,14 @@
                     <input name="/kunjungan_anc_reviewed_integrasi/integrasi_program_tb_obat"
                         data-name="/kunjungan_anc_reviewed_integrasi/integrasi_program_tb_obat"
                         data-relevant=" /kunjungan_anc_reviewed_integrasi/integrasi_program_tb_dahak  = 'positif'"
-                        data-type-xml="select1"
-                        type="radio"
-                        value="rifampisin" />
-                    <span class="option-label active" data-itext-id="/kunjungan_anc_reviewed_integrasi/integrasi_program_tb_obat/rifampisin:label"
+                        data-type-xml="select1" type="radio" value="rifampisin" />
+                    <span class="option-label active"
+                        data-itext-id="/kunjungan_anc_reviewed_integrasi/integrasi_program_tb_obat/rifampisin:label"
                         lang="Bahasa">
                         Rifampisin (R)
                     </span>
-                    <span class="option-label " data-itext-id="/kunjungan_anc_reviewed_integrasi/integrasi_program_tb_obat/rifampisin:label"
+                    <span class="option-label "
+                        data-itext-id="/kunjungan_anc_reviewed_integrasi/integrasi_program_tb_obat/rifampisin:label"
                         lang="en">
                         Rifampicin (R)
                     </span>
@@ -722,14 +797,14 @@
                     <input name="/kunjungan_anc_reviewed_integrasi/integrasi_program_tb_obat"
                         data-name="/kunjungan_anc_reviewed_integrasi/integrasi_program_tb_obat"
                         data-relevant=" /kunjungan_anc_reviewed_integrasi/integrasi_program_tb_dahak  = 'positif'"
-                        data-type-xml="select1"
-                        type="radio"
-                        value="inh" />
-                    <span class="option-label active" data-itext-id="/kunjungan_anc_reviewed_integrasi/integrasi_program_tb_obat/inh:label"
+                        data-type-xml="select1" type="radio" value="inh" />
+                    <span class="option-label active"
+                        data-itext-id="/kunjungan_anc_reviewed_integrasi/integrasi_program_tb_obat/inh:label"
                         lang="Bahasa">
                         INH (H)
                     </span>
-                    <span class="option-label " data-itext-id="/kunjungan_anc_reviewed_integrasi/integrasi_program_tb_obat/inh:label"
+                    <span class="option-label "
+                        data-itext-id="/kunjungan_anc_reviewed_integrasi/integrasi_program_tb_obat/inh:label"
                         lang="en">
                         INH (H)
                     </span>
@@ -738,14 +813,14 @@
                     <input name="/kunjungan_anc_reviewed_integrasi/integrasi_program_tb_obat"
                         data-name="/kunjungan_anc_reviewed_integrasi/integrasi_program_tb_obat"
                         data-relevant=" /kunjungan_anc_reviewed_integrasi/integrasi_program_tb_dahak  = 'positif'"
-                        data-type-xml="select1"
-                        type="radio"
-                        value="pyrazinamid" />
-                    <span class="option-label active" data-itext-id="/kunjungan_anc_reviewed_integrasi/integrasi_program_tb_obat/pyrazinamid:label"
+                        data-type-xml="select1" type="radio" value="pyrazinamid" />
+                    <span class="option-label active"
+                        data-itext-id="/kunjungan_anc_reviewed_integrasi/integrasi_program_tb_obat/pyrazinamid:label"
                         lang="Bahasa">
                         Pyrazinamid (Z)
                     </span>
-                    <span class="option-label " data-itext-id="/kunjungan_anc_reviewed_integrasi/integrasi_program_tb_obat/pyrazinamid:label"
+                    <span class="option-label "
+                        data-itext-id="/kunjungan_anc_reviewed_integrasi/integrasi_program_tb_obat/pyrazinamid:label"
                         lang="en">
                         Pyrazinamid (Z);
                     </span>
@@ -754,14 +829,14 @@
                     <input name="/kunjungan_anc_reviewed_integrasi/integrasi_program_tb_obat"
                         data-name="/kunjungan_anc_reviewed_integrasi/integrasi_program_tb_obat"
                         data-relevant=" /kunjungan_anc_reviewed_integrasi/integrasi_program_tb_dahak  = 'positif'"
-                        data-type-xml="select1"
-                        type="radio"
-                        value="etahmbutol" />
-                    <span class="option-label active" data-itext-id="/kunjungan_anc_reviewed_integrasi/integrasi_program_tb_obat/etahmbutol:label"
+                        data-type-xml="select1" type="radio" value="etahmbutol" />
+                    <span class="option-label active"
+                        data-itext-id="/kunjungan_anc_reviewed_integrasi/integrasi_program_tb_obat/etahmbutol:label"
                         lang="Bahasa">
                         Etahmbutol
                     </span>
-                    <span class="option-label " data-itext-id="/kunjungan_anc_reviewed_integrasi/integrasi_program_tb_obat/etahmbutol:label"
+                    <span class="option-label "
+                        data-itext-id="/kunjungan_anc_reviewed_integrasi/integrasi_program_tb_obat/etahmbutol:label"
                         lang="en">
                         Etahmbutol
                     </span>
@@ -776,8 +851,8 @@
                 data-preload-params="start" data-type-xml="dateTime" type="hidden" />
         </label>
         <label class="calculation non-select ">
-            <input name="/kunjungan_anc_reviewed_integrasi/today" data-preload="date" data-preload-params="today"
-                data-type-xml="date" type="hidden" />
+            <input name="/kunjungan_anc_reviewed_integrasi/today" data-preload="date"
+                data-preload-params="today" data-type-xml="date" type="hidden" />
         </label>
         <label class="calculation non-select ">
             <input name="/kunjungan_anc_reviewed_integrasi/deviceid" data-preload="property"
@@ -798,52 +873,53 @@
     </fieldset>
     <fieldset style="display:none;" id="or-calculated-items">
         <label class="calculation non-select ">
-            <input name="/kunjungan_anc_reviewed_integrasi/existing_location" data-calculate=" /kunjungan_anc_reviewed_integrasi/Village "
-                data-type-xml="string"
+            <input name="/kunjungan_anc_reviewed_integrasi/existing_location"
+                data-calculate=" /kunjungan_anc_reviewed_integrasi/Village " data-type-xml="string"
                 type="hidden" />
         </label>
         <label class="calculation non-select ">
-            <input name="/kunjungan_anc_reviewed_integrasi/provinsi" data-calculate=" /kunjungan_anc_reviewed_integrasi/Province "
-                data-type-xml="string"
+            <input name="/kunjungan_anc_reviewed_integrasi/provinsi"
+                data-calculate=" /kunjungan_anc_reviewed_integrasi/Province " data-type-xml="string"
                 type="hidden" />
         </label>
         <label class="calculation non-select ">
-            <input name="/kunjungan_anc_reviewed_integrasi/kabupaten" data-calculate=" /kunjungan_anc_reviewed_integrasi/District "
-                data-type-xml="string"
+            <input name="/kunjungan_anc_reviewed_integrasi/kabupaten"
+                data-calculate=" /kunjungan_anc_reviewed_integrasi/District " data-type-xml="string"
                 type="hidden" />
         </label>
         <label class="calculation non-select ">
-            <input name="/kunjungan_anc_reviewed_integrasi/desa" data-calculate=" /kunjungan_anc_reviewed_integrasi/Village "
-                data-type-xml="string"
+            <input name="/kunjungan_anc_reviewed_integrasi/desa"
+                data-calculate=" /kunjungan_anc_reviewed_integrasi/Village " data-type-xml="string"
                 type="hidden" />
         </label>
         <label class="calculation non-select ">
-            <input name="/kunjungan_anc_reviewed_integrasi/dusun" data-calculate=" /kunjungan_anc_reviewed_integrasi/Sub-village "
-                data-type-xml="string"
-                type="hidden" />
-        </label>
-        <label class="calculation non-select ">
-            <input name="/kunjungan_anc_reviewed_integrasi/kecamatan" data-calculate=" /kunjungan_anc_reviewed_integrasi/Sub-district "
-                data-type-xml="string"
-                type="hidden" />
-        </label>
-        <label class="calculation non-select ">
-            <input name="/kunjungan_anc_reviewed_integrasi/High_Risk_TBC" data-calculate="if( /kunjungan_anc_reviewed_integrasi/integrasi_program_tb_dahak  ='positif', 'yes','no')"
-                data-type-xml="string"
-                type="hidden" />
-        </label>
-        <label class="calculation non-select ">
-            <input name="/kunjungan_anc_reviewed_integrasi/High_Risk_malaria" data-calculate="if( /kunjungan_anc_reviewed_integrasi/integrasi_program_malaria_periksa_darah  ='positif', 'yes', 'no')"
-                data-type-xml="string"
-                type="hidden" />
-        </label>
-        <label class="calculation non-select ">
-            <input name="/kunjungan_anc_reviewed_integrasi/meta/instanceID" data-calculate="concat('uuid:', uuid())"
+            <input name="/kunjungan_anc_reviewed_integrasi/dusun"
+                data-calculate=" /kunjungan_anc_reviewed_integrasi/Sub-village "
                 data-type-xml="string" type="hidden" />
         </label>
         <label class="calculation non-select ">
-            <input name="/kunjungan_anc_reviewed_integrasi/formhub/uuid" data-calculate="'2e703f0ea3ae4680a434ed93afe4a3c4'"
+            <input name="/kunjungan_anc_reviewed_integrasi/kecamatan"
+                data-calculate=" /kunjungan_anc_reviewed_integrasi/Sub-district "
                 data-type-xml="string" type="hidden" />
+        </label>
+        <label class="calculation non-select ">
+            <input name="/kunjungan_anc_reviewed_integrasi/High_Risk_TBC"
+                data-calculate="if( /kunjungan_anc_reviewed_integrasi/integrasi_program_tb_dahak  ='positif', 'yes','no')"
+                data-type-xml="string" type="hidden" />
+        </label>
+        <label class="calculation non-select ">
+            <input name="/kunjungan_anc_reviewed_integrasi/High_Risk_malaria"
+                data-calculate="if( /kunjungan_anc_reviewed_integrasi/integrasi_program_malaria_periksa_darah  ='positif', 'yes', 'no')"
+                data-type-xml="string" type="hidden" />
+        </label>
+        <label class="calculation non-select ">
+            <input name="/kunjungan_anc_reviewed_integrasi/meta/instanceID"
+                data-calculate="concat('uuid:', uuid())" data-type-xml="string" type="hidden" />
+        </label>
+        <label class="calculation non-select ">
+            <input name="/kunjungan_anc_reviewed_integrasi/formhub/uuid"
+                data-calculate="'2e703f0ea3ae4680a434ed93afe4a3c4'" data-type-xml="string"
+                type="hidden" />
         </label>
     </fieldset>
 </form>

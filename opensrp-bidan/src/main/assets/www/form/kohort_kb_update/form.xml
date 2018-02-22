@@ -9,37 +9,42 @@
 
 
     <label class="note non-select ">
-        <span class="question-label active" data-itext-id="/kohort_pelayanan_kb_reviewed/generated_note_name_13:label"
+        <span class="question-label active"
+            data-itext-id="/kohort_pelayanan_kb_reviewed/generated_note_name_13:label"
             lang="Bahasa">Desa :
             <span class="or-output" data-value=" /kohort_pelayanan_kb_reviewed/Village "></span>
         </span>
-        <span class="question-label " data-itext-id="/kohort_pelayanan_kb_reviewed/generated_note_name_13:label"
-            lang="en">-
+        <span class="question-label "
+            data-itext-id="/kohort_pelayanan_kb_reviewed/generated_note_name_13:label" lang="en">-
         </span>
         <input name="/kohort_pelayanan_kb_reviewed/generated_note_name_13" data-type-xml="string"
             readonly="readonly" type="text" />
     </label>
     <label class="note non-select ">
-        <span class="question-label active" data-itext-id="/kohort_pelayanan_kb_reviewed/generated_note_name_14:label"
+        <span class="question-label active"
+            data-itext-id="/kohort_pelayanan_kb_reviewed/generated_note_name_14:label"
             lang="Bahasa">Dusun :
             <span class="or-output" data-value=" /kohort_pelayanan_kb_reviewed/Sub-village "></span>
         </span>
-        <span class="question-label " data-itext-id="/kohort_pelayanan_kb_reviewed/generated_note_name_14:label"
-            lang="en">-
+        <span class="question-label "
+            data-itext-id="/kohort_pelayanan_kb_reviewed/generated_note_name_14:label" lang="en">-
         </span>
         <input name="/kohort_pelayanan_kb_reviewed/generated_note_name_14" data-type-xml="string"
             readonly="readonly" type="text" />
     </label>
     <label class="question non-select ">
-        <span class="question-label active" data-itext-id="/kohort_pelayanan_kb_reviewed/tanggal_kunjungan:label"
-            lang="Bahasa">Tanggal kunjungan
+        <span class="question-label active"
+            data-itext-id="/kohort_pelayanan_kb_reviewed/tanggal_kunjungan:label" lang="Bahasa">
+            Tanggal kunjungan
         </span>
-        <span class="question-label " data-itext-id="/kohort_pelayanan_kb_reviewed/tanggal_kunjungan:label"
-            lang="en">date of check-up
+        <span class="question-label "
+            data-itext-id="/kohort_pelayanan_kb_reviewed/tanggal_kunjungan:label" lang="en">date of
+            check-up
         </span>
         <span class="required">*</span>
-        <span class="or-hint active" data-itext-id="/kohort_pelayanan_kb_reviewed/tanggal_kunjungan:hint"
-            lang="Bahasa">Diisi dengan
+        <span class="or-hint active"
+            data-itext-id="/kohort_pelayanan_kb_reviewed/tanggal_kunjungan:hint" lang="Bahasa">Diisi
+            dengan
             tanggal kunjungan/ pelayanan
         </span>
         <span class="or-hint " data-itext-id="/kohort_pelayanan_kb_reviewed/tanggal_kunjungan:hint"
@@ -52,20 +57,24 @@
     <fieldset class="question ">
         <fieldset>
             <legend>
-                <span class="question-label active" data-itext-id="/kohort_pelayanan_kb_reviewed/keterangan_tentang_peserta_kb:label"
+                <span class="question-label active"
+                    data-itext-id="/kohort_pelayanan_kb_reviewed/keterangan_tentang_peserta_kb:label"
                     lang="Bahasa">
                     Keterangan tentang Peserta KB
                 </span>
-                <span class="question-label " data-itext-id="/kohort_pelayanan_kb_reviewed/keterangan_tentang_peserta_kb:label"
+                <span class="question-label "
+                    data-itext-id="/kohort_pelayanan_kb_reviewed/keterangan_tentang_peserta_kb:label"
                     lang="en">
                     notes about contraception tools user
                 </span>
-                <span class="or-hint active" data-itext-id="/kohort_pelayanan_kb_reviewed/keterangan_tentang_peserta_kb:hint"
+                <span class="or-hint active"
+                    data-itext-id="/kohort_pelayanan_kb_reviewed/keterangan_tentang_peserta_kb:hint"
                     lang="Bahasa">
                     Diisi B untuk peserta KB baru, L untuk peserta KB Lama, BO untuk peserta KB baru
                     pasca salin
                 </span>
-                <span class="or-hint " data-itext-id="/kohort_pelayanan_kb_reviewed/keterangan_tentang_peserta_kb:hint"
+                <span class="or-hint "
+                    data-itext-id="/kohort_pelayanan_kb_reviewed/keterangan_tentang_peserta_kb:hint"
                     lang="en">
                     Fill in B if it's a new FP contraceptor, L for old contraceptor, BO for
                     post-partum contraceptor
@@ -75,13 +84,14 @@
                 <label class="">
                     <input name="/kohort_pelayanan_kb_reviewed/keterangan_tentang_peserta_kb"
                         data-name="/kohort_pelayanan_kb_reviewed/keterangan_tentang_peserta_kb"
-                        data-type-xml="select1"
-                        type="radio" value="lama" />
-                    <span class="option-label active" data-itext-id="/kohort_pelayanan_kb_reviewed/keterangan_tentang_peserta_kb/lama:label"
+                        data-type-xml="select1" type="radio" value="lama" />
+                    <span class="option-label active"
+                        data-itext-id="/kohort_pelayanan_kb_reviewed/keterangan_tentang_peserta_kb/lama:label"
                         lang="Bahasa">
                         Lama (L)
                     </span>
-                    <span class="option-label " data-itext-id="/kohort_pelayanan_kb_reviewed/keterangan_tentang_peserta_kb/lama:label"
+                    <span class="option-label "
+                        data-itext-id="/kohort_pelayanan_kb_reviewed/keterangan_tentang_peserta_kb/lama:label"
                         lang="en">
                         Old FP Acceptor (OA)
                     </span>
@@ -89,13 +99,14 @@
                 <label class="">
                     <input name="/kohort_pelayanan_kb_reviewed/keterangan_tentang_peserta_kb"
                         data-name="/kohort_pelayanan_kb_reviewed/keterangan_tentang_peserta_kb"
-                        data-type-xml="select1"
-                        type="radio" value="kb_baru_pasca_salin" />
-                    <span class="option-label active" data-itext-id="/kohort_pelayanan_kb_reviewed/keterangan_tentang_peserta_kb/kb_baru_pasca_salin:label"
+                        data-type-xml="select1" type="radio" value="kb_baru_pasca_salin" />
+                    <span class="option-label active"
+                        data-itext-id="/kohort_pelayanan_kb_reviewed/keterangan_tentang_peserta_kb/kb_baru_pasca_salin:label"
                         lang="Bahasa">
                         KB Baru Pasca Salin (BO)
                     </span>
-                    <span class="option-label " data-itext-id="/kohort_pelayanan_kb_reviewed/keterangan_tentang_peserta_kb/kb_baru_pasca_salin:label"
+                    <span class="option-label "
+                        data-itext-id="/kohort_pelayanan_kb_reviewed/keterangan_tentang_peserta_kb/kb_baru_pasca_salin:label"
                         lang="en">
                         Post-partum FP Acceptor
                     </span>
@@ -104,20 +115,24 @@
         </fieldset>
     </fieldset>
     <label class="question or-appearance-minimal ">
-        <span class="question-label active" data-itext-id="/kohort_pelayanan_kb_reviewed/jenis_kontrasepsi_yang_digunakan:label"
+        <span class="question-label active"
+            data-itext-id="/kohort_pelayanan_kb_reviewed/jenis_kontrasepsi_yang_digunakan:label"
             lang="Bahasa">
             Jenis Kontrasepsi yang digunakan
         </span>
-        <span class="question-label " data-itext-id="/kohort_pelayanan_kb_reviewed/jenis_kontrasepsi_yang_digunakan:label"
+        <span class="question-label "
+            data-itext-id="/kohort_pelayanan_kb_reviewed/jenis_kontrasepsi_yang_digunakan:label"
             lang="en">
             kind of contraceptions used
         </span>
         <span class="required">*</span>
-        <span class="or-hint active" data-itext-id="/kohort_pelayanan_kb_reviewed/jenis_kontrasepsi_yang_digunakan:hint"
+        <span class="or-hint active"
+            data-itext-id="/kohort_pelayanan_kb_reviewed/jenis_kontrasepsi_yang_digunakan:hint"
             lang="Bahasa">
             Diisi dengan jenis metode kontrasepsi yang dilayani
         </span>
-        <span class="or-hint " data-itext-id="/kohort_pelayanan_kb_reviewed/jenis_kontrasepsi_yang_digunakan:hint"
+        <span class="or-hint "
+            data-itext-id="/kohort_pelayanan_kb_reviewed/jenis_kontrasepsi_yang_digunakan:hint"
             lang="en">Fill
             in the type of contraceptive method used
         </span>
@@ -153,19 +168,23 @@
     <fieldset class="question ">
         <fieldset>
             <legend>
-                <span class="question-label active" data-itext-id="/kohort_pelayanan_kb_reviewed/keterangan_tentang_peserta_kb_2:label"
+                <span class="question-label active"
+                    data-itext-id="/kohort_pelayanan_kb_reviewed/keterangan_tentang_peserta_kb_2:label"
                     lang="Bahasa">
                     Keterangan tentang Peserta KB2
                 </span>
-                <span class="question-label " data-itext-id="/kohort_pelayanan_kb_reviewed/keterangan_tentang_peserta_kb_2:label"
+                <span class="question-label "
+                    data-itext-id="/kohort_pelayanan_kb_reviewed/keterangan_tentang_peserta_kb_2:label"
                     lang="en">
                     Information of FP Acceptor related to Contraception Use
                 </span>
-                <span class="or-hint active" data-itext-id="/kohort_pelayanan_kb_reviewed/keterangan_tentang_peserta_kb_2:hint"
+                <span class="or-hint active"
+                    data-itext-id="/kohort_pelayanan_kb_reviewed/keterangan_tentang_peserta_kb_2:hint"
                     lang="Bahasa">
                     Diisi dengan ganti cara, efek samping, komplikasi
                 </span>
-                <span class="or-hint " data-itext-id="/kohort_pelayanan_kb_reviewed/keterangan_tentang_peserta_kb_2:hint"
+                <span class="or-hint "
+                    data-itext-id="/kohort_pelayanan_kb_reviewed/keterangan_tentang_peserta_kb_2:hint"
                     lang="en">
                     Fill in GC for method change, ES for side effect, or K for complication
                 </span>
@@ -174,13 +193,14 @@
                 <label class="">
                     <input name="/kohort_pelayanan_kb_reviewed/keterangan_tentang_peserta_kb_2"
                         data-name="/kohort_pelayanan_kb_reviewed/keterangan_tentang_peserta_kb_2"
-                        data-type-xml="select1"
-                        type="radio" value="ganti_cara" />
-                    <span class="option-label active" data-itext-id="/kohort_pelayanan_kb_reviewed/keterangan_tentang_peserta_kb_2/ganti_cara:label"
+                        data-type-xml="select1" type="radio" value="ganti_cara" />
+                    <span class="option-label active"
+                        data-itext-id="/kohort_pelayanan_kb_reviewed/keterangan_tentang_peserta_kb_2/ganti_cara:label"
                         lang="Bahasa">
                         Ganti Cara (GC)
                     </span>
-                    <span class="option-label " data-itext-id="/kohort_pelayanan_kb_reviewed/keterangan_tentang_peserta_kb_2/ganti_cara:label"
+                    <span class="option-label "
+                        data-itext-id="/kohort_pelayanan_kb_reviewed/keterangan_tentang_peserta_kb_2/ganti_cara:label"
                         lang="en">
                         Methode Change (MC)
                     </span>
@@ -188,13 +208,14 @@
                 <label class="">
                     <input name="/kohort_pelayanan_kb_reviewed/keterangan_tentang_peserta_kb_2"
                         data-name="/kohort_pelayanan_kb_reviewed/keterangan_tentang_peserta_kb_2"
-                        data-type-xml="select1"
-                        type="radio" value="efek_samping" />
-                    <span class="option-label active" data-itext-id="/kohort_pelayanan_kb_reviewed/keterangan_tentang_peserta_kb_2/efek_samping:label"
+                        data-type-xml="select1" type="radio" value="efek_samping" />
+                    <span class="option-label active"
+                        data-itext-id="/kohort_pelayanan_kb_reviewed/keterangan_tentang_peserta_kb_2/efek_samping:label"
                         lang="Bahasa">
                         Efek Samping (ES)
                     </span>
-                    <span class="option-label " data-itext-id="/kohort_pelayanan_kb_reviewed/keterangan_tentang_peserta_kb_2/efek_samping:label"
+                    <span class="option-label "
+                        data-itext-id="/kohort_pelayanan_kb_reviewed/keterangan_tentang_peserta_kb_2/efek_samping:label"
                         lang="en">
                         Side Effects (SE)
                     </span>
@@ -202,13 +223,14 @@
                 <label class="">
                     <input name="/kohort_pelayanan_kb_reviewed/keterangan_tentang_peserta_kb_2"
                         data-name="/kohort_pelayanan_kb_reviewed/keterangan_tentang_peserta_kb_2"
-                        data-type-xml="select1"
-                        type="radio" value="komplikasi" />
-                    <span class="option-label active" data-itext-id="/kohort_pelayanan_kb_reviewed/keterangan_tentang_peserta_kb_2/komplikasi:label"
+                        data-type-xml="select1" type="radio" value="komplikasi" />
+                    <span class="option-label active"
+                        data-itext-id="/kohort_pelayanan_kb_reviewed/keterangan_tentang_peserta_kb_2/komplikasi:label"
                         lang="Bahasa">
                         Komplikasi (K)
                     </span>
-                    <span class="option-label " data-itext-id="/kohort_pelayanan_kb_reviewed/keterangan_tentang_peserta_kb_2/komplikasi:label"
+                    <span class="option-label "
+                        data-itext-id="/kohort_pelayanan_kb_reviewed/keterangan_tentang_peserta_kb_2/komplikasi:label"
                         lang="en">
                         Complication (C)
                     </span>
@@ -217,76 +239,87 @@
         </fieldset>
     </fieldset>
     <label class="question or-branch pre-init non-select ">
-        <span class="question-label active" data-itext-id="/kohort_pelayanan_kb_reviewed/keterangan_ganti_cara:label"
-            lang="Bahasa">Keterangan
+        <span class="question-label active"
+            data-itext-id="/kohort_pelayanan_kb_reviewed/keterangan_ganti_cara:label" lang="Bahasa">
+            Keterangan
             Ganti Cara
         </span>
-        <span class="question-label " data-itext-id="/kohort_pelayanan_kb_reviewed/keterangan_ganti_cara:label"
-            lang="en">Change Type
+        <span class="question-label "
+            data-itext-id="/kohort_pelayanan_kb_reviewed/keterangan_ganti_cara:label" lang="en">
+            Change Type
             (CT)
         </span>
-        <span class="or-hint active" data-itext-id="/kohort_pelayanan_kb_reviewed/keterangan_ganti_cara:hint"
-            lang="Bahasa">Berikan alasan
+        <span class="or-hint active"
+            data-itext-id="/kohort_pelayanan_kb_reviewed/keterangan_ganti_cara:hint" lang="Bahasa">
+            Berikan alasan
             dan penjelasan penyebab peserta KB Ganti Cara
         </span>
-        <span class="or-hint " data-itext-id="/kohort_pelayanan_kb_reviewed/keterangan_ganti_cara:hint"
-            lang="en">Write the
+        <span class="or-hint "
+            data-itext-id="/kohort_pelayanan_kb_reviewed/keterangan_ganti_cara:hint" lang="en">Write
+            the
             reason for Method Change
         </span>
-        <input name="/kohort_pelayanan_kb_reviewed/keterangan_ganti_cara" data-relevant=" /kohort_pelayanan_kb_reviewed/keterangan_tentang_peserta_kb_2  = 'ganti_cara'"
-            data-type-xml="string"
-            type="text" />
+        <input name="/kohort_pelayanan_kb_reviewed/keterangan_ganti_cara"
+            data-relevant=" /kohort_pelayanan_kb_reviewed/keterangan_tentang_peserta_kb_2  = 'ganti_cara'"
+            data-type-xml="string" type="text" />
     </label>
     <label class="question or-branch pre-init non-select ">
-        <span class="question-label active" data-itext-id="/kohort_pelayanan_kb_reviewed/keterangan_efek_samping:label"
+        <span class="question-label active"
+            data-itext-id="/kohort_pelayanan_kb_reviewed/keterangan_efek_samping:label"
             lang="Bahasa">Keterangan
             Efek Samping
         </span>
-        <span class="question-label " data-itext-id="/kohort_pelayanan_kb_reviewed/keterangan_efek_samping:label"
-            lang="en">Side Effects
+        <span class="question-label "
+            data-itext-id="/kohort_pelayanan_kb_reviewed/keterangan_efek_samping:label" lang="en">
+            Side Effects
             (SE)
         </span>
-        <span class="or-hint active" data-itext-id="/kohort_pelayanan_kb_reviewed/keterangan_efek_samping:hint"
+        <span class="or-hint active"
+            data-itext-id="/kohort_pelayanan_kb_reviewed/keterangan_efek_samping:hint"
             lang="Bahasa">Keterangan
             efek samping penggunaan metode kontrasepsi
         </span>
-        <span class="or-hint " data-itext-id="/kohort_pelayanan_kb_reviewed/keterangan_efek_samping:hint"
-            lang="en">Write
+        <span class="or-hint "
+            data-itext-id="/kohort_pelayanan_kb_reviewed/keterangan_efek_samping:hint" lang="en">
+            Write
             description of side effect when using a contraceptive
         </span>
-        <input name="/kohort_pelayanan_kb_reviewed/keterangan_efek_samping" data-relevant=" /kohort_pelayanan_kb_reviewed/keterangan_tentang_peserta_kb_2  = 'efek_samping'"
-            data-type-xml="string"
-            type="text" />
+        <input name="/kohort_pelayanan_kb_reviewed/keterangan_efek_samping"
+            data-relevant=" /kohort_pelayanan_kb_reviewed/keterangan_tentang_peserta_kb_2  = 'efek_samping'"
+            data-type-xml="string" type="text" />
     </label>
     <label class="question or-branch pre-init non-select ">
-        <span class="question-label active" data-itext-id="/kohort_pelayanan_kb_reviewed/keterangan_komplikasi:label"
-            lang="Bahasa">Keterangan
+        <span class="question-label active"
+            data-itext-id="/kohort_pelayanan_kb_reviewed/keterangan_komplikasi:label" lang="Bahasa">
+            Keterangan
             Komplikasi
         </span>
-        <span class="question-label " data-itext-id="/kohort_pelayanan_kb_reviewed/keterangan_komplikasi:label"
-            lang="en">Complication
+        <span class="question-label "
+            data-itext-id="/kohort_pelayanan_kb_reviewed/keterangan_komplikasi:label" lang="en">
+            Complication
         </span>
-        <span class="or-hint active" data-itext-id="/kohort_pelayanan_kb_reviewed/keterangan_komplikasi:hint"
-            lang="Bahasa">Keterangan
+        <span class="or-hint active"
+            data-itext-id="/kohort_pelayanan_kb_reviewed/keterangan_komplikasi:hint" lang="Bahasa">
+            Keterangan
             tentang komplikasi penggunaan metode kontrasepsi
         </span>
-        <span class="or-hint " data-itext-id="/kohort_pelayanan_kb_reviewed/keterangan_komplikasi:hint"
-            lang="en">Write
+        <span class="or-hint "
+            data-itext-id="/kohort_pelayanan_kb_reviewed/keterangan_komplikasi:hint" lang="en">Write
             description of complication when using a contraceptive
         </span>
-        <input name="/kohort_pelayanan_kb_reviewed/keterangan_komplikasi" data-relevant=" /kohort_pelayanan_kb_reviewed/keterangan_tentang_peserta_kb_2  = 'komplikasi'"
-            data-type-xml="string"
-            type="text" />
+        <input name="/kohort_pelayanan_kb_reviewed/keterangan_komplikasi"
+            data-relevant=" /kohort_pelayanan_kb_reviewed/keterangan_tentang_peserta_kb_2  = 'komplikasi'"
+            data-type-xml="string" type="text" />
     </label>
 
     <fieldset style="display:none;" id="or-preload-items">
         <label class="calculation non-select ">
-            <input name="/kohort_pelayanan_kb_reviewed/start" data-preload="timestamp" data-preload-params="start"
-                data-type-xml="dateTime" type="hidden" />
+            <input name="/kohort_pelayanan_kb_reviewed/start" data-preload="timestamp"
+                data-preload-params="start" data-type-xml="dateTime" type="hidden" />
         </label>
         <label class="calculation non-select ">
-            <input name="/kohort_pelayanan_kb_reviewed/today" data-preload="date" data-preload-params="today"
-                data-type-xml="date" type="hidden" />
+            <input name="/kohort_pelayanan_kb_reviewed/today" data-preload="date"
+                data-preload-params="today" data-type-xml="date" type="hidden" />
         </label>
         <label class="calculation non-select ">
             <input name="/kohort_pelayanan_kb_reviewed/deviceid" data-preload="property"
@@ -301,44 +334,49 @@
                 data-preload-params="phonenumber" data-type-xml="string" type="hidden" />
         </label>
         <label class="calculation non-select ">
-            <input name="/kohort_pelayanan_kb_reviewed/end" data-preload="timestamp" data-preload-params="end"
-                data-type-xml="dateTime" type="hidden" />
+            <input name="/kohort_pelayanan_kb_reviewed/end" data-preload="timestamp"
+                data-preload-params="end" data-type-xml="dateTime" type="hidden" />
         </label>
     </fieldset>
     <fieldset style="display:none;" id="or-calculated-items">
         <label class="calculation non-select ">
-            <input name="/kohort_pelayanan_kb_reviewed/existing_location" data-calculate=" /kohort_pelayanan_kb_reviewed/Village "
-                data-type-xml="string" type="hidden" />
-        </label>
-        <label class="calculation non-select ">
-            <input name="/kohort_pelayanan_kb_reviewed/provinsi" data-calculate=" /kohort_pelayanan_kb_reviewed/Province "
-                data-type-xml="string" type="hidden" />
-        </label>
-        <label class="calculation non-select ">
-            <input name="/kohort_pelayanan_kb_reviewed/kabupaten" data-calculate=" /kohort_pelayanan_kb_reviewed/District "
-                data-type-xml="string" type="hidden" />
-        </label>
-        <label class="calculation non-select ">
-            <input name="/kohort_pelayanan_kb_reviewed/desa" data-calculate=" /kohort_pelayanan_kb_reviewed/Village "
-                data-type-xml="string" type="hidden" />
-        </label>
-        <label class="calculation non-select ">
-            <input name="/kohort_pelayanan_kb_reviewed/dusun" data-calculate=" /kohort_pelayanan_kb_reviewed/Sub-village "
-                data-type-xml="string"
+            <input name="/kohort_pelayanan_kb_reviewed/existing_location"
+                data-calculate=" /kohort_pelayanan_kb_reviewed/Village " data-type-xml="string"
                 type="hidden" />
         </label>
         <label class="calculation non-select ">
-            <input name="/kohort_pelayanan_kb_reviewed/kecamatan" data-calculate=" /kohort_pelayanan_kb_reviewed/Sub-district "
-                data-type-xml="string"
+            <input name="/kohort_pelayanan_kb_reviewed/provinsi"
+                data-calculate=" /kohort_pelayanan_kb_reviewed/Province " data-type-xml="string"
                 type="hidden" />
         </label>
         <label class="calculation non-select ">
-            <input name="/kohort_pelayanan_kb_reviewed/meta/instanceID" data-calculate="concat('uuid:', uuid())"
-                data-type-xml="string" type="hidden" />
+            <input name="/kohort_pelayanan_kb_reviewed/kabupaten"
+                data-calculate=" /kohort_pelayanan_kb_reviewed/District " data-type-xml="string"
+                type="hidden" />
         </label>
         <label class="calculation non-select ">
-            <input name="/kohort_pelayanan_kb_reviewed/formhub/uuid" data-calculate="'aeefc6ab183947b399e2621b00565b9c'"
-                data-type-xml="string" type="hidden" />
+            <input name="/kohort_pelayanan_kb_reviewed/desa"
+                data-calculate=" /kohort_pelayanan_kb_reviewed/Village " data-type-xml="string"
+                type="hidden" />
+        </label>
+        <label class="calculation non-select ">
+            <input name="/kohort_pelayanan_kb_reviewed/dusun"
+                data-calculate=" /kohort_pelayanan_kb_reviewed/Sub-village " data-type-xml="string"
+                type="hidden" />
+        </label>
+        <label class="calculation non-select ">
+            <input name="/kohort_pelayanan_kb_reviewed/kecamatan"
+                data-calculate=" /kohort_pelayanan_kb_reviewed/Sub-district " data-type-xml="string"
+                type="hidden" />
+        </label>
+        <label class="calculation non-select ">
+            <input name="/kohort_pelayanan_kb_reviewed/meta/instanceID"
+                data-calculate="concat('uuid:', uuid())" data-type-xml="string" type="hidden" />
+        </label>
+        <label class="calculation non-select ">
+            <input name="/kohort_pelayanan_kb_reviewed/formhub/uuid"
+                data-calculate="'aeefc6ab183947b399e2621b00565b9c'" data-type-xml="string"
+                type="hidden" />
         </label>
     </fieldset>
 </form>

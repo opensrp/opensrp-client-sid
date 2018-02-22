@@ -31,11 +31,6 @@ import org.smartregister.view.contract.HomeContext;
 import org.smartregister.view.controller.NativeAfterANMDetailsFetchListener;
 import org.smartregister.view.controller.NativeUpdateANMDetailsTask;
 
-//import java.text.SimpleDateFormat;
-//import java.util.Date;
-//import java.util.HashMap;
-//import java.util.Map;
-
 import static android.widget.Toast.LENGTH_SHORT;
 import static java.lang.String.valueOf;
 import static org.smartregister.event.Event.ACTION_HANDLED;
@@ -43,10 +38,15 @@ import static org.smartregister.event.Event.FORM_SUBMITTED;
 import static org.smartregister.event.Event.SYNC_COMPLETED;
 import static org.smartregister.event.Event.SYNC_STARTED;
 
+//import java.text.SimpleDateFormat;
+//import java.util.Date;
+//import java.util.HashMap;
+//import java.util.Map;
+
 public class BidanHomeActivity extends SecuredActivity {
     private static final String TAG = BidanHomeActivity.class.getName();
     public static int kicount;
-//    SimpleDateFormat timer = new SimpleDateFormat("hh:mm:ss");
+    //    SimpleDateFormat timer = new SimpleDateFormat("hh:mm:ss");
     private MenuItem updateMenuItem;
     private MenuItem remainingFormsToSyncMenuItem;
     private PendingFormSubmissionService pendingFormSubmissionService;
@@ -150,7 +150,7 @@ public class BidanHomeActivity extends SecuredActivity {
                     }
                     Support.ONSYNC = false;
                 } catch (InterruptedException ie) {
-                    Log.e(TAG, "run: "+ ie.getCause() );
+                    Log.e(TAG, "run: " + ie.getCause());
                 }
             }
         }.start();
@@ -234,14 +234,14 @@ public class BidanHomeActivity extends SecuredActivity {
         task.fetch(new NativeAfterANMDetailsFetchListener() {
             @Override
             public void afterFetch(HomeContext anmDetails) {
-                Log.d(TAG, "afterFetch: "+anmDetails);
+                Log.d(TAG, "afterFetch: " + anmDetails);
                 SmartRegisterQueryBuilder sqb = new SmartRegisterQueryBuilder();
                 Cursor kiCountCursor = context().commonrepository("ec_kartu_ibu").rawCustomQueryForAdapter(sqb.queryForCountOnRegisters("ec_kartu_ibu_search", "ec_kartu_ibu_search.is_closed=0 AND namalengkap != '' AND namalengkap IS NOT NULL"));
                 kiCountCursor.moveToFirst();
                 kicount = kiCountCursor.getInt(0);
                 kiCountCursor.close();
 
-                Cursor kbCountCursor = context().commonrepository("ec_kartu_ibu").rawCustomQueryForAdapter(sqb.queryForCountOnRegisters("ec_kartu_ibu_search", "ec_kartu_ibu_search.is_closed=0 AND jenisKontrasepsi !=''"));
+                Cursor kbCountCursor = context().commonrepository("ec_kartu_ibu").rawCustomQueryForAdapter(sqb.queryForCountOnRegisters("ec_kartu_ibu_search", "ec_kartu_ibu_search.is_closed=0 AND jenisKontrasepsi !='0' AND namalengkap != '' AND namalengkap IS NOT NULL"));
                 kbCountCursor.moveToFirst();
                 int kbcount = kbCountCursor.getInt(0);
                 kbCountCursor.close();

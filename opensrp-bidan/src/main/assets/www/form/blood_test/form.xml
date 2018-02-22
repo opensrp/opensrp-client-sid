@@ -41,10 +41,11 @@
         <span class="or-hint " data-itext-id="/Blood_Test/td_sistolik:hint" lang="en">Indicating
             mother's blood pressure (systolic) on ANC check-up
         </span>
-        <input name="/Blood_Test/td_sistolik" data-constraint=".&gt;0 and .&lt;1000" data-type-xml="int"
-            type="number" />
-        <span class="or-constraint-msg active" data-itext-id="/Blood_Test/td_sistolik:jr:constraintMsg"
-            lang="Bahasa">Nilai yang dimasukkan tidak
+        <input name="/Blood_Test/td_sistolik" data-constraint=".&gt;0 and .&lt;1000"
+            data-type-xml="int" type="number" />
+        <span class="or-constraint-msg active"
+            data-itext-id="/Blood_Test/td_sistolik:jr:constraintMsg" lang="Bahasa">Nilai yang
+            dimasukkan tidak
             memenuhi syarat, mohon periksa kembali
         </span>
         <span class="or-constraint-msg " data-itext-id="/Blood_Test/td_sistolik:jr:constraintMsg"
@@ -65,10 +66,11 @@
         <span class="or-hint " data-itext-id="/Blood_Test/td_diastolik:hint" lang="en">Indicating
             mother's blood pressure (dyastolic) on ANC check-up
         </span>
-        <input name="/Blood_Test/td_diastolik" data-constraint=".&gt;0 and .&lt;1000" data-type-xml="int"
-            type="number" />
-        <span class="or-constraint-msg active" data-itext-id="/Blood_Test/td_diastolik:jr:constraintMsg"
-            lang="Bahasa">Nilai yang dimasukkan tidak
+        <input name="/Blood_Test/td_diastolik" data-constraint=".&gt;0 and .&lt;1000"
+            data-type-xml="int" type="number" />
+        <span class="or-constraint-msg active"
+            data-itext-id="/Blood_Test/td_diastolik:jr:constraintMsg" lang="Bahasa">Nilai yang
+            dimasukkan tidak
             memenuhi syarat, mohon periksa kembali
         </span>
         <span class="or-constraint-msg " data-itext-id="/Blood_Test/td_diastolik:jr:constraintMsg"
@@ -103,16 +105,16 @@
                 data-type-xml="date" type="hidden" />
         </label>
         <label class="calculation non-select ">
-            <input name="/Blood_Test/deviceid" data-preload="property" data-preload-params="deviceid"
-                data-type-xml="string" type="hidden" />
+            <input name="/Blood_Test/deviceid" data-preload="property"
+                data-preload-params="deviceid" data-type-xml="string" type="hidden" />
         </label>
         <label class="calculation non-select ">
-            <input name="/Blood_Test/simserial" data-preload="property" data-preload-params="simserial"
-                data-type-xml="string" type="hidden" />
+            <input name="/Blood_Test/simserial" data-preload="property"
+                data-preload-params="simserial" data-type-xml="string" type="hidden" />
         </label>
         <label class="calculation non-select ">
-            <input name="/Blood_Test/phonenumber" data-preload="property" data-preload-params="phonenumber"
-                data-type-xml="string" type="hidden" />
+            <input name="/Blood_Test/phonenumber" data-preload="property"
+                data-preload-params="phonenumber" data-type-xml="string" type="hidden" />
         </label>
         <label class="calculation non-select ">
             <input name="/Blood_Test/end" data-preload="timestamp" data-preload-params="end"
@@ -125,20 +127,20 @@
                 data-type-xml="string" type="hidden" />
         </label>
         <label class="calculation non-select ">
-            <input name="/Blood_Test/provinsi" data-calculate=" /Blood_Test/Province " data-type-xml="string"
-                type="hidden" />
+            <input name="/Blood_Test/provinsi" data-calculate=" /Blood_Test/Province "
+                data-type-xml="string" type="hidden" />
         </label>
         <label class="calculation non-select ">
             <input name="/Blood_Test/kabupaten" data-calculate=" /Blood_Test/District "
                 data-type-xml="string" type="hidden" />
         </label>
         <label class="calculation non-select ">
-            <input name="/Blood_Test/desa" data-calculate=" /Blood_Test/Village " data-type-xml="string"
-                type="hidden" />
+            <input name="/Blood_Test/desa" data-calculate=" /Blood_Test/Village "
+                data-type-xml="string" type="hidden" />
         </label>
         <label class="calculation non-select ">
-            <input name="/Blood_Test/dusun" data-calculate=" /Blood_Test/Sub-village " data-type-xml="string"
-                type="hidden" />
+            <input name="/Blood_Test/dusun" data-calculate=" /Blood_Test/Sub-village "
+                data-type-xml="string" type="hidden" />
         </label>
         <label class="calculation non-select ">
             <input name="/Blood_Test/kecamatan" data-calculate=" /Blood_Test/Sub-district "
@@ -149,8 +151,9 @@
                 data-type-xml="string" type="hidden" />
         </label>
         <label class="calculation non-select ">
-            <input name="/Blood_Test/formhub/uuid" data-calculate="'ed9829dab8ac453997cde171feeac09e'"
-                data-type-xml="string" type="hidden" />
+            <input name="/Blood_Test/formhub/uuid"
+                data-calculate="'ed9829dab8ac453997cde171feeac09e'" data-type-xml="string"
+                type="hidden" />
         </label>
     </fieldset>
 </form>

@@ -40,7 +40,7 @@ public class ANCSmartRegisterFragment extends BaseSmartRegisterFragment {
 
     private static final String TAG = ANCSmartRegisterFragment.class.getName();
     public static String criteria;
-//    private final ClientActionHandler clientActionHandler = new ClientActionHandler();
+    //    private final ClientActionHandler clientActionHandler = new ClientActionHandler();
 //    private ANCClientsProvider kiSCP = new ANCClientsProvider(getActivity(), new ClientActionHandler(), context().alertService());
     private String tableName = "ec_kartu_ibu";
 
@@ -147,11 +147,11 @@ public class ANCSmartRegisterFragment extends BaseSmartRegisterFragment {
         clientsView.setVisibility(View.VISIBLE);
         clientsProgressView.setVisibility(View.INVISIBLE);
         initializeQueries();
-        Log.e(TAG, "setupViews: "+ getResources().getConfiguration().locale );
+        Log.e(TAG, "setupViews: " + getResources().getConfiguration().locale);
     }
 
     public void initializeQueries() {
-        Log.e(TAG, "initializeQueries: " );
+        Log.e(TAG, "initializeQueries: ");
         String tableEcIbu = "ec_ibu";
 
         try {
@@ -189,7 +189,7 @@ public class ANCSmartRegisterFragment extends BaseSmartRegisterFragment {
 
         } catch (Exception e) {
             e.printStackTrace();
-            Log.e(TAG, "initializeQueries: "+ e.getCause() );
+            Log.e(TAG, "initializeQueries: " + e.getCause());
         }
 
     }
@@ -220,7 +220,7 @@ public class ANCSmartRegisterFragment extends BaseSmartRegisterFragment {
         if (isPausedOrRefreshList()) {
             initializeQueries();
         }
-        Log.e(TAG, "onResumption: "+ getResources().getConfiguration().locale );
+        Log.e(TAG, "onResumption: " + getResources().getConfiguration().locale);
     }
 
     private void updateSearchView() {

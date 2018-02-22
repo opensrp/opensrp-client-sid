@@ -34,11 +34,11 @@
             android:theme="@style/AppThemeNoActionBarAndTitle"
             android:windowSoftInputMode="adjustResize" />
         <!--<activity-->
-            <!--android:name=".activity.NativeKIbuSmartRegisterActivity"-->
-            <!--android:configChanges="keyboardHidden|orientation|screenSize"-->
-            <!--android:screenOrientation="landscape"-->
-            <!--android:theme="@style/AppThemeNoActionBarAndTitle"-->
-            <!--android:windowSoftInputMode="adjustResize" />-->
+        <!--android:name=".activity.NativeKIbuSmartRegisterActivity"-->
+        <!--android:configChanges="keyboardHidden|orientation|screenSize"-->
+        <!--android:screenOrientation="landscape"-->
+        <!--android:theme="@style/AppThemeNoActionBarAndTitle"-->
+        <!--android:windowSoftInputMode="adjustResize" />-->
         <activity
             android:name=".activity.DetailMotherActivity"
             android:screenOrientation="landscape"

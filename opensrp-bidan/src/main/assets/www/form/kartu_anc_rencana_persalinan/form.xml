@@ -7,35 +7,39 @@
         <option value="en">English</option>
     </select>
     <label class="note non-select ">
-        <span class="question-label active" data-itext-id="/rencana_persalinan_reviewed/generated_note_name_13:label"
-            lang="Bahasa">Desa :
+        <span class="question-label active"
+            data-itext-id="/rencana_persalinan_reviewed/generated_note_name_13:label" lang="Bahasa">
+            Desa :
             <span class="or-output" data-value=" /rencana_persalinan_reviewed/Village "></span>
         </span>
-        <span class="question-label " data-itext-id="/rencana_persalinan_reviewed/generated_note_name_13:label"
-            lang="en">-
+        <span class="question-label "
+            data-itext-id="/rencana_persalinan_reviewed/generated_note_name_13:label" lang="en">-
         </span>
         <input name="/rencana_persalinan_reviewed/generated_note_name_13" data-type-xml="string"
             readonly="readonly" type="text" />
     </label>
     <label class="note non-select ">
-        <span class="question-label active" data-itext-id="/rencana_persalinan_reviewed/generated_note_name_14:label"
-            lang="Bahasa">Dusun :
+        <span class="question-label active"
+            data-itext-id="/rencana_persalinan_reviewed/generated_note_name_14:label" lang="Bahasa">
+            Dusun :
             <span class="or-output" data-value=" /rencana_persalinan_reviewed/Sub-village "></span>
         </span>
-        <span class="question-label " data-itext-id="/rencana_persalinan_reviewed/generated_note_name_14:label"
-            lang="en">-
+        <span class="question-label "
+            data-itext-id="/rencana_persalinan_reviewed/generated_note_name_14:label" lang="en">-
         </span>
         <input name="/rencana_persalinan_reviewed/generated_note_name_14" data-type-xml="string"
             readonly="readonly" type="text" />
     </label>
     <label class="note non-select ">
-        <span class="question-label active" data-itext-id="/rencana_persalinan_reviewed/generated_note_name_15:label"
-            lang="Bahasa">Hari Taksiran
+        <span class="question-label active"
+            data-itext-id="/rencana_persalinan_reviewed/generated_note_name_15:label" lang="Bahasa">
+            Hari Taksiran
             persalinan :
             <span class="or-output" data-value=" /rencana_persalinan_reviewed/htp "></span>
         </span>
-        <span class="question-label " data-itext-id="/rencana_persalinan_reviewed/generated_note_name_15:label"
-            lang="en">EDD :
+        <span class="question-label "
+            data-itext-id="/rencana_persalinan_reviewed/generated_note_name_15:label" lang="en">EDD
+            :
         </span>
         <input name="/rencana_persalinan_reviewed/generated_note_name_15" data-type-xml="string"
             readonly="readonly" type="text" />
@@ -43,89 +47,103 @@
     <fieldset class="question or-appearance-yes ">
         <fieldset>
             <legend>
-                <span class="question-label active" data-itext-id="/rencana_persalinan_reviewed/lokasi_periksa:label"
-                    lang="Bahasa">Lokasi Periksa
+                <span class="question-label active"
+                    data-itext-id="/rencana_persalinan_reviewed/lokasi_periksa:label" lang="Bahasa">
+                    Lokasi Periksa
                 </span>
-                <span class="question-label " data-itext-id="/rencana_persalinan_reviewed/lokasi_periksa:label"
-                    lang="en">Location of
+                <span class="question-label "
+                    data-itext-id="/rencana_persalinan_reviewed/lokasi_periksa:label" lang="en">
+                    Location of
                     Service
                 </span>
             </legend>
             <div class="option-wrapper">
                 <label class="">
-                    <input name="/rencana_persalinan_reviewed/lokasi_periksa" data-name="/rencana_persalinan_reviewed/lokasi_periksa"
-                        data-type-xml="select1" type="radio"
-                        value="Posyandu" />
-                    <span class="option-label active" data-itext-id="/rencana_persalinan_reviewed/lokasi_periksa/Posyandu:label"
+                    <input name="/rencana_persalinan_reviewed/lokasi_periksa"
+                        data-name="/rencana_persalinan_reviewed/lokasi_periksa"
+                        data-type-xml="select1" type="radio" value="Posyandu" />
+                    <span class="option-label active"
+                        data-itext-id="/rencana_persalinan_reviewed/lokasi_periksa/Posyandu:label"
                         lang="Bahasa">
                         Posyandu
                     </span>
-                    <span class="option-label " data-itext-id="/rencana_persalinan_reviewed/lokasi_periksa/Posyandu:label"
+                    <span class="option-label "
+                        data-itext-id="/rencana_persalinan_reviewed/lokasi_periksa/Posyandu:label"
                         lang="en">
                         Village Outreach Post
                     </span>
                 </label>
                 <label class="">
-                    <input name="/rencana_persalinan_reviewed/lokasi_periksa" data-name="/rencana_persalinan_reviewed/lokasi_periksa"
-                        data-type-xml="select1" type="radio"
-                        value="Polindes" />
-                    <span class="option-label active" data-itext-id="/rencana_persalinan_reviewed/lokasi_periksa/Polindes:label"
+                    <input name="/rencana_persalinan_reviewed/lokasi_periksa"
+                        data-name="/rencana_persalinan_reviewed/lokasi_periksa"
+                        data-type-xml="select1" type="radio" value="Polindes" />
+                    <span class="option-label active"
+                        data-itext-id="/rencana_persalinan_reviewed/lokasi_periksa/Polindes:label"
                         lang="Bahasa">
                         Polindes
                     </span>
-                    <span class="option-label " data-itext-id="/rencana_persalinan_reviewed/lokasi_periksa/Polindes:label"
+                    <span class="option-label "
+                        data-itext-id="/rencana_persalinan_reviewed/lokasi_periksa/Polindes:label"
                         lang="en">
                         Maternal &amp; Child Health Post
                     </span>
                 </label>
                 <label class="">
-                    <input name="/rencana_persalinan_reviewed/lokasi_periksa" data-name="/rencana_persalinan_reviewed/lokasi_periksa"
-                        data-type-xml="select1" type="radio"
-                        value="Puskesmas" />
-                    <span class="option-label active" data-itext-id="/rencana_persalinan_reviewed/lokasi_periksa/Puskesmas:label"
+                    <input name="/rencana_persalinan_reviewed/lokasi_periksa"
+                        data-name="/rencana_persalinan_reviewed/lokasi_periksa"
+                        data-type-xml="select1" type="radio" value="Puskesmas" />
+                    <span class="option-label active"
+                        data-itext-id="/rencana_persalinan_reviewed/lokasi_periksa/Puskesmas:label"
                         lang="Bahasa">
                         Puskesmas
                     </span>
-                    <span class="option-label " data-itext-id="/rencana_persalinan_reviewed/lokasi_periksa/Puskesmas:label"
+                    <span class="option-label "
+                        data-itext-id="/rencana_persalinan_reviewed/lokasi_periksa/Puskesmas:label"
                         lang="en">
                         Primary Health Center
                     </span>
                 </label>
                 <label class="">
-                    <input name="/rencana_persalinan_reviewed/lokasi_periksa" data-name="/rencana_persalinan_reviewed/lokasi_periksa"
-                        data-type-xml="select1" type="radio"
-                        value="Rumah_Ibu" />
-                    <span class="option-label active" data-itext-id="/rencana_persalinan_reviewed/lokasi_periksa/Rumah_Ibu:label"
+                    <input name="/rencana_persalinan_reviewed/lokasi_periksa"
+                        data-name="/rencana_persalinan_reviewed/lokasi_periksa"
+                        data-type-xml="select1" type="radio" value="Rumah_Ibu" />
+                    <span class="option-label active"
+                        data-itext-id="/rencana_persalinan_reviewed/lokasi_periksa/Rumah_Ibu:label"
                         lang="Bahasa">
                         Rumah Ibu
                     </span>
-                    <span class="option-label " data-itext-id="/rencana_persalinan_reviewed/lokasi_periksa/Rumah_Ibu:label"
+                    <span class="option-label "
+                        data-itext-id="/rencana_persalinan_reviewed/lokasi_periksa/Rumah_Ibu:label"
                         lang="en">
                         Mother House
                     </span>
                 </label>
                 <label class="">
-                    <input name="/rencana_persalinan_reviewed/lokasi_periksa" data-name="/rencana_persalinan_reviewed/lokasi_periksa"
-                        data-type-xml="select1" type="radio"
-                        value="Rumah_Sakit" />
-                    <span class="option-label active" data-itext-id="/rencana_persalinan_reviewed/lokasi_periksa/Rumah_Sakit:label"
+                    <input name="/rencana_persalinan_reviewed/lokasi_periksa"
+                        data-name="/rencana_persalinan_reviewed/lokasi_periksa"
+                        data-type-xml="select1" type="radio" value="Rumah_Sakit" />
+                    <span class="option-label active"
+                        data-itext-id="/rencana_persalinan_reviewed/lokasi_periksa/Rumah_Sakit:label"
                         lang="Bahasa">
                         Rumah Sakit
                     </span>
-                    <span class="option-label " data-itext-id="/rencana_persalinan_reviewed/lokasi_periksa/Rumah_Sakit:label"
+                    <span class="option-label "
+                        data-itext-id="/rencana_persalinan_reviewed/lokasi_periksa/Rumah_Sakit:label"
                         lang="en">
                         Hospital
                     </span>
                 </label>
                 <label class="">
-                    <input name="/rencana_persalinan_reviewed/lokasi_periksa" data-name="/rencana_persalinan_reviewed/lokasi_periksa"
-                        data-type-xml="select1" type="radio"
-                        value="Lainnya" />
-                    <span class="option-label active" data-itext-id="/rencana_persalinan_reviewed/lokasi_periksa/Lainnya:label"
+                    <input name="/rencana_persalinan_reviewed/lokasi_periksa"
+                        data-name="/rencana_persalinan_reviewed/lokasi_periksa"
+                        data-type-xml="select1" type="radio" value="Lainnya" />
+                    <span class="option-label active"
+                        data-itext-id="/rencana_persalinan_reviewed/lokasi_periksa/Lainnya:label"
                         lang="Bahasa">
                         Lainnya
                     </span>
-                    <span class="option-label " data-itext-id="/rencana_persalinan_reviewed/lokasi_periksa/Lainnya:label"
+                    <span class="option-label "
+                        data-itext-id="/rencana_persalinan_reviewed/lokasi_periksa/Lainnya:label"
                         lang="en">
                         Other
                     </span>
@@ -134,8 +152,9 @@
         </fieldset>
     </fieldset>
     <label class="question non-select ">
-        <span class="question-label active" data-itext-id="/rencana_persalinan_reviewed/tanggal:label"
-            lang="Bahasa">Tanggal Kunjungan
+        <span class="question-label active"
+            data-itext-id="/rencana_persalinan_reviewed/tanggal:label" lang="Bahasa">Tanggal
+            Kunjungan
         </span>
         <span class="question-label " data-itext-id="/rencana_persalinan_reviewed/tanggal:label"
             lang="en">Visit Date
@@ -152,26 +171,30 @@
             type="date" />
     </label>
     <label class="question or-appearance-minimal ">
-        <span class="question-label active" data-itext-id="/rencana_persalinan_reviewed/rencana_penolong_persalinan:label"
+        <span class="question-label active"
+            data-itext-id="/rencana_persalinan_reviewed/rencana_penolong_persalinan:label"
             lang="Bahasa">Rencana
             Penolong Persalinan
         </span>
-        <span class="question-label " data-itext-id="/rencana_persalinan_reviewed/rencana_penolong_persalinan:label"
+        <span class="question-label "
+            data-itext-id="/rencana_persalinan_reviewed/rencana_penolong_persalinan:label"
             lang="en">Birth
             Attendant
         </span>
         <span class="required">*</span>
-        <span class="or-hint active" data-itext-id="/rencana_persalinan_reviewed/rencana_penolong_persalinan:hint"
+        <span class="or-hint active"
+            data-itext-id="/rencana_persalinan_reviewed/rencana_penolong_persalinan:hint"
             lang="Bahasa">Diisi
             dengan pihak yang akan menolong persalinan
         </span>
-        <span class="or-hint " data-itext-id="/rencana_persalinan_reviewed/rencana_penolong_persalinan:hint"
-            lang="en">Fill in
+        <span class="or-hint "
+            data-itext-id="/rencana_persalinan_reviewed/rencana_penolong_persalinan:hint" lang="en">
+            Fill in
             the intended birth attendant
         </span>
         <select name="/rencana_persalinan_reviewed/rencana_penolong_persalinan"
-            data-name="/rencana_persalinan_reviewed/rencana_penolong_persalinan" data-type-xml="select1"
-            required="required">
+            data-name="/rencana_persalinan_reviewed/rencana_penolong_persalinan"
+            data-type-xml="select1" required="required">
             <option value="">...</option>
             <option value="keluarga">Keluarga (K)</option>
             <option value="dukun">Dukun (D)</option>
@@ -199,20 +222,24 @@
         </span>
     </label>
     <label class="question or-appearance-minimal ">
-        <span class="question-label active" data-itext-id="/rencana_persalinan_reviewed/tempat_rencana_persalinan:label"
+        <span class="question-label active"
+            data-itext-id="/rencana_persalinan_reviewed/tempat_rencana_persalinan:label"
             lang="Bahasa">Tempat
             Rencana Persalinan
         </span>
-        <span class="question-label " data-itext-id="/rencana_persalinan_reviewed/tempat_rencana_persalinan:label"
-            lang="en">Intended
+        <span class="question-label "
+            data-itext-id="/rencana_persalinan_reviewed/tempat_rencana_persalinan:label" lang="en">
+            Intended
             place for labor
         </span>
-        <span class="or-hint active" data-itext-id="/rencana_persalinan_reviewed/tempat_rencana_persalinan:hint"
+        <span class="or-hint active"
+            data-itext-id="/rencana_persalinan_reviewed/tempat_rencana_persalinan:hint"
             lang="Bahasa">Diisi dengan
             rencana tempat dimana Ibu akan bersalin
         </span>
-        <span class="or-hint " data-itext-id="/rencana_persalinan_reviewed/tempat_rencana_persalinan:hint"
-            lang="en">Fill in the
+        <span class="or-hint "
+            data-itext-id="/rencana_persalinan_reviewed/tempat_rencana_persalinan:hint" lang="en">
+            Fill in the
             intended location of delivery
         </span>
         <select name="/rencana_persalinan_reviewed/tempat_rencana_persalinan"
@@ -266,19 +293,23 @@
         </span>
     </label>
     <label class="question or-appearance-minimal ">
-        <span class="question-label active" data-itext-id="/rencana_persalinan_reviewed/rencana_pendamping_persalinan:label"
+        <span class="question-label active"
+            data-itext-id="/rencana_persalinan_reviewed/rencana_pendamping_persalinan:label"
             lang="Bahasa">Rencana
             Pendamping Persalinan
         </span>
-        <span class="question-label " data-itext-id="/rencana_persalinan_reviewed/rencana_pendamping_persalinan:label"
+        <span class="question-label "
+            data-itext-id="/rencana_persalinan_reviewed/rencana_pendamping_persalinan:label"
             lang="en">
             Person(s) accompanying during labor
         </span>
-        <span class="or-hint active" data-itext-id="/rencana_persalinan_reviewed/rencana_pendamping_persalinan:hint"
+        <span class="or-hint active"
+            data-itext-id="/rencana_persalinan_reviewed/rencana_pendamping_persalinan:hint"
             lang="Bahasa">Diisi
             dengan rencana pihak yang akan mendampingi Ibu saat bersalin
         </span>
-        <span class="or-hint " data-itext-id="/rencana_persalinan_reviewed/rencana_pendamping_persalinan:hint"
+        <span class="or-hint "
+            data-itext-id="/rencana_persalinan_reviewed/rencana_pendamping_persalinan:hint"
             lang="en">Fill in
             the persons who will accompany the mother for delivery
         </span>
@@ -311,56 +342,66 @@
     <fieldset class="question ">
         <fieldset>
             <legend>
-                <span class="question-label active" data-itext-id="/rencana_persalinan_reviewed/transportasi:label"
-                    lang="Bahasa">Transportasi
+                <span class="question-label active"
+                    data-itext-id="/rencana_persalinan_reviewed/transportasi:label" lang="Bahasa">
+                    Transportasi
                 </span>
-                <span class="question-label " data-itext-id="/rencana_persalinan_reviewed/transportasi:label"
-                    lang="en">Transportation
+                <span class="question-label "
+                    data-itext-id="/rencana_persalinan_reviewed/transportasi:label" lang="en">
+                    Transportation
                 </span>
-                <span class="or-hint active" data-itext-id="/rencana_persalinan_reviewed/transportasi:hint"
-                    lang="Bahasa">Diisi dengan
+                <span class="or-hint active"
+                    data-itext-id="/rencana_persalinan_reviewed/transportasi:hint" lang="Bahasa">
+                    Diisi dengan
                     rencana transportasi yang akan digunakan menuju tempat bersalin
                 </span>
-                <span class="or-hint " data-itext-id="/rencana_persalinan_reviewed/transportasi:hint"
-                    lang="en">Fill in the
+                <span class="or-hint "
+                    data-itext-id="/rencana_persalinan_reviewed/transportasi:hint" lang="en">Fill in
+                    the
                     transportation that will be used to location of delivery
                 </span>
             </legend>
             <div class="option-wrapper">
                 <label class="">
-                    <input name="/rencana_persalinan_reviewed/transportasi" data-name="/rencana_persalinan_reviewed/transportasi"
-                        data-type-xml="select1" type="radio"
-                        value="sepeda_motor" />
-                    <span class="option-label active" data-itext-id="/rencana_persalinan_reviewed/transportasi/sepeda_motor:label"
+                    <input name="/rencana_persalinan_reviewed/transportasi"
+                        data-name="/rencana_persalinan_reviewed/transportasi"
+                        data-type-xml="select1" type="radio" value="sepeda_motor" />
+                    <span class="option-label active"
+                        data-itext-id="/rencana_persalinan_reviewed/transportasi/sepeda_motor:label"
                         lang="Bahasa">
                         Sepeda Motor (SM)
                     </span>
-                    <span class="option-label " data-itext-id="/rencana_persalinan_reviewed/transportasi/sepeda_motor:label"
+                    <span class="option-label "
+                        data-itext-id="/rencana_persalinan_reviewed/transportasi/sepeda_motor:label"
                         lang="en">
                         Motorcycle
                     </span>
                 </label>
                 <label class="">
-                    <input name="/rencana_persalinan_reviewed/transportasi" data-name="/rencana_persalinan_reviewed/transportasi"
-                        data-type-xml="select1" type="radio"
-                        value="mobil" />
-                    <span class="option-label active" data-itext-id="/rencana_persalinan_reviewed/transportasi/mobil:label"
+                    <input name="/rencana_persalinan_reviewed/transportasi"
+                        data-name="/rencana_persalinan_reviewed/transportasi"
+                        data-type-xml="select1" type="radio" value="mobil" />
+                    <span class="option-label active"
+                        data-itext-id="/rencana_persalinan_reviewed/transportasi/mobil:label"
                         lang="Bahasa">Mobil
                         (MB)
                     </span>
-                    <span class="option-label " data-itext-id="/rencana_persalinan_reviewed/transportasi/mobil:label"
+                    <span class="option-label "
+                        data-itext-id="/rencana_persalinan_reviewed/transportasi/mobil:label"
                         lang="en">Car
                     </span>
                 </label>
                 <label class="">
-                    <input name="/rencana_persalinan_reviewed/transportasi" data-name="/rencana_persalinan_reviewed/transportasi"
-                        data-type-xml="select1" type="radio"
-                        value="lain-lain" />
-                    <span class="option-label active" data-itext-id="/rencana_persalinan_reviewed/transportasi/lain-lain:label"
+                    <input name="/rencana_persalinan_reviewed/transportasi"
+                        data-name="/rencana_persalinan_reviewed/transportasi"
+                        data-type-xml="select1" type="radio" value="lain-lain" />
+                    <span class="option-label active"
+                        data-itext-id="/rencana_persalinan_reviewed/transportasi/lain-lain:label"
                         lang="Bahasa">
                         Lain-Lain (LN)
                     </span>
-                    <span class="option-label " data-itext-id="/rencana_persalinan_reviewed/transportasi/lain-lain:label"
+                    <span class="option-label "
+                        data-itext-id="/rencana_persalinan_reviewed/transportasi/lain-lain:label"
                         lang="en">
                         Etc.
                     </span>
@@ -371,14 +412,17 @@
     <fieldset class="question ">
         <fieldset>
             <legend>
-                <span class="question-label active" data-itext-id="/rencana_persalinan_reviewed/pendonor:label"
-                    lang="Bahasa">Pendonor
+                <span class="question-label active"
+                    data-itext-id="/rencana_persalinan_reviewed/pendonor:label" lang="Bahasa">
+                    Pendonor
                 </span>
-                <span class="question-label " data-itext-id="/rencana_persalinan_reviewed/pendonor:label"
-                    lang="en">Blood donor
+                <span class="question-label "
+                    data-itext-id="/rencana_persalinan_reviewed/pendonor:label" lang="en">Blood
+                    donor
                 </span>
-                <span class="or-hint active" data-itext-id="/rencana_persalinan_reviewed/pendonor:hint"
-                    lang="Bahasa">Diisi dengan rencana
+                <span class="or-hint active"
+                    data-itext-id="/rencana_persalinan_reviewed/pendonor:hint" lang="Bahasa">Diisi
+                    dengan rencana
                     pihak yang akan menjadi Pendonor Darah jika terjadi pendarahan
                 </span>
                 <span class="or-hint " data-itext-id="/rencana_persalinan_reviewed/pendonor:hint"
@@ -390,53 +434,63 @@
                 <label class="">
                     <input name="/rencana_persalinan_reviewed/pendonor" data-type-xml="select"
                         type="checkbox" value="suami" />
-                    <span class="option-label active" data-itext-id="/rencana_persalinan_reviewed/pendonor/suami:label"
+                    <span class="option-label active"
+                        data-itext-id="/rencana_persalinan_reviewed/pendonor/suami:label"
                         lang="Bahasa">Suami (S)
                     </span>
-                    <span class="option-label " data-itext-id="/rencana_persalinan_reviewed/pendonor/suami:label"
-                        lang="en">Husband
+                    <span class="option-label "
+                        data-itext-id="/rencana_persalinan_reviewed/pendonor/suami:label" lang="en">
+                        Husband
                     </span>
                 </label>
                 <label class="">
                     <input name="/rencana_persalinan_reviewed/pendonor" data-type-xml="select"
                         type="checkbox" value="keluarga" />
-                    <span class="option-label active" data-itext-id="/rencana_persalinan_reviewed/pendonor/keluarga:label"
+                    <span class="option-label active"
+                        data-itext-id="/rencana_persalinan_reviewed/pendonor/keluarga:label"
                         lang="Bahasa">
                         Keluarga (K)
                     </span>
-                    <span class="option-label " data-itext-id="/rencana_persalinan_reviewed/pendonor/keluarga:label"
+                    <span class="option-label "
+                        data-itext-id="/rencana_persalinan_reviewed/pendonor/keluarga:label"
                         lang="en">Family
                     </span>
                 </label>
                 <label class="">
                     <input name="/rencana_persalinan_reviewed/pendonor" data-type-xml="select"
                         type="checkbox" value="teman" />
-                    <span class="option-label active" data-itext-id="/rencana_persalinan_reviewed/pendonor/teman:label"
+                    <span class="option-label active"
+                        data-itext-id="/rencana_persalinan_reviewed/pendonor/teman:label"
                         lang="Bahasa">Teman (TM)
                     </span>
-                    <span class="option-label " data-itext-id="/rencana_persalinan_reviewed/pendonor/teman:label"
-                        lang="en">Friend
+                    <span class="option-label "
+                        data-itext-id="/rencana_persalinan_reviewed/pendonor/teman:label" lang="en">
+                        Friend
                     </span>
                 </label>
                 <label class="">
                     <input name="/rencana_persalinan_reviewed/pendonor" data-type-xml="select"
                         type="checkbox" value="lain-lain" />
-                    <span class="option-label active" data-itext-id="/rencana_persalinan_reviewed/pendonor/lain-lain:label"
+                    <span class="option-label active"
+                        data-itext-id="/rencana_persalinan_reviewed/pendonor/lain-lain:label"
                         lang="Bahasa">
                         Lain-lain (LL)
                     </span>
-                    <span class="option-label " data-itext-id="/rencana_persalinan_reviewed/pendonor/lain-lain:label"
+                    <span class="option-label "
+                        data-itext-id="/rencana_persalinan_reviewed/pendonor/lain-lain:label"
                         lang="en">Others
                     </span>
                 </label>
                 <label class="">
                     <input name="/rencana_persalinan_reviewed/pendonor" data-type-xml="select"
                         type="checkbox" value="tidak_ada" />
-                    <span class="option-label active" data-itext-id="/rencana_persalinan_reviewed/pendonor/tidak_ada:label"
+                    <span class="option-label active"
+                        data-itext-id="/rencana_persalinan_reviewed/pendonor/tidak_ada:label"
                         lang="Bahasa">Tidak
                         Ada (TA)
                     </span>
-                    <span class="option-label " data-itext-id="/rencana_persalinan_reviewed/pendonor/tidak_ada:label"
+                    <span class="option-label "
+                        data-itext-id="/rencana_persalinan_reviewed/pendonor/tidak_ada:label"
                         lang="en">None
                     </span>
                 </label>
@@ -446,46 +500,54 @@
     <fieldset class="question ">
         <fieldset>
             <legend>
-                <span class="question-label active" data-itext-id="/rencana_persalinan_reviewed/kondisi_rumah:label"
-                    lang="Bahasa">Apakah rumah
+                <span class="question-label active"
+                    data-itext-id="/rencana_persalinan_reviewed/kondisi_rumah:label" lang="Bahasa">
+                    Apakah rumah
                     ibu dalam kepemilikan permanen?
                 </span>
-                <span class="question-label " data-itext-id="/rencana_persalinan_reviewed/kondisi_rumah:label"
-                    lang="en">Does Mother
+                <span class="question-label "
+                    data-itext-id="/rencana_persalinan_reviewed/kondisi_rumah:label" lang="en">Does
+                    Mother
                     house ownership is permanent?
                 </span>
-                <span class="or-hint active" data-itext-id="/rencana_persalinan_reviewed/kondisi_rumah:hint"
-                    lang="Bahasa">Bagaimana
+                <span class="or-hint active"
+                    data-itext-id="/rencana_persalinan_reviewed/kondisi_rumah:hint" lang="Bahasa">
+                    Bagaimana
                     kondisi rumah Ibu
                 </span>
-                <span class="or-hint " data-itext-id="/rencana_persalinan_reviewed/kondisi_rumah:hint"
-                    lang="en">How is condition
+                <span class="or-hint "
+                    data-itext-id="/rencana_persalinan_reviewed/kondisi_rumah:hint" lang="en">How is
+                    condition
                     of mother's house
                 </span>
             </legend>
             <div class="option-wrapper">
                 <label class="">
-                    <input name="/rencana_persalinan_reviewed/kondisi_rumah" data-name="/rencana_persalinan_reviewed/kondisi_rumah"
-                        data-type-xml="select1" type="radio"
-                        value="permanen" />
-                    <span class="option-label active" data-itext-id="/rencana_persalinan_reviewed/kondisi_rumah/permanen:label"
+                    <input name="/rencana_persalinan_reviewed/kondisi_rumah"
+                        data-name="/rencana_persalinan_reviewed/kondisi_rumah"
+                        data-type-xml="select1" type="radio" value="permanen" />
+                    <span class="option-label active"
+                        data-itext-id="/rencana_persalinan_reviewed/kondisi_rumah/permanen:label"
                         lang="Bahasa">
                         Permanen (PM)
                     </span>
-                    <span class="option-label " data-itext-id="/rencana_persalinan_reviewed/kondisi_rumah/permanen:label"
+                    <span class="option-label "
+                        data-itext-id="/rencana_persalinan_reviewed/kondisi_rumah/permanen:label"
                         lang="en">
                         Permanent (PM)
                     </span>
                 </label>
                 <label class="">
-                    <input name="/rencana_persalinan_reviewed/kondisi_rumah" data-name="/rencana_persalinan_reviewed/kondisi_rumah"
-                        data-type-xml="select1"
-                        type="radio" value="tidak_permanen" />
-                    <span class="option-label active" data-itext-id="/rencana_persalinan_reviewed/kondisi_rumah/tidak_permanen:label"
+                    <input name="/rencana_persalinan_reviewed/kondisi_rumah"
+                        data-name="/rencana_persalinan_reviewed/kondisi_rumah"
+                        data-type-xml="select1" type="radio" value="tidak_permanen" />
+                    <span class="option-label active"
+                        data-itext-id="/rencana_persalinan_reviewed/kondisi_rumah/tidak_permanen:label"
                         lang="Bahasa">
                         Tidak Permanen (TM)
                     </span>
-                    <span class="option-label " data-itext-id="/rencana_persalinan_reviewed/kondisi_rumah/tidak_permanen:label"
+                    <span class="option-label "
+                        data-itext-id="/rencana_persalinan_reviewed/kondisi_rumah/tidak_permanen:label"
                         lang="en">
                         Impermanent (NP)
                     </span>
@@ -496,19 +558,23 @@
     <fieldset class="question ">
         <fieldset>
             <legend>
-                <span class="question-label active" data-itext-id="/rencana_persalinan_reviewed/persediaan_perlengkapan_persalinan:label"
+                <span class="question-label active"
+                    data-itext-id="/rencana_persalinan_reviewed/persediaan_perlengkapan_persalinan:label"
                     lang="Bahasa">
                     Persediaan Perlengkapan Persalinan
                 </span>
-                <span class="question-label " data-itext-id="/rencana_persalinan_reviewed/persediaan_perlengkapan_persalinan:label"
+                <span class="question-label "
+                    data-itext-id="/rencana_persalinan_reviewed/persediaan_perlengkapan_persalinan:label"
                     lang="en">
                     Stock of labor tools
                 </span>
-                <span class="or-hint active" data-itext-id="/rencana_persalinan_reviewed/persediaan_perlengkapan_persalinan:hint"
+                <span class="or-hint active"
+                    data-itext-id="/rencana_persalinan_reviewed/persediaan_perlengkapan_persalinan:hint"
                     lang="Bahasa">
                     Persediaan perlengkapan persalinan yang dilakukan Ibu
                 </span>
-                <span class="or-hint " data-itext-id="/rencana_persalinan_reviewed/persediaan_perlengkapan_persalinan:hint"
+                <span class="or-hint "
+                    data-itext-id="/rencana_persalinan_reviewed/persediaan_perlengkapan_persalinan:hint"
                     lang="en">
                     Stock of labor tools prepared by mother
                 </span>
@@ -516,39 +582,42 @@
             <div class="option-wrapper">
                 <label class="">
                     <input name="/rencana_persalinan_reviewed/persediaan_perlengkapan_persalinan"
-                        data-type-xml="select"
-                        type="checkbox" value="kain" />
-                    <span class="option-label active" data-itext-id="/rencana_persalinan_reviewed/persediaan_perlengkapan_persalinan/kain:label"
+                        data-type-xml="select" type="checkbox" value="kain" />
+                    <span class="option-label active"
+                        data-itext-id="/rencana_persalinan_reviewed/persediaan_perlengkapan_persalinan/kain:label"
                         lang="Bahasa">
                         Kain (KN)
                     </span>
-                    <span class="option-label " data-itext-id="/rencana_persalinan_reviewed/persediaan_perlengkapan_persalinan/kain:label"
+                    <span class="option-label "
+                        data-itext-id="/rencana_persalinan_reviewed/persediaan_perlengkapan_persalinan/kain:label"
                         lang="en">
                         Cloth
                     </span>
                 </label>
                 <label class="">
                     <input name="/rencana_persalinan_reviewed/persediaan_perlengkapan_persalinan"
-                        data-type-xml="select"
-                        type="checkbox" value="handuk" />
-                    <span class="option-label active" data-itext-id="/rencana_persalinan_reviewed/persediaan_perlengkapan_persalinan/handuk:label"
+                        data-type-xml="select" type="checkbox" value="handuk" />
+                    <span class="option-label active"
+                        data-itext-id="/rencana_persalinan_reviewed/persediaan_perlengkapan_persalinan/handuk:label"
                         lang="Bahasa">
                         Handuk (HD)
                     </span>
-                    <span class="option-label " data-itext-id="/rencana_persalinan_reviewed/persediaan_perlengkapan_persalinan/handuk:label"
+                    <span class="option-label "
+                        data-itext-id="/rencana_persalinan_reviewed/persediaan_perlengkapan_persalinan/handuk:label"
                         lang="en">
                         Towel
                     </span>
                 </label>
                 <label class="">
                     <input name="/rencana_persalinan_reviewed/persediaan_perlengkapan_persalinan"
-                        data-type-xml="select"
-                        type="checkbox" value="pakaian_bersih_dan_kering" />
-                    <span class="option-label active" data-itext-id="/rencana_persalinan_reviewed/persediaan_perlengkapan_persalinan/pakaian_bersih_dan_kering:label"
+                        data-type-xml="select" type="checkbox" value="pakaian_bersih_dan_kering" />
+                    <span class="option-label active"
+                        data-itext-id="/rencana_persalinan_reviewed/persediaan_perlengkapan_persalinan/pakaian_bersih_dan_kering:label"
                         lang="Bahasa">
                         Pakaian Bersih dan Kering (PBK)
                     </span>
-                    <span class="option-label " data-itext-id="/rencana_persalinan_reviewed/persediaan_perlengkapan_persalinan/pakaian_bersih_dan_kering:label"
+                    <span class="option-label "
+                        data-itext-id="/rencana_persalinan_reviewed/persediaan_perlengkapan_persalinan/pakaian_bersih_dan_kering:label"
                         lang="en">
                         Dry and Clean Clothes
                     </span>
@@ -558,12 +627,12 @@
     </fieldset>
     <fieldset style="display:none;" id="or-preload-items">
         <label class="calculation non-select ">
-            <input name="/rencana_persalinan_reviewed/start" data-preload="timestamp" data-preload-params="start"
-                data-type-xml="dateTime" type="hidden" />
+            <input name="/rencana_persalinan_reviewed/start" data-preload="timestamp"
+                data-preload-params="start" data-type-xml="dateTime" type="hidden" />
         </label>
         <label class="calculation non-select ">
-            <input name="/rencana_persalinan_reviewed/today" data-preload="date" data-preload-params="today"
-                data-type-xml="date" type="hidden" />
+            <input name="/rencana_persalinan_reviewed/today" data-preload="date"
+                data-preload-params="today" data-type-xml="date" type="hidden" />
         </label>
         <label class="calculation non-select ">
             <input name="/rencana_persalinan_reviewed/deviceid" data-preload="property"
@@ -578,44 +647,49 @@
                 data-preload-params="phonenumber" data-type-xml="string" type="hidden" />
         </label>
         <label class="calculation non-select ">
-            <input name="/rencana_persalinan_reviewed/end" data-preload="timestamp" data-preload-params="end"
-                data-type-xml="dateTime" type="hidden" />
+            <input name="/rencana_persalinan_reviewed/end" data-preload="timestamp"
+                data-preload-params="end" data-type-xml="dateTime" type="hidden" />
         </label>
     </fieldset>
     <fieldset style="display:none;" id="or-calculated-items">
         <label class="calculation non-select ">
-            <input name="/rencana_persalinan_reviewed/existing_location" data-calculate=" /rencana_persalinan_reviewed/Village "
-                data-type-xml="string" type="hidden" />
-        </label>
-        <label class="calculation non-select ">
-            <input name="/rencana_persalinan_reviewed/provinsi" data-calculate=" /rencana_persalinan_reviewed/Province "
-                data-type-xml="string" type="hidden" />
-        </label>
-        <label class="calculation non-select ">
-            <input name="/rencana_persalinan_reviewed/kabupaten" data-calculate=" /rencana_persalinan_reviewed/District "
-                data-type-xml="string" type="hidden" />
-        </label>
-        <label class="calculation non-select ">
-            <input name="/rencana_persalinan_reviewed/desa" data-calculate=" /rencana_persalinan_reviewed/Village "
-                data-type-xml="string" type="hidden" />
-        </label>
-        <label class="calculation non-select ">
-            <input name="/rencana_persalinan_reviewed/dusun" data-calculate=" /rencana_persalinan_reviewed/Sub-village "
-                data-type-xml="string"
+            <input name="/rencana_persalinan_reviewed/existing_location"
+                data-calculate=" /rencana_persalinan_reviewed/Village " data-type-xml="string"
                 type="hidden" />
         </label>
         <label class="calculation non-select ">
-            <input name="/rencana_persalinan_reviewed/kecamatan" data-calculate=" /rencana_persalinan_reviewed/Sub-district "
-                data-type-xml="string"
+            <input name="/rencana_persalinan_reviewed/provinsi"
+                data-calculate=" /rencana_persalinan_reviewed/Province " data-type-xml="string"
                 type="hidden" />
         </label>
         <label class="calculation non-select ">
-            <input name="/rencana_persalinan_reviewed/meta/instanceID" data-calculate="concat('uuid:', uuid())"
-                data-type-xml="string" type="hidden" />
+            <input name="/rencana_persalinan_reviewed/kabupaten"
+                data-calculate=" /rencana_persalinan_reviewed/District " data-type-xml="string"
+                type="hidden" />
         </label>
         <label class="calculation non-select ">
-            <input name="/rencana_persalinan_reviewed/formhub/uuid" data-calculate="'d4d6e01b42db4bc5a39326d7d3f2d6da'"
-                data-type-xml="string" type="hidden" />
+            <input name="/rencana_persalinan_reviewed/desa"
+                data-calculate=" /rencana_persalinan_reviewed/Village " data-type-xml="string"
+                type="hidden" />
+        </label>
+        <label class="calculation non-select ">
+            <input name="/rencana_persalinan_reviewed/dusun"
+                data-calculate=" /rencana_persalinan_reviewed/Sub-village " data-type-xml="string"
+                type="hidden" />
+        </label>
+        <label class="calculation non-select ">
+            <input name="/rencana_persalinan_reviewed/kecamatan"
+                data-calculate=" /rencana_persalinan_reviewed/Sub-district " data-type-xml="string"
+                type="hidden" />
+        </label>
+        <label class="calculation non-select ">
+            <input name="/rencana_persalinan_reviewed/meta/instanceID"
+                data-calculate="concat('uuid:', uuid())" data-type-xml="string" type="hidden" />
+        </label>
+        <label class="calculation non-select ">
+            <input name="/rencana_persalinan_reviewed/formhub/uuid"
+                data-calculate="'d4d6e01b42db4bc5a39326d7d3f2d6da'" data-type-xml="string"
+                type="hidden" />
         </label>
     </fieldset>
 </form>

@@ -3,10 +3,7 @@ package org.smartregister.bidan.provider;
 import android.app.Activity;
 import android.content.Context;
 import android.database.Cursor;
-import android.graphics.drawable.Drawable;
-import android.support.annotation.Nullable;
 import android.util.Log;
-import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.AbsListView;
 import android.widget.ImageButton;
@@ -110,11 +107,11 @@ public class KBClientsProvider extends BaseClientsProvider {
 //        LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 
         clientViewLayoutParams = new AbsListView.LayoutParams(MATCH_PARENT, (int) context.getResources().getDimension(R.dimen.list_item_height));
-        Log.e(TAG, "KBClientsProvider: " );
+        Log.e(TAG, "KBClientsProvider: ");
     }
 
     private void getView(SmartRegisterClient smartRegisterClient, View convertView) {
-        Log.e(TAG, "getView: " );
+        Log.e(TAG, "getView: ");
         try {
 
             ButterKnife.bind(this, convertView);
@@ -223,7 +220,7 @@ public class KBClientsProvider extends BaseClientsProvider {
 
     @Override
     public void getView(Cursor cursor, SmartRegisterClient smartRegisterClient, View view) {
-        Log.e(TAG, "getView: " );
+        Log.e(TAG, "getView: ");
         LoginActivity.setLanguage();
         getView(smartRegisterClient, view);
     }

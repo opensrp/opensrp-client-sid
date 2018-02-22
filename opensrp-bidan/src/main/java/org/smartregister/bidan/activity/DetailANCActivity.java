@@ -30,7 +30,7 @@ public class DetailANCActivity extends Activity {
 
     private static final String TAG = DetailANCActivity.class.getSimpleName();
     public static CommonPersonObjectClient ancClient;
-//    private SimpleDateFormat timer = new SimpleDateFormat("hh:mm:ss");
+    //    private SimpleDateFormat timer = new SimpleDateFormat("hh:mm:ss");
     @Bind(R.id.tv_mother_detail_profile_view)
     ImageView kiview;
     @Bind(R.id.tv_wife_name)

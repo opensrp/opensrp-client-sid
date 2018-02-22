@@ -17,12 +17,13 @@ import org.smartregister.bidan.utils.Tools;
 import org.smartregister.commonregistry.CommonPersonObjectClient;
 import org.smartregister.repository.DetailsRepository;
 import org.smartregister.view.activity.DrishtiApplication;
-import static org.smartregister.util.StringUtil.humanize;
 
 import java.io.File;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
+
+import static org.smartregister.util.StringUtil.humanize;
 
 
 /**
