@@ -43,6 +43,7 @@ public class ClientProcessor {
     private static ClientProcessor instance;
     Context mContext;
     private CloudantDataHandler mCloudantDataHandler;
+    public static final String[] CLIENT_EVENTS = {"Registrasi Vaksinator", "Child Registration"};
 
     public ClientProcessor(Context context) {
         mContext = context;

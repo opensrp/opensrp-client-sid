@@ -9,7 +9,6 @@ import android.os.Bundle;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.util.Log;
-import android.widget.Toast;
 
 import com.flurry.android.FlurryAgent;
 
@@ -26,7 +25,6 @@ import org.smartregister.repository.DetailsRepository;
 import org.smartregister.service.ZiggyService;
 import org.smartregister.gizi.R;
 import org.smartregister.gizi.sync.ClientProcessor;
-import org.smartregister.util.FormUtils;
 import org.smartregister.view.activity.SecuredNativeSmartRegisterActivity;
 import org.smartregister.view.contract.SmartRegisterClient;
 import org.smartregister.view.dialog.DialogOption;
@@ -49,8 +47,7 @@ import java.util.Map;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
-import util.VaksinatorFormUtils;
-import util.formula.Support;
+import util.EnketoFormUtils;
 
 import static org.smartregister.util.Utils.getValue;
 
@@ -177,7 +174,8 @@ public class GiziSmartRegisterActivity extends SecuredNativeSmartRegisterActivit
         Log.v("fieldoverride", fieldOverrides.toString());
         // save the form
         try{
-            VaksinatorFormUtils formUtils = VaksinatorFormUtils.getInstance(getApplicationContext());
+
+            EnketoFormUtils formUtils = EnketoFormUtils.getInstance(getApplicationContext());
           //  FormUtils formUtils = FormUtils.getInstance(getApplicationContext());
             FormSubmission submission = formUtils.generateFormSubmisionFromXMLString(id, formSubmission, formName, fieldOverrides);
 
@@ -294,13 +292,13 @@ public class GiziSmartRegisterActivity extends SecuredNativeSmartRegisterActivit
 
     private void activatingForm(String formName, String entityId, String metaData){
         try {
-            int formIndex = VaksinatorFormUtils.getIndexForFormName(formName, formNames) + 1; // add the offset
+            int formIndex = EnketoFormUtils.getIndexForFormName(formName, formNames) + 1; // add the offset
             if (entityId != null || metaData != null){
                 String data = null;
                 //check if there is previously saved data for the form
                 data = getPreviouslySavedDataForForm(formName, metaData, entityId);
                 if (data == null){
-                    data = VaksinatorFormUtils.getInstance(getApplicationContext()).generateXMLInputForFormWithEntityId(entityId, formName, metaData);
+                    data = EnketoFormUtils.getInstance(getApplicationContext()).generateXMLInputForFormWithEntityId(entityId, formName, metaData);
                 }
 
                 DisplayFormFragment displayFormFragment = getDisplayFormFragmentAtIndex(formIndex);

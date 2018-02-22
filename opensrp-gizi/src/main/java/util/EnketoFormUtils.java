@@ -2,9 +2,10 @@ package util;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
+import android.preference.PreferenceManager;
 import android.util.Xml;
 
-import com.cloudant.sync.datastore.ConflictException;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
@@ -23,6 +24,11 @@ import org.smartregister.clientandeventmodel.SubFormData;
 import org.smartregister.domain.SyncStatus;
 import org.smartregister.domain.form.FormSubmission;
 import org.smartregister.domain.form.SubForm;
+import org.smartregister.gizi.application.GiziApplication;
+import org.smartregister.gizi.sync.ClientProcessor;
+import org.smartregister.repository.AllSharedPreferences;
+import org.smartregister.repository.BaseRepository;
+import org.smartregister.repository.EventClientRepository;
 import org.smartregister.service.intentservices.ReplicationIntentService;
 import org.smartregister.gizi.sync.CloudantDataHandler;
 import org.smartregister.util.AssetHandler;
@@ -44,6 +50,7 @@ import java.io.StringWriter;
 import java.text.Format;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
@@ -52,18 +59,20 @@ import java.util.UUID;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 
+import static org.smartregister.gizi.sync.ClientProcessor.CLIENT_EVENTS;
+
 /**
  * Created by Dani on 08/11/2017.
  */
-public class VaksinatorFormUtils {
+public class EnketoFormUtils {
 
-    public static final String TAG = "VaksinatorFormUtils";
+    public static final String TAG = "EnketoFormUtils";
     public static final String ecClientRelationships = "ec_client_relationships.json";
     private static final String shouldLoadValueKey = "shouldLoadValue";
     private static final String relationalIdKey = "relational_id";
     private static final String databaseIdKey = "_id";
     private static final String injectedBaseEntityIdKey = "injectedBaseEntityId";
-    private static VaksinatorFormUtils instance;
+    private static EnketoFormUtils instance;
     private Context mContext;
     private org.smartregister.Context theAppContext;
     private SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSSZ");
@@ -71,18 +80,20 @@ public class VaksinatorFormUtils {
     private VaksinatorFormEntityConverter formEntityConverter;
     private CloudantDataHandler mCloudantDataHandler;
 
-    public VaksinatorFormUtils(Context context) throws Exception {
+    private EventClientRepository eventClientRepository;
+    public EnketoFormUtils(Context context) throws Exception {
         mContext = context;
         theAppContext = CoreLibrary.getInstance().context();
         FormAttributeParser formAttributeParser = new FormAttributeParser(context);
         formEntityConverter = new VaksinatorFormEntityConverter(formAttributeParser, mContext);
         // Protect creation of static variable.
-        mCloudantDataHandler = CloudantDataHandler.getInstance(context.getApplicationContext());
+      //  mCloudantDataHandler = CloudantDataHandler.getInstance(context.getApplicationContext());
+        eventClientRepository = GiziApplication.getInstance().eventClientRepository();
     }
 
-    public static VaksinatorFormUtils getInstance(Context ctx) throws Exception {
+    public static EnketoFormUtils getInstance(Context ctx) throws Exception {
         if (instance == null) {
-            instance = new VaksinatorFormUtils(ctx);
+            instance = new EnketoFormUtils(ctx);
         }
 
         return instance;
@@ -252,49 +263,12 @@ public class VaksinatorFormUtils {
                 instanceId, formName, entityId, clientVersion, formDataDefinitionVersion,
                 formInstance, clientVersion);
 
-        // retrieve client and events
-        Client c = formEntityConverter.getClientFromFormSubmission(v2FormSubmission);
-        printClient(c);
         Event e = formEntityConverter.getEventFromFormSubmission(v2FormSubmission);
-        printEvent(e);
-        org.smartregister.cloudant.models.Event event = new org.smartregister.cloudant.models.Event(
-                e);
-        createNewEventDocument(event);
-        if (c != null) {
-            org.smartregister.cloudant.models.Client client = new org.smartregister.cloudant
-                    .models.Client(
-                    c);
-            if(EditClientFormNameList().contains(formName)){
-                try {
-                    updateClientDocument(client);
-                } catch (ConflictException e1) {
-                    e1.printStackTrace();
-                }
-            }else{
-                createNewClientDocument(client);
-            }
-        }
 
-        Map<String, Map<String, Object>> dep = formEntityConverter.
-                getDependentClientsFromFormSubmission(v2FormSubmission);
-        for (Map<String, Object> cm : dep.values()) {
-            Client cin = (Client) cm.get("client");
-            Event evin = (Event) cm.get("event");
-            event = new org.smartregister.cloudant.models.Event(evin);
-            createNewEventDocument(event);
-
-            if (cin != null) {
-                org.smartregister.cloudant.models.Client client = new org.smartregister.cloudant
-                        .models.Client(
-                        cin);
-                createNewClientDocument(client);
-                printClient(cin);
-            }
-            printEvent(evin);
-
-        }
-
-        startReplicationIntentService();
+        if (Arrays.asList(CLIENT_EVENTS).contains(e.getEventType()))
+            org.smartregister.util.Utils.startAsyncTask(new SavePatientAsyncTask(v2FormSubmission, mContext, true, e), null);
+        else
+            org.smartregister.util.Utils.startAsyncTask(new SavePatientAsyncTask(v2FormSubmission, mContext, false, e), null);
     }
 
     private void printClient(Client client) {
@@ -313,7 +287,31 @@ public class VaksinatorFormUtils {
         Log.logDebug(eventJson);
         Log.logDebug("====================================");
     }
+    private void saveClient(Client client) {
+        Log.logDebug("============== CLIENT ================");
+        Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSSZ").create();
+        String clientJson = gson.toJson(client);
+        Log.logDebug(clientJson);
+        try {
+            eventClientRepository.addorUpdateClient(client.getBaseEntityId(), new JSONObject(clientJson));
+        } catch (JSONException e) {
+            android.util.Log.e(TAG, e.toString(), e);
+        }
+        Log.logDebug("====================================");
 
+    }
+
+    private void saveEvent(Event event) {
+        Log.logDebug("============== EVENT ================");
+        Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSSZ").create();
+        String eventJson = gson.toJson(event);
+        Log.logDebug(eventJson);
+        try {
+            eventClientRepository.addEvent(event.getBaseEntityId(), new JSONObject(eventJson));
+        } catch (JSONException e) {
+            android.util.Log.e(TAG, e.toString(), e);
+        }
+    }
     /**
      * Start ReplicationIntentService which handles cloudant sync processes
      */
@@ -1116,7 +1114,7 @@ public class VaksinatorFormUtils {
         return formNames;
     }
 
-    private void createNewEventDocument(org.smartregister.cloudant.models.Event event) {
+    /*private void createNewEventDocument(org.smartregister.cloudant.models.Event event) {
         mCloudantDataHandler.createEventDocument(event);
     }
 
@@ -1126,5 +1124,81 @@ public class VaksinatorFormUtils {
 
     private void updateClientDocument(org.smartregister.cloudant.models.Client client) throws ConflictException {
         mCloudantDataHandler.updateDocument(client);
+    }*/
+    private Event tagSyncMetadata(Event event) {
+        AllSharedPreferences sharedPreferences = GiziApplication.getInstance().getContext().userService().getAllSharedPreferences();
+        event.setLocationId(sharedPreferences.fetchDefaultLocalityId(sharedPreferences.fetchRegisteredANM()));
+
+        return event;
+    }
+    class SavePatientAsyncTask extends android.os.AsyncTask<Void, Void, Void> {
+        private final org.smartregister.clientandeventmodel.FormSubmission formSubmission;
+        private Context context;
+        private boolean saveClient;
+        private Event event;
+
+        public SavePatientAsyncTask(org.smartregister.clientandeventmodel.FormSubmission formSubmission, Context context, boolean hasClient, Event event) {
+            this.formSubmission = formSubmission;
+            this.context = context;
+            this.saveClient = hasClient;
+            this.event = event;
+        }
+
+       /* @Override
+        protected void onPostExecute(Void aVoid) {
+            Utils.postEvent(new EnketoFormSaveCompleteEvent(this.formSubmission.formName()));
+
+        }*/
+
+       /* @Override
+        protected void onPreExecute() {
+            Utils.postEvent(new ShowProgressDialogEvent());
+        }*/
+
+        @Override
+        protected Void doInBackground(Void... params) {
+            try {
+                SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(context);
+                AllSharedPreferences allSharedPreferences = new AllSharedPreferences(preferences);
+                if (saveClient) {
+                    Client c = formEntityConverter.getClientFromFormSubmission(formSubmission);
+                    saveClient(c);
+                }
+                event = tagSyncMetadata(event);
+                saveEvent(event);
+                Gson gson = new GsonBuilder().create();
+                if (event.getEventType() != null) {
+
+                    if (event.getEventType().equals("Registrasi Vaksinator")) {
+                        JSONObject json = eventClientRepository.getClientByBaseEntityId(event.getBaseEntityId());
+                        Client client = gson.fromJson(json.toString(), Client.class);
+                        client.addAttribute("kartu_ibu", "kartu_ibu");
+                        saveClient(client);
+                    } else if (event.getEventType().equals("Child Registration")) {
+                        JSONObject json = eventClientRepository.getClientByBaseEntityId(event.getBaseEntityId());
+                        Client client = gson.fromJson(json.toString(), Client.class);
+                        client.addAttribute("anak", "anak");
+                        saveClient(client);
+                   }
+                }
+
+                Map<String, Map<String, Object>> dep = formEntityConverter.
+                        getDependentClientsFromFormSubmission(formSubmission);
+                for (Map<String, Object> cm : dep.values()) {
+                    Client cin = (Client) cm.get("client");
+                    saveClient(cin);
+                    Event evin = (Event) cm.get("event");
+                    evin = tagSyncMetadata(evin);
+                    saveEvent(evin);
+                }
+                long lastSyncTimeStamp = allSharedPreferences.fetchLastUpdatedAtDate(0);
+                Date lastSyncDate = new Date(lastSyncTimeStamp);
+                ClientProcessor.getInstance(context).processClient(eventClientRepository.getEvents(lastSyncDate, BaseRepository.TYPE_Unsynced));
+                allSharedPreferences.saveLastUpdatedAtDate(lastSyncDate.getTime());
+            } catch (Exception e) {
+                android.util.Log.e(TAG, e.toString(), e);
+            }
+            return null;
+        }
     }
 }
