@@ -4,13 +4,12 @@ import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import org.smartregister.Context;
-import org.smartregister.bidan.R;
 import org.smartregister.bidan.utils.CameraPreviewActivity;
 import org.smartregister.bidan.utils.Support;
 import org.smartregister.bidan.utils.Tools;
@@ -19,9 +18,9 @@ import org.smartregister.commonregistry.CommonPersonObject;
 import org.smartregister.commonregistry.CommonPersonObjectClient;
 import org.smartregister.repository.DetailsRepository;
 import org.smartregister.view.activity.DrishtiApplication;
+import org.smartregister.bidan.R;
 
 import java.io.File;
-import java.util.HashMap;
 
 import butterknife.Bind;
 
@@ -34,20 +33,20 @@ import static org.smartregister.util.StringUtil.humanize;
  */
 public class DetailChildActivity extends Activity {
 
-    //image retrieving
     private static final String TAG = DetailChildActivity.class.getName();
     public static CommonPersonObjectClient childclient;
     static String entityid;
-    private static HashMap<String, String> hash;
     @Bind(R.id.childdetailprofileview)
     ImageView childview;
-    private boolean updateMode = false;
     private String userId;
+
+    public DetailChildActivity(String userId) {
+        this.userId = userId;
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        Context context = Context.getInstance();
         setContentView(R.layout.anak_detail_activity);
 
         final ImageView childview = (ImageView) findViewById(R.id.childdetailprofileview);
@@ -84,7 +83,7 @@ public class DetailChildActivity extends Activity {
             @Override
             public void onClick(View v) {
                 finish();
-                DetailChildActivity.childclient = childclient;
+//                DetailChildActivity.childclient = childclient;
                 startActivity(new Intent(DetailChildActivity.this, DetailChildActivity.class));
                 overridePendingTransition(0, 0);
             }
@@ -101,11 +100,11 @@ public class DetailChildActivity extends Activity {
         DetailsRepository detailsRepository = org.smartregister.Context.getInstance().detailsRepository();
         detailsRepository.updateDetails(childclient);
 
-        String gender = childclient.getDetails().containsKey("gender") ? childclient.getDetails().get("gender") : "laki";
-        userId = childclient.getDetails().get("base_entity_id");
+//        String gender = childclient.getDetails().containsKey("gender") ? childclient.getDetails().get("gender") : "laki";
+//        userId = childclient.getDetails().get("base_entity_id");
+//        int placeholderDrawable = gender.equalsIgnoreCase("male") ? R.drawable.child_boy_infant : R.drawable.child_girl_infant;
 
         //start profile image
-        int placeholderDrawable = gender.equalsIgnoreCase("male") ? R.drawable.child_boy_infant : R.drawable.child_girl_infant;
         childview.setTag(R.id.entity_id, childclient.getCaseId());//required when saving file to disk
         if (childclient.getCaseId() != null) {
             //image already in local storage most likey ):
@@ -188,8 +187,10 @@ public class DetailChildActivity extends Activity {
 
             File file = new File(path.toString());
             if (!file.exists()) {
-                file.mkdir();
+                boolean mkdir = file.mkdir();
+                Log.d(TAG, "onActivityResult: mkdir "+ mkdir);
             }
+
             if (file.canWrite()) {
                 path.append(File.separator).append(userId).append(".jpg");
                 Tools.savefile(Tools.scaleDown((Bitmap) intent.getExtras().get("data"), 400.0f, false), path.toString());

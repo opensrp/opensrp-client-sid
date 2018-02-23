@@ -1,10 +1,8 @@
 package org.smartregister.bidan.fragment;
 
-import android.annotation.TargetApi;
 import android.app.Fragment;
 import android.app.FragmentTransaction;
 import android.content.Intent;
-import android.os.Build;
 import android.util.Log;
 import android.view.View;
 
@@ -44,16 +42,7 @@ import static android.view.View.INVISIBLE;
 public class KISmartRegisterFragment extends BaseSmartRegisterFragment {
 
     private static final String TAG = KISmartRegisterFragment.class.getName();
-    public static String criteria;
     private final ClientActionHandler clientActionHandler = new ClientActionHandler();
-
-    public static String getCriteria() {
-        return criteria;
-    }
-
-    public void setCriteria(String criteria) {
-        KISmartRegisterFragment.criteria = criteria;
-    }
 
     @Override
     protected SecuredNativeSmartRegisterActivity.DefaultOptionsProvider getDefaultOptionsProvider() {
@@ -156,24 +145,37 @@ public class KISmartRegisterFragment extends BaseSmartRegisterFragment {
     @Override
     public void setupViews(View view) {
         getDefaultOptionsProvider();
-
         super.setupViews(view);
+        Log.d(TAG, "setupViews: Init");
 
         view.findViewById(R.id.btn_report_month).setVisibility(INVISIBLE);
         view.findViewById(R.id.service_mode_selection).setVisibility(View.GONE);
         clientsView.setVisibility(View.VISIBLE);
         clientsProgressView.setVisibility(View.INVISIBLE);
 //        list.setBackgroundColor(Color.RED);
-        initializeQueries(getCriteria());
+        initializeQueries();
     }
 
-    private String filterStringForAll() {
+    @Override
+    protected void onResumption() {
+        getDefaultOptionsProvider();
+
+        if (isPausedOrRefreshList()) {
+            initializeQueries();
+        }
+//        try {
+//            LoginActivity.setLanguage();
+//        } catch (Exception ignored) {
+//
+//        }
+
+    }
+
+    protected String filterStringForAll() {
         return "";
     }
 
-    @TargetApi(Build.VERSION_CODES.KITKAT)
-    public void initializeQueries(String s) {
-        Log.e(TAG, "initializeQueries: key " + s);
+    public void initializeQueries() {
         try {
 
             KIClientsProvider kiscp = new KIClientsProvider(getActivity(), clientActionHandler, context().alertService());
@@ -212,39 +214,25 @@ public class KISmartRegisterFragment extends BaseSmartRegisterFragment {
 
     }
 
-    private String KiSortByNameAZ() {
-        return "namalengkap ASC";
-    }
-
-    private String KiSortByNameZA() {
-        return "namalengkap DESC";
-    }
-
-    private String KiSortByAge() {
-        return "umur DESC";
-    }
-
-    private String KiSortByNoIbu() {
-        return "noIbu ASC";
-    }
-
-    private String KiSortByEdd() {
-        return "htp IS NULL, htp";
-    }
-
-    @Override
-    protected void onResumption() {
-        getDefaultOptionsProvider();
-        if (isPausedOrRefreshList()) {
-            initializeQueries("");
-        }
-//        try {
-//            LoginActivity.setLanguage();
-//        } catch (Exception ignored) {
+//    private String KiSortByNameAZ() {
+//        return "namalengkap ASC";
+//    }
 //
-//        }
-
-    }
+//    private String KiSortByNameZA() {
+//        return "namalengkap DESC";
+//    }
+//
+//    private String KiSortByAge() {
+//        return "umur DESC";
+//    }
+//
+//    private String KiSortByNoIbu() {
+//        return "noIbu ASC";
+//    }
+//
+//    private String KiSortByEdd() {
+//        return "htp IS NULL, htp";
+//    }
 
     public void updateSearchView() {
         textWatcher(AllConstantsINA.Register.KI);

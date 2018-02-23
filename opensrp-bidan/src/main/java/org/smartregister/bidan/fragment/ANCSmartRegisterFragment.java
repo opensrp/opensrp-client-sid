@@ -39,22 +39,9 @@ import static android.view.View.INVISIBLE;
 public class ANCSmartRegisterFragment extends BaseSmartRegisterFragment {
 
     private static final String TAG = ANCSmartRegisterFragment.class.getName();
-    public static String criteria;
     //    private final ClientActionHandler clientActionHandler = new ClientActionHandler();
 //    private ANCClientsProvider kiSCP = new ANCClientsProvider(getActivity(), new ClientActionHandler(), context().alertService());
     private String tableName = "ec_kartu_ibu";
-
-//    public static String getCriteria() {
-//        return criteria;
-//    }
-//
-//    public void setCriteria(String criteria) {
-//        ANCSmartRegisterFragment.criteria = criteria;
-//    }
-
-//    @Override
-//    protected void onCreation() {
-//    }
 
     @Override
     protected SecuredNativeSmartRegisterActivity.DefaultOptionsProvider getDefaultOptionsProvider() {
@@ -194,25 +181,25 @@ public class ANCSmartRegisterFragment extends BaseSmartRegisterFragment {
 
     }
 
-    private String KiSortByNameAZ() {
-        return "namalengkap ASC";
-    }
-
-    private String KiSortByNameZA() {
-        return "namalengkap DESC";
-    }
-
-    private String KiSortByAge() {
-        return "umur DESC";
-    }
-
-    private String KiSortByNoIbu() {
-        return "noIbu ASC";
-    }
-
-    private String KiSortByEdd() {
-        return "htp IS NULL, htp";
-    }
+//    private String KiSortByNameAZ() {
+//        return "namalengkap ASC";
+//    }
+//
+//    private String KiSortByNameZA() {
+//        return "namalengkap DESC";
+//    }
+//
+//    private String KiSortByAge() {
+//        return "umur DESC";
+//    }
+//
+//    private String KiSortByNoIbu() {
+//        return "noIbu ASC";
+//    }
+//
+//    private String KiSortByEdd() {
+//        return "htp IS NULL, htp";
+//    }
 
     @Override
     protected void onResumption() {

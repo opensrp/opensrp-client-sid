@@ -190,7 +190,7 @@ public class KIClientsProvider extends BaseClientsProvider {
                         anc_status_layout, date_status, visit_status);
             }
             //if anc is 1(closed) set status to pnc
-            else if (anc_isclosed == 1) {
+            if (anc_isclosed == 1) {
                 final CommonPersonObject pncparent = pncRep.findByCaseID(pc.entityId());
                 if (pncparent != null) {
                     short pnc_isclosed = pncparent.getClosed();

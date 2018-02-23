@@ -32,6 +32,7 @@ import org.smartregister.view.dialog.DialogOptionModel;
 import org.smartregister.view.dialog.EditOption;
 import org.smartregister.view.fragment.SecuredNativeSmartRegisterFragment;
 import org.smartregister.view.viewpager.OpenSRPViewPager;
+import org.smartregister.bidan.sync.ClientProcessor;
 
 import java.text.DateFormat;
 import java.util.ArrayList;
@@ -312,8 +313,11 @@ public class BaseRegisterActivity extends SecuredNativeSmartRegisterActivity imp
             BidanFormUtils formUtils = BidanFormUtils.getInstance(getApplicationContext());
             FormSubmission submission = formUtils.generateFormSubmisionFromXMLString(id, formSubmission, formName, fieldOverrides);
 
-            ClientProcessor.getInstance(getApplicationContext()).processClient();
+            ClientProcessor mClientProcessor = new ClientProcessor(getApplicationContext());
+            mClientProcessor.getInstance(getApplicationContext()).processClient();
 
+            android.util.Log.e(TAG, "saveFormSubmission:formName " + formName );
+            android.util.Log.e(TAG, "saveFormSubmission:submission " + submission );
             context().formSubmissionService().updateFTSsearch(submission);
             context().formSubmissionRouter().handleSubmission(submission, formName);
 

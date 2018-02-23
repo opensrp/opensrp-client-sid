@@ -34,14 +34,14 @@ import static org.smartregister.event.Event.FORM_SUBMITTED;
 
 public class ClientProcessor {
 
-    public static final String baseEntityIdJSONKey = "baseEntityId";
+    private static final String baseEntityIdJSONKey = "baseEntityId";
     protected static final String providerIdJSONKey = "providerId";
-    protected static final String VALUES_KEY = "values";
+    private static final String VALUES_KEY = "values";
     private static final String TAG = ClientProcessor.class.getName();
     private static final String detailsUpdated = "detailsUpdated";
     private static final String[] openmrs_gen_ids = {"zeir_id"};
-    private static ClientProcessor instance;
-    Context mContext;
+    private static ClientProcessor mInstance;
+    private Context mContext;
     private CloudantDataHandler mCloudantDataHandler;
 
     public ClientProcessor(Context context) {
@@ -56,11 +56,11 @@ public class ClientProcessor {
     }
 
     public static ClientProcessor getInstance(Context context) {
-        if (instance == null) {
-            instance = new ClientProcessor(context);
+        if (mInstance == null) {
+            mInstance = new ClientProcessor(context);
         }
 
-        return instance;
+        return mInstance;
     }
 
     public synchronized void processClient() throws Exception {
@@ -126,7 +126,7 @@ public class ClientProcessor {
 
     }
 
-    public Boolean processEvent(JSONObject event, JSONObject clientClassificationJson) throws Exception {
+    private Boolean processEvent(JSONObject event, JSONObject clientClassificationJson) throws Exception {
 
         Log.e(TAG, "processEvent:event " + event);
         Log.e(TAG, "processEvent:clientClassificationJson " + clientClassificationJson);
@@ -179,7 +179,7 @@ public class ClientProcessor {
         }
     }
 
-    public Boolean processEvent(JSONObject event, JSONObject client, JSONObject clientClassificationJson) throws Exception {
+    private Boolean processEvent(JSONObject event, JSONObject client, JSONObject clientClassificationJson) throws Exception {
 
         Log.e(TAG, "processEvent:event, client, clientClassification ");
 
@@ -228,7 +228,7 @@ public class ClientProcessor {
         }
     }
 
-    public Boolean processClientClass(JSONObject clientClass, JSONObject event, JSONObject client) {
+    private Boolean processClientClass(JSONObject clientClass, JSONObject event, JSONObject client) {
 
         try {
             if (clientClass == null || clientClass.length() == 0) {
@@ -257,7 +257,7 @@ public class ClientProcessor {
         }
     }
 
-    public Boolean processField(JSONObject fieldJson, JSONObject event, JSONObject client) {
+    private Boolean processField(JSONObject fieldJson, JSONObject event, JSONObject client) {
 
         try {
             if (fieldJson == null || fieldJson.length() == 0) {
@@ -341,7 +341,7 @@ public class ClientProcessor {
         }
     }
 
-    public Boolean processAlert(JSONObject alert, JSONObject clientAlertClassificationJson) throws Exception {
+    private Boolean processAlert(JSONObject alert, JSONObject clientAlertClassificationJson) throws Exception {
 
         try {
             if (alert == null || alert.length() == 0) {
@@ -410,7 +410,7 @@ public class ClientProcessor {
         }
     }
 
-    public Boolean closeCase(JSONObject client, JSONArray closesCase) {
+    private Boolean closeCase(JSONObject client, JSONArray closesCase) {
         try {
             if (closesCase == null || closesCase.length() == 0) {
                 return false;
@@ -432,7 +432,7 @@ public class ClientProcessor {
         }
     }
 
-    public Boolean processCaseModel(JSONObject event, JSONObject client, JSONArray createsCase) {
+    private Boolean processCaseModel(JSONObject event, JSONObject client, JSONArray createsCase) {
         try {
 
             if (createsCase == null || createsCase.length() == 0) {
@@ -606,7 +606,7 @@ public class ClientProcessor {
      * @param values
      * @param eventDate
      */
-    protected void addContentValuesToDetailsTable(ContentValues values, Long eventDate) {
+    private void addContentValuesToDetailsTable(ContentValues values, Long eventDate) {
         try {
             String baseEntityId = values.getAsString("base_entity_id");
 
@@ -628,7 +628,7 @@ public class ClientProcessor {
      * @param event
      * @param client
      */
-    public void updateClientDetailsTable(JSONObject event, JSONObject client) {
+    private void updateClientDetailsTable(JSONObject event, JSONObject client) {
         try {
             Log.i(TAG, "Started updateClientDetailsTable");
 
@@ -723,7 +723,7 @@ public class ClientProcessor {
     }
 
     private Map<String, String> getClientSingleValueAttribute(JSONObject client, String key) {
-        Map<String, String> map = new HashMap<String, String>();
+        Map<String, String> map = new HashMap<>();
 
         try {
             if (client.has(key)) {
@@ -737,7 +737,7 @@ public class ClientProcessor {
         return map;
     }
 
-    public void saveClientDetails(String baseEntityId, Map<String, String> values, Long timestamp) {
+    private void saveClientDetails(String baseEntityId, Map<String, String> values, Long timestamp) {
         for (String key : values.keySet()) {
             String value = values.get(key);
             saveClientDetails(baseEntityId, key, value, timestamp);
@@ -767,7 +767,7 @@ public class ClientProcessor {
      * @return
      * @throws Exception
      */
-    protected String getHumanReadableConceptResponse(String value, JSONObject jsonDocObject) throws Exception {
+    private String getHumanReadableConceptResponse(String value, JSONObject jsonDocObject) throws Exception {
 
         JSONArray humanReadableValues = jsonDocObject.has("humanReadableValues") ? jsonDocObject
                 .getJSONArray("humanReadableValues") : null;
@@ -791,7 +791,7 @@ public class ClientProcessor {
         return humanReadableValue;
     }
 
-    public Map<String, String> getClientAddressAsMap(JSONObject client) {
+    private Map<String, String> getClientAddressAsMap(JSONObject client) {
 //        Log.e(TAG, "getClientAddressAsMap: " + client);
         Map<String, String> addressMap = new HashMap<>();
         try {
@@ -842,13 +842,13 @@ public class ClientProcessor {
     /**
      * Insert the a new record to the database and returns its id
      **/
-    public Long executeInsertStatement(ContentValues values, String tableName) {
+    private Long executeInsertStatement(ContentValues values, String tableName) {
         CommonRepository cr = org.smartregister.CoreLibrary.getInstance().context().commonrepository(tableName);
         Long id = cr.executeInsertStatement(values, tableName);
         return id;
     }
 
-    public void closeCase(String tableName, String baseEntityId) {
+    private void closeCase(String tableName, String baseEntityId) {
         CommonRepository cr = org.smartregister.CoreLibrary.getInstance().context().commonrepository(tableName);
         cr.closeCase(baseEntityId, tableName);
     }
@@ -858,7 +858,7 @@ public class ClientProcessor {
         return cr.deleteCase(baseEntityId, tableName);
     }
 
-    public void executeInsertAlert(ContentValues contentValues) {
+    private void executeInsertAlert(ContentValues contentValues) {
         if (!contentValues.getAsString(AlertRepository.ALERTS_STATUS_COLUMN).isEmpty()) {
             Alert alert = new Alert(contentValues.getAsString(AlertRepository.ALERTS_CASEID_COLUMN),
                     contentValues.getAsString(AlertRepository.ALERTS_SCHEDULE_NAME_COLUMN),
@@ -883,7 +883,7 @@ public class ClientProcessor {
         return c;
     }
 
-    public JSONObject getColumnMappings(String registerName) {
+    private JSONObject getColumnMappings(String registerName) {
 
         try {
             String clientClassificationStr = getFileContents("ec_client_fields.json");
@@ -903,12 +903,12 @@ public class ClientProcessor {
         return null;
     }
 
-    protected String getFileContents(String fileName) {
+    private String getFileContents(String fileName) {
         return AssetHandler.readFileFromAssetsFolder(fileName, mContext);
     }
 
-    protected List<String> getValues(Object jsonObject) throws JSONException {
-        List<String> values = new ArrayList<String>();
+    private List<String> getValues(Object jsonObject) throws JSONException {
+        List<String> values = new ArrayList<>();
         if (jsonObject == null) {
             return values;
         } else if (jsonObject instanceof JSONArray) {
@@ -934,7 +934,7 @@ public class ClientProcessor {
         return new Date().getTime();
     }
 
-    public void updateFTSsearch(String tableName, String entityId, ContentValues contentValues) {
+    private void updateFTSsearch(String tableName, String entityId, ContentValues contentValues) {
         Log.i(TAG, "Starting updateFTSsearch table: " + tableName);
         AllCommonsRepository allCommonsRepository = org.smartregister.CoreLibrary.getInstance().context().
                 allCommonsRepositoryobjects(tableName);
@@ -966,7 +966,7 @@ public class ClientProcessor {
         this.mCloudantDataHandler = mCloudantDataHandler;
     }
 
-    protected boolean isNullOrEmptyJSONObject(JSONObject jsonObject) {
+    private boolean isNullOrEmptyJSONObject(JSONObject jsonObject) {
         return (jsonObject == null || jsonObject.length() == 0);
     }
 

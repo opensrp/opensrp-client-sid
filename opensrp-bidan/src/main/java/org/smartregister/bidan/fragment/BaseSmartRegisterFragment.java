@@ -117,4 +117,24 @@ public class BaseSmartRegisterFragment extends SecuredNativeSmartRegisterCursorA
 //        LoginActivity.setLanguage();
     }
 
+    protected String KiSortByNameAZ() {
+        return "namalengkap ASC";
+    }
+
+    protected String KiSortByNameZA() {
+        return "namalengkap DESC";
+    }
+
+    protected String KiSortByAge() {
+        return "umur DESC";
+    }
+
+    protected String KiSortByNoIbu() {
+        return "noIbu ASC";
+    }
+
+    protected String KiSortByEdd() {
+        return "htp IS NULL, htp";
+    }
+
 }

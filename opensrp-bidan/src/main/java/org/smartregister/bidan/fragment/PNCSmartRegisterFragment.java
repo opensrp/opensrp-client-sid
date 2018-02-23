@@ -202,21 +202,21 @@ public class PNCSmartRegisterFragment extends BaseSmartRegisterFragment {
 
     }
 
-    private String KiSortByNameAZ() {
-        return " namalengkap ASC";
-    }
-
-    private String KiSortByNameZA() {
-        return " namalengkap DESC";
-    }
-
-    private String KiSortByAge() {
-        return " umur DESC";
-    }
-
-    private String KiSortByNoIbu() {
-        return " noIbu ASC";
-    }
+//    private String KiSortByNameAZ() {
+//        return " namalengkap ASC";
+//    }
+//
+//    private String KiSortByNameZA() {
+//        return " namalengkap DESC";
+//    }
+//
+//    private String KiSortByAge() {
+//        return " umur DESC";
+//    }
+//
+//    private String KiSortByNoIbu() {
+//        return " noIbu ASC";
+//    }
 
     @Override
     protected void onResumption() {

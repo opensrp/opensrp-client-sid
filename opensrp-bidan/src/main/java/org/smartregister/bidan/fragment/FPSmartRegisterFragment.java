@@ -85,7 +85,7 @@ public class FPSmartRegisterFragment extends BaseSmartRegisterFragment {
 //                FlurryFacade.logEvent("click_filter_option_on_kohort_kb_dashboard");
                 ArrayList<DialogOption> dialogOptionslist = new ArrayList<>();
 
-                dialogOptionslist.add(new CursorCommonObjectFilterOption(getString(R.string.filter_by_all_label), filterStringForAll()));
+                dialogOptionslist.add(new CursorCommonObjectFilterOption(getString(R.string.filter_by_all_label), ""));
 
                 String locationJSON = context().anmLocationController().get();
                 LocationTree locationTree = EntityUtils.fromJson(locationJSON, LocationTree.class);
@@ -135,9 +135,9 @@ public class FPSmartRegisterFragment extends BaseSmartRegisterFragment {
 
     @Override
     public void setupViews(View view) {
+        super.setupViews(view);
         getDefaultOptionsProvider();
 
-        super.setupViews(view);
         view.findViewById(R.id.btn_report_month).setVisibility(INVISIBLE);
         view.findViewById(R.id.service_mode_selection).setVisibility(View.GONE);
         view.findViewById(R.id.register_client).setVisibility(View.GONE);
@@ -146,9 +146,9 @@ public class FPSmartRegisterFragment extends BaseSmartRegisterFragment {
         initializeQueries();
     }
 
-    private String filterStringForAll() {
-        return "";
-    }
+//    private String filterStringForAll() {
+//        return "";
+//    }
 
 //    public void initializeQueries() {
 //        Log.e(TAG, "initializeQueries: " );
@@ -204,17 +204,18 @@ public class FPSmartRegisterFragment extends BaseSmartRegisterFragment {
             countQueryBuilder.SelectInitiateMainTableCounts("ec_kartu_ibu");
             //countQueryBuilder.customJoin("LEFT JOIN ec_ibu on ec_kartu_ibu.id = ec_ibu.base_entity_id");
             Log.e(TAG, "initializeQueries: " + "Not Initialized");
-            mainCondition = "is_closed = 0 AND jenisKontrasepsi='0' AND namalengkap != '' AND namalengkap IS NOT NULL";
-
+            mainCondition = "is_closed = 0 AND jenisKontrasepsi !='0' AND namalengkap != '' AND namalengkap IS NOT NULL";
             joinTable = "";
             countSelect = countQueryBuilder.mainCondition(mainCondition);
+            Log.e(TAG, "initializeQueries: CountExecute "+ countSelect );
             super.CountExecute();
 
             SmartRegisterQueryBuilder queryBuilder = new SmartRegisterQueryBuilder();
             queryBuilder.SelectInitiateMainTable("ec_kartu_ibu", new String[]{"ec_kartu_ibu.relationalid", "ec_kartu_ibu.is_closed", "ec_kartu_ibu.details", "ec_kartu_ibu.isOutOfArea", "namalengkap", "umur", "namaSuami", "imagelist.imageid"});
             queryBuilder.customJoin("LEFT JOIN ec_ibu on ec_kartu_ibu.id = ec_ibu.base_entity_id LEFT JOIN ImageList imagelist ON ec_ibu.base_entity_id=imagelist.entityID ");
 
-            mainSelect = queryBuilder.mainCondition("ec_kartu_ibu.is_closed = 0 and jenisKontrasepsi !='0' AND namalengkap != '' AND namalengkap IS NOT NULL");
+            mainSelect = queryBuilder.mainCondition("ec_kartu_ibu.is_closed != 0 and jenisKontrasepsi != 0 AND namalengkap != '' AND namalengkap IS NOT NULL");
+            Log.e(TAG, "initializeQueries:mainSelect "+ mainSelect );
             Sortqueries = KiSortByNameAZ();
 
             currentlimit = 20;
@@ -231,25 +232,25 @@ public class FPSmartRegisterFragment extends BaseSmartRegisterFragment {
     }
 
 
-    private String KiSortByNameAZ() {
-        return "namalengkap ASC";
-    }
-
-    private String KiSortByNameZA() {
-        return "namalengkap DESC";
-    }
-
-    private String KiSortByAge() {
-        return "umur DESC";
-    }
-
-    private String KiSortByNoIbu() {
-        return "noIbu ASC";
-    }
-
-    private String KiSortByEdd() {
-        return "htp IS NULL, htp";
-    }
+//    private String KiSortByNameAZ() {
+//        return "namalengkap ASC";
+//    }
+//
+//    private String KiSortByNameZA() {
+//        return "namalengkap DESC";
+//    }
+//
+//    private String KiSortByAge() {
+//        return "umur DESC";
+//    }
+//
+//    private String KiSortByNoIbu() {
+//        return "noIbu ASC";
+//    }
+//
+//    private String KiSortByEdd() {
+//        return "htp IS NULL, htp";
+//    }
 
     @Override
     protected void onResumption() {
