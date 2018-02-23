@@ -22,11 +22,9 @@ import org.smartregister.domain.Response;
 import org.smartregister.gizi.activity.LoginActivity;
 import org.smartregister.gizi.application.GiziApplication;
 import org.smartregister.gizi.R;
-import org.smartregister.gizi.application.GiziApplication;
 import org.smartregister.gizi.receiver.SyncStatusBroadcastReceiver;
-import org.smartregister.gizi.sync.ClientProcessor;
+import org.smartregister.gizi.sync.GiziClientProcessor;
 import org.smartregister.gizi.sync.ECSyncUpdater;
-import org.smartregister.gizi.sync.PathClientProcessor;
 import org.smartregister.repository.EventClientRepository;
 import org.smartregister.service.HTTPAgent;
 import org.smartregister.util.Utils;
@@ -209,7 +207,7 @@ public class SyncService extends Service {
                                         .map(new Function<Pair<Long, Long>, FetchStatus>() {
                                             @Override
                                             public FetchStatus apply(@NonNull Pair<Long, Long> serverVersionPair) throws Exception {
-                                                ClientProcessor.getInstance(context).processClient(ecUpdater.allEvents(serverVersionPair.first - 1, serverVersionPair.second));
+                                                GiziClientProcessor.getInstance(context).processClient(ecUpdater.allEvents(serverVersionPair.first - 1, serverVersionPair.second));
                                                 return FetchStatus.fetched;
                                             }
                                         });

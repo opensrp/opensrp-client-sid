@@ -3,7 +3,7 @@ package org.smartregister.gizi.application;
 import android.content.Intent;
 import android.content.res.Configuration;
 
-import org.smartregister.gizi.receiver.PathSyncBroadcastReceiver;
+import org.smartregister.gizi.receiver.GiziSyncBroadcastReceiver;
 import org.smartregister.gizi.repository.GiziRepository;
 import org.smartregister.Context;
 import org.smartregister.CoreLibrary;
@@ -14,7 +14,6 @@ import org.smartregister.repository.EventClientRepository;
 import org.smartregister.repository.Repository;
 import org.smartregister.gizi.sync.DrishtiSyncScheduler;
 import org.smartregister.view.activity.DrishtiApplication;
-import org.smartregister.view.receiver.SyncBroadcastReceiver;
 
 import static org.smartregister.util.Log.logError;
 import static org.smartregister.util.Log.logInfo;
@@ -41,7 +40,7 @@ public class GiziApplication extends DrishtiApplication {
 
 
       //  DrishtiSyncScheduler.setReceiverClass(SyncBroadcastReceiver.class);
-        DrishtiSyncScheduler.setReceiverClass(PathSyncBroadcastReceiver.class);
+        DrishtiSyncScheduler.setReceiverClass(GiziSyncBroadcastReceiver.class);
         super.onCreate();
         //  ACRA.init(this);
      //   DrishtiSyncScheduler.setReceiverClass(SyncBroadcastReceiver.class);

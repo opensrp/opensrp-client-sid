@@ -24,7 +24,7 @@ import org.smartregister.provider.SmartRegisterClientsProvider;
 import org.smartregister.repository.DetailsRepository;
 import org.smartregister.service.ZiggyService;
 import org.smartregister.gizi.R;
-import org.smartregister.gizi.sync.ClientProcessor;
+import org.smartregister.gizi.sync.GiziClientProcessor;
 import org.smartregister.view.activity.SecuredNativeSmartRegisterActivity;
 import org.smartregister.view.contract.SmartRegisterClient;
 import org.smartregister.view.dialog.DialogOption;
@@ -179,7 +179,7 @@ public class GiziSmartRegisterActivity extends SecuredNativeSmartRegisterActivit
           //  FormUtils formUtils = FormUtils.getInstance(getApplicationContext());
             FormSubmission submission = formUtils.generateFormSubmisionFromXMLString(id, formSubmission, formName, fieldOverrides);
 
-            ClientProcessor.getInstance(getApplicationContext()).processClient();
+            GiziClientProcessor.getInstance(getApplicationContext()).processClient();
 
             context().formSubmissionService().updateFTSsearch(submission);
             context().formSubmissionRouter().handleSubmission(submission, formName);

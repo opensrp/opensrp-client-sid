@@ -10,7 +10,6 @@ import android.text.TextWatcher;
 import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
-import android.widget.Toast;
 
 import com.flurry.android.FlurryAgent;
 
@@ -34,22 +33,17 @@ import org.smartregister.gizi.option.KICommonObjectFilterOption;
 import org.smartregister.provider.SmartRegisterClientsProvider;
 import org.smartregister.gizi.R;
 
-import org.smartregister.gizi.activity.GiziSmartRegisterActivity;
-import org.smartregister.gizi.sync.ClientProcessor;
+import org.smartregister.gizi.sync.GiziClientProcessor;
 import org.smartregister.util.StringUtil;
 import org.smartregister.view.activity.SecuredNativeSmartRegisterActivity;
 import org.smartregister.view.contract.ECClient;
-import org.smartregister.view.contract.SmartRegisterClient;
 import org.smartregister.view.contract.SmartRegisterClients;
 import org.smartregister.view.controller.VillageController;
 import org.smartregister.view.dialog.AllClientsFilter;
 import org.smartregister.view.dialog.DialogOption;
 import org.smartregister.view.dialog.DialogOptionMapper;
-import org.smartregister.view.dialog.DialogOptionModel;
-import org.smartregister.view.dialog.EditOption;
 import org.smartregister.view.dialog.FilterOption;
 import org.smartregister.view.dialog.LocationSelectorDialogFragment;
-import org.smartregister.view.dialog.NameSort;
 import org.smartregister.view.dialog.ServiceModeOption;
 import org.smartregister.view.dialog.SortOption;
 import org.opensrp.api.domain.Location;
@@ -61,7 +55,6 @@ import java.util.ArrayList;
 import java.util.Map;
 
 import util.AsyncTask;
-import util.formula.Support;
 
 import static android.view.View.INVISIBLE;
 import static android.view.View.VISIBLE;
@@ -78,7 +71,7 @@ public class GiziSmartRegisterFragment extends SecuredNativeSmartRegisterCursorA
     private CommonPersonObjectController controller;
     private VillageController villageController;
     private DialogOptionMapper dialogOptionMapper;
-    private ClientProcessor clientProcessor;
+    private GiziClientProcessor clientProcessor;
     private final ClientActionHandler clientActionHandler = new ClientActionHandler();
     private String locationDialogTAG = "locationDialogTAG";
 

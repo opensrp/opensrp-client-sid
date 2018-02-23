@@ -19,7 +19,7 @@ import util.formula.Support;
 
 public class KmsHandler  implements FormSubmissionHandler {
 //    static String bindobject = "anak";
-//    private ClientProcessor clientProcessor;
+//    private GiziClientProcessor clientProcessor;
 //    private  org.ei.opensrp.Context context;
     public KmsHandler() {
 

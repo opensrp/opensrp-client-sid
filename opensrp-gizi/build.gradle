@@ -21,7 +21,7 @@ apply plugin: 'jacoco'
 apply plugin: 'com.github.kt3k.coveralls'
 
 android {
-    compileSdkVersion 22
+    compileSdkVersion 23
     buildToolsVersion "26.0.1"
 
     defaultConfig {

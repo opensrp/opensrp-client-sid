@@ -10,7 +10,7 @@ import util.ServiceTools;
 
 import static org.smartregister.util.Log.logInfo;
 
-public class PathSyncBroadcastReceiver extends BroadcastReceiver {
+public class GiziSyncBroadcastReceiver extends BroadcastReceiver {
     @Override
     public void onReceive(Context context, Intent intent) {
         logInfo("Sync alarm triggered. Trying to Sync.");

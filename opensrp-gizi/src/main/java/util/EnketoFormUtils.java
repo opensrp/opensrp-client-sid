@@ -26,12 +26,11 @@ import org.smartregister.domain.form.FormSubmission;
 import org.smartregister.domain.form.SubForm;
 import org.smartregister.gizi.activity.LoginActivity;
 import org.smartregister.gizi.application.GiziApplication;
-import org.smartregister.gizi.sync.ClientProcessor;
+import org.smartregister.gizi.sync.GiziClientProcessor;
 import org.smartregister.repository.AllSharedPreferences;
 import org.smartregister.repository.BaseRepository;
 import org.smartregister.repository.EventClientRepository;
 import org.smartregister.service.intentservices.ReplicationIntentService;
-import org.smartregister.gizi.sync.CloudantDataHandler;
 import org.smartregister.util.*;
 import org.w3c.dom.Attr;
 import org.w3c.dom.Document;
@@ -59,7 +58,7 @@ import java.util.UUID;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 
-import static org.smartregister.gizi.sync.ClientProcessor.CLIENT_EVENTS;
+import static org.smartregister.gizi.sync.GiziClientProcessor.CLIENT_EVENTS;
 
 /**
  * Created by Dani on 08/11/2017.
@@ -78,8 +77,6 @@ public class EnketoFormUtils {
     private SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSSZ");
     private Format formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
     private VaksinatorFormEntityConverter formEntityConverter;
-    private CloudantDataHandler mCloudantDataHandler;
-
     private EventClientRepository eventClientRepository;
     public EnketoFormUtils(Context context) throws Exception {
         mContext = context;
@@ -1194,7 +1191,7 @@ public class EnketoFormUtils {
                 }
                 long lastSyncTimeStamp = allSharedPreferences.fetchLastUpdatedAtDate(0);
                 Date lastSyncDate = new Date(lastSyncTimeStamp);
-                ClientProcessor.getInstance(context).processClient(eventClientRepository.getEvents(lastSyncDate, BaseRepository.TYPE_Unsynced));
+                GiziClientProcessor.getInstance(context).processClient(eventClientRepository.getEvents(lastSyncDate, BaseRepository.TYPE_Unsynced));
                 allSharedPreferences.saveLastUpdatedAtDate(lastSyncDate.getTime());
             } catch (Exception e) {
                 android.util.Log.e(TAG, e.toString(), e);
