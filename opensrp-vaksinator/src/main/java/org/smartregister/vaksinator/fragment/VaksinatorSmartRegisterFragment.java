@@ -14,8 +14,6 @@ import android.widget.EditText;
 import com.flurry.android.FlurryAgent;
 
 import org.smartregister.Context;
-import org.smartregister.commonregistry.AllCommonsRepository;
-import org.smartregister.commonregistry.CommonPersonObject;
 import org.smartregister.commonregistry.CommonPersonObjectClient;
 import org.smartregister.commonregistry.CommonPersonObjectController;
 import org.smartregister.cursoradapter.CursorCommonObjectFilterOption;
@@ -34,18 +32,14 @@ import org.smartregister.vaksinator.option.KICommonObjectFilterOption;
 import org.smartregister.provider.SmartRegisterClientsProvider;
 import org.smartregister.vaksinator.R;
 
-import org.smartregister.vaksinator.sync.ClientProcessor;
 import org.smartregister.util.StringUtil;
 import org.smartregister.view.activity.SecuredNativeSmartRegisterActivity;
 import org.smartregister.view.contract.ECClient;
-import org.smartregister.view.contract.SmartRegisterClient;
 import org.smartregister.view.contract.SmartRegisterClients;
 import org.smartregister.view.controller.VillageController;
 import org.smartregister.view.dialog.AllClientsFilter;
 import org.smartregister.view.dialog.DialogOption;
 import org.smartregister.view.dialog.DialogOptionMapper;
-import org.smartregister.view.dialog.DialogOptionModel;
-import org.smartregister.view.dialog.EditOption;
 import org.smartregister.view.dialog.FilterOption;
 import org.smartregister.view.dialog.LocationSelectorDialogFragment;
 import org.smartregister.view.dialog.ServiceModeOption;
@@ -76,7 +70,6 @@ public class VaksinatorSmartRegisterFragment extends SecuredNativeSmartRegisterC
     private CommonPersonObjectController controller;
     private VillageController villageController;
     private DialogOptionMapper dialogOptionMapper;
-    private ClientProcessor clientProcessor;
     private final ClientActionHandler clientActionHandler = new ClientActionHandler();
     private String locationDialogTAG = "locationDialogTAG";
 

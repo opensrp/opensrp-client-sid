@@ -9,12 +9,9 @@ import android.os.Bundle;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.util.Log;
-import android.widget.Toast;
 
 import com.flurry.android.FlurryAgent;
 
-import org.smartregister.commonregistry.AllCommonsRepository;
-import org.smartregister.commonregistry.CommonPersonObject;
 import org.smartregister.commonregistry.CommonPersonObjectClient;
 import org.smartregister.cursoradapter.SmartRegisterQueryBuilder;
 import org.smartregister.domain.form.FieldOverrides;
@@ -26,8 +23,6 @@ import org.smartregister.vaksinator.pageradapter.BaseRegisterActivityPagerAdapte
 import org.smartregister.provider.SmartRegisterClientsProvider;
 import org.smartregister.vaksinator.service.SaveService;
 import org.smartregister.vaksinator.R;
-import org.smartregister.vaksinator.sync.ClientProcessor;
-import org.smartregister.util.FormUtils;
 import org.smartregister.vaksinator.sync.VaksinClientProcessor;
 import org.smartregister.view.activity.SecuredNativeSmartRegisterActivity;
 import org.smartregister.view.contract.SmartRegisterClient;
@@ -52,7 +47,6 @@ import java.util.Map;
 import butterknife.Bind;
 import butterknife.ButterKnife;
 import util.EnketoFormUtils;
-import util.formula.Support;
 
 import static org.smartregister.util.Utils.getValue;
 

@@ -7,9 +7,6 @@ package org.smartregister.vaksinator.service;
 import android.content.Context;
 
 import org.smartregister.domain.FetchStatus;
-import org.smartregister.vaksinator.sync.CloudantSyncHandler;
-
-import java.util.concurrent.CountDownLatch;
 
 import util.ServiceTools;
 
