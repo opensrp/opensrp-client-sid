@@ -44,8 +44,6 @@ public class PNCSmartRegisterFragment extends BaseSmartRegisterFragment {
     //    WD
     public static String criteria;
     private final ClientActionHandler clientActionHandler = new ClientActionHandler();
-    String tableName = "ec_kartu_ibu";
-    String tableEcPnc = "ec_pnc";
 
     public static String getCriteria() {
         return criteria;
@@ -168,6 +166,7 @@ public class PNCSmartRegisterFragment extends BaseSmartRegisterFragment {
         Log.d(TAG, "initializeQueries: key " + s);
         try {
             PNCClientsProvider kiscp = new PNCClientsProvider(getActivity(), clientActionHandler, context().alertService());
+            String tableEcPnc = "ec_pnc";
             clientAdapter = new SmartRegisterPaginatedCursorAdapter(getActivity(), null, kiscp, new CommonRepository(tableEcPnc, new String[]{"ec_kartu_ibu.namalengkap", "ec_kartu_ibu.namaSuami"}));
             clientsView.setAdapter(clientAdapter);
 
@@ -241,6 +240,7 @@ public class PNCSmartRegisterFragment extends BaseSmartRegisterFragment {
             } else {
                 StringUtil.humanize(entry.getValue().getLabel());
                 String name = StringUtil.humanize(entry.getValue().getLabel());
+                String tableName = "ec_kartu_ibu";
                 dialogOptionslist.add(new MotherFilterOption(name, "location_name", name, tableName));
 
             }

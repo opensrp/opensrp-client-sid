@@ -177,7 +177,7 @@ public class KBClientsProvider extends BaseClientsProvider {
         follow_status.setText("");
 
         String jenis = pc.getDetails().get("jenisKontrasepsi") != null ? pc.getDetails().get("jenisKontrasepsi") : "-";
-        if (jenis.equals("suntik")) {
+        if ("suntik".equals(jenis)) {
             List<Alert> alertlist_for_client = alertService.findByEntityIdAndAlertNames(pc.entityId(), "KB Injection Cyclofem");
             //alertlist_for_client.get(i).
             if (alertlist_for_client.size() == 0) {

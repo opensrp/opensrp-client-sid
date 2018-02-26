@@ -54,17 +54,17 @@ public class BidanFormEntityConverter {
         mContext = _context;
     }
 
-    /**
-     * Whether form submission is an openmrs form. The xlsform made openmrs form by mapping to an
-     * encounter_type in settings in xlsform.
-     *
-     * @param fs
-     * @return
-     */
-    public boolean isOpenmrsForm(FormSubmissionMap fs) {
-        String eventType = fs.formAttributes().get("encounter_type");
-        return !StringUtils.isEmpty(eventType);
-    }
+//    /**
+//     * Whether form submission is an openmrs form. The xlsform made openmrs form by mapping to an
+//     * encounter_type in settings in xlsform.
+//     *
+//     * @param fs
+//     * @return
+//     */
+//    public boolean isOpenmrsForm(FormSubmissionMap fs) {
+//        String eventType = fs.formAttributes().get("encounter_type");
+//        return !StringUtils.isEmpty(eventType);
+//    }
 
     /**
      * Extract Event from given form submission
@@ -84,8 +84,8 @@ public class BidanFormEntityConverter {
         String encounterLocation = getFieldName(Encounter.location_id, fs);
 
         //TODO
-        String encounterStart = getFieldName(Encounter.encounter_start, fs);
-        String encounterEnd = getFieldName(Encounter.encounter_end, fs);
+//        String encounterStart = getFieldName(Encounter.encounter_start, fs);
+//        String encounterEnd = getFieldName(Encounter.encounter_end, fs);
 
         Date encounterDate = new DateTime(FormEntityConstants.FORM_DATE.format(new Date()))
                 .toDate();
@@ -130,7 +130,7 @@ public class BidanFormEntityConverter {
         return e;
     }
 
-    public Event getEventFromFormSubmission(FormSubmission fs) throws IllegalStateException {
+    Event getEventFromFormSubmission(FormSubmission fs) throws IllegalStateException {
         try {
             return getEventFromFormSubmission(formAttributeParser.createFormSubmissionMap(fs));
         } catch (JsonIOException | JsonSyntaxException | XPathExpressionException
@@ -163,7 +163,7 @@ public class BidanFormEntityConverter {
      * @param fs
      * @return
      */
-    String getFieldName(FormEntity en, FormSubmissionMap fs) {
+    private String getFieldName(FormEntity en, FormSubmissionMap fs) {
         return getFieldName(en, fs.fields());
     }
 
@@ -175,11 +175,11 @@ public class BidanFormEntityConverter {
      * @param
      * @return
      */
-    String getFieldName(FormEntity en, SubformMap subf) {
+    private String getFieldName(FormEntity en, SubformMap subf) {
         return getFieldName(en, subf.fields());
     }
 
-    String getFieldName(FormEntity en, List<FormFieldMap> fields) {
+    private String getFieldName(FormEntity en, List<FormFieldMap> fields) {
         for (FormFieldMap f : fields) {
             if (f.fieldAttributes().containsKey("openmrs_entity") && f.fieldAttributes()
                     .get("openmrs_entity").equalsIgnoreCase(en.entity()) && f.fieldAttributes()
@@ -190,38 +190,38 @@ public class BidanFormEntityConverter {
         return null;
     }
 
-    /**
-     * Get field name for specified openmrs attribute mappings in given form submission
-     *
-     * @param entity
-     * @param entityId
-     * @param entityParentId
-     * @param fs
-     * @return
-     */
-    String getFieldName(String entity, String entityId, String entityParentId, FormSubmissionMap
-            fs) {
-        return getFieldName(entity, entityId, entityParentId, fs.fields());
-    }
+//    /**
+//     * Get field name for specified openmrs attribute mappings in given form submission
+//     *
+//     * @param entity
+//     * @param entityId
+//     * @param entityParentId
+//     * @param fs
+//     * @return
+//     */
+//    String getFieldName(String entity, String entityId, String entityParentId, FormSubmissionMap
+//            fs) {
+//        return getFieldName(entity, entityId, entityParentId, fs.fields());
+//    }
+//
+//    String getFieldName(String entity, String entityId, String entityParentId, SubformMap subf) {
+//        return getFieldName(entity, entityId, entityParentId, subf.fields());
+//    }
 
-    String getFieldName(String entity, String entityId, String entityParentId, SubformMap subf) {
-        return getFieldName(entity, entityId, entityParentId, subf.fields());
-    }
+//    String getFieldName(String entity, String entityId, String entityParentId, List<FormFieldMap>
+//            fields) {
+//        for (FormFieldMap f : fields) {
+//            if (f.fieldAttributes().containsKey("openmrs_entity") && f.fieldAttributes()
+//                    .get("openmrs_entity").equalsIgnoreCase(entity) && f.fieldAttributes()
+//                    .get("openmrs_entity_id").equalsIgnoreCase(entityId) && f.fieldAttributes()
+//                    .get("openmrs_entity_parent").equalsIgnoreCase(entityParentId)) {
+//                return f.name();
+//            }
+//        }
+//        return null;
+//    }
 
-    String getFieldName(String entity, String entityId, String entityParentId, List<FormFieldMap>
-            fields) {
-        for (FormFieldMap f : fields) {
-            if (f.fieldAttributes().containsKey("openmrs_entity") && f.fieldAttributes()
-                    .get("openmrs_entity").equalsIgnoreCase(entity) && f.fieldAttributes()
-                    .get("openmrs_entity_id").equalsIgnoreCase(entityId) && f.fieldAttributes()
-                    .get("openmrs_entity_parent").equalsIgnoreCase(entityParentId)) {
-                return f.name();
-            }
-        }
-        return null;
-    }
-
-    Map<String, Address> extractAddresses(FormSubmissionMap fs) throws ParseException {
+    private Map<String, Address> extractAddresses(FormSubmissionMap fs) throws ParseException {
         Map<String, Address> paddr = new HashMap<>();
         for (FormFieldMap fl : fs.fields()) {
             fillAddressFields(fl, paddr);
@@ -229,7 +229,7 @@ public class BidanFormEntityConverter {
         return paddr;
     }
 
-    Map<String, Address> extractAddressesForSubform(SubformMap subf) throws ParseException {
+    private Map<String, Address> extractAddressesForSubform(SubformMap subf) throws ParseException {
         Map<String, Address> paddr = new HashMap<>();
         for (FormFieldMap fl : subf.fields()) {
             fillAddressFields(fl, paddr);
@@ -237,7 +237,7 @@ public class BidanFormEntityConverter {
         return paddr;
     }
 
-    void fillAddressFields(FormFieldMap fl, Map<String, Address> addresses) throws ParseException {
+    private void fillAddressFields(FormFieldMap fl, Map<String, Address> addresses) throws ParseException {
         Map<String, String> att = fl.fieldAttributes();
         if (att.containsKey("openmrs_entity") && att.get("openmrs_entity")
                 .equalsIgnoreCase("person_address")) {
@@ -299,19 +299,19 @@ public class BidanFormEntityConverter {
         }
     }
 
-    Map<String, String> extractIdentifiers(FormSubmissionMap fs) {
+    private Map<String, String> extractIdentifiers(FormSubmissionMap fs) {
         Map<String, String> pids = new HashMap<>();
         fillIdentifiers(pids, fs.fields());
         return pids;
     }
 
-    Map<String, String> extractIdentifiers(SubformMap subf) {
+    private Map<String, String> extractIdentifiers(SubformMap subf) {
         Map<String, String> pids = new HashMap<>();
         fillIdentifiers(pids, subf.fields());
         return pids;
     }
 
-    void fillIdentifiers(Map<String, String> pids, List<FormFieldMap> fields) {
+    private void fillIdentifiers(Map<String, String> pids, List<FormFieldMap> fields) {
         for (FormFieldMap fl : fields) {
             if (fl.values().size() < 2 && !StringUtils.isEmpty(fl.value())) {
                 Map<String, String> att = fl.fieldAttributes();
@@ -324,7 +324,7 @@ public class BidanFormEntityConverter {
         }
     }
 
-    Map<String, Object> extractAttributes(FormSubmissionMap fs) {
+    private Map<String, Object> extractAttributes(FormSubmissionMap fs) {
         Map<String, Object> pattributes = new HashMap<>();
         fillAttributes(pattributes, fs.fields());
         return pattributes;
@@ -353,10 +353,10 @@ public class BidanFormEntityConverter {
      * Extract Client from given form submission
      *
      * @param
-     * @return
+     * @return createBaseClient
      * @throws ParseException
      */
-    public Client getClientFromFormSubmission(FormSubmission fsubmission) throws
+    Client getClientFromFormSubmission(FormSubmission fsubmission) throws
             IllegalStateException {
         FormSubmissionMap fs;
         try {
@@ -367,14 +367,13 @@ public class BidanFormEntityConverter {
         }
     }
 
-    public Client getClientFromFormSubmission(FormSubmissionMap fsubmission) throws Exception {
-        return createBaseClient(fsubmission);
-
-    }
+//    public Client getClientFromFormSubmission(FormSubmissionMap fsubmission) throws Exception {
+//        return createBaseClient(fsubmission);
+//
+//    }
 
     public Client createBaseClient(FormSubmissionMap fs) throws ParseException {
-        Log.d(TAG, "createBaseClient: " + fs.formAttributes());
-
+        Log.e(TAG, "createBaseClient: " + fs.formAttributes());
 
         String firstName = fs.getFieldValue(getFieldName(Person.first_name, fs));
         String middleName = fs.getFieldValue(getFieldName(Person.middle_name, fs));
@@ -418,7 +417,7 @@ public class BidanFormEntityConverter {
         c.withAddresses(addresses).withAttributes(extractAttributes(fs))
                 .withIdentifiers(extractIdentifiers(fs));
         for (FormFieldMap ffm : fs.fields()) {
-            if (ffm.name().equals("relationalid")) {
+            if ("relationalid".equals(ffm.name())) {
                 c.addRelationship(ffm.fieldAttributes().get("openmrs_entity_id"), ffm.value());
             }
         }

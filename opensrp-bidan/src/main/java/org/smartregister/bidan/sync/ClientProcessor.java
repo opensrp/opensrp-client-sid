@@ -40,7 +40,7 @@ public class ClientProcessor {
     private static final String TAG = ClientProcessor.class.getName();
     private static final String detailsUpdated = "detailsUpdated";
     private static final String[] openmrs_gen_ids = {"zeir_id"};
-    private static ClientProcessor mInstance;
+    private ClientProcessor mInstance;
     private Context mContext;
     private CloudantDataHandler mCloudantDataHandler;
 
@@ -55,7 +55,7 @@ public class ClientProcessor {
 
     }
 
-    public static ClientProcessor getInstance(Context context) {
+    public ClientProcessor getInstance(Context context) {
         if (mInstance == null) {
             mInstance = new ClientProcessor(context);
         }
@@ -76,54 +76,36 @@ public class ClientProcessor {
         //this seems to be easy for now cloudant json to events model is crazy
         List<JSONObject> eventsAndAlerts = handler.getUpdatedEventsAndAlerts(lastSyncDate);
         if (!eventsAndAlerts.isEmpty()) {
-            Log.e(TAG, "processClient:  ");
+            Log.e(TAG, "processClient:  start");
             for (JSONObject eventOrAlert : eventsAndAlerts) {
+
                 String type = eventOrAlert.has("type") ? eventOrAlert.getString("type") : null;
 
-                if (type.equals("Event")) {
+                if ("Event".equals(type)) {
 
                     JSONObject clientClassificationJson = new JSONObject(clientClassificationStr);
 
-                    if (isNullOrEmptyJSONObject(clientClassificationJson)) {
-                        continue;
-                    }
+                    if (isNullOrEmptyJSONObject(clientClassificationJson)) continue;
 
                     // Iterate through the events
+                    Log.e(TAG, "processClient:Event eventOrAlert "+ eventOrAlert );
+                    Log.e(TAG, "processClient:Event clientClassificationJson "+ clientClassificationJson );
                     processEvent(eventOrAlert, clientClassificationJson);
-                } else if (type.equals("Action")) {
+
+                } else if ("Action".equals(type)) {
                     JSONObject clientAlertClassificationJson = new JSONObject(clientAlertsStr);
 
-                    if (isNullOrEmptyJSONObject(clientAlertClassificationJson)) {
-                        continue;
-                    }
+                    if (isNullOrEmptyJSONObject(clientAlertClassificationJson)) continue;
 
+                    // Iterate through the Alerts
+                    Log.e(TAG, "processClient:Action eventOrAlert "+ eventOrAlert );
+                    Log.e(TAG, "processClient:Action clientClassificationJson "+ clientAlertClassificationJson );
                     processAlert(eventOrAlert, clientAlertClassificationJson);
                 }
             }
         }
 
         allSharedPreferences.saveLastSyncDate(lastSyncDate.getTime());
-    }
-
-    public synchronized void processClient(List<JSONObject> events) throws Exception {
-
-        String clientClassificationStr = getFileContents("ec_client_classification.json");
-
-        if (!events.isEmpty()) {
-            for (JSONObject event : events) {
-
-                JSONObject clientClassificationJson = new JSONObject(clientClassificationStr);
-                if (isNullOrEmptyJSONObject(clientClassificationJson)) {
-                    continue;
-                }
-
-                // Iterate through the events
-                if (event.has("client")) {
-                    processEvent(event, event.getJSONObject("client"), clientClassificationJson);
-                }
-            }
-        }
-
     }
 
     private Boolean processEvent(JSONObject event, JSONObject clientClassificationJson) throws Exception {
@@ -134,17 +116,15 @@ public class ClientProcessor {
         try {
             String baseEntityId = event.getString(baseEntityIdJSONKey);
 
-            if (event.has("creator")) {
-                Log.i(TAG, "EVENT from openmrs");
-            }
+            if (event.has("creator")) Log.i(TAG, "EVENT from openmrs");
+
 
             // For data integrity check if a client exists, if not pull one from cloudant and
             // insert in drishti sqlite db
             JSONObject client = getClient(baseEntityId);
             Log.e(TAG, "processEvent: " + client);
-            if (isNullOrEmptyJSONObject(client)) {
-                return false;
-            }
+            if (isNullOrEmptyJSONObject(client)) return false;
+
 
             // Check if child is deceased and skip
             /*if (client.has("deathdate") && !client.getString("deathdate").isEmpty()) {
@@ -154,73 +134,22 @@ public class ClientProcessor {
             // Get the client type classification
             JSONArray clientClasses = clientClassificationJson.getJSONArray("case_classification_rules");
             Log.e(TAG, "processEvent:clientClasses " + clientClasses);
-            if (isNullOrEmptyJSONArray(clientClasses)) {
+            if (isNullOrEmptyJSONArray(clientClasses)) return false;
 
-                return false;
-            }
 
             for (int i = 0; i < clientClasses.length(); i++) {
                 JSONObject clientClass = clientClasses.getJSONObject(i);
+                Log.e(TAG, "processEvent: clientClass.length " + clientClass.length());
                 Log.e(TAG, "processEvent: clientClass " + clientClass);
                 processClientClass(clientClass, event, client);
             }
 
             // Incase the details have not been updated
             boolean updated = event.has(detailsUpdated) && event.getBoolean(detailsUpdated);
-            if (!updated) {
-                updateClientDetailsTable(event, client);
-            }
+            if (!updated) updateClientDetailsTable(event, client);
 
             return true;
-        } catch (Exception e) {
-            Log.e(TAG, e.toString(), e);
 
-            return null;
-        }
-    }
-
-    private Boolean processEvent(JSONObject event, JSONObject client, JSONObject clientClassificationJson) throws Exception {
-
-        Log.e(TAG, "processEvent:event, client, clientClassification ");
-
-        try {
-            String baseEntityId = event.getString(baseEntityIdJSONKey);
-            if (event.has("creator")) {
-                Log.i(TAG, "EVENT from openmrs");
-            }
-            // For data integrity check if a client exists, if not pull one from cloudant and
-            // insert in drishti sqlite db
-
-            if (isNullOrEmptyJSONObject(client)) {
-                return false;
-            }
-
-            // Get the client type classification
-            JSONArray clientClasses = clientClassificationJson
-                    .getJSONArray("case_classification_rules");
-            if (isNullOrEmptyJSONArray(clientClasses)) {
-                return false;
-            }
-
-            // Check if child is deceased and skip
-            if (client.has("deathdate") && !client.getString("deathdate").isEmpty()) {
-
-                return false;
-            }
-
-            for (int i = 0; i < clientClasses.length(); i++) {
-                JSONObject clientClass = clientClasses.getJSONObject(i);
-                processClientClass(clientClass, event, client);
-            }
-
-            // Incase the details have not been updated
-            boolean updated = event.has(detailsUpdated) && event.getBoolean(detailsUpdated);
-
-            if (!updated) {
-                updateClientDetailsTable(event, client);
-            }
-
-            return true;
         } catch (Exception e) {
             Log.e(TAG, e.toString(), e);
 
@@ -229,23 +158,24 @@ public class ClientProcessor {
     }
 
     private Boolean processClientClass(JSONObject clientClass, JSONObject event, JSONObject client) {
+        Log.e(TAG, "processClientClass:clientClass "+clientClass );
+        Log.e(TAG, "processClientClass:event "+event );
+        Log.e(TAG, "processClientClass:client "+client );
 
         try {
-            if (clientClass == null || clientClass.length() == 0) {
-                return false;
-            }
+            if (clientClass == null || clientClass.length() == 0) return false;
 
-            if (event == null || event.length() == 0) {
-                return false;
-            }
 
-            if (client == null || client.length() == 0) {
-                return false;
-            }
+            if (event == null || event.length() == 0) return false;
+
+
+            if (client == null || client.length() == 0) return false;
+
 
             JSONObject ruleObject = clientClass.getJSONObject("rule");
             JSONArray fields = ruleObject.getJSONArray("fields");
 
+            Log.e(TAG, "processClientClass:fields.length() "+fields.length() );
             for (int i = 0; i < fields.length(); i++) {
                 JSONObject fieldJson = fields.getJSONObject(i);
                 processField(fieldJson, event, client);
@@ -259,6 +189,9 @@ public class ClientProcessor {
 
     private Boolean processField(JSONObject fieldJson, JSONObject event, JSONObject client) {
 
+        Log.e(TAG, "processField:fieldJson "+fieldJson );
+        Log.e(TAG, "processField:event "+event );
+        Log.e(TAG, "processField:client "+client );
         try {
             if (fieldJson == null || fieldJson.length() == 0) {
                 return false;
@@ -289,6 +222,7 @@ public class ClientProcessor {
                     fieldJson.has("closes_case") ? fieldJson.getJSONArray("closes_case") : null;
 
             // some fields are in the main doc e.g event_type so fetch them from the main doc
+            Log.e(TAG, "processField:dataSegment "+ dataSegment );
             if (dataSegment != null && !dataSegment.isEmpty()) {
 
                 JSONArray responseValue =
@@ -323,8 +257,7 @@ public class ClientProcessor {
 
             } else {
                 //fetch from the main doc
-                String docSegmentFieldValue =
-                        event.has(fieldName) ? event.get(fieldName).toString() : "";
+                String docSegmentFieldValue = event.has(fieldName) ? event.get(fieldName).toString() : "";
 
                 if (docSegmentFieldValue.equalsIgnoreCase(fieldValue)) {
                     processCaseModel(event, client, createsCase);
@@ -389,8 +322,7 @@ public class ClientProcessor {
 
                 // after successfully retrieving the column name and value store it in Content value
                 if (columnValue != null) {
-                    columnValue = getHumanReadableConceptResponse(columnValue,
-                            jsonDocSegmentObject);
+                    columnValue = getHumanReadableConceptResponse(columnValue, jsonDocSegmentObject);
                     contentValues.put(columnName, columnValue);
                 }
             }
@@ -411,6 +343,7 @@ public class ClientProcessor {
     }
 
     private Boolean closeCase(JSONObject client, JSONArray closesCase) {
+        Log.e(TAG, "closeCase: " );
         try {
             if (closesCase == null || closesCase.length() == 0) {
                 return false;
@@ -433,6 +366,9 @@ public class ClientProcessor {
     }
 
     private Boolean processCaseModel(JSONObject event, JSONObject client, JSONArray createsCase) {
+        Log.e(TAG, "processCaseModel:event "+event );
+        Log.e(TAG, "processCaseModel:client "+client );
+        Log.e(TAG, "processCaseModel:createsCase "+createsCase );
         try {
 
             if (createsCase == null || createsCase.length() == 0) {
@@ -515,8 +451,7 @@ public class ClientProcessor {
                     }
 
                     String encounterType =
-                            jsonMapping.has("event_type") ? jsonMapping.getString("event_type")
-                                    : null;
+                            jsonMapping.has("event_type") ? jsonMapping.getString("event_type") : null;
 
                     if (jsonDocSegment instanceof JSONArray) {
 
@@ -542,9 +477,8 @@ public class ClientProcessor {
                                 // null or it matches the encounter type from the ec doc we're
                                 // processing
                                 boolean encounterTypeMatches =
-                                        (encounterType == null) || (encounterType != null
-                                                && encounterType
-                                                .equalsIgnoreCase(expectedEncounterType));
+                                        (encounterType == null)
+                                                || (encounterType != null && encounterType.equalsIgnoreCase(expectedEncounterType));
 
                                 if (encounterTypeMatches && expectedFieldValue
                                         .equalsIgnoreCase(fieldValue)) {
@@ -555,8 +489,7 @@ public class ClientProcessor {
                             // after successfully retrieving the column name and value store it
                             // in Content value
                             if (columnValue != null) {
-                                columnValue = getHumanReadableConceptResponse(columnValue,
-                                        jsonDocObject);
+                                columnValue = getHumanReadableConceptResponse(columnValue, jsonDocObject);
                                 contentValues.put(columnName, columnValue);
                             }
                         }
@@ -572,8 +505,7 @@ public class ClientProcessor {
                         // after successfully retrieving the column name and value store it in
                         // Content value
                         if (columnValue != null) {
-                            columnValue = getHumanReadableConceptResponse(columnValue,
-                                    jsonDocSegmentObject);
+                            columnValue = getHumanReadableConceptResponse(columnValue, jsonDocSegmentObject);
                             contentValues.put(columnName, columnValue);
                         }
                     }
@@ -585,6 +517,7 @@ public class ClientProcessor {
                 // save the values to db
                 Log.e(TAG, "processCaseModel:contentValues " + contentValues);
                 Long id = executeInsertStatement(contentValues, clientType);
+                Log.e(TAG, "processCaseModel:insert_id "+ id );
                 updateFTSsearch(clientType, baseEntityId, contentValues);
                 Long timestamp = getEventDate(event.get("eventDate"));
                 addContentValuesToDetailsTable(contentValues, timestamp);
@@ -664,7 +597,8 @@ public class ClientProcessor {
      * @return
      */
     private Map<String, String> getObsFromEvent(JSONObject event) {
-        Map<String, String> obs = new HashMap<String, String>();
+        Log.e(TAG, "getObsFromEvent:event "+ event );
+        Map<String, String> obs = new HashMap<>();
 
         try {
             String obsKey = "obs";
@@ -738,6 +672,8 @@ public class ClientProcessor {
     }
 
     private void saveClientDetails(String baseEntityId, Map<String, String> values, Long timestamp) {
+        Log.e(TAG, "saveClientDetails:baseEntityId "+baseEntityId );
+        Log.e(TAG, "saveClientDetails:values "+values );
         for (String key : values.keySet()) {
             String value = values.get(key);
             saveClientDetails(baseEntityId, key, value, timestamp);
@@ -772,23 +708,16 @@ public class ClientProcessor {
         JSONArray humanReadableValues = jsonDocObject.has("humanReadableValues") ? jsonDocObject
                 .getJSONArray("humanReadableValues") : null;
 
-        if (jsonDocObject == null || humanReadableValues == null
-                || humanReadableValues.length() == 0) {
+        if (jsonDocObject == null || humanReadableValues == null || humanReadableValues.length() == 0) {
             String humanReadableValue = org.smartregister.CoreLibrary.getInstance().context().
                     customHumanReadableConceptResponse().get(value);
 
-            if (StringUtils.isNotBlank(humanReadableValue)) {
-                return humanReadableValue;
-            }
+            if (StringUtils.isNotBlank(humanReadableValue)) return humanReadableValue;
 
             return value;
         }
 
-        String humanReadableValue =
-                humanReadableValues.length() == 1 ? humanReadableValues.get(0).toString()
-                        : humanReadableValues.toString();
-
-        return humanReadableValue;
+        return humanReadableValues.length() == 1 ? humanReadableValues.get(0).toString() : humanReadableValues.toString();
     }
 
     private Map<String, String> getClientAddressAsMap(JSONObject client) {
@@ -843,19 +772,15 @@ public class ClientProcessor {
      * Insert the a new record to the database and returns its id
      **/
     private Long executeInsertStatement(ContentValues values, String tableName) {
+        Log.e(TAG, "executeInsertStatement:values "+ values );
+        Log.e(TAG, "executeInsertStatement:tableName "+ tableName );
         CommonRepository cr = org.smartregister.CoreLibrary.getInstance().context().commonrepository(tableName);
-        Long id = cr.executeInsertStatement(values, tableName);
-        return id;
+        return cr.executeInsertStatement(values, tableName);
     }
 
     private void closeCase(String tableName, String baseEntityId) {
         CommonRepository cr = org.smartregister.CoreLibrary.getInstance().context().commonrepository(tableName);
         cr.closeCase(baseEntityId, tableName);
-    }
-
-    public boolean deleteCase(String tableName, String baseEntityId) {
-        CommonRepository cr = org.smartregister.CoreLibrary.getInstance().context().commonrepository(tableName);
-        return cr.deleteCase(baseEntityId, tableName);
     }
 
     private void executeInsertAlert(ContentValues contentValues) {
@@ -874,13 +799,6 @@ public class ClientProcessor {
                 alertService.create(alert);
             }
         }
-    }
-
-    private Cursor queryTable(String sql, String tableName) {
-        CommonRepository cr = org.smartregister.CoreLibrary.getInstance().context().commonrepository(tableName);
-        Cursor c = cr.queryTable(sql);
-
-        return c;
     }
 
     private JSONObject getColumnMappings(String registerName) {
@@ -935,7 +853,7 @@ public class ClientProcessor {
     }
 
     private void updateFTSsearch(String tableName, String entityId, ContentValues contentValues) {
-        Log.i(TAG, "Starting updateFTSsearch table: " + tableName);
+        Log.e(TAG, "Starting updateFTSsearch table: " + tableName);
         AllCommonsRepository allCommonsRepository = org.smartregister.CoreLibrary.getInstance().context().
                 allCommonsRepositoryobjects(tableName);
 
@@ -944,7 +862,7 @@ public class ClientProcessor {
             updateRegisterCount(entityId);
         }
 
-        Log.i(TAG, "Finished updateFTSsearch table: " + tableName);
+        Log.e(TAG, "Finished updateFTSsearch table: " + tableName);
     }
 
     private JSONObject getClient(String baseEntityId) {
@@ -952,7 +870,8 @@ public class ClientProcessor {
             Log.e(TAG, "getClient: " + mCloudantDataHandler.getClientByBaseEntityId(baseEntityId));
             return mCloudantDataHandler.getClientByBaseEntityId(baseEntityId);
         } catch (Exception e) {
-            Log.e(getClass().getName(), "", e);
+            e.printStackTrace();
+            Log.e(getClass().getName(), "", e.getCause());
 
             return null;
         }
@@ -960,10 +879,6 @@ public class ClientProcessor {
 
     private void updateRegisterCount(String entityId) {
         FORM_SUBMITTED.notifyListeners(entityId);
-    }
-
-    public void setCloudantDataHandler(CloudantDataHandler mCloudantDataHandler) {
-        this.mCloudantDataHandler = mCloudantDataHandler;
     }
 
     private boolean isNullOrEmptyJSONObject(JSONObject jsonObject) {
@@ -992,11 +907,105 @@ public class ClientProcessor {
                 }
             }
         } catch (Exception e) {
-
+            e.printStackTrace();
+            Log.e(TAG, "updateIdenitifier: "+ e.getCause() );
         }
     }
 
     public Context getContext() {
         return mContext;
     }
+
+//    public synchronized void processClient(List<JSONObject> events) throws Exception {
+//
+//        String clientClassificationStr = getFileContents("ec_client_classification.json");
+//
+//        if (!events.isEmpty()) {
+//            for (JSONObject event : events) {
+//
+//                JSONObject clientClassificationJson = new JSONObject(clientClassificationStr);
+//                if (isNullOrEmptyJSONObject(clientClassificationJson)) {
+//                    continue;
+//                }
+//
+//                // Iterate through the events
+//                if (event.has("client")) {
+//                    processEvent(event, event.getJSONObject("client"), clientClassificationJson);
+//                }
+//            }
+//        }
+//
+//    }
+
+
+//    private Boolean processEvent(JSONObject event, JSONObject client, JSONObject clientClassificationJson) throws Exception {
+//
+//        Log.e(TAG, "processEvent:event, client, clientClassification ");
+//
+//        try {
+//            String baseEntityId = event.getString(baseEntityIdJSONKey);
+//            if (event.has("creator")) {
+//                Log.i(TAG, "EVENT from openmrs");
+//            }
+//            // For data integrity check if a client exists, if not pull one from cloudant and
+//            // insert in drishti sqlite db
+//
+//            if (isNullOrEmptyJSONObject(client)) {
+//                return false;
+//            }
+//
+//            // Get the client type classification
+//            JSONArray clientClasses = clientClassificationJson
+//                    .getJSONArray("case_classification_rules");
+//            if (isNullOrEmptyJSONArray(clientClasses)) {
+//                return false;
+//            }
+//
+//            // Check if child is deceased and skip
+//            if (client.has("deathdate") && !client.getString("deathdate").isEmpty()) {
+//
+//                return false;
+//            }
+//
+//            for (int i = 0; i < clientClasses.length(); i++) {
+//                JSONObject clientClass = clientClasses.getJSONObject(i);
+//                processClientClass(clientClass, event, client);
+//            }
+//
+//            // Incase the details have not been updated
+//            boolean updated = event.has(detailsUpdated) && event.getBoolean(detailsUpdated);
+//
+//            if (!updated) {
+//                updateClientDetailsTable(event, client);
+//            }
+//
+//            return true;
+//        } catch (Exception e) {
+//            Log.e(TAG, e.toString(), e);
+//
+//            return null;
+//        }
+//    }
+
+
+
+//    public boolean deleteCase(String tableName, String baseEntityId) {
+//        CommonRepository cr = org.smartregister.CoreLibrary.getInstance().context().commonrepository(tableName);
+//        return cr.deleteCase(baseEntityId, tableName);
+//    }
+
+
+//    private Cursor queryTable(String sql, String tableName) {
+//        CommonRepository cr = org.smartregister.CoreLibrary.getInstance().context().commonrepository(tableName);
+//        Cursor c = cr.queryTable(sql);
+//
+//        return c;
+//    }
+
+
+//    public void setCloudantDataHandler(CloudantDataHandler mCloudantDataHandler) {
+//        this.mCloudantDataHandler = mCloudantDataHandler;
+//    }
+
+
 }

@@ -191,7 +191,7 @@ public class Support {
         String _dueEdd = "";
         DateTimeFormatter formatter = DateTimeFormat.forPattern("yyyy-MM-dd");
 
-        if (StringUtils.isNotBlank(htp) && !htp.equals("delivered")) {
+        if (StringUtils.isNotBlank(htp) && !"delivered".equals(htp)) {
 
             LocalDate date = parse(_edd, formatter).toLocalDate();
             LocalDate dateNow = LocalDate.now();

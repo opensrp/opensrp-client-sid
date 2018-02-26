@@ -52,6 +52,7 @@ public class CloudantSyncHandler {
     private static final String LOG_TAG = "CloudantSyncHandler";
     private static CloudantSyncHandler instance;
     private final Context mContext;
+    private ClientProcessor mClientProcessor;
     private final Handler mHandler;
     private Replicator mPushReplicator;
     private Replicator mPullReplicator;
@@ -60,14 +61,16 @@ public class CloudantSyncHandler {
     private String dbURL;
 
     public CloudantSyncHandler(Context context) {
-        this.mContext = context;
+        mContext = context;
+        mClientProcessor = new ClientProcessor(mContext);
+
         // Allow us to switch code called by the ReplicationListener into
         // the main thread so the UI can update safely.
-        this.mHandler = new Handler(Looper.getMainLooper());
+        mHandler = new Handler(Looper.getMainLooper());
         try {
             // Retrieve database host from preferences
             SharedPreferences preferences = PreferenceManager
-                    .getDefaultSharedPreferences(this.mContext);
+                    .getDefaultSharedPreferences(mContext);
             AllSharedPreferences allSharedPreferences = new AllSharedPreferences(preferences);
             String locationAnmids = allSharedPreferences.getPreference(allSharedPreferences.fetchRegisteredANM() + "-locationid");
             String port = AllConstantsINA.CloudantSync.COUCHDB_PORT;
@@ -77,7 +80,7 @@ public class CloudantSyncHandler {
 
             // Replication Filter by provider
 //            String designDocumentId = this.replicationFilterSettings();
-            PullFilter pullFilter = null;
+//            PullFilter pullFilter = null;
 
 //            if (designDocumentId != null) {
 //                String filterDoc = designDocumentId.split("/")[1];
@@ -89,7 +92,7 @@ public class CloudantSyncHandler {
 //                        filterParams);
 //            }
 
-            this.reloadReplicationSettings(pullFilter);
+            this.reloadReplicationSettings(null);
 
         } catch (URISyntaxException e) {
             Log.e(LOG_TAG, "Unable to construct remote URI from configuration", e);
@@ -225,7 +228,7 @@ public class CloudantSyncHandler {
         // Call the logic to break down CE into case models
         try {
             if (rc.documentsReplicated > 0) {
-                ClientProcessor.getInstance(mContext.getApplicationContext()).processClient();
+                mClientProcessor.getInstance(mContext.getApplicationContext()).processClient();
             }
         } catch (Exception e) {
             Log.e(LOG_TAG, e.toString(), e);

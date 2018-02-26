@@ -164,7 +164,8 @@ public class ANCClientsProvider extends BaseClientsProvider {
 
         risk(pc.getDetails().get("highRiskPregnancyPIH"), pc.getDetails().get("highRiskPregnancyProteinEnergyMalnutrition"),
                 pc.getDetails().get("HighRiskPregnancyTooManyChildren"),
-                pc.getDetails().get("highRiskPregnancyDiabetes"), pc.getDetails().get("highRiskPregnancyAnemia"), null, null, null, null, null, hrp_badge);
+                pc.getDetails().get("highRiskPregnancyDiabetes"), pc.getDetails().get("highRiskPregnancyAnemia"),
+                null, null, null, null, null, hrp_badge);
 
         risk(pc.getDetails().get("highRiskLabourFetusMalpresentation"), pc.getDetails().get("highRiskLabourFetusSize"),
                 pc.getDetails().get("highRisklabourFetusNumber"), pc.getDetails().get("HighRiskLabourSectionCesareaRecord"),
@@ -229,10 +230,10 @@ public class ANCClientsProvider extends BaseClientsProvider {
         status_layout.setBackgroundColor(mContext.getResources().getColor(org.smartregister.R.color.status_bar_text_almost_white));
         alert_status.setText("");
 
-        if (ancKe.equals("-") || ancKe.equals("")) {
+        if ("-".equals(ancKe) || "".equals(ancKe)) {
             status_type.setText(R.string.ANC1);
         }
-        if (ancKe.equals("1")) {
+        if ("1".equals(ancKe)) {
             status_type.setText(R.string.ANC2);
             List<Alert> alertlist_for_client = alertService.findByEntityIdAndAlertNames(pc.entityId(), "ANC 2");
             //alertlist_for_client.get(i).
@@ -273,7 +274,7 @@ public class ANCClientsProvider extends BaseClientsProvider {
             }
         }
 
-        if (ancKe.equals("2")) {
+        if ("2".equals(ancKe)) {
             status_type.setText(R.string.ANC3);
             List<Alert> alertlist_for_client = alertService.findByEntityIdAndAlertNames(pc.entityId(), "ANC 3");
             //alertlist_for_client.get(i).
@@ -313,7 +314,7 @@ public class ANCClientsProvider extends BaseClientsProvider {
                 }
             }
         }
-        if (ancKe.equals("3")) {
+        if ("3".equals(ancKe)) {
             status_type.setText(R.string.ANC4);
             List<Alert> alertlist_for_client = alertService.findByEntityIdAndAlertNames(pc.entityId(), "ANC 4");
             //alertlist_for_client.get(i).
@@ -365,8 +366,9 @@ public class ANCClientsProvider extends BaseClientsProvider {
         getView(smartRegisterClient, view);
     }
 
-    public void risk(String risk1, String risk2, String risk3, String risk4, String risk5, String risk6, String risk7, String risk8, String risk9, String risk10, ImageView riskview) {
-        if (risk1 != null && risk1.equals("yes")
+    public void risk(String risk1, String risk2, String risk3, String risk4, String risk5, String risk6,
+                     String risk7, String risk8, String risk9, String risk10, ImageView riskview) {
+        if (risk1 != null && "yes".equals(risk1)
                 || risk2 != null && risk2.equals("yes")
                 || risk3 != null && risk3.equals("yes")
                 || risk4 != null && risk4.equals("yes")

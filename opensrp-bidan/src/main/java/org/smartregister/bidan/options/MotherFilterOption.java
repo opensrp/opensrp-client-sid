@@ -19,7 +19,7 @@ public class MotherFilterOption implements CursorFilterOption {
 
     @Override
     public String filter() {
-        if (StringUtils.isNotBlank(fieldName) && !fieldName.equals("location_name")) {
+        if (StringUtils.isNotBlank(fieldName) && !"location_name".equals(fieldName)) {
             return "AND " + tableName + ".base_entity_id IN (SELECT DISTINCT base_entity_id FROM ec_details WHERE key MATCH '" + fieldName + "' INTERSECT SELECT DISTINCT base_entity_id FROM ec_details WHERE value MATCH '" + criteria + "') ";
         } else {
             return "AND " + tableName + ".base_entity_id IN (SELECT DISTINCT base_entity_id FROM ec_details WHERE value MATCH '" + criteria + "') ";

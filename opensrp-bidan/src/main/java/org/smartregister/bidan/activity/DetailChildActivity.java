@@ -113,7 +113,7 @@ public class DetailChildActivity extends Activity {
 
             Support.setImagetoHolderFromUri(this,
                     userId,
-                    childview, childclient.getDetails().get("gender").equals("female") ? R.drawable.child_girl_infant : R.drawable.child_boy_infant);
+                    childview, "female".equals(childclient.getDetails().get("gender")) ? R.drawable.child_girl_infant : R.drawable.child_boy_infant);
         }
 
         //end profile image

@@ -217,7 +217,7 @@ public class DetailPNCActivity extends Activity {
         highRiskPostPartumPIH.setText(humanize(pncclient.getDetails().get("highRiskPostPartumPIH") != null ? pncclient.getDetails().get("highRiskPostPartumPIH") : "-"));
         highRiskPostPartumDistosia.setText(humanize(pncclient.getDetails().get("highRiskPostPartumDistosia") != null ? pncclient.getDetails().get("highRiskPostPartumDistosia") : "-"));
 
-        AllCommonsRepository kiRepository = org.smartregister.Context.getInstance().allCommonsRepositoryobjects("ec_ibu");
+        AllCommonsRepository kiRepository = Context.getInstance().allCommonsRepositoryobjects("ec_ibu");
 
         CommonPersonObject kiobject = kiRepository.findByCaseID(pncclient.entityId());
 

@@ -45,7 +45,6 @@ public class ChildClientsProvider implements SmartRegisterCLientsProviderForCurs
     private final View.OnClickListener onClickListener;
     private final AlertService alertService;
     private final CommonRepository commonRepository;
-    private Drawable iconPencilDrawable;
     private String str_firstName;
     private String str_motherName;
     private String str_birthDate;
@@ -81,7 +80,7 @@ public class ChildClientsProvider implements SmartRegisterCLientsProviderForCurs
 //    }
 
     @Override
-    public void getView(Cursor cursor, SmartRegisterClient client, final View convertView) {
+    public void getView(Cursor cursor, SmartRegisterClient client, View convertView) {
         ViewHolder viewHolder = new ViewHolder();
 
         CommonPersonObjectClient pc = (CommonPersonObjectClient) client;
@@ -95,7 +94,6 @@ public class ChildClientsProvider implements SmartRegisterCLientsProviderForCurs
         String relationalId = getValue(pc.getColumnmaps(), "relational_id", true).toLowerCase();
         AllCommonsRepository kirep = org.smartregister.Context.getInstance().allCommonsRepositoryobjects("ec_kartu_ibu");
         final CommonPersonObject kiparent = kirep.findByCaseID(relationalId);
-
 
         AllCommonsRepository iburep = org.smartregister.Context.getInstance().allCommonsRepositoryobjects("ec_ibu");
         final CommonPersonObject ibuparent = iburep.findByCaseID(childobject.getColumnmaps().get("relational_id"));

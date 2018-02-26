@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Context;
 import android.database.Cursor;
 import android.graphics.drawable.Drawable;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.AbsListView;
@@ -40,6 +41,7 @@ import static org.smartregister.util.StringUtil.humanizeAndDoUPPERCASE;
 
 public class PNCClientsProvider extends BaseClientsProvider {
 
+    final String TAG = PNCClientsProvider.class.getSimpleName();
     private final Context mContext;
     private final View.OnClickListener onClickListener;
     private final OpenSRPImageLoader mImageLoader;
@@ -133,8 +135,8 @@ public class PNCClientsProvider extends BaseClientsProvider {
         Map<String, String> details = detailsRepository.getAllDetailsForClient(pc.entityId());
         details.putAll(pncobject.getColumnmaps());
 
-        System.out.println("client : " + pc.getColumnmaps().toString());
-        System.out.println("event : " + pc.getDetails().toString());
+        Log.e(TAG, "getView:client : " + pc.getColumnmaps().toString());
+        Log.e(TAG, "getView:event  : " + pc.getDetails().toString());
 
         // ========================================================================================
         // Set Value
@@ -160,7 +162,7 @@ public class PNCClientsProvider extends BaseClientsProvider {
 
         tanggal_bersalin.setText(humanize(pc.getDetails().get("tanggalKalaIAktif") != null ? pc.getDetails().get("tanggalKalaIAktif") : ""));
         String tempat = pc.getDetails().get("tempatBersalin") != null ? pc.getDetails().get("tempatBersalin") : "";
-        tempat_persalinan.setText(tempat.equals("podok_bersalin_desa") ? "POLINDES" : tempat.equals("pusat_kesehatan_masyarakat_pembantu") ? "Puskesmas pembantu" : tempat.equals("pusat_kesehatan_masyarakat") ? "Puskesmas" : humanize(tempat));
+        tempat_persalinan.setText("podok_bersalin_desa".equals(tempat) ? "POLINDES" : "pusat_kesehatan_masyarakat_pembantu".equals(tempat) ? "Puskesmas pembantu" : "pusat_kesehatan_masyarakat".equals(tempat) ? "Puskesmas" : humanize(tempat));
         dok_tipe.setText(humanize(pc.getDetails().get("caraPersalinanIbu") != null ? pc.getDetails().get("caraPersalinanIbu") : ""));
         komplikasi.setText(humanize(pc.getDetails().get("komplikasi") != null ? translateComplication(pc.getDetails().get("komplikasi")) : ""));
 

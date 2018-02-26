@@ -321,9 +321,8 @@ public class BaseRegisterActivity extends SecuredNativeSmartRegisterActivity imp
             context().formSubmissionService().updateFTSsearch(submission);
             context().formSubmissionRouter().handleSubmission(submission, formName);
 
-            if ("kartu_ibu_registration".equals(formName)) {
-                saveuniqueid();
-            }
+            if ("kartu_ibu_registration".equals(formName)) saveuniqueid();
+
             //switch to forms list fragment
             switchToBaseFragment(formSubmission); // Unnecessary!! passing on data
 

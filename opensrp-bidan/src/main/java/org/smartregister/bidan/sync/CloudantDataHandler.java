@@ -1,5 +1,6 @@
 package org.smartregister.bidan.sync;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
@@ -85,18 +86,19 @@ public class CloudantDataHandler {
 
             if (StringUtils.isNotBlank(documentId)) {
                 SQLiteDatabase db = loadDatabase();
-                String query = "select json from revs r inner join docs d on r.doc_id=d.doc_id "
-                        + "where  d.docid='" + documentId + "' and length(json)>2 order by "
-                        + "updated_at desc";
+                String query = "SELECT json FROM revs r INNER JOIN docs d ON r.doc_id=d.doc_id "
+                        + "WHERE d.docid='" + documentId + "' AND length(json)>2 ORDER BY "
+                        + "updated_at DESC";
                 Log.i(getClass().getName(), query);
+                @SuppressLint("Recycle")
                 Cursor cursor = db.rawQuery(query, null);
                 if (cursor != null && cursor.moveToFirst()) {
                     byte[] json = (cursor.getBlob(0));
                     String jsonEventStr = new String(json, "UTF-8");
-                    if (StringUtils.isNotBlank(jsonEventStr) && !jsonEventStr.equals("{}")) { //
+                    if (StringUtils.isNotBlank(jsonEventStr) && !"{}".equals(jsonEventStr)) { //
+                        Log.e(TAG, "getClientByBaseEntityId:new JSONObject(jsonEventStr) "+ new JSONObject(jsonEventStr) );
                         // Check blank/empty json string
-                        JSONObject jsonObectClient = new JSONObject(jsonEventStr);
-                        return jsonObectClient;
+                        return new JSONObject(jsonEventStr);
                     }
                 }
             }

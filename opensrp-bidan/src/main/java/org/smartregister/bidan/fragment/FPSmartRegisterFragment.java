@@ -41,8 +41,6 @@ public class FPSmartRegisterFragment extends BaseSmartRegisterFragment {
 
     private static final String TAG = FPSmartRegisterFragment.class.getName();
     public static String criteria;
-    //    private final ClientActionHandler clientActionHandler = new ClientActionHandler();
-    String tableName = "ec_kartu_ibu";
 
 //    @Override
 //    protected SmartRegisterPaginatedAdapter adapter() {
@@ -275,6 +273,7 @@ public class FPSmartRegisterFragment extends BaseSmartRegisterFragment {
             } else {
                 StringUtil.humanize(entry.getValue().getLabel());
                 String name = StringUtil.humanize(entry.getValue().getLabel());
+                String tableName = "ec_kartu_ibu";
                 dialogOptionslist.add(new MotherFilterOption(name, "location_name", name, tableName));
 
             }
@@ -298,7 +297,9 @@ public class FPSmartRegisterFragment extends BaseSmartRegisterFragment {
 //                    showFragmentDialog(new EditDialogOptionModel(), view.getTag());
 //                    showFragmentDialog(new BaseRegisterActivity.EditDialogOptionModelNew(), view.getTag());
                     showFragmentDialog(((FPSmartRegisterActivity) getActivity()).new EditDialogOptionModelNew(), view.getTag());
-
+                    break;
+                default:
+                    Log.d(TAG, "onClick: Default Click" );
                     break;
             }
         }
