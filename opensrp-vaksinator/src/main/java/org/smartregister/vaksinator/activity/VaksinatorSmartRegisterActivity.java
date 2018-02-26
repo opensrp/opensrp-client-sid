@@ -28,6 +28,7 @@ import org.smartregister.vaksinator.service.SaveService;
 import org.smartregister.vaksinator.R;
 import org.smartregister.vaksinator.sync.ClientProcessor;
 import org.smartregister.util.FormUtils;
+import org.smartregister.vaksinator.sync.VaksinClientProcessor;
 import org.smartregister.view.activity.SecuredNativeSmartRegisterActivity;
 import org.smartregister.view.contract.SmartRegisterClient;
 import org.smartregister.view.dialog.DialogOption;
@@ -50,7 +51,7 @@ import java.util.Map;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
-import util.VaksinatorFormUtils;
+import util.EnketoFormUtils;
 import util.formula.Support;
 
 import static org.smartregister.util.Utils.getValue;
@@ -178,11 +179,11 @@ public class VaksinatorSmartRegisterActivity extends SecuredNativeSmartRegisterA
         Log.v("fieldoverride", fieldOverrides.toString());
         // save the form
         try{
-            VaksinatorFormUtils formUtils = VaksinatorFormUtils.getInstance(getApplicationContext());
+            EnketoFormUtils formUtils = EnketoFormUtils.getInstance(getApplicationContext());
           //  FormUtils formUtils = FormUtils.getInstance(getApplicationContext());
             FormSubmission submission = formUtils.generateFormSubmisionFromXMLString(id, formSubmission, formName, fieldOverrides);
             saveService.saveForm(getParams(submission), submission.instance());
-            ClientProcessor.getInstance(getApplicationContext()).processClient();
+            VaksinClientProcessor.getInstance(getApplicationContext()).processClient();
 
             context().formSubmissionService().updateFTSsearch(submission);
             context().formSubmissionRouter().handleSubmission(submission, formName);
@@ -203,7 +204,7 @@ public class VaksinatorSmartRegisterActivity extends SecuredNativeSmartRegisterA
             String end = timer.format(new Date());
             Map<String, String> FS = new HashMap<String, String>();
             FS.put("end", end);
-            FlurryAgent.logEvent(formName, FS, true);
+//            FlurryAgent.logEvent(formName, FS, true);
         }catch (Exception e){
             // TODO: show error dialog on the formfragment if the submission fails
             DisplayFormFragment displayFormFragment = getDisplayFormFragmentAtIndex(currentPage);
@@ -231,7 +232,7 @@ public class VaksinatorSmartRegisterActivity extends SecuredNativeSmartRegisterA
                 }
 
                 displayFormFragment.setRecordId(null);
-                activatingForm(formName, entityId, metaData);
+                activatingForm(formName,entityId,metaData);
             }
         });
     }
@@ -286,7 +287,7 @@ public class VaksinatorSmartRegisterActivity extends SecuredNativeSmartRegisterA
         String start = timer.format(new Date());
         Map<String, String> FS = new HashMap<String, String>();
         FS.put("start", start);
-        FlurryAgent.logEvent(formName, FS, true);
+//        FlurryAgent.logEvent(formName, FS, true);
 
             activatingForm(formName,entityId,metaData);
 
@@ -297,13 +298,13 @@ public class VaksinatorSmartRegisterActivity extends SecuredNativeSmartRegisterA
         Log.d(TAG, "activatingForm: entityId="+entityId);
         Log.d(TAG, "activatingForm: metaData="+metaData);
         try {
-            int formIndex = VaksinatorFormUtils.getIndexForFormName(formName, formNames) + 1; // add the offset
+            int formIndex = EnketoFormUtils.getIndexForFormName(formName, formNames) + 1; // add the offset
             if (entityId != null || metaData != null){
                 String data = null;
                 //check if there is previously saved data for the form
                 data = getPreviouslySavedDataForForm(formName, metaData, entityId);
                 if (data == null){
-                    data = VaksinatorFormUtils.getInstance(getApplicationContext()).generateXMLInputForFormWithEntityId(entityId, formName, metaData);
+                    data = EnketoFormUtils.getInstance(getApplicationContext()).generateXMLInputForFormWithEntityId(entityId, formName, metaData);
                 }
 
                 Log.d(TAG, "activatingForm: data="+data);
@@ -423,7 +424,7 @@ public class VaksinatorSmartRegisterActivity extends SecuredNativeSmartRegisterA
         String VaksinatorEnd = timer.format(new Date());
         Map<String, String> Vaksinator = new HashMap<String, String>();
         Vaksinator.put("end", VaksinatorEnd);
-        FlurryAgent.logEvent("Vaksinator_dashboard",Vaksinator, true );
+//        FlurryAgent.logEvent("Vaksinator_dashboard",Vaksinator, true );
     }
 
     public void retrieveAndSaveUnsubmittedFormData(){

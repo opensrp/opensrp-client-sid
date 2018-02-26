@@ -56,7 +56,7 @@
         <meta-data
             android:name="io.fabric.ApiKey"
             android:value="b74c58c94d8965151212e8ecf1f4fdfbf5b7f4e4" />
-
+        <service android:name=".service.SyncService" />
     </application>
 
     <uses-permission android:name="android.permission.INTERNET" />

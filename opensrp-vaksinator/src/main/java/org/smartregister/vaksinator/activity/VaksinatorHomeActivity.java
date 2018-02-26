@@ -359,7 +359,7 @@ public class VaksinatorHomeActivity extends SecuredActivity {
             String HomeEnd = timer.format(new Date());
             Map<String, String> Home = new HashMap<String, String>();
             Home.put("end", HomeEnd);
-            FlurryAgent.logEvent("vaksinator_home_dashboard", Home, true);
+//            FlurryAgent.logEvent("vaksinator_home_dashboard", Home, true);
         }
     };
 

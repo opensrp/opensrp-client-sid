@@ -5,11 +5,13 @@ import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.content.res.Resources;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.support.v7.app.AppCompatActivity;
 import android.text.InputType;
 import android.util.DisplayMetrics;
@@ -24,24 +26,25 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import org.apache.commons.lang3.StringUtils;
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.smartregister.Context;
 import org.smartregister.vaksinator.R;
-import org.smartregister.vaksinator.application.VaksinatorApplication;
-import org.smartregister.vaksinator.utils.Config;
 import org.smartregister.domain.LoginResponse;
 import org.smartregister.domain.Response;
 import org.smartregister.domain.ResponseStatus;
 import org.smartregister.event.Listener;
 //import org.smartregister.vaksinator.lib.ErrorReportingFacade;
 import org.smartregister.repository.AllSharedPreferences;
-import org.smartregister.vaksinator.sync.DrishtiSyncScheduler;
+import org.smartregister.sync.DrishtiSyncScheduler;
 import org.smartregister.util.Log;
+import org.smartregister.util.Utils;
+import org.smartregister.vaksinator.application.VaksinatorApplication;
+import org.smartregister.vaksinator.utils.Config;
 import org.smartregister.view.BackgroundAction;
 import org.smartregister.view.LockingBackgroundTask;
 import org.smartregister.view.ProgressIndicator;
-import org.smartregister.vaksinator.activity.SettingsActivity;
 
 import java.io.IOException;
 import java.text.SimpleDateFormat;
@@ -50,7 +53,6 @@ import java.util.zip.ZipEntry;
 import java.util.zip.ZipFile;
 
 //import io.fabric.sdk.android.Fabric;
-import util.uniqueIdGenerator.Generator;
 
 import static android.preference.PreferenceManager.getDefaultSharedPreferences;
 import static android.view.inputmethod.InputMethodManager.HIDE_NOT_ALWAYS;
@@ -75,9 +77,8 @@ public class LoginActivity extends AppCompatActivity {
     public static final String KANNADA_LANGUAGE = "Kannada";
     public static final String Bengali_LANGUAGE = "Bengali";
     public static final String Bahasa_LANGUAGE = "Bahasa";
-
-    public static Generator generator;
-
+    //   public static Generator generator;
+    public static final String PREF_TEAM_LOCATIONS = "PREF_TEAM_LOCATIONS";
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -105,13 +106,13 @@ public class LoginActivity extends AppCompatActivity {
         initializeProgressDialog();
         setLanguage();
 
-//        debugApp();
+          debugApp();
 
     }
 
     private void debugApp() {
         Config config = new Config();
-        String uname = "demo1", pwd = "Satu2345";
+        String uname = "demo_ec_vaksin", pwd = "Satu2345";
         try {
             uname = config.getCredential("uname", getApplicationContext());
             pwd =  config.getCredential("pwd", getApplicationContext());
@@ -131,7 +132,7 @@ public class LoginActivity extends AppCompatActivity {
 
     private void positionViews() {
         ImageView loginglogo = (ImageView)findViewById(R.id.login_logo);
-        loginglogo.setImageDrawable(getResources().getDrawable(R.mipmap.opensrp_indonesia_vaccine_logo));
+        loginglogo.setImageDrawable(getResources().getDrawable(R.mipmap.login_logo));
         context = Context.getInstance().updateApplicationContext(this.getApplicationContext());
 //        getActionBar().setTitle("");
 //        getActionBar().setIcon(getResources().getDrawable(R.mipmap.logo));
@@ -196,8 +197,10 @@ public class LoginActivity extends AppCompatActivity {
     private void initializeLoginFields() {
         userNameEditText = ((EditText) findViewById(org.smartregister.R.id.login_userNameText));
         userNameEditText.setRawInputType(InputType.TYPE_CLASS_TEXT);
+        // userNameEditText.setText("demo_ec");
         passwordEditText = ((EditText) findViewById(org.smartregister.R.id.login_passwordText));
         passwordEditText.setRawInputType(InputType.TYPE_CLASS_TEXT);
+        //  passwordEditText.setText("Satu2345");
     }
 
     private void setDoneActionHandlerOnPasswordField() {
@@ -352,7 +355,7 @@ public class LoginActivity extends AppCompatActivity {
 
     private void localLoginWith(String userName, String password) {
         context.userService().localLogin(userName, password);
-        LoginActivity.generator = new Generator(context, userName, password);
+        //  LoginActivity.generator = new Generator(context, userName, password);
         goToHome();
         //DrishtiSyncScheduler.startOnlyIfConnectedToNetwork(getApplicationContext());
     }
@@ -360,11 +363,16 @@ public class LoginActivity extends AppCompatActivity {
     private void remoteLoginWith(String userName, String password, String userInfo) {
         context.userService().remoteLogin(userName, password, userInfo);
         String locationId = getUserDefaultLocationId(userInfo);
+        Utils.writePreference(VaksinatorApplication.getInstance().getApplicationContext(), PREF_TEAM_LOCATIONS, locationId);
+
         saveDefaultLocationId(userName,locationId);
-        LoginActivity.generator = new Generator(context, userName, password);
+        // LoginActivity.generator = new Generator(context, userName, password);
         goToHome();
+        String locations = Utils.getPreference(VaksinatorApplication.getInstance().getApplicationContext(), PREF_TEAM_LOCATIONS, "");
+        Log.logInfo("USERINFO"+locations);
         //DrishtiSyncScheduler.startOnlyIfConnectedToNetwork(getApplicationContext());
     }
+
 
     private void goToHome() {
         startActivity(new Intent(this, VaksinatorHomeActivity.class));
@@ -433,10 +441,11 @@ public class LoginActivity extends AppCompatActivity {
     public void saveDefaultLocationId(String userName, String locationId) {
         if (userName != null) {
             context.userService().getAllSharedPreferences().savePreference(userName + "-locationid", locationId);
+            Log.logInfo("LOKASI "+locationId);
         }
     }
 
-    private void tryGetUniqueId(final String username, final String password, final Listener<ResponseStatus> afterGetUniqueId) {
+   /* private void tryGetUniqueId(final String username, final String password, final Listener<ResponseStatus> afterGetUniqueId) {
         LockingBackgroundTask task = new LockingBackgroundTask(new ProgressIndicator() {
             @Override
             public void setVisible() {
@@ -461,7 +470,6 @@ public class LoginActivity extends AppCompatActivity {
                 afterGetUniqueId.onEvent(result);
             }
         });
-    }
+    }*/
 
 }
-
