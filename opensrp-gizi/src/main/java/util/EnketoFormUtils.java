@@ -266,6 +266,7 @@ public class EnketoFormUtils {
             org.smartregister.util.Utils.startAsyncTask(new SavePatientAsyncTask(v2FormSubmission, mContext, true, e), null);
         else
             org.smartregister.util.Utils.startAsyncTask(new SavePatientAsyncTask(v2FormSubmission, mContext, false, e), null);
+
     }
 
     private void printClient(Client client) {
@@ -1170,14 +1171,20 @@ public class EnketoFormUtils {
                     if (event.getEventType().equals("Registrasi Vaksinator")) {
                         JSONObject json = eventClientRepository.getClientByBaseEntityId(event.getBaseEntityId());
                         Client client = gson.fromJson(json.toString(), Client.class);
-                        client.addAttribute("kartu_ibu", "kartu_ibu");
+                       // client.addAttribute("kartu_ibu", "kartu_ibu");
                         saveClient(client);
                     } else if (event.getEventType().equals("Child Registration")) {
                         JSONObject json = eventClientRepository.getClientByBaseEntityId(event.getBaseEntityId());
                         Client client = gson.fromJson(json.toString(), Client.class);
-                        client.addAttribute("anak", "anak");
+                       // client.addAttribute("anak", "anak");
                         saveClient(client);
                    }
+                    else if (event.getEventType().equals(EditClientFormNameList())) {
+                        JSONObject json = eventClientRepository.getClientByBaseEntityId(event.getBaseEntityId());
+                        Client client = gson.fromJson(json.toString(), Client.class);
+                        client.addAttribute("edit", "edit");
+                        saveClient(client);
+                    }
                 }
 
                 Map<String, Map<String, Object>> dep = formEntityConverter.
@@ -1199,4 +1206,5 @@ public class EnketoFormUtils {
             return null;
         }
     }
+
 }
