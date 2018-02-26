@@ -416,11 +416,11 @@ public class BidanFormEntityConverter {
 
         c.withAddresses(addresses).withAttributes(extractAttributes(fs))
                 .withIdentifiers(extractIdentifiers(fs));
-        for (FormFieldMap ffm : fs.fields()) {
-            if ("relationalid".equals(ffm.name())) {
-                c.addRelationship(ffm.fieldAttributes().get("openmrs_entity_id"), ffm.value());
-            }
-        }
+//        for (FormFieldMap ffm : fs.fields()) {
+//            if ("relationalid".equals(ffm.name())) {
+//                c.addRelationship(ffm.fieldAttributes().get("openmrs_entity_id"), ffm.value());
+//            }
+//        }
         return c;
     }
 
