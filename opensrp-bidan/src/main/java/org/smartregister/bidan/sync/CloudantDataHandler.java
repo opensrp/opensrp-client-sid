@@ -89,7 +89,8 @@ public class CloudantDataHandler {
                 String query = "SELECT json FROM revs r INNER JOIN docs d ON r.doc_id=d.doc_id "
                         + "WHERE d.docid='" + documentId + "' AND length(json)>2 ORDER BY "
                         + "updated_at DESC";
-                Log.i(getClass().getName(), query);
+                Log.e(getClass().getName(), query);
+                Log.e(TAG, "getClientByBaseEntityId: " + query);
                 @SuppressLint("Recycle")
                 Cursor cursor = db.rawQuery(query, null);
                 if (cursor != null && cursor.moveToFirst()) {

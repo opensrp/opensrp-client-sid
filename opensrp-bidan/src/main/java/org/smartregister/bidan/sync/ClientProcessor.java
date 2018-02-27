@@ -89,7 +89,7 @@ public class ClientProcessor {
 
                     // Iterate through the events
                     Log.e(TAG, "processClient:Event eventOrAlert "+ eventOrAlert );
-                    Log.e(TAG, "processClient:Event clientClassificationJson "+ clientClassificationJson );
+                    Log.e(TAG, "processClient:Event "+ clientClassificationJson );
                     processEvent(eventOrAlert, clientClassificationJson);
 
                 } else if ("Action".equals(type)) {
@@ -139,8 +139,8 @@ public class ClientProcessor {
 
             for (int i = 0; i < clientClasses.length(); i++) {
                 JSONObject clientClass = clientClasses.getJSONObject(i);
-                Log.e(TAG, "processEvent: clientClass.length " + clientClass.length());
-                Log.e(TAG, "processEvent: clientClass " + clientClass);
+//                Log.e(TAG, "processEvent: clientClass.length " + clientClass.length());
+//                Log.e(TAG, "processEvent: clientClass " + clientClass);
                 processClientClass(clientClass, event, client);
             }
 
@@ -158,9 +158,9 @@ public class ClientProcessor {
     }
 
     private Boolean processClientClass(JSONObject clientClass, JSONObject event, JSONObject client) {
-        Log.e(TAG, "processClientClass:clientClass "+clientClass );
-        Log.e(TAG, "processClientClass:event "+event );
-        Log.e(TAG, "processClientClass:client "+client );
+//        Log.e(TAG, "processClientClass:clientClass "+clientClass );
+//        Log.e(TAG, "processClientClass:event "+event );
+//        Log.e(TAG, "processClientClass:client "+client );
 
         try {
             if (clientClass == null || clientClass.length() == 0) return false;
@@ -189,9 +189,9 @@ public class ClientProcessor {
 
     private Boolean processField(JSONObject fieldJson, JSONObject event, JSONObject client) {
 
-        Log.e(TAG, "processField:fieldJson "+fieldJson );
-        Log.e(TAG, "processField:event "+event );
-        Log.e(TAG, "processField:client "+client );
+//        Log.e(TAG, "processField:fieldJson "+fieldJson );
+//        Log.e(TAG, "processField:event "+event );
+//        Log.e(TAG, "processField:client "+client );
         try {
             if (fieldJson == null || fieldJson.length() == 0) {
                 return false;
@@ -222,7 +222,7 @@ public class ClientProcessor {
                     fieldJson.has("closes_case") ? fieldJson.getJSONArray("closes_case") : null;
 
             // some fields are in the main doc e.g event_type so fetch them from the main doc
-            Log.e(TAG, "processField:dataSegment "+ dataSegment );
+//            Log.e(TAG, "processField:dataSegment "+ dataSegment );
             if (dataSegment != null && !dataSegment.isEmpty()) {
 
                 JSONArray responseValue =
@@ -366,9 +366,9 @@ public class ClientProcessor {
     }
 
     private Boolean processCaseModel(JSONObject event, JSONObject client, JSONArray createsCase) {
-        Log.e(TAG, "processCaseModel:event "+event );
-        Log.e(TAG, "processCaseModel:client "+client );
-        Log.e(TAG, "processCaseModel:createsCase "+createsCase );
+//        Log.e(TAG, "processCaseModel:event "+event );
+//        Log.e(TAG, "processCaseModel:client "+client );
+//        Log.e(TAG, "processCaseModel:createsCase "+createsCase );
         try {
 
             if (createsCase == null || createsCase.length() == 0) {
@@ -672,8 +672,8 @@ public class ClientProcessor {
     }
 
     private void saveClientDetails(String baseEntityId, Map<String, String> values, Long timestamp) {
-        Log.e(TAG, "saveClientDetails:baseEntityId "+baseEntityId );
-        Log.e(TAG, "saveClientDetails:values "+values );
+//        Log.e(TAG, "saveClientDetails:baseEntityId "+baseEntityId );
+//        Log.e(TAG, "saveClientDetails:values "+values );
         for (String key : values.keySet()) {
             String value = values.get(key);
             saveClientDetails(baseEntityId, key, value, timestamp);
