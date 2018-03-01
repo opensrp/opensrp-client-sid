@@ -31,7 +31,7 @@ import org.smartregister.view.fragment.SecuredNativeSmartRegisterFragment;
 import org.smartregister.view.viewpager.OpenSRPViewPager;
 import org.json.JSONException;
 import org.json.JSONObject;
-import org.smartregister.bidan.AllConstantsINA;
+import org.smartregister.bidan.BidanConstants;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -170,9 +170,9 @@ public class NativeKBSmartRegisterActivity extends SecuredNativeSmartRegisterAct
 
     public DialogOption[] getEditOptions() {
         return new DialogOption[]{
-                new OpenFormOption(getString(R.string.str_kb_update), AllConstantsINA.FormNames.KOHORT_KB_UPDATE, formController),
+                new OpenFormOption(getString(R.string.str_kb_update), BidanConstants.FormNames.KOHORT_KB_UPDATE, formController),
                // new OpenFormOption("Edit KB ", KOHORT_KB_EDIT, formController),
-                new OpenFormOption(getString(R.string.str_kb_close), AllConstantsINA.FormNames.KOHORT_KB_CLOSE, formController),
+                new OpenFormOption(getString(R.string.str_kb_close), BidanConstants.FormNames.KOHORT_KB_CLOSE, formController),
 
         };
 
@@ -201,7 +201,7 @@ public class NativeKBSmartRegisterActivity extends SecuredNativeSmartRegisterAct
 
         if (combined != null) {
             FieldOverrides fieldOverrides = new FieldOverrides(combined.toString());
-            startFormActivity(AllConstantsINA.FormNames.KOHORT_KB_REGISTER, null, fieldOverrides.getJSONString());
+            startFormActivity(BidanConstants.FormNames.KOHORT_KB_REGISTER, null, fieldOverrides.getJSONString());
         }
     }
     @Override
@@ -321,10 +321,10 @@ public class NativeKBSmartRegisterActivity extends SecuredNativeSmartRegisterAct
 
     private String[] buildFormNameList(){
         List<String> formNames = new ArrayList<String>();
-        formNames.add(AllConstantsINA.FormNames.KOHORT_KB_REGISTER);
-        formNames.add(AllConstantsINA.FormNames.KOHORT_KB_UPDATE);
+        formNames.add(BidanConstants.FormNames.KOHORT_KB_REGISTER);
+        formNames.add(BidanConstants.FormNames.KOHORT_KB_UPDATE);
       //  formNames.add(KOHORT_KB_EDIT);
-        formNames.add(AllConstantsINA.FormNames.KOHORT_KB_CLOSE);
+        formNames.add(BidanConstants.FormNames.KOHORT_KB_CLOSE);
         DialogOption[] options = getEditOptions();
       //  for (int i = 0; i < options.length; i++) {
      //       formNames.add(((OpenFormOption) options[i]).getFormName());

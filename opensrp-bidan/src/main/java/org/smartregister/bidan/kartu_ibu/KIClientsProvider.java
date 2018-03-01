@@ -20,7 +20,7 @@ import org.smartregister.commonregistry.CommonPersonObject;
 import org.smartregister.commonregistry.CommonPersonObjectClient;
 import org.smartregister.commonregistry.CommonPersonObjectController;
 import org.smartregister.cursoradapter.SmartRegisterCLientsProviderForCursorAdapter;
-import org.smartregister.bidan.AllConstantsINA;
+import org.smartregister.bidan.BidanConstants;
 import org.smartregister.bidan.R;
 import org.smartregister.repository.DetailsRepository;
 import org.smartregister.service.AlertService;
@@ -156,7 +156,7 @@ public class KIClientsProvider implements SmartRegisterCLientsProviderForCursorA
         viewHolder.village_name.setText(pc.getDetails().get("address1") != null ? pc.getDetails().get("address1") : "");
         viewHolder.wife_age.setText(pc.getColumnmaps().get("umur") != null ? pc.getColumnmaps().get("umur") : "");
         viewHolder.no_ibu.setText(pc.getDetails().get("noIbu") != null ? pc.getDetails().get("noIbu") : "");
-        viewHolder.unique_id.setText(pc.getDetails().get(AllConstantsINA.CommonFormFields.UNIQUE_ID) != null ? pc.getDetails().get(AllConstantsINA.CommonFormFields.UNIQUE_ID) : "");
+        viewHolder.unique_id.setText(pc.getDetails().get(BidanConstants.CommonFormFields.UNIQUE_ID) != null ? pc.getDetails().get(BidanConstants.CommonFormFields.UNIQUE_ID) : "");
         viewHolder.gravida.setText(pc.getDetails().get("gravida") != null ? pc.getDetails().get("gravida") : "-");
         viewHolder.parity.setText(pc.getDetails().get("partus") != null ? pc.getDetails().get("partus") : "-");
         viewHolder.number_of_abortus.setText(pc.getDetails().get("abortus") != null ? pc.getDetails().get("abortus") : "-");

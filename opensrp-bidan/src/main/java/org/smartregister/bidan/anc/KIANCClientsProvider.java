@@ -6,7 +6,6 @@ import android.database.Cursor;
 import android.graphics.drawable.Drawable;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.AbsListView;
 import android.widget.Button;
 import android.widget.ImageButton;
@@ -22,7 +21,7 @@ import org.smartregister.commonregistry.CommonPersonObjectClient;
 import org.smartregister.commonregistry.CommonPersonObjectController;
 import org.smartregister.cursoradapter.SmartRegisterCLientsProviderForCursorAdapter;
 import org.smartregister.domain.Alert;
-import org.smartregister.bidan.AllConstantsINA;
+import org.smartregister.bidan.BidanConstants;
 import org.smartregister.bidan.R;
 import org.smartregister.bidan.application.BidanApplication;
 import org.smartregister.bidan.kartu_ibu.KIDetailActivity;
@@ -191,7 +190,7 @@ public class KIANCClientsProvider implements SmartRegisterCLientsProviderForCurs
         viewHolder.village_name.setText(pc.getDetails().get("address1")!=null?pc.getDetails().get("address1"):"");
         viewHolder.wife_age.setText(pc.getDetails().get("umur")!=null?pc.getDetails().get("umur"):"");
         viewHolder.no_ibu.setText(pc.getDetails().get("noIbu")!=null?pc.getDetails().get("noIbu"):"");
-        viewHolder.unique_id.setText(pc.getDetails().get(AllConstantsINA.CommonFormFields.UNIQUE_ID)!=null?pc.getDetails().get(AllConstantsINA.CommonFormFields.UNIQUE_ID):"");
+        viewHolder.unique_id.setText(pc.getDetails().get(BidanConstants.CommonFormFields.UNIQUE_ID)!=null?pc.getDetails().get(BidanConstants.CommonFormFields.UNIQUE_ID):"");
 
         viewHolder.usia_klinis.setText(pc.getDetails().get("usiaKlinis")!=null?context.getString(R.string.usia)+pc.getDetails().get("usiaKlinis")+context.getString(R.string.str_weeks):"-");
         viewHolder.htpt.setText(pc.getDetails().get("htp")!=null?pc.getDetails().get("htp"):"-");

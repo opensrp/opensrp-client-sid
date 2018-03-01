@@ -41,11 +41,11 @@ import java.util.Map;
 import butterknife.Bind;
 import butterknife.ButterKnife;
 
-import static org.smartregister.bidan.AllConstantsINA.FormNames.ANAK_BAYI_REGISTRATION;
-import static org.smartregister.bidan.AllConstantsINA.FormNames.KARTU_IBU_ANC_REGISTRATION;
-import static org.smartregister.bidan.AllConstantsINA.FormNames.KARTU_IBU_CLOSE;
-import static org.smartregister.bidan.AllConstantsINA.FormNames.KARTU_IBU_REGISTRATION;
-import static org.smartregister.bidan.AllConstantsINA.FormNames.KOHORT_KB_PELAYANAN;
+import static org.smartregister.bidan.BidanConstants.FormNames.ANAK_BAYI_REGISTRATION;
+import static org.smartregister.bidan.BidanConstants.FormNames.KARTU_IBU_ANC_REGISTRATION;
+import static org.smartregister.bidan.BidanConstants.FormNames.KARTU_IBU_CLOSE;
+import static org.smartregister.bidan.BidanConstants.FormNames.KARTU_IBU_REGISTRATION;
+import static org.smartregister.bidan.BidanConstants.FormNames.KOHORT_KB_PELAYANAN;
 
 /**
  * Created by Dimas Ciputra on 2/18/15.

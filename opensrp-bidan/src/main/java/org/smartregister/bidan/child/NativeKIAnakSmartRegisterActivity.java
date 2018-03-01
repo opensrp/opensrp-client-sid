@@ -38,11 +38,11 @@ import butterknife.Bind;
 import butterknife.ButterKnife;
 import util.formula.Support;
 
-import static org.smartregister.bidan.AllConstantsINA.FormNames.BALITA_KUNJUNGAN;
-import static org.smartregister.bidan.AllConstantsINA.FormNames.BAYI_NEONATAL_PERIOD;
-import static org.smartregister.bidan.AllConstantsINA.FormNames.KARTU_IBU_ANAK_CLOSE;
-import static org.smartregister.bidan.AllConstantsINA.FormNames.BAYI_IMUNISASI;
-import static org.smartregister.bidan.AllConstantsINA.FormNames.KOHORT_BAYI_KUNJUNGAN;
+import static org.smartregister.bidan.BidanConstants.FormNames.BALITA_KUNJUNGAN;
+import static org.smartregister.bidan.BidanConstants.FormNames.BAYI_NEONATAL_PERIOD;
+import static org.smartregister.bidan.BidanConstants.FormNames.KARTU_IBU_ANAK_CLOSE;
+import static org.smartregister.bidan.BidanConstants.FormNames.BAYI_IMUNISASI;
+import static org.smartregister.bidan.BidanConstants.FormNames.KOHORT_BAYI_KUNJUNGAN;
 
 /**
  * Created by Dimas Ciputra on 4/7/15.

@@ -6,14 +6,15 @@ import com.crashlytics.android.Crashlytics;
 
 import org.smartregister.Context;
 import org.smartregister.CoreLibrary;
+import org.smartregister.bidan.repo.BidanRepository;
 import org.smartregister.commonregistry.CommonFtsObject;
 import org.smartregister.bidan.LoginActivity;
-import org.smartregister.bidan.lib.ErrorReportingFacade;
-import org.smartregister.bidan.lib.FlurryFacade;
+import org.smartregister.repository.Repository;
 import org.smartregister.sync.DrishtiSyncScheduler;
 import org.smartregister.view.activity.DrishtiApplication;
 import org.smartregister.view.receiver.SyncBroadcastReceiver;
 
+import static org.smartregister.util.Log.logError;
 import static org.smartregister.util.Log.logInfo;
 
 import java.util.Locale;
@@ -57,6 +58,20 @@ public class BidanApplication extends DrishtiApplication {
     }
 
     @Override
+    public Repository getRepository() {
+        try {
+            if (repository == null) {
+                repository = new BidanRepository(getInstance().getApplicationContext(), context());
+
+            }
+        } catch (UnsatisfiedLinkError e) {
+            logError("Error on getRepository: " + e);
+
+        }
+        return repository;
+    }
+
+    @Override
     public void logoutCurrentUser(){
         Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
@@ -93,7 +108,7 @@ public class BidanApplication extends DrishtiApplication {
                 getBaseContext().getResources().getDisplayMetrics());
     }
 
-    private String[] getFtsSearchFields(String tableName){
+    private static String[] getFtsSearchFields(String tableName){
         switch (tableName) {
             case "ec_kartu_ibu": {
                 return new String[]{"namalengkap", "namaSuami"};
@@ -111,7 +126,7 @@ public class BidanApplication extends DrishtiApplication {
         return null;
     }
 
-    private String[] getFtsSortFields(String tableName){
+    private static String[] getFtsSortFields(String tableName){
         switch (tableName) {
             case "ec_kartu_ibu": {
                 return new String[]{"namalengkap", "umur", "noIbu", "htp"};
@@ -129,7 +144,7 @@ public class BidanApplication extends DrishtiApplication {
         return null;
     }
 
-    private String[] getFtsMainConditions(String tableName){
+    private static String[] getFtsMainConditions(String tableName){
         switch (tableName) {
             case "ec_kartu_ibu": {
                 return new String[]{"is_closed", "jenisKontrasepsi"};
@@ -157,11 +172,11 @@ public class BidanApplication extends DrishtiApplication {
 //    }
 
 
-    private String[] getFtsTables(){
+    private static String[] getFtsTables(){
         return new String[]{ "ec_kartu_ibu", "ec_anak", "ec_ibu", "ec_pnc" };
     }
 
-    private CommonFtsObject createCommonFtsObject(){
+    public static CommonFtsObject createCommonFtsObject(){
         CommonFtsObject commonFtsObject = new CommonFtsObject(getFtsTables());
         for(String ftsTable: commonFtsObject.getTables()){
             commonFtsObject.updateSearchFields(ftsTable, getFtsSearchFields(ftsTable));

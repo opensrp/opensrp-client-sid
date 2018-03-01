@@ -8,7 +8,6 @@ import android.os.Bundle;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.util.Log;
-import android.widget.Toast;
 
 import org.smartregister.domain.form.FieldOverrides;
 import org.smartregister.domain.form.FormSubmission;
@@ -39,12 +38,11 @@ import java.util.Map;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
-import util.formula.Support;
 
-import static org.smartregister.bidan.AllConstantsINA.FormNames.KARTU_IBU_PNC_CLOSE;
-import static org.smartregister.bidan.AllConstantsINA.FormNames.KARTU_IBU_PNC_OA;
-import static org.smartregister.bidan.AllConstantsINA.FormNames.KARTU_IBU_PNC_POSPARTUM_KB;
-import static org.smartregister.bidan.AllConstantsINA.FormNames.KARTU_IBU_PNC_VISIT;
+import static org.smartregister.bidan.BidanConstants.FormNames.KARTU_IBU_PNC_CLOSE;
+import static org.smartregister.bidan.BidanConstants.FormNames.KARTU_IBU_PNC_OA;
+import static org.smartregister.bidan.BidanConstants.FormNames.KARTU_IBU_PNC_POSPARTUM_KB;
+import static org.smartregister.bidan.BidanConstants.FormNames.KARTU_IBU_PNC_VISIT;
 
 /**
  * Created by Dimas Ciputra on 3/5/15.

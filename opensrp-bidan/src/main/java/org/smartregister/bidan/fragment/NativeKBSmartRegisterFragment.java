@@ -1,20 +1,15 @@
 package org.smartregister.bidan.fragment;
 
 import android.annotation.TargetApi;
-import android.app.AlertDialog;
 import android.app.Fragment;
 import android.app.FragmentTransaction;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Build;
-import android.os.Parcelable;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
-
-import com.flurry.android.FlurryAgent;
 
 import org.smartregister.Context;
 import org.smartregister.bidan.R;
@@ -53,13 +48,12 @@ import org.opensrp.api.domain.Location;
 import org.opensrp.api.util.EntityUtils;
 import org.opensrp.api.util.LocationTree;
 import org.opensrp.api.util.TreeNode;
-import org.smartregister.bidan.AllConstantsINA;
+import org.smartregister.bidan.BidanConstants;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
-import java.util.Locale;
 import java.util.Map;
 import java.util.Objects;
 
@@ -283,7 +277,7 @@ public class NativeKBSmartRegisterFragment extends SecuredNativeSmartRegisterCur
         LocationSelectorDialogFragment
                 .newInstance((NativeKBSmartRegisterActivity) getActivity(), new
                         EditDialogOptionModel(), context().anmLocationController().get(),
-                        AllConstantsINA.FormNames.KOHORT_KB_REGISTER)
+                        BidanConstants.FormNames.KOHORT_KB_REGISTER)
                 .show(ft, locationDialogTAG);
     }
 

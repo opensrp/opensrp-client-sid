@@ -8,7 +8,6 @@ import android.os.Bundle;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.util.Log;
-import android.widget.Toast;
 
 import org.smartregister.bidan.R;
 import org.smartregister.domain.form.FormSubmission;
@@ -26,7 +25,7 @@ import org.smartregister.view.dialog.OpenFormOption;
 import org.smartregister.view.fragment.SecuredNativeSmartRegisterFragment;
 import org.smartregister.view.viewpager.OpenSRPViewPager;
 import org.json.JSONObject;
-import org.smartregister.bidan.AllConstantsINA;
+import org.smartregister.bidan.BidanConstants;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -37,7 +36,6 @@ import java.util.Map;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
-import util.formula.Support;
 
 /**
  * Created by Dimas Ciputra on 3/5/15.
@@ -145,13 +143,13 @@ public class NativeKIANCSmartRegisterActivity extends SecuredNativeSmartRegister
 
     public DialogOption[] getEditOptions() {
         return new DialogOption[]{
-                new OpenFormOption(getString(R.string.str_register_anc_visit_form), AllConstantsINA.FormNames.KARTU_IBU_ANC_VISIT, formController),
-                new OpenFormOption(getString(R.string.anc_visit_integrasi), AllConstantsINA.FormNames.KARTU_IBU_ANC_VISIT_INTEGRASI, formController),
-                new OpenFormOption(getString(R.string.anc_visit_labtest), AllConstantsINA.FormNames.KARTU_IBU_ANC_VISIT_LABTEST, formController),
-                new OpenFormOption(getString(R.string.str_rencana_persalinan_anc_form), AllConstantsINA.FormNames.KARTU_IBU_ANC_RENCANA_PERSALINAN, formController),
-                new OpenFormOption(getString(R.string.str_register_pnc_form), AllConstantsINA.FormNames.KARTU_IBU_PNC_REGISTRATION, formController),
+                new OpenFormOption(getString(R.string.str_register_anc_visit_form), BidanConstants.FormNames.KARTU_IBU_ANC_VISIT, formController),
+                new OpenFormOption(getString(R.string.anc_visit_integrasi), BidanConstants.FormNames.KARTU_IBU_ANC_VISIT_INTEGRASI, formController),
+                new OpenFormOption(getString(R.string.anc_visit_labtest), BidanConstants.FormNames.KARTU_IBU_ANC_VISIT_LABTEST, formController),
+                new OpenFormOption(getString(R.string.str_rencana_persalinan_anc_form), BidanConstants.FormNames.KARTU_IBU_ANC_RENCANA_PERSALINAN, formController),
+                new OpenFormOption(getString(R.string.str_register_pnc_form), BidanConstants.FormNames.KARTU_IBU_PNC_REGISTRATION, formController),
                // new OpenFormOption("Edit ANC ", KARTU_IBU_ANC_EDIT, formController),
-                new OpenFormOption(getString(R.string.str_register_anc_close_form), AllConstantsINA.FormNames.KARTU_IBU_ANC_CLOSE, formController),
+                new OpenFormOption(getString(R.string.str_register_anc_close_form), BidanConstants.FormNames.KARTU_IBU_ANC_CLOSE, formController),
         };
     }
 
@@ -162,7 +160,7 @@ public class NativeKIANCSmartRegisterActivity extends SecuredNativeSmartRegister
         try{
             FormUtils formUtils = FormUtils.getInstance(getApplicationContext());
             FormSubmission submission = formUtils.generateFormSubmisionFromXMLString(id, formSubmission, formName, fieldOverrides);
-            if(formName.equalsIgnoreCase(AllConstantsINA.FormNames.KARTU_IBU_PNC_REGISTRATION)) {
+            if(formName.equalsIgnoreCase(BidanConstants.FormNames.KARTU_IBU_PNC_REGISTRATION)) {
                 //do nothing
             }
             else{
@@ -260,13 +258,13 @@ public class NativeKIANCSmartRegisterActivity extends SecuredNativeSmartRegister
 
     private String[] buildFormNameList(){
         List<String> formNames = new ArrayList<String>();
-        formNames.add(AllConstantsINA.FormNames.KARTU_IBU_ANC_VISIT);
-        formNames.add(AllConstantsINA.FormNames.KARTU_IBU_ANC_VISIT_INTEGRASI);
-        formNames.add(AllConstantsINA.FormNames.KARTU_IBU_ANC_VISIT_LABTEST);
-        formNames.add(AllConstantsINA.FormNames.KARTU_IBU_ANC_RENCANA_PERSALINAN);
-        formNames.add(AllConstantsINA.FormNames.KARTU_IBU_PNC_REGISTRATION);
+        formNames.add(BidanConstants.FormNames.KARTU_IBU_ANC_VISIT);
+        formNames.add(BidanConstants.FormNames.KARTU_IBU_ANC_VISIT_INTEGRASI);
+        formNames.add(BidanConstants.FormNames.KARTU_IBU_ANC_VISIT_LABTEST);
+        formNames.add(BidanConstants.FormNames.KARTU_IBU_ANC_RENCANA_PERSALINAN);
+        formNames.add(BidanConstants.FormNames.KARTU_IBU_PNC_REGISTRATION);
       //  formNames.add(KARTU_IBU_ANC_EDIT);
-        formNames.add(AllConstantsINA.FormNames.KARTU_IBU_ANC_CLOSE);
+        formNames.add(BidanConstants.FormNames.KARTU_IBU_ANC_CLOSE);
 
         return formNames.toArray(new String[formNames.size()]);
     }

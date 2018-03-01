@@ -9,9 +9,7 @@ import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
 
-//import org.smartregister.BidanConstants;
 import org.smartregister.Context;
-import org.smartregister.bidan.lib.BidanConstants;
 import org.smartregister.cursoradapter.SmartRegisterQueryBuilder;
 import org.smartregister.enketo.view.fragment.DisplayFormFragment;
 import org.smartregister.event.Listener;
