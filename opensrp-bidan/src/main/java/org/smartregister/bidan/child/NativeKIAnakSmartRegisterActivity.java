@@ -15,6 +15,7 @@ import org.smartregister.bidan.LoginActivity;
 import org.smartregister.bidan.R;
 import org.smartregister.bidan.fragment.NativeKIAnakSmartRegisterFragment;
 import org.smartregister.bidan.pageradapter.BaseRegisterActivityPagerAdapter;
+import org.smartregister.enketo.listener.DisplayFormListener;
 import org.smartregister.enketo.view.fragment.DisplayFormFragment;
 import org.smartregister.provider.SmartRegisterClientsProvider;
 import org.smartregister.service.ZiggyService;
@@ -47,7 +48,8 @@ import static org.smartregister.bidan.BidanConstants.FormNames.KOHORT_BAYI_KUNJU
 /**
  * Created by Dimas Ciputra on 4/7/15.
  */
-public class NativeKIAnakSmartRegisterActivity extends SecuredNativeSmartRegisterActivity {
+public class NativeKIAnakSmartRegisterActivity extends SecuredNativeSmartRegisterActivity
+        implements DisplayFormListener {
     SimpleDateFormat timer = new SimpleDateFormat("hh:mm:ss");
     public static final String TAG = NativeKIAnakSmartRegisterFragment.class.getSimpleName();
     @Bind(R.id.view_pager)
@@ -231,6 +233,7 @@ public class NativeKIAnakSmartRegisterActivity extends SecuredNativeSmartRegiste
                     displayFormFragment.setFormData(data);
                     displayFormFragment.setRecordId(entityId);
                     displayFormFragment.setFieldOverides(metaData);
+                    displayFormFragment.setListener(this);
                 }
             }
 

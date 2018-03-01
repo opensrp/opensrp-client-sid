@@ -98,7 +98,7 @@ public class LoginActivity extends Activity {
         getActionBar().setBackgroundDrawable(getResources().getDrawable(R.color.action_bar_background));
         setLanguage();
 
-        debugApp();
+//        debugApp();
 
     }
     private void debugApp() {
@@ -324,14 +324,14 @@ public class LoginActivity extends Activity {
 
     private void localLoginWith(String userName, String password) {
         context.userService().localLogin(userName, password);
-        LoginActivity.generator = new Generator(context,userName,password);
+//        LoginActivity.generator = new Generator(context,userName,password);
         goToHome();
         DrishtiSyncScheduler.startOnlyIfConnectedToNetwork(getApplicationContext());
     }
 
     private void remoteLoginWith(String userName, String password, String userInfo) {
         context.userService().remoteLogin(userName, password, userInfo);
-        LoginActivity.generator = new Generator(context,userName,password);
+//        LoginActivity.generator = new Generator(context,userName,password);
         goToHome();
         DrishtiSyncScheduler.startOnlyIfConnectedToNetwork(getApplicationContext());
     }
@@ -389,31 +389,31 @@ public class LoginActivity extends Activity {
         }
     }
 
-    private void tryGetUniqueId(final String username, final String password, final Listener<ResponseStatus> afterGetUniqueId) {
-        LockingBackgroundTask task = new LockingBackgroundTask(new ProgressIndicator() {
-            @Override
-            public void setVisible() {
-                progressDialog.show();
-            }
-            @Override
-            public void setInvisible() {
-                progressDialog.dismiss();
-            }
-        });
-
-        task.doActionInBackground(new BackgroundAction<ResponseStatus>() {
-            @Override
-            public ResponseStatus actionToDoInBackgroundThread() {
-                LoginActivity.generator = new Generator(context,username,password);
-                LoginActivity.generator.uniqueIdService().syncUniqueIdFromServer(username, password);
-                return (LoginActivity.generator.uniqueIdService().getLastUsedId(username, password));
-            }
-
-            @Override
-            public void postExecuteInUIThread(ResponseStatus result) {
-                afterGetUniqueId.onEvent(result);
-            }
-        });
-    }
+//    private void tryGetUniqueId(final String username, final String password, final Listener<ResponseStatus> afterGetUniqueId) {
+//        LockingBackgroundTask task = new LockingBackgroundTask(new ProgressIndicator() {
+//            @Override
+//            public void setVisible() {
+//                progressDialog.show();
+//            }
+//            @Override
+//            public void setInvisible() {
+//                progressDialog.dismiss();
+//            }
+//        });
+//
+//        task.doActionInBackground(new BackgroundAction<ResponseStatus>() {
+//            @Override
+//            public ResponseStatus actionToDoInBackgroundThread() {
+//                LoginActivity.generator = new Generator(context,username,password);
+//                LoginActivity.generator.uniqueIdService().syncUniqueIdFromServer(username, password);
+//                return (LoginActivity.generator.uniqueIdService().getLastUsedId(username, password));
+//            }
+//
+//            @Override
+//            public void postExecuteInUIThread(ResponseStatus result) {
+//                afterGetUniqueId.onEvent(result);
+//            }
+//        });
+//    }
 
 }

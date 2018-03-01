@@ -16,6 +16,7 @@ import org.smartregister.bidan.LoginActivity;
 import org.smartregister.bidan.R;
 import org.smartregister.bidan.fragment.NativeKISmartRegisterFragment;
 import org.smartregister.bidan.pageradapter.BaseRegisterActivityPagerAdapter;
+import org.smartregister.enketo.listener.DisplayFormListener;
 import org.smartregister.enketo.view.fragment.DisplayFormFragment;
 import org.smartregister.provider.SmartRegisterClientsProvider;
 import org.smartregister.service.ZiggyService;
@@ -50,7 +51,8 @@ import static org.smartregister.bidan.BidanConstants.FormNames.KOHORT_KB_PELAYAN
 /**
  * Created by Dimas Ciputra on 2/18/15.
  */
-public class NativeKISmartRegisterActivity extends SecuredNativeSmartRegisterActivity implements LocationSelectorDialogFragment.OnLocationSelectedListener{
+public class NativeKISmartRegisterActivity extends SecuredNativeSmartRegisterActivity
+        implements LocationSelectorDialogFragment.OnLocationSelectedListener, DisplayFormListener {
     SimpleDateFormat timer = new SimpleDateFormat("hh:mm:ss");
     public static final String TAG = NativeKISmartRegisterActivity.class.getSimpleName();
     @Bind(R.id.view_pager)
@@ -129,12 +131,12 @@ public class NativeKISmartRegisterActivity extends SecuredNativeSmartRegisterAct
         });
 
 
-        if(LoginActivity.generator.uniqueIdController().needToRefillUniqueId(LoginActivity.generator.UNIQUE_ID_LIMIT)) {
-            String toastMessage =   "need to refill unique id, its only "+
-                                    LoginActivity.generator.uniqueIdController().countRemainingUniqueId()+
-                                    " remaining";
-            Toast.makeText(context().applicationContext(), toastMessage, Toast.LENGTH_LONG).show();
-        }
+//        if(LoginActivity.generator.uniqueIdController().needToRefillUniqueId(LoginActivity.generator.UNIQUE_ID_LIMIT)) {
+//            String toastMessage =   "need to refill unique id, its only "+
+//                                    LoginActivity.generator.uniqueIdController().countRemainingUniqueId()+
+//                                    " remaining";
+//            Toast.makeText(context().applicationContext(), toastMessage, Toast.LENGTH_LONG).show();
+//        }
 
         ziggyService = context().ziggyService();
 
@@ -188,15 +190,14 @@ public class NativeKISmartRegisterActivity extends SecuredNativeSmartRegisterAct
 
         try {
             JSONObject locationJSON = new JSONObject(locationJSONString);
-            JSONObject uniqueId = new JSONObject(LoginActivity.generator.uniqueIdController().getUniqueIdJson());
+//            JSONObject uniqueId = new JSONObject(LoginActivity.generator.uniqueIdController().getUniqueIdJson());
 
             combined = locationJSON;
-            Iterator<String> iter = uniqueId.keys();
-
-            while (iter.hasNext()) {
-                String key = iter.next();
-                combined.put(key, uniqueId.get(key));
-            }
+//            Iterator<String> iter = uniqueId.keys();
+//            while (iter.hasNext()) {
+//                String key = iter.next();
+//                combined.put(key, uniqueId.get(key));
+//            }
 
         } catch (JSONException e) {
             e.printStackTrace();
@@ -213,7 +214,7 @@ public class NativeKISmartRegisterActivity extends SecuredNativeSmartRegisterAct
     public void saveFormSubmission(String formSubmission, String id, String formName, JSONObject fieldOverrides){
         Log.v("fieldoverride", fieldOverrides.toString());
         // save the form
-        try{
+        try {
             FormUtils formUtils = FormUtils.getInstance(getApplicationContext());
             FormSubmission submission = formUtils.generateFormSubmisionFromXMLString(id, formSubmission, formName, fieldOverrides);
             ziggyService.saveForm(getParams(submission), submission.instance());
@@ -264,6 +265,7 @@ public class NativeKISmartRegisterActivity extends SecuredNativeSmartRegisterAct
                 if (displayFormFragment != null) {
                     displayFormFragment.setFormData(data);
                     displayFormFragment.setRecordId(entityId);
+                    displayFormFragment.setListener(this);
                     displayFormFragment.setFieldOverides(metaData);
                 }
             }
@@ -277,14 +279,14 @@ public class NativeKISmartRegisterActivity extends SecuredNativeSmartRegisterAct
     }
 
     public void saveuniqueid() {
-        try {
-            JSONObject uniqueId = new JSONObject(LoginActivity.generator.uniqueIdController().getUniqueIdJson());
-            String uniq = uniqueId.getString("unique_id");
-            LoginActivity.generator.uniqueIdController().updateCurrentUniqueId(uniq);
+//        try {
+//            JSONObject uniqueId = new JSONObject(LoginActivity.generator.uniqueIdController().getUniqueIdJson());
+//            String uniq = uniqueId.getString("unique_id");
+//            LoginActivity.generator.uniqueIdController().updateCurrentUniqueId(uniq);
 
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
+//        } catch (JSONException e) {
+//            e.printStackTrace();
+//        }
     }
 
     public void switchToBaseFragment(final String data){

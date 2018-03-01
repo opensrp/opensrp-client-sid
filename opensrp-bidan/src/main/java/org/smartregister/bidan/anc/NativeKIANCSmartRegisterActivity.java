@@ -14,6 +14,7 @@ import org.smartregister.domain.form.FormSubmission;
 import org.smartregister.bidan.LoginActivity;
 import org.smartregister.bidan.fragment.NativeKIANCSmartRegisterFragment;
 import org.smartregister.bidan.pageradapter.BaseRegisterActivityPagerAdapter;
+import org.smartregister.enketo.listener.DisplayFormListener;
 import org.smartregister.enketo.view.fragment.DisplayFormFragment;
 import org.smartregister.provider.SmartRegisterClientsProvider;
 import org.smartregister.service.ZiggyService;
@@ -40,7 +41,7 @@ import butterknife.ButterKnife;
 /**
  * Created by Dimas Ciputra on 3/5/15.
  */
-public class NativeKIANCSmartRegisterActivity extends SecuredNativeSmartRegisterActivity {
+public class NativeKIANCSmartRegisterActivity extends SecuredNativeSmartRegisterActivity implements DisplayFormListener {
     SimpleDateFormat timer = new SimpleDateFormat("hh:mm:ss");
     public static final String TAG = "ANCActivity";
     @Bind(R.id.view_pager)
@@ -203,6 +204,7 @@ public class NativeKIANCSmartRegisterActivity extends SecuredNativeSmartRegister
                     displayFormFragment.setFormData(data);
                     displayFormFragment.setRecordId(entityId);
                     displayFormFragment.setFieldOverides(metaData);
+                    displayFormFragment.setListener(this);
                 }
             }
 

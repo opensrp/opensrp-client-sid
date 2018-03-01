@@ -15,6 +15,7 @@ import org.smartregister.bidan.LoginActivity;
 import org.smartregister.bidan.R;
 import org.smartregister.bidan.fragment.NativeKIPNCSmartRegisterFragment;
 import org.smartregister.bidan.pageradapter.BaseRegisterActivityPagerAdapter;
+import org.smartregister.enketo.listener.DisplayFormListener;
 import org.smartregister.enketo.view.fragment.DisplayFormFragment;
 import org.smartregister.provider.SmartRegisterClientsProvider;
 import org.smartregister.service.ZiggyService;
@@ -45,9 +46,10 @@ import static org.smartregister.bidan.BidanConstants.FormNames.KARTU_IBU_PNC_POS
 import static org.smartregister.bidan.BidanConstants.FormNames.KARTU_IBU_PNC_VISIT;
 
 /**
- * Created by Dimas Ciputra on 3/5/15.
+ * Created by Dimas Ciputra on 3/5/15
  */
-public class NativeKIPNCSmartRegisterActivity extends SecuredNativeSmartRegisterActivity implements LocationSelectorDialogFragment.OnLocationSelectedListener{
+public class NativeKIPNCSmartRegisterActivity extends SecuredNativeSmartRegisterActivity
+        implements LocationSelectorDialogFragment.OnLocationSelectedListener, DisplayFormListener {
     SimpleDateFormat timer = new SimpleDateFormat("hh:mm:ss");
     public static final String TAG = NativeKIPNCSmartRegisterActivity.class.getSimpleName();
     @Bind(R.id.view_pager)
@@ -229,6 +231,7 @@ public class NativeKIPNCSmartRegisterActivity extends SecuredNativeSmartRegister
                     displayFormFragment.setFormData(data);
                     displayFormFragment.setRecordId(entityId);
                     displayFormFragment.setFieldOverides(metaData);
+                    displayFormFragment.setListener(this);
                 }
             }
 

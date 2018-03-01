@@ -26,7 +26,7 @@ public class SyncBidanBroadcastReceiver extends BroadcastReceiver {
                         new SyncProgressIndicator(),
                         org.smartregister.Context.getInstance().allFormVersionSyncService());
 
-        updateActionsTask.setAdditionalSyncService(LoginActivity.generator.uniqueIdService());
+//        updateActionsTask.setAdditionalSyncService(LoginActivity.generator.uniqueIdService());
 
         updateActionsTask.updateFromServer(new SyncAfterFetchListener());
     }

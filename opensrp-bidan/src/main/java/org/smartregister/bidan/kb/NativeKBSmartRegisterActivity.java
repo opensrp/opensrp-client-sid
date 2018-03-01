@@ -18,6 +18,7 @@ import org.smartregister.domain.form.FormSubmission;
 import org.smartregister.bidan.LoginActivity;
 import org.smartregister.bidan.fragment.NativeKBSmartRegisterFragment;
 import org.smartregister.bidan.pageradapter.BaseRegisterActivityPagerAdapter;
+import org.smartregister.enketo.listener.DisplayFormListener;
 import org.smartregister.enketo.view.fragment.DisplayFormFragment;
 import org.smartregister.provider.SmartRegisterClientsProvider;
 import org.smartregister.service.ZiggyService;
@@ -48,7 +49,8 @@ import util.formula.Support;
 /**
  * Created by Dimas Ciputra on 2/18/15
  */
-public class NativeKBSmartRegisterActivity extends SecuredNativeSmartRegisterActivity implements LocationSelectorDialogFragment.OnLocationSelectedListener{
+public class NativeKBSmartRegisterActivity extends SecuredNativeSmartRegisterActivity
+        implements LocationSelectorDialogFragment.OnLocationSelectedListener, DisplayFormListener {
 
     public static final String TAG = "KBActivity";
     @Bind(R.id.view_pager)
@@ -128,12 +130,12 @@ public class NativeKBSmartRegisterActivity extends SecuredNativeSmartRegisterAct
         });
 
 
-        if(LoginActivity.generator.uniqueIdController().needToRefillUniqueId(LoginActivity.generator.UNIQUE_ID_LIMIT)) {
-            String toastMessage =   "need to refill unique id, its only "+
-                                    LoginActivity.generator.uniqueIdController().countRemainingUniqueId()+
-                                    " remaining";
-            Toast.makeText(context().applicationContext(), toastMessage, Toast.LENGTH_LONG).show();
-        }
+//        if(LoginActivity.generator.uniqueIdController().needToRefillUniqueId(LoginActivity.generator.UNIQUE_ID_LIMIT)) {
+//            String toastMessage =   "need to refill unique id, its only "+
+//                                    LoginActivity.generator.uniqueIdController().countRemainingUniqueId()+
+//                                    " remaining";
+//            Toast.makeText(context().applicationContext(), toastMessage, Toast.LENGTH_LONG).show();
+//        }
 
         ziggyService = context().ziggyService();
 
@@ -185,15 +187,15 @@ public class NativeKBSmartRegisterActivity extends SecuredNativeSmartRegisterAct
 
         try {
             JSONObject locationJSON = new JSONObject(locationJSONString);
-            JSONObject uniqueId = new JSONObject(LoginActivity.generator.uniqueIdController().getUniqueIdJson());
+//            JSONObject uniqueId = new JSONObject(LoginActivity.generator.uniqueIdController().getUniqueIdJson());
 
             combined = locationJSON;
-            Iterator<String> iter = uniqueId.keys();
+//            Iterator<String> iter = uniqueId.keys();
 
-            while (iter.hasNext()) {
-                String key = iter.next();
-                combined.put(key, uniqueId.get(key));
-            }
+//            while (iter.hasNext()) {
+//                String key = iter.next();
+//                combined.put(key, uniqueId.get(key));
+//            }
 
         } catch (JSONException e) {
             e.printStackTrace();
@@ -265,6 +267,7 @@ public class NativeKBSmartRegisterActivity extends SecuredNativeSmartRegisterAct
                     displayFormFragment.setFormData(data);
                     displayFormFragment.setRecordId(entityId);
                     displayFormFragment.setFieldOverides(metaData);
+                    displayFormFragment.setListener(this);
                 }
             }
 
@@ -343,13 +346,13 @@ public class NativeKBSmartRegisterActivity extends SecuredNativeSmartRegisterAct
     }
 
     public void saveuniqueid() {
-        try {
-            JSONObject uniqueId = new JSONObject(LoginActivity.generator.uniqueIdController().getUniqueIdJson());
-            String uniq = uniqueId.getString("unique_id");
-            LoginActivity.generator.uniqueIdController().updateCurrentUniqueId(uniq);
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
+//        try {
+//            JSONObject uniqueId = new JSONObject(LoginActivity.generator.uniqueIdController().getUniqueIdJson());
+//            String uniq = uniqueId.getString("unique_id");
+//            LoginActivity.generator.uniqueIdController().updateCurrentUniqueId(uniq);
+//        } catch (JSONException e) {
+//            e.printStackTrace();
+//        }
     }
 
     public void retrieveAndSaveUnsubmittedFormData(){

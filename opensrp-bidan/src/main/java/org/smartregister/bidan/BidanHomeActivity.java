@@ -275,8 +275,8 @@ public class BidanHomeActivity extends SecuredActivity {
         String locationjson = context().anmLocationController().get();
         LocationTree locationTree = EntityUtils.fromJson(locationjson, LocationTree.class);
 
-        if(LoginActivity.generator.uniqueIdController().needToRefillUniqueId(LoginActivity.generator.UNIQUE_ID_LIMIT))  // unique id part
-            LoginActivity.generator.requestUniqueId();                                                                  // unique id part
+//        if(LoginActivity.generator.uniqueIdController().needToRefillUniqueId(LoginActivity.generator.UNIQUE_ID_LIMIT))  // unique id part
+//            LoginActivity.generator.requestUniqueId();                                                                  // unique id part
     }
 
     @Override
