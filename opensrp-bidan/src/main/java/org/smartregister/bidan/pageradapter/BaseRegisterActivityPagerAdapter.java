@@ -1,5 +1,4 @@
 package org.smartregister.bidan.pageradapter;
-
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -7,18 +6,15 @@ import android.support.v4.app.FragmentPagerAdapter;
 
 import org.smartregister.enketo.view.fragment.DisplayFormFragment;
 
-;
-
-
 /**
- * Created by koros on 11/2/15.
+ * Created by koros on 11/2/15
  */
 public class BaseRegisterActivityPagerAdapter extends FragmentPagerAdapter {
     public static final String ARG_PAGE = "page";
-    public int offset = 0;
     String[] dialogOptions;
     Fragment mBaseFragment;
     Fragment mProfileFragment;
+    public int offset = 0;
 
     public BaseRegisterActivityPagerAdapter(FragmentManager fragmentManager, String[] dialogOptions, Fragment baseFragment) {
         super(fragmentManager);
@@ -26,7 +22,6 @@ public class BaseRegisterActivityPagerAdapter extends FragmentPagerAdapter {
         this.mBaseFragment = baseFragment;
         offset += 1;
     }
-
     public BaseRegisterActivityPagerAdapter(FragmentManager fragmentManager, String[] dialogOptions, Fragment baseFragment, Fragment mProfileFragment) {
         super(fragmentManager);
         this.dialogOptions = dialogOptions;
@@ -44,7 +39,7 @@ public class BaseRegisterActivityPagerAdapter extends FragmentPagerAdapter {
                 fragment = mBaseFragment;
                 break;
             case 1:
-                if (mProfileFragment != null) {
+                if(mProfileFragment != null) {
                     fragment = mProfileFragment;
                     break;
                 }

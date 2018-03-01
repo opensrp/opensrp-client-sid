@@ -105,6 +105,7 @@
             "concept": "1427AAAAAAAAAAAAAAAAAAAAAAAAAAAA"
           }
         },
+
         {
           "column_name": "referenceDate",
           "type": "Event",
@@ -137,6 +138,7 @@
             "concept": "1425AAAAAAAAAAAAAAAAAAAAAAAAAAAA"
           }
         },
+
         {
           "column_name": "type",
           "type": "Event",
@@ -240,21 +242,20 @@
         }
       ]
     },
-    {
-      "name": "ec_multimedia",
-      "columns": [
+    {"name": "ec_multimedia",
+      "columns" : [
         {
-          "column_name": "baseEntityID",
-          "type": "Multimedia",
-          "json_mapping": {
-            "field": "caseId"
+          "column_name" : "baseEntityID",
+          "type" : "Multimedia",
+          "json_mapping" : {
+            "field" : "caseId"
           }
         },
         {
-          "column_name": "faceVector",
-          "type": "Multimedia",
-          "json_mapping": {
-            "field": "attributes.faceVector"
+          "column_name" : "faceVector",
+          "type" : "Multimedia",
+          "json_mapping" : {
+            "field" : "attributes.faceVector"
           }
         }
       ]

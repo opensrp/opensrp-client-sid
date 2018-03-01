@@ -10,40 +10,32 @@
     <fieldset class="question ">
         <fieldset>
             <legend>
-                <span class="question-label active"
-                    data-itext-id="/tambah_kb_oa_reviewed/Lokasi_periksa:label" lang="Bahasa">Lokasi
-                    Periksa
+                <span class="question-label active" data-itext-id="/tambah_kb_oa_reviewed/Lokasi_periksa:label"
+                    lang="Bahasa">Lokasi Periksa
                 </span>
                 <span class="required">*</span>
-                <span class="question-label "
-                    data-itext-id="/tambah_kb_oa_reviewed/Lokasi_periksa:label" lang="en">
+                <span class="question-label " data-itext-id="/tambah_kb_oa_reviewed/Lokasi_periksa:label" lang="en">
                     Location of Service
                 </span>
             </legend>
             <div class="option-wrapper">
                 <label class="">
-                    <input name="/tambah_kb_oa_reviewed/Lokasi_periksa"
-                        data-name="/tambah_kb_oa_reviewed/Lokasi_periksa" data-type-xml="select1"
-                        required="required" type="radio" value="1" />
-                    <span class="option-label active"
-                        data-itext-id="/tambah_kb_oa_reviewed/Lokasi_periksa/Posyandu:label"
+                    <input name="/tambah_kb_oa_reviewed/Lokasi_periksa" data-name="/tambah_kb_oa_reviewed/Lokasi_periksa" data-type-xml="select1"
+                        type="radio" value="1" required="required" />
+                    <span class="option-label active" data-itext-id="/tambah_kb_oa_reviewed/Lokasi_periksa/Posyandu:label"
                         lang="Bahasa">Posyandu
                     </span>
-                    <span class="option-label "
-                        data-itext-id="/tambah_kb_oa_reviewed/Lokasi_periksa/Posyandu:label"
+                    <span class="option-label " data-itext-id="/tambah_kb_oa_reviewed/Lokasi_periksa/Posyandu:label"
                         lang="en">Posyandu
                     </span>
                 </label>
                 <label class="">
-                    <input name="/tambah_kb_oa_reviewed/Lokasi_periksa"
-                        data-name="/tambah_kb_oa_reviewed/Lokasi_periksa" data-type-xml="select1"
-                        required="required" type="radio" value="2" />
-                    <span class="option-label active"
-                        data-itext-id="/tambah_kb_oa_reviewed/Lokasi_periksa/Polindes:label"
+                    <input name="/tambah_kb_oa_reviewed/Lokasi_periksa" data-name="/tambah_kb_oa_reviewed/Lokasi_periksa" data-type-xml="select1"
+                        type="radio" value="2" required="required" />
+                    <span class="option-label active" data-itext-id="/tambah_kb_oa_reviewed/Lokasi_periksa/Polindes:label"
                         lang="Bahasa">Polindes
                     </span>
-                    <span class="option-label "
-                        data-itext-id="/tambah_kb_oa_reviewed/Lokasi_periksa/Polindes:label"
+                    <span class="option-label " data-itext-id="/tambah_kb_oa_reviewed/Lokasi_periksa/Polindes:label"
                         lang="en">Polindes
                     </span>
                 </label>
@@ -51,25 +43,22 @@
         </fieldset>
     </fieldset>
     <label class="note non-select ">
-        <span class="question-label active"
-            data-itext-id="/tambah_kb_oa_reviewed/generated_note_name_12:label" lang="Bahasa">Unique
-            ID:
+        <span class="question-label active" data-itext-id="/tambah_kb_oa_reviewed/generated_note_name_12:label"
+            lang="Bahasa">Unique ID:
             <span class="or-output" data-value=" /tambah_kb_oa_reviewed/unique_id "></span>
         </span>
-        <span class="question-label "
-            data-itext-id="/tambah_kb_oa_reviewed/generated_note_name_12:label" lang="en">Unique ID:
+        <span class="question-label " data-itext-id="/tambah_kb_oa_reviewed/generated_note_name_12:label"
+            lang="en">Unique ID:
             <span class="or-output" data-value=" /tambah_kb_oa_reviewed/unique_id "></span>
         </span>
         <input name="/tambah_kb_oa_reviewed/generated_note_name_12" data-type-xml="string"
             readonly="readonly" type="text" />
     </label>
     <label class="question non-select ">
-        <span class="question-label active" data-itext-id="/tambah_kb_oa_reviewed/nik:label"
-            lang="Bahasa">
+        <span class="question-label active" data-itext-id="/tambah_kb_oa_reviewed/nik:label" lang="Bahasa">
             NIK
         </span>
-        <span class="question-label " data-itext-id="/tambah_kb_oa_reviewed/nik:label" lang="en">
-            Mother's
+        <span class="question-label " data-itext-id="/tambah_kb_oa_reviewed/nik:label" lang="en">Mother's
             National ID
         </span>
         <input name="/tambah_kb_oa_reviewed/nik" data-type-xml="int" type="number" />
@@ -77,39 +66,32 @@
     <fieldset class="question ">
         <fieldset>
             <legend>
-                <span class="question-label active"
-                    data-itext-id="/tambah_kb_oa_reviewed/puskesmas:label" lang="Bahasa">Puskesmas
+                <span class="question-label active" data-itext-id="/tambah_kb_oa_reviewed/puskesmas:label"
+                    lang="Bahasa">Puskesmas
                 </span>
-                <span class="question-label " data-itext-id="/tambah_kb_oa_reviewed/puskesmas:label"
-                    lang="en">
+                <span class="question-label " data-itext-id="/tambah_kb_oa_reviewed/puskesmas:label" lang="en">
                     Primary Health Center (PHC)
                 </span>
             </legend>
             <div class="option-wrapper">
                 <label class="">
-                    <input name="/tambah_kb_oa_reviewed/puskesmas"
-                        data-name="/tambah_kb_oa_reviewed/puskesmas" data-type-xml="select1"
+                    <input name="/tambah_kb_oa_reviewed/puskesmas" data-name="/tambah_kb_oa_reviewed/puskesmas" data-type-xml="select1"
                         type="radio" value="Sengkol" />
-                    <span class="option-label active"
-                        data-itext-id="/tambah_kb_oa_reviewed/puskesmas/Sengkol:label"
+                    <span class="option-label active" data-itext-id="/tambah_kb_oa_reviewed/puskesmas/Sengkol:label"
                         lang="Bahasa">Sengkol
                     </span>
-                    <span class="option-label "
-                        data-itext-id="/tambah_kb_oa_reviewed/puskesmas/Sengkol:label" lang="en">
-                        Sengkol
+                    <span class="option-label " data-itext-id="/tambah_kb_oa_reviewed/puskesmas/Sengkol:label"
+                        lang="en">Sengkol
                     </span>
                 </label>
                 <label class="">
-                    <input name="/tambah_kb_oa_reviewed/puskesmas"
-                        data-name="/tambah_kb_oa_reviewed/puskesmas" data-type-xml="select1"
+                    <input name="/tambah_kb_oa_reviewed/puskesmas" data-name="/tambah_kb_oa_reviewed/puskesmas" data-type-xml="select1"
                         type="radio" value="Janapria" />
-                    <span class="option-label active"
-                        data-itext-id="/tambah_kb_oa_reviewed/puskesmas/Janapria:label"
+                    <span class="option-label active" data-itext-id="/tambah_kb_oa_reviewed/puskesmas/Janapria:label"
                         lang="Bahasa">Janapria
                     </span>
-                    <span class="option-label "
-                        data-itext-id="/tambah_kb_oa_reviewed/puskesmas/Janapria:label" lang="en">
-                        Janapria
+                    <span class="option-label " data-itext-id="/tambah_kb_oa_reviewed/puskesmas/Janapria:label"
+                        lang="en">Janapria
                     </span>
                 </label>
             </div>
@@ -125,8 +107,8 @@
         <input name="/tambah_kb_oa_reviewed/no_ibu" data-type-xml="int" type="number" />
     </label>
     <label class="question non-select ">
-        <span class="question-label active"
-            data-itext-id="/tambah_kb_oa_reviewed/nama_lengkap:label" lang="Bahasa">Nama lengkap
+        <span class="question-label active" data-itext-id="/tambah_kb_oa_reviewed/nama_lengkap:label"
+            lang="Bahasa">Nama lengkap
         </span>
         <span class="question-label " data-itext-id="/tambah_kb_oa_reviewed/nama_lengkap:label"
             lang="en">Full name
@@ -159,9 +141,8 @@
             type="text" />
     </label>
     <label class="question non-select ">
-        <span class="question-label active"
-            data-itext-id="/tambah_kb_oa_reviewed/tanggal_lahir_ibu:label" lang="Bahasa">Tanggal
-            lahir
+        <span class="question-label active" data-itext-id="/tambah_kb_oa_reviewed/tanggal_lahir_ibu:label"
+            lang="Bahasa">Tanggal lahir
         </span>
         <span class="question-label " data-itext-id="/tambah_kb_oa_reviewed/tanggal_lahir_ibu:label"
             lang="en">DOB
@@ -173,24 +154,23 @@
         <span class="or-hint " data-itext-id="/tambah_kb_oa_reviewed/tanggal_lahir_ibu:hint"
             lang="en">Mother's date of birth
         </span>
-        <input name="/tambah_kb_oa_reviewed/tanggal_lahir_ibu" data-type-xml="date"
-            required="required" type="date" />
+        <input name="/tambah_kb_oa_reviewed/tanggal_lahir_ibu" data-type-xml="date" required="required"
+            type="date" />
     </label>
     <label class="note non-select ">
-        <span class="question-label active"
-            data-itext-id="/tambah_kb_oa_reviewed/generated_note_name_19:label" lang="Bahasa">Umur:
+        <span class="question-label active" data-itext-id="/tambah_kb_oa_reviewed/generated_note_name_19:label"
+            lang="Bahasa">Umur:
             <span class="or-output" data-value=" /tambah_kb_oa_reviewed/umur "></span>
         </span>
-        <span class="question-label "
-            data-itext-id="/tambah_kb_oa_reviewed/generated_note_name_19:label" lang="en">Age
+        <span class="question-label " data-itext-id="/tambah_kb_oa_reviewed/generated_note_name_19:label"
+            lang="en">Age
         </span>
         <input name="/tambah_kb_oa_reviewed/generated_note_name_19" data-type-xml="string"
             readonly="readonly" type="text" />
     </label>
     <label class="question non-select ">
-        <span class="question-label active"
-            data-itext-id="/tambah_kb_oa_reviewed/alamat_domisili:label" lang="Bahasa">Alamat
-            domisili
+        <span class="question-label active" data-itext-id="/tambah_kb_oa_reviewed/alamat_domisili:label"
+            lang="Bahasa">Alamat domisili
         </span>
         <span class="question-label " data-itext-id="/tambah_kb_oa_reviewed/alamat_domisili:label"
             lang="en">Address
@@ -322,13 +302,11 @@
     <fieldset class="question ">
         <fieldset>
             <legend>
-                <span class="question-label active"
-                    data-itext-id="/tambah_kb_oa_reviewed/gakin_tidak:label" lang="Bahasa">Gakin/
-                    Tidak
+                <span class="question-label active" data-itext-id="/tambah_kb_oa_reviewed/gakin_tidak:label"
+                    lang="Bahasa">Gakin/ Tidak
                 </span>
-                <span class="question-label "
-                    data-itext-id="/tambah_kb_oa_reviewed/gakin_tidak:label" lang="en">Poor
-                    Family/not
+                <span class="question-label " data-itext-id="/tambah_kb_oa_reviewed/gakin_tidak:label"
+                    lang="en">Poor Family/not
                 </span>
                 <span class="or-hint active" data-itext-id="/tambah_kb_oa_reviewed/gakin_tidak:hint"
                     lang="Bahasa">Apakah Ibu termasuk
@@ -341,28 +319,25 @@
             </legend>
             <div class="option-wrapper">
                 <label class="">
-                    <input name="/tambah_kb_oa_reviewed/gakin_tidak"
-                        data-name="/tambah_kb_oa_reviewed/gakin_tidak" data-type-xml="select1"
-                        type="radio" value="Ya" />
-                    <span class="option-label active"
-                        data-itext-id="/tambah_kb_oa_reviewed/gakin_tidak/Ya:label" lang="Bahasa">Ya
+                    <input name="/tambah_kb_oa_reviewed/gakin_tidak" data-name="/tambah_kb_oa_reviewed/gakin_tidak"
+                        data-type-xml="select1" type="radio"
+                        value="Ya" />
+                    <span class="option-label active" data-itext-id="/tambah_kb_oa_reviewed/gakin_tidak/Ya:label"
+                        lang="Bahasa">Ya
                     </span>
-                    <span class="option-label "
-                        data-itext-id="/tambah_kb_oa_reviewed/gakin_tidak/Ya:label" lang="en">Yes
-                        (Y)
+                    <span class="option-label " data-itext-id="/tambah_kb_oa_reviewed/gakin_tidak/Ya:label"
+                        lang="en">Yes (Y)
                     </span>
                 </label>
                 <label class="">
-                    <input name="/tambah_kb_oa_reviewed/gakin_tidak"
-                        data-name="/tambah_kb_oa_reviewed/gakin_tidak" data-type-xml="select1"
-                        type="radio" value="Tidak" />
-                    <span class="option-label active"
-                        data-itext-id="/tambah_kb_oa_reviewed/gakin_tidak/Tidak:label"
+                    <input name="/tambah_kb_oa_reviewed/gakin_tidak" data-name="/tambah_kb_oa_reviewed/gakin_tidak"
+                        data-type-xml="select1" type="radio"
+                        value="Tidak" />
+                    <span class="option-label active" data-itext-id="/tambah_kb_oa_reviewed/gakin_tidak/Tidak:label"
                         lang="Bahasa">Tidak
                     </span>
-                    <span class="option-label "
-                        data-itext-id="/tambah_kb_oa_reviewed/gakin_tidak/Tidak:label" lang="en">No
-                        (N)
+                    <span class="option-label " data-itext-id="/tambah_kb_oa_reviewed/gakin_tidak/Tidak:label"
+                        lang="en">No (N)
                     </span>
                 </label>
             </div>
@@ -420,8 +395,8 @@
         <input name="/tambah_kb_oa_reviewed/nama_dukun" data-type-xml="string" type="text" />
     </label>
     <label class="question or-appearance-minimal ">
-        <span class="question-label active"
-            data-itext-id="/tambah_kb_oa_reviewed/asuransi_jiwa:label" lang="Bahasa">Asuransi Jiwa
+        <span class="question-label active" data-itext-id="/tambah_kb_oa_reviewed/asuransi_jiwa:label"
+            lang="Bahasa">Asuransi Jiwa
         </span>
         <span class="question-label " data-itext-id="/tambah_kb_oa_reviewed/asuransi_jiwa:label"
             lang="en">Insurance
@@ -481,8 +456,8 @@
         </span>
     </label>
     <label class="question or-appearance-minimal ">
-        <span class="question-label active"
-            data-itext-id="/tambah_kb_oa_reviewed/golongan_darah:label" lang="Bahasa">Golongan Darah
+        <span class="question-label active" data-itext-id="/tambah_kb_oa_reviewed/golongan_darah:label"
+            lang="Bahasa">Golongan Darah
         </span>
         <span class="question-label " data-itext-id="/tambah_kb_oa_reviewed/golongan_darah:label"
             lang="en">Blood Type
@@ -518,19 +493,16 @@
         </span>
     </label>
     <label class="question non-select ">
-        <span class="or-constraint-msg active"
-            data-itext-id="/tambah_kb_oa_reviewed/nomor_telpon_hp:jr:constraintMsg" lang="Bahasa">
-            Nomer teelpon
+        <span class="or-constraint-msg active" data-itext-id="/tambah_kb_oa_reviewed/nomor_telpon_hp:jr:constraintMsg"
+            lang="Bahasa">Nomer teelpon
             tidak boleh lebih dari 12 digit
         </span>
-        <span class="or-constraint-msg "
-            data-itext-id="/tambah_kb_oa_reviewed/nomor_telpon_hp:jr:constraintMsg" lang="en">
-            Contact number
+        <span class="or-constraint-msg " data-itext-id="/tambah_kb_oa_reviewed/nomor_telpon_hp:jr:constraintMsg"
+            lang="en">Contact number
             should be no more than 12 digits
         </span>
-        <span class="question-label active"
-            data-itext-id="/tambah_kb_oa_reviewed/nomor_telpon_hp:label" lang="Bahasa">Nomor
-            Telpon/Hp
+        <span class="question-label active" data-itext-id="/tambah_kb_oa_reviewed/nomor_telpon_hp:label"
+            lang="Bahasa">Nomor Telpon/Hp
         </span>
         <span class="question-label " data-itext-id="/tambah_kb_oa_reviewed/nomor_telpon_hp:label"
             lang="en">Landline/Cell Phone Number
@@ -542,14 +514,14 @@
         <span class="or-hint " data-itext-id="/tambah_kb_oa_reviewed/nomor_telpon_hp:hint"
             lang="en">Mother's contact number
         </span>
-        <input name="/tambah_kb_oa_reviewed/nomor_telpon_hp"
-            data-constraint=".&gt;0 and .&lt;100000000000" data-type-xml="string" type="text" />
+        <input name="/tambah_kb_oa_reviewed/nomor_telpon_hp" data-constraint=".&gt;0 and .&lt;100000000000"
+            data-type-xml="string" type="text" />
     </label>
     <fieldset class="question ">
         <fieldset>
             <legend>
-                <span class="question-label active"
-                    data-itext-id="/tambah_kb_oa_reviewed/pptest:label" lang="Bahasa">Hasil pptest
+                <span class="question-label active" data-itext-id="/tambah_kb_oa_reviewed/pptest:label"
+                    lang="Bahasa">Hasil pptest
                 </span>
                 <span class="question-label " data-itext-id="/tambah_kb_oa_reviewed/pptest:label"
                     lang="en">Pregnancy Test
@@ -557,43 +529,37 @@
             </legend>
             <div class="option-wrapper">
                 <label class="">
-                    <input name="/tambah_kb_oa_reviewed/pptest"
-                        data-name="/tambah_kb_oa_reviewed/pptest" data-type-xml="select1"
-                        type="radio" value="positive" />
-                    <span class="option-label active"
-                        data-itext-id="/tambah_kb_oa_reviewed/pptest/positive:label" lang="Bahasa">
-                        Positif
+                    <input name="/tambah_kb_oa_reviewed/pptest" data-name="/tambah_kb_oa_reviewed/pptest"
+                        data-type-xml="select1" type="radio"
+                        value="positive" />
+                    <span class="option-label active" data-itext-id="/tambah_kb_oa_reviewed/pptest/positive:label"
+                        lang="Bahasa">Positif
                     </span>
-                    <span class="option-label "
-                        data-itext-id="/tambah_kb_oa_reviewed/pptest/positive:label" lang="en">
-                        positive
+                    <span class="option-label " data-itext-id="/tambah_kb_oa_reviewed/pptest/positive:label"
+                        lang="en">positive
                     </span>
                 </label>
                 <label class="">
-                    <input name="/tambah_kb_oa_reviewed/pptest"
-                        data-name="/tambah_kb_oa_reviewed/pptest" data-type-xml="select1"
-                        type="radio" value="negative" />
-                    <span class="option-label active"
-                        data-itext-id="/tambah_kb_oa_reviewed/pptest/negative:label" lang="Bahasa">
-                        Negatif
+                    <input name="/tambah_kb_oa_reviewed/pptest" data-name="/tambah_kb_oa_reviewed/pptest"
+                        data-type-xml="select1" type="radio"
+                        value="negative" />
+                    <span class="option-label active" data-itext-id="/tambah_kb_oa_reviewed/pptest/negative:label"
+                        lang="Bahasa">Negatif
                     </span>
-                    <span class="option-label "
-                        data-itext-id="/tambah_kb_oa_reviewed/pptest/negative:label" lang="en">
-                        negative
+                    <span class="option-label " data-itext-id="/tambah_kb_oa_reviewed/pptest/negative:label"
+                        lang="en">negative
                     </span>
                 </label>
             </div>
         </fieldset>
     </fieldset>
     <label class="question non-select ">
-        <span class="or-constraint-msg active"
-            data-itext-id="/tambah_kb_oa_reviewed/td_sistolik:jr:constraintMsg" lang="Bahasa">Nilai
-            yang
+        <span class="or-constraint-msg active" data-itext-id="/tambah_kb_oa_reviewed/td_sistolik:jr:constraintMsg"
+            lang="Bahasa">Nilai yang
             dimasukkan tidak memenuhi syarat, mohon periksa kembali
         </span>
-        <span class="or-constraint-msg "
-            data-itext-id="/tambah_kb_oa_reviewed/td_sistolik:jr:constraintMsg" lang="en">The
-            entered value
+        <span class="or-constraint-msg " data-itext-id="/tambah_kb_oa_reviewed/td_sistolik:jr:constraintMsg"
+            lang="en">The entered value
             doesn't meet the criteria, please check it again
         </span>
         <span class="question-label active" data-itext-id="/tambah_kb_oa_reviewed/td_sistolik:label"
@@ -614,18 +580,16 @@
             data-type-xml="int" type="number" />
     </label>
     <label class="question non-select ">
-        <span class="or-constraint-msg active"
-            data-itext-id="/tambah_kb_oa_reviewed/td_diastolik:jr:constraintMsg" lang="Bahasa">Nilai
-            yang
+        <span class="or-constraint-msg active" data-itext-id="/tambah_kb_oa_reviewed/td_diastolik:jr:constraintMsg"
+            lang="Bahasa">Nilai yang
             dimasukkan tidak memenuhi syarat, mohon periksa kembali
         </span>
-        <span class="or-constraint-msg "
-            data-itext-id="/tambah_kb_oa_reviewed/td_diastolik:jr:constraintMsg" lang="en">The
-            entered value
+        <span class="or-constraint-msg " data-itext-id="/tambah_kb_oa_reviewed/td_diastolik:jr:constraintMsg"
+            lang="en">The entered value
             doesn't meet the criteria, please check it again
         </span>
-        <span class="question-label active"
-            data-itext-id="/tambah_kb_oa_reviewed/td_diastolik:label" lang="Bahasa">TD (Diastolik)
+        <span class="question-label active" data-itext-id="/tambah_kb_oa_reviewed/td_diastolik:label"
+            lang="Bahasa">TD (Diastolik)
         </span>
         <span class="question-label " data-itext-id="/tambah_kb_oa_reviewed/td_diastolik:label"
             lang="en">Blood pressure (Diastolic) of
@@ -642,14 +606,12 @@
             data-type-xml="decimal" step="any" type="number" />
     </label>
     <label class="question non-select ">
-        <span class="or-constraint-msg active"
-            data-itext-id="/tambah_kb_oa_reviewed/alki_hb:jr:constraintMsg" lang="Bahasa">Nilai yang
-            dimasukkan
+        <span class="or-constraint-msg active" data-itext-id="/tambah_kb_oa_reviewed/alki_hb:jr:constraintMsg"
+            lang="Bahasa">Nilai yang dimasukkan
             tidak memenuhi syarat, mohon periksa kembali
         </span>
-        <span class="or-constraint-msg "
-            data-itext-id="/tambah_kb_oa_reviewed/alki_hb:jr:constraintMsg" lang="en">The entered
-            value
+        <span class="or-constraint-msg " data-itext-id="/tambah_kb_oa_reviewed/alki_hb:jr:constraintMsg"
+            lang="en">The entered value
             doesn't meet the criteria, please check it again
         </span>
         <span class="question-label active" data-itext-id="/tambah_kb_oa_reviewed/alki_hb:label"
@@ -664,18 +626,16 @@
         <span class="or-hint " data-itext-id="/tambah_kb_oa_reviewed/alki_hb:hint" lang="en">Fill in
             Hb test result
         </span>
-        <input name="/tambah_kb_oa_reviewed/alki_hb" data-constraint=".&gt;0"
-            data-type-xml="decimal" step="any" type="number" />
+        <input name="/tambah_kb_oa_reviewed/alki_hb" data-constraint=".&gt;0" data-type-xml="decimal"
+            step="any" type="number" />
     </label>
     <label class="question non-select ">
-        <span class="or-constraint-msg active"
-            data-itext-id="/tambah_kb_oa_reviewed/alki_lila:jr:constraintMsg" lang="Bahasa">Nilai
-            yang dimasukkan
+        <span class="or-constraint-msg active" data-itext-id="/tambah_kb_oa_reviewed/alki_lila:jr:constraintMsg"
+            lang="Bahasa">Nilai yang dimasukkan
             tidak memenuhi syarat, mohon periksa kembali
         </span>
-        <span class="or-constraint-msg "
-            data-itext-id="/tambah_kb_oa_reviewed/alki_lila:jr:constraintMsg" lang="en">The entered
-            value
+        <span class="or-constraint-msg " data-itext-id="/tambah_kb_oa_reviewed/alki_lila:jr:constraintMsg"
+            lang="en">The entered value
             doesn't meet the criteria, please check it again
         </span>
         <span class="question-label active" data-itext-id="/tambah_kb_oa_reviewed/alki_lila:label"
@@ -696,18 +656,15 @@
             data-type-xml="decimal" step="any" type="number" />
     </label>
     <label class="question or-appearance-minimal ">
-        <span class="question-label active"
-            data-itext-id="/tambah_kb_oa_reviewed/alki_penyakit_kronis:label" lang="Bahasa">ALKI/
-            Penyakit Kronis
+        <span class="question-label active" data-itext-id="/tambah_kb_oa_reviewed/alki_penyakit_kronis:label"
+            lang="Bahasa">ALKI/ Penyakit Kronis
         </span>
-        <span class="question-label "
-            data-itext-id="/tambah_kb_oa_reviewed/alki_penyakit_kronis:label" lang="en">ALKI /
-            Chronical
+        <span class="question-label " data-itext-id="/tambah_kb_oa_reviewed/alki_penyakit_kronis:label"
+            lang="en">ALKI / Chronical
             diseases
         </span>
-        <span class="or-hint active"
-            data-itext-id="/tambah_kb_oa_reviewed/alki_penyakit_kronis:hint" lang="Bahasa">Diisi
-            dengan keterangan
+        <span class="or-hint active" data-itext-id="/tambah_kb_oa_reviewed/alki_penyakit_kronis:hint"
+            lang="Bahasa">Diisi dengan keterangan
             tentang penyakit kronis yang dimiliki peserta KB
         </span>
         <span class="or-hint " data-itext-id="/tambah_kb_oa_reviewed/alki_penyakit_kronis:hint"
@@ -742,18 +699,15 @@
     <fieldset class="question ">
         <fieldset>
             <legend>
-                <span class="question-label active"
-                    data-itext-id="/tambah_kb_oa_reviewed/alki_penyakit_ims:label" lang="Bahasa">
-                    ALKI/ IMS
+                <span class="question-label active" data-itext-id="/tambah_kb_oa_reviewed/alki_penyakit_ims:label"
+                    lang="Bahasa">ALKI/ IMS
                 </span>
-                <span class="question-label "
-                    data-itext-id="/tambah_kb_oa_reviewed/alki_penyakit_ims:label" lang="en">ALKI /
-                    Sexually
+                <span class="question-label " data-itext-id="/tambah_kb_oa_reviewed/alki_penyakit_ims:label"
+                    lang="en">ALKI / Sexually
                     Transmitted Infection
                 </span>
-                <span class="or-hint active"
-                    data-itext-id="/tambah_kb_oa_reviewed/alki_penyakit_ims:hint" lang="Bahasa">
-                    Diisi dengan
+                <span class="or-hint active" data-itext-id="/tambah_kb_oa_reviewed/alki_penyakit_ims:hint"
+                    lang="Bahasa">Diisi dengan
                     keterangan tentang Infeksi Menular Seksual yang dimiliki peserta KB
                 </span>
                 <span class="or-hint " data-itext-id="/tambah_kb_oa_reviewed/alki_penyakit_ims:hint"
@@ -763,60 +717,52 @@
             </legend>
             <div class="option-wrapper">
                 <label class="">
-                    <input name="/tambah_kb_oa_reviewed/alki_penyakit_ims"
-                        data-name="/tambah_kb_oa_reviewed/alki_penyakit_ims" data-type-xml="select1"
-                        type="radio" value="Gonore" />
-                    <span class="option-label active"
-                        data-itext-id="/tambah_kb_oa_reviewed/alki_penyakit_ims/Gonore:label"
+                    <input name="/tambah_kb_oa_reviewed/alki_penyakit_ims" data-name="/tambah_kb_oa_reviewed/alki_penyakit_ims"
+                        data-type-xml="select1" type="radio"
+                        value="Gonore" />
+                    <span class="option-label active" data-itext-id="/tambah_kb_oa_reviewed/alki_penyakit_ims/Gonore:label"
                         lang="Bahasa">Gonore
                     </span>
-                    <span class="option-label "
-                        data-itext-id="/tambah_kb_oa_reviewed/alki_penyakit_ims/Gonore:label"
+                    <span class="option-label " data-itext-id="/tambah_kb_oa_reviewed/alki_penyakit_ims/Gonore:label"
                         lang="en">
                         Gonorrhea
                     </span>
                 </label>
                 <label class="">
-                    <input name="/tambah_kb_oa_reviewed/alki_penyakit_ims"
-                        data-name="/tambah_kb_oa_reviewed/alki_penyakit_ims" data-type-xml="select1"
-                        type="radio" value="Sifilis" />
-                    <span class="option-label active"
-                        data-itext-id="/tambah_kb_oa_reviewed/alki_penyakit_ims/Sifilis:label"
+                    <input name="/tambah_kb_oa_reviewed/alki_penyakit_ims" data-name="/tambah_kb_oa_reviewed/alki_penyakit_ims"
+                        data-type-xml="select1" type="radio"
+                        value="Sifilis" />
+                    <span class="option-label active" data-itext-id="/tambah_kb_oa_reviewed/alki_penyakit_ims/Sifilis:label"
                         lang="Bahasa">
                         Sifilis
                     </span>
-                    <span class="option-label "
-                        data-itext-id="/tambah_kb_oa_reviewed/alki_penyakit_ims/Sifilis:label"
+                    <span class="option-label " data-itext-id="/tambah_kb_oa_reviewed/alki_penyakit_ims/Sifilis:label"
                         lang="en">
                         Syphilis
                     </span>
                 </label>
                 <label class="">
-                    <input name="/tambah_kb_oa_reviewed/alki_penyakit_ims"
-                        data-name="/tambah_kb_oa_reviewed/alki_penyakit_ims" data-type-xml="select1"
-                        type="radio" value="Condyloma" />
-                    <span class="option-label active"
-                        data-itext-id="/tambah_kb_oa_reviewed/alki_penyakit_ims/Condyloma:label"
+                    <input name="/tambah_kb_oa_reviewed/alki_penyakit_ims" data-name="/tambah_kb_oa_reviewed/alki_penyakit_ims"
+                        data-type-xml="select1" type="radio"
+                        value="Condyloma" />
+                    <span class="option-label active" data-itext-id="/tambah_kb_oa_reviewed/alki_penyakit_ims/Condyloma:label"
                         lang="Bahasa">
                         Condyloma
                     </span>
-                    <span class="option-label "
-                        data-itext-id="/tambah_kb_oa_reviewed/alki_penyakit_ims/Condyloma:label"
+                    <span class="option-label " data-itext-id="/tambah_kb_oa_reviewed/alki_penyakit_ims/Condyloma:label"
                         lang="en">
                         Condyloma
                     </span>
                 </label>
                 <label class="">
-                    <input name="/tambah_kb_oa_reviewed/alki_penyakit_ims"
-                        data-name="/tambah_kb_oa_reviewed/alki_penyakit_ims" data-type-xml="select1"
+                    <input name="/tambah_kb_oa_reviewed/alki_penyakit_ims" data-name="/tambah_kb_oa_reviewed/alki_penyakit_ims"
+                        data-type-xml="select1"
                         type="radio" value="Herpes Genitalis" />
-                    <span class="option-label active"
-                        data-itext-id="/tambah_kb_oa_reviewed/alki_penyakit_ims/Herpes Genitalis:label"
+                    <span class="option-label active" data-itext-id="/tambah_kb_oa_reviewed/alki_penyakit_ims/Herpes Genitalis:label"
                         lang="Bahasa">
                         Herpes Genitalis
                     </span>
-                    <span class="option-label "
-                        data-itext-id="/tambah_kb_oa_reviewed/alki_penyakit_ims/Herpes Genitalis:label"
+                    <span class="option-label " data-itext-id="/tambah_kb_oa_reviewed/alki_penyakit_ims/Herpes Genitalis:label"
                         lang="en">
                         Genital Herpes
                     </span>
@@ -827,69 +773,59 @@
     <fieldset class="question ">
         <fieldset>
             <legend>
-                <span class="question-label active"
-                    data-itext-id="/tambah_kb_oa_reviewed/keterangan_tentang_peserta_kb:label"
+                <span class="question-label active" data-itext-id="/tambah_kb_oa_reviewed/keterangan_tentang_peserta_kb:label"
                     lang="Bahasa">
                     Keterangan tentang peserta KB
                 </span>
-                <span class="question-label "
-                    data-itext-id="/tambah_kb_oa_reviewed/keterangan_tentang_peserta_kb:label"
+                <span class="question-label " data-itext-id="/tambah_kb_oa_reviewed/keterangan_tentang_peserta_kb:label"
                     lang="en">Notes
                     about FP user
                 </span>
-                <span class="or-hint active"
-                    data-itext-id="/tambah_kb_oa_reviewed/keterangan_tentang_peserta_kb:hint"
+                <span class="or-hint active" data-itext-id="/tambah_kb_oa_reviewed/keterangan_tentang_peserta_kb:hint"
                     lang="Bahasa">Diisi
                     dengan keterangan tentang kunjungan peserta KB baru atau lama
                 </span>
-                <span class="or-hint "
-                    data-itext-id="/tambah_kb_oa_reviewed/keterangan_tentang_peserta_kb:hint"
+                <span class="or-hint " data-itext-id="/tambah_kb_oa_reviewed/keterangan_tentang_peserta_kb:hint"
                     lang="en">Fill
                     in information on whether mother is new or old FP contraceptor
                 </span>
             </legend>
             <div class="option-wrapper">
                 <label class="">
-                    <input name="/tambah_kb_oa_reviewed/keterangan_tentang_peserta_kb"
-                        data-name="/tambah_kb_oa_reviewed/keterangan_tentang_peserta_kb"
-                        data-type-xml="select1" type="radio" value="kb_baru" />
-                    <span class="option-label active"
-                        data-itext-id="/tambah_kb_oa_reviewed/keterangan_tentang_peserta_kb/kb_baru:label"
+                    <input name="/tambah_kb_oa_reviewed/keterangan_tentang_peserta_kb" data-name="/tambah_kb_oa_reviewed/keterangan_tentang_peserta_kb"
+                        data-type-xml="select1"
+                        type="radio" value="kb_baru" />
+                    <span class="option-label active" data-itext-id="/tambah_kb_oa_reviewed/keterangan_tentang_peserta_kb/kb_baru:label"
                         lang="Bahasa">
                         KB baru (B)
                     </span>
-                    <span class="option-label "
-                        data-itext-id="/tambah_kb_oa_reviewed/keterangan_tentang_peserta_kb/kb_baru:label"
+                    <span class="option-label " data-itext-id="/tambah_kb_oa_reviewed/keterangan_tentang_peserta_kb/kb_baru:label"
                         lang="en">
                         New FP Acceptor (NA)
                     </span>
                 </label>
                 <label class="">
-                    <input name="/tambah_kb_oa_reviewed/keterangan_tentang_peserta_kb"
-                        data-name="/tambah_kb_oa_reviewed/keterangan_tentang_peserta_kb"
-                        data-type-xml="select1" type="radio" value="lama" />
-                    <span class="option-label active"
-                        data-itext-id="/tambah_kb_oa_reviewed/keterangan_tentang_peserta_kb/lama:label"
+                    <input name="/tambah_kb_oa_reviewed/keterangan_tentang_peserta_kb" data-name="/tambah_kb_oa_reviewed/keterangan_tentang_peserta_kb"
+                        data-type-xml="select1"
+                        type="radio" value="lama" />
+                    <span class="option-label active" data-itext-id="/tambah_kb_oa_reviewed/keterangan_tentang_peserta_kb/lama:label"
                         lang="Bahasa">
                         Lama (L)
                     </span>
-                    <span class="option-label "
-                        data-itext-id="/tambah_kb_oa_reviewed/keterangan_tentang_peserta_kb/lama:label"
+                    <span class="option-label " data-itext-id="/tambah_kb_oa_reviewed/keterangan_tentang_peserta_kb/lama:label"
                         lang="en">
                         Old FP Acceptor (OA)
                     </span>
                 </label>
                 <label class="">
-                    <input name="/tambah_kb_oa_reviewed/keterangan_tentang_peserta_kb"
-                        data-name="/tambah_kb_oa_reviewed/keterangan_tentang_peserta_kb"
-                        data-type-xml="select1" type="radio" value="kb_baru_pasca_salin" />
-                    <span class="option-label active"
-                        data-itext-id="/tambah_kb_oa_reviewed/keterangan_tentang_peserta_kb/kb_baru_pasca_salin:label"
+                    <input name="/tambah_kb_oa_reviewed/keterangan_tentang_peserta_kb" data-name="/tambah_kb_oa_reviewed/keterangan_tentang_peserta_kb"
+                        data-type-xml="select1"
+                        type="radio" value="kb_baru_pasca_salin" />
+                    <span class="option-label active" data-itext-id="/tambah_kb_oa_reviewed/keterangan_tentang_peserta_kb/kb_baru_pasca_salin:label"
                         lang="Bahasa">
                         KB Baru Pasca Salin (BO)
                     </span>
-                    <span class="option-label "
-                        data-itext-id="/tambah_kb_oa_reviewed/keterangan_tentang_peserta_kb/kb_baru_pasca_salin:label"
+                    <span class="option-label " data-itext-id="/tambah_kb_oa_reviewed/keterangan_tentang_peserta_kb/kb_baru_pasca_salin:label"
                         lang="en">
                         Post-partum FP Acceptor (PPA)
                     </span>
@@ -898,30 +834,26 @@
         </fieldset>
     </fieldset>
     <label class="question or-appearance-minimal ">
-        <span class="question-label active"
-            data-itext-id="/tambah_kb_oa_reviewed/jenis_kontrasepsi_yang_digunakan:label"
+        <span class="question-label active" data-itext-id="/tambah_kb_oa_reviewed/jenis_kontrasepsi_yang_digunakan:label"
             lang="Bahasa">Jenis
             kontrasepsi yang digunakan
         </span>
-        <span class="question-label "
-            data-itext-id="/tambah_kb_oa_reviewed/jenis_kontrasepsi_yang_digunakan:label" lang="en">
-            Kind of
+        <span class="question-label " data-itext-id="/tambah_kb_oa_reviewed/jenis_kontrasepsi_yang_digunakan:label"
+            lang="en">Kind of
             contraceptions used
         </span>
         <span class="required">*</span>
-        <span class="or-hint active"
-            data-itext-id="/tambah_kb_oa_reviewed/jenis_kontrasepsi_yang_digunakan:hint"
+        <span class="or-hint active" data-itext-id="/tambah_kb_oa_reviewed/jenis_kontrasepsi_yang_digunakan:hint"
             lang="Bahasa">Diisi
             dengan jenis metode kontrasepsi yang digunakan
         </span>
-        <span class="or-hint "
-            data-itext-id="/tambah_kb_oa_reviewed/jenis_kontrasepsi_yang_digunakan:hint" lang="en">
-            Fill in
+        <span class="or-hint " data-itext-id="/tambah_kb_oa_reviewed/jenis_kontrasepsi_yang_digunakan:hint"
+            lang="en">Fill in
             type of contraceptive method that mother uses
         </span>
         <select name="/tambah_kb_oa_reviewed/jenis_kontrasepsi_yang_digunakan"
-            data-name="/tambah_kb_oa_reviewed/jenis_kontrasepsi_yang_digunakan"
-            data-type-xml="select1" required="required">
+            data-name="/tambah_kb_oa_reviewed/jenis_kontrasepsi_yang_digunakan" data-type-xml="select1"
+            required="required">
             <option value="">...</option>
             <option value="pil">Pil (P)</option>
             <option value="suntik">Suntik (S)</option>
@@ -951,54 +883,54 @@
 
     <fieldset style="display:none;" id="or-preload-items">
         <label class="calculation non-select ">
-            <input name="/tambah_kb_oa_reviewed/start" data-preload="timestamp"
-                data-preload-params="start" data-type-xml="dateTime" type="hidden" />
+            <input name="/tambah_kb_oa_reviewed/start" data-preload="timestamp" data-preload-params="start"
+                data-type-xml="dateTime" type="hidden" />
         </label>
         <label class="calculation non-select ">
-            <input name="/tambah_kb_oa_reviewed/today" data-preload="date"
-                data-preload-params="today" data-type-xml="date" type="hidden" />
+            <input name="/tambah_kb_oa_reviewed/today" data-preload="date" data-preload-params="today"
+                data-type-xml="date" type="hidden" />
         </label>
         <label class="calculation non-select ">
-            <input name="/tambah_kb_oa_reviewed/deviceid" data-preload="property"
-                data-preload-params="deviceid" data-type-xml="string" type="hidden" />
+            <input name="/tambah_kb_oa_reviewed/deviceid" data-preload="property" data-preload-params="deviceid"
+                data-type-xml="string" type="hidden" />
         </label>
         <label class="calculation non-select ">
-            <input name="/tambah_kb_oa_reviewed/simserial" data-preload="property"
-                data-preload-params="simserial" data-type-xml="string" type="hidden" />
+            <input name="/tambah_kb_oa_reviewed/simserial" data-preload="property" data-preload-params="simserial"
+                data-type-xml="string" type="hidden" />
         </label>
         <label class="calculation non-select ">
-            <input name="/tambah_kb_oa_reviewed/phonenumber" data-preload="property"
-                data-preload-params="phonenumber" data-type-xml="string" type="hidden" />
+            <input name="/tambah_kb_oa_reviewed/phonenumber" data-preload="property" data-preload-params="phonenumber"
+                data-type-xml="string" type="hidden" />
         </label>
         <label class="calculation non-select ">
-            <input name="/tambah_kb_oa_reviewed/end" data-preload="timestamp"
-                data-preload-params="end" data-type-xml="dateTime" type="hidden" />
+            <input name="/tambah_kb_oa_reviewed/end" data-preload="timestamp" data-preload-params="end"
+                data-type-xml="dateTime" type="hidden" />
         </label>
     </fieldset>
     <fieldset style="display:none;" id="or-calculated-items">
         <label class="calculation non-select ">
-            <input name="/tambah_kb_oa_reviewed/umur"
-                data-calculate="int(( /tambah_kb_oa_reviewed/today  -  /tambah_kb_oa_reviewed/tanggal_lahir_ibu ) div 365)"
-                data-type-xml="string" type="hidden" />
+            <input name="/tambah_kb_oa_reviewed/umur" data-calculate="int(( /tambah_kb_oa_reviewed/today  -  /tambah_kb_oa_reviewed/tanggal_lahir_ibu ) div 365)"
+                data-type-xml="string"
+                type="hidden" />
         </label>
         <label class="calculation non-select ">
             <input name="/tambah_kb_oa_reviewed/High_Risk_Pregnancy_Young_maternal_age"
                 data-calculate="if( /tambah_kb_oa_reviewed/umur  &lt;20, 'yes','no')"
-                data-type-xml="string" type="hidden" />
-        </label>
-        <label class="calculation non-select ">
-            <input name="/tambah_kb_oa_reviewed/High_Risk_Pregnancy_Old_maternal_age"
-                data-calculate="if( /tambah_kb_oa_reviewed/umur  &gt;35, 'yes','no')"
-                data-type-xml="string" type="hidden" />
-        </label>
-        <label class="calculation non-select ">
-            <input name="/tambah_kb_oa_reviewed/meta/instanceID"
-                data-calculate="concat('uuid:', uuid())" data-type-xml="string" type="hidden" />
-        </label>
-        <label class="calculation non-select ">
-            <input name="/tambah_kb_oa_reviewed/formhub/uuid"
-                data-calculate="'9cc72bb8cfcf4036b5244b742f6d8a55'" data-type-xml="string"
+                data-type-xml="string"
                 type="hidden" />
+        </label>
+        <label class="calculation non-select ">
+            <input name="/tambah_kb_oa_reviewed/High_Risk_Pregnancy_Old_maternal_age" data-calculate="if( /tambah_kb_oa_reviewed/umur  &gt;35, 'yes','no')"
+                data-type-xml="string"
+                type="hidden" />
+        </label>
+        <label class="calculation non-select ">
+            <input name="/tambah_kb_oa_reviewed/meta/instanceID" data-calculate="concat('uuid:', uuid())"
+                data-type-xml="string" type="hidden" />
+        </label>
+        <label class="calculation non-select ">
+            <input name="/tambah_kb_oa_reviewed/formhub/uuid" data-calculate="'9cc72bb8cfcf4036b5244b742f6d8a55'"
+                data-type-xml="string" type="hidden" />
         </label>
     </fieldset>
 </form>

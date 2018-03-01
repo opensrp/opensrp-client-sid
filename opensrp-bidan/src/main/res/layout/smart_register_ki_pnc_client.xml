@@ -1,37 +1,38 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="@dimen/list_item_height"
-    android:orientation="horizontal"
-    android:weightSum="@integer/ec_list_item_weight_count">
+              android:orientation="horizontal"
+              android:layout_width="match_parent"
+              android:layout_height="@dimen/list_item_height"
+              android:weightSum="@integer/ec_list_item_weight_count">
 
     <include
-        android:id="@+id/profile_info_layout"
-        layout="@layout/smart_register_client_profile_ki"
-        android:layout_width="0dp"
-        android:layout_height="fill_parent"
-        android:layout_weight="@integer/ec_list_profile_box_weight" />
+            android:id="@+id/profile_info_layout"
+            android:layout_width="0dp"
+            android:layout_height="fill_parent"
+            android:layout_weight="@integer/ec_list_profile_box_weight"
+            layout="@layout/smart_register_client_profile_ki"/>
 
     <ImageView
-        android:layout_width="@dimen/smart_register_client_divider_height"
-        android:layout_height="fill_parent"
-        android:src="@color/smart_register_client_divider_color" />
+            android:layout_width="@dimen/smart_register_client_divider_height"
+            android:layout_height="fill_parent"
+            android:src="@color/smart_register_client_divider_color"/>
 
     <org.smartregister.view.customcontrols.CustomFontTextView
         android:id="@+id/pnc_id"
-        style="@style/CustomFontTextViewStyle.ListView.Medium"
         android:layout_width="@dimen/list_ec_no_view_width"
         android:layout_height="fill_parent"
         android:layout_marginTop="10dp"
-        android:layout_weight="@integer/ec_list_ec_no_view_weight" />
+        android:layout_weight="@integer/ec_list_ec_no_view_weight"
+        style="@style/CustomFontTextViewStyle.ListView.Medium"/>
 
     <ImageView
         android:layout_width="@dimen/smart_register_client_divider_height"
         android:layout_height="fill_parent"
-        android:src="@color/smart_register_client_divider_color" />
+        android:src="@color/smart_register_client_divider_color"/>
 
     <RelativeLayout
+        android:id="@+id/dokumentasi_persalinan"
         android:layout_width="0dp"
         android:layout_height="match_parent"
         android:layout_weight="125"
@@ -39,53 +40,53 @@
         android:weightSum="1">
 
         <org.smartregister.view.customcontrols.CustomFontTextView
-            android:id="@+id/tv_dok_tanggal_bersalin"
-            style="@style/CustomFontTextViewStyle.ListView.Small"
+            android:id="@+id/dok_tanggal_bersalin"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
             android:layout_alignParentLeft="true"
             android:layout_alignParentTop="true"
-            android:layout_marginTop="5dp"
-            android:text="16/05/2015" />
+            android:text="16/05/2015"
+            style="@style/CustomFontTextViewStyle.ListView.Small"/>
 
         <org.smartregister.view.customcontrols.CustomFontTextView
             android:id="@+id/dok_tempat_persalinan"
-            style="@style/CustomFontTextViewStyle.ListView.Small"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentLeft="true"
-            android:layout_below="@id/tv_dok_tanggal_bersalin"
-            android:text="@string/place_place" />
+            android:layout_below="@id/dok_tanggal_bersalin"
+            android:text="@string/place_place"
+            style="@style/CustomFontTextViewStyle.ListView.Small"/>
 
 
         <org.smartregister.view.customcontrols.CustomFontTextView
-            android:id="@+id/tv_tempat_persalinan"
-            style="@style/CustomFontTextViewStyle.ListView.Small"
+            android:id="@+id/txt_tempat_persalinan"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentLeft="true"
             android:layout_below="@id/dok_tempat_persalinan"
-            android:ellipsize="none"
-            android:maxLines="2"
             android:scrollHorizontally="false"
-            android:singleLine="false" />
+            android:ellipsize="none"
+            android:singleLine="false"
+            android:maxLines="2"
+            style="@style/CustomFontTextViewStyle.ListView.Small"/>
 
         <org.smartregister.view.customcontrols.CustomFontTextView
             android:id="@+id/dok_tipe"
-            style="@style/CustomFontTextViewStyle.ListView.Small"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_below="@id/txt_tempat_persalinan"
             android:layout_alignParentLeft="true"
-            android:layout_below="@id/tv_tempat_persalinan"
-            android:text="@string/plan_type" />
+            android:text="@string/plan_type"
+            style="@style/CustomFontTextViewStyle.ListView.Small"/>
 
         <org.smartregister.view.customcontrols.CustomFontTextView
-            android:id="@+id/tv_tipe"
-            style="@style/CustomFontTextViewStyle.ListView.Small.NoPadding"
+            android:id="@+id/txt_tipe"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@id/tv_tempat_persalinan"
-            android:layout_toRightOf="@+id/dok_tipe" />
+            android:layout_toRightOf="@+id/dok_tipe"
+            android:layout_below="@id/txt_tempat_persalinan"
+            style="@style/CustomFontTextViewStyle.ListView.Small.NoPadding"/>
 
     </RelativeLayout>
 
@@ -93,78 +94,81 @@
     <ImageView
         android:layout_width="@dimen/smart_register_client_divider_height"
         android:layout_height="fill_parent"
-        android:src="@color/smart_register_client_divider_color" />
+        android:src="@color/smart_register_client_divider_color"/>
 
 
     <TextView
-        android:id="@+id/tv_komplikasi"
-        style="@style/CustomFontTextViewStyle.ListView.Medium.FourLine"
+        android:id="@+id/txt_komplikasi"
         android:layout_width="@dimen/list_ec_no_view_width"
         android:layout_height="fill_parent"
         android:layout_marginTop="10dp"
         android:layout_weight="150"
+        android:scrollHorizontally="false"
         android:ellipsize="none"
+        android:singleLine="false"
         android:maxLines="4"
         android:paddingLeft="10dp"
-        android:scrollHorizontally="false"
-        android:singleLine="false" />
+        style="@style/CustomFontTextViewStyle.ListView.Medium.FourLine"/>
 
 
     <ImageView
         android:layout_width="@dimen/smart_register_client_divider_height"
         android:layout_height="fill_parent"
-        android:src="@color/smart_register_client_divider_color" />
+        android:src="@color/smart_register_client_divider_color"/>
 
 
     <RelativeLayout
+        android:id="@+id/kondisi_persalinan"
         android:layout_width="0dp"
         android:layout_height="match_parent"
         android:layout_weight="125"
-        android:background="@color/status_bar_text_almost_white"
         android:orientation="horizontal"
-        android:weightSum="1">
+        android:weightSum="1"
+        android:background="@color/status_bar_text_almost_white">
 
 
-        <org.smartregister.view.customcontrols.CustomFontTextView
-            android:id="@+id/tv_tgl_kunjungan_pnc"
-            style="@style/CustomFontTextViewStyle.ListView.Medium.FourLine"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="-2dp"
-            android:text="Something "
-            android:textSize="14sp" />
+            <org.smartregister.view.customcontrols.CustomFontTextView
+                android:id="@+id/txt_tanggal_kunjungan_pnc"
+                android:layout_marginTop="-2dp"
+                style="@style/CustomFontTextViewStyle.ListView.Medium.FourLine"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="14sp"
+                android:text="Something "/>
 
-        <org.smartregister.view.customcontrols.CustomFontTextView
-            android:id="@+id/tv_kf"
-            style="@style/CustomFontTextViewStyle.ListView.Medium.FourLine"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/tv_tgl_kunjungan_pnc"
-            android:layout_marginTop="-2dp"
-            android:text="Something "
-            android:textSize="14sp" />
+            <org.smartregister.view.customcontrols.CustomFontTextView
+                android:id="@+id/txt_kf"
+                android:layout_marginTop="-2dp"
+                style="@style/CustomFontTextViewStyle.ListView.Medium.FourLine"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/txt_tanggal_kunjungan_pnc"
+                android:textSize="14sp"
+                android:text="Something "/>
 
-        <org.smartregister.view.customcontrols.CustomFontTextView
-            android:id="@+id/tv_vit_a"
-            style="@style/CustomFontTextViewStyle.ListView.Medium.FourLine"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/tv_kf"
-            android:layout_marginTop="-2dp"
-            android:text="Something "
-            android:textSize="14sp" />
+            <org.smartregister.view.customcontrols.CustomFontTextView
+                android:id="@+id/txt_vit_a"
+                android:layout_marginTop="-2dp"
+                style="@style/CustomFontTextViewStyle.ListView.Medium.FourLine"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/txt_kf"
+                android:textSize="14sp"
+                android:text="Something "/>
 
 
     </RelativeLayout>
 
 
+
     <ImageView
         android:layout_width="@dimen/smart_register_client_divider_height"
         android:layout_height="fill_parent"
-        android:src="@color/smart_register_client_divider_color" />
+        android:src="@color/smart_register_client_divider_color"/>
 
 
     <RelativeLayout
+        android:id="@+id/tanda_vital_layout"
         android:layout_width="0dp"
         android:layout_height="match_parent"
         android:layout_weight="175"
@@ -173,74 +177,74 @@
 
         <org.smartregister.view.customcontrols.CustomFontTextView
             android:id="@+id/lbl_td_sistolik"
-            style="@style/CustomFontTextViewStyle.ListView.Normal"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentLeft="true"
             android:layout_alignParentTop="true"
-            android:text="TD (Sistolik) : " />
+            android:text="TD (Sistolik) : "
+            style="@style/CustomFontTextViewStyle.ListView.Normal"/>
 
         <org.smartregister.view.customcontrols.CustomFontTextView
             android:id="@+id/lbl_td_diastolik"
-            style="@style/CustomFontTextViewStyle.ListView.Normal"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentLeft="true"
             android:layout_below="@id/lbl_td_sistolik"
-            android:text="TD (Diastolik) : " />
+            android:text="TD (Diastolik) : "
+            style="@style/CustomFontTextViewStyle.ListView.Normal"/>
 
 
         <org.smartregister.view.customcontrols.CustomFontTextView
             android:id="@+id/lbl_td_suhu"
-            style="@style/CustomFontTextViewStyle.ListView.Normal"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentLeft="true"
             android:layout_below="@id/lbl_td_diastolik"
-            android:text="@string/temperature_lbl" />
+            android:text="@string/temperature_lbl"
+            style="@style/CustomFontTextViewStyle.ListView.Normal"/>
 
         <org.smartregister.view.customcontrols.CustomFontTextView
-            android:id="@+id/tv_td_sistolik"
-            style="@style/CustomFontTextViewStyle.ListView.Normal.NoPadding"
+            android:id="@+id/txt_td_sistolik"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_toRightOf="@id/lbl_td_sistolik"
             android:layout_alignParentTop="true"
-            android:layout_toRightOf="@id/lbl_td_sistolik" />
+            style="@style/CustomFontTextViewStyle.ListView.Normal.NoPadding"/>
 
         <org.smartregister.view.customcontrols.CustomFontTextView
-            android:id="@+id/tv_td_diastolik"
-            style="@style/CustomFontTextViewStyle.ListView.Normal.NoPadding"
+            android:id="@+id/txt_td_diastolik"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@id/tv_td_sistolik"
-            android:layout_toRightOf="@id/lbl_td_diastolik" />
+            android:layout_toRightOf="@id/lbl_td_diastolik"
+            android:layout_below="@id/txt_td_sistolik"
+            style="@style/CustomFontTextViewStyle.ListView.Normal.NoPadding"/>
 
 
         <org.smartregister.view.customcontrols.CustomFontTextView
-            android:id="@+id/tv_td_suhu"
-            style="@style/CustomFontTextViewStyle.ListView.Normal.NoPadding"
+            android:id="@+id/txt_td_suhu"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_toRightOf="@id/lbl_td_suhu"
             android:layout_below="@id/txt_td_diastolik"
-            android:layout_toRightOf="@id/lbl_td_suhu" />
+            style="@style/CustomFontTextViewStyle.ListView.Normal.NoPadding"/>
 
     </RelativeLayout>
 
     <ImageView
         android:layout_width="@dimen/smart_register_client_divider_height"
         android:layout_height="fill_parent"
-        android:src="@color/smart_register_client_divider_color" />
+        android:src="@color/smart_register_client_divider_color"/>
 
     <ImageButton
-        android:id="@+id/ib_btn_edit"
+        android:id="@+id/btn_edit"
         android:layout_width="@dimen/list_edit_icon_view_width"
         android:layout_height="fill_parent"
-        android:layout_margin="5dp"
         android:layout_weight="105"
-        android:background="@drawable/edit_button_background"
+        android:scaleType="center"
+        android:gravity="center"
+        android:layout_margin="5dp"
         android:clickable="true"
         android:focusable="true"
-        android:gravity="center"
-        android:scaleType="center" />
+        android:background="@drawable/edit_button_background"/>
 
 </LinearLayout>

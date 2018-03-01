@@ -282,8 +282,6 @@
         "name": "type",
         "bind": "/model/instance/anc_registration/type",
         "source": "kartu_ibu.ibu.type"
-      },
-      {
       }
     ]
   }

@@ -50,6 +50,7 @@
         "bind": "/model/instance/dok_persalinan_reviewed/keadaan_bayi",
         "source": "ibu.anak.keadaanBayi"
       },
+
       {
         "name": "persalinan",
         "bind": "/model/instance/dok_persalinan_reviewed/persalinan"
