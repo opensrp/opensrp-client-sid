@@ -1,7 +1,6 @@
 package org.smartregister.bidan.activity;
 
 import android.support.v4.app.Fragment;
-import android.util.Log;
 
 import org.json.JSONException;
 import org.json.JSONObject;

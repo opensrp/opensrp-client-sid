@@ -10,6 +10,7 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import org.smartregister.bidan.R;
 import org.smartregister.bidan.utils.CameraPreviewActivity;
 import org.smartregister.bidan.utils.Support;
 import org.smartregister.bidan.utils.Tools;
@@ -18,7 +19,6 @@ import org.smartregister.commonregistry.CommonPersonObject;
 import org.smartregister.commonregistry.CommonPersonObjectClient;
 import org.smartregister.repository.DetailsRepository;
 import org.smartregister.view.activity.DrishtiApplication;
-import org.smartregister.bidan.R;
 
 import java.io.File;
 
@@ -188,7 +188,7 @@ public class DetailChildActivity extends Activity {
             File file = new File(path.toString());
             if (!file.exists()) {
                 boolean mkdir = file.mkdir();
-                Log.d(TAG, "onActivityResult: mkdir "+ mkdir);
+                Log.d(TAG, "onActivityResult: mkdir " + mkdir);
             }
 
             if (file.canWrite()) {

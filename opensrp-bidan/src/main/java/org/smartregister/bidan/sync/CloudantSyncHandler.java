@@ -52,8 +52,8 @@ public class CloudantSyncHandler {
     private static final String LOG_TAG = "CloudantSyncHandler";
     private static CloudantSyncHandler instance;
     private final Context mContext;
-    private ClientProcessor mClientProcessor;
     private final Handler mHandler;
+    private ClientProcessor mClientProcessor;
     private Replicator mPushReplicator;
     private Replicator mPullReplicator;
     private CloudantSyncListener mListener;

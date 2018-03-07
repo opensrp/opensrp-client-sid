@@ -30,59 +30,6 @@ public class BidanApplication extends DrishtiApplication {
 
     private EventClientRepository eventClientRepository;
 
-    @Override
-    public void onCreate() {
-        super.onCreate();
-
-        mInstance = this;
-
-        context = Context.getInstance();
-        context.updateApplicationContext(getApplicationContext());
-        context.updateCommonFtsObject(createCommonFtsObject());
-
-        //Initialize Modules
-        CoreLibrary.init(context());
-        DrishtiSyncScheduler.setReceiverClass(SyncBroadcastReceiver.class);
-
-        applyUserLanguagePreference();
-        cleanUpSyncState();
-        Fabric.with(this, new Crashlytics());
-    }
-
-    @Override
-    public Repository getRepository() {
-        try {
-            if (repository == null) {
-                repository = new BidanRepository(getInstance().getApplicationContext(), context());
-
-            }
-        } catch (UnsatisfiedLinkError e) {
-            logError("Error on getRepository: " + e);
-
-        }
-        return repository;
-    }
-
-    @Override
-    public void logoutCurrentUser() {
-        Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
-        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-        getApplicationContext().startActivity(intent);
-        context.userService().logoutSession();
-    }
-
-    private void cleanUpSyncState() {
-        DrishtiSyncScheduler.stop(getApplicationContext());
-        context.allSharedPreferences().saveIsSyncInProgress(false);
-    }
-
-    @Override
-    public void onTerminate() {
-        super.onTerminate();
-        logInfo("Application is terminating. Stopping Dristhi Sync scheduler and resetting isSyncInProgress setting.");
-        cleanUpSyncState();
-    }
-
     private static String[] getFtsSearchFields(String tableName) {
         switch (tableName) {
             case "ec_kartu_ibu":
@@ -139,6 +86,56 @@ public class BidanApplication extends DrishtiApplication {
         return commonFtsObject;
     }
 
+    public static synchronized BidanApplication getInstance() {
+        return (BidanApplication) mInstance;
+    }
+
+    @Override
+    public void onCreate() {
+        super.onCreate();
+
+        mInstance = this;
+
+        context = Context.getInstance();
+        context.updateApplicationContext(getApplicationContext());
+        context.updateCommonFtsObject(createCommonFtsObject());
+
+        //Initialize Modules
+        CoreLibrary.init(context());
+        DrishtiSyncScheduler.setReceiverClass(SyncBroadcastReceiver.class);
+
+        applyUserLanguagePreference();
+        cleanUpSyncState();
+        Fabric.with(this, new Crashlytics());
+    }
+
+    @Override
+    public Repository getRepository() {
+        try {
+            if (repository == null) {
+                repository = new BidanRepository(getInstance().getApplicationContext(), context());
+
+            }
+        } catch (UnsatisfiedLinkError e) {
+            logError("Error on getRepository: " + e);
+
+        }
+        return repository;
+    }
+
+    @Override
+    public void logoutCurrentUser() {
+        Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        getApplicationContext().startActivity(intent);
+        context.userService().logoutSession();
+    }
+
+    private void cleanUpSyncState() {
+        DrishtiSyncScheduler.stop(getApplicationContext());
+        context.allSharedPreferences().saveIsSyncInProgress(false);
+    }
+
 //    public UniqueIdRepository uniqueIdRepository() {
 //        if (uniqueIdRepository == null) {
 //            uniqueIdRepository = new UniqueIdRepository((BidanRepository) getRepository());
@@ -161,9 +158,11 @@ public class BidanApplication extends DrishtiApplication {
 //    return settingsRepository;
 //}
 
-
-    public static synchronized BidanApplication getInstance() {
-        return (BidanApplication) mInstance;
+    @Override
+    public void onTerminate() {
+        super.onTerminate();
+        logInfo("Application is terminating. Stopping Dristhi Sync scheduler and resetting isSyncInProgress setting.");
+        cleanUpSyncState();
     }
 
     private void applyUserLanguagePreference() {
@@ -203,7 +202,7 @@ public class BidanApplication extends DrishtiApplication {
         return context;
     }
 
-    public Context getContext(){
+    public Context getContext() {
         return context;
     }
 

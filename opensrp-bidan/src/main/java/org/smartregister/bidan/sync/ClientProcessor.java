@@ -3,7 +3,6 @@ package org.smartregister.bidan.sync;
 import android.content.ContentValues;
 import android.content.Context;
 import android.content.SharedPreferences;
-import android.database.Cursor;
 import android.preference.PreferenceManager;
 import android.util.Log;
 
@@ -34,8 +33,8 @@ import static org.smartregister.event.Event.FORM_SUBMITTED;
 
 public class ClientProcessor {
 
-    private static final String baseEntityIdJSONKey = "baseEntityId";
     protected static final String providerIdJSONKey = "providerId";
+    private static final String baseEntityIdJSONKey = "baseEntityId";
     private static final String VALUES_KEY = "values";
     private static final String TAG = ClientProcessor.class.getName();
     private static final String detailsUpdated = "detailsUpdated";
@@ -88,8 +87,8 @@ public class ClientProcessor {
                     if (isNullOrEmptyJSONObject(clientClassificationJson)) continue;
 
                     // Iterate through the events
-                    Log.e(TAG, "processClient:Event eventOrAlert "+ eventOrAlert );
-                    Log.e(TAG, "processClient:Event "+ clientClassificationJson );
+                    Log.e(TAG, "processClient:Event eventOrAlert " + eventOrAlert);
+                    Log.e(TAG, "processClient:Event " + clientClassificationJson);
                     processEvent(eventOrAlert, clientClassificationJson);
 
                 } else if ("Action".equals(type)) {
@@ -98,8 +97,8 @@ public class ClientProcessor {
                     if (isNullOrEmptyJSONObject(clientAlertClassificationJson)) continue;
 
                     // Iterate through the Alerts
-                    Log.e(TAG, "processClient:Action eventOrAlert "+ eventOrAlert );
-                    Log.e(TAG, "processClient:Action clientClassificationJson "+ clientAlertClassificationJson );
+                    Log.e(TAG, "processClient:Action eventOrAlert " + eventOrAlert);
+                    Log.e(TAG, "processClient:Action clientClassificationJson " + clientAlertClassificationJson);
                     processAlert(eventOrAlert, clientAlertClassificationJson);
                 }
             }
@@ -175,7 +174,7 @@ public class ClientProcessor {
             JSONObject ruleObject = clientClass.getJSONObject("rule");
             JSONArray fields = ruleObject.getJSONArray("fields");
 
-            Log.e(TAG, "processClientClass:fields.length() "+fields.length() );
+            Log.e(TAG, "processClientClass:fields.length() " + fields.length());
             for (int i = 0; i < fields.length(); i++) {
                 JSONObject fieldJson = fields.getJSONObject(i);
                 processField(fieldJson, event, client);
@@ -343,7 +342,7 @@ public class ClientProcessor {
     }
 
     private Boolean closeCase(JSONObject client, JSONArray closesCase) {
-        Log.e(TAG, "closeCase: " );
+        Log.e(TAG, "closeCase: ");
         try {
             if (closesCase == null || closesCase.length() == 0) {
                 return false;
@@ -517,7 +516,7 @@ public class ClientProcessor {
                 // save the values to db
                 Log.e(TAG, "processCaseModel:contentValues " + contentValues);
                 Long id = executeInsertStatement(contentValues, clientType);
-                Log.e(TAG, "processCaseModel:insert_id "+ id );
+                Log.e(TAG, "processCaseModel:insert_id " + id);
                 updateFTSsearch(clientType, baseEntityId, contentValues);
                 Long timestamp = getEventDate(event.get("eventDate"));
                 addContentValuesToDetailsTable(contentValues, timestamp);
@@ -597,7 +596,7 @@ public class ClientProcessor {
      * @return
      */
     private Map<String, String> getObsFromEvent(JSONObject event) {
-        Log.e(TAG, "getObsFromEvent:event "+ event );
+        Log.e(TAG, "getObsFromEvent:event " + event);
         Map<String, String> obs = new HashMap<>();
 
         try {
@@ -772,8 +771,8 @@ public class ClientProcessor {
      * Insert the a new record to the database and returns its id
      **/
     private Long executeInsertStatement(ContentValues values, String tableName) {
-        Log.e(TAG, "executeInsertStatement:values "+ values );
-        Log.e(TAG, "executeInsertStatement:tableName "+ tableName );
+        Log.e(TAG, "executeInsertStatement:values " + values);
+        Log.e(TAG, "executeInsertStatement:tableName " + tableName);
         CommonRepository cr = org.smartregister.CoreLibrary.getInstance().context().commonrepository(tableName);
         return cr.executeInsertStatement(values, tableName);
     }
@@ -908,7 +907,7 @@ public class ClientProcessor {
             }
         } catch (Exception e) {
             e.printStackTrace();
-            Log.e(TAG, "updateIdenitifier: "+ e.getCause() );
+            Log.e(TAG, "updateIdenitifier: " + e.getCause());
         }
     }
 
@@ -986,7 +985,6 @@ public class ClientProcessor {
 //            return null;
 //        }
 //    }
-
 
 
 //    public boolean deleteCase(String tableName, String baseEntityId) {

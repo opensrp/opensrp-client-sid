@@ -97,7 +97,7 @@ public class CloudantDataHandler {
                     byte[] json = (cursor.getBlob(0));
                     String jsonEventStr = new String(json, "UTF-8");
                     if (StringUtils.isNotBlank(jsonEventStr) && !"{}".equals(jsonEventStr)) { //
-                        Log.e(TAG, "getClientByBaseEntityId:new JSONObject(jsonEventStr) "+ new JSONObject(jsonEventStr) );
+                        Log.e(TAG, "getClientByBaseEntityId:new JSONObject(jsonEventStr) " + new JSONObject(jsonEventStr));
                         // Check blank/empty json string
                         return new JSONObject(jsonEventStr);
                     }

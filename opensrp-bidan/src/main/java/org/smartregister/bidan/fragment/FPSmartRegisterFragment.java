@@ -205,7 +205,7 @@ public class FPSmartRegisterFragment extends BaseSmartRegisterFragment {
             mainCondition = "is_closed = 0 AND jenisKontrasepsi !='0' AND namalengkap != '' AND namalengkap IS NOT NULL";
             joinTable = "";
             countSelect = countQueryBuilder.mainCondition(mainCondition);
-            Log.e(TAG, "initializeQueries: CountExecute "+ countSelect );
+            Log.e(TAG, "initializeQueries: CountExecute " + countSelect);
             super.CountExecute();
 
             SmartRegisterQueryBuilder queryBuilder = new SmartRegisterQueryBuilder();
@@ -213,7 +213,7 @@ public class FPSmartRegisterFragment extends BaseSmartRegisterFragment {
             queryBuilder.customJoin("LEFT JOIN ec_ibu on ec_kartu_ibu.id = ec_ibu.base_entity_id LEFT JOIN ImageList imagelist ON ec_ibu.base_entity_id=imagelist.entityID ");
 
             mainSelect = queryBuilder.mainCondition("ec_kartu_ibu.is_closed != 0 and jenisKontrasepsi != 0 AND namalengkap != '' AND namalengkap IS NOT NULL");
-            Log.e(TAG, "initializeQueries:mainSelect "+ mainSelect );
+            Log.e(TAG, "initializeQueries:mainSelect " + mainSelect);
             Sortqueries = KiSortByNameAZ();
 
             currentlimit = 20;
@@ -299,7 +299,7 @@ public class FPSmartRegisterFragment extends BaseSmartRegisterFragment {
                     showFragmentDialog(((FPSmartRegisterActivity) getActivity()).new EditDialogOptionModelNew(), view.getTag());
                     break;
                 default:
-                    Log.d(TAG, "onClick: Default Click" );
+                    Log.d(TAG, "onClick: Default Click");
                     break;
             }
         }

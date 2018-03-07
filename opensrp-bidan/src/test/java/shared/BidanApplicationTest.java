@@ -4,7 +4,6 @@ import android.util.Log;
 
 import org.mockito.Mock;
 import org.mockito.Mockito;
-import org.mockito.MockitoAnnotations;
 import org.robolectric.TestLifecycleApplication;
 import org.smartregister.Context;
 import org.smartregister.bidan.application.BidanApplication;
@@ -16,22 +15,23 @@ import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
 
-import static org.junit.Assert.*;
-import static org.mockito.Matchers.anyString;
 import static org.mockito.MockitoAnnotations.initMocks;
 import static org.powermock.api.mockito.PowerMockito.when;
+
 /**
  * Created by sid-tech on 2/23/18
  */
 public class BidanApplicationTest extends BidanApplication implements TestLifecycleApplication {
 
+    public static final String TAG = BidanApplicationTest.class.getCanonicalName();
     @Mock
     private BidanRepository bidanRepository;
-
     @Mock
     private AlertService alertService;
 
-    public static final String TAG = BidanApplicationTest.class.getCanonicalName();
+    public static synchronized BidanApplication getInstance() {
+        return (BidanApplication) mInstance;
+    }
 
     @Override
     public void onCreate() {
@@ -66,10 +66,6 @@ public class BidanApplicationTest extends BidanApplication implements TestLifecy
     @Override
     public void afterTest(Method method) {
 
-    }
-
-    public static synchronized BidanApplication getInstance() {
-        return (BidanApplication) mInstance;
     }
 
 }

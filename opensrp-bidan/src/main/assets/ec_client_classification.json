@@ -8,52 +8,74 @@
           {
             "field": "eventType",
             "field_value": "Edit Ibu",
-            "creates_case": ["ec_kartu_ibu"]
+            "creates_case": [
+              "ec_kartu_ibu"
+            ]
           },
           {
             "field": "eventType",
             "field_value": "Registrasi Vaksinator",
-            "creates_case": ["ec_kartu_ibu"]
+            "creates_case": [
+              "ec_kartu_ibu"
+            ]
           },
           {
             "field": "eventType",
             "field_value": "Registrasi Gizi",
-            "creates_case": ["ec_kartu_ibu"]
+            "creates_case": [
+              "ec_kartu_ibu"
+            ]
           },
           {
             "field": "eventType",
             "field_value": "Identitas Ibu",
-            "creates_case": ["ec_kartu_ibu"]
+            "creates_case": [
+              "ec_kartu_ibu"
+            ]
           },
           {
-            "field":"eventType",
+            "field": "eventType",
             "field_value": "Tambah KB",
-            "creates_case":["ec_kartu_ibu"]
+            "creates_case": [
+              "ec_kartu_ibu"
+            ]
           },
           {
             "field": "eventType",
             "field_value": "Kohort Pelayanan KB",
-            "creates_case": ["ec_kartu_ibu"]
+            "creates_case": [
+              "ec_kartu_ibu"
+            ]
           },
           {
             "field": "eventType",
             "field_value": "Penutupan KB",
-            "creates_case": ["ec_kartu_ibu"]
+            "creates_case": [
+              "ec_kartu_ibu"
+            ]
           },
           {
             "field": "eventType",
             "field_value": "Registrasi Vaksinator",
-            "closes_case": ["ec_kartu_ibu"]
+            "closes_case": [
+              "ec_kartu_ibu"
+            ]
           },
           {
             "field": "eventType",
             "field_value": "Registrasi Gizi",
-            "closes_case": ["ec_kartu_ibu"]
+            "closes_case": [
+              "ec_kartu_ibu"
+            ]
           },
           {
             "field": "eventType",
             "field_value": "Penutupan Ibu",
-            "closes_case": ["ec_kartu_ibu", "ec_ibu", "ec_pnc"]
+            "closes_case": [
+              "ec_kartu_ibu",
+              "ec_ibu",
+              "ec_pnc"
+            ]
           },
           {
             "field": "obs.fieldCode",
@@ -61,7 +83,11 @@
             "values": [
               "134612AAAAAAAAAAAAAAAAAAAAAAAAAA"
             ],
-            "closes_case": ["ec_kartu_ibu", "ec_ibu", "ec_pnc"]
+            "closes_case": [
+              "ec_kartu_ibu",
+              "ec_ibu",
+              "ec_pnc"
+            ]
           }
         ]
       }

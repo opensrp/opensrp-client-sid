@@ -55,12 +55,12 @@ import static org.smartregister.util.Log.logError;
 import static org.smartregister.util.Log.logVerbose;
 
 public class LoginActivity extends Activity {
-    private static final String TAG = LoginActivity.class.getName();
     public static final String ENGLISH_LOCALE = "en";
     public static final String BAHASA_LOCALE = "in";
     public static final String ENGLISH_LANGUAGE = "English";
     public static final String BAHASA_LANGUAGE = "Bahasa";
     public static final String PREF_TEAM_LOCATIONS = "PREF_TEAM_LOCATIONS";
+    private static final String TAG = LoginActivity.class.getName();
     private Context context = BidanApplication.getInstance().context();
     private EditText userNameEditText;
     private EditText passwordEditText;

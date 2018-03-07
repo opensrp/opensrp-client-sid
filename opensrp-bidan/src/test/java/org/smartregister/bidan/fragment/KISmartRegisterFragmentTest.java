@@ -1,6 +1,5 @@
 package org.smartregister.bidan.fragment;
 
-import android.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 

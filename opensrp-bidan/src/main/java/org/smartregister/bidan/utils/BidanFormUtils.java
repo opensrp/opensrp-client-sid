@@ -112,8 +112,8 @@ public class BidanFormUtils {
             JSONObject object = array.getJSONObject(i);
             if (relationShipExist(link, object)) {
                 System.out.println("Relationship found ##");
-                android.util.Log.e(TAG, "retrieveRelationshipJsonForLink:Relationship found ## "+link );
-                android.util.Log.e(TAG, "retrieveRelationshipJsonForLink:Relationship found ## "+object );
+                android.util.Log.e(TAG, "retrieveRelationshipJsonForLink:Relationship found ## " + link);
+                android.util.Log.e(TAG, "retrieveRelationshipJsonForLink:Relationship found ## " + object);
                 return object;
             }
         }
@@ -165,7 +165,7 @@ public class BidanFormUtils {
         //fu.write("xmlform.txt", formData);
         //fu.write("xmlformsubmission.txt", formSubmission.toString());
 //        System.out.println(formSubmission);
-        android.util.Log.e(TAG, "generateFormSubmisionFromXMLString: "+ formSubmission );
+        android.util.Log.e(TAG, "generateFormSubmisionFromXMLString: " + formSubmission);
 
         // use the form_definition.json to iterate through fields
         String formDefinitionJson = readFileFromAssetsFolder(
