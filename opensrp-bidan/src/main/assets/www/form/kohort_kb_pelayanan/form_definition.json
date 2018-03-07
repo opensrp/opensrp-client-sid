@@ -43,7 +43,7 @@
         "shouldLoadValue": true
       },
       {
-        "name": "Sub-village",
+        "name": "address1",
         "bind": "/model/instance/tambah_kb_reviewed/Sub-village",
         "shouldLoadValue": true
       },

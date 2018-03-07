@@ -112,6 +112,10 @@ dependencies {
         exclude group: 'com.android.support', module: 'recyclerview-v7'
 
     }
+
+    compile files('libs/FlurryAnalytics-6.0.0.jar')
+
+
     testCompile 'junit:junit:4.12'
     testCompile('org.robolectric:robolectric:3.4') {
 

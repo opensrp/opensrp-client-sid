@@ -40,7 +40,7 @@ public class ClientProcessor {
     private static final String TAG = ClientProcessor.class.getName();
     private static final String detailsUpdated = "detailsUpdated";
     private static final String[] openmrs_gen_ids = {"zeir_id"};
-    private ClientProcessor mInstance;
+    private static ClientProcessor mInstance;
     private Context mContext;
     private CloudantDataHandler mCloudantDataHandler;
 
@@ -55,7 +55,7 @@ public class ClientProcessor {
 
     }
 
-    public ClientProcessor getInstance(Context context) {
+    public static ClientProcessor getInstance(Context context) {
         if (mInstance == null) {
             mInstance = new ClientProcessor(context);
         }

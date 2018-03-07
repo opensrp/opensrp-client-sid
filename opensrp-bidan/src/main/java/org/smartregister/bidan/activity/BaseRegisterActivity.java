@@ -7,13 +7,15 @@ import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.widget.Toast;
 
+import com.flurry.android.FlurryAgent;
+
 import org.apache.commons.lang3.StringUtils;
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.smartregister.adapter.SmartRegisterPaginatedAdapter;
 import org.smartregister.bidan.R;
-import org.smartregister.bidan.sync.ClientProcessor;
-import org.smartregister.bidan.utils.BidanFormUtils;
+import org.smartregister.bidan.sync.BidanClientProcessor;
+import org.smartregister.bidan.utils.EnketoFormUtils;
 import org.smartregister.commonregistry.AllCommonsRepository;
 import org.smartregister.commonregistry.CommonPersonObject;
 import org.smartregister.commonregistry.CommonPersonObjectClient;
@@ -32,7 +34,6 @@ import org.smartregister.view.dialog.DialogOptionModel;
 import org.smartregister.view.dialog.EditOption;
 import org.smartregister.view.fragment.SecuredNativeSmartRegisterFragment;
 import org.smartregister.view.viewpager.OpenSRPViewPager;
-import org.smartregister.bidan.sync.ClientProcessor;
 
 import java.text.DateFormat;
 import java.util.ArrayList;
@@ -46,6 +47,8 @@ import butterknife.Bind;
 import butterknife.ButterKnife;
 
 import static org.smartregister.util.Utils.getValue;
+
+//import org.smartregister.bidan.utils.BidanFormUtils;
 
 //import android.content.res.Configuration;
 //import org.smartregister.Context;
@@ -63,6 +66,7 @@ public class BaseRegisterActivity extends SecuredNativeSmartRegisterActivity imp
     @Bind(R.id.view_pager)
     protected OpenSRPViewPager mPager;
     protected int currentPage;
+    //    private String[] formNames = new String[]{};
     protected FragmentPagerAdapter mPagerAdapter;
     protected DisplayFormFragment displayFormFragment;
     protected DisplayFormFragment formFragment;
@@ -241,7 +245,7 @@ public class BaseRegisterActivity extends SecuredNativeSmartRegisterActivity imp
         return getSupportFragmentManager().findFragmentByTag("android:switcher:" + mPager.getId() + ":" + fragmentPagerAdapter.getItemId(position));
     }
 
-    public void saveuniqueid() {
+//    public void saveuniqueid() {
 //        Log.e(TAG, "saveuniqueid: saved" );
 //        try {
 //            JSONObject uniqueId = new JSONObject(LoginActivity.generator.uniqueIdController().getUniqueIdJson());
@@ -251,7 +255,7 @@ public class BaseRegisterActivity extends SecuredNativeSmartRegisterActivity imp
 //        } catch (JSONException e) {
 //            e.printStackTrace();
 //        }
-    }
+//    }
 
 
     @Override
@@ -264,23 +268,19 @@ public class BaseRegisterActivity extends SecuredNativeSmartRegisterActivity imp
         android.util.Log.e(TAG, "startFormActivity: timer " + timer.format(date));
         formTime.put("start", timer.format(date));
 
-
 //        FlurryAgent.logEvent(formName,FS, true );
 //        Log.v("fieldoverride", metaData);
+        String data = "";
 
         try {
             int formIndex = formNames.indexOf(formName) + 1;// add the offset
             if (entityId != null || metaData != null) {
-                String data;
                 //check if there is previously saved data for the form
                 data = getPreviouslySavedDataForForm(formName, metaData, entityId);
 
                 if (data == null) {
-                    data = BidanFormUtils.getInstance(getApplicationContext())
+                    data = EnketoFormUtils.getInstance(getApplicationContext())
                             .generateXMLInputForFormWithEntityId(entityId, formName, metaData);
-//                    android.util.Log.e(TAG, "startFormActivity: entityId " + entityId);
-//                    android.util.Log.e(TAG, "startFormActivity: formName " + formName);
-//                    android.util.Log.e(TAG, "startFormActivity: metaData " + metaData);
                 }
 
                 displayFormFragment = getDisplayFormFragmentAtIndex(formIndex);
@@ -291,6 +291,8 @@ public class BaseRegisterActivity extends SecuredNativeSmartRegisterActivity imp
                     displayFormFragment.setListener(this);
                 }
             }
+
+            android.util.Log.e(TAG, "startFormActivity: displayForm " + data);
 
             mPager.setCurrentItem(formIndex, false); //Don't animate the view on orientation change the view disapears
 
@@ -308,37 +310,130 @@ public class BaseRegisterActivity extends SecuredNativeSmartRegisterActivity imp
 
     @Override
     public void saveFormSubmission(String formSubmission, String id, String formName, JSONObject fieldOverrides) {
+//        android.util.Log.v("fieldoverride", fieldOverrides.toString());
         // save the form
         try {
-            BidanFormUtils formUtils = BidanFormUtils.getInstance(getApplicationContext());
+
+            EnketoFormUtils formUtils = EnketoFormUtils.getInstance(getApplicationContext());
+            //  FormUtils formUtils = FormUtils.getInstance(getApplicationContext());
             FormSubmission submission = formUtils.generateFormSubmisionFromXMLString(id, formSubmission, formName, fieldOverrides);
 
-            ClientProcessor mClientProcessor = new ClientProcessor(getApplicationContext());
-            mClientProcessor.getInstance(getApplicationContext()).processClient();
+            BidanClientProcessor.getInstance(getApplicationContext()).processClient();
 
-            android.util.Log.e(TAG, "saveFormSubmission:formName " + formName );
-            android.util.Log.e(TAG, "saveFormSubmission:submission " + submission );
             context().formSubmissionService().updateFTSsearch(submission);
             context().formSubmissionRouter().handleSubmission(submission, formName);
-
-            if ("kartu_ibu_registration".equals(formName)) saveuniqueid();
-
-            //switch to forms list fragment
             switchToBaseFragment(formSubmission); // Unnecessary!! passing on data
 
+            if (formName.equals("registrasi_ibu")) {
+                android.util.Log.d(TAG, "saveFormSubmission: it was registrasi_ibu form");
+                //  FieldOverrides fieldOverrides = new FieldOverrides(combined.toString());
+
+                fieldOverrides.put("ibuCaseId", submission.entityId());
+//                FieldOverrides fo = new FieldOverrides(fieldOverrides.toString());
+//                activatingOtherForm("registrasi_anak", null, fo.getJSONString());
+            }
+
+            //end capture flurry log for FS
+//            String end = timer.format(new Date());
+//            Map<String, String> FS = new HashMap<>();
+//            FS.put("end", end);
+//            FlurryAgent.logEvent(formName, FS, true);
         } catch (Exception e) {
             // TODO: show error dialog on the formfragment if the submission fails
-            displayFormFragment = getDisplayFormFragmentAtIndex(currentPage);
+            DisplayFormFragment displayFormFragment = getDisplayFormFragmentAtIndex(currentPage);
             if (displayFormFragment != null) {
                 displayFormFragment.hideTranslucentProgressDialog();
             }
             e.printStackTrace();
-            android.util.Log.e(TAG, "saveFormSubmission: " + e.getCause());
         }
-        //end capture flurry log for FS
-        formTime.put("end", timer.format(new Date()));
-//        FlurryAgent.logEvent(formName,FS, true);
+
     }
+
+
+//    public void activatingOtherForm(final String formName, final String entityId, final String metaData){
+//        final int prevPageIndex = currentPage;
+//        runOnUiThread(new Runnable() {
+//            @Override
+//            public void run() {
+//                //hack reset the form
+//                DisplayFormFragment displayFormFragment = getDisplayFormFragmentAtIndex(prevPageIndex);
+//                if (displayFormFragment != null) {
+//                    displayFormFragment.hideTranslucentProgressDialog();
+//                    displayFormFragment.setFormData(null);
+//
+//                }
+//
+//                displayFormFragment.setRecordId(null);
+////                activatingForm(formName, entityId, metaData);
+//            }
+//        });
+//
+//    }
+
+//    private void activatingForm(String formName, String entityId, String metaData){
+//        try {
+//            int formIndex = EnketoFormUtils.getIndexForFormName(formName, formNames) + 1; // add the offset
+//            if (entityId != null || metaData != null){
+//                String data = null;
+//                //check if there is previously saved data for the form
+//                data = getPreviouslySavedDataForForm(formName, metaData, entityId);
+//                if (data == null){
+//                    data = EnketoFormUtils.getInstance(getApplicationContext()).generateXMLInputForFormWithEntityId(entityId, formName, metaData);
+//                }
+//
+//                DisplayFormFragment displayFormFragment = getDisplayFormFragmentAtIndex(formIndex);
+//                if (displayFormFragment != null) {
+//                    displayFormFragment.setFormData(data);
+//                    displayFormFragment.setRecordId(entityId);
+//                    displayFormFragment.setListener(this);
+//                    displayFormFragment.setFieldOverides(metaData);
+//                }
+//            }
+//
+//            mPager.setCurrentItem(formIndex, false); //Don't animate the view on orientation change the view disapears
+//
+//        }catch (Exception e){
+//            e.printStackTrace();
+//        }
+//    }
+
+
+//    public void saveFormSubmissionOld(String formSubmission, String id, String formName, JSONObject fieldOverrides) {
+//        // save the form
+//        try {
+//            BidanFormUtils formUtils = BidanFormUtils.getInstance(getApplicationContext());
+//            FormSubmission submission = formUtils.generateFormSubmisionFromXMLString(id, formSubmission, formName, fieldOverrides);
+//
+////            ClientProcessor mClientProcessor = new ClientProcessor(getApplicationContext());
+////            mClientProcessor.getInstance(getApplicationContext()).processClient();
+////            ClientProcessor.getInstance(getApplicationContext()).processClient();
+//            BidanClientProcessor.getInstance(getApplicationContext()).processClient();
+//
+//            android.util.Log.e(TAG, "saveFormSubmission:formName " + formName );
+//            System.out.println(submission);
+//            android.util.Log.e(TAG, "saveFormSubmission:submission " + submission );
+//
+//            context().formSubmissionService().updateFTSsearch(submission);
+//            context().formSubmissionRouter().handleSubmission(submission, formName);
+//
+//            if ("kartu_ibu_registration".equals(formName)) saveuniqueid();
+//
+//            //switch to forms list fragment
+//            switchToBaseFragment(formSubmission); // Unnecessary!! passing on data
+//
+//        } catch (Exception e) {
+//            // TODO: show error dialog on the formfragment if the submission fails
+//            displayFormFragment = getDisplayFormFragmentAtIndex(currentPage);
+//            if (displayFormFragment != null) {
+//                displayFormFragment.hideTranslucentProgressDialog();
+//            }
+//            e.printStackTrace();
+//            android.util.Log.e(TAG, "saveFormSubmission: " + e.getCause());
+//        }
+//        //end capture flurry log for FS
+//        formTime.put("end", timer.format(new Date()));
+////        FlurryAgent.logEvent(formName,FS, true);
+//    }
 
     public DialogOption[] getEditOptions() {
         return new DialogOption[]{};

@@ -10,6 +10,7 @@ import org.smartregister.CoreLibrary;
 import org.smartregister.bidan.activity.LoginActivity;
 import org.smartregister.bidan.repository.BidanRepository;
 import org.smartregister.commonregistry.CommonFtsObject;
+import org.smartregister.repository.EventClientRepository;
 import org.smartregister.repository.Repository;
 import org.smartregister.sync.DrishtiSyncScheduler;
 import org.smartregister.view.activity.DrishtiApplication;
@@ -26,6 +27,8 @@ public class BidanApplication extends DrishtiApplication {
 
 //    private static SettingsRepository settingsRepository;
 //    private UniqueIdRepository uniqueIdRepository;
+
+    private EventClientRepository eventClientRepository;
 
     @Override
     public void onCreate() {
@@ -198,6 +201,17 @@ public class BidanApplication extends DrishtiApplication {
 
     public Context context() {
         return context;
+    }
+
+    public Context getContext(){
+        return context;
+    }
+
+    public EventClientRepository eventClientRepository() {
+        if (eventClientRepository == null) {
+            eventClientRepository = new EventClientRepository(getRepository());
+        }
+        return eventClientRepository;
     }
 
 
