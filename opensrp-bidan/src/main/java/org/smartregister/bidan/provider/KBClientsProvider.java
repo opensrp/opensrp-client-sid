@@ -3,6 +3,8 @@ package org.smartregister.bidan.provider;
 import android.app.Activity;
 import android.content.Context;
 import android.database.Cursor;
+import android.graphics.drawable.Drawable;
+import android.support.v4.content.ContextCompat;
 import android.util.Log;
 import android.view.View;
 import android.widget.AbsListView;
@@ -98,6 +100,7 @@ public class KBClientsProvider extends BaseClientsProvider {
     ImageView profilepic;
     @Bind(R.id.ib_btn_edit)
     ImageButton follow_up;
+    private Drawable iconPencilDrawable;
 
     public KBClientsProvider(Context context, View.OnClickListener onClickListener, AlertService alertService) {
         super(context);
@@ -134,13 +137,13 @@ public class KBClientsProvider extends BaseClientsProvider {
         profilelayout.setOnClickListener(onClickListener);
         profilelayout.setTag(smartRegisterClient);
 
-//        if (iconPencilDrawable == null) {
-//            iconPencilDrawable = mContext.getResources().getDrawable(R.drawable.ic_pencil);
-//        }
+        if (iconPencilDrawable == null) {
+            iconPencilDrawable = ContextCompat.getDrawable(mContext, R.drawable.ic_pencil);
+        }
 
-//        follow_up.setOnClickListener(onClickListener);
-//        follow_up.setTag(smartRegisterClient);
-//        follow_up.setImageDrawable(iconPencilDrawable);
+        follow_up.setOnClickListener(onClickListener);
+        follow_up.setTag(smartRegisterClient);
+        follow_up.setImageDrawable(iconPencilDrawable);
 
 //        hr_badge.setVisibility(View.INVISIBLE);
 
