@@ -98,7 +98,7 @@ public class LoginActivity extends Activity {
         getActionBar().setBackgroundDrawable(getResources().getDrawable(R.color.action_bar_background));
         setLanguage();
 
-//        debugApp();
+        debugApp();
 
     }
     private void debugApp() {

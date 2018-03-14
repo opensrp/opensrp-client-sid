@@ -70,7 +70,7 @@ import static android.view.View.VISIBLE;
 import static org.apache.commons.lang3.StringUtils.isEmpty;
 
 /**
- * Created by Dimas Ciputra on 2/18/15.
+ * Created by Dimas Ciputra on 2/18/15.l
  */
 public class NativeKISmartRegisterFragment extends SecuredNativeSmartRegisterCursorAdapterFragment {
 
