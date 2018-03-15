@@ -23,6 +23,11 @@
         "shouldLoadValue": true
       },
       {
+        "name": "tanggalRegistrasi",
+        "bind": "/model/instance/Kartu_ibu/tanggal_periksa",
+        "shouldLoadValue": true
+      },
+      {
         "name": "lokasiPeriksa",
         "bind": "/model/instance/Kartu_ibu/lokasi_periksa",
         "shouldLoadValue": true
