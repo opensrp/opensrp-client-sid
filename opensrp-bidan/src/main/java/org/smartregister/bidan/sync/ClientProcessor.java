@@ -87,8 +87,6 @@ public class ClientProcessor {
                     if (isNullOrEmptyJSONObject(clientClassificationJson)) continue;
 
                     // Iterate through the events
-                    Log.e(TAG, "processClient:Event eventOrAlert " + eventOrAlert);
-                    Log.e(TAG, "processClient:Event " + clientClassificationJson);
                     processEvent(eventOrAlert, clientClassificationJson);
 
                 } else if ("Action".equals(type)) {
@@ -107,7 +105,7 @@ public class ClientProcessor {
         allSharedPreferences.saveLastSyncDate(lastSyncDate.getTime());
     }
 
-    private Boolean processEvent(JSONObject event, JSONObject clientClassificationJson) throws Exception {
+    private Boolean processEventOld(JSONObject event, JSONObject clientClassificationJson) throws Exception {
 
         Log.e(TAG, "processEvent:event " + event);
         Log.e(TAG, "processEvent:clientClassificationJson " + clientClassificationJson);
@@ -138,8 +136,13 @@ public class ClientProcessor {
 
             for (int i = 0; i < clientClasses.length(); i++) {
                 JSONObject clientClass = clientClasses.getJSONObject(i);
-//                Log.e(TAG, "processEvent: clientClass.length " + clientClass.length());
-//                Log.e(TAG, "processEvent: clientClass " + clientClass);
+                Log.e(TAG, "processEvent: clientClass.length " + clientClass.length());
+                Log.e(TAG, "processEvent: clientClass " + clientClass);
+                Log.e(TAG, "processEvent: event " + event);
+                Log.e(TAG, "processEvent: client " + client);
+//
+                // SaveDB process here
+                // TODO Resolve FP NULL
                 processClientClass(clientClass, event, client);
             }
 
@@ -152,6 +155,48 @@ public class ClientProcessor {
         } catch (Exception e) {
             Log.e(TAG, e.toString(), e);
 
+            return null;
+        }
+    }
+
+    public Boolean processEvent(JSONObject event, JSONObject clientClassificationJson) throws Exception {
+
+        try {
+            String baseEntityId = event.getString(baseEntityIdJSONKey);
+            if(event.has("creator")){
+                Log.i(TAG,"EVENT from openmrs");
+            }
+
+            if(event.has("eventType") && event.getString("eventType").equals("Child Registration")){
+                Log.i(TAG,"EVENT from child registration");
+            }
+            //for data integrity check if a client exists, if not pull one from cloudant and insert in drishti sqlite db
+
+            JSONObject client = mCloudantDataHandler.getClientByBaseEntityId(baseEntityId);
+            if(isNullOrEmptyJSONObject(client)){
+                return false;
+            }
+
+            // Get the client type classification
+            JSONArray clientClasses = clientClassificationJson.getJSONArray("case_classification_rules");
+            if(isNullOrEmptyJSONArray(clientClasses)){
+                return false;
+            }
+
+            Log.e(TAG, "processEvent:client >> "+ client );
+            for (int i = 0; i < clientClasses.length(); i++) {
+                JSONObject clientClass = clientClasses.getJSONObject(i);
+                processClientClass(clientClass, event, client);
+            }
+
+            // Incase the details have not been updated
+            boolean updated = event.has(detailsUpdated) ? event.getBoolean(detailsUpdated) : false;
+            if(!updated) {
+                updateClientDetailsTable(event, client);
+            }
+            return true;
+        } catch (Exception e) {
+            Log.e(TAG, e.toString(), e);
             return null;
         }
     }

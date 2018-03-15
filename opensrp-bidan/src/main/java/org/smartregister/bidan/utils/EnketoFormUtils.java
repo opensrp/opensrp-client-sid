@@ -235,10 +235,9 @@ public class EnketoFormUtils {
         return fs;
     }
 
-    private void generateClientAndEventModelsForFormSubmission(FormSubmission formSubmission,
-                                                               String formName) {
+    private void generateClientAndEventModelsForFormSubmission(FormSubmission formSubmission, String formName) {
         org.smartregister.clientandeventmodel.FormSubmission v2FormSubmission;
-        android.util.Log.e(TAG, "generateClientAndEventModelsForFormSubmission:formSubmission " + formSubmission);
+//        android.util.Log.e(TAG, "generateClientAndEventModelsForFormSubmission:formSubmission " + formSubmission);
         android.util.Log.e(TAG, "generateClientAndEventModelsForFormSubmission:formName " + formName);
 
         String anmId = CoreLibrary.getInstance().context().anmService().fetchDetails().name();
@@ -266,14 +265,18 @@ public class EnketoFormUtils {
 
         Event e = formEntityConverter.getEventFromFormSubmission(v2FormSubmission);
 
-        if (Arrays.asList(CLIENT_EVENTS).contains(e.getEventType())) {
-            android.util.Log.e(TAG, "generateClientAndEventModelsForFormSubmission:hasClient ");
-            org.smartregister.util.Utils.startAsyncTask(new SavePatientAsyncTask(v2FormSubmission, mContext, true, e), null);
-        } else {
-            android.util.Log.e(TAG, "generateClientAndEventModelsForFormSubmission:noClient " + e.getEventType());
-            org.smartregister.util.Utils.startAsyncTask(new SavePatientAsyncTask(v2FormSubmission, mContext, false, e), null);
+        android.util.Log.e(TAG, "generateClientAndEventModelsForFormSubmission: event "+ e.getEventType() );
+        android.util.Log.e(TAG, "generateClientAndEventModelsForFormSubmission: isContains "+ Arrays.asList(CLIENT_EVENTS).contains(e.getEventType()) );
+        org.smartregister.util.Utils.startAsyncTask(new SavePatientAsyncTask(v2FormSubmission, mContext, Arrays.asList(CLIENT_EVENTS).contains(e.getEventType()), e), null);
 
-        }
+//        if (Arrays.asList(CLIENT_EVENTS).contains(e.getEventType())) {
+//            android.util.Log.e(TAG, "generateClientAndEventModelsForFormSubmission:hasClient type: "+e.getEventType());
+//            org.smartregister.util.Utils.startAsyncTask(new SavePatientAsyncTask(v2FormSubmission, mContext, true, e), null);
+//        } else {
+//            android.util.Log.e(TAG, "generateClientAndEventModelsForFormSubmission:noClient type: " + e.getEventType());
+//            org.smartregister.util.Utils.startAsyncTask(new SavePatientAsyncTask(v2FormSubmission, mContext, false, e), null);
+//
+//        }
     }
 
     private void printClient(Client client) {
@@ -1117,6 +1120,7 @@ public class EnketoFormUtils {
 
     private List<String> EditClientFormNameList() {
         List<String> formNames = new ArrayList<>();
+        formNames.add("kartu_ibu_edit");
         formNames.add("child_edit");
         return formNames;
     }
@@ -1151,6 +1155,7 @@ public class EnketoFormUtils {
             this.context = context;
             this.saveClient = hasClient;
             this.event = event;
+
         }
 
        /* @Override
@@ -1169,7 +1174,7 @@ public class EnketoFormUtils {
             try {
                 SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(context);
                 AllSharedPreferences allSharedPreferences = new AllSharedPreferences(preferences);
-                android.util.Log.e(TAG, "doInBackground: " + saveClient);
+
                 if (saveClient) {
                     Client c = formEntityConverter.getClientFromFormSubmission(formSubmission);
                     saveClient(c);
@@ -1177,32 +1182,37 @@ public class EnketoFormUtils {
                 event = tagSyncMetadata(event);
                 String eventType = event.getEventType();
                 saveEvent(event);
-                Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'").create();
+                Gson gson = new GsonBuilder()
+                        .setDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSSZ")
+                        .create();
+                android.util.Log.e(TAG, "doInBackground:saveClient " + saveClient);
+                android.util.Log.e(TAG, "doInBackground:eventType " + eventType);
 
-                if (eventType != null) {
-
-                    if (event.getEventType().equals("Identitas Ibus")) {
-                        JSONObject json = eventClientRepository.getClientByBaseEntityId(event.getBaseEntityId());
-                        android.util.Log.e(TAG, "doInBackground:json " + json.toString());
-                        Client client = gson.fromJson(json.toString(), Client.class);
-                        saveClient(client);
-                    } else if (event.getEventType().equals("Registrasi Vaksinator")) {
-                        JSONObject json = eventClientRepository.getClientByBaseEntityId(event.getBaseEntityId());
-                        Client client = gson.fromJson(json.toString(), Client.class);
-                        // client.addAttribute("kartu_ibu", "kartu_ibu");
-                        saveClient(client);
-                    } else if (event.getEventType().equals("Child Registration")) {
-                        JSONObject json = eventClientRepository.getClientByBaseEntityId(event.getBaseEntityId());
-                        Client client = gson.fromJson(json.toString(), Client.class);
-                        // client.addAttribute("anak", "anak");
-                        saveClient(client);
-                    } else if (event.getEventType().equals(EditClientFormNameList())) {
-                        JSONObject json = eventClientRepository.getClientByBaseEntityId(event.getBaseEntityId());
-                        Client client = gson.fromJson(json.toString(), Client.class);
-                        client.addAttribute("edit", "edit");
-                        saveClient(client);
-                    }
-                }
+//                if (eventType != null) {
+//
+//                    if (event.getEventType().equals("Identitas Ibus") || event.getEventType().equals("Dokumentasi Persalinan") ) {
+//                        JSONObject json = eventClientRepository.getClientByBaseEntityId(event.getBaseEntityId());
+//                        android.util.Log.e(TAG, "doInBackground:json " + json.toString());
+//                        Client client = gson.fromJson(json.toString(), Client.class);
+//                        saveClient(client);
+//                    } else if (event.getEventType().equals("Registrasi Vaksinator")) {
+//                        JSONObject json = eventClientRepository.getClientByBaseEntityId(event.getBaseEntityId());
+//                        Client client = gson.fromJson(json.toString(), Client.class);
+//                        // client.addAttribute("kartu_ibu", "kartu_ibu");
+//                        saveClient(client);
+//                    } else if (event.getEventType().equals("Tambah Bayi")) {
+//                        JSONObject json = eventClientRepository.getClientByBaseEntityId(event.getBaseEntityId());
+//                        Client client = gson.fromJson(json.toString(), Client.class);
+//                        client.addAttribute("anak", "anak");
+//                        saveClient(client);
+//                    } else if (event.getEventType().equals(EditClientFormNameList())) {
+//                        android.util.Log.e(TAG, "doInBackground: Edit" );
+//                        JSONObject json = eventClientRepository.getClientByBaseEntityId(event.getBaseEntityId());
+//                        Client client = gson.fromJson(json.toString(), Client.class);
+//                        client.addAttribute("edit", "edit");
+//                        saveClient(client);
+//                    }
+//                }
 
                 Map<String, Map<String, Object>> dep = formEntityConverter.
                         getDependentClientsFromFormSubmission(formSubmission);

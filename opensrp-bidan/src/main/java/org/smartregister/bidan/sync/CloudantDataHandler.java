@@ -156,7 +156,7 @@ public class CloudantDataHandler {
 
         String lastSyncString = DateUtil.yyyyMMddHHmmss.format(lastSyncDate);
 
-        List<JSONObject> eventAndAlerts = new ArrayList<JSONObject>();
+        List<JSONObject> eventAndAlerts = new ArrayList<>();
         SQLiteDatabase db = loadDatabase();
         String query = "select json, updated_at from revs where updated_at > '" + lastSyncString
                 + "'  and length(json)>2 order by updated_at asc ";
@@ -173,9 +173,7 @@ public class CloudantDataHandler {
                 }
 
                 JSONObject jsonObectEventOrAlert = new JSONObject(jsonEventStr);
-                String type =
-                        jsonObectEventOrAlert.has("type") ? jsonObectEventOrAlert.getString("type")
-                                : null;
+                String type = jsonObectEventOrAlert.has("type") ? jsonObectEventOrAlert.getString("type") : null;
                 if (StringUtils.isBlank(type)) { // Skip blank types
                     continue;
                 }

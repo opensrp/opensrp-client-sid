@@ -228,8 +228,9 @@ public class BidanFormUtils {
         return fs;
     }
 
-    private void generateClientAndEventModelsForFormSubmission(FormSubmission formSubmission,
-                                                               String formName) {
+    private void generateClientAndEventModelsForFormSubmission(FormSubmission formSubmission, String formName) {
+        android.util.Log.e(TAG, "generateClientAndEventModelsForFormSubmission: " );
+
         org.smartregister.clientandeventmodel.FormSubmission v2FormSubmission;
 
         String anmId = CoreLibrary.getInstance().context().anmService().fetchDetails().name();
@@ -297,23 +298,27 @@ public class BidanFormUtils {
 
         }
 
-        startReplicationIntentService();
+//        startReplicationIntentService();
     }
 
     private void printClient(Client client) {
         Log.logDebug("============== CLIENT ================");
+        Log.logError("============== CLIENT ================");
         Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSSZ").create();
         String clientJson = gson.toJson(client);
         Log.logDebug(clientJson);
+        Log.logError(clientJson);
         Log.logDebug("====================================");
 
     }
 
     private void printEvent(Event event) {
         Log.logDebug("============== EVENT ================");
+        Log.logError("============== EVENT ================");
         Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSSZ").create();
         String eventJson = gson.toJson(event);
         Log.logDebug(eventJson);
+        Log.logError(eventJson);
         Log.logDebug("====================================");
     }
 

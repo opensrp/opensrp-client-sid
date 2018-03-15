@@ -13,6 +13,8 @@ import org.json.JSONObject;
 import org.smartregister.adapter.SmartRegisterPaginatedAdapter;
 import org.smartregister.bidan.R;
 import org.smartregister.bidan.sync.BidanClientProcessor;
+import org.smartregister.bidan.sync.ClientProcessor;
+import org.smartregister.bidan.utils.BidanFormUtils;
 import org.smartregister.bidan.utils.EnketoFormUtils;
 import org.smartregister.commonregistry.AllCommonsRepository;
 import org.smartregister.commonregistry.CommonPersonObject;
@@ -158,6 +160,8 @@ public class BaseRegisterActivity extends SecuredNativeSmartRegisterActivity imp
     @Override
     protected void onResumption() {
         android.util.Log.e(TAG, "onResumption: ");
+        LoginActivity.setLanguage();
+
     }
 
     @Override
@@ -263,7 +267,7 @@ public class BaseRegisterActivity extends SecuredNativeSmartRegisterActivity imp
 //            Toast.makeText(this,"Data still Synchronizing, please wait",Toast.LENGTH_SHORT).show();
 //            return;
 //        }
-        android.util.Log.e(TAG, "startFormActivity: timer " + timer.format(date));
+//        android.util.Log.e(TAG, "startFormActivity: timer " + timer.format(date));
         formTime.put("start", timer.format(date));
 
 //        FlurryAgent.logEvent(formName,FS, true );
@@ -277,7 +281,9 @@ public class BaseRegisterActivity extends SecuredNativeSmartRegisterActivity imp
                 data = getPreviouslySavedDataForForm(formName, metaData, entityId);
 
                 if (data == null) {
-                    data = EnketoFormUtils.getInstance(getApplicationContext())
+//                    data = EnketoFormUtils.getInstance(getApplicationContext())
+//                            .generateXMLInputForFormWithEntityId(entityId, formName, metaData);
+                    data = BidanFormUtils.getInstance(getApplicationContext())
                             .generateXMLInputForFormWithEntityId(entityId, formName, metaData);
                 }
 
@@ -290,6 +296,7 @@ public class BaseRegisterActivity extends SecuredNativeSmartRegisterActivity imp
                 }
             }
 
+            android.util.Log.e(TAG, "startFormActivity: formName " + formName);
             android.util.Log.e(TAG, "startFormActivity: displayForm " + data);
 
             mPager.setCurrentItem(formIndex, false); //Don't animate the view on orientation change the view disapears
@@ -308,15 +315,17 @@ public class BaseRegisterActivity extends SecuredNativeSmartRegisterActivity imp
 
     @Override
     public void saveFormSubmission(String formSubmission, String id, String formName, JSONObject fieldOverrides) {
-//        android.util.Log.v("fieldoverride", fieldOverrides.toString());
+        android.util.Log.e("fieldoverride", fieldOverrides.toString());
         // save the form
         try {
 
-            EnketoFormUtils formUtils = EnketoFormUtils.getInstance(getApplicationContext());
             //  FormUtils formUtils = FormUtils.getInstance(getApplicationContext());
+//            EnketoFormUtils formUtils = EnketoFormUtils.getInstance(getApplicationContext());
+            BidanFormUtils formUtils = BidanFormUtils.getInstance(getApplicationContext());
             FormSubmission submission = formUtils.generateFormSubmisionFromXMLString(id, formSubmission, formName, fieldOverrides);
 
-            BidanClientProcessor.getInstance(getApplicationContext()).processClient();
+//            BidanClientProcessor.getInstance(getApplicationContext()).processClient();
+            ClientProcessor.getInstance(getApplicationContext()).processClient();
 
             context().formSubmissionService().updateFTSsearch(submission);
             context().formSubmissionRouter().handleSubmission(submission, formName);
@@ -511,6 +520,7 @@ public class BaseRegisterActivity extends SecuredNativeSmartRegisterActivity imp
                 }
 
                 FieldOverrides fo = new FieldOverrides(fieldOverrides.toString());
+                android.util.Log.e(TAG, "onDialogOptionSelection:fo "+ fo.getJSONString() );
                 onEditSelectionWithMetadata((EditOption) option, (SmartRegisterClient) tag, fo.getJSONString());
 
             } else if (option.name().equalsIgnoreCase(getString(R.string.str_anak_edit))) {

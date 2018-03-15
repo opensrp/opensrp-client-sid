@@ -14,6 +14,7 @@ import org.smartregister.Context;
 import org.smartregister.bidan.R;
 import org.smartregister.bidan.activity.BaseRegisterActivity;
 import org.smartregister.bidan.activity.DetailMotherActivity;
+import org.smartregister.bidan.activity.LoginActivity;
 import org.smartregister.bidan.options.AllKartuIbuServiceMode;
 import org.smartregister.bidan.options.MotherFilterOption;
 import org.smartregister.bidan.provider.KIClientsProvider;
@@ -154,6 +155,7 @@ public class KISmartRegisterFragment extends BaseSmartRegisterFragment {
         clientsProgressView.setVisibility(View.INVISIBLE);
 //        list.setBackgroundColor(Color.RED);
         initializeQueries();
+        LoginActivity.setLanguage();
     }
 
     @Override
@@ -163,8 +165,9 @@ public class KISmartRegisterFragment extends BaseSmartRegisterFragment {
         if (isPausedOrRefreshList()) {
             initializeQueries();
         }
+
 //        try {
-//            LoginActivity.setLanguage();
+            LoginActivity.setLanguage();
 //        } catch (Exception ignored) {
 //
 //        }
@@ -176,8 +179,8 @@ public class KISmartRegisterFragment extends BaseSmartRegisterFragment {
     }
 
     public void initializeQueries() {
-        try {
 
+        try {
             KIClientsProvider kiscp = new KIClientsProvider(getActivity(), clientActionHandler, context().alertService());
 
             clientAdapter = new SmartRegisterPaginatedCursorAdapter(getActivity(), null, kiscp,

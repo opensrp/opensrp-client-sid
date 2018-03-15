@@ -4,6 +4,7 @@ import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
 
+import org.smartregister.bidan.activity.LoginActivity;
 import org.smartregister.bidan.utils.AllConstantsINA;
 import org.smartregister.cursoradapter.SecuredNativeSmartRegisterCursorAdapterFragment;
 import org.smartregister.provider.SmartRegisterClientsProvider;

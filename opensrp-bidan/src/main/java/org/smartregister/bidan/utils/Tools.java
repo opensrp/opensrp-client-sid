@@ -75,45 +75,48 @@ public class Tools {
         String query = "SELECT name FROM sqlite_master WHERE type='table'";
         String db = context.initRepository().getWritableDatabase().getPath();
         Cursor dbs = context.initRepository().getWritableDatabase().rawQuery(query, null);
-        Log.d("GiziApp", "db: " + db);
+        Log.d(TAG, "rawdb: " + db);
         if (dbs.moveToFirst()) {
             do {
                 String tblName = dbs.getString(dbs.getColumnIndex("name"));
-                Log.d("dbBidan ", "table name: " + tblName);
-                Cursor temp = context.initRepository().getWritableDatabase().rawQuery("SELECT * FROM " + tblName, null);
-                temp.moveToFirst();
-                Log.d("dbBidan ", tblName + " : " + temp.getCount());
-                String output = "";
-                for (String str : temp.getColumnNames())
-                    output = output + ", " + str;
-                Log.d("dbBidan ", "getColumnNames: " + tblName + " >> " + output);
 
-                if (temp.getCount() > 0) {
-                    if (temp.moveToFirst()) {
-                        do {
-                            String output2 = "";
-                            for (String d : temp.getColumnNames()) {
-                                String value = "";
-                                if (d != "") {
-                                    if (temp.getType(temp.getColumnIndex(d)) == temp.FIELD_TYPE_BLOB) {
-                                        value = "blob";
-                                    } else {
-                                        value = temp.getString(temp.getColumnIndex(d));
+                if (!"ec_details_docsize".equals(tblName)) {
+                    Log.d(TAG, "table name: " + tblName);
+                    Cursor temp = context.initRepository().getWritableDatabase().rawQuery("SELECT * FROM " + tblName, null);
+                    temp.moveToFirst();
+                    Log.d(TAG, tblName + " : " + temp.getCount());
+                    String output = "";
+                    for (String str : temp.getColumnNames())
+                        output = output + ", " + str;
+                    Log.d( TAG, "getColumnNames: " + tblName + " >> " + output);
+
+                    if (temp.getCount() > 0) {
+                        if (temp.moveToFirst()) {
+                            do {
+                                String output2 = "";
+                                for (String d : temp.getColumnNames()) {
+                                    String value = "";
+                                    if (d != "") {
+                                        if (temp.getType(temp.getColumnIndex(d)) == temp.FIELD_TYPE_BLOB) {
+                                            value = "blob";
+                                        } else {
+                                            value = temp.getString(temp.getColumnIndex(d));
+                                        }
                                     }
+                                    output2 = output2 + ", " + value;
                                 }
-                                output2 = output2 + ", " + value;
-                            }
-                            Log.d("dbBidan ", "getColumnNames: " + tblName + " >> " + output2);
+                                Log.d(TAG, "getColumnNames: " + tblName + " >> " + output2);
 
-                        } while (temp.moveToNext());
+                            } while (temp.moveToNext());
+                        }
+
                     }
 
+                    temp.close();
                 }
-
-                temp.close();
             } while (dbs.moveToNext());
         }
-        Log.d("dbBidan", "getCount: " + dbs.getCount());
+        Log.d(TAG, "getCount: " + dbs.getCount());
         dbs.close();
 //        return value;
     }

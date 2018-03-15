@@ -293,7 +293,7 @@ public class BidanHomeActivity extends SecuredActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.updateMenuItem:
-                updateFromServer();
+                updateDataFromServer();
                 return true;
             case R.id.switchLanguageMenuItem:
                 String newLanguagePreference = LoginActivity.switchLanguagePreference();
@@ -317,12 +317,12 @@ public class BidanHomeActivity extends SecuredActivity {
         }
     }
 
-    /*public void updateFromServer() {
+    /*public void updateDataFromServer() {
         FlurryFacade.logEvent("clicked_update_from_server");
         UpdateActionsTask updateActionsTask = new UpdateActionsTask(
                 this, context().actionService(), context().formSubmissionSyncService(),
                 new SyncProgressIndicator(), context().allFormVersionSyncService());
-        updateActionsTask.updateFromServer(new SyncAfterFetchListener());
+        updateActionsTask.updateDataFromServer(new SyncAfterFetchListener());
         String locationJSON = context().anmLocationController().get();
         LocationTree locationTree = EntityUtils.fromJson(locationJSON, LocationTree.class);
 
@@ -332,8 +332,8 @@ public class BidanHomeActivity extends SecuredActivity {
 //        if(LoginActivity.generator.uniqueIdController().needToRefillUniqueId(LoginActivity.generator.UNIQUE_ID_LIMIT))  // unique id part
 //            LoginActivity.generator.requestUniqueId();                                                                  // unique id part
     }*/
-    public void updateFromServer() {
-        Log.d("Home", "updateFromServer: tombol update");
+    public void updateDataFromServer() {
+        Log.d("Home", "updateDataFromServer: tombol update");
         UpdateActionsTask updateActionsTask = new UpdateActionsTask(
                 this, context().actionService(), new FormSubmissionSyncService(context().applicationContext()), new SyncProgressIndicator(), context().allFormVersionSyncService());
 //        FlurryFacade.logEvent("click_update_from_server");
