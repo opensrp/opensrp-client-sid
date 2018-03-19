@@ -138,23 +138,23 @@
             required
         </span>
     </label>
-    <label class="question non-select ">
-        <span class="question-label active" data-itext-id="/Kartu_ibu/tanggal_periksa:label"
-            lang="Bahasa">Tanggal Registrasi
-        </span>
-        <span class="question-label " data-itext-id="/Kartu_ibu/tanggal_periksa:label" lang="en">
-            Date of Registration
-        </span>
-        <span class="required">*</span>
-        <input name="/Kartu_ibu/tanggal_periksa" data-constraint=".&lt;= /Kartu_ibu/today "
-            data-type-xml="date" required="required" type="date" />
-        <span class="or-constraint-msg active" data-i18n="constraint.invalid" lang="">Value not
-            allowed
-        </span>
-        <span class="or-required-msg active" data-i18n="constraint.required" lang="">This field is
-            required
-        </span>
-    </label>
+    <!--<label class="question non-select ">-->
+        <!--<span class="question-label active" data-itext-id="/Kartu_ibu/tanggal_periksa:label"-->
+            <!--lang="Bahasa">Tanggal Registrasi-->
+        <!--</span>-->
+        <!--<span class="question-label " data-itext-id="/Kartu_ibu/tanggal_periksa:label" lang="en">-->
+            <!--Date of Registration-->
+        <!--</span>-->
+        <!--<span class="required">*</span>-->
+        <!--<input name="/Kartu_ibu/tanggal_periksa" data-constraint=".&lt;= /Kartu_ibu/today "-->
+            <!--data-type-xml="date" required="required" type="date" />-->
+        <!--<span class="or-constraint-msg active" data-i18n="constraint.invalid" lang="">Value not-->
+            <!--allowed-->
+        <!--</span>-->
+        <!--<span class="or-required-msg active" data-i18n="constraint.required" lang="">This field is-->
+            <!--required-->
+        <!--</span>-->
+    <!--</label>-->
     <fieldset class="question simple-select ">
         <fieldset>
             <legend>
