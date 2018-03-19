@@ -499,12 +499,15 @@ public class BaseRegisterActivity extends SecuredNativeSmartRegisterActivity imp
         public void onDialogOptionSelection(DialogOption option, Object tag) {
             CommonPersonObjectClient pc = (CommonPersonObjectClient) tag;
 
+//            android.util.Log.e(TAG, "onDialogOptionSelection:columnMap "+ pc.getColumnmaps() );
+//            android.util.Log.e(TAG, "onDialogOptionSelection:details "+ pc.getDetails() );
             DetailsRepository detailsRepository = org.smartregister.Context.getInstance().detailsRepository();
 
             if (option.name().equalsIgnoreCase(getString(R.string.str_edit_ki_form))) {
                 // Edit Form Ibu
                 detailsRepository.updateDetails(pc);
                 String ibuCaseId = getValue(pc.getColumnmaps(), "_id", true).toLowerCase();
+                String namaIbu = getValue(pc.getColumnmaps(), "namalengkap", true).toLowerCase();
                 JSONObject fieldOverrides = new JSONObject();
 
                 try {
@@ -515,6 +518,8 @@ public class BaseRegisterActivity extends SecuredNativeSmartRegisterActivity imp
                     fieldOverrides.put("Sub-village", pc.getDetails().get("address1"));
                     fieldOverrides.put("jenis_kelamin", pc.getDetails().get("gender"));
                     fieldOverrides.put("ibuCaseId", ibuCaseId);
+                    fieldOverrides.put("namaLengkap", namaIbu);
+
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
@@ -550,7 +555,7 @@ public class BaseRegisterActivity extends SecuredNativeSmartRegisterActivity imp
 
                 if (option.name().equalsIgnoreCase(getString(R.string.str_register_fp_form))) {
 //                    pc = DetailMotherActivity.motherClient;
-                    android.util.Log.e(TAG, "onDialogOptionSelection: pc " + pc);
+//                    android.util.Log.e(TAG, "onDialogOptionSelection: pc " + pc);
 
                     if (!StringUtils.isNumeric(pc.getDetails().get("jenisKontrasepsi"))) {
                         Toast.makeText(BaseRegisterActivity.this, getString(R.string.mother_already_registered_in_fp), Toast.LENGTH_SHORT).show();

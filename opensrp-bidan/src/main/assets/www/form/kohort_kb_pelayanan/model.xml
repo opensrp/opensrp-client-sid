@@ -6,6 +6,7 @@
             </formhub>
             <start openmrs_entity="encounter" openmrs_entity_id="encounter_start" />
             <today openmrs_entity="encounter" openmrs_entity_id="encounter_date" />
+            <namalengkap/>
             <deviceid />
             <simserial />
             <phonenumber />

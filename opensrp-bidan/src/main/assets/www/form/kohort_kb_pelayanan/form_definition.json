@@ -18,6 +18,11 @@
         "bind": "/model/instance/tambah_kb_reviewed/end"
       },
       {
+        "name": "namalengkap",
+        "bind": "/model/instance/tambah_kb_reviewed/namalengkap",
+        "shouldLoadValue": true
+      },
+      {
         "name": "existing_location",
         "bind": "/model/instance/tambah_kb_reviewed/existing_location",
         "shouldLoadValue": true
