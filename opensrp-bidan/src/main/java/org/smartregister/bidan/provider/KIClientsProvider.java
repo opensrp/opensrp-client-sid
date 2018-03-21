@@ -110,7 +110,7 @@ public class KIClientsProvider extends BaseClientsProvider {
 
         try {
             ButterKnife.bind(this, convertView);
-            Log.e(TAG, "getView: ");
+//            Log.e(TAG, "getView: ");
 
         } catch (Exception e) {
             e.getCause().printStackTrace();
@@ -126,7 +126,7 @@ public class KIClientsProvider extends BaseClientsProvider {
 //        System.out.println("client : " + pc.getColumnmaps().toString());
 //        System.out.println("event : " + pc.getDetails().toString());
         AllCommonsRepository ibuRep = org.smartregister.Context.getInstance().allCommonsRepositoryobjects("ec_ibu");
-        AllCommonsRepository ancrep = org.smartregister.Context.getInstance().allCommonsRepositoryobjects("ec_anc");
+//        AllCommonsRepository ancrep = org.smartregister.Context.getInstance().allCommonsRepositoryobjects("ec_anc");
         AllCommonsRepository pncRep = org.smartregister.Context.getInstance().allCommonsRepositoryobjects("ec_pnc");
         AllCommonsRepository anakRep = org.smartregister.Context.getInstance().allCommonsRepositoryobjects("ec_anak");
         ArrayList<String> list = new ArrayList<>();

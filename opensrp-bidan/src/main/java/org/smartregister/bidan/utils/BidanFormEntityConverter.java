@@ -356,8 +356,7 @@ public class BidanFormEntityConverter {
      * @return createBaseClient
      * @throws ParseException
      */
-    Client getClientFromFormSubmission(FormSubmission fsubmission) throws
-            IllegalStateException {
+    Client getClientFromFormSubmission(FormSubmission fsubmission) throws IllegalStateException {
         FormSubmissionMap fs;
         try {
             fs = formAttributeParser.createFormSubmissionMap(fsubmission);

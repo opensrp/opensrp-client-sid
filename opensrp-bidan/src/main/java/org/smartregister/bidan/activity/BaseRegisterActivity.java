@@ -172,22 +172,6 @@ public class BaseRegisterActivity extends SecuredNativeSmartRegisterActivity imp
 
     @Override
     public void onBackPressed() {
-//        nf.setCriteria("");
-//        Log.e(TAG, "onBackPressed: "+currentPage );
-        // TODO: Set Language from Enketo
-//        android.util.Log.e(TAG, "getView: lang 2 "+ getApplicationContext().getResources().getConfiguration().locale );
-//        android.util.Log.e(TAG, "onBackPressed: ");
-//        if (Locale.US.equals(getApplicationContext().getResources().getConfiguration().locale)){
-//            AllSharedPreferences allSharedPreferences = new AllSharedPreferences(getDefaultSharedPreferences(Context.getInstance().applicationContext()));
-//            android.util.Log.e(TAG, "onBackPressed:change Language " + allSharedPreferences.fetchLanguagePreference() );
-//            Configuration cfg = new Configuration();
-//            cfg.locale = new Locale("in");
-//            getApplicationContext().getResources().updateConfiguration(cfg, null);
-////            LoginActivity.switchLanguagePreference();
-//        } else {
-//            android.util.Log.e(TAG, "onBackPressed: onLang " );
-//        }
-
         if (currentPage != 0) {
             switchToBaseFragment(null);
         } else {
@@ -492,6 +476,8 @@ public class BaseRegisterActivity extends SecuredNativeSmartRegisterActivity imp
 
             DetailsRepository detailsRepository = org.smartregister.Context.getInstance().detailsRepository();
 
+            android.util.Log.e(TAG, "onDialogOptionSelection: "+ option.name() );
+
             if (option.name().equalsIgnoreCase(getString(R.string.str_edit_ki_form))) {
                 // Edit Form Ibu
                 detailsRepository.updateDetails(pc);
@@ -538,6 +524,7 @@ public class BaseRegisterActivity extends SecuredNativeSmartRegisterActivity imp
 
             } else {
 
+                // FP
                 if (option.name().equalsIgnoreCase(getString(R.string.str_register_fp_form))) {
 //                    pc = DetailMotherActivity.motherClient;
                     android.util.Log.e(TAG, "onDialogOptionSelection: pc " + pc);
@@ -559,6 +546,7 @@ public class BaseRegisterActivity extends SecuredNativeSmartRegisterActivity imp
 
                 }
 
+                // ANC
                 if (option.name().equalsIgnoreCase(getString(R.string.str_register_anc_form))) {
                     AllCommonsRepository iburep = org.smartregister.Context.getInstance().allCommonsRepositoryobjects("ec_ibu");
                     final CommonPersonObject ibuparent = iburep.findByCaseID(pc.entityId());
@@ -571,6 +559,19 @@ public class BaseRegisterActivity extends SecuredNativeSmartRegisterActivity imp
                     }
 
                 }
+                // PNC
+//                if (option.name().equalsIgnoreCase(getString(R.string.str_register_pnc_form))) {
+//                    AllCommonsRepository iburep = org.smartregister.Context.getInstance().allCommonsRepositoryobjects("ec_ibu");
+//                    final CommonPersonObject ibuparent = iburep.findByCaseID(pc.entityId());
+//                    if (ibuparent != null) {
+//                        short anc_isclosed = ibuparent.getClosed();
+//                        if (anc_isclosed == 0) {
+//                            Toast.makeText(BaseRegisterActivity.this, getString(R.string.mother_already_registered), Toast.LENGTH_SHORT).show();
+//                            return;
+//                        }
+//                    }
+//
+//                }
                 onEditSelection((EditOption) option, (SmartRegisterClient) tag);
 
             }

@@ -9,7 +9,9 @@ import java.util.List;
 
 public class BidanClientProcessor extends ClientProcessor {
 
-    public static final String[] CLIENT_EVENTS = {"Registrasi Bidan", "Child Registration", "Identitas Ibu"};
+//    public static final String[] CLIENT_EVENTS = {"Registrasi Bidan", "Child Registration", "Identitas Ibu"};
+    public static final String[] CLIENT_EVENTS = {"Registrasi Bidan", "Child Registration", "Identitas Ibu",
+            "Tambah ANC", "Dokumentasi Persalinan", "Tambah Bayi", "Tambah KB"};
     //    public static final String baseEntityIdJSONKey = "baseEntityId";
 //    protected static final String providerIdJSONKey = "providerId";
 //    protected static final String VALUES_KEY = "values";

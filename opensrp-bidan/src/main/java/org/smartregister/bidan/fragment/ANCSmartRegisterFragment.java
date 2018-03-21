@@ -131,14 +131,15 @@ public class ANCSmartRegisterFragment extends BaseSmartRegisterFragment {
         super.setupViews(view);
         view.findViewById(R.id.btn_report_month).setVisibility(INVISIBLE);
         view.findViewById(R.id.service_mode_selection).setVisibility(View.GONE);
+        view.findViewById(R.id.register_client).setVisibility(View.GONE);
         clientsView.setVisibility(View.VISIBLE);
         clientsProgressView.setVisibility(View.INVISIBLE);
         initializeQueries();
-        Log.e(TAG, "setupViews: " + getResources().getConfiguration().locale);
+//        Log.e(TAG, "setupViews: " + getResources().getConfiguration().locale);
     }
 
     public void initializeQueries() {
-        Log.e(TAG, "initializeQueries: ");
+//        Log.e(TAG, "initializeQueries: ");
         String tableEcIbu = "ec_ibu";
 
         try {
@@ -207,7 +208,7 @@ public class ANCSmartRegisterFragment extends BaseSmartRegisterFragment {
         if (isPausedOrRefreshList()) {
             initializeQueries();
         }
-        Log.e(TAG, "onResumption: " + getResources().getConfiguration().locale);
+//        Log.e(TAG, "onResumption: " + getResources().getConfiguration().locale);
     }
 
     private void updateSearchView() {

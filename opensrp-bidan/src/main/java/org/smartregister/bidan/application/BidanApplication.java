@@ -32,7 +32,7 @@ public class BidanApplication extends DrishtiApplication {
     private static String[] getFtsSearchFields(String tableName) {
         switch (tableName) {
             case "ec_kartu_ibu":
-                return new String[]{"namalengkap", "namaSuami", "jenisKontrasepsi"};
+                return new String[]{"namalengkap", "namaSuami"};
             case "ec_anak":
                 return new String[]{"namaBayi"};
             case "ec_ibu":
