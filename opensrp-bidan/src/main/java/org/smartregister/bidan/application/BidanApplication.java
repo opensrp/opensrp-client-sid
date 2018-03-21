@@ -27,7 +27,6 @@ public class BidanApplication extends DrishtiApplication {
 
 //    private static SettingsRepository settingsRepository;
 //    private UniqueIdRepository uniqueIdRepository;
-
     private EventClientRepository eventClientRepository;
 
     private static String[] getFtsSearchFields(String tableName) {
@@ -168,9 +167,10 @@ public class BidanApplication extends DrishtiApplication {
     private void applyUserLanguagePreference() {
         Configuration config = getBaseContext().getResources().getConfiguration();
 
+        context.allSharedPreferences().saveLanguagePreference(LoginActivity.BAHASA_LOCALE);
         String lang = context.allSharedPreferences().fetchLanguagePreference();
         if (!"".equals(lang) && !config.locale.getLanguage().equals(lang)) {
-            locale = new Locale(lang);
+            locale = new Locale(LoginActivity.BAHASA_LOCALE);
             updateConfiguration(config);
         }
     }
