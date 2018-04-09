@@ -53,57 +53,57 @@ public class ANCClientsProvider extends BaseClientsProvider {
     protected CommonPersonObjectController controller;
 
     @Bind(R.id.profile_info_layout)
-    LinearLayout profilelayout;
+    private LinearLayout profilelayout;
     @Bind(R.id.iv_mother_photo)
-    ImageView profilepic;
+    private ImageView profilepic;
     @Bind(R.id.tv_wife_name)
-    TextView wife_name;
+    private TextView wife_name;
     @Bind(R.id.tv_husband_name)
-    TextView husband_name;
+    private TextView husband_name;
     @Bind(R.id.tv_village_name)
-    TextView village_name;
+    private TextView village_name;
     @Bind(R.id.tv_wife_age)
-    TextView wife_age;
+    private TextView wife_age;
     @Bind(R.id.no_ibu)
-    TextView no_ibu;
+    private TextView no_ibu;
     @Bind(R.id.unique_id)
-    TextView unique_id;
+    private TextView unique_id;
     @Bind(R.id.iv_hr_badge)
-    ImageView hr_badge;
+    private ImageView hr_badge;
     @Bind(R.id.iv_hrl_badge)
-    ImageView img_hrl_badge;
+    private ImageView hrl_badge;
     @Bind(R.id.iv_bpl_badge)
-    ImageView bpl_badge;
+    private ImageView bpl_badge;
     @Bind(R.id.iv_hrp_badge)
-    ImageView hrp_badge;
+    private ImageView hrp_badge;
     @Bind(R.id.iv_hrpp_badge)
-    ImageView hrpp_badge;
+    private ImageView hrpp_badge;
     @Bind(R.id.txt_usia_klinis)
-    TextView usia_klinis;
+    private TextView usia_klinis;
     @Bind(R.id.txt_htpt)
-    TextView htpt;
+    private TextView htpt;
     @Bind(R.id.txt_edd_due)
-    TextView edd_due;
+    private TextView edd_due;
     @Bind(R.id.txt_ki_lila_bb)
-    TextView ki_lila_bb;
+    private TextView ki_lila_bb;
     @Bind(R.id.txt_ki_beratbadan_tb)
-    TextView beratbadan_tb;
+    private TextView beratbadan_tb;
     @Bind(R.id.txt_tanggal_kunjungan_anc)
-    TextView tanggal_kunjungan_anc;
+    private TextView tanggal_kunjungan_anc;
     @Bind(R.id.txt_anc_number)
-    TextView anc_number;
+    private TextView anc_number;
     @Bind(R.id.txt_kunjugan_ke)
-    TextView kunjugan_ke;
+    private TextView kunjugan_ke;
     @Bind(R.id.anc_status_layout)
-    RelativeLayout status_layout;
+    private RelativeLayout status_layout;
     @Bind(R.id.txt_status_type)
-    TextView status_type;
+    private TextView status_type;
     @Bind(R.id.txt_status_date_anc)
-    TextView status_date;
+    private TextView status_date;
     @Bind(R.id.txt_alert_status)
-    TextView alert_status;
+    private TextView alert_status;
     @Bind(R.id.btn_anc_edit)
-    ImageButton follow_up;
+    private ImageButton follow_up;
     private AlertService alertService;
 
     public ANCClientsProvider(Context context, View.OnClickListener onClickListener, AlertService alertService) {
@@ -146,30 +146,39 @@ public class ANCClientsProvider extends BaseClientsProvider {
         Map<String, String> details = detailsRepository.getAllDetailsForClient(pc.entityId());
         details.putAll(ancobject.getColumnmaps());
 
-        if (pc.getDetails() != null) {
-            pc.getDetails().putAll(details);
-        } else {
-            pc.setDetails(details);
-        }
-
-        hr_badge.setVisibility(View.INVISIBLE);
-        hrp_badge.setVisibility(View.INVISIBLE);
-        img_hrl_badge.setVisibility(View.INVISIBLE);
+        if (pc.getDetails() != null) pc.getDetails().putAll(details);
+        else pc.setDetails(details);
 
         //Risk flag
-        risk(pc.getDetails().get("highRiskSTIBBVs"), pc.getDetails().get("highRiskEctopicPregnancy"), pc.getDetails().get("highRiskCardiovascularDiseaseRecord"),
-                pc.getDetails().get("highRiskDidneyDisorder"), pc.getDetails().get("highRiskHeartDisorder"), pc.getDetails().get("highRiskAsthma"),
-                pc.getDetails().get("highRiskTuberculosis"), pc.getDetails().get("highRiskMalaria"), pc.getDetails().get("highRiskPregnancyYoungMaternalAge"),
-                pc.getDetails().get("highRiskPregnancyOldMaternalAge"), hr_badge);
+        hr_badge.setVisibility(View.INVISIBLE); // High Risks
+        hrp_badge.setVisibility(View.INVISIBLE); // High Risks Pregnancy
+        hrl_badge.setVisibility(View.INVISIBLE); // High Risk Liabirth
 
-        risk(pc.getDetails().get("highRiskPregnancyPIH"), pc.getDetails().get("highRiskPregnancyProteinEnergyMalnutrition"),
-                pc.getDetails().get("HighRiskPregnancyTooManyChildren"),
-                pc.getDetails().get("highRiskPregnancyDiabetes"), pc.getDetails().get("highRiskPregnancyAnemia"),
-                null, null, null, null, null, hrp_badge);
+        if ("yes".matches(pc.getDetails().get("highRisksSTIBBVs")+ "||" +
+                pc.getDetails().get("highRiskEctopicPregnancy")+ "||" +
+                pc.getDetails().get("highRiskCardiovascularDiseaseRecord")+ "||" +
+                pc.getDetails().get("highRiskDidneyDisorder")+ "||" +
+                pc.getDetails().get("highRiskHeartDisorder")+ "||" +
+                pc.getDetails().get("highRiskAsthma")+ "||" +
+                pc.getDetails().get("highRiskTuberculosis")+ "||" +
+                pc.getDetails().get("highRiskMalaria")+ "||" +
+                pc.getDetails().get("highRiskPregnancyYoungMaternalAge")+ "||" +
+                pc.getDetails().get("highRiskPregnancyOldMaternalAge"))) hr_badge.setVisibility(View.VISIBLE);
 
-        risk(pc.getDetails().get("highRiskLabourFetusMalpresentation"), pc.getDetails().get("highRiskLabourFetusSize"),
-                pc.getDetails().get("highRisklabourFetusNumber"), pc.getDetails().get("HighRiskLabourSectionCesareaRecord"),
-                pc.getDetails().get("highRiskLabourTBRisk"), null, null, null, null, null, img_hrl_badge);
+
+        if ("yes".matches(pc.getDetails().get("highRiskPregnancyPIH")+ "||" +
+                pc.getDetails().get("highRiskPregnancyProteinEnergyMalnutrition")+ "||" +
+                pc.getDetails().get("HighRiskPregnancyTooManyChildren")+ "||" +
+                pc.getDetails().get("highRiskPregnancyDiabetes")+ "||" +
+                pc.getDetails().get("highRiskPregnancyAnemia")))
+                hrp_badge.setVisibility(View.VISIBLE);
+
+        if ("yes".matches(pc.getDetails().get("highRiskLabourFetusMalpresentation")+ "||" +
+                pc.getDetails().get("highRiskLabourFetusSize")+ "||" +
+                pc.getDetails().get("highRisklabourFetusNumber")+ "||" +
+                pc.getDetails().get("HighRiskLabourSectionCesareaRecord")+ "||" +
+                pc.getDetails().get("highRiskLabourTBRisk")))
+                hrl_badge.setVisibility(View.VISIBLE);
 
         //start profile image
         profilepic.setTag(R.id.entity_id, pc.getColumnmaps().get("_id"));//required when saving file to disk
@@ -314,6 +323,7 @@ public class ANCClientsProvider extends BaseClientsProvider {
                 }
             }
         }
+
         if ("3".equals(ancKe)) {
             status_type.setText(R.string.ANC4);
             List<Alert> alertlist_for_client = alertService.findByEntityIdAndAlertNames(pc.entityId(), "ANC 4");
@@ -368,6 +378,7 @@ public class ANCClientsProvider extends BaseClientsProvider {
 
     public void risk(String risk1, String risk2, String risk3, String risk4, String risk5, String risk6,
                      String risk7, String risk8, String risk9, String risk10, ImageView riskview) {
+
         if (risk1 != null && "yes".equals(risk1)
                 || risk2 != null && risk2.equals("yes")
                 || risk3 != null && risk3.equals("yes")
