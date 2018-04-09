@@ -38,69 +38,72 @@ public class KBClientsProvider extends BaseClientsProvider {
     private final Context mContext;
     private final AbsListView.LayoutParams clientViewLayoutParams;
     protected CommonPersonObjectController controller;
-    AlertService alertService;
+    private AlertService alertService;
 
     // layout/smart_register_kb_client.xml
     @Bind(R.id.tv_no_ibu_kb)
-    TextView no_ibu;
+    private TextView no_ibu;
 
     // layout/smart_register_client_obsetri_layout
     @Bind(R.id.tv_gravida)
-    TextView gravida;
+    private TextView gravida;
     @Bind(R.id.tv_parity)
-    TextView parity;
+    private TextView parity;
     @Bind(R.id.tv_number_of_abortus)
-    TextView number_of_abortus;
+    private TextView number_of_abortus;
     @Bind(R.id.tv_number_of_alive)
-    TextView number_of_alive;
+    private TextView number_of_alive;
 
     // Profile KI
     // layout/smart_register_client_profile_ki
     @Bind(R.id.profile_info_layout)
-    LinearLayout profilelayout;
+    private LinearLayout profilelayout;
     @Bind(R.id.tv_wife_name)
-    TextView wife_name;
+    private TextView wife_name;
     @Bind(R.id.tv_husband_name)
-    TextView husband_name;
+    private TextView husband_name;
     @Bind(R.id.tv_village_name)
-    TextView village_name;
+    private TextView village_name;
     @Bind(R.id.tv_wife_age)
-    TextView wife_age;
-    @Bind(R.id.iv_hr_badge)
-    ImageView hr_badge;
-    @Bind(R.id.iv_hrl_badge)
-    ImageView img_hrl_badge;
-    @Bind(R.id.iv_bpl_badge)
-    ImageView bpl_badge;
-    @Bind(R.id.iv_hrp_badge)
-    ImageView hrp_badge;
-    @Bind(R.id.iv_hrpp_badge)
-    ImageView hrpp_badge;
+    private TextView wife_age;
+
     @Bind(R.id.tv_kb_method)
-    TextView kb_method;
+    private TextView kb_method;
     @Bind(R.id.tv_kb_mulai)
-    TextView kb_mulai;
+    private TextView kb_mulai;
     @Bind(R.id.tv_risk_HB)
-    TextView risk_HB;
+    private TextView risk_HB;
     @Bind(R.id.tv_risk_LILA)
-    TextView LILA;
+    private TextView LILA;
     @Bind(R.id.tv_risk_PenyakitKronis)
-    TextView risk_PenyakitKronis;
+    private TextView risk_PenyakitKronis;
     @Bind(R.id.tv_risk_IMS)
-    TextView risk_IMS;
+    private TextView risk_IMS;
     @Bind(R.id.tv_follow_due)
-    TextView follow_up_due;
+    private TextView follow_up_due;
     @Bind(R.id.follow_layout)
-    LinearLayout follow_layout;
+    private LinearLayout follow_layout;
     @Bind(R.id.tv_follow_status)
-    TextView follow_status;
+    private TextView follow_status;
     @Bind(R.id.tv_follow_up_due)
-    TextView follow_due;
+    private TextView follow_due;
     @Bind(R.id.iv_mother_photo)
-    ImageView profilepic;
+    private ImageView profilepic;
     @Bind(R.id.ib_btn_edit)
-    ImageButton follow_up;
+    private ImageButton follow_up;
     private Drawable iconPencilDrawable;
+
+    @Bind(R.id.iv_hr_badge)
+    private ImageView hr_badge;
+    @Bind(R.id.iv_hrl_badge)
+    private ImageView img_hrl_badge;
+    @Bind(R.id.iv_hrp_badge)
+    private ImageView hrp_badge;
+//    @Bind(R.id.iv_bpl_badge)
+//    private ImageView bpl_badge;
+//    @Bind(R.id.iv_hrpp_badge)
+//    private ImageView hrpp_badge;
+
 
     public KBClientsProvider(Context context, View.OnClickListener onClickListener, AlertService alertService) {
         super(context);
@@ -110,11 +113,9 @@ public class KBClientsProvider extends BaseClientsProvider {
 //        LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 
         clientViewLayoutParams = new AbsListView.LayoutParams(MATCH_PARENT, (int) context.getResources().getDimension(R.dimen.list_item_height));
-        Log.e(TAG, "KBClientsProvider: ");
     }
 
     private void getView(SmartRegisterClient smartRegisterClient, View convertView) {
-        Log.e(TAG, "getView: ");
         try {
 
             ButterKnife.bind(this, convertView);
@@ -148,10 +149,10 @@ public class KBClientsProvider extends BaseClientsProvider {
 //        hr_badge.setVisibility(View.INVISIBLE);
 
         //Risk flag
-        risk(pc.getDetails().get("highRiskSTIBBVs"), pc.getDetails().get("highRiskEctopicPregnancy"), pc.getDetails().get("highRiskCardiovascularDiseaseRecord"),
-                pc.getDetails().get("highRiskDidneyDisorder"), pc.getDetails().get("highRiskHeartDisorder"), pc.getDetails().get("highRiskAsthma"),
-                pc.getDetails().get("highRiskTuberculosis"), pc.getDetails().get("highRiskMalaria"), pc.getDetails().get("highRiskPregnancyYoungMaternalAge"),
-                pc.getDetails().get("highRiskPregnancyOldMaternalAge"), hr_badge);
+        if ("yes".matches(pc.getDetails().get("highRiskSTIBBVs")+"||"+ pc.getDetails().get("highRiskEctopicPregnancy")+"||"+ pc.getDetails().get("highRiskCardiovascularDiseaseRecord")+"||"+
+                pc.getDetails().get("highRiskDidneyDisorder")+"||"+ pc.getDetails().get("highRiskHeartDisorder")+"||"+ pc.getDetails().get("highRiskAsthma")+"||"+
+                pc.getDetails().get("highRiskTuberculosis")+"||"+ pc.getDetails().get("highRiskMalaria")+"||"+ pc.getDetails().get("highRiskPregnancyYoungMaternalAge")+"||"+
+                pc.getDetails().get("highRiskPregnancyOldMaternalAge"))) hr_badge.setVisibility(View.VISIBLE);
 
         profilepic.setTag(R.id.entity_id, pc.getColumnmaps().get("_id"));//required when saving file to disk
         Support.setImagetoHolderFromUri((Activity) mContext, pc.getDetails().get("base_entity_id"), profilepic, R.mipmap.woman_placeholder);
@@ -228,22 +229,22 @@ public class KBClientsProvider extends BaseClientsProvider {
         getView(smartRegisterClient, view);
     }
 
-    public void risk(String risk1, String risk2, String risk3, String risk4, String risk5, String risk6, String risk7, String risk8, String risk9, String risk10, ImageView riskview) {
-        if (risk1 != null && risk1.equals("yes")
-                || risk2 != null && risk2.equals("yes")
-                || risk3 != null && risk3.equals("yes")
-                || risk4 != null && risk4.equals("yes")
-                || risk5 != null && risk5.equals("yes")
-                || risk6 != null && risk6.equals("yes")
-                || risk7 != null && risk7.equals("yes")
-                || risk8 != null && risk8.equals("yes")
-                || risk9 != null && risk9.equals("yes")
-                || risk10 != null && risk10.equals("yes")) {
+//    public void risk(String risk1, String risk2, String risk3, String risk4, String risk5, String risk6, String risk7, String risk8, String risk9, String risk10, ImageView riskview) {
+//        if (risk1 != null && risk1.equals("yes")
+//                || risk2 != null && risk2.equals("yes")
+//                || risk3 != null && risk3.equals("yes")
+//                || risk4 != null && risk4.equals("yes")
+//                || risk5 != null && risk5.equals("yes")
+//                || risk6 != null && risk6.equals("yes")
+//                || risk7 != null && risk7.equals("yes")
+//                || risk8 != null && risk8.equals("yes")
+//                || risk9 != null && risk9.equals("yes")
+//                || risk10 != null && risk10.equals("yes")) {
+//
+//            riskview.setVisibility(View.VISIBLE);
+//        }
 
-            riskview.setVisibility(View.VISIBLE);
-        }
-
-    }
+//    }
 
     @Override
     public View inflatelayoutForCursorAdapter() {
