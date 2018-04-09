@@ -12,10 +12,11 @@ import org.json.JSONException;
 import org.json.JSONObject;
 import org.smartregister.adapter.SmartRegisterPaginatedAdapter;
 import org.smartregister.bidan.R;
-import org.smartregister.bidan.sync.BidanClientProcessor;
+//import org.smartregister.bidan.sync.BidanClientProcessor;
+//import org.smartregister.bidan.utils.EnketoFormUtils;
 import org.smartregister.bidan.sync.ClientProcessor;
 import org.smartregister.bidan.utils.BidanFormUtils;
-import org.smartregister.bidan.utils.EnketoFormUtils;
+
 import org.smartregister.commonregistry.AllCommonsRepository;
 import org.smartregister.commonregistry.CommonPersonObject;
 import org.smartregister.commonregistry.CommonPersonObjectClient;
@@ -49,7 +50,6 @@ import butterknife.ButterKnife;
 import static org.smartregister.util.Utils.getValue;
 
 //import org.smartregister.bidan.utils.BidanFormUtils;
-
 //import android.content.res.Configuration;
 //import org.smartregister.Context;
 //import org.smartregister.repository.AllSharedPreferences;
@@ -73,9 +73,9 @@ public class BaseRegisterActivity extends SecuredNativeSmartRegisterActivity imp
     //    protected SimpleDateFormat timer = new SimpleDateFormat("hh:mm:ss");
     int style = DateFormat.MEDIUM;
     //Also try with style = DateFormat.FULL and DateFormat.SHORT
-    Date date = new Date();
-    DateFormat timer = DateFormat.getDateInstance(style, Locale.US);
-    Map<String, String> formTime = new HashMap<>();
+    private Date date = new Date();
+    private DateFormat timer = DateFormat.getDateInstance(style, Locale.US);
+    private Map<String, String> formTime = new HashMap<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -101,7 +101,8 @@ public class BaseRegisterActivity extends SecuredNativeSmartRegisterActivity imp
         mPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             @Override
             public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
-
+                // This Space for book :)
+                android.util.Log.i(TAG, "onPageScrolled: ");
             }
 
             @Override
@@ -112,6 +113,8 @@ public class BaseRegisterActivity extends SecuredNativeSmartRegisterActivity imp
 
             @Override
             public void onPageScrollStateChanged(int state) {
+                // This Space for book :)
+                android.util.Log.i(TAG, "onPageScrollStateChanged: ");
 
             }
         });
@@ -129,7 +132,6 @@ public class BaseRegisterActivity extends SecuredNativeSmartRegisterActivity imp
     }
 
     protected Fragment mBaseFragment() {
-
         return null;
     }
 
