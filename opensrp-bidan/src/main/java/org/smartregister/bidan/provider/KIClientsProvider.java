@@ -3,7 +3,6 @@ package org.smartregister.bidan.provider;
 import android.app.Activity;
 import android.content.Context;
 import android.database.Cursor;
-import android.graphics.drawable.Drawable;
 import android.util.Log;
 import android.view.View;
 import android.widget.AbsListView;
@@ -42,67 +41,68 @@ public class KIClientsProvider extends BaseClientsProvider {
     private final View.OnClickListener onClickListener;
     private final AbsListView.LayoutParams clientViewLayoutParams;
     protected CommonPersonObjectController controller;
-    AlertService alertService;
-    @Bind(R.id.profile_info_layout) protected LinearLayout profilelayout;
+    @Bind(R.id.profile_info_layout)
+    private LinearLayout profilelayout;
     @Bind(R.id.tv_wife_name)
-    TextView wife_name;
+    private TextView wife_name;
     @Bind(R.id.tv_husband_name)
-    TextView husband_name;
+    private TextView husband_name;
     @Bind(R.id.tv_village_name)
-    TextView village_name;
+    private TextView village_name;
     @Bind(R.id.tv_wife_age)
-    TextView wife_age;
+    private TextView wife_age;
     @Bind(R.id.tv_no_ibu)
-    TextView no_ibu;
+    private TextView no_ibu;
     @Bind(R.id.unique_id)
-    TextView unique_id;
+    private TextView unique_id;
     @Bind(R.id.tv_gravida)
-    TextView gravida;
+    private TextView gravida;
     @Bind(R.id.tv_parity)
-    TextView parity;
+    private TextView parity;
     @Bind(R.id.tv_number_of_abortus)
-    TextView number_of_abortus;
+    private TextView number_of_abortus;
     @Bind(R.id.tv_number_of_alive)
-    TextView number_of_alive;
-    @Bind(R.id.iv_hr_badge)
-    ImageView hr_badge;
-    @Bind(R.id.iv_hrl_badge)
-    ImageView img_hrl_badge;
-    @Bind(R.id.iv_bpl_badge)
-    ImageView bpl_badge;
-    @Bind(R.id.iv_hrp_badge)
-    ImageView hrp_badge;
-    @Bind(R.id.iv_hrpp_badge)
-    ImageView hrpp_badge;
+    private TextView number_of_alive;
+
     @Bind(R.id.txt_edd)
-    TextView edd;
+    private TextView edd;
     @Bind(R.id.txt_edd_due)
-    TextView edd_due;
+    private TextView edd_due;
     @Bind(R.id.txt_children_age_left)
-    TextView children_age_left;
+    private TextView children_age_left;
     @Bind(R.id.txt_children_age_right)
-    TextView children_age_right;
+    private TextView children_age_right;
 
     @Bind(R.id.mother_status)
-    TextView anc_status_layout;
+    private TextView anc_status_layout;
     @Bind(R.id.last_visit_status)
-    TextView date_status;
+    private TextView date_status;
     @Bind(R.id.visit_status)
-    TextView visit_status;
+    private TextView visit_status;
     @Bind(R.id.iv_mother_photo)
-    ImageView profilepic;
+    private ImageView profilepic;
     @Bind(R.id.ib_btn_edit)
-    ImageButton follow_up;
-    private Drawable iconPencilDrawable;
+    private ImageButton follow_up;
+
+    @Bind(R.id.iv_hr_badge)
+    private ImageView hr_badge;
+    @Bind(R.id.iv_hrl_badge)
+    private ImageView img_hrl_badge;
+    @Bind(R.id.iv_hrp_badge)
+    private ImageView hrp_badge;
+//    @Bind(R.id.iv_bpl_badge)
+//    private ImageView bpl_badge;
+//    @Bind(R.id.iv_hrpp_badge)
+//    private ImageView hrpp_badge;
+
 
     public KIClientsProvider(Context context, View.OnClickListener onClickListener, AlertService alertService) {
         super(context);
         this.onClickListener = onClickListener;
         this.mContext = context;
-        this.alertService = alertService;
-
+//        AlertService alertService1 = alertService;
         clientViewLayoutParams = new AbsListView.LayoutParams(MATCH_PARENT, (int) context.getResources().getDimension(org.smartregister.R.dimen.list_item_height));
-
+        Log.i(TAG, "KIClientsProvider:alertService "+ alertService);
     }
 
     public void getView(SmartRegisterClient smartRegisterClient, View convertView) {
@@ -113,6 +113,7 @@ public class KIClientsProvider extends BaseClientsProvider {
 
         } catch (Exception e) {
             e.getCause().printStackTrace();
+            Log.e(TAG, "getView: "+ e );
         }
 
         // ========================================================================================
@@ -139,10 +140,7 @@ public class KIClientsProvider extends BaseClientsProvider {
         profilelayout.setOnClickListener(onClickListener);
         profilelayout.setTag(smartRegisterClient);
 
-        if (iconPencilDrawable == null) {
-            iconPencilDrawable = mContext.getResources().getDrawable(R.drawable.ic_pencil);
-        }
-        follow_up.setImageDrawable(iconPencilDrawable);
+        follow_up.setImageResource(R.drawable.ic_pencil);
         follow_up.setOnClickListener(onClickListener);
         follow_up.setTag(smartRegisterClient);
 
@@ -226,18 +224,21 @@ public class KIClientsProvider extends BaseClientsProvider {
         img_hrl_badge.setVisibility(View.INVISIBLE);
 
         //Risk flag
-        risk(pc.getDetails().get("highRiskSTIBBVs"), pc.getDetails().get("highRiskEctopicPregnancy"), pc.getDetails().get("highRiskCardiovascularDiseaseRecord"),
-                pc.getDetails().get("highRiskDidneyDisorder"), pc.getDetails().get("highRiskHeartDisorder"), pc.getDetails().get("highRiskAsthma"),
-                pc.getDetails().get("highRiskTuberculosis"), pc.getDetails().get("highRiskMalaria"), pc.getDetails().get("highRiskPregnancyYoungMaternalAge"),
-                pc.getDetails().get("highRiskPregnancyOldMaternalAge"), hr_badge);
+        if ("yes".matches(pc.getDetails().get("highRiskSTIBBVs")+"||"+ pc.getDetails().get("highRiskEctopicPregnancy")+"||"+ pc.getDetails().get("highRiskCardiovascularDiseaseRecord")+"||"+
+                pc.getDetails().get("highRiskDidneyDisorder")+"||"+ pc.getDetails().get("highRiskHeartDisorder")+"||"+ pc.getDetails().get("highRiskAsthma")+"||"+
+                pc.getDetails().get("highRiskTuberculosis")+"||"+ pc.getDetails().get("highRiskMalaria")+"||"+ pc.getDetails().get("highRiskPregnancyYoungMaternalAge")+"||"+
+                pc.getDetails().get("highRiskPregnancyOldMaternalAge")))
+            hr_badge.setVisibility(View.VISIBLE);
 
-        risk(pc.getDetails().get("highRiskPregnancyPIH"), pc.getDetails().get("highRiskPregnancyProteinEnergyMalnutrition"),
-                pc.getDetails().get("HighRiskPregnancyTooManyChildren"),
-                pc.getDetails().get("highRiskPregnancyDiabetes"), pc.getDetails().get("highRiskPregnancyAnemia"), null, null, null, null, null, hrp_badge);
+        if ("yes".matches(pc.getDetails().get("highRiskPregnancyPIH")+"||"+ pc.getDetails().get("highRiskPregnancyProteinEnergyMalnutrition")+"||"+
+                pc.getDetails().get("HighRiskPregnancyTooManyChildren")+"||"+
+                pc.getDetails().get("highRiskPregnancyDiabetes")+"||"+ pc.getDetails().get("highRiskPregnancyAnemia")))
+            hrp_badge.setVisibility(View.VISIBLE);
 
-        risk(pc.getDetails().get("highRiskLabourFetusMalpresentation"), pc.getDetails().get("highRiskLabourFetusSize"),
-                pc.getDetails().get("highRisklabourFetusNumber"), pc.getDetails().get("HighRiskLabourSectionCesareaRecord"),
-                pc.getDetails().get("highRiskLabourTBRisk"), null, null, null, null, null, img_hrl_badge);
+        if ("yes".matches(pc.getDetails().get("highRiskLabourFetusMalpresentation")+"||"+ pc.getDetails().get("highRiskLabourFetusSize")+"||"+
+                pc.getDetails().get("highRisklabourFetusNumber")+"||"+ pc.getDetails().get("HighRiskLabourSectionCesareaRecord")+"||"+
+                pc.getDetails().get("highRiskLabourTBRisk")))
+            img_hrl_badge.setVisibility(View.VISIBLE);
 
 
         convertView.setLayoutParams(clientViewLayoutParams);
@@ -251,21 +252,21 @@ public class KIClientsProvider extends BaseClientsProvider {
         getView(smartRegisterClient, view);
     }
 
-    public void risk(String risk1, String risk2, String risk3, String risk4, String risk5, String risk6, String risk7, String risk8, String risk9, String risk10, ImageView riskview) {
-        if (risk1 != null && risk1.equals("yes")
-                || risk2 != null && risk2.equals("yes")
-                || risk3 != null && risk3.equals("yes")
-                || risk4 != null && risk4.equals("yes")
-                || risk5 != null && risk5.equals("yes")
-                || risk6 != null && risk6.equals("yes")
-                || risk7 != null && risk7.equals("yes")
-                || risk8 != null && risk8.equals("yes")
-                || risk9 != null && risk9.equals("yes")
-                || risk10 != null && risk10.equals("yes")) {
-
-            riskview.setVisibility(View.VISIBLE);
-        }
-    }
+//    public void risk(String risk1, String risk2, String risk3, String risk4, String risk5, String risk6, String risk7, String risk8, String risk9, String risk10, ImageView riskview) {
+//        if (risk1 != null && risk1.equals("yes")
+//                || risk2 != null && risk2.equals("yes")
+//                || risk3 != null && risk3.equals("yes")
+//                || risk4 != null && risk4.equals("yes")
+//                || risk5 != null && risk5.equals("yes")
+//                || risk6 != null && risk6.equals("yes")
+//                || risk7 != null && risk7.equals("yes")
+//                || risk8 != null && risk8.equals("yes")
+//                || risk9 != null && risk9.equals("yes")
+//                || risk10 != null && risk10.equals("yes")) {
+//
+//            riskview.setVisibility(View.VISIBLE);
+//        }
+//    }
 
     private void checkLastVisit(String date, String visitNumber, String status, TextView tvVisitStatus, TextView tvVisitDate, TextView tvVisitNumber) {
         String visit_date = date != null ? mContext.getString(R.string.date_visit_title) + " " + date : "";
