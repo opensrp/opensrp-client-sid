@@ -98,43 +98,43 @@ public class DetailMotherActivity extends Activity {
     private TextView highRiskTuberculosis;
     @Bind(R.id.txt_highRiskMalaria)
     private TextView highRiskMalaria;
-    @Bind(R.id.txt_highRiskPregnancyPIH)
+    @Bind(R.id.txt_hrp_PIH)
     private TextView highRiskPregnancyPIH;
-    @Bind(R.id.txt_highRiskPregnancyProteinEnergyMalnutrition)
+    @Bind(R.id.txt_hrp_PEM)
     private TextView highRiskPregnancyProteinEnergyMalnutrition;
     @Bind(R.id.txt_highRiskLabourTBRisk)
     private TextView txt_highRiskLabourTBRisk;
     @Bind(R.id.txt_HighRiskLabourSectionCesareaRecord)
     private TextView txt_HighRiskLabourSectionCesareaRecord;
-    @Bind(R.id.txt_highRisklabourFetusNumber)
+    @Bind(R.id.txt_hrl_FetusNumber)
     private TextView txt_highRisklabourFetusNumber;
-    @Bind(R.id.txt_highRiskLabourFetusSize)
+    @Bind(R.id.txt_hrl_FetusSize)
     private TextView txt_highRiskLabourFetusSize;
-    @Bind(R.id.txt_lbl_highRiskLabourFetusMalpresentation)
+    @Bind(R.id.txt_hrl_FetusMalpresentation)
     private TextView txt_lbl_highRiskLabourFetusMalpresentation;
-    @Bind(R.id.txt_highRiskPregnancyAnemia)
+    @Bind(R.id.txt_hrp_Anemia)
     private TextView txt_highRiskPregnancyAnemia;
-    @Bind(R.id.txt_highRiskPregnancyDiabetes)
+    @Bind(R.id.txt_hrp_Diabetes)
     private TextView txt_highRiskPregnancyDiabetes;
     @Bind(R.id.txt_HighRiskPregnancyTooManyChildren)
     private TextView HighRiskPregnancyTooManyChildren;
-    @Bind(R.id.txt_highRiskPostPartumSectioCaesaria)
+    @Bind(R.id.txt_hrpp_SC)
     private TextView highRiskPostPartumSectioCaesaria;
-    @Bind(R.id.txt_highRiskPostPartumForceps)
+    @Bind(R.id.txt_hrpp_Forceps)
     private TextView highRiskPostPartumForceps;
-    @Bind(R.id.txt_highRiskPostPartumVacum)
+    @Bind(R.id.txt_hrpp_Vacum)
     private TextView highRiskPostPartumVacum;
-    @Bind(R.id.txt_highRiskPostPartumPreEclampsiaEclampsia)
+    @Bind(R.id.txt_hrpp_PreEclampsia)
     private TextView highRiskPostPartumPreEclampsiaEclampsia;
-    @Bind(R.id.txt_highRiskPostPartumMaternalSepsis)
+    @Bind(R.id.txt_hrpp_MaternalSepsis)
     private TextView highRiskPostPartumMaternalSepsis;
-    @Bind(R.id.txt_highRiskPostPartumInfection)
+    @Bind(R.id.txt_hrpp_Infection)
     private TextView highRiskPostPartumInfection;
-    @Bind(R.id.txt_highRiskPostPartumHemorrhage)
+    @Bind(R.id.txt_hrpp_Hemorrhage)
     private TextView highRiskPostPartumHemorrhage;
-    @Bind(R.id.txt_highRiskPostPartumPIH)
+    @Bind(R.id.txt_hrpp_PIH)
     private TextView highRiskPostPartumPIH;
-    @Bind(R.id.txt_highRiskPostPartumDistosia)
+    @Bind(R.id.txt_hrpp_Distosia)
     private TextView highRiskPostPartumDistosia;
     @Bind(R.id.txt_highRiskHIVAIDS)
     private TextView txt_highRiskHIVAIDS;

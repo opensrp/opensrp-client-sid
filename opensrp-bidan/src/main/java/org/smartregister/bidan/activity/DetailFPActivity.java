@@ -99,27 +99,27 @@ public class DetailFPActivity extends Activity {
         TextView highRiskAsthma = (TextView) findViewById(R.id.txt_highRiskAsthma);
         TextView highRiskTuberculosis = (TextView) findViewById(R.id.txt_highRiskTuberculosis);
         TextView highRiskMalaria = (TextView) findViewById(R.id.txt_highRiskMalaria);
-        TextView highRiskPregnancyPIH = (TextView) findViewById(R.id.txt_highRiskPregnancyPIH);
-        TextView highRiskPregnancyProteinEnergyMalnutrition = (TextView) findViewById(R.id.txt_highRiskPregnancyProteinEnergyMalnutrition);
+        TextView highRiskPregnancyPIH = (TextView) findViewById(R.id.txt_hrp_PIH);
+        TextView highRiskPregnancyProteinEnergyMalnutrition = (TextView) findViewById(R.id.txt_hrp_PEM);
 
         TextView txt_highRiskLabourTBRisk = (TextView) findViewById(R.id.txt_highRiskLabourTBRisk);
         TextView txt_HighRiskLabourSectionCesareaRecord = (TextView) findViewById(R.id.txt_HighRiskLabourSectionCesareaRecord);
-        TextView txt_highRisklabourFetusNumber = (TextView) findViewById(R.id.txt_highRisklabourFetusNumber);
-        TextView txt_highRiskLabourFetusSize = (TextView) findViewById(R.id.txt_highRiskLabourFetusSize);
-        TextView txt_lbl_highRiskLabourFetusMalpresentation = (TextView) findViewById(R.id.txt_lbl_highRiskLabourFetusMalpresentation);
-        TextView txt_highRiskPregnancyAnemia = (TextView) findViewById(R.id.txt_highRiskPregnancyAnemia);
-        TextView txt_highRiskPregnancyDiabetes = (TextView) findViewById(R.id.txt_highRiskPregnancyDiabetes);
+        TextView txt_highRisklabourFetusNumber = (TextView) findViewById(R.id.txt_hrl_FetusNumber);
+        TextView txt_highRiskLabourFetusSize = (TextView) findViewById(R.id.txt_hrl_FetusSize);
+        TextView txt_lbl_highRiskLabourFetusMalpresentation = (TextView) findViewById(R.id.txt_hrl_FetusMalpresentation);
+        TextView txt_highRiskPregnancyAnemia = (TextView) findViewById(R.id.txt_hrp_Anemia);
+        TextView txt_highRiskPregnancyDiabetes = (TextView) findViewById(R.id.txt_hrp_Diabetes);
         TextView HighRiskPregnancyTooManyChildren = (TextView) findViewById(R.id.txt_HighRiskPregnancyTooManyChildren);
-        TextView highRiskPostPartumSectioCaesaria = (TextView) findViewById(R.id.txt_highRiskPostPartumSectioCaesaria);
-        TextView highRiskPostPartumForceps = (TextView) findViewById(R.id.txt_highRiskPostPartumForceps);
-        TextView highRiskPostPartumVacum = (TextView) findViewById(R.id.txt_highRiskPostPartumVacum);
-        TextView highRiskPostPartumPreEclampsiaEclampsia = (TextView) findViewById(R.id.txt_highRiskPostPartumPreEclampsiaEclampsia);
-        TextView highRiskPostPartumMaternalSepsis = (TextView) findViewById(R.id.txt_highRiskPostPartumMaternalSepsis);
-        TextView highRiskPostPartumInfection = (TextView) findViewById(R.id.txt_highRiskPostPartumInfection);
-        TextView highRiskPostPartumHemorrhage = (TextView) findViewById(R.id.txt_highRiskPostPartumHemorrhage);
+        TextView highRiskPostPartumSectioCaesaria = (TextView) findViewById(R.id.txt_hrpp_SC);
+        TextView highRiskPostPartumForceps = (TextView) findViewById(R.id.txt_hrpp_Forceps);
+        TextView highRiskPostPartumVacum = (TextView) findViewById(R.id.txt_hrpp_Vacum);
+        TextView highRiskPostPartumPreEclampsiaEclampsia = (TextView) findViewById(R.id.txt_hrpp_PreEclampsia);
+        TextView highRiskPostPartumMaternalSepsis = (TextView) findViewById(R.id.txt_hrpp_MaternalSepsis);
+        TextView highRiskPostPartumInfection = (TextView) findViewById(R.id.txt_hrpp_Infection);
+        TextView highRiskPostPartumHemorrhage = (TextView) findViewById(R.id.txt_hrpp_Hemorrhage);
 
-        TextView highRiskPostPartumPIH = (TextView) findViewById(R.id.txt_highRiskPostPartumPIH);
-        TextView highRiskPostPartumDistosia = (TextView) findViewById(R.id.txt_highRiskPostPartumDistosia);
+        TextView highRiskPostPartumPIH = (TextView) findViewById(R.id.txt_hrpp_PIH);
+        TextView highRiskPostPartumDistosia = (TextView) findViewById(R.id.txt_hrpp_Distosia);
         TextView txt_highRiskHIVAIDS = (TextView) findViewById(R.id.txt_highRiskHIVAIDS);
 
 

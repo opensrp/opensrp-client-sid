@@ -255,7 +255,7 @@
                 android:textSize="14sp" />
 
             <org.smartregister.view.customcontrols.CustomFontTextView
-                android:id="@+id/txt_highRiskPregnancyPIH"
+                android:id="@+id/txt_hrp_PIH"
                 style="@style/CustomFontTextViewStyle.ListView.Medium"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -280,7 +280,7 @@
                 android:textSize="14sp" />
 
             <org.smartregister.view.customcontrols.CustomFontTextView
-                android:id="@+id/txt_highRiskPregnancyProteinEnergyMalnutrition"
+                android:id="@+id/txt_hrp_PEM"
                 style="@style/CustomFontTextViewStyle.ListView.Medium"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -305,7 +305,7 @@
                 android:textSize="14sp" />
 
             <org.smartregister.view.customcontrols.CustomFontTextView
-                android:id="@+id/txt_highRiskPregnancyDiabetes"
+                android:id="@+id/txt_hrp_Diabetes"
                 style="@style/CustomFontTextViewStyle.ListView.Medium"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -330,7 +330,7 @@
                 android:textSize="14sp" />
 
             <org.smartregister.view.customcontrols.CustomFontTextView
-                android:id="@+id/txt_highRiskPregnancyAnemia"
+                android:id="@+id/txt_hrp_Anemia"
                 style="@style/CustomFontTextViewStyle.ListView.Medium"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -355,7 +355,7 @@
                 android:textSize="14sp" />
 
             <org.smartregister.view.customcontrols.CustomFontTextView
-                android:id="@+id/txt_lbl_highRiskLabourFetusMalpresentation"
+                android:id="@+id/txt_hrl_FetusMalpresentation"
                 style="@style/CustomFontTextViewStyle.ListView.Medium"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -387,7 +387,7 @@
                 android:textSize="14sp" />
 
             <org.smartregister.view.customcontrols.CustomFontTextView
-                android:id="@+id/txt_highRiskLabourFetusSize"
+                android:id="@+id/txt_hrl_FetusSize"
                 style="@style/CustomFontTextViewStyle.ListView.Medium"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -411,7 +411,7 @@
                 android:textSize="14sp" />
 
             <org.smartregister.view.customcontrols.CustomFontTextView
-                android:id="@+id/txt_highRisklabourFetusNumber"
+                android:id="@+id/txt_hrl_FetusNumber"
                 style="@style/CustomFontTextViewStyle.ListView.Medium"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -507,7 +507,7 @@
                 android:textSize="14sp" />
 
             <org.smartregister.view.customcontrols.CustomFontTextView
-                android:id="@+id/txt_highRiskPostPartumForceps"
+                android:id="@+id/txt_hrpp_Forceps"
                 style="@style/CustomFontTextViewStyle.ListView.Medium"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -531,7 +531,7 @@
                 android:textSize="14sp" />
 
             <org.smartregister.view.customcontrols.CustomFontTextView
-                android:id="@+id/txt_highRiskPostPartumVacum"
+                android:id="@+id/txt_hrpp_Vacum"
                 style="@style/CustomFontTextViewStyle.ListView.Medium"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -555,7 +555,7 @@
                 android:textSize="14sp" />
 
             <org.smartregister.view.customcontrols.CustomFontTextView
-                android:id="@+id/txt_highRiskPostPartumPreEclampsiaEclampsia"
+                android:id="@+id/txt_hrpp_PreEclampsia"
                 style="@style/CustomFontTextViewStyle.ListView.Medium"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -579,7 +579,7 @@
                 android:textSize="14sp" />
 
             <org.smartregister.view.customcontrols.CustomFontTextView
-                android:id="@+id/txt_highRiskPostPartumMaternalSepsis"
+                android:id="@+id/txt_hrpp_MaternalSepsis"
                 style="@style/CustomFontTextViewStyle.ListView.Medium"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -603,7 +603,7 @@
                 android:textSize="14sp" />
 
             <org.smartregister.view.customcontrols.CustomFontTextView
-                android:id="@+id/txt_highRiskPostPartumInfection"
+                android:id="@+id/txt_hrpp_Infection"
                 style="@style/CustomFontTextViewStyle.ListView.Medium"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -627,7 +627,7 @@
                 android:textSize="14sp" />
 
             <org.smartregister.view.customcontrols.CustomFontTextView
-                android:id="@+id/txt_highRiskPostPartumHemorrhage"
+                android:id="@+id/txt_hrpp_Hemorrhage"
                 style="@style/CustomFontTextViewStyle.ListView.Medium"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -651,7 +651,7 @@
                 android:textSize="14sp" />
 
             <org.smartregister.view.customcontrols.CustomFontTextView
-                android:id="@+id/txt_highRiskPostPartumPIH"
+                android:id="@+id/txt_hrpp_PIH"
                 style="@style/CustomFontTextViewStyle.ListView.Medium"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -675,7 +675,7 @@
                 android:textSize="14sp" />
 
             <org.smartregister.view.customcontrols.CustomFontTextView
-                android:id="@+id/txt_highRiskPostPartumDistosia"
+                android:id="@+id/txt_hrpp_Distosia"
                 style="@style/CustomFontTextViewStyle.ListView.Medium"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -699,7 +699,7 @@
                 android:textSize="14sp" />
 
             <org.smartregister.view.customcontrols.CustomFontTextView
-                android:id="@+id/txt_highRiskPostPartumSectioCaesaria"
+                android:id="@+id/txt_hrpp_SC"
                 style="@style/CustomFontTextViewStyle.ListView.Medium"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
