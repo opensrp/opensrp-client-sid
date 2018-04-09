@@ -37,6 +37,7 @@ import java.util.Map;
 import butterknife.Bind;
 import butterknife.ButterKnife;
 
+import static android.content.Context.LAYOUT_INFLATER_SERVICE;
 import static android.view.ViewGroup.LayoutParams.MATCH_PARENT;
 import static org.joda.time.LocalDateTime.parse;
 
@@ -49,7 +50,6 @@ public class ANCClientsProvider extends BaseClientsProvider {
     private final Context mContext;
     private final View.OnClickListener onClickListener;
     private final AbsListView.LayoutParams clientViewLayoutParams;
-    private final LayoutInflater inflater;
     protected CommonPersonObjectController controller;
 
     @Bind(R.id.profile_info_layout)
@@ -72,12 +72,12 @@ public class ANCClientsProvider extends BaseClientsProvider {
     private ImageView hr_badge;
     @Bind(R.id.iv_hrl_badge)
     private ImageView hrl_badge;
-    @Bind(R.id.iv_bpl_badge)
-    private ImageView bpl_badge;
     @Bind(R.id.iv_hrp_badge)
     private ImageView hrp_badge;
-    @Bind(R.id.iv_hrpp_badge)
-    private ImageView hrpp_badge;
+    //    @Bind(R.id.iv_bpl_badge)
+//    private ImageView bpl_badge;
+//    @Bind(R.id.iv_hrpp_badge)
+//    private ImageView hrpp_badge;
     @Bind(R.id.txt_usia_klinis)
     private TextView usia_klinis;
     @Bind(R.id.txt_htpt)
@@ -111,7 +111,7 @@ public class ANCClientsProvider extends BaseClientsProvider {
         this.onClickListener = onClickListener;
         this.mContext = context;
         this.alertService = alertService;
-        this.inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        LayoutInflater inflater = (LayoutInflater) context.getSystemService(LAYOUT_INFLATER_SERVICE);
 
         clientViewLayoutParams = new AbsListView.LayoutParams(MATCH_PARENT, (int) context.getResources().getDimension(org.smartregister.R.dimen.list_item_height));
 
