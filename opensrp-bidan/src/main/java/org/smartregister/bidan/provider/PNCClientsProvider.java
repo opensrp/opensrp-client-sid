@@ -22,8 +22,6 @@ import org.smartregister.commonregistry.CommonPersonObjectClient;
 import org.smartregister.commonregistry.CommonPersonObjectController;
 import org.smartregister.repository.DetailsRepository;
 import org.smartregister.service.AlertService;
-import org.smartregister.util.OpenSRPImageLoader;
-import org.smartregister.view.activity.DrishtiApplication;
 import org.smartregister.view.contract.SmartRegisterClient;
 
 import java.util.Map;
@@ -36,70 +34,71 @@ import static org.smartregister.util.StringUtil.humanize;
 import static org.smartregister.util.StringUtil.humanizeAndDoUPPERCASE;
 
 /**
- * Created by sid-tech on 11/30/17.
+ * Created by sid-tech on 11/30/17
  */
 
 public class PNCClientsProvider extends BaseClientsProvider {
 
-    final String TAG = PNCClientsProvider.class.getSimpleName();
+    private final String TAG = PNCClientsProvider.class.getSimpleName();
     private final Context mContext;
     private final View.OnClickListener onClickListener;
-    private final OpenSRPImageLoader mImageLoader;
-    private final int txtColorBlack;
     private final AbsListView.LayoutParams clientViewLayoutParams;
-    private final LayoutInflater inflater;
     protected CommonPersonObjectController controller;
-    AlertService alertService;
     @Bind(R.id.profile_info_layout)
-    LinearLayout profilelayout;
+    private LinearLayout profilelayout;
     @Bind(R.id.tv_wife_name)
-    TextView wife_name;
+    private TextView wife_name;
     @Bind(R.id.tv_husband_name)
-    TextView husband_name;
+    private TextView husband_name;
     @Bind(R.id.tv_village_name)
-    TextView village_name;
+    private TextView village_name;
     @Bind(R.id.tv_wife_age)
-    TextView wife_age;
+    private TextView wife_age;
     @Bind(R.id.pnc_id)
-    TextView pnc_id;
+    private TextView pnc_id;
+    // unique_id = (TextView)@Bind(R.id.unique_id);
+    @Bind(R.id.tv_dok_tanggal_bersalin)
+    private TextView tanggal_bersalin;
+    @Bind(R.id.tv_tempat_persalinan)
+    private TextView tempat_persalinan;
+    @Bind(R.id.tv_tipe)
+    private TextView dok_tipe;
+    @Bind(R.id.tv_komplikasi)
+    private TextView komplikasi;
+    @Bind(R.id.tv_tgl_kunjungan_pnc)
+    private TextView tanggal_kunjungan;
+    @Bind(R.id.tv_kf)
+    private TextView KF;
+    @Bind(R.id.tv_vit_a)
+    private TextView vit_a;
+    @Bind(R.id.tv_td_sistolik)
+    private TextView td_sistolik;
+    @Bind(R.id.tv_td_diastolik)
+    private TextView td_diastolik;
+    @Bind(R.id.tv_td_suhu)
+    private TextView td_suhu;
+    @Bind(R.id.iv_mother_photo)
+    private ImageView profilepic;
+    @Bind(R.id.ib_btn_edit)
+    private ImageButton follow_up;
+    private Drawable iconPencilDrawable;
+
     // Badge Flag
     @Bind(R.id.iv_hr_badge)
-    ImageView hr_badge;
-    // unique_id = (TextView)@Bind(R.id.unique_id);
+    private ImageView hr_badge;
     @Bind(R.id.iv_hrl_badge)
-    ImageView img_hrl_badge;
-    @Bind(R.id.iv_bpl_badge)
-    ImageView bpl_badge;
+    private ImageView img_hrl_badge;
     @Bind(R.id.iv_hrp_badge)
-    ImageView hrp_badge;
+    private ImageView hrp_badge;
+
+    @Bind(R.id.iv_bpl_badge)
+    private ImageView bpl_badge;
     @Bind(R.id.iv_hrpp_badge)
-    ImageView hrpp_badge;
-    @Bind(R.id.tv_dok_tanggal_bersalin)
-    TextView tanggal_bersalin;
-    @Bind(R.id.tv_tempat_persalinan)
-    TextView tempat_persalinan;
-    @Bind(R.id.tv_tipe)
-    TextView dok_tipe;
-    @Bind(R.id.tv_komplikasi)
-    TextView komplikasi;
-    @Bind(R.id.tv_tgl_kunjungan_pnc)
-    TextView tanggal_kunjungan;
-    @Bind(R.id.tv_kf)
-    TextView KF;
-    @Bind(R.id.tv_vit_a)
-    TextView vit_a;
-    @Bind(R.id.tv_td_sistolik)
-    TextView td_sistolik;
-    @Bind(R.id.tv_td_diastolik)
-    TextView td_diastolik;
-    @Bind(R.id.tv_td_suhu)
-    TextView td_suhu;
+    private ImageView hrpp_badge;
+    private AlertService alertService;
+
     //  txt_kondisi_ibu txt_KF txt_vit_a
-    @Bind(R.id.iv_mother_photo)
-    ImageView profilepic;
-    @Bind(R.id.ib_btn_edit)
-    ImageButton follow_up;
-    private Drawable iconPencilDrawable;
+
 
     public PNCClientsProvider(Context context, View.OnClickListener onClickListener, AlertService alertService) {
 
@@ -107,11 +106,13 @@ public class PNCClientsProvider extends BaseClientsProvider {
         this.onClickListener = onClickListener;
         this.mContext = context;
         this.alertService = alertService;
-        clientViewLayoutParams = new AbsListView.LayoutParams(MATCH_PARENT, (int) context.getResources().getDimension(R.dimen.list_item_height));
-        this.inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 
-        txtColorBlack = context.getResources().getColor(R.color.text_black);
-        mImageLoader = DrishtiApplication.getCachedImageLoaderInstance();
+//        AlertService alertService1 = alertService;
+        clientViewLayoutParams = new AbsListView.LayoutParams(MATCH_PARENT, (int) context.getResources().getDimension(R.dimen.list_item_height));
+        LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+
+//        int txtColorBlack = context.getResources().getColor(R.color.text_black);
+//        OpenSRPImageLoader mImageLoader = DrishtiApplication.getCachedImageLoaderInstance();
 
     }
 
@@ -141,18 +142,15 @@ public class PNCClientsProvider extends BaseClientsProvider {
         // ========================================================================================
         // Set Value
         // ========================================================================================
-        profilepic.setImageDrawable(mContext.getResources().getDrawable(R.mipmap.woman_placeholder));
+        profilepic.setImageResource(R.mipmap.woman_placeholder);
         follow_up.setOnClickListener(onClickListener);
         follow_up.setTag(smartRegisterClient);
         profilelayout.setOnClickListener(onClickListener);
         profilelayout.setTag(smartRegisterClient);
 
-        if (iconPencilDrawable == null) {
-            iconPencilDrawable = mContext.getResources().getDrawable(R.drawable.ic_pencil);
-        }
-        follow_up.setImageDrawable(iconPencilDrawable);
+        follow_up.setImageResource(R.drawable.ic_pencil);
         follow_up.setOnClickListener(onClickListener);
-        //set image
+        follow_up.setTag(smartRegisterClient);
 
         if (pc.getDetails() != null) {
             pc.getDetails().putAll(details);
@@ -179,18 +177,21 @@ public class PNCClientsProvider extends BaseClientsProvider {
         img_hrl_badge.setVisibility(View.INVISIBLE);
 
         //Risk flag
-        risk(pc.getDetails().get("highRiskSTIBBVs"), pc.getDetails().get("highRiskEctopicPregnancy"), pc.getDetails().get("highRiskCardiovascularDiseaseRecord"),
-                pc.getDetails().get("highRiskDidneyDisorder"), pc.getDetails().get("highRiskHeartDisorder"), pc.getDetails().get("highRiskAsthma"),
-                pc.getDetails().get("highRiskTuberculosis"), pc.getDetails().get("highRiskMalaria"), pc.getDetails().get("highRiskPregnancyYoungMaternalAge"),
-                pc.getDetails().get("highRiskPregnancyOldMaternalAge"), hr_badge);
+        if ("yes".matches(pc.getDetails().get("highRiskSTIBBVs")+ "||" + pc.getDetails().get("highRiskEctopicPregnancy")+ "||" +pc.getDetails().get("highRiskCardiovascularDiseaseRecord") + "||" +
+                pc.getDetails().get("highRiskDidneyDisorder")+ "||" +pc.getDetails().get("highRiskHeartDisorder")+ "||" +pc.getDetails().get("highRiskAsthma") + "||" +
+                pc.getDetails().get("highRiskTuberculosis")+ "||" +pc.getDetails().get("highRiskMalaria")+ "||" +pc.getDetails().get("highRiskPregnancyYoungMaternalAge") + "||" +
+                pc.getDetails().get("highRiskPregnancyOldMaternalAge")))
+            hr_badge.setVisibility(View.VISIBLE);
 
-        risk(pc.getDetails().get("highRiskPregnancyPIH"), pc.getDetails().get("highRiskPregnancyProteinEnergyMalnutrition"),
-                pc.getDetails().get("HighRiskPregnancyTooManyChildren"),
-                pc.getDetails().get("highRiskPregnancyDiabetes"), pc.getDetails().get("highRiskPregnancyAnemia"), null, null, null, null, null, hrp_badge);
+        if ("yes".matches(pc.getDetails().get("highRiskPregnancyPIH")+ "||" +pc.getDetails().get("highRiskPregnancyProteinEnergyMalnutrition") +"||"+
+                pc.getDetails().get("HighRiskPregnancyTooManyChildren") + "||" +
+                pc.getDetails().get("highRiskPregnancyDiabetes")+ "||" +pc.getDetails().get("highRiskPregnancyAnemia")))
+            hrp_badge.setVisibility(View.VISIBLE);
 
-        risk(pc.getDetails().get("highRiskLabourFetusMalpresentation"), pc.getDetails().get("highRiskLabourFetusSize"),
-                pc.getDetails().get("highRisklabourFetusNumber"), pc.getDetails().get("HighRiskLabourSectionCesareaRecord"),
-                pc.getDetails().get("highRiskLabourTBRisk"), null, null, null, null, null, img_hrl_badge);
+        if ("yes".matches(pc.getDetails().get("highRiskLabourFetusMalpresentation")+ "||" +pc.getDetails().get("highRiskLabourFetusSize")+"||"+
+                pc.getDetails().get("highRisklabourFetusNumber")+ "||" +pc.getDetails().get("HighRiskLabourSectionCesareaRecord")+"||"+
+                pc.getDetails().get("highRiskLabourTBRisk")))
+            img_hrl_badge.setVisibility(View.VISIBLE);
 
         String kf_ke = pc.getDetails().get("hariKeKF") != null ? pc.getDetails().get("hariKeKF") : "";
         KF.setText(String.format("%s %s", mContext.getString(R.string.hari_ke_kf), humanizeAndDoUPPERCASE(kf_ke)));
@@ -221,22 +222,22 @@ public class PNCClientsProvider extends BaseClientsProvider {
         return text.toLowerCase().contains("dak_ada_kompli") ? mContext.getString(R.string.no_complication) : text;
     }
 
-    public void risk(String risk1, String risk2, String risk3, String risk4, String risk5, String risk6, String risk7, String risk8, String risk9, String risk10, ImageView riskview) {
-        if (risk1 != null && risk1.equals("yes")
-                || risk2 != null && risk2.equals("yes")
-                || risk3 != null && risk3.equals("yes")
-                || risk4 != null && risk4.equals("yes")
-                || risk5 != null && risk5.equals("yes")
-                || risk6 != null && risk6.equals("yes")
-                || risk7 != null && risk7.equals("yes")
-                || risk8 != null && risk8.equals("yes")
-                || risk9 != null && risk9.equals("yes")
-                || risk10 != null && risk10.equals("yes")) {
-
-            riskview.setVisibility(View.VISIBLE);
-        }
-
-    }
+//    public void risk(String risk1, String risk2, String risk3, String risk4, String risk5, String risk6, String risk7, String risk8, String risk9, String risk10, ImageView riskview) {
+//        if (risk1 != null && risk1.equals("yes")
+//                || risk2 != null && risk2.equals("yes")
+//                || risk3 != null && risk3.equals("yes")
+//                || risk4 != null && risk4.equals("yes")
+//                || risk5 != null && risk5.equals("yes")
+//                || risk6 != null && risk6.equals("yes")
+//                || risk7 != null && risk7.equals("yes")
+//                || risk8 != null && risk8.equals("yes")
+//                || risk9 != null && risk9.equals("yes")
+//                || risk10 != null && risk10.equals("yes")) {
+//
+//            riskview.setVisibility(View.VISIBLE);
+//        }
+//
+//    }
 
     @Override
     public View inflatelayoutForCursorAdapter() {

@@ -376,23 +376,23 @@ public class ANCClientsProvider extends BaseClientsProvider {
         getView(smartRegisterClient, view);
     }
 
-    public void risk(String risk1, String risk2, String risk3, String risk4, String risk5, String risk6,
-                     String risk7, String risk8, String risk9, String risk10, ImageView riskview) {
-
-        if (risk1 != null && "yes".equals(risk1)
-                || risk2 != null && risk2.equals("yes")
-                || risk3 != null && risk3.equals("yes")
-                || risk4 != null && risk4.equals("yes")
-                || risk5 != null && risk5.equals("yes")
-                || risk6 != null && risk6.equals("yes")
-                || risk7 != null && risk7.equals("yes")
-                || risk8 != null && risk8.equals("yes")
-                || risk9 != null && risk9.equals("yes")
-                || risk10 != null && risk10.equals("yes")) {
-
-            riskview.setVisibility(View.VISIBLE);
-        }
-    }
+//    public void risk(String risk1, String risk2, String risk3, String risk4, String risk5, String risk6,
+//                     String risk7, String risk8, String risk9, String risk10, ImageView riskview) {
+//
+//        if (risk1 != null && "yes".equals(risk1)
+//                || risk2 != null && risk2.equals("yes")
+//                || risk3 != null && risk3.equals("yes")
+//                || risk4 != null && risk4.equals("yes")
+//                || risk5 != null && risk5.equals("yes")
+//                || risk6 != null && risk6.equals("yes")
+//                || risk7 != null && risk7.equals("yes")
+//                || risk8 != null && risk8.equals("yes")
+//                || risk9 != null && risk9.equals("yes")
+//                || risk10 != null && risk10.equals("yes")) {
+//
+//            riskview.setVisibility(View.VISIBLE);
+//        }
+//    }
 
     @Override
     public View inflatelayoutForCursorAdapter() {
