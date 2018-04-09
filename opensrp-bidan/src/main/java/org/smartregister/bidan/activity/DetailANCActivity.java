@@ -32,215 +32,215 @@ public class DetailANCActivity extends Activity {
     public static CommonPersonObjectClient ancClient;
     //    private SimpleDateFormat timer = new SimpleDateFormat("hh:mm:ss");
     @Bind(R.id.tv_mother_detail_profile_view)
-    ImageView kiview;
+    private ImageView kiview;
     @Bind(R.id.tv_wife_name)
-    TextView nama;
+    private TextView nama;
     @Bind(R.id.tv_nik)
-    TextView nik;
+    private TextView nik;
     @Bind(R.id.tv_husband_name)
-    TextView husband_name;
+    private TextView husband_name;
     @Bind(R.id.tv_dob)
-    TextView dob;
+    private TextView dob;
     @Bind(R.id.tv_contact_phone_number)
-    TextView phone;
+    private TextView phone;
     @Bind(R.id.tv_risk1)
-    TextView risk1;
+    private TextView risk1;
     @Bind(R.id.tv_risk2)
-    TextView risk2;
+    private TextView risk2;
     @Bind(R.id.tv_risk3)
-    TextView risk3;
+    private TextView risk3;
     @Bind(R.id.tv_risk4)
-    TextView risk4;
+    private TextView risk4;
 
     @Bind(R.id.tv_show_more)
-    TextView show_risk;
+    private TextView show_risk;
     @Bind(R.id.tv_show_more_detail)
-    TextView show_detail;
+    private TextView show_detail;
 
 
     @Bind(R.id.tv_child_detail_information)
-    TextView details;
+    private TextView details;
     @Bind(R.id.tv_detail_today)
-    TextView risk;
+    private TextView risk;
     @Bind(R.id.tv_detail_l)
-    TextView plan;
+    private TextView plan;
 
     // birth plan
 //    @Bind(R.id.tv_mother_summary)
 //    TextView mother_summary;
 
     @Bind(R.id.tv_b_edd)
-    TextView txt_b_edd;
+    private TextView txt_b_edd;
     @Bind(R.id.tv_b_lastvisit)
-    TextView txt_b_lastvisit;
+    private TextView txt_b_lastvisit;
     @Bind(R.id.tv_b_location)
-    TextView txt_b_location;
+    private TextView txt_b_location;
 
     @Bind(R.id.tv_b_edd2)
-    TextView txt_b_edd2;
+    private TextView txt_b_edd2;
     @Bind(R.id.tv_b_attend)
-    TextView txt_b_attend;
+    private TextView txt_b_attend;
     @Bind(R.id.tv_b_place)
-    TextView txt_b_place;
+    private TextView txt_b_place;
     @Bind(R.id.tv_b_person)
-    TextView txt_b_person;
+    private TextView txt_b_person;
     @Bind(R.id.tv_b_transport)
-    TextView txt_b_transport;
+    private TextView txt_b_transport;
     @Bind(R.id.tv_b_blood)
-    TextView txt_b_blood;
+    private TextView txt_b_blood;
     @Bind(R.id.tv_b_houser)
-    TextView txt_b_houser;
+    private TextView txt_b_houser;
     @Bind(R.id.tv_b_stock)
-    TextView txt_b_stock;
+    private TextView txt_b_stock;
 
 
     //detail data
     @Bind(R.id.txt_Keterangan_k1k4)
-    TextView Keterangan_k1k4;
+    private TextView Keterangan_k1k4;
     @Bind(R.id.txt_ancDate)
-    TextView ancDate;
+    private TextView ancDate;
     @Bind(R.id.txt_tanggalHPHT)
-    TextView tanggalHPHT;
+    private TextView tanggalHPHT;
     @Bind(R.id.txt_usiaKlinis)
-    TextView usiaKlinis;
+    private TextView usiaKlinis;
     @Bind(R.id.txt_trimesterKe)
-    TextView trimesterKe;
+    private TextView trimesterKe;
     @Bind(R.id.txt_kunjunganKe)
-    TextView kunjunganKe;
+    private TextView kunjunganKe;
     @Bind(R.id.txt_ancKe)
-    TextView ancKe;
+    private TextView ancKe;
     @Bind(R.id.txt_bbKg)
-    TextView bbKg;
+    private TextView bbKg;
     @Bind(R.id.txt_tandaVitalTDSistolik)
-    TextView tandaVitalTDSistolik;
+    private TextView tandaVitalTDSistolik;
     @Bind(R.id.txt_tandaVitalTDDiastolik)
-    TextView tandaVitalTDDiastolik;
+    private TextView tandaVitalTDDiastolik;
     @Bind(R.id.txt_hasilPemeriksaanLILA)
-    TextView hasilPemeriksaanLILA;
+    private TextView hasilPemeriksaanLILA;
     @Bind(R.id.txt_statusGiziibu)
-    TextView statusGiziibu;
+    private TextView statusGiziibu;
     @Bind(R.id.txt_tfu)
-    TextView tfu;
+    private TextView tfu;
     @Bind(R.id.txt_refleksPatelaIbu)
-    TextView refleksPatelaIbu;
+    private TextView refleksPatelaIbu;
     @Bind(R.id.txt_djj)
-    TextView djj;
+    private TextView djj;
     @Bind(R.id.txt_kepalaJaninTerhadapPAP)
-    TextView kepalaJaninTerhadapPAP;
+    private TextView kepalaJaninTerhadapPAP;
     @Bind(R.id.txt_taksiranBeratJanin)
-    TextView taksiranBeratJanin;
+    private TextView taksiranBeratJanin;
     @Bind(R.id.txt_persentasiJanin)
-    TextView persentasiJanin;
+    private TextView persentasiJanin;
     @Bind(R.id.txt_jumlahJanin)
-    TextView jumlahJanin;
+    private TextView jumlahJanin;
 
 
     @Bind(R.id.txt_statusImunisasitt)
-    TextView statusImunisasitt;
+    private TextView statusImunisasitt;
     @Bind(R.id.txt_pelayananfe)
-    TextView pelayananfe;
+    private TextView pelayananfe;
     @Bind(R.id.txt_komplikasidalamKehamilan)
-    TextView komplikasidalamKehamilan;
+    private TextView komplikasidalamKehamilan;
 
     @Bind(R.id.txt_integrasiProgrampmtctvct)
-    TextView integrasiProgrampmtctvct;
+    private TextView integrasiProgrampmtctvct;
     @Bind(R.id.txt_integrasiProgrampmtctPeriksaDarah)
-    TextView integrasiProgrampmtctPeriksaDarah;
+    private TextView integrasiProgrampmtctPeriksaDarah;
     @Bind(R.id.txt_integrasiProgrampmtctSerologi)
-    TextView integrasiProgrampmtctSerologi;
+    private TextView integrasiProgrampmtctSerologi;
     @Bind(R.id.txt_integrasiProgrampmtctarvProfilaksis)
-    TextView integrasiProgrampmtctarvProfilaksis;
+    private TextView integrasiProgrampmtctarvProfilaksis;
     @Bind(R.id.txt_integrasiProgramMalariaPeriksaDarah)
-    TextView integrasiProgramMalariaPeriksaDarah;
+    private TextView integrasiProgramMalariaPeriksaDarah;
     @Bind(R.id.txt_integrasiProgramMalariaObat)
-    TextView integrasiProgramMalariaObat;
+    private TextView integrasiProgramMalariaObat;
     @Bind(R.id.txt_integrasiProgramMalariaKelambuBerinsektisida)
-    TextView integrasiProgramMalariaKelambuBerinsektisida;
+    private TextView integrasiProgramMalariaKelambuBerinsektisida;
     @Bind(R.id.txt_integrasiProgramtbDahak)
-    TextView integrasiProgramtbDahak;
+    private TextView integrasiProgramtbDahak;
     @Bind(R.id.txt_integrasiProgramtbObat)
-    TextView integrasiProgramtbObat;
+    private TextView integrasiProgramtbObat;
 
     @Bind(R.id.txt_laboratoriumPeriksaHbHasil)
-    TextView laboratoriumPeriksaHbHasil;
+    private TextView laboratoriumPeriksaHbHasil;
     @Bind(R.id.txt_laboratoriumPeriksaHbAnemia)
-    TextView laboratoriumPeriksaHbAnemia;
+    private TextView laboratoriumPeriksaHbAnemia;
     @Bind(R.id.txt_laboratoriumProteinUria)
-    TextView laboratoriumProteinUria;
+    private TextView laboratoriumProteinUria;
     @Bind(R.id.txt_laboratoriumGulaDarah)
-    TextView laboratoriumGulaDarah;
+    private TextView laboratoriumGulaDarah;
     @Bind(R.id.txt_laboratoriumThalasemia)
-    TextView laboratoriumThalasemia;
+    private TextView laboratoriumThalasemia;
     @Bind(R.id.txt_laboratoriumSifilis)
-    TextView laboratoriumSifilis;
+    private TextView laboratoriumSifilis;
     @Bind(R.id.txt_laboratoriumHbsAg)
-    TextView laboratoriumHbsAg;
+    private TextView laboratoriumHbsAg;
 
 
     //detail RISK
     @Bind(R.id.txt_highRiskSTIBBVs)
-    TextView highRiskSTIBBVs;
+    private TextView highRiskSTIBBVs;
     @Bind(R.id.txt_highRiskEctopicPregnancy)
-    TextView highRiskEctopicPregnancy;
+    private TextView highRiskEctopicPregnancy;
     @Bind(R.id.txt_highRiskCardiovascularDiseaseRecord)
-    TextView highRiskCardiovascularDiseaseRecord;
+    private TextView highRiskCardiovascularDiseaseRecord;
     @Bind(R.id.txt_highRiskDidneyDisorder)
-    TextView highRiskDidneyDisorder;
+    private TextView highRiskDidneyDisorder;
     @Bind(R.id.txt_highRiskHeartDisorder)
-    TextView highRiskHeartDisorder;
+    private TextView highRiskHeartDisorder;
     @Bind(R.id.txt_highRiskAsthma)
-    TextView highRiskAsthma;
+    private TextView highRiskAsthma;
     @Bind(R.id.txt_highRiskTuberculosis)
-    TextView highRiskTuberculosis;
+    private TextView highRiskTuberculosis;
     @Bind(R.id.txt_highRiskMalaria)
-    TextView highRiskMalaria;
+    private TextView highRiskMalaria;
     @Bind(R.id.txt_highRiskPregnancyPIH)
-    TextView highRiskPregnancyPIH;
+    private TextView highRiskPregnancyPIH;
     @Bind(R.id.txt_highRiskPregnancyProteinEnergyMalnutrition)
-    TextView highRiskPregnancyProteinEnergyMalnutrition;
+    private TextView highRiskPregnancyProteinEnergyMalnutrition;
 
     @Bind(R.id.txt_highRiskLabourTBRisk)
-    TextView txt_highRiskLabourTBRisk;
+    private TextView txt_highRiskLabourTBRisk;
     @Bind(R.id.txt_HighRiskLabourSectionCesareaRecord)
-    TextView txt_HighRiskLabourSectionCesareaRecord;
+    private TextView txt_HighRiskLabourSectionCesareaRecord;
     @Bind(R.id.txt_highRisklabourFetusNumber)
-    TextView txt_highRisklabourFetusNumber;
+    private TextView txt_highRisklabourFetusNumber;
     @Bind(R.id.txt_highRiskLabourFetusSize)
-    TextView txt_highRiskLabourFetusSize;
+    private TextView txt_highRiskLabourFetusSize;
     @Bind(R.id.txt_lbl_highRiskLabourFetusMalpresentation)
-    TextView txt_lbl_highRiskLabourFetusMalpresentation;
+    private TextView txt_lbl_highRiskLabourFetusMalpresentation;
     @Bind(R.id.txt_highRiskPregnancyAnemia)
-    TextView txt_highRiskPregnancyAnemia;
+    private TextView txt_highRiskPregnancyAnemia;
     @Bind(R.id.txt_highRiskPregnancyDiabetes)
-    TextView txt_highRiskPregnancyDiabetes;
+    private TextView txt_highRiskPregnancyDiabetes;
     @Bind(R.id.txt_HighRiskPregnancyTooManyChildren)
-    TextView HighRiskPregnancyTooManyChildren;
+    private TextView HighRiskPregnancyTooManyChildren;
     @Bind(R.id.txt_highRiskPostPartumSectioCaesaria)
-    TextView highRiskPostPartumSectioCaesaria;
+    private TextView highRiskPostPartumSectioCaesaria;
     @Bind(R.id.txt_highRiskPostPartumForceps)
-    TextView highRiskPostPartumForceps;
+    private TextView highRiskPostPartumForceps;
     @Bind(R.id.txt_highRiskPostPartumVacum)
-    TextView highRiskPostPartumVacum;
+    private TextView highRiskPostPartumVacum;
     @Bind(R.id.txt_highRiskPostPartumPreEclampsiaEclampsia)
-    TextView highRiskPostPartumPreEclampsiaEclampsia;
+    private TextView highRiskPostPartumPreEclampsiaEclampsia;
     @Bind(R.id.txt_highRiskPostPartumMaternalSepsis)
-    TextView highRiskPostPartumMaternalSepsis;
+    private TextView highRiskPostPartumMaternalSepsis;
     @Bind(R.id.txt_highRiskPostPartumInfection)
-    TextView highRiskPostPartumInfection;
+    private TextView highRiskPostPartumInfection;
     @Bind(R.id.txt_highRiskPostPartumHemorrhage)
-    TextView highRiskPostPartumHemorrhage;
+    private TextView highRiskPostPartumHemorrhage;
 
     @Bind(R.id.txt_highRiskPostPartumPIH)
-    TextView highRiskPostPartumPIH;
+    private TextView highRiskPostPartumPIH;
     @Bind(R.id.txt_highRiskPostPartumDistosia)
-    TextView highRiskPostPartumDistosia;
+    private TextView highRiskPostPartumDistosia;
     @Bind(R.id.txt_highRiskHIVAIDS)
-    TextView txt_highRiskHIVAIDS;
+    private TextView txt_highRiskHIVAIDS;
 
     @Bind(R.id.iv_icon_device)
-    ImageView heart_bpm;
+    private ImageView heart_bpm;
     @Bind(R.id.btn_back_to_home)
-    ImageButton back;
+    private ImageButton back;
 
 
     @Override
