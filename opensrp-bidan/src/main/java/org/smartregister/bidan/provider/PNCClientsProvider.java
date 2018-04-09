@@ -3,7 +3,6 @@ package org.smartregister.bidan.provider;
 import android.app.Activity;
 import android.content.Context;
 import android.database.Cursor;
-import android.graphics.drawable.Drawable;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -81,7 +80,7 @@ public class PNCClientsProvider extends BaseClientsProvider {
     private ImageView profilepic;
     @Bind(R.id.ib_btn_edit)
     private ImageButton follow_up;
-    private Drawable iconPencilDrawable;
+//    private Drawable iconPencilDrawable;
 
     // Badge Flag
     @Bind(R.id.iv_hr_badge)
@@ -91,11 +90,11 @@ public class PNCClientsProvider extends BaseClientsProvider {
     @Bind(R.id.iv_hrp_badge)
     private ImageView hrp_badge;
 
-    @Bind(R.id.iv_bpl_badge)
-    private ImageView bpl_badge;
-    @Bind(R.id.iv_hrpp_badge)
-    private ImageView hrpp_badge;
-    private AlertService alertService;
+//    @Bind(R.id.iv_bpl_badge)
+//    private ImageView bpl_badge;
+//    @Bind(R.id.iv_hrpp_badge)
+//    private ImageView hrpp_badge;
+//    private AlertService alertService;
 
     //  txt_kondisi_ibu txt_KF txt_vit_a
 
@@ -105,9 +104,9 @@ public class PNCClientsProvider extends BaseClientsProvider {
         super(context);
         this.onClickListener = onClickListener;
         this.mContext = context;
-        this.alertService = alertService;
+//        this.alertService = alertService;
+        Log.e(TAG, "PNCClientsProvider: "+ alertService );
 
-//        AlertService alertService1 = alertService;
         clientViewLayoutParams = new AbsListView.LayoutParams(MATCH_PARENT, (int) context.getResources().getDimension(R.dimen.list_item_height));
         LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 
