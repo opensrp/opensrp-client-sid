@@ -33,7 +33,7 @@ import static org.smartregister.util.Utils.fillValue;
 import static org.smartregister.util.Utils.getValue;
 
 /**
- * Created by sid-tech on 11/27/17.
+ * Created by sid-tech on 11/27/17
  */
 
 public class ChildClientsProvider implements SmartRegisterCLientsProviderForCursorAdapter {
@@ -42,28 +42,19 @@ public class ChildClientsProvider implements SmartRegisterCLientsProviderForCurs
     private final LayoutInflater inflater;
     private final Context context;
     private final View.OnClickListener onClickListener;
-    private final AlertService alertService;
-    private final CommonRepository commonRepository;
-    private String str_firstName;
     private String str_motherName;
-    private String str_birthDate;
     private String str_birthPlace;
     private String str_childAddress;
-    private String str_childAge;
-
-    private String str_current_weight;
-    private String str_visit_date;
-    private String str_current_height;
-    private String str_status_gizi;
 
     public ChildClientsProvider(Context context, View.OnClickListener onClickListener,
                                 AlertService alertService, CommonRepository commonRepository) {
 
         this.onClickListener = onClickListener;
         this.context = context;
-        this.alertService = alertService;
-        this.commonRepository = commonRepository;
         this.inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+
+        Log.i(TAG, "ChildClientsProvider: alert "+ alertService);
+        Log.i(TAG, "ChildClientsProvider: repo "+ commonRepository.TABLE_NAME);
 
 //        AbsListView.LayoutParams clientViewLayoutParams = new AbsListView.LayoutParams(MATCH_PARENT, (int) context.getResources().getDimension(org.smartregister.R.dimen.list_item_height));
     }
@@ -103,13 +94,13 @@ public class ChildClientsProvider implements SmartRegisterCLientsProviderForCurs
         convertView.findViewById(R.id.profile_info_layout).setTag(client);
         convertView.findViewById(R.id.profile_info_layout).setOnClickListener(onClickListener);
 
-        str_firstName = getValue(pc.getColumnmaps(), "namaBayi", true);
-        str_birthDate = getValue(pc.getColumnmaps(), "tanggalLahirAnak", true);
+        String str_firstName = getValue(pc.getColumnmaps(), "namaBayi", true);
+        String str_birthDate = getValue(pc.getColumnmaps(), "tanggalLahirAnak", true);
 
         if (str_birthDate.length() > 10)
             str_birthDate = str_birthDate.substring(0, Support.getColumnmaps(pc, "tanggalLahirAnak").indexOf("T"));
 
-        str_childAge = monthRangeToToday(str_birthDate) + " " + context.getString(R.string.str_month);
+        String str_childAge = monthRangeToToday(str_birthDate) + " " + context.getString(R.string.str_month);
 
 
         if (ibuparent != null) {
@@ -127,7 +118,7 @@ public class ChildClientsProvider implements SmartRegisterCLientsProviderForCurs
         // Photo, Name, Mother, Father, Address
         viewHolder.profilepic = (ImageView) convertView.findViewById(R.id.iv_child_photo);
         viewHolder.follow_up = (ImageButton) convertView.findViewById(R.id.ib_btn_edit);
-        viewHolder.profilepic.setImageDrawable(context.getResources().getDrawable(R.mipmap.child_boy));
+        viewHolder.profilepic.setImageResource(R.mipmap.child_boy);
 
         if (pc.getDetails().get("gender") != null) {
             Support.setImagetoHolderFromUri((Activity) context, pc.getDetails().get("base_entity_id"),
@@ -190,16 +181,13 @@ public class ChildClientsProvider implements SmartRegisterCLientsProviderForCurs
         String gizi = status_gizi.equals("GB") ? "Gizi Buruk" : status_gizi.equals("GK") ? "Gizi Kurang" : status_gizi.equals("GR") ? "Gizi Rendah" : "";
 
         if (pc.getDetails().get("tanggalPenimbangan") != null) {
-            str_current_weight = berat;
-            str_visit_date = tanggal;
-            str_current_height = tinggi;
-            str_status_gizi = gizi;
-        }
 
         fillValue((TextView) convertView.findViewById(R.id.txt_current_weight), context.getString(R.string.str_weight) + berat);
         fillValue((TextView) convertView.findViewById(R.id.txt_visit_date), context.getString(R.string.date_visit_title) + tanggal);
         fillValue((TextView) convertView.findViewById(R.id.txt_current_height), context.getString(R.string.height) + tinggi);
         fillValue((TextView) convertView.findViewById(R.id.txt_status_gizi), context.getString(R.string.nutrition) + gizi);
+
+        }
 
     }
 
@@ -245,11 +233,11 @@ public class ChildClientsProvider implements SmartRegisterCLientsProviderForCurs
         return inflater;
     }
 
-    class ViewHolder {
+    private class ViewHolder {
 
-        public TextView hb0, complete, name, village, age, campak, gender;
+        public TextView complete, name, village, age, campak, gender; // hb0
         ImageButton follow_up;
-        ImageView hp_badge, hb0_no, hb0_yes, pol1_no, pol1_yes, pol2_no, pol2_yes, pol3_no, pol3_yes;
+        ImageView hb0_no, hb0_yes, pol1_no, pol1_yes, pol2_no, pol2_yes, pol3_no, pol3_yes; // hp_badge
         ImageView pol4_no, pol4_yes, vitk_no, vitk_yes, campak_no, campak_yes, ivp_no, ivp_yes, profilepic;
     }
 }
