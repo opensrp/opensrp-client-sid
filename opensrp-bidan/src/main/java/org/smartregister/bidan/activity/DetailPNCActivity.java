@@ -25,25 +25,25 @@ import static org.smartregister.util.StringUtil.humanize;
 import static org.smartregister.util.StringUtil.humanizeAndDoUPPERCASE;
 
 /**
- * Created by sid-tech on 11/30/17.
+ * Created by sid-tech on 11/30/17
  */
 
 public class DetailPNCActivity extends Activity {
 
     //image retrieving
     private static final String TAG = DetailPNCActivity.class.getName();
-    private static final String IMAGE_CACHE_DIR = "thumbs";
+//    private static final String IMAGE_CACHE_DIR = "thumbs";
     public static CommonPersonObjectClient pncclient;
     //  private static KmsCalc  kmsCalc;
-    private static int mImageThumbSize;
-    private static int mImageThumbSpacing;
-    private static String showbgm;
+//    private static int mImageThumbSize;
+//    private static int mImageThumbSpacing;
+//    private static String showbgm;
 //    private static ImageFetcher mImageFetcher;
 
     //image retrieving
-    SimpleDateFormat timer = new SimpleDateFormat("hh:mm:ss");
-    private SimpleDateFormat fta;
-    private SimpleDateFormat ftb;
+//    SimpleDateFormat timer = new SimpleDateFormat("hh:mm:ss");
+//    private SimpleDateFormat fta;
+//    private SimpleDateFormat ftb;
     private View.OnClickListener bpmListener = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
@@ -54,17 +54,17 @@ public class DetailPNCActivity extends Activity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        Context context = Context.getInstance();
+//        Context context = Context.getInstance();
         setContentView(R.layout.pnc_detail_activity);
 
-        String DetailStart = timer.format(new Date());
-        Map<String, String> Detail = new HashMap<String, String>();
-        Detail.put("start", DetailStart);
+//        String DetailStart = timer.format(new Date());
+//        Map<String, String> Detail = new HashMap<>();
+//        Detail.put("start", DetailStart);
         //FlurryAgent.logEvent("PNC_detail_view",Detail, true );
 
         final ImageView kiview = (ImageView) findViewById(R.id.tv_mother_detail_profile_view);
         //header
-        TextView today = (TextView) findViewById(R.id.tv_detail_today);
+//        TextView today = (TextView) findViewById(R.id.tv_detail_today);
 
         //profile
         TextView nama = (TextView) findViewById(R.id.tv_wife_name);
@@ -84,7 +84,7 @@ public class DetailPNCActivity extends Activity {
 //        ImageView heart_bpm = (ImageView) findViewById(R.id.icon_device);
         ImageView device = (ImageView) findViewById(R.id.iv_icon_device);
         device.setVisibility(View.VISIBLE);
-        device.setOnClickListener(bpmListener);
+//        device.setOnClickListener(bpmListener);
 
         //detail data
         TextView txt_keadaanIbu = (TextView) findViewById(R.id.txt_keadaanIbu);
@@ -161,9 +161,9 @@ public class DetailPNCActivity extends Activity {
                 finish();
                 startActivity(new Intent(DetailPNCActivity.this, PNCSmartRegisterActivity.class));
                 overridePendingTransition(0, 0);
-                String DetailEnd = timer.format(new Date());
-                Map<String, String> Detail = new HashMap<String, String>();
-                Detail.put("end", DetailEnd);
+//                String DetailEnd = timer.format(new Date());
+//                Map<String, String> Detail = new HashMap<>();
+//                Detail.put("end", DetailEnd);
                 //FlurryAgent.logEvent("PNC_detail_view", Detail, true);
             }
         });
