@@ -16,42 +16,35 @@ import org.smartregister.commonregistry.CommonPersonObject;
 import org.smartregister.commonregistry.CommonPersonObjectClient;
 import org.smartregister.repository.DetailsRepository;
 
-import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.Map;
-
 import static org.smartregister.util.StringUtil.humanize;
 
-//import org.smartregister.bidan.activity.v1.NativeKBSmartRegisterActivity;
-
 /**
- * Created by sid-tech on 11/30/17.
+ * Created by sid-tech on 11/30/17
  */
 
 public class DetailFPActivity extends Activity {
 
-    private static final String TAG = DetailFPActivity.class.getName();
+//    private static final String TAG = DetailFPActivity.class.getName();
     public static CommonPersonObjectClient kiclient;
-    SimpleDateFormat timer = new SimpleDateFormat("hh:mm:ss");
-    private View.OnClickListener bpmListener;
+//    private SimpleDateFormat timer = new SimpleDateFormat("hh:mm:ss");
+//    private View.OnClickListener bpmListener;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        Context context = Context.getInstance();
+//        Context context = Context.getInstance();
         setContentView(R.layout.kb_detail_activity);
 
 
-        String DetailStart = timer.format(new Date());
-        Map<String, String> Detail = new HashMap<String, String>();
-        Detail.put("start", DetailStart);
+//        String DetailStart = timer.format(new Date());
+//        Map<String, String> Detail = new HashMap<String, String>();
+//        Detail.put("start", DetailStart);
 
 //        FlurryAgent.logEvent("KB_detail_view", Detail, true);
 
         final ImageView kiview = (ImageView) findViewById(R.id.tv_mother_detail_profile_view);
         //header
-        TextView today = (TextView) findViewById(R.id.tv_detail_today);
+//        TextView today = (TextView) findViewById(R.id.tv_detail_today);
 
         //profile
         TextView nama = (TextView) findViewById(R.id.tv_wife_name);
@@ -130,9 +123,9 @@ public class DetailFPActivity extends Activity {
                 finish();
                 startActivity(new Intent(DetailFPActivity.this, FPSmartRegisterActivity.class));
                 overridePendingTransition(0, 0);
-                String DetailEnd = timer.format(new Date());
-                Map<String, String> Detail = new HashMap<>();
-                Detail.put("end", DetailEnd);
+//                String DetailEnd = timer.format(new Date());
+//                Map<String, String> Detail = new HashMap<>();
+//                Detail.put("end", DetailEnd);
 //                FlurryAgent.logEvent("KB_detail_view", Detail, true);
             }
         });
