@@ -307,7 +307,7 @@ public class DetailMotherActivity extends Activity {
             }
             if (file.canWrite()) {
                 path.append(File.separator).append(userId).append(".jpg");
-                Tools.savefile(Tools.scaleDown((Bitmap) intent.getExtras().get("data"), 400.0f, false), path.toString());
+                Tools.saveFile(Tools.scaleDown((Bitmap) intent.getExtras().get("data"), 400.0f, false), path.toString());
             }
 
             finish();

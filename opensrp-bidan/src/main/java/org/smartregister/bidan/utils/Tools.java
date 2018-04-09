@@ -17,14 +17,14 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 
 /**
- * Created by sid-tech on 1/24/18.
+ * Created by sid-tech on 1/24/18
  */
 
 public class Tools {
     private static String TAG = Tools.class.getName();
-    private static Object dbRecord;
+//    private static Object dbRecord;
 
-    public static void savefile(Bitmap sourceuri, String destinationFilename) {
+    public static void saveFile(Bitmap sourceuri, String destinationFilename) {
         try {
             ByteArrayOutputStream bos = new ByteArrayOutputStream();
             sourceuri.compress(Bitmap.CompressFormat.JPEG, 50, bos);
@@ -43,12 +43,12 @@ public class Tools {
             Bitmap thumbImage = ThumbnailUtils.extractThumbnail(
                     BitmapFactory.decodeFile(tfos.toString()), THUMBSIZE, THUMBSIZE);
             if (thumbImage != null) thumbImage.compress(Bitmap.CompressFormat.PNG, 100, tfos);
-            else Log.e(TAG, "savefile: ");
+            else Log.e(TAG, "saveFile: ");
 
             tfos.close();
         } catch (IOException e) {
             e.printStackTrace();
-            Log.e(TAG, "savefile: " + e.getCause());
+            Log.e(TAG, "saveFile: " + e.getCause());
         }
     }
 
