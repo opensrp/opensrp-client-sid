@@ -13,7 +13,7 @@ class CloudantSyncListener {
      * Called by CloudantSyncHandler when it receives a replication complete callback.
      * CloudantSyncHandler takes care of calling this on the main thread.
      */
-    void replicationComplete() {
+    protected void replicationComplete() {
         Log.e(TAG, "replicationComplete: " );
     }
 
@@ -21,7 +21,7 @@ class CloudantSyncListener {
      * Called by TasksModel when it receives a replication error callback.
      * TasksModel takes care of calling this on the main thread.
      */
-    public void replicationError() {
+    protected void replicationError() {
         Log.e(TAG, "replicationError: " );
     }
 }

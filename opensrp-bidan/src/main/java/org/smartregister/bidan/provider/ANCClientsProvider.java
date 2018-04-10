@@ -4,7 +4,6 @@ import android.app.Activity;
 import android.content.Context;
 import android.database.Cursor;
 import android.util.Log;
-import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.AbsListView;
 import android.widget.ImageButton;
@@ -34,10 +33,6 @@ import org.smartregister.view.contract.SmartRegisterClient;
 import java.util.List;
 import java.util.Map;
 
-import butterknife.Bind;
-import butterknife.ButterKnife;
-
-import static android.content.Context.LAYOUT_INFLATER_SERVICE;
 import static android.view.ViewGroup.LayoutParams.MATCH_PARENT;
 import static org.joda.time.LocalDateTime.parse;
 
@@ -52,58 +47,58 @@ public class ANCClientsProvider extends BaseClientsProvider {
     private final AbsListView.LayoutParams clientViewLayoutParams;
     protected CommonPersonObjectController controller;
 
-    @Bind(R.id.profile_info_layout)
-    private LinearLayout profilelayout;
-    @Bind(R.id.iv_mother_photo)
-    private ImageView profilepic;
-    @Bind(R.id.tv_wife_name)
-    private TextView wife_name;
-    @Bind(R.id.tv_husband_name)
-    private TextView husband_name;
-    @Bind(R.id.tv_village_name)
-    private TextView village_name;
-    @Bind(R.id.tv_wife_age)
-    private TextView wife_age;
-    @Bind(R.id.no_ibu)
-    private TextView no_ibu;
-    @Bind(R.id.unique_id)
-    private TextView unique_id;
-    @Bind(R.id.iv_hr_badge)
-    private ImageView hr_badge;
-    @Bind(R.id.iv_hrl_badge)
-    private ImageView hrl_badge;
-    @Bind(R.id.iv_hrp_badge)
-    private ImageView hrp_badge;
-    //    @Bind(R.id.iv_bpl_badge)
-//    private ImageView bpl_badge;
-//    @Bind(R.id.iv_hrpp_badge)
-//    private ImageView hrpp_badge;
-    @Bind(R.id.txt_usia_klinis)
-    private TextView usia_klinis;
-    @Bind(R.id.txt_htpt)
-    private TextView htpt;
-    @Bind(R.id.txt_edd_due)
-    private TextView edd_due;
-    @Bind(R.id.txt_ki_lila_bb)
-    private TextView ki_lila_bb;
-    @Bind(R.id.txt_ki_beratbadan_tb)
-    private TextView beratbadan_tb;
-    @Bind(R.id.txt_tanggal_kunjungan_anc)
-    private TextView tanggal_kunjungan_anc;
-    @Bind(R.id.txt_anc_number)
-    private TextView anc_number;
-    @Bind(R.id.txt_kunjugan_ke)
-    private TextView kunjugan_ke;
-    @Bind(R.id.anc_status_layout)
-    private RelativeLayout status_layout;
-    @Bind(R.id.txt_status_type)
-    private TextView status_type;
-    @Bind(R.id.txt_status_date_anc)
-    private TextView status_date;
-    @Bind(R.id.txt_alert_status)
-    private TextView alert_status;
-    @Bind(R.id.btn_anc_edit)
-    private ImageButton follow_up;
+//    @Bind(R.id.profile_info_layout)
+//    private LinearLayout profilelayout;
+//    @Bind(R.id.iv_mother_photo)
+//    private ImageView profilepic;
+//    @Bind(R.id.tv_wife_name)
+//    private TextView wife_name;
+//    @Bind(R.id.tv_husband_name)
+//    private TextView husband_name;
+//    @Bind(R.id.tv_village_name)
+//    private TextView village_name;
+//    @Bind(R.id.tv_wife_age)
+//    private TextView wife_age;
+//    @Bind(R.id.no_ibu)
+//    private TextView no_ibu;
+//    @Bind(R.id.unique_id)
+//    private TextView unique_id;
+//    @Bind(R.id.iv_hr_badge)
+//    private ImageView hr_badge;
+//    @Bind(R.id.iv_hrl_badge)
+//    private ImageView hrl_badge;
+//    @Bind(R.id.iv_hrp_badge)
+//    private ImageView hrp_badge;
+//    //    @Bind(R.id.iv_bpl_badge)
+////    private ImageView bpl_badge;
+////    @Bind(R.id.iv_hrpp_badge)
+////    private ImageView hrpp_badge;
+//    @Bind(R.id.txt_usia_klinis)
+//    private TextView usia_klinis;
+//    @Bind(R.id.txt_htpt)
+//    private TextView htpt;
+//    @Bind(R.id.txt_edd_due)
+//    private TextView edd_due;
+//    @Bind(R.id.txt_ki_lila_bb)
+//    private TextView ki_lila_bb;
+//    @Bind(R.id.txt_ki_beratbadan_tb)
+//    private TextView beratbadan_tb;
+//    @Bind(R.id.txt_tanggal_kunjungan_anc)
+//    private TextView tanggal_kunjungan_anc;
+//    @Bind(R.id.txt_anc_number)
+//    private TextView anc_number;
+//    @Bind(R.id.txt_kunjugan_ke)
+//    private TextView kunjugan_ke;
+//    @Bind(R.id.anc_status_layout)
+//    private RelativeLayout status_layout;
+//    @Bind(R.id.txt_status_type)
+//    private TextView status_type;
+//    @Bind(R.id.txt_status_date_anc)
+//    private TextView status_date;
+//    @Bind(R.id.txt_alert_status)
+//    private TextView alert_status;
+//    @Bind(R.id.btn_anc_edit)
+//    private ImageButton follow_up;
     private AlertService alertService;
 
     public ANCClientsProvider(Context context, View.OnClickListener onClickListener, AlertService alertService) {
@@ -119,20 +114,14 @@ public class ANCClientsProvider extends BaseClientsProvider {
 
     public void getView(SmartRegisterClient smartRegisterClient, View convertView) {
 
-        try {
-            ButterKnife.bind(this, convertView);
-
-        } catch (Exception e) {
-            e.getCause().printStackTrace();
-            Log.e(TAG, "getView: " + e.getMessage());
-        }
+//        try {
+//            ButterKnife.bind(this, convertView);
+//
+//        } catch (Exception e) {
+//            e.getCause().printStackTrace();
+//            Log.e(TAG, "getView: " + e.getMessage());
+//        }
 //        // Load data from DB
-        profilelayout.setOnClickListener(onClickListener);
-        profilelayout.setTag(smartRegisterClient);
-
-        follow_up.setImageResource(R.drawable.ic_pencil);
-        follow_up.setOnClickListener(onClickListener);
-        follow_up.setTag(smartRegisterClient);
 
         CommonPersonObjectClient pc = (CommonPersonObjectClient) smartRegisterClient;
         AllCommonsRepository allancRepository = org.smartregister.Context.getInstance().allCommonsRepositoryobjects("ec_ibu");
@@ -149,10 +138,74 @@ public class ANCClientsProvider extends BaseClientsProvider {
         if (pc.getDetails() != null) pc.getDetails().putAll(details);
         else pc.setDetails(details);
 
+
+        // ========================================================================================
+        // Set Value
+        // ========================================================================================
+
+        LinearLayout profilelayout = (LinearLayout) convertView.findViewById(R.id.profile_info_layout);
+        profilelayout.setOnClickListener(onClickListener);
+        profilelayout.setTag(smartRegisterClient);
+
+        final ImageView profilePic = (ImageView) convertView.findViewById(R.id.iv_mother_photo);
+        profilePic.setImageResource(R.mipmap.woman_placeholder);
+        ((TextView) convertView.findViewById(R.id.tv_wife_name)).setText(pc.getColumnmaps().get("namalengkap") != null ? pc.getColumnmaps().get("namalengkap") : "");
+        ((TextView) convertView.findViewById(R.id.tv_husband_name)).setText(pc.getColumnmaps().get("namaSuami") != null ? pc.getColumnmaps().get("namaSuami") : "");
+        ((TextView) convertView.findViewById(R.id.tv_village_name)).setText(pc.getDetails().get("address1") != null ? pc.getDetails().get("address1") : "");
+        ((TextView) convertView.findViewById(R.id.tv_wife_age)).setText(pc.getDetails().get("umur") != null ? pc.getDetails().get("umur") : "");
+        ((TextView) convertView.findViewById(R.id.pnc_id)).setText(pc.getDetails().get("noIbu") != null ? pc.getDetails().get("noIbu") : "");
+
+        profilelayout.setOnClickListener(onClickListener);
+        profilelayout.setTag(smartRegisterClient);
+
+        ImageButton follow_up = (ImageButton) convertView.findViewById(R.id.btn_edit);
+        follow_up.setOnClickListener(onClickListener);
+        follow_up.setTag(smartRegisterClient);
+        follow_up.setImageResource(R.drawable.ic_pencil);
+        follow_up.setOnClickListener(onClickListener);
+        follow_up.setTag(smartRegisterClient);
+
+//        hr_badge.setVisibility(View.INVISIBLE);
+
+
+        profilePic.setTag(R.id.entity_id, pc.getColumnmaps().get("_id"));//required when saving file to disk
+        Support.setImagetoHolderFromUri((Activity) mContext, pc.getDetails().get("base_entity_id"), profilePic, R.mipmap.woman_placeholder);
+
+//        wife_name.setText(pc.getColumnmaps().get("namalengkap") != null ? pc.getColumnmaps().get("namalengkap") : "null");
+//        husband_name.setText(pc.getColumnmaps().get("namaSuami") != null ? pc.getColumnmaps().get("namaSuami") : "null");
+//        village_name.setText(pc.getDetails().get("address1") != null ? pc.getDetails().get("address1") : "");
+//        wife_age.setText(pc.getColumnmaps().get("umur") != null ? pc.getColumnmaps().get("umur") : "");
+//        no_ibu.setText(pc.getDetails().get("noIbu") != null ? pc.getDetails().get("noIbu") : "");
+
+//        ((TextView) convertView.findViewById(R.id.unique_id)).setText(pc.getDetails().get(AllConstantsINA.CommonFormFields.UNIQUE_ID) != null ? pc.getDetails().get(AllConstantsINA.CommonFormFields.UNIQUE_ID) : "");
+        ((TextView) convertView.findViewById(R.id.tv_gravida)).setText(pc.getDetails().get("gravida") != null ? pc.getDetails().get("gravida") : "-");
+        ((TextView) convertView.findViewById(R.id.tv_parity)).setText(pc.getDetails().get("partus") != null ? pc.getDetails().get("partus") : "-");
+        ((TextView) convertView.findViewById(R.id.tv_number_of_abortus)).setText(pc.getDetails().get("abortus") != null ? pc.getDetails().get("abortus") : "-");
+        ((TextView) convertView.findViewById(R.id.tv_number_of_alive)).setText(pc.getDetails().get("hidup") != null ? pc.getDetails().get("hidup") : "-");
+        ((TextView) convertView.findViewById(R.id.tv_b_edd)).setText(pc.getDetails().get("htp") != null ? pc.getDetails().get("htp") : "");
+        // ===>
+
+        profilelayout.setOnClickListener(onClickListener);
+        profilelayout.setTag(smartRegisterClient);
+
+        follow_up.setImageResource(R.drawable.ic_pencil);
+        follow_up.setOnClickListener(onClickListener);
+        follow_up.setTag(smartRegisterClient);
+
         //Risk flag
+        ImageView hr_badge = (ImageView) convertView.findViewById(R.id.iv_hr_badge);
+        ImageView hrp_badge = (ImageView) convertView.findViewById(R.id.iv_hrp_badge);
+        ImageView hrl_badge = (ImageView) convertView.findViewById(R.id.iv_hrl_badge);
+
         hr_badge.setVisibility(View.INVISIBLE); // High Risks
         hrp_badge.setVisibility(View.INVISIBLE); // High Risks Pregnancy
         hrl_badge.setVisibility(View.INVISIBLE); // High Risk Liabirth
+
+        //Risk flag
+        if ("yes".matches(pc.getDetails().get("highRiskSTIBBVs")+"||"+ pc.getDetails().get("highRiskEctopicPregnancy")+"||"+ pc.getDetails().get("highRiskCardiovascularDiseaseRecord")+"||"+
+                pc.getDetails().get("highRiskDidneyDisorder")+"||"+ pc.getDetails().get("highRiskHeartDisorder")+"||"+ pc.getDetails().get("highRiskAsthma")+"||"+
+                pc.getDetails().get("highRiskTuberculosis")+"||"+ pc.getDetails().get("highRiskMalaria")+"||"+ pc.getDetails().get("highRiskPregnancyYoungMaternalAge")+"||"+
+                pc.getDetails().get("highRiskPregnancyOldMaternalAge"))) hr_badge.setVisibility(View.VISIBLE);
 
         if ("yes".matches(pc.getDetails().get("highRisksSTIBBVs")+ "||" +
                 pc.getDetails().get("highRiskEctopicPregnancy")+ "||" +
@@ -181,20 +234,19 @@ public class ANCClientsProvider extends BaseClientsProvider {
                 hrl_badge.setVisibility(View.VISIBLE);
 
         //start profile image
-        profilepic.setTag(R.id.entity_id, pc.getColumnmaps().get("_id"));//required when saving file to disk
+        profilePic.setTag(R.id.entity_id, pc.getColumnmaps().get("_id"));//required when saving file to disk
+        Support.setImagetoHolderFromUri((Activity) mContext, pc.getDetails().get("base_entity_id"), profilePic, R.mipmap.woman_placeholder);
 
-        Support.setImagetoHolderFromUri((Activity) mContext, pc.getDetails().get("base_entity_id"), profilepic, R.mipmap.woman_placeholder);
+//        wife_name.setText(pc.getColumnmaps().get("namalengkap") != null ? pc.getColumnmaps().get("namalengkap") : "");
+//        husband_name.setText(pc.getColumnmaps().get("namaSuami") != null ? pc.getColumnmaps().get("namaSuami") : "");
+//        village_name.setText(pc.getDetails().get("address1") != null ? pc.getDetails().get("address1") : "");
+//        wife_age.setText(pc.getDetails().get("umur") != null ? pc.getDetails().get("umur") : "");
+//        no_ibu.setText(pc.getDetails().get("noIbu") != null ? pc.getDetails().get("noIbu") : "");
+        ((TextView) convertView.findViewById(R.id.unique_id)).setText(pc.getDetails().get(AllConstantsINA.CommonFormFields.UNIQUE_ID) != null ? pc.getDetails().get(AllConstantsINA.CommonFormFields.UNIQUE_ID) : "");
+        ((TextView) convertView.findViewById(R.id.txt_usia_klinis)).setText(pc.getDetails().get("usiaKlinis") != null ? mContext.getString(R.string.usia) + pc.getDetails().get("usiaKlinis") + mContext.getString(R.string.str_weeks) : "-");
+        ((TextView) convertView.findViewById(R.id.txt_htpt)).setText(pc.getDetails().get("htp") != null ? pc.getDetails().get("htp") : "-");
 
-        wife_name.setText(pc.getColumnmaps().get("namalengkap") != null ? pc.getColumnmaps().get("namalengkap") : "");
-        husband_name.setText(pc.getColumnmaps().get("namaSuami") != null ? pc.getColumnmaps().get("namaSuami") : "");
-        village_name.setText(pc.getDetails().get("address1") != null ? pc.getDetails().get("address1") : "");
-        wife_age.setText(pc.getDetails().get("umur") != null ? pc.getDetails().get("umur") : "");
-        no_ibu.setText(pc.getDetails().get("noIbu") != null ? pc.getDetails().get("noIbu") : "");
-        unique_id.setText(pc.getDetails().get(AllConstantsINA.CommonFormFields.UNIQUE_ID) != null ? pc.getDetails().get(AllConstantsINA.CommonFormFields.UNIQUE_ID) : "");
-
-        usia_klinis.setText(pc.getDetails().get("usiaKlinis") != null ? mContext.getString(R.string.usia) + pc.getDetails().get("usiaKlinis") + mContext.getString(R.string.str_weeks) : "-");
-        htpt.setText(pc.getDetails().get("htp") != null ? pc.getDetails().get("htp") : "-");
-
+        TextView edd_due = (TextView) convertView.findViewById(R.id.tv_b_edd);
         String edd = pc.getDetails().get("htp");
         if (StringUtils.isNotBlank(pc.getDetails().get("htp"))) {
             String _dueEdd = "";
@@ -222,17 +274,23 @@ public class ANCClientsProvider extends BaseClientsProvider {
         }
 
 
-        ki_lila_bb.setText(pc.getDetails().get("hasilPemeriksaanLILA") != null ? pc.getDetails().get("hasilPemeriksaanLILA") : "-");
+        ((TextView) convertView.findViewById(R.id.txt_ki_lila_bb)).setText(pc.getDetails().get("hasilPemeriksaanLILA") != null ? pc.getDetails().get("hasilPemeriksaanLILA") : "-");
 
-        beratbadan_tb.setText(pc.getDetails().get("bbKg") != null ? pc.getDetails().get("bbKg") : "-");
+        ((TextView) convertView.findViewById(R.id.txt_ki_beratbadan_tb)).setText(pc.getDetails().get("bbKg") != null ? pc.getDetails().get("bbKg") : "-");
 
         String ancDate = pc.getDetails().get("ancDate") != null ? pc.getDetails().get("ancDate") : "-";
         String ancKe = pc.getDetails().get("ancKe") != null ? pc.getDetails().get("ancKe") : "-";
         String kunjunganKe = pc.getDetails().get("kunjunganKe") != null ? pc.getDetails().get("kunjunganKe") : "-";
 
-        tanggal_kunjungan_anc.setText(String.format("%s%s", mContext.getString(R.string.last_visit_date), ancDate));
-        anc_number.setText(String.format("%s%s", mContext.getString(R.string.anc_ke), ancKe));
-        kunjugan_ke.setText(String.format("%s%s", mContext.getString(R.string.visit_number), kunjunganKe));
+        ((TextView) convertView.findViewById(R.id.txt_tanggal_kunjungan_anc)).setText(String.format("%s%s", mContext.getString(R.string.last_visit_date), ancDate));
+        ((TextView) convertView.findViewById(R.id.txt_anc_number)).setText(String.format("%s%s", mContext.getString(R.string.anc_ke), ancKe));
+        ((TextView) convertView.findViewById(R.id.txt_kunjunganKe)).setText(String.format("%s%s", mContext.getString(R.string.visit_number), kunjunganKe));
+
+        // STATUS
+        RelativeLayout status_layout = (RelativeLayout) convertView.findViewById(R.id.status_layout);
+        TextView status_type = (TextView) convertView.findViewById(R.id.txt_status_type);
+        TextView status_date = (TextView) convertView.findViewById(R.id.txt_status_date);
+        TextView alert_status = (TextView) convertView.findViewById(R.id.txt_alert_status);
 
         status_type.setText("");
         status_date.setText("");

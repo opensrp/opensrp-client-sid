@@ -236,8 +236,8 @@ public class ChildClientsProvider implements SmartRegisterCLientsProviderForCurs
     private class ViewHolder {
 
         public TextView complete, name, village, age, campak, gender; // hb0
-        ImageButton follow_up;
-        ImageView hb0_no, hb0_yes, pol1_no, pol1_yes, pol2_no, pol2_yes, pol3_no, pol3_yes; // hp_badge
-        ImageView pol4_no, pol4_yes, vitk_no, vitk_yes, campak_no, campak_yes, ivp_no, ivp_yes, profilepic;
+        private ImageButton follow_up;
+        private ImageView hb0_no, hb0_yes, pol1_no, pol1_yes, pol2_no, pol2_yes, pol3_no, pol3_yes, // hp_badge
+        pol4_no, pol4_yes, vitk_no, vitk_yes, campak_no, campak_yes, ivp_no, ivp_yes, profilepic;
     }
 }

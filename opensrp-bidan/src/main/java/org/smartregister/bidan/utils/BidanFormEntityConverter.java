@@ -44,12 +44,12 @@ import java.util.Map;
 import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.xpath.XPathExpressionException;
 
-public class BidanFormEntityConverter {
+class BidanFormEntityConverter {
     private static final String TAG = BidanFormEntityConverter.class.getName();
     private FormAttributeParser formAttributeParser;
     private Context mContext;
 
-    public BidanFormEntityConverter(FormAttributeParser formAttributeParser, Context _context) {
+    protected BidanFormEntityConverter(FormAttributeParser formAttributeParser, Context _context) {
         this.formAttributeParser = formAttributeParser;
         mContext = _context;
     }
@@ -69,13 +69,12 @@ public class BidanFormEntityConverter {
     /**
      * Extract Event from given form submission
      *
-     * @param fs
-     * @return
-     * @throws ParseException
+     * @param fs FormSubmissionMap
+     * @return Event
+     * @throws ParseException Exception parse input
      */
     private Event getEventFromFormSubmission(FormSubmissionMap fs) throws ParseException {
-        return createEvent(fs.entityId(), fs.formAttributes().get("encounter_type"), fs.fields(),
-                fs);
+        return createEvent(fs.entityId(), fs.formAttributes().get("encounter_type"), fs.fields(), fs);
     }
 
     private Event createEvent(String entityId, String eventType, List<FormFieldMap> fields,
@@ -130,7 +129,7 @@ public class BidanFormEntityConverter {
         return e;
     }
 
-    Event getEventFromFormSubmission(FormSubmission fs) throws IllegalStateException {
+    protected Event getEventFromFormSubmission(FormSubmission fs) throws IllegalStateException {
         try {
             return getEventFromFormSubmission(formAttributeParser.createFormSubmissionMap(fs));
         } catch (JsonIOException | JsonSyntaxException | XPathExpressionException
@@ -142,27 +141,25 @@ public class BidanFormEntityConverter {
     /**
      * Extract Event for given subform with given data mapped to specified Encounter Type.
      *
-     * @param fs
-     * @param
-     * @param eventType
-     * @param subformInstance
-     * @return
-     * @throws ParseException
+     * @param fs FormSubmissionMap
+     * @param eventType String
+     * @param subformInstance subformInstance
+     * @return Event
+     * @throws ParseException Exception to Parse
      */
-    private Event getEventForSubform(FormSubmissionMap fs, String eventType, SubformMap
-            subformInstance) throws ParseException {
+    private Event getEventForSubform(FormSubmissionMap fs, String eventType, SubformMap subformInstance)
+            throws ParseException {
         Log.e(TAG, "getEventForSubform: eventType "+ eventType );
         return createEvent(subformInstance.entityId(),
-                subformInstance.formAttributes().get("openmrs_entity_id"), subformInstance.fields(),
-                fs);
+                subformInstance.formAttributes().get("openmrs_entity_id"), subformInstance.fields(), fs);
     }
 
     /**
      * Get field name for specified openmrs entity in given form submission
      *
-     * @param en
-     * @param fs
-     * @return
+     * @param en FormEntity
+     * @param fs FormSubmissionMap
+     * @return String
      */
     private String getFieldName(FormEntity en, FormSubmissionMap fs) {
         return getFieldName(en, fs.fields());
@@ -171,10 +168,9 @@ public class BidanFormEntityConverter {
     /**
      * Get field name for specified openmrs entity in given form submission for given subform
      *
-     * @param en
-     * @param
-     * @param
-     * @return
+     * @param en Form Entity
+     * @param subf SubformMap
+     * @return String
      */
     private String getFieldName(FormEntity en, SubformMap subf) {
         return getFieldName(en, subf.fields());
@@ -331,13 +327,13 @@ public class BidanFormEntityConverter {
         return pattributes;
     }
 
-    Map<String, Object> extractAttributes(SubformMap subf) {
+    private Map<String, Object> extractAttributes(SubformMap subf) {
         Map<String, Object> pattributes = new HashMap<>();
         fillAttributes(pattributes, subf.fields());
         return pattributes;
     }
 
-    Map<String, Object> fillAttributes(Map<String, Object> pattributes, List<FormFieldMap> fields) {
+    private Map<String, Object> fillAttributes(Map<String, Object> pattributes, List<FormFieldMap> fields) {
         for (FormFieldMap fl : fields) {
             if (fl.values().size() < 2 && !StringUtils.isEmpty(fl.value())) {
                 Map<String, String> att = fl.fieldAttributes();
@@ -353,11 +349,11 @@ public class BidanFormEntityConverter {
     /**
      * Extract Client from given form submission
      *
-     * @param
-     * @return createBaseClient
-     * @throws ParseException
+     * @param fsubmission FormSubmission
+     * @return Client
+     * @throws IllegalStateException Exception
      */
-    Client getClientFromFormSubmission(FormSubmission fsubmission) throws IllegalStateException {
+    protected Client getClientFromFormSubmission(FormSubmission fsubmission) throws IllegalStateException {
 
         FormSubmissionMap fs;
         try {
@@ -373,7 +369,7 @@ public class BidanFormEntityConverter {
 //
 //    }
 
-    public Client createBaseClient(FormSubmissionMap fs) throws ParseException {
+    private Client createBaseClient(FormSubmissionMap fs) throws ParseException {
         Log.e(TAG, "createBaseClient: " + fs.formAttributes());
 
         String firstName = fs.getFieldValue(getFieldName(Person.first_name, fs));
@@ -425,7 +421,7 @@ public class BidanFormEntityConverter {
         return c;
     }
 
-    public Client createSubformClient(SubformMap subf) throws ParseException {
+    private Client createSubformClient(SubformMap subf) throws ParseException {
         String firstName = subf.getFieldValue(getFieldName(Person.first_name, subf));
         String gender = subf.getFieldValue(getFieldName(Person.gender, subf));
         String bb = subf.getFieldValue(getFieldName(Person.birthdate, subf));
@@ -514,7 +510,7 @@ public class BidanFormEntityConverter {
      * beneficiary (excluding main beneficiary).
      * The dependent entities are specified via subforms (repeat groups) in xls forms.
      *
-     * @param
+     * @param fsubmission FormSubmission
      * @return The clients and events Map with id of dependent entity as key. Each entry in Map
      * contains an
      * internal map that holds Client and Event info as "client" and "event" respectively for that
@@ -526,9 +522,9 @@ public class BidanFormEntityConverter {
      * EventObjForGivenIDAndForm}},
      * {278383-765766-dddddd-767666-ffffff: {client: ClientObjForGivenID, event:
      * EventObjForGivenIDAndForm}}
-     * @throws ParseException
+     * @throws JsonIOException | JsonSyntaxException | XPathExpressionException
      */
-    public Map<String, Map<String, Object>> getDependentClientsFromFormSubmission(
+    protected Map<String, Map<String, Object>> getDependentClientsFromFormSubmission(
             FormSubmission fsubmission) throws IllegalStateException {
         FormSubmissionMap fs;
         try {

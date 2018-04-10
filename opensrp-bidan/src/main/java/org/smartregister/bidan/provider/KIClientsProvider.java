@@ -27,9 +27,6 @@ import org.smartregister.view.contract.SmartRegisterClient;
 import java.util.ArrayList;
 import java.util.List;
 
-import butterknife.Bind;
-import butterknife.ButterKnife;
-
 import static android.view.ViewGroup.LayoutParams.MATCH_PARENT;
 import static org.smartregister.bidan.R.layout.smart_register_ki_client;
 
@@ -41,55 +38,55 @@ public class KIClientsProvider extends BaseClientsProvider {
     private final View.OnClickListener onClickListener;
     private final AbsListView.LayoutParams clientViewLayoutParams;
     protected CommonPersonObjectController controller;
-    @Bind(R.id.profile_info_layout)
-    private LinearLayout profilelayout;
-    @Bind(R.id.tv_wife_name)
-    private TextView wife_name;
-    @Bind(R.id.tv_husband_name)
-    private TextView husband_name;
-    @Bind(R.id.tv_village_name)
-    private TextView village_name;
-    @Bind(R.id.tv_wife_age)
-    private TextView wife_age;
-    @Bind(R.id.tv_no_ibu)
-    private TextView no_ibu;
-    @Bind(R.id.unique_id)
-    private TextView unique_id;
-    @Bind(R.id.tv_gravida)
-    private TextView gravida;
-    @Bind(R.id.tv_parity)
-    private TextView parity;
-    @Bind(R.id.tv_number_of_abortus)
-    private TextView number_of_abortus;
-    @Bind(R.id.tv_number_of_alive)
-    private TextView number_of_alive;
-
-    @Bind(R.id.txt_edd)
-    private TextView edd;
-    @Bind(R.id.txt_edd_due)
-    private TextView edd_due;
-    @Bind(R.id.txt_children_age_left)
-    private TextView children_age_left;
-    @Bind(R.id.txt_children_age_right)
-    private TextView children_age_right;
-
-    @Bind(R.id.mother_status)
-    private TextView anc_status_layout;
-    @Bind(R.id.last_visit_status)
-    private TextView date_status;
-    @Bind(R.id.visit_status)
-    private TextView visit_status;
-    @Bind(R.id.iv_mother_photo)
-    private ImageView profilepic;
-    @Bind(R.id.ib_btn_edit)
-    private ImageButton follow_up;
-
-    @Bind(R.id.iv_hr_badge)
-    private ImageView hr_badge;
-    @Bind(R.id.iv_hrl_badge)
-    private ImageView img_hrl_badge;
-    @Bind(R.id.iv_hrp_badge)
-    private ImageView hrp_badge;
+//    @Bind(R.id.profile_info_layout)
+//    private LinearLayout profilelayout;
+//    @Bind(R.id.tv_wife_name)
+//    private TextView wife_name;
+//    @Bind(R.id.tv_husband_name)
+//    private TextView husband_name;
+//    @Bind(R.id.tv_village_name)
+//    private TextView village_name;
+//    @Bind(R.id.tv_wife_age)
+//    private TextView wife_age;
+//    @Bind(R.id.tv_no_ibu)
+//    private TextView no_ibu;
+//    @Bind(R.id.unique_id)
+//    private TextView unique_id;
+//    @Bind(R.id.tv_gravida)
+//    private TextView gravida;
+//    @Bind(R.id.tv_parity)
+//    private TextView parity;
+//    @Bind(R.id.tv_number_of_abortus)
+//    private TextView number_of_abortus;
+//    @Bind(R.id.tv_number_of_alive)
+//    private TextView number_of_alive;
+//
+//    @Bind(R.id.txt_edd)
+//    private TextView edd;
+//    @Bind(R.id.txt_edd_due)
+//    private TextView edd_due;
+//    @Bind(R.id.txt_children_age_left)
+//    private TextView children_age_left;
+//    @Bind(R.id.txt_children_age_right)
+//    private TextView children_age_right;
+//
+//    @Bind(R.id.mother_status)
+//    private TextView anc_status_layout;
+//    @Bind(R.id.last_visit_status)
+//    private TextView date_status;
+//    @Bind(R.id.visit_status)
+//    private TextView visit_status;
+//    @Bind(R.id.iv_mother_photo)
+//    private ImageView profilepic;
+//    @Bind(R.id.ib_btn_edit)
+//    private ImageButton follow_up;
+//
+//    @Bind(R.id.iv_hr_badge)
+//    private ImageView hr_badge;
+//    @Bind(R.id.iv_hrl_badge)
+//    private ImageView img_hrl_badge;
+//    @Bind(R.id.iv_hrp_badge)
+//    private ImageView hrp_badge;
 //    @Bind(R.id.iv_bpl_badge)
 //    private ImageView bpl_badge;
 //    @Bind(R.id.iv_hrpp_badge)
@@ -107,14 +104,14 @@ public class KIClientsProvider extends BaseClientsProvider {
 
     public void getView(SmartRegisterClient smartRegisterClient, View convertView) {
 
-        try {
-            ButterKnife.bind(this, convertView);
+//        try {
+//            ButterKnife.bind(this, convertView);
 //            Log.e(TAG, "getView: ");
 
-        } catch (Exception e) {
-            e.getCause().printStackTrace();
-            Log.e(TAG, "getView: "+ e );
-        }
+//        } catch (Exception e) {
+//            e.getCause().printStackTrace();
+//            Log.e(TAG, "getView: "+ e );
+//        }
 
         // ========================================================================================
         // Load Value from Local DB
@@ -137,30 +134,54 @@ public class KIClientsProvider extends BaseClientsProvider {
         // ========================================================================================
         // Set Value
         // ========================================================================================
+
+        LinearLayout profilelayout = (LinearLayout) convertView.findViewById(R.id.profile_info_layout);
         profilelayout.setOnClickListener(onClickListener);
         profilelayout.setTag(smartRegisterClient);
 
+        final ImageView profilePic = (ImageView) convertView.findViewById(R.id.iv_mother_photo);
+        profilePic.setImageResource(R.mipmap.woman_placeholder);
+        ((TextView) convertView.findViewById(R.id.tv_wife_name)).setText(pc.getColumnmaps().get("namalengkap") != null ? pc.getColumnmaps().get("namalengkap") : "");
+        ((TextView) convertView.findViewById(R.id.tv_husband_name)).setText(pc.getColumnmaps().get("namaSuami") != null ? pc.getColumnmaps().get("namaSuami") : "");
+        ((TextView) convertView.findViewById(R.id.tv_village_name)).setText(pc.getDetails().get("address1") != null ? pc.getDetails().get("address1") : "");
+        ((TextView) convertView.findViewById(R.id.tv_wife_age)).setText(pc.getDetails().get("umur") != null ? pc.getDetails().get("umur") : "");
+        ((TextView) convertView.findViewById(R.id.pnc_id)).setText(pc.getDetails().get("noIbu") != null ? pc.getDetails().get("noIbu") : "");
+
+        profilelayout.setOnClickListener(onClickListener);
+        profilelayout.setTag(smartRegisterClient);
+
+        ImageButton follow_up = (ImageButton) convertView.findViewById(R.id.btn_edit);
+        follow_up.setOnClickListener(onClickListener);
+        follow_up.setTag(smartRegisterClient);
         follow_up.setImageResource(R.drawable.ic_pencil);
         follow_up.setOnClickListener(onClickListener);
         follow_up.setTag(smartRegisterClient);
 
         //start profile image
-        profilepic.setTag(R.id.entity_id, pc.getColumnmaps().get("_id"));//required when saving file to disk
-        Support.setImagetoHolderFromUri((Activity) mContext, pc.getDetails().get("base_entity_id"), profilepic, R.mipmap.woman_placeholder);
+        profilePic.setTag(R.id.entity_id, pc.getColumnmaps().get("_id"));//required when saving file to disk
+        Support.setImagetoHolderFromUri((Activity) mContext, pc.getDetails().get("base_entity_id"), profilePic, R.mipmap.woman_placeholder);
 //        profilepic.setTag(smartRegisterClient);
         //end profile image
 
-        wife_name.setText(pc.getColumnmaps().get("namalengkap") != null ? pc.getColumnmaps().get("namalengkap") : "");
-        husband_name.setText(pc.getColumnmaps().get("namaSuami") != null ? pc.getColumnmaps().get("namaSuami") : "");
-        village_name.setText(pc.getDetails().get("address1") != null ? pc.getDetails().get("address1") : "");
-        wife_age.setText(pc.getColumnmaps().get("umur") != null ? pc.getColumnmaps().get("umur") : "");
-        no_ibu.setText(pc.getDetails().get("noIbu") != null ? pc.getDetails().get("noIbu") : "");
-        unique_id.setText(pc.getDetails().get(AllConstantsINA.CommonFormFields.UNIQUE_ID) != null ? pc.getDetails().get(AllConstantsINA.CommonFormFields.UNIQUE_ID) : "");
-        gravida.setText(pc.getDetails().get("gravida") != null ? pc.getDetails().get("gravida") : "-");
-        parity.setText(pc.getDetails().get("partus") != null ? pc.getDetails().get("partus") : "-");
-        number_of_abortus.setText(pc.getDetails().get("abortus") != null ? pc.getDetails().get("abortus") : "-");
-        number_of_alive.setText(pc.getDetails().get("hidup") != null ? pc.getDetails().get("hidup") : "-");
-        edd.setText(pc.getDetails().get("htp") != null ? pc.getDetails().get("htp") : "");
+//        wife_name.setText(pc.getColumnmaps().get("namalengkap") != null ? pc.getColumnmaps().get("namalengkap") : "");
+//        husband_name.setText(pc.getColumnmaps().get("namaSuami") != null ? pc.getColumnmaps().get("namaSuami") : "");
+//        village_name.setText(pc.getDetails().get("address1") != null ? pc.getDetails().get("address1") : "");
+//        wife_age.setText(pc.getColumnmaps().get("umur") != null ? pc.getColumnmaps().get("umur") : "");
+//        no_ibu.setText(pc.getDetails().get("noIbu") != null ? pc.getDetails().get("noIbu") : "");
+
+        ((TextView) convertView.findViewById(R.id.unique_id)).setText(pc.getDetails().get(AllConstantsINA.CommonFormFields.UNIQUE_ID) != null ? pc.getDetails().get(AllConstantsINA.CommonFormFields.UNIQUE_ID) : "");
+        ((TextView) convertView.findViewById(R.id.tv_gravida)).setText(pc.getDetails().get("gravida") != null ? pc.getDetails().get("gravida") : "-");
+        ((TextView) convertView.findViewById(R.id.tv_parity)).setText(pc.getDetails().get("partus") != null ? pc.getDetails().get("partus") : "-");
+        ((TextView) convertView.findViewById(R.id.tv_number_of_abortus)).setText(pc.getDetails().get("abortus") != null ? pc.getDetails().get("abortus") : "-");
+        ((TextView) convertView.findViewById(R.id.tv_number_of_alive)).setText(pc.getDetails().get("hidup") != null ? pc.getDetails().get("hidup") : "-");
+        ((TextView) convertView.findViewById(R.id.tv_b_edd)).setText(pc.getDetails().get("htp") != null ? pc.getDetails().get("htp") : "");
+
+        TextView edd_due = (TextView) convertView.findViewById(R.id.tv_b_edd);
+        TextView anc_status_layout = (TextView) convertView.findViewById(R.id.mother_status);
+        TextView date_status = (TextView) convertView.findViewById(R.id.last_visit_status);
+        TextView visit_status = (TextView) convertView.findViewById(R.id.visit_status);
+        TextView children_age_left = (TextView) convertView.findViewById(R.id.txt_children_age_left);
+        TextView children_age_right = (TextView) convertView.findViewById(R.id.txt_children_age_right);
 
         edd_due.setText("");
         anc_status_layout.setText("");
@@ -219,9 +240,13 @@ public class KIClientsProvider extends BaseClientsProvider {
             children_age_right.setText(commonPersonObject.getColumnmaps().get("tanggalLahirAnak") != null ? "DOB : " + commonPersonObject.getColumnmaps().get("tanggalLahirAnak").substring(0, commonPersonObject.getColumnmaps().get("tanggalLahirAnak").indexOf("T")) : "");
         }
 
+        ImageView hr_badge = (ImageView) convertView.findViewById(R.id.iv_hr_badge);
+        ImageView hrp_badge = (ImageView) convertView.findViewById(R.id.iv_hrp_badge);
+        ImageView hrl_badge = (ImageView) convertView.findViewById(R.id.iv_hrl_badge);
+
         hr_badge.setVisibility(View.INVISIBLE);
         hrp_badge.setVisibility(View.INVISIBLE);
-        img_hrl_badge.setVisibility(View.INVISIBLE);
+        hrl_badge.setVisibility(View.INVISIBLE);
 
         //Risk flag
         if ("yes".matches(pc.getDetails().get("highRiskSTIBBVs")+"||"+ pc.getDetails().get("highRiskEctopicPregnancy")+"||"+ pc.getDetails().get("highRiskCardiovascularDiseaseRecord")+"||"+
@@ -238,7 +263,7 @@ public class KIClientsProvider extends BaseClientsProvider {
         if ("yes".matches(pc.getDetails().get("highRiskLabourFetusMalpresentation")+"||"+ pc.getDetails().get("highRiskLabourFetusSize")+"||"+
                 pc.getDetails().get("highRisklabourFetusNumber")+"||"+ pc.getDetails().get("HighRiskLabourSectionCesareaRecord")+"||"+
                 pc.getDetails().get("highRiskLabourTBRisk")))
-            img_hrl_badge.setVisibility(View.VISIBLE);
+            hrl_badge.setVisibility(View.VISIBLE);
 
 
         convertView.setLayoutParams(clientViewLayoutParams);

@@ -33,7 +33,7 @@ public class DetailChildActivity extends Activity {
 
     private static final String TAG = DetailChildActivity.class.getName();
     public static CommonPersonObjectClient childclient;
-    static String entityid;
+//    private static String entityid;
 //    @Bind(R.id.childdetailprofileview)
 //    ImageView childview;
     private String userId;
@@ -155,7 +155,7 @@ public class DetailChildActivity extends Activity {
             public void onClick(View v) {
 
 //                FlurryFacade.logEvent("taking_child_pictures_on_anak_detail_view");
-                entityid = childclient.entityId();
+//                entityid = childclient.entityId();
 //                if (hash.containsValue(entityid)) {
 //                    updateMode = true;
 //                }

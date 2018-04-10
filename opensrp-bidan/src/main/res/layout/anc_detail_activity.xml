@@ -22,7 +22,7 @@
         android:weightSum="4">
 
         <org.smartregister.view.customcontrols.CustomFontTextView
-            android:id="@+id/tv_child_detail_information"
+            android:id="@+id/tv_anc_detail_information"
             style="@style/CustomFontTextViewStyle.ListView.Medium"
 
             android:layout_width="0dp"
