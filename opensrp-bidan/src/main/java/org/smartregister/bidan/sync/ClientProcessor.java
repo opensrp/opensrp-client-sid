@@ -33,7 +33,7 @@ import static org.smartregister.event.Event.FORM_SUBMITTED;
 
 public class ClientProcessor {
 
-    protected static final String providerIdJSONKey = "providerId";
+//    protected static final String providerIdJSONKey = "providerId";
     private static final String baseEntityIdJSONKey = "baseEntityId";
     private static final String VALUES_KEY = "values";
     private static final String TAG = ClientProcessor.class.getName();
@@ -105,61 +105,61 @@ public class ClientProcessor {
         allSharedPreferences.saveLastSyncDate(lastSyncDate.getTime());
     }
 
-    private Boolean processEventOld(JSONObject event, JSONObject clientClassificationJson) throws Exception {
-
-        Log.e(TAG, "processEvent:event " + event);
-        Log.e(TAG, "processEvent:clientClassificationJson " + clientClassificationJson);
-
-        try {
-            String baseEntityId = event.getString(baseEntityIdJSONKey);
-
-            if (event.has("creator")) Log.i(TAG, "EVENT from openmrs");
-
-
-            // For data integrity check if a client exists, if not pull one from cloudant and
-            // insert in drishti sqlite db
-            JSONObject client = getClient(baseEntityId);
-            Log.e(TAG, "processEvent: " + client);
-            if (isNullOrEmptyJSONObject(client)) return false;
-
-
-            // Check if child is deceased and skip
-            /*if (client.has("deathdate") && !client.getString("deathdate").isEmpty()) {
-                return false;
-            }*/
-
-            // Get the client type classification
-            JSONArray clientClasses = clientClassificationJson.getJSONArray("case_classification_rules");
-            Log.e(TAG, "processEvent:clientClasses " + clientClasses);
-            if (isNullOrEmptyJSONArray(clientClasses)) return false;
-
-
-            for (int i = 0; i < clientClasses.length(); i++) {
-                JSONObject clientClass = clientClasses.getJSONObject(i);
-                Log.e(TAG, "processEvent: clientClass.length " + clientClass.length());
-                Log.e(TAG, "processEvent: clientClass " + clientClass);
-                Log.e(TAG, "processEvent: event " + event);
-                Log.e(TAG, "processEvent: client " + client);
+//    private Boolean processEventOld(JSONObject event, JSONObject clientClassificationJson) throws Exception {
 //
-                // SaveDB process here
-                // TODO Resolve FP NULL
-                processClientClass(clientClass, event, client);
-            }
+//        Log.e(TAG, "processEvent:event " + event);
+//        Log.e(TAG, "processEvent:clientClassificationJson " + clientClassificationJson);
+//
+//        try {
+//            String baseEntityId = event.getString(baseEntityIdJSONKey);
+//
+//            if (event.has("creator")) Log.i(TAG, "EVENT from openmrs");
+//
+//
+//            // For data integrity check if a client exists, if not pull one from cloudant and
+//            // insert in drishti sqlite db
+//            JSONObject client = getClient(baseEntityId);
+//            Log.e(TAG, "processEvent: " + client);
+//            if (isNullOrEmptyJSONObject(client)) return false;
+//
+//
+//            // Check if child is deceased and skip
+//            /*if (client.has("deathdate") && !client.getString("deathdate").isEmpty()) {
+//                return false;
+//            }*/
+//
+//            // Get the client type classification
+//            JSONArray clientClasses = clientClassificationJson.getJSONArray("case_classification_rules");
+//            Log.e(TAG, "processEvent:clientClasses " + clientClasses);
+//            if (isNullOrEmptyJSONArray(clientClasses)) return false;
+//
+//
+//            for (int i = 0; i < clientClasses.length(); i++) {
+//                JSONObject clientClass = clientClasses.getJSONObject(i);
+//                Log.e(TAG, "processEvent: clientClass.length " + clientClass.length());
+//                Log.e(TAG, "processEvent: clientClass " + clientClass);
+//                Log.e(TAG, "processEvent: event " + event);
+//                Log.e(TAG, "processEvent: client " + client);
+////
+//                // SaveDB process here
+//                // TODO Resolve FP NULL
+//                processClientClass(clientClass, event, client);
+//            }
+//
+//            // Incase the details have not been updated
+//            boolean updated = event.has(detailsUpdated) && event.getBoolean(detailsUpdated);
+//            if (!updated) updateClientDetailsTable(event, client);
+//
+//            return true;
+//
+//        } catch (Exception e) {
+//            Log.e(TAG, e.toString(), e);
+//
+//            return null;
+//        }
+//    }
 
-            // Incase the details have not been updated
-            boolean updated = event.has(detailsUpdated) && event.getBoolean(detailsUpdated);
-            if (!updated) updateClientDetailsTable(event, client);
-
-            return true;
-
-        } catch (Exception e) {
-            Log.e(TAG, e.toString(), e);
-
-            return null;
-        }
-    }
-
-    public Boolean processEvent(JSONObject event, JSONObject clientClassificationJson) throws Exception {
+    private Boolean processEvent(JSONObject event, JSONObject clientClassificationJson) throws Exception {
 
         try {
             String baseEntityId = event.getString(baseEntityIdJSONKey);

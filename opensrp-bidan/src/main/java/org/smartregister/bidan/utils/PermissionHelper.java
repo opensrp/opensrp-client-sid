@@ -8,13 +8,13 @@ import android.support.v4.app.FragmentManager;
 import java.util.ArrayList;
 
 /**
- * Created by sid-tech on 1/24/18.
+ * Created by sid-tech on 1/24/18
  */
 
 public class PermissionHelper extends Fragment {
     public static final String TAG = PermissionHelper.class.getName();
     private static final String ARGS_PERMISSIONS = "args_permissions";
-    private static final int REQUEST_PERMISSION = 101;
+//    private static final int REQUEST_PERMISSION = 101;
     private PermissionCallback mCallback;
 
     public static PermissionHelper newInstance(String[] permissions) {

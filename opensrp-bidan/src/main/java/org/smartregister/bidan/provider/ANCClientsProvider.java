@@ -111,7 +111,7 @@ public class ANCClientsProvider extends BaseClientsProvider {
         this.onClickListener = onClickListener;
         this.mContext = context;
         this.alertService = alertService;
-        LayoutInflater inflater = (LayoutInflater) context.getSystemService(LAYOUT_INFLATER_SERVICE);
+//        LayoutInflater inflater = (LayoutInflater) context.getSystemService(LAYOUT_INFLATER_SERVICE);
 
         clientViewLayoutParams = new AbsListView.LayoutParams(MATCH_PARENT, (int) context.getResources().getDimension(org.smartregister.R.dimen.list_item_height));
 

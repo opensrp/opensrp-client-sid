@@ -24,19 +24,19 @@ import java.util.Set;
 public class BidanRepository extends Repository {
 
     private static final String TAG = BidanRepository.class.getCanonicalName();
-    private final Context context;
+    private final Context mContext;
     private SQLiteDatabase readableDatabase;
     private SQLiteDatabase writableDatabase;
 
     public BidanRepository(Context context, org.smartregister.Context opensrpContext) {
         super(context, BidanConstants.DATABASE_NAME, BidanConstants.DATABASE_VERSION, opensrpContext.session(), BidanApplication.createCommonFtsObject(), opensrpContext.sharedRepositoriesArray());
-        this.context = context;
+        this.mContext = context;
     }
 
     @Override
     public void onCreate(SQLiteDatabase database) {
         super.onCreate(database);
-        Log.e(TAG, "onCreate: ");
+        Log.e(TAG, "onCreate: "+ mContext);
         EventClientRepository.createTable(database, EventClientRepository.Table.client, EventClientRepository.client_column.values());
         EventClientRepository.createTable(database, EventClientRepository.Table.event, EventClientRepository.event_column.values());
 //        EventClientRepository.createTable(database, EventClientRepository.Table.address, EventClientRepository.address_column.values());
@@ -124,82 +124,82 @@ public class BidanRepository extends Repository {
 //    }
 
 
-    private void addFieldsToFTSTable(SQLiteDatabase database, String originalTableName, List<String> newlyAddedFields) {
-
-        // Create the new ec_child table
-
-        String newTableNameSuffix = "_v2";
-
-        Set<String> searchColumns = new LinkedHashSet<>();
-        searchColumns.add(CommonFtsObject.idColumn);
-        searchColumns.add(CommonFtsObject.relationalIdColumn);
-        searchColumns.add(CommonFtsObject.phraseColumn);
-        searchColumns.add(CommonFtsObject.isClosedColumn);
-
-        String[] mainConditions = this.commonFtsObject.getMainConditions(originalTableName);
-        if (mainConditions != null)
-            for (String mainCondition : mainConditions) {
-                if (!mainCondition.equals(CommonFtsObject.isClosedColumnName))
-                    searchColumns.add(mainCondition);
-            }
-
-        String[] sortFields = this.commonFtsObject.getSortFields(originalTableName);
-        if (sortFields != null) {
-            for (String sortValue : sortFields) {
-                if (sortValue.startsWith("alerts.")) {
-                    sortValue = sortValue.split("\\.")[1];
-                }
-                searchColumns.add(sortValue);
-            }
-        }
-
-        String joinedSearchColumns = StringUtils.join(searchColumns, ",");
-
-        String searchSql = "create virtual table "
-                + CommonFtsObject.searchTableName(originalTableName) + newTableNameSuffix
-                + " using fts4 (" + joinedSearchColumns + ");";
-        Log.d(TAG, "Create query is\n---------------------------\n" + searchSql);
-
-        database.execSQL(searchSql);
-
-        ArrayList<String> oldFields = new ArrayList<>();
-
-        for (String curColumn : searchColumns) {
-            curColumn = curColumn.trim();
-            if (curColumn.contains(" ")) {
-                String[] curColumnParts = curColumn.split(" ");
-                curColumn = curColumnParts[0];
-            }
-
-            if (!newlyAddedFields.contains(curColumn)) {
-                oldFields.add(curColumn);
-            } else {
-                Log.d(TAG, "Skipping field " + curColumn + " from the select query");
-            }
-        }
-
-        String insertQuery = "insert into "
-                + CommonFtsObject.searchTableName(originalTableName) + newTableNameSuffix
-                + " (" + StringUtils.join(oldFields, ", ") + ")"
-                + " select " + StringUtils.join(oldFields, ", ") + " from "
-                + CommonFtsObject.searchTableName(originalTableName);
-
-        Log.d(TAG, "Insert query is\n---------------------------\n" + insertQuery);
-        database.execSQL(insertQuery);
-
-        // Run the drop query
-        String dropQuery = "drop table " + CommonFtsObject.searchTableName(originalTableName);
-        Log.d(TAG, "Drop query is\n---------------------------\n" + dropQuery);
-        database.execSQL(dropQuery);
-
-        // Run rename query
-        String renameQuery = "alter table "
-                + CommonFtsObject.searchTableName(originalTableName) + newTableNameSuffix
-                + " rename to " + CommonFtsObject.searchTableName(originalTableName);
-        Log.d(TAG, "Rename query is\n---------------------------\n" + renameQuery);
-        database.execSQL(renameQuery);
-
-    }
+//    private void addFieldsToFTSTable(SQLiteDatabase database, String originalTableName, List<String> newlyAddedFields) {
+//
+//        // Create the new ec_child table
+//
+//        String newTableNameSuffix = "_v2";
+//
+//        Set<String> searchColumns = new LinkedHashSet<>();
+//        searchColumns.add(CommonFtsObject.idColumn);
+//        searchColumns.add(CommonFtsObject.relationalIdColumn);
+//        searchColumns.add(CommonFtsObject.phraseColumn);
+//        searchColumns.add(CommonFtsObject.isClosedColumn);
+//
+//        String[] mainConditions = this.commonFtsObject.getMainConditions(originalTableName);
+//        if (mainConditions != null)
+//            for (String mainCondition : mainConditions) {
+//                if (!mainCondition.equals(CommonFtsObject.isClosedColumnName))
+//                    searchColumns.add(mainCondition);
+//            }
+//
+//        String[] sortFields = this.commonFtsObject.getSortFields(originalTableName);
+//        if (sortFields != null) {
+//            for (String sortValue : sortFields) {
+//                if (sortValue.startsWith("alerts.")) {
+//                    sortValue = sortValue.split("\\.")[1];
+//                }
+//                searchColumns.add(sortValue);
+//            }
+//        }
+//
+//        String joinedSearchColumns = StringUtils.join(searchColumns, ",");
+//
+//        String searchSql = "create virtual table "
+//                + CommonFtsObject.searchTableName(originalTableName) + newTableNameSuffix
+//                + " using fts4 (" + joinedSearchColumns + ");";
+//        Log.d(TAG, "Create query is\n---------------------------\n" + searchSql);
+//
+//        database.execSQL(searchSql);
+//
+//        ArrayList<String> oldFields = new ArrayList<>();
+//
+//        for (String curColumn : searchColumns) {
+//            curColumn = curColumn.trim();
+//            if (curColumn.contains(" ")) {
+//                String[] curColumnParts = curColumn.split(" ");
+//                curColumn = curColumnParts[0];
+//            }
+//
+//            if (!newlyAddedFields.contains(curColumn)) {
+//                oldFields.add(curColumn);
+//            } else {
+//                Log.d(TAG, "Skipping field " + curColumn + " from the select query");
+//            }
+//        }
+//
+//        String insertQuery = "insert into "
+//                + CommonFtsObject.searchTableName(originalTableName) + newTableNameSuffix
+//                + " (" + StringUtils.join(oldFields, ", ") + ")"
+//                + " select " + StringUtils.join(oldFields, ", ") + " from "
+//                + CommonFtsObject.searchTableName(originalTableName);
+//
+//        Log.d(TAG, "Insert query is\n---------------------------\n" + insertQuery);
+//        database.execSQL(insertQuery);
+//
+//        // Run the drop query
+//        String dropQuery = "drop table " + CommonFtsObject.searchTableName(originalTableName);
+//        Log.d(TAG, "Drop query is\n---------------------------\n" + dropQuery);
+//        database.execSQL(dropQuery);
+//
+//        // Run rename query
+//        String renameQuery = "alter table "
+//                + CommonFtsObject.searchTableName(originalTableName) + newTableNameSuffix
+//                + " rename to " + CommonFtsObject.searchTableName(originalTableName);
+//        Log.d(TAG, "Rename query is\n---------------------------\n" + renameQuery);
+//        database.execSQL(renameQuery);
+//
+//    }
 
 
 }

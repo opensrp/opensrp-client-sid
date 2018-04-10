@@ -73,7 +73,7 @@ public class BidanFormEntityConverter {
      * @return
      * @throws ParseException
      */
-    public Event getEventFromFormSubmission(FormSubmissionMap fs) throws ParseException {
+    private Event getEventFromFormSubmission(FormSubmissionMap fs) throws ParseException {
         return createEvent(fs.entityId(), fs.formAttributes().get("encounter_type"), fs.fields(),
                 fs);
     }
@@ -151,6 +151,7 @@ public class BidanFormEntityConverter {
      */
     private Event getEventForSubform(FormSubmissionMap fs, String eventType, SubformMap
             subformInstance) throws ParseException {
+        Log.e(TAG, "getEventForSubform: eventType "+ eventType );
         return createEvent(subformInstance.entityId(),
                 subformInstance.formAttributes().get("openmrs_entity_id"), subformInstance.fields(),
                 fs);

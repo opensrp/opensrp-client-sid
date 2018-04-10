@@ -108,7 +108,7 @@ public class PNCClientsProvider extends BaseClientsProvider {
         Log.e(TAG, "PNCClientsProvider: "+ alertService );
 
         clientViewLayoutParams = new AbsListView.LayoutParams(MATCH_PARENT, (int) context.getResources().getDimension(R.dimen.list_item_height));
-        LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+//        LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 
 //        int txtColorBlack = context.getResources().getColor(R.color.text_black);
 //        OpenSRPImageLoader mImageLoader = DrishtiApplication.getCachedImageLoaderInstance();

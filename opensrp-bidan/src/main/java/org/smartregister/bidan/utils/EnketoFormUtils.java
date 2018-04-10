@@ -279,22 +279,22 @@ public class EnketoFormUtils {
 //        }
     }
 
-    private void printClient(Client client) {
-        Log.logDebug("============== CLIENT ================");
-        Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSSZ").create();
-        String clientJson = gson.toJson(client);
-        Log.logDebug(clientJson);
-        Log.logDebug("====================================");
-
-    }
-
-    private void printEvent(Event event) {
-        Log.logDebug("============== EVENT ================");
-        Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSSZ").create();
-        String eventJson = gson.toJson(event);
-        Log.logDebug(eventJson);
-        Log.logDebug("====================================");
-    }
+//    private void printClient(Client client) {
+//        Log.logDebug("============== CLIENT ================");
+//        Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSSZ").create();
+//        String clientJson = gson.toJson(client);
+//        Log.logDebug(clientJson);
+//        Log.logDebug("====================================");
+//
+//    }
+//
+//    private void printEvent(Event event) {
+//        Log.logDebug("============== EVENT ================");
+//        Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSSZ").create();
+//        String eventJson = gson.toJson(event);
+//        Log.logDebug(eventJson);
+//        Log.logDebug("====================================");
+//    }
 
     private void saveClient(Client client) {
         Log.logDebug("============== CLIENT ================");
@@ -322,14 +322,14 @@ public class EnketoFormUtils {
         }
     }
 
-    /**
-     * Start ReplicationIntentService which handles cloudant sync processes
-     */
-    private void startReplicationIntentService() {
-
-        Intent serviceIntent = new Intent(mContext, ReplicationIntentService.class);
-        mContext.startService(serviceIntent);
-    }
+//    /**
+//     * Start ReplicationIntentService which handles cloudant sync processes
+//     */
+//    private void startReplicationIntentService() {
+//
+//        Intent serviceIntent = new Intent(mContext, ReplicationIntentService.class);
+//        mContext.startService(serviceIntent);
+//    }
 
     private List<SubFormData> getSubFormList(FormSubmission formSubmission) {
         List<SubFormData> sub_forms = new ArrayList<SubFormData>();
@@ -529,8 +529,8 @@ public class EnketoFormUtils {
                             if (shouldLoadId && childRecords.length() > 0) {
                                 for (int k = 0; k < childRecords.length(); k++) {
                                     JSONObject childEntityJson = childRecords.getJSONObject(k);
-                                    JSONObject obj = getCombinedJsonObjectForObject(
-                                            childEntityJson);
+                                    JSONObject obj = getCombinedJsonObjectForObject(childEntityJson);
+                                    android.util.Log.e(TAG, "writeXML: Obj "+ obj );
                                     writeXML(child, serializer, fieldOverrides, subFormDefinition,
                                             childEntityJson, entityId);
                                 }
@@ -571,8 +571,8 @@ public class EnketoFormUtils {
     /**
      * Retrieve additional details for this record from the details Table.
      *
-     * @param entityJson
-     * @return
+     * @param entityJson Json Entity
+     * @return JsonIbject res
      */
     private JSONObject getCombinedJsonObjectForObject(JSONObject entityJson) {
         try {
@@ -595,9 +595,9 @@ public class EnketoFormUtils {
      * Iterate through the provided array and retrieve a json object whose name attribute matches
      * the name supplied
      *
-     * @param fieldName
-     * @param array
-     * @return
+     * @param fieldName Field Name
+     * @param array Array Json
+     * @return JsonObject
      */
     private JSONObject getJsonFieldFromArray(String fieldName, JSONArray array) {
         try {
@@ -605,6 +605,7 @@ public class EnketoFormUtils {
                 for (int i = 0; i < array.length(); i++) {
                     JSONObject field = array.getJSONObject(i);
                     String name = field.has("name") ? field.getString("name") : null;
+                    assert name != null;
                     if (name.equals(fieldName)) {
                         return field;
                     }
@@ -619,10 +620,10 @@ public class EnketoFormUtils {
     /**
      * retrieves node value for cases which the nodename don't match the name of the xml element
      *
-     * @param nodeName
-     * @param entityJson
-     * @param formDefinition
-     * @return
+     * @param nodeName Node Name
+     * @param entityJson Json Entity
+     * @param formDefinition  Form Definition
+     * @return String
      */
     private String retrieveValueForNodeName(String nodeName, JSONObject entityJson, JSONObject
             formDefinition) {
@@ -667,18 +668,18 @@ public class EnketoFormUtils {
         return "";
     }
 
-    /**
-     * Currently not used but, the method should retrieve the path of a given node,
-     * useful when confirming if the current node has been properly mapped to its bind_path
-     **/
-    private String getXPath(Node node) {
-        Node parent = node.getParentNode();
-        if (parent == null) {
-            return "/" + node.getNodeName();
-        }
-
-        return getXPath(parent) + "/";
-    }
+//    /**
+//     * Currently not used but, the method should retrieve the path of a given node,
+//     * useful when confirming if the current node has been properly mapped to its bind_path
+//     **/
+//    private String getXPath(Node node) {
+//        Node parent = node.getParentNode();
+//        if (parent == null) {
+//            return "/" + node.getNodeName();
+//        }
+//
+//        return getXPath(parent) + "/";
+//    }
 
     private List<String> getSubFormNames(JSONObject formDefinition) throws Exception {
         List<String> subFormNames = new ArrayList<String>();
@@ -758,7 +759,7 @@ public class EnketoFormUtils {
         return null;
     }
 
-    public Object getObjectAtPath(String[] path, JSONObject jsonObject) throws Exception {
+    private Object getObjectAtPath(String[] path, JSONObject jsonObject) throws Exception {
         JSONObject object = jsonObject;
         int i = 0;
         while (i < path.length - 1) {
@@ -775,8 +776,8 @@ public class EnketoFormUtils {
         return object.has(path[i]) ? object.get(path[i]) : null;
     }
 
-    public JSONArray getPopulatedFieldsForArray(JSONObject fieldsDefinition, String entityId,
-                                                JSONObject jsonObject, JSONObject overrides)
+    private JSONArray getPopulatedFieldsForArray(JSONObject fieldsDefinition, String entityId,
+                                                 JSONObject jsonObject, JSONObject overrides)
             throws Exception {
         String bindPath = fieldsDefinition.getString("bind_type");
         String sql = "select * from " + bindPath + " where id='" + entityId + "'";
@@ -877,7 +878,7 @@ public class EnketoFormUtils {
         return item.has("source") && item.getString("source").split("\\.").length > 2;
     }
 
-    public String retrieveValueForLinkedRecord(String link, JSONObject entityJson) {
+    private String retrieveValueForLinkedRecord(String link, JSONObject entityJson) {
         try {
             String entityRelationships = readFileFromAssetsFolder(
                     "www/form/entity_relationship" + ".json");
@@ -927,7 +928,7 @@ public class EnketoFormUtils {
         return null;
     }
 
-    public JSONArray getFieldsArrayForSubFormDefinition(JSONObject fieldsDefinition) throws
+    private JSONArray getFieldsArrayForSubFormDefinition(JSONObject fieldsDefinition) throws
             Exception {
         JSONArray fieldsArray = fieldsDefinition.getJSONArray("fields");
         String bindPath = fieldsDefinition.getString("bind_type");
@@ -956,7 +957,7 @@ public class EnketoFormUtils {
         return subFormFieldsArray;
     }
 
-    public JSONObject getFieldValuesForSubFormDefinition(JSONObject fieldsDefinition, String
+    private JSONObject getFieldValuesForSubFormDefinition(JSONObject fieldsDefinition, String
             relationalId, String entityId, JSONObject jsonObject, JSONObject overrides) throws
             Exception {
 
@@ -1118,12 +1119,12 @@ public class EnketoFormUtils {
         return null;
     }
 
-    private List<String> EditClientFormNameList() {
-        List<String> formNames = new ArrayList<>();
-        formNames.add("kartu_ibu_edit");
-        formNames.add("child_edit");
-        return formNames;
-    }
+//    private List<String> EditClientFormNameList() {
+//        List<String> formNames = new ArrayList<>();
+//        formNames.add("kartu_ibu_edit");
+//        formNames.add("child_edit");
+//        return formNames;
+//    }
 
     /*private void createNewEventDocument(org.smartregister.cloudant.models.Event event) {
         mCloudantDataHandler.createEventDocument(event);
@@ -1137,7 +1138,7 @@ public class EnketoFormUtils {
         mCloudantDataHandler.updateDocument(client);
     }*/
     private Event tagSyncMetadata(Event event) {
-        AllSharedPreferences sharedPreferences = BidanApplication.getInstance().getContext().userService().getAllSharedPreferences();
+//        AllSharedPreferences sharedPreferences = BidanApplication.getInstance().getContext().userService().getAllSharedPreferences();
         String locations = org.smartregister.util.Utils.getPreference(mContext, LoginActivity.PREF_TEAM_LOCATIONS, "");
         event.setLocationId(locations);
 
@@ -1182,9 +1183,9 @@ public class EnketoFormUtils {
                 event = tagSyncMetadata(event);
                 String eventType = event.getEventType();
                 saveEvent(event);
-                Gson gson = new GsonBuilder()
-                        .setDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSSZ")
-                        .create();
+//                Gson gson = new GsonBuilder()
+//                        .setDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSSZ")
+//                        .create();
                 android.util.Log.e(TAG, "doInBackground:saveClient " + saveClient);
                 android.util.Log.e(TAG, "doInBackground:eventType " + eventType);
 

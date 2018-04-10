@@ -5,28 +5,23 @@ import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
 import android.provider.MediaStore;
-import android.widget.FrameLayout;
 
 /**
- * Created by sid-tech on 1/24/18.
+ * Created by sid-tech on 1/24/18
  */
 
 public class CameraPreviewActivity extends Activity {
 //public class CameraPreviewActivity { implements PermissionHelper.PermissionCallback {
 
     public static final String REQUEST_TYPE = "org.nusabit.fbpkh.REQUEST_TYPE";
-    private int mScreenMode;
-    private FrameLayout mViewContent;
+//    private int mScreenMode;
+//    private FrameLayout mViewContent;
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         requestWindowFeature(1);
         getWindow().setFlags(1024, 1024);
-        if (Build.VERSION.SDK_INT >= 16) {
-            getWindow().getDecorView().setSystemUiVisibility(1284);
-        } else {
-            getWindow().addFlags(1024);
-        }
+        getWindow().getDecorView().setSystemUiVisibility(1284);
         if (Build.VERSION.SDK_INT >= 21) {
             getWindow().setStatusBarColor(0);
         }
@@ -50,12 +45,12 @@ public class CameraPreviewActivity extends Activity {
         }
     }
 
-    public void onPermissionResult(String s, boolean success) {
-        if (success) {
-            startActivityForResult(new Intent("android.media.action.IMAGE_CAPTURE"), getIntent().getIntExtra(REQUEST_TYPE, -1));
-            return;
-        }
-        setResult(0);
-        finish();
-    }
+//    public void onPermissionResult(String s, boolean success) {
+//        if (success) {
+//            startActivityForResult(new Intent("android.media.action.IMAGE_CAPTURE"), getIntent().getIntExtra(REQUEST_TYPE, -1));
+//            return;
+//        }
+//        setResult(0);
+//        finish();
+//    }
 }

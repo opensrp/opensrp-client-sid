@@ -25,7 +25,7 @@ import static org.joda.time.LocalDateTime.parse;
  */
 public class Support {
 
-    private static final String TAG = Support.class.getName();
+//    private static final String TAG = Support.class.getName();
 
     public static boolean ONSYNC = false;
 
@@ -166,7 +166,7 @@ public class Support {
 
         if (externalFile.exists()) {
 
-            Uri external = Uri.fromFile(externalFile);
+//            Uri external = Uri.fromFile(externalFile);
 //            view.setImageURI(external);
 
             view.setImageBitmap(Tools.getThumbnailBitmap(externalFile.getPath(), 100));
