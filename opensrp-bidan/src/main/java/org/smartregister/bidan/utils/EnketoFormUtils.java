@@ -332,7 +332,7 @@ public class EnketoFormUtils {
 //    }
 
     private List<SubFormData> getSubFormList(FormSubmission formSubmission) {
-        List<SubFormData> sub_forms = new ArrayList<SubFormData>();
+        List<SubFormData> sub_forms = new ArrayList<>();
         List<SubForm> subForms = formSubmission.getFormInstance().getForm().getSub_forms();
         if (subForms != null) {
             for (SubForm sf : subForms) {
@@ -354,7 +354,7 @@ public class EnketoFormUtils {
 
     private List<FormField> convertFormFields(List<org.smartregister.domain.form.FormField>
                                                       formFields) {
-        List<FormField> fields = new ArrayList<FormField>();
+        List<FormField> fields = new ArrayList<>();
         for (org.smartregister.domain.form.FormField ff : formFields) {
             FormField f = new FormField(ff.getName(), ff.getValue(), ff.getSource());
             fields.add(f);

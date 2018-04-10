@@ -71,7 +71,7 @@ public class BaseRegisterActivity extends SecuredNativeSmartRegisterActivity imp
     protected DisplayFormFragment displayFormFragment;
     protected DisplayFormFragment formFragment;
     //    protected SimpleDateFormat timer = new SimpleDateFormat("hh:mm:ss");
-    int style = DateFormat.MEDIUM;
+    private int style = DateFormat.MEDIUM;
     //Also try with style = DateFormat.FULL and DateFormat.SHORT
     private Date date = new Date();
     private DateFormat timer = DateFormat.getDateInstance(style, Locale.US);
@@ -333,7 +333,7 @@ public class BaseRegisterActivity extends SecuredNativeSmartRegisterActivity imp
             context().formSubmissionRouter().handleSubmission(submission, formName);
             switchToBaseFragment(formSubmission); // Unnecessary!! passing on data
 
-            if (formName.equals("registrasi_ibu")) {
+            if ("registrasi_ibu".equals(formName)) {
                 android.util.Log.d(TAG, "saveFormSubmission: it was registrasi_ibu form");
                 //  FieldOverrides fieldOverrides = new FieldOverrides(combined.toString());
 

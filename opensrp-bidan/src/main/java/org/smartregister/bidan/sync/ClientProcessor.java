@@ -167,7 +167,7 @@ public class ClientProcessor {
                 Log.i(TAG,"EVENT from openmrs");
             }
 
-            if(event.has("eventType") && event.getString("eventType").equals("Child Registration")){
+            if(event.has("eventType") && "Child Registration".equals(event.getString("eventType"))){
                 Log.i(TAG,"EVENT from child registration");
             }
             //for data integrity check if a client exists, if not pull one from cloudant and insert in drishti sqlite db

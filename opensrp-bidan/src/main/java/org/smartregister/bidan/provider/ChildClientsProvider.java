@@ -122,7 +122,7 @@ public class ChildClientsProvider implements SmartRegisterCLientsProviderForCurs
 
         if (pc.getDetails().get("gender") != null) {
             Support.setImagetoHolderFromUri((Activity) context, pc.getDetails().get("base_entity_id"),
-                    viewHolder.profilepic, pc.getDetails().get("gender").equals("female") ? R.drawable.child_girl_infant : R.drawable.child_boy_infant);
+                    viewHolder.profilepic, "female".equals(pc.getDetails().get("gender")) ? R.drawable.child_girl_infant : R.drawable.child_boy_infant);
         } else {
             Log.e(TAG, "getView: Gender is NOT SET");
         }
@@ -178,7 +178,7 @@ public class ChildClientsProvider implements SmartRegisterCLientsProviderForCurs
         String tinggi = pc.getDetails().get("panjangBayi") != null ? " " + pc.getDetails().get("panjangBayi") : pc.getDetails().get("tinggiBadan") != null ? pc.getDetails().get("tinggiBadan") : "";
 
         String status_gizi = pc.getDetails().get("statusGizi") != null ? pc.getDetails().get("statusGizi") : "";
-        String gizi = status_gizi.equals("GB") ? "Gizi Buruk" : status_gizi.equals("GK") ? "Gizi Kurang" : status_gizi.equals("GR") ? "Gizi Rendah" : "";
+        String gizi = "GB".equals(status_gizi) ? "Gizi Buruk" : "GK".equals(status_gizi) ? "Gizi Kurang" : "GR".equals(status_gizi) ? "Gizi Rendah" : "";
 
         if (pc.getDetails().get("tanggalPenimbangan") != null) {
 

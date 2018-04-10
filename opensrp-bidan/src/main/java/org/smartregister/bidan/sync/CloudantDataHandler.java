@@ -167,7 +167,7 @@ public class CloudantDataHandler {
             while (cursor.moveToNext()) {
                 byte[] json = (cursor.getBlob(0));
                 String jsonEventStr = new String(json, "UTF-8");
-                if (StringUtils.isBlank(jsonEventStr) || jsonEventStr.equals("{}")) { // Skip
+                if (StringUtils.isBlank(jsonEventStr) || "{}".equals(jsonEventStr)) { // Skip
                     // blank/empty json string
                     continue;
                 }
@@ -178,7 +178,7 @@ public class CloudantDataHandler {
                     continue;
                 }
 
-                if (!type.equals("Event") && !type.equals("Action")) { // Skip type that isn't
+                if (!"Event".equals(type) && !"Action".equals(type)) { // Skip type that isn't
                     // Event or Action
                     continue;
                 }

@@ -22,8 +22,6 @@ import org.smartregister.view.activity.DrishtiApplication;
 
 import java.io.File;
 
-import butterknife.Bind;
-
 import static org.smartregister.util.StringUtil.humanize;
 
 //import org.smartregister.bidan.lib.FlurryFacade;
@@ -36,8 +34,8 @@ public class DetailChildActivity extends Activity {
     private static final String TAG = DetailChildActivity.class.getName();
     public static CommonPersonObjectClient childclient;
     static String entityid;
-    @Bind(R.id.childdetailprofileview)
-    ImageView childview;
+//    @Bind(R.id.childdetailprofileview)
+//    ImageView childview;
     private String userId;
 
     public DetailChildActivity(String userId) {
