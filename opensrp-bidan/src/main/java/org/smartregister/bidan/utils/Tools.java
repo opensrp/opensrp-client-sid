@@ -22,7 +22,6 @@ import java.io.IOException;
 
 public class Tools {
     private static String TAG = Tools.class.getName();
-//    private static Object dbRecord;
 
     public static void saveFile(Bitmap sourceuri, String destinationFilename) {
         try {

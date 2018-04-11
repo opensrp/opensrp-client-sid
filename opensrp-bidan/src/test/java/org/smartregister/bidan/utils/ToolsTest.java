@@ -1,64 +1,67 @@
 package org.smartregister.bidan.utils;
 
+
+import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 
-import org.apache.commons.io.FileUtils;
-import org.junit.Assert;
+import junit.framework.Assert;
+
+import org.junit.After;
 import org.junit.Before;
-import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.mockito.Mock;
+import org.mockito.Mockito;
 import org.powermock.core.classloader.annotations.PrepareForTest;
-import org.powermock.modules.junit4.rule.PowerMockRule;
-import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
-import org.smartregister.Context;
-import org.smartregister.bidan.R;
+import org.robolectric.annotation.Config;
+import org.robolectric.shadows.ShadowBitmapFactory;
 import org.smartregister.bidan.application.BidanApplication;
-import org.smartregister.commonregistry.CommonPersonObjectClient;
-import org.smartregister.repository.ImageRepository;
 
 import java.io.File;
+import java.io.OutputStream;
 
-import static org.mockito.MockitoAnnotations.initMocks;
+import shared.BaseUnitTest;
+
+import static org.smartregister.bidan.utils.Tools.saveFile;
 
 /**
  * Created by sid-tech on 1/25/18
  */
 @PrepareForTest({BidanApplication.class})
-@RunWith(RobolectricTestRunner.class)
-public class ToolsTest {
-
-    @Rule
-    public PowerMockRule rule = new PowerMockRule();
-
-    @Mock
-    public CommonPersonObjectClient commonPersonObjectClient;
-
-    @Mock
-    public BidanApplication bidanApplication;
-
-    @Mock
-    public Context context;
-
-    @Mock
-    public ImageRepository imageRepository;
+public class ToolsTest extends BaseUnitTest {
 
     @Before
-    public void setUp() {
-
-        initMocks(this);
+    public void setUp() throws Exception {
+        File file = new File(getContext().getCacheDir(), "test_file");
+        file.delete();
     }
 
     @Test
-    public void checkFileSaved() throws Exception{
-        Bitmap bmp1 = BitmapFactory.decodeResource(RuntimeEnvironment.application.getResources(), R.mipmap.ic_launcher);
+    public void saveFileSuccess() throws Exception {
+        File file = new File(getContext().getCacheDir(), "test_file");
+        Bitmap bitmap = Mockito.mock(Bitmap.class);
+        Mockito.when(bitmap.hasAlpha()).thenReturn(true);
+        Mockito.when(
+                bitmap.compress((Bitmap.CompressFormat) Mockito.any(), Mockito.anyInt(),
+                        (OutputStream) Mockito.any())).
+                thenReturn(true);
+        Mockito.when(bitmap.getWidth()).thenReturn(400);
+        Mockito.when(bitmap.getHeight()).thenReturn(400);
+        Bitmap b = Bitmap.createBitmap(10, 10, Bitmap.Config.RGB_565);
+        saveFile(b, "a.png");
+//        boolean result = saveFile("");
+//        Assert.assertTrue(result);
 
-        Tools.saveFile(bmp1, "test_foto.png");
-        Assert.assertTrue(FileUtils.deleteQuietly(new File("test_foto.png")));
-        System.out.println();
+        ShadowBitmapFactory.provideWidthAndHeightHints(file.getAbsolutePath(), 400, 400);
+        Bitmap writtenBitmap = BitmapFactory.decodeFile(file.getAbsolutePath());
+        Assert.assertNotNull(writtenBitmap);
+        Assert.assertEquals(bitmap.getWidth(), writtenBitmap.getWidth());
+        Assert.assertEquals(bitmap.getHeight(), writtenBitmap.getHeight());
+    }
+
+    private Context getContext() {
+        return RuntimeEnvironment.application;
     }
 
 }

@@ -95,6 +95,7 @@ android {
         checkReleaseBuilds false
         abortOnError false
     }
+
 }
 
 dependencies {
@@ -115,10 +116,8 @@ dependencies {
 
     compile files('libs/FlurryAnalytics-6.0.0.jar')
 
-
     testCompile 'junit:junit:4.12'
     testCompile('org.robolectric:robolectric:3.4') {
-
         exclude group: 'com.google.guava', module: 'guava'
         exclude group: 'org.apache.maven', module: 'maven-model'
         exclude group: 'org.apache.maven', module: 'maven-ant-tasks'
