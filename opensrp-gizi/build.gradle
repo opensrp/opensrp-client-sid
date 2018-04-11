@@ -145,3 +145,7 @@ task jacocoTestReport(type: JacocoReport, dependsOn: ['testDebug']) {
 coveralls {
     jacocoReportPath = "${buildDir}/reports/jacoco/jacocoRootReport/merged.xml"
 }
+tasks.coveralls {
+    dependsOn 'connectedAndroidTest'
+    onlyIf { System.env.'CI' }
+}
