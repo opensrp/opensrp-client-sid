@@ -88,28 +88,13 @@
             android:screenOrientation="landscape"
             android:theme="@style/AppThemeNoTitle" />
 
-
-        <activity
-            android:name=".activity.KIDetailActivity"
-            android:screenOrientation="landscape"
-            android:theme="@style/AppThemeNoTitle" />
-
-        <activity
-            android:name=".activity.NativeKBSmartRegisterActivity"
-            android:configChanges="keyboardHidden|orientation|screenSize"
-            android:screenOrientation="landscape"
-            android:theme="@style/AppThemeNoActionBarAndTitle"
-            android:windowSoftInputMode="adjustResize" />
-        <activity
-            android:name=".activity.KBDetailActivity"
-            android:screenOrientation="landscape"
-            android:theme="@style/AppThemeNoTitle" />
-
         <activity
             android:name=".activity.SettingsActivity"
             android:screenOrientation="landscape" />
         <activity android:name=".utils.CameraPreviewActivity" />
-        <activity android:name=".utils.Camera2PreviewActivity" />
+        <!--<activity android:name=".utils.Camera2PreviewActivity" />-->
+        <uses-library android:name="android.test.runner"/>
+
 
         <meta-data
             android:name="io.fabric.ApiKey"

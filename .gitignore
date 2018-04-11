@@ -81,6 +81,7 @@ opensrp-path/
 /opensrp-vaksinator/
 opensrp-vaksinator/
 # AllConstantsINA.java
+a.png
 lib/bpm
 lib/
 opensrp-bidan/src/main/java/org/smartregister/bidan/utils/AllConstantsINA.java

@@ -238,52 +238,52 @@ public class AnakSmartRegisterFragment extends BaseSmartRegisterFragment {
     }
 
     //    WD
-    @Override
-    public void setupSearchView(final View view) {
-        searchView = (EditText) view.findViewById(org.smartregister.R.id.edt_search);
-        searchView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                searchTextChangeListener("");
-            }
-        });
+//    @Override
+//    public void setupSearchView(final View view) {
+//        searchView = (EditText) view.findViewById(org.smartregister.R.id.edt_search);
+//        searchView.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                searchTextChangeListener("");
+//            }
+//        });
+//
+//        searchCancelView = view.findViewById(org.smartregister.R.id.btn_search_cancel);
+//        searchCancelView.setOnClickListener(searchCancelHandler);
+//    }
 
-        searchCancelView = view.findViewById(org.smartregister.R.id.btn_search_cancel);
-        searchCancelView.setOnClickListener(searchCancelHandler);
-    }
-
-    public void searchTextChangeListener(String s) {
-        Log.e(TAG, "searchTextChangeListener: " + s);
-        if (s != null) {
-            filters = s;
-        } else {
-            searchView.addTextChangedListener(new TextWatcher() {
-                @Override
-                public void beforeTextChanged(CharSequence charSequence, int i, int i2, int i3) {
-                }
-
-                @Override
-                public void onTextChanged(final CharSequence cs, int start, int before, int count) {
-
-                    Log.e(TAG, "onTextChanged: searchTextChangeListener" + searchView.getText());
-                    (new AsyncTask() {
-
-                        @Override
-                        protected Object doInBackground(Object[] params) {
-                            filters = cs.toString();
-                            joinTable = "";
-                            mainCondition = "isClosed !='true' and ibuCaseId !='' ";
-                            return null;
-                        }
-                    }).execute();
-                }
-
-                @Override
-                public void afterTextChanged(Editable editable) {
-                }
-            });
-        }
-    }
+//    public void searchTextChangeListener(String s) {
+//        Log.e(TAG, "searchTextChangeListener: " + s);
+//        if (s != null) {
+//            filters = s;
+//        } else {
+//            searchView.addTextChangedListener(new TextWatcher() {
+//                @Override
+//                public void beforeTextChanged(CharSequence charSequence, int i, int i2, int i3) {
+//                }
+//
+//                @Override
+//                public void onTextChanged(final CharSequence cs, int start, int before, int count) {
+//
+//                    Log.e(TAG, "onTextChanged: searchTextChangeListener" + searchView.getText());
+//                    (new AsyncTask() {
+//
+//                        @Override
+//                        protected Object doInBackground(Object[] params) {
+//                            filters = cs.toString();
+//                            joinTable = "";
+//                            mainCondition = "isClosed !='true' and ibuCaseId !='' ";
+//                            return null;
+//                        }
+//                    }).execute();
+//                }
+//
+//                @Override
+//                public void afterTextChanged(Editable editable) {
+//                }
+//            });
+//        }
+//    }
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
