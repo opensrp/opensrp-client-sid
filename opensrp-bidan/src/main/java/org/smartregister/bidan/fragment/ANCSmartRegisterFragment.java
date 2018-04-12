@@ -1,85 +1,47 @@
 package org.smartregister.bidan.fragment;
 
-import android.annotation.TargetApi;
 import android.content.Intent;
-import android.os.AsyncTask;
-import android.os.Build;
-import android.text.Editable;
-import android.text.TextWatcher;
 import android.util.Log;
 import android.view.View;
-import android.widget.EditText;
-import android.widget.Toast;
 
-import org.apache.commons.lang3.StringUtils;
 import org.opensrp.api.domain.Location;
 import org.opensrp.api.util.EntityUtils;
 import org.opensrp.api.util.LocationTree;
 import org.opensrp.api.util.TreeNode;
 import org.smartregister.Context;
 import org.smartregister.bidan.R;
-import org.smartregister.bidan.activity.BaseRegisterActivity;
+import org.smartregister.bidan.activity.ANCSmartRegisterActivity;
 import org.smartregister.bidan.activity.DetailANCActivity;
-import org.smartregister.bidan.activity.DetailMotherActivity;
-import org.smartregister.bidan.activity.NativeKIANCSmartRegisterActivity;
-import org.smartregister.bidan.activity.NativeKIbuSmartRegisterActivity;
 import org.smartregister.bidan.options.KIANCOverviewServiceMode;
 import org.smartregister.bidan.options.MotherFilterOption;
-import org.smartregister.bidan.provider.KIANCClientsProvider;
-import org.smartregister.commonregistry.AllCommonsRepository;
-import org.smartregister.commonregistry.CommonPersonObject;
+import org.smartregister.bidan.provider.ANCClientsProvider;
+import org.smartregister.bidan.utils.AllConstantsINA;
 import org.smartregister.commonregistry.CommonPersonObjectClient;
 import org.smartregister.commonregistry.CommonRepository;
 import org.smartregister.cursoradapter.CursorCommonObjectFilterOption;
 import org.smartregister.cursoradapter.CursorCommonObjectSort;
 import org.smartregister.cursoradapter.SmartRegisterPaginatedCursorAdapter;
 import org.smartregister.cursoradapter.SmartRegisterQueryBuilder;
-import org.smartregister.provider.SmartRegisterClientsProvider;
 import org.smartregister.util.StringUtil;
 import org.smartregister.view.activity.SecuredNativeSmartRegisterActivity;
-import org.smartregister.view.contract.SmartRegisterClient;
 import org.smartregister.view.dialog.AllClientsFilter;
 import org.smartregister.view.dialog.DialogOption;
-import org.smartregister.view.dialog.DialogOptionModel;
-import org.smartregister.view.dialog.EditOption;
 import org.smartregister.view.dialog.FilterOption;
 import org.smartregister.view.dialog.NameSort;
 import org.smartregister.view.dialog.ServiceModeOption;
 import org.smartregister.view.dialog.SortOption;
 
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
-import java.util.HashMap;
 import java.util.Map;
 
 import static android.view.View.INVISIBLE;
 
-/**
- * Created by sid-tech on 11/29/17.
- */
-
 public class ANCSmartRegisterFragment extends BaseSmartRegisterFragment {
 
     private static final String TAG = ANCSmartRegisterFragment.class.getName();
-    //    WD
-    public static String criteria;
-    private final ClientActionHandler clientActionHandler = new ClientActionHandler();
-    Date date = new Date();
-    SimpleDateFormat sdf;
-    Map<String, String> FS = new HashMap<>();
-
-    public static String getCriteria() {
-        return criteria;
-    }
-
-    public void setCriteria(String criteria) {
-        ANCSmartRegisterFragment.criteria = criteria;
-    }
-
-    @Override
-    protected void onCreation() {
-    }
+    //    private final ClientActionHandler clientActionHandler = new ClientActionHandler();
+//    private ANCClientsProvider kiSCP = new ANCClientsProvider(getActivity(), new ClientActionHandler(), context().alertService());
+    private String tableName = "ec_kartu_ibu";
 
     @Override
     protected SecuredNativeSmartRegisterActivity.DefaultOptionsProvider getDefaultOptionsProvider() {
@@ -116,7 +78,7 @@ public class ANCSmartRegisterFragment extends BaseSmartRegisterFragment {
 //                FlurryFacade.logEvent("click_filter_option_on_kohort_ibu_dashboard");
                 ArrayList<DialogOption> dialogOptionslist = new ArrayList<>();
 
-                dialogOptionslist.add(new CursorCommonObjectFilterOption(getString(R.string.filter_by_all_label), filterStringForAll()));
+                dialogOptionslist.add(new CursorCommonObjectFilterOption(getString(R.string.filter_by_all_label), ""));
 
                 String locationJSON = context().anmLocationController().get();
                 LocationTree locationTree = EntityUtils.fromJson(locationJSON, LocationTree.class);
@@ -158,71 +120,51 @@ public class ANCSmartRegisterFragment extends BaseSmartRegisterFragment {
         };
     }
 
-    @Override
-    protected SmartRegisterClientsProvider clientsProvider() {
-        return null;
-    }
-
-    private DialogOption[] getEditOptions() {
-        return ((BaseRegisterActivity) getActivity()).getEditOptions();
-    }
-
-    @Override
-    protected void onInitialization() {
-        //  context.formSubmissionRouter().getHandlerMap().put("census_enrollment_form", new CensusEnrollmentHandler());
-    }
-
-    @Override
-    public void startRegistration() {
-    }
+//    @Override
+//    protected SmartRegisterClientsProvider clientsProvider() {
+//        return null;
+//    }
 
     @Override
     public void setupViews(View view) {
         getDefaultOptionsProvider();
-
         super.setupViews(view);
         view.findViewById(R.id.btn_report_month).setVisibility(INVISIBLE);
         view.findViewById(R.id.service_mode_selection).setVisibility(View.GONE);
+        view.findViewById(R.id.register_client).setVisibility(View.GONE);
         clientsView.setVisibility(View.VISIBLE);
         clientsProgressView.setVisibility(View.INVISIBLE);
-//        list.setBackgroundColor(Color.RED);
-        initializeQueries(getCriteria());
+        initializeQueries();
+//        Log.e(TAG, "setupViews: " + getResources().getConfiguration().locale);
     }
 
-    private String filterStringForAll() {
-        return "";
-    }
+    public void initializeQueries() {
+//        Log.e(TAG, "initializeQueries: ");
+        String tableEcIbu = "ec_ibu";
 
-    @TargetApi(Build.VERSION_CODES.KITKAT)
-    public void initializeQueries(String s) {
         try {
 
-            KIANCClientsProvider kiscp = new KIANCClientsProvider(getActivity(), clientActionHandler, context().alertService());
-            clientAdapter = new SmartRegisterPaginatedCursorAdapter(getActivity(), null, kiscp, new CommonRepository("ec_ibu", new String[]{"ec_ibu.is_closed", "ec_kartu_ibu.namalengkap", "ec_kartu_ibu.namaSuami"}));
+            clientAdapter = new SmartRegisterPaginatedCursorAdapter(getActivity(), null,
+                    new ANCClientsProvider(getActivity(), new ClientActionHandler(), context().alertService()),
+                    new CommonRepository(tableName, new String[]{"ec_ibu.is_closed", "ec_kartu_ibu.namalengkap", "ec_kartu_ibu.namaSuami"}));
             clientsView.setAdapter(clientAdapter);
 
-            setTablename("ec_ibu");
-            SmartRegisterQueryBuilder countqueryBuilder = new SmartRegisterQueryBuilder();
-            countqueryBuilder.SelectInitiateMainTableCounts("ec_ibu");
+            setTablename(tableEcIbu);
+            SmartRegisterQueryBuilder countQueryBuilder = new SmartRegisterQueryBuilder();
+            countQueryBuilder.SelectInitiateMainTableCounts(tableEcIbu);
+            countQueryBuilder.customJoin("LEFT JOIN ec_kartu_ibu on ec_kartu_ibu.id = ec_ibu.id");
 
-            if (s != null && !s.isEmpty()) {
-                Log.e(TAG, "initializeQueries with ID = " + s);
-                mainCondition = "is_closed = 0 AND namalengkap != '' AND object_id LIKE '%" + s + "%'";
-
-            } else {
-                mainCondition = "is_closed = 0 AND namalengkap != '' ";
-                Log.e(TAG, "initializeQueries: Not Initialized");
-            }
+//            mainCondition = "is_closed = 0";
+            mainCondition = "is_closed = 0 AND namalengkap != '' AND namalengkap IS NOT NULL";
 
             joinTable = "";
-            countSelect = countqueryBuilder.mainCondition(mainCondition);
+            countSelect = countQueryBuilder.mainCondition(mainCondition);
             super.CountExecute();
 
             SmartRegisterQueryBuilder queryBuilder = new SmartRegisterQueryBuilder();
-
-            queryBuilder.SelectInitiateMainTable("ec_ibu", new String[]{"ec_ibu.relationalid", "ec_ibu.is_closed", "ec_ibu.details", "ec_kartu_ibu.namalengkap", "ec_kartu_ibu.namaSuami", "imagelist.imageid"});
+            queryBuilder.SelectInitiateMainTable(tableEcIbu, new String[]{"ec_ibu.relationalid", "ec_ibu.is_closed", "ec_ibu.details", "ec_kartu_ibu.namalengkap", "ec_kartu_ibu.namaSuami", "imagelist.imageid"});
             queryBuilder.customJoin("LEFT JOIN ec_kartu_ibu on ec_kartu_ibu.id = ec_ibu.id LEFT JOIN ImageList imagelist ON ec_ibu.id=imagelist.entityID");
-            mainSelect = queryBuilder.mainCondition(mainCondition);
+            mainSelect = queryBuilder.mainCondition("ec_kartu_ibu.is_closed = 0 AND namalengkap != '' AND namalengkap IS NOT NULL");
             Sortqueries = KiSortByNameAZ();
 
             currentlimit = 20;
@@ -232,49 +174,45 @@ public class ANCSmartRegisterFragment extends BaseSmartRegisterFragment {
             CountExecute();
             updateSearchView();
             refresh();
+
         } catch (Exception e) {
             e.printStackTrace();
+            Log.e(TAG, "initializeQueries: " + e.getCause());
         }
 
     }
 
-    private String KiSortByNameAZ() {
-        return "namalengkap ASC";
-    }
-
-    private String KiSortByNameZA() {
-        return "namalengkap DESC";
-    }
-
-    private String KiSortByAge() {
-        return "umur DESC";
-    }
-
-    private String KiSortByNoIbu() {
-        return "noIbu ASC";
-    }
-
-    private String KiSortByEdd() {
-        return "htp IS NULL, htp";
-    }
+//    private String KiSortByNameAZ() {
+//        return "namalengkap ASC";
+//    }
+//
+//    private String KiSortByNameZA() {
+//        return "namalengkap DESC";
+//    }
+//
+//    private String KiSortByAge() {
+//        return "umur DESC";
+//    }
+//
+//    private String KiSortByNoIbu() {
+//        return "noIbu ASC";
+//    }
+//
+//    private String KiSortByEdd() {
+//        return "htp IS NULL, htp";
+//    }
 
     @Override
     protected void onResumption() {
         getDefaultOptionsProvider();
         if (isPausedOrRefreshList()) {
-            initializeQueries("");
+            initializeQueries();
         }
-        try {
-//            LoginActivity.setLanguage();
-        } catch (Exception ignored) {
-
-        }
-
+//        Log.e(TAG, "onResumption: " + getResources().getConfiguration().locale);
     }
 
     private void updateSearchView() {
-        getSearchView().removeTextChangedListener(textWatcher);
-        getSearchView().addTextChangedListener(textWatcher);
+        textWatcher(AllConstantsINA.Register.ANC);
     }
 
     public void addChildToList(ArrayList<DialogOption> dialogOptionslist, Map<String, TreeNode<String, Location>> locationMap) {
@@ -286,67 +224,10 @@ public class ANCSmartRegisterFragment extends BaseSmartRegisterFragment {
             } else {
                 StringUtil.humanize(entry.getValue().getLabel());
                 String name = StringUtil.humanize(entry.getValue().getLabel());
-                dialogOptionslist.add(new MotherFilterOption(name, "location_name", name, "ec_kartu_ibu"));
+                dialogOptionslist.add(new MotherFilterOption(name, "location_name", name, tableName));
 
             }
         }
-    }
-
-    @Override
-    public void setupSearchView(final View view) {
-        searchView = (EditText) view.findViewById(org.smartregister.R.id.edt_search);
-        searchView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                searchTextChangeListener("");
-            }
-        });
-
-        searchCancelView = view.findViewById(org.smartregister.R.id.btn_search_cancel);
-        searchCancelView.setOnClickListener(searchCancelHandler);
-    }
-
-    public void searchTextChangeListener(String s) {
-
-        if (s != null) {
-            filters = s;
-        } else {
-            searchView.addTextChangedListener(new TextWatcher() {
-                @Override
-                public void beforeTextChanged(CharSequence charSequence, int i, int i2, int i3) {
-                }
-
-                @Override
-                public void onTextChanged(final CharSequence cs, int start, int before, int count) {
-
-                    (new AsyncTask() {
-
-                        @Override
-                        protected Object doInBackground(Object[] params) {
-                            filters = cs.toString();
-                            return null;
-                        }
-                    }).execute();
-                }
-
-                @Override
-                public void afterTextChanged(Editable editable) {
-                }
-            });
-        }
-    }
-
-    @Override
-    public void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-
-        Intent myIntent = new Intent(getActivity(), NativeKIbuSmartRegisterActivity.class);
-        if (data != null) {
-            myIntent.putExtra("org.smartregister.bidan_cloudant.face.face_mode", true);
-            myIntent.putExtra("org.smartregister.bidan_cloudant.face.base_id", data.getStringExtra("org.smartregister.bidan_cloudant.face.base_id"));
-        }
-        getActivity().startActivity(myIntent);
-
     }
 
     private class ClientActionHandler implements View.OnClickListener {
@@ -361,10 +242,10 @@ public class ANCSmartRegisterFragment extends BaseSmartRegisterFragment {
                     getActivity().finish();
                     break;
 
-                case R.id.ib_btn_edit:
+                case R.id.btn_anc_edit:
                     DetailANCActivity.ancClient = (CommonPersonObjectClient) view.getTag();
 //                    showFragmentDialog(new EditDialogOptionModel(), view.getTag());
-                    showFragmentDialog(((NativeKIANCSmartRegisterActivity) getActivity()).new EditDialogOptionModel(), view.getTag());
+                    showFragmentDialog(((ANCSmartRegisterActivity) getActivity()).new EditDialogOptionModelNew(), view.getTag());
 
                     break;
             }
@@ -372,47 +253,4 @@ public class ANCSmartRegisterFragment extends BaseSmartRegisterFragment {
 
     }
 
-    private class EditDialogOptionModelOld implements DialogOptionModel {
-        @Override
-        public DialogOption[] getDialogOptions() {
-            return getEditOptions();
-        }
-
-        @Override
-        public void onDialogOptionSelection(DialogOption option, Object tag) {
-
-            if (option.name().equalsIgnoreCase(getString(R.string.str_register_anc_form))) {
-                CommonPersonObjectClient pc = DetailMotherActivity.motherClient;
-                AllCommonsRepository iburep = Context.getInstance().allCommonsRepositoryobjects("ec_ibu");
-                final CommonPersonObject ibuparent = iburep.findByCaseID(pc.entityId());
-                if (ibuparent != null) {
-                    short anc_isclosed = ibuparent.getClosed();
-                    if (anc_isclosed == 0) {
-                        Toast.makeText(getActivity().getApplicationContext(), getString(R.string.mother_already_registered), Toast.LENGTH_SHORT).show();
-                        return;
-                    }
-                }
-            }
-            if (option.name().equalsIgnoreCase(getString(R.string.str_register_fp_form))) {
-                CommonPersonObjectClient pc = DetailMotherActivity.motherClient;
-
-                if (!StringUtils.isNumeric(pc.getDetails().get("jenisKontrasepsi"))) {
-                    Toast.makeText(getActivity().getApplicationContext(), getString(R.string.mother_already_registered_in_fp), Toast.LENGTH_SHORT).show();
-                    return;
-                }
-
-                AllCommonsRepository iburep = Context.getInstance().allCommonsRepositoryobjects("ec_ibu");
-                final CommonPersonObject ibuparent = iburep.findByCaseID(pc.entityId());
-                if (ibuparent != null) {
-                    short anc_isclosed = ibuparent.getClosed();
-                    if (anc_isclosed == 0) {
-                        Toast.makeText(getActivity().getApplicationContext(), getString(R.string.mother_already_registered), Toast.LENGTH_SHORT).show();
-                        return;
-                    }
-                }
-            }
-
-            onEditSelection((EditOption) option, (SmartRegisterClient) tag);
-        }
-    }
 }
