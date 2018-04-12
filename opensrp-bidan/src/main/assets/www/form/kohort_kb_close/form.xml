@@ -1,0 +1,761 @@
+<form autocomplete="off" class="or clearfix" id="Penutupan_KB" novalidate="novalidate">
+    <!--This form was created by transforming a OpenRosa-flavored (X)Form using an XSLT sheet created by Enketo LLC.-->
+    <section class="form-logo"></section>
+    <h3 id="form-title">Penutupan KB</h3>
+    <select data-default-lang="Bahasa" id="form-languages">
+        <option value="Bahasa">Bahasa</option>
+        <option value="en">English</option>
+    </select>
+
+
+    <label class="note non-select ">
+        <span class="question-label active"
+            data-itext-id="/penutupan_kb_reviewed/generated_note_name_13:label" lang="Bahasa">Desa :
+            <span class="or-output" data-value=" /penutupan_kb_reviewed/Village "></span>
+        </span>
+        <span class="question-label "
+            data-itext-id="/penutupan_kb_reviewed/generated_note_name_13:label" lang="en">-
+        </span>
+        <input name="/penutupan_kb_reviewed/generated_note_name_13" data-type-xml="string"
+            readonly="readonly" type="text" />
+    </label>
+    <label class="note non-select ">
+        <span class="question-label active"
+            data-itext-id="/penutupan_kb_reviewed/generated_note_name_14:label" lang="Bahasa">Dusun
+            :
+            <span class="or-output" data-value=" /penutupan_kb_reviewed/Sub-village "></span>
+        </span>
+        <span class="question-label "
+            data-itext-id="/penutupan_kb_reviewed/generated_note_name_14:label" lang="en">-
+        </span>
+        <input name="/penutupan_kb_reviewed/generated_note_name_14" data-type-xml="string"
+            readonly="readonly" type="text" />
+    </label>
+    <fieldset class="question ">
+        <fieldset>
+            <legend>
+                <span class="question-label active"
+                    data-itext-id="/penutupan_kb_reviewed/kb_close_reason:label" lang="Bahasa">
+                    Alasan menutup KB
+                </span>
+                <span class="question-label "
+                    data-itext-id="/penutupan_kb_reviewed/kb_close_reason:label" lang="en">Reason
+                    for Family
+                    Planning's Closure
+                </span>
+                <span class="required">*</span>
+                <span class="or-hint active"
+                    data-itext-id="/penutupan_kb_reviewed/kb_close_reason:hint" lang="Bahasa">
+                    Pilihlah salah satu
+                    alasan yang tersedia
+                </span>
+                <span class="or-hint " data-itext-id="/penutupan_kb_reviewed/kb_close_reason:hint"
+                    lang="en">Select one of
+                    reasons available
+                </span>
+            </legend>
+            <div class="option-wrapper">
+                <label class="">
+                    <input name="/penutupan_kb_reviewed/kb_close_reason"
+                        data-name="/penutupan_kb_reviewed/kb_close_reason" data-type-xml="select1"
+                        required="required" type="radio" value="death_of_mother" />
+                    <span class="option-label active"
+                        data-itext-id="/penutupan_kb_reviewed/kb_close_reason/death_of_mother:label"
+                        lang="Bahasa">
+                        Ibu meninggal
+                    </span>
+                    <span class="option-label "
+                        data-itext-id="/penutupan_kb_reviewed/kb_close_reason/death_of_mother:label"
+                        lang="en">
+                        Maternal death
+                    </span>
+                </label>
+                <label class="">
+                    <input name="/penutupan_kb_reviewed/kb_close_reason"
+                        data-name="/penutupan_kb_reviewed/kb_close_reason" data-type-xml="select1"
+                        required="required" type="radio" value="permanent_relocation" />
+                    <span class="option-label active"
+                        data-itext-id="/penutupan_kb_reviewed/kb_close_reason/permanent_relocation:label"
+                        lang="Bahasa">
+                        Relokasi
+                    </span>
+                    <span class="option-label "
+                        data-itext-id="/penutupan_kb_reviewed/kb_close_reason/permanent_relocation:label"
+                        lang="en">
+                        Relocation
+                    </span>
+                </label>
+                <label class="">
+                    <input name="/penutupan_kb_reviewed/kb_close_reason"
+                        data-name="/penutupan_kb_reviewed/kb_close_reason" data-type-xml="select1"
+                        required="required" type="radio" value="dropout" />
+                    <span class="option-label active"
+                        data-itext-id="/penutupan_kb_reviewed/kb_close_reason/dropout:label"
+                        lang="Bahasa">Drop
+                        Out (DO)
+                    </span>
+                    <span class="option-label "
+                        data-itext-id="/penutupan_kb_reviewed/kb_close_reason/dropout:label"
+                        lang="en">Drop
+                        Out (DO)/Service Withdrawal
+                    </span>
+                </label>
+                <label class="">
+                    <input name="/penutupan_kb_reviewed/kb_close_reason"
+                        data-name="/penutupan_kb_reviewed/kb_close_reason" data-type-xml="select1"
+                        required="required" type="radio" value="gagal" />
+                    <span class="option-label active"
+                        data-itext-id="/penutupan_kb_reviewed/kb_close_reason/gagal:label"
+                        lang="Bahasa">Gagal (G)
+                    </span>
+                    <span class="option-label "
+                        data-itext-id="/penutupan_kb_reviewed/kb_close_reason/gagal:label"
+                        lang="en">Failure
+                        (F)
+                    </span>
+                </label>
+                <label class="">
+                    <input name="/penutupan_kb_reviewed/kb_close_reason"
+                        data-name="/penutupan_kb_reviewed/kb_close_reason" data-type-xml="select1"
+                        required="required" type="radio" value="komplikasi" />
+                    <span class="option-label active"
+                        data-itext-id="/penutupan_kb_reviewed/kb_close_reason/komplikasi:label"
+                        lang="Bahasa">
+                        Komplikasi
+                    </span>
+                    <span class="option-label "
+                        data-itext-id="/penutupan_kb_reviewed/kb_close_reason/komplikasi:label"
+                        lang="en">
+                        Complication
+                    </span>
+                </label>
+            </div>
+        </fieldset>
+    </fieldset>
+    <label class="question or-branch pre-init non-select ">
+        <span class="question-label active"
+            data-itext-id="/penutupan_kb_reviewed/keterangan_do:label" lang="Bahasa">Keterangan DO
+        </span>
+        <span class="question-label " data-itext-id="/penutupan_kb_reviewed/keterangan_do:label"
+            lang="en">Note of Drop Out
+        </span>
+        <span class="or-hint active" data-itext-id="/penutupan_kb_reviewed/keterangan_do:hint"
+            lang="Bahasa">Berikan alasan dan penjelasan
+            penyebab peserta KB Drop Out
+        </span>
+        <span class="or-hint " data-itext-id="/penutupan_kb_reviewed/keterangan_do:hint" lang="en">
+            Write the reason for Drop Out
+        </span>
+        <input name="/penutupan_kb_reviewed/keterangan_do"
+            data-relevant=" /penutupan_kb_reviewed/kb_close_reason  = 'dropout'"
+            data-type-xml="string" type="text" />
+    </label>
+    <fieldset class="question or-branch pre-init ">
+        <fieldset>
+            <legend>
+                <span class="question-label active"
+                    data-itext-id="/penutupan_kb_reviewed/keterangan_gagal:label" lang="Bahasa">
+                    Keterangan Gagal
+                </span>
+                <span class="question-label "
+                    data-itext-id="/penutupan_kb_reviewed/keterangan_gagal:label" lang="en">Note of
+                    Failure
+                </span>
+                <span class="or-hint active"
+                    data-itext-id="/penutupan_kb_reviewed/keterangan_gagal:hint" lang="Bahasa">
+                    Berikan alasan dan
+                    penjelasan tambahan berkaitan peserta gagal KB
+                </span>
+                <span class="or-hint " data-itext-id="/penutupan_kb_reviewed/keterangan_gagal:hint"
+                    lang="en">Write the reason
+                    for contraceptive failure
+                </span>
+            </legend>
+            <div class="option-wrapper">
+                <label class="">
+                    <input name="/penutupan_kb_reviewed/keterangan_gagal"
+                        data-name="/penutupan_kb_reviewed/keterangan_gagal"
+                        data-relevant=" /penutupan_kb_reviewed/kb_close_reason  = 'gagal'"
+                        data-type-xml="select1" type="radio" value="ibu_hamil" />
+                    <span class="option-label active"
+                        data-itext-id="/penutupan_kb_reviewed/keterangan_gagal/ibu_hamil:label"
+                        lang="Bahasa">Ibu
+                        hamil
+                    </span>
+                    <span class="option-label "
+                        data-itext-id="/penutupan_kb_reviewed/keterangan_gagal/ibu_hamil:label"
+                        lang="en">
+                        Mother becomes pregnant
+                    </span>
+                </label>
+                <label class="">
+                    <input name="/penutupan_kb_reviewed/keterangan_gagal"
+                        data-name="/penutupan_kb_reviewed/keterangan_gagal"
+                        data-relevant=" /penutupan_kb_reviewed/kb_close_reason  = 'gagal'"
+                        data-type-xml="select1" type="radio" value="tidak_ada_keterangan" />
+                    <span class="option-label active"
+                        data-itext-id="/penutupan_kb_reviewed/keterangan_gagal/tidak_ada_keterangan:label"
+                        lang="Bahasa">
+                        Tidak ada keterangan
+                    </span>
+                    <span class="option-label "
+                        data-itext-id="/penutupan_kb_reviewed/keterangan_gagal/tidak_ada_keterangan:label"
+                        lang="en">
+                        None
+                    </span>
+                </label>
+                <label class="">
+                    <input name="/penutupan_kb_reviewed/keterangan_gagal"
+                        data-name="/penutupan_kb_reviewed/keterangan_gagal"
+                        data-relevant=" /penutupan_kb_reviewed/kb_close_reason  = 'gagal'"
+                        data-type-xml="select1" type="radio" value="lainnya" />
+                    <span class="option-label active"
+                        data-itext-id="/penutupan_kb_reviewed/keterangan_gagal/lainnya:label"
+                        lang="Bahasa">
+                        Lainnya
+                    </span>
+                    <span class="option-label "
+                        data-itext-id="/penutupan_kb_reviewed/keterangan_gagal/lainnya:label"
+                        lang="en">Other
+                    </span>
+                </label>
+            </div>
+        </fieldset>
+    </fieldset>
+    <label class="question or-branch pre-init non-select ">
+        <span class="question-label active"
+            data-itext-id="/penutupan_kb_reviewed/keterangan_gagal_lainnya:label" lang="Bahasa">
+            Keterangan gagal
+            lainnya
+        </span>
+        <span class="question-label "
+            data-itext-id="/penutupan_kb_reviewed/keterangan_gagal_lainnya:label" lang="en">Other
+            note of
+            failure
+        </span>
+        <input name="/penutupan_kb_reviewed/keterangan_gagal_lainnya"
+            data-relevant=" /penutupan_kb_reviewed/keterangan_gagal  = 'lainnya'"
+            data-type-xml="string" type="text" />
+    </label>
+    <label class="question or-branch pre-init non-select ">
+        <span class="or-constraint-msg active"
+            data-itext-id="/penutupan_kb_reviewed/death_date:jr:constraintMsg" lang="Bahasa">Tanggal
+            kematian ibu
+            hari ini atau hari-hari sebelumnya
+        </span>
+        <span class="or-constraint-msg "
+            data-itext-id="/penutupan_kb_reviewed/death_date:jr:constraintMsg" lang="en">Date of
+            mother's
+            death today or the days before
+        </span>
+        <span class="question-label active" data-itext-id="/penutupan_kb_reviewed/death_date:label"
+            lang="Bahasa">Tanggal kematian
+        </span>
+        <span class="question-label " data-itext-id="/penutupan_kb_reviewed/death_date:label"
+            lang="en">Date of death
+        </span>
+        <span class="or-hint active" data-itext-id="/penutupan_kb_reviewed/death_date:hint"
+            lang="Bahasa">Masukkan tanggal kematian
+        </span>
+        <span class="or-hint " data-itext-id="/penutupan_kb_reviewed/death_date:hint" lang="en">
+            Enter the date of death
+        </span>
+        <input name="/penutupan_kb_reviewed/death_date"
+            data-constraint=".&lt;= /penutupan_kb_reviewed/today "
+            data-relevant=" /penutupan_kb_reviewed/kb_close_reason  = 'death_of_mother'"
+            data-type-xml="date" type="date" />
+    </label>
+    <fieldset class="question or-branch pre-init ">
+        <fieldset>
+            <legend>
+                <span class="question-label active"
+                    data-itext-id="/penutupan_kb_reviewed/place_of_death:label" lang="Bahasa">Tempat
+                    kematian
+                </span>
+                <span class="question-label "
+                    data-itext-id="/penutupan_kb_reviewed/place_of_death:label" lang="en">Place of
+                    death
+                </span>
+                <span class="or-hint active"
+                    data-itext-id="/penutupan_kb_reviewed/place_of_death:hint" lang="Bahasa">Tempat
+                    kematian ibu
+                </span>
+                <span class="or-hint " data-itext-id="/penutupan_kb_reviewed/place_of_death:hint"
+                    lang="en">Place of maternal
+                    death
+                </span>
+            </legend>
+            <div class="option-wrapper">
+                <label class="">
+                    <input name="/penutupan_kb_reviewed/place_of_death"
+                        data-name="/penutupan_kb_reviewed/place_of_death"
+                        data-relevant=" /penutupan_kb_reviewed/kb_close_reason  = 'death_of_mother'"
+                        data-type-xml="select1" type="radio" value="Rumah sendiri/keluarga" />
+                    <span class="option-label active"
+                        data-itext-id="/penutupan_kb_reviewed/place_of_death/Rumah sendiri/keluarga:label"
+                        lang="Bahasa">
+                        Rumah sendiri/keluarga
+                    </span>
+                    <span class="option-label "
+                        data-itext-id="/penutupan_kb_reviewed/place_of_death/Rumah sendiri/keluarga:label"
+                        lang="en">
+                        Mother/family's house
+                    </span>
+                </label>
+                <label class="">
+                    <input name="/penutupan_kb_reviewed/place_of_death"
+                        data-name="/penutupan_kb_reviewed/place_of_death"
+                        data-relevant=" /penutupan_kb_reviewed/kb_close_reason  = 'death_of_mother'"
+                        data-type-xml="select1" type="radio" value="Polindes" />
+                    <span class="option-label active"
+                        data-itext-id="/penutupan_kb_reviewed/place_of_death/Polindes:label"
+                        lang="Bahasa">
+                        Polindes
+                    </span>
+                    <span class="option-label "
+                        data-itext-id="/penutupan_kb_reviewed/place_of_death/Polindes:label"
+                        lang="en">
+                        Community-based health post
+                    </span>
+                </label>
+                <label class="">
+                    <input name="/penutupan_kb_reviewed/place_of_death"
+                        data-name="/penutupan_kb_reviewed/place_of_death"
+                        data-relevant=" /penutupan_kb_reviewed/kb_close_reason  = 'death_of_mother'"
+                        data-type-xml="select1" type="radio" value="Pustu" />
+                    <span class="option-label active"
+                        data-itext-id="/penutupan_kb_reviewed/place_of_death/Pustu:label"
+                        lang="Bahasa">Pustu
+                    </span>
+                    <span class="option-label "
+                        data-itext-id="/penutupan_kb_reviewed/place_of_death/Pustu:label" lang="en">
+                        Sub-center
+                    </span>
+                </label>
+                <label class="">
+                    <input name="/penutupan_kb_reviewed/place_of_death"
+                        data-name="/penutupan_kb_reviewed/place_of_death"
+                        data-relevant=" /penutupan_kb_reviewed/kb_close_reason  = 'death_of_mother'"
+                        data-type-xml="select1" type="radio" value="Rumah bidan" />
+                    <span class="option-label active"
+                        data-itext-id="/penutupan_kb_reviewed/place_of_death/Rumah bidan:label"
+                        lang="Bahasa">
+                        Rumah bidan
+                    </span>
+                    <span class="option-label "
+                        data-itext-id="/penutupan_kb_reviewed/place_of_death/Rumah bidan:label"
+                        lang="en">
+                        Midwife's house
+                    </span>
+                </label>
+                <label class="">
+                    <input name="/penutupan_kb_reviewed/place_of_death"
+                        data-name="/penutupan_kb_reviewed/place_of_death"
+                        data-relevant=" /penutupan_kb_reviewed/kb_close_reason  = 'death_of_mother'"
+                        data-type-xml="select1" type="radio" value="Puskesmas" />
+                    <span class="option-label active"
+                        data-itext-id="/penutupan_kb_reviewed/place_of_death/Puskesmas:label"
+                        lang="Bahasa">
+                        Puskesmas
+                    </span>
+                    <span class="option-label "
+                        data-itext-id="/penutupan_kb_reviewed/place_of_death/Puskesmas:label"
+                        lang="en">
+                        Primary Health Center
+                    </span>
+                </label>
+                <label class="">
+                    <input name="/penutupan_kb_reviewed/place_of_death"
+                        data-name="/penutupan_kb_reviewed/place_of_death"
+                        data-relevant=" /penutupan_kb_reviewed/kb_close_reason  = 'death_of_mother'"
+                        data-type-xml="select1" type="radio"
+                        value="Dalam perjalanan ke fasilitas" />
+                    <span class="option-label active"
+                        data-itext-id="/penutupan_kb_reviewed/place_of_death/Dalam perjalanan ke fasilitas:label"
+                        lang="Bahasa">
+                        Dalam perjalanan ke fasilitas
+                    </span>
+                    <span class="option-label "
+                        data-itext-id="/penutupan_kb_reviewed/place_of_death/Dalam perjalanan ke fasilitas:label"
+                        lang="en">
+                        On the way to facility
+                    </span>
+                </label>
+                <label class="">
+                    <input name="/penutupan_kb_reviewed/place_of_death"
+                        data-name="/penutupan_kb_reviewed/place_of_death"
+                        data-relevant=" /penutupan_kb_reviewed/kb_close_reason  = 'death_of_mother'"
+                        data-type-xml="select1" type="radio" value="Lainnya" />
+                    <span class="option-label active"
+                        data-itext-id="/penutupan_kb_reviewed/place_of_death/Lainnya:label"
+                        lang="Bahasa">Lainnya
+                    </span>
+                    <span class="option-label "
+                        data-itext-id="/penutupan_kb_reviewed/place_of_death/Lainnya:label"
+                        lang="en">Other
+                    </span>
+                </label>
+            </div>
+        </fieldset>
+    </fieldset>
+    <label class="question or-branch pre-init non-select ">
+        <span class="question-label active" data-itext-id="/penutupan_kb_reviewed/address:label"
+            lang="Bahasa">Alamat Ibu (Dusun)
+        </span>
+        <span class="question-label " data-itext-id="/penutupan_kb_reviewed/address:label"
+            lang="en">Mother&#x2019;s address (dusun)
+        </span>
+        <span class="or-hint active" data-itext-id="/penutupan_kb_reviewed/address:hint"
+            lang="Bahasa">Masukkan alamat Ibu (Dusun)
+        </span>
+        <span class="or-hint " data-itext-id="/penutupan_kb_reviewed/address:hint" lang="en">Enter
+            the mother&#x2019;s address (dusun)
+        </span>
+        <input name="/penutupan_kb_reviewed/address"
+            data-relevant=" /penutupan_kb_reviewed/kb_close_reason  = 'death_of_mother'"
+            data-type-xml="string" type="text" />
+    </label>
+    <label class="question or-branch pre-init non-select ">
+        <span class="question-label active"
+            data-itext-id="/penutupan_kb_reviewed/note_maternal_death_cause:label" lang="Bahasa">
+            Penyebab Kematian
+        </span>
+        <span class="question-label "
+            data-itext-id="/penutupan_kb_reviewed/note_maternal_death_cause:label" lang="en">Cause
+        </span>
+        <span class="or-hint active"
+            data-itext-id="/penutupan_kb_reviewed/note_maternal_death_cause:hint" lang="Bahasa">
+            Masukkan penyebab
+            kematian
+        </span>
+        <span class="or-hint " data-itext-id="/penutupan_kb_reviewed/note_maternal_death_cause:hint"
+            lang="en">Fill in the cause
+            of maternal death
+        </span>
+        <input name="/penutupan_kb_reviewed/note_maternal_death_cause"
+            data-relevant=" /penutupan_kb_reviewed/kb_close_reason  = 'death_of_mother'"
+            data-type-xml="string" type="text" />
+    </label>
+    <fieldset class="question or-branch pre-init ">
+        <fieldset>
+            <legend>
+                <span class="question-label active"
+                    data-itext-id="/penutupan_kb_reviewed/birth_attendant:label" lang="Bahasa">
+                    Penolong Persalinan
+                </span>
+                <span class="question-label "
+                    data-itext-id="/penutupan_kb_reviewed/birth_attendant:label" lang="en">Birth
+                    Attendant
+                </span>
+                <span class="or-hint active"
+                    data-itext-id="/penutupan_kb_reviewed/birth_attendant:hint" lang="Bahasa">
+                    Sebutkan siapa yang
+                    menolong ibu hamil saat bersalin
+                </span>
+                <span class="or-hint " data-itext-id="/penutupan_kb_reviewed/birth_attendant:hint"
+                    lang="en">Write the one who
+                    assist mother's delivery
+                </span>
+            </legend>
+            <div class="option-wrapper">
+                <label class="">
+                    <input name="/penutupan_kb_reviewed/birth_attendant"
+                        data-name="/penutupan_kb_reviewed/birth_attendant"
+                        data-relevant=" /penutupan_kb_reviewed/kb_close_reason  = 'death_of_mother'"
+                        data-type-xml="select1" type="radio" value="keluarga" />
+                    <span class="option-label active"
+                        data-itext-id="/penutupan_kb_reviewed/birth_attendant/keluarga:label"
+                        lang="Bahasa">
+                        Keluarga (K)
+                    </span>
+                    <span class="option-label "
+                        data-itext-id="/penutupan_kb_reviewed/birth_attendant/keluarga:label"
+                        lang="en">Family
+                    </span>
+                </label>
+                <label class="">
+                    <input name="/penutupan_kb_reviewed/birth_attendant"
+                        data-name="/penutupan_kb_reviewed/birth_attendant"
+                        data-relevant=" /penutupan_kb_reviewed/kb_close_reason  = 'death_of_mother'"
+                        data-type-xml="select1" type="radio" value="dukun" />
+                    <span class="option-label active"
+                        data-itext-id="/penutupan_kb_reviewed/birth_attendant/dukun:label"
+                        lang="Bahasa">Dukun (D)
+                    </span>
+                    <span class="option-label "
+                        data-itext-id="/penutupan_kb_reviewed/birth_attendant/dukun:label"
+                        lang="en">
+                        Traditional Birth Attendant
+                    </span>
+                </label>
+                <label class="">
+                    <input name="/penutupan_kb_reviewed/birth_attendant"
+                        data-name="/penutupan_kb_reviewed/birth_attendant"
+                        data-relevant=" /penutupan_kb_reviewed/kb_close_reason  = 'death_of_mother'"
+                        data-type-xml="select1" type="radio" value="bidan" />
+                    <span class="option-label active"
+                        data-itext-id="/penutupan_kb_reviewed/birth_attendant/bidan:label"
+                        lang="Bahasa">Bidan (B)
+                    </span>
+                    <span class="option-label "
+                        data-itext-id="/penutupan_kb_reviewed/birth_attendant/bidan:label"
+                        lang="en">Midwife
+                    </span>
+                </label>
+                <label class="">
+                    <input name="/penutupan_kb_reviewed/birth_attendant"
+                        data-name="/penutupan_kb_reviewed/birth_attendant"
+                        data-relevant=" /penutupan_kb_reviewed/kb_close_reason  = 'death_of_mother'"
+                        data-type-xml="select1" type="radio" value="dr.umum" />
+                    <span class="option-label active"
+                        data-itext-id="/penutupan_kb_reviewed/birth_attendant/dr.umum:label"
+                        lang="Bahasa">Dr.Umum
+                        (DU)
+                    </span>
+                    <span class="option-label "
+                        data-itext-id="/penutupan_kb_reviewed/birth_attendant/dr.umum:label"
+                        lang="en">Doctor
+                    </span>
+                </label>
+                <label class="">
+                    <input name="/penutupan_kb_reviewed/birth_attendant"
+                        data-name="/penutupan_kb_reviewed/birth_attendant"
+                        data-relevant=" /penutupan_kb_reviewed/kb_close_reason  = 'death_of_mother'"
+                        data-type-xml="select1" type="radio" value="dr.spesialis" />
+                    <span class="option-label active"
+                        data-itext-id="/penutupan_kb_reviewed/birth_attendant/dr.spesialis:label"
+                        lang="Bahasa">
+                        Dr.Spesialis (DS)
+                    </span>
+                    <span class="option-label "
+                        data-itext-id="/penutupan_kb_reviewed/birth_attendant/dr.spesialis:label"
+                        lang="en">
+                        Obstectric and Gynecology Specialist (OGS)
+                    </span>
+                </label>
+                <label class="">
+                    <input name="/penutupan_kb_reviewed/birth_attendant"
+                        data-name="/penutupan_kb_reviewed/birth_attendant"
+                        data-relevant=" /penutupan_kb_reviewed/kb_close_reason  = 'death_of_mother'"
+                        data-type-xml="select1" type="radio" value="lain-lain" />
+                    <span class="option-label active"
+                        data-itext-id="/penutupan_kb_reviewed/birth_attendant/lain-lain:label"
+                        lang="Bahasa">
+                        Lain-Lain (LN)
+                    </span>
+                    <span class="option-label "
+                        data-itext-id="/penutupan_kb_reviewed/birth_attendant/lain-lain:label"
+                        lang="en">
+                        Others
+                    </span>
+                </label>
+                <label class="">
+                    <input name="/penutupan_kb_reviewed/birth_attendant"
+                        data-name="/penutupan_kb_reviewed/birth_attendant"
+                        data-relevant=" /penutupan_kb_reviewed/kb_close_reason  = 'death_of_mother'"
+                        data-type-xml="select1" type="radio" value="tidak_ada" />
+                    <span class="option-label active"
+                        data-itext-id="/penutupan_kb_reviewed/birth_attendant/tidak_ada:label"
+                        lang="Bahasa">Tidak
+                        Ada (TA)
+                    </span>
+                    <span class="option-label "
+                        data-itext-id="/penutupan_kb_reviewed/birth_attendant/tidak_ada:label"
+                        lang="en">None
+                    </span>
+                </label>
+            </div>
+        </fieldset>
+    </fieldset>
+    <fieldset class="question or-branch pre-init ">
+        <fieldset>
+            <legend>
+                <span class="question-label active"
+                    data-itext-id="/penutupan_kb_reviewed/referred:label" lang="Bahasa">Apakah ibu
+                    ini dirujuk?
+                </span>
+                <span class="question-label " data-itext-id="/penutupan_kb_reviewed/referred:label"
+                    lang="en">Was this mother referred
+                    to other facility?
+                </span>
+                <span class="or-hint active" data-itext-id="/penutupan_kb_reviewed/referred:hint"
+                    lang="Bahasa">Untuk mengetahui apakah ibu
+                    tersebut dirujuk ke fasilitas lain
+                </span>
+                <span class="or-hint " data-itext-id="/penutupan_kb_reviewed/referred:hint"
+                    lang="en">Information whether the
+                    mother was referred to other facility or not
+                </span>
+            </legend>
+            <div class="option-wrapper">
+                <label class="">
+                    <input name="/penutupan_kb_reviewed/referred"
+                        data-name="/penutupan_kb_reviewed/referred"
+                        data-relevant=" /penutupan_kb_reviewed/kb_close_reason  = 'death_of_mother'"
+                        data-type-xml="select1" type="radio" value="yes" />
+                    <span class="option-label active"
+                        data-itext-id="/penutupan_kb_reviewed/referred/yes:label" lang="Bahasa">Ya
+                    </span>
+                    <span class="option-label "
+                        data-itext-id="/penutupan_kb_reviewed/referred/yes:label" lang="en">Yes
+                    </span>
+                </label>
+                <label class="">
+                    <input name="/penutupan_kb_reviewed/referred"
+                        data-name="/penutupan_kb_reviewed/referred"
+                        data-relevant=" /penutupan_kb_reviewed/kb_close_reason  = 'death_of_mother'"
+                        data-type-xml="select1" type="radio" value="no" />
+                    <span class="option-label active"
+                        data-itext-id="/penutupan_kb_reviewed/referred/no:label" lang="Bahasa">Tidak
+                    </span>
+                    <span class="option-label "
+                        data-itext-id="/penutupan_kb_reviewed/referred/no:label" lang="en">No
+                    </span>
+                </label>
+            </div>
+        </fieldset>
+    </fieldset>
+    <label class="question or-branch pre-init non-select ">
+        <span class="question-label active"
+            data-itext-id="/penutupan_kb_reviewed/referral_location:label" lang="Bahasa">Ibu dirujuk
+            ke
+        </span>
+        <span class="question-label " data-itext-id="/penutupan_kb_reviewed/referral_location:label"
+            lang="en">Location of referral
+        </span>
+        <span class="or-hint active" data-itext-id="/penutupan_kb_reviewed/referral_location:hint"
+            lang="Bahasa">Untuk mengetahui ibu
+            dirujuk ke fasilitas mana
+        </span>
+        <span class="or-hint " data-itext-id="/penutupan_kb_reviewed/referral_location:hint"
+            lang="en">Information related to the
+            location of mother's referral
+        </span>
+        <input name="/penutupan_kb_reviewed/referral_location"
+            data-relevant=" /penutupan_kb_reviewed/referred  = 'yes'" data-type-xml="string"
+            type="text" />
+    </label>
+    <label class="question or-branch pre-init non-select ">
+        <span class="question-label active"
+            data-itext-id="/penutupan_kb_reviewed/prereferral_management:label" lang="Bahasa">
+            Tindakan sebelum
+            dirujuk
+        </span>
+        <span class="question-label "
+            data-itext-id="/penutupan_kb_reviewed/prereferral_management:label" lang="en">
+            Pre-referral
+            management
+        </span>
+        <span class="or-hint active"
+            data-itext-id="/penutupan_kb_reviewed/prereferral_management:hint" lang="Bahasa">
+            Tuliskan tindakan
+            perawatan yang diberikan kepada ibu sebelum dirujuk
+        </span>
+        <span class="or-hint " data-itext-id="/penutupan_kb_reviewed/prereferral_management:hint"
+            lang="en">Describe the care
+            management provided for the mother prior to referral
+        </span>
+        <input name="/penutupan_kb_reviewed/prereferral_management"
+            data-relevant=" /penutupan_kb_reviewed/referred  = 'yes'" data-type-xml="string"
+            type="text" />
+    </label>
+    <fieldset class="question ">
+        <fieldset>
+            <legend>
+                <span class="question-label active"
+                    data-itext-id="/penutupan_kb_reviewed/confirm_kb_close:label" lang="Bahasa">
+                    konfirmasi
+                    penutupan KB?
+                </span>
+                <span class="question-label "
+                    data-itext-id="/penutupan_kb_reviewed/confirm_kb_close:label" lang="en">
+                    Confirmation of
+                    Family Planning Closure?
+                </span>
+            </legend>
+            <div class="option-wrapper">
+                <label class="">
+                    <input name="/penutupan_kb_reviewed/confirm_kb_close"
+                        data-name="/penutupan_kb_reviewed/confirm_kb_close" data-type-xml="select1"
+                        type="radio" value="yes" />
+                    <span class="option-label active"
+                        data-itext-id="/penutupan_kb_reviewed/confirm_kb_close/yes:label"
+                        lang="Bahasa">Ya
+                    </span>
+                    <span class="option-label "
+                        data-itext-id="/penutupan_kb_reviewed/confirm_kb_close/yes:label" lang="en">
+                        Yes
+                    </span>
+                </label>
+            </div>
+        </fieldset>
+    </fieldset>
+
+    <fieldset style="display:none;" id="or-preload-items">
+        <label class="calculation non-select ">
+            <input name="/penutupan_kb_reviewed/start" data-preload="timestamp"
+                data-preload-params="start" data-type-xml="dateTime" type="hidden" />
+        </label>
+        <label class="calculation non-select ">
+            <input name="/penutupan_kb_reviewed/today" data-preload="date"
+                data-preload-params="today" data-type-xml="date" type="hidden" />
+        </label>
+        <label class="calculation non-select ">
+            <input name="/penutupan_kb_reviewed/deviceid" data-preload="property"
+                data-preload-params="deviceid" data-type-xml="string" type="hidden" />
+        </label>
+        <label class="calculation non-select ">
+            <input name="/penutupan_kb_reviewed/simserial" data-preload="property"
+                data-preload-params="simserial" data-type-xml="string" type="hidden" />
+        </label>
+        <label class="calculation non-select ">
+            <input name="/penutupan_kb_reviewed/phonenumber" data-preload="property"
+                data-preload-params="phonenumber" data-type-xml="string" type="hidden" />
+        </label>
+        <label class="calculation non-select ">
+            <input name="/penutupan_kb_reviewed/end" data-preload="timestamp"
+                data-preload-params="end" data-type-xml="dateTime" type="hidden" />
+        </label>
+    </fieldset>
+    <fieldset style="display:none;" id="or-calculated-items">
+        <label class="calculation non-select ">
+            <input name="/penutupan_kb_reviewed/existing_location"
+                data-calculate=" /penutupan_kb_reviewed/Village " data-type-xml="string"
+                type="hidden" />
+        </label>
+        <label class="calculation non-select ">
+            <input name="/penutupan_kb_reviewed/provinsi"
+                data-calculate=" /penutupan_kb_reviewed/Province " data-type-xml="string"
+                type="hidden" />
+        </label>
+        <label class="calculation non-select ">
+            <input name="/penutupan_kb_reviewed/kabupaten"
+                data-calculate=" /penutupan_kb_reviewed/District " data-type-xml="string"
+                type="hidden" />
+        </label>
+        <label class="calculation non-select ">
+            <input name="/penutupan_kb_reviewed/desa"
+                data-calculate=" /penutupan_kb_reviewed/Village " data-type-xml="string"
+                type="hidden" />
+        </label>
+        <label class="calculation non-select ">
+            <input name="/penutupan_kb_reviewed/dusun"
+                data-calculate=" /penutupan_kb_reviewed/Sub-village " data-type-xml="string"
+                type="hidden" />
+        </label>
+        <label class="calculation non-select ">
+            <input name="/penutupan_kb_reviewed/kecamatan"
+                data-calculate=" /penutupan_kb_reviewed/Sub-district " data-type-xml="string"
+                type="hidden" />
+        </label>
+        <label class="calculation non-select ">
+            <input name="/penutupan_kb_reviewed/meta/instanceID"
+                data-calculate="concat('uuid:', uuid())" data-type-xml="string" type="hidden" />
+        </label>
+        <label class="calculation non-select ">
+            <input name="/penutupan_kb_reviewed/formhub/uuid"
+                data-calculate="'658791259ff5480a9dfc86e5955defa5'" data-type-xml="string"
+                type="hidden" />
+        </label>
+    </fieldset>
+</form>
