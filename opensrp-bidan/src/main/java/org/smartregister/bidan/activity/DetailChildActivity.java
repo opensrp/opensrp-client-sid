@@ -38,14 +38,16 @@ public class DetailChildActivity extends Activity {
 //    ImageView childview;
     private String userId;
 
-    public DetailChildActivity(String userId) {
-        this.userId = userId;
-    }
+//    public DetailChildActivity(String userId) {
+//        this.userId = userId;
+//    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.anak_detail_activity);
+
+        userId = childclient.getDetails().get("base_entity_id");
 
         final ImageView childview = (ImageView) findViewById(R.id.childdetailprofileview);
         //header
