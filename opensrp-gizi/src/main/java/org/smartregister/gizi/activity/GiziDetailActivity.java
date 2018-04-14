@@ -3,7 +3,6 @@ package org.smartregister.gizi.activity;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.Environment;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.ImageView;
@@ -13,7 +12,6 @@ import com.flurry.android.FlurryAgent;
 import com.jjoe64.graphview.DefaultLabelFormatter;
 import com.jjoe64.graphview.GraphView;
 
-import org.smartregister.Context;
 import org.smartregister.commonregistry.AllCommonsRepository;
 import org.smartregister.commonregistry.CommonPersonObject;
 import org.smartregister.commonregistry.CommonPersonObjectClient;
@@ -23,56 +21,32 @@ import org.smartregister.util.Log;
 import org.smartregister.view.activity.DrishtiApplication;
 
 import java.io.File;
-import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
-import util.ImageCache;
-import util.ImageFetcher;
 import util.KMS.KmsCalc;
 import util.KMS.KmsPerson;
 import util.formula.Support;
 import util.growthChart.GrowthChartGenerator;
 
 /**
- * Created by Iq on 26/04/16.
+ * Created by Iq on 26/04/16
  */
 public class GiziDetailActivity extends Activity {
-    public static CommonPersonObjectClient kiclient;
 
     SimpleDateFormat timer = new SimpleDateFormat("hh:mm:ss");
-    //image retrieving
     private static final String TAG = GiziDetailActivity.class.getSimpleName();
-    private static final String IMAGE_CACHE_DIR = "thumbs";
-  //  private static KmsCalc  kmsCalc;
-    private static int mImageThumbSize;
-    private static int mImageThumbSpacing;
-    private static String showbgm;
-    private static ImageFetcher mImageFetcher;
-
-    //image retrieving
-
     public static CommonPersonObjectClient childclient;
-
-
-    private static HashMap<String, String> hash;
-    private boolean updateMode = false;
-    private String mode;
-
-    private String photo_path;
-    private File tb_photo;
-    private String fileName;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        Context context = Context.getInstance();
+//        Context context = Context.getInstance();
         setContentView(R.layout.gizi_detail_activity);
         String DetailStart = timer.format(new Date());
-                Map<String, String> Detail = new HashMap<String, String>();
+                Map<String, String> Detail = new HashMap<>();
                 Detail.put("start", DetailStart);
                 FlurryAgent.logEvent("gizi_detail_view",Detail, true );
 
@@ -115,7 +89,7 @@ public class GiziDetailActivity extends Activity {
                 overridePendingTransition(0, 0);
 
                 String DetailEnd = timer.format(new Date());
-                Map<String, String> Detail = new HashMap<String, String>();
+                Map<String, String> Detail = new HashMap<>();
                 Detail.put("end", DetailEnd);
                 FlurryAgent.logEvent("gizi_detail_view", Detail, true);
             }
@@ -172,10 +146,9 @@ public class GiziDetailActivity extends Activity {
         lastVitA.setText(String.format("%s %s",getString(R.string.lastVitA),(Support.getDetails(childclient, "lastVitA"))));
         lastAnthelmintic.setText(String.format("%s %s",getString(R.string.lastAnthelmintic),(Support.getDetails(childclient, "lastAnthelmintic"))));
 
-        String[]history = Support.split(Support.fixHistory(Support.getDetails(childclient,"history_berat")));
-        String[]historyUmur = history[0].split(",");
-        String[]historyBerat = history[1].split(",");
-
+//        String[]history = Support.split(Support.fixHistory(Support.getDetails(childclient,"history_berat")));
+//        String[]historyUmur = history[0].split(",");
+//        String[]historyBerat = history[1].split(",");
         KmsPerson anak = new KmsPerson(childclient);
         KmsCalc kalkulator = new KmsCalc();
 
@@ -208,12 +181,11 @@ public class GiziDetailActivity extends Activity {
                 bindobject = "anak";
                 entityid = childclient.entityId();
 
-                if (hash.containsValue(entityid)) {
-                    android.util.Log.e(TAG, "onClick: " + entityid + " updated");
-                    mode = "updated";
-                    updateMode = true;
-
-                }
+//                if (hash.containsValue(entityid)) {
+//                    android.util.Log.e(TAG, "onClick: " + entityid + " updated");
+//                    mode = "updated";
+//                    updateMode = true;
+//                }
 
               /*  Intent takePictureIntent = new Intent(GiziDetailActivity.this, SmartShutterActivity.class);
                 takePictureIntent.putExtra("IdentifyPerson", false);
@@ -227,12 +199,12 @@ public class GiziDetailActivity extends Activity {
     }
 
     // english: fEMale, bahasa: perEMpuan, both have EM; since en: male, bhs: laki, both no EM
-    private  String gender(String value){
-        if (value.toLowerCase().contains("em"))
-            return getString(R.string.child_female);
-        else
-            return getString(R.string.child_male);
-    }
+//    private  String gender(String value){
+//        if (value.toLowerCase().contains("em"))
+//            return getString(R.string.child_female);
+//        else
+//            return getString(R.string.child_male);
+//    }
 
     private void generateGrowthChart(String xAxis, String yAxis){
         Log.logInfo("Berat :" +yAxis);
@@ -276,45 +248,40 @@ public class GiziDetailActivity extends Activity {
             return getString(R.string.weight_new);
     }
 
-    String mCurrentPhotoPath;
-
-    private File createImageFile() throws IOException {
-        // Create an image file name
-        String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date());
-        String imageFileName = "JPEG_" + timeStamp + "_";
-        File storageDir = Environment.getExternalStoragePublicDirectory(
-                Environment.DIRECTORY_PICTURES);
-        File image = File.createTempFile(
-                imageFileName,  /* prefix */
-                ".jpg",         /* suffix */
-                storageDir      /* directory */
-        );
-
-        // Save a file: path for use with ACTION_VIEW intents
-        mCurrentPhotoPath = "file:" + image.getAbsolutePath();
-        return image;
-    }
-    static final int REQUEST_TAKE_PHOTO = 1;
-    static ImageView mImageView;
-    static File currentfile;
+//    String mCurrentPhotoPath;
+//    private File createImageFile() throws IOException {
+//         Create an image file name
+//        String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date());
+//        String imageFileName = "JPEG_" + timeStamp + "_";
+//        File storageDir = Environment.getExternalStoragePublicDirectory(
+//                Environment.DIRECTORY_PICTURES);
+//        File image = File.createTempFile(
+//                imageFileName,  /* prefix */
+//                ".jpg",         /* suffix */
+//                storageDir      /* directory */
+//        );
+//
+//         Save a file: path for use with ACTION_VIEW intents
+//        mCurrentPhotoPath = "file:" + image.getAbsolutePath();
+//        return image;
+//    }
     static String bindobject;
     static String entityid;
 
-    public static void setImagetoHolder(Activity activity, String file, ImageView view, int placeholder){
-        mImageThumbSize = 300;
-        mImageThumbSpacing = Context.getInstance().applicationContext().getResources().getDimensionPixelSize(R.dimen.image_thumbnail_spacing);
-
-
-        ImageCache.ImageCacheParams cacheParams =
-                new ImageCache.ImageCacheParams(activity, IMAGE_CACHE_DIR);
-        cacheParams.setMemCacheSizePercent(0.50f); // Set memory cache to 25% of app memory
-        mImageFetcher = new ImageFetcher(activity, mImageThumbSize);
-        mImageFetcher.setLoadingImage(placeholder);
-        mImageFetcher.addImageCache(activity.getFragmentManager(), cacheParams);
-        mImageFetcher.loadImage("file:///"+file,view);
-    }
-
-    public String arrayToString(String[]data,String separator){
+//    public static void setImagetoHolder(Activity activity, String file, ImageView view, int placeholder){
+//        mImageThumbSize = 300;
+//        mImageThumbSpacing = Context.getInstance().applicationContext().getResources().getDimensionPixelSize(R.dimen.image_thumbnail_spacing);
+//
+//
+//        ImageCache.ImageCacheParams cacheParams =
+//                new ImageCache.ImageCacheParams(activity, IMAGE_CACHE_DIR);
+//        cacheParams.setMemCacheSizePercent(0.50f); // Set memory cache to 25% of app memory
+//        mImageFetcher = new ImageFetcher(activity, mImageThumbSize);
+//        mImageFetcher.setLoadingImage(placeholder);
+//        mImageFetcher.addImageCache(activity.getFragmentManager(), cacheParams);
+//        mImageFetcher.loadImage("file:///"+file,view);
+//    }
+    public String arrayToString(String[]data, String separator){
         String umurs="";
         for(int i=0;i<data.length;i++){
             umurs = umurs + "," + Integer.toString(Integer.parseInt(data[i])/30);
@@ -366,15 +333,11 @@ public class GiziDetailActivity extends Activity {
         return result;
     }
 
-
-
     @Override
     public void onBackPressed() {
         finish();
         startActivity(new Intent(this, GiziSmartRegisterActivity.class));
         overridePendingTransition(0, 0);
-
-
     }
 
     @Override
@@ -382,8 +345,6 @@ public class GiziDetailActivity extends Activity {
         android.util.Log.e(TAG, "onActivityResult: refresh");
         finish();
         startActivity(getIntent());
-
     }
-
 
 }
