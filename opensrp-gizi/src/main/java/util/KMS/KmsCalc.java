@@ -13,7 +13,7 @@ public class KmsCalc {
             int tahun = Integer.parseInt(currentDate.substring(0, 4)) - Integer.parseInt(lastVisitDate.substring(0, 4));
             int bulan = Integer.parseInt(currentDate.substring(5, 7)) - Integer.parseInt(lastVisitDate.substring(5, 7));
             int hari = Integer.parseInt(currentDate.substring(8)) - Integer.parseInt(lastVisitDate.substring(8));
-            return (tahun * 12 + bulan + (int) (hari / 30));
+            return (tahun * 12 + bulan + hari / 30);
     }
 
     public String cek2T(KmsPerson bayi){

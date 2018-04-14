@@ -19,7 +19,7 @@ public class VaksinatorDateSort implements SortOption {
     ByColumnAndByDetails byColumnAndByDetails;
 
     public enum ByColumnAndByDetails{
-        byColumn,byDetails;
+        byColumn,byDetails
     }
 
     public VaksinatorDateSort() {

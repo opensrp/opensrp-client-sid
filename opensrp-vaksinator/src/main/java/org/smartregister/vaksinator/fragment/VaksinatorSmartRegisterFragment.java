@@ -503,7 +503,7 @@ public class VaksinatorSmartRegisterFragment extends SecuredNativeSmartRegisterC
 
     //    WD
     public void setCriteria(String criteria) {
-        this.criteria = criteria;
+        VaksinatorSmartRegisterFragment.criteria = criteria;
     }
 
     public static String getCriteria() {

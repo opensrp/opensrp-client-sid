@@ -329,7 +329,7 @@ public class GiziSmartRegisterActivity extends SecuredNativeSmartRegisterActivit
         System.out.println("start form activity / nama = " + name);
         CharSequence selections[] = new CharSequence[]{name, name, name};
 
-        selections[choice] = (CharSequence) name;
+        selections[choice] = name;
 
         String query = "SELECT namaBayi FROM ec_anak where ec_anak.is_closed = 0";
         Cursor cursor = context().commonrepository("ec_anak").rawCustomQueryForAdapter(query);
@@ -344,7 +344,7 @@ public class GiziSmartRegisterActivity extends SecuredNativeSmartRegisterActivit
                 else if (temp.equals(name))
                     i--;
                 else
-                    selections[i] = (CharSequence) temp;
+                    selections[i] = temp;
                 cursor.moveToFirst();
             }
         }

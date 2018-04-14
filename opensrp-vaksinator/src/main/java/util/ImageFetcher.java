@@ -270,7 +270,7 @@ public class ImageFetcher extends ImageResizer {
 
         try {
             final URL url = new URL(urlString);
-            urlConnection = (URLConnection) url.openConnection();
+            urlConnection = url.openConnection();
             in = new BufferedInputStream(urlConnection.getInputStream(), IO_BUFFER_SIZE);
             out = new BufferedOutputStream(outputStream, IO_BUFFER_SIZE);
 

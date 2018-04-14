@@ -96,7 +96,7 @@ public class Tools {
                                 for (String d : temp.getColumnNames()) {
                                     String value = "";
                                     if (d != "") {
-                                        if (temp.getType(temp.getColumnIndex(d)) == temp.FIELD_TYPE_BLOB) {
+                                        if (temp.getType(temp.getColumnIndex(d)) == Cursor.FIELD_TYPE_BLOB) {
                                             value = "blob";
                                         } else {
                                             value = temp.getString(temp.getColumnIndex(d));

@@ -517,7 +517,7 @@ public class GiziSmartRegisterFragment extends SecuredNativeSmartRegisterCursorA
 
     //    WD
     public void setCriteria(String criteria) {
-        this.criteria = criteria;
+        GiziSmartRegisterFragment.criteria = criteria;
     }
 
     public static String getCriteria() {

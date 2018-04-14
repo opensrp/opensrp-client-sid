@@ -532,7 +532,7 @@ public class TTSmartRegisterFragment extends SecuredNativeSmartRegisterCursorAda
 
     //    WD
     public void setCriteria(String criteria) {
-        this.criteria = criteria;
+        TTSmartRegisterFragment.criteria = criteria;
     }
 
     public static String getCriteria() {

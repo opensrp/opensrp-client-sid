@@ -280,7 +280,7 @@ public class ChildSmartClientsProvider implements SmartRegisterCLientsProviderFo
             int umur = Integer.parseInt(history1[history1.length - 1].split(":")[0]);
             double berat = Double.parseDouble(history1[history1.length - 1].split(":")[1]);
             double tinggi;
-            boolean isMale = Support.getDetails(pc,"gender").toLowerCase().contains("em");;
+            boolean isMale = Support.getDetails(pc,"gender").toLowerCase().contains("em");
 
             if (umur<1857){
                 ZScoreSystemCalculation calculator = new ZScoreSystemCalculation();

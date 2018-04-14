@@ -54,7 +54,7 @@ public class AnakSmartRegisterFragment extends BaseSmartRegisterFragment {
     }
 
     public void setCriteria(String criteria) {
-        this.criteria = criteria;
+        AnakSmartRegisterFragment.criteria = criteria;
     }
 
     @Override

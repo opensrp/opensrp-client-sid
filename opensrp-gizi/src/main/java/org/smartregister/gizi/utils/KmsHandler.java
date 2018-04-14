@@ -61,7 +61,7 @@ public class KmsHandler  implements FormSubmissionHandler {
         detailsRepository.add(entityID, "preload_history_tinggi", tinggi, tsLong);
         detailsRepository.add(entityID, "kunjunganSebelumnya", lastVisitDate, tsLong);
         ZScoreSystemCalculation zScore = new ZScoreSystemCalculation();
-        if(submission.getFieldValue("tanggalPenimbangan") != null ? !submission.getFieldValue("tanggalPenimbangan").toLowerCase().equals("") : false)
+        if(submission.getFieldValue("tanggalPenimbangan") != null && !submission.getFieldValue("tanggalPenimbangan").toLowerCase().equals(""))
         {
             if(zScore.dailyUnitCalculationOf(dateOfBirth, lastVisitDate) < 1857) {
                 String[]tempAgeW = history[0].split(",");
@@ -112,7 +112,7 @@ public class KmsHandler  implements FormSubmissionHandler {
         String tanggal_sebelumnya="", tanggal2sblmnya="";
 
         if(submission.getFieldValue("history_berat") != null && submission.getFieldValue("tanggalLahirAnak") != null) {
-            if(submission.getFieldValue("tanggalPenimbangan") != null ? !submission.getFieldValue("tanggalPenimbangan").toLowerCase().equals("") : false) {
+            if(submission.getFieldValue("tanggalPenimbangan") != null && !submission.getFieldValue("tanggalPenimbangan").toLowerCase().equals("")) {
                 String[] historyBerat = Support.insertionSort(submission.getFieldValue("history_berat"));
                 String latestDate = Support.findDate(submission.getFieldValue("tanggalLahirAnak"), Integer.parseInt(historyBerat[historyBerat.length - 1].split(":")[0]));
                 if (submission.getFieldValue("tanggalPenimbangan").toLowerCase().equals(latestDate.toLowerCase()) && submission.getFieldValue("kunjunganSebelumnya") != null) {

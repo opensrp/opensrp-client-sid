@@ -480,7 +480,7 @@ public void updateSearchView(){
 
     //    WD
     public void setCriteria(String criteria) {
-        this.criteria = criteria;
+        GiziIbuSmartRegisterFragment.criteria = criteria;
     }
 
     public static String getCriteria() {
