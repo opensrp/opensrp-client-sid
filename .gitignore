@@ -76,3 +76,4 @@ project.properties
 a.png
 lib/bpm
 lib/
+.idea/*.xml
