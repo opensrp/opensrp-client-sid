@@ -1,0 +1,824 @@
+<form autocomplete="off" class="or clearfix" dir="ltr" id="Kartu_ibu" novalidate="novalidate">
+    <!--This form was created by transforming a OpenRosa-flavored (X)Form using an XSL stylesheet created by Enketo LLC.-->
+    <section class="form-logo"></section>
+    <h3 dir="auto" id="form-title">Identitas Ibu</h3>
+    <select data-default-lang="Bahasa" id="form-languages">
+        <option data-dir="ltr" value="Bahasa">Bahasa</option>
+        <option data-dir="ltr" value="en">English</option>
+    </select>
+    <label class="question note non-select ">
+        <span class="question-label active" data-itext-id="/Kartu_ibu/generated_note_name_13:label"
+            lang="Bahasa">Desa :
+            <span class="or-output" data-value=" /Kartu_ibu/Village "></span>
+        </span>
+        <span class="question-label " data-itext-id="/Kartu_ibu/generated_note_name_13:label"
+            lang="en">-
+        </span>
+        <input name="/Kartu_ibu/generated_note_name_13" data-type-xml="string" readonly="readonly"
+            type="text" />
+    </label>
+    <label class="question note non-select ">
+        <span class="question-label active" data-itext-id="/Kartu_ibu/generated_note_name_14:label"
+            lang="Bahasa">Dusun :
+            <span class="or-output" data-value=" /Kartu_ibu/Sub-village "></span>
+        </span>
+        <span class="question-label " data-itext-id="/Kartu_ibu/generated_note_name_14:label"
+            lang="en">-
+        </span>
+        <input name="/Kartu_ibu/generated_note_name_14" data-type-xml="string" readonly="readonly"
+            type="text" />
+    </label>
+    <fieldset class="question simple-select ">
+        <fieldset>
+            <legend>
+                <span class="question-label active" data-itext-id="/Kartu_ibu/pasien_wilayah:label"
+                    lang="Bahasa">Apakah ibu adalah pasien wilayah
+                    Anda?
+                </span>
+                <span class="question-label " data-itext-id="/Kartu_ibu/pasien_wilayah:label"
+                    lang="en">Is the mother living in your
+                    catchment area?
+                </span>
+                <span class="required">*</span>
+            </legend>
+            <div class="option-wrapper">
+                <label class="">
+                    <input name="/Kartu_ibu/pasien_wilayah" data-name="/Kartu_ibu/pasien_wilayah"
+                        data-type-xml="select1" required="required" type="radio"
+                        value="pasien_wilayah_desa" />
+                    <span class="option-label active"
+                        data-itext-id="/Kartu_ibu/pasien_wilayah/pasien_wilayah_desa:label"
+                        lang="Bahasa">Ya
+                    </span>
+                    <span class="option-label "
+                        data-itext-id="/Kartu_ibu/pasien_wilayah/pasien_wilayah_desa:label"
+                        lang="en">Yes
+                    </span>
+                </label>
+                <label class="">
+                    <input name="/Kartu_ibu/pasien_wilayah" data-name="/Kartu_ibu/pasien_wilayah"
+                        data-type-xml="select1" required="required" type="radio"
+                        value="pasien_luar_wilayah" />
+                    <span class="option-label active"
+                        data-itext-id="/Kartu_ibu/pasien_wilayah/pasien_luar_wilayah:label"
+                        lang="Bahasa">Tidak
+                    </span>
+                    <span class="option-label "
+                        data-itext-id="/Kartu_ibu/pasien_wilayah/pasien_luar_wilayah:label"
+                        lang="en">No
+                    </span>
+                </label>
+            </div>
+        </fieldset>
+        <span class="or-required-msg active" data-i18n="constraint.required" lang="">This field is
+            required
+        </span>
+    </fieldset>
+    <fieldset class="question simple-select ">
+        <fieldset>
+            <legend>
+                <span class="question-label active" data-itext-id="/Kartu_ibu/pasien_pindahan:label"
+                    lang="Bahasa">Apakah ibu adalah warga
+                    pindahan dari desa lain?
+                </span>
+                <span class="question-label " data-itext-id="/Kartu_ibu/pasien_pindahan:label"
+                    lang="en">Is the mother moving in to this
+                    village?
+                </span>
+                <span class="required">*</span>
+            </legend>
+            <div class="option-wrapper">
+                <label class="">
+                    <input name="/Kartu_ibu/pasien_pindahan" data-name="/Kartu_ibu/pasien_pindahan"
+                        data-type-xml="select1" required="required" type="radio" value="Yes" />
+                    <span class="option-label active"
+                        data-itext-id="/Kartu_ibu/pasien_pindahan/Yes:label" lang="Bahasa">Ya
+                    </span>
+                    <span class="option-label " data-itext-id="/Kartu_ibu/pasien_pindahan/Yes:label"
+                        lang="en">Yes
+                    </span>
+                </label>
+                <label class="">
+                    <input name="/Kartu_ibu/pasien_pindahan" data-name="/Kartu_ibu/pasien_pindahan"
+                        data-type-xml="select1" required="required" type="radio" value="No" />
+                    <span class="option-label active"
+                        data-itext-id="/Kartu_ibu/pasien_pindahan/No:label" lang="Bahasa">Tidak
+                    </span>
+                    <span class="option-label " data-itext-id="/Kartu_ibu/pasien_pindahan/No:label"
+                        lang="en">No
+                    </span>
+                </label>
+            </div>
+        </fieldset>
+        <span class="or-required-msg active" data-i18n="constraint.required" lang="">This field is
+            required
+        </span>
+    </fieldset>
+    <label class="question or-branch pre-init non-select ">
+        <span class="question-label active" data-itext-id="/Kartu_ibu/tgl_pindah:label"
+            lang="Bahasa">Sejak kapan ibu pindah ke sini?
+        </span>
+        <span class="question-label " data-itext-id="/Kartu_ibu/tgl_pindah:label" lang="en">Since
+            when did she move this village?
+        </span>
+        <span class="required">*</span>
+        <span class="or-hint active" data-itext-id="/Kartu_ibu/tgl_pindah:hint" lang="Bahasa">
+            Tuliskan tanggal ibu pindah ke desa ini
+        </span>
+        <span class="or-hint " data-itext-id="/Kartu_ibu/tgl_pindah:hint" lang="en">Write the date
+            when the mother moved into this village
+        </span>
+        <input name="/Kartu_ibu/tgl_pindah" data-constraint=".&lt; /Kartu_ibu/today "
+            data-relevant=" /Kartu_ibu/pasien_pindahan ='Yes'" data-type-xml="date"
+            required="required" type="date" />
+        <span class="or-constraint-msg active" data-i18n="constraint.invalid" lang="">Value not
+            allowed
+        </span>
+        <span class="or-required-msg active" data-i18n="constraint.required" lang="">This field is
+            required
+        </span>
+    </label>
+    <!--<label class="question non-select " type="hidden">-->
+        <!--<span class="question-label active" data-itext-id="/Kartu_ibu/tanggal_periksa:label"-->
+            <!--lang="Bahasa">Tanggal Registrasi-->
+        <!--</span>-->
+        <!--<span class="question-label " data-itext-id="/Kartu_ibu/tanggal_periksa:label" lang="en">-->
+            <!--Date of Registration-->
+        <!--</span>-->
+        <!--<span class="required">*</span>-->
+        <!--<input name="/Kartu_ibu/tanggal_periksa" data-constraint=".&lt;= /Kartu_ibu/today "-->
+            <!--data-type-xml="date" required="required" type="date" />-->
+        <!--<span class="or-constraint-msg active" data-i18n="constraint.invalid" lang="">Value not-->
+            <!--allowed-->
+        <!--</span>-->
+        <!--<span class="or-required-msg active" data-i18n="constraint.required" lang="">This field is-->
+            <!--required-->
+        <!--</span>-->
+    <!--</label>-->
+    <fieldset class="question simple-select ">
+        <fieldset>
+            <legend>
+                <span class="required">*</span>
+                <span class="question-label active" data-itext-id="/Kartu_ibu/lokasi_periksa:label"
+                    lang="Bahasa">Lokasi Periksa
+                </span>
+                <span class="question-label " data-itext-id="/Kartu_ibu/lokasi_periksa:label"
+                    lang="en">Location of Service
+                </span>
+
+            </legend>
+            <div class="option-wrapper">
+                <label class="">
+                    <input name="/Kartu_ibu/lokasi_periksa" data-name="/Kartu_ibu/lokasi_periksa"
+                        data-type-xml="select1" required="required" type="radio" value="Posyandu" />
+                    <span class="option-label active"
+                        data-itext-id="/Kartu_ibu/lokasi_periksa/Posyandu:label" lang="Bahasa">
+                        Posyandu
+                    </span>
+                    <span class="option-label "
+                        data-itext-id="/Kartu_ibu/lokasi_periksa/Posyandu:label" lang="en">Village
+                        Outreach
+                        Post
+                    </span>
+                </label>
+                <label class="">
+                    <input name="/Kartu_ibu/lokasi_periksa" data-name="/Kartu_ibu/lokasi_periksa"
+                        data-type-xml="select1" type="radio" value="Polindes" />
+                    <span class="option-label active"
+                        data-itext-id="/Kartu_ibu/lokasi_periksa/Polindes:label" lang="Bahasa">
+                        Polindes
+                    </span>
+                    <span class="option-label "
+                        data-itext-id="/Kartu_ibu/lokasi_periksa/Polindes:label" lang="en">Health
+                        Clinic Post
+                    </span>
+                </label>
+                <label class="">
+                    <input name="/Kartu_ibu/lokasi_periksa" data-name="/Kartu_ibu/lokasi_periksa"
+                        data-type-xml="select1" type="radio" value="Puskesmas" />
+                    <span class="option-label active"
+                        data-itext-id="/Kartu_ibu/lokasi_periksa/Puskesmas:label" lang="Bahasa">
+                        Puskesmas
+                    </span>
+                    <span class="option-label "
+                        data-itext-id="/Kartu_ibu/lokasi_periksa/Puskesmas:label" lang="en">Health
+                        Facility
+                    </span>
+                </label>
+                <label class="">
+                    <input name="/Kartu_ibu/lokasi_periksa" data-name="/Kartu_ibu/lokasi_periksa"
+                        data-type-xml="select1" type="radio" value="Rumah_Ibu" />
+                    <span class="option-label active"
+                        data-itext-id="/Kartu_ibu/lokasi_periksa/Rumah_Ibu:label" lang="Bahasa">
+                        Rumah Ibu
+                    </span>
+                    <span class="option-label "
+                        data-itext-id="/Kartu_ibu/lokasi_periksa/Rumah_Ibu:label" lang="en">Mother
+                        House
+                    </span>
+                </label>
+                <label class="">
+                    <input name="/Kartu_ibu/lokasi_periksa" data-name="/Kartu_ibu/lokasi_periksa"
+                        data-type-xml="select1" type="radio" value="Rumah_Sakit" />
+                    <span class="option-label active"
+                        data-itext-id="/Kartu_ibu/lokasi_periksa/Rumah_Sakit:label" lang="Bahasa">
+                        Rumah Sakit
+                    </span>
+                    <span class="option-label "
+                        data-itext-id="/Kartu_ibu/lokasi_periksa/Rumah_Sakit:label" lang="en">
+                        Hospital
+                    </span>
+                </label>
+                <label class="">
+                    <input name="/Kartu_ibu/lokasi_periksa" data-name="/Kartu_ibu/lokasi_periksa"
+                        data-type-xml="select1" type="radio" value="Lainnya" />
+                    <span class="option-label active"
+                        data-itext-id="/Kartu_ibu/lokasi_periksa/Lainnya:label" lang="Bahasa">
+                        Lainnya
+                    </span>
+                    <span class="option-label "
+                        data-itext-id="/Kartu_ibu/lokasi_periksa/Lainnya:label" lang="en">Other
+                    </span>
+                </label>
+            </div>
+        </fieldset>
+        <span class="or-required-msg active" data-i18n="constraint.required" lang="">This field is
+            required
+        </span>
+    </fieldset>
+    <label class="question or-branch pre-init non-select ">
+        <span class="question-label active" data-itext-id="/Kartu_ibu/lokasi_periksa_other:label"
+            lang="Bahasa">Lainnya
+        </span>
+        <span class="question-label " data-itext-id="/Kartu_ibu/lokasi_periksa_other:label"
+            lang="en">Other
+        </span>
+        <span class="or-hint active" data-itext-id="/Kartu_ibu/lokasi_periksa_other:hint"
+            lang="Bahasa">Lainnya
+        </span>
+        <span class="or-hint " data-itext-id="/Kartu_ibu/lokasi_periksa_other:hint" lang="en">Write
+            other location
+        </span>
+        <input name="/Kartu_ibu/lokasi_periksa_other"
+            data-relevant=" /Kartu_ibu/lokasi_periksa ='Lainnya'" data-type-xml="string"
+            type="text" />
+    </label>
+    <label class="question note non-select ">
+        <span class="question-label active" data-itext-id="/Kartu_ibu/generated_note_name_32:label"
+            lang="Bahasa">Unique ID:
+            <span class="or-output" data-value=" /Kartu_ibu/unique_id "></span>
+        </span>
+        <span class="question-label " data-itext-id="/Kartu_ibu/generated_note_name_32:label"
+            lang="en">Unique ID:
+            <span class="or-output" data-value=" /Kartu_ibu/unique_id "></span>
+        </span>
+        <input name="/Kartu_ibu/generated_note_name_32" data-type-xml="string" readonly="readonly"
+            type="text" />
+    </label>
+    <label class="question non-select ">
+        <span class="question-label active" data-itext-id="/Kartu_ibu/puskesmas:label"
+            lang="Bahasa">Puskesmas
+        </span>
+        <span class="question-label " data-itext-id="/Kartu_ibu/puskesmas:label" lang="en">Primary
+            Health Center (PHC)
+        </span>
+        <span class="required">*</span>
+        <span class="or-hint active" data-itext-id="/Kartu_ibu/puskesmas:hint" lang="Bahasa">Nama
+            puskesmas tempat ibu melakukan pemeriksaan
+        </span>
+        <span class="or-hint " data-itext-id="/Kartu_ibu/puskesmas:hint" lang="en">Name of primary
+            health center where mother does a check-up
+        </span>
+        <input name="/Kartu_ibu/puskesmas" data-type-xml="string" required="required" type="text" />
+        <span class="or-required-msg active" data-i18n="constraint.required" lang="">This field is
+            required
+        </span>
+    </label>
+    <label class="question non-select ">
+        <span class="question-label active" data-itext-id="/Kartu_ibu/no_ibu:label" lang="Bahasa">
+            No. Ibu
+        </span>
+        <span class="question-label " data-itext-id="/Kartu_ibu/no_ibu:label" lang="en">Mother's
+            Number
+        </span>
+        <input name="/Kartu_ibu/no_ibu" data-type-xml="int" type="number" />
+    </label>
+    <label class="question non-select ">
+        <span class="question-label active" data-itext-id="/Kartu_ibu/nik:label" lang="Bahasa">NIK
+        </span>
+        <span class="question-label " data-itext-id="/Kartu_ibu/nik:label" lang="en">National Id
+            Number
+        </span>
+        <input name="/Kartu_ibu/nik" data-type-xml="int" type="number" />
+    </label>
+    <label class="question non-select ">
+        <span class="question-label active" data-itext-id="/Kartu_ibu/nama_lengkap:label"
+            lang="Bahasa">Nama lengkap
+        </span>
+        <span class="question-label " data-itext-id="/Kartu_ibu/nama_lengkap:label" lang="en">Full
+            name
+        </span>
+        <span class="required">*</span>
+        <span class="or-hint active" data-itext-id="/Kartu_ibu/nama_lengkap:hint" lang="Bahasa">Nama
+            lengkap Ibu
+        </span>
+        <span class="or-hint " data-itext-id="/Kartu_ibu/nama_lengkap:hint" lang="en">Mother's full
+            name
+        </span>
+        <input name="/Kartu_ibu/nama_lengkap" data-type-xml="string" required="required"
+            type="text" />
+        <span class="or-required-msg active" data-i18n="constraint.required" lang="">This field is
+            required
+        </span>
+    </label>
+    <label class="question non-select ">
+        <span class="question-label active" data-itext-id="/Kartu_ibu/nama_suami:label"
+            lang="Bahasa">Nama suami
+        </span>
+        <span class="question-label " data-itext-id="/Kartu_ibu/nama_suami:label" lang="en">Name of
+            husband
+        </span>
+        <span class="required">*</span>
+        <span class="or-hint active" data-itext-id="/Kartu_ibu/nama_suami:hint" lang="Bahasa">Nama
+            lengkap suami
+        </span>
+        <span class="or-hint " data-itext-id="/Kartu_ibu/nama_suami:hint" lang="en">Husband's full
+            name
+        </span>
+        <input name="/Kartu_ibu/nama_suami" data-type-xml="string" required="required"
+            type="text" />
+        <span class="or-required-msg active" data-i18n="constraint.required" lang="">This field is
+            required
+        </span>
+    </label>
+    <label class="question non-select ">
+        <span class="question-label active" data-itext-id="/Kartu_ibu/tanggal_lahir_ibu:label"
+            lang="Bahasa">Tanggal lahir
+        </span>
+        <span class="question-label " data-itext-id="/Kartu_ibu/tanggal_lahir_ibu:label" lang="en">
+            DOB
+        </span>
+        <span class="required">*</span>
+        <span class="or-hint active" data-itext-id="/Kartu_ibu/tanggal_lahir_ibu:hint"
+            lang="Bahasa">Tanggal lahir Ibu
+        </span>
+        <span class="or-hint " data-itext-id="/Kartu_ibu/tanggal_lahir_ibu:hint" lang="en">Mother's
+            date of birth
+        </span>
+        <input name="/Kartu_ibu/tanggal_lahir_ibu" data-type-xml="date" required="required"
+            type="date" />
+        <span class="or-required-msg active" data-i18n="constraint.required" lang="">This field is
+            required
+        </span>
+    </label>
+    <label class="question note non-select ">
+        <span class="question-label active" data-itext-id="/Kartu_ibu/generated_note_name_40:label"
+            lang="Bahasa">Umur:
+            <span class="or-output" data-value=" /Kartu_ibu/umur "></span>
+        </span>
+        <span class="question-label " data-itext-id="/Kartu_ibu/generated_note_name_40:label"
+            lang="en">Age
+        </span>
+        <input name="/Kartu_ibu/generated_note_name_40" data-type-xml="string" readonly="readonly"
+            type="text" />
+    </label>
+    <label class="question non-select ">
+        <span class="question-label active" data-itext-id="/Kartu_ibu/alamat_domisili:label"
+            lang="Bahasa">Alamat domisili
+        </span>
+        <span class="question-label " data-itext-id="/Kartu_ibu/alamat_domisili:label" lang="en">
+            Address
+        </span>
+        <span class="or-hint active" data-itext-id="/Kartu_ibu/alamat_domisili:hint" lang="Bahasa">
+            Alamat tempat tinggal (rumah) Ibu
+        </span>
+        <span class="or-hint " data-itext-id="/Kartu_ibu/alamat_domisili:hint" lang="en">Mother's
+            address
+        </span>
+        <input name="/Kartu_ibu/alamat_domisili" data-type-xml="string" type="text" />
+    </label>
+    <label class="question or-appearance-minimal ">
+        <span class="question-label active" data-itext-id="/Kartu_ibu/pendidikan:label"
+            lang="Bahasa">Pendidikan
+        </span>
+        <span class="question-label " data-itext-id="/Kartu_ibu/pendidikan:label" lang="en">
+            Education
+        </span>
+        <span class="or-hint active" data-itext-id="/Kartu_ibu/pendidikan:hint" lang="Bahasa">
+            Pendidikan Terakhir Ibu
+        </span>
+        <span class="or-hint " data-itext-id="/Kartu_ibu/pendidikan:hint" lang="en">Mother's highest
+            education
+        </span>
+        <select name="/Kartu_ibu/pendidikan" data-name="/Kartu_ibu/pendidikan"
+            data-type-xml="select1">
+            <option value="">...</option>
+            <option value="Sekolah_Dasar">Sekolah Dasar (SD)</option>
+            <option value="Sekolah_Menengah_Pertama">Sekolah Menengah Pertama (SMP)</option>
+            <option value="Sekolah_Menengah_Atas">Sekolah Menengah Atas (SMA)</option>
+            <option value="Perguruan_Tinggi">Perguruan Tinggi</option>
+            <option value="Tidak_sekolah">Tidak sekolah</option>
+        </select>
+        <span style="display:none;" class="or-option-translations">
+            <span data-option-value="Sekolah_Dasar" lang="Bahasa">Sekolah Dasar (SD)</span>
+            <span data-option-value="Sekolah_Dasar" lang="en">Primary School</span>
+            <span data-option-value="Sekolah_Menengah_Pertama" lang="Bahasa">Sekolah Menengah
+                Pertama (SMP)
+            </span>
+            <span data-option-value="Sekolah_Menengah_Pertama" lang="en">Junior High School</span>
+            <span data-option-value="Sekolah_Menengah_Atas" lang="Bahasa">Sekolah Menengah Atas
+                (SMA)
+            </span>
+            <span data-option-value="Sekolah_Menengah_Atas" lang="en">Senior High School</span>
+            <span data-option-value="Perguruan_Tinggi" lang="Bahasa">Perguruan Tinggi</span>
+            <span data-option-value="Perguruan_Tinggi" lang="en">College/University</span>
+            <span data-option-value="Tidak_sekolah" lang="Bahasa">Tidak sekolah</span>
+            <span data-option-value="Tidak_sekolah" lang="en">No Formal Education</span>
+        </span>
+    </label>
+    <label class="question or-appearance-minimal ">
+        <span class="question-label active" data-itext-id="/Kartu_ibu/agama:label" lang="Bahasa">
+            Agama
+        </span>
+        <span class="question-label " data-itext-id="/Kartu_ibu/agama:label" lang="en">Religion
+        </span>
+        <span class="or-hint active" data-itext-id="/Kartu_ibu/agama:hint" lang="Bahasa">Agama Ibu
+        </span>
+        <span class="or-hint " data-itext-id="/Kartu_ibu/agama:hint" lang="en">Mother's religion
+        </span>
+        <select name="/Kartu_ibu/agama" data-name="/Kartu_ibu/agama" data-type-xml="select1">
+            <option value="">...</option>
+            <option value="Islam">Islam</option>
+            <option value="Hindu">Hindu</option>
+            <option value="Kristen">Kristen</option>
+            <option value="Katolik">Katolik</option>
+            <option value="Budha">Budha</option>
+            <option value="Lainnya">Lainnya</option>
+        </select>
+        <span style="display:none;" class="or-option-translations">
+            <span data-option-value="Islam" lang="Bahasa">Islam</span>
+            <span data-option-value="Islam" lang="en">Islam (I)</span>
+            <span data-option-value="Hindu" lang="Bahasa">Hindu</span>
+            <span data-option-value="Hindu" lang="en">Hinduism (H);</span>
+            <span data-option-value="Kristen" lang="Bahasa">Kristen</span>
+            <span data-option-value="Kristen" lang="en">Christianity (K)</span>
+            <span data-option-value="Katolik" lang="Bahasa">Katolik</span>
+            <span data-option-value="Katolik" lang="en">Catholic</span>
+            <span data-option-value="Budha" lang="Bahasa">Budha</span>
+            <span data-option-value="Budha" lang="en">Buddhism (B)</span>
+            <span data-option-value="Lainnya" lang="Bahasa">Lainnya</span>
+            <span data-option-value="Lainnya" lang="en">Other</span>
+        </span>
+    </label>
+    <label class="question or-appearance-minimal ">
+        <span class="question-label active" data-itext-id="/Kartu_ibu/pekerjaan:label"
+            lang="Bahasa">Pekerjaan
+        </span>
+        <span class="question-label " data-itext-id="/Kartu_ibu/pekerjaan:label" lang="en">
+            Occupation
+        </span>
+        <span class="or-hint active" data-itext-id="/Kartu_ibu/pekerjaan:hint" lang="Bahasa">
+            Pekerjaan Ibu
+        </span>
+        <span class="or-hint " data-itext-id="/Kartu_ibu/pekerjaan:hint" lang="en">Mother's
+            occupation
+        </span>
+        <select name="/Kartu_ibu/pekerjaan" data-name="/Kartu_ibu/pekerjaan"
+            data-type-xml="select1">
+            <option value="">...</option>
+            <option value="Ibu_Rumah_Tangga">Ibu rumah tangga</option>
+            <option value="Petani">Petani</option>
+            <option value="Nelayan">Nelayan</option>
+            <option value="Pedagang">Pedagang</option>
+            <option value="PNS">PNS</option>
+            <option value="Swasta">Swasta</option>
+            <option value="Lainnya">Lainnya</option>
+        </select>
+        <span style="display:none;" class="or-option-translations">
+            <span data-option-value="Ibu_Rumah_Tangga" lang="Bahasa">Ibu rumah tangga</span>
+            <span data-option-value="Ibu_Rumah_Tangga" lang="en">Housewife</span>
+            <span data-option-value="Petani" lang="Bahasa">Petani</span>
+            <span data-option-value="Petani" lang="en">Farmer</span>
+            <span data-option-value="Nelayan" lang="Bahasa">Nelayan</span>
+            <span data-option-value="Nelayan" lang="en">Fisherman</span>
+            <span data-option-value="Pedagang" lang="Bahasa">Pedagang</span>
+            <span data-option-value="Pedagang" lang="en">Merchant</span>
+            <span data-option-value="PNS" lang="Bahasa">PNS</span>
+            <span data-option-value="PNS" lang="en">Civil Servant</span>
+            <span data-option-value="Swasta" lang="Bahasa">Swasta</span>
+            <span data-option-value="Swasta" lang="en">Private Employee</span>
+            <span data-option-value="Lainnya" lang="Bahasa">Lainnya</span>
+            <span data-option-value="Lainnya" lang="en">Other</span>
+        </span>
+    </label>
+    <label class="question or-branch pre-init non-select ">
+        <span class="question-label active" data-itext-id="/Kartu_ibu/pekerjaan_other:label"
+            lang="Bahasa">Lainnya
+        </span>
+        <span class="question-label " data-itext-id="/Kartu_ibu/pekerjaan_other:label" lang="en">
+            Other
+        </span>
+        <span class="or-hint active" data-itext-id="/Kartu_ibu/pekerjaan_other:hint" lang="Bahasa">
+            Lainya
+        </span>
+        <span class="or-hint " data-itext-id="/Kartu_ibu/pekerjaan_other:hint" lang="en">Write other
+            location
+        </span>
+        <input name="/Kartu_ibu/pekerjaan_other" data-relevant=" /Kartu_ibu/pekerjaan ='Lainnya'"
+            data-type-xml="string" type="text" />
+    </label>
+    <fieldset class="question simple-select ">
+        <fieldset>
+            <legend>
+                <span class="question-label active" data-itext-id="/Kartu_ibu/gakin_tidak:label"
+                    lang="Bahasa">Gakin/ Tidak
+                </span>
+                <span class="question-label " data-itext-id="/Kartu_ibu/gakin_tidak:label"
+                    lang="en">Poor Family/not
+                </span>
+                <span class="or-hint active" data-itext-id="/Kartu_ibu/gakin_tidak:hint"
+                    lang="Bahasa">Apakah Ibu termasuk keluarga miskin
+                    atau tidak
+                </span>
+                <span class="or-hint " data-itext-id="/Kartu_ibu/gakin_tidak:hint" lang="en">Does
+                    mother belong to poor family or not? (Low-Income Population / Financially poor)
+                </span>
+            </legend>
+            <div class="option-wrapper">
+                <label class="">
+                    <input name="/Kartu_ibu/gakin_tidak" data-name="/Kartu_ibu/gakin_tidak"
+                        data-type-xml="select1" type="radio" value="Yes" />
+                    <span class="option-label active"
+                        data-itext-id="/Kartu_ibu/gakin_tidak/Yes:label" lang="Bahasa">Ya
+                    </span>
+                    <span class="option-label " data-itext-id="/Kartu_ibu/gakin_tidak/Yes:label"
+                        lang="en">Yes
+                    </span>
+                </label>
+                <label class="">
+                    <input name="/Kartu_ibu/gakin_tidak" data-name="/Kartu_ibu/gakin_tidak"
+                        data-type-xml="select1" type="radio" value="No" />
+                    <span class="option-label active"
+                        data-itext-id="/Kartu_ibu/gakin_tidak/No:label" lang="Bahasa">Tidak
+                    </span>
+                    <span class="option-label " data-itext-id="/Kartu_ibu/gakin_tidak/No:label"
+                        lang="en">No
+                    </span>
+                </label>
+            </div>
+        </fieldset>
+    </fieldset>
+    <label class="question non-select ">
+        <span class="question-label active" data-itext-id="/Kartu_ibu/posyandu:label" lang="Bahasa">
+            Posyandu
+        </span>
+        <span class="question-label " data-itext-id="/Kartu_ibu/posyandu:label" lang="en">Name of
+            Outreach Post
+        </span>
+        <span class="required">*</span>
+        <span class="or-hint active" data-itext-id="/Kartu_ibu/posyandu:hint" lang="Bahasa">Nama
+            Posyandu tempat Ibu menerima pelayanan kesehatan
+        </span>
+        <span class="or-hint " data-itext-id="/Kartu_ibu/posyandu:hint" lang="en">Name of Health
+            Post where mother receives health care
+        </span>
+        <input name="/Kartu_ibu/posyandu" data-type-xml="string" required="required" type="text" />
+        <span class="or-required-msg active" data-i18n="constraint.required" lang="">This field is
+            required
+        </span>
+    </label>
+    <label class="question non-select ">
+        <span class="question-label active" data-itext-id="/Kartu_ibu/nama_kader:label"
+            lang="Bahasa">Nama Kader
+        </span>
+        <span class="question-label " data-itext-id="/Kartu_ibu/nama_kader:label" lang="en">Name of
+            Community Volunteer
+        </span>
+        <span class="or-hint active" data-itext-id="/Kartu_ibu/nama_kader:hint" lang="Bahasa">Nama
+            kader Posyandu yang memberi Ibu pelayanan kesehatan
+        </span>
+        <span class="or-hint " data-itext-id="/Kartu_ibu/nama_kader:hint" lang="en">Name of
+            community health worker that gives health service
+        </span>
+        <input name="/Kartu_ibu/nama_kader" data-type-xml="string" type="text" />
+    </label>
+    <label class="question non-select ">
+        <span class="question-label active" data-itext-id="/Kartu_ibu/nama_dukun:label"
+            lang="Bahasa">Nama Dukun
+        </span>
+        <span class="question-label " data-itext-id="/Kartu_ibu/nama_dukun:label" lang="en">Name of
+            Traditional Birth Attendant
+        </span>
+        <span class="or-hint active" data-itext-id="/Kartu_ibu/nama_dukun:hint" lang="Bahasa">Nama
+            dukun yang menemani Ibu pada saat menerima pelayanan kesehatan
+        </span>
+        <span class="or-hint " data-itext-id="/Kartu_ibu/nama_dukun:hint" lang="en">Name of
+            traditional birth attendant that accompany mother during health care service
+        </span>
+        <input name="/Kartu_ibu/nama_dukun" data-type-xml="string" type="text" />
+    </label>
+    <label class="question or-appearance-minimal ">
+        <span class="question-label active" data-itext-id="/Kartu_ibu/asuransi_jiwa:label"
+            lang="Bahasa">Asuransi Jiwa
+        </span>
+        <span class="question-label " data-itext-id="/Kartu_ibu/asuransi_jiwa:label" lang="en">
+            Insurance
+        </span>
+        <span class="or-hint active" data-itext-id="/Kartu_ibu/asuransi_jiwa:hint" lang="Bahasa">
+            Jenis asuransi yang dimiliki Ibu
+        </span>
+        <span class="or-hint " data-itext-id="/Kartu_ibu/asuransi_jiwa:hint" lang="en">Type
+            insurance that mother has
+        </span>
+        <select name="/Kartu_ibu/asuransi_jiwa" data-name="/Kartu_ibu/asuransi_jiwa"
+            data-type-xml="select1">
+            <option value="">...</option>
+            <option value="Jaminan_Kesehatan_Masyarakat">Jaminan Kesehatan Masyarakat (Jamkesmas)
+            </option>
+            <option value="Jamsostek">Jaminan Sosial dan Ketenagakerjaan (Jamsostek)</option>
+            <option value="Jaminan_Kesehatan_Daerah">Jaminan Kesehatan Daerah (Jamkesda)</option>
+            <option value="Asuransi_Kesehatan">Asuransi Kesehatan (Askes)</option>
+            <option value="Jaminan_Persalinan">Jaminan Persalinan (Jampersal)</option>
+            <option value="Tidak_Ada_Asuransi">Tidak memiliki asuransi/pembiayaan</option>
+        </select>
+        <span style="display:none;" class="or-option-translations">
+            <span data-option-value="Jaminan_Kesehatan_Masyarakat" lang="Bahasa">Jaminan Kesehatan
+                Masyarakat (Jamkesmas)
+            </span>
+            <span data-option-value="Jaminan_Kesehatan_Masyarakat" lang="en">National Health
+                Insurance for the Poor
+            </span>
+            <span data-option-value="Jamsostek" lang="Bahasa">Jaminan Sosial dan Ketenagakerjaan
+                (Jamsostek)
+            </span>
+            <span data-option-value="Jamsostek" lang="en">Social Insurance for Private Sector
+                Workers
+            </span>
+            <span data-option-value="Jaminan_Kesehatan_Daerah" lang="Bahasa">Jaminan Kesehatan
+                Daerah (Jamkesda)
+            </span>
+            <span data-option-value="Jaminan_Kesehatan_Daerah" lang="en">Regional Health Insurance
+                for the Poor
+            </span>
+            <span data-option-value="Asuransi_Kesehatan" lang="Bahasa">Asuransi Kesehatan (Askes)
+            </span>
+            <span data-option-value="Asuransi_Kesehatan" lang="en">Health Insurance for Civil
+                Servants and Retired Armed Forces Personnel
+            </span>
+            <span data-option-value="Jaminan_Persalinan" lang="Bahasa">Jaminan Persalinan
+                (Jampersal)
+            </span>
+            <span data-option-value="Jaminan_Persalinan" lang="en">Health Insurance for Pregnant
+                Women and Newborns
+            </span>
+            <span data-option-value="Tidak_Ada_Asuransi" lang="Bahasa">Tidak memiliki
+                asuransi/pembiayaan
+            </span>
+            <span data-option-value="Tidak_Ada_Asuransi" lang="en">No Insurance</span>
+        </span>
+    </label>
+    <label class="question or-appearance-minimal ">
+        <span class="question-label active" data-itext-id="/Kartu_ibu/golongan_darah:label"
+            lang="Bahasa">Golongan Darah
+        </span>
+        <span class="question-label " data-itext-id="/Kartu_ibu/golongan_darah:label" lang="en">
+            Blood Type
+        </span>
+        <span class="required">*</span>
+        <span class="or-hint active" data-itext-id="/Kartu_ibu/golongan_darah:hint" lang="Bahasa">
+            Menunjukan golongan darah Ibu
+        </span>
+        <span class="or-hint " data-itext-id="/Kartu_ibu/golongan_darah:hint" lang="en">Mother's
+            blood type
+        </span>
+        <select name="/Kartu_ibu/golongan_darah" data-name="/Kartu_ibu/golongan_darah"
+            data-type-xml="select1" required="required">
+            <option value="">...</option>
+            <option value="A">A</option>
+            <option value="B">B</option>
+            <option value="AB">AB</option>
+            <option value="O">O</option>
+            <option value="NA">Belum diketahui</option>
+        </select>
+        <span style="display:none;" class="or-option-translations">
+            <span data-option-value="A" lang="Bahasa">A</span>
+            <span data-option-value="A" lang="en">A</span>
+            <span data-option-value="B" lang="Bahasa">B</span>
+            <span data-option-value="B" lang="en">B</span>
+            <span data-option-value="AB" lang="Bahasa">AB</span>
+            <span data-option-value="AB" lang="en">AB</span>
+            <span data-option-value="O" lang="Bahasa">O</span>
+            <span data-option-value="O" lang="en">O</span>
+            <span data-option-value="NA" lang="Bahasa">Belum diketahui</span>
+            <span data-option-value="NA" lang="en">Unknown</span>
+        </span>
+        <span class="or-required-msg active" data-i18n="constraint.required" lang="">This field is
+            required
+        </span>
+    </label>
+    <label class="question non-select ">
+        <span class="question-label active" data-itext-id="/Kartu_ibu/nomor_telpon_hp:label"
+            lang="Bahasa">Nomor Telpon/Hp
+        </span>
+        <span class="question-label " data-itext-id="/Kartu_ibu/nomor_telpon_hp:label" lang="en">
+            Landline/Cell Phone Number
+        </span>
+        <span class="or-hint active" data-itext-id="/Kartu_ibu/nomor_telpon_hp:hint" lang="Bahasa">
+            Nomor telpon/Hp yang dimiliki oleh Ibu atau No telpon Keluarga
+        </span>
+        <span class="or-hint " data-itext-id="/Kartu_ibu/nomor_telpon_hp:hint" lang="en">Mother's
+            contact number
+        </span>
+        <input name="/Kartu_ibu/nomor_telpon_hp" data-constraint=".&gt;0 and .&lt;100000000000"
+            data-type-xml="string" type="text" />
+        <span class="or-constraint-msg active"
+            data-itext-id="/Kartu_ibu/nomor_telpon_hp:jr:constraintMsg" lang="Bahasa">Nomer teelpon
+            tidak boleh
+            lebih dari 12 digit
+        </span>
+        <span class="or-constraint-msg " data-itext-id="/Kartu_ibu/nomor_telpon_hp:jr:constraintMsg"
+            lang="en">Contact number should be no
+            more than 12 digits
+        </span>
+    </label>
+    <fieldset style="display:none;" id="or-preload-items">
+        <label class="calculation non-select ">
+            <input name="/Kartu_ibu/start" data-preload="timestamp" data-preload-params="start"
+                data-type-xml="dateTime" type="hidden" />
+        </label>
+        <label class="calculation non-select ">
+            <input name="/Kartu_ibu/today" data-preload="date" data-preload-params="today"
+                data-type-xml="date" type="hidden" />
+        </label>
+        <label class="calculation non-select ">
+            <input name="/Kartu_ibu/deviceid" data-preload="property" data-preload-params="deviceid"
+                data-type-xml="string" type="hidden" />
+        </label>
+        <label class="calculation non-select ">
+            <input name="/Kartu_ibu/simserial" data-preload="property"
+                data-preload-params="simserial" data-type-xml="string" type="hidden" />
+        </label>
+        <label class="calculation non-select ">
+            <input name="/Kartu_ibu/phonenumber" data-preload="property"
+                data-preload-params="phonenumber" data-type-xml="string" type="hidden" />
+        </label>
+        <label class="calculation non-select ">
+            <input name="/Kartu_ibu/end" data-preload="timestamp" data-preload-params="end"
+                data-type-xml="dateTime" type="hidden" />
+        </label>
+    </fieldset>
+    <fieldset style="display:none;" id="or-calculated-items">
+        <label class="calculation non-select ">
+            <input name="/Kartu_ibu/existing_location" data-calculate=" /Kartu_ibu/Village "
+                data-type-xml="string" type="hidden" />
+        </label>
+        <label class="calculation non-select ">
+            <input name="/Kartu_ibu/provinsi" data-calculate=" /Kartu_ibu/Province "
+                data-type-xml="string" type="hidden" />
+        </label>
+        <label class="calculation non-select ">
+            <input name="/Kartu_ibu/kabupaten" data-calculate=" /Kartu_ibu/District "
+                data-type-xml="string" type="hidden" />
+        </label>
+        <label class="calculation non-select ">
+            <input name="/Kartu_ibu/desa" data-calculate=" /Kartu_ibu/Village "
+                data-type-xml="string" type="hidden" />
+        </label>
+        <label class="calculation non-select ">
+            <input name="/Kartu_ibu/dusun" data-calculate=" /Kartu_ibu/Sub-village "
+                data-type-xml="string" type="hidden" />
+        </label>
+        <label class="calculation non-select ">
+            <input name="/Kartu_ibu/kecamatan" data-calculate=" /Kartu_ibu/Sub-district "
+                data-type-xml="string" type="hidden" />
+        </label>
+        <label class="calculation non-select ">
+            <input name="/Kartu_ibu/umur"
+                data-calculate="int(( /Kartu_ibu/today  -  /Kartu_ibu/tanggal_lahir_ibu ) div 365.25)"
+                data-type-xml="string" type="hidden" />
+        </label>
+        <label class="calculation non-select ">
+            <input name="/Kartu_ibu/high_risk_pregnancy_young_maternal_age"
+                data-calculate="if( /Kartu_ibu/umur  &lt;20, 'yes','no')" data-type-xml="string"
+                type="hidden" />
+        </label>
+        <label class="calculation non-select ">
+            <input name="/Kartu_ibu/high_risk_pregnancy_old_maternal_age"
+                data-calculate="if( /Kartu_ibu/umur  &gt;35, 'yes','no')" data-type-xml="string"
+                type="hidden" />
+        </label>
+        <label class="calculation non-select ">
+            <input name="/Kartu_ibu/reg_date" data-calculate=" /Kartu_ibu/today "
+                data-type-xml="string" type="hidden" />
+        </label>
+        <label class="calculation non-select ">
+            <input name="/Kartu_ibu/meta/instanceID" data-calculate="concat('uuid:', uuid())"
+                data-type-xml="string" type="hidden" />
+        </label>
+        <label class="calculation non-select ">
+            <input name="/Kartu_ibu/formhub/uuid"
+                data-calculate="'4a931daf447d4ba2b6391436ef77e33d'" data-type-xml="string"
+                type="hidden" />
+        </label>
+    </fieldset>
+</form>
