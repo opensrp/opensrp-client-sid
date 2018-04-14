@@ -72,16 +72,7 @@ project.properties
 .settings
 /opensrp-bidan/src/main/assets/config.properties
 /**/config.properties
-opensrp-app/
-opensrp-bidan2/
-opensrp-path/
-/opensrp-app/
-/opensrp-bidan2/
-/opensrp-path/
-/opensrp-vaksinator/
-opensrp-vaksinator/
 AllConstantsINA.java
 a.png
 lib/bpm
 lib/
-opensrp-bidan/src/main/java/org/smartregister/bidan/utils/AllConstantsINA.java
