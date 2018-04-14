@@ -49,10 +49,11 @@ script:
   #- ./gradlew connectedAndroidTest
   #Run All tests Unit and Instrumentation
   - travis_wait ./gradlew opensrp-vaksinator:clean opensrp-vaksinator:jacocoTestReport coveralls --stacktrace
+  - travis_wait ./gradlew opensrp-gizi:clean opensrp-gizi:jacocoTestReport coveralls --stacktrace
 
 after_failure:
  - pandoc opensrp-app-vaksinator/build/reports/tests/index.html -t plain
-
+ - pandoc opensrp-gizi/build/reports/tests/index.html -t plain
 
 notifications:
   slack:
