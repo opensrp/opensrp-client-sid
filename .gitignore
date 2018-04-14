@@ -72,7 +72,7 @@ project.properties
 .settings
 /opensrp-bidan/src/main/assets/config.properties
 /**/config.properties
-AllConstantsINA.java
+#AllConstantsINA.java
 a.png
 lib/bpm
 lib/
