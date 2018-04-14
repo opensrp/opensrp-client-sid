@@ -92,6 +92,7 @@
             android:name=".activity.SettingsActivity"
             android:screenOrientation="landscape" />
         <activity android:name=".utils.CameraPreviewActivity" />
+        <activity android:name=".activity.BaseRegisterActivity" />
         <!--<activity android:name=".utils.Camera2PreviewActivity" />-->
         <uses-library android:name="android.test.runner"/>
 
