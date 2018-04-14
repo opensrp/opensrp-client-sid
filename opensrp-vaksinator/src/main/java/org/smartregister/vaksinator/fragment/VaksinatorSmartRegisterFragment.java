@@ -13,6 +13,10 @@ import android.widget.EditText;
 
 import com.flurry.android.FlurryAgent;
 
+import org.opensrp.api.domain.Location;
+import org.opensrp.api.util.EntityUtils;
+import org.opensrp.api.util.LocationTree;
+import org.opensrp.api.util.TreeNode;
 import org.smartregister.Context;
 import org.smartregister.commonregistry.CommonPersonObjectClient;
 import org.smartregister.commonregistry.CommonPersonObjectController;
@@ -22,17 +26,16 @@ import org.smartregister.cursoradapter.CursorSortOption;
 import org.smartregister.cursoradapter.SecuredNativeSmartRegisterCursorAdapterFragment;
 import org.smartregister.cursoradapter.SmartRegisterPaginatedCursorAdapter;
 import org.smartregister.cursoradapter.SmartRegisterQueryBuilder;
+import org.smartregister.provider.SmartRegisterClientsProvider;
+import org.smartregister.util.StringUtil;
+import org.smartregister.vaksinator.R;
 import org.smartregister.vaksinator.activity.LoginActivity;
 import org.smartregister.vaksinator.activity.VaksinatorDetailActivity;
+import org.smartregister.vaksinator.activity.VaksinatorSmartRegisterActivity;
 import org.smartregister.vaksinator.libs.FlurryFacade;
+import org.smartregister.vaksinator.option.KICommonObjectFilterOption;
 import org.smartregister.vaksinator.option.VaksinatorServiceModeOption;
 import org.smartregister.vaksinator.provider.ChildSmartClientsProvider;
-import org.smartregister.vaksinator.activity.VaksinatorSmartRegisterActivity;
-import org.smartregister.vaksinator.option.KICommonObjectFilterOption;
-import org.smartregister.provider.SmartRegisterClientsProvider;
-import org.smartregister.vaksinator.R;
-
-import org.smartregister.util.StringUtil;
 import org.smartregister.view.activity.SecuredNativeSmartRegisterActivity;
 import org.smartregister.view.contract.ECClient;
 import org.smartregister.view.contract.SmartRegisterClients;
@@ -44,10 +47,6 @@ import org.smartregister.view.dialog.FilterOption;
 import org.smartregister.view.dialog.LocationSelectorDialogFragment;
 import org.smartregister.view.dialog.ServiceModeOption;
 import org.smartregister.view.dialog.SortOption;
-import org.opensrp.api.domain.Location;
-import org.opensrp.api.util.EntityUtils;
-import org.opensrp.api.util.LocationTree;
-import org.opensrp.api.util.TreeNode;
 
 import java.util.ArrayList;
 import java.util.Map;
@@ -57,7 +56,6 @@ import util.AsyncTask;
 import static android.view.View.INVISIBLE;
 import static android.view.View.VISIBLE;
 import static org.apache.commons.lang3.StringUtils.isEmpty;
-import static org.smartregister.util.Utils.getValue;
 
 /**
  * Created by koros on 10/12/15.

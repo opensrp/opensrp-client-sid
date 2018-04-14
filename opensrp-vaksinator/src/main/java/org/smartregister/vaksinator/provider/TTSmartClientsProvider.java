@@ -31,7 +31,6 @@ import org.smartregister.view.dialog.SortOption;
 import org.smartregister.view.viewholder.OnClickFormLauncher;
 
 import java.io.File;
-import java.util.Map;
 
 import static android.view.ViewGroup.LayoutParams.MATCH_PARENT;
 

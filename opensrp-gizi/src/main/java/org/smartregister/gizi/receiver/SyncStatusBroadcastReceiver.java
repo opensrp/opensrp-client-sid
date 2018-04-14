@@ -7,7 +7,6 @@ import android.content.IntentFilter;
 import android.os.Bundle;
 
 import org.smartregister.domain.FetchStatus;
-import org.smartregister.gizi.application.GiziApplication;
 
 import java.io.Serializable;
 import java.util.ArrayList;

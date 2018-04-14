@@ -2,38 +2,16 @@ package org.smartregister.gizi.sync;
 
 import android.content.ContentValues;
 import android.content.Context;
-import android.content.SharedPreferences;
-import android.database.Cursor;
-import android.preference.PreferenceManager;
 import android.util.Log;
 
 import org.apache.commons.lang3.StringUtils;
 import org.json.JSONArray;
-import org.json.JSONException;
 import org.json.JSONObject;
-import org.smartregister.clientandeventmodel.DateUtil;
-import org.smartregister.commonregistry.AllCommonsRepository;
-import org.smartregister.commonregistry.CommonRepository;
-import org.smartregister.domain.Alert;
-import org.smartregister.domain.AlertStatus;
-import org.smartregister.repository.AlertRepository;
-import org.smartregister.repository.AllSharedPreferences;
-import org.smartregister.repository.DetailsRepository;
-import org.smartregister.service.AlertService;
 import org.smartregister.sync.ClientProcessor;
-import org.smartregister.util.AssetHandler;
 
-import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.Date;
 import java.util.HashMap;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
-
-import static org.smartregister.event.Event.FORM_SUBMITTED;
 
 public class GiziClientProcessor extends ClientProcessor {
 

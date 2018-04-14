@@ -5,7 +5,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
-import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -15,11 +14,7 @@ import org.smartregister.bidan.utils.Support;
 import org.smartregister.commonregistry.CommonPersonObjectClient;
 import org.smartregister.repository.DetailsRepository;
 
-import butterknife.Bind;
-import butterknife.ButterKnife;
-
 import static org.smartregister.util.StringUtil.humanize;
-import static org.smartregister.util.StringUtil.humanizeAndDoUPPERCASE;
 
 //import org.smartregister.bidan.lib.FlurryFacade;
 

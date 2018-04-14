@@ -8,16 +8,16 @@ import org.smartregister.CoreLibrary;
 import org.smartregister.commonregistry.CommonFtsObject;
 import org.smartregister.repository.EventClientRepository;
 import org.smartregister.repository.Repository;
-import org.smartregister.vaksinator.sync.DrishtiSyncScheduler;
 import org.smartregister.vaksinator.activity.LoginActivity;
 import org.smartregister.vaksinator.receiver.VaksinSyncBroadcastReceiver;
 import org.smartregister.vaksinator.repository.VaksinatorRepository;
+import org.smartregister.vaksinator.sync.DrishtiSyncScheduler;
 import org.smartregister.view.activity.DrishtiApplication;
+
+import java.util.Locale;
 
 import static org.smartregister.util.Log.logError;
 import static org.smartregister.util.Log.logInfo;
-
-import java.util.Locale;
 
 /**
  * Created by koros on 1/22/16.

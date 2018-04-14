@@ -6,8 +6,8 @@ import android.util.Log;
 import net.sqlcipher.database.SQLiteDatabase;
 
 import org.apache.commons.lang3.StringUtils;
-import org.smartregister.gizi.application.GiziApplication;
 import org.smartregister.commonregistry.CommonFtsObject;
+import org.smartregister.gizi.application.GiziApplication;
 import org.smartregister.repository.EventClientRepository;
 import org.smartregister.repository.Repository;
 

@@ -1,12 +1,7 @@
 package org.smartregister.bidan.fragment;
 
 import android.content.Intent;
-import android.os.AsyncTask;
-import android.text.Editable;
-import android.text.TextWatcher;
-import android.util.Log;
 import android.view.View;
-import android.widget.EditText;
 
 import org.opensrp.api.domain.Location;
 import org.opensrp.api.util.EntityUtils;

@@ -5,9 +5,9 @@ import android.widget.Toast;
 
 import org.smartregister.domain.DownloadStatus;
 import org.smartregister.domain.FetchStatus;
+import org.smartregister.gizi.service.FormSubmissionSyncService;
 import org.smartregister.service.ActionService;
 import org.smartregister.service.AllFormVersionSyncService;
-import org.smartregister.gizi.service.FormSubmissionSyncService;
 import org.smartregister.sync.AdditionalSyncService;
 import org.smartregister.sync.AfterFetchListener;
 import org.smartregister.view.BackgroundAction;

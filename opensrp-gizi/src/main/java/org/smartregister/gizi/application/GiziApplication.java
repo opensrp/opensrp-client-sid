@@ -3,22 +3,22 @@ package org.smartregister.gizi.application;
 import android.content.Intent;
 import android.content.res.Configuration;
 
-import org.smartregister.gizi.receiver.GiziSyncBroadcastReceiver;
-import org.smartregister.gizi.repository.GiziRepository;
 import org.smartregister.Context;
 import org.smartregister.CoreLibrary;
 import org.smartregister.commonregistry.CommonFtsObject;
 import org.smartregister.gizi.activity.LoginActivity;
 import org.smartregister.gizi.libs.FlurryFacade;
+import org.smartregister.gizi.receiver.GiziSyncBroadcastReceiver;
+import org.smartregister.gizi.repository.GiziRepository;
+import org.smartregister.gizi.sync.DrishtiSyncScheduler;
 import org.smartregister.repository.EventClientRepository;
 import org.smartregister.repository.Repository;
-import org.smartregister.gizi.sync.DrishtiSyncScheduler;
 import org.smartregister.view.activity.DrishtiApplication;
+
+import java.util.Locale;
 
 import static org.smartregister.util.Log.logError;
 import static org.smartregister.util.Log.logInfo;
-
-import java.util.Locale;
 
 /**
  * Created by koros on 1/22/16.

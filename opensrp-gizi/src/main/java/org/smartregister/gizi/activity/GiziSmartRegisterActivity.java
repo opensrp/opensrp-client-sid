@@ -12,19 +12,22 @@ import android.util.Log;
 
 import com.flurry.android.FlurryAgent;
 
+import org.json.JSONException;
+import org.json.JSONObject;
 import org.smartregister.commonregistry.CommonPersonObjectClient;
 import org.smartregister.cursoradapter.SmartRegisterQueryBuilder;
 import org.smartregister.domain.form.FieldOverrides;
 import org.smartregister.domain.form.FormSubmission;
 import org.smartregister.enketo.listener.DisplayFormListener;
-import org.smartregister.gizi.utils.KmsHandler;
+import org.smartregister.enketo.view.fragment.DisplayFormFragment;
+import org.smartregister.gizi.R;
 import org.smartregister.gizi.fragment.GiziSmartRegisterFragment;
 import org.smartregister.gizi.pageradapter.BaseRegisterActivityPagerAdapter;
+import org.smartregister.gizi.sync.GiziClientProcessor;
+import org.smartregister.gizi.utils.KmsHandler;
 import org.smartregister.provider.SmartRegisterClientsProvider;
 import org.smartregister.repository.DetailsRepository;
 import org.smartregister.service.ZiggyService;
-import org.smartregister.gizi.R;
-import org.smartregister.gizi.sync.GiziClientProcessor;
 import org.smartregister.view.activity.SecuredNativeSmartRegisterActivity;
 import org.smartregister.view.contract.SmartRegisterClient;
 import org.smartregister.view.dialog.DialogOption;
@@ -32,11 +35,8 @@ import org.smartregister.view.dialog.DialogOptionModel;
 import org.smartregister.view.dialog.EditOption;
 import org.smartregister.view.dialog.LocationSelectorDialogFragment;
 import org.smartregister.view.dialog.OpenFormOption;
-import org.smartregister.enketo.view.fragment.DisplayFormFragment;
 import org.smartregister.view.fragment.SecuredNativeSmartRegisterFragment;
 import org.smartregister.view.viewpager.OpenSRPViewPager;
-import org.json.JSONException;
-import org.json.JSONObject;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;

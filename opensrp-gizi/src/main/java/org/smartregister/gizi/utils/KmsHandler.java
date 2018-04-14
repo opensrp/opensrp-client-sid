@@ -4,7 +4,7 @@ import org.smartregister.commonregistry.AllCommonsRepository;
 import org.smartregister.commonregistry.CommonPersonObject;
 import org.smartregister.domain.form.FormSubmission;
 import org.smartregister.repository.DetailsRepository;
-import  org.smartregister.service.formsubmissionhandler.FormSubmissionHandler;
+import org.smartregister.service.formsubmissionhandler.FormSubmissionHandler;
 
 import util.KMS.KmsCalc;
 import util.KMS.KmsPerson;

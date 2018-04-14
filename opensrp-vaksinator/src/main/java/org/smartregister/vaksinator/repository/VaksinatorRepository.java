@@ -6,10 +6,10 @@ import android.util.Log;
 import net.sqlcipher.database.SQLiteDatabase;
 
 import org.apache.commons.lang3.StringUtils;
-import org.smartregister.vaksinator.application.VaksinatorApplication;
 import org.smartregister.commonregistry.CommonFtsObject;
 import org.smartregister.repository.EventClientRepository;
 import org.smartregister.repository.Repository;
+import org.smartregister.vaksinator.application.VaksinatorApplication;
 
 import java.util.ArrayList;
 import java.util.LinkedHashSet;

@@ -12,11 +12,8 @@ import org.json.JSONException;
 import org.json.JSONObject;
 import org.smartregister.adapter.SmartRegisterPaginatedAdapter;
 import org.smartregister.bidan.R;
-//import org.smartregister.bidan.sync.BidanClientProcessor;
-//import org.smartregister.bidan.utils.EnketoFormUtils;
 import org.smartregister.bidan.sync.ClientProcessor;
 import org.smartregister.bidan.utils.BidanFormUtils;
-
 import org.smartregister.commonregistry.AllCommonsRepository;
 import org.smartregister.commonregistry.CommonPersonObject;
 import org.smartregister.commonregistry.CommonPersonObjectClient;
@@ -48,6 +45,9 @@ import butterknife.Bind;
 import butterknife.ButterKnife;
 
 import static org.smartregister.util.Utils.getValue;
+
+//import org.smartregister.bidan.sync.BidanClientProcessor;
+//import org.smartregister.bidan.utils.EnketoFormUtils;
 
 //import org.smartregister.bidan.utils.BidanFormUtils;
 //import android.content.res.Configuration;

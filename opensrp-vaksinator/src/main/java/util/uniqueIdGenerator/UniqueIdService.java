@@ -1,19 +1,15 @@
 package util.uniqueIdGenerator;
+
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
-import static java.text.MessageFormat.format;
 import org.smartregister.DristhiConfiguration;
 import org.smartregister.domain.FetchStatus;
 import org.smartregister.domain.Response;
 import org.smartregister.domain.ResponseStatus;
-import org.smartregister.vaksinator.activity.LoginActivity;
 import org.smartregister.repository.AllSharedPreferences;
 import org.smartregister.service.HTTPAgent;
 import org.smartregister.vaksinator.sync.AdditionalSyncService;
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
 
 import static java.text.MessageFormat.format;
 import static org.smartregister.domain.FetchStatus.fetched;

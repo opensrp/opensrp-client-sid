@@ -13,6 +13,10 @@ import android.widget.EditText;
 
 import com.flurry.android.FlurryAgent;
 
+import org.opensrp.api.domain.Location;
+import org.opensrp.api.util.EntityUtils;
+import org.opensrp.api.util.LocationTree;
+import org.opensrp.api.util.TreeNode;
 import org.smartregister.Context;
 import org.smartregister.commonregistry.CommonPersonObjectClient;
 import org.smartregister.commonregistry.CommonPersonObjectController;
@@ -23,17 +27,16 @@ import org.smartregister.cursoradapter.CursorSortOption;
 import org.smartregister.cursoradapter.SecuredNativeSmartRegisterCursorAdapterFragment;
 import org.smartregister.cursoradapter.SmartRegisterPaginatedCursorAdapter;
 import org.smartregister.cursoradapter.SmartRegisterQueryBuilder;
-import org.smartregister.gizi.activity.LoginActivity;
+import org.smartregister.gizi.R;
 import org.smartregister.gizi.activity.GiziDetailActivity;
 import org.smartregister.gizi.activity.GiziGrowthChartActivity;
-import org.smartregister.gizi.option.GiziServiceModeOption;
-import org.smartregister.gizi.provider.ChildSmartClientsProvider;
 import org.smartregister.gizi.activity.GiziSmartRegisterActivity;
+import org.smartregister.gizi.activity.LoginActivity;
+import org.smartregister.gizi.option.GiziServiceModeOption;
 import org.smartregister.gizi.option.KICommonObjectFilterOption;
-import org.smartregister.provider.SmartRegisterClientsProvider;
-import org.smartregister.gizi.R;
-
+import org.smartregister.gizi.provider.ChildSmartClientsProvider;
 import org.smartregister.gizi.sync.GiziClientProcessor;
+import org.smartregister.provider.SmartRegisterClientsProvider;
 import org.smartregister.util.StringUtil;
 import org.smartregister.view.activity.SecuredNativeSmartRegisterActivity;
 import org.smartregister.view.contract.ECClient;
@@ -46,10 +49,6 @@ import org.smartregister.view.dialog.FilterOption;
 import org.smartregister.view.dialog.LocationSelectorDialogFragment;
 import org.smartregister.view.dialog.ServiceModeOption;
 import org.smartregister.view.dialog.SortOption;
-import org.opensrp.api.domain.Location;
-import org.opensrp.api.util.EntityUtils;
-import org.opensrp.api.util.LocationTree;
-import org.opensrp.api.util.TreeNode;
 
 import java.util.ArrayList;
 import java.util.Map;

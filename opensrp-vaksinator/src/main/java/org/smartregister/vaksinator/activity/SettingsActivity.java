@@ -8,8 +8,8 @@ import android.preference.PreferenceActivity;
 import android.preference.PreferenceFragment;
 import android.preference.PreferenceManager;
 
-import org.smartregister.vaksinator.R;
 import org.smartregister.repository.AllSharedPreferences;
+import org.smartregister.vaksinator.R;
 
 import java.net.MalformedURLException;
 import java.net.URL;

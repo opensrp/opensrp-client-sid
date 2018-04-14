@@ -4,12 +4,11 @@ import android.app.Activity;
 import android.net.Uri;
 import android.widget.ImageView;
 
+import org.smartregister.commonregistry.CommonPersonObject;
+import org.smartregister.commonregistry.CommonPersonObjectClient;
 import org.smartregister.util.Log;
 
 import java.io.File;
-
-import org.smartregister.commonregistry.CommonPersonObject;
-import org.smartregister.commonregistry.CommonPersonObjectClient;
 
 /**
  * Created by al on 30/05/2017.

@@ -3,8 +3,6 @@ package org.smartregister.bidan.provider;
 import android.app.Activity;
 import android.content.Context;
 import android.database.Cursor;
-import android.graphics.drawable.Drawable;
-import android.support.v4.content.ContextCompat;
 import android.util.Log;
 import android.view.View;
 import android.widget.AbsListView;
@@ -15,7 +13,6 @@ import android.widget.TextView;
 
 import org.smartregister.bidan.R;
 import org.smartregister.bidan.activity.LoginActivity;
-import org.smartregister.bidan.utils.AllConstantsINA;
 import org.smartregister.bidan.utils.Support;
 import org.smartregister.commonregistry.CommonPersonObjectClient;
 import org.smartregister.commonregistry.CommonPersonObjectController;
@@ -25,9 +22,6 @@ import org.smartregister.service.AlertService;
 import org.smartregister.view.contract.SmartRegisterClient;
 
 import java.util.List;
-
-import butterknife.Bind;
-import butterknife.ButterKnife;
 
 import static android.view.ViewGroup.LayoutParams.MATCH_PARENT;
 

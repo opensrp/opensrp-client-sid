@@ -10,8 +10,6 @@ import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.flurry.android.FlurryAgent;
-
 import org.json.JSONObject;
 import org.opensrp.api.domain.Location;
 import org.opensrp.api.util.EntityUtils;
@@ -23,11 +21,11 @@ import org.smartregister.cursoradapter.SmartRegisterQueryBuilder;
 import org.smartregister.enketo.view.fragment.DisplayFormFragment;
 import org.smartregister.event.Listener;
 import org.smartregister.service.PendingFormSubmissionService;
-import org.smartregister.vaksinator.sync.SyncAfterFetchListener;
-import org.smartregister.vaksinator.sync.SyncProgressIndicator;
 import org.smartregister.vaksinator.R;
 import org.smartregister.vaksinator.controller.VaksinatorNavigationController;
 import org.smartregister.vaksinator.service.FormSubmissionSyncService;
+import org.smartregister.vaksinator.sync.SyncAfterFetchListener;
+import org.smartregister.vaksinator.sync.SyncProgressIndicator;
 import org.smartregister.vaksinator.sync.UpdateActionsTask;
 import org.smartregister.vaksinator.utils.AllConstantsINA;
 import org.smartregister.view.activity.SecuredActivity;

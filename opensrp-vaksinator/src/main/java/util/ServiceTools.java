@@ -3,6 +3,7 @@ package util;
 import android.app.ActivityManager;
 import android.content.Context;
 import android.content.Intent;
+
 import org.smartregister.vaksinator.application.VaksinatorApplication;
 
 import java.util.List;

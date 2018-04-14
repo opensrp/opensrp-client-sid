@@ -9,6 +9,10 @@ import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 
+import org.opensrp.api.domain.Location;
+import org.opensrp.api.util.EntityUtils;
+import org.opensrp.api.util.LocationTree;
+import org.opensrp.api.util.TreeNode;
 import org.smartregister.Context;
 import org.smartregister.commonregistry.CommonPersonObjectController;
 import org.smartregister.commonregistry.CommonRepository;
@@ -19,9 +23,9 @@ import org.smartregister.cursoradapter.SecuredNativeSmartRegisterCursorAdapterFr
 import org.smartregister.cursoradapter.SmartRegisterPaginatedCursorAdapter;
 import org.smartregister.cursoradapter.SmartRegisterQueryBuilder;
 import org.smartregister.gizi.R;
+import org.smartregister.gizi.activity.IbuSmartRegisterActivity;
 import org.smartregister.gizi.option.IbuServiceModeOption;
 import org.smartregister.gizi.provider.IbuSmartClientsProvider;
-import org.smartregister.gizi.activity.IbuSmartRegisterActivity;
 import org.smartregister.provider.SmartRegisterClientsProvider;
 import org.smartregister.sync.ClientProcessor;
 import org.smartregister.util.StringUtil;
@@ -38,10 +42,6 @@ import org.smartregister.view.dialog.EditOption;
 import org.smartregister.view.dialog.FilterOption;
 import org.smartregister.view.dialog.ServiceModeOption;
 import org.smartregister.view.dialog.SortOption;
-import org.opensrp.api.domain.Location;
-import org.opensrp.api.util.EntityUtils;
-import org.opensrp.api.util.LocationTree;
-import org.opensrp.api.util.TreeNode;
 
 import java.util.ArrayList;
 import java.util.Map;

@@ -7,11 +7,10 @@ import android.util.Log;
 
 import net.sqlcipher.database.SQLiteDatabase;
 
-import org.smartregister.domain.Report;
+import org.smartregister.repository.BaseRepository;
 import org.smartregister.repository.Repository;
 import org.smartregister.vaksinator.application.VaksinatorApplication;
 import org.smartregister.vaksinator.domain.UniqueId;
-import org.smartregister.repository.BaseRepository;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;

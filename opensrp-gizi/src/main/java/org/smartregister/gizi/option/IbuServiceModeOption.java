@@ -1,14 +1,8 @@
 package org.smartregister.gizi.option;
 
-import android.view.View;
-
 import org.smartregister.Context;
 import org.smartregister.gizi.R;
 import org.smartregister.provider.SmartRegisterClientsProvider;
-import org.smartregister.view.contract.ANCSmartRegisterClient;
-import org.smartregister.view.contract.ChildSmartRegisterClient;
-import org.smartregister.view.contract.FPSmartRegisterClient;
-import org.smartregister.view.contract.pnc.PNCSmartRegisterClient;
 import org.smartregister.view.dialog.ServiceModeOption;
 
 import static org.smartregister.view.activity.SecuredNativeSmartRegisterActivity.ClientsHeaderProvider;

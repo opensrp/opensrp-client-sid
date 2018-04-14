@@ -1,9 +1,5 @@
 package util.ZScore;
 
-import android.content.Context;
-
-import org.smartregister.gizi.R;
-
 /**
  * Created by Iq on 24/05/16.
  */

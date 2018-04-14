@@ -3,9 +3,7 @@ package org.smartregister.gizi.provider;
 import android.app.Activity;
 import android.content.Context;
 import android.database.Cursor;
-import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
-import android.os.AsyncTask;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -17,21 +15,14 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import org.apache.commons.lang3.StringUtils;
-import org.joda.time.DateTime;
 import org.smartregister.commonregistry.AllCommonsRepository;
 import org.smartregister.commonregistry.CommonPersonObject;
 import org.smartregister.commonregistry.CommonPersonObjectClient;
 import org.smartregister.commonregistry.CommonPersonObjectController;
-import org.smartregister.commonregistry.CommonRepository;
 import org.smartregister.cursoradapter.SmartRegisterCLientsProviderForCursorAdapter;
-import org.smartregister.domain.Alert;
 import org.smartregister.gizi.R;
 import org.smartregister.repository.DetailsRepository;
 import org.smartregister.service.AlertService;
-import org.smartregister.util.DateUtil;
-import org.smartregister.util.OpenSRPImageLoader;
-import org.smartregister.util.Utils;
 import org.smartregister.view.activity.DrishtiApplication;
 import org.smartregister.view.contract.SmartRegisterClient;
 import org.smartregister.view.contract.SmartRegisterClients;
@@ -42,24 +33,11 @@ import org.smartregister.view.viewholder.OnClickFormLauncher;
 
 import java.io.File;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Calendar;
-import java.util.Date;
-import java.util.List;
-import java.util.Map;
-import java.util.concurrent.TimeUnit;
 
-import util.GiziConstants;
 import util.ZScore.ZScoreSystemCalculation;
 import util.formula.Support;
 
 import static android.view.ViewGroup.LayoutParams.MATCH_PARENT;
-import static org.smartregister.gizi.R.id.antihelminticText;
-import static org.smartregister.util.Utils.fillValue;
-import static org.smartregister.util.Utils.getName;
-import static org.smartregister.util.Utils.getValue;
-import static util.formula.Support.findDate;
 
 /**
  * Created by soran on 08/11/17.

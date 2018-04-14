@@ -5,16 +5,15 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.net.Uri;
 
-
-//import org.ei.opensrp.vaksinator.test.TestSmartRegisterActivity;
+import org.json.JSONObject;
 import org.smartregister.vaksinator.R;
 import org.smartregister.vaksinator.activity.TTSmartRegisterActivity;
 import org.smartregister.vaksinator.activity.VaksinatorSmartRegisterActivity;
 import org.smartregister.view.controller.ANMController;
-import org.json.JSONObject;
-
 
 import static android.preference.PreferenceManager.getDefaultSharedPreferences;
+
+//import org.ei.opensrp.vaksinator.test.TestSmartRegisterActivity;
 
 public class VaksinatorNavigationController extends org.smartregister.view.controller.NavigationController {
     private Activity activity;

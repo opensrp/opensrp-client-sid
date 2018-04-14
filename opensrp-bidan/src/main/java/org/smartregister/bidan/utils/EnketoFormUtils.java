@@ -1,7 +1,6 @@
 package org.smartregister.bidan.utils;
 
 import android.content.Context;
-import android.content.Intent;
 import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
 import android.util.Xml;
@@ -30,7 +29,6 @@ import org.smartregister.domain.form.SubForm;
 import org.smartregister.repository.AllSharedPreferences;
 import org.smartregister.repository.BaseRepository;
 import org.smartregister.repository.EventClientRepository;
-import org.smartregister.service.intentservices.ReplicationIntentService;
 import org.smartregister.util.AssetHandler;
 import org.smartregister.util.Log;
 import org.w3c.dom.Attr;

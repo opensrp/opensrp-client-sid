@@ -11,8 +11,11 @@ import android.util.Log;
 
 import com.flurry.android.FlurryAgent;
 
+import org.json.JSONException;
+import org.json.JSONObject;
 import org.smartregister.domain.form.FieldOverrides;
 import org.smartregister.domain.form.FormSubmission;
+import org.smartregister.enketo.view.fragment.DisplayFormFragment;
 import org.smartregister.gizi.R;
 import org.smartregister.gizi.fragment.GiziIbuSmartRegisterFragment;
 import org.smartregister.gizi.pageradapter.BaseRegisterActivityPagerAdapter;
@@ -27,10 +30,6 @@ import org.smartregister.view.dialog.LocationSelectorDialogFragment;
 import org.smartregister.view.dialog.OpenFormOption;
 import org.smartregister.view.fragment.SecuredNativeSmartRegisterFragment;
 import org.smartregister.view.viewpager.OpenSRPViewPager;
-import org.json.JSONException;
-import org.json.JSONObject;
-
-import org.smartregister.enketo.view.fragment.DisplayFormFragment;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;

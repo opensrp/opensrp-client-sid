@@ -2,12 +2,8 @@ package org.smartregister.vaksinator.activity;
 
 import android.app.Activity;
 import android.content.Intent;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
-import android.os.Environment;
-import android.provider.MediaStore;
 import android.util.Log;
 import android.view.View;
 import android.widget.ImageButton;
@@ -20,26 +16,21 @@ import org.smartregister.Context;
 import org.smartregister.commonregistry.AllCommonsRepository;
 import org.smartregister.commonregistry.CommonPersonObject;
 import org.smartregister.commonregistry.CommonPersonObjectClient;
-import org.smartregister.domain.ProfileImage;
 import org.smartregister.repository.DetailsRepository;
-import org.smartregister.repository.ImageRepository;
-import org.smartregister.util.OpenSRPImageLoader;
 import org.smartregister.vaksinator.R;
-//import org.smartregister.vaksinator.face.camera.SmartShutterActivity;
 import org.smartregister.vaksinator.libs.FlurryFacade;
 import org.smartregister.view.activity.DrishtiApplication;
 
 import java.io.File;
-import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.UUID;
 
-import util.ImageCache;
 import util.ImageFetcher;
 import util.formula.Support;
+
+//import org.smartregister.vaksinator.face.camera.SmartShutterActivity;
 
 /**
  * Created by Iq on 09/06/16.

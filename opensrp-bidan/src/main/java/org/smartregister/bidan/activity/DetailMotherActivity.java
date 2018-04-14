@@ -8,6 +8,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
+
 import org.smartregister.bidan.R;
 import org.smartregister.bidan.utils.CameraPreviewActivity;
 import org.smartregister.bidan.utils.Support;
@@ -15,8 +16,10 @@ import org.smartregister.bidan.utils.Tools;
 import org.smartregister.commonregistry.CommonPersonObjectClient;
 import org.smartregister.repository.DetailsRepository;
 import org.smartregister.view.activity.DrishtiApplication;
-import static org.smartregister.util.StringUtil.humanize;
+
 import java.io.File;
+
+import static org.smartregister.util.StringUtil.humanize;
 //import butterknife.ButterKnife;
 
 /**

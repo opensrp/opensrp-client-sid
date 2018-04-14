@@ -5,7 +5,6 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.Cursor;
 import android.os.Bundle;
-import android.os.Parcelable;
 import android.support.v4.content.CursorLoader;
 import android.support.v4.content.Loader;
 import android.text.Editable;
@@ -14,14 +13,11 @@ import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 
-import com.flurry.android.FlurryAgent;
-
 import org.opensrp.api.domain.Location;
 import org.opensrp.api.util.EntityUtils;
 import org.opensrp.api.util.LocationTree;
 import org.opensrp.api.util.TreeNode;
 import org.smartregister.Context;
-import org.smartregister.commonregistry.CommonPersonObjectClient;
 import org.smartregister.commonregistry.CommonPersonObjectController;
 import org.smartregister.commonregistry.CommonRepository;
 import org.smartregister.cursoradapter.CursorCommonObjectFilterOption;
@@ -30,17 +26,15 @@ import org.smartregister.cursoradapter.CursorFilterOption;
 import org.smartregister.cursoradapter.CursorSortOption;
 import org.smartregister.cursoradapter.SecuredNativeSmartRegisterCursorAdapterFragment;
 import org.smartregister.cursoradapter.SmartRegisterPaginatedCursorAdapter;
-import org.smartregister.vaksinator.utils.SmartRegisterQueryBuilder;
 import org.smartregister.provider.SmartRegisterClientsProvider;
 import org.smartregister.util.StringUtil;
-import org.smartregister.vaksinator.activity.LoginActivity;
 import org.smartregister.vaksinator.R;
-//import org.smartregister.vaksinator.face.camera.SmartShutterActivity;
+import org.smartregister.vaksinator.activity.LoginActivity;
+import org.smartregister.vaksinator.activity.TTSmartRegisterActivity;
 import org.smartregister.vaksinator.option.TTCommonObjectFilterOption;
 import org.smartregister.vaksinator.option.TTServiceModeOption;
 import org.smartregister.vaksinator.provider.TTSmartClientsProvider;
-import org.smartregister.vaksinator.activity.TTSmartRegisterActivity;
-//import org.smartregister.vaksinator.vaksinator.FlurryFacade;
+import org.smartregister.vaksinator.utils.SmartRegisterQueryBuilder;
 import org.smartregister.view.activity.SecuredNativeSmartRegisterActivity;
 import org.smartregister.view.contract.ECClient;
 import org.smartregister.view.contract.SmartRegisterClient;
@@ -52,7 +46,6 @@ import org.smartregister.view.dialog.DialogOptionMapper;
 import org.smartregister.view.dialog.DialogOptionModel;
 import org.smartregister.view.dialog.EditOption;
 import org.smartregister.view.dialog.FilterOption;
-import org.smartregister.view.dialog.NameSort;
 import org.smartregister.view.dialog.ServiceModeOption;
 import org.smartregister.view.dialog.SortOption;
 
@@ -65,6 +58,9 @@ import util.AsyncTask;
 import static android.view.View.INVISIBLE;
 import static android.view.View.VISIBLE;
 import static org.apache.commons.lang3.StringUtils.isEmpty;
+
+//import org.smartregister.vaksinator.face.camera.SmartShutterActivity;
+//import org.smartregister.vaksinator.vaksinator.FlurryFacade;
 
 /**
  * Created by koros on 10/12/15.

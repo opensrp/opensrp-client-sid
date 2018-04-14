@@ -1,28 +1,19 @@
 package util.uniqueIdGenerator;
 
 import android.os.AsyncTask;
-import android.util.Log;
 
-import org.apache.http.HttpEntity;
-import org.apache.http.HttpResponse;
-import org.apache.http.StatusLine;
+import org.smartregister.Context;
+import org.smartregister.repository.SettingsRepository;
+import org.smartregister.util.Cache;
+import org.smartregister.vaksinator.application.VaksinatorApplication;
+import org.smartregister.vaksinator.repository.UniqueIdRepository;
+
+import java.util.List;
+
 //import org.apache.http.client.ClientProtocolException;
 //import org.apache.http.client.HttpClient;
 //import org.apache.http.client.methods.HttpGet;
 //import org.apache.http.impl.client.DefaultHttpClient;
-import org.smartregister.Context;
-import org.smartregister.vaksinator.activity.LoginActivity;
-import org.smartregister.vaksinator.application.VaksinatorApplication;
-import org.smartregister.vaksinator.repository.VaksinatorRepository;
-import org.smartregister.vaksinator.repository.UniqueIdRepository;
-import org.smartregister.repository.SettingsRepository;
-import org.smartregister.util.Cache;
-
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.util.List;
 
 /**
  * Created by Null on 2016-10-13.

@@ -5,17 +5,10 @@ import android.util.Log;
 
 import net.sqlcipher.database.SQLiteDatabase;
 
-import org.apache.commons.lang3.StringUtils;
 import org.smartregister.bidan.application.BidanApplication;
 import org.smartregister.bidan.utils.BidanConstants;
-import org.smartregister.commonregistry.CommonFtsObject;
 import org.smartregister.repository.EventClientRepository;
 import org.smartregister.repository.Repository;
-
-import java.util.ArrayList;
-import java.util.LinkedHashSet;
-import java.util.List;
-import java.util.Set;
 
 /**
  * Created by sid-tech on 11/22/17.

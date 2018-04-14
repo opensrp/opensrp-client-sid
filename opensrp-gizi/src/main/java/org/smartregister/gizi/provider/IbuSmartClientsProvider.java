@@ -19,7 +19,6 @@ import org.smartregister.cursoradapter.SmartRegisterCLientsProviderForCursorAdap
 import org.smartregister.gizi.R;
 import org.smartregister.repository.DetailsRepository;
 import org.smartregister.service.AlertService;
-import org.smartregister.util.OpenSRPImageLoader;
 import org.smartregister.view.activity.DrishtiApplication;
 import org.smartregister.view.contract.SmartRegisterClient;
 import org.smartregister.view.contract.SmartRegisterClients;

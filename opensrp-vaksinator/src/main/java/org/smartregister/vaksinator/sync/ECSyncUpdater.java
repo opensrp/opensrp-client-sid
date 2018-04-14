@@ -7,12 +7,11 @@ import org.joda.time.DateTime;
 import org.json.JSONArray;
 import org.json.JSONObject;
 import org.smartregister.domain.Response;
-
-import org.smartregister.vaksinator.service.SyncService;
 import org.smartregister.repository.EventClientRepository;
 import org.smartregister.service.HTTPAgent;
 import org.smartregister.util.Utils;
 import org.smartregister.vaksinator.application.VaksinatorApplication;
+import org.smartregister.vaksinator.service.SyncService;
 
 import java.util.ArrayList;
 import java.util.Date;

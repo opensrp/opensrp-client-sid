@@ -15,6 +15,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 import org.smartregister.domain.form.FieldOverrides;
 import org.smartregister.domain.form.FormSubmission;
+import org.smartregister.enketo.view.fragment.DisplayFormFragment;
 import org.smartregister.provider.SmartRegisterClientsProvider;
 import org.smartregister.service.ZiggyService;
 import org.smartregister.sync.ClientProcessor;
@@ -22,11 +23,9 @@ import org.smartregister.util.FormUtils;
 import org.smartregister.vaksinator.R;
 import org.smartregister.vaksinator.fragment.TTSmartRegisterFragment;
 import org.smartregister.vaksinator.pageradapter.BaseRegisterActivityPagerAdapter;
-//import org.smartregister.vaksinator.vaksinator.FlurryFacade;
 import org.smartregister.view.activity.SecuredNativeSmartRegisterActivity;
 import org.smartregister.view.dialog.DialogOption;
 import org.smartregister.view.dialog.LocationSelectorDialogFragment;
-import org.smartregister.enketo.view.fragment.DisplayFormFragment;
 import org.smartregister.view.fragment.SecuredNativeSmartRegisterFragment;
 import org.smartregister.view.viewpager.OpenSRPViewPager;
 
@@ -36,6 +35,8 @@ import java.util.List;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
+
+//import org.smartregister.vaksinator.vaksinator.FlurryFacade;
 
 //import org.smartregister.test.fragment.HouseHoldSmartRegisterFragment;
 
