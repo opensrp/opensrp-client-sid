@@ -1,0 +1,180 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="#ffffff"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="150dp"
+        android:orientation="horizontal"
+        android:weightSum="1">
+
+        <ImageView
+            android:id="@+id/tv_mother_detail_profile_view"
+            android:layout_width="103dp"
+            android:layout_height="100dp"
+            android:layout_margin="10dp"
+            android:scaleType="fitXY"
+            android:src="@drawable/woman_placeholder" />
+
+        <LinearLayout
+            android:layout_width="200dp"
+            android:layout_height="match_parent"
+            android:layout_weight="0.15"
+            android:orientation="vertical">
+
+            <org.smartregister.view.customcontrols.CustomFontTextView
+                android:id="@+id/tv_wife_name"
+                style="@style/CustomFontTextViewStyle.ListView.Medium"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp"
+                android:text="@string/name"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:textColor="@color/text_black"
+                android:textSize="14sp" />
+
+            <org.smartregister.view.customcontrols.CustomFontTextView
+                android:id="@+id/tv_nik"
+                style="@style/CustomFontTextViewStyle.ListView.Medium"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp"
+                android:text="@string/nik"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:textColor="@color/text_black"
+                android:textSize="14sp" />
+
+            <org.smartregister.view.customcontrols.CustomFontTextView
+                android:id="@+id/tv_husband_name"
+                style="@style/CustomFontTextViewStyle.ListView.Medium"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp"
+                android:text="@string/husband_name"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:textColor="@color/text_black"
+                android:textSize="14sp" />
+
+            <org.smartregister.view.customcontrols.CustomFontTextView
+                android:id="@+id/tv_dob"
+                style="@style/CustomFontTextViewStyle.ListView.Medium"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp"
+                android:text="@string/date_of_birth"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:textColor="@color/text_black"
+                android:textSize="14sp" />
+
+            <org.smartregister.view.customcontrols.CustomFontTextView
+                android:id="@+id/tv_contact_phone_number"
+                style="@style/CustomFontTextViewStyle.ListView.Medium"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp"
+                android:text="@string/phone"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:textColor="@color/text_black"
+                android:textSize="14sp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="330dp"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <org.smartregister.view.customcontrols.CustomFontTextView
+                style="@style/CustomFontTextViewStyle.ListView.Medium"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp"
+                android:text="RISK :"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:textColor="@color/alert_urgent_red"
+                android:textSize="14sp" />
+
+            <org.smartregister.view.customcontrols.CustomFontTextView
+                android:id="@+id/tv_risk1"
+                style="@style/CustomFontTextViewStyle.ListView.Medium"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:textColor="@color/text_black"
+                android:textSize="14sp" />
+
+            <org.smartregister.view.customcontrols.CustomFontTextView
+                android:id="@+id/tv_risk2"
+                style="@style/CustomFontTextViewStyle.ListView.Medium"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:textColor="@color/text_black"
+                android:textSize="14sp" />
+
+            <org.smartregister.view.customcontrols.CustomFontTextView
+                android:id="@+id/tv_risk3"
+                style="@style/CustomFontTextViewStyle.ListView.Medium"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:textColor="@color/text_black"
+                android:textSize="14sp" />
+
+            <org.smartregister.view.customcontrols.CustomFontTextView
+                android:id="@+id/tv_risk4"
+                style="@style/CustomFontTextViewStyle.ListView.Medium"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:textColor="@color/text_black"
+                android:textSize="14sp" />
+
+            <org.smartregister.view.customcontrols.CustomFontTextView
+                android:id="@+id/tv_show_more"
+                style="@style/CustomFontTextViewStyle.ListView.Medium"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:textColor="@color/alert_urgent_red"
+                android:textSize="18sp" />
+
+            <org.smartregister.view.customcontrols.CustomFontTextView
+                android:id="@+id/tv_show_more_detail"
+                style="@style/CustomFontTextViewStyle.ListView.Medium"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:textColor="@color/alert_urgent_red"
+                android:textSize="18sp"
+                android:visibility="gone" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center">
+
+            <ImageView
+                android:id="@+id/iv_icon_device"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:layout_gravity="center"
+                android:layout_margin="10dp"
+                android:scaleType="fitXY"
+                android:src="@drawable/pulseheart"
+                android:visibility="invisible" />
+        </LinearLayout>
+
+    </LinearLayout>
+</LinearLayout>
