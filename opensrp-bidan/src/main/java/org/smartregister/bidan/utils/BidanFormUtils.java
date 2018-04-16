@@ -469,8 +469,8 @@ public class BidanFormUtils {
     }
 
     private void writeXML(Element node, XmlSerializer serializer, JSONObject fieldOverrides,
-                          JSONObject formDefinition, JSONObject entityJson, String parentId) {
-        try {
+                          JSONObject formDefinition, JSONObject entityJson, String parentId) throws Exception {
+//        try {
 
             String nodeName = node.getNodeName();
             String entityId = entityJson.has("id") ? entityJson.getString("id") : generateRandomUUIDString();
@@ -544,9 +544,9 @@ public class BidanFormUtils {
 
             serializer.endTag("", node.getNodeName());
 
-        } catch (Exception e) {
-            throw new RuntimeException(e);
-        }
+//        } catch (Exception e) {
+//            throw new RuntimeException(e);
+//        }
     }
 
 //    /**

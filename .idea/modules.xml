@@ -3,6 +3,7 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/opensrp-bidan/opensrp-bidan.iml" filepath="$PROJECT_DIR$/opensrp-bidan/opensrp-bidan.iml" />
+      <module fileurl="file://$PROJECT_DIR$/opensrp-bidan/opensrp-bidan.iml" filepath="$PROJECT_DIR$/opensrp-bidan/opensrp-bidan.iml" />
       <module fileurl="file://$PROJECT_DIR$/opensrp-client-sid.iml" filepath="$PROJECT_DIR$/opensrp-client-sid.iml" />
       <module fileurl="file://$PROJECT_DIR$/opensrp-gizi/opensrp-gizi.iml" filepath="$PROJECT_DIR$/opensrp-gizi/opensrp-gizi.iml" />
       <module fileurl="file://$PROJECT_DIR$/opensrp-vaksinator/opensrp-vaksinator.iml" filepath="$PROJECT_DIR$/opensrp-vaksinator/opensrp-vaksinator.iml" />
