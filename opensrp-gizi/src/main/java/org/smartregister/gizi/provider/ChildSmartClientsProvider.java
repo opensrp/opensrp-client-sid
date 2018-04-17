@@ -8,8 +8,6 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.AbsListView;
-import android.widget.Button;
-import android.widget.FrameLayout;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -57,6 +55,7 @@ public class ChildSmartClientsProvider implements SmartRegisterCLientsProviderFo
                                     AlertService alertService) {
         this.context = context;
         this.onClickListener = onClickListener;
+        Log.i(TAG, "ChildSmartClientsProvider: "+ alertService);
 //        AlertService alertService1 = alertService;
         this.inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 

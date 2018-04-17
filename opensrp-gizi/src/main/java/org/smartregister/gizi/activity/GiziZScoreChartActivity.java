@@ -74,7 +74,7 @@ public class GiziZScoreChartActivity extends Activity{
     private void initializeGlobalVariable(){
         ////System.out.println("data z score client = "+client.getDetails().toString());
         historyUmur = split(Support.fixHistory(client.getDetails().get("history_berat")))[0];
-        historyUmurHari = client.getDetails().get("history_umur_tinggi");
+//        String historyUmurHari = client.getDetails().get("history_umur_tinggi");
         historyBerat = split(Support.fixHistory(client.getDetails().get("history_berat")))[1];
         historyTinggi = cleanBlankValueOf(Support.fixHistory(client.getDetails().get("history_tinggi")));
         historyTinggiUmurHari = cleanBlankValueOf(client.getDetails().get("history_tinggi_umur_hari"));
@@ -407,7 +407,6 @@ public class GiziZScoreChartActivity extends Activity{
     private TextView lfaActivity;
 
     private String historyUmur;
-    private String historyUmurHari;
     private String historyBerat;
     private String historyTinggi;
     private String historyTinggiUmurHari;

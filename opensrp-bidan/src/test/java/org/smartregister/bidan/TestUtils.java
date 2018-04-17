@@ -1,13 +1,11 @@
 package org.smartregister.bidan;
 
-import android.net.Uri;
-
 /**
  * Created by sid-tech on 4/11/18
  */
 
 public class TestUtils {
 
-    private static final Uri URI_1 = Uri.parse("http://example.com/1.png");
+//    private static final Uri URI_1 = Uri.parse("http://example.com/1.png");
 
 }

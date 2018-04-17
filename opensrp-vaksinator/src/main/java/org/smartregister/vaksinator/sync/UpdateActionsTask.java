@@ -1,6 +1,7 @@
 package org.smartregister.vaksinator.sync;
 
 import android.content.Context;
+import android.util.Log;
 import android.widget.Toast;
 
 import org.smartregister.domain.DownloadStatus;
@@ -17,8 +18,8 @@ import static org.smartregister.domain.FetchStatus.nothingFetched;
 import static org.smartregister.util.Log.logInfo;
 
 public class UpdateActionsTask {
+    private static final String TAG = UpdateActionsTask.class.getName();
     private final LockingBackgroundTask task;
-    private ActionService actionService;
     private Context context;
     private FormSubmissionSyncService formSubmissionSyncService;
     private AllFormVersionSyncService allFormVersionSyncService;
@@ -26,7 +27,8 @@ public class UpdateActionsTask {
 
     public UpdateActionsTask(Context context, ActionService actionService, FormSubmissionSyncService formSubmissionSyncService, ProgressIndicator progressIndicator,
                              AllFormVersionSyncService allFormVersionSyncService) {
-        this.actionService = actionService;
+        Log.i(TAG, "UpdateActionsTask: "+ actionService);
+//        ActionService actionService1 = actionService;
         this.context = context;
         this.formSubmissionSyncService = formSubmissionSyncService;
         this.allFormVersionSyncService = allFormVersionSyncService;
@@ -34,9 +36,9 @@ public class UpdateActionsTask {
         task = new LockingBackgroundTask(progressIndicator);
     }
 
-    public void setAdditionalSyncService(AdditionalSyncService additionalSyncService) {
-        this.additionalSyncService = additionalSyncService;
-    }
+//    public void setAdditionalSyncService(AdditionalSyncService additionalSyncService) {
+//        this.additionalSyncService = additionalSyncService;
+//    }
 
     public void updateFromServer(final AfterFetchListener afterFetchListener) {
         if (org.smartregister.Context.getInstance().IsUserLoggedOut()) {

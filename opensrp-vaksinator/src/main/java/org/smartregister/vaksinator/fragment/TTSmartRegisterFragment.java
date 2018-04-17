@@ -69,13 +69,13 @@ public class TTSmartRegisterFragment extends SecuredNativeSmartRegisterCursorAda
 
     private static final String TAG = TTSmartRegisterFragment.class.getSimpleName();
 
-    private SmartRegisterClientsProvider clientProvider = null;
-    private CommonPersonObjectController controller;
-    private VillageController villageController;
-    private DialogOptionMapper dialogOptionMapper;
+//    private SmartRegisterClientsProvider clientProvider = null;
+//    private CommonPersonObjectController controller;
+//    private VillageController villageController;
+//    private DialogOptionMapper dialogOptionMapper;
 
     private final ClientActionHandler clientActionHandler = new ClientActionHandler();
-    private String locationDialogTAG = "locationDialogTAG";
+//    private String locationDialogTAG = "locationDialogTAG";
 
     public static String criteria;
 
@@ -194,15 +194,15 @@ public class TTSmartRegisterFragment extends SecuredNativeSmartRegisterCursorAda
     private String filterStringForAll(){
         return "";
     }
-    private String sortByAlertmethod() {
-        return " CASE WHEN alerts.status = 'urgent' THEN '1'"
-                +
-                "WHEN alerts.status = 'upcoming' THEN '2'\n" +
-                "WHEN alerts.status = 'normal' THEN '3'\n" +
-                "WHEN alerts.status = 'expired' THEN '4'\n" +
-                "WHEN alerts.status is Null THEN '5'\n" +
-                "Else alerts.status END ASC";
-    }
+//    private String sortByAlertmethod() {
+//        return " CASE WHEN alerts.status = 'urgent' THEN '1'"
+//                +
+//                "WHEN alerts.status = 'upcoming' THEN '2'\n" +
+//                "WHEN alerts.status = 'normal' THEN '3'\n" +
+//                "WHEN alerts.status = 'expired' THEN '4'\n" +
+//                "WHEN alerts.status is Null THEN '5'\n" +
+//                "Else alerts.status END ASC";
+//    }
 
    public void initializeQueries(){
        String tableName = "ec_ibu";

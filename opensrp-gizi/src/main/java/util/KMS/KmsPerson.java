@@ -9,7 +9,7 @@ import util.formula.Support;
  */
 public class KmsPerson {
 
-    private String name;
+//    private String name;
     private boolean isMale;
     private int age;
     private String dateOfBirth;

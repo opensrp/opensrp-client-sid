@@ -1,20 +1,14 @@
 package org.smartregister.vaksinator.activity;
 
-import android.content.DialogInterface;
-import android.content.Intent;
 import android.content.pm.ActivityInfo;
-import android.database.Cursor;
 import android.os.Bundle;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.util.Log;
 
-import com.flurry.android.FlurryAgent;
-
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.smartregister.commonregistry.CommonPersonObjectClient;
-import org.smartregister.cursoradapter.SmartRegisterQueryBuilder;
 import org.smartregister.domain.form.FieldOverrides;
 import org.smartregister.domain.form.FormSubmission;
 import org.smartregister.enketo.listener.DisplayFormListener;
@@ -65,7 +59,7 @@ public class VaksinatorSmartRegisterActivity extends SecuredNativeSmartRegisterA
 
     private VaksinatorSmartRegisterFragment nf = new VaksinatorSmartRegisterFragment();
 
-    private Map<String, String> FS = new HashMap<>();
+//    private Map<String, String> FS = new HashMap<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -137,10 +131,13 @@ public class VaksinatorSmartRegisterActivity extends SecuredNativeSmartRegisterA
 
     @Override
     protected void setupViews() {
+        // do nothing
     }
 
     @Override
-    protected void onResumption(){}
+    protected void onResumption(){
+        // do nothing
+    }
 
     @Override
     protected NavBarOptionsProvider getNavBarOptionsProvider() {return null;}
@@ -194,11 +191,12 @@ public class VaksinatorSmartRegisterActivity extends SecuredNativeSmartRegisterA
             }
 
             //end capture flurry log for FS
-            String end = timer.format(new Date());
-            Map<String, String> FS = new HashMap<String, String>();
-            FS.put("end", end);
-//            FlurryAgent.logEvent(formName, FS, true);
-        }catch (Exception e){
+//            String end = timer.format(new Date());
+//            Map<String, String> FS = new HashMap<>();
+//            FS.put("end", end);
+//            FlurryAgent.logEvent(formName, FS, true);\
+
+        } catch (Exception e){
             // TODO: show error dialog on the formfragment if the submission fails
             DisplayFormFragment displayFormFragment = getDisplayFormFragmentAtIndex(currentPage);
             if (displayFormFragment != null) {
@@ -235,10 +233,9 @@ public class VaksinatorSmartRegisterActivity extends SecuredNativeSmartRegisterA
         JSONObject combined = null;
 
         try {
-            JSONObject locationJSON = new JSONObject(locationJSONString);
-           // JSONObject uniqueId = new JSONObject(LoginActivity.generator.uniqueIdController().getUniqueIdJson());
+            // JSONObject uniqueId = new JSONObject(LoginActivity.generator.uniqueIdController().getUniqueIdJson());
 
-            combined = locationJSON;
+            combined = new JSONObject(locationJSONString);
           //  Iterator<String> iter = uniqueId.keys();
 
            /* while (iter.hasNext()) {
@@ -278,9 +275,10 @@ public class VaksinatorSmartRegisterActivity extends SecuredNativeSmartRegisterA
             return;
         }*/
 
-        String start = timer.format(new Date());
-        Map<String, String> FS = new HashMap<String, String>();
-        FS.put("start", start);
+       // TIMER
+//        String start = timer.format(new Date());
+//        Map<String, String> FS = new HashMap<>();
+//        FS.put("start", start);
 //        FlurryAgent.logEvent(formName, FS, true);
 
             activatingForm(formName,entityId,metaData);
@@ -294,7 +292,7 @@ public class VaksinatorSmartRegisterActivity extends SecuredNativeSmartRegisterA
         try {
             int formIndex = EnketoFormUtils.getIndexForFormName(formName, formNames) + 1; // add the offset
             if (entityId != null || metaData != null){
-                String data = null;
+                String data;
                 //check if there is previously saved data for the form
                 data = getPreviouslySavedDataForForm(formName, metaData, entityId);
                 if (data == null){
@@ -319,41 +317,41 @@ public class VaksinatorSmartRegisterActivity extends SecuredNativeSmartRegisterA
         }
     }
 
-    /**
-     * Get 3 children name, 1 determined and 2 random. the determined one will be generated based on
-     * @entityId and stored to index @choice of char sequence array.
-     * @param choice
-     * @param entityId
-     * @return
-     */
-    private CharSequence[] selections(int choice, String entityId){
-        String name = org.smartregister.Context.getInstance().allCommonsRepositoryobjects("ec_anak").findByCaseID(entityId).getColumnmaps().get("namaBayi");
-        System.out.println("start form activity / nama = " + name);
-        CharSequence selections[] = new CharSequence[]{name, name, name};
-
-        selections[choice] = name;
-
-        String query = "SELECT namaBayi FROM ec_anak where ec_anak.is_closed = 0";
-        Cursor cursor = context().commonrepository("ec_anak").rawCustomQueryForAdapter(query);
-        cursor.moveToFirst();
-
-        for (int i = 0; i < selections.length; i++) {
-            if (i != choice) {
-                cursor.move(new java.util.Random().nextInt(cursor.getCount()));
-                String temp = cursor.getString(cursor.getColumnIndex("namaBayi"));
-                if(temp==null)
-                    i--;
-                else if (temp.equals(name))
-                    i--;
-                else
-                    selections[i] = temp;
-                cursor.moveToFirst();
-            }
-        }
-        cursor.close();
-
-        return selections;
-    }
+//    /**
+//     * Get 3 children name, 1 determined and 2 random. the determined one will be generated based on
+//     * @entityId and stored to index @choice of char sequence array.
+//     * @param choice
+//     * @param entityId
+//     * @return
+//     */
+//    private CharSequence[] selections(int choice, String entityId){
+//        String name = org.smartregister.Context.getInstance().allCommonsRepositoryobjects("ec_anak").findByCaseID(entityId).getColumnmaps().get("namaBayi");
+//        System.out.println("start form activity / nama = " + name);
+//        CharSequence selections[] = new CharSequence[]{name, name, name};
+//
+//        selections[choice] = name;
+//
+//        String query = "SELECT namaBayi FROM ec_anak where ec_anak.is_closed = 0";
+//        Cursor cursor = context().commonrepository("ec_anak").rawCustomQueryForAdapter(query);
+//        cursor.moveToFirst();
+//
+//        for (int i = 0; i < selections.length; i++) {
+//            if (i != choice) {
+//                cursor.move(new java.util.Random().nextInt(cursor.getCount()));
+//                String temp = cursor.getString(cursor.getColumnIndex("namaBayi"));
+//                if(temp==null)
+//                    i--;
+//                else if (temp.equals(name))
+//                    i--;
+//                else
+//                    selections[i] = temp;
+//                cursor.moveToFirst();
+//            }
+//        }
+//        cursor.close();
+//
+//        return selections;
+//    }
 
     public void switchToBaseFragment(final String data){
         final int prevPageIndex = currentPage;
@@ -374,6 +372,7 @@ public class VaksinatorSmartRegisterActivity extends SecuredNativeSmartRegisterA
 
                 }
 
+                assert displayFormFragment != null;
                 displayFormFragment.setRecordId(null);
             }
         });
@@ -402,7 +401,7 @@ public class VaksinatorSmartRegisterActivity extends SecuredNativeSmartRegisterA
     }
 
     private String[] buildFormNameList(){
-        List<String> formNames = new ArrayList<String>();
+        List<String> formNames = new ArrayList<>();
         formNames.add("registrasi_ibu");
         formNames.add("registrasi_anak");
         formNames.add("child_edit");
@@ -415,9 +414,9 @@ public class VaksinatorSmartRegisterActivity extends SecuredNativeSmartRegisterA
     protected void onPause() {
         super.onPause();
         retrieveAndSaveUnsubmittedFormData();
-        String VaksinatorEnd = timer.format(new Date());
-        Map<String, String> Vaksinator = new HashMap<String, String>();
-        Vaksinator.put("end", VaksinatorEnd);
+//        String VaksinatorEnd = timer.format(new Date());
+//        Map<String, String> mVaksinator = new HashMap<>();
+//        mVaksinator.put("end", VaksinatorEnd);
 //        FlurryAgent.logEvent("Vaksinator_dashboard",Vaksinator, true );
     }
 
@@ -428,46 +427,46 @@ public class VaksinatorSmartRegisterActivity extends SecuredNativeSmartRegisterA
         }
     }
 
-    private int getNumOfChild(){
-        Cursor childcountcursor = context().commonrepository("ec_anak").rawCustomQueryForAdapter(new SmartRegisterQueryBuilder().queryForCountOnRegisters("ec_anak_search", "ec_anak_search.is_closed=0"));
-        childcountcursor.moveToFirst();
-        int childcount= childcountcursor.getInt(0);
-        childcountcursor.close();
-        return childcount;
-    }
+//    private int getNumOfChild(){
+//        Cursor childcountcursor = context().commonrepository("ec_anak").rawCustomQueryForAdapter(new SmartRegisterQueryBuilder().queryForCountOnRegisters("ec_anak_search", "ec_anak_search.is_closed=0"));
+//        childcountcursor.moveToFirst();
+//        int childcount= childcountcursor.getInt(0);
+//        childcountcursor.close();
+//        return childcount;
+//    }
 
     private boolean currentActivityIsShowingForm(){
         return currentPage != 0;
     }
 
-    private DialogInterface.OnClickListener listener = new DialogInterface.OnClickListener() {
-
-        @Override
-        public void onClick(DialogInterface dialog, int which) {
-            String face_end = timer.format(new Date());
-            FS.put("face_end", face_end);
-
-            Log.e(TAG, "onClick: which "+ which );
-            nf.setCriteria("!");
-
-            if (which == -1 ){
-                currentPage = 0;
-                Log.e(TAG, "onClick: YES ");
-                FlurryAgent.logEvent(TAG+"search_by_face OK", true);
-
-            } else {
-                Log.e(TAG, "onClick: NO "+currentPage);
-                FlurryAgent.logEvent(TAG+"search_by_face NOK", true);
-
-                onBackPressed();
-
-                Intent intent= new Intent(VaksinatorSmartRegisterActivity.this, VaksinatorSmartRegisterActivity.class);
-                startActivity(intent.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT));
-            }
-
-
-        }
-    };
+//    private DialogInterface.OnClickListener listener = new DialogInterface.OnClickListener() {
+//
+//        @Override
+//        public void onClick(DialogInterface dialog, int which) {
+//            String face_end = timer.format(new Date());
+//            FS.put("face_end", face_end);
+//
+//            Log.e(TAG, "onClick: which "+ which );
+//            nf.setCriteria("!");
+//
+//            if (which == -1 ){
+//                currentPage = 0;
+//                Log.e(TAG, "onClick: YES ");
+//                FlurryAgent.logEvent(TAG+"search_by_face OK", true);
+//
+//            } else {
+//                Log.e(TAG, "onClick: NO "+currentPage);
+//                FlurryAgent.logEvent(TAG+"search_by_face NOK", true);
+//
+//                onBackPressed();
+//
+//                Intent intent= new Intent(VaksinatorSmartRegisterActivity.this, VaksinatorSmartRegisterActivity.class);
+//                startActivity(intent.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT));
+//            }
+//
+//
+//        }
+//    };
 
     public class EditDialogOptionModel implements DialogOptionModel {
         @Override

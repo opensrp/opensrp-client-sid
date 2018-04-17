@@ -400,28 +400,28 @@ public class IbuSmartRegisterActivity extends SecuredNativeSmartRegisterActivity
         return currentPage != 0;
     }
 
-    private DialogInterface.OnClickListener listener = new DialogInterface.OnClickListener() {
-        @Override
-        public void onClick(DialogInterface dialog, int which) {
-
-            if (which == -1 ){
-                nf.setCriteria("!");
-                currentPage = 0;
-                Log.e(TAG, "onClick: YES " + currentPage);
-                FlurryAgent.logEvent(TAG+"search_by_face OK", true);
-
-            } else {
-                nf.setCriteria("");
-                onBackPressed();
-                Log.e(TAG, "onClick: NO " + currentPage);
-                FlurryAgent.logEvent(TAG + "search_by_face NOK", true);
-
-                Intent intent= new Intent(IbuSmartRegisterActivity.this, IbuSmartRegisterActivity.class);
-                startActivity(intent.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT));
-            }
-
-
-        }
-    };
+//    private DialogInterface.OnClickListener listener = new DialogInterface.OnClickListener() {
+//        @Override
+//        public void onClick(DialogInterface dialog, int which) {
+//
+//            if (which == -1 ){
+//                nf.setCriteria("!");
+//                currentPage = 0;
+//                Log.e(TAG, "onClick: YES " + currentPage);
+//                FlurryAgent.logEvent(TAG+"search_by_face OK", true);
+//
+//            } else {
+//                nf.setCriteria("");
+//                onBackPressed();
+//                Log.e(TAG, "onClick: NO " + currentPage);
+//                FlurryAgent.logEvent(TAG + "search_by_face NOK", true);
+//
+//                Intent intent= new Intent(IbuSmartRegisterActivity.this, IbuSmartRegisterActivity.class);
+//                startActivity(intent.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT));
+//            }
+//
+//
+//        }
+//    };
 
 }

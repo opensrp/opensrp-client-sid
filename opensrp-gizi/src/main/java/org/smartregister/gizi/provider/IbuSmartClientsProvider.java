@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Context;
 import android.database.Cursor;
 import android.graphics.drawable.Drawable;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.AbsListView;
@@ -34,27 +35,27 @@ import java.util.Map;
 import static android.view.ViewGroup.LayoutParams.MATCH_PARENT;
 
 /**
- * Created by user on 2/12/15.
+ * Created by user on 2/12/15
  */
 public class IbuSmartClientsProvider implements SmartRegisterCLientsProviderForCursorAdapter {
+    private static final String TAG = IbuSmartClientsProvider.class.getName();
     private final LayoutInflater inflater;
     private final Context context;
     private final View.OnClickListener onClickListener;
-    private Drawable iconPencilDrawable;
-    private final int txtColorBlack;
-    private final AbsListView.LayoutParams clientViewLayoutParams;
 
     protected CommonPersonObjectController controller;
 
     public IbuSmartClientsProvider(Context context, View.OnClickListener onClickListener,
                                   AlertService alertService) {
+        Log.e(TAG, "IbuSmartClientsProvider: "+ alertService );
         this.onClickListener = onClickListener;
         this.context = context;
-//        AlertService alertService1 = alertService;
         this.inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        AbsListView.LayoutParams clientViewLayoutParams = new AbsListView.LayoutParams(MATCH_PARENT, (int) context.getResources().getDimension(R.dimen.list_item_height));
 
-        clientViewLayoutParams = new AbsListView.LayoutParams(MATCH_PARENT, (int) context.getResources().getDimension(org.smartregister.gizi.R.dimen.list_item_height));
-        txtColorBlack = context.getResources().getColor(org.smartregister.gizi.R.color.text_black);
+//        AlertService alertService1 = alertService;
+//        txtColorBlack =
+//        context.getResources().getColor(org.smartregister.gizi.R.color.text_black);
 
     }
 

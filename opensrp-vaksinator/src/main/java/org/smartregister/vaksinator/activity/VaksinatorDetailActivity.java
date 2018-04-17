@@ -1,5 +1,6 @@
 package org.smartregister.vaksinator.activity;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Intent;
 import android.net.Uri;
@@ -12,7 +13,6 @@ import android.widget.TextView;
 
 import com.flurry.android.FlurryAgent;
 
-import org.smartregister.Context;
 import org.smartregister.commonregistry.AllCommonsRepository;
 import org.smartregister.commonregistry.CommonPersonObject;
 import org.smartregister.commonregistry.CommonPersonObjectClient;
@@ -27,32 +27,23 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
-import util.ImageFetcher;
 import util.formula.Support;
 
 //import org.smartregister.vaksinator.face.camera.SmartShutterActivity;
 
 /**
- * Created by Iq on 09/06/16.
+ * Created by Iq on 09/06/16
  */
 public class VaksinatorDetailActivity extends Activity {
     private SimpleDateFormat timer = new SimpleDateFormat("hh:mm:ss");
     //image retrieving
     private static final String TAG = VaksinatorDetailActivity.class.getSimpleName();
-    private static final String IMAGE_CACHE_DIR = "thumbs";
-    //  private static KmsCalc  kmsCalc;
-
-    private static int mImageThumbSize;
-    private static int mImageThumbSpacing;
-    private static String showbgm;
-    private static ImageFetcher mImageFetcher;
-
-    //image retrieving
     public static CommonPersonObjectClient controller;
+    @SuppressLint("SetTextI18n")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        Context context = Context.getInstance();
+//        Context context = Context.getInstance();
         setContentView(R.layout.smart_register_jurim_detail_client);
 
         DetailsRepository detailsRepository = org.smartregister.Context.getInstance().detailsRepository();
@@ -65,7 +56,7 @@ public class VaksinatorDetailActivity extends Activity {
         final CommonPersonObject kiparent = kirep.findByCaseID(Support.getColumnmaps(controllers, "relational_id"));
 
         String DetailStart = timer.format(new Date());
-        Map<String, String> Detail = new HashMap<String, String>();
+        Map<String, String> Detail = new HashMap<>();
         Detail.put("start", DetailStart);
         FlurryAgent.logEvent("vaksinator_detail_view",Detail, true );
         //label
@@ -123,7 +114,7 @@ public class VaksinatorDetailActivity extends Activity {
                 overridePendingTransition(0, 0);
                 //Start capture flurry log for FS
                 String DetailEnd = timer.format(new Date());
-                Map<String, String> Detail = new HashMap<String, String>();
+                Map<String, String> Detail = new HashMap<>();
                 Detail.put("end", DetailEnd);
                 FlurryAgent.logEvent("vaksinator_detail_view",Detail, true );
             }
@@ -225,14 +216,9 @@ public class VaksinatorDetailActivity extends Activity {
         additionalDPT.setText(": " + (transformToddmmyyyy(Support.getDetails(controller, "dpt_hb_lanjutan"))));
         additionalMeasles.setText(": " + (transformToddmmyyyy(Support.getDetails(controller, "campak_lanjutan"))));
 
-
-        String mgender = controller.getDetails().containsKey("gender") ? Support.getDetails(controller, "gender"):"laki";
-
-
+//        String mgender = controller.getDetails().containsKey("gender") ? Support.getDetails(controller, "gender"):"laki";
         //start profile image
-
-        int placeholderDrawable = mgender.equalsIgnoreCase("male") ? R.drawable.child_boy_infant:R.drawable.child_girl_infant;
-
+//        int placeholderDrawable = mgender.equalsIgnoreCase("male") ? R.drawable.child_boy_infant:R.drawable.child_girl_infant;
         photo.setTag(R.id.entity_id, controller.getCaseId());//required when saving file to disk
         if(controller.getCaseId()!=null){//image already in local storage most likey ):
             //set profile image by passing the client id.If the image doesn't exist in the image repository then download and save locally
@@ -339,11 +325,11 @@ public class VaksinatorDetailActivity extends Activity {
         return pc.getDetails().get(variable)!=null && pc.getDetails().get(variable).length()==10;
     }
 
-    private int age(String date1, String date2){
-        return (Integer.parseInt(date2.substring(0,3)) - Integer.parseInt(date1.substring(0,3)))*360
-                + (Integer.parseInt(date2.substring(5,7)) - Integer.parseInt(date1.substring(5,7)))*30
-                + (Integer.parseInt(date2.substring(8)) - Integer.parseInt(date1.substring(8)));
-    }
+//    private int age(String date1, String date2){
+//        return (Integer.parseInt(date2.substring(0,3)) - Integer.parseInt(date1.substring(0,3)))*360
+//                + (Integer.parseInt(date2.substring(5,7)) - Integer.parseInt(date1.substring(5,7)))*30
+//                + (Integer.parseInt(date2.substring(8)) - Integer.parseInt(date1.substring(8)));
+//    }
 
     public String transformToddmmyyyy(String date){
         if(date.length()>3) {

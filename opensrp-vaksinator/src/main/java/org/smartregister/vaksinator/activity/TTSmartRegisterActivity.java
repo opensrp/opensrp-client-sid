@@ -1,6 +1,5 @@
 package org.smartregister.vaksinator.activity;
 
-import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
@@ -28,7 +27,6 @@ import org.smartregister.view.dialog.LocationSelectorDialogFragment;
 import org.smartregister.view.fragment.SecuredNativeSmartRegisterFragment;
 import org.smartregister.view.viewpager.OpenSRPViewPager;
 
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -41,7 +39,7 @@ import butterknife.ButterKnife;
 
 public class TTSmartRegisterActivity extends SecuredNativeSmartRegisterActivity implements
         LocationSelectorDialogFragment.OnLocationSelectedListener{
-    private SimpleDateFormat timer = new SimpleDateFormat("hh:mm:ss");
+//    private SimpleDateFormat timer = new SimpleDateFormat("hh:mm:ss");
 
     public static final String TAG = "TT REGISTER";
     @Bind(R.id.view_pager) public OpenSRPViewPager mPager;
@@ -71,37 +69,34 @@ public class TTSmartRegisterActivity extends SecuredNativeSmartRegisterActivity 
         formNames = this.buildFormNameList();
 
         //        WD
-        Bundle extras = getIntent().getExtras();
-        if (extras != null){
-            boolean mode_face = extras.getBoolean("org.smartregister.indonesia.face.face_mode");
-            String base_id = extras.getString("org.smartregister.indonesia.face.base_id");
-            double proc_time = extras.getDouble("org.smartregister.indonesia.face.proc_time");
-//            Log.e(TAG, "onCreate: "+proc_time );
-
-            if (mode_face){
-                nf.setCriteria(base_id);
-                mBaseFragment = new TTSmartRegisterFragment();
-
-                Log.e(TAG, "onCreate: id " + base_id);
-//                showToast("id "+base_id);
-                AlertDialog.Builder builder= new AlertDialog.Builder(this);
-                builder.setTitle("Is it Right Person ?");
-//                builder.setTitle("Is it Right Clients ?" + base_id);
-//                builder.setTitle("Is it Right Clients ?"+ pc.getName());
-
-                // TODO : get name by base_id
-//                builder.setMessage("Process Time : " + proc_time + " s");
-
-                builder.setNegativeButton("CANCEL", listener);
-                builder.setPositiveButton("YES", listener);
-                builder.show();
-            }
-        } else {
+//        Bundle extras = getIntent().getExtras();
+//        if (extras != null){
+//            boolean mode_face = extras.getBoolean("org.smartregister.indonesia.face.face_mode");
+//            String base_id = extras.getString("org.smartregister.indonesia.face.base_id");
+////            double proc_time = extras.getDouble("org.smartregister.indonesia.face.proc_time");
+////            Log.e(TAG, "onCreate: "+proc_time );
+//
+//            if (mode_face){
+//                nf.setCriteria(base_id);
+//                mBaseFragment = new TTSmartRegisterFragment();
+//
+//                Log.e(TAG, "onCreate: id " + base_id);
+////                showToast("id "+base_id);
+//                AlertDialog.Builder builder= new AlertDialog.Builder(this);
+//                builder.setTitle("Is it Right Person ?");
+////                builder.setTitle("Is it Right Clients ?" + base_id);
+////                builder.setTitle("Is it Right Clients ?"+ pc.getName());
+//
+//                // TODO : get name by base_id
+////                builder.setMessage("Process Time : " + proc_time + " s");
+//
+//                builder.setNegativeButton("CANCEL", listener);
+//                builder.setPositiveButton("YES", listener);
+//                builder.show();
+//            }
+//        } else {
             mBaseFragment = new TTSmartRegisterFragment();
-        }
-
-
-
+//        }
 
         // Instantiate a ViewPager and a PagerAdapter.
         mPagerAdapter = new BaseRegisterActivityPagerAdapter(getSupportFragmentManager(), formNames, mBaseFragment);
@@ -153,6 +148,7 @@ public class TTSmartRegisterActivity extends SecuredNativeSmartRegisterActivity 
 
     public DialogOption[] getEditOptions() {
         return new DialogOption[]{
+                // do nothing
 //                new OpenFormOption("Bayi Immunisasi", "kohort_bayi_immunization", formController),
 //
 //                new OpenFormOption("Tutup Bayi", "kohort_anak_tutup", formController),

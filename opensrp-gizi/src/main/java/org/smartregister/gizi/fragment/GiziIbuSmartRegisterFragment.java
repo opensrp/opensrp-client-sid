@@ -9,12 +9,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 
-import org.opensrp.api.domain.Location;
-import org.opensrp.api.util.EntityUtils;
-import org.opensrp.api.util.LocationTree;
-import org.opensrp.api.util.TreeNode;
 import org.smartregister.Context;
-import org.smartregister.commonregistry.CommonPersonObjectController;
 import org.smartregister.commonregistry.CommonRepository;
 import org.smartregister.cursoradapter.CursorCommonObjectFilterOption;
 import org.smartregister.cursoradapter.CursorCommonObjectSort;
@@ -24,19 +19,15 @@ import org.smartregister.cursoradapter.SmartRegisterPaginatedCursorAdapter;
 import org.smartregister.cursoradapter.SmartRegisterQueryBuilder;
 import org.smartregister.gizi.R;
 import org.smartregister.gizi.activity.IbuSmartRegisterActivity;
+import org.smartregister.gizi.activity.LoginActivity;
 import org.smartregister.gizi.option.IbuServiceModeOption;
 import org.smartregister.gizi.provider.IbuSmartClientsProvider;
 import org.smartregister.provider.SmartRegisterClientsProvider;
-import org.smartregister.sync.ClientProcessor;
-import org.smartregister.util.StringUtil;
 import org.smartregister.view.activity.SecuredNativeSmartRegisterActivity;
-import org.smartregister.view.contract.ECClient;
 import org.smartregister.view.contract.SmartRegisterClient;
 import org.smartregister.view.contract.SmartRegisterClients;
-import org.smartregister.view.controller.VillageController;
 import org.smartregister.view.dialog.AllClientsFilter;
 import org.smartregister.view.dialog.DialogOption;
-import org.smartregister.view.dialog.DialogOptionMapper;
 import org.smartregister.view.dialog.DialogOptionModel;
 import org.smartregister.view.dialog.EditOption;
 import org.smartregister.view.dialog.FilterOption;
@@ -44,7 +35,6 @@ import org.smartregister.view.dialog.ServiceModeOption;
 import org.smartregister.view.dialog.SortOption;
 
 import java.util.ArrayList;
-import java.util.Map;
 
 import util.AsyncTask;
 
@@ -53,19 +43,19 @@ import static android.view.View.VISIBLE;
 import static org.apache.commons.lang3.StringUtils.isEmpty;
 
 /**
- * Created by koros on 10/12/15.
+ * Created by koros on 10/12/15
  */
 public class GiziIbuSmartRegisterFragment extends SecuredNativeSmartRegisterCursorAdapterFragment {
 
     private static final String TAG = GiziIbuSmartRegisterFragment.class.getSimpleName();
 
-    private SmartRegisterClientsProvider clientProvider = null;
-    private CommonPersonObjectController controller;
-    private VillageController villageController;
-    private DialogOptionMapper dialogOptionMapper;
-    private ClientProcessor clientProcessor;
+//    private SmartRegisterClientsProvider clientProvider = null;
+//    private CommonPersonObjectController controller;
+//    private VillageController villageController;
+//    private DialogOptionMapper dialogOptionMapper;
+//    private ClientProcessor clientProcessor;
+//    private String locationDialogTAG = "locationDialogTAG";
     private final ClientActionHandler clientActionHandler = new ClientActionHandler();
-    private String locationDialogTAG = "locationDialogTAG";
 
     public static String criteria;
 
@@ -113,17 +103,16 @@ public class GiziIbuSmartRegisterFragment extends SecuredNativeSmartRegisterCurs
             @Override
             public DialogOption[] filterOptions() {
            //     FlurryFacade.logEvent("click_filter_option_on_kohort_ibu_dashboard");
-                ArrayList<DialogOption> dialogOptionslist = new ArrayList<DialogOption>();
+                ArrayList<DialogOption> dialogOptionslist = new ArrayList<>();
 
                 dialogOptionslist.add(new CursorCommonObjectFilterOption(getString(R.string.filter_by_all_label),filterStringForAll()));
                 //     dialogOptionslist.add(new CursorCommonObjectFilterOption(getString(R.string.hh_no_mwra),filterStringForNoElco()));
                 //      dialogOptionslist.add(new CursorCommonObjectFilterOption(getString(R.string.hh_has_mwra),filterStringForOneOrMoreElco()));
 
-                String locationjson = context().anmLocationController().get();
-                LocationTree locationTree = EntityUtils.fromJson(locationjson, LocationTree.class);
+//                String locationjson = context().anmLocationController().get();
+//                LocationTree locationTree = EntityUtils.fromJson(locationjson, LocationTree.class);
+//                Map<String,TreeNode<String, Location>> locationMap = locationTree.getLocationsHierarchy();
 
-                Map<String,TreeNode<String, Location>> locationMap =
-                        locationTree.getLocationsHierarchy();
                 //addChildToList(dialogOptionslist,locationMap);
                 DialogOption[] dialogOptions = new DialogOption[dialogOptionslist.size()];
                 for (int i = 0;i < dialogOptionslist.size();i++){
@@ -193,15 +182,16 @@ public class GiziIbuSmartRegisterFragment extends SecuredNativeSmartRegisterCurs
     private String filterStringForAll(){
         return "";
     }
-    private String sortByAlertmethod() {
-        return " CASE WHEN alerts.status = 'urgent' THEN '1'"
-                +
-                "WHEN alerts.status = 'upcoming' THEN '2'\n" +
-                "WHEN alerts.status = 'normal' THEN '3'\n" +
-                "WHEN alerts.status = 'expired' THEN '4'\n" +
-                "WHEN alerts.status is Null THEN '5'\n" +
-                "Else alerts.status END ASC";
-    }
+
+//    private String sortByAlertmethod() {
+//        return " CASE WHEN alerts.status = 'urgent' THEN '1'"
+//                +
+//                "WHEN alerts.status = 'upcoming' THEN '2'\n" +
+//                "WHEN alerts.status = 'normal' THEN '3'\n" +
+//                "WHEN alerts.status = 'expired' THEN '4'\n" +
+//                "WHEN alerts.status is Null THEN '5'\n" +
+//                "Else alerts.status END ASC";
+//    }
 
     private void initializeQueries() {
         String tableName = "ec_ibu";
@@ -292,9 +282,9 @@ public class GiziIbuSmartRegisterFragment extends SecuredNativeSmartRegisterCurs
             }
         }
 
-        private void showProfileView(ECClient client) {
-            navigationController.startEC(client.entityId());
-        }
+//        private void showProfileView(ECClient client) {
+//            navigationController.startEC(client.entityId());
+//        }
     }
 
 
@@ -302,30 +292,30 @@ public class GiziIbuSmartRegisterFragment extends SecuredNativeSmartRegisterCurs
     private String KiSortByNameAZ() {
         return "namalengkap ASC";
     }
+
     private String KiSortByNameZA() {
         return "namalengkap DESC";
     }
 
-    private String KiSortByAge() {
-        return "umur DESC";
-    }
-    private String KiSortByNoIbu() {
-        return "noIbu ASC";
-    }
-
-    private String KiSortByEdd() {
-        return "htp IS NULL, htp";
-    }
-
+//    private String KiSortByAge() {
+//        return "umur DESC";
+//    }
+//    private String KiSortByNoIbu() {
+//        return "noIbu ASC";
+//    }
+//    private String KiSortByEdd() {
+//        return "htp IS NULL, htp";
+//    }
 
     private class EditDialogOptionModel implements DialogOptionModel {
+
         @Override
         public DialogOption[] getDialogOptions() {
             return getEditOptions();
         }
+
         @Override
         public void onDialogOptionSelection(DialogOption option, Object tag) {
-
 
             /*if(option.name().equalsIgnoreCase(getString(R.string.str_register_anc_form)) ) {
                 CommonPersonObjectClient pc = KIDetailActivity.kiclient;
@@ -350,9 +340,9 @@ public class GiziIbuSmartRegisterFragment extends SecuredNativeSmartRegisterCurs
         //     updateSearchView();
 //
         try{
-          //  LoginActivity.setLanguage();
-        }catch (Exception e){
-
+            LoginActivity.setLanguage();
+        } catch (Exception e){
+            e.printStackTrace();
         }
 
     }
@@ -407,86 +397,95 @@ public class GiziIbuSmartRegisterFragment extends SecuredNativeSmartRegisterCurs
 //        searchCancelView = view.findViewById(org.smartregister.R.id.btn_search_cancel);
 //        searchCancelView.setOnClickListener(searchCancelHandler);
 //    }
+
+//    private void updateSearchView() {
 //
-public void updateSearchView(){
-    getSearchView().addTextChangedListener(new TextWatcher() {
-        @Override
-        public void beforeTextChanged(CharSequence charSequence, int i, int i2, int i3) {
-            // do nothing
-        }
-
-        @Override
-        public void onTextChanged(final CharSequence cs, int start, int before, int count) {
-            (new AsyncTask() {
-                SmartRegisterClients filteredClients;
-
-                @Override
-                protected Object doInBackground(Object[] params) {
-//                        currentSearchFilter =
-//                        setCurrentSearchFilter(new HHSearchOption(cs.toString()));
-//                        filteredClients = getClientsAdapter().getListItemProvider()
-//                                .updateClients(getCurrentVillageFilter(), getCurrentServiceModeOption(),
-//                                        getCurrentSearchFilter(), getCurrentSortOption());
+//        TextWatcher textWatcher = new TextWatcher() {
+//            @Override
+//            public void beforeTextChanged(CharSequence charSequence, int i, int i2, int i3) {
+//                // do nothing
+//            }
 //
-
-                    filters = cs.toString();
-                    joinTable = "";
-                    mainCondition = " is_closed = 0 ";
-                    return null;
-                }
-
-                @Override
-                protected void onPostExecute(Object o) {
-//                        clientsAdapter
-//                                .refreshList(currentVillageFilter, currentServiceModeOption,
-//                                        currentSearchFilter, currentSortOption);
-//                        getClientsAdapter().refreshClients(filteredClients);
-//                        getClientsAdapter().notifyDataSetChanged();
-                    getSearchCancelView().setVisibility(isEmpty(cs) ? INVISIBLE : VISIBLE);
-                    filterandSortExecute();
-                    super.onPostExecute(o);
-                }
-            }).execute();
-//                currentSearchFilter = new HHSearchOption(cs.toString());
-//                clientsAdapter
-//                        .refreshList(currentVillageFilter, currentServiceModeOption,
-//                                currentSearchFilter, currentSortOption);
+//            @Override
+//            public void onTextChanged(final CharSequence cs, int start, int before, int count) {
+////            filter(cs.toString(), "", "");
+//                filters = cs.toString();
+//                joinTable = "";
+//                mainCondition = "is_closed = 0";
 //
-//                searchCancelView.setVisibility(isEmpty(cs) ? INVISIBLE : VISIBLE);
+//                getSearchCancelView().setVisibility(isEmpty(cs) ? INVISIBLE : VISIBLE);
+//                CountExecute();
+//                filterandSortExecute();
+//            }
+//
+//            @Override
+//            public void afterTextChanged(Editable editable) {
+//                // do nothing
+//            }
+//        };
+//
+//        getSearchView().removeTextChangedListener(textWatcher);
+//        getSearchView().addTextChangedListener(textWatcher);    }
 
+    public void updateSearchView() {
 
-        }
-
-        @Override
-        public void afterTextChanged(Editable editable) {
-            // do nothing
-        }
-    });
-}
-    public void addChildToList(ArrayList<DialogOption> dialogOptionslist,Map<String,TreeNode<String, Location>> locationMap){
-        for(Map.Entry<String, TreeNode<String, Location>> entry : locationMap.entrySet()) {
-
-            if(entry.getValue().getChildren() != null) {
-                addChildToList(dialogOptionslist,entry.getValue().getChildren());
-
-            }else{
-                StringUtil.humanize(entry.getValue().getLabel());
-                String name = StringUtil.humanize(entry.getValue().getLabel());
-                dialogOptionslist.add(new org.smartregister.gizi.option.KICommonObjectFilterOption(name,"desa", name));
-
+        getSearchView().addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i2, int i3) {
+                // do nothing
             }
-        }
+
+            @Override
+            public void onTextChanged(final CharSequence cs, int start, int before, int count) {
+                (new AsyncTask() {
+
+                    @Override
+                    protected Object doInBackground(Object[] params) {
+                        filters = cs.toString();
+                        joinTable = "";
+                        mainCondition = " is_closed = 0 ";
+                        return null;
+                    }
+
+                    @Override
+                    protected void onPostExecute(Object o) {
+                        getSearchCancelView().setVisibility(isEmpty(cs) ? INVISIBLE : VISIBLE);
+                        filterandSortExecute();
+                        super.onPostExecute(o);
+                    }
+                }).execute();
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+                // do nothing
+            }
+        });
     }
 
+//    public void addChildToList(ArrayList<DialogOption> dialogOptionslist,Map<String,TreeNode<String, Location>> locationMap){
+//        for(Map.Entry<String, TreeNode<String, Location>> entry : locationMap.entrySet()) {
+//
+//            if(entry.getValue().getChildren() != null) {
+//                addChildToList(dialogOptionslist,entry.getValue().getChildren());
+//
+//            }else{
+//                StringUtil.humanize(entry.getValue().getLabel());
+//                String name = StringUtil.humanize(entry.getValue().getLabel());
+//                dialogOptionslist.add(new org.smartregister.gizi.option.KICommonObjectFilterOption(name,"desa", name));
+//
+//            }
+//        }
+//    }
 
     //    WD
     public void setCriteria(String criteria) {
         GiziIbuSmartRegisterFragment.criteria = criteria;
     }
 
-    public static String getCriteria() {
-        return criteria;
-    }
+//    public static String getCriteria() {
+//        return criteria;
+//    }
 
     //    WD
     @Override

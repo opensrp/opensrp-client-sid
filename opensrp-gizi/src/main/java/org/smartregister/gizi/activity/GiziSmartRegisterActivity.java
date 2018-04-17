@@ -441,34 +441,34 @@ public class GiziSmartRegisterActivity extends SecuredNativeSmartRegisterActivit
         return currentPage != 0;
     }
 
-    private DialogInterface.OnClickListener listener = new DialogInterface.OnClickListener() {
-
-        @Override
-        public void onClick(DialogInterface dialog, int which) {
-            String face_end = timer.format(new Date());
-            FS.put("face_end", face_end);
-
-            Log.e(TAG, "onClick: which "+ which );
-            nf.setCriteria("!");
-
-            if (which == -1 ){
-                currentPage = 0;
-                Log.e(TAG, "onClick: YES ");
-                FlurryAgent.logEvent(TAG+"search_by_face OK", true);
-
-            } else {
-                Log.e(TAG, "onClick: NO "+currentPage);
-                FlurryAgent.logEvent(TAG+"search_by_face NOK", true);
-
-                onBackPressed();
-
-                Intent intent= new Intent(GiziSmartRegisterActivity.this, GiziSmartRegisterActivity.class);
-                startActivity(intent.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT));
-            }
-
-
-        }
-    };
+//    private DialogInterface.OnClickListener listener = new DialogInterface.OnClickListener() {
+//
+//        @Override
+//        public void onClick(DialogInterface dialog, int which) {
+//            String face_end = timer.format(new Date());
+//            FS.put("face_end", face_end);
+//
+//            Log.e(TAG, "onClick: which "+ which );
+//            nf.setCriteria("!");
+//
+//            if (which == -1 ){
+//                currentPage = 0;
+//                Log.e(TAG, "onClick: YES ");
+//                FlurryAgent.logEvent(TAG+"search_by_face OK", true);
+//
+//            } else {
+//                Log.e(TAG, "onClick: NO "+currentPage);
+//                FlurryAgent.logEvent(TAG+"search_by_face NOK", true);
+//
+//                onBackPressed();
+//
+//                Intent intent= new Intent(GiziSmartRegisterActivity.this, GiziSmartRegisterActivity.class);
+//                startActivity(intent.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT));
+//            }
+//
+//
+//        }
+//    };
 
     public class EditDialogOptionModel implements DialogOptionModel {
         @Override

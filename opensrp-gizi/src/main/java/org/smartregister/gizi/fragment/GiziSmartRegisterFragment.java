@@ -66,11 +66,11 @@ public class GiziSmartRegisterFragment extends SecuredNativeSmartRegisterCursorA
 
     private static final String TAG = GiziSmartRegisterFragment.class.getSimpleName();
 
-    private SmartRegisterClientsProvider clientProvider = null;
-    private CommonPersonObjectController controller;
-    private VillageController villageController;
-    private DialogOptionMapper dialogOptionMapper;
-    private GiziClientProcessor clientProcessor;
+//    private SmartRegisterClientsProvider clientProvider = null;
+//    private CommonPersonObjectController controller;
+//    private VillageController villageController;
+//    private DialogOptionMapper dialogOptionMapper;
+//    private GiziClientProcessor clientProcessor;
     private final ClientActionHandler clientActionHandler = new ClientActionHandler();
     private String locationDialogTAG = "locationDialogTAG";
 
@@ -150,9 +150,6 @@ public class GiziSmartRegisterFragment extends SecuredNativeSmartRegisterCursorA
             public DialogOption[] sortingOptions() {
                // FlurryFacade.logEvent("click_sorting_option_on_kohort_ibu_dashboard");
                 return new DialogOption[]{
-//                        new HouseholdCensusDueDateSort(),
-
-
                         new CursorCommonObjectSort(getResources().getString(R.string.sort_by_name_label),KiSortByNameAZ()),
                         new CursorCommonObjectSort(getResources().getString(R.string.sort_by_name_label_reverse),KiSortByNameZA()),
                         new CursorCommonObjectSort(getResources().getString(R.string.sort_by_age),KiSortByAgeASC()),
@@ -204,15 +201,15 @@ public class GiziSmartRegisterFragment extends SecuredNativeSmartRegisterCursorA
         return "";
     }
 
-    private String sortByAlertmethod() {
-        return " CASE WHEN alerts.status = 'urgent' THEN '1'"
-                +
-                "WHEN alerts.status = 'upcoming' THEN '2'\n" +
-                "WHEN alerts.status = 'normal' THEN '3'\n" +
-                "WHEN alerts.status = 'expired' THEN '4'\n" +
-                "WHEN alerts.status is Null THEN '5'\n" +
-                "Else alerts.status END ASC";
-    }
+//    private String sortByAlertmethod() {
+//        return " CASE WHEN alerts.status = 'urgent' THEN '1'"
+//                +
+//                "WHEN alerts.status = 'upcoming' THEN '2'\n" +
+//                "WHEN alerts.status = 'normal' THEN '3'\n" +
+//                "WHEN alerts.status = 'expired' THEN '4'\n" +
+//                "WHEN alerts.status is Null THEN '5'\n" +
+//                "Else alerts.status END ASC";
+//    }
 
     private void initializeQueries() {
         String tableName = "ec_anak";
@@ -321,9 +318,9 @@ public class GiziSmartRegisterFragment extends SecuredNativeSmartRegisterCursorA
             }
         }
 
-        private void showProfileView(ECClient client) {
-            navigationController.startEC(client.entityId());
-        }
+//        private void showProfileView(ECClient client) {
+//            navigationController.startEC(client.entityId());
+//        }
     }
 
 
@@ -341,16 +338,16 @@ public class GiziSmartRegisterFragment extends SecuredNativeSmartRegisterCursorA
         return " tanggalLahirAnak ASC";
     }
 
-    private String KiSortByAge() {
-        return " umur DESC";
-    }
-    private String KiSortByNoIbu() {
-        return " noIbu ASC";
-    }
-
-    private String KiSortByEdd() {
-        return " htp IS NULL, htp";
-    }
+//    private String KiSortByAge() {
+//        return " umur DESC";
+//    }
+//    private String KiSortByNoIbu() {
+//        return " noIbu ASC";
+//    }
+//
+//    private String KiSortByEdd() {
+//        return " htp IS NULL, htp";
+//    }
 
 /*
     private class EditDialogOptionModel implements DialogOptionModel {
@@ -447,21 +444,14 @@ public class GiziSmartRegisterFragment extends SecuredNativeSmartRegisterCursorA
         getSearchView().addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence charSequence, int i, int i2, int i3) {
+                // do nothing
             }
 
             @Override
             public void onTextChanged(final CharSequence cs, int start, int before, int count) {
                 (new AsyncTask() {
-                    SmartRegisterClients filteredClients;
-
                     @Override
                     protected Object doInBackground(Object[] params) {
-//                        currentSearchFilter =
-//                        setCurrentSearchFilter(new HHSearchOption(cs.toString()));
-//                        filteredClients = getClientsAdapter().getListItemProvider()
-//                                .updateClients(getCurrentVillageFilter(), getCurrentServiceModeOption(),
-//                                        getCurrentSearchFilter(), getCurrentSortOption());
-//
 
                         filters = cs.toString();
                         joinTable = "";
@@ -471,29 +461,16 @@ public class GiziSmartRegisterFragment extends SecuredNativeSmartRegisterCursorA
 
                     @Override
                     protected void onPostExecute(Object o) {
-//                        clientsAdapter
-//                                .refreshList(currentVillageFilter, currentServiceModeOption,
-//                                        currentSearchFilter, currentSortOption);
-//                        getClientsAdapter().refreshClients(filteredClients);
-//                        getClientsAdapter().notifyDataSetChanged();
                         getSearchCancelView().setVisibility(isEmpty(cs) ? INVISIBLE : VISIBLE);
                         filterandSortExecute();
                         super.onPostExecute(o);
                     }
                 }).execute();
-//                currentSearchFilter = new HHSearchOption(cs.toString());
-//                clientsAdapter
-//                        .refreshList(currentVillageFilter, currentServiceModeOption,
-//                                currentSearchFilter, currentSortOption);
-//
-//                searchCancelView.setVisibility(isEmpty(cs) ? INVISIBLE : VISIBLE);
-
-
             }
 
             @Override
             public void afterTextChanged(Editable editable) {
-
+                // do nothing
             }
         });
     }
@@ -519,9 +496,9 @@ public class GiziSmartRegisterFragment extends SecuredNativeSmartRegisterCursorA
         GiziSmartRegisterFragment.criteria = criteria;
     }
 
-    public static String getCriteria() {
-        return criteria;
-    }
+//    public static String getCriteria() {
+//        return criteria;
+//    }
 
     //    WD
     @Override
@@ -571,6 +548,7 @@ public class GiziSmartRegisterFragment extends SecuredNativeSmartRegisterCursorA
             searchView.addTextChangedListener(new TextWatcher() {
                 @Override
                 public void beforeTextChanged(CharSequence charSequence, int i, int i2, int i3) {
+                    // do nothing
                 }
 
                 @Override
@@ -612,6 +590,7 @@ public class GiziSmartRegisterFragment extends SecuredNativeSmartRegisterCursorA
 
                 @Override
                 public void afterTextChanged(Editable editable) {
+                    // do nothing
                 }
             });
         }

@@ -24,7 +24,6 @@ public class SyncStatusBroadcastReceiver extends BroadcastReceiver {
 
     private static SyncStatusBroadcastReceiver singleton;
     private boolean isSyncing;
-    private boolean alarmsTriggered = false;
 
     private final ArrayList<SyncStatusListener> syncStatusListeners;
 
@@ -56,17 +55,17 @@ public class SyncStatusBroadcastReceiver extends BroadcastReceiver {
         syncStatusListeners = new ArrayList<>();
     }
 
-    public void addSyncStatusListener(SyncStatusListener syncStatusListener) {
-        if (!syncStatusListeners.contains(syncStatusListener)) {
-            syncStatusListeners.add(syncStatusListener);
-        }
-    }
-
-    public void removeSyncStatusListener(SyncStatusListener syncStatusListener) {
-        if (syncStatusListeners.contains(syncStatusListener)) {
-            syncStatusListeners.remove(syncStatusListener);
-        }
-    }
+//    public void addSyncStatusListener(SyncStatusListener syncStatusListener) {
+//        if (!syncStatusListeners.contains(syncStatusListener)) {
+//            syncStatusListeners.add(syncStatusListener);
+//        }
+//    }
+//
+//    public void removeSyncStatusListener(SyncStatusListener syncStatusListener) {
+//        if (syncStatusListeners.contains(syncStatusListener)) {
+//            syncStatusListeners.remove(syncStatusListener);
+//        }
+//    }
 
     public boolean isSyncing() {
         return isSyncing;
