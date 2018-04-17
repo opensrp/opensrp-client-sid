@@ -27,7 +27,6 @@ import org.smartregister.gizi.sync.GiziClientProcessor;
 import org.smartregister.gizi.utils.KmsHandler;
 import org.smartregister.provider.SmartRegisterClientsProvider;
 import org.smartregister.repository.DetailsRepository;
-import org.smartregister.service.ZiggyService;
 import org.smartregister.view.activity.SecuredNativeSmartRegisterActivity;
 import org.smartregister.view.contract.SmartRegisterClient;
 import org.smartregister.view.dialog.DialogOption;
@@ -57,7 +56,7 @@ public class GiziSmartRegisterActivity extends SecuredNativeSmartRegisterActivit
     private SimpleDateFormat timer = new SimpleDateFormat("hh:mm:ss");
 
     public static final String TAG = GiziSmartRegisterActivity.class.getSimpleName();
-    @Bind(R.id.view_pager) private OpenSRPViewPager mPager;
+    @Bind(R.id.view_pager) public OpenSRPViewPager mPager;
     private FragmentPagerAdapter mPagerAdapter;
     private int currentPage;
     private String[] formNames = new String[]{};
@@ -80,7 +79,7 @@ public class GiziSmartRegisterActivity extends SecuredNativeSmartRegisterActivit
 
         formNames = this.buildFormNameList();
 
-        Bundle extras = getIntent().getExtras();
+//        Bundle extras = getIntent().getExtras();
 
 //        if (extras != null) {
 //            boolean mode_face = extras.getBoolean("org.ei.opensrp.indonesia.face.face_mode");
@@ -133,14 +132,17 @@ public class GiziSmartRegisterActivity extends SecuredNativeSmartRegisterActivit
     }
 
     @Override
-    protected DefaultOptionsProvider getDefaultOptionsProvider() {return null;}
+    protected DefaultOptionsProvider getDefaultOptionsProvider() { return null; }
 
     @Override
     protected void setupViews() {
+        // do nothing
     }
 
     @Override
-    protected void onResumption(){}
+    protected void onResumption(){
+        // do nothing
+    }
 
     @Override
     protected NavBarOptionsProvider getNavBarOptionsProvider() {return null;}

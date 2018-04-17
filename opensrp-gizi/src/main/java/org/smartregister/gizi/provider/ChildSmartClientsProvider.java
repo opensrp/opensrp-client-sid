@@ -411,14 +411,9 @@ public class ChildSmartClientsProvider implements SmartRegisterCLientsProviderFo
 
         private TextView name ;
         private TextView age ;
-        private TextView village;
-        private TextView husbandname;
         private TextView subVillage;
         private LinearLayout profilelayout;
         private ImageView profilepic;
-        private FrameLayout due_date_holder;
-
-        private Button warnbutton;
         private ImageButton follow_up;
         private TextView fatherName;
         private TextView gender;
@@ -435,14 +430,18 @@ public class ChildSmartClientsProvider implements SmartRegisterCLientsProviderFo
         private TextView heightText;
         private ImageView heightLogo;
         private ImageView vitALogo;
-        private TextView vitAText;
         private ImageView antihelminticLogo;
+        protected TextView vitAText;
         private TextView antihelminticText;
+//        private TextView village;
+//        private TextView husbandname;
+//        private FrameLayout due_date_holder;
+//        private Button warnbutton;
 
 
         public void setVitAVisibility(){
             int month = Integer.parseInt(new SimpleDateFormat("MM").format(new java.util.Date()));
-            int visibility = month == 2 || month == 8 ? View.VISIBLE : View.INVISIBLE;
+//            int visibility = month == 2 || month == 8 ? View.VISIBLE : View.INVISIBLE;
 //             vitALogo.setVisibility(visibility);
 //             vitAText.setVisibility(visibility);
         }

@@ -1,6 +1,5 @@
 package org.smartregister.gizi.activity;
 
-import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
@@ -49,12 +48,10 @@ public class IbuSmartRegisterActivity extends SecuredNativeSmartRegisterActivity
     private SimpleDateFormat timer = new SimpleDateFormat("hh:mm:ss");
 
     public static final String TAG = "GiziIbuActivity";
-    @Bind(R.id.view_pager) private OpenSRPViewPager mPager;
+    @Bind(R.id.view_pager) public OpenSRPViewPager mPager;
     private FragmentPagerAdapter mPagerAdapter;
     private int currentPage;
-    private ClientProcessor clientProcessor;
     private String[] formNames = new String[]{};
-    private android.support.v4.app.Fragment mBaseFragment = null;
 
     private ZiggyService ziggyService;
 
@@ -68,7 +65,7 @@ public class IbuSmartRegisterActivity extends SecuredNativeSmartRegisterActivity
 
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
         String GiziStart = timer.format(new Date());
-                Map<String, String> Gizi = new HashMap<String, String>();
+                Map<String, String> Gizi = new HashMap<>();
                 Gizi.put("start", GiziStart);
 //                FlurryAgent.logEvent("Gizi_dashboard",Gizi, true );
        // FlurryFacade.logEvent("Gizi_dashboard");
@@ -102,7 +99,7 @@ public class IbuSmartRegisterActivity extends SecuredNativeSmartRegisterActivity
 //                builder.show();
 //            }
 //        } else {
-            mBaseFragment = new GiziIbuSmartRegisterFragment();
+        android.support.v4.app.Fragment mBaseFragment = new GiziIbuSmartRegisterFragment();
 //        }
 
         // Instantiate a ViewPager and a PagerAdapter.
@@ -125,23 +122,23 @@ public class IbuSmartRegisterActivity extends SecuredNativeSmartRegisterActivity
     }
 
     @Override
-    protected DefaultOptionsProvider getDefaultOptionsProvider() {return null;}
-
-//    @Override
-//    protected void setupViews() {
-//        // do nothing
-//    }
-
-//    @Override
-//    protected void onResumption(){
-//        // do nothing
-//    }
+    protected DefaultOptionsProvider getDefaultOptionsProvider() { return null; }
 
     @Override
-    protected NavBarOptionsProvider getNavBarOptionsProvider() {return null;}
+    protected void setupViews() {
+        // do nothing
+    }
 
     @Override
-    protected SmartRegisterClientsProvider clientsProvider() {return null;}
+    protected void onResumption(){
+        // do nothing
+    }
+
+    @Override
+    protected NavBarOptionsProvider getNavBarOptionsProvider() { return null; }
+
+    @Override
+    protected SmartRegisterClientsProvider clientsProvider() { return null; }
 
     @Override
     protected void onInitialization() {

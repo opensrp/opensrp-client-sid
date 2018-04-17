@@ -135,12 +135,12 @@ public class VaksinatorSmartRegisterActivity extends SecuredNativeSmartRegisterA
     @Override
     protected DefaultOptionsProvider getDefaultOptionsProvider() {return null;}
 
-//    @Override
-//    protected void setupViews() {
-//    }
-//
-//    @Override
-//    protected void onResumption(){}
+    @Override
+    protected void setupViews() {
+    }
+
+    @Override
+    protected void onResumption(){}
 
     @Override
     protected NavBarOptionsProvider getNavBarOptionsProvider() {return null;}
