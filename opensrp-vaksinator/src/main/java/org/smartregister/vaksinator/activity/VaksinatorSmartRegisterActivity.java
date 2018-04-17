@@ -55,7 +55,7 @@ public class VaksinatorSmartRegisterActivity extends SecuredNativeSmartRegisterA
     private SimpleDateFormat timer = new SimpleDateFormat("hh:mm:ss");
 
     public static final String TAG = VaksinatorSmartRegisterActivity.class.getSimpleName();
-    @Bind(R.id.view_pager) private OpenSRPViewPager mPager;
+    @Bind(R.id.view_pager) public OpenSRPViewPager mPager;
     private FragmentPagerAdapter mPagerAdapter;
     private int currentPage;
     private String[] formNames = new String[]{};

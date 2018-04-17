@@ -44,7 +44,7 @@ public class TTSmartRegisterActivity extends SecuredNativeSmartRegisterActivity 
     private SimpleDateFormat timer = new SimpleDateFormat("hh:mm:ss");
 
     public static final String TAG = "TT REGISTER";
-    @Bind(R.id.view_pager) private OpenSRPViewPager mPager;
+    @Bind(R.id.view_pager) public OpenSRPViewPager mPager;
     private FragmentPagerAdapter mPagerAdapter;
     private int currentPage;
 
@@ -127,10 +127,14 @@ public class TTSmartRegisterActivity extends SecuredNativeSmartRegisterActivity 
     protected DefaultOptionsProvider getDefaultOptionsProvider() {return null;}
 
     @Override
-    protected void setupViews() {}
+    protected void setupViews() {
+        // do nothing
+    }
 
     @Override
-    protected void onResumption(){}
+    protected void onResumption(){
+        // odo nothing
+    }
 
     @Override
     protected NavBarOptionsProvider getNavBarOptionsProvider() {return null;}

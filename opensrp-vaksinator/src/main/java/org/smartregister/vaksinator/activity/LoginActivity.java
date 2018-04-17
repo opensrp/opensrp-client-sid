@@ -101,7 +101,7 @@ public class LoginActivity extends AppCompatActivity {
         initializeProgressDialog();
         setLanguage();
 
-          debugApp();
+        debugApp();
 
     }
 
