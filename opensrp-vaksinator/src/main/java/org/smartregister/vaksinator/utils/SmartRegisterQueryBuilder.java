@@ -6,10 +6,10 @@ import org.smartregister.commonregistry.CommonFtsObject;
 import java.util.List;
 
 /**
- * Created by Dani on 22/11/2017.
+ * Created by Dani on 22/11/2017
  */
 public class SmartRegisterQueryBuilder {
-    String Selectquery;
+    private String Selectquery;
 
     public SmartRegisterQueryBuilder(String selectquery) {
         Selectquery = selectquery;
@@ -264,40 +264,40 @@ public class SmartRegisterQueryBuilder {
         return phraseClause;
     }
 
-    private String phraseClause(String mainCondition, String phrase) {
-        if (StringUtils.isNotBlank(phrase)) {
-            String phraseClause =
-                    " WHERE " + mainConditionClause(mainCondition) + CommonFtsObject.phraseColumn
-                            + matchPhrase(phrase);
-            return phraseClause;
-        } else if (StringUtils.isNotBlank(mainCondition)) {
-            return " WHERE " + mainCondition;
-        }
-        return "";
-    }
+//    public String phraseClause(String mainCondition, String phrase) {
+//        if (StringUtils.isNotBlank(phrase)) {
+//            String phraseClause =
+//                    " WHERE " + mainConditionClause(mainCondition) + CommonFtsObject.phraseColumn
+//                            + matchPhrase(phrase);
+//            return phraseClause;
+//        } else if (StringUtils.isNotBlank(mainCondition)) {
+//            return " WHERE " + mainCondition;
+//        }
+//        return "";
+//    }
+//
+//    public String phraseClause(String joinTable, String mainCondition, String phrase) {
+//        String phraseClause =
+//                " WHERE " + mainConditionClause(mainCondition) + CommonFtsObject.phraseColumn
+//                        + matchPhrase(phrase) + " UNION SELECT "
+//                        + CommonFtsObject.relationalIdColumn + " FROM " + CommonFtsObject
+//                        .searchTableName(joinTable) + " " + "WHERE " + CommonFtsObject.phraseColumn
+//                        + matchPhrase(phrase);
+//        return phraseClause;
+//    }
 
-    private String phraseClause(String joinTable, String mainCondition, String phrase) {
-        String phraseClause =
-                " WHERE " + mainConditionClause(mainCondition) + CommonFtsObject.phraseColumn
-                        + matchPhrase(phrase) + " UNION SELECT "
-                        + CommonFtsObject.relationalIdColumn + " FROM " + CommonFtsObject
-                        .searchTableName(joinTable) + " " + "WHERE " + CommonFtsObject.phraseColumn
-                        + matchPhrase(phrase);
-        return phraseClause;
-    }
-
-    private String phraseClause(String tableName, String joinTable, String mainCondition, String
-            phrase) {
-        String phraseClause =
-                " WHERE " + CommonFtsObject.idColumn + " IN ( SELECT " + CommonFtsObject.idColumn
-                        + " FROM " + CommonFtsObject.searchTableName(tableName) + " WHERE "
-                        + mainConditionClause(mainCondition) + CommonFtsObject.phraseColumn
-                        + matchPhrase(phrase) + " UNION SELECT "
-                        + CommonFtsObject.relationalIdColumn + " " + "FROM " + CommonFtsObject
-                        .searchTableName(joinTable) + " WHERE " + CommonFtsObject.phraseColumn
-                        + matchPhrase(phrase) + " )";
-        return phraseClause;
-    }
+//    public String phraseClause(String tableName, String joinTable, String mainCondition, String
+//            phrase) {
+//        String phraseClause =
+//                " WHERE " + CommonFtsObject.idColumn + " IN ( SELECT " + CommonFtsObject.idColumn
+//                        + " FROM " + CommonFtsObject.searchTableName(tableName) + " WHERE "
+//                        + mainConditionClause(mainCondition) + CommonFtsObject.phraseColumn
+//                        + matchPhrase(phrase) + " UNION SELECT "
+//                        + CommonFtsObject.relationalIdColumn + " " + "FROM " + CommonFtsObject
+//                        .searchTableName(joinTable) + " WHERE " + CommonFtsObject.phraseColumn
+//                        + matchPhrase(phrase) + " )";
+//        return phraseClause;
+//    }
 
     private String setTablenameToCondition(String tablename, String mainCondition){
         mainCondition = mainCondition.trim();

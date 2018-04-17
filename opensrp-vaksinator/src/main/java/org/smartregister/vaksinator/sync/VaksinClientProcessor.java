@@ -21,7 +21,7 @@ public class VaksinClientProcessor extends ClientProcessor {
     private static final String TAG = "VaksinClientProcessor";
     private static final String detailsUpdated = "detailsUpdated";
     private static final String[] openmrs_gen_ids = {"zeir_id"};
-    Context mContext;
+    private Context mContext;
     private static VaksinClientProcessor instance;
 
     public static final String[] CLIENT_EVENTS = {"Registrasi Vaksinator", "Child Registration"};

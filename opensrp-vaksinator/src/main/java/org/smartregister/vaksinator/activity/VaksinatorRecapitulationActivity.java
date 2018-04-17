@@ -1,5 +1,6 @@
 package org.smartregister.vaksinator.activity;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Intent;
 import android.database.Cursor;
@@ -23,11 +24,10 @@ import java.util.Map;
  * Created by Iq on 09/06/16, modified by Marwan on 14/07/16
  */
 public class VaksinatorRecapitulationActivity extends Activity {
-    Context context;
-    //image retrieving
-
+    private Context context;
     public static CommonPersonObjectClient controller;
     public static String staticVillageName;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -178,76 +178,75 @@ public class VaksinatorRecapitulationActivity extends Activity {
         return true;
     }
 
+    @SuppressLint("SetTextI18n")
     private void updateView(LocalVariable var, org.smartregister.commonregistry.CommonPersonObjectClients clients, int month, int year){
         int counter = 0;
 
         String keyword = Integer.toString(year)+"-"+(month>9 ? Integer.toString(month):"0"+ Integer.toString(month));
 
-        var.titleLabel.setText(context.getStringResource(R.string.vaksinator_recapitulation_label));
-        var.hbUnderLabel.setText("HB 0 (0-7 "+context.getStringResource(R.string.hari)+")");
-        var.hbOverLabel.setText("HB 0 (>7 "+context.getStringResource(R.string.hari)+")");
-        var.campakLabel.setText(context.getStringResource(R.string.measles));
-        var.deadU.setText(context.getStringResource(R.string.meninggal)+ " <30 "+context.getStringResource(R.string.hari));
-        var.deadO.setText(context.getStringResource(R.string.meninggal)+ " >=30 "+context.getStringResource(R.string.hari));
-        var.movingLabel.setText(context.getStringResource(R.string.moving));
+        ((TextView) findViewById(R.id.txt_title_label)).setText(context.getStringResource(R.string.vaksinator_recapitulation_label));
+        ((TextView) findViewById(R.id.hb0under)).setText("HB 0 (0-7 "+context.getStringResource(R.string.hari)+")");
+        ((TextView) findViewById(R.id.hb0Over)).setText("HB 0 (>7 "+context.getStringResource(R.string.hari)+")");
+        ((TextView) findViewById(R.id.campakReporting)).setText(context.getStringResource(R.string.measles));
+        ((TextView) findViewById(R.id.deathUnder)).setText(context.getStringResource(R.string.meninggal)+ " <30 "+context.getStringResource(R.string.hari));
+        ((TextView) findViewById(R.id.deathOver)).setText(context.getStringResource(R.string.meninggal)+ " >=30 "+context.getStringResource(R.string.hari));
+        ((TextView) findViewById(R.id.pindahReporting)).setText(context.getStringResource(R.string.moving));
 
-        var.hbUnder7.setText(Integer.toString(recapitulation(clients, "hb0", keyword, "under 7")));
-        var.hbOver7.setText(Integer.toString(recapitulation(clients, "hb0", keyword, "over 7")));
-        var.bcg.setText(Integer.toString(recapitulation(clients, "bcg", keyword)));
-        var.pol1.setText(Integer.toString(recapitulation(clients, "polio1", keyword)));
-        var.hb1.setText(Integer.toString(recapitulation(clients, "dptHb1", keyword)));
-        var.pol2.setText(Integer.toString(recapitulation(clients, "polio2", keyword) + counter));
-        var.hb2.setText(Integer.toString(recapitulation(clients, "dptHb2", keyword)));
-        var.pol3.setText(Integer.toString(recapitulation(clients, "polio3", keyword)));
-        var.hb3.setText(Integer.toString(recapitulation(clients, "dptHb3", keyword)));
-        var.pol4.setText(Integer.toString(recapitulation(clients, "polio4", keyword)));
-        var.ipv.setText(Integer.toString(recapitulation(clients, "ipv", keyword)));
-        var.measles.setText(Integer.toString(recapitulation(clients, "imunisasi_campak", keyword)));
-        var.diedu30.setText(Integer.toString(recapitulation(clients, "tanggal_meninggal", keyword, "under 30")));
-        var.diedo30.setText(Integer.toString(recapitulation(clients, "tanggal_meninggal", keyword, "over 30")));
-        var.moving.setText(Integer.toString(counter));
+        ((TextView) findViewById(R.id.hbUnder7Reporting)).setText(Integer.toString(recapitulation(clients, "hb0", keyword, "under 7")));
+        ((TextView) findViewById(R.id.hbOver7Reporting)).setText(Integer.toString(recapitulation(clients, "hb0", keyword, "over 7")));
+        ((TextView) findViewById(R.id.bcgReporting)).setText(Integer.toString(recapitulation(clients, "bcg", keyword)));
+        ((TextView) findViewById(R.id.pol1Reporting)).setText(Integer.toString(recapitulation(clients, "polio1", keyword)));
+        ((TextView) findViewById(R.id.hb1Reporting)).setText(Integer.toString(recapitulation(clients, "dptHb1", keyword)));
+        ((TextView) findViewById(R.id.pol2Reporting)).setText(Integer.toString(recapitulation(clients, "polio2", keyword) + counter));
+        ((TextView) findViewById(R.id.hb2Reporting)).setText(Integer.toString(recapitulation(clients, "dptHb2", keyword)));
+        ((TextView) findViewById(R.id.pol3Reporting)).setText(Integer.toString(recapitulation(clients, "polio3", keyword)));
+        ((TextView) findViewById(R.id.hb3Reporting)).setText(Integer.toString(recapitulation(clients, "dptHb3", keyword)));
+        ((TextView) findViewById(R.id.pol4Reporting)).setText(Integer.toString(recapitulation(clients, "polio4", keyword)));
+        ((TextView) findViewById(R.id.ipvReporting)).setText(Integer.toString(recapitulation(clients, "ipv", keyword)));
+        ((TextView) findViewById(R.id.measlesReporting)).setText(Integer.toString(recapitulation(clients, "imunisasi_campak", keyword)));
+        ((TextView) findViewById(R.id.diedunder30Reporting)).setText(Integer.toString(recapitulation(clients, "tanggal_meninggal", keyword, "under 30")));
+        ((TextView) findViewById(R.id.diedover30Reporting)).setText(Integer.toString(recapitulation(clients, "tanggal_meninggal", keyword, "over 30")));
+        ((TextView) findViewById(R.id.movingReporting)).setText(Integer.toString(counter));
     }
-    private boolean hasDate(String data){
-        if(data!=null)
-            return data.length()>6;
-        return false;
+    private boolean hasDate(String data) {
+        return data != null && data.length() > 6;
     }
 
     private class LocalVariable{
-        TextView titleLabel = (TextView) findViewById(R.id.txt_title_label);
-        TextView hbUnderLabel = (TextView) findViewById(R.id.hb0under);
-        TextView hbOverLabel = (TextView) findViewById(R.id.hb0Over);
-        TextView campakLabel = (TextView) findViewById(R.id.campakReporting);
-        TextView deadU = (TextView) findViewById(R.id.deathUnder);
-        TextView deadO = (TextView) findViewById(R.id.deathOver);
-        TextView hbUnder7 = (TextView) findViewById(R.id.hbUnder7Reporting);
-        TextView hbOver7 = (TextView) findViewById(R.id.hbOver7Reporting);
-        TextView bcg = (TextView) findViewById(R.id.bcgReporting);
-        TextView pol1 = (TextView) findViewById(R.id.pol1Reporting);
-        TextView hb1 = (TextView) findViewById(R.id.hb1Reporting);
-        TextView pol2 = (TextView) findViewById(R.id.pol2Reporting);
-        TextView hb2 = (TextView) findViewById(R.id.hb2Reporting);
-        TextView pol3 = (TextView) findViewById(R.id.pol3Reporting);
-        TextView hb3 = (TextView) findViewById(R.id.hb3Reporting);
-        TextView pol4 = (TextView) findViewById(R.id.pol4Reporting);
-        TextView ipv = (TextView) findViewById(R.id.ipvReporting);
-        TextView measles = (TextView) findViewById(R.id.measlesReporting);
-        TextView diedu30 = (TextView) findViewById(R.id.diedunder30Reporting);
-        TextView diedo30 = (TextView) findViewById(R.id.diedover30Reporting);
-        TextView moving = (TextView) findViewById(R.id.movingReporting);
-        TextView movingLabel = (TextView) findViewById(R.id.pindahReporting);
-        TextView subtitle = (TextView) findViewById(R.id.subtitle);
+//        private TextView titleLabel = (TextView) findViewById(R.id.txt_title_label);
+//        private TextView hbUnderLabel = (TextView) findViewById(R.id.hb0under);
+//        private TextView hbOverLabel = (TextView) findViewById(R.id.hb0Over);
+//        private TextView campakLabel = (TextView) findViewById(R.id.campakReporting);
+//        private TextView deadU = (TextView) findViewById(R.id.deathUnder);
+//        private TextView deadO = (TextView) findViewById(R.id.deathOver);
+//        private TextView hbUnder7 = (TextView) findViewById(R.id.hbUnder7Reporting);
+//        private TextView hbOver7 = (TextView) findViewById(R.id.hbOver7Reporting);
+//        private TextView bcg = (TextView) findViewById(R.id.bcgReporting);
+//        TextView pol1 = (TextView) findViewById(R.id.pol1Reporting);
+//        TextView hb1 = (TextView) findViewById(R.id.hb1Reporting);
+//        TextView pol2 = (TextView) findViewById(R.id.pol2Reporting);
+//        TextView hb2 = (TextView) findViewById(R.id.hb2Reporting);
+//        TextView pol3 = (TextView) findViewById(R.id.pol3Reporting);
+//        TextView hb3 = (TextView) findViewById(R.id.hb3Reporting);
+//        TextView pol4 = (TextView) findViewById(R.id.pol4Reporting);
+//        TextView ipv = (TextView) findViewById(R.id.ipvReporting);
+//        TextView measles = (TextView) findViewById(R.id.measlesReporting);
+//        TextView diedu30 = (TextView) findViewById(R.id.diedunder30Reporting);
+//        TextView diedo30 = (TextView) findViewById(R.id.diedover30Reporting);
+//        TextView moving = (TextView) findViewById(R.id.movingReporting);
+//        TextView movingLabel = (TextView) findViewById(R.id.pindahReporting);
+//        TextView subtitle = (TextView) findViewById(R.id.subtitle);
 
-        Spinner monthSpinner = (Spinner) findViewById(R.id.monthSpinner);
-        Spinner yearSpinner = (Spinner) findViewById(R.id.yearSpinner);
+        private Spinner monthSpinner = (Spinner) findViewById(R.id.monthSpinner);
+        private Spinner yearSpinner = (Spinner) findViewById(R.id.yearSpinner);
 
-        void setDefaultSpinnerDate(){
+        private void setDefaultSpinnerDate(){
             String[]date = (new java.text.SimpleDateFormat("yyyy-MM-dd").format(new Date())).split("-");
             monthSpinner.setSelection(Integer.parseInt(date[1])-1);
             yearSpinner.setSelection(Integer.parseInt(date[0]) - 2015);
         }
-        void setSubtitle(String villageName){
-            subtitle.setText( context.getStringResource(R.string.headerTextpart01) +" "+ villageName
+        private void setSubtitle(String villageName){
+            ((TextView) findViewById(R.id.subtitle)).setText( context.getStringResource(R.string.headerTextpart01) +" "+ villageName
                             + " " + context.getStringResource(R.string.headerTextpart02) +" "+ monthSpinner.getSelectedItem().toString()
                             + " " + context.getStringResource(R.string.headerTextpart03) +" "+ yearSpinner.getSelectedItem().toString());
         }

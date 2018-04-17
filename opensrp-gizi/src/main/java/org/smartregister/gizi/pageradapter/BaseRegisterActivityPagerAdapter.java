@@ -13,9 +13,9 @@ import org.smartregister.enketo.view.fragment.DisplayFormFragment;
  */
 public class BaseRegisterActivityPagerAdapter extends FragmentPagerAdapter {
     public static final String ARG_PAGE = "page";
-    String[] dialogOptions;
-    Fragment mBaseFragment;
-    Fragment mProfileFragment;
+    private String[] dialogOptions;
+    private Fragment mBaseFragment;
+    private Fragment mProfileFragment;
     public int offset = 0;
 
     public BaseRegisterActivityPagerAdapter(FragmentManager fragmentManager, String[] dialogOptions, Fragment baseFragment) {

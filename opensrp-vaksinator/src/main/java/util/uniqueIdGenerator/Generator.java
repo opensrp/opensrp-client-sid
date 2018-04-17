@@ -26,7 +26,7 @@ public class Generator {
     private UniqueIdController uniqueIdController;
     private UniqueIdService uniqueIdService;
     private Context context;
-    VaksinatorApplication bidanApplication;
+    private VaksinatorApplication bidanApplication;
 
     private String url;
     private String result;

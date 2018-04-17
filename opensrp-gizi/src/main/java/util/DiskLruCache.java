@@ -98,11 +98,11 @@ import java.util.concurrent.TimeUnit;
  * responding appropriately.
  */
 public final class DiskLruCache implements Closeable {
-    static final String JOURNAL_FILE = "journal";
-    static final String JOURNAL_FILE_TMP = "journal.tmp";
-    static final String MAGIC = "libcore.io.DiskLruCache";
-    static final String VERSION_1 = "1";
-    static final long ANY_SEQUENCE_NUMBER = -1;
+    private static final String JOURNAL_FILE = "journal";
+    private static final String JOURNAL_FILE_TMP = "journal.tmp";
+    private static final String MAGIC = "libcore.io.DiskLruCache";
+    private static final String VERSION_1 = "1";
+    private static final long ANY_SEQUENCE_NUMBER = -1;
     private static final String CLEAN = "CLEAN";
     private static final String DIRTY = "DIRTY";
     private static final String REMOVE = "REMOVE";

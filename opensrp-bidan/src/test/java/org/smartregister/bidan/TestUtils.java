@@ -8,6 +8,6 @@ import android.net.Uri;
 
 public class TestUtils {
 
-    static final Uri URI_1 = Uri.parse("http://example.com/1.png");
+    private static final Uri URI_1 = Uri.parse("http://example.com/1.png");
 
 }

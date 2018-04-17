@@ -246,8 +246,8 @@ public abstract class AsyncTask<Params, Progress, Result> {
 
     @TargetApi(11)
     private static class SerialExecutor implements Executor {
-        final ArrayDeque<Runnable> mTasks = new ArrayDeque<Runnable>();
-        Runnable mActive;
+        private final ArrayDeque<Runnable> mTasks = new ArrayDeque<Runnable>();
+        private Runnable mActive;
 
         public synchronized void execute(final Runnable r) {
             mTasks.offer(new Runnable() {
@@ -680,7 +680,7 @@ public abstract class AsyncTask<Params, Progress, Result> {
     }
 
     private static abstract class WorkerRunnable<Params, Result> implements Callable<Result> {
-        Params[] mParams;
+        protected Params[] mParams;
     }
 
     @SuppressWarnings({"RawUseOfParameterizedType"})

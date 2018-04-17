@@ -49,7 +49,7 @@ import static org.smartregister.event.Event.SYNC_COMPLETED;
 import static org.smartregister.event.Event.SYNC_STARTED;
 
 public class GiziHomeActivity extends SecuredActivity {
-    SimpleDateFormat timer = new SimpleDateFormat("hh:mm:ss");
+    private SimpleDateFormat timer = new SimpleDateFormat("hh:mm:ss");
     private MenuItem updateMenuItem;
     private MenuItem remainingFormsToSyncMenuItem;
     private PendingFormSubmissionService pendingFormSubmissionService;

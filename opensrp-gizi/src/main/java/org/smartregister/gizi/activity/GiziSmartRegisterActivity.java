@@ -54,23 +54,19 @@ import static org.smartregister.util.Utils.getValue;
 public class GiziSmartRegisterActivity extends SecuredNativeSmartRegisterActivity implements
         LocationSelectorDialogFragment.OnLocationSelectedListener, DisplayFormListener{
 
-    SimpleDateFormat timer = new SimpleDateFormat("hh:mm:ss");
+    private SimpleDateFormat timer = new SimpleDateFormat("hh:mm:ss");
 
     public static final String TAG = GiziSmartRegisterActivity.class.getSimpleName();
-    @Bind(R.id.view_pager)
-    OpenSRPViewPager mPager;
+    @Bind(R.id.view_pager) private OpenSRPViewPager mPager;
     private FragmentPagerAdapter mPagerAdapter;
     private int currentPage;
     private String[] formNames = new String[]{};
     private android.support.v4.app.Fragment mBaseFragment = null;
 
-    ZiggyService ziggyService;
+    private GiziSmartRegisterFragment nf = new GiziSmartRegisterFragment();
 
-    GiziSmartRegisterFragment nf = new GiziSmartRegisterFragment();
+    private Map<String, String> FS = new HashMap<>();
 
-    Map<String, String> FS = new HashMap<>();
-
-    Bundle extras;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -84,31 +80,31 @@ public class GiziSmartRegisterActivity extends SecuredNativeSmartRegisterActivit
 
         formNames = this.buildFormNameList();
 
-        extras = getIntent().getExtras();
+        Bundle extras = getIntent().getExtras();
 
-        if (extras != null) {
-            boolean mode_face = extras.getBoolean("org.ei.opensrp.indonesia.face.face_mode");
-            String base_id = extras.getString("org.ei.opensrp.indonesia.face.base_id");
-            double proc_time = extras.getDouble("org.ei.opensrp.indonesia.face.proc_time");
-
-            if (mode_face) {
-                nf.setCriteria(base_id);
-                mBaseFragment = new GiziSmartRegisterFragment();
-
-                Log.e(TAG, "onCreate: id " + base_id);
-
-                AlertDialog.Builder builder = new AlertDialog.Builder(this);
-                builder.setTitle("Is it Right Person ?");
-
-                // TODO : get name by base_id
-                builder.setNegativeButton("CANCEL", listener );
-                builder.setPositiveButton("YES", listener );
-                builder.show();
-            }
-
-        } else {
+//        if (extras != null) {
+//            boolean mode_face = extras.getBoolean("org.ei.opensrp.indonesia.face.face_mode");
+//            String base_id = extras.getString("org.ei.opensrp.indonesia.face.base_id");
+//            double proc_time = extras.getDouble("org.ei.opensrp.indonesia.face.proc_time");
+//
+//            if (mode_face) {
+//                nf.setCriteria(base_id);
+//                mBaseFragment = new GiziSmartRegisterFragment();
+//
+//                Log.e(TAG, "onCreate: id " + base_id);
+//
+//                AlertDialog.Builder builder = new AlertDialog.Builder(this);
+//                builder.setTitle("Is it Right Person ?");
+//
+//                // TODO : get name by base_id
+//                builder.setNegativeButton("CANCEL", listener );
+//                builder.setPositiveButton("YES", listener );
+//                builder.show();
+//            }
+//
+//        } else {
             mBaseFragment = new GiziSmartRegisterFragment();
-        }
+//        }
 
         mPagerAdapter = new BaseRegisterActivityPagerAdapter(getSupportFragmentManager(), formNames, mBaseFragment);
         mPager.setOffscreenPageLimit(formNames.length);
@@ -126,8 +122,9 @@ public class GiziSmartRegisterActivity extends SecuredNativeSmartRegisterActivit
                                    LoginActivity.generator.uniqueIdController().countRemainingUniqueId());
             Toast.makeText(context().applicationContext(), toastMessage, Toast.LENGTH_LONG).show();
         }*/
-        ziggyService = context().ziggyService();
+//        ZiggyService ziggyService = context().ziggyService();
     }
+
     public void onPageChanged(int page){
         setRequestedOrientation(page == 0
                 ? ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE
@@ -373,6 +370,7 @@ public class GiziSmartRegisterActivity extends SecuredNativeSmartRegisterActivit
 
                 }
 
+                assert displayFormFragment != null;
                 displayFormFragment.setRecordId(null);
             }
         });

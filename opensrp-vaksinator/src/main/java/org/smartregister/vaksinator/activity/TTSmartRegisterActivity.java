@@ -17,7 +17,6 @@ import org.smartregister.domain.form.FieldOverrides;
 import org.smartregister.domain.form.FormSubmission;
 import org.smartregister.enketo.view.fragment.DisplayFormFragment;
 import org.smartregister.provider.SmartRegisterClientsProvider;
-import org.smartregister.service.ZiggyService;
 import org.smartregister.sync.ClientProcessor;
 import org.smartregister.util.FormUtils;
 import org.smartregister.vaksinator.R;
@@ -42,11 +41,10 @@ import butterknife.ButterKnife;
 
 public class TTSmartRegisterActivity extends SecuredNativeSmartRegisterActivity implements
         LocationSelectorDialogFragment.OnLocationSelectedListener{
-    SimpleDateFormat timer = new SimpleDateFormat("hh:mm:ss");
+    private SimpleDateFormat timer = new SimpleDateFormat("hh:mm:ss");
 
     public static final String TAG = "TT REGISTER";
-    @Bind(R.id.view_pager)
-    OpenSRPViewPager mPager;
+    @Bind(R.id.view_pager) private OpenSRPViewPager mPager;
     private FragmentPagerAdapter mPagerAdapter;
     private int currentPage;
 
@@ -54,9 +52,7 @@ public class TTSmartRegisterActivity extends SecuredNativeSmartRegisterActivity 
     private android.support.v4.app.Fragment mBaseFragment = null;
 
 
-    ZiggyService ziggyService;
-
-    TTSmartRegisterFragment nf = new TTSmartRegisterFragment();
+    private TTSmartRegisterFragment nf = new TTSmartRegisterFragment();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -119,8 +115,9 @@ public class TTSmartRegisterActivity extends SecuredNativeSmartRegisterActivity 
             }
         });
 
-        ziggyService = context().ziggyService();
+//        ZiggyService ziggyService = context().ziggyService();
     }
+
     public void onPageChanged(int page){
         setRequestedOrientation(page == 0 ? ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE : ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
         LoginActivity.setLanguage();

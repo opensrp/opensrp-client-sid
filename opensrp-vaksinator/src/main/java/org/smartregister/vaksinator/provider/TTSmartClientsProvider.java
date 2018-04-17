@@ -225,31 +225,31 @@ public class TTSmartClientsProvider implements SmartRegisterCLientsProviderForCu
 //                || risk10 != null && risk10.equals("yes")){
 //        }
     }
-    class ViewHolder {
+    private class ViewHolder {
 
-        TextView wife_name ;
-        TextView husband_name ;
-        TextView village_name;
-        TextView wife_age;
-        LinearLayout profilelayout;
-        ImageView profilepic;
-        ImageButton follow_up;
-        TextView no_ibu;
-        TextView unique_id;
-        TextView usia_klinis;
-        TextView htpt;
-        TextView ki_lila_bb;
-        TextView beratbadan_tb;
-        TextView status_type;
-        TextView status_date;
-        TextView alert_status;
-        RelativeLayout status_layout;
-        TextView tanggal_kunjungan_anc;
-        TextView anc_number;
-        TextView kunjugan_ke;
-        ImageView hr_badge  ;
-        ImageView bpl_badge;
-        TextView edd_due;
+        private TextView wife_name ;
+        private TextView husband_name ;
+        private TextView village_name;
+        private TextView wife_age;
+        private LinearLayout profilelayout;
+        private ImageView profilepic;
+        private ImageButton follow_up;
+        private TextView no_ibu;
+        private TextView unique_id;
+        private TextView usia_klinis;
+        private TextView htpt;
+        private TextView ki_lila_bb;
+        private TextView beratbadan_tb;
+        private TextView status_type;
+        private TextView status_date;
+        private TextView alert_status;
+        private RelativeLayout status_layout;
+        private TextView tanggal_kunjungan_anc;
+        private TextView anc_number;
+        private TextView kunjugan_ke;
+        private ImageView hr_badge  ;
+        private ImageView bpl_badge;
+        private TextView edd_due;
     }
 
 

@@ -324,9 +324,9 @@ public class ChildSmartClientsProvider implements SmartRegisterCLientsProviderFo
     }
 
     class ViewHolder {
-        LinearLayout profilelayout;
-        ImageView profilepic;
-        ImageButton follow_up;
+        private LinearLayout profilelayout;
+        protected ImageView profilepic;
+        protected ImageButton follow_up;
         public TextView hb0;
         public TextView pol1;
         public TextView pol2;

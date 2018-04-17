@@ -40,7 +40,7 @@ import util.formula.Support;
 import static android.view.ViewGroup.LayoutParams.MATCH_PARENT;
 
 /**
- * Created by soran on 08/11/17.
+ * Created by soran on 08/11/17
  */
 
 public class ChildSmartClientsProvider implements SmartRegisterCLientsProviderForCursorAdapter {
@@ -49,24 +49,20 @@ public class ChildSmartClientsProvider implements SmartRegisterCLientsProviderFo
     private final Context context;
     private final View.OnClickListener onClickListener;
     private Drawable iconPencilDrawable;
-    private final int txtColorBlack;
     private final AbsListView.LayoutParams clientViewLayoutParams;
 
     protected CommonPersonObjectController controller;
 
-    AlertService alertService;
-    public ChildSmartClientsProvider(Context context,
-                                    View.OnClickListener onClickListener,
+    public ChildSmartClientsProvider(Context context, View.OnClickListener onClickListener,
                                     AlertService alertService) {
-        this.onClickListener = onClickListener;
-//        this.controller = controller;
         this.context = context;
-        this.alertService = alertService;
+        this.onClickListener = onClickListener;
+//        AlertService alertService1 = alertService;
         this.inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 
-        clientViewLayoutParams = new AbsListView.LayoutParams(MATCH_PARENT,
-                (int) context.getResources().getDimension(org.smartregister.R.dimen.list_item_height));
-        txtColorBlack = context.getResources().getColor(org.smartregister.R.color.text_black);
+        clientViewLayoutParams = new AbsListView.LayoutParams(MATCH_PARENT, (int) context.getResources().getDimension(org.smartregister.R.dimen.list_item_height));
+//        int txtColorBlack =
+        context.getResources().getColor(org.smartregister.R.color.text_black);
 
     }
 
@@ -175,8 +171,8 @@ public class ChildSmartClientsProvider implements SmartRegisterCLientsProviderFo
             viewHolder.gender.setText(Support.getDetails(pc, "tanggalLahirAnak") != "-"
                     ? age / 12 + " " + context.getString(R.string.years_unit) + " " + age % 12 + " " + context.getString(R.string.month_unit) : "-");
 
-/** collect history data and clean latest history data which contains no specific date or value,
- */
+
+            // collect history data and clean latest history data which contains no specific date or value,
             if (!Support.getDetails(pc, "umur").toLowerCase().equals("nan")) {
                 String[] history1 = hasValue(Support.getDetails(pc, "history_berat")) ? Support.insertionSort(Support.getDetails(pc, "history_berat")) : new String[]{"0:0"};
                 if (history1[history1.length - 1].charAt(history1[history1.length - 1].length() - 1) == ':')
@@ -193,8 +189,6 @@ public class ChildSmartClientsProvider implements SmartRegisterCLientsProviderFo
                 System.out.println("history1 : " + history1[history1.length - 1]);
                 System.out.println("history2 : " + history2[history2.length - 1]);
                 System.out.println("newest : " + newestDateonHistory);
-/**
- */
                 String weightToDisplay;
                 String heightToDisplay;
 
@@ -415,34 +409,35 @@ public class ChildSmartClientsProvider implements SmartRegisterCLientsProviderFo
 
     class ViewHolder {
 
-        TextView name ;
-        TextView age ;
-        TextView village;
-        TextView husbandname;
-        TextView subVillage;
-        LinearLayout profilelayout;
-        ImageView profilepic;
-        FrameLayout due_date_holder;
-        Button warnbutton;
-        ImageButton follow_up;
-        TextView fatherName;
-        TextView gender;
-        TextView dateOfBirth;
-        TextView visitDate;
-        TextView height;
-        TextView weight;
-        TextView underweight;
-        TextView stunting_status;
-        TextView wasting_status;
-        TextView absentAlert;
-        TextView weightText;
-        ImageView weightLogo;
-        TextView heightText;
-        ImageView heightLogo;
-        ImageView vitALogo;
-        TextView vitAText;
-        ImageView antihelminticLogo;
-        TextView antihelminticText;
+        private TextView name ;
+        private TextView age ;
+        private TextView village;
+        private TextView husbandname;
+        private TextView subVillage;
+        private LinearLayout profilelayout;
+        private ImageView profilepic;
+        private FrameLayout due_date_holder;
+
+        private Button warnbutton;
+        private ImageButton follow_up;
+        private TextView fatherName;
+        private TextView gender;
+        private TextView dateOfBirth;
+        private TextView visitDate;
+        private TextView height;
+        private TextView weight;
+        private TextView underweight;
+        private TextView stunting_status;
+        private TextView wasting_status;
+        private TextView absentAlert;
+        private TextView weightText;
+        private ImageView weightLogo;
+        private TextView heightText;
+        private ImageView heightLogo;
+        private ImageView vitALogo;
+        private TextView vitAText;
+        private ImageView antihelminticLogo;
+        private TextView antihelminticText;
 
 
         public void setVitAVisibility(){

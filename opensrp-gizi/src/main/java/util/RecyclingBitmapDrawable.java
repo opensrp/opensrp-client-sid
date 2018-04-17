@@ -30,7 +30,7 @@ import org.smartregister.BuildConfig;
  */
 public class RecyclingBitmapDrawable extends BitmapDrawable {
 
-    static final String TAG = "CountingBitmapDrawable";
+    private static final String TAG = "CountingBitmapDrawable";
 
     private int mCacheRefCount = 0;
     private int mDisplayRefCount = 0;

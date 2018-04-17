@@ -1,7 +1,7 @@
 package util;
 
 /**
- * Created by Dani on 10/11/2017.
+ * Created by Dani on 10/11/2017
  */
 
 import android.content.Context;
@@ -49,7 +49,7 @@ public class VaksinatorFormEntityConverter {
     private FormAttributeParser formAttributeParser;
     private Context mContext;
 
-    public VaksinatorFormEntityConverter(FormAttributeParser formAttributeParser, Context _context) {
+    protected VaksinatorFormEntityConverter(FormAttributeParser formAttributeParser, Context _context) {
         this.formAttributeParser = formAttributeParser;
         mContext = _context;
     }
@@ -74,8 +74,7 @@ public class VaksinatorFormEntityConverter {
      * @throws ParseException
      */
     public Event getEventFromFormSubmission(FormSubmissionMap fs) throws ParseException {
-        return createEvent(fs.entityId(), fs.formAttributes().get("encounter_type"), fs.fields(),
-                fs);
+        return createEvent(fs.entityId(), fs.formAttributes().get("encounter_type"), fs.fields(), fs);
     }
 
     private Event createEvent(String entityId, String eventType, List<FormFieldMap> fields,
@@ -130,7 +129,7 @@ public class VaksinatorFormEntityConverter {
         return e;
     }
 
-    public Event getEventFromFormSubmission(FormSubmission fs) throws IllegalStateException {
+    protected Event getEventFromFormSubmission(FormSubmission fs) throws IllegalStateException {
         try {
             return getEventFromFormSubmission(formAttributeParser.createFormSubmissionMap(fs));
         } catch (JsonIOException | JsonSyntaxException | XPathExpressionException
@@ -142,10 +141,9 @@ public class VaksinatorFormEntityConverter {
     /**
      * Extract Event for given subform with given data mapped to specified Encounter Type.
      *
-     * @param fs
-     * @param
-     * @param eventType
-     * @param subformInstance
+     * @param fs FormSubmissionMap
+     * @param eventType eventType
+     * @param subformInstance SubformMap
      * @return
      * @throws ParseException
      */
@@ -163,23 +161,22 @@ public class VaksinatorFormEntityConverter {
      * @param fs
      * @return
      */
-    String getFieldName(FormEntity en, FormSubmissionMap fs) {
+    private String getFieldName(FormEntity en, FormSubmissionMap fs) {
         return getFieldName(en, fs.fields());
     }
 
     /**
      * Get field name for specified openmrs entity in given form submission for given subform
      *
-     * @param en
-     * @param
-     * @param
-     * @return
+     * @param en Form Entity
+     * @param subf Subform
+     * @return getFieldname
      */
-    String getFieldName(FormEntity en, SubformMap subf) {
+    private String getFieldName(FormEntity en, SubformMap subf) {
         return getFieldName(en, subf.fields());
     }
 
-    String getFieldName(FormEntity en, List<FormFieldMap> fields) {
+    private String getFieldName(FormEntity en, List<FormFieldMap> fields) {
         for (FormFieldMap f : fields) {
             if (f.fieldAttributes().containsKey("openmrs_entity") && f.fieldAttributes()
                     .get("openmrs_entity").equalsIgnoreCase(en.entity()) && f.fieldAttributes()
@@ -193,22 +190,21 @@ public class VaksinatorFormEntityConverter {
     /**
      * Get field name for specified openmrs attribute mappings in given form submission
      *
-     * @param entity
-     * @param entityId
-     * @param entityParentId
-     * @param fs
-     * @return
+     * @param entity Entity Name
+     * @param entityId Entity Id
+     * @param entityParentId Entity Parent Id
+     * @param fs Form Submssion Map
+     * @return getFieldName
      */
-    String getFieldName(String entity, String entityId, String entityParentId, FormSubmissionMap
-            fs) {
+    private String getFieldName(String entity, String entityId, String entityParentId, FormSubmissionMap fs) {
         return getFieldName(entity, entityId, entityParentId, fs.fields());
     }
 
-    String getFieldName(String entity, String entityId, String entityParentId, SubformMap subf) {
+    private String getFieldName(String entity, String entityId, String entityParentId, SubformMap subf) {
         return getFieldName(entity, entityId, entityParentId, subf.fields());
     }
 
-    String getFieldName(String entity, String entityId, String entityParentId, List<FormFieldMap>
+    private String getFieldName(String entity, String entityId, String entityParentId, List<FormFieldMap>
             fields) {
         for (FormFieldMap f : fields) {
             if (f.fieldAttributes().containsKey("openmrs_entity") && f.fieldAttributes()
@@ -221,7 +217,7 @@ public class VaksinatorFormEntityConverter {
         return null;
     }
 
-    Map<String, Address> extractAddresses(FormSubmissionMap fs) throws ParseException {
+    private Map<String, Address> extractAddresses(FormSubmissionMap fs) throws ParseException {
         Map<String, Address> paddr = new HashMap<>();
         for (FormFieldMap fl : fs.fields()) {
             fillAddressFields(fl, paddr);
@@ -229,7 +225,7 @@ public class VaksinatorFormEntityConverter {
         return paddr;
     }
 
-    Map<String, Address> extractAddressesForSubform(SubformMap subf) throws ParseException {
+    private Map<String, Address> extractAddressesForSubform(SubformMap subf) throws ParseException {
         Map<String, Address> paddr = new HashMap<>();
         for (FormFieldMap fl : subf.fields()) {
             fillAddressFields(fl, paddr);
@@ -237,7 +233,7 @@ public class VaksinatorFormEntityConverter {
         return paddr;
     }
 
-    void fillAddressFields(FormFieldMap fl, Map<String, Address> addresses) throws ParseException {
+    private void fillAddressFields(FormFieldMap fl, Map<String, Address> addresses) throws ParseException {
         Map<String, String> att = fl.fieldAttributes();
         if (att.containsKey("openmrs_entity") && att.get("openmrs_entity")
                 .equalsIgnoreCase("person_address")) {
@@ -299,19 +295,19 @@ public class VaksinatorFormEntityConverter {
         }
     }
 
-    Map<String, String> extractIdentifiers(FormSubmissionMap fs) {
+    private Map<String, String> extractIdentifiers(FormSubmissionMap fs) {
         Map<String, String> pids = new HashMap<>();
         fillIdentifiers(pids, fs.fields());
         return pids;
     }
 
-    Map<String, String> extractIdentifiers(SubformMap subf) {
+    private Map<String, String> extractIdentifiers(SubformMap subf) {
         Map<String, String> pids = new HashMap<>();
         fillIdentifiers(pids, subf.fields());
         return pids;
     }
 
-    void fillIdentifiers(Map<String, String> pids, List<FormFieldMap> fields) {
+    private void fillIdentifiers(Map<String, String> pids, List<FormFieldMap> fields) {
         for (FormFieldMap fl : fields) {
             if (fl.values().size() < 2 && !StringUtils.isEmpty(fl.value())) {
                 Map<String, String> att = fl.fieldAttributes();
@@ -324,19 +320,19 @@ public class VaksinatorFormEntityConverter {
         }
     }
 
-    Map<String, Object> extractAttributes(FormSubmissionMap fs) {
+    private Map<String, Object> extractAttributes(FormSubmissionMap fs) {
         Map<String, Object> pattributes = new HashMap<>();
         fillAttributes(pattributes, fs.fields());
         return pattributes;
     }
 
-    Map<String, Object> extractAttributes(SubformMap subf) {
+    private Map<String, Object> extractAttributes(SubformMap subf) {
         Map<String, Object> pattributes = new HashMap<>();
         fillAttributes(pattributes, subf.fields());
         return pattributes;
     }
 
-    Map<String, Object> fillAttributes(Map<String, Object> pattributes, List<FormFieldMap> fields) {
+    private Map<String, Object> fillAttributes(Map<String, Object> pattributes, List<FormFieldMap> fields) {
         for (FormFieldMap fl : fields) {
             if (fl.values().size() < 2 && !StringUtils.isEmpty(fl.value())) {
                 Map<String, String> att = fl.fieldAttributes();
@@ -352,9 +348,9 @@ public class VaksinatorFormEntityConverter {
     /**
      * Extract Client from given form submission
      *
-     * @param
-     * @return
-     * @throws ParseException
+     * @param fsubmission Form Submission
+     * @return createBaseClient Create Base Client
+     * @throws IllegalStateException
      */
     public Client getClientFromFormSubmission(FormSubmission fsubmission) throws
             IllegalStateException {

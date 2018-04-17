@@ -1,6 +1,5 @@
 package org.smartregister.vaksinator.activity;
 
-import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
@@ -53,23 +52,21 @@ import static org.smartregister.util.Utils.getValue;
 public class VaksinatorSmartRegisterActivity extends SecuredNativeSmartRegisterActivity implements
         LocationSelectorDialogFragment.OnLocationSelectedListener, DisplayFormListener{
 
-    SimpleDateFormat timer = new SimpleDateFormat("hh:mm:ss");
+    private SimpleDateFormat timer = new SimpleDateFormat("hh:mm:ss");
 
     public static final String TAG = VaksinatorSmartRegisterActivity.class.getSimpleName();
-    @Bind(R.id.view_pager)
-    OpenSRPViewPager mPager;
+    @Bind(R.id.view_pager) private OpenSRPViewPager mPager;
     private FragmentPagerAdapter mPagerAdapter;
     private int currentPage;
     private String[] formNames = new String[]{};
     private android.support.v4.app.Fragment mBaseFragment = null;
 
-    SaveService saveService;
+    private SaveService saveService;
 
-    VaksinatorSmartRegisterFragment nf = new VaksinatorSmartRegisterFragment();
+    private VaksinatorSmartRegisterFragment nf = new VaksinatorSmartRegisterFragment();
 
-    Map<String, String> FS = new HashMap<>();
+    private Map<String, String> FS = new HashMap<>();
 
-    Bundle extras;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -83,31 +80,30 @@ public class VaksinatorSmartRegisterActivity extends SecuredNativeSmartRegisterA
 
         formNames = this.buildFormNameList();
 
-        extras = getIntent().getExtras();
-
-        if (extras != null) {
-            boolean mode_face = extras.getBoolean("org.ei.opensrp.indonesia.face.face_mode");
-            String base_id = extras.getString("org.ei.opensrp.indonesia.face.base_id");
-            double proc_time = extras.getDouble("org.ei.opensrp.indonesia.face.proc_time");
-
-            if (mode_face) {
-                nf.setCriteria(base_id);
-                mBaseFragment = new VaksinatorSmartRegisterFragment();
-
-                Log.e(TAG, "onCreate: id " + base_id);
-
-                AlertDialog.Builder builder = new AlertDialog.Builder(this);
-                builder.setTitle("Is it Right Person ?");
-
-                // TODO : get name by base_id
-                builder.setNegativeButton("CANCEL", listener );
-                builder.setPositiveButton("YES", listener );
-                builder.show();
-            }
-
-        } else {
+//        Bundle extras = getIntent().getExtras();
+//        if (extras != null) {
+//            boolean mode_face = extras.getBoolean("org.ei.opensrp.indonesia.face.face_mode");
+//            String base_id = extras.getString("org.ei.opensrp.indonesia.face.base_id");
+//            double proc_time = extras.getDouble("org.ei.opensrp.indonesia.face.proc_time");
+//
+//            if (mode_face) {
+//                nf.setCriteria(base_id);
+//                mBaseFragment = new VaksinatorSmartRegisterFragment();
+//
+//                Log.e(TAG, "onCreate: id " + base_id);
+//
+//                AlertDialog.Builder builder = new AlertDialog.Builder(this);
+//                builder.setTitle("Is it Right Person ?");
+//
+//                // TODO : get name by base_id
+//                builder.setNegativeButton("CANCEL", listener );
+//                builder.setPositiveButton("YES", listener );
+//                builder.show();
+//            }
+//
+//        } else {
             mBaseFragment = new VaksinatorSmartRegisterFragment();
-        }
+//        }
 
         mPagerAdapter = new BaseRegisterActivityPagerAdapter(getSupportFragmentManager(), formNames, mBaseFragment);
         mPager.setOffscreenPageLimit(formNames.length);
@@ -251,6 +247,7 @@ public class VaksinatorSmartRegisterActivity extends SecuredNativeSmartRegisterA
             }*/
 
             System.out.println("injection string: " + combined.toString());
+
         } catch (JSONException e) {
             e.printStackTrace();
         }

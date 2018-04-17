@@ -46,20 +46,19 @@ import butterknife.ButterKnife;
 public class IbuSmartRegisterActivity extends SecuredNativeSmartRegisterActivity implements
         LocationSelectorDialogFragment.OnLocationSelectedListener{
 
-    SimpleDateFormat timer = new SimpleDateFormat("hh:mm:ss");
+    private SimpleDateFormat timer = new SimpleDateFormat("hh:mm:ss");
 
     public static final String TAG = "GiziIbuActivity";
-    @Bind(R.id.view_pager)
-    OpenSRPViewPager mPager;
+    @Bind(R.id.view_pager) private OpenSRPViewPager mPager;
     private FragmentPagerAdapter mPagerAdapter;
     private int currentPage;
     private ClientProcessor clientProcessor;
     private String[] formNames = new String[]{};
     private android.support.v4.app.Fragment mBaseFragment = null;
 
-    ZiggyService ziggyService;
+    private ZiggyService ziggyService;
 
-    GiziIbuSmartRegisterFragment nf = new GiziIbuSmartRegisterFragment();
+    private GiziIbuSmartRegisterFragment nf = new GiziIbuSmartRegisterFragment();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -77,35 +76,34 @@ public class IbuSmartRegisterActivity extends SecuredNativeSmartRegisterActivity
         formNames = this.buildFormNameList();
 
         //        WD
-        Bundle extras = getIntent().getExtras();
-        if (extras != null) {
-            boolean mode_face = extras.getBoolean("org.smartregister.indonesia.face.face_mode");
-            String base_id = extras.getString("org.smartregister.indonesia.face.base_id");
-            double proc_time = extras.getDouble("org.smartregister.indonesia.face.proc_time");
-//            Log.e(TAG, "onCreate: "+proc_time );
-
-            if (mode_face) {
-                nf.setCriteria(base_id);
-                mBaseFragment = new GiziIbuSmartRegisterFragment();
-
-                Log.e(TAG, "onCreate: id " + base_id);
-//                showToast("id "+base_id);
-                AlertDialog.Builder builder = new AlertDialog.Builder(this);
-                builder.setTitle("Is it Right Person ?");
-//                builder.setTitle("Is it Right Clients ?" + base_id);
-//                builder.setTitle("Is it Right Clients ?"+ pc.getName());
-
-                // TODO : get name by base_id
-//                builder.setMessage("Process Time : " + proc_time + " s");
-
-                builder.setNegativeButton("CANCEL", listener );
-                builder.setPositiveButton("YES", listener );
-                builder.show();
-            }
-        } else {
+//        Bundle extras = getIntent().getExtras();
+//        if (extras != null) {
+//            boolean mode_face = extras.getBoolean("org.smartregister.indonesia.face.face_mode");
+//            String base_id = extras.getString("org.smartregister.indonesia.face.base_id");
+//            double proc_time = extras.getDouble("org.smartregister.indonesia.face.proc_time");
+////            Log.e(TAG, "onCreate: "+proc_time );
+//
+//            if (mode_face) {
+//                nf.setCriteria(base_id);
+//                mBaseFragment = new GiziIbuSmartRegisterFragment();
+//
+//                Log.e(TAG, "onCreate: id " + base_id);
+////                showToast("id "+base_id);
+//                AlertDialog.Builder builder = new AlertDialog.Builder(this);
+//                builder.setTitle("Is it Right Person ?");
+////                builder.setTitle("Is it Right Clients ?" + base_id);
+////                builder.setTitle("Is it Right Clients ?"+ pc.getName());
+//
+//                // TODO : get name by base_id
+////                builder.setMessage("Process Time : " + proc_time + " s");
+//
+//                builder.setNegativeButton("CANCEL", listener );
+//                builder.setPositiveButton("YES", listener );
+//                builder.show();
+//            }
+//        } else {
             mBaseFragment = new GiziIbuSmartRegisterFragment();
-        }
-
+//        }
 
         // Instantiate a ViewPager and a PagerAdapter.
         mPagerAdapter = new BaseRegisterActivityPagerAdapter(getSupportFragmentManager(), formNames, mBaseFragment);

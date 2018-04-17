@@ -46,17 +46,14 @@ public class IbuSmartClientsProvider implements SmartRegisterCLientsProviderForC
 
     protected CommonPersonObjectController controller;
 
-    AlertService alertService;
-    public IbuSmartClientsProvider(Context context,
-                                  View.OnClickListener onClickListener,
+    public IbuSmartClientsProvider(Context context, View.OnClickListener onClickListener,
                                   AlertService alertService) {
         this.onClickListener = onClickListener;
         this.context = context;
-        this.alertService = alertService;
+//        AlertService alertService1 = alertService;
         this.inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 
-        clientViewLayoutParams = new AbsListView.LayoutParams(MATCH_PARENT,
-                (int) context.getResources().getDimension(org.smartregister.gizi.R.dimen.list_item_height));
+        clientViewLayoutParams = new AbsListView.LayoutParams(MATCH_PARENT, (int) context.getResources().getDimension(org.smartregister.gizi.R.dimen.list_item_height));
         txtColorBlack = context.getResources().getColor(org.smartregister.gizi.R.color.text_black);
 
     }
@@ -271,14 +268,14 @@ public class IbuSmartClientsProvider implements SmartRegisterCLientsProviderForC
 
     class ViewHolder {
 
-        TextView namaLengkap, tanggalLahir, umur, dusun, namaSuami;
+        private TextView namaLengkap, tanggalLahir, umur, dusun, namaSuami;
 
-        LinearLayout profilelayout;
-        ImageView profilepic;
+        private LinearLayout profilelayout;
+        private ImageView profilepic;
 
-        TextView HPHT, lastANCVisit, lila, hbLevel, weight;
+        private TextView HPHT, lastANCVisit, lila, hbLevel, weight;
 
-        TextView sistolik, diastolik, vitaminA2, vitaminA24;
+        private TextView sistolik, diastolik, vitaminA2, vitaminA24;
 
 //         TextView stunting_status;
 //         TextView wasting_status;

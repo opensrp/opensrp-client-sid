@@ -36,7 +36,7 @@ import util.formula.Support;
  * Created by Iq on 09/06/16.
  */
 public class VaksinatorDetailActivity extends Activity {
-    SimpleDateFormat timer = new SimpleDateFormat("hh:mm:ss");
+    private SimpleDateFormat timer = new SimpleDateFormat("hh:mm:ss");
     //image retrieving
     private static final String TAG = VaksinatorDetailActivity.class.getSimpleName();
     private static final String IMAGE_CACHE_DIR = "thumbs";
@@ -231,7 +231,7 @@ public class VaksinatorDetailActivity extends Activity {
 
         //start profile image
 
-        int placeholderDrawable= mgender.equalsIgnoreCase("male") ? R.drawable.child_boy_infant:R.drawable.child_girl_infant;
+        int placeholderDrawable = mgender.equalsIgnoreCase("male") ? R.drawable.child_boy_infant:R.drawable.child_girl_infant;
 
         photo.setTag(R.id.entity_id, controller.getCaseId());//required when saving file to disk
         if(controller.getCaseId()!=null){//image already in local storage most likey ):
@@ -288,13 +288,6 @@ public class VaksinatorDetailActivity extends Activity {
 //        });
     }
 
-    String mCurrentPhotoPath;
-
-    static final int REQUEST_TAKE_PHOTO = 1;
-    static ImageView mImageView;
-    static File currentfile;
-    static String bindobject;
-    static String entityid;
 
     private boolean isComplete(){
         return ((Support.getDetails(controller, "hb0") != null &&

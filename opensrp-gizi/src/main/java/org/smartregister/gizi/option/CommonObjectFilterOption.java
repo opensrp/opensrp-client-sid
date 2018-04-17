@@ -10,7 +10,7 @@ public class CommonObjectFilterOption implements FilterOption {
     private final String criteria;
     public final String fieldname;
     private final String filterOptionName;
-    ByColumnAndByDetails byColumnAndByDetails;
+    private ByColumnAndByDetails byColumnAndByDetails;
 
     public enum ByColumnAndByDetails{
         byColumn,byDetails

@@ -21,7 +21,7 @@ public class GiziClientProcessor extends ClientProcessor {
     private static final String TAG = "GiziClientProcessor";
     private static final String detailsUpdated = "detailsUpdated";
     private static final String[] openmrs_gen_ids = {"zeir_id"};
-    Context mContext;
+    private Context mContext;
     private static GiziClientProcessor instance;
 
     public static final String[] CLIENT_EVENTS = {"Registrasi Vaksinator", "Child Registration"};

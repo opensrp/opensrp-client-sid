@@ -15,8 +15,8 @@ import java.util.Date;
  * Created by Iq on 30/03/16.
  */
 public class VaksinatorDateSort implements SortOption {
-    String field;
-    ByColumnAndByDetails byColumnAndByDetails;
+    private String field;
+    private ByColumnAndByDetails byColumnAndByDetails;
 
     public enum ByColumnAndByDetails{
         byColumn,byDetails
@@ -37,7 +37,7 @@ public class VaksinatorDateSort implements SortOption {
         return allClients;
     }
 
-    Comparator<SmartRegisterClient> commoncomparator = new Comparator<SmartRegisterClient>() {
+    private Comparator<SmartRegisterClient> commoncomparator = new Comparator<SmartRegisterClient>() {
         @Override
         public int compare(SmartRegisterClient oneClient, SmartRegisterClient anotherClient2) {
             CommonPersonObjectClient commonPersonObjectClient = (CommonPersonObjectClient)oneClient;

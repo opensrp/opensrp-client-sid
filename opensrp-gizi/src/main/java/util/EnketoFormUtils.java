@@ -166,6 +166,7 @@ public class EnketoFormUtils {
     public FormSubmission generateFormSubmisionFromXMLString(String entity_id, String formData,
                                                              String formName, JSONObject
                                                                      overrides) throws Exception {
+        android.util.Log.i(TAG, "generateFormSubmisionFromXMLString: "+ entity_id);
         JSONObject formSubmission = XML.toJSONObject(formData);
 
         //FileUtilities fu = new FileUtilities();
