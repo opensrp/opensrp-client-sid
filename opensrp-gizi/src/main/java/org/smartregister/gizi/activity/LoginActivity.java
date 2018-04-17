@@ -87,7 +87,7 @@ public class LoginActivity extends AppCompatActivity {
             conf.locale = new Locale(preferredLocale);
             res.updateConfiguration(conf, dm);
         }catch(Exception e){
-
+            android.util.Log.e(TAG, "onCreate: " + e.getCause());
         }
         setContentView(R.layout.login);
 

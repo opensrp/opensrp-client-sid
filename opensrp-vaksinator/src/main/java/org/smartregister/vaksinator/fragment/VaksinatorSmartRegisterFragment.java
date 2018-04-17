@@ -64,10 +64,10 @@ public class VaksinatorSmartRegisterFragment extends SecuredNativeSmartRegisterC
 
     private static final String TAG = VaksinatorSmartRegisterFragment.class.getSimpleName();
 
-    private SmartRegisterClientsProvider clientProvider = null;
-    private CommonPersonObjectController controller;
-    private VillageController villageController;
-    private DialogOptionMapper dialogOptionMapper;
+//    private SmartRegisterClientsProvider clientProvider = null;
+//    private CommonPersonObjectController controller;
+//    private VillageController villageController;
+//    private DialogOptionMapper dialogOptionMapper;
     private final ClientActionHandler clientActionHandler = new ClientActionHandler();
     private String locationDialogTAG = "locationDialogTAG";
 
@@ -197,15 +197,15 @@ public class VaksinatorSmartRegisterFragment extends SecuredNativeSmartRegisterC
         return "";
     }
 
-    private String sortByAlertmethod() {
-        return " CASE WHEN alerts.status = 'urgent' THEN '1'"
-                +
-                "WHEN alerts.status = 'upcoming' THEN '2'\n" +
-                "WHEN alerts.status = 'normal' THEN '3'\n" +
-                "WHEN alerts.status = 'expired' THEN '4'\n" +
-                "WHEN alerts.status is Null THEN '5'\n" +
-                "Else alerts.status END ASC";
-    }
+//    private String sortByAlertmethod() {
+//        return " CASE WHEN alerts.status = 'urgent' THEN '1'"
+//                +
+//                "WHEN alerts.status = 'upcoming' THEN '2'\n" +
+//                "WHEN alerts.status = 'normal' THEN '3'\n" +
+//                "WHEN alerts.status = 'expired' THEN '4'\n" +
+//                "WHEN alerts.status is Null THEN '5'\n" +
+//                "Else alerts.status END ASC";
+//    }
     /*public void initializeQueries(String s){
         VaksinatorSmartClientsProvider kiscp = new VaksinatorSmartClientsProvider(getActivity(),clientActionHandler,context().alertService());
         clientAdapter = new SmartRegisterPaginatedCursorAdapter(getActivity(), null, kiscp, new CommonRepository("ec_anak",new String []{"tanggalLahirAnak","namaBayi"}));
@@ -328,9 +328,9 @@ public class VaksinatorSmartRegisterFragment extends SecuredNativeSmartRegisterC
             }
         }
 
-        private void showProfileView(ECClient client) {
-            navigationController.startEC(client.entityId());
-        }
+//        private void showProfileView(ECClient client) {
+//            navigationController.startEC(client.entityId());
+//        }
     }
 
 
@@ -348,16 +348,16 @@ public class VaksinatorSmartRegisterFragment extends SecuredNativeSmartRegisterC
         return " tanggalLahirAnak ASC";
     }
 
-    private String KiSortByAge() {
-        return " umur DESC";
-    }
-    private String KiSortByNoIbu() {
-        return " noIbu ASC";
-    }
-
-    private String KiSortByEdd() {
-        return " htp IS NULL, htp";
-    }
+//    private String KiSortByAge() {
+//        return " umur DESC";
+//    }
+//    private String KiSortByNoIbu() {
+//        return " noIbu ASC";
+//    }
+//
+//    private String KiSortByEdd() {
+//        return " htp IS NULL, htp";
+//    }
 
 
     @Override
@@ -372,7 +372,7 @@ public class VaksinatorSmartRegisterFragment extends SecuredNativeSmartRegisterC
         try{
             LoginActivity.setLanguage();
         }catch (Exception e){
-
+            e.printStackTrace();
         }
 
     }
@@ -438,7 +438,6 @@ public class VaksinatorSmartRegisterFragment extends SecuredNativeSmartRegisterC
             @Override
             public void onTextChanged(final CharSequence cs, int start, int before, int count) {
                 (new AsyncTask() {
-                    SmartRegisterClients filteredClients;
 
                     @Override
                     protected Object doInBackground(Object[] params) {
@@ -505,9 +504,9 @@ public class VaksinatorSmartRegisterFragment extends SecuredNativeSmartRegisterC
         VaksinatorSmartRegisterFragment.criteria = criteria;
     }
 
-    public static String getCriteria() {
-        return criteria;
-    }
+//    public static String getCriteria() {
+//        return criteria;
+//    }
 
     //    WD
     @Override

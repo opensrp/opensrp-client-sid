@@ -40,25 +40,22 @@ import static android.view.ViewGroup.LayoutParams.MATCH_PARENT;
 public class TTSmartClientsProvider implements SmartRegisterCLientsProviderForCursorAdapter {
     private final LayoutInflater inflater;
     private final Context context;
-    private final View.OnClickListener onClickListener;
     private Drawable iconPencilDrawable;
-    private final int txtColorBlack;
     private final AbsListView.LayoutParams clientViewLayoutParams;
 
     protected CommonPersonObjectController controller;
 
-    AlertService alertService;
     public TTSmartClientsProvider(Context context,
                                   View.OnClickListener onClickListener,
                                   AlertService alertService) {
-        this.onClickListener = onClickListener;
+        View.OnClickListener onClickListener1 = onClickListener;
         this.context = context;
-        this.alertService = alertService;
+        AlertService alertService1 = alertService;
         this.inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 
         clientViewLayoutParams = new AbsListView.LayoutParams(MATCH_PARENT,
                 (int) context.getResources().getDimension(org.smartregister.vaksinator.R.dimen.list_item_height));
-        txtColorBlack = context.getResources().getColor(org.smartregister.vaksinator.R.color.text_black);
+        int txtColorBlack = context.getResources().getColor(R.color.text_black);
 
     }
 
@@ -231,7 +228,7 @@ public class TTSmartClientsProvider implements SmartRegisterCLientsProviderForCu
         private TextView husband_name ;
         private TextView village_name;
         private TextView wife_age;
-        private LinearLayout profilelayout;
+        protected LinearLayout profilelayout;
         private ImageView profilepic;
         private ImageButton follow_up;
         private TextView no_ibu;
@@ -247,8 +244,8 @@ public class TTSmartClientsProvider implements SmartRegisterCLientsProviderForCu
         private TextView tanggal_kunjungan_anc;
         private TextView anc_number;
         private TextView kunjugan_ke;
-        private ImageView hr_badge  ;
-        private ImageView bpl_badge;
+        protected ImageView hr_badge  ;
+        protected ImageView bpl_badge;
         private TextView edd_due;
     }
 
