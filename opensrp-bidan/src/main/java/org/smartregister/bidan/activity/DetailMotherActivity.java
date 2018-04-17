@@ -9,6 +9,7 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import org.smartregister.Context;
 import org.smartregister.bidan.R;
 import org.smartregister.bidan.utils.CameraPreviewActivity;
 import org.smartregister.bidan.utils.Support;
@@ -157,7 +158,7 @@ public class DetailMotherActivity extends Activity {
             }
         });
 
-        DetailsRepository detailsRepository = org.smartregister.Context.getInstance().detailsRepository();
+        DetailsRepository detailsRepository = Context.getInstance().detailsRepository();
         detailsRepository.updateDetails(motherClient);
 
         Support.setImagetoHolderFromUri(this, getObjValue(motherClient, "base_entity_id"), ((ImageView) findViewById(R.id.tv_mother_detail_profile_view)), R.mipmap.woman_placeholder);

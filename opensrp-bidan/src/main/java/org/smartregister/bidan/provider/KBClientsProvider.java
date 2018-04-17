@@ -1,7 +1,6 @@
 package org.smartregister.bidan.provider;
 
 import android.app.Activity;
-import android.content.Context;
 import android.database.Cursor;
 import android.util.Log;
 import android.view.View;
@@ -20,6 +19,7 @@ import org.smartregister.domain.Alert;
 import org.smartregister.repository.DetailsRepository;
 import org.smartregister.service.AlertService;
 import org.smartregister.view.contract.SmartRegisterClient;
+import org.smartregister.Context;
 
 import java.util.List;
 
@@ -30,7 +30,7 @@ public class KBClientsProvider extends BaseClientsProvider {
     private static final String TAG = KBClientsProvider.class.getName();
 
     private final View.OnClickListener onClickListener;
-    private final Context mContext;
+    private final android.content.Context mContext;
     private final AbsListView.LayoutParams clientViewLayoutParams;
     protected CommonPersonObjectController controller;
     private AlertService alertService;
@@ -100,7 +100,7 @@ public class KBClientsProvider extends BaseClientsProvider {
 //    private ImageView hrpp_badge;
 
 
-    public KBClientsProvider(Context context, View.OnClickListener onClickListener, AlertService alertService) {
+    public KBClientsProvider(android.content.Context context, View.OnClickListener onClickListener, AlertService alertService) {
         super(context);
         this.onClickListener = onClickListener;
         this.mContext = context;
@@ -121,7 +121,7 @@ public class KBClientsProvider extends BaseClientsProvider {
 //        }
 
         CommonPersonObjectClient pc = (CommonPersonObjectClient) smartRegisterClient;
-        DetailsRepository detailsRepository = org.smartregister.Context.getInstance().detailsRepository();
+        DetailsRepository detailsRepository = Context.getInstance().detailsRepository();
         detailsRepository.updateDetails(pc);
 
 //        System.out.println("client : " + pc.getColumnmaps().toString());

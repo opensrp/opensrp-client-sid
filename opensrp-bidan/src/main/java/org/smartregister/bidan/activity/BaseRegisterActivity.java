@@ -51,7 +51,7 @@ import static org.smartregister.util.Utils.getValue;
 
 //import org.smartregister.bidan.utils.BidanFormUtils;
 //import android.content.res.Configuration;
-//import org.smartregister.Context;
+import org.smartregister.Context;
 //import org.smartregister.repository.AllSharedPreferences;
 //import static android.preference.PreferenceManager.getDefaultSharedPreferences;
 
@@ -459,7 +459,7 @@ public class BaseRegisterActivity extends SecuredNativeSmartRegisterActivity imp
 //        public void onDialogOptionSelection(DialogOption option, Object tag) {
 //            android.util.Log.e(TAG, "onDialogOptionSelection: NOEDIT" );
 //            CommonPersonObjectClient pc = (CommonPersonObjectClient) tag;
-//            DetailsRepository detailsRepository = org.smartregister.Context.getInstance().detailsRepository();
+//            DetailsRepository detailsRepository = Context.getInstance().detailsRepository();
 //            detailsRepository.updateDetails(pc);
 //            String ibuCaseId = getValue(pc.getColumnmaps(), "_id", true).toLowerCase();
 //            JSONObject fieldOverrides = new JSONObject();
@@ -503,7 +503,7 @@ public class BaseRegisterActivity extends SecuredNativeSmartRegisterActivity imp
 
 //            android.util.Log.e(TAG, "onDialogOptionSelection:columnMap "+ pc.getColumnmaps() );
 //            android.util.Log.e(TAG, "onDialogOptionSelection:details "+ pc.getDetails() );
-            DetailsRepository detailsRepository = org.smartregister.Context.getInstance().detailsRepository();
+            DetailsRepository detailsRepository = Context.getInstance().detailsRepository();
 
             if (option.name().equalsIgnoreCase(getString(R.string.str_edit_ki_form))) {
                 // Edit Form Ibu
@@ -564,7 +564,7 @@ public class BaseRegisterActivity extends SecuredNativeSmartRegisterActivity imp
                         return;
                     }
 
-                    AllCommonsRepository iburep = org.smartregister.Context.getInstance().allCommonsRepositoryobjects("ec_ibu");
+                    AllCommonsRepository iburep = Context.getInstance().allCommonsRepositoryobjects("ec_ibu");
                     final CommonPersonObject ibuparent = iburep.findByCaseID(pc.entityId());
                     if (ibuparent != null) {
                         short anc_isclosed = ibuparent.getClosed();
@@ -577,7 +577,7 @@ public class BaseRegisterActivity extends SecuredNativeSmartRegisterActivity imp
                 }
 
                 if (option.name().equalsIgnoreCase(getString(R.string.str_register_anc_form))) {
-                    AllCommonsRepository iburep = org.smartregister.Context.getInstance().allCommonsRepositoryobjects("ec_ibu");
+                    AllCommonsRepository iburep = Context.getInstance().allCommonsRepositoryobjects("ec_ibu");
                     final CommonPersonObject ibuparent = iburep.findByCaseID(pc.entityId());
                     if (ibuparent != null) {
                         short anc_isclosed = ibuparent.getClosed();

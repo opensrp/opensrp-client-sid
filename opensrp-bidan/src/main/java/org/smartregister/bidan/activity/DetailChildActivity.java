@@ -10,6 +10,7 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import org.smartregister.Context;
 import org.smartregister.bidan.R;
 import org.smartregister.bidan.utils.CameraPreviewActivity;
 import org.smartregister.bidan.utils.Support;
@@ -97,7 +98,7 @@ public class DetailChildActivity extends Activity {
             }
         });
 
-        DetailsRepository detailsRepository = org.smartregister.Context.getInstance().detailsRepository();
+        DetailsRepository detailsRepository = Context.getInstance().detailsRepository();
         detailsRepository.updateDetails(childclient);
 
 //        String gender = childclient.getDetails().containsKey("gender") ? childclient.getDetails().get("gender") : "laki";
@@ -118,14 +119,14 @@ public class DetailChildActivity extends Activity {
 
         //end profile image
 
-        AllCommonsRepository childRepository = org.smartregister.Context.getInstance().allCommonsRepositoryobjects("ec_anak");
+        AllCommonsRepository childRepository = Context.getInstance().allCommonsRepositoryobjects("ec_anak");
 
         CommonPersonObject childobject = childRepository.findByCaseID(childclient.entityId());
 
-//        AllCommonsRepository iburep = org.smartregister.Context.getInstance().allCommonsRepositoryobjects("ec_ibu");
+//        AllCommonsRepository iburep = Context.getInstance().allCommonsRepositoryobjects("ec_ibu");
 //        final CommonPersonObject ibuparent = iburep.findByCaseID(childobject.getColumnmaps().get("relational_id"));
 
-        AllCommonsRepository kirep = org.smartregister.Context.getInstance().allCommonsRepositoryobjects("ec_kartu_ibu");
+        AllCommonsRepository kirep = Context.getInstance().allCommonsRepositoryobjects("ec_kartu_ibu");
         final CommonPersonObject kiparent = kirep.findByCaseID(childobject.getColumnmaps().get("relational_id"));
 
 

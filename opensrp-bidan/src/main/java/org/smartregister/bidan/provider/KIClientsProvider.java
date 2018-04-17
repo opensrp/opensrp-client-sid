@@ -1,7 +1,6 @@
 package org.smartregister.bidan.provider;
 
 import android.app.Activity;
-import android.content.Context;
 import android.database.Cursor;
 import android.util.Log;
 import android.view.View;
@@ -12,6 +11,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import org.apache.commons.lang3.StringUtils;
+import org.smartregister.Context;
 import org.smartregister.bidan.R;
 import org.smartregister.bidan.activity.LoginActivity;
 import org.smartregister.bidan.utils.AllConstantsINA;
@@ -34,7 +34,7 @@ public class KIClientsProvider extends BaseClientsProvider {
 
     private static final String TAG = KIClientsProvider.class.getName();
 
-    private final Context mContext;
+    private final android.content.Context mContext;
     private final View.OnClickListener onClickListener;
     private final AbsListView.LayoutParams clientViewLayoutParams;
     protected CommonPersonObjectController controller;
@@ -93,7 +93,7 @@ public class KIClientsProvider extends BaseClientsProvider {
 //    private ImageView hrpp_badge;
 
 
-    public KIClientsProvider(Context context, View.OnClickListener onClickListener, AlertService alertService) {
+    public KIClientsProvider(android.content.Context context, View.OnClickListener onClickListener, AlertService alertService) {
         super(context);
         this.onClickListener = onClickListener;
         this.mContext = context;
@@ -117,15 +117,15 @@ public class KIClientsProvider extends BaseClientsProvider {
         // Load Value from Local DB
         // ========================================================================================
         CommonPersonObjectClient pc = (CommonPersonObjectClient) smartRegisterClient;
-        DetailsRepository detailsRepository = org.smartregister.Context.getInstance().detailsRepository();
+        DetailsRepository detailsRepository = Context.getInstance().detailsRepository();
         detailsRepository.updateDetails(pc);
 //        Log.e(TAG, "getView:CommonPersonObjectClient "+ pc.getDetails());
 //        System.out.println("client : " + pc.getColumnmaps().toString());
 //        System.out.println("event : " + pc.getDetails().toString());
-        AllCommonsRepository ibuRep = org.smartregister.Context.getInstance().allCommonsRepositoryobjects("ec_ibu");
-//        AllCommonsRepository ancrep = org.smartregister.Context.getInstance().allCommonsRepositoryobjects("ec_anc");
-        AllCommonsRepository pncRep = org.smartregister.Context.getInstance().allCommonsRepositoryobjects("ec_pnc");
-        AllCommonsRepository anakRep = org.smartregister.Context.getInstance().allCommonsRepositoryobjects("ec_anak");
+        AllCommonsRepository ibuRep = Context.getInstance().allCommonsRepositoryobjects("ec_ibu");
+//        AllCommonsRepository ancrep = Context.getInstance().allCommonsRepositoryobjects("ec_anc");
+        AllCommonsRepository pncRep = Context.getInstance().allCommonsRepositoryobjects("ec_pnc");
+        AllCommonsRepository anakRep = Context.getInstance().allCommonsRepositoryobjects("ec_anak");
         ArrayList<String> list = new ArrayList<>();
         list.add((pc.entityId()));
         List<CommonPersonObject> allchild = anakRep.findByRelational_IDs(list);

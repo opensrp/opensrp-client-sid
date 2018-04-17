@@ -1,7 +1,6 @@
 package org.smartregister.bidan.provider;
 
 import android.app.Activity;
-import android.content.Context;
 import android.database.Cursor;
 import android.util.Log;
 import android.view.View;
@@ -29,6 +28,7 @@ import org.smartregister.domain.Alert;
 import org.smartregister.repository.DetailsRepository;
 import org.smartregister.service.AlertService;
 import org.smartregister.view.contract.SmartRegisterClient;
+import org.smartregister.Context;
 
 import java.util.List;
 import java.util.Map;
@@ -42,7 +42,7 @@ import static org.joda.time.LocalDateTime.parse;
 public class ANCClientsProvider extends BaseClientsProvider {
 
     private static final String TAG = ANCClientsProvider.class.getName();
-    private final Context mContext;
+    private final android.content.Context mContext;
     private final View.OnClickListener onClickListener;
     private final AbsListView.LayoutParams clientViewLayoutParams;
     protected CommonPersonObjectController controller;
@@ -101,7 +101,7 @@ public class ANCClientsProvider extends BaseClientsProvider {
 //    private ImageButton follow_up;
     private AlertService alertService;
 
-    public ANCClientsProvider(Context context, View.OnClickListener onClickListener, AlertService alertService) {
+    public ANCClientsProvider(android.content.Context context, View.OnClickListener onClickListener, AlertService alertService) {
         super(context);
         this.onClickListener = onClickListener;
         this.mContext = context;
@@ -124,9 +124,9 @@ public class ANCClientsProvider extends BaseClientsProvider {
 //        // Load data from DB
 
         CommonPersonObjectClient pc = (CommonPersonObjectClient) smartRegisterClient;
-        AllCommonsRepository allancRepository = org.smartregister.Context.getInstance().allCommonsRepositoryobjects("ec_ibu");
+        AllCommonsRepository allancRepository = Context.getInstance().allCommonsRepositoryobjects("ec_ibu");
         CommonPersonObject ancobject = allancRepository.findByCaseID(pc.entityId());
-        DetailsRepository detailsRepository = org.smartregister.Context.getInstance().detailsRepository();
+        DetailsRepository detailsRepository = Context.getInstance().detailsRepository();
         detailsRepository.updateDetails(ancobject);
 
         Log.e(TAG, "getView: client : " + ancobject.getColumnmaps().toString());

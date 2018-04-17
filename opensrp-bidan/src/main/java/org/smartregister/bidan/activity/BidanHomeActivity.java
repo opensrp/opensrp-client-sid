@@ -131,6 +131,8 @@ public class BidanHomeActivity extends SecuredActivity {
                 case R.id.btn_reporting:
                     navigationController.startReports();
                     break;
+                default:
+                    break;
 
 //                case R.id.btn_videos:
 //                    navigationController.startVideos();

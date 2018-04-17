@@ -43,7 +43,7 @@ public class UpdateActionsTask {
 //    }
 
     public void updateFromServer(final AfterFetchListener afterFetchListener) {
-        if (org.smartregister.Context.getInstance().IsUserLoggedOut()) {
+        if (Context.getInstance().IsUserLoggedOut()) {
             logInfo("Not updating from server as user is not logged in.");
             return;
         }
@@ -56,7 +56,7 @@ public class UpdateActionsTask {
                 Log.i(TAG, "updateFromServer:additional "+mAdditionalSyncService);
                 FetchStatus fetchStatusForForms = formSubmissionSyncService.sync();
 
-                if (org.smartregister.Context.getInstance().configuration().shouldSyncForm()) {
+                if (Context.getInstance().configuration().shouldSyncForm()) {
 
                     allFormVersionSyncService.verifyFormsInFolder();
                     FetchStatus fetchVersionStatus = allFormVersionSyncService.pullFormDefinitionFromServer();

@@ -204,10 +204,10 @@ public class DetailPNCActivity extends Activity {
 
         AllCommonsRepository kiRepository = Context.getInstance().allCommonsRepositoryobjects("ec_ibu");
         CommonPersonObject kiobject = kiRepository.findByCaseID(pncclient.entityId());
-        AllCommonsRepository iburep = org.smartregister.Context.getInstance().allCommonsRepositoryobjects("ec_kartu_ibu");
+        AllCommonsRepository iburep = Context.getInstance().allCommonsRepositoryobjects("ec_kartu_ibu");
         final CommonPersonObject ibuparent = iburep.findByCaseID(kiobject.getColumnmaps().get("base_entity_id"));
 
-        DetailsRepository detailsRepository = org.smartregister.Context.getInstance().detailsRepository();
+        DetailsRepository detailsRepository = Context.getInstance().detailsRepository();
         detailsRepository.updateDetails(ibuparent);
         // Set Image
 //        DrishtiApplication.getCachedImageLoaderInstance().getImageByClientId(ibuparent.getCaseId(), OpenSRPImageLoader.getStaticImageListener(kiview, R.mipmap.woman_placeholder, R.mipmap.woman_placeholder));

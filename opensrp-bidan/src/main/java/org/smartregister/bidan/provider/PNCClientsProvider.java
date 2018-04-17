@@ -1,7 +1,6 @@
 package org.smartregister.bidan.provider;
 
 import android.app.Activity;
-import android.content.Context;
 import android.database.Cursor;
 import android.util.Log;
 import android.view.View;
@@ -20,7 +19,7 @@ import org.smartregister.commonregistry.CommonPersonObjectController;
 import org.smartregister.repository.DetailsRepository;
 import org.smartregister.service.AlertService;
 import org.smartregister.view.contract.SmartRegisterClient;
-
+import org.smartregister.Context;
 import java.util.Map;
 
 import static android.view.ViewGroup.LayoutParams.MATCH_PARENT;
@@ -34,7 +33,7 @@ import static org.smartregister.util.StringUtil.humanizeAndDoUPPERCASE;
 public class PNCClientsProvider extends BaseClientsProvider {
 
     private final String TAG = PNCClientsProvider.class.getSimpleName();
-    private final Context mContext;
+    private final android.content.Context mContext;
     private final View.OnClickListener onClickListener;
     private final AbsListView.LayoutParams clientViewLayoutParams;
     protected CommonPersonObjectController controller;
@@ -95,7 +94,7 @@ public class PNCClientsProvider extends BaseClientsProvider {
     //  txt_kondisi_ibu txt_KF txt_vit_a
 
 
-    public PNCClientsProvider(Context context, View.OnClickListener onClickListener, AlertService alertService) {
+    public PNCClientsProvider(android.content.Context context, View.OnClickListener onClickListener, AlertService alertService) {
 
         super(context);
         this.onClickListener = onClickListener;
@@ -123,10 +122,10 @@ public class PNCClientsProvider extends BaseClientsProvider {
         // Load Value from Local DB
         // ========================================================================================
         CommonPersonObjectClient pc = (CommonPersonObjectClient) smartRegisterClient;
-        AllCommonsRepository allancRepository = org.smartregister.Context.getInstance().allCommonsRepositoryobjects("ec_pnc");
+        AllCommonsRepository allancRepository = Context.getInstance().allCommonsRepositoryobjects("ec_pnc");
         CommonPersonObject pncobject = allancRepository.findByCaseID(pc.entityId());
 
-        DetailsRepository detailsRepository = org.smartregister.Context.getInstance().detailsRepository();
+        DetailsRepository detailsRepository = Context.getInstance().detailsRepository();
         detailsRepository.updateDetails(pc);
         Map<String, String> details = detailsRepository.getAllDetailsForClient(pc.entityId());
         details.putAll(pncobject.getColumnmaps());
