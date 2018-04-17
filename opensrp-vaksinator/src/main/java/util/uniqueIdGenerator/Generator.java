@@ -144,7 +144,9 @@ public class Generator {
         }
 
         @Override
-        protected void onPreExecute() {}
+        protected void onPreExecute() {
+            // do nothing
+        }
 
         @Override
         protected void onProgressUpdate(Void... values) {}

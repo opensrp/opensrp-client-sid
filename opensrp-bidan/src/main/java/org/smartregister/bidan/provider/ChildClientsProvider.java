@@ -216,6 +216,8 @@ public class ChildClientsProvider implements SmartRegisterCLientsProviderForCurs
 
     @Override
     public void onServiceModeSelected(ServiceModeOption serviceModeOption) {
+        Log.i(TAG, "onServiceModeSelected: ");
+//        ServiceModeOption currentServiceModeOption = serviceModeOption;
 
     }
 

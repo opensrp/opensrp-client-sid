@@ -81,6 +81,7 @@ public class TTSmartRegisterFragment extends SecuredNativeSmartRegisterCursorAda
 
     @Override
     protected void onCreation() {
+        // do nothing
     }
 
     @Override
@@ -461,6 +462,7 @@ public class TTSmartRegisterFragment extends SecuredNativeSmartRegisterCursorAda
         getSearchView().addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence charSequence, int i, int i2, int i3) {
+                // DO NOTHING
             }
 
             @Override
@@ -507,7 +509,7 @@ public class TTSmartRegisterFragment extends SecuredNativeSmartRegisterCursorAda
 
             @Override
             public void afterTextChanged(Editable editable) {
-
+                // do nothing
             }
         });
     }

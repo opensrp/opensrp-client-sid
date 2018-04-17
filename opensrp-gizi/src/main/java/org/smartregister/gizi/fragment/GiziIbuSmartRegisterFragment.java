@@ -412,6 +412,7 @@ public void updateSearchView(){
     getSearchView().addTextChangedListener(new TextWatcher() {
         @Override
         public void beforeTextChanged(CharSequence charSequence, int i, int i2, int i3) {
+            // do nothing
         }
 
         @Override
@@ -458,7 +459,7 @@ public void updateSearchView(){
 
         @Override
         public void afterTextChanged(Editable editable) {
-
+            // do nothing
         }
     });
 }

@@ -55,17 +55,17 @@ public class BidanApplicationTest extends BidanApplication implements TestLifecy
 
     @Override
     public void beforeTest(Method method) {
-
+        // do nothing
     }
 
     @Override
     public void prepareTest(Object test) {
-
+        // do nothing
     }
 
     @Override
     public void afterTest(Method method) {
-
+        // do nothing
     }
 
 }

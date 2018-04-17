@@ -129,6 +129,7 @@ public class FPSmartRegisterFragment extends BaseSmartRegisterFragment {
 
     @Override
     protected void onInitialization() {
+        // do nothing
     }
 
     @Override

@@ -316,58 +316,58 @@ public class GiziZScoreChartActivity extends Activity{
         return result.length()<1? "" : result.substring(1,result.length());
     }
 
-    private String buildDayAgeArray(String huh,String hu){
-        if(hu==null)
-            return "";
-        //////System.out.println("hu = "+hu);
-        //////System.out.println("huh = " + huh);
-        String [] huhLength = huh==null ? new String[1] : huh.split(",");
-        String [] huLength = hu.split(",");
-        String result = "";
-
-        if(huhLength.length<huLength.length) {
-            // step 1.  initializing sum of data that recorded before the history_umur_hari.
-            int[] age = new int[(huLength.length)-huhLength.length];
-//            String[] temp = historyUmur.split(",");
-
-            // step 2.  copying month age data
-            for (int i = 0; i < age.length; i++) {
-                age[i] = Integer.parseInt(huLength[i+1]);
-            }
-
-            // step 3.  fix the duplicate value on series
-            if (age.length>1)
-                age[1]= age[0] == age[1] ? age[1]++ : age[1];
-            for (int i = 2; i < age.length - 1; i++) {
-                if (age[i - 1] == age[i]) {
-                    if (age[i - 1] - age[i - 2] == 2)
-                        age[i - 1]--;
-                    else
-                        age[i]++;
-                }
-            }
-
-            // step 4.  convert month age to daily unit and transform it into string
-            result = Integer.toString(age[0] * 30);
-            for(int i=1;i<age.length;i++){
-                age[i]*=30;
-                result = result + "," + Integer.toString(age[i]);
-            }
-        }
-        if(huh!=null) {
-            result = result.length() > 0 && !huhLength[0].equals("") && huhLength.length > 1
-                    ? result + "," + huhLength[1]
-                    : huhLength.length > 1
-                        ? huhLength[1]
-                        : "";
-
-            for (int i = 2; i < huhLength.length; i++) {
-                result = result + "," + huhLength[i];
-            }
-        }
-        //////System.out.println("result = "+result);
-        return result;
-    }
+//    private String buildDayAgeArray(String huh,String hu){
+//        if(hu==null)
+//            return "";
+//        //////System.out.println("hu = "+hu);
+//        //////System.out.println("huh = " + huh);
+//        String [] huhLength = huh==null ? new String[1] : huh.split(",");
+//        String [] huLength = hu.split(",");
+//        String result = "";
+//
+//        if(huhLength.length<huLength.length) {
+//            // step 1.  initializing sum of data that recorded before the history_umur_hari.
+//            int[] age = new int[(huLength.length)-huhLength.length];
+////            String[] temp = historyUmur.split(",");
+//
+//            // step 2.  copying month age data
+//            for (int i = 0; i < age.length; i++) {
+//                age[i] = Integer.parseInt(huLength[i+1]);
+//            }
+//
+//            // step 3.  fix the duplicate value on series
+//            if (age.length>1)
+//                age[1]= age[0] == age[1] ? age[1]++ : age[1];
+//            for (int i = 2; i < age.length - 1; i++) {
+//                if (age[i - 1] == age[i]) {
+//                    if (age[i - 1] - age[i - 2] == 2)
+//                        age[i - 1]--;
+//                    else
+//                        age[i]++;
+//                }
+//            }
+//
+//            // step 4.  convert month age to daily unit and transform it into string
+//            result = Integer.toString(age[0] * 30);
+//            for(int i=1;i<age.length;i++){
+//                age[i]*=30;
+//                result = result + "," + Integer.toString(age[i]);
+//            }
+//        }
+//        if(huh!=null) {
+//            result = result.length() > 0 && !huhLength[0].equals("") && huhLength.length > 1
+//                    ? result + "," + huhLength[1]
+//                    : huhLength.length > 1
+//                        ? huhLength[1]
+//                        : "";
+//
+//            for (int i = 2; i < huhLength.length; i++) {
+//                result = result + "," + huhLength[i];
+//            }
+//        }
+//        //////System.out.println("result = "+result);
+//        return result;
+//    }
 
     public String cleanBlankValueOf(String string){
         if(string==null)

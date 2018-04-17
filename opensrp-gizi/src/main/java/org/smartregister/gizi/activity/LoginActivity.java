@@ -291,7 +291,9 @@ public class LoginActivity extends AppCompatActivity {
     private void tryGetLocation(final Listener<Response<String>> afterGet) {
         LockingBackgroundTask task = new LockingBackgroundTask(new ProgressIndicator() {
             @Override
-            public void setVisible() { }
+            public void setVisible() {
+                // do nothing
+            }
 
             @Override
             public void setInvisible() { Log.logInfo("Successfully get location"); }

@@ -75,7 +75,7 @@ public class VaksinatorSmartRegisterFragment extends SecuredNativeSmartRegisterC
 
     @Override
     protected void onCreation() {
-        //
+        // do nothing
     }
 
 //    @Override
@@ -432,6 +432,7 @@ public class VaksinatorSmartRegisterFragment extends SecuredNativeSmartRegisterC
         getSearchView().addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence charSequence, int i, int i2, int i3) {
+                // do nothing
             }
 
             @Override
@@ -478,7 +479,7 @@ public class VaksinatorSmartRegisterFragment extends SecuredNativeSmartRegisterC
 
             @Override
             public void afterTextChanged(Editable editable) {
-
+                // do nothing
             }
         });
     }
@@ -556,6 +557,7 @@ public class VaksinatorSmartRegisterFragment extends SecuredNativeSmartRegisterC
             searchView.addTextChangedListener(new TextWatcher() {
                 @Override
                 public void beforeTextChanged(CharSequence charSequence, int i, int i2, int i3) {
+                    // do nothing
                 }
 
                 @Override
@@ -597,6 +599,7 @@ public class VaksinatorSmartRegisterFragment extends SecuredNativeSmartRegisterC
 
                 @Override
                 public void afterTextChanged(Editable editable) {
+                    // do nothing
                 }
             });
         }

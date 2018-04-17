@@ -158,6 +158,7 @@ public class GiziSmartRegisterActivity extends SecuredNativeSmartRegisterActivit
 
     @Override
     public void startRegistration() {
+        //do nothing
     }
 
     public DialogOption[] getEditOptions() {

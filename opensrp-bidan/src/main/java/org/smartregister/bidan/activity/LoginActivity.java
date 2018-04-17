@@ -292,6 +292,7 @@ public class LoginActivity extends Activity {
                 .setPositiveButton("OK", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
+                        // do nothing
                     }
                 })
                 .create();

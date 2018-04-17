@@ -46,7 +46,7 @@ public class BaseClientsProvider implements SmartRegisterCLientsProviderForCurso
 
     @Override
     public void onServiceModeSelected(ServiceModeOption serviceModeOption) {
-        Log.e(TAG, "onServiceModeSelected: ");
+        // do nothing
     }
 
     @Override

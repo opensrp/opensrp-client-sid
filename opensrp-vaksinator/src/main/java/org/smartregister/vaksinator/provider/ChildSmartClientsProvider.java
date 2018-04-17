@@ -297,7 +297,7 @@ public class ChildSmartClientsProvider implements SmartRegisterCLientsProviderFo
 
     @Override
     public void onServiceModeSelected(ServiceModeOption serviceModeOption) {
-
+        // do nothing
     }
 
     @Override

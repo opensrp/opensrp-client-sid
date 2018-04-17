@@ -129,14 +129,15 @@ public class IbuSmartRegisterActivity extends SecuredNativeSmartRegisterActivity
     @Override
     protected DefaultOptionsProvider getDefaultOptionsProvider() {return null;}
 
-    @Override
-    protected void setupViews() {
+//    @Override
+//    protected void setupViews() {
+//        // do nothing
+//    }
 
-
-    }
-
-    @Override
-    protected void onResumption(){}
+//    @Override
+//    protected void onResumption(){
+//        // do nothing
+//    }
 
     @Override
     protected NavBarOptionsProvider getNavBarOptionsProvider() {return null;}
@@ -151,6 +152,7 @@ public class IbuSmartRegisterActivity extends SecuredNativeSmartRegisterActivity
 
     @Override
     public void startRegistration() {
+        // do nothing
     }
 
     public DialogOption[] getEditOptions() {

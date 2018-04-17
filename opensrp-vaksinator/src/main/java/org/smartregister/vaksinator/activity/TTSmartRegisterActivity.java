@@ -129,11 +129,11 @@ public class TTSmartRegisterActivity extends SecuredNativeSmartRegisterActivity 
     @Override
     protected DefaultOptionsProvider getDefaultOptionsProvider() {return null;}
 
-    @Override
-    protected void setupViews() {}
-
-    @Override
-    protected void onResumption(){}
+//    @Override
+//    protected void setupViews() {}
+//
+//    @Override
+//    protected void onResumption(){}
 
     @Override
     protected NavBarOptionsProvider getNavBarOptionsProvider() {return null;}
@@ -142,7 +142,9 @@ public class TTSmartRegisterActivity extends SecuredNativeSmartRegisterActivity 
     protected SmartRegisterClientsProvider clientsProvider() {return null;}
 
     @Override
-    protected void onInitialization() {}
+    protected void onInitialization() {
+        // do nothing
+    }
 
     @Override
     public void startRegistration() {

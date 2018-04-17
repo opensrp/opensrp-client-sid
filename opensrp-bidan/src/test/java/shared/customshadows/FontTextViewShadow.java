@@ -12,10 +12,10 @@ import org.smartregister.view.customcontrols.FontVariant;
 public class FontTextViewShadow extends ShadowTextView {
 
     public void customFontTextView(Context context, AttributeSet attrs, int defStyle) {
-
+        // do nothing
     }
 
     public void setFontVariant(final FontVariant variant) {
-
+        // do nothing
     }
 }
