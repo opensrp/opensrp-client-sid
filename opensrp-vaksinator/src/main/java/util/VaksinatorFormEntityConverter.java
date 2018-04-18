@@ -414,7 +414,7 @@ public class VaksinatorFormEntityConverter {
         c.withAddresses(addresses).withAttributes(extractAttributes(fs))
                 .withIdentifiers(extractIdentifiers(fs));
         for (FormFieldMap ffm:fs.fields()){
-            if (ffm.name().equals("relationalid")){
+            if ("relationalid".equals(ffm.name())){
                 c.addRelationship(ffm.fieldAttributes().get("openmrs_entity_id"), ffm.value());
             }
         }

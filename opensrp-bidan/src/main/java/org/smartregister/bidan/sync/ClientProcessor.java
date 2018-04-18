@@ -909,17 +909,17 @@ public class ClientProcessor {
         Log.e(TAG, "Finished updateFTSsearch table: " + tableName);
     }
 
-    private JSONObject getClient(String baseEntityId) {
-        try {
-            Log.e(TAG, "getClient: " + mCloudantDataHandler.getClientByBaseEntityId(baseEntityId));
-            return mCloudantDataHandler.getClientByBaseEntityId(baseEntityId);
-        } catch (Exception e) {
-            e.printStackTrace();
-            Log.e(getClass().getName(), "", e.getCause());
-
-            return null;
-        }
-    }
+//    private JSONObject getClient(String baseEntityId) {
+//        try {
+//            Log.e(TAG, "getClient: " + mCloudantDataHandler.getClientByBaseEntityId(baseEntityId));
+//            return mCloudantDataHandler.getClientByBaseEntityId(baseEntityId);
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//            Log.e(getClass().getName(), "", e.getCause());
+//
+//            return null;
+//        }
+//    }
 
     private void updateRegisterCount(String entityId) {
         FORM_SUBMITTED.notifyListeners(entityId);

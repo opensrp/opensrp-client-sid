@@ -224,7 +224,7 @@ public class IbuSmartClientsProvider implements SmartRegisterCLientsProviderForC
     }
 
     private int usiaKandungan(String hpht, String lastANC){
-        return (hpht.equals("") || lastANC.equals("")) ? -1 : dailyUnitCalculationOf(hpht,lastANC);
+        return ("".equals(hpht) || "".equals(lastANC)) ? -1 : dailyUnitCalculationOf(hpht,lastANC);
     }
 
     private int dailyUnitCalculationOf(String dateFrom,String dateTo){

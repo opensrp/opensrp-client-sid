@@ -116,13 +116,13 @@ public class GiziApplication extends DrishtiApplication {
     }
 
     private static String[] getFtsSearchFields(String tableName){
-        if(tableName.equals("ec_anak")){
+        if("ec_anak".equals(tableName)){
             return new String[]{ "namaBayi","tanggalLahirAnak" };
            // return ftsSearchFields;
-        }  else if (tableName.equals("ec_ibu")){
+        }  else if ("ec_ibu".equals(tableName)){
             return new String[]{ "namalengkap" };
             // return ftsSearchFields;
-        }else if (tableName.equals("ec_kartu_ibu")){
+        } else if ("ec_kartu_ibu".equals(tableName)){
                 return new String[]{ "namalengkap", "namaSuami" };
            // return ftsSearchFields;
         }

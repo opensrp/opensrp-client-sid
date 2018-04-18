@@ -174,7 +174,7 @@ public class GiziGrowthChartActivity extends Activity{
     private int monthAge(String dateFrom, String dateTo){
         if(dateFrom==null || dateTo==null)
             return 0;
-        else if(dateFrom.length()<6 || dateTo.equals("") || dateTo.equals(" "))
+        else if(dateFrom.length()<6 || "".equals(dateTo) || " ".equals(dateTo))
             return 0;
         else if(dateTo.length()>0 && dateTo.length()<3)
             return Integer.parseInt(dateTo);

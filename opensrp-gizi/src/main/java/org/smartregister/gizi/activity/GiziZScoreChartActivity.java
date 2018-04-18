@@ -178,7 +178,7 @@ public class GiziZScoreChartActivity extends Activity{
         String axis2 = "", data2="" ;
 
         String tempAxis2 = createHFAAxis();
-        if (!tempAxis2.equals("")) {
+        if (!"".equals(tempAxis2)) {
             axis2 = tempAxis2.split(",").length > 0 ? Integer.toString(Integer.parseInt(tempAxis2.split(",")[0]) / 30) : "";
             for (int i = 1; i < tempAxis2.split(",").length; i++) {
                 axis2 = axis2 + "," + Integer.toString(Integer.parseInt(tempAxis2.split(",")[i]) / 30);
@@ -275,7 +275,7 @@ public class GiziZScoreChartActivity extends Activity{
 
     private String createWFHAxis(){
         String axis = createHFAAxis();
-        if(axis.equals(""))
+        if("".equals(axis))
             return "";
         String result = "";
 
@@ -322,7 +322,7 @@ public class GiziZScoreChartActivity extends Activity{
     private String buildDayAgeArray(String age){
         if (age==null)
             return "";
-        else if(age.equals(""))
+        else if("".equals(age))
             return "";
 
         String result = "";

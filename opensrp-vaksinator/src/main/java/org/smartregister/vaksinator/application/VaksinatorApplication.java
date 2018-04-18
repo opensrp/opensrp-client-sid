@@ -143,13 +143,13 @@ public class VaksinatorApplication extends DrishtiApplication {
     }
 
     private  static String[] getFtsMainConditions(String tableName){
-        if(tableName.equals("ec_anak")){
+        if("ec_anak".equals(tableName)){
             String[] mainConditions = {"is_closed", "details" , "namaBayi"};
             return mainConditions;
-        } else if(tableName.equals("ec_ibu")){
+        } else if("ec_ibu".equals(tableName)){
             String[] mainConditions = { "is_closed", "pptest"};
             return mainConditions;
-        } else if(tableName.equals("ec_kartu_ibu")){
+        } else if("ec_kartu_ibu".equals(tableName)){
             String[] mainConditions = { "is_closed", "namalengkap"};
             return mainConditions;
         }

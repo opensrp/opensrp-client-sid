@@ -148,7 +148,7 @@ public class ChildSmartClientsProvider implements SmartRegisterCLientsProviderFo
 
         }
 
-        viewHolder.age.setText(!Support.getColumnmaps(pc,"tanggalLahirAnak").equals("-")
+        viewHolder.age.setText(!"-".equals(Support.getColumnmaps(pc,"tanggalLahirAnak"))
                 ? Integer.toString(age(ages) / 12) + " " + context.getResources().getString(R.string.year_short)
                 + ", " + Integer.toString(age(ages) % 12) + " " + context.getResources().getString(R.string.month_short)
                 : " ");
@@ -158,10 +158,10 @@ public class ChildSmartClientsProvider implements SmartRegisterCLientsProviderFo
                 : "Laki-laki"
                 : " ");
 
-        if (!Support.getDetails(pc,"gender").equals("-")) {
+        if (!"-".equals(Support.getDetails(pc,"gender"))) {
             VaksinatorDetailActivity.setImagetoHolderFromUri((Activity) context,
                     DrishtiApplication.getAppDir() + File.separator + Support.getDetails(pc, "base_entity_id") + ".JPEG",
-                    viewHolder.profilepic, Support.getDetails(pc, "gender").equals("female") ? R.drawable.child_girl_infant : R.drawable.child_boy_infant);
+                    viewHolder.profilepic, "female".equals(Support.getDetails(pc, "gender")) ? R.drawable.child_girl_infant : R.drawable.child_boy_infant);
         } else {
             Log.e(TAG, "getView: Gender is NOT SET");
         }
@@ -220,7 +220,7 @@ public class ChildSmartClientsProvider implements SmartRegisterCLientsProviderFo
                     + (Integer.parseInt(max.substring(8, 10)) - Integer.parseInt(dates[i].substring(8, 10)))
             ) < 0 ? dates[i] : max;
         }
-        return max.equals("0000-00-00") ? "" : max;
+        return "0000-00-00".equals(max) ? "" : max;
     }
 
     //  updating icon

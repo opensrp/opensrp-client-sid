@@ -1168,12 +1168,12 @@ public class EnketoFormUtils {
                 Gson gson = new GsonBuilder().create();
                 if (event.getEventType() != null) {
 
-                    if (event.getEventType().equals("Registrasi Vaksinator")) {
+                    if ("Registrasi Vaksinator".equals(event.getEventType())) {
                         JSONObject json = eventClientRepository.getClientByBaseEntityId(event.getBaseEntityId());
                         Client client = gson.fromJson(json.toString(), Client.class);
                         client.addAttribute("kartu_ibu", "kartu_ibu");
                         saveClient(client);
-                    } else if (event.getEventType().equals("Child Registration")) {
+                    } else if ("Child Registration".equals(event.getEventType())) {
                         JSONObject json = eventClientRepository.getClientByBaseEntityId(event.getBaseEntityId());
                         Client client = gson.fromJson(json.toString(), Client.class);
                         client.addAttribute("anak", "anak");

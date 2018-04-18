@@ -183,7 +183,7 @@ public class GrowthChartGenerator {
 
     private void createLineChart(GraphView graph, String dateOfBirth, String date,String weight){
         int counter = 0;
-        if(date.equals("")||date.equals(" "))
+        if("".equals(date)||" ".equals(date))
             return;
         int[]dateInt = calculateAgesFrom(dateOfBirth, date.split(","));
         String []weightDouble = weight.split(",");

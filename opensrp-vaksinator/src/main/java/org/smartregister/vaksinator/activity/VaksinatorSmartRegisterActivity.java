@@ -179,7 +179,7 @@ public class VaksinatorSmartRegisterActivity extends SecuredNativeSmartRegisterA
             context().formSubmissionRouter().handleSubmission(submission, formName);
             switchToBaseFragment(formSubmission); // Unnecessary!! passing on data
 
-            if(formName.equals("registrasi_ibu")) {
+            if("registrasi_ibu".equals(formName)) {
                 Log.d(TAG, "saveFormSubmission: it was registrasi_ibu form");
                 //  FieldOverrides fieldOverrides = new FieldOverrides(combined.toString());
 

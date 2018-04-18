@@ -188,7 +188,7 @@ public class VaksinatorDetailActivity extends Activity {
 */
 
         dateOfBirth.setText(": " + (transformToddmmyyyy(Support.getColumnmaps(controller,"tanggalLahirAnak").substring(0,10))));
-        birthWeight.setText(": " + (!Support.getDetails(controller, "beratLahir").equals("-")
+        birthWeight.setText(": " + (!"-".equals(Support.getDetails(controller, "beratLahir"))
                 ? Double.toString(Integer.parseInt(controller.getDetails()
                 .get("beratLahir"))/1000)
                 + " kg"
