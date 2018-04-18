@@ -23,11 +23,11 @@ public class VaksinatorRepository extends Repository {
     private static final String TAG = VaksinatorRepository.class.getCanonicalName();
     private SQLiteDatabase readableDatabase;
     private SQLiteDatabase writableDatabase;
-    private final Context context;
+//    private final Context context;
 
     public VaksinatorRepository(Context context, org.smartregister.Context opensrpContext) {
         super(context, VaksinatorConstants.DATABASE_NAME, VaksinatorConstants.DATABASE_VERSION, opensrpContext.session(), VaksinatorApplication.createCommonFtsObject(), opensrpContext.sharedRepositoriesArray());
-        this.context = context;
+//        this.context = context;
     }
 
     @Override
@@ -47,12 +47,7 @@ public class VaksinatorRepository extends Repository {
         Log.w(VaksinatorRepository.class.getName(),
                 "Upgrading database from version " + oldVersion + " to "
                         + newVersion + ", which will destroy all old data");
-
-        
     }
-
-    
-
 
     @Override
     public SQLiteDatabase getReadableDatabase() {
@@ -127,9 +122,7 @@ public class VaksinatorRepository extends Repository {
     private void addFieldsToFTSTable(SQLiteDatabase database, String originalTableName, List<String> newlyAddedFields) {
 
         // Create the new ec_child table
-
         String newTableNameSuffix = "_v2";
-
         Set<String> searchColumns = new LinkedHashSet<>();
         searchColumns.add(CommonFtsObject.idColumn);
         searchColumns.add(CommonFtsObject.relationalIdColumn);

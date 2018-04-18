@@ -24,8 +24,8 @@ import static org.powermock.api.mockito.PowerMockito.when;
 public class BidanApplicationTest extends BidanApplication implements TestLifecycleApplication {
 
     public static final String TAG = BidanApplicationTest.class.getCanonicalName();
-    @Mock
-    private BidanRepository bidanRepository;
+//    @Mock
+//    private BidanRepository bidanRepository;
     @Mock
     private AlertService alertService;
 

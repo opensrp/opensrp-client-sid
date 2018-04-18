@@ -1,13 +1,10 @@
 package org.smartregister.vaksinator.service;
 
 import org.mozilla.javascript.Context;
-import org.mozilla.javascript.Function;
 import org.mozilla.javascript.ScriptableObject;
 import org.smartregister.repository.FormDataRepository;
 import org.smartregister.service.ZiggyFileLoader;
 import org.smartregister.service.formsubmissionhandler.FormSubmissionRouter;
-
-import java.util.Map;
 
 import static java.text.MessageFormat.format;
 import static org.mozilla.javascript.Context.enter;
@@ -20,10 +17,10 @@ import static org.smartregister.util.Log.logError;
 import static org.smartregister.util.Log.logInfo;
 
 /**
- * Created by Dani on 07/11/2017.
+ * Created by Dani on 07/11/2017
  */
 public class SaveService {
-    private static final String SAVE_METHOD_NAME = "save";
+//    private static final String SAVE_METHOD_NAME = "save";
     private static final String JS_INIT_SCRIPT = "require([\"ziggy/FormDataController\"], function (FormDataController) {\n" +
             "    controller = FormDataController;\n" +
             "});";
@@ -32,8 +29,6 @@ public class SaveService {
     private FormDataRepository dataRepository;
     private FormSubmissionRouter formSubmissionRouter;
     private Context context;
-    private ScriptableObject scope;
-    private Function saveFunction;
 
     public SaveService(ZiggyFileLoader ziggyFileLoader, FormDataRepository dataRepository, FormSubmissionRouter formSubmissionRouter) {
         this.ziggyFileLoader = ziggyFileLoader;
@@ -53,13 +48,13 @@ public class SaveService {
         try {
             context = enter();
             context.setOptimizationLevel(-1);
-            scope = context.initStandardObjects();
+            ScriptableObject scope = context.initStandardObjects();
             String jsFiles = ziggyFileLoader.getJSFiles();
             scope.put(REPOSITORY, scope, toObject(dataRepository, scope));
             scope.put(ZIGGY_FILE_LOADER, scope, toObject(ziggyFileLoader, scope));
             scope.put(FORM_SUBMISSION_ROUTER, scope, toObject(formSubmissionRouter, scope));
             context.evaluateString(scope, jsFiles + JS_INIT_SCRIPT, "code", 1, null);
-            saveFunction = ((Function) ((Map) scope.get("controller", scope)).get(SAVE_METHOD_NAME));
+//            Function saveFunction = ((Function) ((Map) scope.get("controller", scope)).get(SAVE_METHOD_NAME));
         } catch (Exception e) {
             logError("Rhino initialization failed. We are screwed. EOW!!!. Evil: " + e);
         } finally {

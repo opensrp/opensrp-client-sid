@@ -23,17 +23,16 @@ public class UpdateActionsTask {
     private Context context;
     private FormSubmissionSyncService formSubmissionSyncService;
     private AllFormVersionSyncService allFormVersionSyncService;
-    private AdditionalSyncService additionalSyncService;
 
     public UpdateActionsTask(Context context, ActionService actionService, FormSubmissionSyncService formSubmissionSyncService, ProgressIndicator progressIndicator,
                              AllFormVersionSyncService allFormVersionSyncService) {
         Log.i(TAG, "UpdateActionsTask: "+ actionService);
-//        ActionService actionService1 = actionService;
         this.context = context;
         this.formSubmissionSyncService = formSubmissionSyncService;
         this.allFormVersionSyncService = allFormVersionSyncService;
-        this.additionalSyncService = null;
         task = new LockingBackgroundTask(progressIndicator);
+//        ActionService actionService1 = actionService;
+//        AdditionalSyncService additionalSyncService = null;
     }
 
 //    public void setAdditionalSyncService(AdditionalSyncService additionalSyncService) {
@@ -50,8 +49,6 @@ public class UpdateActionsTask {
             public FetchStatus actionToDoInBackgroundThread() {
 
                 FetchStatus fetchStatusForForms = formSubmissionSyncService.sync();
-                FetchStatus fetchStatusForActions = nothingFetched;//actionService.fetchNewActions();
-                FetchStatus fetchStatusAdditional = nothingFetched;//additionalSyncService == null ? nothingFetched : additionalSyncService.sync();
 
                 if(org.smartregister.Context.getInstance().configuration().shouldSyncForm()) {
 
@@ -69,7 +66,7 @@ public class UpdateActionsTask {
                 }
 
 
-                if(fetchStatusForActions == fetched || fetchStatusForForms == fetched || fetchStatusAdditional == fetched)
+                if(nothingFetched == fetched || fetchStatusForForms == fetched)
                     return fetched;
 
                 return fetchStatusForForms;

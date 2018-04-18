@@ -53,7 +53,6 @@ public class CloudantSyncHandler {
     private static CloudantSyncHandler instance;
     private final Context mContext;
     private final Handler mHandler;
-    private ClientProcessor mClientProcessor;
     private Replicator mPushReplicator;
     private Replicator mPullReplicator;
     private CloudantSyncListener mListener;
@@ -62,7 +61,7 @@ public class CloudantSyncHandler {
 
     public CloudantSyncHandler(Context context) {
         mContext = context;
-        mClientProcessor = new ClientProcessor(mContext);
+//        ClientProcessor mClientProcessor = new ClientProcessor(mContext);
 
         // Allow us to switch code called by the ReplicationListener into
         // the main thread so the UI can update safely.

@@ -65,12 +65,12 @@ public class LoginActivity extends AppCompatActivity {
     private EditText passwordEditText;
     private ProgressDialog progressDialog;
     public static final String ENGLISH_LOCALE = "en";
-    public static final String KANNADA_LOCALE = "kn";
-    public static final String BENGALI_LOCALE = "bn";
+//    public static final String KANNADA_LOCALE = "kn";
+//    public static final String BENGALI_LOCALE = "bn";
     public static final String BAHASA_LOCALE = "in";
     public static final String ENGLISH_LANGUAGE = "English";
-    public static final String KANNADA_LANGUAGE = "Kannada";
-    public static final String Bengali_LANGUAGE = "Bengali";
+//    public static final String KANNADA_LANGUAGE = "Kannada";
+//    public static final String Bengali_LANGUAGE = "Bengali";
     public static final String Bahasa_LANGUAGE = "Bahasa";
     //   public static Generator generator;
     public static final String PREF_TEAM_LOCATIONS = "PREF_TEAM_LOCATIONS";
@@ -88,8 +88,8 @@ public class LoginActivity extends AppCompatActivity {
             android.content.res.Configuration conf = res.getConfiguration();
             conf.locale = new Locale(preferredLocale);
             res.updateConfiguration(conf, dm);
-        }catch(Exception e){
-
+        } catch(Exception e){
+            android.util.Log.e(TAG, "onCreate: "+ e.getCause() );
         }
         setContentView(R.layout.login);
 

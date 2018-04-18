@@ -61,7 +61,7 @@ public class GiziSmartRegisterActivity extends SecuredNativeSmartRegisterActivit
 
     private GiziSmartRegisterFragment nf = new GiziSmartRegisterFragment();
 
-    private Map<String, String> FS = new HashMap<>();
+//    private Map<String, String> FS = new HashMap<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

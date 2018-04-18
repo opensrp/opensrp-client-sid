@@ -41,7 +41,7 @@ import static org.smartregister.util.Utils.fillValue;
 import static org.smartregister.util.Utils.getValue;
 
 /**
- * Created by soran on 08/11/17.
+ * Created by soran on 08/11/17
  */
 
 public class ChildSmartClientsProvider implements SmartRegisterCLientsProviderForCursorAdapter {
@@ -49,20 +49,19 @@ public class ChildSmartClientsProvider implements SmartRegisterCLientsProviderFo
     private final LayoutInflater inflater;
     private final Context context;
     private final View.OnClickListener onClickListener;
-    private final AlertService alertService;
     private Drawable iconPencilDrawable;
-    private final AbsListView.LayoutParams clientViewLayoutParams;
-    private final CommonRepository commonRepository;
 
     public ChildSmartClientsProvider(Context context, View.OnClickListener onClickListener,
                                      AlertService alertService,  CommonRepository commonRepository) {
         this.onClickListener = onClickListener;
         this.context = context;
-        this.alertService = alertService;
-        this.commonRepository = commonRepository;
         this.inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-
-        clientViewLayoutParams = new AbsListView.LayoutParams(MATCH_PARENT, (int) context.getResources().getDimension(org.smartregister.R.dimen.list_item_height));
+//        AlertService alertService1 = alertService;
+//        CommonRepository commonRepository1 = commonRepository;
+//        AbsListView.LayoutParams clientViewLayoutParams =
+//        new AbsListView.LayoutParams(MATCH_PARENT, (int) context.getResources().getDimension(org.smartregister.R.dimen.list_item_height));
+        Log.i(TAG, "ChildSmartClientsProvider: "+ alertService);
+        Log.i(TAG, "ChildSmartClientsProvider: "+ commonRepository);
     }
 
     @Override
@@ -134,8 +133,8 @@ public class ChildSmartClientsProvider implements SmartRegisterCLientsProviderFo
         int umur = Support.getColumnmaps(pc,"tanggalLahirAnak") != "-" ? age(ages) : 0;
 
         // get parent
-        AllCommonsRepository childRepository = org.smartregister.Context.getInstance().allCommonsRepositoryobjects("ec_anak");
-        CommonPersonObject childobject = childRepository.findByCaseID(pc.entityId());
+//        AllCommonsRepository childRepository = org.smartregister.Context.getInstance().allCommonsRepositoryobjects("ec_anak");
+//        CommonPersonObject childobject = childRepository.findByCaseID(pc.entityId());
         String relationalId = getValue(pc.getColumnmaps(), "relational_id", true).toLowerCase();
         AllCommonsRepository kirep = org.smartregister.Context.getInstance().allCommonsRepositoryobjects("ec_kartu_ibu");
         final CommonPersonObject kiparent = kirep.findByCaseID(relationalId);
