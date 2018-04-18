@@ -35,7 +35,6 @@ import org.smartregister.vaksinator.option.TTServiceModeOption;
 import org.smartregister.vaksinator.provider.TTSmartClientsProvider;
 import org.smartregister.vaksinator.utils.SmartRegisterQueryBuilder;
 import org.smartregister.view.activity.SecuredNativeSmartRegisterActivity;
-import org.smartregister.view.contract.ECClient;
 import org.smartregister.view.dialog.AllClientsFilter;
 import org.smartregister.view.dialog.DialogOption;
 import org.smartregister.view.dialog.FilterOption;
@@ -163,9 +162,9 @@ public class TTSmartRegisterFragment extends SecuredNativeSmartRegisterCursorAda
         return null;
     }
 
-    private DialogOption[] getEditOptions() {
-        return ((TTSmartRegisterActivity)getActivity()).getEditOptions();
-    }
+//    private DialogOption[] getEditOptions() {
+//        return ((TTSmartRegisterActivity)getActivity()).getEditOptions();
+//    }
 
     @Override
     protected void onInitialization() {
@@ -238,7 +237,6 @@ public class TTSmartRegisterFragment extends SecuredNativeSmartRegisterCursorAda
     @Override
     public void CountExecute() {
         Cursor c = null;
-
         try {
             SmartRegisterQueryBuilder sqb = new SmartRegisterQueryBuilder(countSelect);
             String query = "";
@@ -390,9 +388,9 @@ public class TTSmartRegisterFragment extends SecuredNativeSmartRegisterCursorAda
             }
         }
 
-        private void showProfileView(ECClient client) {
-            navigationController.startEC(client.entityId());
-        }
+//        private void showProfileView(ECClient client) {
+//            navigationController.startEC(client.entityId());
+//        }
     }
 
 
@@ -511,9 +509,9 @@ public class TTSmartRegisterFragment extends SecuredNativeSmartRegisterCursorAda
         TTSmartRegisterFragment.criteria = criteria;
     }
 
-    public static String getCriteria() {
-        return criteria;
-    }
+//    public static String getCriteria() {
+//        return criteria;
+//    }
 
     //    WD
     @Override
@@ -572,13 +570,6 @@ public class TTSmartRegisterFragment extends SecuredNativeSmartRegisterCursorAda
 
                         @Override
                         protected Object doInBackground(Object[] params) {
-//                        currentSearchFilter =
-//                        setCurrentSearchFilter(new HHSearchOption(cs.toString()));
-//                        filteredClients = getClientsAdapter().getListItemProvider()
-//                                .updateClients(getCurrentVillageFilter(), getCurrentServiceModeOption(),
-//                                        getCurrentSearchFilter(), getCurrentSortOption());
-//
-
                             filters = cs.toString();
                             joinTable = "";
                             mainCondition = "namalengkap !=''";

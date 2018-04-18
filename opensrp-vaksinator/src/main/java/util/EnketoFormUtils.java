@@ -97,20 +97,20 @@ public class EnketoFormUtils {
         return instance;
     }
 
-    /* Checks if the provided node has Child elements
-     * @param element
-     * @return
-     */
-    public static boolean hasChildElements(Node element) {
-        NodeList children = element.getChildNodes();
-        for (int i = 0; i < children.getLength(); i++) {
-            if (children.item(i).getNodeType() == Node.ELEMENT_NODE) {
-                return true;
-            }
-        }
-
-        return false;
-    }
+//    /* Checks if the provided node has Child elements
+//     * @param element
+//     * @return
+//     */
+//    public static boolean hasChildElements(Node element) {
+//        NodeList children = element.getChildNodes();
+//        for (int i = 0; i < children.getLength(); i++) {
+//            if (children.item(i).getNodeType() == Node.ELEMENT_NODE) {
+//                return true;
+//            }
+//        }
+//
+//        return false;
+//    }
 
     private static JSONObject retrieveRelationshipJsonForLink(String link, JSONArray array)
             throws Exception {
@@ -269,22 +269,23 @@ public class EnketoFormUtils {
             org.smartregister.util.Utils.startAsyncTask(new SavePatientAsyncTask(v2FormSubmission, mContext, false, e), null);
     }
 
-    private void printClient(Client client) {
-        Log.logDebug("============== CLIENT ================");
-        Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSSZ").create();
-        String clientJson = gson.toJson(client);
-        Log.logDebug(clientJson);
-        Log.logDebug("====================================");
+//    private void printClient(Client client) {
+//        Log.logDebug("============== CLIENT ================");
+//        Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSSZ").create();
+//        String clientJson = gson.toJson(client);
+//        Log.logDebug(clientJson);
+//        Log.logDebug("====================================");
+//
+//    }
+//
+//    private void printEvent(Event event) {
+//        Log.logDebug("============== EVENT ================");
+//        Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSSZ").create();
+//        String eventJson = gson.toJson(event);
+//        Log.logDebug(eventJson);
+//        Log.logDebug("====================================");
+//    }
 
-    }
-
-    private void printEvent(Event event) {
-        Log.logDebug("============== EVENT ================");
-        Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSSZ").create();
-        String eventJson = gson.toJson(event);
-        Log.logDebug(eventJson);
-        Log.logDebug("====================================");
-    }
     private void saveClient(Client client) {
         Log.logDebug("============== CLIENT ================");
         Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSSZ").create();
@@ -310,14 +311,15 @@ public class EnketoFormUtils {
             android.util.Log.e(TAG, e.toString(), e);
         }
     }
-    /**
-     * Start ReplicationIntentService which handles cloudant sync processes
-     */
-    private void startReplicationIntentService() {
 
-        Intent serviceIntent = new Intent(mContext, ReplicationIntentService.class);
-        mContext.startService(serviceIntent);
-    }
+//    /**
+//     * Start ReplicationIntentService which handles cloudant sync processes
+//     */
+//    private void startReplicationIntentService() {
+//
+//        Intent serviceIntent = new Intent(mContext, ReplicationIntentService.class);
+//        mContext.startService(serviceIntent);
+//    }
 
     private List<SubFormData> getSubFormList(FormSubmission formSubmission) {
         List<SubFormData> sub_forms = new ArrayList<SubFormData>();
@@ -655,18 +657,18 @@ public class EnketoFormUtils {
         return "";
     }
 
-    /**
-     * Currently not used but, the method should retrieve the path of a given node,
-     * useful when confirming if the current node has been properly mapped to its bind_path
-     **/
-    private String getXPath(Node node) {
-        Node parent = node.getParentNode();
-        if (parent == null) {
-            return "/" + node.getNodeName();
-        }
-
-        return getXPath(parent) + "/";
-    }
+//    /**
+//     * Currently not used but, the method should retrieve the path of a given node,
+//     * useful when confirming if the current node has been properly mapped to its bind_path
+//     **/
+//    private String getXPath(Node node) {
+//        Node parent = node.getParentNode();
+//        if (parent == null) {
+//            return "/" + node.getNodeName();
+//        }
+//
+//        return getXPath(parent) + "/";
+//    }
 
     private List<String> getSubFormNames(JSONObject formDefinition) throws Exception {
         List<String> subFormNames = new ArrayList<String>();
@@ -1061,7 +1063,7 @@ public class EnketoFormUtils {
     }
 
     private String readFileFromAssetsFolder(String fileName) {
-        String fileContents = null;
+        String fileContents;
         try {
             InputStream is = mContext.getAssets().open(fileName);
             int size = is.available();
@@ -1080,35 +1082,35 @@ public class EnketoFormUtils {
         return fileContents;
     }
 
-    public JSONObject getFormJson(String formIdentity) {
-        if (mContext != null) {
-            try {
-                InputStream inputStream = mContext.getApplicationContext().getAssets()
-                        .open("json" + ".form/" + formIdentity + ".json");
-                BufferedReader reader = new BufferedReader(
-                        new InputStreamReader(inputStream, "UTF-8"));
-                String jsonString;
-                StringBuilder stringBuilder = new StringBuilder();
+//    public JSONObject getFormJson(String formIdentity) {
+//        if (mContext != null) {
+//            try {
+//                InputStream inputStream = mContext.getApplicationContext().getAssets()
+//                        .open("json" + ".form/" + formIdentity + ".json");
+//                BufferedReader reader = new BufferedReader(
+//                        new InputStreamReader(inputStream, "UTF-8"));
+//                String jsonString;
+//                StringBuilder stringBuilder = new StringBuilder();
+//
+//                while ((jsonString = reader.readLine()) != null) {
+//                    stringBuilder.append(jsonString);
+//                }
+//                inputStream.close();
+//
+//                return new JSONObject(stringBuilder.toString());
+//            } catch (IOException | JSONException e) {
+//                e.printStackTrace();
+//            }
+//        }
+//
+//        return null;
+//    }
 
-                while ((jsonString = reader.readLine()) != null) {
-                    stringBuilder.append(jsonString);
-                }
-                inputStream.close();
-
-                return new JSONObject(stringBuilder.toString());
-            } catch (IOException | JSONException e) {
-                e.printStackTrace();
-            }
-        }
-
-        return null;
-    }
-
-    private List<String> editClientFormNameList(){
-        List<String> formNames = new ArrayList<String>();
-        formNames.add("child_edit");
-        return formNames;
-    }
+//    private List<String> editClientFormNameList(){
+//        List<String> formNames = new ArrayList<String>();
+//        formNames.add("child_edit");
+//        return formNames;
+//    }
 
     /*private void createNewEventDocument(org.smartregister.cloudant.models.Event event) {
         mCloudantDataHandler.createEventDocument(event);
@@ -1122,7 +1124,7 @@ public class EnketoFormUtils {
         mCloudantDataHandler.updateDocument(client);
     }*/
     private Event tagSyncMetadata(Event event) {
-        AllSharedPreferences sharedPreferences = VaksinatorApplication.getInstance().getContext().userService().getAllSharedPreferences();
+//        AllSharedPreferences sharedPreferences = VaksinatorApplication.getInstance().getContext().userService().getAllSharedPreferences();
         String locations = org.smartregister.util.Utils.getPreference(mContext, LoginActivity.PREF_TEAM_LOCATIONS, "");
         event.setLocationId(locations);
 

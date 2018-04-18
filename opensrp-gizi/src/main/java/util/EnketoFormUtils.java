@@ -97,20 +97,20 @@ public class EnketoFormUtils {
         return instance;
     }
 
-    /* Checks if the provided node has Child elements
-     * @param element
-     * @return
-     */
-    public static boolean hasChildElements(Node element) {
-        NodeList children = element.getChildNodes();
-        for (int i = 0; i < children.getLength(); i++) {
-            if (children.item(i).getNodeType() == Node.ELEMENT_NODE) {
-                return true;
-            }
-        }
-
-        return false;
-    }
+//    /* Checks if the provided node has Child elements
+//     * @param element
+//     * @return
+//     */
+//    public static boolean hasChildElements(Node element) {
+//        NodeList children = element.getChildNodes();
+//        for (int i = 0; i < children.getLength(); i++) {
+//            if (children.item(i).getNodeType() == Node.ELEMENT_NODE) {
+//                return true;
+//            }
+//        }
+//
+//        return false;
+//    }
 
     private static JSONObject retrieveRelationshipJsonForLink(String link, JSONArray array)
             throws Exception {
@@ -271,22 +271,23 @@ public class EnketoFormUtils {
 
     }
 
-    private void printClient(Client client) {
-        Log.logDebug("============== CLIENT ================");
-        Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSSZ").create();
-        String clientJson = gson.toJson(client);
-        Log.logDebug(clientJson);
-        Log.logDebug("====================================");
+//    private void printClient(Client client) {
+//        Log.logDebug("============== CLIENT ================");
+//        Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSSZ").create();
+//        String clientJson = gson.toJson(client);
+//        Log.logDebug(clientJson);
+//        Log.logDebug("====================================");
+//
+//    }
+//
+//    private void printEvent(Event event) {
+//        Log.logDebug("============== EVENT ================");
+//        Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSSZ").create();
+//        String eventJson = gson.toJson(event);
+//        Log.logDebug(eventJson);
+//        Log.logDebug("====================================");
+//    }
 
-    }
-
-    private void printEvent(Event event) {
-        Log.logDebug("============== EVENT ================");
-        Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSSZ").create();
-        String eventJson = gson.toJson(event);
-        Log.logDebug(eventJson);
-        Log.logDebug("====================================");
-    }
     private void saveClient(Client client) {
         Log.logDebug("============== CLIENT ================");
         Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSSZ").create();
@@ -312,17 +313,18 @@ public class EnketoFormUtils {
             android.util.Log.e(TAG, e.toString(), e);
         }
     }
-    /**
-     * Start ReplicationIntentService which handles cloudant sync processes
-     */
-    private void startReplicationIntentService() {
 
-        Intent serviceIntent = new Intent(mContext, ReplicationIntentService.class);
-        mContext.startService(serviceIntent);
-    }
+//    /**
+//     * Start ReplicationIntentService which handles cloudant sync processes
+//     */
+//    private void startReplicationIntentService() {
+//
+//        Intent serviceIntent = new Intent(mContext, ReplicationIntentService.class);
+//        mContext.startService(serviceIntent);
+//    }
 
     private List<SubFormData> getSubFormList(FormSubmission formSubmission) {
-        List<SubFormData> sub_forms = new ArrayList<SubFormData>();
+        List<SubFormData> sub_forms = new ArrayList<>();
         List<SubForm> subForms = formSubmission.getFormInstance().getForm().getSub_forms();
         if (subForms != null) {
             for (SubForm sf : subForms) {
@@ -344,7 +346,7 @@ public class EnketoFormUtils {
 
     private List<FormField> convertFormFields(List<org.smartregister.domain.form.FormField>
                                                       formFields) {
-        List<FormField> fields = new ArrayList<FormField>();
+        List<FormField> fields = new ArrayList<>();
         for (org.smartregister.domain.form.FormField ff : formFields) {
             FormField f = new FormField(ff.getName(), ff.getValue(), ff.getSource());
             fields.add(f);
@@ -657,18 +659,18 @@ public class EnketoFormUtils {
         return "";
     }
 
-    /**
-     * Currently not used but, the method should retrieve the path of a given node,
-     * useful when confirming if the current node has been properly mapped to its bind_path
-     **/
-    private String getXPath(Node node) {
-        Node parent = node.getParentNode();
-        if (parent == null) {
-            return "/" + node.getNodeName();
-        }
-
-        return getXPath(parent) + "/";
-    }
+//    /**
+//     * Currently not used but, the method should retrieve the path of a given node,
+//     * useful when confirming if the current node has been properly mapped to its bind_path
+//     **/
+//    private String getXPath(Node node) {
+//        Node parent = node.getParentNode();
+//        if (parent == null) {
+//            return "/" + node.getNodeName();
+//        }
+//
+//        return getXPath(parent) + "/";
+//    }
 
     private List<String> getSubFormNames(JSONObject formDefinition) throws Exception {
         List<String> subFormNames = new ArrayList<String>();
@@ -1082,29 +1084,29 @@ public class EnketoFormUtils {
         return fileContents;
     }
 
-    public JSONObject getFormJson(String formIdentity) {
-        if (mContext != null) {
-            try {
-                InputStream inputStream = mContext.getApplicationContext().getAssets()
-                        .open("json" + ".form/" + formIdentity + ".json");
-                BufferedReader reader = new BufferedReader(
-                        new InputStreamReader(inputStream, "UTF-8"));
-                String jsonString;
-                StringBuilder stringBuilder = new StringBuilder();
-
-                while ((jsonString = reader.readLine()) != null) {
-                    stringBuilder.append(jsonString);
-                }
-                inputStream.close();
-
-                return new JSONObject(stringBuilder.toString());
-            } catch (IOException | JSONException e) {
-                e.printStackTrace();
-            }
-        }
-
-        return null;
-    }
+//    public JSONObject getFormJson(String formIdentity) {
+//        if (mContext != null) {
+//            try {
+//                InputStream inputStream = mContext.getApplicationContext().getAssets()
+//                        .open("json" + ".form/" + formIdentity + ".json");
+//                BufferedReader reader = new BufferedReader(
+//                        new InputStreamReader(inputStream, "UTF-8"));
+//                String jsonString;
+//                StringBuilder stringBuilder = new StringBuilder();
+//
+//                while ((jsonString = reader.readLine()) != null) {
+//                    stringBuilder.append(jsonString);
+//                }
+//                inputStream.close();
+//
+//                return new JSONObject(stringBuilder.toString());
+//            } catch (IOException | JSONException e) {
+//                e.printStackTrace();
+//            }
+//        }
+//
+//        return null;
+//    }
 
     private List<String> editClientFormNameList(){
         List<String> formNames = new ArrayList<>();

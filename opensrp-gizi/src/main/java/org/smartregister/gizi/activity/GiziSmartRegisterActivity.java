@@ -170,7 +170,7 @@ public class GiziSmartRegisterActivity extends SecuredNativeSmartRegisterActivit
     public void saveFormSubmission(String formSubmission, String id, String formName, JSONObject fieldOverrides){
         Log.v("fieldoverride", fieldOverrides.toString());
         // save the form
-        try{
+        try {
 
             EnketoFormUtils formUtils = EnketoFormUtils.getInstance(getApplicationContext());
           //  FormUtils formUtils = FormUtils.getInstance(getApplicationContext());
@@ -198,7 +198,8 @@ public class GiziSmartRegisterActivity extends SecuredNativeSmartRegisterActivit
             Map<String, String> FS = new HashMap<String, String>();
             FS.put("end", end);
             FlurryAgent.logEvent(formName, FS, true);
-        }catch (Exception e){
+
+        } catch (Exception e){
             // TODO: show error dialog on the formfragment if the submission fails
             DisplayFormFragment displayFormFragment = getDisplayFormFragmentAtIndex(currentPage);
             if (displayFormFragment != null) {
@@ -206,9 +207,6 @@ public class GiziSmartRegisterActivity extends SecuredNativeSmartRegisterActivit
             }
             e.printStackTrace();
         }
-
-       
-
     }
 
     public void activatingOtherForm(final String formName, final String entityId, final String metaData){
@@ -279,7 +277,7 @@ public class GiziSmartRegisterActivity extends SecuredNativeSmartRegisterActivit
         }*/
 
         String start = timer.format(new Date());
-        Map<String, String> FS = new HashMap<String, String>();
+        Map<String, String> FS = new HashMap<>();
         FS.put("start", start);
         FlurryAgent.logEvent(formName, FS, true);
 
@@ -314,41 +312,41 @@ public class GiziSmartRegisterActivity extends SecuredNativeSmartRegisterActivit
         }
     }
 
-    /**
-     * Get 3 children name, 1 determined and 2 random. the determined one will be generated based on
-     * @entityId and stored to index @choice of char sequence array.
-     * @param choice
-     * @param entityId
-     * @return
-     */
-    private CharSequence[] selections(int choice, String entityId){
-        String name = org.smartregister.Context.getInstance().allCommonsRepositoryobjects("ec_anak").findByCaseID(entityId).getColumnmaps().get("namaBayi");
-        System.out.println("start form activity / nama = " + name);
-        CharSequence selections[] = new CharSequence[]{name, name, name};
-
-        selections[choice] = name;
-
-        String query = "SELECT namaBayi FROM ec_anak where ec_anak.is_closed = 0";
-        Cursor cursor = context().commonrepository("ec_anak").rawCustomQueryForAdapter(query);
-        cursor.moveToFirst();
-
-        for (int i = 0; i < selections.length; i++) {
-            if (i != choice) {
-                cursor.move(new java.util.Random().nextInt(cursor.getCount()));
-                String temp = cursor.getString(cursor.getColumnIndex("namaBayi"));
-                if(temp==null)
-                    i--;
-                else if (temp.equals(name))
-                    i--;
-                else
-                    selections[i] = temp;
-                cursor.moveToFirst();
-            }
-        }
-        cursor.close();
-
-        return selections;
-    }
+//    /**
+//     * Get 3 children name, 1 determined and 2 random. the determined one will be generated based on
+//     * @entityId and stored to index @choice of char sequence array.
+//     * @param choice
+//     * @param entityId
+//     * @return
+//     */
+//    private CharSequence[] selections(int choice, String entityId){
+//        String name = org.smartregister.Context.getInstance().allCommonsRepositoryobjects("ec_anak").findByCaseID(entityId).getColumnmaps().get("namaBayi");
+//        System.out.println("start form activity / nama = " + name);
+//        CharSequence selections[] = new CharSequence[]{name, name, name};
+//
+//        selections[choice] = name;
+//
+//        String query = "SELECT namaBayi FROM ec_anak where ec_anak.is_closed = 0";
+//        Cursor cursor = context().commonrepository("ec_anak").rawCustomQueryForAdapter(query);
+//        cursor.moveToFirst();
+//
+//        for (int i = 0; i < selections.length; i++) {
+//            if (i != choice) {
+//                cursor.move(new java.util.Random().nextInt(cursor.getCount()));
+//                String temp = cursor.getString(cursor.getColumnIndex("namaBayi"));
+//                if(temp==null)
+//                    i--;
+//                else if (temp.equals(name))
+//                    i--;
+//                else
+//                    selections[i] = temp;
+//                cursor.moveToFirst();
+//            }
+//        }
+//        cursor.close();
+//
+//        return selections;
+//    }
 
     public void switchToBaseFragment(final String data){
         final int prevPageIndex = currentPage;
@@ -398,7 +396,7 @@ public class GiziSmartRegisterActivity extends SecuredNativeSmartRegisterActivit
     }
 
     private String[] buildFormNameList(){
-        List<String> formNames = new ArrayList<String>();
+        List<String> formNames = new ArrayList<>();
         formNames.add("registrasi_gizi");
         formNames.add("registrasi_ibu");
         formNames.add("registrasi_anak");
@@ -426,13 +424,13 @@ public class GiziSmartRegisterActivity extends SecuredNativeSmartRegisterActivit
         }
     }
 
-    private int getNumOfChild(){
-        Cursor childcountcursor = context().commonrepository("ec_anak").rawCustomQueryForAdapter(new SmartRegisterQueryBuilder().queryForCountOnRegisters("ec_anak_search", "ec_anak_search.is_closed=0"));
-        childcountcursor.moveToFirst();
-        int childcount= childcountcursor.getInt(0);
-        childcountcursor.close();
-        return childcount;
-    }
+//    private int getNumOfChild(){
+//        Cursor childcountcursor = context().commonrepository("ec_anak").rawCustomQueryForAdapter(new SmartRegisterQueryBuilder().queryForCountOnRegisters("ec_anak_search", "ec_anak_search.is_closed=0"));
+//        childcountcursor.moveToFirst();
+//        int childcount= childcountcursor.getInt(0);
+//        childcountcursor.close();
+//        return childcount;
+//    }
 
     private boolean currentActivityIsShowingForm(){
         return currentPage != 0;
@@ -468,10 +466,12 @@ public class GiziSmartRegisterActivity extends SecuredNativeSmartRegisterActivit
 //    };
 
     public class EditDialogOptionModel implements DialogOptionModel {
+
         @Override
         public DialogOption[] getDialogOptions() {
             return getEditOptions();
         }
+
         @Override
         public void onDialogOptionSelection(DialogOption option, Object tag) {
             CommonPersonObjectClient pc = (CommonPersonObjectClient) tag;

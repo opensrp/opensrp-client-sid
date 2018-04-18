@@ -26,8 +26,6 @@ import org.json.JSONException;
 import org.json.JSONObject;
 import org.smartregister.Context;
 import org.smartregister.domain.LoginResponse;
-import org.smartregister.domain.Response;
-import org.smartregister.domain.ResponseStatus;
 import org.smartregister.event.Listener;
 import org.smartregister.gizi.R;
 import org.smartregister.gizi.application.GiziApplication;
@@ -63,12 +61,12 @@ public class LoginActivity extends AppCompatActivity {
     private EditText passwordEditText;
     private ProgressDialog progressDialog;
     public static final String ENGLISH_LOCALE = "en";
-    public static final String KANNADA_LOCALE = "kn";
-    public static final String BENGALI_LOCALE = "bn";
+//    public static final String KANNADA_LOCALE = "kn";
+//    public static final String BENGALI_LOCALE = "bn";
     public static final String BAHASA_LOCALE = "in";
     public static final String ENGLISH_LANGUAGE = "English";
-    public static final String KANNADA_LANGUAGE = "Kannada";
-    public static final String Bengali_LANGUAGE = "Bengali";
+//    public static final String KANNADA_LANGUAGE = "Kannada";
+//    public static final String Bengali_LANGUAGE = "Bengali";
     public static final String Bahasa_LANGUAGE = "Bahasa";
  //   public static Generator generator;
     public static final String PREF_TEAM_LOCATIONS = "PREF_TEAM_LOCATIONS";
@@ -278,40 +276,40 @@ public class LoginActivity extends AppCompatActivity {
         dialog.show();
     }
 
-    private void getLocation() {
-        tryGetLocation(new Listener<Response<String>>() {
-            @Override
-            public void onEvent(Response<String> data) {
-                if (data.status() == ResponseStatus.success) {
-                    context.userService().saveAnmLocation(data.payload());
-                }
-            }
-        });
-    }
+//    private void getLocation() {
+//        tryGetLocation(new Listener<Response<String>>() {
+//            @Override
+//            public void onEvent(Response<String> data) {
+//                if (data.status() == ResponseStatus.success) {
+//                    context.userService().saveAnmLocation(data.payload());
+//                }
+//            }
+//        });
+//    }
 
-    private void tryGetLocation(final Listener<Response<String>> afterGet) {
-        LockingBackgroundTask task = new LockingBackgroundTask(new ProgressIndicator() {
-            @Override
-            public void setVisible() {
-                // do nothing
-            }
-
-            @Override
-            public void setInvisible() { Log.logInfo("Successfully get location"); }
-        });
-
-        task.doActionInBackground(new BackgroundAction<Response<String>>() {
-            @Override
-            public Response<String> actionToDoInBackgroundThread() {
-                return context.userService().getLocationInformation();
-            }
-
-            @Override
-            public void postExecuteInUIThread(Response<String> result) {
-                afterGet.onEvent(result);
-            }
-        });
-    }
+//    private void tryGetLocation(final Listener<Response<String>> afterGet) {
+//        LockingBackgroundTask task = new LockingBackgroundTask(new ProgressIndicator() {
+//            @Override
+//            public void setVisible() {
+//                // do nothing
+//            }
+//
+//            @Override
+//            public void setInvisible() { Log.logInfo("Successfully get location"); }
+//        });
+//
+//        task.doActionInBackground(new BackgroundAction<Response<String>>() {
+//            @Override
+//            public Response<String> actionToDoInBackgroundThread() {
+//                return context.userService().getLocationInformation();
+//            }
+//
+//            @Override
+//            public void postExecuteInUIThread(Response<String> result) {
+//                afterGet.onEvent(result);
+//            }
+//        });
+//    }
 
     private void tryRemoteLogin(final String userName, final String password, final Listener<LoginResponse> afterLoginCheck) {
         LockingBackgroundTask task = new LockingBackgroundTask(new ProgressIndicator() {
@@ -346,6 +344,7 @@ public class LoginActivity extends AppCompatActivity {
 
     private void hideKeyboard() {
         InputMethodManager inputManager = (InputMethodManager) getSystemService(INPUT_METHOD_SERVICE);
+        if (getCurrentFocus() != null)
         inputManager.hideSoftInputFromWindow(getCurrentFocus().getWindowToken(), HIDE_NOT_ALWAYS);
     }
 

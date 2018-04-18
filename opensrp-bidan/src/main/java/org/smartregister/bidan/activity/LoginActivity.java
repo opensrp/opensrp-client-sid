@@ -59,12 +59,12 @@ public class LoginActivity extends Activity {
     public static final String BAHASA_LOCALE = "in";
     public static final String ENGLISH_LANGUAGE = "English";
     public static final String BAHASA_LANGUAGE = "Bahasa";
-    public static final String PREF_TEAM_LOCATIONS = "PREF_TEAM_LOCATIONS";
     private static final String TAG = LoginActivity.class.getName();
     private Context context = BidanApplication.getInstance().context();
     private EditText userNameEditText;
     private EditText passwordEditText;
     private ProgressDialog progressDialog;
+//    public static final String PREF_TEAM_LOCATIONS = "PREF_TEAM_LOCATIONS";
 
     public static Context getOpenSRPContext() {
         return BidanApplication.getInstance().context();
@@ -367,20 +367,20 @@ public class LoginActivity extends Activity {
         progressDialog.setMessage(getString(org.smartregister.R.string.loggin_in_dialog_message));
     }
 
-    private void debugApp() {
-        //    String uname = getResources().getString(R.string.uname);
-        //   String pwd = getResources().getString(R.string.pwd);
-        String uname = "demo_ec";
-        String pwd = "Satu2345";
-
-        LayoutInflater layoutInflater = getLayoutInflater();
-        View view = layoutInflater.inflate(R.layout.login, null);
-
-        if (getOpenSRPContext().userService().hasARegisteredUser()) {
-            localLogin(view, uname, pwd);
-        } else {
-            remoteLogin(view, uname, pwd);
-        }
-    }
+//    private void debugApp() {
+//        //    String uname = getResources().getString(R.string.uname);
+//        //   String pwd = getResources().getString(R.string.pwd);
+//        String uname = "demo_ec";
+//        String pwd = "Satu2345";
+//
+//        LayoutInflater layoutInflater = getLayoutInflater();
+//        View view = layoutInflater.inflate(R.layout.login, null);
+//
+//        if (getOpenSRPContext().userService().hasARegisteredUser()) {
+//            localLogin(view, uname, pwd);
+//        } else {
+//            remoteLogin(view, uname, pwd);
+//        }
+//    }
 
 }

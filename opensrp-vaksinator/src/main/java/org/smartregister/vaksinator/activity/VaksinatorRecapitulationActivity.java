@@ -174,9 +174,9 @@ public class VaksinatorRecapitulationActivity extends Activity {
         );
     }
 
-    private boolean islarger(String date, String dividerDate){
-        return true;
-    }
+//    private boolean islarger(String date, String dividerDate){
+//        return true;
+//    }
 
     @SuppressLint("SetTextI18n")
     private void updateView(LocalVariable var, org.smartregister.commonregistry.CommonPersonObjectClients clients, int month, int year){

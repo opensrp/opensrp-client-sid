@@ -301,9 +301,9 @@ public class ChildSmartClientsProvider implements SmartRegisterCLientsProviderFo
         }
     }
 
-    private String setGender(String gender){
-        return gender.toLowerCase().contains("em") ? context.getString(R.string.child_female) : context.getString(R.string.child_male);
-    }
+//    private String setGender(String gender){
+//        return gender.toLowerCase().contains("em") ? context.getString(R.string.child_female) : context.getString(R.string.child_male);
+//    }
 
     private String returnLatestDate(String date1, String date2){
         if(date1 == "-" || date2 == "-"){

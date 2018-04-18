@@ -99,24 +99,24 @@ public class VaksinatorRepository extends Repository {
         super.close();
     }
 
-    /**
-     * Version 2 added some columns to the ec_child table
-     *
-     * @param database
-     */
-    private void upgradeToVersion2(SQLiteDatabase database) {
-        try {
-            // Run insert query
-            ArrayList<String> newlyAddedFields = new ArrayList<>();
-            newlyAddedFields.add("BCG_2");
-            newlyAddedFields.add("inactive");
-            newlyAddedFields.add("lost_to_follow_up");
-
-            addFieldsToFTSTable(database, VaksinatorConstants.CHILD_TABLE_NAME, newlyAddedFields);
-        } catch (Exception e) {
-            Log.e(TAG, "upgradeToVersion2 " + Log.getStackTraceString(e));
-        }
-    }
+//    /**
+//     * Version 2 added some columns to the ec_child table
+//     *
+//     * @param database
+//     */
+//    private void upgradeToVersion2(SQLiteDatabase database) {
+//        try {
+//            // Run insert query
+//            ArrayList<String> newlyAddedFields = new ArrayList<>();
+//            newlyAddedFields.add("BCG_2");
+//            newlyAddedFields.add("inactive");
+//            newlyAddedFields.add("lost_to_follow_up");
+//
+//            addFieldsToFTSTable(database, VaksinatorConstants.CHILD_TABLE_NAME, newlyAddedFields);
+//        } catch (Exception e) {
+//            Log.e(TAG, "upgradeToVersion2 " + Log.getStackTraceString(e));
+//        }
+//    }
 
     
     private void addFieldsToFTSTable(SQLiteDatabase database, String originalTableName, List<String> newlyAddedFields) {
