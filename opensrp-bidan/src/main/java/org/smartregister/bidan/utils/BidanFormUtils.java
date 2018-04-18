@@ -791,11 +791,9 @@ public class BidanFormUtils {
                 item.put("value", value);
             }
 
-            if (shouldLoadValue && overrides.has(item.getString("name"))) {
-                // if the value is not set use the value in the overrides filed
-                if (!item.has("value")) {
+            // if the value is not set use the value in the overrides filed
+            if (shouldLoadValue && overrides.has(item.getString("name")) && !item.has("value")) {
                     item.put("value", overrides.getString(item.getString("name")));
-                }
             }
 
             // map the id field for child elements

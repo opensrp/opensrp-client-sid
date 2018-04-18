@@ -332,10 +332,8 @@ public class VaksinatorDetailActivity extends Activity {
 //    }
 
     public String transformToddmmyyyy(String date){
-        if(date.length()>3) {
-            if (date.charAt(4) == '-')
-                date = String.format("%s/%s/%s", new String[]{date.substring(8, 10), date.substring(5, 7), date.substring(0, 4)});
-        }
+        if(date.length()>3 && date.charAt(4) == '-')
+                date = String.format("%s/%s/%s", (Object[]) new String[]{date.substring(8, 10), date.substring(5, 7), date.substring(0, 4)});
         return date;
     }
 

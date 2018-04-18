@@ -317,10 +317,8 @@ public class ChildSmartClientsProvider implements SmartRegisterCLientsProviderFo
         return dayRangeBetween(date1.split("-"),date2.split("-"))>0 ? date2 : date1;
     }
 
-    private boolean isLate(String lastVisitDate,int threshold){
-        if (lastVisitDate==null || lastVisitDate.length()<6)
-            return true;
-        return  monthRangeToToday(lastVisitDate) > threshold;
+    private boolean isLate(String lastVisitDate,int threshold) {
+        return lastVisitDate == null || lastVisitDate.length() < 6 || monthRangeToToday(lastVisitDate) > threshold;
     }
 
 //    private boolean isDue(String lastVisitDate){
@@ -330,16 +328,12 @@ public class ChildSmartClientsProvider implements SmartRegisterCLientsProviderFo
 //        return dayRangeBetween(lastVisitDate.split("-"),new SimpleDateFormat("yyyy-MM-dd").format(new java.util.Date()).split("-")) <= 30;
 //    }
 
-    private boolean isGiven(CommonPersonObjectClient pc, String details){
-        if(Support.getDetails(pc,details) != null)
-            return Support.getDetails(pc,details).equalsIgnoreCase("ya") || Support.getDetails(pc,details).equalsIgnoreCase("yes");
-        return false;
+    private boolean isGiven(CommonPersonObjectClient pc, String details) {
+        return Support.getDetails(pc, details) != null && (Support.getDetails(pc, details).equalsIgnoreCase("ya") || Support.getDetails(pc, details).equalsIgnoreCase("yes"));
     }
 
-    private boolean hasValue(String data){
-        if(data == null)
-            return false;
-        return data.length() > 2;
+    private boolean hasValue(String data) {
+        return data != null && data.length() > 2;
     }
 
     private int monthRangeToToday(String lastVisitDate){

@@ -11,7 +11,7 @@ import org.smartregister.util.Log;
 import java.io.File;
 
 /**
- * Created by al on 30/05/2017.
+ * Created by al on 30/05/2017
  */
 public class Support {
     public static boolean ONSYNC = false;
@@ -31,9 +31,9 @@ public class Support {
             return new String[]{"0","0"};
         String []temp = data.split(",");
         String []result = {"",""};
-        for(int i=0;i<temp.length;i++){
-            result[0]=result[0]+","+temp[i].split(":")[0];
-            result[1]=result[1]+","+temp[i].split(":")[1];
+        for (String aTemp : temp) {
+            result[0] = result[0] + "," + aTemp.split(":")[0];
+            result[1] = result[1] + "," + aTemp.split(":")[1];
         }
         result[0]=result[0].substring(1,result[0].length());
         result[1]=result[1].substring(1,result[1].length());
@@ -41,34 +41,28 @@ public class Support {
     }
 
     public static String getColumnmaps(CommonPersonObjectClient person, String values){
-        if(person.getColumnmaps().get(values)!=null){
-            if(person.getColumnmaps().get(values).length()>0)
+
+        if(person.getColumnmaps().get(values)!=null && person.getColumnmaps().get(values).length()>0)
                 return person.getColumnmaps().get(values);
-        }
+
         return "-";
     }
 
     public static String getColumnmaps(CommonPersonObject person, String values){
-        if(person.getColumnmaps().get(values)!=null){
-            if(person.getColumnmaps().get(values).length()>0)
+        if(person.getColumnmaps().get(values)!=null && person.getColumnmaps().get(values).length()>0)
                 return person.getColumnmaps().get(values);
-        }
         return "-";
     }
 
     public static String getDetails(CommonPersonObjectClient person, String values){
-        if(person.getDetails().get(values)!=null){
-            if(person.getDetails().get(values).length()>0)
+        if(person.getDetails().get(values)!=null && person.getDetails().get(values).length()>0)
                 return person.getDetails().get(values);
-        }
         return "-";
     }
 
     public static String getDetails(CommonPersonObject person, String values){
-        if(person.getDetails().get(values)!=null){
-            if(person.getDetails().get(values).length()>0)
+        if(person.getDetails().get(values)!=null && person.getDetails().get(values).length()>0)
                 return person.getDetails().get(values);
-        }
         return "-";
     }
 
@@ -95,8 +89,8 @@ public class Support {
 
     public static String combine(String[]data, String separator){
         String result="";
-        for(int i=0;i<data.length;i++){
-            result=result+separator+data[i];
+        for (String aData : data) {
+            result = result + separator + aData;
         }
         return result.substring(1,result.length());
     }
