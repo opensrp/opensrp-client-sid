@@ -1104,7 +1104,7 @@ public class EnketoFormUtils {
         return null;
     }
 
-    private List<String> EditClientFormNameList(){
+    private List<String> editClientFormNameList(){
         List<String> formNames = new ArrayList<String>();
         formNames.add("child_edit");
         return formNames;

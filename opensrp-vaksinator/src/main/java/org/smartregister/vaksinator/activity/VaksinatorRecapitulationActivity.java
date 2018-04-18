@@ -44,7 +44,7 @@ public class VaksinatorRecapitulationActivity extends Activity {
 //        String sql = queryBuilder.searchQueryFts("ec_anak", "", " is_closed = 0 ", " is_closed = 0 ");
 //        List<String> ids = context().commonrepository("ec_anak").findSearchIds(sql);
 //        String squery = queryBuilder.toStringFts(ids, "ec_anak" + "." + CommonRepository.ID_COLUMN);
-//        squery = queryBuilder.Endquery(squery);
+//        squery = queryBuilder.endQuery(squery);
 
         final org.smartregister.commonregistry.CommonPersonObjectClients clients = new org.smartregister.commonregistry.CommonPersonObjectClients();
         String query = "SELECT * FROM ec_anak where ec_anak.is_closed = 0";

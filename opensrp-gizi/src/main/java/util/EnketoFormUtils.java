@@ -1063,7 +1063,7 @@ public class EnketoFormUtils {
     }
 
     private String readFileFromAssetsFolder(String fileName) {
-        String fileContents = null;
+        String fileContents;
         try {
             InputStream is = mContext.getAssets().open(fileName);
             int size = is.available();
@@ -1106,8 +1106,8 @@ public class EnketoFormUtils {
         return null;
     }
 
-    private List<String> EditClientFormNameList(){
-        List<String> formNames = new ArrayList<String>();
+    private List<String> editClientFormNameList(){
+        List<String> formNames = new ArrayList<>();
         formNames.add("child_edit");
         return formNames;
     }
@@ -1179,7 +1179,7 @@ public class EnketoFormUtils {
                        // client.addAttribute("anak", "anak");
                         saveClient(client);
                    }
-                    else if (event.getEventType().equals(EditClientFormNameList())) {
+                    else if (event.getEventType().equals(editClientFormNameList())) {
                         JSONObject json = eventClientRepository.getClientByBaseEntityId(event.getBaseEntityId());
                         Client client = gson.fromJson(json.toString(), Client.class);
                         client.addAttribute("edit", "edit");

@@ -19,7 +19,6 @@ import org.opensrp.api.util.LocationTree;
 import org.opensrp.api.util.TreeNode;
 import org.smartregister.Context;
 import org.smartregister.commonregistry.CommonPersonObjectClient;
-import org.smartregister.commonregistry.CommonPersonObjectController;
 import org.smartregister.commonregistry.CommonRepository;
 import org.smartregister.cursoradapter.CursorCommonObjectFilterOption;
 import org.smartregister.cursoradapter.CursorCommonObjectSort;
@@ -35,16 +34,11 @@ import org.smartregister.gizi.activity.LoginActivity;
 import org.smartregister.gizi.option.GiziServiceModeOption;
 import org.smartregister.gizi.option.KICommonObjectFilterOption;
 import org.smartregister.gizi.provider.ChildSmartClientsProvider;
-import org.smartregister.gizi.sync.GiziClientProcessor;
 import org.smartregister.provider.SmartRegisterClientsProvider;
 import org.smartregister.util.StringUtil;
 import org.smartregister.view.activity.SecuredNativeSmartRegisterActivity;
-import org.smartregister.view.contract.ECClient;
-import org.smartregister.view.contract.SmartRegisterClients;
-import org.smartregister.view.controller.VillageController;
 import org.smartregister.view.dialog.AllClientsFilter;
 import org.smartregister.view.dialog.DialogOption;
-import org.smartregister.view.dialog.DialogOptionMapper;
 import org.smartregister.view.dialog.FilterOption;
 import org.smartregister.view.dialog.LocationSelectorDialogFragment;
 import org.smartregister.view.dialog.ServiceModeOption;
@@ -150,10 +144,10 @@ public class GiziSmartRegisterFragment extends SecuredNativeSmartRegisterCursorA
             public DialogOption[] sortingOptions() {
                // FlurryFacade.logEvent("click_sorting_option_on_kohort_ibu_dashboard");
                 return new DialogOption[]{
-                        new CursorCommonObjectSort(getResources().getString(R.string.sort_by_name_label),KiSortByNameAZ()),
-                        new CursorCommonObjectSort(getResources().getString(R.string.sort_by_name_label_reverse),KiSortByNameZA()),
-                        new CursorCommonObjectSort(getResources().getString(R.string.sort_by_age),KiSortByAgeASC()),
-                        new CursorCommonObjectSort(getResources().getString(R.string.sort_by_age_reverse),KiSortByAgeDESC()),
+                        new CursorCommonObjectSort(getResources().getString(R.string.sort_by_name_label), kiSortByNameAZ()),
+                        new CursorCommonObjectSort(getResources().getString(R.string.sort_by_name_label_reverse), kiSortByNameZA()),
+                        new CursorCommonObjectSort(getResources().getString(R.string.sort_by_age), kiSortByAgeASC()),
+                        new CursorCommonObjectSort(getResources().getString(R.string.sort_by_age_reverse), kiSortByAgeDESC()),
                 };
             }
 
@@ -315,6 +309,8 @@ public class GiziSmartRegisterFragment extends SecuredNativeSmartRegisterCursorA
                   //  FlurryFacade.logEvent("click_button_edit_vaksinator");
                     showFragmentDialog(((GiziSmartRegisterActivity)getActivity()).new EditDialogOptionModel(), view.getTag());
                     break;
+                default:
+                    break;
             }
         }
 
@@ -325,16 +321,19 @@ public class GiziSmartRegisterFragment extends SecuredNativeSmartRegisterCursorA
 
 
 
-    private String KiSortByNameAZ() {
+    private String kiSortByNameAZ() {
         return " namaBayi ASC";
     }
-    private String KiSortByNameZA() {
+
+    private String kiSortByNameZA() {
         return " namaBayi DESC";
     }
-    private String KiSortByAgeASC() {
+
+    private String kiSortByAgeASC() {
         return " tanggalLahirAnak DESC";
     }
-    private String KiSortByAgeDESC() {
+
+    private String kiSortByAgeDESC() {
         return " tanggalLahirAnak ASC";
     }
 
@@ -384,7 +383,7 @@ public class GiziSmartRegisterFragment extends SecuredNativeSmartRegisterCursorA
         try{
             LoginActivity.setLanguage();
         }catch (Exception e){
-
+            e.printStackTrace();
         }
 
     }
@@ -480,7 +479,7 @@ public class GiziSmartRegisterFragment extends SecuredNativeSmartRegisterCursorA
             if(entry.getValue().getChildren() != null) {
                 addChildToList(dialogOptionslist,entry.getValue().getChildren());
 
-            }else{
+            } else {
                 StringUtil.humanize(entry.getValue().getLabel());
                 String name = StringUtil.humanize(entry.getValue().getLabel());
                 dialogOptionslist.add(new KICommonObjectFilterOption(name,"desa", name));
@@ -559,13 +558,6 @@ public class GiziSmartRegisterFragment extends SecuredNativeSmartRegisterCursorA
 
                         @Override
                         protected Object doInBackground(Object[] params) {
-//                        currentSearchFilter =
-//                        setCurrentSearchFilter(new HHSearchOption(cs.toString()));
-//                        filteredClients = getClientsAdapter().getListItemProvider()
-//                                .updateClients(getCurrentVillageFilter(), getCurrentServiceModeOption(),
-//                                        getCurrentSearchFilter(), getCurrentSortOption());
-//
-
                             filters = cs.toString();
                             joinTable = "";
                             mainCondition = "nama_bayi !=''";

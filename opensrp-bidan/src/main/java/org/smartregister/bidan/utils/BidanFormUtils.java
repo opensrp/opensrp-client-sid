@@ -270,7 +270,7 @@ public class BidanFormUtils {
             org.smartregister.cloudant.models.Client client = new org.smartregister.cloudant
                     .models.Client(
                     c);
-            if (EditClientFormNameList().contains(formName)) {
+            if (editClientFormNameList().contains(formName)) {
                 try {
                     updateClientDocument(client);
                 } catch (ConflictException e1) {
@@ -1106,8 +1106,8 @@ public class BidanFormUtils {
         mCloudantDataHandler.createClientDocument(client);
     }
 
-    private List<String> EditClientFormNameList() {
-        android.util.Log.e(TAG, "EditClientFormNameList: ");
+    private List<String> editClientFormNameList() {
+        android.util.Log.e(TAG, "editClientFormNameList: ");
         List<String> formNames = new ArrayList<>();
         formNames.add(KARTU_IBU_EDIT);
         formNames.add(KOHORT_BAYI_EDIT);

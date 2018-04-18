@@ -25,7 +25,6 @@ import org.smartregister.gizi.provider.IbuSmartClientsProvider;
 import org.smartregister.provider.SmartRegisterClientsProvider;
 import org.smartregister.view.activity.SecuredNativeSmartRegisterActivity;
 import org.smartregister.view.contract.SmartRegisterClient;
-import org.smartregister.view.contract.SmartRegisterClients;
 import org.smartregister.view.dialog.AllClientsFilter;
 import org.smartregister.view.dialog.DialogOption;
 import org.smartregister.view.dialog.DialogOptionModel;
@@ -134,8 +133,8 @@ public class GiziIbuSmartRegisterFragment extends SecuredNativeSmartRegisterCurs
 //                        new HouseholdCensusDueDateSort(),
 
 
-                        new CursorCommonObjectSort(getResources().getString(R.string.sort_by_name_label),KiSortByNameAZ()),
-                        new CursorCommonObjectSort(getResources().getString(R.string.sort_by_name_label_reverse),KiSortByNameZA()),
+                        new CursorCommonObjectSort(getResources().getString(R.string.sort_by_name_label), kiSortByNameAZ()),
+                        new CursorCommonObjectSort(getResources().getString(R.string.sort_by_name_label_reverse), kiSortByNameZA()),
                 };
             }
 
@@ -289,11 +288,11 @@ public class GiziIbuSmartRegisterFragment extends SecuredNativeSmartRegisterCurs
 
 
 
-    private String KiSortByNameAZ() {
+    private String kiSortByNameAZ() {
         return "namalengkap ASC";
     }
 
-    private String KiSortByNameZA() {
+    private String kiSortByNameZA() {
         return "namalengkap DESC";
     }
 

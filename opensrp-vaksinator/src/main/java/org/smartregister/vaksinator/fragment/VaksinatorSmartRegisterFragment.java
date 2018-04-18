@@ -19,13 +19,12 @@ import org.opensrp.api.util.LocationTree;
 import org.opensrp.api.util.TreeNode;
 import org.smartregister.Context;
 import org.smartregister.commonregistry.CommonPersonObjectClient;
-import org.smartregister.commonregistry.CommonPersonObjectController;
 import org.smartregister.cursoradapter.CursorCommonObjectFilterOption;
 import org.smartregister.cursoradapter.CursorCommonObjectSort;
 import org.smartregister.cursoradapter.CursorSortOption;
 import org.smartregister.cursoradapter.SecuredNativeSmartRegisterCursorAdapterFragment;
 import org.smartregister.cursoradapter.SmartRegisterPaginatedCursorAdapter;
-import org.smartregister.cursoradapter.SmartRegisterQueryBuilder;
+//import org.smartregister.cursoradapter.SmartRegisterQueryBuilder;
 import org.smartregister.provider.SmartRegisterClientsProvider;
 import org.smartregister.util.StringUtil;
 import org.smartregister.vaksinator.R;
@@ -37,16 +36,13 @@ import org.smartregister.vaksinator.option.KICommonObjectFilterOption;
 import org.smartregister.vaksinator.option.VaksinatorServiceModeOption;
 import org.smartregister.vaksinator.provider.ChildSmartClientsProvider;
 import org.smartregister.view.activity.SecuredNativeSmartRegisterActivity;
-import org.smartregister.view.contract.ECClient;
-import org.smartregister.view.contract.SmartRegisterClients;
-import org.smartregister.view.controller.VillageController;
 import org.smartregister.view.dialog.AllClientsFilter;
 import org.smartregister.view.dialog.DialogOption;
-import org.smartregister.view.dialog.DialogOptionMapper;
 import org.smartregister.view.dialog.FilterOption;
 import org.smartregister.view.dialog.LocationSelectorDialogFragment;
 import org.smartregister.view.dialog.ServiceModeOption;
 import org.smartregister.view.dialog.SortOption;
+import org.smartregister.vaksinator.utils.SmartRegisterQueryBuilder;
 
 import java.util.ArrayList;
 import java.util.Map;
@@ -58,7 +54,7 @@ import static android.view.View.VISIBLE;
 import static org.apache.commons.lang3.StringUtils.isEmpty;
 
 /**
- * Created by koros on 10/12/15.
+ * Created by koros on 10/12/15
  */
 public class VaksinatorSmartRegisterFragment extends SecuredNativeSmartRegisterCursorAdapterFragment {
 
@@ -150,10 +146,10 @@ public class VaksinatorSmartRegisterFragment extends SecuredNativeSmartRegisterC
 //                        new HouseholdCensusDueDateSort(),
 
 
-                        new CursorCommonObjectSort(getResources().getString(R.string.sort_by_name_label),KiSortByNameAZ()),
-                        new CursorCommonObjectSort(getResources().getString(R.string.sort_by_name_label_reverse),KiSortByNameZA()),
-                        new CursorCommonObjectSort(getResources().getString(R.string.sort_by_child_age),KiSortByAgeASC()),
-                        new CursorCommonObjectSort(getResources().getString(R.string.sort_by_child_age_desc),KiSortByAgeDESC()),
+                        new CursorCommonObjectSort(getResources().getString(R.string.sort_by_name_label), kiSortByNameAZ()),
+                        new CursorCommonObjectSort(getResources().getString(R.string.sort_by_name_label_reverse), kiSortByNameZA()),
+                        new CursorCommonObjectSort(getResources().getString(R.string.sort_by_child_age), kiSortByAgeASC()),
+                        new CursorCommonObjectSort(getResources().getString(R.string.sort_by_child_age_desc), kiSortByAgeDESC()),
                 };
             }
 
@@ -213,7 +209,7 @@ public class VaksinatorSmartRegisterFragment extends SecuredNativeSmartRegisterC
 
         setTablename("ec_anak");
         SmartRegisterQueryBuilder countqueryBUilder = new SmartRegisterQueryBuilder();
-        countqueryBUilder.SelectInitiateMainTableCounts("ec_anak");
+        countqueryBUilder.selectInitiateMainTableCounts("ec_anak");
 
         if (s == null || s.equals("!") || s.equals("")) {
             Log.e(TAG, "initializeQueries: "+"Not Initialized" );
@@ -228,9 +224,9 @@ public class VaksinatorSmartRegisterFragment extends SecuredNativeSmartRegisterC
         super.CountExecute();
 
         SmartRegisterQueryBuilder queryBUilder = new SmartRegisterQueryBuilder();
-        queryBUilder.SelectInitiateMainTable("ec_anak", new String[]{"ec_anak.relationalid","ec_anak.is_closed","ec_anak.details","tanggalLahirAnak","namaBayi"});
+        queryBUilder.selectInitiateMainTable("ec_anak", new String[]{"ec_anak.relationalid","ec_anak.is_closed","ec_anak.details","tanggalLahirAnak","namaBayi"});
         mainSelect = queryBUilder.mainCondition("is_closed = 0 ");
-        //   Sortqueries = KiSortByNameAZ();
+        //   Sortqueries = kiSortByNameAZ();
 
         currentlimit = 20;
         currentoffset = 0;
@@ -254,13 +250,13 @@ public class VaksinatorSmartRegisterFragment extends SecuredNativeSmartRegisterC
 
         setTablename(tableName);
         SmartRegisterQueryBuilder countqueryBUilder = new SmartRegisterQueryBuilder();
-        countqueryBUilder.SelectInitiateMainTableCounts(tableName);
+        countqueryBUilder.selectInitiateMainTableCounts(tableName);
         mainCondition = " is_closed = 0 ";
         countSelect = countqueryBUilder.mainCondition(mainCondition);
         super.CountExecute();
 
         SmartRegisterQueryBuilder queryBUilder = new SmartRegisterQueryBuilder();
-        queryBUilder.SelectInitiateMainTable(tableName, new String[]{
+        queryBUilder.selectInitiateMainTable(tableName, new String[]{
                 tableName + ".relationalid",
                 tableName + ".details",
                 tableName + ".is_closed",
@@ -335,16 +331,18 @@ public class VaksinatorSmartRegisterFragment extends SecuredNativeSmartRegisterC
 
 
 
-    private String KiSortByNameAZ() {
+    private String kiSortByNameAZ() {
         return " namaBayi ASC";
     }
-    private String KiSortByNameZA() {
+
+    private String kiSortByNameZA() {
         return " namaBayi DESC";
     }
-    private String KiSortByAgeASC() {
+    private String kiSortByAgeASC() {
         return " tanggalLahirAnak DESC";
     }
-    private String KiSortByAgeDESC() {
+
+    private String kiSortByAgeDESC() {
         return " tanggalLahirAnak ASC";
     }
 

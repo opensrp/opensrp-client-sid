@@ -18,7 +18,6 @@ import org.opensrp.api.util.EntityUtils;
 import org.opensrp.api.util.LocationTree;
 import org.opensrp.api.util.TreeNode;
 import org.smartregister.Context;
-import org.smartregister.commonregistry.CommonPersonObjectController;
 import org.smartregister.commonregistry.CommonRepository;
 import org.smartregister.cursoradapter.CursorCommonObjectFilterOption;
 import org.smartregister.cursoradapter.CursorCommonObjectSort;
@@ -37,14 +36,8 @@ import org.smartregister.vaksinator.provider.TTSmartClientsProvider;
 import org.smartregister.vaksinator.utils.SmartRegisterQueryBuilder;
 import org.smartregister.view.activity.SecuredNativeSmartRegisterActivity;
 import org.smartregister.view.contract.ECClient;
-import org.smartregister.view.contract.SmartRegisterClient;
-import org.smartregister.view.contract.SmartRegisterClients;
-import org.smartregister.view.controller.VillageController;
 import org.smartregister.view.dialog.AllClientsFilter;
 import org.smartregister.view.dialog.DialogOption;
-import org.smartregister.view.dialog.DialogOptionMapper;
-import org.smartregister.view.dialog.DialogOptionModel;
-import org.smartregister.view.dialog.EditOption;
 import org.smartregister.view.dialog.FilterOption;
 import org.smartregister.view.dialog.ServiceModeOption;
 import org.smartregister.view.dialog.SortOption;
@@ -63,7 +56,7 @@ import static org.apache.commons.lang3.StringUtils.isEmpty;
 //import org.smartregister.vaksinator.vaksinator.FlurryFacade;
 
 /**
- * Created by koros on 10/12/15.
+ * Created by koros on 10/12/15
  */
 public class TTSmartRegisterFragment extends SecuredNativeSmartRegisterCursorAdapterFragment {
 
@@ -118,11 +111,11 @@ public class TTSmartRegisterFragment extends SecuredNativeSmartRegisterCursorAda
             @Override
             public DialogOption[] filterOptions() {
 //                FlurryFacade.logEvent("click_filter_option_on_kohort_ibu_dashboard");
-                ArrayList<DialogOption> dialogOptionslist = new ArrayList<DialogOption>();
+                ArrayList<DialogOption> dialogOptionslist = new ArrayList<>();
 
                 dialogOptionslist.add(new CursorCommonObjectFilterOption(getString(R.string.filter_by_all_label),filterStringForAll()));
-                //     dialogOptionslist.add(new CursorCommonObjectFilterOption(getString(R.string.hh_no_mwra),filterStringForNoElco()));
-                //      dialogOptionslist.add(new CursorCommonObjectFilterOption(getString(R.string.hh_has_mwra),filterStringForOneOrMoreElco()));
+                // dialogOptionslist.add(new CursorCommonObjectFilterOption(getString(R.string.hh_no_mwra),filterStringForNoElco()));
+                // dialogOptionslist.add(new CursorCommonObjectFilterOption(getString(R.string.hh_has_mwra),filterStringForOneOrMoreElco()));
 
                 String locationjson = context().anmLocationController().get();
                 LocationTree locationTree = EntityUtils.fromJson(locationjson, LocationTree.class);
@@ -147,8 +140,8 @@ public class TTSmartRegisterFragment extends SecuredNativeSmartRegisterCursorAda
             public DialogOption[] sortingOptions() {
 //                FlurryFacade.logEvent("click_sorting_option_on_kohort_ibu_dashboard");
                 return new DialogOption[]{
-                        new CursorCommonObjectSort(getResources().getString(R.string.sort_by_name_label),KiSortByNameAZ()),
-                        new CursorCommonObjectSort(getResources().getString(R.string.sort_by_name_label_reverse),KiSortByNameZA()),
+                        new CursorCommonObjectSort(getResources().getString(R.string.sort_by_name_label), kiSortByNameAZ()),
+                        new CursorCommonObjectSort(getResources().getString(R.string.sort_by_name_label_reverse), kiSortByNameZA()),
                 };
             }
 
@@ -212,7 +205,7 @@ public class TTSmartRegisterFragment extends SecuredNativeSmartRegisterCursorAda
 
        setTablename(tableName);
        SmartRegisterQueryBuilder countqueryBUilder = new SmartRegisterQueryBuilder();
-       countqueryBUilder.SelectInitiateMainTableCounts(tableName);
+       countqueryBUilder.selectInitiateMainTableCounts(tableName);
        countqueryBUilder.customJoin("LEFT JOIN ec_kartu_ibu on ec_kartu_ibu.id = ec_ibu.id");
        mainCondition = " is_closed = 0 and pptest ='Positive' ";
 
@@ -221,7 +214,7 @@ public class TTSmartRegisterFragment extends SecuredNativeSmartRegisterCursorAda
 
 
        SmartRegisterQueryBuilder queryBUilder = new SmartRegisterQueryBuilder();
-       queryBUilder.SelectInitiateMainTable(tableName, new String[]{
+       queryBUilder.selectInitiateMainTable(tableName, new String[]{
                "ec_ibu.relationalid",
                "ec_ibu.is_closed",
                "ec_ibu.details",
@@ -253,11 +246,11 @@ public class TTSmartRegisterFragment extends SecuredNativeSmartRegisterCursorAda
                 String sql = sqb.countQueryFts(tablename, joinTable, mainCondition, filters);
                 List<String> ids = commonRepository().findSearchIds(sql);
                 query = sqb.toStringFts(ids, tablename + "." + CommonRepository.ID_COLUMN);
-                query = sqb.Endquery(query);
+                query = sqb.endQuery(query);
             } else {
                 sqb.addCondition(filters);
                 query = sqb.orderbyCondition(Sortqueries);
-                query = sqb.Endquery(query);
+                query = sqb.endQuery(query);
             }
 
             Log.i(getClass().getName(), query);
@@ -305,11 +298,11 @@ public class TTSmartRegisterFragment extends SecuredNativeSmartRegisterCursorAda
                 List<String> ids = commonRepository().findSearchIds(sql);
                 query = sqb.toStringFts(ids, tablename + "." + CommonRepository.ID_COLUMN,
                         Sortqueries);
-                query = sqb.Endquery(query);
+                query = sqb.endQuery(query);
             } else {
                 sqb.addCondition(filters);
                 query = sqb.orderbyCondition(Sortqueries);
-                query = sqb.Endquery(sqb.addlimitandOffset(query, currentlimit, currentoffset));
+                query = sqb.endQuery(sqb.addlimitandOffset(query, currentlimit, currentoffset));
 
             }
         } catch (Exception e) {
@@ -377,19 +370,23 @@ public class TTSmartRegisterFragment extends SecuredNativeSmartRegisterCursorAda
     private class ClientActionHandler implements View.OnClickListener {
         public void onClick(View view) {
             switch (view.getId()) {
-//                case R.id.profile_info_layout:
+                case R.id.profile_info_layout:
+                    Log.e(TAG, "onClick: Detail Info" );
 //                    FlurryFacade.logEvent("click_detail_picture_vaksinator");
 //                    VaksinatorDetailActivity.controller = (CommonPersonObjectClient)view.getTag();
 //                    Intent intent = new Intent(getActivity(),VaksinatorDetailActivity.class);
 //                    startActivity(intent);
 //                    getActivity().finish();
-//                    break;
+                    break;
 //
 //                //untuk follow up button
-//                case R.id.btn_edit:
+                case R.id.btn_edit:
+                    Log.e(TAG, "onClick: Followup" );
 //                    FlurryFacade.logEvent("click_button_edit_vaksinator");
 //                    showFragmentDialog(new EditDialogOptionModel(), view.getTag());
-//                    break;
+                    break;
+                default:
+                    break;
             }
         }
 
@@ -400,10 +397,11 @@ public class TTSmartRegisterFragment extends SecuredNativeSmartRegisterCursorAda
 
 
 
-    private String KiSortByNameAZ() {
+    private String kiSortByNameAZ() {
         return " namalengkap ASC";
     }
-    private String KiSortByNameZA() {
+
+    private String kiSortByNameZA() {
         return " namalengkap DESC";
     }
 

@@ -1,6 +1,7 @@
 package org.smartregister.bidan.fragment;
 
 import android.content.Intent;
+import android.util.Log;
 import android.view.View;
 
 import org.opensrp.api.domain.Location;
@@ -69,7 +70,7 @@ public class AnakSmartRegisterFragment extends BaseSmartRegisterFragment {
 
             @Override
             public SortOption sortOption() {
-                return new CursorCommonObjectSort(getResources().getString(R.string.sort_by_name_label), AnakNameShort());
+                return new CursorCommonObjectSort(getResources().getString(R.string.sort_by_name_label), anakNameShort());
 
             }
 
@@ -114,9 +115,9 @@ public class AnakSmartRegisterFragment extends BaseSmartRegisterFragment {
             public DialogOption[] sortingOptions() {
 //                FlurryFacade.logEvent("click_sorting_option_on_kohort_anak_dashboard");
                 return new DialogOption[]{
-                        new CursorCommonObjectSort(getResources().getString(R.string.sort_by_name_label), AnakNameShort()),
-                        new CursorCommonObjectSort(getResources().getString(R.string.sort_by_name_label_reverse), AnakNameShortR()),
-                        new CursorCommonObjectSort(getResources().getString(R.string.sort_by_dob_label), AnakDOB()),//tanggalLahirAnak
+                        new CursorCommonObjectSort(getResources().getString(R.string.sort_by_name_label), anakNameShort()),
+                        new CursorCommonObjectSort(getResources().getString(R.string.sort_by_name_label_reverse), anakNameShortR()),
+                        new CursorCommonObjectSort(getResources().getString(R.string.sort_by_dob_label), anakDOB()),//tanggalLahirAnak
                 };
             }
 
@@ -127,7 +128,7 @@ public class AnakSmartRegisterFragment extends BaseSmartRegisterFragment {
         };
     }
 
-    private String AnakDOB() {
+    private String anakDOB() {
         return "tanggalLahirAnak ASC";
     }
 
@@ -183,7 +184,7 @@ public class AnakSmartRegisterFragment extends BaseSmartRegisterFragment {
         mainSelect = queryBuilder.mainCondition(mainCondition);
         mainCondition = "is_closed = 0";
 
-        Sortqueries = AnakNameShort();
+        Sortqueries = anakNameShort();
 //        Sortqueries = ((CursorSortOption) getDefaultOptionsProvider().sortOption()).sort();
 
         currentlimit = 20;
@@ -195,11 +196,11 @@ public class AnakSmartRegisterFragment extends BaseSmartRegisterFragment {
         refresh();
     }
 
-    private String AnakNameShort() {
+    private String anakNameShort() {
         return "namaBayi ASC";
     }
 
-    private String AnakNameShortR() {
+    private String anakNameShortR() {
         return "namaBayi DESC";
     }
 
@@ -308,7 +309,9 @@ public class AnakSmartRegisterFragment extends BaseSmartRegisterFragment {
 //                    FlurryFacade.logEvent("click_visit_button_on_kohort_anak_dashboard");
 //                    showFragmentDialog(new EditDialogOptionModel(), view.getTag());
                     showFragmentDialog(((ANCSmartRegisterActivity) getActivity()).new EditDialogOptionModelNew(), view.getTag());
-
+                    break;
+                default:
+                    Log.e(TAG, "onClick: Default options " );
                     break;
             }
         }
