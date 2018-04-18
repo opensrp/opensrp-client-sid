@@ -271,6 +271,9 @@ public class KISmartRegisterFragment extends BaseSmartRegisterFragment {
                 case R.id.ib_btn_edit:
                     showFragmentDialog(((BaseRegisterActivity) getActivity()).new EditDialogOptionModelNew(), view.getTag());
                     break;
+
+                default:
+                    break;
             }
         }
 

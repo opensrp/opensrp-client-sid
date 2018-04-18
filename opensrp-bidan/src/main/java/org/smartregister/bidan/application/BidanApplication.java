@@ -40,6 +40,7 @@ public class BidanApplication extends DrishtiApplication {
                 return new String[]{"namalengkap", "namaSuami"};
             case "ec_pnc":
                 return new String[]{"namalengkap", "namaSuami"};
+            default:
         }
         return null;
     }
@@ -54,6 +55,7 @@ public class BidanApplication extends DrishtiApplication {
                 return new String[]{"namalengkap", "umur", "noIbu", "pptest", "htp"};
             case "ec_pnc":
                 return new String[]{"namalengkap", "umur", "noIbu", "keadaanIbu"};
+            default:
         }
         return null;
     }
@@ -68,6 +70,8 @@ public class BidanApplication extends DrishtiApplication {
                 return new String[]{"is_closed", "type", "pptest", "kartuIbuId"};
             case "ec_pnc":
                 return new String[]{"is_closed", "keadaanIbu", "type"};
+            default:
+
         }
         return null;
     }

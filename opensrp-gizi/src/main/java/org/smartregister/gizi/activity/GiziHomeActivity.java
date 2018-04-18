@@ -373,7 +373,8 @@ public class GiziHomeActivity extends SecuredActivity {
                 case R.id.btn_gizi_ibu_register:
                     navigationController.startECSmartRegistry();
                     break;
-
+                default:
+                    break;
 
             }
             String HomeEnd = timer.format(new Date());
@@ -394,6 +395,9 @@ public class GiziHomeActivity extends SecuredActivity {
 
                 case R.id.btn_videos:
 //                    navigationController.startVideos();
+                    break;
+
+                default:
                     break;
             }
         }

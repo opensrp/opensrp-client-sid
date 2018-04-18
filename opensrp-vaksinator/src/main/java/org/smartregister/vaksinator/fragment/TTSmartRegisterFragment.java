@@ -384,7 +384,7 @@ public class TTSmartRegisterFragment extends SecuredNativeSmartRegisterCursorAda
 //                    showFragmentDialog(new EditDialogOptionModel(), view.getTag());
                     break;
                 default:
-                    break;
+//                    break;
             }
         }
 

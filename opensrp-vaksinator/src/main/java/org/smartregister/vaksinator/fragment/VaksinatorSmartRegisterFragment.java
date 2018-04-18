@@ -50,6 +50,7 @@ import util.AsyncTask;
 
 import static android.view.View.INVISIBLE;
 import static android.view.View.VISIBLE;
+import static org.apache.commons.lang3.StringUtils.defaultIfBlank;
 import static org.apache.commons.lang3.StringUtils.isEmpty;
 
 //import org.smartregister.cursoradapter.SmartRegisterQueryBuilder;
@@ -322,6 +323,8 @@ public class VaksinatorSmartRegisterFragment extends SecuredNativeSmartRegisterC
                     FlurryFacade.logEvent("click_button_edit_vaksinator");
                     showFragmentDialog(((VaksinatorSmartRegisterActivity)getActivity()).new EditDialogOptionModel(), view.getTag());
                     break;
+
+                default:
             }
         }
 

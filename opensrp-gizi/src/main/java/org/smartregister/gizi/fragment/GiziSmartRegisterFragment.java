@@ -310,7 +310,7 @@ public class GiziSmartRegisterFragment extends SecuredNativeSmartRegisterCursorA
                     showFragmentDialog(((GiziSmartRegisterActivity)getActivity()).new EditDialogOptionModel(), view.getTag());
                     break;
                 default:
-                    break;
+//                    break;
             }
         }
 

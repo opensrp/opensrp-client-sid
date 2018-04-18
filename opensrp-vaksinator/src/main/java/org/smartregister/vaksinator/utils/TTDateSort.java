@@ -62,8 +62,11 @@ public class TTDateSort implements SortOption {
                         Date date2 = dateFormat.parse(commonPersonObjectClient2.getDetails().get(field));
                         return date1.compareTo(date2);
                     }catch (Exception e){
-                        break;
+                        e.printStackTrace();
                     }
+                    break;
+
+                default:
 
             }
             return 0;

@@ -338,7 +338,7 @@ public class VaksinatorHomeActivity extends SecuredActivity {
                     break;
 
                 default:
-                    break;
+//                    break;
 
             }
             // TIMER
@@ -359,7 +359,7 @@ public class VaksinatorHomeActivity extends SecuredActivity {
                     break;
 
                 default:
-                    break;
+//                    break;
 
 //                case R.id.btn_videos:
 //                    navigationController.startVideos();

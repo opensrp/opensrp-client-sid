@@ -245,7 +245,8 @@ public class ANCSmartRegisterFragment extends BaseSmartRegisterFragment {
                     DetailANCActivity.ancClient = (CommonPersonObjectClient) view.getTag();
 //                    showFragmentDialog(new EditDialogOptionModel(), view.getTag());
                     showFragmentDialog(((ANCSmartRegisterActivity) getActivity()).new EditDialogOptionModelNew(), view.getTag());
-
+                    break;
+                default:
                     break;
             }
         }

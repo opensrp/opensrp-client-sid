@@ -262,7 +262,9 @@ public class PNCSmartRegisterFragment extends BaseSmartRegisterFragment {
 //                    //FlurryFacade.logEvent("click_visit_button_on_kohort_pnc_dashboard");
 //                    showFragmentDialog(new EditDialogOptionModel(), view.getTag());
                     showFragmentDialog(((PNCSmartRegisterActivity) getActivity()).new EditDialogOptionModelNew(), view.getTag());
+                    break;
 
+                default:
                     break;
             }
         }

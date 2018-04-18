@@ -278,6 +278,9 @@ public class GiziIbuSmartRegisterFragment extends SecuredNativeSmartRegisterCurs
                   //  FlurryFacade.logEvent("click_button_edit_vaksinator");
                     showFragmentDialog(new EditDialogOptionModel(), view.getTag());
                     break;
+
+                default:
+//                    break;
             }
         }
 
