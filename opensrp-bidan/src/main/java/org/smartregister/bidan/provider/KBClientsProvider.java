@@ -10,6 +10,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import org.smartregister.Context;
 import org.smartregister.bidan.R;
 import org.smartregister.bidan.activity.LoginActivity;
 import org.smartregister.bidan.utils.Support;
@@ -19,7 +20,6 @@ import org.smartregister.domain.Alert;
 import org.smartregister.repository.DetailsRepository;
 import org.smartregister.service.AlertService;
 import org.smartregister.view.contract.SmartRegisterClient;
-import org.smartregister.Context;
 
 import java.util.List;
 

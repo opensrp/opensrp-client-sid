@@ -16,6 +16,7 @@ import org.joda.time.LocalDate;
 import org.joda.time.Months;
 import org.joda.time.format.DateTimeFormat;
 import org.joda.time.format.DateTimeFormatter;
+import org.smartregister.Context;
 import org.smartregister.bidan.R;
 import org.smartregister.bidan.activity.LoginActivity;
 import org.smartregister.bidan.utils.AllConstantsINA;
@@ -28,7 +29,6 @@ import org.smartregister.domain.Alert;
 import org.smartregister.repository.DetailsRepository;
 import org.smartregister.service.AlertService;
 import org.smartregister.view.contract.SmartRegisterClient;
-import org.smartregister.Context;
 
 import java.util.List;
 import java.util.Map;

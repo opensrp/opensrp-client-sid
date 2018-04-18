@@ -3,7 +3,6 @@ package org.smartregister.gizi.provider;
 import android.app.Activity;
 import android.content.Context;
 import android.database.Cursor;
-import android.graphics.drawable.Drawable;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;

@@ -1,8 +1,5 @@
 package org.smartregister.gizi.activity;
 
-import android.app.AlertDialog;
-import android.content.DialogInterface;
-import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.database.Cursor;
 import android.os.Bundle;

@@ -10,6 +10,7 @@ import android.widget.Toast;
 import org.apache.commons.lang3.StringUtils;
 import org.json.JSONException;
 import org.json.JSONObject;
+import org.smartregister.Context;
 import org.smartregister.adapter.SmartRegisterPaginatedAdapter;
 import org.smartregister.bidan.R;
 import org.smartregister.bidan.sync.ClientProcessor;
@@ -48,10 +49,8 @@ import static org.smartregister.util.Utils.getValue;
 
 //import org.smartregister.bidan.sync.BidanClientProcessor;
 //import org.smartregister.bidan.utils.EnketoFormUtils;
-
 //import org.smartregister.bidan.utils.BidanFormUtils;
 //import android.content.res.Configuration;
-import org.smartregister.Context;
 //import org.smartregister.repository.AllSharedPreferences;
 //import static android.preference.PreferenceManager.getDefaultSharedPreferences;
 

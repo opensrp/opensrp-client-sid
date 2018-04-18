@@ -24,7 +24,6 @@ import org.smartregister.cursoradapter.CursorCommonObjectSort;
 import org.smartregister.cursoradapter.CursorSortOption;
 import org.smartregister.cursoradapter.SecuredNativeSmartRegisterCursorAdapterFragment;
 import org.smartregister.cursoradapter.SmartRegisterPaginatedCursorAdapter;
-//import org.smartregister.cursoradapter.SmartRegisterQueryBuilder;
 import org.smartregister.provider.SmartRegisterClientsProvider;
 import org.smartregister.util.StringUtil;
 import org.smartregister.vaksinator.R;
@@ -35,6 +34,7 @@ import org.smartregister.vaksinator.libs.FlurryFacade;
 import org.smartregister.vaksinator.option.KICommonObjectFilterOption;
 import org.smartregister.vaksinator.option.VaksinatorServiceModeOption;
 import org.smartregister.vaksinator.provider.ChildSmartClientsProvider;
+import org.smartregister.vaksinator.utils.SmartRegisterQueryBuilder;
 import org.smartregister.view.activity.SecuredNativeSmartRegisterActivity;
 import org.smartregister.view.dialog.AllClientsFilter;
 import org.smartregister.view.dialog.DialogOption;
@@ -42,7 +42,6 @@ import org.smartregister.view.dialog.FilterOption;
 import org.smartregister.view.dialog.LocationSelectorDialogFragment;
 import org.smartregister.view.dialog.ServiceModeOption;
 import org.smartregister.view.dialog.SortOption;
-import org.smartregister.vaksinator.utils.SmartRegisterQueryBuilder;
 
 import java.util.ArrayList;
 import java.util.Map;
@@ -52,6 +51,8 @@ import util.AsyncTask;
 import static android.view.View.INVISIBLE;
 import static android.view.View.VISIBLE;
 import static org.apache.commons.lang3.StringUtils.isEmpty;
+
+//import org.smartregister.cursoradapter.SmartRegisterQueryBuilder;
 
 /**
  * Created by koros on 10/12/15
