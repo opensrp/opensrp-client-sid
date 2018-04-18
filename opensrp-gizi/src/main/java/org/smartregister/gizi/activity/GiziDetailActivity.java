@@ -39,6 +39,8 @@ public class GiziDetailActivity extends Activity {
     private SimpleDateFormat timer = new SimpleDateFormat("hh:mm:ss");
     private static final String TAG = GiziDetailActivity.class.getSimpleName();
     public static CommonPersonObjectClient childclient;
+    protected static String bindobject;
+    protected static String entityid;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -265,8 +267,7 @@ public class GiziDetailActivity extends Activity {
 //        mCurrentPhotoPath = "file:" + image.getAbsolutePath();
 //        return image;
 //    }
-    protected static String bindobject;
-    protected static String entityid;
+
 
 //    public static void setImagetoHolder(Activity activity, String file, ImageView view, int placeholder){
 //        mImageThumbSize = 300;

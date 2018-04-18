@@ -4,7 +4,12 @@ package util.ZScore;
  * Created by Iq on 24/05/16.
  */
 public class ReferenceTableForDailyIndex {
-    public double[]getBoysWeightForAge(int index){
+
+    protected String[] WeightAgeStandardIndex = {"Severely Underweight", "Underweight", "Normal", "Overweight"};
+    protected String[] HeightAgeStandardIndex = {"Severely Stunted", "Stunted", "Normal", "Tall"};
+    protected String[] WeightHeightStandardIndex = {"Severely Wasted", "Wasted", "Normal", "Overweight"};
+
+    public double[] getBoysWeightForAge(int index){
         double[][]boysWeightForAge={
                 {0,0.3487,3.3464,0.14602},
                 {1,0.3127,3.3174,0.14693},
@@ -13613,20 +13618,4 @@ public class ReferenceTableForDailyIndex {
     }
 
 
-//    public String[]WeightAgeStandardIndex = {context.getResources().getString(R.string.Underweight),
-// context.getResources().getString(R.string.Underweight),context.getResources().getString(R.string.good_nutrition),context.getResources().getString(R.string.overweight)};
-    public String[]WeightAgeStandardIndex = {"Severely Underweight","Underweight","Normal","Overweight"};
-
-   // public String[]HeightAgeStandardIndex = {context.getResources().getString(R.string.s_stunted),
-    //                                        context.getResources().getString(R.string.stunted),
-     //                                       context.getResources().getString(R.string.normal),
-     //                                       context.getResources().getString(R.string.tall)};
-    public String[]HeightAgeStandardIndex = {"Severely Stunted","Stunted","Normal","Tall"};
-
-    // BMI, weight length and weight height has the same standard
-   // public String[]WeightHeightStandardIndex = {context.getResources().getString(R.string.S_wasted),
-   //                                             context.getResources().getString(R.string.wasted),
-   //                                             context.getResources().getString(R.string.normal),
-    //                                            context.getResources().getString(R.string.overweight)};
-    public String[]WeightHeightStandardIndex = {"Severely Wasted","Wasted","Normal","Overweight"};
 }

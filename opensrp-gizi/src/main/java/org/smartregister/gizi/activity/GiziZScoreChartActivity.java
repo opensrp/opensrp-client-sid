@@ -12,7 +12,6 @@ import android.widget.TextView;
 import com.flurry.android.FlurryAgent;
 import com.jjoe64.graphview.GraphView;
 
-import org.smartregister.Context;
 import org.smartregister.commonregistry.CommonPersonObjectClient;
 import org.smartregister.gizi.R;
 import org.smartregister.repository.DetailsRepository;
@@ -23,16 +22,32 @@ import util.growthChart.GraphConstant;
 import util.growthChart.GrowthChartGenerator;
 
 /**
- * Created by Null on 2016-12-06.
+ * Created by Null on 2016-12-06
  */
 public class GiziZScoreChartActivity extends Activity{
 
     public static CommonPersonObjectClient client;
     private ZScoreSystemCalculation calc;
+    private GrowthChartGenerator generator;
+
+    private TextView detailActivity;
+    private ImageButton back;
+    private TextView lfaActivity;
+
+    private String historyUmur;
+    private String historyBerat;
+    private String historyTinggi;
+    private String historyTinggiUmurHari;
+
+    private GraphView zScoreGraph;
+    private CheckBox wfaCheckBox;
+    private CheckBox hfaCheckBox;
+    private CheckBox wfhCheckBox;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        final Context context = Context.getInstance();
+//        final Context context = Context.getInstance();
         calc = new ZScoreSystemCalculation();
         setContentView(R.layout.gizi_z_score_activity);
         FlurryAgent.logEvent("ZScore_chart_view");
@@ -154,23 +169,25 @@ public class GiziZScoreChartActivity extends Activity{
     }
 
     private String[]initializeZScoreSeries(){
-        String axis1 = wfaChecked ? createWFAAxis():"";
-        String data1 = wfaChecked ? createWFASeries():"";
-        String axis2="",data2="";
+//        boolean wfaChecked = true;
+//        boolean wfhChecked = true;
+//        boolean hfaChecked = true;
+//
+        String axis1 = createWFAAxis();
+        String data1 = createWFASeries();
+        String axis2 = "", data2="" ;
 
-        if(hfaChecked) {
-            String tempAxis2 = createHFAAxis();
-            if (!tempAxis2.equals("")) {
-                axis2 = tempAxis2.split(",").length > 0 ? Integer.toString(Integer.parseInt(tempAxis2.split(",")[0]) / 30) : "";
-                for (int i = 1; i < tempAxis2.split(",").length; i++) {
-                    axis2 = axis2 + "," + Integer.toString(Integer.parseInt(tempAxis2.split(",")[i]) / 30);
-                }
-                data2 = createHFASeries();
+        String tempAxis2 = createHFAAxis();
+        if (!tempAxis2.equals("")) {
+            axis2 = tempAxis2.split(",").length > 0 ? Integer.toString(Integer.parseInt(tempAxis2.split(",")[0]) / 30) : "";
+            for (int i = 1; i < tempAxis2.split(",").length; i++) {
+                axis2 = axis2 + "," + Integer.toString(Integer.parseInt(tempAxis2.split(",")[i]) / 30);
             }
+            data2 = createHFASeries();
         }
 
-        String axis3 = wfhChecked ? createWFHAxis() : "";
-        String data3 = wfhChecked ? createWFHSeries() : "";
+        String axis3 = createWFHAxis();
+        String data3 = createWFHSeries();
 
         ////System.out.println("data 1 = "+axis1+"@"+data1);
         ////System.out.println("data 2 = "+axis2+"@"+data2);
@@ -181,7 +198,7 @@ public class GiziZScoreChartActivity extends Activity{
 
     //CREATING AXIS AND SERIES DATA
     private String createWFAAxis(){
-        String seriesAxis = "";
+        String seriesAxis;
         String [] temp = buildDayAgeArray(historyUmur/*, historyUmurHari*/).split(",");
         seriesAxis = temp[0].equals("") ? "" : ""+(Integer.parseInt(temp[0])/30);
         for(int i=1;i<temp.length;i++){
@@ -204,9 +221,9 @@ public class GiziZScoreChartActivity extends Activity{
 
         if(ageLength==1 && dayAge[0].equals(""))
             return dayAge[0];
-        for(int i=0;i<ageLength;i++){
+//        for (String aDayAge : dayAge) {
             ////System.out.println("age on day : "+dayAge[i]);
-        }
+//        }
 
         for(int i=0;i<ageLength;i++){
             if(Integer.parseInt(dayAge[i])<0)
@@ -374,12 +391,12 @@ public class GiziZScoreChartActivity extends Activity{
             return null;
         String[] tempArray = string.split(",");
         String tempString = "";
-        for(int i=0;i<tempArray.length;i++){
-            if(tempArray[i].charAt(tempArray[i].length()-1) == ':')
+        for (String aTempArray : tempArray) {
+            if (aTempArray.charAt(aTempArray.length() - 1) == ':')
                 continue;
-            tempString = tempString + "~" + tempArray[i]
-                         + (tempArray[i].substring(tempArray[i].length()-1).equalsIgnoreCase(":")? "0" : "")
-                         + "~";
+            tempString = tempString + "~" + aTempArray
+                    + (aTempArray.substring(aTempArray.length() - 1).equalsIgnoreCase(":") ? "0" : "")
+                    + "~";
         }
         return tempString.substring(1,tempString.length()-1).replaceAll("~~", ",");
     }
@@ -391,33 +408,12 @@ public class GiziZScoreChartActivity extends Activity{
             return new String[]{"0","0"};
         String []temp = data.split(",");
         String []result = {"",""};
-        for(int i=0;i<temp.length;i++){
-            result[0]=result[0]+","+temp[i].split(":")[0];
-            result[1]=result[1]+","+temp[i].split(":")[1];
+        for (String aTemp : temp) {
+            result[0] = result[0] + "," + aTemp.split(":")[0];
+            result[1] = result[1] + "," + aTemp.split(":")[1];
         }
         result[0]=result[0].substring(1,result[0].length());
         result[1]=result[1].substring(1,result[1].length());
         return result;
     }
-
-    GrowthChartGenerator generator;
-
-    private TextView detailActivity;
-    private ImageButton back;
-    private TextView lfaActivity;
-
-    private String historyUmur;
-    private String historyBerat;
-    private String historyTinggi;
-    private String historyTinggiUmurHari;
-
-    private boolean wfaChecked=true;
-    private boolean hfaChecked=true;
-    private boolean wfhChecked=true;
-
-    private GraphView zScoreGraph;
-    private CheckBox wfaCheckBox;
-    private CheckBox hfaCheckBox;
-    private CheckBox wfhCheckBox;
-
 }

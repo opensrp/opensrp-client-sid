@@ -10,6 +10,39 @@ import java.util.ArrayList;
 
 public class GrowthChartGenerator {
 
+    private GraphView graph;
+    private LineGraphSeries<DataPoint> series1 = new LineGraphSeries<>();
+    private LineGraphSeries<DataPoint> series2 = new LineGraphSeries<>();
+    private LineGraphSeries<DataPoint> series3 = new LineGraphSeries<>();
+    private LineGraphSeries<DataPoint> series4 = new LineGraphSeries<>();
+    private LineGraphSeries<DataPoint> series5 = new LineGraphSeries<>();
+    private LineGraphSeries<DataPoint> series6 = new LineGraphSeries<>();
+    private LineGraphSeries<DataPoint> series7 = new LineGraphSeries<>();
+//    LineGraphSeries<DataPoint> seriesMain = new LineGraphSeries<DataPoint>();
+
+    private double [][]graphLine;
+    private String xValue;
+    private String yValue;
+    private String dateOfBirth;
+    private String gender;
+    private LineGraphSeries [][]a;
+
+    /**
+     * age shift used to shift X-Axis value so the axis value will start from (0 + ageShift) value,
+     * currently used when generating height for age chart.
+     */
+    private int ageShift = 0;
+    private int index = 0;
+    private boolean[]chartDisplay = {true,true,true};
+
+    private final int red = Color.rgb(255,0,0);
+    private final int yellow = Color.rgb(255,255,0);
+    private final int green = Color.rgb(0,255,0);
+    private final int blue = Color.rgb(0,32,255);
+    private final int purple = Color.rgb(239,0,255);
+    private final int orange = Color.rgb(255,111,0);
+    private final int []zScoreChartColor = {blue,purple,orange};
+
     public GrowthChartGenerator(GraphView graph,String gender,String dateOfBirth, String xValue,String yValue){
         this.graph = graph;
         this.xValue = xValue;
@@ -262,36 +295,5 @@ public class GrowthChartGenerator {
         }
     }
 
-    private GraphView graph;
-    private LineGraphSeries<DataPoint> series1 = new LineGraphSeries<>();
-    private LineGraphSeries<DataPoint> series2 = new LineGraphSeries<>();
-    private LineGraphSeries<DataPoint> series3 = new LineGraphSeries<>();
-    private LineGraphSeries<DataPoint> series4 = new LineGraphSeries<>();
-    private LineGraphSeries<DataPoint> series5 = new LineGraphSeries<>();
-    private LineGraphSeries<DataPoint> series6 = new LineGraphSeries<>();
-    private LineGraphSeries<DataPoint> series7 = new LineGraphSeries<>();
-//    LineGraphSeries<DataPoint> seriesMain = new LineGraphSeries<DataPoint>();
 
-    private double [][]graphLine;
-    private String xValue;
-    private String yValue;
-    private String dateOfBirth;
-    private String gender;
-    private LineGraphSeries [][]a;
-
-    /**
-     * age shift used to shift X-Axis value so the axis value will start from (0 + ageShift) value,
-     * currently used when generating height for age chart.
-     */
-    private int ageShift = 0;
-    private int index = 0;
-    private boolean[]chartDisplay = {true,true,true};
-
-    private final int red = Color.rgb(255,0,0);
-    private final int yellow = Color.rgb(255,255,0);
-    private final int green = Color.rgb(0,255,0);
-    private final int blue = Color.rgb(0,32,255);
-    private final int purple = Color.rgb(239,0,255);
-    private final int orange = Color.rgb(255,111,0);
-    private final int []zScoreChartColor = {blue,purple,orange};
 }

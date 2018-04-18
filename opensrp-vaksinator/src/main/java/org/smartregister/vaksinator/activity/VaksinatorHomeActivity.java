@@ -11,12 +11,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import org.json.JSONObject;
-import org.opensrp.api.domain.Location;
-import org.opensrp.api.util.EntityUtils;
-import org.opensrp.api.util.LocationTree;
-import org.opensrp.api.util.TreeNode;
 import org.smartregister.Context;
-import org.smartregister.commonregistry.CommonPersonObjectController;
 import org.smartregister.cursoradapter.SmartRegisterQueryBuilder;
 import org.smartregister.enketo.view.fragment.DisplayFormFragment;
 import org.smartregister.event.Listener;
@@ -48,7 +43,7 @@ import static org.smartregister.event.Event.SYNC_COMPLETED;
 import static org.smartregister.event.Event.SYNC_STARTED;
 
 /**
- * Created by sid on 10/15/17.
+ * Created by sid on 10/15/17
  */
 
 public class VaksinatorHomeActivity extends SecuredActivity {
@@ -57,6 +52,12 @@ public class VaksinatorHomeActivity extends SecuredActivity {
     private MenuItem updateMenuItem;
     private MenuItem remainingFormsToSyncMenuItem;
     private PendingFormSubmissionService pendingFormSubmissionService;
+
+    private TextView anakRegisterClientCountView;
+    private TextView ibuRegisterClientCountView;
+//    public static CommonPersonObjectController kicontroller;
+//    public static CommonPersonObjectController childcontroller;
+
 
     private Listener<Boolean> onSyncStartListener = new Listener<Boolean>() {
         @Override
@@ -79,10 +80,6 @@ public class VaksinatorHomeActivity extends SecuredActivity {
             }
             updateRegisterCounts();
 
-//            new Tools(context());
-//            Tools.download_images();
-//            Tools.setVectorfromAPI(getApplicationContext());
-//            Tools.setVectorsBuffered();
             AllConstantsINA.SLEEP_TIME = AllConstantsINA.WAITING_TIME;
             flagActivator();
 
@@ -121,13 +118,6 @@ public class VaksinatorHomeActivity extends SecuredActivity {
         }
     };
 
-    private TextView anakRegisterClientCountView;
-    private TextView ibuRegisterClientCountView;
-    public static CommonPersonObjectController kicontroller;
-    public static CommonPersonObjectController childcontroller;
-
-    private static int kicount;
-    private int childcount;
 
     @Override
     protected void onCreation() {
@@ -163,11 +153,10 @@ public class VaksinatorHomeActivity extends SecuredActivity {
     private void setupViews() {
         findViewById(R.id.btn_vaksinator_register).setOnClickListener(onRegisterStartListener);
         findViewById(R.id.btn_TT_vaksinator_register).setOnClickListener(onRegisterStartListener);
+        findViewById(R.id.btn_reporting).setOnClickListener(onButtonsClickListener);
         // findViewById(R.id.btn_test2_register).setOnClickListener(onRegisterStartListener);
         // findViewById(R.id.btn_tt_register).setVisibility(View.INVISIBLE);
-
-        findViewById(R.id.btn_reporting).setOnClickListener(onButtonsClickListener);
-//        findViewById(R.id.btn_videos).setOnClickListener(onButtonsClickListener);
+        // findViewById(R.id.btn_videos).setOnClickListener(onButtonsClickListener);
 
         anakRegisterClientCountView = (TextView) findViewById(R.id.txt_vaksinator_register_client_count);
         ibuRegisterClientCountView = (TextView) findViewById(R.id.txt_TT_vaksinator_register_client_count);
@@ -180,7 +169,7 @@ public class VaksinatorHomeActivity extends SecuredActivity {
         SYNC_COMPLETED.addListener(onSyncCompleteListener);
         FORM_SUBMITTED.addListener(onFormSubmittedListener);
         ACTION_HANDLED.addListener(updateANMDetailsListener);
-        getSupportActionBar().setTitle("");
+        if (getSupportActionBar() != null) getSupportActionBar().setTitle("");
         getSupportActionBar().setIcon(getResources().getDrawable(org.smartregister.vaksinator.R.mipmap.logo));
         getSupportActionBar().setLogo(org.smartregister.vaksinator.R.mipmap.logo);
         getSupportActionBar().setDisplayUseLogoEnabled(true);
@@ -199,10 +188,6 @@ public class VaksinatorHomeActivity extends SecuredActivity {
 //        initFR();
     }
 
-    private void initFR() {
-//        new Tools(context());
-    }
-
     private void updateRegisterCounts() {
         NativeUpdateANMDetailsTask task = new NativeUpdateANMDetailsTask(Context.getInstance().anmController());
         task.fetch(new NativeAfterANMDetailsFetchListener() {
@@ -217,12 +202,12 @@ public class VaksinatorHomeActivity extends SecuredActivity {
         SmartRegisterQueryBuilder sqb = new SmartRegisterQueryBuilder();
         Cursor childcountcursor = context().commonrepository("ec_anak").rawCustomQueryForAdapter(sqb.queryForCountOnRegisters("ec_anak_search", "ec_anak_search.is_closed=0"));
         childcountcursor.moveToFirst();
-        childcount = childcountcursor.getInt(0);
+        int childcount = childcountcursor.getInt(0);
         childcountcursor.close();
 
         Cursor kicountcursor = context().commonrepository("ec_ibu").rawCustomQueryForAdapter(sqb.queryForCountOnRegisters("ec_ibu", "ec_ibu.is_closed=0 and ec_ibu.pptest='Positive'"));
         kicountcursor.moveToFirst();
-        kicount = kicountcursor.getInt(0);
+        int kicount = kicountcursor.getInt(0);
         kicountcursor.close();
 
         anakRegisterClientCountView.setText(valueOf(childcount));
@@ -290,11 +275,10 @@ public class VaksinatorHomeActivity extends SecuredActivity {
 //        if (LoginActivity.generator.uniqueIdController().needToRefillUniqueId(LoginActivity.generator.UNIQUE_ID_LIMIT))  // unique id part
 //            LoginActivity.generator.requestUniqueId();                                                                  // unique id part
 
-        String locationjson = context().anmLocationController().get();
-        LocationTree locationTree = EntityUtils.fromJson(locationjson, LocationTree.class);
-
-        Map<String, TreeNode<String, Location>> locationMap =
-                locationTree.getLocationsHierarchy();
+//        String locationjson = context().anmLocationController().get();
+//        LocationTree locationTree = EntityUtils.fromJson(locationjson, LocationTree.class);
+//
+//        Map<String, TreeNode<String, Location>> locationMap = locationTree.getLocationsHierarchy();
 
 
 //        Cursor childcountcursor = context().commonrepository("ec_anak").rawCustomQueryForAdapter("SELECT * FROM ec_anak");
@@ -353,10 +337,14 @@ public class VaksinatorHomeActivity extends SecuredActivity {
                     navigationController.startFPSmartRegistry();
                     break;
 
+                default:
+                    break;
+
             }
-            String HomeEnd = timer.format(new Date());
-            Map<String, String> Home = new HashMap<String, String>();
-            Home.put("end", HomeEnd);
+            // TIMER
+//            String HomeEnd = timer.format(new Date());
+//            Map<String, String> Home = new HashMap<String, String>();
+//            Home.put("end", HomeEnd);
 //            FlurryAgent.logEvent("vaksinator_home_dashboard", Home, true);
         }
     };
@@ -368,6 +356,9 @@ public class VaksinatorHomeActivity extends SecuredActivity {
             switch (view.getId()) {
                 case R.id.btn_reporting:
                     navigationController.startReports();
+                    break;
+
+                default:
                     break;
 
 //                case R.id.btn_videos:

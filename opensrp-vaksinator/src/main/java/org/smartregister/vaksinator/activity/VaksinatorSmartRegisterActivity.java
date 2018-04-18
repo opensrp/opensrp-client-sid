@@ -46,9 +46,9 @@ import static org.smartregister.util.Utils.getValue;
 public class VaksinatorSmartRegisterActivity extends SecuredNativeSmartRegisterActivity implements
         LocationSelectorDialogFragment.OnLocationSelectedListener, DisplayFormListener{
 
-    private SimpleDateFormat timer = new SimpleDateFormat("hh:mm:ss");
-
     public static final String TAG = VaksinatorSmartRegisterActivity.class.getSimpleName();
+    private SimpleDateFormat timer = new SimpleDateFormat("hh:mm:ss");
+    public static boolean out;
     @Bind(R.id.view_pager) public OpenSRPViewPager mPager;
     private FragmentPagerAdapter mPagerAdapter;
     private int currentPage;
@@ -69,8 +69,8 @@ public class VaksinatorSmartRegisterActivity extends SecuredNativeSmartRegisterA
 
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
         String VaksinatorStart = timer.format(new Date());
-        Map<String, String> Vaksinator = new HashMap<>();
-        Vaksinator.put("start", VaksinatorStart);
+        Map<String, String> timerVaksinator = new HashMap<>();
+        timerVaksinator.put("start", VaksinatorStart);
 
         formNames = this.buildFormNameList();
 
@@ -266,7 +266,6 @@ public class VaksinatorSmartRegisterActivity extends SecuredNativeSmartRegisterA
         }
     }*/
 
-    public static boolean out;
 
     @Override
     public void startFormActivity(final String formName, final String entityId, final String metaData) {
