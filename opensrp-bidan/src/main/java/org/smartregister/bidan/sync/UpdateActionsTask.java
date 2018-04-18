@@ -1,6 +1,7 @@
 package org.smartregister.bidan.sync;
 
 import android.content.Context;
+//import android.content.Context;
 import android.util.Log;
 import android.widget.Toast;
 
@@ -43,7 +44,7 @@ public class UpdateActionsTask {
 //    }
 
     public void updateFromServer(final AfterFetchListener afterFetchListener) {
-        if (Context.getInstance().IsUserLoggedOut()) {
+        if (org.smartregister.Context.getInstance().IsUserLoggedOut()) {
             logInfo("Not updating from server as user is not logged in.");
             return;
         }
@@ -56,7 +57,7 @@ public class UpdateActionsTask {
                 Log.i(TAG, "updateFromServer:additional "+mAdditionalSyncService);
                 FetchStatus fetchStatusForForms = formSubmissionSyncService.sync();
 
-                if (Context.getInstance().configuration().shouldSyncForm()) {
+                if (org.smartregister.Context.getInstance().configuration().shouldSyncForm()) {
 
                     allFormVersionSyncService.verifyFormsInFolder();
                     FetchStatus fetchVersionStatus = allFormVersionSyncService.pullFormDefinitionFromServer();
