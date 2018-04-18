@@ -160,11 +160,10 @@ public class GiziGrowthChartActivity extends Activity{
             age[i]=monthAge(dateOfBirth, Integer.toString(Integer.parseInt(array2[i][0])/30));
             ageSeries = ageSeries + "," + Integer.toString(age[i]);
             lengthSeries = lengthSeries + "," + array2[i][1];
-            if(i>0){
-                if(age[i]>=24 && age[i-1]<24){
+            if(i>0 && age[i]>=24 && age[i-1]<24){
                     ageSeries=ageSeries + ";" +Integer.toString(age[i]);
                     lengthSeries = lengthSeries + ";" + array2[i][1];
-                }
+//                }
             }
         }
         if (ageSeries.length()+lengthSeries.length()<2)

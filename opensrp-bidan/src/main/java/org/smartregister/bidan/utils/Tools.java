@@ -89,8 +89,10 @@ public class Tools {
                         output = output + ", " + str;
                     Log.d( TAG, "getColumnNames: " + tblName + " >> " + output);
 
-                    if (temp.getCount() > 0) {
-                        if (temp.moveToFirst()) {
+                    if (temp.getCount() > 0
+//                            ) {
+//                        if (
+                               && temp.moveToFirst()) {
                             do {
                                 String output2 = "";
                                 for (String d : temp.getColumnNames()) {
@@ -107,8 +109,7 @@ public class Tools {
                                 Log.d(TAG, "getColumnNames: " + tblName + " >> " + output2);
 
                             } while (temp.moveToNext());
-                        }
-
+//                        }
                     }
 
                     temp.close();
