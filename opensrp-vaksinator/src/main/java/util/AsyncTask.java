@@ -380,6 +380,7 @@ public abstract class AsyncTask<Params, Progress, Result> {
      * @see #doInBackground
      */
     protected void onPreExecute() {
+        // do nothing
     }
 
     /**
@@ -396,6 +397,7 @@ public abstract class AsyncTask<Params, Progress, Result> {
      */
     @SuppressWarnings({"UnusedDeclaration"})
     protected void onPostExecute(Result result) {
+        // do nothing
     }
 
     /**
@@ -647,7 +649,7 @@ public abstract class AsyncTask<Params, Progress, Result> {
     protected final void publishProgress(Progress... values) {
         if (!isCancelled()) {
             sHandler.obtainMessage(MESSAGE_POST_PROGRESS,
-                    new AsyncTaskResult<Progress>(this, values)).sendToTarget();
+                    new AsyncTaskResult<>(this, values)).sendToTarget();
         }
     }
 

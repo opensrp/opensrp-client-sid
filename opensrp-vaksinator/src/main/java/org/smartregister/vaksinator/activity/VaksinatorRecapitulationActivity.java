@@ -111,7 +111,7 @@ public class VaksinatorRecapitulationActivity extends Activity {
 
                     @Override
                     public void onNothingSelected(AdapterView<?> parentView) {
-
+                        // do nothing
                     }
                 }
         );

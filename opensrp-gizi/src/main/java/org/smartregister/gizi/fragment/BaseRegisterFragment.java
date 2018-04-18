@@ -27,16 +27,19 @@ public class BaseRegisterFragment extends SecuredNativeSmartRegisterCursorAdapte
 
     @Override
     protected void onInitialization() {
+        // do nothing
 
     }
 
     @Override
     protected void startRegistration() {
+        // do nothing
 
     }
 
     @Override
     protected void onCreation() {
+        // do nothing
 
     }
 }

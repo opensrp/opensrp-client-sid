@@ -533,6 +533,7 @@ public class GiziIbuSmartRegisterFragment extends SecuredNativeSmartRegisterCurs
             searchView.addTextChangedListener(new TextWatcher() {
                 @Override
                 public void beforeTextChanged(CharSequence charSequence, int i, int i2, int i3) {
+                    // do nothing
                 }
 
                 @Override
@@ -543,13 +544,6 @@ public class GiziIbuSmartRegisterFragment extends SecuredNativeSmartRegisterCurs
 
                         @Override
                         protected Object doInBackground(Object[] params) {
-//                        currentSearchFilter =
-//                        setCurrentSearchFilter(new HHSearchOption(cs.toString()));
-//                        filteredClients = getClientsAdapter().getListItemProvider()
-//                                .updateClients(getCurrentVillageFilter(), getCurrentServiceModeOption(),
-//                                        getCurrentSearchFilter(), getCurrentSortOption());
-//
-
                             filters = cs.toString();
                             joinTable = "";
                             mainCondition = "namalengkap !=''";

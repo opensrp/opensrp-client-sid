@@ -411,6 +411,7 @@ public abstract class AsyncTask<Params, Progress, Result> {
      */
     @SuppressWarnings({"UnusedDeclaration"})
     protected void onProgressUpdate(Progress... values) {
+        // do nothing
     }
 
     /**

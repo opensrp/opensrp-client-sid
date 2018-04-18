@@ -149,6 +149,8 @@ public class Generator {
         }
 
         @Override
-        protected void onProgressUpdate(Void... values) {}
+        protected void onProgressUpdate(Void... values) {
+            // do nothing
+        }
     }
 }

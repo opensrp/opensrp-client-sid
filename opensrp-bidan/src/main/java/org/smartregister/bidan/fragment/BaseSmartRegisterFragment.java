@@ -88,18 +88,18 @@ public class BaseSmartRegisterFragment extends SecuredNativeSmartRegisterCursorA
 
     @Override
     protected void onInitialization() {
-        Log.e(TAG, "onInitialization: ");
-
+        // do nothing
     }
 
     @Override
     protected void startRegistration() {
-
+        // do nothing
     }
 
     @Override
     protected void onCreation() {
-        Log.e(TAG, "onCreation: ");
+        // do nothing
+
     }
 
     protected void filter(String filterString, String joinTableString, String mainConditionString) {

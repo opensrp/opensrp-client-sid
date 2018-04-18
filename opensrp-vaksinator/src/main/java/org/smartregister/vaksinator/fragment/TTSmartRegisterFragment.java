@@ -407,39 +407,39 @@ public class TTSmartRegisterFragment extends SecuredNativeSmartRegisterCursorAda
         return " namalengkap DESC";
     }
 
-    private String KiSortByAge() {
-        return " umur DESC";
-    }
-    private String KiSortByNoIbu() {
-        return " noIbu ASC";
-    }
-
-    private String KiSortByEdd() {
-        return " htp IS NULL, htp";
-    }
-
-
-    private class EditDialogOptionModel implements DialogOptionModel {
-        @Override
-        public DialogOption[] getDialogOptions() {
-            return getEditOptions();
-        }
-        @Override
-        public void onDialogOptionSelection(DialogOption option, Object tag) {
-
-
-            /*if(option.name().equalsIgnoreCase(getString(R.string.str_register_anc_form)) ) {
-                CommonPersonObjectClient pc = KIDetailActivity.kiclient;
-                if(pc.getColumnmaps().get("ibu.type")!= null) {
-                    if (pc.getColumnmaps().get("ibu.type").equals("anc") || pc.getColumnmaps().get("ibu.type").equals("pnc")) {
-                        Toast.makeText(getActivity().getApplicationContext(), getString(R.string.mother_already_registered), Toast.LENGTH_SHORT).show();
-                        return;
-                    }
-                }
-            }*/
-            onEditSelection((EditOption) option, (SmartRegisterClient) tag);
-        }
-    }
+//    private String KiSortByAge() {
+//        return " umur DESC";
+//    }
+//    private String KiSortByNoIbu() {
+//        return " noIbu ASC";
+//    }
+//
+//    private String KiSortByEdd() {
+//        return " htp IS NULL, htp";
+//    }
+//
+//
+//    private class EditDialogOptionModel implements DialogOptionModel {
+//        @Override
+//        public DialogOption[] getDialogOptions() {
+//            return getEditOptions();
+//        }
+//        @Override
+//        public void onDialogOptionSelection(DialogOption option, Object tag) {
+//
+//
+//            /*if(option.name().equalsIgnoreCase(getString(R.string.str_register_anc_form)) ) {
+//                CommonPersonObjectClient pc = KIDetailActivity.kiclient;
+//                if(pc.getColumnmaps().get("ibu.type")!= null) {
+//                    if (pc.getColumnmaps().get("ibu.type").equals("anc") || pc.getColumnmaps().get("ibu.type").equals("pnc")) {
+//                        Toast.makeText(getActivity().getApplicationContext(), getString(R.string.mother_already_registered), Toast.LENGTH_SHORT).show();
+//                        return;
+//                    }
+//                }
+//            }*/
+//            onEditSelection((EditOption) option, (SmartRegisterClient) tag);
+//        }
+//    }
 
     @Override
     protected void onResumption() {
@@ -452,8 +452,8 @@ public class TTSmartRegisterFragment extends SecuredNativeSmartRegisterCursorAda
 //
         try{
             LoginActivity.setLanguage();
-        }catch (Exception e){
-
+        } catch (Exception e){
+            e.printStackTrace();
         }
 
     }
@@ -468,17 +468,9 @@ public class TTSmartRegisterFragment extends SecuredNativeSmartRegisterCursorAda
             @Override
             public void onTextChanged(final CharSequence cs, int start, int before, int count) {
                 (new AsyncTask() {
-                    SmartRegisterClients filteredClients;
 
                     @Override
                     protected Object doInBackground(Object[] params) {
-//                        currentSearchFilter =
-//                        setCurrentSearchFilter(new HHSearchOption(cs.toString()));
-//                        filteredClients = getClientsAdapter().getListItemProvider()
-//                                .updateClients(getCurrentVillageFilter(), getCurrentServiceModeOption(),
-//                                        getCurrentSearchFilter(), getCurrentSortOption());
-//
-
                         filters = cs.toString();
                         joinTable = "";
                         mainCondition = " namalengkap !='' ";
@@ -487,23 +479,11 @@ public class TTSmartRegisterFragment extends SecuredNativeSmartRegisterCursorAda
 
                     @Override
                     protected void onPostExecute(Object o) {
-//                        clientsAdapter
-//                                .refreshList(currentVillageFilter, currentServiceModeOption,
-//                                        currentSearchFilter, currentSortOption);
-//                        getClientsAdapter().refreshClients(filteredClients);
-//                        getClientsAdapter().notifyDataSetChanged();
                         getSearchCancelView().setVisibility(isEmpty(cs) ? INVISIBLE : VISIBLE);
                         filterandSortExecute();
                         super.onPostExecute(o);
                     }
                 }).execute();
-//                currentSearchFilter = new HHSearchOption(cs.toString());
-//                clientsAdapter
-//                        .refreshList(currentVillageFilter, currentServiceModeOption,
-//                                currentSearchFilter, currentSortOption);
-//
-//                searchCancelView.setVisibility(isEmpty(cs) ? INVISIBLE : VISIBLE);
-
 
             }
 

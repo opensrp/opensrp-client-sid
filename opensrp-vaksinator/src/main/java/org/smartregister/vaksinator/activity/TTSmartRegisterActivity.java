@@ -144,6 +144,7 @@ public class TTSmartRegisterActivity extends SecuredNativeSmartRegisterActivity 
 
     @Override
     public void startRegistration() {
+        // do nothing
     }
 
     public DialogOption[] getEditOptions() {
