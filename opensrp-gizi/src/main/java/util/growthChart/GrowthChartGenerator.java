@@ -63,7 +63,7 @@ public class GrowthChartGenerator {
         this.dateOfBirth=dateOfBirth;
         this.gender = gender;
         a = new LineGraphSeries[3][];
-        switch(graphStyle){
+        switch (graphStyle){
             case GraphConstant.WFA_CHART : initWeightForAgeChart(xValue, yValue);
                 break;
             case GraphConstant.HFA_CHART : initHeightForAgeChart(xValue, yValue);
@@ -72,6 +72,7 @@ public class GrowthChartGenerator {
                 break;
             case GraphConstant.Z_SCORE_CHART : initzScoreChart(xValue, yValue);
                 break;
+            default:
         }
     }
 
