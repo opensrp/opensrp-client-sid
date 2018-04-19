@@ -5,7 +5,7 @@ import android.os.Bundle;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.util.Log;
-
+import android.support.v4.app.Fragment;
 import com.flurry.android.FlurryAgent;
 
 import org.json.JSONException;
@@ -55,7 +55,6 @@ public class GiziSmartRegisterActivity extends SecuredNativeSmartRegisterActivit
     private FragmentPagerAdapter mPagerAdapter;
     private int currentPage;
     private String[] formNames = new String[]{};
-    private android.support.v4.app.Fragment mBaseFragment = null;
 
     private GiziSmartRegisterFragment nf = new GiziSmartRegisterFragment();
 
@@ -97,7 +96,7 @@ public class GiziSmartRegisterActivity extends SecuredNativeSmartRegisterActivit
 //            }
 //
 //        } else {
-            mBaseFragment = new GiziSmartRegisterFragment();
+        Fragment mBaseFragment = new GiziSmartRegisterFragment();
 //        }
 
         mPagerAdapter = new BaseRegisterActivityPagerAdapter(getSupportFragmentManager(), formNames, mBaseFragment);

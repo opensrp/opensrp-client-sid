@@ -2,6 +2,7 @@ package org.smartregister.vaksinator.activity;
 
 import android.content.pm.ActivityInfo;
 import android.os.Bundle;
+import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.util.Log;
@@ -53,7 +54,6 @@ public class VaksinatorSmartRegisterActivity extends SecuredNativeSmartRegisterA
     private FragmentPagerAdapter mPagerAdapter;
     private int currentPage;
     private String[] formNames = new String[]{};
-    private android.support.v4.app.Fragment mBaseFragment = null;
 
     private SaveService saveService;
 
@@ -96,7 +96,7 @@ public class VaksinatorSmartRegisterActivity extends SecuredNativeSmartRegisterA
 //            }
 //
 //        } else {
-            mBaseFragment = new VaksinatorSmartRegisterFragment();
+        Fragment mBaseFragment = new VaksinatorSmartRegisterFragment();
 //        }
 
         mPagerAdapter = new BaseRegisterActivityPagerAdapter(getSupportFragmentManager(), formNames, mBaseFragment);

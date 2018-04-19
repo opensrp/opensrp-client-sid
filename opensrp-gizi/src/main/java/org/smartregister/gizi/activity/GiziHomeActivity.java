@@ -92,11 +92,6 @@ public class GiziHomeActivity extends SecuredActivity {
 
     private TextView anakRegisterClientCountView;
     private TextView ibuRegisterClientCountView;
-//    public static CommonPersonObjectController kicontroller;
-//    public static CommonPersonObjectController childcontroller;
-//    public static int kicount;
-    private int childcount;
-    private int ibucount;
 
 
     @Override
@@ -182,12 +177,12 @@ public class GiziHomeActivity extends SecuredActivity {
         SmartRegisterQueryBuilder sqb = new SmartRegisterQueryBuilder();
         Cursor childcountcursor = context().commonrepository("ec_anak").rawCustomQueryForAdapter(sqb.queryForCountOnRegisters("ec_anak_search", "ec_anak_search.is_closed=0"));
         childcountcursor.moveToFirst();
-        childcount = childcountcursor.getInt(0);
+        int childcount = childcountcursor.getInt(0);
         childcountcursor.close();
 
         Cursor ibucountcursor = context().commonrepository("ec_ibu").rawCustomQueryForAdapter(sqb.queryForCountOnRegisters("ec_ibu", "ec_ibu.is_closed=0 and ec_ibu.pptest ='Positive'"));
         ibucountcursor.moveToFirst();
-        ibucount = ibucountcursor.getInt(0);
+        int ibucount = ibucountcursor.getInt(0);
         ibucountcursor.close();
 
         ibuRegisterClientCountView.setText(valueOf(ibucount));

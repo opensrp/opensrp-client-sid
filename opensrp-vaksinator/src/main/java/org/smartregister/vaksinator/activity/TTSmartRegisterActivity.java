@@ -4,6 +4,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.os.Bundle;
+import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.util.Log;
@@ -47,7 +48,6 @@ public class TTSmartRegisterActivity extends SecuredNativeSmartRegisterActivity 
     private int currentPage;
 
     private String[] formNames = new String[]{};
-    private android.support.v4.app.Fragment mBaseFragment = null;
 
 
     private TTSmartRegisterFragment nf = new TTSmartRegisterFragment();
@@ -95,7 +95,7 @@ public class TTSmartRegisterActivity extends SecuredNativeSmartRegisterActivity 
 //                builder.show();
 //            }
 //        } else {
-            mBaseFragment = new TTSmartRegisterFragment();
+        Fragment mBaseFragment = new TTSmartRegisterFragment();
 //        }
 
         // Instantiate a ViewPager and a PagerAdapter.
