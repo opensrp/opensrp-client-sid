@@ -118,23 +118,23 @@ public class BaseSmartRegisterFragment extends SecuredNativeSmartRegisterCursorA
 //        LoginActivity.setLanguage();
     }
 
-    protected String KiSortByNameAZ() {
+    protected String kiSortByNameAZ() {
         return "namalengkap ASC";
     }
 
-    protected String KiSortByNameZA() {
+    protected String kiSortByNameZA() {
         return "namalengkap DESC";
     }
 
-    protected String KiSortByAge() {
+    protected String kiSortByAge() {
         return "umur DESC";
     }
 
-    protected String KiSortByNoIbu() {
+    protected String kiSortByNoIbu() {
         return "noIbu ASC";
     }
 
-    protected String KiSortByEdd() {
+    protected String kiSortByEdd() {
         return "htp IS NULL, htp";
     }
 

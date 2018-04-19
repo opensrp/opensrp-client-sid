@@ -121,11 +121,11 @@ public class PNCSmartRegisterFragment extends BaseSmartRegisterFragment {
                 return new DialogOption[]{
 //                        new HouseholdCensusDueDateSort(),
 
-                        new CursorCommonObjectSort(getResources().getString(R.string.sort_by_name_label), KiSortByNameAZ()),
-                        new CursorCommonObjectSort(getResources().getString(R.string.sort_by_name_label_reverse), KiSortByNameZA()),
-                        new CursorCommonObjectSort(getResources().getString(R.string.sort_by_wife_age_label), KiSortByAge()),
-                        //    new CursorCommonObjectSort(getResources().getString(R.string.sort_by_edd_label),KiSortByEdd()),
-                        new CursorCommonObjectSort(getResources().getString(R.string.sort_by_no_ibu_label), KiSortByNoIbu()),
+                        new CursorCommonObjectSort(getResources().getString(R.string.sort_by_name_label), kiSortByNameAZ()),
+                        new CursorCommonObjectSort(getResources().getString(R.string.sort_by_name_label_reverse), kiSortByNameZA()),
+                        new CursorCommonObjectSort(getResources().getString(R.string.sort_by_wife_age_label), kiSortByAge()),
+                        //    new CursorCommonObjectSort(getResources().getString(R.string.sort_by_edd_label),kiSortByEdd()),
+                        new CursorCommonObjectSort(getResources().getString(R.string.sort_by_no_ibu_label), kiSortByNoIbu()),
                 };
             }
 
@@ -186,7 +186,7 @@ public class PNCSmartRegisterFragment extends BaseSmartRegisterFragment {
             queryBUilder.customJoin("LEFT JOIN ec_kartu_ibu on ec_kartu_ibu.id = ec_pnc.id LEFT JOIN ImageList imagelist ON ec_pnc.id=imagelist.entityID");
             mainSelect = queryBUilder.mainCondition("ec_kartu_ibu.is_closed = 0 and (keadaanIbu ='hidup' OR keadaanIbu IS NULL) ");
 
-            Sortqueries = KiSortByNameAZ();
+            Sortqueries = kiSortByNameAZ();
 
             currentlimit = 20;
             currentoffset = 0;
@@ -201,19 +201,19 @@ public class PNCSmartRegisterFragment extends BaseSmartRegisterFragment {
 
     }
 
-//    private String KiSortByNameAZ() {
+//    private String kiSortByNameAZ() {
 //        return " namalengkap ASC";
 //    }
 //
-//    private String KiSortByNameZA() {
+//    private String kiSortByNameZA() {
 //        return " namalengkap DESC";
 //    }
 //
-//    private String KiSortByAge() {
+//    private String kiSortByAge() {
 //        return " umur DESC";
 //    }
 //
-//    private String KiSortByNoIbu() {
+//    private String kiSortByNoIbu() {
 //        return " noIbu ASC";
 //    }
 

@@ -108,11 +108,11 @@ public class FPSmartRegisterFragment extends BaseSmartRegisterFragment {
             public DialogOption[] sortingOptions() {
 //                FlurryFacade.logEvent("click_sorting_option_on_kohort_kb_dashboard");
                 return new DialogOption[]{
-                        new CursorCommonObjectSort(getResources().getString(R.string.sort_by_name_label), KiSortByNameAZ()),
-                        new CursorCommonObjectSort(getResources().getString(R.string.sort_by_name_label_reverse), KiSortByNameZA()),
-                        new CursorCommonObjectSort(getResources().getString(R.string.sort_by_wife_age_label), KiSortByAge()),
-                        new CursorCommonObjectSort(getResources().getString(R.string.sort_by_edd_label), KiSortByEdd()),
-                        new CursorCommonObjectSort(getResources().getString(R.string.sort_by_no_ibu_label), KiSortByNoIbu()),
+                        new CursorCommonObjectSort(getResources().getString(R.string.sort_by_name_label), kiSortByNameAZ()),
+                        new CursorCommonObjectSort(getResources().getString(R.string.sort_by_name_label_reverse), kiSortByNameZA()),
+                        new CursorCommonObjectSort(getResources().getString(R.string.sort_by_wife_age_label), kiSortByAge()),
+                        new CursorCommonObjectSort(getResources().getString(R.string.sort_by_edd_label), kiSortByEdd()),
+                        new CursorCommonObjectSort(getResources().getString(R.string.sort_by_no_ibu_label), kiSortByNoIbu()),
                 };
             }
 
@@ -174,7 +174,7 @@ public class FPSmartRegisterFragment extends BaseSmartRegisterFragment {
 //            queryBuilder.SelectInitiateMainTable(tableName, new String[]{"ec_kartu_ibu.relationalid", "ec_kartu_ibu.is_closed", "ec_kartu_ibu.details", "ec_kartu_ibu.isOutOfArea", "ec_kartu_ibu.namalengkap", "ec_kartu_ibu.umur", "ec_kartu_ibu.namaSuami", "noIbu"});
 //            //   queryBuilder.customJoin("LEFT JOIN ec_anak ON ec_kartu_ibu.id = ec_anak.relational_id ");
 //            mainSelect = queryBuilder.mainCondition(mainCondition);
-//            Sortqueries = KiSortByNameAZ();
+//            Sortqueries = kiSortByNameAZ();
 //
 //            currentlimit = 20;
 //            currentoffset = 0;
@@ -216,7 +216,7 @@ public class FPSmartRegisterFragment extends BaseSmartRegisterFragment {
 
             mainSelect = queryBuilder.mainCondition("ec_kartu_ibu.is_closed != 0 and jenisKontrasepsi != 0 AND namalengkap != '' AND namalengkap IS NOT NULL");
             Log.e(TAG, "initializeQueries:mainSelect " + mainSelect);
-            Sortqueries = KiSortByNameAZ();
+            Sortqueries = kiSortByNameAZ();
 
             currentlimit = 20;
             currentoffset = 0;
@@ -232,23 +232,23 @@ public class FPSmartRegisterFragment extends BaseSmartRegisterFragment {
     }
 
 
-//    private String KiSortByNameAZ() {
+//    private String kiSortByNameAZ() {
 //        return "namalengkap ASC";
 //    }
 //
-//    private String KiSortByNameZA() {
+//    private String kiSortByNameZA() {
 //        return "namalengkap DESC";
 //    }
 //
-//    private String KiSortByAge() {
+//    private String kiSortByAge() {
 //        return "umur DESC";
 //    }
 //
-//    private String KiSortByNoIbu() {
+//    private String kiSortByNoIbu() {
 //        return "noIbu ASC";
 //    }
 //
-//    private String KiSortByEdd() {
+//    private String kiSortByEdd() {
 //        return "htp IS NULL, htp";
 //    }
 
