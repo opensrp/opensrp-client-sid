@@ -1,4 +1,4 @@
-package util.ZScore;
+package util.zscore;
 
 /**
  * Created by Iq on 24/05/16.

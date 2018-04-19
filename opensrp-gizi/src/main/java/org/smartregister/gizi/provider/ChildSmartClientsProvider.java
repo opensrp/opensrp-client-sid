@@ -33,7 +33,7 @@ import java.io.File;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-import util.ZScore.ZScoreSystemCalculation;
+import util.zscore.ZScoreSystemCalculation;
 import util.formula.Support;
 
 import static android.view.View.INVISIBLE;

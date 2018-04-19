@@ -16,10 +16,10 @@ import org.smartregister.commonregistry.CommonPersonObjectClient;
 import org.smartregister.gizi.R;
 import org.smartregister.repository.DetailsRepository;
 
-import util.ZScore.ZScoreSystemCalculation;
+import util.zscore.ZScoreSystemCalculation;
 import util.formula.Support;
-import util.growthChart.GraphConstant;
-import util.growthChart.GrowthChartGenerator;
+import util.growthchart.GraphConstant;
+import util.growthchart.GrowthChartGenerator;
 
 /**
  * Created by Null on 2016-12-06

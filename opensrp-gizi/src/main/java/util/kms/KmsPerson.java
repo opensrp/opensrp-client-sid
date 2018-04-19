@@ -1,4 +1,4 @@
-package util.KMS;
+package util.kms;
 
 import org.smartregister.commonregistry.CommonPersonObjectClient;
 

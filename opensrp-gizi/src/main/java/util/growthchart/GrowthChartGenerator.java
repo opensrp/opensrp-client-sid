@@ -1,4 +1,4 @@
-package util.growthChart;
+package util.growthchart;
 
 import android.graphics.Color;
 

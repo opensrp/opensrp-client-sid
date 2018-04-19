@@ -222,6 +222,7 @@ public class VaksinatorSmartRegisterActivity extends SecuredNativeSmartRegisterA
 
                 }
 
+                if (displayFormFragment != null)
                 displayFormFragment.setRecordId(null);
                 activatingForm(formName,entityId,metaData);
             }

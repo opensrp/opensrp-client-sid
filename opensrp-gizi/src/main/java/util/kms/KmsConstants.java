@@ -1,4 +1,4 @@
-package util.KMS;
+package util.kms;
 
 /**
  * Created by Iq on 02/05/16.

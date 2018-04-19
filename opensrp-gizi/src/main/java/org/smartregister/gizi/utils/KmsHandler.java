@@ -4,9 +4,9 @@ import org.smartregister.domain.form.FormSubmission;
 import org.smartregister.repository.DetailsRepository;
 import org.smartregister.service.formsubmissionhandler.FormSubmissionHandler;
 
-import util.KMS.KmsCalc;
-import util.KMS.KmsPerson;
-import util.ZScore.ZScoreSystemCalculation;
+import util.kms.KmsCalc;
+import util.kms.KmsPerson;
+import util.zscore.ZScoreSystemCalculation;
 import util.formula.Support;
 
 /**

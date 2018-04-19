@@ -21,8 +21,8 @@ import java.util.HashMap;
 import java.util.Map;
 
 import util.formula.Support;
-import util.growthChart.GraphConstant;
-import util.growthChart.GrowthChartGenerator;
+import util.growthchart.GraphConstant;
+import util.growthchart.GrowthChartGenerator;
 
 /**
  * Created by Null on 2016-10-25.

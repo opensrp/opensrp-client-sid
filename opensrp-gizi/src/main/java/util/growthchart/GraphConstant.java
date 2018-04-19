@@ -1,4 +1,4 @@
-package util.growthChart;
+package util.growthchart;
 
 /**
  * Created by Null on 2016-10-14.

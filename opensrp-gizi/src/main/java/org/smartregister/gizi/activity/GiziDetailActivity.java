@@ -26,10 +26,10 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
-import util.KMS.KmsCalc;
-import util.KMS.KmsPerson;
+import util.kms.KmsCalc;
+import util.kms.KmsPerson;
 import util.formula.Support;
-import util.growthChart.GrowthChartGenerator;
+import util.growthchart.GrowthChartGenerator;
 
 /**
  * Created by Iq on 26/04/16
