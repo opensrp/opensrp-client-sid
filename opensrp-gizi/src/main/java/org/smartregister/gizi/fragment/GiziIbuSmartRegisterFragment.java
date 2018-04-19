@@ -571,6 +571,7 @@ public class GiziIbuSmartRegisterFragment extends SecuredNativeSmartRegisterCurs
 
                 @Override
                 public void afterTextChanged(Editable editable) {
+                    // do nothing
                 }
             });
         }

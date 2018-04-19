@@ -448,6 +448,7 @@ public abstract class AsyncTask<Params, Progress, Result> {
      * @see #isCancelled()
      */
     protected void onCancelled() {
+        // do nothing
     }
 
     /**
