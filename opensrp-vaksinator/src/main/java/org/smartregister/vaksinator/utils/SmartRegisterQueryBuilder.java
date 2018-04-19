@@ -252,15 +252,13 @@ public class SmartRegisterQueryBuilder {
 
     private String phraseClauseWithTable(String tablename, String tableName, String joinTable, String mainCondition, String
             phrase) {
-        String phraseClause =
-                " WHERE " + CommonFtsObject.idColumn + " IN ( SELECT " + CommonFtsObject.idColumn
-                        + " FROM " + CommonFtsObject.searchTableName(tableName) + " WHERE "
-                        + setTablenameToCondition(CommonFtsObject.searchTableName(tablename), mainConditionClause(mainCondition)) + CommonFtsObject.phraseColumn
-                        + matchPhrase(phrase) + " UNION SELECT "
-                        + CommonFtsObject.relationalIdColumn + " " + "FROM " + CommonFtsObject
-                        .searchTableName(joinTable) + " WHERE " + CommonFtsObject.phraseColumn
-                        + matchPhrase(phrase) + " )";
-        return phraseClause;
+        return " WHERE " + CommonFtsObject.idColumn + " IN ( SELECT " + CommonFtsObject.idColumn
+                + " FROM " + CommonFtsObject.searchTableName(tableName) + " WHERE "
+                + setTablenameToCondition(CommonFtsObject.searchTableName(tablename), mainConditionClause(mainCondition)) + CommonFtsObject.phraseColumn
+                + matchPhrase(phrase) + " UNION SELECT "
+                + CommonFtsObject.relationalIdColumn + " " + "FROM " + CommonFtsObject
+                .searchTableName(joinTable) + " WHERE " + CommonFtsObject.phraseColumn
+                + matchPhrase(phrase) + " )";
     }
 
 //    public String phraseClause(String mainCondition, String phrase) {
@@ -298,12 +296,15 @@ public class SmartRegisterQueryBuilder {
 //        return phraseClause;
 //    }
 
-    private String setTablenameToCondition(String tablename, String mainCondition){
+    private String setTablenameToCondition(String tablename, String appMainCondition){
+        String mainCondition = appMainCondition;
         mainCondition = mainCondition.trim();
         return tablename+"."+mainCondition;
     }
 
-    private String matchPhrase(String phrase) {
+    private String matchPhrase(String myPhrase) {
+        String phrase = myPhrase;
+
         if (phrase == null) {
             phrase = "";
         }
@@ -327,7 +328,8 @@ public class SmartRegisterQueryBuilder {
         return " LIMIT " + offset + "," + limit;
     }
 
-    private String mainConditionClause(String mainCondition) {
+    private String mainConditionClause(String appMainCondition) {
+        String mainCondition = appMainCondition;
         if (StringUtils.isNotBlank(mainCondition)) {
             return mainCondition += " AND ";
         } else {

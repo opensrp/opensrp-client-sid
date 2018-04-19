@@ -178,12 +178,12 @@ public class EnketoFormUtils {
         String rootNodeKey = formSubmission.keys().next();
 
         // retrieve the id, if it fails use the provided value by the param
-        entity_id = formSubmission.getJSONObject(rootNodeKey).has(databaseIdKey) ? formSubmission
+        String myEntityId = formSubmission.getJSONObject(rootNodeKey).has(databaseIdKey) ? formSubmission
                 .getJSONObject(rootNodeKey).getString(databaseIdKey) : generateRandomUUIDString();
 
         //String bindPath = formDefinition.getJSONObject("form").getString("bind_type");
         JSONObject fieldsDefinition = formDefinition.getJSONObject("form");
-        JSONArray populatedFieldsArray = getPopulatedFieldsForArray(fieldsDefinition, entity_id,
+        JSONArray populatedFieldsArray = getPopulatedFieldsForArray(fieldsDefinition, myEntityId,
                 formSubmission, overrides);
 
         // replace all the fields in the form
@@ -208,7 +208,7 @@ public class EnketoFormUtils {
                 subFormDataArray = (JSONArray) subFormDataObject;
             }
 
-            JSONArray subForms = getSubForms(subFormDataArray, entity_id, subFormDefinition,
+            JSONArray subForms = getSubForms(subFormDataArray, myEntityId, subFormDefinition,
                     overrides);
 
             // replace the subforms field with real data

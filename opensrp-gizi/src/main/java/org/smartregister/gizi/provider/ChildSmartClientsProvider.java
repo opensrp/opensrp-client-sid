@@ -35,6 +35,7 @@ import java.text.SimpleDateFormat;
 import util.ZScore.ZScoreSystemCalculation;
 import util.formula.Support;
 
+import static android.view.View.INVISIBLE;
 import static android.view.ViewGroup.LayoutParams.MATCH_PARENT;
 
 /**
@@ -161,7 +162,7 @@ public class ChildSmartClientsProvider implements SmartRegisterCLientsProviderFo
             viewHolder.setAntihelminticVisibility(
                     dayRangeBetween(Tgl.split("-")
                             , new SimpleDateFormat("yyyy-MM-dd").format(new java.util.Date()).split("-")
-                    ) >= 365 ? View.VISIBLE : View.INVISIBLE
+                    ) >= 365 ? View.VISIBLE : INVISIBLE
             );
             viewHolder.dateOfBirth.setText(Support.getDetails(pc, "tanggalLahirAnak") != "-" ? Tgl : "");
 
@@ -221,8 +222,8 @@ public class ChildSmartClientsProvider implements SmartRegisterCLientsProviderFo
                 viewHolder.absentAlert.setVisibility(Support.getDetails(pc, "tanggalPenimbangan") != "-"
                         ? isLate(Support.getDetails(pc, "tanggalPenimbangan"), 1)
                         ? View.VISIBLE
-                        : View.INVISIBLE
-                        : View.INVISIBLE
+                        : INVISIBLE
+                        : INVISIBLE
                 );
                 viewHolder.setVitAVisibility();
 
@@ -445,7 +446,8 @@ public class ChildSmartClientsProvider implements SmartRegisterCLientsProviderFo
         }
     }
 
-    public String findDate(String startDate, int dayAge){
+    public String findDate(String startDate, int myDayAge){
+        int dayAge = myDayAge;
         int[]dayLength = {31,28,31,30,31,30,31,31,30,31,30,31};
         int startYear = Integer.parseInt(startDate.substring(0,4));
         int startMonth = Integer.parseInt(startDate.substring(5,7));

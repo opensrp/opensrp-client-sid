@@ -24,7 +24,8 @@ public class Support {
         return data;
     }
 
-    public static String[]split(String data){
+    public static String[] split(String myData){
+        String data = myData;
         if(data == null)
             data="";
         if(!data.contains(":"))
@@ -101,7 +102,8 @@ public class Support {
         return combine(insertionSort(data), ",");
     }
 
-    public static String findDate(String startDate, int dayAge){
+    public static String findDate(String startDate, int myDayAge){
+        int dayAge = myDayAge;
         int[]dayLength = {31,28,31,30,31,30,31,31,30,31,30,31};
         int startYear = Integer.parseInt(startDate.substring(0,4));
         int startMonth = Integer.parseInt(startDate.substring(5,7));

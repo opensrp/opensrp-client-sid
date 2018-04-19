@@ -312,7 +312,8 @@ public class ChildSmartClientsProvider implements SmartRegisterCLientsProviderFo
         return inflater;
     }
 
-    public String transformToddmmyyyy(String date){
+    public String transformToddmmyyyy(String myDate){
+        String date = myDate;
         if(date.length()>3 && date.charAt(4) == '-')
                 date = String.format("%s/%s/%s", (Object[]) new String[]{date.substring(8, 10), date.substring(5, 7), date.substring(0, 4)});
         return date;

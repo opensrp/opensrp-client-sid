@@ -318,12 +318,13 @@ public class GiziDetailActivity extends Activity {
         return (((currentYear-visitYear)*12) + (8-visitDate)) <=12;
     }
 
-    private String[]split(String data){
-        if(data == null)
-            data="";
-        if(!data.contains(":"))
+    private String[] split(String data){
+        String myData = data;
+        if(myData == null)
+            myData="";
+        if(!myData.contains(":"))
             return new String[]{"0","0"};
-        String []temp = data.split(",");
+        String []temp = myData.split(",");
         String []result = {"",""};
         for (String aTemp : temp) {
             result[0] = result[0] + "," + aTemp.split(":")[0];

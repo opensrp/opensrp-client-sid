@@ -159,11 +159,11 @@ public class EnketoFormUtils {
         return -1;
     }
 
-    public FormSubmission generateFormSubmisionFromXMLString(String entity_id, String formData,
+    public FormSubmission generateFormSubmisionFromXMLString(String mEntityId, String formData,
                                                              String formName, JSONObject
                                                                      overrides) throws Exception {
         JSONObject formSubmission = XML.toJSONObject(formData);
-
+        android.util.Log.e(TAG, "generateFormSubmisionFromXMLString: "+ mEntityId );
         //FileUtilities fu = new FileUtilities();
         //fu.write("xmlform.txt", formData);
         //fu.write("xmlformsubmission.txt", formSubmission.toString());
@@ -177,7 +177,7 @@ public class EnketoFormUtils {
         String rootNodeKey = formSubmission.keys().next();
 
         // retrieve the id, if it fails use the provided value by the param
-        entity_id = formSubmission.getJSONObject(rootNodeKey).has(databaseIdKey) ? formSubmission
+        String entity_id = formSubmission.getJSONObject(rootNodeKey).has(databaseIdKey) ? formSubmission
                 .getJSONObject(rootNodeKey).getString(databaseIdKey) : generateRandomUUIDString();
 
         //String bindPath = formDefinition.getJSONObject("form").getString("bind_type");
