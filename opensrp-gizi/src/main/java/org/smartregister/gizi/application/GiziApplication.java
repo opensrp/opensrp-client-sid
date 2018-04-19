@@ -45,8 +45,8 @@ public class GiziApplication extends DrishtiApplication {
         //  ACRA.init(this);
      //   DrishtiSyncScheduler.setReceiverClass(SyncBroadcastReceiver.class);
       //  ErrorReportingFacade.initErrorHandler(getApplicationContext());
-        /**
-         * ENABLE THIS AGAIN AFTER FINISH TESTING*/
+        //
+         // ENABLE THIS AGAIN AFTER FINISH TESTING*/
         FlurryFacade.init(this);
        // context = Context.getInstance();
         context.updateApplicationContext(getApplicationContext());
@@ -130,29 +130,23 @@ public class GiziApplication extends DrishtiApplication {
     }
 
     private static String[] getFtsSortFields(String tableName){
-        if(tableName.equals("ec_anak")){
-            String[] sortFields = { "namaBayi","tanggalLahirAnak"};
-            return sortFields;
-        } else if(tableName.equals("ec_ibu")){
-            String[] sortFields = { "namalengkap"};
-            return sortFields;
-        }  else if(tableName.equals("ec_kartu_ibu")){
-            String[] sortFields = { "namalengkap", "namaSuami"};
-            return sortFields;
+        if("ec_anak".equals(tableName)){
+            return new String[]{ "namaBayi","tanggalLahirAnak"};
+        } else if("ec_ibu".equals(tableName)){
+            return new String[]{ "namalengkap"};
+        }  else if("ec_kartu_ibu".equals(tableName)){
+            return new String[]{ "namalengkap", "namaSuami"};
         }
         return null;
     }
 
     private  static String[] getFtsMainConditions(String tableName){
-        if(tableName.equals("ec_anak")){
-            String[] mainConditions = {"is_closed", "details" , "namaBayi"};
-            return mainConditions;
-        } else if(tableName.equals("ec_ibu")){
-            String[] mainConditions = { "is_closed", "pptest"};
-            return mainConditions;
-        } else if(tableName.equals("ec_kartu_ibu")){
-            String[] mainConditions = { "is_closed", "namalengkap"};
-            return mainConditions;
+        if("ec_anak".equals(tableName)){
+            return new String[]{"is_closed", "details" , "namaBayi"};
+        } else if("ec_ibu".equals(tableName)){
+            return new String[]{ "is_closed", "pptest"};
+        } else if("ec_kartu_ibu".equals(tableName)){
+            return new String[]{ "is_closed", "namalengkap"};
         }
         return null;
     }
