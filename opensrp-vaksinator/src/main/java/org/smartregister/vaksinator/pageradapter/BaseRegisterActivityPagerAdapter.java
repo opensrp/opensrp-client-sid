@@ -13,9 +13,9 @@ import org.smartregister.enketo.view.fragment.DisplayFormFragment;
  */
 public class BaseRegisterActivityPagerAdapter extends FragmentPagerAdapter {
     public static final String ARG_PAGE = "page";
-    String[] dialogOptions;
-    Fragment mBaseFragment;
-    Fragment mProfileFragment;
+    private String[] dialogOptions;
+    private Fragment mBaseFragment;
+    private Fragment mProfileFragment;
     public int offset = 0;
 
     public BaseRegisterActivityPagerAdapter(FragmentManager fragmentManager, String[] dialogOptions, Fragment baseFragment) {
@@ -24,18 +24,19 @@ public class BaseRegisterActivityPagerAdapter extends FragmentPagerAdapter {
         this.mBaseFragment = baseFragment;
         offset += 1;
     }
-    public BaseRegisterActivityPagerAdapter(FragmentManager fragmentManager, String[] dialogOptions, Fragment baseFragment, Fragment mProfileFragment) {
-        super(fragmentManager);
-        this.dialogOptions = dialogOptions;
-        this.mBaseFragment = baseFragment;
-        this.mProfileFragment = mProfileFragment;
-        offset += 2;
-    }
+
+    //    public BaseRegisterActivityPagerAdapter(FragmentManager fragmentManager, String[] dialogOptions, Fragment baseFragment, Fragment mProfileFragment) {
+//        super(fragmentManager);
+//        this.dialogOptions = dialogOptions;
+//        this.mBaseFragment = baseFragment;
+//        this.mProfileFragment = mProfileFragment;
+//        offset += 2;
+//    }
 
 
     @Override
     public Fragment getItem(int position) {
-        Fragment fragment = null;
+        Fragment fragment;
         switch (position) {
             case 0:
                 fragment = mBaseFragment;

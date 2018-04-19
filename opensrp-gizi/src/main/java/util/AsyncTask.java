@@ -690,8 +690,8 @@ public abstract class AsyncTask<Params, Progress, Result> {
 
     @SuppressWarnings({"RawUseOfParameterizedType"})
     private static class AsyncTaskResult<Data> {
-        final AsyncTask mTask;
-        final Data[] mData;
+        private final AsyncTask mTask;
+        private final Data[] mData;
 
         AsyncTaskResult(AsyncTask task, Data... data) {
             mTask = task;
