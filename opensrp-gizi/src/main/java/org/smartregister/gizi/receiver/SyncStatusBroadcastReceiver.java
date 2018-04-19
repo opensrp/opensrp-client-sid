@@ -23,7 +23,7 @@ public class SyncStatusBroadcastReceiver extends BroadcastReceiver {
     public static final String EXTRA_COMPLETE_STATUS = "complete_status";
 
     private static SyncStatusBroadcastReceiver singleton;
-    private boolean isSyncing;
+//    private boolean isSyncing;
 //    private boolean alarmsTriggered = false;
 
     private final ArrayList<SyncStatusListener> syncStatusListeners;
@@ -95,21 +95,21 @@ public class SyncStatusBroadcastReceiver extends BroadcastReceiver {
     }
 
     private void started() {
-        isSyncing = true;
+//        isSyncing = true;
         for (SyncStatusListener syncStatusListener : syncStatusListeners) {
             syncStatusListener.onSyncStart();
         }
     }
 
     private void inProgress(FetchStatus fetchStatus) {
-        isSyncing = true;
+//        isSyncing = true;
         for (SyncStatusListener syncStatusListener : syncStatusListeners) {
             syncStatusListener.onSyncInProgress(fetchStatus);
         }
     }
 
     private void complete(FetchStatus fetchStatus) {
-        isSyncing = false;
+//        isSyncing = false;
         for (SyncStatusListener syncStatusListener : syncStatusListeners) {
             syncStatusListener.onSyncComplete(fetchStatus);
         }
