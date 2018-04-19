@@ -33,6 +33,8 @@ import org.smartregister.view.contract.SmartRegisterClient;
 import java.util.List;
 import java.util.Map;
 
+import static android.view.View.INVISIBLE;
+import static android.view.View.VISIBLE;
 import static android.view.ViewGroup.LayoutParams.MATCH_PARENT;
 import static org.joda.time.LocalDateTime.parse;
 

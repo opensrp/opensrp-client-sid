@@ -96,6 +96,10 @@ android {
         abortOnError false
     }
 
+    configurations.all {
+        resolutionStrategy.force 'com.google.code.findbugs:jsr305:1.3.9'
+    }
+
 }
 
 dependencies {
@@ -129,9 +133,17 @@ dependencies {
     }
     testCompile "org.robolectric:shadows-support-v4:3.3.2"
 
+    androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.1') {
+        exclude group: 'com.android.support', module: 'support-annotations'
+        exclude group: 'junit', module: 'junit'
+    }
+    androidTestCompile('com.android.support.test.espresso:espresso-intents:2.2.1') {
+        exclude group: 'com.android.support', module: 'support-annotations'
+        exclude group: 'junit', module: 'junit'
+    }
+
+//     Set this dependency to build and run Espresso tests
     testCompile 'org.apache.maven:maven-ant-tasks:2.1.3'
-    //    compile project(':lib:bpm')
-//    compile(name: 'opensrp-deviceinterface-debug', ext: 'aar')
 
     compile('com.crashlytics.sdk.android:crashlytics:2.8.0@aar') {
         transitive = true;
@@ -146,7 +158,6 @@ dependencies {
     testCompile("org.powermock:powermock-classloading-xstream:$powerMockVersion") {
         exclude group: 'com.thoughtworks.xstream', module: 'xstream'
     }
-//    compile project(':lib:opensrp-device:opensrp-deviceinterface')
 
     androidTestCompile "junit:junit:4.12"
 //    androidTestCompile "com.android.support.test:runner:0.5"

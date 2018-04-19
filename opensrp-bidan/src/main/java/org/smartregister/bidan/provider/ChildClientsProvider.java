@@ -29,6 +29,8 @@ import org.smartregister.view.viewholder.OnClickFormLauncher;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
+import static android.view.View.INVISIBLE;
+import static android.view.View.VISIBLE;
 import static org.smartregister.util.Utils.fillValue;
 import static org.smartregister.util.Utils.getValue;
 

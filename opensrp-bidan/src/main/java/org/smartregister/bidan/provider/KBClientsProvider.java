@@ -23,6 +23,8 @@ import org.smartregister.view.contract.SmartRegisterClient;
 
 import java.util.List;
 
+import static android.view.View.INVISIBLE;
+import static android.view.View.VISIBLE;
 import static android.view.ViewGroup.LayoutParams.MATCH_PARENT;
 
 public class KBClientsProvider extends BaseClientsProvider {

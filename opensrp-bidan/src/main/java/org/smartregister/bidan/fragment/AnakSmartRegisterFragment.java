@@ -33,6 +33,7 @@ import org.smartregister.view.dialog.SortOption;
 import java.util.ArrayList;
 import java.util.Map;
 
+import static android.view.View.GONE;
 import static android.view.View.INVISIBLE;
 import static android.view.View.VISIBLE;
 import static org.smartregister.bidan.utils.BidanConstants.CHILD_TABLE_NAME;
