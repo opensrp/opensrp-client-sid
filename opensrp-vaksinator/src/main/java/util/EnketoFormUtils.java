@@ -515,8 +515,7 @@ public class EnketoFormUtils {
                             if (shouldLoadId && childRecords.length() > 0) {
                                 for (int k = 0; k < childRecords.length(); k++) {
                                     JSONObject childEntityJson = childRecords.getJSONObject(k);
-                                    JSONObject obj = getCombinedJsonObjectForObject(
-                                            childEntityJson);
+//                                    JSONObject obj = getCombinedJsonObjectForObject(childEntityJson);
                                     writeXML(child, serializer, fieldOverrides, subFormDefinition,
                                             childEntityJson, entityId);
                                 }

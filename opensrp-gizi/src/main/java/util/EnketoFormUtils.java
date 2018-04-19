@@ -517,8 +517,7 @@ public class EnketoFormUtils {
                             if (shouldLoadId && childRecords.length() > 0) {
                                 for (int k = 0; k < childRecords.length(); k++) {
                                     JSONObject childEntityJson = childRecords.getJSONObject(k);
-                                    JSONObject obj = getCombinedJsonObjectForObject(
-                                            childEntityJson);
+//                                    JSONObject obj = getCombinedJsonObjectForObject(childEntityJson);
                                     writeXML(child, serializer, fieldOverrides, subFormDefinition,
                                             childEntityJson, entityId);
                                 }
@@ -556,28 +555,28 @@ public class EnketoFormUtils {
         }
     }
 
-    /**
-     * Retrieve additional details for this record from the details Table.
-     *
-     * @param entityJson
-     * @return
-     */
-    private JSONObject getCombinedJsonObjectForObject(JSONObject entityJson) {
-        try {
-            String baseEntityId = entityJson.getString("base_entity_id");
-            Map<String, String> map = theAppContext.detailsRepository().
-                    getAllDetailsForClient(baseEntityId);
-
-            for (String key : map.keySet()) {
-                if (!entityJson.has(key)) {
-                    entityJson.put(key, map.get(key));
-                }
-            }
-        } catch (Exception e) {
-            android.util.Log.e(TAG, e.toString(), e);
-        }
-        return entityJson;
-    }
+//    /**
+//     * Retrieve additional details for this record from the details Table.
+//     *
+//     * @param entityJson
+//     * @return
+//     */
+//    private JSONObject getCombinedJsonObjectForObject(JSONObject entityJson) {
+//        try {
+//            String baseEntityId = entityJson.getString("base_entity_id");
+//            Map<String, String> map = theAppContext.detailsRepository().
+//                    getAllDetailsForClient(baseEntityId);
+//
+//            for (String key : map.keySet()) {
+//                if (!entityJson.has(key)) {
+//                    entityJson.put(key, map.get(key));
+//                }
+//            }
+//        } catch (Exception e) {
+//            android.util.Log.e(TAG, e.toString(), e);
+//        }
+//        return entityJson;
+//    }
 
     /**
      * Iterate through the provided array and retrieve a json object whose name attribute matches
@@ -1122,7 +1121,7 @@ public class EnketoFormUtils {
         mCloudantDataHandler.updateDocument(client);
     }*/
     private Event tagSyncMetadata(Event event) {
-        AllSharedPreferences sharedPreferences = GiziApplication.getInstance().getContext().userService().getAllSharedPreferences();
+//        AllSharedPreferences sharedPreferences = GiziApplication.getInstance().getContext().userService().getAllSharedPreferences();
         String locations = org.smartregister.util.Utils.getPreference(mContext, LoginActivity.PREF_TEAM_LOCATIONS, "");
         event.setLocationId(locations);
 

@@ -199,7 +199,7 @@ public class TTSmartRegisterFragment extends SecuredNativeSmartRegisterCursorAda
 
    public void initializeQueries(){
        String tableName = "ec_ibu";
-       TTSmartClientsProvider kiscp = new TTSmartClientsProvider(getActivity(),clientActionHandler,context().alertService());
+       TTSmartClientsProvider kiscp = new TTSmartClientsProvider(getActivity(), clientActionHandler, context().alertService());
        clientAdapter = new SmartRegisterPaginatedCursorAdapter(getActivity(), null, kiscp, new CommonRepository("ec_ibu",new String []{"ec_ibu.is_closed", "ec_kartu_ibu.namalengkap", "ec_kartu_ibu.namaSuami"}));
        clientsView.setAdapter(clientAdapter);
 

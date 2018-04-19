@@ -84,8 +84,8 @@ public class VaksinatorFormEntityConverter {
         String encounterLocation = getFieldName(Encounter.location_id, fs);
 
         //TODO
-        String encounterStart = getFieldName(Encounter.encounter_start, fs);
-        String encounterEnd = getFieldName(Encounter.encounter_end, fs);
+//        String encounterStart = getFieldName(Encounter.encounter_start, fs);
+//        String encounterEnd = getFieldName(Encounter.encounter_end, fs);
 
         Date encounterDate = new DateTime(FormEntityConstants.FORM_DATE.format(new Date()))
                 .toDate();
@@ -190,36 +190,36 @@ public class VaksinatorFormEntityConverter {
         return null;
     }
 
-    /**
-     * Get field name for specified openmrs attribute mappings in given form submission
-     *
-     * @param entity
-     * @param entityId
-     * @param entityParentId
-     * @param fs
-     * @return
-     */
-    private String getFieldName(String entity, String entityId, String entityParentId, FormSubmissionMap
-            fs) {
-        return getFieldName(entity, entityId, entityParentId, fs.fields());
-    }
+//    /**
+//     * Get field name for specified openmrs attribute mappings in given form submission
+//     *
+//     * @param entity
+//     * @param entityId
+//     * @param entityParentId
+//     * @param fs
+//     * @return
+//     */
+//    private String getFieldName(String entity, String entityId, String entityParentId, FormSubmissionMap
+//            fs) {
+//        return getFieldName(entity, entityId, entityParentId, fs.fields());
+//    }
+//
+//    private String getFieldName(String entity, String entityId, String entityParentId, SubformMap subf) {
+//        return getFieldName(entity, entityId, entityParentId, subf.fields());
+//    }
 
-    private String getFieldName(String entity, String entityId, String entityParentId, SubformMap subf) {
-        return getFieldName(entity, entityId, entityParentId, subf.fields());
-    }
-
-    private String getFieldName(String entity, String entityId, String entityParentId, List<FormFieldMap>
-            fields) {
-        for (FormFieldMap f : fields) {
-            if (f.fieldAttributes().containsKey("openmrs_entity") && f.fieldAttributes()
-                    .get("openmrs_entity").equalsIgnoreCase(entity) && f.fieldAttributes()
-                    .get("openmrs_entity_id").equalsIgnoreCase(entityId) && f.fieldAttributes()
-                    .get("openmrs_entity_parent").equalsIgnoreCase(entityParentId)) {
-                return f.name();
-            }
-        }
-        return null;
-    }
+//    private String getFieldName(String entity, String entityId, String entityParentId, List<FormFieldMap>
+//            fields) {
+//        for (FormFieldMap f : fields) {
+//            if (f.fieldAttributes().containsKey("openmrs_entity") && f.fieldAttributes()
+//                    .get("openmrs_entity").equalsIgnoreCase(entity) && f.fieldAttributes()
+//                    .get("openmrs_entity_id").equalsIgnoreCase(entityId) && f.fieldAttributes()
+//                    .get("openmrs_entity_parent").equalsIgnoreCase(entityParentId)) {
+//                return f.name();
+//            }
+//        }
+//        return null;
+//    }
 
     private Map<String, Address> extractAddresses(FormSubmissionMap fs) throws ParseException {
         Map<String, Address> paddr = new HashMap<>();
@@ -367,10 +367,10 @@ public class VaksinatorFormEntityConverter {
         }
     }
 
-    public Client getClientFromFormSubmission(FormSubmissionMap fsubmission) throws Exception {
-        return createBaseClient(fsubmission);
-
-    }
+//    public Client getClientFromFormSubmission(FormSubmissionMap fsubmission) throws Exception {
+//        return createBaseClient(fsubmission);
+//
+//    }
 
     public Client createBaseClient(FormSubmissionMap fs) throws ParseException {
         Log.d(TAG, "createBaseClient: "+fs.formAttributes());

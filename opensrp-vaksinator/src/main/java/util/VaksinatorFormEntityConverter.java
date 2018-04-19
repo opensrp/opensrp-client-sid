@@ -54,17 +54,17 @@ public class VaksinatorFormEntityConverter {
         mContext = _context;
     }
 
-    /**
-     * Whether form submission is an openmrs form. The xlsform made openmrs form by mapping to an
-     * encounter_type in settings in xlsform.
-     *
-     * @param fs
-     * @return
-     */
-    public boolean isOpenmrsForm(FormSubmissionMap fs) {
-        String eventType = fs.formAttributes().get("encounter_type");
-        return !StringUtils.isEmpty(eventType);
-    }
+//    /**
+//     * Whether form submission is an openmrs form. The xlsform made openmrs form by mapping to an
+//     * encounter_type in settings in xlsform.
+//     *
+//     * @param fs
+//     * @return
+//     */
+//    public boolean isOpenmrsForm(FormSubmissionMap fs) {
+//        String eventType = fs.formAttributes().get("encounter_type");
+//        return !StringUtils.isEmpty(eventType);
+//    }
 
     /**
      * Extract Event from given form submission
@@ -83,8 +83,8 @@ public class VaksinatorFormEntityConverter {
         String encounterLocation = getFieldName(Encounter.location_id, fs);
 
         //TODO
-        String encounterStart = getFieldName(Encounter.encounter_start, fs);
-        String encounterEnd = getFieldName(Encounter.encounter_end, fs);
+//        String encounterStart = getFieldName(Encounter.encounter_start, fs);
+//        String encounterEnd = getFieldName(Encounter.encounter_end, fs);
 
         Date encounterDate = new DateTime(FormEntityConstants.FORM_DATE.format(new Date()))
                 .toDate();
@@ -187,35 +187,35 @@ public class VaksinatorFormEntityConverter {
         return null;
     }
 
-    /**
-     * Get field name for specified openmrs attribute mappings in given form submission
-     *
-     * @param entity Entity Name
-     * @param entityId Entity Id
-     * @param entityParentId Entity Parent Id
-     * @param fs Form Submssion Map
-     * @return getFieldName
-     */
-    private String getFieldName(String entity, String entityId, String entityParentId, FormSubmissionMap fs) {
-        return getFieldName(entity, entityId, entityParentId, fs.fields());
-    }
+//    /**
+//     * Get field name for specified openmrs attribute mappings in given form submission
+//     *
+//     * @param entity Entity Name
+//     * @param entityId Entity Id
+//     * @param entityParentId Entity Parent Id
+//     * @param fs Form Submssion Map
+//     * @return getFieldName
+//     */
+//    private String getFieldName(String entity, String entityId, String entityParentId, FormSubmissionMap fs) {
+//        return getFieldName(entity, entityId, entityParentId, fs.fields());
+//    }
+//
+//    private String getFieldName(String entity, String entityId, String entityParentId, SubformMap subf) {
+//        return getFieldName(entity, entityId, entityParentId, subf.fields());
+//    }
 
-    private String getFieldName(String entity, String entityId, String entityParentId, SubformMap subf) {
-        return getFieldName(entity, entityId, entityParentId, subf.fields());
-    }
-
-    private String getFieldName(String entity, String entityId, String entityParentId, List<FormFieldMap>
-            fields) {
-        for (FormFieldMap f : fields) {
-            if (f.fieldAttributes().containsKey("openmrs_entity") && f.fieldAttributes()
-                    .get("openmrs_entity").equalsIgnoreCase(entity) && f.fieldAttributes()
-                    .get("openmrs_entity_id").equalsIgnoreCase(entityId) && f.fieldAttributes()
-                    .get("openmrs_entity_parent").equalsIgnoreCase(entityParentId)) {
-                return f.name();
-            }
-        }
-        return null;
-    }
+//    private String getFieldName(String entity, String entityId, String entityParentId, List<FormFieldMap>
+//            fields) {
+//        for (FormFieldMap f : fields) {
+//            if (f.fieldAttributes().containsKey("openmrs_entity") && f.fieldAttributes()
+//                    .get("openmrs_entity").equalsIgnoreCase(entity) && f.fieldAttributes()
+//                    .get("openmrs_entity_id").equalsIgnoreCase(entityId) && f.fieldAttributes()
+//                    .get("openmrs_entity_parent").equalsIgnoreCase(entityParentId)) {
+//                return f.name();
+//            }
+//        }
+//        return null;
+//    }
 
     private Map<String, Address> extractAddresses(FormSubmissionMap fs) throws ParseException {
         Map<String, Address> paddr = new HashMap<>();
@@ -484,7 +484,7 @@ public class VaksinatorFormEntityConverter {
         try {
             String relationships = AssetHandler
                     .readFileFromAssetsFolder(FormUtils.ecClientRelationships, mContext);
-            JSONArray jsonArray = null;
+            JSONArray jsonArray;
 
             jsonArray = new JSONArray(relationships);
 

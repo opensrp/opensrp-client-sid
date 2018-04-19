@@ -27,7 +27,6 @@ import org.smartregister.view.dialog.SortOption;
 import org.smartregister.view.viewholder.OnClickFormLauncher;
 
 import java.io.File;
-import java.text.SimpleDateFormat;
 import java.util.Map;
 
 /**
@@ -286,12 +285,12 @@ public class IbuSmartClientsProvider implements SmartRegisterCLientsProviderForC
 //         TextView antihelminticText;
 
 
-        public void setVitAVisibility(){
-            int month = Integer.parseInt(new SimpleDateFormat("MM").format(new java.util.Date()));
-            int visibility = month == 2 || month == 8 ? View.VISIBLE : View.INVISIBLE;
-//             vitALogo.setVisibility(visibility);
-//             vitAText.setVisibility(visibility);
-        }
+//        public void setVitAVisibility(){
+//            int month = Integer.parseInt(new SimpleDateFormat("MM").format(new java.util.Date()));
+//            int visibility = month == 2 || month == 8 ? View.VISIBLE : View.INVISIBLE;
+////             vitALogo.setVisibility(visibility);
+////             vitAText.setVisibility(visibility);
+//        }
 //
 //         public void setAntihelminticVisibility(int visibility){
 //             antihelminticLogo.setVisibility(visibility);

@@ -45,17 +45,16 @@ public class TTSmartClientsProvider implements SmartRegisterCLientsProviderForCu
 
     protected CommonPersonObjectController controller;
 
-    public TTSmartClientsProvider(Context context,
-                                  View.OnClickListener onClickListener,
+    public TTSmartClientsProvider(Context context, View.OnClickListener onClickListener,
                                   AlertService alertService) {
-        View.OnClickListener onClickListener1 = onClickListener;
+//        View.OnClickListener onClickListener1 = onClickListener;
         this.context = context;
-        AlertService alertService1 = alertService;
+//        AlertService alertService1 = alertService;
         this.inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 
         clientViewLayoutParams = new AbsListView.LayoutParams(MATCH_PARENT,
                 (int) context.getResources().getDimension(org.smartregister.vaksinator.R.dimen.list_item_height));
-        int txtColorBlack = context.getResources().getColor(R.color.text_black);
+//        int txtColorBlack = context.getResources().getColor(R.color.text_black);
 
     }
 
