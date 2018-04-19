@@ -129,9 +129,9 @@ public class VaksinatorRecapitulationActivity extends Activity {
 
     private int recapitulation(org.smartregister.commonregistry.CommonPersonObjectClients clients,String fieldName, String keyword){
         int counter = 0;
-        org.smartregister.commonregistry.CommonPersonObjectClient cl;
+        CommonPersonObjectClient cl;
         for(int i=0;i<clients.size();i++){
-            cl = ((org.smartregister.commonregistry.CommonPersonObjectClient)clients.get(i));
+            cl = ((CommonPersonObjectClient)clients.get(i));
             if (cl.getDetails().get(fieldName)!=null)
                 counter = cl.getDetails().get(fieldName).contains(keyword) ? counter+1:counter;
         }
@@ -144,9 +144,9 @@ public class VaksinatorRecapitulationActivity extends Activity {
 
         String[]cond = filter.split(" ");
         int counter = 0;
-        org.smartregister.commonregistry.CommonPersonObjectClient cl;
+        CommonPersonObjectClient cl;
         for(int i=0;i<clients.size();i++){
-            cl = ((org.smartregister.commonregistry.CommonPersonObjectClient)clients.get(i));
+            cl = ((CommonPersonObjectClient)clients.get(i));
             if (hasDate(cl.getDetails().get(fieldName))) {
                 counter = cl.getDetails().get(fieldName).contains(keyword)
                           ? cond[0].equalsIgnoreCase("under")

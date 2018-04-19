@@ -4,10 +4,11 @@ import org.smartregister.Context;
 import org.smartregister.bidan.R;
 import org.smartregister.provider.SmartRegisterClientsProvider;
 import org.smartregister.view.activity.SecuredNativeSmartRegisterActivity;
+import org.smartregister.view.activity.SecuredNativeSmartRegisterActivity.ClientsHeaderProvider;
 import org.smartregister.view.dialog.ServiceModeOption;
 
 /**
- * Created by sid-tech on 11/30/17.
+ * Created by sid-tech on 11/30/17
  */
 
 public class AllKBServiceMode extends ServiceModeOption {
@@ -22,7 +23,7 @@ public class AllKBServiceMode extends ServiceModeOption {
     }
 
     @Override
-    public SecuredNativeSmartRegisterActivity.ClientsHeaderProvider getHeaderProvider() {
+    public ClientsHeaderProvider getHeaderProvider() {
         return new SecuredNativeSmartRegisterActivity.ClientsHeaderProvider() {
             @Override
             public int count() {

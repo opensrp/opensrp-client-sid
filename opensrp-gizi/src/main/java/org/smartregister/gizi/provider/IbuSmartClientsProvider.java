@@ -1,5 +1,6 @@
 package org.smartregister.gizi.provider;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Context;
 import android.database.Cursor;
@@ -28,6 +29,8 @@ import org.smartregister.view.viewholder.OnClickFormLauncher;
 
 import java.io.File;
 import java.util.Map;
+
+import util.formula.Support;
 
 /**
  * Created by user on 2/12/15
@@ -110,7 +113,7 @@ public class IbuSmartClientsProvider implements SmartRegisterCLientsProviderForC
 //                        OpenSRPImageLoader.getStaticImageListener(viewHolder.profilepic, R.mipmap.woman_placeholder, R.mipmap.woman_placeholder));
 //            }
             viewHolder.profilepic.setTag(R.id.entity_id, pc.getColumnmaps().get("_id"));//required when saving file to disk
-            util.formula.Support.setImagetoHolderFromUri((Activity) context,
+            Support.setImagetoHolderFromUri((Activity) context,
                     DrishtiApplication.getAppDir() + File.separator + pc.getDetails().get("base_entity_id") + ".JPEG",
                     viewHolder.profilepic, R.mipmap.woman_placeholder);
 
@@ -204,10 +207,11 @@ public class IbuSmartClientsProvider implements SmartRegisterCLientsProviderForC
     public LayoutInflater inflater() {
         return inflater;
     }
+
+    @SuppressLint("InflateParams")
     @Override
     public View inflatelayoutForCursorAdapter() {
-        View View = inflater().inflate(R.layout.smart_register_gizi_ibu_client, null);
-        return View;
+        return inflater().inflate(R.layout.smart_register_gizi_ibu_client, null);
     }
 
     private String getColumnMaps(String tag, CommonPersonObjectClient client){
@@ -265,7 +269,7 @@ public class IbuSmartClientsProvider implements SmartRegisterCLientsProviderForC
         return null;
     }
 
-    class ViewHolder {
+    private class ViewHolder {
 
         private TextView namaLengkap, tanggalLahir, umur, dusun, namaSuami;
 

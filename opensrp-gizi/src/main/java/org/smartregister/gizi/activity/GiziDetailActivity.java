@@ -106,7 +106,7 @@ public class GiziDetailActivity extends Activity {
 
         if (childclient.getDetails().get("gender") != null) {
             System.out.println(childclient.getDetails().toString());
-            util.formula.Support.setImagetoHolderFromUri( this ,
+            Support.setImagetoHolderFromUri( this ,
                     DrishtiApplication.getAppDir() + File.separator + childclient.getDetails().get("base_entity_id") + ".JPEG",
                     childview, childclient.getDetails().get("gender").equals("female") ? R.drawable.child_girl_infant : R.drawable.child_boy_infant);
         } else {
@@ -293,10 +293,10 @@ public class GiziDetailActivity extends Activity {
     private boolean inTheSameRegion(String date){
         if(date==null || date.length()<6)
             return false;
-        int currentDate = Integer.parseInt(new SimpleDateFormat("MM").format(new java.util.Date()));
+        int currentDate = Integer.parseInt(new SimpleDateFormat("MM").format(new Date()));
         int visitDate = Integer.parseInt(date.substring(5, 7));
 
-        int currentYear = Integer.parseInt(new SimpleDateFormat("yyyy").format(new java.util.Date()));
+        int currentYear = Integer.parseInt(new SimpleDateFormat("yyyy").format(new Date()));
         int visitYear = Integer.parseInt(date.substring(0, 4));
 
         boolean date1 = currentDate < 2 || currentDate >=8;

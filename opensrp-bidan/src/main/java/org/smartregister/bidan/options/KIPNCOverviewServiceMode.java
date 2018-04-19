@@ -4,6 +4,7 @@ import org.smartregister.Context;
 import org.smartregister.bidan.R;
 import org.smartregister.provider.SmartRegisterClientsProvider;
 import org.smartregister.view.activity.SecuredNativeSmartRegisterActivity;
+import org.smartregister.view.activity.SecuredNativeSmartRegisterActivity.ClientsHeaderProvider;
 import org.smartregister.view.dialog.ServiceModeOption;
 
 public class KIPNCOverviewServiceMode extends ServiceModeOption {
@@ -18,7 +19,7 @@ public class KIPNCOverviewServiceMode extends ServiceModeOption {
     }
 
     @Override
-    public SecuredNativeSmartRegisterActivity.ClientsHeaderProvider getHeaderProvider() {
+    public ClientsHeaderProvider getHeaderProvider() {
         return new SecuredNativeSmartRegisterActivity.ClientsHeaderProvider() {
             @Override
             public int count() {

@@ -4,9 +4,8 @@ import org.smartregister.Context;
 import org.smartregister.bidan.R;
 import org.smartregister.provider.SmartRegisterClientsProvider;
 import org.smartregister.view.activity.SecuredNativeSmartRegisterActivity;
+import org.smartregister.view.activity.SecuredNativeSmartRegisterActivity.ClientsHeaderProvider;
 import org.smartregister.view.dialog.ServiceModeOption;
-
-import static org.smartregister.view.activity.SecuredNativeSmartRegisterActivity.ClientsHeaderProvider;
 
 public class AnakOverviewServiceMode extends ServiceModeOption {
 

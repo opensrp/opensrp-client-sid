@@ -7,9 +7,11 @@ import android.preference.PreferenceManager;
 import android.util.Log;
 
 import org.apache.commons.lang3.StringUtils;
+import org.joda.time.DateTime;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+import org.smartregister.bidan.utils.AllConstantsINA;
 import org.smartregister.clientandeventmodel.DateUtil;
 import org.smartregister.commonregistry.AllCommonsRepository;
 import org.smartregister.commonregistry.CommonRepository;
@@ -20,6 +22,7 @@ import org.smartregister.repository.AllSharedPreferences;
 import org.smartregister.repository.DetailsRepository;
 import org.smartregister.service.AlertService;
 import org.smartregister.util.AssetHandler;
+import org.smartregister.util.Utils;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -904,6 +907,16 @@ public class ClientProcessor {
         if (allCommonsRepository != null) {
             allCommonsRepository.updateSearch(entityId);
             updateRegisterCount(entityId);
+        }
+
+        if (contentValues != null && StringUtils.containsIgnoreCase(tableName, "child")) {
+//            String dobString = contentValues.getAsString(AllConstantsINA.TABLE_NAME.DOB);
+//            DateTime birthDateTime = Utils.dobStringToDateTime(dobString);
+//            if (birthDateTime != null) {
+                Log.i(TAG, "updateFTSsearch: ");
+//                VaccineSchedule.updateOfflineAlerts(entityId, birthDateTime, "child");
+//                ServiceSchedule.updateOfflineAlerts(entityId, birthDateTime);
+//            }
         }
 
         Log.e(TAG, "Finished updateFTSsearch table: " + tableName);

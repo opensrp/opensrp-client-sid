@@ -124,7 +124,7 @@ public class ChildSmartClientsProvider implements SmartRegisterCLientsProviderFo
         viewHolder.profilepic.setTag(R.id.entity_id, Support.getColumnmaps(pc, "_id"));//required when saving file to disk
 
         if (Support.getDetails(pc, "gender") != null) {
-            util.formula.Support.setImagetoHolderFromUri((Activity) context,
+            Support.setImagetoHolderFromUri((Activity) context,
                     DrishtiApplication.getAppDir() + File.separator + Support.getDetails(pc, "base_entity_id") + ".JPEG",
                     viewHolder.profilepic, Support.getDetails(pc, "gender").equals("female") ? R.drawable.child_girl_infant : R.drawable.child_boy_infant);
         } else {
