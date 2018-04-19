@@ -35,7 +35,7 @@ import java.io.File;
 import static android.view.ViewGroup.LayoutParams.MATCH_PARENT;
 
 /**
- * Created by Dimas Ciputra on 2/16/15.
+ * Created by Dimas Ciputra on 2/16/15
  */
 public class TTSmartClientsProvider implements SmartRegisterCLientsProviderForCursorAdapter {
     private final LayoutInflater inflater;
@@ -44,17 +44,15 @@ public class TTSmartClientsProvider implements SmartRegisterCLientsProviderForCu
     private final AbsListView.LayoutParams clientViewLayoutParams;
 
     protected CommonPersonObjectController controller;
+    private final View.OnClickListener onClickListener;
 
-    public TTSmartClientsProvider(Context context, View.OnClickListener onClickListener,
-                                  AlertService alertService) {
-//        View.OnClickListener onClickListener1 = onClickListener;
+    public TTSmartClientsProvider(Context context, View.OnClickListener onClickListener, AlertService alertService) {
+        this.onClickListener = onClickListener;
         this.context = context;
-//        AlertService alertService1 = alertService;
         this.inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-
-        clientViewLayoutParams = new AbsListView.LayoutParams(MATCH_PARENT,
-                (int) context.getResources().getDimension(org.smartregister.vaksinator.R.dimen.list_item_height));
+        clientViewLayoutParams = new AbsListView.LayoutParams(MATCH_PARENT, (int) context.getResources().getDimension(org.smartregister.vaksinator.R.dimen.list_item_height));
 //        int txtColorBlack = context.getResources().getColor(R.color.text_black);
+//        AlertService alertService1 = alertService;
 
     }
 
@@ -91,6 +89,7 @@ public class TTSmartClientsProvider implements SmartRegisterCLientsProviderForCu
 
             viewHolder.profilepic = (ImageView) convertView.findViewById(R.id.img_profile);
             viewHolder.follow_up = (ImageButton) convertView.findViewById(R.id.btn_edit);
+            viewHolder.profilelayout.setOnClickListener(onClickListener);
             convertView.setTag(viewHolder);
 
         } else {
