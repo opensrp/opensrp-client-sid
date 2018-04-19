@@ -6,8 +6,6 @@ import android.support.v4.app.FragmentPagerAdapter;
 
 import org.smartregister.enketo.view.fragment.DisplayFormFragment;
 
-
-
 /**
  * Created by koros on 11/2/15.
  */

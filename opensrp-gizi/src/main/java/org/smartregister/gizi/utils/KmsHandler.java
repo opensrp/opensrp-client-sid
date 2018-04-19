@@ -20,8 +20,8 @@ public class KmsHandler implements FormSubmissionHandler {
 //    private GiziClientProcessor clientProcessor;
 //    private  org.ei.opensrp.Context context;
 
-    public KmsHandler() {
-    }
+//    public KmsHandler() {
+//    }
 
     @Override
     public void handle(FormSubmission submission) {
