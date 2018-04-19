@@ -49,9 +49,9 @@ import java.util.Map;
 
 import util.AsyncTask;
 
+import static android.view.View.GONE;
 import static android.view.View.INVISIBLE;
 import static android.view.View.VISIBLE;
-import static android.view.View.GONE;
 import static org.apache.commons.lang3.StringUtils.isEmpty;
 
 /**

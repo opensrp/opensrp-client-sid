@@ -2,10 +2,11 @@ package org.smartregister.gizi.activity;
 
 import android.content.pm.ActivityInfo;
 import android.os.Bundle;
+import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.util.Log;
-import android.support.v4.app.Fragment;
+
 import com.flurry.android.FlurryAgent;
 
 import org.json.JSONException;
