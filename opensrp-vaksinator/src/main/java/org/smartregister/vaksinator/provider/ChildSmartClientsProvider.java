@@ -313,10 +313,8 @@ public class ChildSmartClientsProvider implements SmartRegisterCLientsProviderFo
     }
 
     public String transformToddmmyyyy(String date){
-        if(date.length()>3) {
-            if (date.charAt(4) == '-')
-                date = String.format("%s/%s/%s", new String[]{date.substring(8, 10), date.substring(5, 7), date.substring(0, 4)});
-        }
+        if(date.length()>3 && date.charAt(4) == '-')
+                date = String.format("%s/%s/%s", (Object[]) new String[]{date.substring(8, 10), date.substring(5, 7), date.substring(0, 4)});
         return date;
     }
 
@@ -342,12 +340,12 @@ public class ChildSmartClientsProvider implements SmartRegisterCLientsProviderFo
         public ImageView pol3Logo;
         public ImageView pol4Logo;
         public ImageView ipvLogo;
-        public ImageView hbAlert;
-        public ImageView pol1Alert;
-        public ImageView pol2Alert;
-        public ImageView pol3Alert;
-        public ImageView pol4Alert;
-        public ImageView measlesAlert;
+//        public ImageView hbAlert;
+//        public ImageView pol1Alert;
+//        public ImageView pol2Alert;
+//        public ImageView pol3Alert;
+//        public ImageView pol4Alert;
+//        public ImageView measlesAlert;
         public FrameLayout hb0Layout;
         public FrameLayout bcgLayout;
         public FrameLayout hb1Layout;

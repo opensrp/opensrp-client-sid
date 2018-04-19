@@ -52,18 +52,14 @@ public class Support {
     }
 
     public static String getColumnmaps(CommonPersonObjectClient person, String values) {
-        if (person.getColumnmaps().get(values) != null) {
-            if (person.getColumnmaps().get(values).length() > 0)
+        if (person.getColumnmaps().get(values) != null && person.getColumnmaps().get(values).length() > 0)
                 return person.getColumnmaps().get(values);
-        }
         return "-";
     }
 
     public static String getColumnmaps(CommonPersonObject person, String values) {
-        if (person.getColumnmaps().get(values) != null) {
-            if (person.getColumnmaps().get(values).length() > 0)
+        if (person.getColumnmaps().get(values) != null && person.getColumnmaps().get(values).length() > 0)
                 return person.getColumnmaps().get(values);
-        }
         return "-";
     }
 
