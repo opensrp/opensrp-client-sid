@@ -443,15 +443,16 @@ public class ChildSmartClientsProvider implements SmartRegisterCLientsProviderFo
         }
     }
 
+    // TODO: NPATH 3500
     public String findDate(String startDate, int myDayAge){
         int dayAge = myDayAge;
-        int[]dayLength = {31,28,31,30,31,30,31,31,30,31,30,31};
+        int[]dayLength = { 31,28,31,30,31,30,31,31,30,31,30,31 };
         int startYear = Integer.parseInt(startDate.substring(0,4));
         int startMonth = Integer.parseInt(startDate.substring(5,7));
         int startDay = Integer.parseInt(startDate.substring(8, 10));
 
         dayLength[1] = startYear % 4 == 0 ? 29 : 28;
-        while(dayAge>dayLength[startMonth-1]){
+        while(dayAge > dayLength[startMonth-1]){
             dayAge = dayAge - dayLength[startMonth-1];
             startMonth++;
             if(startMonth>12){

@@ -169,13 +169,10 @@ public class GiziZScoreChartActivity extends Activity{
     }
 
     private String[]initializeZScoreSeries(){
-//        boolean wfaChecked = true;
-//        boolean wfhChecked = true;
-//        boolean hfaChecked = true;
-//
         String axis1 = createWFAAxis();
         String data1 = createWFASeries();
-        String axis2 = "", data2="" ;
+        String axis2 = "";
+        String data2 = "";
 
         String tempAxis2 = createHFAAxis();
         if (!"".equals(tempAxis2)) {

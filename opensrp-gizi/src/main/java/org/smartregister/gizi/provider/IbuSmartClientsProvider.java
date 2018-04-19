@@ -228,8 +228,12 @@ public class IbuSmartClientsProvider implements SmartRegisterCLientsProviderForC
         String[]d1 = dateFrom.split("-");
         String[]d2 = dateTo.split("-");
 
-        int day1=Integer.parseInt(d1[2]),month1=Integer.parseInt(d1[1]),year1=Integer.parseInt(d1[0]);
-        int day2=Integer.parseInt(d2[2]),month2=Integer.parseInt(d2[1]),year2=Integer.parseInt(d2[0]);
+        int day1=Integer.parseInt(d1[2]);
+        int month1=Integer.parseInt(d1[1]);
+        int year1=Integer.parseInt(d1[0]);
+        int day2=Integer.parseInt(d2[2]);
+        int month2=Integer.parseInt(d2[1]);
+        int year2=Integer.parseInt(d2[0]);
 
         if (month2<month1){
             month2+=12;

@@ -105,7 +105,8 @@ public class LoginActivity extends AppCompatActivity {
 
     private void debugApp() {
         Config config = new Config();
-        String uname = "demo_ec_vaksin", pwd = "Satu2345";
+        String uname = "demo_ec_vaksin";
+        String pwd = "Satu2345";
         try {
             uname = config.getCredential("uname", getApplicationContext());
             pwd =  config.getCredential("pwd", getApplicationContext());

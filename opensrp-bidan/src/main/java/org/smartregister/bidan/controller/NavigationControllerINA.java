@@ -62,7 +62,8 @@ public class NavigationControllerINA extends org.smartregister.view.controller.N
 
     @Override
     public void startReports() {
-        String id, pass;
+        String id;
+        String pass;
         try {
             id = new JSONObject(anmController.get()).get("anmName").toString();
             pass = context.allSettings().fetchANMPassword();

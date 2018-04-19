@@ -59,7 +59,8 @@ public class VaksinatorNavigationController extends org.smartregister.view.contr
 
     @Override
     public void startReports() {
-        String id, pass;
+        String id;
+        String pass;
         try{
             id = new JSONObject(anmController.get()).get("anmName").toString();
             pass = context.allSettings().fetchANMPassword();

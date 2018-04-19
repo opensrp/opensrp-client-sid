@@ -49,7 +49,8 @@ public class GiziNavigationController extends org.smartregister.view.controller.
 
     @Override
     public void startReports() {
-        String id, pass;
+        String id;
+        String pass;
         try{
             id = new JSONObject(anmController.get()).get("anmName").toString();
             pass = context.allSettings().fetchANMPassword();
