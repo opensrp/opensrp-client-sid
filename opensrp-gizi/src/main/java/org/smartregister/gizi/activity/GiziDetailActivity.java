@@ -312,7 +312,7 @@ public class GiziDetailActivity extends Activity {
             return false;
         int visitDate = Integer.parseInt(date.substring(5, 7));
 
-        int currentYear = Integer.parseInt(new SimpleDateFormat("yyyy").format(new java.util.Date()));
+        int currentYear = Integer.parseInt(new SimpleDateFormat("yyyy").format(new Date()));
         int visitYear = Integer.parseInt(date.substring(0, 4));
 
         return (((currentYear-visitYear)*12) + (8-visitDate)) <=12;

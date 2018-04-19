@@ -2,6 +2,7 @@ package org.smartregister.gizi.activity;
 
 import android.content.pm.ActivityInfo;
 import android.os.Bundle;
+import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.util.Log;
@@ -218,10 +219,12 @@ public class IbuSmartRegisterActivity extends SecuredNativeSmartRegisterActivity
         JSONObject combined = null;
 
         try {
-            JSONObject locationJSON = new JSONObject(locationJSONString);
+//            JSONObject locationJSON = new JSONObject(locationJSONString);
             //   JSONObject uniqueId = new JSONObject(context().uniqueIdController().getUniqueIdJson());
 
-            combined = locationJSON;
+//            combined = locationJSON;
+            combined = new JSONObject(locationJSONString);
+
             //     Iterator<String> iter = uniqueId.keys();
 
        /*     while (iter.hasNext()) {
@@ -257,7 +260,7 @@ public class IbuSmartRegisterActivity extends SecuredNativeSmartRegisterActivity
         try {
             int formIndex = FormUtils.getIndexForFormName(formName, formNames) + 1; // add the offset
             if (entityId != null || metaData != null){
-                String data = null;
+                String data;
                 //check if there is previously saved data for the form
                 data = getPreviouslySavedDataForForm(formName, metaData, entityId);
                 if (data == null){
@@ -340,7 +343,7 @@ public class IbuSmartRegisterActivity extends SecuredNativeSmartRegisterActivity
 
     }
 
-    public android.support.v4.app.Fragment findFragmentByPosition(int position) {
+    public Fragment findFragmentByPosition(int position) {
         FragmentPagerAdapter fragmentPagerAdapter = mPagerAdapter;
         return getSupportFragmentManager().findFragmentByTag("android:switcher:" + mPager.getId() + ":" + fragmentPagerAdapter.getItemId(position));
     }

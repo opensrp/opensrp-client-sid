@@ -31,6 +31,7 @@ import org.smartregister.view.viewholder.OnClickFormLauncher;
 
 import java.io.File;
 import java.text.SimpleDateFormat;
+import java.util.Date;
 
 import util.ZScore.ZScoreSystemCalculation;
 import util.formula.Support;
@@ -161,7 +162,7 @@ public class ChildSmartClientsProvider implements SmartRegisterCLientsProviderFo
 
             viewHolder.setAntihelminticVisibility(
                     dayRangeBetween(Tgl.split("-")
-                            , new SimpleDateFormat("yyyy-MM-dd").format(new java.util.Date()).split("-")
+                            , new SimpleDateFormat("yyyy-MM-dd").format(new Date()).split("-")
                     ) >= 365 ? View.VISIBLE : INVISIBLE
             );
             viewHolder.dateOfBirth.setText(!"-".equals(Support.getDetails(pc, "tanggalLahirAnak")) ? Tgl : "");
@@ -337,7 +338,7 @@ public class ChildSmartClientsProvider implements SmartRegisterCLientsProviderFo
     private int monthRangeToToday(String lastVisitDate){
         if (lastVisitDate.length()<10)
             return 0;
-        String currentDate[] = new SimpleDateFormat("yyyy-MM").format(new java.util.Date()).substring(0,7).split("-");
+        String currentDate[] = new SimpleDateFormat("yyyy-MM").format(new Date()).substring(0,7).split("-");
         return ((Integer.parseInt(currentDate[0]) - Integer.parseInt(lastVisitDate.substring(0,4)))*12 +
                 (Integer.parseInt(currentDate[1]) - Integer.parseInt(lastVisitDate.substring(5,7))));
     }
@@ -349,10 +350,10 @@ public class ChildSmartClientsProvider implements SmartRegisterCLientsProviderFo
     private boolean inTheSameRegion(String date){
         if(date==null || date.length()<6)
             return false;
-        int currentDate = Integer.parseInt(new SimpleDateFormat("MM").format(new java.util.Date()));
+        int currentDate = Integer.parseInt(new SimpleDateFormat("MM").format(new Date()));
         int visitDate = Integer.parseInt(date.substring(5, 7));
 
-        int currentYear = Integer.parseInt(new SimpleDateFormat("yyyy").format(new java.util.Date()));
+        int currentYear = Integer.parseInt(new SimpleDateFormat("yyyy").format(new Date()));
         int visitYear = Integer.parseInt(date.substring(0, 4));
 
         boolean date1 = currentDate < 2 || currentDate >=8;
