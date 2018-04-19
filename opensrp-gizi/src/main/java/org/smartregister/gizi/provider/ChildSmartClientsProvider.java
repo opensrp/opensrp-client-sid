@@ -174,7 +174,7 @@ public class ChildSmartClientsProvider implements SmartRegisterCLientsProviderFo
 
 
             // collect history data and clean latest history data which contains no specific date or value,
-            if (!Support.getDetails(pc, "umur").toLowerCase().equals("nan")) {
+            if (!"nan".equals(Support.getDetails(pc, "umur").toLowerCase())) {
                 String[] history1 = hasValue(Support.getDetails(pc, "history_berat")) ? Support.insertionSort(Support.getDetails(pc, "history_berat")) : new String[]{"0:0"};
                 if (history1[history1.length - 1].charAt(history1[history1.length - 1].length() - 1) == ':')
                     history1[history1.length - 1] = history1[history1.length - 1] + "-";

@@ -41,7 +41,7 @@ public class KmsHandler implements FormSubmissionHandler {
         String[] history_umur = umurs.split(",");
         String tinggi = submission.getFieldValue("history_tinggi") != null ? submission.getFieldValue("history_tinggi") : "0#0";
         String lastVisitDate = submission.getFieldValue("tanggalPenimbangan") != null
-                ? !submission.getFieldValue("tanggalPenimbangan").toLowerCase().equals("nan")
+                ? !"nan".equals(submission.getFieldValue("tanggalPenimbangan").toLowerCase())
                 ? submission.getFieldValue("tanggalPenimbangan")
                 : "-"
                 : "-";
@@ -109,7 +109,7 @@ public class KmsHandler implements FormSubmissionHandler {
             double berat;
             double beraSebelum;
             String tanggal_sebelumnya;
-            if (submission.getFieldValue("tanggalPenimbangan").toLowerCase().equals(latestDate.toLowerCase()) && submission.getFieldValue("kunjunganSebelumnya") != null) {
+            if (submission.getFieldValue("tanggalPenimbangan").equalsIgnoreCase(latestDate.toLowerCase()) && submission.getFieldValue("kunjunganSebelumnya") != null) {
                 berat = Double.parseDouble(submission.getFieldValue("beratBadan") != null ? submission.getFieldValue("beratBadan") : "0");
                 beraSebelum = Double.parseDouble((history_berat.length) >= 2 ? (history_berat[(history_berat.length) - 2]) : "0");
                 tanggal_sebelumnya = (submission.getFieldValue("kunjunganSebelumnya") != null ? submission.getFieldValue("kunjunganSebelumnya") : "0");
