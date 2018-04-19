@@ -66,18 +66,14 @@ public class Support {
     }
 
     public static String getDetails(CommonPersonObjectClient person, String values) {
-        if (person.getDetails().get(values) != null) {
-            if (person.getDetails().get(values).length() > 0)
+        if (person.getDetails().get(values) != null && person.getDetails().get(values).length() > 0)
                 return person.getDetails().get(values);
-        }
         return "-";
     }
 
     public static String getDetails(CommonPersonObject person, String values) {
-        if (person.getDetails().get(values) != null) {
-            if (person.getDetails().get(values).length() > 0)
+        if (person.getDetails().get(values) != null && person.getDetails().get(values).length() > 0)
                 return person.getDetails().get(values);
-        }
         return "-";
     }
 
