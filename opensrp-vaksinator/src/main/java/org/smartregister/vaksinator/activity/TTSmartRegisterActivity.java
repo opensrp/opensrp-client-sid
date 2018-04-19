@@ -1,15 +1,11 @@
 package org.smartregister.vaksinator.activity;
 
-import android.content.DialogInterface;
-import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.util.Log;
-
-import com.flurry.android.FlurryAgent;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -23,7 +19,6 @@ import org.smartregister.vaksinator.R;
 import org.smartregister.vaksinator.fragment.TTSmartRegisterFragment;
 import org.smartregister.vaksinator.pageradapter.BaseRegisterActivityPagerAdapter;
 import org.smartregister.view.activity.SecuredNativeSmartRegisterActivity;
-import org.smartregister.view.dialog.DialogOption;
 import org.smartregister.view.dialog.LocationSelectorDialogFragment;
 import org.smartregister.view.fragment.SecuredNativeSmartRegisterFragment;
 import org.smartregister.view.viewpager.OpenSRPViewPager;
@@ -35,7 +30,6 @@ import butterknife.Bind;
 import butterknife.ButterKnife;
 
 //import org.smartregister.vaksinator.vaksinator.FlurryFacade;
-
 //import org.smartregister.test.fragment.HouseHoldSmartRegisterFragment;
 
 public class TTSmartRegisterActivity extends SecuredNativeSmartRegisterActivity implements
@@ -147,16 +141,15 @@ public class TTSmartRegisterActivity extends SecuredNativeSmartRegisterActivity 
         // do nothing
     }
 
-    public DialogOption[] getEditOptions() {
-        return new DialogOption[]{
-                // do nothing
-//                new OpenFormOption("Bayi Immunisasi", "kohort_bayi_immunization", formController),
+//    public DialogOption[] getEditOptions() {
+//        return new DialogOption[]{
+//                // do nothing
+////                new OpenFormOption("Bayi Immunisasi", "kohort_bayi_immunization", formController),
+////
+////                new OpenFormOption("Tutup Bayi", "kohort_anak_tutup", formController),
 //
-//                new OpenFormOption("Tutup Bayi", "kohort_anak_tutup", formController),
-
-        };
-    }
-
+//        };
+//    }
 
     /*@Override
     public void saveFormSubmission(String formSubmission, String id, String formName, JSONObject fieldOverrides){
@@ -351,28 +344,28 @@ public class TTSmartRegisterActivity extends SecuredNativeSmartRegisterActivity 
         return currentPage != 0;
     }
 
-    private DialogInterface.OnClickListener listener = new DialogInterface.OnClickListener() {
-        @Override
-        public void onClick(DialogInterface dialog, int which) {
-
-            if (which == -1 ){
-                nf.setCriteria("!");
-                currentPage = 0;
-                Log.e(TAG, "onClick: YES " + currentPage);
-                FlurryAgent.logEvent(TAG + "search_by_face OK", true);
-
-            } else {
-                nf.setCriteria("!");
-                Log.e(TAG, "onClick: NO "+currentPage);
-                FlurryAgent.logEvent(TAG + "search_by_face NOK", true);
-
-                onBackPressed();
-
-                Intent intent= new Intent(TTSmartRegisterActivity.this, TTSmartRegisterActivity.class);
-                startActivity(intent.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT));
-            }
-
-
-        }
-    };
+//    private DialogInterface.OnClickListener listener = new DialogInterface.OnClickListener() {
+//        @Override
+//        public void onClick(DialogInterface dialog, int which) {
+//
+//            if (which == -1 ){
+//                nf.setCriteria("!");
+//                currentPage = 0;
+//                Log.e(TAG, "onClick: YES " + currentPage);
+//                FlurryAgent.logEvent(TAG + "search_by_face OK", true);
+//
+//            } else {
+//                nf.setCriteria("!");
+//                Log.e(TAG, "onClick: NO "+currentPage);
+//                FlurryAgent.logEvent(TAG + "search_by_face NOK", true);
+//
+//                onBackPressed();
+//
+//                Intent intent= new Intent(TTSmartRegisterActivity.this, TTSmartRegisterActivity.class);
+//                startActivity(intent.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT));
+//            }
+//
+//
+//        }
+//    };
 }
