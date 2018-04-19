@@ -36,11 +36,12 @@ public class UpdateActionsTask {
         this.additionalSyncService = null;
         task = new LockingBackgroundTask(progressIndicator);
         Log.e(TAG, "UpdateActionsTask: "+actionService );
+        Log.e(TAG, "UpdateActionsTask: "+additionalSyncService );
     }
 
-    public void setAdditionalSyncService(AdditionalSyncService additionalSyncService) {
-        this.additionalSyncService = additionalSyncService;
-    }
+//    public void setAdditionalSyncService(AdditionalSyncService additionalSyncService) {
+//        this.additionalSyncService = additionalSyncService;
+//    }
 
     public void updateFromServer(final AfterFetchListener afterFetchListener) {
         if (org.smartregister.Context.getInstance().IsUserLoggedOut()) {
@@ -52,8 +53,6 @@ public class UpdateActionsTask {
             public FetchStatus actionToDoInBackgroundThread() {
 
                 FetchStatus fetchStatusForForms = formSubmissionSyncService.sync();
-                FetchStatus fetchStatusForActions = nothingFetched;//actionService.fetchNewActions();
-                FetchStatus fetchStatusAdditional = nothingFetched;//additionalSyncService == null ? nothingFetched : additionalSyncService.sync();
 
                 if(org.smartregister.Context.getInstance().configuration().shouldSyncForm()) {
 
@@ -71,7 +70,7 @@ public class UpdateActionsTask {
                 }
 
 
-                if(fetchStatusForActions == fetched || fetchStatusForForms == fetched || fetchStatusAdditional == fetched)
+                if(nothingFetched == fetched || fetchStatusForForms == fetched)
                     return fetched;
 
                 return fetchStatusForForms;
