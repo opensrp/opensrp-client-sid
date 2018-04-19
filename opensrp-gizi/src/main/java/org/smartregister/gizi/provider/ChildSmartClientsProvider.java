@@ -164,11 +164,11 @@ public class ChildSmartClientsProvider implements SmartRegisterCLientsProviderFo
                             , new SimpleDateFormat("yyyy-MM-dd").format(new java.util.Date()).split("-")
                     ) >= 365 ? View.VISIBLE : INVISIBLE
             );
-            viewHolder.dateOfBirth.setText(Support.getDetails(pc, "tanggalLahirAnak") != "-" ? Tgl : "");
+            viewHolder.dateOfBirth.setText(!"-".equals(Support.getDetails(pc, "tanggalLahirAnak")) ? Tgl : "");
 
 //        viewHolder.gender.setText( Support.getDetails(pc,"gender") != null ? setGender(Support.getDetails(pc,"gender")):"-");
             int age = monthRangeToToday(dob);
-            viewHolder.gender.setText(Support.getDetails(pc, "tanggalLahirAnak") != "-"
+            viewHolder.gender.setText( !"-".equals(Support.getDetails(pc, "tanggalLahirAnak"))
                     ? age / 12 + " " + context.getString(R.string.years_unit) + " " + age % 12 + " " + context.getString(R.string.month_unit) : "-");
 
 
@@ -199,12 +199,12 @@ public class ChildSmartClientsProvider implements SmartRegisterCLientsProviderFo
 //                } else {
                 System.out.println("history != tglPenimbangan");
                 viewHolder.visitDate.setText(context.getString(R.string.tanggal) + " " + (history1.length > 1 ? newestDateonHistory : "-"));
-                heightToDisplay = (Support.getDetails(pc, "tinggiBadan") != "-"
+                heightToDisplay = (!"-".equals(Support.getDetails(pc, "tinggiBadan"))
                         ? !Support.getDetails(pc, "tinggiBadan").equals(history2[history2.length - 1])
                         ? history2[history2.length - 1].split(":")[1]
                         : Support.getDetails(pc, "tinggiBadan")
                         : "-");
-                weightToDisplay = (Support.getDetails(pc, "beratBadan") != "-"
+                weightToDisplay = (!"-".equals(Support.getDetails(pc, "beratBadan"))
                         ? !Support.getDetails(pc, "beratBadan").equals(history1[history1.length - 1])
                         ? history1[history1.length - 1].split(":")[1]
                         : Support.getDetails(pc, "beratBadan")
@@ -219,7 +219,7 @@ public class ChildSmartClientsProvider implements SmartRegisterCLientsProviderFo
                 viewHolder.antihelminticText.setText(R.string.anthelmintic);
 
 //------VISIBLE AND INVISIBLE COMPONENT
-                viewHolder.absentAlert.setVisibility(Support.getDetails(pc, "tanggalPenimbangan") != "-"
+                viewHolder.absentAlert.setVisibility(!"-".equals(Support.getDetails(pc, "tanggalPenimbangan"))
                         ? isLate(Support.getDetails(pc, "tanggalPenimbangan"), 1)
                         ? View.VISIBLE
                         : INVISIBLE
@@ -307,15 +307,12 @@ public class ChildSmartClientsProvider implements SmartRegisterCLientsProviderFo
 //    }
 
     private String returnLatestDate(String date1, String date2){
-        if(date1 == "-" || date2 == "-"){
-            return date1=="-" && date2=="-"
-                    ? null
-                    : date1=="-"
-                    ? date2
-                    : date1
-                    ;
+        if("-".equals(date1) || "_".equals(date2)){
+            return "-".equals(date1) && "-".equals(date2)
+                    ? null : "-".equals(date1)
+                    ? date2 : date1;
         }
-        return dayRangeBetween(date1.split("-"),date2.split("-"))>0 ? date2 : date1;
+        return dayRangeBetween(date1.split("-"), date2.split("-"))>0 ? date2 : date1;
     }
 
     private boolean isLate(String lastVisitDate,int threshold) {

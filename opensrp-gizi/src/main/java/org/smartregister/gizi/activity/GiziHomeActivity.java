@@ -288,7 +288,7 @@ public class GiziHomeActivity extends SecuredActivity {
                         do{
                             for(String d:temp.getColumnNames()){
                                 String value = "";
-                                if(d!=""){
+                                if(!"".equals(d)){
                                     if(temp.getType(temp.getColumnIndex(d))== Cursor.FIELD_TYPE_BLOB){
                                         value = "blob";
                                     }else{
