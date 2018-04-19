@@ -319,7 +319,7 @@ public class TTSmartRegisterActivity extends SecuredNativeSmartRegisterActivity 
     }
 
     private String[] buildFormNameList(){
-        List<String> formNames = new ArrayList<String>();
+        List<String> formNames = new ArrayList<>();
         formNames.add("registrasi_ibu");
         formNames.add("kohort_anak_tutup");
         formNames.add("kohort_bayi_immunization");

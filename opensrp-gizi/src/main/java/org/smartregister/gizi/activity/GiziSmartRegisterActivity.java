@@ -1,7 +1,6 @@
 package org.smartregister.gizi.activity;
 
 import android.content.pm.ActivityInfo;
-import android.database.Cursor;
 import android.os.Bundle;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
@@ -12,7 +11,6 @@ import com.flurry.android.FlurryAgent;
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.smartregister.commonregistry.CommonPersonObjectClient;
-import org.smartregister.cursoradapter.SmartRegisterQueryBuilder;
 import org.smartregister.domain.form.FieldOverrides;
 import org.smartregister.domain.form.FormSubmission;
 import org.smartregister.enketo.listener.DisplayFormListener;
@@ -195,7 +193,7 @@ public class GiziSmartRegisterActivity extends SecuredNativeSmartRegisterActivit
 
             //end capture flurry log for FS
             String end = timer.format(new Date());
-            Map<String, String> FS = new HashMap<String, String>();
+            Map<String, String> FS = new HashMap<>();
             FS.put("end", end);
             FlurryAgent.logEvent(formName, FS, true);
 
@@ -412,7 +410,7 @@ public class GiziSmartRegisterActivity extends SecuredNativeSmartRegisterActivit
         super.onPause();
         retrieveAndSaveUnsubmittedFormData();
         String GiziEnd = timer.format(new Date());
-        Map<String, String> Gizi = new HashMap<String, String>();
+        Map<String, String> Gizi = new HashMap<>();
         Gizi.put("end", GiziEnd);
         FlurryAgent.logEvent("Gizi_dashboard",Gizi, true );
     }

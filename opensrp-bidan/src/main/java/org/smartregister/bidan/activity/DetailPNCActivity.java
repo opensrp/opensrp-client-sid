@@ -17,9 +17,10 @@ import org.smartregister.commonregistry.CommonPersonObject;
 import org.smartregister.commonregistry.CommonPersonObjectClient;
 import org.smartregister.repository.DetailsRepository;
 
+import static android.view.View.GONE;
+import static android.view.View.VISIBLE;
 import static org.smartregister.util.StringUtil.humanize;
 import static org.smartregister.util.StringUtil.humanizeAndDoUPPERCASE;
-
 /**
  * Created by sid-tech on 11/30/17
  */
@@ -80,7 +81,7 @@ public class DetailPNCActivity extends Activity {
 
 //        ImageView heart_bpm = (ImageView) findViewById(R.id.icon_device);
         ImageView device = (ImageView) findViewById(R.id.iv_icon_device);
-        device.setVisibility(View.VISIBLE);
+        device.setVisibility(VISIBLE);
 //        device.setOnClickListener(bpmListener);
 
         //detail data
@@ -273,20 +274,20 @@ public class DetailPNCActivity extends Activity {
             @Override
             public void onClick(View v) {
 //                FlurryFacade.logEvent("click_risk_detail");
-                findViewById(R.id.id1).setVisibility(View.GONE);
-                findViewById(R.id.id2).setVisibility(View.VISIBLE);
-                findViewById(R.id.tv_show_more_detail).setVisibility(View.VISIBLE);
-                findViewById(R.id.tv_show_more).setVisibility(View.GONE);
+                findViewById(R.id.id1).setVisibility(GONE);
+                findViewById(R.id.id2).setVisibility(VISIBLE);
+                findViewById(R.id.tv_show_more_detail).setVisibility(VISIBLE);
+                findViewById(R.id.tv_show_more).setVisibility(GONE);
             }
         });
 
         show_detail.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                findViewById(R.id.id1).setVisibility(View.VISIBLE);
-                findViewById(R.id.id2).setVisibility(View.GONE);
-                findViewById(R.id.tv_show_more).setVisibility(View.VISIBLE);
-                findViewById(R.id.tv_show_more_detail).setVisibility(View.GONE);
+                findViewById(R.id.id1).setVisibility(VISIBLE);
+                findViewById(R.id.id2).setVisibility(GONE);
+                findViewById(R.id.tv_show_more).setVisibility(VISIBLE);
+                findViewById(R.id.tv_show_more_detail).setVisibility(GONE);
             }
         });
 

@@ -7,7 +7,6 @@ import android.graphics.drawable.Drawable;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.widget.AbsListView;
 import android.widget.FrameLayout;
 import android.widget.ImageButton;
 import android.widget.ImageView;
@@ -36,7 +35,6 @@ import java.text.SimpleDateFormat;
 
 import util.formula.Support;
 
-import static android.view.ViewGroup.LayoutParams.MATCH_PARENT;
 import static org.smartregister.util.Utils.fillValue;
 import static org.smartregister.util.Utils.getValue;
 
@@ -241,14 +239,14 @@ public class ChildSmartClientsProvider implements SmartRegisterCLientsProviderFo
         boolean complete = false;
         boolean someComplete = false;
 
-        for (int i = 0; i < var.length; i++) {
-            someComplete = someComplete || (Support.getDetails(pc,var[i]).length() > 6);
+        for (String aVar : var) {
+            someComplete = someComplete || (Support.getDetails(pc, aVar).length() > 6);
         }
 
         if (someComplete) {
             complete = true;
-            for (int i = 0; i < var.length; i++) {
-                complete = complete && (Support.getDetails(pc,var[i]).length() > 6);
+            for (String aVar : var) {
+                complete = complete && (Support.getDetails(pc, aVar).length() > 6);
             }
         }
 

@@ -134,7 +134,7 @@ public class ChildSmartClientsProvider implements SmartRegisterCLientsProviderFo
         String dob = Support.getColumnmaps(pc, "tanggalLahirAnak");
         dob = dob.length() > 7 ? dob.substring(0, dob.indexOf("T")) : dob;
 
-        viewHolder.age.setVisibility(View.INVISIBLE);//.setText(Support.getDetails(pc,"tanggalLahirAnak")!= null ? Integer.toString(monthRangeToToday(ages))+" bln" : "");
+        viewHolder.age.setVisibility(INVISIBLE);//.setText(Support.getDetails(pc,"tanggalLahirAnak")!= null ? Integer.toString(monthRangeToToday(ages))+" bln" : "");
 
         AllCommonsRepository childRepository = org.smartregister.Context.getInstance().allCommonsRepositoryobjects("ec_anak");
         CommonPersonObject childobject = childRepository.findByCaseID(pc.entityId());
@@ -433,7 +433,7 @@ public class ChildSmartClientsProvider implements SmartRegisterCLientsProviderFo
 
 
         public void setVitAVisibility(){
-            int month = Integer.parseInt(new SimpleDateFormat("MM").format(new java.util.Date()));
+//            int month = Integer.parseInt(new SimpleDateFormat("MM").format(new java.util.Date()));
 //            int visibility = month == 2 || month == 8 ? View.VISIBLE : View.INVISIBLE;
 //             vitALogo.setVisibility(visibility);
 //             vitAText.setVisibility(visibility);

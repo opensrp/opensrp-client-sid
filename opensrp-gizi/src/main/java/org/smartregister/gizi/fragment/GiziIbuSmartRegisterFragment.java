@@ -37,6 +37,7 @@ import java.util.ArrayList;
 
 import util.AsyncTask;
 
+import static android.view.View.GONE;
 import static android.view.View.INVISIBLE;
 import static android.view.View.VISIBLE;
 import static org.apache.commons.lang3.StringUtils.isEmpty;
@@ -171,10 +172,10 @@ public class GiziIbuSmartRegisterFragment extends SecuredNativeSmartRegisterCurs
 
         super.setupViews(view);
         view.findViewById(R.id.btn_report_month).setVisibility(INVISIBLE);
-        view.findViewById(R.id.service_mode_selection).setVisibility(View.GONE);
-        view.findViewById(R.id.register_client).setVisibility(View.GONE);
-        clientsView.setVisibility(View.VISIBLE);
-        clientsProgressView.setVisibility(View.INVISIBLE);
+        view.findViewById(R.id.service_mode_selection).setVisibility(GONE);
+        view.findViewById(R.id.register_client).setVisibility(GONE);
+        clientsView.setVisibility(VISIBLE);
+        clientsProgressView.setVisibility(INVISIBLE);
 //        list.setBackgroundColor(Color.RED);
         initializeQueries();
     }

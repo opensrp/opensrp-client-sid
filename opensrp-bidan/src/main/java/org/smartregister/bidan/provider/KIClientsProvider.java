@@ -244,26 +244,26 @@ public class KIClientsProvider extends BaseClientsProvider {
         ImageView hrp_badge = (ImageView) convertView.findViewById(R.id.iv_hrp_badge);
         ImageView hrl_badge = (ImageView) convertView.findViewById(R.id.iv_hrl_badge);
 
-        hr_badge.setVisibility(View.INVISIBLE);
-        hrp_badge.setVisibility(View.INVISIBLE);
-        hrl_badge.setVisibility(View.INVISIBLE);
+        hr_badge.setVisibility(INVISIBLE);
+        hrp_badge.setVisibility(INVISIBLE);
+        hrl_badge.setVisibility(INVISIBLE);
 
         //Risk flag
         if ("yes".matches(pc.getDetails().get("highRiskSTIBBVs")+"||"+ pc.getDetails().get("highRiskEctopicPregnancy")+"||"+ pc.getDetails().get("highRiskCardiovascularDiseaseRecord")+"||"+
                 pc.getDetails().get("highRiskDidneyDisorder")+"||"+ pc.getDetails().get("highRiskHeartDisorder")+"||"+ pc.getDetails().get("highRiskAsthma")+"||"+
                 pc.getDetails().get("highRiskTuberculosis")+"||"+ pc.getDetails().get("highRiskMalaria")+"||"+ pc.getDetails().get("highRiskPregnancyYoungMaternalAge")+"||"+
                 pc.getDetails().get("highRiskPregnancyOldMaternalAge")))
-            hr_badge.setVisibility(View.VISIBLE);
+            hr_badge.setVisibility(VISIBLE);
 
         if ("yes".matches(pc.getDetails().get("highRiskPregnancyPIH")+"||"+ pc.getDetails().get("highRiskPregnancyProteinEnergyMalnutrition")+"||"+
                 pc.getDetails().get("HighRiskPregnancyTooManyChildren")+"||"+
                 pc.getDetails().get("highRiskPregnancyDiabetes")+"||"+ pc.getDetails().get("highRiskPregnancyAnemia")))
-            hrp_badge.setVisibility(View.VISIBLE);
+            hrp_badge.setVisibility(VISIBLE);
 
         if ("yes".matches(pc.getDetails().get("highRiskLabourFetusMalpresentation")+"||"+ pc.getDetails().get("highRiskLabourFetusSize")+"||"+
                 pc.getDetails().get("highRisklabourFetusNumber")+"||"+ pc.getDetails().get("HighRiskLabourSectionCesareaRecord")+"||"+
                 pc.getDetails().get("highRiskLabourTBRisk")))
-            hrl_badge.setVisibility(View.VISIBLE);
+            hrl_badge.setVisibility(VISIBLE);
 
 
         convertView.setLayoutParams(clientViewLayoutParams);
@@ -289,7 +289,7 @@ public class KIClientsProvider extends BaseClientsProvider {
 //                || risk9 != null && risk9.equals("yes")
 //                || risk10 != null && risk10.equals("yes")) {
 //
-//            riskview.setVisibility(View.VISIBLE);
+//            riskview.setVisibility(VISIBLE);
 //        }
 //    }
 

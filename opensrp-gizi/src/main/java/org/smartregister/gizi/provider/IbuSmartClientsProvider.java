@@ -6,7 +6,6 @@ import android.database.Cursor;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.widget.AbsListView;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -31,8 +30,6 @@ import java.io.File;
 import java.text.SimpleDateFormat;
 import java.util.Map;
 
-import static android.view.ViewGroup.LayoutParams.MATCH_PARENT;
-
 /**
  * Created by user on 2/12/15
  */
@@ -50,8 +47,7 @@ public class IbuSmartClientsProvider implements SmartRegisterCLientsProviderForC
         this.onClickListener = onClickListener;
         this.context = context;
         this.inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-        AbsListView.LayoutParams clientViewLayoutParams = new AbsListView.LayoutParams(MATCH_PARENT, (int) context.getResources().getDimension(R.dimen.list_item_height));
-
+//        AbsListView.LayoutParams clientViewLayoutParams = new AbsListView.LayoutParams(MATCH_PARENT, (int) context.getResources().getDimension(R.dimen.list_item_height));
 //        AlertService alertService1 = alertService;
 //        txtColorBlack =
 //        context.getResources().getColor(org.smartregister.gizi.R.color.text_black);

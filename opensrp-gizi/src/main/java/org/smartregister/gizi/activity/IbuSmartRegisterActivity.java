@@ -360,7 +360,7 @@ public class IbuSmartRegisterActivity extends SecuredNativeSmartRegisterActivity
     }
 
     private String[] buildFormNameList(){
-        List<String> formNames = new ArrayList<String>();
+        List<String> formNames = new ArrayList<>();
        formNames.add("registrasi_gizi");
         formNames.add("kunjungan_gizi");
         formNames.add("edit_registrasi_gizi");

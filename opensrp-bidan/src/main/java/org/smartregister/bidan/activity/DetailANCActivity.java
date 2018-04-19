@@ -14,6 +14,8 @@ import org.smartregister.bidan.utils.Support;
 import org.smartregister.commonregistry.CommonPersonObjectClient;
 import org.smartregister.repository.DetailsRepository;
 
+import static android.view.View.GONE;
+import static android.view.View.VISIBLE;
 import static org.smartregister.util.StringUtil.humanize;
 
 //import org.smartregister.bidan.lib.FlurryFacade;
@@ -228,10 +230,10 @@ public class DetailANCActivity extends Activity {
         setContentView(R.layout.anc_detail_activity);
 
 //        ButterKnife.bind(this);
-        findViewById(R.id.iv_icon_device).setVisibility(View.VISIBLE);
+        findViewById(R.id.iv_icon_device).setVisibility(VISIBLE);
 
-        findViewById(R.id.tv_show_more).setVisibility(View.GONE);
-        findViewById(R.id.tv_show_more_detail).setVisibility(View.GONE);
+        findViewById(R.id.tv_show_more).setVisibility(GONE);
+        findViewById(R.id.tv_show_more_detail).setVisibility(GONE);
 
         findViewById(R.id.btn_back_to_home).setOnClickListener(new View.OnClickListener() {
             @Override
@@ -377,31 +379,31 @@ public class DetailANCActivity extends Activity {
             @Override
             public void onClick(View v) {
                 //FlurryFacade.logEvent("click_risk_detail");
-                findViewById(R.id.id1).setVisibility(View.GONE);
-                findViewById(R.id.id2).setVisibility(View.VISIBLE);
-                findViewById(R.id.id3).setVisibility(View.VISIBLE);
-                //  findViewById(R.id.show_more_detail).setVisibility(View.VISIBLE);
-                // findViewById(R.id.show_more).setVisibility(View.GONE);
+                findViewById(R.id.id1).setVisibility(GONE);
+                findViewById(R.id.id2).setVisibility(VISIBLE);
+                findViewById(R.id.id3).setVisibility(VISIBLE);
+                //  findViewById(R.id.show_more_detail).setVisibility(VISIBLE);
+                // findViewById(R.id.show_more).setVisibility(GONE);
             }
         });
 
         findViewById(R.id.tv_anc_detail_information).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                findViewById(R.id.id1).setVisibility(View.VISIBLE);
-                findViewById(R.id.id2).setVisibility(View.GONE);
-                findViewById(R.id.id3).setVisibility(View.VISIBLE);
-                //  findViewById(R.id.show_more).setVisibility(View.VISIBLE);
-                //  findViewById(R.id.show_more_detail).setVisibility(View.GONE);
+                findViewById(R.id.id1).setVisibility(VISIBLE);
+                findViewById(R.id.id2).setVisibility(GONE);
+                findViewById(R.id.id3).setVisibility(VISIBLE);
+                //  findViewById(R.id.show_more).setVisibility(VISIBLE);
+                //  findViewById(R.id.show_more_detail).setVisibility(GONE);
             }
         });
 
         findViewById(R.id.tv_detail_l).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                findViewById(R.id.id1).setVisibility(View.GONE);
-                findViewById(R.id.id2).setVisibility(View.GONE);
-                findViewById(R.id.id3).setVisibility(View.VISIBLE);
+                findViewById(R.id.id1).setVisibility(GONE);
+                findViewById(R.id.id2).setVisibility(GONE);
+                findViewById(R.id.id3).setVisibility(VISIBLE);
                 // mother_summary.setText("Birth Plan Summary");
             }
         });

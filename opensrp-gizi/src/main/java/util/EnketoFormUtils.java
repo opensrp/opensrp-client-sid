@@ -1,7 +1,6 @@
 package util;
 
 import android.content.Context;
-import android.content.Intent;
 import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
 import android.util.Xml;
@@ -30,7 +29,6 @@ import org.smartregister.gizi.sync.GiziClientProcessor;
 import org.smartregister.repository.AllSharedPreferences;
 import org.smartregister.repository.BaseRepository;
 import org.smartregister.repository.EventClientRepository;
-import org.smartregister.service.intentservices.ReplicationIntentService;
 import org.smartregister.util.AssetHandler;
 import org.smartregister.util.Log;
 import org.w3c.dom.Attr;
@@ -41,11 +39,9 @@ import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 import org.xmlpull.v1.XmlSerializer;
 
-import java.io.BufferedReader;
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.io.InputStream;
-import java.io.InputStreamReader;
 import java.io.StringWriter;
 import java.text.Format;
 import java.text.SimpleDateFormat;
@@ -673,7 +669,7 @@ public class EnketoFormUtils {
 //    }
 
     private List<String> getSubFormNames(JSONObject formDefinition) throws Exception {
-        List<String> subFormNames = new ArrayList<String>();
+        List<String> subFormNames = new ArrayList<>();
         if (formDefinition.has("form") && formDefinition.getJSONObject("form").has("sub_forms")) {
             JSONArray subForms = formDefinition.getJSONObject("form").getJSONArray("sub_forms");
             for (int i = 0; i < subForms.length(); i++) {

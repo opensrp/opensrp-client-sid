@@ -284,8 +284,8 @@ public class GiziDetailActivity extends Activity {
 //    }
     public String arrayToString(String[]data, String separator){
         String umurs="";
-        for(int i=0;i<data.length;i++){
-            umurs = umurs + "," + Integer.toString(Integer.parseInt(data[i])/30);
+        for (String aData : data) {
+            umurs = umurs + "," + Integer.toString(Integer.parseInt(aData) / 30);
         }
         return umurs.substring(1,umurs.length());
     }
@@ -325,9 +325,9 @@ public class GiziDetailActivity extends Activity {
             return new String[]{"0","0"};
         String []temp = data.split(",");
         String []result = {"",""};
-        for(int i=0;i<temp.length;i++){
-            result[0]=result[0]+","+temp[i].split(":")[0];
-            result[1]=result[1]+","+temp[i].split(":")[1];
+        for (String aTemp : temp) {
+            result[0] = result[0] + "," + aTemp.split(":")[0];
+            result[1] = result[1] + "," + aTemp.split(":")[1];
         }
         result[0]=result[0].substring(1,result[0].length());
         result[1]=result[1].substring(1,result[1].length());

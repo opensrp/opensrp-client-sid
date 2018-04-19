@@ -165,7 +165,7 @@ public class ANCClientsProvider extends BaseClientsProvider {
         follow_up.setOnClickListener(onClickListener);
         follow_up.setTag(smartRegisterClient);
 
-//        hr_badge.setVisibility(View.INVISIBLE);
+//        hr_badge.setVisibility(INVISIBLE);
 
 
         profilePic.setTag(R.id.entity_id, pc.getColumnmaps().get("_id"));//required when saving file to disk
@@ -197,15 +197,15 @@ public class ANCClientsProvider extends BaseClientsProvider {
         ImageView hrp_badge = (ImageView) convertView.findViewById(R.id.iv_hrp_badge);
         ImageView hrl_badge = (ImageView) convertView.findViewById(R.id.iv_hrl_badge);
 
-        hr_badge.setVisibility(View.INVISIBLE); // High Risks
-        hrp_badge.setVisibility(View.INVISIBLE); // High Risks Pregnancy
-        hrl_badge.setVisibility(View.INVISIBLE); // High Risk Liabirth
+        hr_badge.setVisibility(INVISIBLE); // High Risks
+        hrp_badge.setVisibility(INVISIBLE); // High Risks Pregnancy
+        hrl_badge.setVisibility(INVISIBLE); // High Risk Liabirth
 
         //Risk flag
         if ("yes".matches(pc.getDetails().get("highRiskSTIBBVs")+"||"+ pc.getDetails().get("highRiskEctopicPregnancy")+"||"+ pc.getDetails().get("highRiskCardiovascularDiseaseRecord")+"||"+
                 pc.getDetails().get("highRiskDidneyDisorder")+"||"+ pc.getDetails().get("highRiskHeartDisorder")+"||"+ pc.getDetails().get("highRiskAsthma")+"||"+
                 pc.getDetails().get("highRiskTuberculosis")+"||"+ pc.getDetails().get("highRiskMalaria")+"||"+ pc.getDetails().get("highRiskPregnancyYoungMaternalAge")+"||"+
-                pc.getDetails().get("highRiskPregnancyOldMaternalAge"))) hr_badge.setVisibility(View.VISIBLE);
+                pc.getDetails().get("highRiskPregnancyOldMaternalAge"))) hr_badge.setVisibility(VISIBLE);
 
         if ("yes".matches(pc.getDetails().get("highRisksSTIBBVs")+ "||" +
                 pc.getDetails().get("highRiskEctopicPregnancy")+ "||" +
@@ -216,7 +216,7 @@ public class ANCClientsProvider extends BaseClientsProvider {
                 pc.getDetails().get("highRiskTuberculosis")+ "||" +
                 pc.getDetails().get("highRiskMalaria")+ "||" +
                 pc.getDetails().get("highRiskPregnancyYoungMaternalAge")+ "||" +
-                pc.getDetails().get("highRiskPregnancyOldMaternalAge"))) hr_badge.setVisibility(View.VISIBLE);
+                pc.getDetails().get("highRiskPregnancyOldMaternalAge"))) hr_badge.setVisibility(VISIBLE);
 
 
         if ("yes".matches(pc.getDetails().get("highRiskPregnancyPIH")+ "||" +
@@ -224,14 +224,14 @@ public class ANCClientsProvider extends BaseClientsProvider {
                 pc.getDetails().get("HighRiskPregnancyTooManyChildren")+ "||" +
                 pc.getDetails().get("highRiskPregnancyDiabetes")+ "||" +
                 pc.getDetails().get("highRiskPregnancyAnemia")))
-                hrp_badge.setVisibility(View.VISIBLE);
+                hrp_badge.setVisibility(VISIBLE);
 
         if ("yes".matches(pc.getDetails().get("highRiskLabourFetusMalpresentation")+ "||" +
                 pc.getDetails().get("highRiskLabourFetusSize")+ "||" +
                 pc.getDetails().get("highRisklabourFetusNumber")+ "||" +
                 pc.getDetails().get("HighRiskLabourSectionCesareaRecord")+ "||" +
                 pc.getDetails().get("highRiskLabourTBRisk")))
-                hrl_badge.setVisibility(View.VISIBLE);
+                hrl_badge.setVisibility(VISIBLE);
 
         //start profile image
         profilePic.setTag(R.id.entity_id, pc.getColumnmaps().get("_id"));//required when saving file to disk
@@ -448,7 +448,7 @@ public class ANCClientsProvider extends BaseClientsProvider {
 //                || risk9 != null && risk9.equals("yes")
 //                || risk10 != null && risk10.equals("yes")) {
 //
-//            riskview.setVisibility(View.VISIBLE);
+//            riskview.setVisibility(VISIBLE);
 //        }
 //    }
 

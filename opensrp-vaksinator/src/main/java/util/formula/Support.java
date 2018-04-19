@@ -31,9 +31,9 @@ public class Support {
             return new String[]{"0","0"};
         String []temp = data.split(",");
         String []result = {"",""};
-        for(int i=0;i<temp.length;i++){
-            result[0]=result[0]+","+temp[i].split(":")[0];
-            result[1]=result[1]+","+temp[i].split(":")[1];
+        for (String aTemp : temp) {
+            result[0] = result[0] + "," + aTemp.split(":")[0];
+            result[1] = result[1] + "," + aTemp.split(":")[1];
         }
         result[0]=result[0].substring(1,result[0].length());
         result[1]=result[1].substring(1,result[1].length());
@@ -87,8 +87,8 @@ public class Support {
 
     public static String combine(String[]data, String separator){
         String result="";
-        for(int i=0;i<data.length;i++){
-            result=result+separator+data[i];
+        for (String aData : data) {
+            result = result + separator + aData;
         }
         return result.substring(1,result.length());
     }

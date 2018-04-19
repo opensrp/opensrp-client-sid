@@ -156,14 +156,14 @@ public class KBClientsProvider extends BaseClientsProvider {
         follow_up.setOnClickListener(onClickListener);
         follow_up.setTag(smartRegisterClient);
 
-//        hr_badge.setVisibility(View.INVISIBLE);
+//        hr_badge.setVisibility(INVISIBLE);
         ImageView hr_badge = (ImageView) convertView.findViewById(R.id.iv_hr_badge);
 
         //Risk flag
         if ("yes".matches(pc.getDetails().get("highRiskSTIBBVs")+"||"+ pc.getDetails().get("highRiskEctopicPregnancy")+"||"+ pc.getDetails().get("highRiskCardiovascularDiseaseRecord")+"||"+
                 pc.getDetails().get("highRiskDidneyDisorder")+"||"+ pc.getDetails().get("highRiskHeartDisorder")+"||"+ pc.getDetails().get("highRiskAsthma")+"||"+
                 pc.getDetails().get("highRiskTuberculosis")+"||"+ pc.getDetails().get("highRiskMalaria")+"||"+ pc.getDetails().get("highRiskPregnancyYoungMaternalAge")+"||"+
-                pc.getDetails().get("highRiskPregnancyOldMaternalAge"))) hr_badge.setVisibility(View.VISIBLE);
+                pc.getDetails().get("highRiskPregnancyOldMaternalAge"))) hr_badge.setVisibility(VISIBLE);
 
         profilePic.setTag(R.id.entity_id, pc.getColumnmaps().get("_id"));//required when saving file to disk
         Support.setImagetoHolderFromUri((Activity) mContext, pc.getDetails().get("base_entity_id"), profilePic, R.mipmap.woman_placeholder);
@@ -192,8 +192,8 @@ public class KBClientsProvider extends BaseClientsProvider {
         ((TextView) convertView.findViewById(R.id.tv_risk_IMS)).setText(pc.getDetails().get("alkiPenyakitIms") != null ? pc.getDetails().get("alkiPenyakitIms") : "");
         ((TextView) convertView.findViewById(R.id.tv_risk_PenyakitKronis)).setText(pc.getDetails().get("alkiPenyakitKronis") != null ? pc.getDetails().get("alkiPenyakitKronis") : "");
 
-        convertView.findViewById(R.id.iv_hrp_badge).setVisibility(View.INVISIBLE);
-        convertView.findViewById(R.id.iv_hrl_badge).setVisibility(View.INVISIBLE);
+        convertView.findViewById(R.id.iv_hrp_badge).setVisibility(INVISIBLE);
+        convertView.findViewById(R.id.iv_hrl_badge).setVisibility(INVISIBLE);
 
         LinearLayout follow_layout = (LinearLayout) convertView.findViewById(R.id.follow_layout);
         TextView follow_due = (TextView) convertView.findViewById(R.id.tv_b_edd);
@@ -266,7 +266,7 @@ public class KBClientsProvider extends BaseClientsProvider {
 //                || risk9 != null && risk9.equals("yes")
 //                || risk10 != null && risk10.equals("yes")) {
 //
-//            riskview.setVisibility(View.VISIBLE);
+//            riskview.setVisibility(VISIBLE);
 //        }
 
 //    }

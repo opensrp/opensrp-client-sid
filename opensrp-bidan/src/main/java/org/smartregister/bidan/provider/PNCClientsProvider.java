@@ -180,26 +180,26 @@ public class PNCClientsProvider extends BaseClientsProvider {
         ((TextView) convertView.findViewById(R.id.tv_td_sistolik)).setText(humanize(pc.getDetails().get("tandaVitalTDSistolik") != null ? pc.getDetails().get("tandaVitalTDSistolik") : ""));
         ((TextView) convertView.findViewById(R.id.tv_td_diastolik)).setText(humanize(pc.getDetails().get("tandaVitalTDDiastolik") != null ? pc.getDetails().get("tandaVitalTDDiastolik") : ""));
 
-        convertView.findViewById(R.id.iv_hr_badge).setVisibility(View.INVISIBLE);
-        convertView.findViewById(R.id.iv_hrp_badge).setVisibility(View.INVISIBLE);
-        convertView.findViewById(R.id.iv_hrl_badge).setVisibility(View.INVISIBLE);
+        convertView.findViewById(R.id.iv_hr_badge).setVisibility(INVISIBLE);
+        convertView.findViewById(R.id.iv_hrp_badge).setVisibility(INVISIBLE);
+        convertView.findViewById(R.id.iv_hrl_badge).setVisibility(INVISIBLE);
 
         //Risk flag
         if ("yes".matches(pc.getDetails().get("highRiskSTIBBVs")+ "||" + pc.getDetails().get("highRiskEctopicPregnancy")+ "||" +pc.getDetails().get("highRiskCardiovascularDiseaseRecord") + "||" +
                 pc.getDetails().get("highRiskDidneyDisorder")+ "||" +pc.getDetails().get("highRiskHeartDisorder")+ "||" +pc.getDetails().get("highRiskAsthma") + "||" +
                 pc.getDetails().get("highRiskTuberculosis")+ "||" +pc.getDetails().get("highRiskMalaria")+ "||" +pc.getDetails().get("highRiskPregnancyYoungMaternalAge") + "||" +
                 pc.getDetails().get("highRiskPregnancyOldMaternalAge")))
-            convertView.findViewById(R.id.iv_hr_badge).setVisibility(View.VISIBLE);
+            convertView.findViewById(R.id.iv_hr_badge).setVisibility(VISIBLE);
 
         if ("yes".matches(pc.getDetails().get("highRiskPregnancyPIH")+ "||" +pc.getDetails().get("highRiskPregnancyProteinEnergyMalnutrition") +"||"+
                 pc.getDetails().get("HighRiskPregnancyTooManyChildren") + "||" +
                 pc.getDetails().get("highRiskPregnancyDiabetes")+ "||" +pc.getDetails().get("highRiskPregnancyAnemia")))
-            convertView.findViewById(R.id.iv_hrp_badge).setVisibility(View.VISIBLE);
+            convertView.findViewById(R.id.iv_hrp_badge).setVisibility(VISIBLE);
 
         if ("yes".matches(pc.getDetails().get("highRiskLabourFetusMalpresentation")+ "||" +pc.getDetails().get("highRiskLabourFetusSize")+"||"+
                 pc.getDetails().get("highRisklabourFetusNumber")+ "||" +pc.getDetails().get("HighRiskLabourSectionCesareaRecord")+"||"+
                 pc.getDetails().get("highRiskLabourTBRisk")))
-            convertView.findViewById(R.id.iv_hrl_badge).setVisibility(View.VISIBLE);
+            convertView.findViewById(R.id.iv_hrl_badge).setVisibility(VISIBLE);
 
         String kf_ke = pc.getDetails().get("hariKeKF") != null ? pc.getDetails().get("hariKeKF") : "";
         ((TextView) convertView.findViewById(R.id.tv_kf)).setText(String.format("%s %s", mContext.getString(R.string.hari_ke_kf), humanizeAndDoUPPERCASE(kf_ke)));
@@ -233,7 +233,7 @@ public class PNCClientsProvider extends BaseClientsProvider {
 //                || risk9 != null && risk9.equals("yes")
 //                || risk10 != null && risk10.equals("yes")) {
 //
-//            riskview.setVisibility(View.VISIBLE);
+//            riskview.setVisibility(VISIBLE);
 //        }
 //
 //    }

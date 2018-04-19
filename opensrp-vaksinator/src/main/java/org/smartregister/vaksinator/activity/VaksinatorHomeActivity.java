@@ -155,7 +155,7 @@ public class VaksinatorHomeActivity extends SecuredActivity {
         findViewById(R.id.btn_TT_vaksinator_register).setOnClickListener(onRegisterStartListener);
         findViewById(R.id.btn_reporting).setOnClickListener(onButtonsClickListener);
         // findViewById(R.id.btn_test2_register).setOnClickListener(onRegisterStartListener);
-        // findViewById(R.id.btn_tt_register).setVisibility(View.INVISIBLE);
+        // findViewById(R.id.btn_tt_register).setVisibility(INVISIBLE);
         // findViewById(R.id.btn_videos).setOnClickListener(onButtonsClickListener);
 
         anakRegisterClientCountView = (TextView) findViewById(R.id.txt_vaksinator_register_client_count);

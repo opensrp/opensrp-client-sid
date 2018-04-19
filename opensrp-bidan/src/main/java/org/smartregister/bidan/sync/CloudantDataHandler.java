@@ -115,7 +115,7 @@ public class CloudantDataHandler {
             return null;
         }
 
-        Map<String, Object> query = new HashMap<String, Object>();
+        Map<String, Object> query = new HashMap<>();
         query.put("type", "Client");
         query.put(baseEntityIdJSONKey, baseEntityId);
 
@@ -135,7 +135,7 @@ public class CloudantDataHandler {
             return null;
         }
 
-        Map<String, Object> query = new HashMap<String, Object>();
+        Map<String, Object> query = new HashMap<>();
         query.put("type", "Client");
         query.put(baseEntityIdJSONKey, baseEntityId);
 
@@ -374,7 +374,7 @@ public class CloudantDataHandler {
     public List<Client> allClients() {
         int nDocs = this.mDatastore.getDocumentCount();
         List<DocumentRevision> all = this.mDatastore.getAllDocuments(0, nDocs, true);
-        List<Client> clients = new ArrayList<Client>();
+        List<Client> clients = new ArrayList<>();
         // Filter all documents down to those of type client.
         for (DocumentRevision rev : all) {
             Client client = null;

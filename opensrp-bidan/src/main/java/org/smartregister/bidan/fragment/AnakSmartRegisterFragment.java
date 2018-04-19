@@ -34,6 +34,7 @@ import java.util.ArrayList;
 import java.util.Map;
 
 import static android.view.View.INVISIBLE;
+import static android.view.View.VISIBLE;
 import static org.smartregister.bidan.utils.BidanConstants.CHILD_TABLE_NAME;
 
 //import com.flurry.android.FlurryAgent;
@@ -139,10 +140,10 @@ public class AnakSmartRegisterFragment extends BaseSmartRegisterFragment {
 
         super.setupViews(view);
         view.findViewById(R.id.btn_report_month).setVisibility(INVISIBLE);
-        view.findViewById(R.id.register_client).setVisibility(View.GONE);
-        view.findViewById(R.id.service_mode_selection).setVisibility(View.GONE);
-        clientsView.setVisibility(View.VISIBLE);
-        clientsProgressView.setVisibility(View.INVISIBLE);
+        view.findViewById(R.id.register_client).setVisibility(GONE);
+        view.findViewById(R.id.service_mode_selection).setVisibility(GONE);
+        clientsView.setVisibility(VISIBLE);
+        clientsProgressView.setVisibility(INVISIBLE);
         initializeQueries(getCriteria());
     }
 

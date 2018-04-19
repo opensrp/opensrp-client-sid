@@ -57,7 +57,7 @@ public class GiziGrowthChartActivity extends Activity{
                 overridePendingTransition(0, 0);
 
                 String DetailEnd = new SimpleDateFormat("hh:mm:ss").format(new Date());
-                Map<String, String> Detail = new HashMap<String, String>();
+                Map<String, String> Detail = new HashMap<>();
                 Detail.put("end", DetailEnd);
                 FlurryAgent.logEvent("gizi_detail_view", Detail, true);
             }

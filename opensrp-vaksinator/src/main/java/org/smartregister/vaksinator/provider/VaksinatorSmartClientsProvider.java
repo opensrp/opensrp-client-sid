@@ -100,7 +100,7 @@ public class VaksinatorSmartClientsProvider implements SmartRegisterCLientsProvi
 
         viewHolder.name.setText(Support.getDetails(pc,"namaBayi"));
         String ages = pc.getColumnmaps().get("tanggalLahirAnak").substring(0, pc.getColumnmaps().get("tanggalLahirAnak").indexOf("T"));
-        viewHolder.age.setVisibility(View.INVISIBLE);//.setText(pc.getDetails().get("tanggalLahirAnak")!= null ? Integer.toString(monthRangeToToday(ages))+" bln" : "");
+        viewHolder.age.setVisibility(INVISIBLE);//.setText(pc.getDetails().get("tanggalLahirAnak")!= null ? Integer.toString(monthRangeToToday(ages))+" bln" : "");
 
         AllCommonsRepository childRepository = org.smartregister.Context.getInstance().allCommonsRepositoryobjects("ec_anak");
         CommonPersonObject childobject = childRepository.findByCaseID(pc.entityId());

@@ -13,12 +13,7 @@ import android.widget.Toast;
 import com.flurry.android.FlurryAgent;
 
 import org.json.JSONObject;
-import org.opensrp.api.domain.Location;
-import org.opensrp.api.util.EntityUtils;
-import org.opensrp.api.util.LocationTree;
-import org.opensrp.api.util.TreeNode;
 import org.smartregister.Context;
-import org.smartregister.commonregistry.CommonPersonObjectController;
 import org.smartregister.cursoradapter.SmartRegisterQueryBuilder;
 import org.smartregister.enketo.view.fragment.DisplayFormFragment;
 import org.smartregister.event.Listener;
@@ -97,10 +92,9 @@ public class GiziHomeActivity extends SecuredActivity {
 
     private TextView anakRegisterClientCountView;
     private TextView ibuRegisterClientCountView;
-    public static CommonPersonObjectController kicontroller;
-    public static CommonPersonObjectController childcontroller;
-    public static int kicount;
-
+//    public static CommonPersonObjectController kicontroller;
+//    public static CommonPersonObjectController childcontroller;
+//    public static int kicount;
     private int childcount;
     private int ibucount;
 
@@ -117,7 +111,7 @@ public class GiziHomeActivity extends SecuredActivity {
         DisplayFormFragment.okMessage = getResources().getString(R.string.okforminputerror);
 
         String HomeStart = timer.format(new Date());
-        Map<String, String> Home = new HashMap<String, String>();
+        Map<String, String> Home = new HashMap<>();
         Home.put("start", HomeStart);
         FlurryAgent.logEvent("gizi_home_dashboard",Home, true );
 
@@ -152,6 +146,7 @@ public class GiziHomeActivity extends SecuredActivity {
         SYNC_COMPLETED.addListener(onSyncCompleteListener);
         FORM_SUBMITTED.addListener(onFormSubmittedListener);
         ACTION_HANDLED.addListener(updateANMDetailsListener);
+        if (getSupportActionBar()!= null)
         getSupportActionBar().setTitle("");
         getSupportActionBar().setIcon(getResources().getDrawable(org.smartregister.gizi.R.mipmap.logo));
         getSupportActionBar().setLogo(org.smartregister.gizi.R.mipmap.logo);
@@ -263,19 +258,14 @@ public class GiziHomeActivity extends SecuredActivity {
         Log.d("Home", "updateFromServer: tombol update");
         UpdateActionsTask updateActionsTask = new UpdateActionsTask(
                 this, context().actionService(), new FormSubmissionSyncService(context().applicationContext()) ,new SyncProgressIndicator(), context().allFormVersionSyncService());
-//        FlurryFacade.logEvent("click_update_from_server");
         updateActionsTask.updateFromServer(new SyncAfterFetchListener());
-
+//        FlurryFacade.logEvent("click_update_from_server");
 //        if (LoginActivity.generator.uniqueIdController().needToRefillUniqueId(LoginActivity.generator.UNIQUE_ID_LIMIT))  // unique id part
 //            LoginActivity.generator.requestUniqueId();                                                                  // unique id part
-
-        String locationjson = context().anmLocationController().get();
-        LocationTree locationTree = EntityUtils.fromJson(locationjson, LocationTree.class);
-
-        Map<String, TreeNode<String, Location>> locationMap =
-                locationTree.getLocationsHierarchy();
-
-
+//        String locationjson = context().anmLocationController().get();
+//        LocationTree locationTree = EntityUtils.fromJson(locationjson, LocationTree.class);
+//        Map<String, TreeNode<String, Location>> locationMap =
+//                locationTree.getLocationsHierarchy();
 
         String query  = "SELECT name FROM sqlite_master WHERE type='table'";
         String db = context().initRepository().getWritableDatabase().getPath();
@@ -377,8 +367,9 @@ public class GiziHomeActivity extends SecuredActivity {
                     break;
 
             }
+
             String HomeEnd = timer.format(new Date());
-            Map<String, String> Home = new HashMap<String, String>();
+            Map<String, String> Home = new HashMap<>();
             Home.put("end", HomeEnd);
             FlurryAgent.logEvent("gizi_home_dashboard",Home, true);
         }

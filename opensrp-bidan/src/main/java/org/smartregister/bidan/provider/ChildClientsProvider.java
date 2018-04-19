@@ -193,11 +193,11 @@ public class ChildClientsProvider implements SmartRegisterCLientsProviderForCurs
 
     private void checkVisibility(String immunization1, String immunization2, ImageView no, ImageView yes) {
         if (immunization1 != null || immunization2 != null) {
-            no.setVisibility(View.INVISIBLE);
-            yes.setVisibility(View.VISIBLE);
+            no.setVisibility(INVISIBLE);
+            yes.setVisibility(VISIBLE);
         } else {
-            no.setVisibility(View.VISIBLE);
-            yes.setVisibility(View.INVISIBLE);
+            no.setVisibility(VISIBLE);
+            yes.setVisibility(INVISIBLE);
         }
 
     }

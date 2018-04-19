@@ -1,7 +1,6 @@
 package org.smartregister.bidan.sync;
 
 import android.content.Context;
-//import android.content.Context;
 import android.util.Log;
 import android.widget.Toast;
 
@@ -19,6 +18,8 @@ import org.smartregister.view.ProgressIndicator;
 import static org.smartregister.domain.FetchStatus.fetched;
 import static org.smartregister.domain.FetchStatus.nothingFetched;
 import static org.smartregister.util.Log.logInfo;
+
+//import android.content.Context;
 
 public class UpdateActionsTask {
     private static final String TAG = UpdateActionsTask.class.getName();

@@ -15,7 +15,6 @@ import android.text.InputType;
 import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.KeyEvent;
-import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -219,10 +218,8 @@ public class LoginActivity extends Activity {
         final String password = passwordEditText.getText().toString();
 
         if (context.userService().hasARegisteredUser()) {
-            android.util.Log.e(TAG, "login: lokal ");
             localLogin(view, userName, password);
         } else {
-            android.util.Log.e(TAG, "login: remote ");
             remoteLogin(view, userName, password);
         }
     }
@@ -354,7 +351,7 @@ public class LoginActivity extends Activity {
                     .getString("name");
 
         } catch (JSONException e) {
-            android.util.Log.v("Error : ", e.getMessage());
+            Log.v("Error : ", e.getMessage());
         }
 
         return null;

@@ -672,7 +672,7 @@ public class ClientProcessor {
     }
 
     private Map<String, String> getClientAttributes(JSONObject client) {
-        Map<String, String> attributes = new HashMap<String, String>();
+        Map<String, String> attributes = new HashMap<>();
 
         try {
             String attributesKey = "attributes";

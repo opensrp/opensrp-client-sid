@@ -48,11 +48,10 @@ import java.util.Map;
 
 import util.AsyncTask;
 
+import static android.view.View.GONE;
 import static android.view.View.INVISIBLE;
 import static android.view.View.VISIBLE;
-import static org.apache.commons.lang3.StringUtils.defaultIfBlank;
 import static org.apache.commons.lang3.StringUtils.isEmpty;
-
 //import org.smartregister.cursoradapter.SmartRegisterQueryBuilder;
 
 /**
@@ -116,7 +115,7 @@ public class VaksinatorSmartRegisterFragment extends SecuredNativeSmartRegisterC
             @Override
             public DialogOption[] filterOptions() {
                 FlurryAgent.logEvent("click_filter_option_on_kohort_ibu_dashboard");
-                ArrayList<DialogOption> dialogOptionslist = new ArrayList<DialogOption>();
+                ArrayList<DialogOption> dialogOptionslist = new ArrayList<>();
 
                 dialogOptionslist.add(new CursorCommonObjectFilterOption(getString(R.string.filter_by_all_label),filterStringForAll()));
                 //     dialogOptionslist.add(new CursorCommonObjectFilterOption(getString(R.string.hh_no_mwra),filterStringForNoElco()));
@@ -184,9 +183,9 @@ public class VaksinatorSmartRegisterFragment extends SecuredNativeSmartRegisterC
 
         super.setupViews(view);
         view.findViewById(R.id.btn_report_month).setVisibility(INVISIBLE);
-        view.findViewById(R.id.service_mode_selection).setVisibility(View.GONE);
-        clientsView.setVisibility(View.VISIBLE);
-        clientsProgressView.setVisibility(View.INVISIBLE);
+        view.findViewById(R.id.service_mode_selection).setVisibility(GONE);
+        clientsView.setVisibility(VISIBLE);
+        clientsProgressView.setVisibility(INVISIBLE);
 //        list.setBackgroundColor(Color.RED);
         initializeQueries();
     }

@@ -7,7 +7,6 @@ import org.mockito.Mockito;
 import org.robolectric.TestLifecycleApplication;
 import org.smartregister.Context;
 import org.smartregister.bidan.application.BidanApplication;
-import org.smartregister.bidan.repository.BidanRepository;
 import org.smartregister.domain.Alert;
 import org.smartregister.service.AlertService;
 

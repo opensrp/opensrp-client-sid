@@ -369,12 +369,7 @@ public class CloudantSyncHandler {
 
             JsonObject rootJson = root.getAsJsonObject();
 
-            if (rootJson.has("ok") && rootJson.has("id") && rootJson.get("id").getAsString()
-                    .equals(designDocumentId)) {
-                return rootJson.get("ok").getAsBoolean();
-            }
-
-            return false;
+            return rootJson.has("ok") && rootJson.has("id") && rootJson.get("id").getAsString().equals(designDocumentId) && rootJson.get("ok").getAsBoolean();
 
         } catch (Exception e) {
             Log.e(LOG_TAG, "Exception While setting replication filter", e);

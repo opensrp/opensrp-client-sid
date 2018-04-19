@@ -62,10 +62,8 @@ public class PermissionHelper extends Fragment {
         String[] permissions = getArguments().getStringArray(ARGS_PERMISSIONS);
 //        String[] var3 = permissions;
         int var4 = permissions.length;
-        for (int var5 = 0; var5 < var4; var5++) {
-            String permission = permissions[var5];
-
-//            if (ContextCompat.checkSelfPermission(getActivity(), permission) == 0) {
+        for (String permission : permissions) {
+            //            if (ContextCompat.checkSelfPermission(getActivity(), permission) == 0) {
 //                this.mCallback.onPermissionResult(permission, true);
 //            } else {
             requiredPermissions.add(permission);
