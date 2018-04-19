@@ -5,6 +5,7 @@ import android.util.Log;
 
 import org.joda.time.DateTime;
 import org.json.JSONArray;
+import org.json.JSONException;
 import org.json.JSONObject;
 import org.smartregister.domain.Response;
 import org.smartregister.repository.EventClientRepository;
@@ -41,7 +42,7 @@ public class ECSyncUpdater {
         db = VaksinatorApplication.getInstance().eventClientRepository();
     }
     
-    public JSONObject fetchAsJsonObject(String filter, String filterValue) throws Exception {
+    public JSONObject fetchAsJsonObject(String filter, String filterValue) throws JSONException {
         try {
             HTTPAgent httpAgent = VaksinatorApplication.getInstance().context().getHttpAgent();
             String baseUrl = VaksinatorApplication.getInstance().context().
@@ -57,18 +58,18 @@ public class ECSyncUpdater {
             Log.i(ECSyncUpdater.class.getName(), "URL: " + url);
 
             if (httpAgent == null) {
-                throw new Exception(SEARCH_URL + " http agent is null");
+                throw new IllegalAccessException(SEARCH_URL + " http agent is null");
             }
 
             Response resp = httpAgent.fetch(url);
             if (resp.isFailure()) {
-                throw new Exception(SEARCH_URL + " not returned data");
+                throw new IllegalAccessException(SEARCH_URL + " not returned data");
             }
 
             return new JSONObject((String) resp.payload());
         } catch (Exception e) {
             Log.e(getClass().getName(), "Exception", e);
-            throw new Exception(SEARCH_URL + " threw exception", e);
+            throw new JSONException(SEARCH_URL + " threw exception "+ e.getCause());
         }
     }
 

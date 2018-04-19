@@ -452,8 +452,8 @@ public class EnketoFormUtils {
     }
 
     private void writeXML(Element node, XmlSerializer serializer, JSONObject fieldOverrides,
-                          JSONObject formDefinition, JSONObject entityJson, String parentId) {
-        try {
+                          JSONObject formDefinition, JSONObject entityJson, String parentId) throws JSONException, IOException {
+//        try {
             String nodeName = node.getNodeName();
             String entityId =
                     entityJson.has("id") ? entityJson.getString("id") : generateRandomUUIDString();
@@ -492,8 +492,7 @@ public class EnketoFormUtils {
                         // get the subform definition
                         JSONArray subForms = formDefinition.getJSONObject("form").
                                 getJSONArray("sub_forms");
-                        JSONObject subFormDefinition = retriveSubformDefinitionForBindPath(subForms,
-                                fieldName);
+                        JSONObject subFormDefinition = retriveSubformDefinitionForBindPath(subForms, fieldName);
                         if (subFormDefinition != null) {
 
                             String childTableName = subFormDefinition.getString("ec_bind_type");
@@ -548,9 +547,9 @@ public class EnketoFormUtils {
 
             serializer.endTag("", node.getNodeName());
 
-        } catch (Exception e) {
-            throw new RuntimeException(e);
-        }
+//        } catch (Exception e) {
+//            throw new RuntimeException(e);
+//        }
     }
 
     /**
@@ -665,7 +664,7 @@ public class EnketoFormUtils {
 //        return getXPath(parent) + "/";
 //    }
 
-    private List<String> getSubFormNames(JSONObject formDefinition) throws Exception {
+    private List<String> getSubFormNames(JSONObject formDefinition) throws JSONException {
         List<String> subFormNames = new ArrayList<>();
         if (formDefinition.has("form") && formDefinition.getJSONObject("form").has("sub_forms")) {
             JSONArray subForms = formDefinition.getJSONObject("form").getJSONArray("sub_forms");
@@ -681,8 +680,7 @@ public class EnketoFormUtils {
         return subFormNames;
     }
 
-    private JSONObject retriveSubformDefinitionForBindPath(JSONArray subForms, String fieldName)
-            throws Exception {
+    private JSONObject retriveSubformDefinitionForBindPath(JSONArray subForms, String fieldName) throws JSONException {
         for (int i = 0; i < subForms.length(); i++) {
             JSONObject subForm = subForms.getJSONObject(i);
             String subFormNameStr = subForm.getString("default_bind_path");
@@ -698,8 +696,8 @@ public class EnketoFormUtils {
     }
 
     private void writeXMLAttributes(Element node, XmlSerializer serializer, String id, String
-            relationalId) {
-        try {
+            relationalId) throws IOException {
+//        try {
             // get a map containing the attributes of this node
             NamedNodeMap attributes = node.getAttributes();
 
@@ -721,9 +719,9 @@ public class EnketoFormUtils {
                 serializer.attribute("", attrName, attrValue);
             }
 
-        } catch (Exception e) {
-            throw new RuntimeException(e);
-        }
+//        } catch (Exception e) {
+//            throw new RuntimeException(e);
+//        }
     }
 
     private String generateRandomUUIDString() {

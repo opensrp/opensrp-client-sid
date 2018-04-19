@@ -147,7 +147,7 @@ public class CloudantSyncHandler {
         if (this.mPushReplicator != null) {
             this.mPushReplicator.start();
         } else {
-            throw new RuntimeException("Push replication not set up correctly");
+            throw new IllegalArgumentException("Push replication not set up correctly");
         }
     }
 
@@ -158,7 +158,7 @@ public class CloudantSyncHandler {
         if (this.mPullReplicator != null) {
             this.mPullReplicator.start();
         } else {
-            throw new RuntimeException("Push replication not set up correctly");
+            throw new IllegalArgumentException("Push replication not set up correctly");
         }
     }
 

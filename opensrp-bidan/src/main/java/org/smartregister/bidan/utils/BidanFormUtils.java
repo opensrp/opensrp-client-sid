@@ -694,8 +694,7 @@ public class BidanFormUtils {
         return null;
     }
 
-    private void writeXMLAttributes(Element node, XmlSerializer serializer, String id, String
-            relationalId) {
+    private void writeXMLAttributes(Element node, XmlSerializer serializer, String id, String relationalId) {
         try {
             // get a map containing the attributes of this node
             NamedNodeMap attributes = node.getAttributes();
@@ -718,8 +717,8 @@ public class BidanFormUtils {
                 serializer.attribute("", attrName, attrValue);
             }
 
-        } catch (Exception e) {
-            throw new RuntimeException(e);
+        } catch (IOException e) {
+            e.printStackTrace();
         }
     }
 

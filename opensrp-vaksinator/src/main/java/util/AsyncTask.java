@@ -20,6 +20,7 @@ import android.annotation.TargetApi;
 import android.os.Handler;
 import android.os.Message;
 import android.os.Process;
+import android.util.Log;
 
 import java.util.ArrayDeque;
 import java.util.concurrent.BlockingQueue;
@@ -227,13 +228,13 @@ public abstract class AsyncTask<Params, Progress, Result> {
     public static final Executor SERIAL_EXECUTOR = Utils.hasHoneycomb() ? new SerialExecutor() :
             Executors.newSingleThreadExecutor(sThreadFactory);
 
-    public static final Executor DUAL_THREAD_EXECUTOR =
-            Executors.newFixedThreadPool(2, sThreadFactory);
+//    public static final Executor DUAL_THREAD_EXECUTOR = Executors.newFixedThreadPool(2, sThreadFactory);
 
     private static final int MESSAGE_POST_RESULT = 0x1;
     private static final int MESSAGE_POST_PROGRESS = 0x2;
 
     private static final InternalHandler sHandler = new InternalHandler();
+    private static final String TAG = AsyncTask.class.getName();
 
     private static volatile Executor sDefaultExecutor = SERIAL_EXECUTOR;
     private final WorkerRunnable<Params, Result> mWorker;
@@ -322,8 +323,8 @@ public abstract class AsyncTask<Params, Progress, Result> {
                 } catch (InterruptedException e) {
                     android.util.Log.w(LOG_TAG, e);
                 } catch (ExecutionException e) {
-                    throw new RuntimeException("An error occured while executing doInBackground()",
-                            e.getCause());
+//                    throw new RuntimeException("An error occured while executing doInBackground()", e.getCause());
+                    Log.e(TAG, "done: An error occured while executing doInBackground() "+ e.getCause() );
                 } catch (CancellationException e) {
                     postResultIfNotInvoked(null);
                 }
@@ -341,7 +342,7 @@ public abstract class AsyncTask<Params, Progress, Result> {
     private Result postResult(Result result) {
         @SuppressWarnings("unchecked")
         Message message = sHandler.obtainMessage(MESSAGE_POST_RESULT,
-                new AsyncTaskResult<Result>(this, result));
+                new AsyncTaskResult<>(this, result));
         message.sendToTarget();
         return result;
     }
