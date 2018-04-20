@@ -723,8 +723,9 @@ public class EnketoFormUtils {
                 serializer.attribute("", attrName, attrValue);
             }
 
-        } catch (Exception e) {
-            throw new RuntimeException(e);
+        } catch (IOException e) {
+            e.printStackTrace();
+//            throw new RuntimeException(e);
         }
     }
 
