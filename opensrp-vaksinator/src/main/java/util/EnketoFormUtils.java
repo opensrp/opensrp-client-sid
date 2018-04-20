@@ -552,35 +552,35 @@ public class EnketoFormUtils {
 //        }
     }
 
-    /**
-     * Retrieve additional details for this record from the details Table.
-     *
-     * @param entityJson
-     * @return
-     */
-    private JSONObject getCombinedJsonObjectForObject(JSONObject entityJson) {
-        try {
-            String baseEntityId = entityJson.getString("base_entity_id");
-            Map<String, String> map = theAppContext.detailsRepository().
-                    getAllDetailsForClient(baseEntityId);
-
-            for (String key : map.keySet()) {
-                if (!entityJson.has(key)) {
-                    entityJson.put(key, map.get(key));
-                }
-            }
-        } catch (Exception e) {
-            android.util.Log.e(TAG, e.toString(), e);
-        }
-        return entityJson;
-    }
+//    /**
+//     * Retrieve additional details for this record from the details Table.
+//     *
+//     * @param entityJson
+//     * @return
+//     */
+//    private JSONObject getCombinedJsonObjectForObject(JSONObject entityJson) {
+//        try {
+//            String baseEntityId = entityJson.getString("base_entity_id");
+//            Map<String, String> map = theAppContext.detailsRepository().
+//                    getAllDetailsForClient(baseEntityId);
+//
+//            for (String key : map.keySet()) {
+//                if (!entityJson.has(key)) {
+//                    entityJson.put(key, map.get(key));
+//                }
+//            }
+//        } catch (Exception e) {
+//            android.util.Log.e(TAG, e.toString(), e);
+//        }
+//        return entityJson;
+//    }
 
     /**
      * Iterate through the provided array and retrieve a json object whose name attribute matches
      * the name supplied
      *
-     * @param fieldName
-     * @param array
+     * @param fieldName String
+     * @param array JSONArray
      * @return
      */
     private JSONObject getJsonFieldFromArray(String fieldName, JSONArray array) {
@@ -603,9 +603,9 @@ public class EnketoFormUtils {
     /**
      * retrieves node value for cases which the nodename don't match the name of the xml element
      *
-     * @param nodeName
-     * @param entityJson
-     * @param formDefinition
+     * @param nodeName String
+     * @param entityJson JSONObject
+     * @param formDefinition JSONObject
      * @return
      */
     private String retrieveValueForNodeName(String nodeName, JSONObject entityJson, JSONObject
