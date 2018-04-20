@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Context;
 import android.database.Cursor;
 import android.graphics.drawable.Drawable;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.AbsListView;
@@ -38,8 +39,10 @@ import static android.view.ViewGroup.LayoutParams.MATCH_PARENT;
  * Created by Dimas Ciputra on 2/16/15
  */
 public class TTSmartClientsProvider implements SmartRegisterCLientsProviderForCursorAdapter {
+    private static final String TAG = TTSmartClientsProvider.class.getName();
     private final LayoutInflater inflater;
     private final Context context;
+    private final AlertService mAlertService;
     private Drawable iconPencilDrawable;
     private final AbsListView.LayoutParams clientViewLayoutParams;
 
@@ -49,11 +52,13 @@ public class TTSmartClientsProvider implements SmartRegisterCLientsProviderForCu
     public TTSmartClientsProvider(Context context, View.OnClickListener onClickListener, AlertService alertService) {
         this.onClickListener = onClickListener;
         this.context = context;
+        this.mAlertService = alertService;
         this.inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+
         clientViewLayoutParams = new AbsListView.LayoutParams(MATCH_PARENT, (int) context.getResources().getDimension(org.smartregister.vaksinator.R.dimen.list_item_height));
+
 //        int txtColorBlack = context.getResources().getColor(R.color.text_black);
 //        AlertService alertService1 = alertService;
-
     }
 
     @Override
@@ -157,6 +162,8 @@ public class TTSmartClientsProvider implements SmartRegisterCLientsProviderForCu
 
         viewHolder.status_type.setText(pc.getDetails().get("statusImunisasitt")!= null ? ttStatus(pc.getDetails().get("statusImunisasitt")):"None");
 
+        Log.i(TAG, "getView: "+ mAlertService.findByEntityId(pc.entityId()));
+
         convertView.setLayoutParams(clientViewLayoutParams);
     }
 
@@ -203,8 +210,7 @@ public class TTSmartClientsProvider implements SmartRegisterCLientsProviderForCu
 
     @Override
     public View inflatelayoutForCursorAdapter() {
-        View View = inflater().inflate(R.layout.smart_register_tt_client, null);
-        return View;
+        return inflater().inflate(R.layout.smart_register_tt_client, null);
     }
 
     public void risk (String risk1,String risk2,String risk3,String risk4,String risk5,String risk6,String risk7,String risk8,String risk9,String risk10,ImageView riskview){

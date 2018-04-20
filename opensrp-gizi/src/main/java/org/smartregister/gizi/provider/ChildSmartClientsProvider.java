@@ -153,9 +153,7 @@ public class ChildSmartClientsProvider implements SmartRegisterCLientsProviderFo
             viewHolder.subVillage.setText(Support.getDetails(kiparent, "address1") != null ? Support.getDetails(kiparent, "address1") : "");
         }
 
-
         String Tgl = Support.getDetails(pc, "tanggalLahirAnak");
-
         if (Tgl.length() > 7) {
             if (Tgl != null && Tgl.contains("T"))
                 Tgl = Tgl.substring(0, Tgl.indexOf("T"));
@@ -234,7 +232,7 @@ public class ChildSmartClientsProvider implements SmartRegisterCLientsProviderFo
                 viewHolder.vitALogo.setImageDrawable(context.getResources().getDrawable(inTheSameRegion(Support.getDetails(pc, "lastVitA")) ? R.drawable.ic_yes_large : R.drawable.ic_remove));
                 viewHolder.antihelminticLogo.setImageDrawable(context.getResources().getDrawable(isGiven(pc, "obatcacing") ? R.drawable.ic_yes_large : R.drawable.ic_remove));
 
-                setViewStatusGizi(pc,viewHolder,newestDateonHistory,history1,history2);
+                setViewStatusGizi(pc, viewHolder, newestDateonHistory, history1, history2);
                 //================ END OF Z-SCORE==============================//
             }
             convertView.setLayoutParams(clientViewLayoutParams);
@@ -244,16 +242,19 @@ public class ChildSmartClientsProvider implements SmartRegisterCLientsProviderFo
 //    CommonPersonObjectController householdelcocontroller;
 
     private void setViewStatusGizi(CommonPersonObjectClient pc, ViewHolder viewHolder, String newestDateonHistory, String[]history1, String[]history2){
-        if (Support.getDetails(pc, "tanggalPenimbangan") != "-") {
+        if ( !"-".equals(Support.getDetails(pc, "tanggalPenimbangan"))) {
             String stuntingStatus = "";
-            String underweightStatus = "";
+            String underweightStatus;
             String wastingStatus = "";
-            System.out.println("history 1 combined: "+Support.combine(history1,","));
-            System.out.println("history 2 combined: "+Support.combine(history2,","));
             int umur = Integer.parseInt(history1[history1.length - 1].split(":")[0]);
             double berat = Double.parseDouble(history1[history1.length - 1].split(":")[1]);
             double tinggi;
             boolean isMale = Support.getDetails(pc,"gender").toLowerCase().contains("em");
+
+            Log.i(TAG, "setViewStatusGizi:newestDateonHistory "+ newestDateonHistory);
+
+            System.out.println("history 1 combined: "+Support.combine(history1, ","));
+            System.out.println("history 2 combined: "+Support.combine(history2, ","));
 
             if (umur<1857){
                 ZScoreSystemCalculation calculator = new ZScoreSystemCalculation();

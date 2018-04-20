@@ -28,11 +28,6 @@ import org.smartregister.view.contract.HomeContext;
 import org.smartregister.view.controller.NativeAfterANMDetailsFetchListener;
 import org.smartregister.view.controller.NativeUpdateANMDetailsTask;
 
-import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.Map;
-
 import util.formula.Support;
 
 import static android.widget.Toast.LENGTH_SHORT;
@@ -48,7 +43,8 @@ import static org.smartregister.event.Event.SYNC_STARTED;
 
 public class VaksinatorHomeActivity extends SecuredActivity {
 
-    private SimpleDateFormat timer = new SimpleDateFormat("hh:mm:ss");
+    private static final String TAG = VaksinatorHomeActivity.class.getName();
+//    private SimpleDateFormat timer = new SimpleDateFormat("hh:mm:ss");
     private MenuItem updateMenuItem;
     private MenuItem remainingFormsToSyncMenuItem;
     private PendingFormSubmissionService pendingFormSubmissionService;
@@ -97,8 +93,8 @@ public class VaksinatorHomeActivity extends SecuredActivity {
                             AllConstantsINA.SLEEP_TIME-=1000;
                     }
                     Support.ONSYNC=false;
-                }catch (InterruptedException ie){
-
+                } catch (InterruptedException ie){
+                    ie.printStackTrace();
                 }
             }
         }.start();
@@ -122,10 +118,9 @@ public class VaksinatorHomeActivity extends SecuredActivity {
     @Override
     protected void onCreation() {
         // Get Starting Time
-        String homeStart = timer.format(new Date());
-        Map<String, String> home = new HashMap<>();
-        home.put("start", homeStart);
-
+//        String homeStart = timer.format(new Date());
+//        Map<String, String> home = new HashMap<>();
+//        home.put("start", homeStart);
         //logEvent("home_dashboard", home, true);
 
         setContentView(R.layout.smart_registers_jurim_home);
@@ -199,6 +194,7 @@ public class VaksinatorHomeActivity extends SecuredActivity {
     }
 
     private void updateRegisterCounts(HomeContext homeContext) {
+        Log.i(TAG, "updateRegisterCounts: childCount "+ homeContext.childCount());
         SmartRegisterQueryBuilder sqb = new SmartRegisterQueryBuilder();
         Cursor childcountcursor = context().commonrepository("ec_anak").rawCustomQueryForAdapter(sqb.queryForCountOnRegisters("ec_anak_search", "ec_anak_search.is_closed=0"));
         childcountcursor.moveToFirst();

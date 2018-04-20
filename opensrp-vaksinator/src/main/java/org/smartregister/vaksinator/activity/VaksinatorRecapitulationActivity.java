@@ -5,6 +5,7 @@ import android.app.Activity;
 import android.content.Intent;
 import android.database.Cursor;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ImageButton;
@@ -19,11 +20,12 @@ import org.smartregister.vaksinator.R;
 import java.util.Date;
 import java.util.Map;
 
-
 /**
  * Created by Iq on 09/06/16, modified by Marwan on 14/07/16
  */
 public class VaksinatorRecapitulationActivity extends Activity {
+    private static final String TAG = VaksinatorRecapitulationActivity.class.getName();
+    public static final String SPACE = " ";
     private Context context;
     public static CommonPersonObjectClient controller;
     public static String staticVillageName;
@@ -142,7 +144,7 @@ public class VaksinatorRecapitulationActivity extends Activity {
         if(!(filter.toLowerCase().contains("under") || filter.toLowerCase().contains("over")))
             return 0;
 
-        String[]cond = filter.split(" ");
+        String[]cond = filter.split(SPACE);
         int counter = 0;
         CommonPersonObjectClient cl;
         for(int i=0;i<clients.size();i++){
@@ -180,6 +182,7 @@ public class VaksinatorRecapitulationActivity extends Activity {
 
     @SuppressLint("SetTextI18n")
     private void updateView(LocalVariable var, org.smartregister.commonregistry.CommonPersonObjectClients clients, int month, int year){
+        Log.i(TAG, "updateView: var "+ var);
         int counter = 0;
 
         String keyword = Integer.toString(year)+"-"+(month>9 ? Integer.toString(month):"0"+ Integer.toString(month));

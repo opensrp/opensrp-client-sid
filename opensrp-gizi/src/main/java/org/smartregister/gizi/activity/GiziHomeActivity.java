@@ -44,9 +44,12 @@ import static org.smartregister.event.Event.SYNC_COMPLETED;
 import static org.smartregister.event.Event.SYNC_STARTED;
 
 public class GiziHomeActivity extends SecuredActivity {
+    private static final String TAG = GiziHomeActivity.class.getName();
     private SimpleDateFormat timer = new SimpleDateFormat("hh:mm:ss");
     private MenuItem updateMenuItem;
     private MenuItem remainingFormsToSyncMenuItem;
+    private TextView anakRegisterClientCountView;
+    private TextView ibuRegisterClientCountView;
     private PendingFormSubmissionService pendingFormSubmissionService;
 
     private Listener<Boolean> onSyncStartListener = new Listener<Boolean>() {
@@ -64,17 +67,14 @@ public class GiziHomeActivity extends SecuredActivity {
         @Override
         public void onEvent(Boolean data) {
             //#TODO: RemainingFormsToSyncCount cannot be updated from a back ground thread!!
-            Support.ONSYNC = true;
+//            Support.ONSYNC = true;
             updateRemainingFormsToSyncCount();
             if (updateMenuItem != null) {
                 updateMenuItem.setActionView(null);
             }
             updateRegisterCounts();
-
         }
     };
-
-
 
     private Listener<String> onFormSubmittedListener = new Listener<String>() {
         @Override
@@ -89,9 +89,6 @@ public class GiziHomeActivity extends SecuredActivity {
             updateRegisterCounts();
         }
     };
-
-    private TextView anakRegisterClientCountView;
-    private TextView ibuRegisterClientCountView;
 
 
     @Override
@@ -161,8 +158,6 @@ public class GiziHomeActivity extends SecuredActivity {
        // initFR();
     }
 
-
-
     private void updateRegisterCounts() {
         NativeUpdateANMDetailsTask task = new NativeUpdateANMDetailsTask(Context.getInstance().anmController());
         task.fetch(new NativeAfterANMDetailsFetchListener() {
@@ -174,6 +169,7 @@ public class GiziHomeActivity extends SecuredActivity {
     }
 
     private void updateRegisterCounts(HomeContext homeContext) {
+        Log.i(TAG, "updateRegisterCounts: ANC Count "+homeContext.ancCount());
         SmartRegisterQueryBuilder sqb = new SmartRegisterQueryBuilder();
         Cursor childcountcursor = context().commonrepository("ec_anak").rawCustomQueryForAdapter(sqb.queryForCountOnRegisters("ec_anak_search", "ec_anak_search.is_closed=0"));
         childcountcursor.moveToFirst();
@@ -188,7 +184,6 @@ public class GiziHomeActivity extends SecuredActivity {
         ibuRegisterClientCountView.setText(valueOf(ibucount));
 
         anakRegisterClientCountView.setText(valueOf(childcount));
-
 
     }
 
@@ -249,6 +244,7 @@ public class GiziHomeActivity extends SecuredActivity {
 
 
     }*/
+
     public void updateFromServer() {
         Log.d("Home", "updateFromServer: tombol update");
         UpdateActionsTask updateActionsTask = new UpdateActionsTask(
@@ -384,7 +380,6 @@ public class GiziHomeActivity extends SecuredActivity {
                     break;
 
                 default:
-                    break;
             }
         }
     };

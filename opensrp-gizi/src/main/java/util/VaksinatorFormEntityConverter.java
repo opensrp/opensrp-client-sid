@@ -54,17 +54,17 @@ public class VaksinatorFormEntityConverter {
         mContext = _context;
     }
 
-    /**
-     * Whether form submission is an openmrs form. The xlsform made openmrs form by mapping to an
-     * encounter_type in settings in xlsform.
-     *
-     * @param fs
-     * @return
-     */
-    public boolean isOpenmrsForm(FormSubmissionMap fs) {
-        String eventType = fs.formAttributes().get("encounter_type");
-        return !StringUtils.isEmpty(eventType);
-    }
+//    /**
+//     * Whether form submission is an openmrs form. The xlsform made openmrs form by mapping to an
+//     * encounter_type in settings in xlsform.
+//     *
+//     * @param fs
+//     * @return
+//     */
+//    public boolean isOpenmrsForm(FormSubmissionMap fs) {
+//        String eventType = fs.formAttributes().get("encounter_type");
+//        return !StringUtils.isEmpty(eventType);
+//    }
 
     /**
      * Extract Event from given form submission
@@ -142,26 +142,25 @@ public class VaksinatorFormEntityConverter {
     /**
      * Extract Event for given subform with given data mapped to specified Encounter Type.
      *
-     * @param fs
-     * @param
-     * @param eventType
-     * @param subformInstance
-     * @return
+     * @param fs FormSubmissionMap
+     * @param eventType eventType
+     * @param subformInstance SubformMap
+     * @return createEvent
      * @throws ParseException
      */
-    private Event getEventForSubform(FormSubmissionMap fs, String eventType, SubformMap
-            subformInstance) throws ParseException {
-        return createEvent(subformInstance.entityId(),
-                subformInstance.formAttributes().get("openmrs_entity_id"), subformInstance.fields(),
-                fs);
+    private Event getEventForSubform(FormSubmissionMap fs, String eventType, SubformMap subformInstance) throws ParseException {
+
+        Log.i(TAG, "getEventForSubform: eventType "+ eventType);
+        return createEvent(subformInstance.entityId(), subformInstance.formAttributes().get("openmrs_entity_id"),
+                subformInstance.fields(), fs);
     }
 
     /**
      * Get field name for specified openmrs entity in given form submission
      *
-     * @param en
-     * @param fs
-     * @return
+     * @param en FormEntity
+     * @param fs FormSubmissionMap
+     * @return getFieldName()
      */
     private String getFieldName(FormEntity en, FormSubmissionMap fs) {
         return getFieldName(en, fs.fields());
@@ -170,10 +169,9 @@ public class VaksinatorFormEntityConverter {
     /**
      * Get field name for specified openmrs entity in given form submission for given subform
      *
-     * @param en
-     * @param
-     * @param
-     * @return
+     * @param en FormEntity
+     * @param subf SubformMap
+     * @return getFieldName(en, subf.fields)
      */
     private String getFieldName(FormEntity en, SubformMap subf) {
         return getFieldName(en, subf.fields());
@@ -352,19 +350,19 @@ public class VaksinatorFormEntityConverter {
     /**
      * Extract Client from given form submission
      *
-     * @param
-     * @return
-     * @throws ParseException
+     * @param fsubmission FormSubmission
+     * @return createBaseClient
+     * @throws IllegalStateException
      */
     public Client getClientFromFormSubmission(FormSubmission fsubmission) throws
-            IllegalStateException {
+            ParserConfigurationException, SAXException, XPathExpressionException, IOException, ParseException {
         FormSubmissionMap fs;
-        try {
+//        try {
             fs = formAttributeParser.createFormSubmissionMap(fsubmission);
             return createBaseClient(fs);
-        } catch (Exception e) {
-            throw new IllegalStateException(e);
-        }
+//        } catch (Exception e) {
+//            throw new IllegalStateException(e);
+//        }
     }
 
 //    public Client getClientFromFormSubmission(FormSubmissionMap fsubmission) throws Exception {
@@ -374,7 +372,6 @@ public class VaksinatorFormEntityConverter {
 
     public Client createBaseClient(FormSubmissionMap fs) throws ParseException {
         Log.d(TAG, "createBaseClient: "+fs.formAttributes());
-
 
         String firstName = fs.getFieldValue(getFieldName(Person.first_name, fs));
         String middleName = fs.getFieldValue(getFieldName(Person.middle_name, fs));

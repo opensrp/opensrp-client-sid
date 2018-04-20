@@ -96,7 +96,7 @@ public class IbuSmartRegisterActivity extends SecuredNativeSmartRegisterActivity
 //                builder.show();
 //            }
 //        } else {
-        android.support.v4.app.Fragment mBaseFragment = new GiziIbuSmartRegisterFragment();
+        Fragment mBaseFragment = new GiziIbuSmartRegisterFragment();
 //        }
 
         // Instantiate a ViewPager and a PagerAdapter.
@@ -337,6 +337,7 @@ public class IbuSmartRegisterActivity extends SecuredNativeSmartRegisterActivity
 
                 }
 
+                assert displayFormFragment != null;
                 displayFormFragment.setRecordId(null);
             }
         });

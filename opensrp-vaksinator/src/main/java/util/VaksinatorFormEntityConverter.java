@@ -149,6 +149,7 @@ public class VaksinatorFormEntityConverter {
      */
     private Event getEventForSubform(FormSubmissionMap fs, String eventType, SubformMap
             subformInstance) throws ParseException {
+        Log.i(TAG, "getEventForSubform: "+ eventType);
         return createEvent(subformInstance.entityId(),
                 subformInstance.formAttributes().get("openmrs_entity_id"), subformInstance.fields(),
                 fs);
