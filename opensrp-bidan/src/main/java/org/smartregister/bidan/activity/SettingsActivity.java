@@ -26,8 +26,8 @@ public class SettingsActivity extends PreferenceActivity {
         getFragmentManager().beginTransaction().replace(android.R.id.content, new MyPreferenceFragment()).commit();
     }
 
-
     public static class MyPreferenceFragment extends PreferenceFragment {
+
         @Override
         public void onCreate(final Bundle savedInstanceState) {
             super.onCreate(savedInstanceState);
@@ -67,6 +67,7 @@ public class SettingsActivity extends PreferenceActivity {
 
                 logInfo("Saved URL: " + allSharedPreferences.fetchHost(""));
                 logInfo("Port: " + allSharedPreferences.fetchPort(0));
+
             } catch (MalformedURLException e) {
                 logError("Malformed Url: " + baseUrl);
             }

@@ -165,8 +165,8 @@ public class VaksinatorHomeActivity extends SecuredActivity {
         FORM_SUBMITTED.addListener(onFormSubmittedListener);
         ACTION_HANDLED.addListener(updateANMDetailsListener);
         if (getSupportActionBar() != null) getSupportActionBar().setTitle("");
-        getSupportActionBar().setIcon(getResources().getDrawable(org.smartregister.vaksinator.R.mipmap.logo));
-        getSupportActionBar().setLogo(org.smartregister.vaksinator.R.mipmap.logo);
+        getSupportActionBar().setIcon(getResources().getDrawable(R.mipmap.logo));
+        getSupportActionBar().setLogo(R.mipmap.logo);
         getSupportActionBar().setDisplayUseLogoEnabled(true);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
         LoginActivity.setLanguage();

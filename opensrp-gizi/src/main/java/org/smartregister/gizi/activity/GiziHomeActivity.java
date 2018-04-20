@@ -248,7 +248,7 @@ public class GiziHomeActivity extends SecuredActivity {
     public void updateFromServer() {
         Log.d("Home", "updateFromServer: tombol update");
         UpdateActionsTask updateActionsTask = new UpdateActionsTask(
-                this, context().actionService(), new FormSubmissionSyncService(context().applicationContext()) ,new SyncProgressIndicator(), context().allFormVersionSyncService());
+                this, context().actionService(), new FormSubmissionSyncService(context().applicationContext()), new SyncProgressIndicator(), context().allFormVersionSyncService());
         updateActionsTask.updateFromServer(new SyncAfterFetchListener());
 //        FlurryFacade.logEvent("click_update_from_server");
 //        if (LoginActivity.generator.uniqueIdController().needToRefillUniqueId(LoginActivity.generator.UNIQUE_ID_LIMIT))  // unique id part

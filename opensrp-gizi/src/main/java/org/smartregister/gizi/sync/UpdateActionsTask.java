@@ -25,7 +25,6 @@ public class UpdateActionsTask {
     private Context context;
     private FormSubmissionSyncService formSubmissionSyncService;
     private AllFormVersionSyncService allFormVersionSyncService;
-    private AdditionalSyncService additionalSyncService;
 
     public UpdateActionsTask(Context context, ActionService actionService, FormSubmissionSyncService formSubmissionSyncService, ProgressIndicator progressIndicator,
                              AllFormVersionSyncService allFormVersionSyncService) {
@@ -33,10 +32,10 @@ public class UpdateActionsTask {
         this.context = context;
         this.formSubmissionSyncService = formSubmissionSyncService;
         this.allFormVersionSyncService = allFormVersionSyncService;
-        this.additionalSyncService = null;
+        AdditionalSyncService additionalSyncService = null;
         task = new LockingBackgroundTask(progressIndicator);
-        Log.e(TAG, "UpdateActionsTask: "+actionService );
-        Log.e(TAG, "UpdateActionsTask: "+additionalSyncService );
+        Log.e(TAG, "UpdateActionsTask: "+ actionService );
+        Log.e(TAG, "UpdateActionsTask: "+ additionalSyncService);
     }
 
 //    public void setAdditionalSyncService(AdditionalSyncService additionalSyncService) {
