@@ -1,5 +1,7 @@
 package org.smartregister.bidan.options;
 
+import junit.framework.Assert;
+
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Mock;
@@ -17,10 +19,12 @@ public class KIANCOverviewServiceModeTest extends BaseUnitTest {
     @Mock
     private SmartRegisterClientsProvider smartRegisterClientsProvider;
 
+    private KIANCOverviewServiceMode kiancOverviewServiceMode;
+
     @Before
     public void setUp() throws Exception {
         MockitoAnnotations.initMocks(this);
-        KIANCOverviewServiceMode kiancOverviewServiceMode = new KIANCOverviewServiceMode(smartRegisterClientsProvider);
+        kiancOverviewServiceMode = new KIANCOverviewServiceMode(smartRegisterClientsProvider);
         kiancOverviewServiceMode.name();
         SecuredNativeSmartRegisterActivity.ClientsHeaderProvider clientsHeaderProvider = kiancOverviewServiceMode.getHeaderProvider();
         clientsHeaderProvider.count();
@@ -32,7 +36,7 @@ public class KIANCOverviewServiceModeTest extends BaseUnitTest {
     }
 
     @Test
-    public void mockRunable() {
-        // do nothing
+    public void modeNameIsKB() {
+        Assert.assertEquals(kiancOverviewServiceMode.name(), "ANC");
     }
 }

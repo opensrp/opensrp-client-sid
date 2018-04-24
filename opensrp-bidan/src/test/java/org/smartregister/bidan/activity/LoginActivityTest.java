@@ -91,7 +91,7 @@ public class LoginActivityTest extends BaseUnitTest {
 
     @After
     public void tearDown() throws Exception {
-
+        // do nothing
     }
 
     @Test

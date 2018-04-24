@@ -15,7 +15,7 @@ public class KIANCOverviewServiceMode extends ServiceModeOption {
 
     @Override
     public String name() {
-        return Context.getInstance().getStringResource(R.string.kb_selection);
+        return Context.getInstance().getStringResource(R.string.str_anc);
     }
 
     @Override

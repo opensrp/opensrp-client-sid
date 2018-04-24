@@ -1,9 +1,13 @@
 package org.smartregister.bidan.options;
 
+import junit.framework.Assert;
+
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
+import org.smartregister.Context;
+import org.smartregister.bidan.R;
 import org.smartregister.provider.SmartRegisterClientsProvider;
 import org.smartregister.view.activity.SecuredNativeSmartRegisterActivity;
 
@@ -17,10 +21,12 @@ public class AnakOverviewServiceModeTest extends BaseUnitTest {
     @Mock
     private SmartRegisterClientsProvider smartRegisterClientsProvider;
 
+    private AnakOverviewServiceMode anakOverviewServiceMode;
+
     @Before
     public void setUp() throws Exception {
         MockitoAnnotations.initMocks(this);
-        AnakOverviewServiceMode anakOverviewServiceMode = new AnakOverviewServiceMode(smartRegisterClientsProvider);
+        anakOverviewServiceMode = new AnakOverviewServiceMode(smartRegisterClientsProvider);
         anakOverviewServiceMode.name();
         SecuredNativeSmartRegisterActivity.ClientsHeaderProvider clientsHeaderProvider = anakOverviewServiceMode.getHeaderProvider();
         clientsHeaderProvider.count();
@@ -32,7 +38,7 @@ public class AnakOverviewServiceModeTest extends BaseUnitTest {
     }
 
     @Test
-    public void mockRunable() {
-        // do nothing
+    public void modeNameIsChild() {
+        Assert.assertEquals(anakOverviewServiceMode.name(), "CHILD");
     }
 }
