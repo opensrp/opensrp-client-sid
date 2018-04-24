@@ -11,6 +11,7 @@ import android.content.res.Resources;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.text.InputType;
+import android.text.TextUtils;
 import android.util.DisplayMetrics;
 import android.view.KeyEvent;
 import android.view.Menu;
@@ -169,20 +170,34 @@ public class LoginActivity extends AppCompatActivity {
             goToHome();
         }
 
-        fillUserIfExists();
+//        fillUserIfExists();
     }
 
     public void login(final View view) {
+        login(view, !getOpenSRPContext().allSharedPreferences().fetchForceRemoteLogin());
+    }
+
+    private void login(final View view, boolean localLogin) {
         hideKeyboard();
         view.setClickable(false);
 
         final String userName = userNameEditText.getText().toString();
         final String password = passwordEditText.getText().toString();
 
-        if (context.userService().hasARegisteredUser()) {
-            localLogin(view, userName, password);
+//        if (context.userService().hasARegisteredUser()) {
+//            localLogin(view, userName, password);
+//        } else {
+//            remoteLogin(view, userName, password);
+//        }
+        if (!TextUtils.isEmpty(userName) && !TextUtils.isEmpty(password)) {
+            if (localLogin) {
+                localLogin(view, userName, password);
+            } else {
+                remoteLogin(view, userName, password);
+            }
         } else {
-            remoteLogin(view, userName, password);
+            showErrorDialog(getResources().getString(R.string.unauthorized));
+            view.setClickable(true);
         }
     }
 

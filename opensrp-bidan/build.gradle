@@ -28,11 +28,11 @@ apply plugin: 'com.github.kt3k.coveralls'
 apply plugin: 'io.fabric'
 
 // Local repo
-repositories {
-    flatDir {
-        dirs '../lib/opensrp-device/opensrp-deviceinterface/build/outputs/aar'
-    }
-}
+//repositories {
+//    flatDir {
+//        dirs '../lib/opensrp-device/opensrp-deviceinterface/build/outputs/aar'
+//    }
+//}
 
 android {
 

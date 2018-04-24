@@ -1,4 +1,4 @@
-package org.smartregister.bidan.activity;
+package org.smartregister.gizi.activity;
 
 import android.app.AlarmManager;
 import android.content.Intent;
@@ -15,7 +15,6 @@ import org.junit.Before;
 import org.junit.Test;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
-import org.mockito.Mockito;
 import org.powermock.core.classloader.annotations.PowerMockIgnore;
 import org.powermock.core.classloader.annotations.PrepareForTest;
 import org.robolectric.Robolectric;
@@ -23,9 +22,9 @@ import org.robolectric.RuntimeEnvironment;
 import org.robolectric.android.controller.ActivityController;
 import org.robolectric.annotation.Config;
 import org.smartregister.CoreLibrary;
-import org.smartregister.bidan.R;
-import org.smartregister.bidan.activity.mock.LoginActivityMock;
-import org.smartregister.bidan.activity.shadow.ShadowContext;
+import org.smartregister.gizi.R;
+import org.smartregister.gizi.activity.mock.LoginActivityMock;
+import org.smartregister.gizi.activity.shadow.ShadowContext;
 import org.smartregister.domain.LoginResponse;
 import org.smartregister.repository.AllSharedPreferences;
 import org.smartregister.service.UserService;

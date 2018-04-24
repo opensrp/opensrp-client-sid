@@ -313,38 +313,6 @@ public class LoginActivity extends AppCompatActivity {
         });*/
     }
 
-    private void hideKeyboard() {
-        InputMethodManager inputManager = (InputMethodManager) getSystemService(INPUT_METHOD_SERVICE);
-        inputManager.hideSoftInputFromWindow(getCurrentFocus().getWindowToken(), HIDE_NOT_ALWAYS);
-    }
-
-    private void localLoginWith(String userName, String password) {
-        context.userService().localLogin(userName, password);
-//        LoginActivity.generator = new Generator(context, userName, password);
-        goToHome();
-        DrishtiSyncScheduler.startOnlyIfConnectedToNetwork(getApplicationContext());
-    }
-
-    private void showErrorDialog(String message) {
-        AlertDialog dialog = new AlertDialog.Builder(this)
-                .setTitle(getString(R.string.login_failed_dialog_title))
-                .setMessage(message)
-                .setPositiveButton("OK", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialogInterface, int i) {
-                        // do nothing
-                    }
-                })
-                .create();
-        dialog.show();
-    }
-
-    private void goToHome() {
-        startActivity(new Intent(this, BidanHomeActivity.class));
-//        startActivity(new Intent(this, FPSmartRegisterActivity.class));
-        finish();
-    }
-
     private void tryRemoteLogin(final String userName, final String password, final Listener<LoginResponse> afterLoginCheck) {
         LockingBackgroundTask task = new LockingBackgroundTask(new ProgressIndicator() {
             @Override
@@ -376,6 +344,38 @@ public class LoginActivity extends AppCompatActivity {
         setDefaultLocationId(userName, locationId);
         goToHome();
         DrishtiSyncScheduler.startOnlyIfConnectedToNetwork(getApplicationContext());
+    }
+
+    private void localLoginWith(String userName, String password) {
+        context.userService().localLogin(userName, password);
+//        LoginActivity.generator = new Generator(context, userName, password);
+        goToHome();
+        DrishtiSyncScheduler.startOnlyIfConnectedToNetwork(getApplicationContext());
+    }
+
+    private void hideKeyboard() {
+        InputMethodManager inputManager = (InputMethodManager) getSystemService(INPUT_METHOD_SERVICE);
+        inputManager.hideSoftInputFromWindow(getCurrentFocus().getWindowToken(), HIDE_NOT_ALWAYS);
+    }
+
+    private void showErrorDialog(String message) {
+        AlertDialog dialog = new AlertDialog.Builder(this)
+                .setTitle(getString(R.string.login_failed_dialog_title))
+                .setMessage(message)
+                .setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        // do nothing
+                    }
+                })
+                .create();
+        dialog.show();
+    }
+
+    private void goToHome() {
+        startActivity(new Intent(this, BidanHomeActivity.class));
+//        startActivity(new Intent(this, FPSmartRegisterActivity.class));
+        finish();
     }
 
     public void setDefaultLocationId(String userName, String locationId) {
