@@ -1,6 +1,5 @@
 package org.smartregister.bidan.activity;
 
-import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
@@ -11,7 +10,9 @@ import android.content.pm.PackageManager;
 import android.content.res.Resources;
 import android.os.Bundle;
 import android.support.v4.content.res.ResourcesCompat;
+import android.support.v7.app.AppCompatActivity;
 import android.text.InputType;
+import android.text.TextUtils;
 import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.KeyEvent;
@@ -53,7 +54,7 @@ import static org.smartregister.domain.LoginResponse.UNKNOWN_RESPONSE;
 import static org.smartregister.util.Log.logError;
 import static org.smartregister.util.Log.logVerbose;
 
-public class LoginActivity extends Activity {
+public class LoginActivity extends AppCompatActivity {
     public static final String ENGLISH_LOCALE = "en";
     public static final String BAHASA_LOCALE = "in";
     public static final String ENGLISH_LANGUAGE = "English";
@@ -64,52 +65,6 @@ public class LoginActivity extends Activity {
     private EditText passwordEditText;
     private ProgressDialog progressDialog;
 //    public static final String PREF_TEAM_LOCATIONS = "PREF_TEAM_LOCATIONS";
-
-    public static Context getOpenSRPContext() {
-        return BidanApplication.getInstance().context();
-    }
-
-    public static void setLanguage() {
-
-        AllSharedPreferences allSharedPreferences = new AllSharedPreferences(getDefaultSharedPreferences(Context.getInstance().applicationContext()));
-        String preferredLocale = allSharedPreferences.fetchLanguagePreference();
-
-        Resources res = Context.getInstance().applicationContext().getResources();
-        // Change locale settings in the app.
-        DisplayMetrics dm = res.getDisplayMetrics();
-        android.content.res.Configuration conf = res.getConfiguration();
-//        conf.locale = new Locale(BAHASA_LOCALE);
-        conf.locale = new Locale(preferredLocale);
-        res.updateConfiguration(conf, dm);
-        Log.e(TAG, "setLanguage: " + res.getConfiguration().locale.toString());
-
-    }
-
-    public static String switchLanguagePreference() {
-        AllSharedPreferences allSharedPreferences = new AllSharedPreferences(getDefaultSharedPreferences(Context.getInstance().applicationContext()));
-        String preferredLocale = allSharedPreferences.fetchLanguagePreference();
-        Resources res = Context.getInstance().applicationContext().getResources();
-        // Change locale settings in the app.
-        DisplayMetrics dm = res.getDisplayMetrics();
-        android.content.res.Configuration conf = res.getConfiguration();
-
-        if (ENGLISH_LOCALE.equals(preferredLocale)) {
-            allSharedPreferences.saveLanguagePreference(BAHASA_LOCALE);
-            conf.locale = new Locale(BAHASA_LOCALE);
-            res.updateConfiguration(conf, dm);
-            return BAHASA_LANGUAGE;
-
-        } else {
-            allSharedPreferences.saveLanguagePreference(ENGLISH_LOCALE);
-//            Resources res = Context.getInstance().applicationContext().getResources();
-            // Change locale settings in the app.
-//            DisplayMetrics dm = res.getDisplayMetrics();
-//            android.content.res.Configuration conf = res.getConfiguration();
-            conf.locale = new Locale(ENGLISH_LOCALE);
-            res.updateConfiguration(conf, dm);
-            return ENGLISH_LANGUAGE;
-        }
-    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -142,11 +97,14 @@ public class LoginActivity extends Activity {
         initializeBuildDetails();
         setDoneActionHandlerOnPasswordField();
         initializeProgressDialog();
-        getActionBar().setTitle("");
+
+        if (getActionBar() != null) {
+            getActionBar().setTitle("");
 //        getActionBar().setIcon(getResources().getDrawable(R.mipmap.logo));
-        getActionBar().setIcon(ResourcesCompat.getDrawable(getResources(), R.mipmap.logo, null));
+            getActionBar().setIcon(ResourcesCompat.getDrawable(getResources(), R.mipmap.logo, null));
 //        getActionBar().setBackgroundDrawable(getResources().getDrawable(R.color.action_bar_background));
-        getActionBar().setBackgroundDrawable(ResourcesCompat.getDrawable(getResources(), R.color.action_bar_background, null));
+            getActionBar().setBackgroundDrawable(ResourcesCompat.getDrawable(getResources(), R.color.action_bar_background, null));
+        }
         setLanguage();
 
 //        debugApp();
@@ -170,6 +128,89 @@ public class LoginActivity extends Activity {
         return super.onOptionsItemSelected(item);
     }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+
+        if (!getOpenSRPContext().IsUserLoggedOut()) {
+            goToHome();
+        }
+    }
+
+    public static Context getOpenSRPContext() {
+        return BidanApplication.getInstance().context();
+    }
+
+    public String getUserDefaultLocationId(String userInfo) {
+        try {
+            JSONObject userLocationJSON = new JSONObject(userInfo);
+            return userLocationJSON
+                    .getJSONObject(AllConstantsINA.SyncFilters.FILTER_TEAM)
+                    .getJSONArray(AllConstantsINA.SyncFilters.FILTER_LOCATION_ID)
+                    .getJSONObject(0)
+                    .getString("name");
+
+        } catch (JSONException e) {
+            Log.v("Error : ", e.getMessage());
+        }
+
+        return null;
+    }
+
+    public static String switchLanguagePreference() {
+        AllSharedPreferences allSharedPreferences = new AllSharedPreferences(getDefaultSharedPreferences(Context.getInstance().applicationContext()));
+        String preferredLocale = allSharedPreferences.fetchLanguagePreference();
+        Resources res = Context.getInstance().applicationContext().getResources();
+        // Change locale settings in the app.
+        DisplayMetrics dm = res.getDisplayMetrics();
+        android.content.res.Configuration conf = res.getConfiguration();
+
+        if (ENGLISH_LOCALE.equals(preferredLocale)) {
+            allSharedPreferences.saveLanguagePreference(BAHASA_LOCALE);
+            conf.locale = new Locale(BAHASA_LOCALE);
+            res.updateConfiguration(conf, dm);
+            return BAHASA_LANGUAGE;
+
+        } else {
+            allSharedPreferences.saveLanguagePreference(ENGLISH_LOCALE);
+//            Resources res = Context.getInstance().applicationContext().getResources();
+            // Change locale settings in the app.
+//            DisplayMetrics dm = res.getDisplayMetrics();
+//            android.content.res.Configuration conf = res.getConfiguration();
+            conf.locale = new Locale(ENGLISH_LOCALE);
+            res.updateConfiguration(conf, dm);
+            return ENGLISH_LANGUAGE;
+        }
+    }
+
+    private String getVersion() throws PackageManager.NameNotFoundException {
+        PackageInfo packageInfo = getPackageManager().getPackageInfo(getPackageName(), 0);
+        return packageInfo.versionName;
+    }
+
+    private String getBuildDate() throws PackageManager.NameNotFoundException, IOException {
+        ApplicationInfo applicationInfo = getPackageManager().getApplicationInfo(getPackageName(), 0);
+        ZipFile zf = new ZipFile(applicationInfo.sourceDir);
+        ZipEntry ze = zf.getEntry("classes.dex");
+        return new SimpleDateFormat("dd MMM yyyy", Locale.getDefault()).format(new java.util.Date(ze.getTime()));
+    }
+
+    public static void setLanguage() {
+
+        AllSharedPreferences allSharedPreferences = new AllSharedPreferences(getDefaultSharedPreferences(Context.getInstance().applicationContext()));
+        String preferredLocale = allSharedPreferences.fetchLanguagePreference();
+
+        Resources res = Context.getInstance().applicationContext().getResources();
+        // Change locale settings in the app.
+        DisplayMetrics dm = res.getDisplayMetrics();
+        android.content.res.Configuration conf = res.getConfiguration();
+//        conf.locale = new Locale(BAHASA_LOCALE);
+        conf.locale = new Locale(preferredLocale);
+        res.updateConfiguration(conf, dm);
+        Log.e(TAG, "setLanguage: " + res.getConfiguration().locale.toString());
+
+    }
+
     private void initializeLoginFields() {
         userNameEditText = ((EditText) findViewById(org.smartregister.R.id.login_userNameText));
         userNameEditText.setRawInputType(InputType.TYPE_CLASS_TEXT);
@@ -186,18 +227,6 @@ public class LoginActivity extends Activity {
         }
     }
 
-    private String getVersion() throws PackageManager.NameNotFoundException {
-        PackageInfo packageInfo = getPackageManager().getPackageInfo(getPackageName(), 0);
-        return packageInfo.versionName;
-    }
-
-    private String getBuildDate() throws PackageManager.NameNotFoundException, IOException {
-        ApplicationInfo applicationInfo = getPackageManager().getApplicationInfo(getPackageName(), 0);
-        ZipFile zf = new ZipFile(applicationInfo.sourceDir);
-        ZipEntry ze = zf.getEntry("classes.dex");
-        return new SimpleDateFormat("dd MMM yyyy", Locale.getDefault()).format(new java.util.Date(ze.getTime()));
-    }
-
     private void setDoneActionHandlerOnPasswordField() {
         passwordEditText.setOnEditorActionListener(new TextView.OnEditorActionListener() {
             @Override
@@ -211,16 +240,30 @@ public class LoginActivity extends Activity {
     }
 
     public void login(final View view) {
+        login(view, !getOpenSRPContext().allSharedPreferences().fetchForceRemoteLogin());
+    }
+
+    private void login(final View view, boolean localLogin) {
         hideKeyboard();
         view.setClickable(false);
 
         final String userName = userNameEditText.getText().toString();
         final String password = passwordEditText.getText().toString();
 
-        if (context.userService().hasARegisteredUser()) {
-            localLogin(view, userName, password);
+//        if (context.userService().hasARegisteredUser()) {
+//            localLogin(view, userName, password);
+//        } else {
+//            remoteLogin(view, userName, password);
+//        }
+        if (!TextUtils.isEmpty(userName) && !TextUtils.isEmpty(password)) {
+            if (localLogin) {
+                localLogin(view, userName, password);
+            } else {
+                remoteLogin(view, userName, password);
+            }
         } else {
-            remoteLogin(view, userName, password);
+            showErrorDialog(getResources().getString(R.string.unauthorized));
+            view.setClickable(true);
         }
     }
 
@@ -339,22 +382,6 @@ public class LoginActivity extends Activity {
         if (userName != null) {
             context.userService().getAllSharedPreferences().savePreference(userName + "-locationid", locationId);
         }
-    }
-
-    public String getUserDefaultLocationId(String userInfo) {
-        try {
-            JSONObject userLocationJSON = new JSONObject(userInfo);
-            return userLocationJSON
-                    .getJSONObject(AllConstantsINA.SyncFilters.FILTER_TEAM)
-                    .getJSONArray(AllConstantsINA.SyncFilters.FILTER_LOCATION_ID)
-                    .getJSONObject(0)
-                    .getString("name");
-
-        } catch (JSONException e) {
-            Log.v("Error : ", e.getMessage());
-        }
-
-        return null;
     }
 
     private void initializeProgressDialog() {
