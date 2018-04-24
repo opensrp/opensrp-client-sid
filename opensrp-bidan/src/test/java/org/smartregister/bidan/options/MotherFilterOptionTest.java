@@ -21,7 +21,7 @@ public class MotherFilterOptionTest extends BaseUnitTest {
     private String fieldName = "location_name";
     private String filterOption = "filter_option";
     private String tableName = "table_name";
-    MotherFilterOption motherFilterOption;
+    private MotherFilterOption motherFilterOption;
 
     @Before
     public void setUp() throws Exception {
