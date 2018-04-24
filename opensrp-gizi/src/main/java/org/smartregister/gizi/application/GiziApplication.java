@@ -27,6 +27,7 @@ import static org.smartregister.util.Log.logInfo;
 public class GiziApplication extends DrishtiApplication {
 
     private EventClientRepository eventClientRepository;
+
     @Override
     public void onCreate() {
 
@@ -47,7 +48,7 @@ public class GiziApplication extends DrishtiApplication {
       //  ErrorReportingFacade.initErrorHandler(getApplicationContext());
         //
          // ENABLE THIS AGAIN AFTER FINISH TESTING*/
-//        FlurryFacade.init(this);
+        FlurryFacade.init(this);
        // context = Context.getInstance();
         context.updateApplicationContext(getApplicationContext());
         context.updateCommonFtsObject(createCommonFtsObject());

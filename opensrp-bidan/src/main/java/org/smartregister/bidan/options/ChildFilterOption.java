@@ -5,7 +5,7 @@ import org.smartregister.cursoradapter.CursorFilterOption;
 import org.smartregister.view.contract.SmartRegisterClient;
 
 /**
- * Created by Iq on 06/02/17.
+ * Created by Iq on 06/02/17
  */
 public class ChildFilterOption implements CursorFilterOption {
     private final String criteria;
