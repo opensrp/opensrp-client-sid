@@ -183,7 +183,7 @@ public class LoginActivity extends AppCompatActivity {
         }
     }
 
-    private String getVersion() throws PackageManager.NameNotFoundException {
+    protected String getVersion() throws PackageManager.NameNotFoundException {
         PackageInfo packageInfo = getPackageManager().getPackageInfo(getPackageName(), 0);
         return packageInfo.versionName;
     }

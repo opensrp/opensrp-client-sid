@@ -351,12 +351,12 @@ public class LoginActivity extends AppCompatActivity {
         });
     }
 
-    private void fillUserIfExists() {
-        if (context.userService().hasARegisteredUser()) {
-            userNameEditText.setText(context.allSharedPreferences().fetchRegisteredANM());
-            userNameEditText.setEnabled(false);
-        }
-    }
+//    private void fillUserIfExists() {
+//        if (context.userService().hasARegisteredUser()) {
+//            userNameEditText.setText(context.allSharedPreferences().fetchRegisteredANM());
+//            userNameEditText.setEnabled(false);
+//        }
+//    }
 
     private void hideKeyboard() {
         InputMethodManager inputManager = (InputMethodManager) getSystemService(INPUT_METHOD_SERVICE);
@@ -390,7 +390,7 @@ public class LoginActivity extends AppCompatActivity {
         finish();
     }
 
-    private String getVersion() throws PackageManager.NameNotFoundException {
+    protected String getVersion() throws PackageManager.NameNotFoundException {
         PackageInfo packageInfo = getPackageManager().getPackageInfo(getPackageName(), 0);
         return packageInfo.versionName;
     }

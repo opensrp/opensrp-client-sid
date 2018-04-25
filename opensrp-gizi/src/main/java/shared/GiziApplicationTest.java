@@ -6,8 +6,8 @@ import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.robolectric.TestLifecycleApplication;
 import org.smartregister.Context;
-import org.smartregister.gizi.application.GiziApplication;
 import org.smartregister.domain.Alert;
+import org.smartregister.gizi.application.GiziApplication;
 import org.smartregister.service.AlertService;
 
 import java.lang.reflect.Field;

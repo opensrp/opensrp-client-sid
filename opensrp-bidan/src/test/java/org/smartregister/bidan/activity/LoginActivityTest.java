@@ -2,6 +2,7 @@ package org.smartregister.bidan.activity;
 
 import android.app.AlarmManager;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.os.IBinder;
 import android.util.Log;
 import android.view.inputmethod.InputMethodManager;
@@ -10,6 +11,8 @@ import android.widget.EditText;
 
 import junit.framework.Assert;
 
+import org.apache.commons.io.Charsets;
+import org.apache.commons.io.IOUtils;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -22,6 +25,7 @@ import org.robolectric.RuntimeEnvironment;
 import org.robolectric.android.controller.ActivityController;
 import org.robolectric.annotation.Config;
 import org.smartregister.CoreLibrary;
+import org.smartregister.bidan.BuildConfig;
 import org.smartregister.bidan.R;
 import org.smartregister.bidan.activity.mock.LoginActivityMock;
 import org.smartregister.bidan.activity.shadow.ShadowContext;
@@ -29,6 +33,10 @@ import org.smartregister.domain.LoginResponse;
 import org.smartregister.repository.AllSharedPreferences;
 import org.smartregister.service.UserService;
 import org.smartregister.sync.DrishtiSyncScheduler;
+
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.StringWriter;
 
 import shared.BaseUnitTest;
 import shared.customshadows.FontTextViewShadow;
@@ -126,5 +134,33 @@ public class LoginActivityTest extends BaseUnitTest {
         }
 
         System.gc();
+    }
+
+    @Test
+    public void appVersionEqualsVersionName(){
+        try {
+            Assert.assertEquals(activity.getVersion(), BuildConfig.VERSION_NAME);
+        } catch (PackageManager.NameNotFoundException e) {
+            e.printStackTrace();
+        }
+    }
+
+    @Test
+    public void defaultLocationIdEqualsPendem(){
+        InputStream inputStream = this.getClass().getClassLoader().getResourceAsStream("dataTest.json");
+        StringWriter writer = new StringWriter();
+        try {
+            IOUtils.copy(inputStream, writer, Charsets.UTF_8);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        Assert.assertEquals(activity.getUserDefaultLocationId(writer.toString()), "Pendem");
+    }
+
+    @Test
+    public void switchLanguageEnToIn(){
+        Assert.assertEquals(LoginActivity.switchLanguagePreference(), "Bahasa");
+
     }
 }

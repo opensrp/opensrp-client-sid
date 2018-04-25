@@ -7,7 +7,6 @@ import org.smartregister.Context;
 import org.smartregister.CoreLibrary;
 import org.smartregister.commonregistry.CommonFtsObject;
 import org.smartregister.gizi.activity.LoginActivity;
-import org.smartregister.gizi.libs.FlurryFacade;
 import org.smartregister.gizi.receiver.GiziSyncBroadcastReceiver;
 import org.smartregister.gizi.repository.GiziRepository;
 import org.smartregister.gizi.sync.DrishtiSyncScheduler;
@@ -47,8 +46,9 @@ public class GiziApplication extends DrishtiApplication {
      //   DrishtiSyncScheduler.setReceiverClass(SyncBroadcastReceiver.class);
       //  ErrorReportingFacade.initErrorHandler(getApplicationContext());
         //
-         // ENABLE THIS AGAIN AFTER FINISH TESTING*/
-        FlurryFacade.init(this);
+        // TODO ENABLE THIS AGAIN AFTER FINISH TESTING*/
+//        FlurryFacade.init(this);
+
        // context = Context.getInstance();
         context.updateApplicationContext(getApplicationContext());
         context.updateCommonFtsObject(createCommonFtsObject());

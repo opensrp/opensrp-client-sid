@@ -10,6 +10,8 @@ import android.widget.EditText;
 
 import junit.framework.Assert;
 
+import org.apache.commons.io.Charsets;
+import org.apache.commons.io.IOUtils;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -22,13 +24,18 @@ import org.robolectric.RuntimeEnvironment;
 import org.robolectric.android.controller.ActivityController;
 import org.robolectric.annotation.Config;
 import org.smartregister.CoreLibrary;
+import org.smartregister.domain.LoginResponse;
+import org.smartregister.gizi.BuildConfig;
 import org.smartregister.gizi.R;
 import org.smartregister.gizi.activity.mock.LoginActivityMock;
 import org.smartregister.gizi.activity.shadow.ShadowContext;
-import org.smartregister.domain.LoginResponse;
 import org.smartregister.repository.AllSharedPreferences;
 import org.smartregister.service.UserService;
 import org.smartregister.sync.DrishtiSyncScheduler;
+
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.StringWriter;
 
 import shared.BaseUnitTest;
 import shared.customshadows.FontTextViewShadow;
@@ -51,6 +58,7 @@ public class LoginActivityTest extends BaseUnitTest {
     private LoginActivityMock activity;
     @Mock
     private org.smartregister.Context context_;
+
     @Mock
     private InputMethodManager inputManager;
     @Mock
@@ -82,16 +90,13 @@ public class LoginActivityTest extends BaseUnitTest {
         when(inputManager.hideSoftInputFromWindow(isNull(IBinder.class), anyInt())).thenReturn(true);
         Intent intent = new Intent(RuntimeEnvironment.application, LoginActivityMock.class);
         controller = Robolectric.buildActivity(LoginActivityMock.class, intent);
-        controller.create()
-                .start()
-                .resume()
-                .visible();
+        controller.create().start().resume().visible();
         activity = controller.get();
     }
 
     @After
     public void tearDown() throws Exception {
-
+        // do nothing
     }
 
     @Test
@@ -127,4 +132,36 @@ public class LoginActivityTest extends BaseUnitTest {
 
         System.gc();
     }
+
+    @Test
+    public void appVersionEqualsVersionName(){
+        Assert.assertEquals(activity.getAppVersion(), BuildConfig.VERSION_NAME);
+    }
+
+    @Test
+    public void defaultLocationIdEqualsPendem(){
+        InputStream inputStream = this.getClass().getClassLoader().getResourceAsStream("dataTest.json");
+        StringWriter writer = new StringWriter();
+        try {
+            IOUtils.copy(inputStream, writer, Charsets.UTF_8);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        Assert.assertEquals(activity.getUserDefaultLocationId(writer.toString()), "Pendem");
+    }
+
+    @Test
+    public void switchLanguageEnToIn(){
+        Assert.assertEquals(LoginActivity.switchLanguagePreference(), "Bahasa");
+    }
+
+//    @Test
+//    public void buildDate_equals_date(){
+//        try {
+//            Assert.assertEquals(activity.getBuildDate(), BuildConfig.VERSION_NAME);
+//        } catch (PackageManager.NameNotFoundException | IOException e) {
+//            e.printStackTrace();
+//        }
+//    }
 }

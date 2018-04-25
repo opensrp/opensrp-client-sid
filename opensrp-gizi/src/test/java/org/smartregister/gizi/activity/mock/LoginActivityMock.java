@@ -1,5 +1,6 @@
 package org.smartregister.gizi.activity.mock;
 
+import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.view.View;
@@ -36,5 +37,15 @@ public class LoginActivityMock extends LoginActivity {
     @Override
     public View getCurrentFocus() {
         return findViewById(org.smartregister.R.id.login_userNameText);
+    }
+
+    public String getAppVersion(){
+        try {
+            return getVersion();
+        } catch (PackageManager.NameNotFoundException e) {
+            e.printStackTrace();
+        }
+
+        return null;
     }
 }
