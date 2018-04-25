@@ -403,7 +403,7 @@ public class CloudantSyncHandler {
         }
     }
 
-    private String getAuthorization() {
+    public String getAuthorization() {
 
         String username = AllConstantsINA.CloudantSync.COUCH_DATABASE_USER;
         String password = AllConstantsINA.CloudantSync.COUCH_DATABASE_PASS;
@@ -417,7 +417,7 @@ public class CloudantSyncHandler {
         return null;
     }
 
-    private String getFileContents(String fileName) {
+    public String getFileContents(String fileName) {
         return AssetHandler.readFileFromAssetsFolder(fileName, mContext);
     }
 }

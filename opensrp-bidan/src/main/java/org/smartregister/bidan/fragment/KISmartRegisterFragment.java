@@ -155,7 +155,6 @@ public class KISmartRegisterFragment extends BaseSmartRegisterFragment {
         view.findViewById(R.id.service_mode_selection).setVisibility(GONE);
         clientsView.setVisibility(VISIBLE);
         clientsProgressView.setVisibility(INVISIBLE);
-//        list.setBackgroundColor(Color.RED);
         initializeQueries();
         LoginActivity.setLanguage();
     }
