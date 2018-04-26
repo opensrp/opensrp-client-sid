@@ -169,7 +169,6 @@ public class ANCClientsProvider extends BaseClientsProvider {
 
 //        hr_badge.setVisibility(INVISIBLE);
 
-
         profilePic.setTag(R.id.entity_id, pc.getColumnmaps().get("_id"));//required when saving file to disk
         Support.setImagetoHolderFromUri((Activity) mContext, pc.getDetails().get("base_entity_id"), profilePic, R.mipmap.woman_placeholder);
 

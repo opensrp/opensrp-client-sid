@@ -231,7 +231,7 @@ public class ANCSmartRegisterFragment extends BaseSmartRegisterFragment {
         }
     }
 
-    private class ClientActionHandler implements View.OnClickListener {
+    public class ClientActionHandler implements View.OnClickListener {
         @Override
         public void onClick(View view) {
             switch (view.getId()) {

@@ -4,12 +4,8 @@ import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
-import org.robolectric.RuntimeEnvironment;
-import org.smartregister.sync.SyncAfterFetchListener;
 
 import shared.BaseUnitTest;
-
-import static org.junit.Assert.*;
 
 /**
  * Created by sid-tech on 4/25/18
@@ -29,7 +25,7 @@ public class CloudantSyncListenerTest extends BaseUnitTest {
 
 
     @Test
-    public void testReplicationComplete(){
+    public void testReplicationComplete() {
         // do nothing
     }
 

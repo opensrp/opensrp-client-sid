@@ -8,8 +8,6 @@ import org.robolectric.RuntimeEnvironment;
 
 import shared.BaseUnitTest;
 
-import static org.junit.Assert.*;
-
 /**
  * Created by sid-tech on 4/25/18
  */
@@ -17,7 +15,6 @@ public class FormSubmissionSyncServiceTest extends BaseUnitTest {
 
     @Mock
     private FormSubmissionSyncService formSubmissionSyncService;
-
 
 
     @Before
@@ -29,7 +26,7 @@ public class FormSubmissionSyncServiceTest extends BaseUnitTest {
 
 
     @Test
-    public void testW(){
+    public void testW() {
         formSubmissionSyncService.sync();
     }
 

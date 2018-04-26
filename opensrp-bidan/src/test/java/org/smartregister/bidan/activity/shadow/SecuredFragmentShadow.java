@@ -15,8 +15,7 @@ public class SecuredFragmentShadow extends Shadow {
     public static Context mContext;
 
     @Implementation
-    protected Context context()
-    {
+    protected Context context() {
         return mContext;
     }
 }

@@ -9,7 +9,7 @@ import org.robolectric.RuntimeEnvironment;
 
 import shared.BaseUnitTest;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
 
 /**
  * Created by sid-tech on 4/25/18
@@ -33,13 +33,13 @@ public class CloudantSyncHandlerTest extends BaseUnitTest {
     }
 
     @Test
-    public void testReadFileContents(){
+    public void testReadFileContents() {
         assertEquals(cloudantSyncHandler.getFileContents(""), null);
     }
 
     @Test
-    public void testAuthentication(){
-        assertEquals(cloudantSyncHandler.getAuthorization(), "Q09VQ0hfREFUQUJBU0VfVVNFUjpDT1VDSF9EQVRBQkFTRV9QQVNT");
+    public void testAuthentication() {
+        assertEquals(cloudantSyncHandler.getAuthorization(), "Q09VQ0hfREFUQUJBU0VfVVNFUjpDT1VDSF9EQVRBQkFTRV9QQVNT\n");
     }
 
 }

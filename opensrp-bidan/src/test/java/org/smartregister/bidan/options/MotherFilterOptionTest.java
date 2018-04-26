@@ -35,7 +35,7 @@ public class MotherFilterOptionTest extends BaseUnitTest {
     }
 
     @Test
-    public void filterOptionReturnString(){
+    public void filterOptionReturnString() {
         Assert.assertEquals(motherFilterOption.name(), "filter_option");
     }
 
@@ -50,7 +50,7 @@ public class MotherFilterOptionTest extends BaseUnitTest {
         fieldName = "josh";
         criteria = "abcd";
         motherFilterOption = new MotherFilterOption(criteria, fieldName, filterOption, tableName);
-        Assert.assertEquals("AND " + tableName + ".base_entity_id IN (SELECT DISTINCT base_entity_id FROM ec_details WHERE key MATCH '" + fieldName + "' INTERSECT SELECT DISTINCT base_entity_id FROM ec_details WHERE value MATCH '" + criteria + "') ", motherFilterOption.filter() );
+        Assert.assertEquals("AND " + tableName + ".base_entity_id IN (SELECT DISTINCT base_entity_id FROM ec_details WHERE key MATCH '" + fieldName + "' INTERSECT SELECT DISTINCT base_entity_id FROM ec_details WHERE value MATCH '" + criteria + "') ", motherFilterOption.filter());
 
     }
 

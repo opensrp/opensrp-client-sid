@@ -215,11 +215,11 @@ public class PNCClientsProvider extends BaseClientsProvider {
         getView(smartRegisterClient, view);
     }
 
-    private String yesNo(String text) {
+    public String yesNo(String text) {
         return mContext.getString(text.toLowerCase().contains("y") ? R.string.mcareyes_button_label : R.string.mcareno_button_label);
     }
 
-    private String translateComplication(String text) {
+    public String translateComplication(String text) {
         return text.toLowerCase().contains("dak_ada_kompli") ? mContext.getString(R.string.no_complication) : text;
     }
 

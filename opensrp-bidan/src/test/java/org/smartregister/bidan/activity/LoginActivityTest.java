@@ -137,7 +137,7 @@ public class LoginActivityTest extends BaseUnitTest {
     }
 
     @Test
-    public void appVersionEqualsVersionName(){
+    public void appVersionEqualsVersionName() {
         try {
             Assert.assertEquals(activity.getVersion(), BuildConfig.VERSION_NAME);
         } catch (PackageManager.NameNotFoundException e) {
@@ -146,7 +146,7 @@ public class LoginActivityTest extends BaseUnitTest {
     }
 
     @Test
-    public void defaultLocationIdEqualsPendem(){
+    public void defaultLocationIdEqualsPendem() {
         InputStream inputStream = this.getClass().getClassLoader().getResourceAsStream("dataTest.json");
         StringWriter writer = new StringWriter();
         try {
@@ -159,7 +159,7 @@ public class LoginActivityTest extends BaseUnitTest {
     }
 
     @Test
-    public void switchLanguageEnToIn(){
+    public void switchLanguageEnToIn() {
         Assert.assertEquals(LoginActivity.switchLanguagePreference(), "Bahasa");
 
     }

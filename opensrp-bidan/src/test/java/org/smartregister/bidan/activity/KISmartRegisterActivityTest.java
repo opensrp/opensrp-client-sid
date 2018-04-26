@@ -2,93 +2,52 @@ package org.smartregister.bidan.activity;
 
 import android.content.Context;
 import android.content.Intent;
-import android.os.IBinder;
-import android.util.Log;
-import android.view.View;
-import android.view.ViewGroup;
 import android.view.inputmethod.InputMethodManager;
-import android.widget.Button;
-import android.widget.EditText;
-import android.widget.ImageButton;
-import android.widget.ListAdapter;
-import android.widget.ListView;
-import android.widget.TextView;
 
-import junit.framework.Assert;
-
-import net.sqlcipher.Cursor;
-import net.sqlcipher.MatrixCursor;
-
-import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Mock;
-import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
 import org.powermock.core.classloader.annotations.PrepareForTest;
 import org.robolectric.Robolectric;
 import org.robolectric.RuntimeEnvironment;
 import org.robolectric.android.controller.ActivityController;
 import org.robolectric.annotation.Config;
-import org.robolectric.shadows.ShadowLooper;
 import org.smartregister.CoreLibrary;
 import org.smartregister.DristhiConfiguration;
-import org.smartregister.bidan.R;
 import org.smartregister.bidan.activity.mock.KISmartRegisterActivityMock;
 import org.smartregister.bidan.activity.shadow.SecuredActivityShadow;
 import org.smartregister.bidan.activity.shadow.SecuredFragmentShadow;
 import org.smartregister.bidan.activity.shadow.ShadowContext;
-import org.smartregister.bidan.fragment.KISmartRegisterFragment;
 import org.smartregister.bidan.repository.BidanRepository;
-import org.smartregister.bidan.utils.AllConstantsINA;
-import org.smartregister.commonregistry.CommonPersonObject;
 import org.smartregister.commonregistry.CommonRepository;
-import org.smartregister.domain.Alert;
-import org.smartregister.domain.AlertStatus;
-import org.smartregister.domain.Response;
-import org.smartregister.domain.ResponseStatus;
 import org.smartregister.repository.DetailsRepository;
 import org.smartregister.service.AlertService;
 import org.smartregister.service.ZiggyService;
 import org.smartregister.view.controller.ANMLocationController;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
 import shared.BaseUnitTest;
 
-import static junit.framework.Assert.assertTrue;
-import static org.junit.Assert.assertEquals;
 import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.ArgumentMatchers.anyInt;
-import static org.mockito.ArgumentMatchers.anyString;
-import static org.mockito.ArgumentMatchers.isNull;
 import static org.mockito.Mockito.when;
 
 /**
  * Created by sid-tech on 4/25/18
  */
 @PrepareForTest({CoreLibrary.class})
-@Config(shadows = {SecuredActivityShadow.class, SecuredFragmentShadow.class, ShadowContext.class})// LocationPickerViewShadow.class, JsonFormUtilsShadow.class, MyShadowAsyncTask.class, CommonRepositoryShadow.class, ShadowContextForRegistryActivity.class})
-public class KISmartRegisterActivityTest extends BaseUnitTest{
-
-    KISmartRegisterActivityMock activity;
-    private Map<String, String> details;
-    ActivityController<KISmartRegisterActivityMock> controller;
-    List<Alert> alertList = new ArrayList<>();
-    @Mock
-    BidanRepository bidanRepository;
+@Config(shadows = {SecuredActivityShadow.class, SecuredFragmentShadow.class, ShadowContext.class})
+// LocationPickerViewShadow.class, JsonFormUtilsShadow.class, MyShadowAsyncTask.class, CommonRepositoryShadow.class, ShadowContextForRegistryActivity.class})
+public class KISmartRegisterActivityTest extends BaseUnitTest {
 
     @Mock
     public org.smartregister.service.HTTPAgent httpAgent;
-
     @Mock
     public DristhiConfiguration configuration;
-
+    private ActivityController<KISmartRegisterActivityMock> controller;
     @Mock
-    AlertService alertService;
+    private BidanRepository bidanRepository;
+    @Mock
+    private AlertService alertService;
 
     @Mock
     private InputMethodManager inputManager;
@@ -172,7 +131,7 @@ public class KISmartRegisterActivityTest extends BaseUnitTest{
 
         Intent intent = new Intent(RuntimeEnvironment.application, KISmartRegisterActivityMock.class);
         controller = Robolectric.buildActivity(KISmartRegisterActivityMock.class, intent);
-        activity = controller.create().start().resume().visible().get();
+//        activity = controller.create().start().resume().visible().get();
     }
 
     @Test

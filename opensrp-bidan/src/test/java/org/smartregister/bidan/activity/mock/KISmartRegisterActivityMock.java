@@ -17,14 +17,14 @@ public class KISmartRegisterActivityMock extends KISmartRegisterActivity {
     public static Context mContext;
     public static InputMethodManager inputManager;
 
+    public static void setmContext(Context Context) {
+        mContext = Context;
+    }
+
     @Override
     public void onCreate(Bundle bundle) {
         super.onCreate(bundle);
         setTheme(R.style.AppTheme);
-    }
-
-    public static void setmContext(Context Context) {
-        mContext = Context;
     }
 
     @Override

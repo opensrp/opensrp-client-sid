@@ -19,6 +19,7 @@ public class KIPNCOverviewServiceModeTest extends BaseUnitTest {
     @Mock
     private SmartRegisterClientsProvider smartRegisterClientsProvider;
     private KIPNCOverviewServiceMode kipncOverviewServiceMode;
+
     @Before
     public void setUp() throws Exception {
         MockitoAnnotations.initMocks(this);

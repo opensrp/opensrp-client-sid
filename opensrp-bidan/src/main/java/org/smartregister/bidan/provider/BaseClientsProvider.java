@@ -22,7 +22,7 @@ public class BaseClientsProvider implements SmartRegisterCLientsProviderForCurso
     private final String TAG = BaseClientsProvider.class.getName();
     private final LayoutInflater inflater;
     private final Context mContext;
-    protected CommonPersonObjectController controller;
+    protected CommonPersonObjectController controller ;
 
     BaseClientsProvider(Context context) {
         this.inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);

@@ -18,7 +18,7 @@ public class BidanClientProcessor extends ClientProcessor {
 //    private static final String[] openmrs_gen_ids = {"zeir_id"};
     private static BidanClientProcessor instance;
 
-    private BidanClientProcessor(Context context) {
+    public BidanClientProcessor(Context context) {
         super(context);
     }
 

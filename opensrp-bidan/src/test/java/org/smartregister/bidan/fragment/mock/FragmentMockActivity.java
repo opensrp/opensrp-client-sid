@@ -13,8 +13,8 @@ public class FragmentMockActivity extends ActionBarActivity {
 
     @Override
     public void onCreate(Bundle bundle) {
-        setTheme(R.style.AppTheme); //we need this here
         super.onCreate(bundle);
+        setTheme(R.style.AppTheme); //we need this here
         LinearLayout linearLayout;
         linearLayout = new LinearLayout(this);
         setContentView(linearLayout);
@@ -28,7 +28,6 @@ public class FragmentMockActivity extends ActionBarActivity {
         fragmentTransaction.add(fragment, "");
         fragmentTransaction.commit();
     }
-
 
 
 }
