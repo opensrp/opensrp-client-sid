@@ -12,8 +12,8 @@ import shared.BaseUnitTest;
  */
 public class CloudantDataHandlerTest extends BaseUnitTest {
 
-    @Mock
-    private CloudantDataHandler cloudantDataHandler;
+//    @Mock
+//    private CloudantDataHandler cloudantDataHandler;
 
 
     @Before
@@ -22,13 +22,13 @@ public class CloudantDataHandlerTest extends BaseUnitTest {
 //        cloudantDataHandler = new CloudantDataHandler(RuntimeEnvironment.application);
     }
 
-    @Test
-    public void testInstance() {
+//    @Test
+//    public void testInstance() {
 //        try {
 //            assertEquals(cloudantDataHandler.getInstance(RuntimeEnvironment.application), "" );
 //        } catch (Exception e) {
 //            e.printStackTrace();
 //        }
-    }
+//    }
 
 }

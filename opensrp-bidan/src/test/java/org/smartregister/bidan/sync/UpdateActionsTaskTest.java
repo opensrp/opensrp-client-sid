@@ -38,12 +38,11 @@ public class UpdateActionsTaskTest extends BaseUnitTest {
     ProgressIndicator pi;
     @Mock
     AllFormVersionSyncService afvss;
-    private UpdateActionsTask updateActionsTask;
 
     @Before
     public void setUp() throws Exception {
         MockitoAnnotations.initMocks(this);
-        updateActionsTask = new UpdateActionsTask(RuntimeEnvironment.application, actionService, fss, pi, afvss);
+        UpdateActionsTask updateActionsTask = new UpdateActionsTask(RuntimeEnvironment.application, actionService, fss, pi, afvss);
         updateActionsTask.updateFromServer(new SyncAfterFetchListener());
     }
 

@@ -25,10 +25,9 @@ import java.security.cert.CertificateException;
 public class ShadowOpensrpSSLHelper extends Shadow {
 
     private KeyStore systemCAKS;
-    private File file;
 
     public void __constructor__(Context context_, DristhiConfiguration configuration_) {
-
+        // do nothing
     }
 
 
@@ -36,7 +35,7 @@ public class ShadowOpensrpSSLHelper extends Shadow {
             IOException, NoSuchAlgorithmException, UnrecoverableKeyException, KeyManagementException {
         ClassLoader classLoader = this.getClass().getClassLoader();
         URL resource = classLoader.getResource("sid.jks");
-        file = new File(resource.getPath());
+        File file = new File(resource.getPath());
         InputStream inputStream = new FileInputStream(file);
 
         KeyStore keyStore = KeyStore.getInstance("JKS");

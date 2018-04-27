@@ -1,6 +1,7 @@
 package org.smartregister.bidan.activity.mock;
 
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.view.Menu;
 import android.view.inputmethod.InputMethodManager;
 
@@ -68,7 +69,7 @@ public class KISmartRegisterActivityMock extends KISmartRegisterActivity {
     }
 
     @Override
-    public Object getSystemService(String name) {
+    public Object getSystemService(@NonNull String name) {
         if (name.equalsIgnoreCase(INPUT_METHOD_SERVICE)) {
             return inputManager;
         } else {

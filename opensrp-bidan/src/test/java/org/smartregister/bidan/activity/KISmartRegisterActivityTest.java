@@ -43,11 +43,10 @@ public class KISmartRegisterActivityTest extends BaseUnitTest {
     public org.smartregister.service.HTTPAgent httpAgent;
     @Mock
     public DristhiConfiguration configuration;
-    private ActivityController<KISmartRegisterActivityMock> controller;
-    @Mock
-    private BidanRepository bidanRepository;
-    @Mock
-    private AlertService alertService;
+//    @Mock
+//    private BidanRepository bidanRepository;
+//    @Mock
+//    private AlertService alertService;
 
     @Mock
     private InputMethodManager inputManager;
@@ -130,7 +129,7 @@ public class KISmartRegisterActivityTest extends BaseUnitTest {
 //        when(inputManager.hideSoftInputFromWindow(isNull(IBinder.class), anyInt())).thenReturn(true);
 
         Intent intent = new Intent(RuntimeEnvironment.application, KISmartRegisterActivityMock.class);
-        controller = Robolectric.buildActivity(KISmartRegisterActivityMock.class, intent);
+//        ActivityController<KISmartRegisterActivityMock> controller = Robolectric.buildActivity(KISmartRegisterActivityMock.class, intent);
 //        activity = controller.create().start().resume().visible().get();
     }
 

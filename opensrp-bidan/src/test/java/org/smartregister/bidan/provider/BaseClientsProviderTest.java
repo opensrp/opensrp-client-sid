@@ -1,21 +1,9 @@
 package org.smartregister.bidan.provider;
 
-import android.view.View;
-import android.view.ViewGroup;
-
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Mock;
 import org.robolectric.RuntimeEnvironment;
-import org.smartregister.bidan.options.AllKartuIbuServiceMode;
-import org.smartregister.provider.SmartRegisterClientsProvider;
-import org.smartregister.view.contract.SmartRegisterClient;
-import org.smartregister.view.contract.SmartRegisterClients;
-import org.smartregister.view.dialog.FilterOption;
-import org.smartregister.view.dialog.ServiceModeOption;
-import org.smartregister.view.dialog.SortOption;
-import org.smartregister.view.viewholder.OnClickFormLauncher;
-
 import shared.BaseUnitTest;
 
 import static org.junit.Assert.assertNotNull;
@@ -27,58 +15,60 @@ import static org.junit.Assert.assertNull;
 public class BaseClientsProviderTest extends BaseUnitTest {
 
     @Mock
-    BaseClientsProvider baseClientsProvider;
+    private BaseClientsProvider baseClientsProvider;
 
-    FilterOption fo = new FilterOption() {
-        @Override
-        public boolean filter(SmartRegisterClient smartRegisterClient) {
-            return false;
-        }
+//    FilterOption fo = new FilterOption() {
+//        @Override
+//        public boolean filter(SmartRegisterClient smartRegisterClient) {
+//            return false;
+//        }
+//
+//        @Override
+//        public String name() {
+//            return null;
+//        }
+//    };
 
-        @Override
-        public String name() {
-            return null;
-        }
-    };
-    SmartRegisterClientsProvider srcp = new SmartRegisterClientsProvider() {
-        @Override
-        public View getView(SmartRegisterClient smartRegisterClient, View view, ViewGroup viewGroup) {
-            return null;
-        }
+//    SmartRegisterClientsProvider srcp = new SmartRegisterClientsProvider() {
+//        @Override
+//        public View getView(SmartRegisterClient smartRegisterClient, View view, ViewGroup viewGroup) {
+//            return null;
+//        }
+//
+//        @Override
+//        public SmartRegisterClients getClients() {
+//            return null;
+//        }
+//
+//        @Override
+//        public SmartRegisterClients updateClients(FilterOption filterOption, ServiceModeOption serviceModeOption, FilterOption filterOption1, SortOption sortOption) {
+//            return null;
+//        }
+//
+//        @Override
+//        public void onServiceModeSelected(ServiceModeOption serviceModeOption) {
+//
+//        }
+//
+//        @Override
+//        public OnClickFormLauncher newFormLauncher(String s, String s1, String s2) {
+//            return null;
+//        }
+//    };
 
-        @Override
-        public SmartRegisterClients getClients() {
-            return null;
-        }
+//    ServiceModeOption smo = new AllKartuIbuServiceMode(srcp);
 
-        @Override
-        public SmartRegisterClients updateClients(FilterOption filterOption, ServiceModeOption serviceModeOption, FilterOption filterOption1, SortOption sortOption) {
-            return null;
-        }
-
-        @Override
-        public void onServiceModeSelected(ServiceModeOption serviceModeOption) {
-
-        }
-
-        @Override
-        public OnClickFormLauncher newFormLauncher(String s, String s1, String s2) {
-            return null;
-        }
-    };
-    ServiceModeOption smo = new AllKartuIbuServiceMode(srcp);
-
-    SortOption so = new SortOption() {
-        @Override
-        public SmartRegisterClients sort(SmartRegisterClients smartRegisterClients) {
-            return null;
-        }
-
-        @Override
-        public String name() {
-            return null;
-        }
-    };
+//    SortOption so = new SortOption() {
+//        @Override
+//        public SmartRegisterClients sort(SmartRegisterClients smartRegisterClients) {
+//            return null;
+//        }
+//
+//        @Override
+//        public String name() {
+//            return null;
+//        }
+//    };
 
     @Before
     public void setUp() throws Exception {
@@ -109,9 +99,9 @@ public class BaseClientsProviderTest extends BaseUnitTest {
         assertNull(baseClientsProvider.newFormLauncher(a, b, c));
     }
 
-    @Test
-    public void testClients() {
-//        assertEquals(baseClientsProvider.getClients() , null);
-    }
+//    @Test
+//    public void testClients() {
+////        assertEquals(baseClientsProvider.getClients() , null);
+//    }
 
 }
