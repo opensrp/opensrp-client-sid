@@ -4,6 +4,7 @@ import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Mock;
 import org.robolectric.RuntimeEnvironment;
+
 import shared.BaseUnitTest;
 
 import static org.junit.Assert.assertNotNull;

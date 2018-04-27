@@ -159,7 +159,7 @@ public class ClientProcessor {
 //        }
 //    }
 
-    private Boolean processEvent(JSONObject event, JSONObject clientClassificationJson) throws Exception {
+    public Boolean processEvent(JSONObject event, JSONObject clientClassificationJson) throws Exception {
 
         try {
             String baseEntityId = event.getString(baseEntityIdJSONKey);
@@ -231,7 +231,7 @@ public class ClientProcessor {
         }
     }
 
-    private Boolean processField(JSONObject fieldJson, JSONObject event, JSONObject client) {
+    public Boolean processField(JSONObject fieldJson, JSONObject event, JSONObject client) {
 
 //        Log.e(TAG, "processField:fieldJson "+fieldJson );
 //        Log.e(TAG, "processField:event "+event );
@@ -409,7 +409,7 @@ public class ClientProcessor {
         }
     }
 
-    private Boolean processCaseModel(JSONObject event, JSONObject client, JSONArray createsCase) {
+    public Boolean processCaseModel(JSONObject event, JSONObject client, JSONArray createsCase) {
 //        Log.e(TAG, "processCaseModel:event "+event );
 //        Log.e(TAG, "processCaseModel:client "+client );
 //        Log.e(TAG, "processCaseModel:createsCase "+createsCase );
@@ -605,7 +605,7 @@ public class ClientProcessor {
      * @param event
      * @param client
      */
-    private void updateClientDetailsTable(JSONObject event, JSONObject client) {
+    public void updateClientDetailsTable(JSONObject event, JSONObject client) {
         try {
             Log.i(TAG, "Started updateClientDetailsTable");
 
@@ -715,7 +715,7 @@ public class ClientProcessor {
         return map;
     }
 
-    private void saveClientDetails(String baseEntityId, Map<String, String> values, Long timestamp) {
+    public void saveClientDetails(String baseEntityId, Map<String, String> values, Long timestamp) {
 //        Log.e(TAG, "saveClientDetails:baseEntityId "+baseEntityId );
 //        Log.e(TAG, "saveClientDetails:values "+values );
         for (String key : values.keySet()) {
@@ -764,7 +764,7 @@ public class ClientProcessor {
         return humanReadableValues.length() == 1 ? humanReadableValues.get(0).toString() : humanReadableValues.toString();
     }
 
-    private Map<String, String> getClientAddressAsMap(JSONObject client) {
+    public Map<String, String> getClientAddressAsMap(JSONObject client) {
 //        Log.e(TAG, "getClientAddressAsMap: " + client);
         Map<String, String> addressMap = new HashMap<>();
         try {

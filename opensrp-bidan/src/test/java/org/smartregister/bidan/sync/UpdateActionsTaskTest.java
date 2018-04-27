@@ -15,7 +15,6 @@ import org.smartregister.bidan.service.FormSubmissionSyncService;
 import org.smartregister.service.ActionService;
 import org.smartregister.service.AllFormVersionSyncService;
 import org.smartregister.ssl.OpensrpSSLHelper;
-import org.smartregister.sync.SyncAfterFetchListener;
 import org.smartregister.view.ProgressIndicator;
 
 import shared.BaseUnitTest;
@@ -43,7 +42,7 @@ public class UpdateActionsTaskTest extends BaseUnitTest {
     public void setUp() throws Exception {
         MockitoAnnotations.initMocks(this);
         UpdateActionsTask updateActionsTask = new UpdateActionsTask(RuntimeEnvironment.application, actionService, fss, pi, afvss);
-        updateActionsTask.updateFromServer(new SyncAfterFetchListener());
+//        updateActionsTask.updateFromServer(new SyncAfterFetchListener());
     }
 
 
