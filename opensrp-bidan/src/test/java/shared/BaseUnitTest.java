@@ -29,3 +29,4 @@ public abstract class BaseUnitTest {
         public static final String EMPTY_STRING = "";
     }
 }
+
