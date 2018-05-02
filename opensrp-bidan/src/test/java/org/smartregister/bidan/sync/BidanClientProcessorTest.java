@@ -1,102 +1,110 @@
 package org.smartregister.bidan.sync;
 
+import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
 
-import com.google.common.collect.Lists;
+import junit.framework.Assert;
 
 import org.json.JSONArray;
-import org.json.JSONException;
 import org.json.JSONObject;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
+import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
 import org.powermock.api.mockito.PowerMockito;
 import org.powermock.core.classloader.annotations.PowerMockIgnore;
 import org.powermock.core.classloader.annotations.PrepareForTest;
 import org.powermock.modules.junit4.PowerMockRunner;
 import org.robolectric.RuntimeEnvironment;
+import org.smartregister.Context;
 import org.smartregister.CoreLibrary;
-import org.smartregister.sync.*;
+import org.smartregister.repository.DetailsRepository;
+import org.smartregister.sync.ClientProcessor;
 import org.smartregister.util.AssetHandler;
-import org.smartregister.view.activity.DrishtiApplication;
 
 import java.util.ArrayList;
-import java.util.List;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
-
-import shared.BaseUnitTest;
-
-import static org.junit.Assert.assertEquals;
 
 /**
  * Created by sid-tech on 4/26/18
  */
 @RunWith(PowerMockRunner.class)
-@PrepareForTest({CloudantDataHandler.class})
+@PrepareForTest({AssetHandler.class, CloudantDataHandler.class, PreferenceManager.class})
 @PowerMockIgnore({"javax.xml.*", "org.xml.sax.*", "org.w3c.dom.*", "org.springframework.context.*", "org.apache.log4j.*"})
 public class BidanClientProcessorTest {
 
     private final static int NUM_THREADS = 10;
-    private final static int NUM_ITERATIONS = 1000;
+    private final static int NUM_ITERATIONS = 10;
 
     @Mock
     private BidanClientProcessor bidanClientProcessor;
+    @Mock
     private BidanClientProcessor bidanClientNotProcessor;
+    @Mock
+    private Context context;
+    @Mock
+    private DetailsRepository detailsRepository;
+    @Mock
+    private CloudantDataHandler cloudantDataHandler;
+    private ClientProcessor clientProcessor;
+    @Mock
+    private SharedPreferences sharedPreferences;
 
     @Before
     public void setUp() throws Exception {
         MockitoAnnotations.initMocks(this);
-        PowerMockito.mockStatic(CloudantDataHandler.class);
+        CoreLibrary.init(context);
+        Mockito.when(context.detailsRepository()).thenReturn(detailsRepository);
 
+        PowerMockito.mockStatic(AssetHandler.class);
+        PowerMockito.when(AssetHandler.readFileFromAssetsFolder("ec_client_classification.json", context.applicationContext())).thenReturn(ClientData.clientClassificationJson);
+        PowerMockito.when(AssetHandler.readFileFromAssetsFolder("ec_client_fields.json", context.applicationContext())).thenReturn(ClientData.ec_client_fields_json);
+        PowerMockito.when(AssetHandler.readFileFromAssetsFolder("ec_client_alerts.json", context.applicationContext())).thenReturn(ClientData.ec_client_alerts);
+
+        PowerMockito.mockStatic(CloudantDataHandler.class);
         BidanClientProcessor.getInstance(RuntimeEnvironment.application);
-//        BidanClientProcessor.processClient();
+        clientProcessor = new ClientProcessor(context.applicationContext());
+        bidanClientProcessor = new BidanClientProcessor(RuntimeEnvironment.application);
 
     }
 
     @Test
-    public void testSynchronizedSameValue() throws InterruptedException {
-        bidanClientProcessor = new BidanClientProcessor(RuntimeEnvironment.application);
-        bidanClientNotProcessor = new BidanClientProcessor(RuntimeEnvironment.application);
+    public void processClientTest() throws Exception {
+        JSONArray eventArray = new JSONArray(ClientData.eventJsonArray);
+        final ArrayList<JSONObject> eventList = new ArrayList<>();
+        for (int i = 0; i < eventArray.length(); i++) {
+            eventList.add(eventArray.getJSONObject(i));
+        }
+        JSONArray clientArray = new JSONArray(ClientData.clientJsonArray);
+        ArrayList<JSONObject> clientList = new ArrayList<>();
+        for (int i = 0; i < clientArray.length(); i++) {
+            clientList.add(clientArray.getJSONObject(i));
+        }
 
-//        ExecutorService executor = Executors.newFixedThreadPool(10);
-//        final List<JSONObject> events = new ArrayList<>();
-//        final List<JSONObject> result = Lists.newArrayList();
-//        try {
-//            JSONObject jsonProperty = new JSONObject()
-//                    .put(Key.eventType.name(), "property")
-//                    .put(Key.client.name(), "")
-//                    .put(Key.hidden.name(), false)
-//                    .put(Key.values.name(), new JSONArray().put(false).put(true));
-//            events.add(jsonProperty);
-//            result.add(jsonProperty);
-//        } catch (JSONException e) {
-//            e.printStackTrace();
-//        }
-//        for (int i = 0; i < NUM_THREADS; i++) {
-//            executor.submit(new Runnable() {
-//                @Override
-//                public void run() {
-//                    for (int i = 0; i < NUM_ITERATIONS; i++) {
-//                        try {
-//                            bidanClientProcessor.processClient(events);
-//                            assertEquals(result, events);
-//                        } catch (Exception e) {
-//                            e.printStackTrace();
-//                        }
-////                        notSync.inc();
-//                    }
-//                }
-//            });
-//        }
+        bidanClientProcessor.processClient(eventList);
     }
 
-    private enum Key {
-        eventType,
-        client,
-        hidden,
-        values
+    @Test
+    public void assertProcessFieldReturnsTrue() throws Exception {
+        final JSONObject fieldObject = new JSONObject(ClientData.ec_client_fields_json);
+        final ArrayList<JSONObject> eventList = new ArrayList<>();
+        JSONArray eventArray = new JSONArray(ClientData.eventJsonArray);
+        for (int i = 0; i < eventArray.length(); i++) {
+            eventList.add(eventArray.getJSONObject(i));
+        }
+        JSONArray clientArray = new JSONArray(ClientData.clientJsonArray);
+        ArrayList<JSONObject> clientList = new ArrayList<>();
+        for (int i = 0; i < clientArray.length(); i++) {
+            clientList.add(clientArray.getJSONObject(i));
+        }
+        PowerMockito.mockStatic(CloudantDataHandler.class);
+        PowerMockito.when(CloudantDataHandler.getInstance(context.applicationContext())).thenReturn(cloudantDataHandler);
+        bidanClientProcessor = new BidanClientProcessor(context.applicationContext());
+        JSONArray fieldArray = fieldObject.getJSONArray("bindobjects");
+        Assert.assertEquals(bidanClientProcessor.processField(fieldArray.getJSONObject(0), eventList.get(0), clientList.get(0)), Boolean.TRUE);
     }
+
+
+
 }

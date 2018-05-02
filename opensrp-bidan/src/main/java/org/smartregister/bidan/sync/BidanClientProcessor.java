@@ -9,14 +9,15 @@ import java.util.List;
 
 public class BidanClientProcessor extends ClientProcessor {
 
-    public static final String[] CLIENT_EVENTS = {"Registrasi Bidan", "Child Registration", "Identitas Ibu",
-            "Dokumentasi Persalinan", "Tambah Bayi", "Tambah KB"};
+    private static BidanClientProcessor instance;
+//    public static final String[] CLIENT_EVENTS = {"Registrasi Bidan", "Child Registration", "Identitas Ibu",
+//            "Dokumentasi Persalinan", "Tambah Bayi", "Tambah KB"};
+
     //    public static final String baseEntityIdJSONKey = "baseEntityId";
 //    protected static final String providerIdJSONKey = "providerId";
 //    protected static final String VALUES_KEY = "values";
 //    private static final String detailsUpdated = "detailsUpdated";
 //    private static final String[] openmrs_gen_ids = {"zeir_id"};
-    private static BidanClientProcessor instance;
 
     public BidanClientProcessor(Context context) {
         super(context);

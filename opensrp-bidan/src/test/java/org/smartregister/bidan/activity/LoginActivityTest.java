@@ -146,7 +146,7 @@ public class LoginActivityTest extends BaseUnitTest {
     }
 
     @Test
-    public void defaultLocationIdEqualsPendem() {
+    public void assertDefaultLocation() {
         InputStream inputStream = this.getClass().getClassLoader().getResourceAsStream("dataTest.json");
         StringWriter writer = new StringWriter();
         try {
