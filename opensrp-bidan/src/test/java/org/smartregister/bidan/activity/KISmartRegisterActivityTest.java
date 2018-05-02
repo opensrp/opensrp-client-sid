@@ -30,8 +30,8 @@ import static org.mockito.Mockito.when;
 /**
  * Created by sid-tech on 4/25/18
  */
-@PrepareForTest({CoreLibrary.class})
-@Config(shadows = {SecuredActivityShadow.class, SecuredFragmentShadow.class, ShadowContext.class})
+//@PrepareForTest({CoreLibrary.class})
+//@Config(shadows = {SecuredActivityShadow.class, SecuredFragmentShadow.class, ShadowContext.class})
 // LocationPickerViewShadow.class, JsonFormUtilsShadow.class, MyShadowAsyncTask.class, CommonRepositoryShadow.class, ShadowContextForRegistryActivity.class})
 public class KISmartRegisterActivityTest extends BaseUnitTest {
 
