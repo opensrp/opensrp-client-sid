@@ -6,36 +6,100 @@
         android:name=".application.BidanApplication"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
-        >
+        android:label="@string/app_name"
+        android:supportsRtl="true"
+        android:theme="@style/AppTheme">
         <activity
             android:name=".activity.LoginActivity"
             android:label="@string/app_name"
-            android:theme="@style/BidanAppTheme"
             android:screenOrientation="landscape"
-            android:windowSoftInputMode="stateAlwaysHidden|adjustResize"
-            >
+            android:theme="@android:style/Theme.Holo"
+            android:windowSoftInputMode="adjustResize|stateHidden">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
         <activity
             android:name=".activity.BidanHomeActivity"
-            android:screenOrientation="landscape" />
+            android:screenOrientation="landscape"
+            android:theme="@style/AppTheme" />
+
+        <activity
+            android:name=".activity.KISmartRegisterActivity"
+            android:configChanges="keyboardHidden|orientation|screenSize"
+            android:screenOrientation="landscape"
+            android:theme="@style/AppThemeNoActionBarAndTitle"
+            android:windowSoftInputMode="adjustResize" />
+        <!--<activity-->
+        <!--android:name=".activity.NativeKIbuSmartRegisterActivity"-->
+        <!--android:configChanges="keyboardHidden|orientation|screenSize"-->
+        <!--android:screenOrientation="landscape"-->
+        <!--android:theme="@style/AppThemeNoActionBarAndTitle"-->
+        <!--android:windowSoftInputMode="adjustResize" />-->
+        <activity
+            android:name=".activity.DetailMotherActivity"
+            android:screenOrientation="landscape"
+            android:theme="@style/AppThemeNoTitle" />
+
+        <activity
+            android:name=".activity.FPSmartRegisterActivity"
+            android:configChanges="keyboardHidden|orientation|screenSize"
+            android:screenOrientation="landscape"
+            android:theme="@style/AppThemeNoActionBarAndTitle"
+            android:windowSoftInputMode="adjustResize" />
+        <activity
+            android:name=".activity.DetailFPActivity"
+            android:screenOrientation="landscape"
+            android:theme="@style/AppThemeNoTitle" />
+
+        <activity
+            android:name=".activity.PNCSmartRegisterActivity"
+            android:configChanges="keyboardHidden|orientation|screenSize"
+            android:screenOrientation="landscape"
+            android:theme="@style/AppThemeNoActionBarAndTitle"
+            android:windowSoftInputMode="adjustResize" />
+        <activity
+            android:name=".activity.DetailPNCActivity"
+            android:screenOrientation="landscape"
+            android:theme="@style/AppThemeNoTitle" />
+
+        <activity
+            android:name=".activity.ANCSmartRegisterActivity"
+            android:configChanges="keyboardHidden|orientation|screenSize"
+            android:screenOrientation="landscape"
+            android:theme="@style/AppThemeNoActionBarAndTitle"
+            android:windowSoftInputMode="adjustResize" />
+        <activity
+            android:name=".activity.DetailANCActivity"
+            android:screenOrientation="landscape"
+            android:theme="@style/AppThemeNoTitle" />
+
+        <activity
+            android:name=".activity.AnakSmartRegisterActivity"
+            android:configChanges="keyboardHidden|orientation|screenSize"
+            android:screenOrientation="landscape"
+            android:theme="@style/AppThemeNoActionBarAndTitle"
+            android:windowSoftInputMode="adjustResize" />
+        <activity
+            android:name=".activity.DetailChildActivity"
+            android:screenOrientation="landscape"
+            android:theme="@style/AppThemeNoTitle" />
+
         <activity
             android:name=".activity.SettingsActivity"
             android:screenOrientation="landscape" />
-        <!-- local key -->
-            <!--<meta-data-->
-            <!--android:name="io.fabric.ApiKey"-->
-            <!--android:value="b74c58c94d8965151212e8ecf1f4fdfbf5b7f4e4" />-->
-        <!-- sid key -->
-        <!--<meta-data-->
-            <!--android:name="io.fabric.ApiKey"-->
-            <!--android:value="b74c58c94d8965151212e8ecf1f4fdfbf5b7f4e4" />-->
+        <activity android:name=".utils.CameraPreviewActivity" />
+        <activity android:name=".activity.BaseRegisterActivity" />
+        <!--<activity android:name=".utils.Camera2PreviewActivity" />-->
+        <uses-library android:name="android.test.runner"/>
 
+
+        <meta-data
+            android:name="io.fabric.ApiKey"
+            android:value="5bda8a6293b5b89b510a53e5d297d42bdf427e10" />
     </application>
 
-    <uses-permission android:name="android.permission.INTERNET" />
 </manifest>
