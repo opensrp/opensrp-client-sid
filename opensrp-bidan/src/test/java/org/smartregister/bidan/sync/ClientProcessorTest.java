@@ -40,17 +40,15 @@ import static org.mockito.ArgumentMatchers.anyString;
 @PowerMockIgnore({"javax.xml.*", "org.xml.sax.*", "org.w3c.dom.*", "org.springframework.context.*", "org.apache.log4j.*"})
 public class ClientProcessorTest {
 
-    @Mock
-    private Context context;
+    private static final String LAST_SYNC_DATE = "LAST_SYNC_DATE";
 
 //    @Rule
 //    public PowerMockRule rule = new PowerMockRule();
-
+    @Mock
+    private Context context;
     private ClientProcessor clientProcessor;
-
     @Mock
     private CoreLibrary coreLibrary;
-
     @Mock
     private DetailsRepository detailsRepository;
     @Mock
@@ -59,7 +57,6 @@ public class ClientProcessorTest {
     private CommonRepository cr;
     @Mock
     private SharedPreferences sharedPreferences;
-    private static final String LAST_SYNC_DATE = "LAST_SYNC_DATE";
 
     //    private ActivityController<MockActivity> controller;
 //    private MockActivity activity;

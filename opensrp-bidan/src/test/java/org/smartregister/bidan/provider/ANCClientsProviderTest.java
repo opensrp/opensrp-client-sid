@@ -26,7 +26,7 @@ public class ANCClientsProviderTest extends BaseUnitTest {
 //    @Mock
 //    private Cursor cursor;
 
-//    @Mock
+    //    @Mock
 //    private SmartRegisterClient client = new SmartRegisterClient() {
 //        @Override
 //        public String entityId() {

@@ -55,7 +55,7 @@ public class MockSharedPreference implements SharedPreferences {
 
     @Override
     public boolean getBoolean(final String s, final boolean b) {
-        return (preferenceMap.get(s) != null ? (boolean)preferenceMap.get(s) : b);
+        return (preferenceMap.get(s) != null ? (boolean) preferenceMap.get(s) : b);
     }
 
     @Override
