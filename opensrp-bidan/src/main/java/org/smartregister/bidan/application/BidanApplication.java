@@ -2,6 +2,9 @@ package org.smartregister.bidan.application;
 
 import android.content.Intent;
 import android.content.res.Configuration;
+import android.util.Log;
+import android.view.inputmethod.InputMethodManager;
+import android.view.inputmethod.InputMethodSubtype;
 
 import com.crashlytics.android.Crashlytics;
 

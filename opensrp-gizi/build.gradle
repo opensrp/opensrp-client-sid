@@ -1,24 +1,28 @@
 buildscript {
     repositories {
         jcenter()
+        maven { url 'https://maven.fabric.io/public' }
     }
     dependencies {
         classpath "com.android.tools.build:gradle:1.2.3"
         classpath 'org.robolectric:robolectric-gradle-plugin:1.1.0'
         classpath 'org.kt3k.gradle.plugin:coveralls-gradle-plugin:2.8.1'
+        classpath 'io.fabric.tools:gradle:1.+'
     }
 }
 
-allprojects {
-    repositories {
-        maven { url 'https://oss.sonatype.org/content/repositories/snapshots/' }
-        mavenLocal()
-    }
+repositories {
+    jcenter()
+    mavenCentral()
+    maven { url 'https://oss.sonatype.org/content/repositories/snapshots/' }
+    maven { url 'https://maven.fabric.io/public' }
+    mavenLocal()
 }
 
 apply plugin: 'com.android.application'
 apply plugin: 'jacoco'
 apply plugin: 'com.github.kt3k.coveralls'
+apply plugin: 'io.fabric'
 
 android {
     compileSdkVersion 22
@@ -143,9 +147,16 @@ dependencies {
 //     Set this dependency to build and run Espresso tests
     testCompile 'org.apache.maven:maven-ant-tasks:2.1.3'
 
-//    compile('com.crashlytics.sdk.android:crashlytics:2.8.0@aar') {
-//        transitive = true;
-//    }
+//    compile 'org.robolectric:annotations:3.4'
+//    compile 'org.robolectric:framework:3.4'
+//    compile 'junit:junit:4.12'
+//    compile 'org.powermock:powermock-module-junit4:1.7.3'
+//    compile 'org.robolectric:robolectric:3.4'
+//    compile 'org.powermock:powermock-api-mockito2:1.7.3'
+
+    compile('com.crashlytics.sdk.android:crashlytics:2.8.0@aar') {
+        transitive = true;
+    }
 
     // PowerMock
     def powerMockVersion = '1.7.3'
@@ -157,14 +168,8 @@ dependencies {
         exclude group: 'com.thoughtworks.xstream', module: 'xstream'
     }
 
-    androidTestCompile "junit:junit:4.12"
+//    androidTestCompile "junit:junit:4.12"
 //    androidTestCompile "com.android.support.test:runner:0.5"
-    compile 'org.robolectric:annotations:3.4'
-    compile 'org.robolectric:framework:3.4'
-    compile 'junit:junit:4.12'
-    compile 'org.powermock:powermock-module-junit4:1.7.3'
-    compile 'org.robolectric:robolectric:3.4'
-    compile 'org.powermock:powermock-api-mockito2:1.7.3'
 }
 
 task jacocoTestReport(type: JacocoReport, dependsOn: ['testDebug']) {

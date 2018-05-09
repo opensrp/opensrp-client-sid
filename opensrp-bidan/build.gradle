@@ -63,10 +63,11 @@ android {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
             buildConfigField "int", "DATABASE_VERSION", '1'
+            resValue "string", 'opensrp_url', '"http://118.91.130.18:9090/opensrp"'
 
         }
         debug {
-            resValue "string", 'opensrp_url', '"http://118.91.130.18:9090/opensrp"'
+            resValue "string", 'opensrp_url', '"http://192.168.1.253:9090/opensrp"'
             buildConfigField "int", "DATABASE_VERSION", '1'
             buildConfigField "boolean", "SYNC_WAIT", 'false'
             buildConfigField "boolean", "UNIQUE_ID", 'false'
@@ -162,7 +163,7 @@ dependencies {
         exclude group: 'com.thoughtworks.xstream', module: 'xstream'
     }
 
-    androidTestCompile "junit:junit:4.12"
+//    androidTestCompile "junit:junit:4.12"
 //    androidTestCompile "com.android.support.test:runner:0.5"
 }
 

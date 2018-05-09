@@ -42,7 +42,7 @@ public class ClientProcessorTest {
 
     private static final String LAST_SYNC_DATE = "LAST_SYNC_DATE";
 
-//    @Rule
+    //    @Rule
 //    public PowerMockRule rule = new PowerMockRule();
     @Mock
     private Context context;

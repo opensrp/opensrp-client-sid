@@ -8,6 +8,7 @@ import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.content.res.Resources;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.content.res.ResourcesCompat;
 import android.support.v7.app.AppCompatActivity;
@@ -98,12 +99,9 @@ public class LoginActivity extends AppCompatActivity {
         setDoneActionHandlerOnPasswordField();
         initializeProgressDialog();
 
-        if (getActionBar() != null) {
-            getActionBar().setTitle("");
-//        getActionBar().setIcon(getResources().getDrawable(R.mipmap.logo));
-            getActionBar().setIcon(ResourcesCompat.getDrawable(getResources(), R.mipmap.logo, null));
-//        getActionBar().setBackgroundDrawable(getResources().getDrawable(R.color.action_bar_background));
-            getActionBar().setBackgroundDrawable(ResourcesCompat.getDrawable(getResources(), R.color.action_bar_background, null));
+        if (getSupportActionBar() != null) {
+            getSupportActionBar().setIcon(ResourcesCompat.getDrawable(getResources(), R.mipmap.logo, null));
+            getSupportActionBar().setBackgroundDrawable(ResourcesCompat.getDrawable(getResources(), R.color.action_bar_background, null));
         }
         setLanguage();
 
@@ -115,7 +113,6 @@ public class LoginActivity extends AppCompatActivity {
         // Inflate the menu; this adds items to the action bar if it is present.
 //        getMenuInflater().inflate(R.menu.menu_main, menu);
         menu.add("Settings");
-
         return true;
     }
 
