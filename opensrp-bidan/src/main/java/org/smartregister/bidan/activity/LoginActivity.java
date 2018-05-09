@@ -8,7 +8,6 @@ import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.content.res.Resources;
-import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.content.res.ResourcesCompat;
 import android.support.v7.app.AppCompatActivity;
@@ -29,6 +28,7 @@ import android.widget.TextView;
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.smartregister.Context;
+import org.smartregister.bidan.BuildConfig;
 import org.smartregister.bidan.R;
 import org.smartregister.bidan.application.BidanApplication;
 import org.smartregister.bidan.utils.AllConstantsINA;
@@ -131,6 +131,17 @@ public class LoginActivity extends AppCompatActivity {
 
         if (!getOpenSRPContext().IsUserLoggedOut()) {
             goToHome();
+        }
+
+        if (BuildConfig.DEBUG) {
+            fillUserIfExists();
+        }
+    }
+
+    private void fillUserIfExists() {
+        if (context.userService().hasARegisteredUser()) {
+            userNameEditText.setText(context.allSharedPreferences().fetchRegisteredANM());
+            userNameEditText.setEnabled(false);
         }
     }
 
@@ -237,6 +248,7 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     public void login(final View view) {
+        Log.e(TAG, "login: "+ getOpenSRPContext().userService().hasARegisteredUser() );
         login(view, !getOpenSRPContext().allSharedPreferences().fetchForceRemoteLogin());
     }
 
@@ -247,11 +259,6 @@ public class LoginActivity extends AppCompatActivity {
         final String userName = userNameEditText.getText().toString();
         final String password = passwordEditText.getText().toString();
 
-//        if (context.userService().hasARegisteredUser()) {
-//            localLogin(view, userName, password);
-//        } else {
-//            remoteLogin(view, userName, password);
-//        }
         if (!TextUtils.isEmpty(userName) && !TextUtils.isEmpty(password)) {
             if (localLogin) {
                 localLogin(view, userName, password);
@@ -281,6 +288,8 @@ public class LoginActivity extends AppCompatActivity {
 //                FlurryAgent.setUserId(userName);
                 if (loginResponse == SUCCESS) {
                     remoteLoginWith(userName, password, loginResponse.payload());
+                    getOpenSRPContext().allSharedPreferences().saveForceRemoteLogin(false);
+
                 } else {
                     if (loginResponse == null) {
                         showErrorDialog("Login failed. Unknown reason. Try Again");

@@ -12,7 +12,7 @@ public class KICommonObjectFilterOption implements CursorFilterOption {
     public String filter() {
 
 
-        return " and ec_anak.relational_id IN (SELECT DISTINCT base_entity_id FROM ec_details WHERE value MATCH '"+criteria+"')";
+        return "AND ec_anak.relational_id IN (SELECT DISTINCT base_entity_id FROM ec_details WHERE value MATCH '" + criteria + "') ";
 
     }
 

@@ -166,7 +166,7 @@ public class LoginActivity extends AppCompatActivity {
     protected void onResume() {
         super.onResume();
 
-        if (!context.IsUserLoggedOut()) {
+        if (!getOpenSRPContext().IsUserLoggedOut()) {
             goToHome();
         }
 

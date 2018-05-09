@@ -15,7 +15,7 @@ public class IbuServiceModeOption extends ServiceModeOption {
 
     @Override
     public String name() {
-       return Context.getInstance().getStringResource(R.string.test_register);
+       return Context.getInstance().getStringResource(R.string.mother);
     }
 
     @Override

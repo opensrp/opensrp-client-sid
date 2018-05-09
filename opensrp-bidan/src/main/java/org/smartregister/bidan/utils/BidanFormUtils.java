@@ -726,14 +726,21 @@ public class BidanFormUtils {
         return UUID.randomUUID().toString();
     }
 
-    private String retrieveIdForSubmission(JSONObject jsonObject) throws Exception {
+    private String retrieveIdForSubmission(JSONObject jsonObject) throws JSONException {
         JSONArray fields = jsonObject.getJSONObject("form").getJSONArray("fields");
+        android.util.Log.e(TAG, "retrieveIdForSubmission: "+ fields );
+        System.out.println(fields);
 
         for (int i = 0; i < fields.length(); i++) {
             JSONObject field = fields.getJSONObject(i);
 
-            if (field.has("name") && field.getString("name").equalsIgnoreCase("id")) {
-                return field.getString("value");
+            try {
+                if (field.has("name") && field.getString("name").equalsIgnoreCase("id")) {
+                    return field.getString("value");
+                }
+
+            } catch (JSONException e){
+                e.printStackTrace();
             }
         }
         return null;

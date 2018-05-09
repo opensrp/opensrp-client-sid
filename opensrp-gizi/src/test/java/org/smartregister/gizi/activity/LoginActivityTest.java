@@ -27,6 +27,7 @@ import org.smartregister.CoreLibrary;
 import org.smartregister.domain.LoginResponse;
 import org.smartregister.gizi.BuildConfig;
 import org.smartregister.gizi.R;
+import org.smartregister.gizi.activity.LoginActivity;
 import org.smartregister.gizi.activity.mock.LoginActivityMock;
 import org.smartregister.gizi.activity.shadow.ShadowContext;
 import org.smartregister.repository.AllSharedPreferences;

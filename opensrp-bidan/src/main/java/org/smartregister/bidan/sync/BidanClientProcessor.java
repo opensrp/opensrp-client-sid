@@ -10,8 +10,8 @@ import java.util.List;
 public class BidanClientProcessor extends ClientProcessor {
 
     private static BidanClientProcessor instance;
-//    public static final String[] CLIENT_EVENTS = {"Registrasi Bidan", "Child Registration", "Identitas Ibu",
-//            "Dokumentasi Persalinan", "Tambah Bayi", "Tambah KB"};
+    public static final String[] CLIENT_EVENTS = {"Registrasi Bidan", "Child Registration", "Identitas Ibu",
+            "Dokumentasi Persalinan", "Tambah Bayi", "Tambah KB"};
 
     //    public static final String baseEntityIdJSONKey = "baseEntityId";
 //    protected static final String providerIdJSONKey = "providerId";
