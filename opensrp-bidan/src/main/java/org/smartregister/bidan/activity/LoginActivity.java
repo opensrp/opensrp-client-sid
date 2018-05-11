@@ -134,14 +134,10 @@ public class LoginActivity extends AppCompatActivity {
         }
 
         if (BuildConfig.DEBUG) {
-            fillUserIfExists();
-        }
-    }
-
-    private void fillUserIfExists() {
-        if (context.userService().hasARegisteredUser()) {
-            userNameEditText.setText(context.allSharedPreferences().fetchRegisteredANM());
-            userNameEditText.setEnabled(false);
+            if (getOpenSRPContext().userService().hasARegisteredUser()) {
+                userNameEditText.setText(context.allSharedPreferences().fetchRegisteredANM());
+                userNameEditText.setEnabled(false);
+            }
         }
     }
 

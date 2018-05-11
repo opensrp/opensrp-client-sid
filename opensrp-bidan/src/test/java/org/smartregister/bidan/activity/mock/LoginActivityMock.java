@@ -1,5 +1,6 @@
 package org.smartregister.bidan.activity.mock;
 
+import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -37,5 +38,15 @@ public class LoginActivityMock extends LoginActivity {
     @Override
     public View getCurrentFocus() {
         return findViewById(org.smartregister.R.id.login_userNameText);
+    }
+
+    public String getAppVersion() {
+        try {
+            return getVersion();
+        } catch (PackageManager.NameNotFoundException e) {
+            e.printStackTrace();
+        }
+
+        return null;
     }
 }
