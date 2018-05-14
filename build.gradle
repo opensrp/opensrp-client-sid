@@ -58,14 +58,14 @@ buildDashboard {
     reports.html.destination = "build/"
 }
 
-allprojects {
-    apply plugin: 'jacoco'
-}
+
 
 test.reports.html.enabled = false
 test.reports.junitXml.enabled = false
 
-
+allprojects {
+    apply plugin: 'jacoco'
+}
 task codeCoverageReport(type: JacocoReport) {
 
     // Gather execution data from all subprojects
