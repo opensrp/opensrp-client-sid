@@ -321,7 +321,6 @@
     <ImageView
         android:layout_width="@dimen/smart_register_client_divider_height"
         android:layout_height="fill_parent"
-        android:id="@+id/imageView"
         android:src="@color/smart_register_client_divider_color" />
 
     <LinearLayout

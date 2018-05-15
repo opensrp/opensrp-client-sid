@@ -46,7 +46,4 @@ public class KmsConstants {
     public static final double [] maleWeightUpIndicator={
             0,800,900,800,600,500,400,400,300,300,300,300,200};
 
-    public static final double[] femaleWeightUpIndicator={
-            0,800,900,800,600,500,400,300,300,300,300,200};
-
 }

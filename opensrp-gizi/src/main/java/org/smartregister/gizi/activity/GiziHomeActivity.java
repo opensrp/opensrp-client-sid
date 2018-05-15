@@ -13,6 +13,10 @@ import android.widget.Toast;
 import com.flurry.android.FlurryAgent;
 
 import org.json.JSONObject;
+import org.opensrp.api.domain.Location;
+import org.opensrp.api.util.EntityUtils;
+import org.opensrp.api.util.LocationTree;
+import org.opensrp.api.util.TreeNode;
 import org.smartregister.Context;
 import org.smartregister.cursoradapter.SmartRegisterQueryBuilder;
 import org.smartregister.enketo.view.fragment.DisplayFormFragment;
@@ -34,8 +38,6 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
-import util.formula.Support;
-
 import static android.widget.Toast.LENGTH_SHORT;
 import static java.lang.String.valueOf;
 import static org.smartregister.event.Event.ACTION_HANDLED;
@@ -44,73 +46,103 @@ import static org.smartregister.event.Event.SYNC_COMPLETED;
 import static org.smartregister.event.Event.SYNC_STARTED;
 
 public class GiziHomeActivity extends SecuredActivity {
-    private static final String TAG = GiziHomeActivity.class.getName();
     private SimpleDateFormat timer = new SimpleDateFormat("hh:mm:ss");
     private MenuItem updateMenuItem;
     private MenuItem remainingFormsToSyncMenuItem;
-    private TextView anakRegisterClientCountView;
-    private TextView ibuRegisterClientCountView;
     private PendingFormSubmissionService pendingFormSubmissionService;
 
     private Listener<Boolean> onSyncStartListener = new Listener<Boolean>() {
         @Override
         public void onEvent(Boolean data) {
-            Support.ONSYNC = true;
             //AllConstants.SLEEP_TIME = 15000;
             if (updateMenuItem != null) {
                 updateMenuItem.setActionView(R.layout.progress);
             }
         }
     };
-
+    private TextView anakRegisterClientCountView;
+    private TextView ibuRegisterClientCountView;
+//    private int childcount;
+//    private int ibucount;
     private Listener<Boolean> onSyncCompleteListener = new Listener<Boolean>() {
         @Override
         public void onEvent(Boolean data) {
             //#TODO: RemainingFormsToSyncCount cannot be updated from a back ground thread!!
-//            Support.ONSYNC = true;
             updateRemainingFormsToSyncCount();
             if (updateMenuItem != null) {
                 updateMenuItem.setActionView(null);
             }
             updateRegisterCounts();
+
         }
     };
-
     private Listener<String> onFormSubmittedListener = new Listener<String>() {
         @Override
         public void onEvent(String instanceId) {
             updateRegisterCounts();
         }
     };
-
     private Listener<String> updateANMDetailsListener = new Listener<String>() {
         @Override
         public void onEvent(String data) {
             updateRegisterCounts();
         }
     };
+    private View.OnClickListener onRegisterStartListener = new View.OnClickListener() {
 
+        @Override
+        public void onClick(View view) {
+            switch (view.getId()) {
+                case R.id.btn_gizi_register:
+                    navigationController.startChildSmartRegistry();
+                    break;
+                case R.id.btn_gizi_ibu_register:
+                    navigationController.startECSmartRegistry();
+                    break;
+
+
+            }
+            String HomeEnd = timer.format(new Date());
+            Map<String, String> Home = new HashMap<String, String>();
+            Home.put("end", HomeEnd);
+            FlurryAgent.logEvent("gizi_home_dashboard", Home, true);
+        }
+    };
+    private View.OnClickListener onButtonsClickListener = new View.OnClickListener() {
+
+        @Override
+        public void onClick(View view) {
+            switch (view.getId()) {
+                case R.id.btn_reporting:
+                    navigationController.startReports();
+                    break;
+
+                case R.id.btn_videos:
+//                    navigationController.startVideos();
+                    break;
+            }
+        }
+    };
 
     @Override
     protected void onCreation() {
         //home dashboard
         setContentView(R.layout.smart_registers_gizi_home);
         //  FlurryFacade.logEvent("gizi_home_dashboard");
-        navigationController = new GiziNavigationController(this,anmController,context());
+        navigationController = new GiziNavigationController(this, anmController, context());
         setupViews();
         initialize();
         DisplayFormFragment.formInputErrorMessage = getResources().getString(R.string.forminputerror);
         DisplayFormFragment.okMessage = getResources().getString(R.string.okforminputerror);
 
         String HomeStart = timer.format(new Date());
-        Map<String, String> Home = new HashMap<>();
+        Map<String, String> Home = new HashMap<String, String>();
         Home.put("start", HomeStart);
-        FlurryAgent.logEvent("gizi_home_dashboard",Home, true );
+        FlurryAgent.logEvent("gizi_home_dashboard", Home, true);
 
         // Require for okhttp
         int SDK_INT = android.os.Build.VERSION.SDK_INT;
-        if (SDK_INT > 8)
-        {
+        if (SDK_INT > 8) {
             StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder()
                     .permitAll().build();
             StrictMode.setThreadPolicy(policy);
@@ -138,7 +170,6 @@ public class GiziHomeActivity extends SecuredActivity {
         SYNC_COMPLETED.addListener(onSyncCompleteListener);
         FORM_SUBMITTED.addListener(onFormSubmittedListener);
         ACTION_HANDLED.addListener(updateANMDetailsListener);
-        if (getSupportActionBar()!= null)
         getSupportActionBar().setTitle("");
         getSupportActionBar().setIcon(getResources().getDrawable(org.smartregister.gizi.R.mipmap.logo));
         getSupportActionBar().setLogo(org.smartregister.gizi.R.mipmap.logo);
@@ -155,7 +186,7 @@ public class GiziHomeActivity extends SecuredActivity {
         updateSyncIndicator();
         updateRemainingFormsToSyncCount();
 
-       // initFR();
+        // initFR();
     }
 
     private void updateRegisterCounts() {
@@ -169,7 +200,6 @@ public class GiziHomeActivity extends SecuredActivity {
     }
 
     private void updateRegisterCounts(HomeContext homeContext) {
-        Log.i(TAG, "updateRegisterCounts: ANC Count "+homeContext.ancCount());
         SmartRegisterQueryBuilder sqb = new SmartRegisterQueryBuilder();
         Cursor childcountcursor = context().commonrepository("ec_anak").rawCustomQueryForAdapter(sqb.queryForCountOnRegisters("ec_anak_search", "ec_anak_search.is_closed=0"));
         childcountcursor.moveToFirst();
@@ -184,6 +214,7 @@ public class GiziHomeActivity extends SecuredActivity {
         ibuRegisterClientCountView.setText(valueOf(ibucount));
 
         anakRegisterClientCountView.setText(valueOf(childcount));
+
 
     }
 
@@ -221,21 +252,27 @@ public class GiziHomeActivity extends SecuredActivity {
                 String anmID;
                 try {
                     anmID = new JSONObject(context().anmController().get()).get("anmName").toString();
-                }catch (org.json.JSONException e){
+                } catch (org.json.JSONException e) {
                     anmID = "undefined";
                 }
-                Toast.makeText(this, String.format("%s current user = %s",context().getStringResource(R.string.app_name),anmID), LENGTH_SHORT).show();return true;
+                Toast.makeText(this, String.format("%s current user = %s", context().getStringResource(R.string.app_name), anmID), LENGTH_SHORT).show();
+                return true;
             default:
                 return super.onOptionsItemSelected(item);
         }
     }
 
-    /*public void updateFromServer() {
+
+    public void updateFromServer() {
+        Log.d("Home", "updateFromServer: tombol update");
         UpdateActionsTask updateActionsTask = new UpdateActionsTask(
-                this, context().actionService(), context().formSubmissionSyncService(),
-                new SyncProgressIndicator(), context().allFormVersionSyncService());
-        FlurryFacade.logEvent("click_update_from_server");
+                this, context().actionService(), new FormSubmissionSyncService(context().applicationContext()), new SyncProgressIndicator(), context().allFormVersionSyncService());
+//        FlurryFacade.logEvent("click_update_from_server");
         updateActionsTask.updateFromServer(new SyncAfterFetchListener());
+
+//        if (LoginActivity.generator.uniqueIdController().needToRefillUniqueId(LoginActivity.generator.UNIQUE_ID_LIMIT))  // unique id part
+//            LoginActivity.generator.requestUniqueId();                                                                  // unique id part
+
         String locationjson = context().anmLocationController().get();
         LocationTree locationTree = EntityUtils.fromJson(locationjson, LocationTree.class);
 
@@ -243,71 +280,46 @@ public class GiziHomeActivity extends SecuredActivity {
                 locationTree.getLocationsHierarchy();
 
 
-    }*/
-
-    public void updateFromServer() {
-        Log.d("Home", "updateFromServer: tombol update");
-        UpdateActionsTask updateActionsTask = new UpdateActionsTask(
-                this, context().actionService(), new FormSubmissionSyncService(context().applicationContext()), new SyncProgressIndicator(), context().allFormVersionSyncService());
-        updateActionsTask.updateFromServer(new SyncAfterFetchListener());
-//        FlurryFacade.logEvent("click_update_from_server");
-//        if (LoginActivity.generator.uniqueIdController().needToRefillUniqueId(LoginActivity.generator.UNIQUE_ID_LIMIT))  // unique id part
-//            LoginActivity.generator.requestUniqueId();                                                                  // unique id part
-//        String locationjson = context().anmLocationController().get();
-//        LocationTree locationTree = EntityUtils.fromJson(locationjson, LocationTree.class);
-//        Map<String, TreeNode<String, Location>> locationMap =
-//                locationTree.getLocationsHierarchy();
-
-        String query  = "SELECT name FROM sqlite_master WHERE type='table'";
+        String query = "SELECT name FROM sqlite_master WHERE type='table'";
         String db = context().initRepository().getWritableDatabase().getPath();
         Cursor dbs = context().initRepository().getWritableDatabase().rawQuery(query, null);
         Log.d("testanak", "db: " + db);
-        if (dbs.moveToFirst()){
-            do{
+        if (dbs.moveToFirst()) {
+            do {
                 String data = dbs.getString(dbs.getColumnIndex("name"));
                 Log.d("testanak", "table name: " + data);
-                Cursor temp = context().initRepository().getWritableDatabase().rawQuery("SELECT * FROM "+data, null);
+                Cursor temp = context().initRepository().getWritableDatabase().rawQuery("SELECT * FROM " + data, null);
                 temp.moveToFirst();
-                Log.d("testanak", data+": " + temp.getCount());
-                String output ="";
-                for(String str: temp.getColumnNames())
-                    output=output+", "+str;
+                Log.d("testanak", data + ": " + temp.getCount());
+                String output = "";
+                for (String str : temp.getColumnNames())
+                    output = output + ", " + str;
                 Log.d("testanak", "getColumnNames: " + output);
-                String output2 ="";
-                if(temp.getCount()>0){
-                    if (temp.moveToFirst()){
-                        do{
-                            for(String d:temp.getColumnNames()){
+                String output2 = "";
+                if (temp.getCount() > 0) {
+                    if (temp.moveToFirst()) {
+                        do {
+                            for (String d : temp.getColumnNames()) {
                                 String value = "";
-                                if(!"".equals(d)){
-                                    if(temp.getType(temp.getColumnIndex(d))== Cursor.FIELD_TYPE_BLOB){
+                                if (d != "") {
+                                    if (temp.getType(temp.getColumnIndex(d)) == Cursor.FIELD_TYPE_BLOB) {
                                         value = "blob";
-                                    }else{
+                                    } else {
                                         value = temp.getString(temp.getColumnIndex(d));
                                     }
                                 }
-                                output2=output2+", "+value;
+                                output2 = output2 + ", " + value;
                             }
-                        }while(temp.moveToNext());
+                        } while (temp.moveToNext());
                     }
                     Log.d("testanak", "getColumnNames: " + output2);
                 }
 
                 temp.close();
-            }while(dbs.moveToNext());
+            } while (dbs.moveToNext());
         }
         Log.d("testanak", "getCount: " + dbs.getCount());
         dbs.close();
-
-
-//        Cursor childcountcursor = context().commonrepository("ec_anak").rawCustomQueryForAdapter("SELECT * FROM ec_anak");
-//        childcountcursor.moveToFirst();
-//        Log.d("testanak", "getCount: "+childcountcursor.getCount());
-//        Log.d("testanak", "getColumnCount: "+childcountcursor.getColumnCount());
-//        String output ="";
-//        for(String str: childcountcursor.getColumnNames())
-//            output=output+", "+str;
-//        Log.d("testanak", "getColumnNames: "+output);
     }
 
     @Override
@@ -342,45 +354,4 @@ public class GiziHomeActivity extends SecuredActivity {
             remainingFormsToSyncMenuItem.setVisible(false);
         }
     }
-
-    private View.OnClickListener onRegisterStartListener = new View.OnClickListener() {
-
-        @Override
-        public void onClick(View view) {
-            switch (view.getId()) {
-                case R.id.btn_gizi_register:
-                    navigationController.startChildSmartRegistry();
-                    break;
-                case R.id.btn_gizi_ibu_register:
-                    navigationController.startECSmartRegistry();
-                    break;
-                default:
-                    break;
-
-            }
-
-            String HomeEnd = timer.format(new Date());
-            Map<String, String> Home = new HashMap<>();
-            Home.put("end", HomeEnd);
-            FlurryAgent.logEvent("gizi_home_dashboard",Home, true);
-        }
-    };
-
-    private View.OnClickListener onButtonsClickListener = new View.OnClickListener() {
-
-        @Override
-        public void onClick(View view) {
-            switch (view.getId()) {
-                case R.id.btn_reporting:
-                    navigationController.startReports();
-                    break;
-
-                case R.id.btn_videos:
-//                    navigationController.startVideos();
-                    break;
-
-                default:
-            }
-        }
-    };
 }

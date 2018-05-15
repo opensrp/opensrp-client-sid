@@ -18,14 +18,14 @@ public class GiziNavigationController extends org.smartregister.view.controller.
     private org.smartregister.Context context;
 
     public GiziNavigationController(Activity activity, ANMController anmController) {
-        super(activity,anmController);
+        super(activity, anmController);
         this.activity = activity;
         this.anmController = anmController;
     }
 
     public GiziNavigationController(Activity activity, ANMController anmController, org.smartregister.Context context) {
-        this(activity,anmController);
-        this.context=context;
+        this(activity, anmController);
+        this.context = context;
     }
 
     @Override
@@ -33,32 +33,33 @@ public class GiziNavigationController extends org.smartregister.view.controller.
         activity.startActivity(new Intent(activity, IbuSmartRegisterActivity.class));
 
     }
+
     @Override
     public void startFPSmartRegistry() {
-     //   activity.startActivity(new Intent(activity, ElcoSmartRegisterActivity.class));
+        //   activity.startActivity(new Intent(activity, ElcoSmartRegisterActivity.class));
     }
+
     @Override
     public void startANCSmartRegistry() {
-   //     activity.startActivity(new Intent(activity, IbuSmartRegisterActivity.class));
+        //     activity.startActivity(new Intent(activity, IbuSmartRegisterActivity.class));
     }
 
     @Override
     public void startChildSmartRegistry() {
-         activity.startActivity(new Intent(activity, GiziSmartRegisterActivity.class));
+        activity.startActivity(new Intent(activity, GiziSmartRegisterActivity.class));
     }
 
     @Override
     public void startReports() {
-        String id;
-        String pass;
-        try{
+        String id, pass;
+        try {
             id = new JSONObject(anmController.get()).get("anmName").toString();
             pass = context.allSettings().fetchANMPassword();
-        }catch(org.json.JSONException ex){
-            id="noname";
-            pass="null";
+        } catch (org.json.JSONException ex) {
+            id = "noname";
+            pass = "null";
         }
-        String uri = "http://"+id+":"+pass+"@"+activity.getApplicationContext().getString(R.string.dho_site).replace("http://","");
+        String uri = "http://" + id + ":" + pass + "@" + activity.getApplicationContext().getString(R.string.dho_site).replace("http://", "");
         activity.startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(uri)));
     }
 

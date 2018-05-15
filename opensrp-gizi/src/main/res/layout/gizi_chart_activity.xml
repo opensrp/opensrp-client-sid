@@ -9,9 +9,9 @@
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textSize="16dp"
+        android:textSize="16sp"
         android:id="@+id/chart_label"
-        android:text="CHILD GROWTH CHART"
+        android:text="@string/chart_title"
         android:textAllCaps="true"
         android:textStyle="bold"
         android:gravity="center_horizontal" />
@@ -31,9 +31,9 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textSize="16dp"
+            android:textSize="16sp"
             android:id="@+id/lfa_chart_name"
-            android:text="Length For Age"
+            android:text="@string/lfa_string"
             android:textAllCaps="true"
             android:textStyle="bold"
             android:gravity="center_horizontal" />
@@ -51,9 +51,9 @@
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textSize="16dp"
+        android:textSize="16sp"
         android:id="@+id/hfa_chart_name"
-        android:text="Height For Age"
+        android:text="@string/hfa_string"
         android:textAllCaps="true"
         android:textStyle="bold"
         android:gravity="center_horizontal" />

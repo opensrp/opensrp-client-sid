@@ -1,9 +1,10 @@
 package org.smartregister.bidan.utils;
 
 import android.content.Context;
+import android.content.SharedPreferences;
+import android.preference.PreferenceManager;
 import android.util.Xml;
 
-import com.cloudant.sync.datastore.ConflictException;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
@@ -12,7 +13,9 @@ import org.json.JSONException;
 import org.json.JSONObject;
 import org.json.XML;
 import org.smartregister.CoreLibrary;
-import org.smartregister.bidan.sync.CloudantDataHandler;
+import org.smartregister.bidan.activity.LoginActivity;
+import org.smartregister.bidan.application.BidanApplication;
+import org.smartregister.bidan.sync.BidanClientProcessor;
 import org.smartregister.clientandeventmodel.Client;
 import org.smartregister.clientandeventmodel.Event;
 import org.smartregister.clientandeventmodel.FormAttributeParser;
@@ -23,6 +26,12 @@ import org.smartregister.clientandeventmodel.SubFormData;
 import org.smartregister.domain.SyncStatus;
 import org.smartregister.domain.form.FormSubmission;
 import org.smartregister.domain.form.SubForm;
+//import org.smartregister.gizi.activity.LoginActivity;
+//import org.smartregister.gizi.application.GiziApplication;
+//import org.smartregister.gizi.sync.GiziClientProcessor;
+import org.smartregister.repository.AllSharedPreferences;
+import org.smartregister.repository.BaseRepository;
+import org.smartregister.repository.EventClientRepository;
 import org.smartregister.util.AssetHandler;
 import org.smartregister.util.Log;
 import org.w3c.dom.Attr;
@@ -40,6 +49,7 @@ import java.io.StringWriter;
 import java.text.Format;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
@@ -48,22 +58,16 @@ import java.util.UUID;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 
-import static org.smartregister.bidan.utils.AllConstantsINA.FormNames.KARTU_IBU_EDIT;
-import static org.smartregister.bidan.utils.AllConstantsINA.FormNames.KOHORT_BAYI_EDIT;
+import utils.BidanFormEntityConverter;
 
-//import android.content.Intent;
-//import org.smartregister.service.intentservices.ReplicationIntentService;
+import static org.smartregister.bidan.sync.BidanClientProcessor.CLIENT_EVENTS;
 
-//import java.io.BufferedReader;
-//import java.io.InputStreamReader;
+//import static org.smartregister.gizi.sync.GiziClientProcessor.CLIENT_EVENTS;
 
-/**
- * Created by Dani on 08/11/2017
- */
 public class BidanFormUtils {
 
-    public static final String TAG = BidanFormUtils.class.getName();
-    private static final String ecClientRelationships = "ec_client_relationships.json";
+    public static final String TAG = "EnketoFormUtils";
+    public static final String ecClientRelationships = "ec_client_relationships.json";
     private static final String shouldLoadValueKey = "shouldLoadValue";
     private static final String relationalIdKey = "relational_id";
     private static final String databaseIdKey = "_id";
@@ -74,15 +78,16 @@ public class BidanFormUtils {
     private SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSSZ");
     private Format formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
     private BidanFormEntityConverter formEntityConverter;
-    private CloudantDataHandler mCloudantDataHandler;
+    private EventClientRepository eventClientRepository;
 
-    private BidanFormUtils(Context context) throws Exception {
+    public BidanFormUtils(Context context) throws Exception {
         mContext = context;
         theAppContext = CoreLibrary.getInstance().context();
         FormAttributeParser formAttributeParser = new FormAttributeParser(context);
         formEntityConverter = new BidanFormEntityConverter(formAttributeParser, mContext);
         // Protect creation of static variable.
-        mCloudantDataHandler = CloudantDataHandler.getInstance(context.getApplicationContext());
+        //  mCloudantDataHandler = CloudantDataHandler.getInstance(context.getApplicationContext());
+        eventClientRepository = BidanApplication.getInstance().eventClientRepository();
     }
 
     public static BidanFormUtils getInstance(Context ctx) throws Exception {
@@ -93,29 +98,13 @@ public class BidanFormUtils {
         return instance;
     }
 
-//    /* Checks if the provided node has Child elements
-//     * @param element
-//     * @return
-//     */
-//    public static boolean hasChildElements(Node element) {
-//        NodeList children = element.getChildNodes();
-//        for (int i = 0; i < children.getLength(); i++) {
-//            if (children.item(i).getNodeType() == Node.ELEMENT_NODE) {
-//                return true;
-//            }
-//        }
-//
-//        return false;
-//    }
-
     private static JSONObject retrieveRelationshipJsonForLink(String link, JSONArray array)
             throws Exception {
         for (int i = 0; i < array.length(); i++) {
             JSONObject object = array.getJSONObject(i);
             if (relationShipExist(link, object)) {
                 System.out.println("Relationship found ##");
-                android.util.Log.e(TAG, "retrieveRelationshipJsonForLink:Relationship found ## " + link);
-                android.util.Log.e(TAG, "retrieveRelationshipJsonForLink:Relationship found ## " + object);
+
                 return object;
             }
         }
@@ -150,35 +139,37 @@ public class BidanFormUtils {
         return false;
     }
 
-//    public static int getIndexForFormName(String formName, String[] formNames) {
-//        for (int i = 0; i < formNames.length; i++) {
-//            if (formName.equalsIgnoreCase(formNames[i])) {
-//                return i;
-//            }
-//        }
-//
-//        return -1;
-//    }
+    public static int getIndexForFormName(String formName, String[] formNames) {
+        for (int i = 0; i < formNames.length; i++) {
+            if (formName.equalsIgnoreCase(formNames[i])) {
+                return i;
+            }
+        }
 
-    public FormSubmission generateFormSubmisionFromXMLString(String entity_id, String formData, String formName, JSONObject overrides) throws Exception {
+        return -1;
+    }
+
+    public FormSubmission generateFormSubmisionFromXMLString(String entity_id, String formData,
+                                                             String formName, JSONObject
+                                                                     overrides) throws Exception {
         JSONObject formSubmission = XML.toJSONObject(formData);
 
         //FileUtilities fu = new FileUtilities();
         //fu.write("xmlform.txt", formData);
         //fu.write("xmlformsubmission.txt", formSubmission.toString());
-//        System.out.println(formSubmission);
-        android.util.Log.e(TAG, "generateFormSubmisionFromXMLString: " + formSubmission);
+        System.out.println(entity_id);
+        System.out.println(formSubmission);
 
         // use the form_definition.json to iterate through fields
         String formDefinitionJson = readFileFromAssetsFolder(
                 "www/form/" + formName + "/form_definition.json");
         JSONObject formDefinition = new JSONObject(formDefinitionJson);
 
-        // Reasigning parameter entity_id
-//        String rootNodeKey = formSubmission.keys().next();
+        String rootNodeKey = formSubmission.keys().next();
+
         // retrieve the id, if it fails use the provided value by the param
-//        entity_id = formSubmission.getJSONObject(rootNodeKey).has(databaseIdKey) ? formSubmission
-//                .getJSONObject(rootNodeKey).getString(databaseIdKey) : generateRandomUUIDString();
+        entity_id = formSubmission.getJSONObject(rootNodeKey).has(databaseIdKey) ? formSubmission
+                .getJSONObject(rootNodeKey).getString(databaseIdKey) : generateRandomUUIDString();
 
         //String bindPath = formDefinition.getJSONObject("form").getString("bind_type");
         JSONObject fieldsDefinition = formDefinition.getJSONObject("form");
@@ -230,9 +221,8 @@ public class BidanFormUtils {
         return fs;
     }
 
-    private void generateClientAndEventModelsForFormSubmission(FormSubmission formSubmission, String formName) {
-        android.util.Log.e(TAG, "generateClientAndEventModelsForFormSubmission: ");
-
+    private void generateClientAndEventModelsForFormSubmission(FormSubmission formSubmission,
+                                                               String formName) {
         org.smartregister.clientandeventmodel.FormSubmission v2FormSubmission;
 
         String anmId = CoreLibrary.getInstance().context().anmService().fetchDetails().name();
@@ -258,80 +248,40 @@ public class BidanFormUtils {
                 instanceId, formName, entityId, clientVersion, formDataDefinitionVersion,
                 formInstance, clientVersion);
 
-        // retrieve client and events
-        Client c = formEntityConverter.getClientFromFormSubmission(v2FormSubmission);
-        printClient(c);
         Event e = formEntityConverter.getEventFromFormSubmission(v2FormSubmission);
-        printEvent(e);
-        org.smartregister.cloudant.models.Event event = new org.smartregister.cloudant.models.Event(
-                e);
-        createNewEventDocument(event);
-        if (c != null) {
-            org.smartregister.cloudant.models.Client client = new org.smartregister.cloudant
-                    .models.Client(
-                    c);
-            if (editClientFormNameList().contains(formName)) {
-                try {
-                    updateClientDocument(client);
-                } catch (ConflictException e1) {
-                    e1.printStackTrace();
-                }
-            } else {
-                createNewClientDocument(client);
-            }
-        }
 
+        if (Arrays.asList(CLIENT_EVENTS).contains(e.getEventType()))
+            org.smartregister.util.Utils.startAsyncTask(new SavePatientAsyncTask(v2FormSubmission, mContext, true, e), null);
+        else
+            org.smartregister.util.Utils.startAsyncTask(new SavePatientAsyncTask(v2FormSubmission, mContext, false, e), null);
 
-        Map<String, Map<String, Object>> dep = formEntityConverter.getDependentClientsFromFormSubmission(v2FormSubmission);
-        for (Map<String, Object> cm : dep.values()) {
-            Client cin = (Client) cm.get("client");
-            Event evin = (Event) cm.get("event");
-            event = new org.smartregister.cloudant.models.Event(evin);
-            createNewEventDocument(event);
-
-            if (cin != null) {
-                org.smartregister.cloudant.models.Client client = new org.smartregister.cloudant
-                        .models.Client(
-                        cin);
-                createNewClientDocument(client);
-                printClient(cin);
-            }
-            printEvent(evin);
-
-        }
-
-//        startReplicationIntentService();
     }
 
-    private void printClient(Client client) {
+    private void saveClient(Client client) {
         Log.logDebug("============== CLIENT ================");
-        Log.logError("============== CLIENT ================");
         Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSSZ").create();
         String clientJson = gson.toJson(client);
         Log.logDebug(clientJson);
-        Log.logError(clientJson);
+        try {
+            eventClientRepository.addorUpdateClient(client.getBaseEntityId(), new JSONObject(clientJson));
+        } catch (JSONException e) {
+            android.util.Log.e(TAG, e.toString(), e);
+        }
         Log.logDebug("====================================");
 
     }
 
-    private void printEvent(Event event) {
+    private void saveEvent(Event event) {
         Log.logDebug("============== EVENT ================");
-        Log.logError("============== EVENT ================");
         Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSSZ").create();
         String eventJson = gson.toJson(event);
         Log.logDebug(eventJson);
-        Log.logError(eventJson);
-        Log.logDebug("====================================");
+        try {
+            eventClientRepository.addEvent(event.getBaseEntityId(), new JSONObject(eventJson));
+        } catch (JSONException e) {
+            android.util.Log.e(TAG, e.toString(), e);
+        }
     }
-
-//    /**
-//     * Start ReplicationIntentService which handles cloudant sync processes
-//     */
-//    private void startReplicationIntentService() {
-//
-//        Intent serviceIntent = new Intent(mContext, ReplicationIntentService.class);
-//        mContext.startService(serviceIntent);
-//    }
 
     private List<SubFormData> getSubFormList(FormSubmission formSubmission) {
         List<SubFormData> sub_forms = new ArrayList<>();
@@ -392,11 +342,8 @@ public class BidanFormUtils {
         return subForms;
     }
 
-    public String generateXMLInputForFormWithEntityId(String entityId, String formName, String overrides) {
-//        android.util.Log.e(TAG, "generateXMLInputForFormWithEntityId: " + overrides);
-        android.util.Log.e(TAG, "generateXMLInputForFormWithEntityId: formname " + formName);
-//        android.util.Log.e(TAG, "generateXMLInputForFormWithEntityId: " + entityId);
-
+    public String generateXMLInputForFormWithEntityId(String entityId, String formName, String
+            overrides) {
         try {
             // get the field overrides map
             JSONObject fieldOverrides = new JSONObject();
@@ -407,27 +354,28 @@ public class BidanFormUtils {
             }
 
             // use the form_definition.json to get the form mappings
-            String formDefinitionJson = readFileFromAssetsFolder("www/form/" + formName + "/form_definition.json");
+            String formDefinitionJson = readFileFromAssetsFolder(
+                    "www/form/" + formName + "/form_definition.json");
             JSONObject formDefinition = new JSONObject(formDefinitionJson);
-
-//            android.util.Log.e(TAG, "generateXMLInputForFormWithEntityId: " + formDefinition.getJSONObject("form"));
             String ec_bind_path = formDefinition.getJSONObject("form").getString("ec_bind_type");
 
-            String sql = "SELECT * FROM " + ec_bind_path + " WHERE base_entity_id='" + entityId + "'";
-            Map<String, String> dbEntity = theAppContext.formDataRepository().getMapFromSQLQuery(sql);
-            Map<String, String> detailsMap = theAppContext.detailsRepository().getAllDetailsForClient(entityId);
+            String sql =
+                    "select * from " + ec_bind_path + " where base_entity_id='" + entityId + "'";
+            Map<String, String> dbEntity = theAppContext.formDataRepository().
+                    getMapFromSQLQuery(sql);
+            Map<String, String> detailsMap = theAppContext.detailsRepository().
+                    getAllDetailsForClient(entityId);
             detailsMap.putAll(dbEntity);
 
             JSONObject entityJson = new JSONObject();
-            if (!detailsMap.isEmpty()) {
+            if (detailsMap != null && !detailsMap.isEmpty()) {
                 entityJson = new JSONObject(detailsMap);
             }
 
             //read the xml form model, the expected form model that is passed to the form mirrors it
-            @SuppressWarnings("ConstantConditions")
             String formModelString = readFileFromAssetsFolder(
-                    "www/form/" + formName + "/model" + ".xml").replaceAll("\n", " ").replaceAll("\r", " ");
-
+                    "www/form/" + formName + "/model" + ".xml").replaceAll("\n", " ")
+                    .replaceAll("\r", " ");
             InputStream is = new ByteArrayInputStream(formModelString.getBytes());
             DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
             dbf.setValidating(false);
@@ -440,7 +388,8 @@ public class BidanFormUtils {
             serializer.startDocument("UTF-8", true);
 
             //skip processing <model><instance>
-            NodeList els = ((Element) document.getElementsByTagName("model").item(0)).getElementsByTagName("instance");
+            NodeList els = ((Element) document.getElementsByTagName("model").item(0)).
+                    getElementsByTagName("instance");
             Element el = (Element) els.item(0);
             NodeList entries = el.getChildNodes();
             int num = entries.getLength();
@@ -457,8 +406,8 @@ public class BidanFormUtils {
             String xml = writer.toString();
             // Add model and instance tags
             xml = xml.substring(56);
-//            System.out.println(xml);
-            android.util.Log.d(TAG, "generateXMLInputForFormWithEntityId: xml " + xml);
+            System.out.println(xml);
+            android.util.Log.d(TAG, "generateXMLInputForFormWithEntityId: "+xml);
 
             return xml;
 
@@ -469,22 +418,32 @@ public class BidanFormUtils {
     }
 
     private void writeXML(Element node, XmlSerializer serializer, JSONObject fieldOverrides,
-                          JSONObject formDefinition, JSONObject entityJson, String parentId) throws Exception {
-//        try {
-
+                          JSONObject formDefinition, JSONObject entityJson, String parentId) {
+        try {
             String nodeName = node.getNodeName();
-            String entityId = entityJson.has("id") ? entityJson.getString("id") : generateRandomUUIDString();
-            String relationalId = entityJson.has(relationalIdKey) ? entityJson.getString(relationalIdKey) : parentId;
-            String nodeValue = retrieveValueForNodeName(nodeName, entityJson, formDefinition);
-            List<String> subFormNames = getSubFormNames(formDefinition);
+            String entityId =
+                    entityJson.has("id") ? entityJson.getString("id") : generateRandomUUIDString();
+            String relationalId =
+                    entityJson.has(relationalIdKey) ? entityJson.getString(relationalIdKey)
+                            : parentId;
 
             serializer.startTag("", nodeName);
+
             // write the xml attributes
             writeXMLAttributes(node, serializer, entityId, relationalId);
+
+            String nodeValue = retrieveValueForNodeName(nodeName, entityJson, formDefinition);
             //overwrite the node value with contents from overrides map
-            if (fieldOverrides.has(nodeName)) nodeValue = fieldOverrides.getString(nodeName);
+            if (fieldOverrides.has(nodeName)) {
+                nodeValue = fieldOverrides.getString(nodeName);
+            }
             //write the node value
-            if (nodeValue != null) serializer.text(nodeValue);
+            if (nodeValue != null) {
+                serializer.text(nodeValue);
+            }
+
+            List<String> subFormNames = getSubFormNames(formDefinition);
+
             // get all child nodes
             NodeList entries = node.getChildNodes();
             int num = entries.getLength();
@@ -497,7 +456,8 @@ public class BidanFormUtils {
                     if (!subFormNames.isEmpty() && subFormNames.contains(fieldName)) {
                         // its a subform element process it
                         // get the subform definition
-                        JSONArray subForms = formDefinition.getJSONObject("form").getJSONArray("sub_forms");
+                        JSONArray subForms = formDefinition.getJSONObject("form").
+                                getJSONArray("sub_forms");
                         JSONObject subFormDefinition = retriveSubformDefinitionForBindPath(subForms,
                                 fieldName);
                         if (subFormDefinition != null) {
@@ -505,26 +465,30 @@ public class BidanFormUtils {
                             String childTableName = subFormDefinition.getString("ec_bind_type");
                             String sql = "select * from '" + childTableName + "' where "
                                     + "relational_id = '" + entityId + "'";
-                            String childRecordsString = theAppContext.formDataRepository().queryList(sql);
+                            String childRecordsString = theAppContext.formDataRepository().
+                                    queryList(sql);
                             JSONArray childRecords = new JSONArray(childRecordsString);
+
                             JSONArray fieldsArray = subFormDefinition.getJSONArray("fields");
                             // check whether we are supposed to load the id of the child record
                             JSONObject idFieldDefn = getJsonFieldFromArray("id", fieldsArray);
+
                             // definition for id
-                            assert idFieldDefn != null;
                             boolean shouldLoadId =
-                                    idFieldDefn.has(shouldLoadValueKey) && idFieldDefn.getBoolean(shouldLoadValueKey);
+                                    idFieldDefn.has(shouldLoadValueKey) && idFieldDefn
+                                            .getBoolean(shouldLoadValueKey);
 
                             if (shouldLoadId && childRecords.length() > 0) {
                                 for (int k = 0; k < childRecords.length(); k++) {
                                     JSONObject childEntityJson = childRecords.getJSONObject(k);
-//                                    JSONObject obj = getCombinedJsonObjectForObject(childEntityJson);
+                                    JSONObject obj = getCombinedJsonObjectForObject(
+                                            childEntityJson);
                                     writeXML(child, serializer, fieldOverrides, subFormDefinition,
                                             childEntityJson, entityId);
                                 }
+
                             }
                         }
-
                     } else {
                         // it's not a sub-form element write its value
                         serializer.startTag("", fieldName);
@@ -532,11 +496,18 @@ public class BidanFormUtils {
                         // a value node doesn't have id or relationalId fields
                         writeXMLAttributes(child, serializer, null, null);
                         // write the node value
-                        String value = retrieveValueForNodeName(fieldName, entityJson, formDefinition);
+                        String value = retrieveValueForNodeName(fieldName, entityJson,
+                                formDefinition);
                         // write the node value
-                        if (value != null) serializer.text(value);
+                        if (value != null) {
+                            serializer.text(value);
+                        }
+
                         // overwrite the node value with contents from overrides map
-                        if (fieldOverrides.has(fieldName)) serializer.text(fieldOverrides.getString(fieldName));
+                        if (fieldOverrides.has(fieldName)) {
+                            serializer.text(fieldOverrides.getString(fieldName));
+                        }
+
                         serializer.endTag("", fieldName);
                     }
                 }
@@ -544,41 +515,41 @@ public class BidanFormUtils {
 
             serializer.endTag("", node.getNodeName());
 
-//        } catch (Exception e) {
-//            throw new RuntimeException(e);
-//        }
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
     }
 
-//    /**
-//     * Retrieve additional details for this record from the details Table.
-//     *
-//     * @param entityJson Json Data Entities
-//     * @return Json Object
-//     */
-//    private JSONObject getCombinedJsonObjectForObject(JSONObject entityJson) {
-//        try {
-//            String baseEntityId = entityJson.getString("base_entity_id");
-//            Map<String, String> map = theAppContext.detailsRepository().
-//                    getAllDetailsForClient(baseEntityId);
-//
-//            for (String key : map.keySet()) {
-//                if (!entityJson.has(key)) {
-//                    entityJson.put(key, map.get(key));
-//                }
-//            }
-//        } catch (Exception e) {
-//            android.util.Log.e(TAG, e.toString(), e);
-//        }
-//        return entityJson;
-//    }
+    /**
+     * Retrieve additional details for this record from the details Table.
+     *
+     * @param entityJson
+     * @return
+     */
+    private JSONObject getCombinedJsonObjectForObject(JSONObject entityJson) {
+        try {
+            String baseEntityId = entityJson.getString("base_entity_id");
+            Map<String, String> map = theAppContext.detailsRepository().
+                    getAllDetailsForClient(baseEntityId);
+
+            for (String key : map.keySet()) {
+                if (!entityJson.has(key)) {
+                    entityJson.put(key, map.get(key));
+                }
+            }
+        } catch (Exception e) {
+            android.util.Log.e(TAG, e.toString(), e);
+        }
+        return entityJson;
+    }
 
     /**
      * Iterate through the provided array and retrieve a json object whose name attribute matches
      * the name supplied
      *
-     * @param fieldName Name of Field
-     * @param array     Array
-     * @return Json Object
+     * @param fieldName
+     * @param array
+     * @return
      */
     private JSONObject getJsonFieldFromArray(String fieldName, JSONArray array) {
         try {
@@ -586,7 +557,6 @@ public class BidanFormUtils {
                 for (int i = 0; i < array.length(); i++) {
                     JSONObject field = array.getJSONObject(i);
                     String name = field.has("name") ? field.getString("name") : null;
-                    assert name != null;
                     if (name.equals(fieldName)) {
                         return field;
                     }
@@ -601,10 +571,10 @@ public class BidanFormUtils {
     /**
      * retrieves node value for cases which the nodename don't match the name of the xml element
      *
-     * @param nodeName       Name of Node
-     * @param entityJson     Jason Entities
-     * @param formDefinition Form Definition
-     * @return String
+     * @param nodeName
+     * @param entityJson
+     * @param formDefinition
+     * @return
      */
     private String retrieveValueForNodeName(String nodeName, JSONObject entityJson, JSONObject
             formDefinition) {
@@ -649,21 +619,8 @@ public class BidanFormUtils {
         return "";
     }
 
-//    /**
-//     * Currently not used but, the method should retrieve the path of a given node,
-//     * useful when confirming if the current node has been properly mapped to its bind_path
-//     **/
-//    private String getXPath(Node node) {
-//        Node parent = node.getParentNode();
-//        if (parent == null) {
-//            return "/" + node.getNodeName();
-//        }
-//
-//        return getXPath(parent) + "/";
-//    }
-
     private List<String> getSubFormNames(JSONObject formDefinition) throws Exception {
-        List<String> subFormNames = new ArrayList<>();
+        List<String> subFormNames = new ArrayList<String>();
         if (formDefinition.has("form") && formDefinition.getJSONObject("form").has("sub_forms")) {
             JSONArray subForms = formDefinition.getJSONObject("form").getJSONArray("sub_forms");
             for (int i = 0; i < subForms.length(); i++) {
@@ -694,7 +651,8 @@ public class BidanFormUtils {
         return null;
     }
 
-    private void writeXMLAttributes(Element node, XmlSerializer serializer, String id, String relationalId) {
+    private void writeXMLAttributes(Element node, XmlSerializer serializer, String id, String
+            relationalId) {
         try {
             // get a map containing the attributes of this node
             NamedNodeMap attributes = node.getAttributes();
@@ -717,8 +675,8 @@ public class BidanFormUtils {
                 serializer.attribute("", attrName, attrValue);
             }
 
-        } catch (IOException e) {
-            e.printStackTrace();
+        } catch (Exception e) {
+            throw new RuntimeException(e);
         }
     }
 
@@ -726,27 +684,20 @@ public class BidanFormUtils {
         return UUID.randomUUID().toString();
     }
 
-    private String retrieveIdForSubmission(JSONObject jsonObject) throws JSONException {
+    private String retrieveIdForSubmission(JSONObject jsonObject) throws Exception {
         JSONArray fields = jsonObject.getJSONObject("form").getJSONArray("fields");
-        android.util.Log.e(TAG, "retrieveIdForSubmission: "+ fields );
-        System.out.println(fields);
 
         for (int i = 0; i < fields.length(); i++) {
             JSONObject field = fields.getJSONObject(i);
 
-            try {
-                if (field.has("name") && field.getString("name").equalsIgnoreCase("id")) {
-                    return field.getString("value");
-                }
-
-            } catch (JSONException e){
-                e.printStackTrace();
+            if (field.has("name") && field.getString("name").equalsIgnoreCase("id")) {
+                return field.getString("value");
             }
         }
         return null;
     }
 
-    private Object getObjectAtPath(String[] path, JSONObject jsonObject) throws Exception {
+    public Object getObjectAtPath(String[] path, JSONObject jsonObject) throws Exception {
         JSONObject object = jsonObject;
         int i = 0;
         while (i < path.length - 1) {
@@ -763,8 +714,8 @@ public class BidanFormUtils {
         return object.has(path[i]) ? object.get(path[i]) : null;
     }
 
-    private JSONArray getPopulatedFieldsForArray(JSONObject fieldsDefinition, String entityId,
-                                                 JSONObject jsonObject, JSONObject overrides)
+    public JSONArray getPopulatedFieldsForArray(JSONObject fieldsDefinition, String entityId,
+                                                JSONObject jsonObject, JSONObject overrides)
             throws Exception {
         String bindPath = fieldsDefinition.getString("bind_type");
         String sql = "select * from " + bindPath + " where id='" + entityId + "'";
@@ -797,9 +748,11 @@ public class BidanFormUtils {
                 item.put("value", value);
             }
 
-            // if the value is not set use the value in the overrides filed
-            if (shouldLoadValue && overrides.has(item.getString("name")) && !item.has("value")) {
+            if (shouldLoadValue && overrides.has(item.getString("name"))) {
+                // if the value is not set use the value in the overrides filed
+                if (!item.has("value")) {
                     item.put("value", overrides.getString(item.getString("name")));
+                }
             }
 
             // map the id field for child elements
@@ -863,7 +816,7 @@ public class BidanFormUtils {
         return item.has("source") && item.getString("source").split("\\.").length > 2;
     }
 
-    private String retrieveValueForLinkedRecord(String link, JSONObject entityJson) {
+    public String retrieveValueForLinkedRecord(String link, JSONObject entityJson) {
         try {
             String entityRelationships = readFileFromAssetsFolder(
                     "www/form/entity_relationship" + ".json");
@@ -913,7 +866,7 @@ public class BidanFormUtils {
         return null;
     }
 
-    private JSONArray getFieldsArrayForSubFormDefinition(JSONObject fieldsDefinition) throws
+    public JSONArray getFieldsArrayForSubFormDefinition(JSONObject fieldsDefinition) throws
             Exception {
         JSONArray fieldsArray = fieldsDefinition.getJSONArray("fields");
         String bindPath = fieldsDefinition.getString("bind_type");
@@ -942,7 +895,7 @@ public class BidanFormUtils {
         return subFormFieldsArray;
     }
 
-    private JSONObject getFieldValuesForSubFormDefinition(JSONObject fieldsDefinition, String
+    public JSONObject getFieldValuesForSubFormDefinition(JSONObject fieldsDefinition, String
             relationalId, String entityId, JSONObject jsonObject, JSONObject overrides) throws
             Exception {
 
@@ -1002,9 +955,9 @@ public class BidanFormUtils {
      * see if the current field is a client_relationship field, if so set it's value to the
      * relationId since that's the parent base_entity_id
      *
-     * @param fieldItem    Field Item
-     * @param fieldsValues Field Values
-     * @param relationalId Relation id
+     * @param fieldItem
+     * @param fieldsValues
+     * @param relationalId
      */
     private void populateRelationField(JSONObject fieldItem, JSONObject fieldsValues, String
             relationalId) {
@@ -1027,7 +980,7 @@ public class BidanFormUtils {
         }
     }
 
-    private String getValueForPath(String[] path, JSONObject jsonObject) throws Exception {
+    public String getValueForPath(String[] path, JSONObject jsonObject) throws Exception {
         JSONObject object = jsonObject;
         String value = null;
         int i = 0;
@@ -1047,7 +1000,7 @@ public class BidanFormUtils {
         Object valueObject = object.has(path[i]) ? object.get(path[i]) : null;
 
         if (valueObject == null) {
-            return null;
+            return value;
         }
         if (valueObject instanceof JSONObject && ((JSONObject) valueObject).has("content")) {
             value = ((JSONObject) object.get(path[i])).getString("content");
@@ -1061,7 +1014,7 @@ public class BidanFormUtils {
     }
 
     private String readFileFromAssetsFolder(String fileName) {
-        String fileContents;
+        String fileContents = null;
         try {
             InputStream is = mContext.getAssets().open(fileName);
             int size = is.available();
@@ -1080,31 +1033,13 @@ public class BidanFormUtils {
         return fileContents;
     }
 
-//    public JSONObject getFormJson(String formIdentity) {
-//        if (mContext != null) {
-//            try {
-//                InputStream inputStream = mContext.getApplicationContext().getAssets()
-//                        .open("json" + ".form/" + formIdentity + ".json");
-//                BufferedReader reader = new BufferedReader(
-//                        new InputStreamReader(inputStream, "UTF-8"));
-//                String jsonString;
-//                StringBuilder stringBuilder = new StringBuilder();
-//
-//                while ((jsonString = reader.readLine()) != null) {
-//                    stringBuilder.append(jsonString);
-//                }
-//                inputStream.close();
-//
-//                return new JSONObject(stringBuilder.toString());
-//            } catch (IOException | JSONException e) {
-//                e.printStackTrace();
-//            }
-//        }
-//
-//        return null;
-//    }
+    private List<String> EditClientFormNameList(){
+        List<String> formNames = new ArrayList<String>();
+        formNames.add("child_edit");
+        return formNames;
+    }
 
-    private void createNewEventDocument(org.smartregister.cloudant.models.Event event) {
+    /*private void createNewEventDocument(org.smartregister.cloudant.models.Event event) {
         mCloudantDataHandler.createEventDocument(event);
     }
 
@@ -1112,15 +1047,91 @@ public class BidanFormUtils {
         mCloudantDataHandler.createClientDocument(client);
     }
 
-    private List<String> editClientFormNameList() {
-        android.util.Log.e(TAG, "editClientFormNameList: ");
-        List<String> formNames = new ArrayList<>();
-        formNames.add(KARTU_IBU_EDIT);
-        formNames.add(KOHORT_BAYI_EDIT);
-        return formNames;
-    }
-
     private void updateClientDocument(org.smartregister.cloudant.models.Client client) throws ConflictException {
         mCloudantDataHandler.updateDocument(client);
+    }*/
+    private Event tagSyncMetadata(Event event) {
+        AllSharedPreferences sharedPreferences = BidanApplication.getInstance().getContext().userService().getAllSharedPreferences();
+        String locations = org.smartregister.util.Utils.getPreference(mContext, LoginActivity.PREF_TEAM_LOCATIONS, "");
+        event.setLocationId(locations);
+
+        return event;
     }
+    class SavePatientAsyncTask extends android.os.AsyncTask<Void, Void, Void> {
+        private final org.smartregister.clientandeventmodel.FormSubmission formSubmission;
+        private Context context;
+        private boolean saveClient;
+        private Event event;
+
+        public SavePatientAsyncTask(org.smartregister.clientandeventmodel.FormSubmission formSubmission, Context context, boolean hasClient, Event event) {
+            this.formSubmission = formSubmission;
+            this.context = context;
+            this.saveClient = hasClient;
+            this.event = event;
+        }
+
+       /* @Override
+        protected void onPostExecute(Void aVoid) {
+            Utils.postEvent(new EnketoFormSaveCompleteEvent(this.formSubmission.formName()));
+
+        }*/
+
+       /* @Override
+        protected void onPreExecute() {
+            Utils.postEvent(new ShowProgressDialogEvent());
+        }*/
+
+        @Override
+        protected Void doInBackground(Void... params) {
+            try {
+                SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(context);
+                AllSharedPreferences allSharedPreferences = new AllSharedPreferences(preferences);
+                if (saveClient) {
+                    Client c = formEntityConverter.getClientFromFormSubmission(formSubmission);
+                    saveClient(c);
+                }
+                event = tagSyncMetadata(event);
+                saveEvent(event);
+                Gson gson = new GsonBuilder().create();
+                if (event.getEventType() != null) {
+
+                    if (event.getEventType().equals("Registrasi Vaksinator")) {
+                        JSONObject json = eventClientRepository.getClientByBaseEntityId(event.getBaseEntityId());
+                        Client client = gson.fromJson(json.toString(), Client.class);
+                        // client.addAttribute("kartu_ibu", "kartu_ibu");
+                        saveClient(client);
+                    } else if (event.getEventType().equals("Child Registration")) {
+                        JSONObject json = eventClientRepository.getClientByBaseEntityId(event.getBaseEntityId());
+                        Client client = gson.fromJson(json.toString(), Client.class);
+                        // client.addAttribute("anak", "anak");
+                        saveClient(client);
+                    }
+                    else if (event.getEventType().equals(EditClientFormNameList())) {
+                        JSONObject json = eventClientRepository.getClientByBaseEntityId(event.getBaseEntityId());
+                        Client client = gson.fromJson(json.toString(), Client.class);
+                        client.addAttribute("edit", "edit");
+                        saveClient(client);
+                    }
+                }
+
+                Map<String, Map<String, Object>> dep = formEntityConverter.
+                        getDependentClientsFromFormSubmission(formSubmission);
+                for (Map<String, Object> cm : dep.values()) {
+                    Client cin = (Client) cm.get("client");
+                    saveClient(cin);
+                    Event evin = (Event) cm.get("event");
+                    evin = tagSyncMetadata(evin);
+                    saveEvent(evin);
+                }
+                long lastSyncTimeStamp = allSharedPreferences.fetchLastUpdatedAtDate(0);
+                Date lastSyncDate = new Date(lastSyncTimeStamp);
+                BidanClientProcessor.getInstance(context).processClient(eventClientRepository.getEvents(lastSyncDate, BaseRepository.TYPE_Unsynced));
+                allSharedPreferences.saveLastUpdatedAtDate(lastSyncDate.getTime());
+            } catch (Exception e) {
+                android.util.Log.e(TAG, e.toString(), e);
+            }
+            return null;
+        }
+    }
+
 }

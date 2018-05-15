@@ -28,10 +28,6 @@ public class GiziApplicationTest extends GiziApplication implements TestLifecycl
     @Mock
     private AlertService alertService;
 
-    public static synchronized GiziApplication getInstance() {
-        return (GiziApplication) mInstance;
-    }
-
     @Override
     public void onCreate() {
         super.onCreate();

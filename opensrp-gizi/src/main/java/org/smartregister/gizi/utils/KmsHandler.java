@@ -1,5 +1,6 @@
 package org.smartregister.gizi.utils;
 
+import org.smartregister.commonregistry.AllCommonsRepository;
 import org.smartregister.domain.form.FormSubmission;
 import org.smartregister.repository.DetailsRepository;
 import org.smartregister.service.formsubmissionhandler.FormSubmissionHandler;
@@ -16,17 +17,17 @@ import util.zscore.ZScoreSystemCalculation;
  */
 
 public class KmsHandler implements FormSubmissionHandler {
-//    static String bindobject = "anak";
+    //    static String bindobject = "anak";
 //    private GiziClientProcessor clientProcessor;
 //    private  org.ei.opensrp.Context context;
+    public KmsHandler() {
 
-//    public KmsHandler() {
-//    }
+    }
 
     @Override
     public void handle(FormSubmission submission) {
         String entityID = submission.entityId();
-//        AllCommonsRepository childRepository = org.smartregister.Context.getInstance().allCommonsRepositoryobjects("ec_anak");
+        AllCommonsRepository childRepository = org.smartregister.Context.getInstance().allCommonsRepositoryobjects("ec_anak");
 //        CommonPersonObject childobject = childRepository.findByCaseID(entityID);
         Long tsLong = System.currentTimeMillis() / 1000;
 
@@ -41,7 +42,7 @@ public class KmsHandler implements FormSubmissionHandler {
         String[] history_umur = umurs.split(",");
         String tinggi = submission.getFieldValue("history_tinggi") != null ? submission.getFieldValue("history_tinggi") : "0#0";
         String lastVisitDate = submission.getFieldValue("tanggalPenimbangan") != null
-                ? !"nan".equals(submission.getFieldValue("tanggalPenimbangan").toLowerCase())
+                ? !submission.getFieldValue("tanggalPenimbangan").toLowerCase().equals("nan")
                 ? submission.getFieldValue("tanggalPenimbangan")
                 : "-"
                 : "-";
@@ -54,13 +55,12 @@ public class KmsHandler implements FormSubmissionHandler {
         detailsRepository.add(entityID, "preload_umur", umurs, tsLong);
         detailsRepository.add(entityID, "berat_preload", submission.getFieldValue("history_berat") != null ? submission.getFieldValue("history_berat") : "0:0", tsLong);
 //        detailsRepository.add(entityID, "history_umur", umurs, tsLong);
-
         // detailsRepository.add(entityID, "preload_history_tinggi", submission.getFieldValue("history_tinggi")!= null ? submission.getFieldValue("history_tinggi") :"0#0", tsLong);
         detailsRepository.add(entityID, "preload_history_tinggi", tinggi, tsLong);
         detailsRepository.add(entityID, "kunjunganSebelumnya", lastVisitDate, tsLong);
         ZScoreSystemCalculation zScore = new ZScoreSystemCalculation();
-        if ((submission.getFieldValue("tanggalPenimbangan") != null && !submission.getFieldValue("tanggalPenimbangan").toLowerCase().equals("")) &&
-            (zScore.dailyUnitCalculationOf(dateOfBirth, lastVisitDate) < 1857)) {
+        if (submission.getFieldValue("tanggalPenimbangan") != null && !submission.getFieldValue("tanggalPenimbangan").toLowerCase().equals("")) {
+            if (zScore.dailyUnitCalculationOf(dateOfBirth, lastVisitDate) < 1857) {
                 String[] tempAgeW = history[0].split(",");
                 String[] tempAgeH = history2[0].split(",");
                 String[] tempWeight = history[1].split(",");
@@ -96,58 +96,61 @@ public class KmsHandler implements FormSubmissionHandler {
 
 
                 }
+            }
         }
-        //
-        // kms calculation
-        // NOTE - Need a better way to handle z-score data to sqllite
-        //
-        if ((submission.getFieldValue("history_berat") != null && submission.getFieldValue("tanggalLahirAnak") != null) &&
-                (submission.getFieldValue("tanggalPenimbangan") != null && !submission.getFieldValue("tanggalPenimbangan").toLowerCase().equals(""))) {
+        /**
+         * kms calculation
+         * NOTE - Need a better way to handle z-score data to sqllite
+         */
 
-            String[] historyBerat = Support.insertionSort(submission.getFieldValue("history_berat"));
-            String latestDate = Support.findDate(submission.getFieldValue("tanggalLahirAnak"), Integer.parseInt(historyBerat[historyBerat.length - 1].split(":")[0]));
-            double berat;
-            double beraSebelum;
-            String tanggal_sebelumnya;
-            if (submission.getFieldValue("tanggalPenimbangan").equalsIgnoreCase(latestDate.toLowerCase()) && submission.getFieldValue("kunjunganSebelumnya") != null) {
-                berat = Double.parseDouble(submission.getFieldValue("beratBadan") != null ? submission.getFieldValue("beratBadan") : "0");
-                beraSebelum = Double.parseDouble((history_berat.length) >= 2 ? (history_berat[(history_berat.length) - 2]) : "0");
-                tanggal_sebelumnya = (submission.getFieldValue("kunjunganSebelumnya") != null ? submission.getFieldValue("kunjunganSebelumnya") : "0");
-            } else {
-                berat = Double.parseDouble(historyBerat[historyBerat.length - 1].split(":")[1]);
-                beraSebelum = historyBerat.length > 2 ? Double.parseDouble(historyBerat[historyBerat.length - 2].split(":")[1]) : 0.0;
-                tanggal_sebelumnya = historyBerat.length > 2 ? Support.findDate(submission.getFieldValue("tanggalLahirAnak"), Integer.parseInt(historyBerat[historyBerat.length - 2].split(":")[0])) : "";
-            }
-            String tanggal2sblmnya = historyBerat.length > 3 ? Support.findDate(submission.getFieldValue("tanggalLahirAnak"), Integer.parseInt(historyBerat[historyBerat.length - 3].split(":")[0])) : "";
 
-            //KMS calculation lastVisitDate
-            KmsPerson data = new KmsPerson(!gender.toLowerCase().contains("em"), dateOfBirth, berat, beraSebelum, lastVisitDate, berat_sebelum, tanggal_sebelumnya, tanggal2sblmnya);
-            KmsCalc calculator = new KmsCalc();
-            ////System.out.println("tanggal penimbangan = "+submission.getFieldValue("tanggalPenimbangan")+", "+lastVisitDate);
+        double berat = 0.0;
+        double beraSebelum = 0.0;
+        String tanggal_sebelumnya = "", tanggal2sblmnya = "";
 
-            String duat = history_berat.length <= 2 ? "-" : (Integer.parseInt(history_umur[history_umur.length - 1]) / 30) - (Integer.parseInt(history_umur[history_umur.length - 2]) / 30) >= 2 ? "-" : calculator.cek2T(data);
-            String status = history_berat.length <= 2 ? "No" : calculator.cekWeightStatus(data);
-
-            detailsRepository.add(entityID, "bgm", calculator.cekBGM(data), tsLong);
-            detailsRepository.add(entityID, "dua_t", duat, tsLong);
-            detailsRepository.add(entityID, "garis_kuning", calculator.cekBawahKuning(data), tsLong);
-            detailsRepository.add(entityID, "nutrition_status", status, tsLong);
-
-            if (submission.getFieldValue("vitA") != null) {
-                if (submission.getFieldValue("vitA").equalsIgnoreCase("yes") || submission.getFieldValue("vitA").equalsIgnoreCase("ya")) {
-                    detailsRepository.add(entityID, "lastVitA", submission.getFieldValue("tanggalPenimbangan"), tsLong);
+        if (submission.getFieldValue("history_berat") != null && submission.getFieldValue("tanggalLahirAnak") != null) {
+            if (submission.getFieldValue("tanggalPenimbangan") != null && !submission.getFieldValue("tanggalPenimbangan").toLowerCase().equals("")) {
+                String[] historyBerat = Support.insertionSort(submission.getFieldValue("history_berat"));
+                String latestDate = Support.findDate(submission.getFieldValue("tanggalLahirAnak"), Integer.parseInt(historyBerat[historyBerat.length - 1].split(":")[0]));
+                if (submission.getFieldValue("tanggalPenimbangan").toLowerCase().equals(latestDate.toLowerCase()) && submission.getFieldValue("kunjunganSebelumnya") != null) {
+                    berat = Double.parseDouble(submission.getFieldValue("beratBadan") != null ? submission.getFieldValue("beratBadan") : "0");
+                    beraSebelum = Double.parseDouble((history_berat.length) >= 2 ? (history_berat[(history_berat.length) - 2]) : "0");
+                    tanggal_sebelumnya = (submission.getFieldValue("kunjunganSebelumnya") != null ? submission.getFieldValue("kunjunganSebelumnya") : "0");
+                } else {
+                    berat = Double.parseDouble(historyBerat[historyBerat.length - 1].split(":")[1]);
+                    beraSebelum = historyBerat.length > 2 ? Double.parseDouble(historyBerat[historyBerat.length - 2].split(":")[1]) : 0.0;
+                    tanggal_sebelumnya = historyBerat.length > 2 ? Support.findDate(submission.getFieldValue("tanggalLahirAnak"), Integer.parseInt(historyBerat[historyBerat.length - 2].split(":")[0])) : "";
                 }
-            } else {
-                detailsRepository.add(entityID, "lastVitA", submission.getFieldValue("lastVitA"), tsLong);
-            }
-            if (submission.getFieldValue("obatcacing") != null) {
-                if (submission.getFieldValue("obatcacing").equalsIgnoreCase("yes") || submission.getFieldValue("obatcacing").equalsIgnoreCase("ya")) {
-                    detailsRepository.add(entityID, "lastAnthelmintic", submission.getFieldValue("tanggalPenimbangan"), tsLong);
+                tanggal2sblmnya = historyBerat.length > 3 ? Support.findDate(submission.getFieldValue("tanggalLahirAnak"), Integer.parseInt(historyBerat[historyBerat.length - 3].split(":")[0])) : "";
+
+                //KMS calculation lastVisitDate
+                KmsPerson data = new KmsPerson(!gender.toLowerCase().contains("em"), dateOfBirth, berat, beraSebelum, lastVisitDate, berat_sebelum, tanggal_sebelumnya, tanggal2sblmnya);
+                KmsCalc calculator = new KmsCalc();
+                ////System.out.println("tanggal penimbangan = "+submission.getFieldValue("tanggalPenimbangan")+", "+lastVisitDate);
+
+                String duat = history_berat.length <= 2 ? "-" : (Integer.parseInt(history_umur[history_umur.length - 1]) / 30) - (Integer.parseInt(history_umur[history_umur.length - 2]) / 30) >= 2 ? "-" : calculator.cek2T(data);
+                String status = history_berat.length <= 2 ? "No" : calculator.cekWeightStatus(data);
+
+                detailsRepository.add(entityID, "bgm", calculator.cekBGM(data), tsLong);
+                detailsRepository.add(entityID, "dua_t", duat, tsLong);
+                detailsRepository.add(entityID, "garis_kuning", calculator.cekBawahKuning(data), tsLong);
+                detailsRepository.add(entityID, "nutrition_status", status, tsLong);
+
+                if (submission.getFieldValue("vitA") != null) {
+                    if (submission.getFieldValue("vitA").equalsIgnoreCase("yes") || submission.getFieldValue("vitA").equalsIgnoreCase("ya")) {
+                        detailsRepository.add(entityID, "lastVitA", submission.getFieldValue("tanggalPenimbangan"), tsLong);
+                    }
+                } else {
+                    detailsRepository.add(entityID, "lastVitA", submission.getFieldValue("lastVitA"), tsLong);
                 }
-            } else {
-                detailsRepository.add(entityID, "lastAnthelmintic", submission.getFieldValue("lastAnthelmintic"), tsLong);
+                if (submission.getFieldValue("obatcacing") != null) {
+                    if (submission.getFieldValue("obatcacing").equalsIgnoreCase("yes") || submission.getFieldValue("obatcacing").equalsIgnoreCase("ya")) {
+                        detailsRepository.add(entityID, "lastAnthelmintic", submission.getFieldValue("tanggalPenimbangan"), tsLong);
+                    }
+                } else {
+                    detailsRepository.add(entityID, "lastAnthelmintic", submission.getFieldValue("lastAnthelmintic"), tsLong);
+                }
             }
-//            }
         }
     }
 

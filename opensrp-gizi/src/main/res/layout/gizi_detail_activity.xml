@@ -46,8 +46,7 @@
     <ImageView
         android:layout_width="match_parent"
         android:layout_height="@dimen/smart_register_client_divider_height"
-        android:src="@color/smart_register_client_divider_color"
-        android:id="@+id/imageView4" />
+        android:src="@color/smart_register_client_divider_color" />
 
     <include
         android:layout_marginLeft="10dp"
@@ -62,15 +61,13 @@
     <ImageView
         android:layout_width="match_parent"
         android:layout_height="@dimen/smart_register_client_divider_height"
-        android:src="@color/smart_register_client_divider_color"
-        android:id="@+id/imageView3" />
+        android:src="@color/smart_register_client_divider_color" />
     <org.smartregister.view.customcontrols.CustomFontTextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:text="CHILD GROWTH CHART"
         style="@style/CustomFontTextViewStyle.ListView.Medium"
-        android:id="@+id/lbl_chart_header"
         android:textStyle="bold"
         android:textColor="#000000"
         android:textSize="16sp"
@@ -97,7 +94,6 @@
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:text="Age (Month)"
         style="@style/CustomFontTextViewStyle.ListView.Medium"
-        android:id="@+id/lbl_chart_label"
         android:textStyle="bold"
         android:textColor="#000000"
         android:textSize="16sp"

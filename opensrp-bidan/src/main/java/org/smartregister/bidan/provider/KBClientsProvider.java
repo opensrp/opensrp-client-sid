@@ -146,12 +146,12 @@ public class KBClientsProvider extends BaseClientsProvider {
         ((TextView) convertView.findViewById(R.id.tv_husband_name)).setText(pc.getColumnmaps().get("namaSuami") != null ? pc.getColumnmaps().get("namaSuami") : "");
         ((TextView) convertView.findViewById(R.id.tv_village_name)).setText(pc.getDetails().get("address1") != null ? pc.getDetails().get("address1") : "");
         ((TextView) convertView.findViewById(R.id.tv_wife_age)).setText(pc.getDetails().get("umur") != null ? pc.getDetails().get("umur") : "");
-        ((TextView) convertView.findViewById(R.id.pnc_id)).setText(pc.getDetails().get("noIbu") != null ? pc.getDetails().get("noIbu") : "");
+        ((TextView) convertView.findViewById(R.id.tv_no_ibu_kb)).setText(pc.getDetails().get("noIbu") != null ? pc.getDetails().get("noIbu") : "");
 
         profilelayout.setOnClickListener(onClickListener);
         profilelayout.setTag(smartRegisterClient);
 
-        ImageButton follow_up = (ImageButton) convertView.findViewById(R.id.btn_edit);
+        ImageButton follow_up = (ImageButton) convertView.findViewById(R.id.ib_btn_edit);
         follow_up.setOnClickListener(onClickListener);
         follow_up.setTag(smartRegisterClient);
         follow_up.setImageResource(R.drawable.ic_pencil);

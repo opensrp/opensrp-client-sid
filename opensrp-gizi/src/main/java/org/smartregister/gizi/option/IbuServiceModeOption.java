@@ -15,7 +15,7 @@ public class IbuServiceModeOption extends ServiceModeOption {
 
     @Override
     public String name() {
-       return Context.getInstance().getStringResource(R.string.mother);
+        return Context.getInstance().getStringResource(R.string.gizi_ibu);
     }
 
     @Override
@@ -33,13 +33,13 @@ public class IbuServiceModeOption extends ServiceModeOption {
 
             @Override
             public int[] weights() {
-                return new int[]{20,42,40,39,45,14};
+                return new int[]{20, 42, 40, 39, 45, 14};
             }
 
             @Override
             public int[] headerTextResourceIds() {
                 return new int[]{
-                        R.string.header_edit,R.string.detail_ibu,R.string.anthopometri,R.string.hasil_lab,R.string.post_partum_care,R.string.header_edit
+                        R.string.header_edit, R.string.detail_ibu, R.string.anthopometri, R.string.hasil_lab, R.string.post_partum_care, R.string.header_edit
                 };
             }
         };

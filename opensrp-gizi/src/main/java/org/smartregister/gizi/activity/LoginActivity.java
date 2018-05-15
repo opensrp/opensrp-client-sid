@@ -11,7 +11,6 @@ import android.content.res.Resources;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.text.InputType;
-import android.text.TextUtils;
 import android.util.DisplayMetrics;
 import android.view.KeyEvent;
 import android.view.Menu;
@@ -39,7 +38,6 @@ import org.smartregister.view.ProgressIndicator;
 
 import java.io.IOException;
 import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.Locale;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipFile;
@@ -57,50 +55,19 @@ import static org.smartregister.util.Log.logVerbose;
 //import io.fabric.sdk.android.Fabric;
 
 public class LoginActivity extends AppCompatActivity {
-    private static final String TAG = LoginActivity.class.getSimpleName();
+    public static final String ENGLISH_LOCALE = "en";
+    public static final String BAHASA_LOCALE = "in";
+    public static final String ENGLISH_LANGUAGE = "English";
+    public static final String Bahasa_LANGUAGE = "Bahasa";
+    //   public static Generator generator;
+    public static final String PREF_TEAM_LOCATIONS = "PREF_TEAM_LOCATIONS";
     private Context context;
     private EditText userNameEditText;
     private EditText passwordEditText;
     private ProgressDialog progressDialog;
-    public static final String ENGLISH_LOCALE = "en";
-//    public static final String KANNADA_LOCALE = "kn";
-//    public static final String BENGALI_LOCALE = "bn";
-    public static final String BAHASA_LOCALE = "in";
-    public static final String ENGLISH_LANGUAGE = "English";
-//    public static final String KANNADA_LANGUAGE = "Kannada";
-//    public static final String Bengali_LANGUAGE = "Bengali";
-    public static final String Bahasa_LANGUAGE = "Bahasa";
- //   public static Generator generator;
-    public static final String PREF_TEAM_LOCATIONS = "PREF_TEAM_LOCATIONS";
-    @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        logVerbose("Initializing ...");
 
-        try{
-            AllSharedPreferences allSharedPreferences = new AllSharedPreferences(getDefaultSharedPreferences(this));
-            String preferredLocale = allSharedPreferences.fetchLanguagePreference();
-            Resources res = getOpenSRPContext().applicationContext().getResources();
-            // Change locale settings in the app.
-            DisplayMetrics dm = res.getDisplayMetrics();
-            android.content.res.Configuration conf = res.getConfiguration();
-            conf.locale = new Locale(preferredLocale);
-            res.updateConfiguration(conf, dm);
-        }catch(Exception e){
-            android.util.Log.e(TAG, "onCreate: " + e.getCause());
-        }
-        setContentView(R.layout.login);
-
-        positionViews();
-
-        initializeLoginFields();
-        initializeBuildDetails();
-        setDoneActionHandlerOnPasswordField();
-        initializeProgressDialog();
-        setLanguage();
-
-      //  debugApp();
-
+    public static Context getOpenSRPContext() {
+        return GiziApplication.getInstance().context();
     }
 
    /* private void debugApp() {
@@ -123,8 +90,76 @@ public class LoginActivity extends AppCompatActivity {
         }
     }*/
 
+    public static void setLanguage() {
+        AllSharedPreferences allSharedPreferences = new AllSharedPreferences(getDefaultSharedPreferences(Context.getInstance().applicationContext()));
+        String preferredLocale = allSharedPreferences.fetchLanguagePreference();
+        Resources res = Context.getInstance().applicationContext().getResources();
+        // Change locale settings in the app.
+        DisplayMetrics dm = res.getDisplayMetrics();
+        android.content.res.Configuration conf = res.getConfiguration();
+        conf.locale = new Locale(preferredLocale);
+        res.updateConfiguration(conf, dm);
+
+    }
+
+    public static String switchLanguagePreference() {
+        AllSharedPreferences allSharedPreferences = new AllSharedPreferences(getDefaultSharedPreferences(Context.getInstance().applicationContext()));
+
+        String preferredLocale = allSharedPreferences.fetchLanguagePreference();
+        if (ENGLISH_LOCALE.equals(preferredLocale)) {
+            allSharedPreferences.saveLanguagePreference(BAHASA_LOCALE);
+            Resources res = Context.getInstance().applicationContext().getResources();
+            // Change locale settings in the app.
+            DisplayMetrics dm = res.getDisplayMetrics();
+            android.content.res.Configuration conf = res.getConfiguration();
+            conf.locale = new Locale(BAHASA_LOCALE);
+            res.updateConfiguration(conf, dm);
+            return Bahasa_LANGUAGE;
+        } else {
+            allSharedPreferences.saveLanguagePreference(ENGLISH_LOCALE);
+            Resources res = Context.getInstance().applicationContext().getResources();
+            // Change locale settings in the app.
+            DisplayMetrics dm = res.getDisplayMetrics();
+            android.content.res.Configuration conf = res.getConfiguration();
+            conf.locale = new Locale(ENGLISH_LOCALE);
+            res.updateConfiguration(conf, dm);
+            return ENGLISH_LANGUAGE;
+        }
+    }
+
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        logVerbose("Initializing ...");
+
+        try {
+            AllSharedPreferences allSharedPreferences = new AllSharedPreferences(getDefaultSharedPreferences(this));
+            String preferredLocale = allSharedPreferences.fetchLanguagePreference();
+            Resources res = getOpenSRPContext().applicationContext().getResources();
+            // Change locale settings in the app.
+            DisplayMetrics dm = res.getDisplayMetrics();
+            android.content.res.Configuration conf = res.getConfiguration();
+            conf.locale = new Locale(preferredLocale);
+            res.updateConfiguration(conf, dm);
+        } catch (Exception e) {
+
+        }
+        setContentView(R.layout.login);
+
+        positionViews();
+
+        initializeLoginFields();
+        initializeBuildDetails();
+        setDoneActionHandlerOnPasswordField();
+        initializeProgressDialog();
+        setLanguage();
+
+        //  debugApp();
+
+    }
+
     private void positionViews() {
-        ImageView loginglogo = (ImageView)findViewById(R.id.login_logo);
+        ImageView loginglogo = (ImageView) findViewById(R.id.login_logo);
         loginglogo.setImageDrawable(getResources().getDrawable(R.mipmap.login_logo));
         context = Context.getInstance().updateApplicationContext(this.getApplicationContext());
 //        getActionBar().setTitle("");
@@ -133,20 +168,16 @@ public class LoginActivity extends AppCompatActivity {
 
     }
 
-    public static Context getOpenSRPContext() {
-        return GiziApplication.getInstance().context();
-    }
-
     @Override
-    public boolean onCreateOptionsMenu(Menu menu)
-    {
+    public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
         menu.add("Settings");
         return true;
     }
+
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        if(item.getTitle().toString().equalsIgnoreCase("Settings")){
+        if (item.getTitle().toString().equalsIgnoreCase("Settings")) {
             startActivity(new Intent(this, SettingsActivity.class));
             return true;
         }
@@ -166,7 +197,7 @@ public class LoginActivity extends AppCompatActivity {
     protected void onResume() {
         super.onResume();
 
-        if (!getOpenSRPContext().IsUserLoggedOut()) {
+        if (!context.IsUserLoggedOut()) {
             goToHome();
         }
 
@@ -174,40 +205,26 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     public void login(final View view) {
-        login(view, !getOpenSRPContext().allSharedPreferences().fetchForceRemoteLogin());
-    }
-
-    private void login(final View view, boolean localLogin) {
         hideKeyboard();
         view.setClickable(false);
 
         final String userName = userNameEditText.getText().toString();
         final String password = passwordEditText.getText().toString();
 
-//        if (context.userService().hasARegisteredUser()) {
-//            localLogin(view, userName, password);
-//        } else {
-//            remoteLogin(view, userName, password);
-//        }
-        if (!TextUtils.isEmpty(userName) && !TextUtils.isEmpty(password)) {
-            if (localLogin) {
-                localLogin(view, userName, password);
-            } else {
-                remoteLogin(view, userName, password);
-            }
+        if (context.userService().hasARegisteredUser()) {
+            localLogin(view, userName, password);
         } else {
-            showErrorDialog(getResources().getString(R.string.unauthorized));
-            view.setClickable(true);
+            remoteLogin(view, userName, password);
         }
     }
 
     private void initializeLoginFields() {
         userNameEditText = ((EditText) findViewById(org.smartregister.R.id.login_userNameText));
         userNameEditText.setRawInputType(InputType.TYPE_CLASS_TEXT);
-       // userNameEditText.setText("demo_ec");
+        // userNameEditText.setText("demo_ec");
         passwordEditText = ((EditText) findViewById(org.smartregister.R.id.login_passwordText));
         passwordEditText.setRawInputType(InputType.TYPE_CLASS_TEXT);
-      //  passwordEditText.setText("Satu2345");
+        //  passwordEditText.setText("Satu2345");
     }
 
     private void setDoneActionHandlerOnPasswordField() {
@@ -253,11 +270,11 @@ public class LoginActivity extends AppCompatActivity {
                     if (loginResponse == null) {
                         showErrorDialog("Login failed. Unknown reason. Try Again");
                     } else {
-                        if(loginResponse == NO_INTERNET_CONNECTIVITY){
+                        if (loginResponse == NO_INTERNET_CONNECTIVITY) {
                             showErrorDialog(getResources().getString(R.string.no_internet_connectivity));
-                        }else if (loginResponse == UNKNOWN_RESPONSE){
+                        } else if (loginResponse == UNKNOWN_RESPONSE) {
                             showErrorDialog(getResources().getString(R.string.unknown_response));
-                        }else if (loginResponse == UNAUTHORIZED){
+                        } else if (loginResponse == UNAUTHORIZED) {
                             showErrorDialog(getResources().getString(R.string.unauthorized));
                         }
 //                        showErrorDialog(loginResponse.message());
@@ -285,47 +302,11 @@ public class LoginActivity extends AppCompatActivity {
                 .setPositiveButton("OK", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
-                        // do nothing
                     }
                 })
                 .create();
         dialog.show();
     }
-
-//    private void getLocation() {
-//        tryGetLocation(new Listener<Response<String>>() {
-//            @Override
-//            public void onEvent(Response<String> data) {
-//                if (data.status() == ResponseStatus.success) {
-//                    context.userService().saveAnmLocation(data.payload());
-//                }
-//            }
-//        });
-//    }
-
-//    private void tryGetLocation(final Listener<Response<String>> afterGet) {
-//        LockingBackgroundTask task = new LockingBackgroundTask(new ProgressIndicator() {
-//            @Override
-//            public void setVisible() {
-//                // do nothing
-//            }
-//
-//            @Override
-//            public void setInvisible() { Log.logInfo("Successfully get location"); }
-//        });
-//
-//        task.doActionInBackground(new BackgroundAction<Response<String>>() {
-//            @Override
-//            public Response<String> actionToDoInBackgroundThread() {
-//                return context.userService().getLocationInformation();
-//            }
-//
-//            @Override
-//            public void postExecuteInUIThread(Response<String> result) {
-//                afterGet.onEvent(result);
-//            }
-//        });
-//    }
 
     private void tryRemoteLogin(final String userName, final String password, final Listener<LoginResponse> afterLoginCheck) {
         LockingBackgroundTask task = new LockingBackgroundTask(new ProgressIndicator() {
@@ -351,22 +332,21 @@ public class LoginActivity extends AppCompatActivity {
         });
     }
 
-//    private void fillUserIfExists() {
-//        if (context.userService().hasARegisteredUser()) {
-//            userNameEditText.setText(context.allSharedPreferences().fetchRegisteredANM());
-//            userNameEditText.setEnabled(false);
-//        }
-//    }
+    private void fillUserIfExists() {
+        if (context.userService().hasARegisteredUser()) {
+            userNameEditText.setText(context.allSharedPreferences().fetchRegisteredANM());
+            userNameEditText.setEnabled(false);
+        }
+    }
 
     private void hideKeyboard() {
         InputMethodManager inputManager = (InputMethodManager) getSystemService(INPUT_METHOD_SERVICE);
-        if (getCurrentFocus() != null)
         inputManager.hideSoftInputFromWindow(getCurrentFocus().getWindowToken(), HIDE_NOT_ALWAYS);
     }
 
     private void localLoginWith(String userName, String password) {
         context.userService().localLogin(userName, password);
-      //  LoginActivity.generator = new Generator(context, userName, password);
+        //  LoginActivity.generator = new Generator(context, userName, password);
         goToHome();
         //DrishtiSyncScheduler.startOnlyIfConnectedToNetwork(getApplicationContext());
     }
@@ -376,14 +356,13 @@ public class LoginActivity extends AppCompatActivity {
         String locationId = getUserDefaultLocationId(userInfo);
         Utils.writePreference(GiziApplication.getInstance().getApplicationContext(), PREF_TEAM_LOCATIONS, locationId);
 
-        saveDefaultLocationId(userName,locationId);
-       // LoginActivity.generator = new Generator(context, userName, password);
+        saveDefaultLocationId(userName, locationId);
+        // LoginActivity.generator = new Generator(context, userName, password);
         goToHome();
         String locations = Utils.getPreference(GiziApplication.getInstance().getApplicationContext(), PREF_TEAM_LOCATIONS, "");
-        Log.logInfo("USERINFO"+locations);
+        Log.logInfo("USERINFO" + locations);
         //DrishtiSyncScheduler.startOnlyIfConnectedToNetwork(getApplicationContext());
     }
-
 
     private void goToHome() {
         startActivity(new Intent(this, GiziHomeActivity.class));
@@ -399,43 +378,7 @@ public class LoginActivity extends AppCompatActivity {
         ApplicationInfo applicationInfo = getPackageManager().getApplicationInfo(getPackageName(), 0);
         ZipFile zf = new ZipFile(applicationInfo.sourceDir);
         ZipEntry ze = zf.getEntry("classes.dex");
-        return new SimpleDateFormat("dd MMM yyyy", Locale.getDefault()).format(new Date(ze.getTime()));
-    }
-
-    public static void setLanguage(){
-        AllSharedPreferences allSharedPreferences = new AllSharedPreferences(getDefaultSharedPreferences(Context.getInstance().applicationContext()));
-        String preferredLocale = allSharedPreferences.fetchLanguagePreference();
-        Resources res = Context.getInstance().applicationContext().getResources();
-        // Change locale settings in the app.
-        DisplayMetrics dm = res.getDisplayMetrics();
-        android.content.res.Configuration conf = res.getConfiguration();
-        conf.locale = new Locale(preferredLocale);
-        res.updateConfiguration(conf, dm);
-
-    }
-    public static String switchLanguagePreference() {
-        AllSharedPreferences allSharedPreferences = new AllSharedPreferences(getDefaultSharedPreferences(Context.getInstance().applicationContext()));
-
-        String preferredLocale = allSharedPreferences.fetchLanguagePreference();
-        if (ENGLISH_LOCALE.equals(preferredLocale)) {
-            allSharedPreferences.saveLanguagePreference(BAHASA_LOCALE);
-            Resources res = Context.getInstance().applicationContext().getResources();
-            // Change locale settings in the app.
-            DisplayMetrics dm = res.getDisplayMetrics();
-            android.content.res.Configuration conf = res.getConfiguration();
-            conf.locale = new Locale(BAHASA_LOCALE);
-            res.updateConfiguration(conf, dm);
-            return Bahasa_LANGUAGE;
-        } else {
-            allSharedPreferences.saveLanguagePreference(ENGLISH_LOCALE);
-            Resources res = Context.getInstance().applicationContext().getResources();
-            // Change locale settings in the app.
-            DisplayMetrics dm = res.getDisplayMetrics();
-            android.content.res.Configuration conf = res.getConfiguration();
-            conf.locale = new Locale(ENGLISH_LOCALE);
-            res.updateConfiguration(conf, dm);
-            return ENGLISH_LANGUAGE;
-        }
+        return new SimpleDateFormat("dd MMM yyyy", Locale.getDefault()).format(new java.util.Date(ze.getTime()));
     }
 
     public String getUserDefaultLocationId(String userInfo) {
@@ -452,7 +395,7 @@ public class LoginActivity extends AppCompatActivity {
     public void saveDefaultLocationId(String userName, String locationId) {
         if (userName != null) {
             context.userService().getAllSharedPreferences().savePreference(userName + "-locationid", locationId);
-            Log.logInfo("LOKASI "+locationId);
+            Log.logInfo("LOKASI " + locationId);
         }
     }
 

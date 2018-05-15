@@ -43,7 +43,7 @@ public class KIFilterOptionTest extends BaseUnitTest {
     @Test
     public void filterWithVALUE() {
 
-        Assert.assertEquals("AND " + tableName + ".relational_id IN (SELECT DISTINCT base_entity_id FROM ec_details WHERE value MATCH '" + criteria + "') ", motherFilterOption.filter());
+        Assert.assertEquals("AND " + tableName + ".relational_id IN (SELECT DISTINCT base_entity_id FROM ec_details WHERE value MATCH '" + criteria + "')", motherFilterOption.filter());
 
     }
 
@@ -52,7 +52,7 @@ public class KIFilterOptionTest extends BaseUnitTest {
         fieldName = "josh";
         criteria = "abcd";
         motherFilterOption = new KICommonObjectFilterOption(criteria, fieldName, filterOption);
-        Assert.assertEquals("AND " + tableName + ".relational_id IN (SELECT DISTINCT base_entity_id FROM ec_details WHERE value MATCH '" + criteria + "') ", motherFilterOption.filter());
+        Assert.assertEquals("AND " + tableName + ".relational_id IN (SELECT DISTINCT base_entity_id FROM ec_details WHERE value MATCH '" + criteria + "')", motherFilterOption.filter());
 
     }
 

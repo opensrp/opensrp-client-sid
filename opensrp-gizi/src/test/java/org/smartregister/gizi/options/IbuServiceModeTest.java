@@ -36,7 +36,7 @@ public class IbuServiceModeTest extends BaseUnitTest {
 
     @Test
     public void modeNameIsHouseHold() {
-        Assert.assertEquals(allKartuIbuServiceMode.name(), "Ibu");
+        Assert.assertEquals(allKartuIbuServiceMode.name(), "MOTHER NUTRITION");
     }
 
 }

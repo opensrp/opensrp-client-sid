@@ -45,14 +45,11 @@ import io.reactivex.schedulers.Schedulers;
 import util.NetworkUtils;
 
 public class SyncService extends Service {
+    public static final int EVENT_PULL_LIMIT = 100;
     private static final String EVENTS_SYNC_PATH = "/rest/event/add";
-
+    private static final int EVENT_PUSH_LIMIT = 50;
     private Context context;
     private HTTPAgent httpAgent;
-
-    public static final int EVENT_PULL_LIMIT = 100;
-    private static final int EVENT_PUSH_LIMIT = 50;
-
     private volatile HandlerThread mHandlerThread;
     private ServiceHandler mServiceHandler;
     private List<Observable<?>> observables;
@@ -122,7 +119,7 @@ public class SyncService extends Service {
         // Fetch locations
 
         String locations = Utils.getPreference(context, LoginActivity.PREF_TEAM_LOCATIONS, "");
-        org.smartregister.util.Log.logInfo("SYNCLOK"+locations);
+        org.smartregister.util.Log.logInfo("SYNCLOK" + locations);
         if (StringUtils.isBlank(locations)) {
             sendSyncStatusBroadcastMessage(FetchStatus.fetchedFailed, true);
             return;

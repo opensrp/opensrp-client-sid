@@ -220,5 +220,11 @@ public class BidanApplication extends DrishtiApplication {
         return eventClientRepository;
     }
 
+    public EventClientRepository eventClientRepository() {
+        if (eventClientRepository == null) {
+            eventClientRepository = new EventClientRepository(getRepository());
+        }
+        return eventClientRepository;
+    }
 
 }

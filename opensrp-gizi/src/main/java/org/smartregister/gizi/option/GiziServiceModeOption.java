@@ -15,7 +15,7 @@ public class GiziServiceModeOption extends ServiceModeOption {
 
     @Override
     public String name() {
-       return Context.getInstance().getStringResource(R.string.test_register);
+        return Context.getInstance().getStringResource(R.string.test_register);
     }
 
     @Override
@@ -33,14 +33,14 @@ public class GiziServiceModeOption extends ServiceModeOption {
 
             @Override
             public int[] weights() {
-                return new int[]{30,25,23,15,7};
+                return new int[]{30, 25, 23, 15, 7};
             }
 
             @Override
             public int[] headerTextResourceIds() {
                 return new int[]{
-                        R.string.child_profile,R.string.anthopometri,R.string.status,R.string.visitSchedule,R.string.header_edit
-                        };
+                        R.string.child_profile, R.string.anthopometri, R.string.status, R.string.visitSchedule, R.string.header_edit
+                };
             }
         };
     }

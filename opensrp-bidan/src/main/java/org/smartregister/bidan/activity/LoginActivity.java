@@ -65,7 +65,7 @@ public class LoginActivity extends AppCompatActivity {
     private EditText userNameEditText;
     private EditText passwordEditText;
     private ProgressDialog progressDialog;
-//    public static final String PREF_TEAM_LOCATIONS = "PREF_TEAM_LOCATIONS";
+    public static final String PREF_TEAM_LOCATIONS = "PREF_TEAM_LOCATIONS";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

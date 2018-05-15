@@ -11,10 +11,9 @@ import org.smartregister.util.Log;
 import java.io.File;
 
 /**
- * Created by al on 30/05/2017
+ * Created by al on 30/05/2017.
  */
 public class Support {
-    public static boolean ONSYNC = false;
 
     public static String[]replace(String[]data,String target,String replacement){
         for(int i=0;i<data.length;i++){
@@ -24,17 +23,16 @@ public class Support {
         return data;
     }
 
-    public static String[] split(String myData){
-        String data = myData;
+    public static String[]split(String data){
         if(data == null)
             data="";
         if(!data.contains(":"))
             return new String[]{"0","0"};
         String []temp = data.split(",");
         String []result = {"",""};
-        for (String aTemp : temp) {
-            result[0] = result[0] + "," + aTemp.split(":")[0];
-            result[1] = result[1] + "," + aTemp.split(":")[1];
+        for(int i=0;i<temp.length;i++){
+            result[0]=result[0]+","+temp[i].split(":")[0];
+            result[1]=result[1]+","+temp[i].split(":")[1];
         }
         result[0]=result[0].substring(1,result[0].length());
         result[1]=result[1].substring(1,result[1].length());
@@ -42,28 +40,34 @@ public class Support {
     }
 
     public static String getColumnmaps(CommonPersonObjectClient person, String values){
-
-        if(person.getColumnmaps().get(values)!=null && person.getColumnmaps().get(values).length()>0)
+        if(person.getColumnmaps().get(values)!=null){
+            if(person.getColumnmaps().get(values).length()>0)
                 return person.getColumnmaps().get(values);
-
+        }
         return "-";
     }
 
     public static String getColumnmaps(CommonPersonObject person, String values){
-        if(person.getColumnmaps().get(values)!=null && person.getColumnmaps().get(values).length()>0)
+        if(person.getColumnmaps().get(values)!=null){
+            if(person.getColumnmaps().get(values).length()>0)
                 return person.getColumnmaps().get(values);
+        }
         return "-";
     }
 
     public static String getDetails(CommonPersonObjectClient person, String values){
-        if(person.getDetails().get(values)!=null && person.getDetails().get(values).length()>0)
+        if(person.getDetails().get(values)!=null){
+            if(person.getDetails().get(values).length()>0)
                 return person.getDetails().get(values);
+        }
         return "-";
     }
 
     public static String getDetails(CommonPersonObject person, String values){
-        if(person.getDetails().get(values)!=null && person.getDetails().get(values).length()>0)
+        if(person.getDetails().get(values)!=null){
+            if(person.getDetails().get(values).length()>0)
                 return person.getDetails().get(values);
+        }
         return "-";
     }
 
@@ -90,8 +94,8 @@ public class Support {
 
     public static String combine(String[]data, String separator){
         String result="";
-        for (String aData : data) {
-            result = result + separator + aData;
+        for(int i=0;i<data.length;i++){
+            result=result+separator+data[i];
         }
         return result.substring(1,result.length());
     }
@@ -102,8 +106,7 @@ public class Support {
         return combine(insertionSort(data), ",");
     }
 
-    public static String findDate(String startDate, int myDayAge){
-        int dayAge = myDayAge;
+    public static String findDate(String startDate, int dayAge){
         int[]dayLength = {31,28,31,30,31,30,31,31,30,31,30,31};
         int startYear = Integer.parseInt(startDate.substring(0,4));
         int startMonth = Integer.parseInt(startDate.substring(5,7));

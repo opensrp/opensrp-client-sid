@@ -46,19 +46,11 @@ public class ZScoreSystemCalculation {
         return result;
     }
 
-    public double countWFA(String gender, String dateOfBirth, String lastVisitDate, double weight){
-        return countWFA(!gender.contains("em"),dailyUnitCalculationOf(dateOfBirth,lastVisitDate),weight);
-    }
-
     public double countWFA(boolean isMale,int age,double weight){
 
         coefficient = isMale ? new ReferenceTableForDailyIndex().getBoysWeightForAge(age):
                 new ReferenceTableForDailyIndex().getGirlsWeightForAge(age);
         return this.zScoreCalculation(weight, coefficient);
-    }
-
-    public double countHFA(String gender, String dateOfBirth, String lastVisitDate, double height){
-        return countHFA(!gender.contains("em"),dailyUnitCalculationOf(dateOfBirth,lastVisitDate),height);
     }
 
     public double countHFA(boolean isMale,int age, double height){
@@ -88,17 +80,6 @@ public class ZScoreSystemCalculation {
         coefficient = isMale ? new ReferenceTableForDailyIndex().getBoysWeightForHeight(index):
                 new ReferenceTableForDailyIndex().getGirlsWeightForHeight(index);
         return this.zScoreCalculation(weight, coefficient);
-    }
-
-    public double countBMI(String gender,  String dateOfBirth, String lastVisitDate, double weight,double height){
-        return countBMI(gender.contains("l"), dailyUnitCalculationOf(dateOfBirth,lastVisitDate),weight,height);
-    }
-
-    public double countBMI(boolean isMale, int age, double weight,double height){
-        double param = weight/Math.pow(height/100,2);
-        coefficient = isMale ? new ReferenceTableForDailyIndex().getBoysBMIForAge(age):
-                new ReferenceTableForDailyIndex().getGirlsBMIForAge(age);
-        return this.zScoreCalculation(param, coefficient);
     }
 
     public int dailyUnitCalculationOf(String dateFrom,String dateTo){

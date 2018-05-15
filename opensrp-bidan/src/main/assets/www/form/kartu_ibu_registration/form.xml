@@ -9,7 +9,7 @@
     <label class="question note non-select ">
         <span class="question-label active" data-itext-id="/Kartu_ibu/generated_note_name_13:label"
             lang="Bahasa">Desa :
-            <span class="or-output" data-value=" /Kartu_ibu/Village "></span>
+            <span class="or-output" data-value=" /Kartu_ibu/Village"/>
         </span>
         <span class="question-label " data-itext-id="/Kartu_ibu/generated_note_name_13:label"
             lang="en">-
@@ -20,7 +20,7 @@
     <label class="question note non-select ">
         <span class="question-label active" data-itext-id="/Kartu_ibu/generated_note_name_14:label"
             lang="Bahasa">Dusun :
-            <span class="or-output" data-value=" /Kartu_ibu/Sub-village "></span>
+            <span class="or-output" data-value=" /Kartu_ibu/Sub-district"/>
         </span>
         <span class="question-label " data-itext-id="/Kartu_ibu/generated_note_name_14:label"
             lang="en">-
@@ -266,11 +266,11 @@
     <label class="question note non-select ">
         <span class="question-label active" data-itext-id="/Kartu_ibu/generated_note_name_32:label"
             lang="Bahasa">Unique ID:
-            <span class="or-output" data-value=" /Kartu_ibu/unique_id "></span>
+            <span class="or-output" data-value=" /Kartu_ibu/unique_id"/>
         </span>
         <span class="question-label " data-itext-id="/Kartu_ibu/generated_note_name_32:label"
             lang="en">Unique ID:
-            <span class="or-output" data-value=" /Kartu_ibu/unique_id "></span>
+            <span class="or-output" data-value=" /Kartu_ibu/unique_id"/>
         </span>
         <input name="/Kartu_ibu/generated_note_name_32" data-type-xml="string" readonly="readonly"
             type="text" />
@@ -374,7 +374,7 @@
     <label class="question note non-select ">
         <span class="question-label active" data-itext-id="/Kartu_ibu/generated_note_name_40:label"
             lang="Bahasa">Umur:
-            <span class="or-output" data-value=" /Kartu_ibu/umur "></span>
+            <span class="or-output" data-value=" /Kartu_ibu/umur"/>
         </span>
         <span class="question-label " data-itext-id="/Kartu_ibu/generated_note_name_40:label"
             lang="en">Age

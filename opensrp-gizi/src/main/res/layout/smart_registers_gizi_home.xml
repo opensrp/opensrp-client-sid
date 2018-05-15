@@ -28,9 +28,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Gizi"
-                android:id="@+id/textView2"
                 android:fontFamily="sans-serif-condensed"
-                android:textSize="100dp"
+                android:textSize="100sp"
                 android:layout_gravity="bottom|left"
                 android:textStyle="bold"
                 android:textColor="#ffffff" />
@@ -38,7 +37,6 @@
             <ImageView
                 android:layout_width="150dp"
                 android:layout_height="match_parent"
-                android:id="@+id/imageView2"
                 android:src="@mipmap/opensrp_indonesia_gizi_logo" />
 
         </LinearLayout>

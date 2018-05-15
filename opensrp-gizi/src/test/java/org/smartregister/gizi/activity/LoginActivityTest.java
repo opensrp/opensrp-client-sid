@@ -5,7 +5,6 @@ import android.content.Intent;
 import android.os.IBinder;
 import android.util.Log;
 import android.view.inputmethod.InputMethodManager;
-import android.widget.Button;
 import android.widget.EditText;
 
 import junit.framework.Assert;
@@ -27,7 +26,6 @@ import org.smartregister.CoreLibrary;
 import org.smartregister.domain.LoginResponse;
 import org.smartregister.gizi.BuildConfig;
 import org.smartregister.gizi.R;
-import org.smartregister.gizi.activity.LoginActivity;
 import org.smartregister.gizi.activity.mock.LoginActivityMock;
 import org.smartregister.gizi.activity.shadow.ShadowContext;
 import org.smartregister.repository.AllSharedPreferences;
@@ -78,7 +76,7 @@ public class LoginActivityTest extends BaseUnitTest {
     public void setUp() throws Exception {
         org.mockito.MockitoAnnotations.initMocks(this);
         CoreLibrary.init(context_);
-        LoginActivityMock.mockactivitycontext = context_;
+//        LoginActivityMock.mockActivityContext = context_;
         LoginActivityMock.inputManager = inputManager;
 
         DrishtiSyncScheduler.setReceiverClass(LoginActivityMock.class);
@@ -115,8 +113,8 @@ public class LoginActivityTest extends BaseUnitTest {
         EditText password = (EditText) activity.findViewById(R.id.login_passwordText);
         username.setText("admin");
         password.setText("password");
-        Button login_button = (Button) activity.findViewById(R.id.login_loginButton);
-        login_button.performClick();
+//        Button login_button = (Button) activity.findViewById(R.id.login_loginButton);
+//        login_button.performClick();
 //        Mockito.verify(userService, Mockito.atLeastOnce()).localLogin(anyString(), anyString());
         destroyController();
 

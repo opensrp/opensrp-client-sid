@@ -5,23 +5,17 @@ import org.smartregister.view.contract.SmartRegisterClient;
 
 public class KICommonObjectFilterOption implements CursorFilterOption {
     public final String criteria;
-    public final String fieldname;
     private final String filterOptionName;
-
-    @Override
-    public String filter() {
-
-
-        return "AND ec_anak.relational_id IN (SELECT DISTINCT base_entity_id FROM ec_details WHERE value MATCH '" + criteria + "') ";
-
-    }
-
-
 
     public KICommonObjectFilterOption(String criteria, String fieldname, String filteroptionname) {
         this.criteria = criteria;
-        this.fieldname = fieldname;
+//        String fieldName = fieldname;
         this.filterOptionName = filteroptionname;
+    }
+
+    @Override
+    public String filter() {
+        return "AND ec_anak.relational_id IN (SELECT DISTINCT base_entity_id FROM ec_details WHERE value MATCH '" + criteria + "')";
     }
 
     @Override

@@ -6,7 +6,6 @@ import android.support.annotation.Nullable;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 
-import org.smartregister.Context;
 import org.smartregister.gizi.activity.LoginActivity;
 
 /**
@@ -15,7 +14,7 @@ import org.smartregister.gizi.activity.LoginActivity;
 
 public class LoginActivityMock extends LoginActivity {
 
-    public static Context mockactivitycontext;
+//    public static Context mockActivityContext;
     public static InputMethodManager inputManager;
 
     @Override

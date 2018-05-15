@@ -73,13 +73,14 @@ public class EnketoFormUtils {
     private org.smartregister.Context theAppContext;
     private SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSSZ");
     private Format formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-    private VaksinatorFormEntityConverter formEntityConverter;
+    private GiziFormEntityConverter formEntityConverter;
     private EventClientRepository eventClientRepository;
+
     public EnketoFormUtils(Context context) throws Exception {
         mContext = context;
         theAppContext = CoreLibrary.getInstance().context();
         FormAttributeParser formAttributeParser = new FormAttributeParser(context);
-        formEntityConverter = new VaksinatorFormEntityConverter(formAttributeParser, mContext);
+        formEntityConverter = new GiziFormEntityConverter(formAttributeParser, mContext);
         // Protect creation of static variable.
       //  mCloudantDataHandler = CloudantDataHandler.getInstance(context.getApplicationContext());
         eventClientRepository = GiziApplication.getInstance().eventClientRepository();
@@ -92,21 +93,6 @@ public class EnketoFormUtils {
 
         return instance;
     }
-
-//    /* Checks if the provided node has Child elements
-//     * @param element
-//     * @return
-//     */
-//    public static boolean hasChildElements(Node element) {
-//        NodeList children = element.getChildNodes();
-//        for (int i = 0; i < children.getLength(); i++) {
-//            if (children.item(i).getNodeType() == Node.ELEMENT_NODE) {
-//                return true;
-//            }
-//        }
-//
-//        return false;
-//    }
 
     private static JSONObject retrieveRelationshipJsonForLink(String link, JSONArray array)
             throws Exception {
@@ -162,12 +148,12 @@ public class EnketoFormUtils {
     public FormSubmission generateFormSubmisionFromXMLString(String entity_id, String formData,
                                                              String formName, JSONObject
                                                                      overrides) throws Exception {
-        android.util.Log.i(TAG, "generateFormSubmisionFromXMLString: "+ entity_id);
         JSONObject formSubmission = XML.toJSONObject(formData);
 
         //FileUtilities fu = new FileUtilities();
         //fu.write("xmlform.txt", formData);
         //fu.write("xmlformsubmission.txt", formSubmission.toString());
+        System.out.println(entity_id);
         System.out.println(formSubmission);
 
         // use the form_definition.json to iterate through fields
@@ -178,12 +164,12 @@ public class EnketoFormUtils {
         String rootNodeKey = formSubmission.keys().next();
 
         // retrieve the id, if it fails use the provided value by the param
-        String myEntityId = formSubmission.getJSONObject(rootNodeKey).has(databaseIdKey) ? formSubmission
+        entity_id = formSubmission.getJSONObject(rootNodeKey).has(databaseIdKey) ? formSubmission
                 .getJSONObject(rootNodeKey).getString(databaseIdKey) : generateRandomUUIDString();
 
         //String bindPath = formDefinition.getJSONObject("form").getString("bind_type");
         JSONObject fieldsDefinition = formDefinition.getJSONObject("form");
-        JSONArray populatedFieldsArray = getPopulatedFieldsForArray(fieldsDefinition, myEntityId,
+        JSONArray populatedFieldsArray = getPopulatedFieldsForArray(fieldsDefinition, entity_id,
                 formSubmission, overrides);
 
         // replace all the fields in the form
@@ -208,7 +194,7 @@ public class EnketoFormUtils {
                 subFormDataArray = (JSONArray) subFormDataObject;
             }
 
-            JSONArray subForms = getSubForms(subFormDataArray, myEntityId, subFormDefinition,
+            JSONArray subForms = getSubForms(subFormDataArray, entity_id, subFormDefinition,
                     overrides);
 
             // replace the subforms field with real data
@@ -267,23 +253,6 @@ public class EnketoFormUtils {
 
     }
 
-//    private void printClient(Client client) {
-//        Log.logDebug("============== CLIENT ================");
-//        Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSSZ").create();
-//        String clientJson = gson.toJson(client);
-//        Log.logDebug(clientJson);
-//        Log.logDebug("====================================");
-//
-//    }
-//
-//    private void printEvent(Event event) {
-//        Log.logDebug("============== EVENT ================");
-//        Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSSZ").create();
-//        String eventJson = gson.toJson(event);
-//        Log.logDebug(eventJson);
-//        Log.logDebug("====================================");
-//    }
-
     private void saveClient(Client client) {
         Log.logDebug("============== CLIENT ================");
         Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSSZ").create();
@@ -309,15 +278,6 @@ public class EnketoFormUtils {
             android.util.Log.e(TAG, e.toString(), e);
         }
     }
-
-//    /**
-//     * Start ReplicationIntentService which handles cloudant sync processes
-//     */
-//    private void startReplicationIntentService() {
-//
-//        Intent serviceIntent = new Intent(mContext, ReplicationIntentService.class);
-//        mContext.startService(serviceIntent);
-//    }
 
     private List<SubFormData> getSubFormList(FormSubmission formSubmission) {
         List<SubFormData> sub_forms = new ArrayList<>();
@@ -454,8 +414,8 @@ public class EnketoFormUtils {
     }
 
     private void writeXML(Element node, XmlSerializer serializer, JSONObject fieldOverrides,
-                          JSONObject formDefinition, JSONObject entityJson, String parentId) throws JSONException, IOException {
-//        try {
+                          JSONObject formDefinition, JSONObject entityJson, String parentId) {
+        try {
             String nodeName = node.getNodeName();
             String entityId =
                     entityJson.has("id") ? entityJson.getString("id") : generateRandomUUIDString();
@@ -517,7 +477,8 @@ public class EnketoFormUtils {
                             if (shouldLoadId && childRecords.length() > 0) {
                                 for (int k = 0; k < childRecords.length(); k++) {
                                     JSONObject childEntityJson = childRecords.getJSONObject(k);
-//                                    JSONObject obj = getCombinedJsonObjectForObject(childEntityJson);
+                                    JSONObject obj = getCombinedJsonObjectForObject(
+                                            childEntityJson);
                                     writeXML(child, serializer, fieldOverrides, subFormDefinition,
                                             childEntityJson, entityId);
                                 }
@@ -550,33 +511,33 @@ public class EnketoFormUtils {
 
             serializer.endTag("", node.getNodeName());
 
-//        } catch (Exception e) {
-//            throw new RuntimeException(e);
-//        }
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
     }
 
-//    /**
-//     * Retrieve additional details for this record from the details Table.
-//     *
-//     * @param entityJson
-//     * @return
-//     */
-//    private JSONObject getCombinedJsonObjectForObject(JSONObject entityJson) {
-//        try {
-//            String baseEntityId = entityJson.getString("base_entity_id");
-//            Map<String, String> map = theAppContext.detailsRepository().
-//                    getAllDetailsForClient(baseEntityId);
-//
-//            for (String key : map.keySet()) {
-//                if (!entityJson.has(key)) {
-//                    entityJson.put(key, map.get(key));
-//                }
-//            }
-//        } catch (Exception e) {
-//            android.util.Log.e(TAG, e.toString(), e);
-//        }
-//        return entityJson;
-//    }
+    /**
+     * Retrieve additional details for this record from the details Table.
+     *
+     * @param entityJson
+     * @return
+     */
+    private JSONObject getCombinedJsonObjectForObject(JSONObject entityJson) {
+        try {
+            String baseEntityId = entityJson.getString("base_entity_id");
+            Map<String, String> map = theAppContext.detailsRepository().
+                    getAllDetailsForClient(baseEntityId);
+
+            for (String key : map.keySet()) {
+                if (!entityJson.has(key)) {
+                    entityJson.put(key, map.get(key));
+                }
+            }
+        } catch (Exception e) {
+            android.util.Log.e(TAG, e.toString(), e);
+        }
+        return entityJson;
+    }
 
     /**
      * Iterate through the provided array and retrieve a json object whose name attribute matches
@@ -654,21 +615,8 @@ public class EnketoFormUtils {
         return "";
     }
 
-//    /**
-//     * Currently not used but, the method should retrieve the path of a given node,
-//     * useful when confirming if the current node has been properly mapped to its bind_path
-//     **/
-//    private String getXPath(Node node) {
-//        Node parent = node.getParentNode();
-//        if (parent == null) {
-//            return "/" + node.getNodeName();
-//        }
-//
-//        return getXPath(parent) + "/";
-//    }
-
-    private List<String> getSubFormNames(JSONObject formDefinition) throws JSONException {
-        List<String> subFormNames = new ArrayList<>();
+    private List<String> getSubFormNames(JSONObject formDefinition) throws Exception {
+        List<String> subFormNames = new ArrayList<String>();
         if (formDefinition.has("form") && formDefinition.getJSONObject("form").has("sub_forms")) {
             JSONArray subForms = formDefinition.getJSONObject("form").getJSONArray("sub_forms");
             for (int i = 0; i < subForms.length(); i++) {
@@ -684,7 +632,7 @@ public class EnketoFormUtils {
     }
 
     private JSONObject retriveSubformDefinitionForBindPath(JSONArray subForms, String fieldName)
-            throws JSONException {
+            throws Exception {
         for (int i = 0; i < subForms.length(); i++) {
             JSONObject subForm = subForms.getJSONObject(i);
             String subFormNameStr = subForm.getString("default_bind_path");
@@ -723,9 +671,8 @@ public class EnketoFormUtils {
                 serializer.attribute("", attrName, attrValue);
             }
 
-        } catch (IOException e) {
-            e.printStackTrace();
-//            throw new RuntimeException(e);
+        } catch (Exception e) {
+            throw new RuntimeException(e);
         }
     }
 
@@ -797,9 +744,11 @@ public class EnketoFormUtils {
                 item.put("value", value);
             }
 
-            // if the value is not set use the value in the overrides filed
-            if (shouldLoadValue && overrides.has(item.getString("name")) &&  !item.has("value")) {
+            if (shouldLoadValue && overrides.has(item.getString("name"))) {
+                // if the value is not set use the value in the overrides filed
+                if (!item.has("value")) {
                     item.put("value", overrides.getString(item.getString("name")));
+                }
             }
 
             // map the id field for child elements
@@ -1061,7 +1010,7 @@ public class EnketoFormUtils {
     }
 
     private String readFileFromAssetsFolder(String fileName) {
-        String fileContents;
+        String fileContents = null;
         try {
             InputStream is = mContext.getAssets().open(fileName);
             int size = is.available();
@@ -1080,32 +1029,8 @@ public class EnketoFormUtils {
         return fileContents;
     }
 
-//    public JSONObject getFormJson(String formIdentity) {
-//        if (mContext != null) {
-//            try {
-//                InputStream inputStream = mContext.getApplicationContext().getAssets()
-//                        .open("json" + ".form/" + formIdentity + ".json");
-//                BufferedReader reader = new BufferedReader(
-//                        new InputStreamReader(inputStream, "UTF-8"));
-//                String jsonString;
-//                StringBuilder stringBuilder = new StringBuilder();
-//
-//                while ((jsonString = reader.readLine()) != null) {
-//                    stringBuilder.append(jsonString);
-//                }
-//                inputStream.close();
-//
-//                return new JSONObject(stringBuilder.toString());
-//            } catch (IOException | JSONException e) {
-//                e.printStackTrace();
-//            }
-//        }
-//
-//        return null;
-//    }
-
-    private List<String> editClientFormNameList(){
-        List<String> formNames = new ArrayList<>();
+    private List<String> EditClientFormNameList(){
+        List<String> formNames = new ArrayList<String>();
         formNames.add("child_edit");
         return formNames;
     }
@@ -1122,7 +1047,7 @@ public class EnketoFormUtils {
         mCloudantDataHandler.updateDocument(client);
     }*/
     private Event tagSyncMetadata(Event event) {
-//        AllSharedPreferences sharedPreferences = GiziApplication.getInstance().getContext().userService().getAllSharedPreferences();
+        AllSharedPreferences sharedPreferences = GiziApplication.getInstance().getContext().userService().getAllSharedPreferences();
         String locations = org.smartregister.util.Utils.getPreference(mContext, LoginActivity.PREF_TEAM_LOCATIONS, "");
         event.setLocationId(locations);
 
@@ -1177,7 +1102,7 @@ public class EnketoFormUtils {
                        // client.addAttribute("anak", "anak");
                         saveClient(client);
                    }
-                    else if (event.getEventType().equals(editClientFormNameList())) {
+                    else if (event.getEventType().equals(EditClientFormNameList())) {
                         JSONObject json = eventClientRepository.getClientByBaseEntityId(event.getBaseEntityId());
                         Client client = gson.fromJson(json.toString(), Client.class);
                         client.addAttribute("edit", "edit");

@@ -210,7 +210,7 @@ public abstract class AsyncTask<Params, Progress, Result> {
     };
 
     private static final BlockingQueue<Runnable> sPoolWorkQueue =
-            new LinkedBlockingQueue<>(10);
+            new LinkedBlockingQueue<Runnable>(10);
 
     /**
      * An {@link Executor} that can be used to execute tasks in parallel.
@@ -226,9 +226,6 @@ public abstract class AsyncTask<Params, Progress, Result> {
      */
     public static final Executor SERIAL_EXECUTOR = Utils.hasHoneycomb() ? new SerialExecutor() :
             Executors.newSingleThreadExecutor(sThreadFactory);
-
-    public static final Executor DUAL_THREAD_EXECUTOR =
-            Executors.newFixedThreadPool(2, sThreadFactory);
 
     private static final int MESSAGE_POST_RESULT = 0x1;
     private static final int MESSAGE_POST_PROGRESS = 0x2;
@@ -246,8 +243,8 @@ public abstract class AsyncTask<Params, Progress, Result> {
 
     @TargetApi(11)
     private static class SerialExecutor implements Executor {
-        private final ArrayDeque<Runnable> mTasks = new ArrayDeque<>();
-        private Runnable mActive;
+        final ArrayDeque<Runnable> mTasks = new ArrayDeque<Runnable>();
+        Runnable mActive;
 
         public synchronized void execute(final Runnable r) {
             mTasks.offer(new Runnable() {
@@ -290,16 +287,6 @@ public abstract class AsyncTask<Params, Progress, Result> {
         FINISHED,
     }
 
-    /** @hide Used to force static handler to be created. */
-    public static void init() {
-        sHandler.getLooper();
-    }
-
-    /** @hide */
-    public static void setDefaultExecutor(Executor exec) {
-        sDefaultExecutor = exec;
-    }
-
     /**
      * Creates a new asynchronous task. This constructor must be invoked on the UI thread.
      */
@@ -321,11 +308,9 @@ public abstract class AsyncTask<Params, Progress, Result> {
                     postResultIfNotInvoked(get());
                 } catch (InterruptedException e) {
                     android.util.Log.w(LOG_TAG, e);
-                }
-                catch (ExecutionException e) {
-                    e.printStackTrace();
-//                    throw new RuntimeException("An error occured while executing doInBackground()",
-//                            e.getCause());
+                } catch (ExecutionException e) {
+                    throw new RuntimeException("An error occured while executing doInBackground()",
+                            e.getCause());
                 } catch (CancellationException e) {
                     postResultIfNotInvoked(null);
                 }
@@ -343,7 +328,7 @@ public abstract class AsyncTask<Params, Progress, Result> {
     private Result postResult(Result result) {
         @SuppressWarnings("unchecked")
         Message message = sHandler.obtainMessage(MESSAGE_POST_RESULT,
-                new AsyncTaskResult<>(this, result));
+                new AsyncTaskResult<Result>(this, result));
         message.sendToTarget();
         return result;
     }
@@ -382,7 +367,6 @@ public abstract class AsyncTask<Params, Progress, Result> {
      * @see #doInBackground
      */
     protected void onPreExecute() {
-        // do nothing
     }
 
     /**
@@ -399,7 +383,6 @@ public abstract class AsyncTask<Params, Progress, Result> {
      */
     @SuppressWarnings({"UnusedDeclaration"})
     protected void onPostExecute(Result result) {
-        // do nothing
     }
 
     /**
@@ -413,7 +396,6 @@ public abstract class AsyncTask<Params, Progress, Result> {
      */
     @SuppressWarnings({"UnusedDeclaration"})
     protected void onProgressUpdate(Progress... values) {
-        // do nothing
     }
 
     /**
@@ -448,7 +430,6 @@ public abstract class AsyncTask<Params, Progress, Result> {
      * @see #isCancelled()
      */
     protected void onCancelled() {
-        // do nothing
     }
 
     /**
@@ -610,8 +591,6 @@ public abstract class AsyncTask<Params, Progress, Result> {
                     throw new IllegalStateException("Cannot execute task:"
                             + " the task has already been executed "
                             + "(a task can be executed only once)");
-
-                default:
             }
         }
 
@@ -654,7 +633,7 @@ public abstract class AsyncTask<Params, Progress, Result> {
     protected final void publishProgress(Progress... values) {
         if (!isCancelled()) {
             sHandler.obtainMessage(MESSAGE_POST_PROGRESS,
-                    new AsyncTaskResult<>(this, values)).sendToTarget();
+                    new AsyncTaskResult<Progress>(this, values)).sendToTarget();
         }
     }
 
@@ -680,20 +659,18 @@ public abstract class AsyncTask<Params, Progress, Result> {
                 case MESSAGE_POST_PROGRESS:
                     result.mTask.onProgressUpdate(result.mData);
                     break;
-
-                default:
             }
         }
     }
 
     private static abstract class WorkerRunnable<Params, Result> implements Callable<Result> {
-        protected Params[] mParams;
+        Params[] mParams;
     }
 
     @SuppressWarnings({"RawUseOfParameterizedType"})
     private static class AsyncTaskResult<Data> {
-        private final AsyncTask mTask;
-        private final Data[] mData;
+        final AsyncTask mTask;
+        final Data[] mData;
 
         AsyncTaskResult(AsyncTask task, Data... data) {
             mTask = task;
