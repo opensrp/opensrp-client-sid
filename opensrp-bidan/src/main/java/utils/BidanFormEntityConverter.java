@@ -126,11 +126,10 @@ public class BidanFormEntityConverter {
     /**
      * Extract Event for given subform with given data mapped to specified Encounter Type.
      *
-     * @param fs
-     * @param
-     * @param eventType
-     * @param subformInstance
-     * @return
+     * @param fs FormSubmissionMap
+     * @param eventType String
+     * @param subformInstance SubformMap
+     * @return createEvent
      * @throws ParseException
      */
     private Event getEventForSubform(FormSubmissionMap fs, String eventType, SubformMap

@@ -14,7 +14,6 @@ import org.smartregister.Context;
 import org.smartregister.bidan.R;
 import org.smartregister.bidan.activity.BaseRegisterActivity;
 import org.smartregister.bidan.activity.DetailMotherActivity;
-import org.smartregister.bidan.activity.LoginActivity;
 import org.smartregister.bidan.options.AllKartuIbuServiceMode;
 import org.smartregister.bidan.options.MotherFilterOption;
 import org.smartregister.bidan.provider.KIClientsProvider;
@@ -156,7 +155,8 @@ public class KISmartRegisterFragment extends BaseSmartRegisterFragment {
         clientsView.setVisibility(VISIBLE);
         clientsProgressView.setVisibility(INVISIBLE);
         initializeQueries();
-        LoginActivity.setLanguage();
+
+//        LoginActivity.setLanguage();
     }
 
     @Override
@@ -168,7 +168,7 @@ public class KISmartRegisterFragment extends BaseSmartRegisterFragment {
         }
 
 //        try {
-            LoginActivity.setLanguage();
+//            LoginActivity.setLanguage();
 //        } catch (Exception ignored) {
 //
 //        }

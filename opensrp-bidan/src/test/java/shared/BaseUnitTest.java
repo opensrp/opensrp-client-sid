@@ -8,8 +8,6 @@ import org.robolectric.RobolectricTestRunner;
 import org.robolectric.annotation.Config;
 import org.smartregister.bidan.BuildConfig;
 
-import shared.customshadows.FontTextViewShadow;
-
 /**
  * Created by sid-tech on 2/23/18
  */

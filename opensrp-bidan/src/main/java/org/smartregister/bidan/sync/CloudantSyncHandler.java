@@ -227,7 +227,7 @@ public class CloudantSyncHandler {
         // Call the logic to break down CE into case models
         try {
             if (rc.documentsReplicated > 0) {
-                ClientProcessor.getInstance(mContext.getApplicationContext()).processClient();
+                BidanClientProcessor.getInstance(mContext.getApplicationContext()).processClient();
             }
         } catch (Exception e) {
             Log.e(LOG_TAG, e.toString(), e);

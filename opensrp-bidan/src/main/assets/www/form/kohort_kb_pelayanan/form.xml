@@ -11,7 +11,7 @@
         <span class="question-label active"
             data-itext-id="/tambah_kb_reviewed/generated_note_name_13:label" lang="Bahasa">Nama Ibu
             :
-            <span class="or-output" data-value=" /tambah_kb_reviewed/namalengkap "></span>
+            <span class="or-output" data-value=" /tambah_kb_reviewed/namalengkap"/>
         </span>
         <span class="question-label "
             data-itext-id="/tambah_kb_reviewed/generated_note_name_13:label" lang="en">-
@@ -23,7 +23,7 @@
     <label class="note non-select ">
         <span class="question-label active"
             data-itext-id="/tambah_kb_reviewed/generated_note_name_13:label" lang="Bahasa">Desa :
-            <span class="or-output" data-value=" /tambah_kb_reviewed/Village "></span>
+            <span class="or-output" data-value=" /tambah_kb_reviewed/Village"/>
         </span>
         <span class="question-label "
             data-itext-id="/tambah_kb_reviewed/generated_note_name_13:label" lang="en">-
@@ -34,7 +34,7 @@
     <label class="note non-select ">
         <span class="question-label active"
             data-itext-id="/tambah_kb_reviewed/generated_note_name_14:label" lang="Bahasa">Dusun :
-            <span class="or-output" data-value=" /tambah_kb_reviewed/Sub-village "></span>
+            <span class="or-output" data-value=" /tambah_kb_reviewed/Sub-district"/>
         </span>
         <span class="question-label "
             data-itext-id="/tambah_kb_reviewed/generated_note_name_14:label" lang="en">-
@@ -45,7 +45,7 @@
     <label class="question non-select or-appearance-yes ">
         <span class="or-constraint-msg active"
             data-itext-id="/tambah_kb_reviewed/tanggal_periksa:jr:constraintMsg" lang="Bahasa">.&lt;=
-            <span class="or-output" data-value=" /tambah_kb_reviewed/today "></span>
+            <span class="or-output" data-value=" /tambah_kb_reviewed/today"/>
         </span>
         <span class="or-constraint-msg "
             data-itext-id="/tambah_kb_reviewed/tanggal_periksa:jr:constraintMsg" lang="en">-

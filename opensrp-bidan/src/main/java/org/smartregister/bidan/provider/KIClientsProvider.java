@@ -13,7 +13,6 @@ import android.widget.TextView;
 
 import org.apache.commons.lang3.StringUtils;
 import org.smartregister.bidan.R;
-import org.smartregister.bidan.activity.LoginActivity;
 import org.smartregister.bidan.utils.AllConstantsINA;
 import org.smartregister.bidan.utils.Support;
 import org.smartregister.commonregistry.AllCommonsRepository;
@@ -198,7 +197,7 @@ public class KIClientsProvider extends BaseClientsProvider {
 
     @Override
     public void getView(Cursor cursor, SmartRegisterClient smartRegisterClient, View view) {
-        LoginActivity.setLanguage();
+//        LoginActivity.setLanguage();
         getView(smartRegisterClient, view);
     }
 

@@ -155,12 +155,12 @@ public class ANCClientsProvider extends BaseClientsProvider {
         ((TextView) convertView.findViewById(R.id.tv_husband_name)).setText(pc.getColumnmaps().get("namaSuami") != null ? pc.getColumnmaps().get("namaSuami") : "");
         ((TextView) convertView.findViewById(R.id.tv_village_name)).setText(pc.getDetails().get("address1") != null ? pc.getDetails().get("address1") : "");
         ((TextView) convertView.findViewById(R.id.tv_wife_age)).setText(pc.getDetails().get("umur") != null ? pc.getDetails().get("umur") : "");
-        ((TextView) convertView.findViewById(R.id.pnc_id)).setText(pc.getDetails().get("noIbu") != null ? pc.getDetails().get("noIbu") : "");
+        ((TextView) convertView.findViewById(R.id.no_ibu)).setText(pc.getDetails().get("noIbu") != null ? pc.getDetails().get("noIbu") : "");
 
         profilelayout.setOnClickListener(onClickListener);
         profilelayout.setTag(smartRegisterClient);
 
-        ImageButton follow_up = (ImageButton) convertView.findViewById(R.id.btn_edit);
+        ImageButton follow_up = (ImageButton) convertView.findViewById(R.id.btn_anc_edit);
         follow_up.setOnClickListener(onClickListener);
         follow_up.setTag(smartRegisterClient);
         follow_up.setImageResource(R.drawable.ic_pencil);
@@ -179,11 +179,11 @@ public class ANCClientsProvider extends BaseClientsProvider {
 //        no_ibu.setText(pc.getDetails().get("noIbu") != null ? pc.getDetails().get("noIbu") : "");
 
 //        ((TextView) convertView.findViewById(R.id.unique_id)).setText(pc.getDetails().get(AllConstantsINA.CommonFormFields.UNIQUE_ID) != null ? pc.getDetails().get(AllConstantsINA.CommonFormFields.UNIQUE_ID) : "");
-        ((TextView) convertView.findViewById(R.id.tv_gravida)).setText(pc.getDetails().get("gravida") != null ? pc.getDetails().get("gravida") : "-");
-        ((TextView) convertView.findViewById(R.id.tv_parity)).setText(pc.getDetails().get("partus") != null ? pc.getDetails().get("partus") : "-");
-        ((TextView) convertView.findViewById(R.id.tv_number_of_abortus)).setText(pc.getDetails().get("abortus") != null ? pc.getDetails().get("abortus") : "-");
-        ((TextView) convertView.findViewById(R.id.tv_number_of_alive)).setText(pc.getDetails().get("hidup") != null ? pc.getDetails().get("hidup") : "-");
-        ((TextView) convertView.findViewById(R.id.tv_b_edd)).setText(pc.getDetails().get("htp") != null ? pc.getDetails().get("htp") : "");
+//        ((TextView) convertView.findViewById(R.id.tv_gravida)).setText(pc.getDetails().get("gravida") != null ? pc.getDetails().get("gravida") : "-");
+//        ((TextView) convertView.findViewById(R.id.tv_parity)).setText(pc.getDetails().get("partus") != null ? pc.getDetails().get("partus") : "-");
+//        ((TextView) convertView.findViewById(R.id.tv_number_of_abortus)).setText(pc.getDetails().get("abortus") != null ? pc.getDetails().get("abortus") : "-");
+//        ((TextView) convertView.findViewById(R.id.tv_number_of_alive)).setText(pc.getDetails().get("hidup") != null ? pc.getDetails().get("hidup") : "-");
+//        ((TextView) convertView.findViewById(R.id.tv_b_edd)).setText(pc.getDetails().get("htp") != null ? pc.getDetails().get("htp") : "");
         // ===>
 
         profilelayout.setOnClickListener(onClickListener);
@@ -247,7 +247,7 @@ public class ANCClientsProvider extends BaseClientsProvider {
         ((TextView) convertView.findViewById(R.id.txt_usia_klinis)).setText(pc.getDetails().get("usiaKlinis") != null ? mContext.getString(R.string.usia) + pc.getDetails().get("usiaKlinis") + mContext.getString(R.string.str_weeks) : "-");
         ((TextView) convertView.findViewById(R.id.txt_htpt)).setText(pc.getDetails().get("htp") != null ? pc.getDetails().get("htp") : "-");
 
-        TextView edd_due = (TextView) convertView.findViewById(R.id.tv_b_edd);
+        TextView edd_due = (TextView) convertView.findViewById(R.id.txt_edd_due);
         String edd = pc.getDetails().get("htp");
         if (StringUtils.isNotBlank(pc.getDetails().get("htp"))) {
             String _dueEdd = "";
@@ -285,17 +285,17 @@ public class ANCClientsProvider extends BaseClientsProvider {
 
         ((TextView) convertView.findViewById(R.id.txt_tanggal_kunjungan_anc)).setText(String.format("%s%s", mContext.getString(R.string.last_visit_date), ancDate));
         ((TextView) convertView.findViewById(R.id.txt_anc_number)).setText(String.format("%s%s", mContext.getString(R.string.anc_ke), ancKe));
-        ((TextView) convertView.findViewById(R.id.txt_kunjunganKe)).setText(String.format("%s%s", mContext.getString(R.string.visit_number), kunjunganKe));
+        ((TextView) convertView.findViewById(R.id.txt_kunjugan_ke)).setText(String.format("%s%s", mContext.getString(R.string.visit_number), kunjunganKe));
 
         // STATUS
-        RelativeLayout status_layout = (RelativeLayout) convertView.findViewById(R.id.status_layout);
+        RelativeLayout status_layout = (RelativeLayout) convertView.findViewById(R.id.anc_status_layout);
         TextView status_type = (TextView) convertView.findViewById(R.id.txt_status_type);
-        TextView status_date = (TextView) convertView.findViewById(R.id.txt_status_date);
+        TextView status_date = (TextView) convertView.findViewById(R.id.txt_status_date_anc);
         TextView alert_status = (TextView) convertView.findViewById(R.id.txt_alert_status);
 
+        status_layout.setBackgroundColor(mContext.getResources().getColor(org.smartregister.R.color.status_bar_text_almost_white));
         status_type.setText("");
         status_date.setText("");
-        status_layout.setBackgroundColor(mContext.getResources().getColor(org.smartregister.R.color.status_bar_text_almost_white));
         alert_status.setText("");
 
         if ("-".equals(ancKe) || "".equals(ancKe)) {

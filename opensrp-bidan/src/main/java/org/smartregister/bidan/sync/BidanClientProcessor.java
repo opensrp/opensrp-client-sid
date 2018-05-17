@@ -1,6 +1,7 @@
 package org.smartregister.bidan.sync;
 
 import android.content.Context;
+import android.util.Log;
 
 import org.json.JSONObject;
 import org.smartregister.sync.ClientProcessor;
@@ -9,15 +10,9 @@ import java.util.List;
 
 public class BidanClientProcessor extends ClientProcessor {
 
-    private static BidanClientProcessor instance;
     public static final String[] CLIENT_EVENTS = {"Registrasi Bidan", "Child Registration", "Identitas Ibu",
-            "Dokumentasi Persalinan", "Tambah Bayi", "Tambah KB"};
-
-    //    public static final String baseEntityIdJSONKey = "baseEntityId";
-//    protected static final String providerIdJSONKey = "providerId";
-//    protected static final String VALUES_KEY = "values";
-//    private static final String detailsUpdated = "detailsUpdated";
-//    private static final String[] openmrs_gen_ids = {"zeir_id"};
+            "Dokumentasi Persalinan"};//, "Tambah Bayi", "Tambah KB"};
+    private static BidanClientProcessor instance;
 
     public BidanClientProcessor(Context context) {
         super(context);
@@ -40,7 +35,8 @@ public class BidanClientProcessor extends ClientProcessor {
 
                 String eventType = event.has("eventType") ? event.getString("eventType") : null;
                 if (eventType == null) {
-                    continue;
+                    Log.e("TAG", "processClient: eventType NULL" );
+                    // continue;
                 } else {
                     JSONObject clientClassificationJson = new JSONObject(clientClassificationStr);
                     if (isNullOrEmptyJSONObject(clientClassificationJson)) {
@@ -54,5 +50,4 @@ public class BidanClientProcessor extends ClientProcessor {
             }
         }
     }
-
 }

@@ -27,7 +27,6 @@ public class SettingsActivity extends PreferenceActivity {
     }
 
     public static class MyPreferenceFragment extends PreferenceFragment {
-
         @Override
         public void onCreate(final Bundle savedInstanceState) {
             super.onCreate(savedInstanceState);

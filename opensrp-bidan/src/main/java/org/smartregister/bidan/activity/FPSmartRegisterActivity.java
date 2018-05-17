@@ -32,8 +32,9 @@ public class FPSmartRegisterActivity extends BaseRegisterActivity {
     protected List<String> buildFormNameList() {
 
         List<String> formNames = new ArrayList<>();
-        formNames.add(KOHORT_KB_REGISTER);
+//        formNames.add(KOHORT_KB_REGISTER);
         formNames.add(KOHORT_KB_UPDATE);
+        formNames.add(KOHORT_KB_CLOSE);
 
         return formNames;
     }

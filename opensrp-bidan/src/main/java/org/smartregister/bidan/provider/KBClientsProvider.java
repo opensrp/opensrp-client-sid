@@ -114,7 +114,6 @@ public class KBClientsProvider extends BaseClientsProvider {
 
     private void getView(SmartRegisterClient smartRegisterClient, View convertView) {
 //        try {
-//
 //            ButterKnife.bind(this, convertView);
 //
 //        } catch (Exception e) {
@@ -181,12 +180,7 @@ public class KBClientsProvider extends BaseClientsProvider {
         ((TextView) convertView.findViewById(R.id.tv_parity)).setText(pc.getDetails().get("partus") != null ? pc.getDetails().get("partus") : "-");
         ((TextView) convertView.findViewById(R.id.tv_number_of_abortus)).setText(pc.getDetails().get("abortus") != null ? pc.getDetails().get("abortus") : "-");
         ((TextView) convertView.findViewById(R.id.tv_number_of_alive)).setText(pc.getDetails().get("hidup") != null ? pc.getDetails().get("hidup") : "-");
-        ((TextView) convertView.findViewById(R.id.tv_b_edd)).setText(pc.getDetails().get("htp") != null ? pc.getDetails().get("htp") : "");
 
-//        gravida.setText(pc.getDetails().get("gravida") != null ? pc.getDetails().get("gravida") : "-");
-//        parity.setText(pc.getDetails().get("partus") != null ? pc.getDetails().get("partus") : "-");
-//        number_of_abortus.setText(pc.getDetails().get("abortus") != null ? pc.getDetails().get("abortus") : "-");
-//        number_of_alive.setText(pc.getDetails().get("hidup") != null ? pc.getDetails().get("hidup") : "-");
         ((TextView) convertView.findViewById(R.id.tv_kb_method)).setText(pc.getDetails().get("jenisKontrasepsi") != null ? pc.getDetails().get("jenisKontrasepsi") : "");
         ((TextView) convertView.findViewById(R.id.tv_kb_mulai)).setText(pc.getDetails().get("tanggalkunjungan") != null ? pc.getDetails().get("tanggalkunjungan") : "");
         ((TextView) convertView.findViewById(R.id.tv_risk_HB)).setText(pc.getDetails().get("alkihb") != null ? pc.getDetails().get("alkihb") : "-");
@@ -198,13 +192,13 @@ public class KBClientsProvider extends BaseClientsProvider {
         convertView.findViewById(R.id.iv_hrl_badge).setVisibility(INVISIBLE);
 
         LinearLayout follow_layout = (LinearLayout) convertView.findViewById(R.id.follow_layout);
-        TextView follow_due = (TextView) convertView.findViewById(R.id.tv_b_edd);
-        TextView follow_up_due = (TextView) convertView.findViewById(R.id.mother_status);
-        TextView follow_status = (TextView) convertView.findViewById(R.id.visit_status);
+        TextView follow_due = (TextView) convertView.findViewById(R.id.tv_follow_due);
+        TextView follow_up_due = (TextView) convertView.findViewById(R.id.tv_follow_up_due);
+        TextView follow_status = (TextView) convertView.findViewById(R.id.tv_follow_status);
 
+        follow_layout.setBackgroundColor(mContext.getResources().getColor(R.color.status_bar_text_almost_white));
         follow_due.setText("");
         follow_up_due.setText("");
-        follow_layout.setBackgroundColor(mContext.getResources().getColor(R.color.status_bar_text_almost_white));
         follow_status.setText("");
 
         String jenis = pc.getDetails().get("jenisKontrasepsi") != null ? pc.getDetails().get("jenisKontrasepsi") : "-";

@@ -1,7 +1,7 @@
 <form autocomplete="off" class="or clearfix" dir="ltr" id="Kartu_ibu" novalidate="novalidate">
     <!--This form was created by transforming a OpenRosa-flavored (X)Form using an XSL stylesheet created by Enketo LLC.-->
     <section class="form-logo"></section>
-    <h3 dir="auto" id="form-title">Edit Identitas Ibu</h3>
+    <h3 dir="auto" id="form-title">Identitas Ibu</h3>
     <select data-default-lang="Bahasa" id="form-languages">
         <option data-dir="ltr" value="Bahasa">Bahasa</option>
         <option data-dir="ltr" value="en">English</option>
@@ -9,7 +9,7 @@
     <label class="question note non-select ">
         <span class="question-label active" data-itext-id="/Kartu_ibu/generated_note_name_13:label"
             lang="Bahasa">Desa :
-            <span class="or-output" data-value=" /Kartu_ibu/Village "></span>
+            <span class="or-output" data-value=" /Kartu_ibu/Village"/>
         </span>
         <span class="question-label " data-itext-id="/Kartu_ibu/generated_note_name_13:label"
             lang="en">-
@@ -20,7 +20,7 @@
     <label class="question note non-select ">
         <span class="question-label active" data-itext-id="/Kartu_ibu/generated_note_name_14:label"
             lang="Bahasa">Dusun :
-            <span class="or-output" data-value=" /Kartu_ibu/Sub-village "></span>
+            <span class="or-output" data-value=" /Kartu_ibu/Sub-district"/>
         </span>
         <span class="question-label " data-itext-id="/Kartu_ibu/generated_note_name_14:label"
             lang="en">-
@@ -138,22 +138,22 @@
             required
         </span>
     </label>
-    <!--<label class="question non-select ">-->
-        <!--<span class="question-label active" data-itext-id="/Kartu_ibu/tanggal_periksa:label"-->
-            <!--lang="Bahasa">Tanggal Registrasi-->
-        <!--</span>-->
-        <!--<span class="question-label " data-itext-id="/Kartu_ibu/tanggal_periksa:label" lang="en">-->
-            <!--Date of Registration-->
-        <!--</span>-->
-        <!--<span class="required">*</span>-->
-        <!--<input name="/Kartu_ibu/tanggal_periksa" data-constraint=".&lt;= /Kartu_ibu/today "-->
-            <!--data-type-xml="date" required="required" type="date" />-->
-        <!--<span class="or-constraint-msg active" data-i18n="constraint.invalid" lang="">Value not-->
-            <!--allowed-->
-        <!--</span>-->
-        <!--<span class="or-required-msg active" data-i18n="constraint.required" lang="">This field is-->
-            <!--required-->
-        <!--</span>-->
+    <!--<label class="question non-select " type="hidden">-->
+    <!--<span class="question-label active" data-itext-id="/Kartu_ibu/tanggal_periksa:label"-->
+    <!--lang="Bahasa">Tanggal Registrasi-->
+    <!--</span>-->
+    <!--<span class="question-label " data-itext-id="/Kartu_ibu/tanggal_periksa:label" lang="en">-->
+    <!--Date of Registration-->
+    <!--</span>-->
+    <!--<span class="required">*</span>-->
+    <!--<input name="/Kartu_ibu/tanggal_periksa" data-constraint=".&lt;= /Kartu_ibu/today "-->
+    <!--data-type-xml="date" required="required" type="date" />-->
+    <!--<span class="or-constraint-msg active" data-i18n="constraint.invalid" lang="">Value not-->
+    <!--allowed-->
+    <!--</span>-->
+    <!--<span class="or-required-msg active" data-i18n="constraint.required" lang="">This field is-->
+    <!--required-->
+    <!--</span>-->
     <!--</label>-->
     <fieldset class="question simple-select ">
         <fieldset>
@@ -266,11 +266,11 @@
     <label class="question note non-select ">
         <span class="question-label active" data-itext-id="/Kartu_ibu/generated_note_name_32:label"
             lang="Bahasa">Unique ID:
-            <span class="or-output" data-value=" /Kartu_ibu/unique_id "></span>
+            <span class="or-output" data-value=" /Kartu_ibu/unique_id"/>
         </span>
         <span class="question-label " data-itext-id="/Kartu_ibu/generated_note_name_32:label"
             lang="en">Unique ID:
-            <span class="or-output" data-value=" /Kartu_ibu/unique_id "></span>
+            <span class="or-output" data-value=" /Kartu_ibu/unique_id"/>
         </span>
         <input name="/Kartu_ibu/generated_note_name_32" data-type-xml="string" readonly="readonly"
             type="text" />
@@ -295,7 +295,6 @@
         </span>
     </label>
     <label class="question non-select ">
-        <span class="required">*</span>
         <span class="question-label active" data-itext-id="/Kartu_ibu/no_ibu:label" lang="Bahasa">
             No. Ibu
         </span>
@@ -375,7 +374,7 @@
     <label class="question note non-select ">
         <span class="question-label active" data-itext-id="/Kartu_ibu/generated_note_name_40:label"
             lang="Bahasa">Umur:
-            <span class="or-output" data-value=" /Kartu_ibu/umur "></span>
+            <span class="or-output" data-value=" /Kartu_ibu/umur"/>
         </span>
         <span class="question-label " data-itext-id="/Kartu_ibu/generated_note_name_40:label"
             lang="en">Age

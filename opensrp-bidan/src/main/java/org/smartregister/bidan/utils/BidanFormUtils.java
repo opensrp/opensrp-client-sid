@@ -20,15 +20,13 @@ import org.smartregister.clientandeventmodel.Client;
 import org.smartregister.clientandeventmodel.Event;
 import org.smartregister.clientandeventmodel.FormAttributeParser;
 import org.smartregister.clientandeventmodel.FormData;
+import org.smartregister.clientandeventmodel.FormEntityConverter;
 import org.smartregister.clientandeventmodel.FormField;
 import org.smartregister.clientandeventmodel.FormInstance;
 import org.smartregister.clientandeventmodel.SubFormData;
 import org.smartregister.domain.SyncStatus;
 import org.smartregister.domain.form.FormSubmission;
 import org.smartregister.domain.form.SubForm;
-//import org.smartregister.gizi.activity.LoginActivity;
-//import org.smartregister.gizi.application.GiziApplication;
-//import org.smartregister.gizi.sync.GiziClientProcessor;
 import org.smartregister.repository.AllSharedPreferences;
 import org.smartregister.repository.BaseRepository;
 import org.smartregister.repository.EventClientRepository;
@@ -58,11 +56,7 @@ import java.util.UUID;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 
-import utils.BidanFormEntityConverter;
-
 import static org.smartregister.bidan.sync.BidanClientProcessor.CLIENT_EVENTS;
-
-//import static org.smartregister.gizi.sync.GiziClientProcessor.CLIENT_EVENTS;
 
 public class BidanFormUtils {
 
@@ -77,17 +71,19 @@ public class BidanFormUtils {
     private org.smartregister.Context theAppContext;
     private SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSSZ");
     private Format formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-    private BidanFormEntityConverter formEntityConverter;
     private EventClientRepository eventClientRepository;
+//    private BidanFormEntityConverter formEntityConverter;
+    private FormEntityConverter formEntityConverter;
 
     public BidanFormUtils(Context context) throws Exception {
         mContext = context;
         theAppContext = CoreLibrary.getInstance().context();
         FormAttributeParser formAttributeParser = new FormAttributeParser(context);
-        formEntityConverter = new BidanFormEntityConverter(formAttributeParser, mContext);
+//        formEntityConverter = new BidanFormEntityConverter(formAttributeParser, mContext);
+        formEntityConverter = new FormEntityConverter(formAttributeParser, mContext);
+        eventClientRepository = BidanApplication.getInstance().eventClientRepository();
         // Protect creation of static variable.
         //  mCloudantDataHandler = CloudantDataHandler.getInstance(context.getApplicationContext());
-        eventClientRepository = BidanApplication.getInstance().eventClientRepository();
     }
 
     public static BidanFormUtils getInstance(Context ctx) throws Exception {
@@ -157,8 +153,8 @@ public class BidanFormUtils {
         //FileUtilities fu = new FileUtilities();
         //fu.write("xmlform.txt", formData);
         //fu.write("xmlformsubmission.txt", formSubmission.toString());
-        System.out.println(entity_id);
-        System.out.println(formSubmission);
+//        System.out.println(entity_id);
+//        System.out.println(formSubmission);
 
         // use the form_definition.json to iterate through fields
         String formDefinitionJson = readFileFromAssetsFolder(
@@ -406,7 +402,7 @@ public class BidanFormUtils {
             String xml = writer.toString();
             // Add model and instance tags
             xml = xml.substring(56);
-            System.out.println(xml);
+//            System.out.println(xml);
             android.util.Log.d(TAG, "generateXMLInputForFormWithEntityId: "+xml);
 
             return xml;
@@ -523,8 +519,8 @@ public class BidanFormUtils {
     /**
      * Retrieve additional details for this record from the details Table.
      *
-     * @param entityJson
-     * @return
+     * @param entityJson JSONObject
+     * @return entityJson
      */
     private JSONObject getCombinedJsonObjectForObject(JSONObject entityJson) {
         try {
@@ -1125,6 +1121,7 @@ public class BidanFormUtils {
                 }
                 long lastSyncTimeStamp = allSharedPreferences.fetchLastUpdatedAtDate(0);
                 Date lastSyncDate = new Date(lastSyncTimeStamp);
+//                BidanOldClientProcessor.getInstance(context).processClient(eventClientRepository.getEvents(lastSyncDate, BaseRepository.TYPE_Unsynced));
                 BidanClientProcessor.getInstance(context).processClient(eventClientRepository.getEvents(lastSyncDate, BaseRepository.TYPE_Unsynced));
                 allSharedPreferences.saveLastUpdatedAtDate(lastSyncDate.getTime());
             } catch (Exception e) {
