@@ -457,6 +457,10 @@
     <string name="ANC1">ANC</string>
     <string name="ANC4">ANC 4</string>
     <string name="followUpDue">Follow up due</string>
+    <string name="yes_button_label">Yes</string>
 
+    <string name="url_separator">/</string>
+    <string name="clients_key">clients</string>
+    <string name="events_key">events</string>
 
 </resources>

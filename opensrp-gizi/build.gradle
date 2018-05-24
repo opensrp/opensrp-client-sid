@@ -83,7 +83,7 @@ android {
 }
 
 dependencies {
-    compile('org.smartregister:opensrp-client-core:1.1.1-SNAPSHOT@aar') {
+    compile('org.smartregister:opensrp-client-core:1.2.1-SNAPSHOT@aar') {
         transitive = true
         exclude group: 'com.github.bmelnychuk', module: 'atv'
         exclude group: 'com.google.guava', module: 'guava'

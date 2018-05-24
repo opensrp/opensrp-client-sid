@@ -10,7 +10,6 @@ import org.opensrp.api.util.LocationTree;
 import org.opensrp.api.util.TreeNode;
 import org.smartregister.Context;
 import org.smartregister.bidan.R;
-import org.smartregister.bidan.activity.ANCSmartRegisterActivity;
 import org.smartregister.bidan.activity.AnakSmartRegisterActivity;
 import org.smartregister.bidan.activity.DetailChildActivity;
 import org.smartregister.bidan.options.AnakOverviewServiceMode;
@@ -307,10 +306,10 @@ public class AnakSmartRegisterFragment extends BaseSmartRegisterFragment {
                     startActivity(intent);
                     getActivity().finish();
                     break;
-                case R.id.ib_btn_edit:
+                case R.id.ib_cm_edit:
 //                    FlurryFacade.logEvent("click_visit_button_on_kohort_anak_dashboard");
 //                    showFragmentDialog(new EditDialogOptionModel(), view.getTag());
-                    showFragmentDialog(((ANCSmartRegisterActivity) getActivity()).new EditDialogOptionModelNew(), view.getTag());
+                    showFragmentDialog(((AnakSmartRegisterActivity) getActivity()).new EditDialogOptionModelNew(), view.getTag());
                     break;
                 default:
                     Log.e(TAG, "onClick: Default options " );

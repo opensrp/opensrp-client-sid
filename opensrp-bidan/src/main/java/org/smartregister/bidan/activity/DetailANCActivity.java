@@ -375,7 +375,7 @@ public class DetailANCActivity extends Activity {
         ((TextView) findViewById(R.id.tv_b_stock)).setText(getStrValue("persediaanPerlengkapanPersalinan"));
 
 
-        findViewById(R.id.detail_today).setOnClickListener(new View.OnClickListener() {
+        findViewById(R.id.tv_detail_today).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 //FlurryFacade.logEvent("click_risk_detail");

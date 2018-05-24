@@ -1,7 +1,6 @@
 package org.smartregister.bidan.activity;
 
 import android.support.v4.app.Fragment;
-import android.util.Log;
 
 import org.smartregister.bidan.R;
 import org.smartregister.bidan.fragment.AnakSmartRegisterFragment;
@@ -30,8 +29,6 @@ public class AnakSmartRegisterActivity extends BaseRegisterActivity {
 
     @Override
     protected Fragment mBaseFragment() {
-
-        Log.e(TAG, "mBaseFragment: ");
         return new AnakSmartRegisterFragment();
     }
 
