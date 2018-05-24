@@ -213,7 +213,7 @@
         android:src="@color/smart_register_client_divider_color" />
 
     <ImageButton
-        android:id="@+id/ib_btn_edit"
+        android:id="@+id/ib_fp_edit"
         android:layout_width="@dimen/list_edit_icon_view_width"
         android:layout_height="fill_parent"
         android:layout_margin="5dp"

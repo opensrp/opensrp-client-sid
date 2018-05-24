@@ -81,7 +81,7 @@ public class KIClientsProvider extends BaseClientsProvider {
         profilelayout.setOnClickListener(onClickListener);
         profilelayout.setTag(smartRegisterClient);
 
-        ImageButton follow_up = (ImageButton) convertView.findViewById(R.id.ib_btn_edit);
+        ImageButton follow_up = (ImageButton) convertView.findViewById(R.id.ib_cm_edit);
         if (follow_up != null) {
             follow_up.setOnClickListener(onClickListener);
             follow_up.setTag(smartRegisterClient);

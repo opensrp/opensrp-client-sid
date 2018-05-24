@@ -9,7 +9,6 @@ import org.smartregister.domain.DownloadStatus;
 import org.smartregister.domain.FetchStatus;
 import org.smartregister.service.ActionService;
 import org.smartregister.service.AllFormVersionSyncService;
-import org.smartregister.sync.AdditionalSyncService;
 import org.smartregister.sync.AfterFetchListener;
 import org.smartregister.view.BackgroundAction;
 import org.smartregister.view.LockingBackgroundTask;
@@ -19,30 +18,20 @@ import static org.smartregister.domain.FetchStatus.fetched;
 import static org.smartregister.domain.FetchStatus.nothingFetched;
 import static org.smartregister.util.Log.logInfo;
 
-//import android.content.Context;
-
 public class UpdateActionsTask {
     private static final String TAG = UpdateActionsTask.class.getName();
     private final LockingBackgroundTask task;
-    private ActionService mActionService;
     private Context context;
     private FormSubmissionSyncService formSubmissionSyncService;
     private AllFormVersionSyncService allFormVersionSyncService;
-    private AdditionalSyncService mAdditionalSyncService;
 
     public UpdateActionsTask(Context context, ActionService actionService, FormSubmissionSyncService formSubmissionSyncService, ProgressIndicator progressIndicator,
                              AllFormVersionSyncService allFormVersionSyncService) {
-        this.mActionService = actionService;
         this.context = context;
         this.formSubmissionSyncService = formSubmissionSyncService;
         this.allFormVersionSyncService = allFormVersionSyncService;
-        this.mAdditionalSyncService = null;
         task = new LockingBackgroundTask(progressIndicator);
     }
-
-//    public void setAdditionalSyncService(AdditionalSyncService additionalSyncService) {
-//        this.additionalSyncService = additionalSyncService;
-//    }
 
     public void updateFromServer(final AfterFetchListener afterFetchListener) {
         if (org.smartregister.Context.getInstance().IsUserLoggedOut()) {
@@ -50,19 +39,18 @@ public class UpdateActionsTask {
             return;
         }
 
-        Log.i(TAG, "updateFromServer:actionservice "+mActionService);
-
         task.doActionInBackground(new BackgroundAction<FetchStatus>() {
             public FetchStatus actionToDoInBackgroundThread() {
 
-                Log.i(TAG, "updateFromServer:additional "+mAdditionalSyncService);
                 FetchStatus fetchStatusForForms = formSubmissionSyncService.sync();
+                Log.e(TAG, "updateFromServer: "+fetchStatusForForms.toString() );
 
                 if (org.smartregister.Context.getInstance().configuration().shouldSyncForm()) {
 
                     allFormVersionSyncService.verifyFormsInFolder();
                     FetchStatus fetchVersionStatus = allFormVersionSyncService.pullFormDefinitionFromServer();
                     DownloadStatus downloadStatus = allFormVersionSyncService.downloadAllPendingFormFromServer();
+                    Log.e("TAG","actionToDoInBackgroundThread: "+ downloadStatus );
 
                     if (downloadStatus == DownloadStatus.downloaded) {
                         allFormVersionSyncService.unzipAllDownloadedFormFile();
@@ -71,10 +59,12 @@ public class UpdateActionsTask {
                     if (fetchVersionStatus == fetched || downloadStatus == DownloadStatus.downloaded) {
                         return fetched;
                     }
+                } else {
+                    Log.e("TAG", "actionToDoInBackgroundThread: notsync " + fetchStatusForForms );
                 }
 
 
-                if (nothingFetched == fetched || fetchStatusForForms == fetched)
+                if (nothingFetched == fetched || fetchStatusForForms == fetched || nothingFetched == fetched)
                     return fetched;
 
                 return fetchStatusForForms;

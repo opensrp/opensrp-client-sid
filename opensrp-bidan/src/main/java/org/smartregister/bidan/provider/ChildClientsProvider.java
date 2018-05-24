@@ -90,8 +90,8 @@ public class ChildClientsProvider implements SmartRegisterCLientsProviderForCurs
         AllCommonsRepository iburep = org.smartregister.Context.getInstance().allCommonsRepositoryobjects("ec_ibu");
         final CommonPersonObject ibuparent = iburep.findByCaseID(childobject.getColumnmaps().get("relational_id"));
 
-        convertView.findViewById(R.id.ib_btn_edit).setTag(client);
-        convertView.findViewById(R.id.ib_btn_edit).setOnClickListener(onClickListener);
+        convertView.findViewById(R.id.ib_cm_edit).setTag(client);
+        convertView.findViewById(R.id.ib_cm_edit).setOnClickListener(onClickListener);
 
         convertView.findViewById(R.id.profile_info_layout).setTag(client);
         convertView.findViewById(R.id.profile_info_layout).setOnClickListener(onClickListener);
@@ -119,7 +119,7 @@ public class ChildClientsProvider implements SmartRegisterCLientsProviderForCurs
         //---------- Child Basic Information
         // Photo, Name, Mother, Father, Address
         viewHolder.profilepic = (ImageView) convertView.findViewById(R.id.iv_child_photo);
-        viewHolder.follow_up = (ImageButton) convertView.findViewById(R.id.ib_btn_edit);
+        viewHolder.follow_up = (ImageButton) convertView.findViewById(R.id.ib_cm_edit);
         viewHolder.profilepic.setImageResource(R.mipmap.child_boy);
 
         if (pc.getDetails().get("gender") != null) {

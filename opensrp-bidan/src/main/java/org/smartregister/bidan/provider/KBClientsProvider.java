@@ -150,7 +150,7 @@ public class KBClientsProvider extends BaseClientsProvider {
         profilelayout.setOnClickListener(onClickListener);
         profilelayout.setTag(smartRegisterClient);
 
-        ImageButton follow_up = (ImageButton) convertView.findViewById(R.id.ib_btn_edit);
+        ImageButton follow_up = (ImageButton) convertView.findViewById(R.id.ib_fp_edit);
         follow_up.setOnClickListener(onClickListener);
         follow_up.setTag(smartRegisterClient);
         follow_up.setImageResource(R.drawable.ic_pencil);

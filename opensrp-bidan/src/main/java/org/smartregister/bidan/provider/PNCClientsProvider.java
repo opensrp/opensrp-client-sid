@@ -7,6 +7,7 @@ import android.view.View;
 import android.widget.AbsListView;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import org.smartregister.Context;
@@ -151,11 +152,11 @@ public class PNCClientsProvider extends BaseClientsProvider {
         profilePic.setTag(R.id.entity_id, pc.getColumnmaps().get("_id"));//required when saving file to disk
         Support.setImagetoHolderFromUri((Activity) mContext, pc.getDetails().get("base_entity_id"), profilePic, R.mipmap.woman_placeholder);
 
-        ImageButton profilelayout = (ImageButton) convertView.findViewById(R.id.profile_info_layout);
+        LinearLayout profilelayout = (LinearLayout) convertView.findViewById(R.id.profile_info_layout);
         profilelayout.setOnClickListener(onClickListener);
         profilelayout.setTag(smartRegisterClient);
 
-        ImageButton follow_up = (ImageButton) convertView.findViewById(R.id.btn_edit);
+        ImageButton follow_up = (ImageButton) convertView.findViewById(R.id.ib_pnc_edit);
         follow_up.setOnClickListener(onClickListener);
         follow_up.setTag(smartRegisterClient);
         follow_up.setImageResource(R.drawable.ic_pencil);

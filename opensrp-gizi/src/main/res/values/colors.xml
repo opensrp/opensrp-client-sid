@@ -30,6 +30,7 @@
     <color name="hb_level_normal">#43ae23</color>
     <color name="hb_level_dangerous">#d13f3f</color>
     <color name="hb_level_high">#edca00</color>
+    <color name="action_bar_background">#2b475e</color>
 
     <!-- FaceR-->
     <!--<color name="yellow">#ff0</color>-->

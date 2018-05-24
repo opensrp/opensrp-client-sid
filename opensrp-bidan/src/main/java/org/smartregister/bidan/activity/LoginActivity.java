@@ -7,6 +7,7 @@ import android.content.Intent;
 import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
+import android.content.res.AssetManager;
 import android.content.res.Resources;
 import android.os.Bundle;
 import android.support.v4.content.res.ResourcesCompat;
@@ -16,6 +17,7 @@ import android.text.TextUtils;
 import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.KeyEvent;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -36,13 +38,16 @@ import org.smartregister.domain.LoginResponse;
 import org.smartregister.event.Listener;
 import org.smartregister.repository.AllSharedPreferences;
 import org.smartregister.sync.DrishtiSyncScheduler;
+import org.smartregister.util.Utils;
 import org.smartregister.view.BackgroundAction;
 import org.smartregister.view.LockingBackgroundTask;
 import org.smartregister.view.ProgressIndicator;
 
 import java.io.IOException;
+import java.io.InputStream;
 import java.text.SimpleDateFormat;
 import java.util.Locale;
+import java.util.Properties;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipFile;
 
@@ -105,8 +110,37 @@ public class LoginActivity extends AppCompatActivity {
         }
         setLanguage();
 
-//        debugApp();
+        debugApp();
+
     }
+
+    private void debugApp() {
+        String uname = "demo_ec_vaksin", pwd = "Satu2345";
+        try {
+            uname = getCredential("uname", getApplicationContext());
+            pwd =  getCredential("pwd", getApplicationContext());
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        LayoutInflater layoutInflater = getLayoutInflater();
+        View view = layoutInflater.inflate(R.layout.login, null);
+        if (context.userService().hasARegisteredUser()){
+            localLoginWith(uname, pwd);
+            //localLogin(view, uname, pwd);
+        } else {
+            remoteLogin(view, uname, pwd);
+        }
+    }
+
+    public String getCredential(String acc, android.content.Context context) throws IOException {
+        Properties prop = new Properties();
+        AssetManager assetManager = context.getAssets();
+        InputStream inputStream = assetManager.open("config.properties");
+        prop.load(inputStream);
+        return prop.getProperty(acc);
+    }
+
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -342,7 +376,10 @@ public class LoginActivity extends AppCompatActivity {
     private void remoteLoginWith(String userName, String password, String userInfo) {
         context.userService().remoteLogin(userName, password, userInfo);
         // LoginActivity.generator = new Generator(context, userName, password);
+
         String locationId = getUserDefaultLocationId(userInfo);
+        Utils.writePreference(BidanApplication.getInstance().getApplicationContext(), PREF_TEAM_LOCATIONS, locationId);
+
         setDefaultLocationId(userName, locationId);
         goToHome();
         DrishtiSyncScheduler.startOnlyIfConnectedToNetwork(getApplicationContext());

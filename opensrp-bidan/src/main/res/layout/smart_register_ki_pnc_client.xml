@@ -221,7 +221,7 @@
             style="@style/CustomFontTextViewStyle.ListView.Normal.NoPadding"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@id/txt_td_diastolik"
+            android:layout_below="@id/tv_td_diastolik"
             android:layout_toRightOf="@id/lbl_td_suhu" />
 
     </RelativeLayout>
@@ -232,7 +232,7 @@
         android:src="@color/smart_register_client_divider_color" />
 
     <ImageButton
-        android:id="@+id/ib_btn_edit"
+        android:id="@+id/ib_pnc_edit"
         android:layout_width="@dimen/list_edit_icon_view_width"
         android:layout_height="fill_parent"
         android:layout_margin="5dp"

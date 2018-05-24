@@ -39,18 +39,19 @@ import java.util.Map;
  * Created by onamacuser on 11/03/2016.
  */
 
-public class CloudantDataHandler {
+public class CloudantDataHandler extends org.smartregister.sync.CloudantDataHandler {
     private static final String TAG = CloudantDataHandler.class.getCanonicalName();
     private static final String baseEntityIdJSONKey = "baseEntityId";
     private static final String DATASTORE_MANGER_DIR = "data";
     private static final String DATASTORE_NAME = "opensrp_clients_events";
     private static CloudantDataHandler instance;
-    private final Context mContext;
+    private Context mContext;
     private final Datastore mDatastore;
     private final IndexManager mIndexManager;
     private final SQLiteDatabase mDatabase;
 
     public CloudantDataHandler(Context context) throws Exception {
+        super(context);
         this.mContext = context;
 
         // Set up our datastore within its own folder in the applications data directory.

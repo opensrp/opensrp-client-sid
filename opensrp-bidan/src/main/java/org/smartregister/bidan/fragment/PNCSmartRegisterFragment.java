@@ -24,7 +24,6 @@ import org.smartregister.cursoradapter.CursorCommonObjectFilterOption;
 import org.smartregister.cursoradapter.CursorCommonObjectSort;
 import org.smartregister.cursoradapter.SmartRegisterPaginatedCursorAdapter;
 import org.smartregister.cursoradapter.SmartRegisterQueryBuilder;
-import org.smartregister.provider.SmartRegisterClientsProvider;
 import org.smartregister.util.StringUtil;
 import org.smartregister.view.activity.SecuredNativeSmartRegisterActivity;
 import org.smartregister.view.dialog.AllClientsFilter;
@@ -43,22 +42,21 @@ import static android.view.View.VISIBLE;
 
 public class PNCSmartRegisterFragment extends BaseSmartRegisterFragment {
     private static final String TAG = PNCSmartRegisterFragment.class.getName();
-    //    WD
-    public static String criteria;
     private final ClientActionHandler clientActionHandler = new ClientActionHandler();
+//    public static String criteria;
 
-    public static String getCriteria() {
-        return criteria;
-    }
+//    public static String getCriteria() {
+//        return criteria;
+//    }
 
-    public void setCriteria(String criteria) {
-        PNCSmartRegisterFragment.criteria = criteria;
-    }
+//    public void setCriteria(String criteria) {
+//        PNCSmartRegisterFragment.criteria = criteria;
+//    }
 
-    @Override
-    protected void onCreation() {
-        //
-    }
+//    @Override
+//    protected void onCreation() {
+//        //
+//    }
 
     @Override
     protected SecuredNativeSmartRegisterActivity.DefaultOptionsProvider getDefaultOptionsProvider() {
@@ -138,10 +136,10 @@ public class PNCSmartRegisterFragment extends BaseSmartRegisterFragment {
         };
     }
 
-    @Override
-    protected SmartRegisterClientsProvider clientsProvider() {
-        return null;
-    }
+//    @Override
+//    protected SmartRegisterClientsProvider clientsProvider() {
+//        return null;
+//    }
 
 
     @Override
@@ -156,7 +154,7 @@ public class PNCSmartRegisterFragment extends BaseSmartRegisterFragment {
         clientsView.setVisibility(VISIBLE);
         clientsProgressView.setVisibility(INVISIBLE);
 //        list.setBackgroundColor(Color.RED);
-        initializeQueries(getCriteria());
+//        initializeQueries(getCriteria());
     }
 
     private String filterStringForAll() {
@@ -167,9 +165,9 @@ public class PNCSmartRegisterFragment extends BaseSmartRegisterFragment {
     public void initializeQueries(String s) {
         Log.d(TAG, "initializeQueries: key " + s);
         try {
-            PNCClientsProvider kiscp = new PNCClientsProvider(getActivity(), clientActionHandler, context().alertService());
+//            PNCClientsProvider kiscp = new PNCClientsProvider(getActivity(), clientActionHandler, context().alertService());
             String tableEcPnc = "ec_pnc";
-            clientAdapter = new SmartRegisterPaginatedCursorAdapter(getActivity(), null, kiscp, new CommonRepository(tableEcPnc, new String[]{"ec_kartu_ibu.namalengkap", "ec_kartu_ibu.namaSuami"}));
+            clientAdapter = new SmartRegisterPaginatedCursorAdapter(getActivity(), null, new PNCClientsProvider(getActivity(), clientActionHandler, context().alertService()), new CommonRepository(tableEcPnc, new String[]{"ec_kartu_ibu.namalengkap", "ec_kartu_ibu.namaSuami"}));
             clientsView.setAdapter(clientAdapter);
 
             setTablename(tableEcPnc);
@@ -260,7 +258,7 @@ public class PNCSmartRegisterFragment extends BaseSmartRegisterFragment {
                     startActivity(intent);
                     getActivity().finish();
                     break;
-                case R.id.ib_btn_edit:
+                case R.id.ib_pnc_edit:
 //                    //FlurryFacade.logEvent("click_visit_button_on_kohort_pnc_dashboard");
 //                    showFragmentDialog(new EditDialogOptionModel(), view.getTag());
                     showFragmentDialog(((PNCSmartRegisterActivity) getActivity()).new EditDialogOptionModelNew(), view.getTag());

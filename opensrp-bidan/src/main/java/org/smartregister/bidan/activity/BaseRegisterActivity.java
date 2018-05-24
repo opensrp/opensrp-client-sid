@@ -151,7 +151,7 @@ public class BaseRegisterActivity extends SecuredNativeSmartRegisterActivity imp
 
     @Override
     protected void onInitialization() {
-        android.util.Log.e(TAG, "onInitialization: ");
+        // do nothing
     }
 
     public void startRegistration() {

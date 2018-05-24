@@ -5,13 +5,14 @@ package org.smartregister.bidan.service;
  */
 
 import android.content.Context;
+import android.util.Log;
 
-import org.smartregister.bidan.sync.CloudantSyncHandler;
 import org.smartregister.domain.FetchStatus;
 
-import java.util.concurrent.CountDownLatch;
+import utils.ServiceTools;
 
 public class FormSubmissionSyncService {
+    private static final String TAG = FormSubmissionSyncService.class.getName();
     private Context context;
 
     public FormSubmissionSyncService(Context context) {
@@ -20,17 +21,15 @@ public class FormSubmissionSyncService {
 
     public FetchStatus sync() {
         try {
-            CloudantSyncHandler mCloudantSyncHandler = CloudantSyncHandler.getInstance(context.getApplicationContext());
-            CountDownLatch mCountDownLatch = new CountDownLatch(2);
-            mCloudantSyncHandler.setCountDownLatch(mCountDownLatch);
-            mCloudantSyncHandler.startPullReplication();
-            mCloudantSyncHandler.startPushReplication();
+            ServiceTools.startService(context, SyncService.class);
 
-            mCountDownLatch.await();
-
-//            Intent intent = new Intent(DrishtiApplication.getInstance().getApplicationContext(),
-//                    ImageUploadSyncService.class);
-//            DrishtiApplication.getInstance().getApplicationContext().startService(intent);
+//            CloudantSyncHandler mCloudantSyncHandler = CloudantSyncHandler.getInstance(context.getApplicationContext());
+//            CountDownLatch mCountDownLatch = new CountDownLatch(2);
+//            mCloudantSyncHandler.setCountDownLatch(mCountDownLatch);
+//            mCloudantSyncHandler.startPullReplication();
+//            mCloudantSyncHandler.startPushReplication();
+//            mCountDownLatch.await();
+            Log.e(TAG, "sync: " );
 
             return FetchStatus.fetched;
         } catch (Exception e) {
