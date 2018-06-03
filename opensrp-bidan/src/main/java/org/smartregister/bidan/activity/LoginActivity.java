@@ -84,9 +84,6 @@ import static org.smartregister.util.Log.logInfo;
 import static org.smartregister.util.Log.logVerbose;
 import static util.BidanConstants.VIEW_CONFIGURATION_PREFIX;
 
-/**
- * Created on 09/10/2017 by SGithengi
- */
 public class LoginActivity extends AppCompatActivity {
 
     public static final String PREF_TEAM_LOCATIONS = "PREF_TEAM_LOCATIONS";

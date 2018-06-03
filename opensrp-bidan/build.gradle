@@ -40,7 +40,8 @@ android {
         buildConfigField "boolean", "TIME_CHECK", "false"
         buildConfigField "String", "SYNC_TYPE", '"teamId"'
         buildConfigField "long", "BUILD_TIMESTAMP", System.currentTimeMillis() + "L"
-        resValue "string", 'opensrp_url', '"https://tbreach-stage.smartregister.org/opensrp/"'
+//        resValue "string", 'opensrp_url', '"https://tbreach-stage.smartregister.org/opensrp/"'
+        resValue "string", 'opensrp_url', '"http://192.168.1.253:9090/opensrp/"'
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
 
         javaCompileOptions {
@@ -127,7 +128,7 @@ dependencies {
     implementation 'io.reactivex.rxjava2:rxjava:2.1.5'
     implementation 'com.github.lecho:hellocharts-android:v1.5.8'
 
-    annotationProcessor 'com.jakewharton:butterknife:7.0.0'
+    annotationProcessor 'com.jakewharton:butterknife:8.8.1'
 
     androidTestImplementation 'junit:junit:4.12'
 

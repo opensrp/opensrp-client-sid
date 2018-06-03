@@ -58,7 +58,8 @@ script:
   #Run jacocoTestReport -> Runs all unit tests & instrumentation tests
   - travis_wait ./gradlew clean assemble test
 
-after_success: ./gradlew jacocoRootReport coveralls --stacktrace
+after_success: ./gradlew jacocoRootReport coveralls
+
 after_failure:
  - pandoc build/reports/tests/index.html -t plain
 
