@@ -8,8 +8,8 @@ import android.preference.PreferenceActivity;
 import android.preference.PreferenceFragment;
 import android.preference.PreferenceManager;
 
-import org.smartregister.gizi.R;
 import org.smartregister.repository.AllSharedPreferences;
+import org.smartregister.gizi.R;
 
 import java.net.MalformedURLException;
 import java.net.URL;
@@ -67,6 +67,7 @@ public class SettingsActivity extends PreferenceActivity {
 
                 logInfo("Saved URL: " + allSharedPreferences.fetchHost(""));
                 logInfo("Port: " + allSharedPreferences.fetchPort(0));
+                org.smartregister.gizi.application.GiziApplication.getInstance().startPullConfigurableViewsIntentService(getActivity());
             } catch (MalformedURLException e) {
                 logError("Malformed Url: " + baseUrl);
             }

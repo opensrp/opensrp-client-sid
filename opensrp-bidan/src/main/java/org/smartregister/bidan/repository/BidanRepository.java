@@ -5,36 +5,37 @@ import android.util.Log;
 
 import net.sqlcipher.database.SQLiteDatabase;
 
+import org.smartregister.AllConstants;
 import org.smartregister.bidan.application.BidanApplication;
-import org.smartregister.bidan.utils.BidanConstants;
+import org.smartregister.configurableviews.repository.ConfigurableViewsRepository;
 import org.smartregister.repository.EventClientRepository;
 import org.smartregister.repository.Repository;
 
 /**
- * Created by sid-tech on 11/22/17.
+ * Created by keyman on 23/08/2017.
  */
-
 public class BidanRepository extends Repository {
 
     private static final String TAG = BidanRepository.class.getCanonicalName();
-    private final Context mContext;
-    private SQLiteDatabase readableDatabase;
-    private SQLiteDatabase writableDatabase;
+    protected SQLiteDatabase readableDatabase;
+    protected SQLiteDatabase writableDatabase;
 
-    public BidanRepository(Context context, org.smartregister.Context opensrpContext) {
-        super(context, BidanConstants.DATABASE_NAME, BidanConstants.DATABASE_VERSION, opensrpContext.session(), BidanApplication.createCommonFtsObject(), opensrpContext.sharedRepositoriesArray());
-        this.mContext = context;
+    public BidanRepository(Context context, org.smartregister.Context openSRPContext) {
+        super(context, AllConstants.DATABASE_NAME, AllConstants.DATABASE_VERSION, openSRPContext.session(), BidanApplication.createCommonFtsObject(), openSRPContext.sharedRepositoriesArray());
     }
 
     @Override
     public void onCreate(SQLiteDatabase database) {
         super.onCreate(database);
-        Log.e(TAG, "onCreate: "+ mContext);
+        ConfigurableViewsRepository.createTable(database);
         EventClientRepository.createTable(database, EventClientRepository.Table.client, EventClientRepository.client_column.values());
+        EventClientRepository.createTable(database, EventClientRepository.Table.address, EventClientRepository.address_column.values());
         EventClientRepository.createTable(database, EventClientRepository.Table.event, EventClientRepository.event_column.values());
-//        EventClientRepository.createTable(database, EventClientRepository.Table.address, EventClientRepository.address_column.values());
-//        EventClientRepository.createTable(database, EventClientRepository.Table.obs, EventClientRepository.obs_column.values());
-        onUpgrade(database, 1, BidanConstants.DATABASE_VERSION);
+        EventClientRepository.createTable(database, EventClientRepository.Table.obs, EventClientRepository.obs_column.values());
+        ResultsRepository.createTable(database);
+        ResultDetailsRepository.createTable(database);
+        BMIRepository.createTable(database);
+        //onUpgrade(database, 1, 2);
 
     }
 
@@ -44,8 +45,18 @@ public class BidanRepository extends Repository {
                 "Upgrading database from version " + oldVersion + " to "
                         + newVersion + ", which will destroy all old data");
 
+        int upgradeTo = oldVersion + 1;
+        while (upgradeTo <= newVersion) {
+            switch (upgradeTo) {
+                case 2:
+                    // upgradeToVersion2(db);
+                    break;
+                default:
+                    break;
+            }
+            upgradeTo++;
+        }
     }
-
 
     @Override
     public SQLiteDatabase getReadableDatabase() {
@@ -97,103 +108,4 @@ public class BidanRepository extends Repository {
         super.close();
     }
 
-//    /**
-//     * Version 2 added some columns to the ec_child table
-//     *
-//     * @param database
-//     */
-//    private void upgradeToVersion2(SQLiteDatabase database) {
-//        try {
-//            // Run insert query
-//            ArrayList<String> newlyAddedFields = new ArrayList<>();
-//            newlyAddedFields.add("BCG_2");
-//            newlyAddedFields.add("inactive");
-//            newlyAddedFields.add("lost_to_follow_up");
-//
-//            addFieldsToFTSTable(database, BidanConstants.CHILD_TABLE_NAME, newlyAddedFields);
-//        } catch (Exception e) {
-//            Log.e(TAG, "upgradeToVersion2 " + Log.getStackTraceString(e));
-//        }
-//    }
-
-
-//    private void addFieldsToFTSTable(SQLiteDatabase database, String originalTableName, List<String> newlyAddedFields) {
-//
-//        // Create the new ec_child table
-//
-//        String newTableNameSuffix = "_v2";
-//
-//        Set<String> searchColumns = new LinkedHashSet<>();
-//        searchColumns.add(CommonFtsObject.idColumn);
-//        searchColumns.add(CommonFtsObject.relationalIdColumn);
-//        searchColumns.add(CommonFtsObject.phraseColumn);
-//        searchColumns.add(CommonFtsObject.isClosedColumn);
-//
-//        String[] mainConditions = this.commonFtsObject.getMainConditions(originalTableName);
-//        if (mainConditions != null)
-//            for (String mainCondition : mainConditions) {
-//                if (!mainCondition.equals(CommonFtsObject.isClosedColumnName))
-//                    searchColumns.add(mainCondition);
-//            }
-//
-//        String[] sortFields = this.commonFtsObject.getSortFields(originalTableName);
-//        if (sortFields != null) {
-//            for (String sortValue : sortFields) {
-//                if (sortValue.startsWith("alerts.")) {
-//                    sortValue = sortValue.split("\\.")[1];
-//                }
-//                searchColumns.add(sortValue);
-//            }
-//        }
-//
-//        String joinedSearchColumns = StringUtils.join(searchColumns, ",");
-//
-//        String searchSql = "create virtual table "
-//                + CommonFtsObject.searchTableName(originalTableName) + newTableNameSuffix
-//                + " using fts4 (" + joinedSearchColumns + ");";
-//        Log.d(TAG, "Create query is\n---------------------------\n" + searchSql);
-//
-//        database.execSQL(searchSql);
-//
-//        ArrayList<String> oldFields = new ArrayList<>();
-//
-//        for (String curColumn : searchColumns) {
-//            curColumn = curColumn.trim();
-//            if (curColumn.contains(" ")) {
-//                String[] curColumnParts = curColumn.split(" ");
-//                curColumn = curColumnParts[0];
-//            }
-//
-//            if (!newlyAddedFields.contains(curColumn)) {
-//                oldFields.add(curColumn);
-//            } else {
-//                Log.d(TAG, "Skipping field " + curColumn + " from the select query");
-//            }
-//        }
-//
-//        String insertQuery = "insert into "
-//                + CommonFtsObject.searchTableName(originalTableName) + newTableNameSuffix
-//                + " (" + StringUtils.join(oldFields, ", ") + ")"
-//                + " select " + StringUtils.join(oldFields, ", ") + " from "
-//                + CommonFtsObject.searchTableName(originalTableName);
-//
-//        Log.d(TAG, "Insert query is\n---------------------------\n" + insertQuery);
-//        database.execSQL(insertQuery);
-//
-//        // Run the drop query
-//        String dropQuery = "drop table " + CommonFtsObject.searchTableName(originalTableName);
-//        Log.d(TAG, "Drop query is\n---------------------------\n" + dropQuery);
-//        database.execSQL(dropQuery);
-//
-//        // Run rename query
-//        String renameQuery = "alter table "
-//                + CommonFtsObject.searchTableName(originalTableName) + newTableNameSuffix
-//                + " rename to " + CommonFtsObject.searchTableName(originalTableName);
-//        Log.d(TAG, "Rename query is\n---------------------------\n" + renameQuery);
-//        database.execSQL(renameQuery);
-//
-//    }
-
-
 }
-

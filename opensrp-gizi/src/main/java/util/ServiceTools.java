@@ -4,8 +4,6 @@ import android.app.ActivityManager;
 import android.content.Context;
 import android.content.Intent;
 
-import org.smartregister.gizi.application.GiziApplication;
-
 import java.util.List;
 
 /**
@@ -15,7 +13,7 @@ import java.util.List;
 public class ServiceTools {
 
     private static boolean isServiceRunning(Class<?> serviceClass) {
-        final ActivityManager activityManager = (ActivityManager) GiziApplication.getInstance().getSystemService(Context.ACTIVITY_SERVICE);
+        final ActivityManager activityManager = (ActivityManager) org.smartregister.gizi.application.GiziApplication.getInstance().getSystemService(Context.ACTIVITY_SERVICE);
         final List<ActivityManager.RunningServiceInfo> services = activityManager.getRunningServices(Integer.MAX_VALUE);
 
         for (ActivityManager.RunningServiceInfo service : services) {
@@ -33,7 +31,7 @@ public class ServiceTools {
 
         if (!isServiceRunning(serviceClass)) {
             Intent intent = new Intent(context, serviceClass);
-            GiziApplication.getInstance().startService(intent);
+            org.smartregister.gizi.application.GiziApplication.getInstance().startService(intent);
         }
 
     }

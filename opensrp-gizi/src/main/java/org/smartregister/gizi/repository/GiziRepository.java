@@ -5,31 +5,36 @@ import android.util.Log;
 
 import net.sqlcipher.database.SQLiteDatabase;
 
-import org.smartregister.gizi.application.GiziApplication;
+import org.smartregister.AllConstants;
+import org.smartregister.configurableviews.repository.ConfigurableViewsRepository;
 import org.smartregister.repository.EventClientRepository;
 import org.smartregister.repository.Repository;
 
-import util.GiziConstants;
-
+/**
+ * Created by keyman on 23/08/2017.
+ */
 public class GiziRepository extends Repository {
 
     private static final String TAG = GiziRepository.class.getCanonicalName();
-    private SQLiteDatabase readableDatabase;
-    private SQLiteDatabase writableDatabase;
+    protected SQLiteDatabase readableDatabase;
+    protected SQLiteDatabase writableDatabase;
 
-    public GiziRepository(Context context, org.smartregister.Context opensrpContext) {
-        super(context, GiziConstants.DATABASE_NAME, GiziConstants.DATABASE_VERSION, opensrpContext.session(), GiziApplication.createCommonFtsObject(), opensrpContext.sharedRepositoriesArray());
+    public GiziRepository(Context context, org.smartregister.Context openSRPContext) {
+        super(context, AllConstants.DATABASE_NAME, AllConstants.DATABASE_VERSION, openSRPContext.session(), org.smartregister.gizi.application.GiziApplication.createCommonFtsObject(), openSRPContext.sharedRepositoriesArray());
     }
 
     @Override
     public void onCreate(SQLiteDatabase database) {
         super.onCreate(database);
+        ConfigurableViewsRepository.createTable(database);
         EventClientRepository.createTable(database, EventClientRepository.Table.client, EventClientRepository.client_column.values());
         EventClientRepository.createTable(database, EventClientRepository.Table.address, EventClientRepository.address_column.values());
         EventClientRepository.createTable(database, EventClientRepository.Table.event, EventClientRepository.event_column.values());
         EventClientRepository.createTable(database, EventClientRepository.Table.obs, EventClientRepository.obs_column.values());
-
-        onUpgrade(database, 1, GiziConstants.DATABASE_VERSION);
+        ResultsRepository.createTable(database);
+        ResultDetailsRepository.createTable(database);
+        BMIRepository.createTable(database);
+        //onUpgrade(database, 1, 2);
 
     }
 
@@ -39,18 +44,27 @@ public class GiziRepository extends Repository {
                 "Upgrading database from version " + oldVersion + " to "
                         + newVersion + ", which will destroy all old data");
 
-
+        int upgradeTo = oldVersion + 1;
+        while (upgradeTo <= newVersion) {
+            switch (upgradeTo) {
+                case 2:
+                    // upgradeToVersion2(db);
+                    break;
+                default:
+                    break;
+            }
+            upgradeTo++;
+        }
     }
-
 
     @Override
     public SQLiteDatabase getReadableDatabase() {
-        return getReadableDatabase(GiziApplication.getInstance().getPassword());
+        return getReadableDatabase(org.smartregister.gizi.application.GiziApplication.getInstance().getPassword());
     }
 
     @Override
     public SQLiteDatabase getWritableDatabase() {
-        return getWritableDatabase(GiziApplication.getInstance().getPassword());
+        return getWritableDatabase(org.smartregister.gizi.application.GiziApplication.getInstance().getPassword());
     }
 
     @Override
@@ -92,6 +106,5 @@ public class GiziRepository extends Repository {
         }
         super.close();
     }
-
 
 }

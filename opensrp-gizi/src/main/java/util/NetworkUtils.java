@@ -5,17 +5,16 @@ import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.util.Log;
 
-import org.smartregister.gizi.application.GiziApplication;
-
 /**
  * Created by Jason Rogena - jrogena@ona.io on 08/06/2017.
  */
 
 public class NetworkUtils {
     private static final String TAG = NetworkUtils.class.getName();
+
     public static boolean isNetworkAvailable() {
         try {
-            ConnectivityManager connectivityManager = (ConnectivityManager) GiziApplication
+            ConnectivityManager connectivityManager = (ConnectivityManager) org.smartregister.gizi.application.GiziApplication
                     .getInstance().getSystemService(Context.CONNECTIVITY_SERVICE);
             NetworkInfo activeNetworkInfo = connectivityManager.getActiveNetworkInfo();
             return activeNetworkInfo != null && activeNetworkInfo.isConnected();

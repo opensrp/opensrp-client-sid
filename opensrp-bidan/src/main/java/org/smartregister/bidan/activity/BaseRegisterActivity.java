@@ -1,137 +1,128 @@
 package org.smartregister.bidan.activity;
 
-import android.content.pm.ActivityInfo;
+import android.app.ProgressDialog;
+import android.content.DialogInterface;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Looper;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentPagerAdapter;
+import android.support.v4.app.NavUtils;
 import android.support.v4.view.ViewPager;
+import android.support.v7.app.AlertDialog;
+import android.util.Log;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.widget.Toast;
 
-import org.apache.commons.lang3.StringUtils;
-import org.json.JSONException;
+import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
 import org.json.JSONObject;
-import org.smartregister.Context;
-import org.smartregister.adapter.SmartRegisterPaginatedAdapter;
-import org.smartregister.bidan.R;
-import org.smartregister.bidan.sync.BidanClientProcessor;
-import org.smartregister.bidan.utils.BidanFormUtils;
-import org.smartregister.commonregistry.AllCommonsRepository;
-import org.smartregister.commonregistry.CommonPersonObject;
-import org.smartregister.commonregistry.CommonPersonObjectClient;
-import org.smartregister.domain.form.FieldOverrides;
-import org.smartregister.domain.form.FormSubmission;
+import org.smartregister.configurableviews.ConfigurableViewsLibrary;
+import org.smartregister.configurableviews.model.RegisterConfiguration;
+import org.smartregister.configurableviews.model.ViewConfiguration;
+import org.smartregister.domain.FetchStatus;
 import org.smartregister.enketo.adapter.pager.EnketoRegisterPagerAdapter;
 import org.smartregister.enketo.listener.DisplayFormListener;
 import org.smartregister.enketo.view.fragment.DisplayFormFragment;
 import org.smartregister.provider.SmartRegisterClientsProvider;
-import org.smartregister.repository.DetailsRepository;
-import org.smartregister.util.Log;
+import org.smartregister.bidan.R;
+import org.smartregister.bidan.event.EnketoFormSaveCompleteEvent;
+import org.smartregister.bidan.event.ShowProgressDialogEvent;
+import org.smartregister.bidan.event.SyncEvent;
+import org.smartregister.bidan.fragment.BaseRegisterFragment;
+import org.smartregister.bidan.util.Constants;
 import org.smartregister.view.activity.SecuredNativeSmartRegisterActivity;
-import org.smartregister.view.contract.SmartRegisterClient;
-import org.smartregister.view.dialog.DialogOption;
-import org.smartregister.view.dialog.DialogOptionModel;
-import org.smartregister.view.dialog.EditOption;
-import org.smartregister.view.fragment.SecuredNativeSmartRegisterFragment;
 import org.smartregister.view.viewpager.OpenSRPViewPager;
 
-import java.text.DateFormat;
 import java.util.ArrayList;
-import java.util.Date;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Locale;
-import java.util.Map;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
+import util.EnketoFormUtils;
+import util.BidanConstants;
 
-import static org.smartregister.util.Utils.getValue;
+import static util.BidanConstants.ENKETO_FORMS.CHEST_XRAY;
+import static util.BidanConstants.ENKETO_FORMS.CULTURE;
+import static util.BidanConstants.ENKETO_FORMS.DIAGNOSIS;
+import static util.BidanConstants.ENKETO_FORMS.GENE_XPERT;
+import static util.BidanConstants.ENKETO_FORMS.SMEAR;
 
-//import org.smartregister.bidan.sync.BidanOldClientProcessor;
-//import org.smartregister.bidan.utils.EnketoFormUtils;
-//import org.smartregister.bidan.utils.BidanFormUtils;
-//import android.content.res.Configuration;
-//import org.smartregister.repository.AllSharedPreferences;
-//import static android.preference.PreferenceManager.getDefaultSharedPreferences;
 
 /**
- * Created by SID
+ * Created by samuelgithengi on 10/30/17.
  */
 
-public class BaseRegisterActivity extends SecuredNativeSmartRegisterActivity implements DisplayFormListener {
+public abstract class BaseRegisterActivity extends SecuredNativeSmartRegisterActivity implements DisplayFormListener {
 
-    private final String TAG = BaseRegisterActivity.class.getName();
-    protected List<String> formNames;
+    public static final String TAG = "BaseRegisterActivity";
+
+    public static String TOOLBAR_TITLE = "org.smartregister.bidan.activity.toolbarTitle";
+
+    private ProgressDialog progressDialog;
+
     @Bind(R.id.view_pager)
     protected OpenSRPViewPager mPager;
-    protected int currentPage;
-    //    private String[] formNames = new String[]{};
     protected FragmentPagerAdapter mPagerAdapter;
-    protected DisplayFormFragment displayFormFragment;
-    protected DisplayFormFragment formFragment;
-    //    protected SimpleDateFormat timer = new SimpleDateFormat("hh:mm:ss");
-    private int style = DateFormat.MEDIUM;
-    //Also try with style = DateFormat.FULL and DateFormat.SHORT
-    private Date date = new Date();
-    private DateFormat timer = DateFormat.getDateInstance(style, Locale.US);
-    private Map<String, String> formTime = new HashMap<>();
+    protected int currentPage;
+
+    protected List<String> formNames;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        // Use core layout
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_base_register);
         ButterKnife.bind(this);
-        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
         formNames = this.buildFormNameList();
+        Fragment mBaseFragment = getRegisterFragment();
 
         // Instantiate a ViewPager and a PagerAdapter.
-        mPagerAdapter = new EnketoRegisterPagerAdapter(getSupportFragmentManager(), formNames.toArray(new String[formNames.size()]), mBaseFragment());
+        mPagerAdapter = new EnketoRegisterPagerAdapter(getSupportFragmentManager(), formNames.toArray(new String[formNames.size()]), mBaseFragment);
         mPager.setOffscreenPageLimit(formNames.size());
         mPager.setAdapter(mPagerAdapter);
-//        mPager.setOnPageChangeListener(new ViewPager.SimpleOnPageChangeListener() {
-//            @Override
-//            public void onPageSelected(int position) {
-//                currentPage = position;
-//                onPageChanged(position);
-//            }
-//        });
-//
-        mPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
-            @Override
-            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
-                // This Space for book :)
-                android.util.Log.i(TAG, "onPageScrolled: ");
-            }
-
+        mPager.addOnPageChangeListener(new ViewPager.SimpleOnPageChangeListener() {
             @Override
             public void onPageSelected(int position) {
                 currentPage = position;
-                onPageChanged(position);
-            }
-
-            @Override
-            public void onPageScrollStateChanged(int state) {
-                // This Space for book :)
-                android.util.Log.i(TAG, "onPageScrollStateChanged: ");
-
             }
         });
+        initializeEnketoFormFragment(formNames.get(0), null, null, false);
+        //mPager.setCurrentItem(0, false);
+    }
 
+    protected abstract Fragment getRegisterFragment();
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu_register, menu);
+        processMenuConfigurations(menu);
+        return true;
+    }
+
+    private void processMenuConfigurations(Menu menu) {
+        if (getViewIdentifiers().isEmpty())
+            return;
+        ViewConfiguration viewConfiguration = ConfigurableViewsLibrary.getInstance()
+                .getConfigurableViewsHelper().getViewConfiguration(getViewIdentifiers().get(0));
+        if (viewConfiguration == null)
+            return;
+        RegisterConfiguration metadata = (RegisterConfiguration) viewConfiguration.getMetadata();
+        menu.findItem(R.id.advancedSearch).setVisible(metadata.isEnableAdvancedSearch());
+        menu.findItem(R.id.sortList).setVisible(metadata.isEnableSortList());
+        menu.findItem(R.id.filterList).setVisible(metadata.isEnableFilterList());
     }
 
     @Override
-    protected void setupViews() {
-        android.util.Log.d(TAG, "setupViews: Initialize NavBar");
-
-    }
-
-    protected List<String> buildFormNameList() {
-        return new ArrayList<>();
-    }
-
-    protected Fragment mBaseFragment() {
-        return null;
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                NavUtils.navigateUpFromSameTask(this);
+                return true;
+            default:
+                return false;
+        }
     }
 
     @Override
@@ -150,58 +141,150 @@ public class BaseRegisterActivity extends SecuredNativeSmartRegisterActivity imp
     }
 
     @Override
-    protected void onInitialization() {
-        // do nothing
-    }
-
-    public void startRegistration() {
-        android.util.Log.d(TAG, "startRegistration: ");
+    protected void setupViews() {//Implement Abstract Method
     }
 
     @Override
     protected void onResumption() {
-        android.util.Log.e(TAG, "onResumption: ");
-        LoginActivity.setLanguage();
-
+        ConfigurableViewsLibrary.getInstance().getConfigurableViewsHelper().registerViewConfigurations(getViewIdentifiers());
+        EventBus.getDefault().register(this);
     }
 
     @Override
     protected void onPause() {
         super.onPause();
-        retrieveAndSaveUnsubmittedFormData();
-
-//        String KIEnd = timer.format(new Date());
-//        Map<String, String> KI = new HashMap<>();
-//        KI.put("end", KIEnd);
+        EventBus.getDefault().unregister(this);
     }
 
     @Override
-    public void onBackPressed() {
-//        nf.setCriteria("");
-//        Log.e(TAG, "onBackPressed: "+currentPage );
-        // TODO: Set Language from Enketo
-//        android.util.Log.e(TAG, "getView: lang 2 "+ this.getResources().getConfiguration().locale );
-//        android.util.Log.e(TAG, "onBackPressed: ");
-//        if (Locale.US.equals(this.getResources().getConfiguration().locale)){
-//            AllSharedPreferences allSharedPreferences = new AllSharedPreferences(getDefaultSharedPreferences(Context.getInstance().applicationContext()));
-//            android.util.Log.e(TAG, "onBackPressed:change Language " + allSharedPreferences.fetchLanguagePreference() );
-//            Configuration cfg = new Configuration();
-//            cfg.locale = new Locale("in");
-//            this.getResources().updateConfiguration(cfg, null);
-////            LoginActivity.switchLanguagePreference();
-//        } else {
-//            android.util.Log.e(TAG, "onBackPressed: onLang " );
-//        }
+    protected void onInitialization() {//Implement Abstract Method
+    }
 
-        if (currentPage != 0) {
-            switchToBaseFragment(null);
+    @Override
+    public void startRegistration() {//Implement Abstract Method
+    }
+
+    private Fragment findFragmentByPosition(int position) {
+        return getSupportFragmentManager().findFragmentByTag("android:switcher:" + mPager.getId() + ":" + mPagerAdapter.getItemId(position));
+    }
+
+    public void refreshList(final FetchStatus fetchStatus) {
+        if (Looper.myLooper() == Looper.getMainLooper()) {
+            BaseRegisterFragment registerFragment = (BaseRegisterFragment) findFragmentByPosition(0);
+            if (registerFragment != null && fetchStatus.equals(FetchStatus.fetched)) {
+                registerFragment.refreshListView();
+            }
         } else {
-            super.onBackPressed(); // allow back key only if we are
+            Handler handler = new Handler(Looper.getMainLooper());
+            handler.post(new Runnable() {
+                @Override
+                public void run() {
+                    BaseRegisterFragment registerFragment = (BaseRegisterFragment) findFragmentByPosition(0);
+                    if (registerFragment != null && fetchStatus.equals(FetchStatus.fetched)) {
+                        registerFragment.refreshListView();
+                    }
+                }
+            });
+        }
+
+    }
+
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void showProgressDialog(ShowProgressDialogEvent showProgressDialogEvent) {
+        if (showProgressDialogEvent != null)
+            showProgressDialog();
+    }
+
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void saveFormSubmissionComplete(EnketoFormSaveCompleteEvent enketoFormSaveCompleteEvent) {
+        if (enketoFormSaveCompleteEvent != null) {
+            refreshList(FetchStatus.fetched);
+            hideProgressDialog();
+            switchToBaseFragment();
         }
     }
 
-    private void switchToBaseFragment() {
-        android.util.Log.e(TAG, "switchToBaseFragment: " );
+    @Override
+    public void onFormClosed(String recordId, String formName) {
+        Toast.makeText(this, formName + " closed", Toast.LENGTH_SHORT).show();
+        hideProgressDialog();
+        switchToBaseFragment();
+    }
+
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void refreshList(SyncEvent syncEvent) {
+        if (syncEvent != null && syncEvent.getFetchStatus().equals(FetchStatus.fetched))
+            refreshList(FetchStatus.fetched);
+    }
+
+    public void showProgressDialog() {
+        progressDialog = new ProgressDialog(this);
+        progressDialog.setCancelable(false);
+        progressDialog.setTitle(getString(R.string.saving_dialog_title));
+        progressDialog.setMessage(getString(R.string.please_wait_message));
+        if (!isFinishing())
+            progressDialog.show();
+    }
+
+    public void hideProgressDialog() {
+        if (progressDialog != null) {
+            progressDialog.dismiss();
+        }
+    }
+
+    public void startFormActivity(String formName, String entityId, String metaData) {
+        initializeEnketoFormFragment(formName, entityId, metaData, true);
+    }
+
+
+    public void initializeEnketoFormFragment(String formName, String entityId, String metaData, boolean displayForm) {
+        try {
+            int formIndex = formNames.indexOf(formName) + 1; // add the offset
+            if (entityId != null || metaData != null) {
+                String data = EnketoFormUtils.getInstance(getApplicationContext()).generateXMLInputForFormWithEntityId(entityId, formName, metaData);
+                DisplayFormFragment displayFormFragment = getDisplayFormFragmentAtIndex(formIndex);
+                if (displayFormFragment != null) {
+                    displayFormFragment.setFormData(data);
+                    displayFormFragment.setRecordId(entityId);
+                    displayFormFragment.setFieldOverides(metaData);
+                    displayFormFragment.setListener(this);
+                    displayFormFragment.setResize(false);
+                }
+            }
+
+            if (displayForm)
+                mPager.setCurrentItem(formIndex, false); //Don't animate the view on orientation change the view disapears
+
+        } catch (Exception e) {
+            Log.e(TAG, "startFormActivity: ", e);
+        }
+
+    }
+
+    private DisplayFormFragment getDisplayFormFragmentAtIndex(int index) {
+        return (DisplayFormFragment) findFragmentByPosition(index);
+    }
+
+    protected List<String> buildFormNameList() {
+        List<String> formNames = new ArrayList<String>();
+        formNames.add(GENE_XPERT);
+        formNames.add(SMEAR);
+        formNames.add(CHEST_XRAY);
+        formNames.add(CULTURE);
+        formNames.add(DIAGNOSIS);
+
+        formNames.add(Constants.FORM.NEW_PATIENT_REGISTRATION);
+        formNames.add(BidanConstants.ENKETO_FORMS.TREATMENT_INITIATION);
+        formNames.add(Constants.FORM.CONTACT_SCREENING);
+        formNames.add(BidanConstants.ENKETO_FORMS.FOLLOWUP_VISIT);
+        formNames.add(BidanConstants.ENKETO_FORMS.ADD_TB_CONTACT);
+        formNames.add(Constants.FORM.REMOVE_PATIENT);
+        formNames.add(Constants.FORM.TREATMENT_OUTCOME);
+        formNames.add(BidanConstants.ENKETO_FORMS.ADD_POSITIVE_PATIENT);
+        return formNames;
+    }
+
+    public void switchToBaseFragment() {
         final int prevPageIndex = currentPage;
         runOnUiThread(new Runnable() {
             @Override
@@ -211,277 +294,54 @@ public class BaseRegisterActivity extends SecuredNativeSmartRegisterActivity imp
                 if (displayFormFragment != null) {
                     displayFormFragment.hideTranslucentProgressDialog();
                     displayFormFragment.setFormData(null);
-                }
-
-                displayFormFragment.setRecordId(null);
-
-            }
-        });
-
-    }
-
-    public void switchToBaseFragment(final String data) {
-        final int prevPageIndex = currentPage;
-        runOnUiThread(new Runnable() {
-            @Override
-            public void run() {
-                mPager.setCurrentItem(0, false);
-                SecuredNativeSmartRegisterFragment registerFragment = (SecuredNativeSmartRegisterFragment) findFragmentByPosition(0);
-                if (registerFragment != null && data != null) {
-                    registerFragment.refreshListView();
-                }
-
-                //hack reset the form
-                displayFormFragment = getDisplayFormFragmentAtIndex(prevPageIndex);
-                if (displayFormFragment != null) {
-                    displayFormFragment.hideTranslucentProgressDialog();
-                    displayFormFragment.setFormData(null);
                     displayFormFragment.setRecordId(null);
-
                 }
             }
         });
 
     }
 
-    public void onPageChanged(int page) {
-        setRequestedOrientation(page == 0 ? ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE : ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
-    }
-
-    private boolean currentActivityIsShowingForm() {
-        return currentPage != 0;
-    }
-
-    public DisplayFormFragment getDisplayFormFragmentAtIndex(int index) {
-        return (DisplayFormFragment) findFragmentByPosition(index);
-    }
-
-    public void retrieveAndSaveUnsubmittedFormData() {
-        if (currentActivityIsShowingForm()) {
-            formFragment = getDisplayFormFragmentAtIndex(currentPage);
-            formFragment.saveCurrentFormData();
-        }
-    }
-
-    public Fragment findFragmentByPosition(int position) {
-        FragmentPagerAdapter fragmentPagerAdapter = mPagerAdapter;
-        return getSupportFragmentManager().findFragmentByTag("android:switcher:" + mPager.getId() + ":" + fragmentPagerAdapter.getItemId(position));
-    }
-
-//    public void saveuniqueid() {
-//        Log.e(TAG, "saveuniqueid: saved" );
-//        try {
-//            JSONObject uniqueId = new JSONObject(LoginActivity.generator.uniqueIdController().getUniqueIdJson());
-//            String uniq = uniqueId.getString("unique_id");
-//            LoginActivity.generator.uniqueIdController().updateCurrentUniqueId(uniq);
-//
-//        } catch (JSONException e) {
-//            e.printStackTrace();
-//        }
-//    }
-
-
     @Override
-    public void startFormActivity(String formName, String entityId, String metaData) {
-        //  FlurryFacade.logEvent(formName);
-//        if(Support.ONSYNC) {
-//            Toast.makeText(this,"Data still Synchronizing, please wait",Toast.LENGTH_SHORT).show();
-//            return;
-//        }
-//        android.util.Log.e(TAG, "startFormActivity: timer " + timer.format(date));
-        formTime.put("start", timer.format(date));
-
-//        FlurryAgent.logEvent(formName,FS, true );
-//        Log.v("fieldoverride", metaData);
-        String data = null;
-
+    public void saveFormSubmission(String formSubmision, String id, String formName, JSONObject fieldOverrides) {
         try {
-            int formIndex = formNames.indexOf(formName) + 1;// add the offset
-            if (entityId != null || metaData != null) {
-                //check if there is previously saved data for the form
-                if (metaData != null ) data = getPreviouslySavedDataForForm(formName, metaData, entityId);
-                android.util.Log.e(TAG, "startFormActivity: previous data "+ data );
-
-                if (data == null) {
-//                    data = EnketoFormUtils.getInstance(this)
-//                            .generateXMLInputForFormWithEntityId(entityId, formName, metaData);
-                    data = BidanFormUtils.getInstance(this)
-                            .generateXMLInputForFormWithEntityId(entityId, formName, metaData);
-                    android.util.Log.e(TAG, "startFormActivity: recent data "+ data );
-                }
-
-                displayFormFragment = getDisplayFormFragmentAtIndex(formIndex);
-                if (displayFormFragment != null) {
-                    displayFormFragment.setFormData(data);
-                    displayFormFragment.setRecordId(entityId);
-                    displayFormFragment.setFieldOverides(metaData);
-                    displayFormFragment.setListener(this);
-                }
-            }
-
-            android.util.Log.e(TAG, "startFormActivity: formName " + formName);
-            android.util.Log.e(TAG, "startFormActivity: displayForm " + data);
-
-            mPager.setCurrentItem(formIndex, false); //Don't animate the view on orientation change the view disapears
-
+            EnketoFormUtils enketoFormUtils = EnketoFormUtils.getInstance(getApplicationContext());
+            enketoFormUtils.generateFormSubmisionFromXMLString(id, formSubmision, formName, fieldOverrides);
         } catch (Exception e) {
-            e.printStackTrace();
-            android.util.Log.e(TAG, "startFormActivity: " + e.getMessage());
-        }
-
-    }
-
-    @Override
-    protected SmartRegisterPaginatedAdapter adapter() {
-        return new SmartRegisterPaginatedAdapter(clientsProvider());
-    }
-
-    @Override
-    public void saveFormSubmission(String formSubmission, String id, String formName, JSONObject fieldOverrides) {
-        try {
-            BidanFormUtils formUtils = BidanFormUtils.getInstance(this);
-            FormSubmission submission = formUtils.generateFormSubmisionFromXMLString(id, formSubmission, formName, fieldOverrides);
-
-            BidanClientProcessor.getInstance(this).processClient();
-
-            android.util.Log.e(TAG, "saveFormSubmission: "+ formName );
-            android.util.Log.e(TAG, "saveFormSubmission: "+submission.toString() );
-
-            context().formSubmissionService().updateFTSsearch(submission);
-            context().formSubmissionRouter().handleSubmission(submission, formName);
-//            switchToBaseFragment(formSubmission); // Unnecessary!! passing on data
+            Log.i(TAG, "saveFormSubmission: ", e);
             switchToBaseFragment();
-
-            if ("registrasi_ibu".equals(formName)) {
-
-                fieldOverrides.put("ibuCaseId", submission.entityId());
-            }
-
-            //end capture flurry log for FS
-//            String end = timer.format(new Date());
-//            Map<String, String> FS = new HashMap<>();
-//            FS.put("end", end);
-//            FlurryAgent.logEvent(formName, FS, true);
-        } catch (Exception e) {
-            // TODO: show error dialog on the formfragment if the submission fails
-            DisplayFormFragment displayFormFragment = getDisplayFormFragmentAtIndex(currentPage);
-            if (displayFormFragment != null) {
-                displayFormFragment.hideTranslucentProgressDialog();
-            }
-            e.printStackTrace();
         }
-
     }
 
-
-    public DialogOption[] getEditOptions() {
-        return new DialogOption[]{};
+    @Override
+    protected void onStop() {
+        super.onStop();
+        ConfigurableViewsLibrary.getInstance().getConfigurableViewsHelper().unregisterViewConfiguration(getViewIdentifiers());
     }
 
-    /**
-     * Inner class for Edit and Followup
-     */
-    public class EditDialogOptionModelNew implements DialogOptionModel {
+    public abstract List<String> getViewIdentifiers();
 
-        @Override
-        public DialogOption[] getDialogOptions() {
-
-            return getEditOptions();
-        }
-
-        @Override
-        public void onDialogOptionSelection(DialogOption option, Object tag) {
-            CommonPersonObjectClient pc = (CommonPersonObjectClient) tag;
-
-//            android.util.Log.e(TAG, "onDialogOptionSelection:columnMap "+ pc.getColumnmaps() );
-//            android.util.Log.e(TAG, "onDialogOptionSelection:details "+ pc.getDetails() );
-            DetailsRepository detailsRepository = Context.getInstance().detailsRepository();
-
-            if (option.name().equalsIgnoreCase(getString(R.string.str_edit_ki_form))) {
-                // Edit Form Ibu
-                detailsRepository.updateDetails(pc);
-                String ibuCaseId = getValue(pc.getColumnmaps(), "_id", true).toLowerCase();
-                String namaIbu = getValue(pc.getColumnmaps(), "namalengkap", true).toLowerCase();
-                JSONObject fieldOverrides = new JSONObject();
-
-                try {
-                    fieldOverrides.put("Province", pc.getDetails().get("stateProvince"));
-                    fieldOverrides.put("District", pc.getDetails().get("countyDistrict"));
-                    fieldOverrides.put("Sub-district", pc.getDetails().get("address2"));
-                    fieldOverrides.put("Village", pc.getDetails().get("cityVillage"));
-                    fieldOverrides.put("Sub-village", pc.getDetails().get("address1"));
-                    fieldOverrides.put("jenis_kelamin", pc.getDetails().get("gender"));
-                    fieldOverrides.put("ibuCaseId", ibuCaseId);
-                    fieldOverrides.put("namaLengkap", namaIbu);
-
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                }
-
-                FieldOverrides fo = new FieldOverrides(fieldOverrides.toString());
-                android.util.Log.e(TAG, "onDialogOptionSelection:fo "+ fo.getJSONString() );
-                onEditSelectionWithMetadata((EditOption) option, (SmartRegisterClient) tag, fo.getJSONString());
-
-            } else if (option.name().equalsIgnoreCase(getString(R.string.str_anak_edit))) {
-                // Edit Form Ibu
-                Log.logError(TAG, "kohort_bayi_edit");
-                detailsRepository.updateDetails(pc);
-                String ibuCaseId = getValue(pc.getColumnmaps(), "_id", true).toLowerCase();
-                JSONObject fieldOverrides = new JSONObject();
-
-                try {
-                    fieldOverrides.put("Province", pc.getDetails().get("stateProvince"));
-                    fieldOverrides.put("District", pc.getDetails().get("countyDistrict"));
-                    fieldOverrides.put("Sub-district", pc.getDetails().get("address2"));
-                    fieldOverrides.put("Village", pc.getDetails().get("cityVillage"));
-                    fieldOverrides.put("Sub-village", pc.getDetails().get("address1"));
-                    fieldOverrides.put("jenis_kelamin", pc.getDetails().get("gender"));
-                    fieldOverrides.put("ibuCaseId", ibuCaseId);
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                }
-
-                FieldOverrides fo = new FieldOverrides(fieldOverrides.toString());
-                android.util.Log.e(TAG, "onDialogOptionSelection:fo.getJSONString() " + fo.getJSONString());
-                onEditSelectionWithMetadata((EditOption) option, (SmartRegisterClient) tag, fo.getJSONString());
-
-            } else {
-
-                if (option.name().equalsIgnoreCase(getString(R.string.str_register_fp_form))) {
-//                    android.util.Log.e(TAG, "onDialogOptionSelection: pc " + pc.getDetails());
-                    if (!StringUtils.isNumeric(pc.getDetails().get("jenisKontrasepsi"))) {
-                        Toast.makeText(BaseRegisterActivity.this, getString(R.string.mother_already_registered_in_fp), Toast.LENGTH_SHORT).show();
-                        return;
-                    }
-
-                    AllCommonsRepository iburep = Context.getInstance().allCommonsRepositoryobjects("ec_ibu");
-                    final CommonPersonObject ibuparent = iburep.findByCaseID(pc.entityId());
-                    if (ibuparent != null) {
-                        short anc_isclosed = ibuparent.getClosed();
-                        if (anc_isclosed == 0) {
-                            Toast.makeText(BaseRegisterActivity.this, getString(R.string.mother_already_registered), Toast.LENGTH_SHORT).show();
-                            return;
-                        }
-                    }
-
-                }
-
-                if (option.name().equalsIgnoreCase(getString(R.string.str_register_anc_form))) {
-                    AllCommonsRepository iburep = Context.getInstance().allCommonsRepositoryobjects("ec_ibu");
-                    final CommonPersonObject ibuparent = iburep.findByCaseID(pc.entityId());
-                    if (ibuparent != null) {
-                        short anc_isclosed = ibuparent.getClosed();
-                        if (anc_isclosed == 0) {
-                            Toast.makeText(BaseRegisterActivity.this, getString(R.string.mother_already_registered), Toast.LENGTH_SHORT).show();
-                            return;
-                        }
-                    }
-
-                }
-                onEditSelection((EditOption) option, (SmartRegisterClient) tag);
-
-            }
-            // End Select Edit or Followup
+    @Override
+    public void onBackPressed() {
+        if (currentPage != 0) {
+            new AlertDialog.Builder(this, R.style.TbrAlertDialog)
+                    .setMessage(R.string.form_back_confirm_dialog_message)
+                    .setTitle(R.string.form_back_confirm_dialog_title)
+                    .setCancelable(false)
+                    .setPositiveButton(R.string.no_button_label,
+                            new DialogInterface.OnClickListener() {
+                                public void onClick(DialogInterface dialog, int whichButton) {
+                                    //Do nothing, remain on Enketo Form Fragment
+                                }
+                            })
+                    .setNegativeButton(R.string.yes_button_label,
+                            new DialogInterface.OnClickListener() {
+                                public void onClick(DialogInterface dialog, int whichButton) {
+                                    switchToBaseFragment();
+                                }
+                            })
+                    .show();
+        } else {
+            super.onBackPressed(); // allow back key only if we are
         }
     }
 

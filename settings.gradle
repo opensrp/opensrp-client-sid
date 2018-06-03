@@ -1,4 +1,2 @@
-rootProject.name = 'opensrp-client-sid'
-include ':opensrp-vaksinator'
-include ':opensrp-gizi'
 include ':opensrp-bidan'
+include ':opensrp-gizi'

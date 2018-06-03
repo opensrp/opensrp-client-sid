@@ -1,108 +1,95 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
     package="org.smartregister.bidan">
 
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+
     <application
-        tools:replace="android:icon"
         android:name=".application.BidanApplication"
         android:allowBackup="true"
-        android:icon="@mipmap/ic_opensrp_logo"
-        >
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:supportsRtl="true"
+        android:theme="@style/AppTheme">
         <activity
             android:name=".activity.LoginActivity"
-            android:label="@string/app_name"
-            android:screenOrientation="landscape"
-            android:theme="@style/BidanAppTheme"
-            android:windowSoftInputMode="adjustResize|stateHidden">
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.Login"
+            android:windowSoftInputMode="stateAlwaysHidden|adjustResize">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
-        <activity
-            android:name=".activity.BidanHomeActivity"
-            android:screenOrientation="landscape"
-            android:theme="@style/AppTheme" />
-
-        <activity
-            android:name=".activity.KISmartRegisterActivity"
-            android:configChanges="keyboardHidden|orientation|screenSize"
-            android:screenOrientation="landscape"
-            android:theme="@style/AppThemeNoActionBarAndTitle"
-            android:windowSoftInputMode="adjustResize" />
-        <!--<activity-->
-        <!--android:name=".activity.NativeKIbuSmartRegisterActivity"-->
-        <!--android:configChanges="keyboardHidden|orientation|screenSize"-->
-        <!--android:screenOrientation="landscape"-->
-        <!--android:theme="@style/AppThemeNoActionBarAndTitle"-->
-        <!--android:windowSoftInputMode="adjustResize" />-->
-        <activity
-            android:name=".activity.DetailMotherActivity"
-            android:screenOrientation="landscape"
-            android:theme="@style/AppThemeNoTitle" />
-
-        <activity
-            android:name=".activity.FPSmartRegisterActivity"
-            android:configChanges="keyboardHidden|orientation|screenSize"
-            android:screenOrientation="landscape"
-            android:theme="@style/AppThemeNoActionBarAndTitle"
-            android:windowSoftInputMode="adjustResize" />
-        <activity
-            android:name=".activity.DetailFPActivity"
-            android:screenOrientation="landscape"
-            android:theme="@style/AppThemeNoTitle" />
-
-        <activity
-            android:name=".activity.PNCSmartRegisterActivity"
-            android:configChanges="keyboardHidden|orientation|screenSize"
-            android:screenOrientation="landscape"
-            android:theme="@style/AppThemeNoActionBarAndTitle"
-            android:windowSoftInputMode="adjustResize" />
-        <activity
-            android:name=".activity.DetailPNCActivity"
-            android:screenOrientation="landscape"
-            android:theme="@style/AppThemeNoTitle" />
-
-        <activity
-            android:name=".activity.ANCSmartRegisterActivity"
-            android:configChanges="keyboardHidden|orientation|screenSize"
-            android:screenOrientation="landscape"
-            android:theme="@style/AppThemeNoActionBarAndTitle"
-            android:windowSoftInputMode="adjustResize" />
-        <activity
-            android:name=".activity.DetailANCActivity"
-            android:screenOrientation="landscape"
-            android:theme="@style/AppThemeNoTitle" />
-
-        <activity
-            android:name=".activity.AnakSmartRegisterActivity"
-            android:configChanges="keyboardHidden|orientation|screenSize"
-            android:screenOrientation="landscape"
-            android:theme="@style/AppThemeNoActionBarAndTitle"
-            android:windowSoftInputMode="adjustResize" />
-        <activity
-            android:name=".activity.DetailChildActivity"
-            android:screenOrientation="landscape"
-            android:theme="@style/AppThemeNoTitle" />
-
         <activity
             android:name=".activity.SettingsActivity"
-            android:screenOrientation="landscape"
-            android:theme="@style/Theme.AppCompat.Light.DarkActionBar"
-            />
-        <activity android:name=".utils.CameraPreviewActivity" />
-        <activity android:name=".activity.BaseRegisterActivity" />
-        <!--<activity android:name=".utils.Camera2PreviewActivity" />-->
-        <uses-library android:name="android.test.runner"/>
+            android:label="@string/action_settings" />
+        <activity
+            android:name=".activity.HomeActivity"
+            android:configChanges="keyboardHidden|orientation|screenSize"
+            android:launchMode="singleTask"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.NoActionBar" />
 
+        <activity
+            android:name=".activity.PresumptivePatientRegisterActivity"
+            android:configChanges="keyboardHidden|orientation|screenSize"
+            android:launchMode="singleTask"
+            android:parentActivityName=".activity.HomeActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".activity.PresumptivePatientDetailActivity"
+            android:configChanges="keyboardHidden|orientation|screenSize"
+            android:launchMode="singleTask"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".activity.PositivePatientDetailActivity"
+            android:configChanges="keyboardHidden|orientation|screenSize"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".activity.InTreatmentPatientDetailActivity"
+            android:configChanges="keyboardHidden|orientation|screenSize"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.NoActionBar" />
 
-        <meta-data
-            android:name="io.fabric.ApiKey"
-            android:value="5bda8a6293b5b89b510a53e5d297d42bdf427e10" />
+        <activity
+            android:name=".activity.ScreenedPatientDetailActivity"
+            android:configChanges="keyboardHidden|orientation|screenSize"
+            android:launchMode="singleTask"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.NoActionBar" />
+
+        <activity
+            android:name=".activity.PositivePatientRegisterActivity"
+            android:configChanges="keyboardHidden|orientation|screenSize"
+            android:launchMode="singleTask"
+            android:parentActivityName=".activity.HomeActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.NoActionBar" />
+
+        <activity
+            android:name=".activity.InTreatmentPatientRegisterActivity"
+            android:configChanges="keyboardHidden|orientation|screenSize"
+            android:launchMode="singleTask"
+            android:parentActivityName=".activity.HomeActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.NoActionBar" />
+
         <service android:name=".service.SyncService" />
+
+        <receiver android:name=".receiver.BidanSyncBroadcastReceiver" />
+
+        <provider
+            android:name=".provider.ServiceHistoryProvider"
+            android:authorities="com.smartregister.bidan.service.history.provider" />
 
     </application>
 

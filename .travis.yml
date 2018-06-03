@@ -1,44 +1,43 @@
 language: android
 # sudo set to required because of an issue with how TravisCI handles builds in Docker containers https://github.com/travis-ci/travis-ci/issues/3695.
 # Setting sudo to required prevents Travis from testing the project in a Docker container.
-sudo: false
+sudo: required
 jdk: oraclejdk8
+dist: precise
 
 before_cache:
-  - rm -f  $HOME/.gradle/caches/modules-2/modules-2.lock
-  - rm -fr $HOME/.gradle/caches/*/plugin-resolution/
+  -rm -f $HOME/.gradle/caches/modules-2/modules-2.lock
+  -rm -fr $HOME/.gradle/caches/*/plugin-resolution/
 
 cache:
   directories:
-  - $HOME/.gradle/caches/
-  - $HOME/.gradle/wrapper/
-  - $HOME/.android/build-cache
+    - $HOME/.gradle/caches/
+    - $HOME/.gradle/wrapper/
 
 env:
   matrix:
     - ANDROID_TARGET=android-22 ANDROID_ABI=armeabi-v7a
   global:
     # wait up to 10 minutes for adb to connect to emulator
-    - ADB_INSTALL_TIMEOUT=10
     - MALLOC_ARENA_MAX=2
+    - ADB_INSTALL_TIMEOUT=20 #increment timeout to 20 mins
 
 android:
   components:
     # tools required
     - tools
     # The BuildTools version used by your project
-    - build-tools-26.0.1
+    - build-tools-27.0.3
     # The SDK version used to compile your projects
     - android-22
+    - android-27
     # Additional components
-    - extra-google-google_play_services
     - extra-google-m2repository
     - extra-android-m2repository
-    - addon-google_apis-google-19
+
     # Specify at least one system image,
     # if you need to run emulator(s) during your tests
     - sys-img-armeabi-v7a-android-22
-
 
 addons:
   apt_packages:
@@ -48,29 +47,20 @@ before_script:
   # Emulator Management: Create, Start and Wait
   - echo no | android create avd --force -n test -t $ANDROID_TARGET --abi $ANDROID_ABI
   - emulator -avd test -no-skin -no-audio -no-window &
-  - adb wait-for-device
+  - android-wait-for-emulator
   - adb shell input keyevent 82 &
 
-script: 
+script:
   - echo "Travis branch is $TRAVIS_BRANCH"
   - echo "Travis branch is in pull request $TRAVIS_PULL+REQUEST"
   - chmod 755 gradlew
   - ls -la
-  - ./gradlew clean check -x :opensrp-bidan:lint
-  #- ./gradlew connectedAndroidTest
-  #Run All tests Unit and Instrumentation
-#  - travis_wait ./gradlew opensrp-bidan:clean opensrp-bidan:jacocoTestReport coveralls --stacktrace
-#  - travis_wait ./gradlew opensrp-vaksinator:clean opensrp-vaksinator:jacocoTestReport coveralls --stacktrace
-#  - travis_wait ./gradlew opensrp-gizi:clean opensrp-gizi:jacocoTestReport coveralls --stacktrace
+  #Run jacocoTestReport -> Runs all unit tests & instrumentation tests
+  - travis_wait ./gradlew clean assemble test
 
+after_success: ./gradlew jacocoRootReport coveralls --stacktrace
 after_failure:
- - pandoc opensrp-bidan/build/reports/tests/index.html -t plain
- - pandoc opensrp-vaksinator/build/reports/tests/index.html -t plain
- - pandoc opensrp-gizi/build/reports/tests/index.html -t plain\
-
-after_success:
-  - ./gradlew jacocoTestReport coveralls
-  - .buildscript/deploy_snapshot.sh
+ - pandoc build/reports/tests/index.html -t plain
 
 notifications:
   slack:

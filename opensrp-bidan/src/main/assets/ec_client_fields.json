@@ -1,7 +1,7 @@
 {
   "bindobjects": [
     {
-      "name": "ec_kartu_ibu",
+      "name": "ec_patient",
       "columns": [
         {
           "column_name": "base_entity_id",
@@ -11,188 +11,133 @@
           }
         },
         {
-          "column_name": "namalengkap",
+          "column_name": "participant_id",
+          "type": "Client",
+          "json_mapping": {
+            "field": "identifiers.TBREACH ID"
+          }
+        },
+        {
+          "column_name": "program_id",
+          "type": "Client",
+          "json_mapping": {
+            "field": "identifiers.TBREACH Program ID"
+          }
+        },
+        {
+          "column_name": "first_name",
           "type": "Client",
           "json_mapping": {
             "field": "firstName"
           }
         },
         {
-          "column_name": "noIbu",
-          "type": "Client",
-          "json_mapping": {
-            "field": "attributes.NoIbu"
-          }
-        },
-        {
-          "column_name": "unique_id",
-          "type": "Client",
-          "json_mapping": {
-            "field": "attributes.UniqueId"
-          }
-        },
-        {
-          "column_name": "namaSuami",
+          "column_name": "last_name",
           "type": "Client",
           "json_mapping": {
             "field": "lastName"
           }
         },
         {
-          "column_name": "tanggalLahir",
+          "column_name": "gender",
+          "type": "Client",
+          "json_mapping": {
+            "field": "gender"
+          }
+        },
+        {
+          "column_name": "dob",
           "type": "Client",
           "json_mapping": {
             "field": "birthdate"
           }
         },
         {
-          "column_name": "isOutOfArea",
+          "column_name": "mobile_phone_number",
           "type": "Client",
           "json_mapping": {
-            "field": "isOutOfArea",
-            "comment": "doesn't have concept mapping"
+            "field": "attributes.Primary Contact Number"
           }
         },
         {
-          "column_name": "htp",
+          "column_name": "presumptive",
           "type": "Event",
           "json_mapping": {
             "field": "obs.fieldCode",
-            "concept": "5596AAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+            "concept": "TBR:presumptive tuberculosis case"
           }
         },
         {
-          "column_name": "jenisKontrasepsi",
+          "column_name": "confirmed_tb",
           "type": "Event",
           "json_mapping": {
             "field": "obs.fieldCode",
-            "concept": "374AAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+            "concept": "TBR: confirmed tb patient"
           }
         },
         {
-          "column_name": "umur",
+          "column_name": "last_interacted_with",
+          "type": "Event",
+          "json_mapping": {
+            "field": "version"
+          }
+        },
+        {
+          "column_name": "first_encounter",
+          "type": "Client",
+          "json_mapping": {
+            "field": "dateCreated"
+          }
+        },
+        {
+          "column_name": "diagnosis_date",
+          "type": "Client",
+          "json_mapping": {
+            "field": "attributes.diagnosis_date"
+          }
+        },
+        {
+          "column_name": "treatment_initiation_date",
           "type": "Event",
           "json_mapping": {
             "field": "obs.fieldCode",
-            "concept": "1532AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+            "concept": "TBR: treatment start date"
+          }
+        },
+        {
+          "column_name": "baseline",
+          "type": "Client",
+          "json_mapping": {
+            "field": "attributes.baseline"
+          }
+        },
+        {
+          "column_name": "next_visit_date",
+          "type": "Event",
+          "json_mapping": {
+            "field": "obs.fieldCode",
+            "concept": "TBR: next visit date"
+          }
+        },
+        {
+          "column_name": "smear_due_date",
+          "type": "Event",
+          "json_mapping": {
+            "field": "obs.fieldCode",
+            "concept": "TBR: smear due date"
+          }
+        },
+        {
+          "column_name": "date_removed",
+          "type": "Client",
+          "json_mapping": {
+            "field": "attributes.dateRemoved"
           }
         }
       ]
     },
     {
-      "name": "ec_ibu",
-      "columns": [
-        {
-          "column_name": "base_entity_id",
-          "type": "Client",
-          "json_mapping": {
-            "field": "baseEntityId"
-          }
-        },
-        {
-          "column_name": "kartuIbuId",
-          "type": "Client",
-          "json_mapping": {
-            "field": "kartuIbuId",
-            "comment": "doesn't have concept mapping"
-          }
-        },
-        {
-          "column_name": "tanggalHPHT",
-          "type": "Event",
-          "json_mapping": {
-            "field": "obs.fieldCode",
-            "concept": "1427AAAAAAAAAAAAAAAAAAAAAAAAAAAA"
-          }
-        },
-        {
-          "column_name": "referenceDate",
-          "type": "Event",
-          "json_mapping": {
-            "field": "obs.fieldCode",
-            "concept": "160753AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
-          }
-        },
-        {
-          "column_name": "pptest",
-          "type": "Event",
-          "json_mapping": {
-            "field": "obs.fieldCode",
-            "concept": "45AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
-          }
-        },
-        {
-          "column_name": "ancDate",
-          "type": "Event",
-          "json_mapping": {
-            "field": "obs.fieldCode",
-            "concept": "160753AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
-          }
-        },
-        {
-          "column_name": "ancKe",
-          "type": "Event",
-          "json_mapping": {
-            "field": "obs.fieldCode",
-            "concept": "1425AAAAAAAAAAAAAAAAAAAAAAAAAAAA"
-          }
-        },
-        {
-          "column_name": "type",
-          "type": "Event",
-          "json_mapping": {
-            "field": "type",
-            "comment": "doesn't have concept mapping"
-          }
-        }
-      ]
-    },
-    {
-      "name": "ec_pnc",
-      "columns": [
-        {
-          "column_name": "base_entity_id",
-          "type": "Client",
-          "json_mapping": {
-            "field": "baseEntityId"
-          }
-        },
-        {
-          "column_name": "keadaanIbu",
-          "type": "Event",
-          "json_mapping": {
-            "field": "obs.fieldCode",
-            "concept": "160085AAAAAAAAAAAAAAAAAAAAAAAAAA"
-          }
-        },
-        {
-          "column_name": "tempatBersalin",
-          "type": "Event",
-          "json_mapping": {
-            "field": "obs.fieldCode",
-            "concept": "1572AAAAAAAAAAAAAAAAAAAAAAAAAAAA"
-          }
-        },
-        {
-          "column_name": "caraPersalinanIbu",
-          "type": "Event",
-          "json_mapping": {
-            "field": "obs.fieldCode",
-            "concept": "5630AAAAAAAAAAAAAAAAAAAAAAAAAAAA"
-          }
-        },
-        {
-          "column_name": "komplikasi",
-          "type": "Event",
-          "json_mapping": {
-            "field": "obs.fieldCode",
-            "concept": "1576AAAAAAAAAAAAAAAAAAAAAAAAAAAA"
-          }
-        }
-      ]
-    },
-    {
-      "name": "ec_anak",
+      "name": "ec_contact",
       "columns": [
         {
           "column_name": "base_entity_id",
@@ -205,56 +150,42 @@
           "column_name": "relational_id",
           "type": "Client",
           "json_mapping": {
-            "field": "relationships.ibuCaseId"
+            "field": "relationships.parent"
           }
         },
         {
-          "column_name": "noBayi",
+          "column_name": "program_id",
           "type": "Client",
           "json_mapping": {
-            "field": "attributes.noBayi"
+            "field": "identifiers.TBREACH Program ID"
           }
         },
         {
-          "column_name": "beratLahir",
-          "type": "Event",
+          "column_name": "first_name",
+          "type": "Client",
           "json_mapping": {
-            "field": "obs.fieldCode",
-            "concept": "5916AAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+            "field": "firstName"
           }
         },
         {
-          "column_name": "namaBayi",
-          "type": "Event",
+          "column_name": "last_name",
+          "type": "Client",
           "json_mapping": {
-            "field": "obs.fieldCode",
-            "concept": "1586AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+            "field": "lastName"
           }
         },
         {
-          "column_name": "tanggalLahirAnak",
+          "column_name": "gender",
+          "type": "Client",
+          "json_mapping": {
+            "field": "gender"
+          }
+        },
+        {
+          "column_name": "dob",
           "type": "Client",
           "json_mapping": {
             "field": "birthdate"
-          }
-        }
-      ]
-    },
-    {
-      "name": "ec_multimedia",
-      "columns": [
-        {
-          "column_name": "baseEntityID",
-          "type": "Multimedia",
-          "json_mapping": {
-            "field": "caseId"
-          }
-        },
-        {
-          "column_name": "faceVector",
-          "type": "Multimedia",
-          "json_mapping": {
-            "field": "attributes.faceVector"
           }
         }
       ]
