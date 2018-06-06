@@ -43,7 +43,7 @@ public class ANCSmartRegisterFragment extends BaseSmartRegisterFragment {
     private static final String TAG = ANCSmartRegisterFragment.class.getName();
     //    private final ClientActionHandler clientActionHandler = new ClientActionHandler();
 //    private ANCClientsProvider kiSCP = new ANCClientsProvider(getActivity(), new ClientActionHandler(), context().alertService());
-    private String tableName = "ec_kartu_ibu";
+    private String ecKiTableName = "ec_kartu_ibu";
 
     @Override
     protected SecuredNativeSmartRegisterActivity.DefaultOptionsProvider getDefaultOptionsProvider() {
@@ -147,7 +147,7 @@ public class ANCSmartRegisterFragment extends BaseSmartRegisterFragment {
 
             clientAdapter = new SmartRegisterPaginatedCursorAdapter(getActivity(), null,
                     new ANCClientsProvider(getActivity(), new ClientActionHandler(), context().alertService()),
-                    new CommonRepository(tableName, new String[]{"ec_ibu.is_closed", "ec_kartu_ibu.namalengkap", "ec_kartu_ibu.namaSuami"}));
+                    new CommonRepository(tableEcIbu, new String[]{"ec_ibu.is_closed", "ec_kartu_ibu.namalengkap", "ec_kartu_ibu.namaSuami"}));
             clientsView.setAdapter(clientAdapter);
 
             setTablename(tableEcIbu);
@@ -166,7 +166,7 @@ public class ANCSmartRegisterFragment extends BaseSmartRegisterFragment {
             queryBuilder.SelectInitiateMainTable(tableEcIbu, new String[]{"ec_ibu.relationalid", "ec_ibu.is_closed", "ec_ibu.details", "ec_kartu_ibu.namalengkap", "ec_kartu_ibu.namaSuami", "imagelist.imageid"});
             queryBuilder.customJoin("LEFT JOIN ec_kartu_ibu on ec_kartu_ibu.id = ec_ibu.id LEFT JOIN ImageList imagelist ON ec_ibu.id=imagelist.entityID");
             mainSelect = queryBuilder.mainCondition("ec_kartu_ibu.is_closed = 0 AND namalengkap != '' AND namalengkap IS NOT NULL");
-            Sortqueries = kiSortByNameAZ();
+//            Sortqueries = kiSortByNameAZ();
 
             currentlimit = 20;
             currentoffset = 0;
@@ -225,7 +225,7 @@ public class ANCSmartRegisterFragment extends BaseSmartRegisterFragment {
             } else {
                 StringUtil.humanize(entry.getValue().getLabel());
                 String name = StringUtil.humanize(entry.getValue().getLabel());
-                dialogOptionslist.add(new MotherFilterOption(name, "location_name", name, tableName));
+                dialogOptionslist.add(new MotherFilterOption(name, "location_name", name, ecKiTableName));
 
             }
         }

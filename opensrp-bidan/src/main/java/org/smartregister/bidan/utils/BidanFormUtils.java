@@ -272,7 +272,7 @@ public class BidanFormUtils {
         Log.logDebug("============== EVENT ================");
         Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSSZ").create();
         String eventJson = gson.toJson(event);
-        Log.logDebug(eventJson);
+        Log.logDebug("event ==> "+eventJson);
         try {
             eventClientRepository.addEvent(event.getBaseEntityId(), new JSONObject(eventJson));
         } catch (JSONException e) {
@@ -1070,6 +1070,7 @@ public class BidanFormUtils {
         @Override
         protected void onPostExecute(Void aVoid) {
 
+            android.util.Log.e(TAG, "onPostExecute: " );
             if (context instanceof BaseRegisterActivity) {
                 final BaseRegisterActivity registerActivity = ((BaseRegisterActivity) context);
                 registerActivity.refreshList(FetchStatus.fetched);
@@ -1094,22 +1095,24 @@ public class BidanFormUtils {
                     saveClient(c);
                 }
                 event = tagSyncMetadata(event);
+                String eventType = event.getEventType();
                 saveEvent(event);
-                Gson gson = new GsonBuilder().create();
-                if (event.getEventType() != null) {
 
-                    if (event.getEventType().equals("Registrasi Vaksinator")) {
+                Gson gson = new GsonBuilder().create();
+                if (eventType != null) {
+
+                    if (eventType.equals("Registrasi Vaksinator")) {
                         JSONObject json = eventClientRepository.getClientByBaseEntityId(event.getBaseEntityId());
                         Client client = gson.fromJson(json.toString(), Client.class);
                         // client.addAttribute("kartu_ibu", "kartu_ibu");
                         saveClient(client);
-                    } else if (event.getEventType().equals("Child Registration")) {
+                    } else if (eventType.equals("Child Registration")) {
                         JSONObject json = eventClientRepository.getClientByBaseEntityId(event.getBaseEntityId());
                         Client client = gson.fromJson(json.toString(), Client.class);
                         // client.addAttribute("anak", "anak");
                         saveClient(client);
                     }
-                    else if (event.getEventType().equals(EditClientFormNameList())) {
+                    else if (eventType.equals(EditClientFormNameList())) {
                         JSONObject json = eventClientRepository.getClientByBaseEntityId(event.getBaseEntityId());
                         Client client = gson.fromJson(json.toString(), Client.class);
                         client.addAttribute("edit", "edit");

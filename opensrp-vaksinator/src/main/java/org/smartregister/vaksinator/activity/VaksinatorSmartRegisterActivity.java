@@ -209,6 +209,11 @@ public class VaksinatorSmartRegisterActivity extends SecuredNativeSmartRegisterA
 
     }
 
+    @Override
+    public void onFormClosed(String s, String s1) {
+        // do nothing
+    }
+
     public void activatingOtherForm(final String formName, final String entityId, final String metaData) {
         final int prevPageIndex = currentPage;
         runOnUiThread(new Runnable() {

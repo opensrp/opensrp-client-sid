@@ -27,6 +27,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 import org.smartregister.Context;
 import org.smartregister.domain.LoginResponse;
+import org.smartregister.domain.jsonmapping.LoginResponseData;
 import org.smartregister.event.Listener;
 import org.smartregister.repository.AllSharedPreferences;
 import org.smartregister.util.Log;
@@ -358,9 +359,9 @@ public class LoginActivity extends AppCompatActivity {
         //DrishtiSyncScheduler.startOnlyIfConnectedToNetwork(getApplicationContext());
     }
 
-    private void remoteLoginWith(String userName, String password, String userInfo) {
+    private void remoteLoginWith(String userName, String password, LoginResponseData userInfo) {
         context.userService().remoteLogin(userName, password, userInfo);
-        String locationId = getUserDefaultLocationId(userInfo);
+        String locationId = getUserDefaultLocationId(userInfo.user.toString());
         Utils.writePreference(VaksinatorApplication.getInstance().getApplicationContext(), PREF_TEAM_LOCATIONS, locationId);
 
         saveDefaultLocationId(userName,locationId);

@@ -103,7 +103,7 @@ allprojects {
 }
 
 subprojects { subProject ->
-    def exclude = ['org/nusabit/R*.class', '**/BuildConfig.class', '**/R.class', '**/R$*.class', '**/BuildConfig.*', '**/Manifest*.*']
+    def exclude = ['org/smartregister/*/R*.class', '**/BuildConfig.class', '**/R.class', '**/R$*.class', '**/BuildConfig.*', '**/Manifest*.*']
     task jacocoTestReport(type: JacocoReport, dependsOn: ['testDebugUnitTest']) {
         reports {
             xml.enabled = true
@@ -119,26 +119,17 @@ subprojects { subProject ->
         rootProject.coveralls.sourceDirs.addAll(sourceDirectories.flatten())
     }
 
-    afterEvaluate {
-        def isLibrary = subProject.plugins.hasPlugin('android-library')
-
-        if (isLibrary) {
-            subProject.apply plugin: "com.github.dcendents.android-maven"
-            subProject.apply plugin: "com.jfrog.bintray"
-
-            task javadoc(type: Javadoc) {
-                source = android.sourceSets.main.java.srcDirs
-                classpath += project.files(android.getBootClasspath().join(File.pathSeparator))
-            }
-
-            if (subProject.hasProperty('bintrayCredentials')) {
-                subProject.apply from: '../publish-to-bintray.gradle'
-            }
+    project.plugins.whenPluginAdded { plugin ->
+        if("com.android.build.gradle.AppPlugin".equals(plugin.class.name)) {
+            project.android.dexOptions.preDexLibraries = rootProject.ext.preDexLibs
+        } else if ("com.android.build.gradle.LibraryPlugin".equals(plugin.class.name)) {
+            project.android.dexOptions.preDexLibraries = rootProject.ext.preDexLibs
         }
     }
+
 }
 
-def publishedProjects = subprojects.findAll { !it.path.contains('example') }
+def publishedProjects = subprojects.findAll { !it.path.contains('opensrp') }
 task jacocoRootReport(type: JacocoReport, group: 'Coverage reports') {
     description = 'Generates an aggregate report from all subprojects'
 
