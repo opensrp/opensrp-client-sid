@@ -108,7 +108,7 @@ public class SyncService extends Service {
         }
 
         try {
-            pushToServer();
+            pushECToServer();
             pullECFromServer();
 
         } catch (Exception e) {
@@ -265,13 +265,8 @@ public class SyncService extends Service {
         sendSyncStatusBroadcastMessage(fetchStatus, true);
     }
 
-// PUSH TO SERVER
-
-    private void pushToServer() {
-        pushECToServer();
-    }
-
     private void pushECToServer() {
+        Log.e(TAG, "pushECToServer: start " );
         EventClientRepository db = BidanApplication.getInstance().eventClientRepository();
         boolean keepSyncing = true;
 
@@ -301,6 +296,8 @@ public class SyncService extends Service {
                                 baseUrl,
                                 EVENTS_SYNC_PATH),
                         jsonPayload);
+                Log.e(TAG, "pushECToServer:response "+ baseUrl + " >> PATH "+EVENTS_SYNC_PATH );
+                Log.e(TAG, "pushECToServer:response "+ response.status() );
                 if (response.isFailure()) {
                     Log.e(getClass().getName(), "Events sync failed.");
                     return;
@@ -311,6 +308,7 @@ public class SyncService extends Service {
                 Log.e(getClass().getName(), e.getMessage());
             }
         }
+        Log.e(TAG, "pushECToServer: end" );
 
 
     }

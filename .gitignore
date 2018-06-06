@@ -77,3 +77,4 @@ a.png
 lib/bpm
 lib/
 .idea/*.xml
+*.exec

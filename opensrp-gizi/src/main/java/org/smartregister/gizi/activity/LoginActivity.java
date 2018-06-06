@@ -30,6 +30,7 @@ import org.smartregister.Context;
 import org.smartregister.domain.LoginResponse;
 import org.smartregister.domain.Response;
 import org.smartregister.domain.ResponseStatus;
+import org.smartregister.domain.jsonmapping.LoginResponseData;
 import org.smartregister.event.Listener;
 import org.smartregister.gizi.R;
 import org.smartregister.gizi.application.GiziApplication;
@@ -288,39 +289,6 @@ public class LoginActivity extends AppCompatActivity {
         dialog.show();
     }
 
-    private void getLocation() {
-        tryGetLocation(new Listener<Response<String>>() {
-            @Override
-            public void onEvent(Response<String> data) {
-                if (data.status() == ResponseStatus.success) {
-                    context.userService().saveAnmLocation(data.payload());
-                }
-            }
-        });
-    }
-
-    private void tryGetLocation(final Listener<Response<String>> afterGet) {
-        LockingBackgroundTask task = new LockingBackgroundTask(new ProgressIndicator() {
-            @Override
-            public void setVisible() { }
-
-            @Override
-            public void setInvisible() { Log.logInfo("Successfully get location"); }
-        });
-
-        task.doActionInBackground(new BackgroundAction<Response<String>>() {
-            @Override
-            public Response<String> actionToDoInBackgroundThread() {
-                return context.userService().getLocationInformation();
-            }
-
-            @Override
-            public void postExecuteInUIThread(Response<String> result) {
-                afterGet.onEvent(result);
-            }
-        });
-    }
-
     private void tryRemoteLogin(final String userName, final String password, final Listener<LoginResponse> afterLoginCheck) {
         LockingBackgroundTask task = new LockingBackgroundTask(new ProgressIndicator() {
             @Override
@@ -364,9 +332,9 @@ public class LoginActivity extends AppCompatActivity {
         //DrishtiSyncScheduler.startOnlyIfConnectedToNetwork(getApplicationContext());
     }
 
-    private void remoteLoginWith(String userName, String password, String userInfo) {
+    private void remoteLoginWith(String userName, String password, LoginResponseData userInfo) {
         context.userService().remoteLogin(userName, password, userInfo);
-        String locationId = getUserDefaultLocationId(userInfo);
+        String locationId = getUserDefaultLocationId(userInfo.user.toString());
         Utils.writePreference(GiziApplication.getInstance().getApplicationContext(), PREF_TEAM_LOCATIONS, locationId);
 
         saveDefaultLocationId(userName,locationId);

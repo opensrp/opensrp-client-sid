@@ -112,7 +112,7 @@ public class LoginActivity extends AppCompatActivity {
         }
         setLanguage();
 
-//        debugApp();
+        debugApp();
 
     }
 
@@ -429,21 +429,5 @@ public class LoginActivity extends AppCompatActivity {
         progressDialog.setTitle(getString(org.smartregister.R.string.loggin_in_dialog_title));
         progressDialog.setMessage(getString(org.smartregister.R.string.loggin_in_dialog_message));
     }
-
-//    private void debugApp() {
-//        //    String uname = getResources().getString(R.string.uname);
-//        //   String pwd = getResources().getString(R.string.pwd);
-//        String uname = "demo_ec";
-//        String pwd = "Satu2345";
-//
-//        LayoutInflater layoutInflater = getLayoutInflater();
-//        View view = layoutInflater.inflate(R.layout.login, null);
-//
-//        if (getOpenSRPContext().userService().hasARegisteredUser()) {
-//            localLogin(view, uname, pwd);
-//        } else {
-//            remoteLogin(view, uname, pwd);
-//        }
-//    }
 
 }

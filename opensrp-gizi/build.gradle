@@ -101,6 +101,7 @@ android {
     }
 
     lintOptions {
+        disable 'MissingTranslation', 'ExtraTranslation'
         lintConfig file("lint.xml")
         abortOnError false
     }

@@ -55,16 +55,17 @@ script:
   - echo "Travis branch is in pull request $TRAVIS_PULL+REQUEST"
   - chmod 755 gradlew
   - ls -la
-  - ./gradlew clean assemble test
+#  - travis_wait ./gradlew clean assemble test --stacktrace
+  - travis_wait ./gradlew clean jacocoTestReport coveralls --stacktrace
 
 after_failure:
  - pandoc opensrp-bidan/build/reports/tests/index.html -t plain
  - pandoc opensrp-vaksinator/build/reports/tests/index.html -t plain
  - pandoc opensrp-gizi/build/reports/tests/index.html -t plain\
 
-after_success:
-  - ./gradlew jacocoTestReport coveralls
-  - .buildscript/deploy_snapshot.sh
+#after_success:
+#  - ./gradlew jacocoTestReport coveralls
+#  - .buildscript/deploy_snapshot.sh
 
 notifications:
   slack:
