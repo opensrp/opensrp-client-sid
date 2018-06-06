@@ -13,6 +13,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 import org.json.XML;
 import org.smartregister.CoreLibrary;
+import org.smartregister.bidan.activity.BaseRegisterActivity;
 import org.smartregister.bidan.activity.LoginActivity;
 import org.smartregister.bidan.application.BidanApplication;
 import org.smartregister.bidan.sync.BidanClientProcessor;
@@ -24,6 +25,7 @@ import org.smartregister.clientandeventmodel.FormEntityConverter;
 import org.smartregister.clientandeventmodel.FormField;
 import org.smartregister.clientandeventmodel.FormInstance;
 import org.smartregister.clientandeventmodel.SubFormData;
+import org.smartregister.domain.FetchStatus;
 import org.smartregister.domain.SyncStatus;
 import org.smartregister.domain.form.FormSubmission;
 import org.smartregister.domain.form.SubForm;
@@ -32,6 +34,7 @@ import org.smartregister.repository.BaseRepository;
 import org.smartregister.repository.EventClientRepository;
 import org.smartregister.util.AssetHandler;
 import org.smartregister.util.Log;
+import org.smartregister.util.Utils;
 import org.w3c.dom.Attr;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
@@ -1064,16 +1067,22 @@ public class BidanFormUtils {
             this.event = event;
         }
 
-       /* @Override
+        @Override
         protected void onPostExecute(Void aVoid) {
-            Utils.postEvent(new EnketoFormSaveCompleteEvent(this.formSubmission.formName()));
 
-        }*/
+            if (context instanceof BaseRegisterActivity) {
+                final BaseRegisterActivity registerActivity = ((BaseRegisterActivity) context);
+                registerActivity.refreshList(FetchStatus.fetched);
+                registerActivity.hideProgressDialog();
+            }
 
-       /* @Override
+//            Utils.postEvent(new EnketoFormSaveCompleteEvent(this.formSubmission.formName()));
+        }
+
+        @Override
         protected void onPreExecute() {
-            Utils.postEvent(new ShowProgressDialogEvent());
-        }*/
+//            Utils.postEvent(new ShowProgressDialogEvent());
+        }
 
         @Override
         protected Void doInBackground(Void... params) {

@@ -217,7 +217,7 @@ public class PNCClientsProvider extends BaseClientsProvider {
     }
 
     public String yesNo(String text) {
-        return mContext.getString(text.toLowerCase().contains("y") ? R.string.mcareyes_button_label : R.string.mcareno_button_label);
+        return mContext.getString(text.toLowerCase().contains("y") ? R.string.yes_button_label : R.string.no_button_label);
     }
 
     public String translateComplication(String text) {

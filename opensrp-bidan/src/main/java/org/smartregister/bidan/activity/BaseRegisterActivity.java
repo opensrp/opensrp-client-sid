@@ -1,7 +1,10 @@
 package org.smartregister.bidan.activity;
 
+import android.app.ProgressDialog;
 import android.content.pm.ActivityInfo;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Looper;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
@@ -13,11 +16,13 @@ import org.json.JSONObject;
 import org.smartregister.Context;
 import org.smartregister.adapter.SmartRegisterPaginatedAdapter;
 import org.smartregister.bidan.R;
+import org.smartregister.bidan.fragment.BaseSmartRegisterFragment;
 import org.smartregister.bidan.sync.BidanClientProcessor;
 import org.smartregister.bidan.utils.BidanFormUtils;
 import org.smartregister.commonregistry.AllCommonsRepository;
 import org.smartregister.commonregistry.CommonPersonObject;
 import org.smartregister.commonregistry.CommonPersonObjectClient;
+import org.smartregister.domain.FetchStatus;
 import org.smartregister.domain.form.FieldOverrides;
 import org.smartregister.domain.form.FormSubmission;
 import org.smartregister.enketo.adapter.pager.EnketoRegisterPagerAdapter;
@@ -383,6 +388,33 @@ public class BaseRegisterActivity extends SecuredNativeSmartRegisterActivity imp
         return new DialogOption[]{};
     }
 
+    public void hideProgressDialog() {
+        // todo hide progress dialog
+//        if (progressDialog != null) {
+//            progressDialog.dismiss();
+//        }
+    }
+
+    public void refreshList(final FetchStatus fetchStatus) {
+        if (Looper.myLooper() == Looper.getMainLooper()) {
+            BaseSmartRegisterFragment registerFragment = (BaseSmartRegisterFragment) findFragmentByPosition(0);
+            if (registerFragment != null && fetchStatus.equals(FetchStatus.fetched)) {
+                registerFragment.refreshListView();
+            }
+        } else {
+            Handler handler = new Handler(Looper.getMainLooper());
+            handler.post(new Runnable() {
+                @Override
+                public void run() {
+                    BaseSmartRegisterFragment registerFragment = (BaseSmartRegisterFragment) findFragmentByPosition(0);
+                    if (registerFragment != null && fetchStatus.equals(FetchStatus.fetched)) {
+                        registerFragment.refreshListView();
+                    }
+                }
+            });
+        }
+
+    }
     /**
      * Inner class for Edit and Followup
      */

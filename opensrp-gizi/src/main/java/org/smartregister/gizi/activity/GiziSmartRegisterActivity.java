@@ -187,6 +187,11 @@ public class GiziSmartRegisterActivity extends SecuredNativeSmartRegisterActivit
 
     }
 
+    @Override
+    public void onFormClosed(String s, String s1) {
+
+    }
+
     public void activatingOtherForm(final String formName, final String entityId, final String metaData) {
         final int prevPageIndex = currentPage;
         runOnUiThread(new Runnable() {
