@@ -23,12 +23,6 @@ public class FormSubmissionSyncService {
         try {
             ServiceTools.startService(context, SyncService.class);
 
-//            CloudantSyncHandler mCloudantSyncHandler = CloudantSyncHandler.getInstance(context.getApplicationContext());
-//            CountDownLatch mCountDownLatch = new CountDownLatch(2);
-//            mCloudantSyncHandler.setCountDownLatch(mCountDownLatch);
-//            mCloudantSyncHandler.startPullReplication();
-//            mCloudantSyncHandler.startPushReplication();
-//            mCountDownLatch.await();
             Log.e(TAG, "sync: " );
 
             return FetchStatus.fetched;

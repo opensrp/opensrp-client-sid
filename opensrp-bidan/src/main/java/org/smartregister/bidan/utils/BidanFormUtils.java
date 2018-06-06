@@ -82,8 +82,6 @@ public class BidanFormUtils {
 //        formEntityConverter = new BidanFormEntityConverter(formAttributeParser, mContext);
         formEntityConverter = new FormEntityConverter(formAttributeParser, mContext);
         eventClientRepository = BidanApplication.getInstance().eventClientRepository();
-        // Protect creation of static variable.
-        //  mCloudantDataHandler = CloudantDataHandler.getInstance(context.getApplicationContext());
     }
 
     public static BidanFormUtils getInstance(Context ctx) throws Exception {

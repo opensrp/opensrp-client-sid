@@ -373,6 +373,11 @@ public class BaseRegisterActivity extends SecuredNativeSmartRegisterActivity imp
 
     }
 
+    @Override
+    public void onFormClosed(String s, String s1) {
+        // do nothing
+    }
+
 
     public DialogOption[] getEditOptions() {
         return new DialogOption[]{};

@@ -35,6 +35,7 @@ import org.smartregister.bidan.R;
 import org.smartregister.bidan.application.BidanApplication;
 import org.smartregister.bidan.utils.AllConstantsINA;
 import org.smartregister.domain.LoginResponse;
+import org.smartregister.domain.jsonmapping.LoginResponseData;
 import org.smartregister.event.Listener;
 import org.smartregister.repository.AllSharedPreferences;
 import org.smartregister.sync.DrishtiSyncScheduler;
@@ -46,6 +47,7 @@ import org.smartregister.view.ProgressIndicator;
 import java.io.IOException;
 import java.io.InputStream;
 import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.Locale;
 import java.util.Properties;
 import java.util.zip.ZipEntry;
@@ -90,7 +92,7 @@ public class LoginActivity extends AppCompatActivity {
             e.printStackTrace();
         }
         setContentView(org.smartregister.R.layout.login);
-        ImageView loginglogo = (ImageView) findViewById(R.id.login_logo);
+        ImageView loginglogo = findViewById(R.id.login_logo);
 //        loginglogo.setImageDrawable(getResources().getDrawable(R.drawable.login_logo_bidan));
         loginglogo.setImageDrawable(ResourcesCompat.getDrawable(getResources(), R.drawable.login_logo_bidan, null));
 //        ContextCompat.getDrawable(getActivity(), R.drawable.login_logo_bidan);
@@ -110,7 +112,7 @@ public class LoginActivity extends AppCompatActivity {
         }
         setLanguage();
 
-        debugApp();
+//        debugApp();
 
     }
 
@@ -226,11 +228,8 @@ public class LoginActivity extends AppCompatActivity {
         return packageInfo.versionName;
     }
 
-    private String getBuildDate() throws PackageManager.NameNotFoundException, IOException {
-        ApplicationInfo applicationInfo = getPackageManager().getApplicationInfo(getPackageName(), 0);
-        ZipFile zf = new ZipFile(applicationInfo.sourceDir);
-        ZipEntry ze = zf.getEntry("classes.dex");
-        return new SimpleDateFormat("dd MMM yyyy", Locale.getDefault()).format(new java.util.Date(ze.getTime()));
+    private String getBuildDate() {
+        return new SimpleDateFormat("dd MMM yyyy", Locale.getDefault()).format(new Date(BuildConfig.BUILD_TIMESTAMP));
     }
 
     public static void setLanguage() {
@@ -250,14 +249,14 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     private void initializeLoginFields() {
-        userNameEditText = ((EditText) findViewById(org.smartregister.R.id.login_userNameText));
+        userNameEditText = findViewById(org.smartregister.R.id.login_userNameText);
         userNameEditText.setRawInputType(InputType.TYPE_CLASS_TEXT);
-        passwordEditText = ((EditText) findViewById(org.smartregister.R.id.login_passwordText));
+        passwordEditText = findViewById(org.smartregister.R.id.login_passwordText);
         passwordEditText.setRawInputType(InputType.TYPE_CLASS_TEXT);
     }
 
     private void initializeBuildDetails() {
-        TextView buildDetailsTextView = (TextView) findViewById(org.smartregister.R.id.login_build);
+        TextView buildDetailsTextView = findViewById(org.smartregister.R.id.login_build);
         try {
             buildDetailsTextView.setText("Version " + getVersion() + ", Built on: " + getBuildDate());
         } catch (Exception e) {
@@ -278,7 +277,7 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     public void login(final View view) {
-        Log.e(TAG, "login: "+ getOpenSRPContext().userService().hasARegisteredUser() );
+//        Log.e(TAG, "login: "+ getOpenSRPContext().userService().hasARegisteredUser() );
         login(view, !getOpenSRPContext().allSharedPreferences().fetchForceRemoteLogin());
     }
 
@@ -324,6 +323,7 @@ public class LoginActivity extends AppCompatActivity {
                     if (loginResponse == null) {
                         showErrorDialog("Login failed. Unknown reason. Try Again");
                     } else {
+                        Log.e(TAG, "onEvent: "+ loginResponse.message() );
                         if (loginResponse == NO_INTERNET_CONNECTIVITY) {
                             showErrorDialog(getResources().getString(R.string.no_internet_connectivity));
                         } else if (loginResponse == UNKNOWN_RESPONSE) {
@@ -373,11 +373,11 @@ public class LoginActivity extends AppCompatActivity {
         });
     }
 
-    private void remoteLoginWith(String userName, String password, String userInfo) {
+    private void remoteLoginWith(String userName, String password, LoginResponseData userInfo) {
         context.userService().remoteLogin(userName, password, userInfo);
         // LoginActivity.generator = new Generator(context, userName, password);
 
-        String locationId = getUserDefaultLocationId(userInfo);
+        String locationId = getUserDefaultLocationId(userInfo.user.toString());
         Utils.writePreference(BidanApplication.getInstance().getApplicationContext(), PREF_TEAM_LOCATIONS, locationId);
 
         setDefaultLocationId(userName, locationId);

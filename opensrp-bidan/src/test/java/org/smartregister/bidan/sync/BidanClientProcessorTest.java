@@ -30,7 +30,7 @@ import java.util.ArrayList;
  * Created by sid-tech on 4/26/18
  */
 @RunWith(PowerMockRunner.class)
-@PrepareForTest({AssetHandler.class, CloudantDataHandler.class, PreferenceManager.class})
+@PrepareForTest({AssetHandler.class, PreferenceManager.class})
 @PowerMockIgnore({"javax.xml.*", "org.xml.sax.*", "org.w3c.dom.*", "org.springframework.context.*", "org.apache.log4j.*"})
 public class BidanClientProcessorTest {
 
@@ -45,8 +45,8 @@ public class BidanClientProcessorTest {
     private Context context;
     @Mock
     private DetailsRepository detailsRepository;
-    @Mock
-    private CloudantDataHandler cloudantDataHandler;
+//    @Mock
+//    private CloudantDataHandler cloudantDataHandler;
     private ClientProcessor clientProcessor;
     @Mock
     private SharedPreferences sharedPreferences;
@@ -62,7 +62,7 @@ public class BidanClientProcessorTest {
         PowerMockito.when(AssetHandler.readFileFromAssetsFolder("ec_client_fields.json", context.applicationContext())).thenReturn(ClientData.ec_client_fields_json);
         PowerMockito.when(AssetHandler.readFileFromAssetsFolder("ec_client_alerts.json", context.applicationContext())).thenReturn(ClientData.ec_client_alerts);
 
-        PowerMockito.mockStatic(CloudantDataHandler.class);
+//        PowerMockito.mockStatic(CloudantDataHandler.class);
         BidanClientProcessor.getInstance(RuntimeEnvironment.application);
         clientProcessor = new ClientProcessor(context.applicationContext());
         bidanClientProcessor = new BidanClientProcessor(RuntimeEnvironment.application);
@@ -98,8 +98,8 @@ public class BidanClientProcessorTest {
         for (int i = 0; i < clientArray.length(); i++) {
             clientList.add(clientArray.getJSONObject(i));
         }
-        PowerMockito.mockStatic(CloudantDataHandler.class);
-        PowerMockito.when(CloudantDataHandler.getInstance(context.applicationContext())).thenReturn(cloudantDataHandler);
+//        PowerMockito.mockStatic(CloudantDataHandlera.class);
+//        PowerMockito.when(CloudantDataHandlera.getInstance(context.applicationContext())).thenReturn(cloudantDataHandler);
         bidanClientProcessor = new BidanClientProcessor(context.applicationContext());
         JSONArray fieldArray = fieldObject.getJSONArray("bindobjects");
         Assert.assertEquals(bidanClientProcessor.processField(fieldArray.getJSONObject(0), eventList.get(0), clientList.get(0)), Boolean.TRUE);
