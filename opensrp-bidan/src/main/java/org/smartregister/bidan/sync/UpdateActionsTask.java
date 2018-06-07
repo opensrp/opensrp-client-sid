@@ -43,14 +43,14 @@ public class UpdateActionsTask {
             public FetchStatus actionToDoInBackgroundThread() {
 
                 FetchStatus fetchStatusForForms = formSubmissionSyncService.sync();
-                Log.e(TAG, "updateFromServer: "+fetchStatusForForms.toString() );
+                Log.e(TAG, "updateFromServer:fetchStatusForForms "+fetchStatusForForms.toString() );
 
                 if (org.smartregister.Context.getInstance().configuration().shouldSyncForm()) {
 
                     allFormVersionSyncService.verifyFormsInFolder();
                     FetchStatus fetchVersionStatus = allFormVersionSyncService.pullFormDefinitionFromServer();
                     DownloadStatus downloadStatus = allFormVersionSyncService.downloadAllPendingFormFromServer();
-                    Log.e("TAG","actionToDoInBackgroundThread: "+ downloadStatus );
+                    Log.e(TAG,"actionToDoInBackgroundThread:downloadStatus "+ downloadStatus );
 
                     if (downloadStatus == DownloadStatus.downloaded) {
                         allFormVersionSyncService.unzipAllDownloadedFormFile();
@@ -60,16 +60,17 @@ public class UpdateActionsTask {
                         return fetched;
                     }
                 } else {
-                    Log.e("TAG", "actionToDoInBackgroundThread: notsync " + fetchStatusForForms );
+                    Log.e(TAG, "actionToDoInBackgroundThread: fetchStatusForForms " + fetchStatusForForms );
                 }
 
 
-                if (nothingFetched == fetched || fetchStatusForForms == fetched || nothingFetched == fetched)
+                if (nothingFetched == fetched || fetchStatusForForms == fetched )
                     return fetched;
 
                 return fetchStatusForForms;
             }
 
+            @Override
             public void postExecuteInUIThread(FetchStatus result) {
                 if (result != null && context != null && result != nothingFetched) {
                     Toast.makeText(context, result.displayValue(), Toast.LENGTH_SHORT).show();

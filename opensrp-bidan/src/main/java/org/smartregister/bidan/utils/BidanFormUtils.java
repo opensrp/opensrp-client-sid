@@ -34,7 +34,6 @@ import org.smartregister.repository.BaseRepository;
 import org.smartregister.repository.EventClientRepository;
 import org.smartregister.util.AssetHandler;
 import org.smartregister.util.Log;
-import org.smartregister.util.Utils;
 import org.w3c.dom.Attr;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
@@ -1031,7 +1030,7 @@ public class BidanFormUtils {
     }
 
     private List<String> EditClientFormNameList(){
-        List<String> formNames = new ArrayList<String>();
+        List<String> formNames = new ArrayList<>();
         formNames.add("child_edit");
         return formNames;
     }
@@ -1054,6 +1053,7 @@ public class BidanFormUtils {
 
         return event;
     }
+
     class SavePatientAsyncTask extends android.os.AsyncTask<Void, Void, Void> {
         private final org.smartregister.clientandeventmodel.FormSubmission formSubmission;
         private Context context;
@@ -1070,7 +1070,6 @@ public class BidanFormUtils {
         @Override
         protected void onPostExecute(Void aVoid) {
 
-            android.util.Log.e(TAG, "onPostExecute: " );
             if (context instanceof BaseRegisterActivity) {
                 final BaseRegisterActivity registerActivity = ((BaseRegisterActivity) context);
                 registerActivity.refreshList(FetchStatus.fetched);
@@ -1099,14 +1098,15 @@ public class BidanFormUtils {
                 saveEvent(event);
 
                 Gson gson = new GsonBuilder().create();
+                android.util.Log.e(TAG, "doInBackground: eventType "+ eventType );
                 if (eventType != null) {
 
-                    if (eventType.equals("Registrasi Vaksinator")) {
+                    if (eventType.equals(AllConstantsINA.FormNames.KI_FORM_TITLE)) {
                         JSONObject json = eventClientRepository.getClientByBaseEntityId(event.getBaseEntityId());
                         Client client = gson.fromJson(json.toString(), Client.class);
                         // client.addAttribute("kartu_ibu", "kartu_ibu");
                         saveClient(client);
-                    } else if (eventType.equals("Child Registration")) {
+                    } else if (eventType.equals(AllConstantsINA.FormNames.CHILD_FORM_TITLE)) {
                         JSONObject json = eventClientRepository.getClientByBaseEntityId(event.getBaseEntityId());
                         Client client = gson.fromJson(json.toString(), Client.class);
                         // client.addAttribute("anak", "anak");

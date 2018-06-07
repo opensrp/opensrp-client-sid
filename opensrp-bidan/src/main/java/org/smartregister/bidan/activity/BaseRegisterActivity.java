@@ -106,7 +106,7 @@ public class BaseRegisterActivity extends SecuredNativeSmartRegisterActivity imp
             @Override
             public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
                 // This Space for book :)
-                android.util.Log.i(TAG, "onPageScrolled: ");
+//                android.util.Log.i(TAG, "onPageScrolled: ");
             }
 
             @Override
@@ -118,7 +118,7 @@ public class BaseRegisterActivity extends SecuredNativeSmartRegisterActivity imp
             @Override
             public void onPageScrollStateChanged(int state) {
                 // This Space for book :)
-                android.util.Log.i(TAG, "onPageScrollStateChanged: ");
+//                android.util.Log.i(TAG, "onPageScrollStateChanged: ");
 
             }
         });
@@ -226,6 +226,7 @@ public class BaseRegisterActivity extends SecuredNativeSmartRegisterActivity imp
     }
 
     public void switchToBaseFragment(final String data) {
+        android.util.Log.e(TAG, "switchToBaseFragment: " );
         final int prevPageIndex = currentPage;
         runOnUiThread(new Runnable() {
             @Override
@@ -234,6 +235,15 @@ public class BaseRegisterActivity extends SecuredNativeSmartRegisterActivity imp
                 SecuredNativeSmartRegisterFragment registerFragment = (SecuredNativeSmartRegisterFragment) findFragmentByPosition(0);
                 if (registerFragment != null && data != null) {
                     registerFragment.refreshListView();
+                    android.util.Log.e(TAG, "run: refresh1" );
+                    registerFragment.setRefreshList(true);
+                    android.util.Log.e(TAG, "run: refresh2" );
+
+                    //                final BaseRegisterActivity registerActivity = ((BaseRegisterActivity) context);
+//                registerActivity.refreshList(FetchStatus.fetched);
+//                registerActivity.hideProgressDialog();
+                } else {
+                    android.util.Log.e(TAG, "run: " );
                 }
 
                 //hack reset the form
@@ -350,18 +360,19 @@ public class BaseRegisterActivity extends SecuredNativeSmartRegisterActivity imp
             BidanClientProcessor.getInstance(this).processClient();
 
             android.util.Log.e(TAG, "saveFormSubmission: "+ formName );
-            android.util.Log.e(TAG, "saveFormSubmission: "+submission.toString() );
+//            android.util.Log.e(TAG, "saveFormSubmission: "+ submission.toString() );
 
             context().formSubmissionService().updateFTSsearch(submission);
             context().formSubmissionRouter().handleSubmission(submission, formName);
+            // refresh list
 //            switchToBaseFragment(formSubmission); // Unnecessary!! passing on data
-            switchToBaseFragment();
+//            switchToBaseFragment(null);
 
             if ("registrasi_ibu".equals(formName)) {
 
                 fieldOverrides.put("ibuCaseId", submission.entityId());
             }
-
+            switchToBaseFragment("");
             //end capture flurry log for FS
 //            String end = timer.format(new Date());
 //            Map<String, String> FS = new HashMap<>();

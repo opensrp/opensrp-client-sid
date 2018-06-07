@@ -29,6 +29,22 @@ public class AllConstantsINA {
         public static final String UNIQUE_ID = "unique_id";
     }
 
+    public static final class KEY {
+        public static final String _ID = "_id";
+        public static final String FIRST_NAME = "first_name";
+        public static final String LAST_NAME = "last_name";
+        public static final String FIRST_ENCOUNTER = "first_encounter";
+        public static final String DATE = "date";
+        public static final String DOB = "dob";
+        public static final String GENDER = "gender";
+        public static final String PARTICIPANT_ID = "participant_id";
+        public static final String NEXT_VISIT_DATE = "next_visit_date";
+        public static final String PATIENT_TYPE = "patient_type";
+        public static final String SITE_OF_DISEASE = "site_of_disease";
+        public static final String TREATMENT_INITIATION_DATE = "treatment_initiation_date";
+        public static final String CLIENT = "client";
+
+    }
 
     public class FormNames {
 //        public static final String EC_REGISTRATION = "ec_registration";
@@ -58,6 +74,8 @@ public class AllConstantsINA {
 //        public static final String CHILD_ILLNESS = "child_illness";
 //        public static final String VITAMIN_A = "vitamin_a";
 //        public static final String DELIVERY_PLAN = "delivery_plan";
+        public static final String KI_FORM_TITLE = "Identitas Ibu";
+        public static final String CHILD_FORM_TITLE = "Child Registration";
 //        public static final String EC_EDIT = "ec_edit";
 //        public static final String ANC_INVESTIGATIONS = "anc_investigations";
 //        public static final String RECORD_ECPS = "record_ecps";

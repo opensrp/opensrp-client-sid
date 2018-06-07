@@ -40,7 +40,6 @@ public class ECSyncUpdater {
     }
 
     public JSONObject fetchAsJsonObject(String filter, String filterValue) throws Exception {
-        Log.e(TAG, "fetchAsJsonObject: " );
         try {
             HTTPAgent httpAgent = BidanApplication.getInstance().context().getHttpAgent();
             String baseUrl = BidanApplication.getInstance().context().

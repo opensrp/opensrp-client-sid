@@ -335,7 +335,7 @@ public class BidanHomeActivity extends SecuredActivity {
 //            LoginActivity.generator.requestUniqueId();                                                                  // unique id part
     }*/
     public void updateDataFromServer() {
-        Log.d("Home", "updateDataFromServer: tombol update");
+        Log.e("Home", "updateDataFromServer: tombol update");
         UpdateActionsTask updateActionsTask = new UpdateActionsTask(
                 this, context().actionService(), new FormSubmissionSyncService(context().applicationContext()), new SyncProgressIndicator(), context().allFormVersionSyncService());
 //        FlurryFacade.logEvent("click_update_from_server");
