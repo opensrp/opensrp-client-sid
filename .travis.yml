@@ -56,7 +56,7 @@ script:
   - chmod 755 gradlew
   - ls -la
 #  - travis_wait ./gradlew clean assemble test --stacktrace
-  - travis_wait ./gradlew clean jacocoTestReport coveralls --stacktrace
+  - travis_wait ./gradlew clean jacocoRootReport coveralls --stacktrace
 
 after_failure:
  - pandoc opensrp-bidan/build/reports/tests/index.html -t plain

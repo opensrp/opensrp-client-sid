@@ -7,6 +7,7 @@ import net.sqlcipher.database.SQLiteDatabase;
 
 import org.smartregister.bidan.application.BidanApplication;
 import org.smartregister.bidan.utils.BidanConstants;
+import org.smartregister.configurableviews.repository.ConfigurableViewsRepository;
 import org.smartregister.repository.EventClientRepository;
 import org.smartregister.repository.Repository;
 
@@ -26,17 +27,22 @@ public class BidanRepository extends Repository {
         this.mContext = context;
     }
 
+
     @Override
     public void onCreate(SQLiteDatabase database) {
         super.onCreate(database);
-        Log.e(TAG, "onCreate: "+ mContext);
+        ConfigurableViewsRepository.createTable(database);
         EventClientRepository.createTable(database, EventClientRepository.Table.client, EventClientRepository.client_column.values());
+        EventClientRepository.createTable(database, EventClientRepository.Table.address, EventClientRepository.address_column.values());
         EventClientRepository.createTable(database, EventClientRepository.Table.event, EventClientRepository.event_column.values());
-//        EventClientRepository.createTable(database, EventClientRepository.Table.address, EventClientRepository.address_column.values());
-//        EventClientRepository.createTable(database, EventClientRepository.Table.obs, EventClientRepository.obs_column.values());
-        onUpgrade(database, 1, BidanConstants.DATABASE_VERSION);
+        EventClientRepository.createTable(database, EventClientRepository.Table.obs, EventClientRepository.obs_column.values());
+//        ResultsRepository.createTable(database);
+//        ResultDetailsRepository.createTable(database);
+//        BMIRepository.createTable(database);
+//        onUpgrade(database, 1, BidanConstants.DATABASE_VERSION);
 
     }
+
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {

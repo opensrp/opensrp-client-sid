@@ -21,6 +21,7 @@ import org.smartregister.bidan.R;
 import org.smartregister.bidan.activity.LoginActivity;
 import org.smartregister.bidan.application.BidanApplication;
 import org.smartregister.bidan.receiver.SyncStatusBroadcastReceiver;
+import org.smartregister.bidan.sync.BidanClientProcessor;
 import org.smartregister.bidan.sync.ECSyncUpdater;
 import org.smartregister.domain.FetchStatus;
 import org.smartregister.domain.Response;
@@ -117,13 +118,55 @@ public class SyncService extends Service {
         }
     }
 
+    private void pushECToServer() {
+        EventClientRepository db = BidanApplication.getInstance().eventClientRepository();
+        boolean keepSyncing = true;
+
+        while (keepSyncing) {
+            try {
+                Map<String, Object> pendingEvents = db.getUnSyncedEvents(EVENT_PUSH_LIMIT);
+
+                if (pendingEvents.isEmpty()) {
+                    return;
+                }
+
+                String baseUrl = BidanApplication.getInstance().context().configuration().dristhiBaseURL();
+                if (baseUrl.endsWith(context.getString(R.string.url_separator))) {
+                    baseUrl = baseUrl.substring(0, baseUrl.lastIndexOf(context.getString(R.string.url_separator)));
+                }
+                // create request body
+                JSONObject request = new JSONObject();
+                if (pendingEvents.containsKey(context.getString(R.string.clients_key))) {
+                    request.put(context.getString(R.string.clients_key), pendingEvents.get(context.getString(R.string.clients_key)));
+                }
+                if (pendingEvents.containsKey(context.getString(R.string.events_key))) {
+                    request.put(context.getString(R.string.events_key), pendingEvents.get(context.getString(R.string.events_key)));
+                }
+
+                String jsonPayload = request.toString();
+                Log.e(TAG, "pushECToServer: "+ jsonPayload );
+                Response<String> response = httpAgent.post(
+                        MessageFormat.format("{0}/{1}", baseUrl, EVENTS_SYNC_PATH), jsonPayload);
+
+                if (response.isFailure()) {
+                    Log.e(getClass().getName(), "Events sync failed.");
+                    return;
+                }
+                db.markEventsAsSynced(pendingEvents);
+                Log.i(getClass().getName(), "Events synced successfully.");
+            } catch (Exception e) {
+                Log.e(getClass().getName(), e.getMessage());
+            }
+        }
+
+    }
+
     private void pullECFromServer() {
+        Log.e(TAG, "pullECFromServer: start" );
         final ECSyncUpdater ecUpdater = ECSyncUpdater.getInstance(context);
 
         // Fetch locations
-
         String locations = Utils.getPreference(context, LoginActivity.PREF_TEAM_LOCATIONS, "");
-        org.smartregister.util.Log.logInfo("SYNCLOKASI" + locations);
         if (StringUtils.isBlank(locations)) {
             sendSyncStatusBroadcastMessage(FetchStatus.fetchedFailed, true);
             return;
@@ -192,6 +235,7 @@ public class SyncService extends Service {
     }
 
     private void saveResponseParcel(final ResponseParcel responseParcel) {
+        Log.e(TAG, "saveResponseParcel: " );
         final ECSyncUpdater ecUpdater = ECSyncUpdater.getInstance(context);
         final Observable<FetchStatus> observable = Observable.just(responseParcel)
                 .observeOn(AndroidSchedulers.from(mHandlerThread.getLooper()))
@@ -208,7 +252,9 @@ public class SyncService extends Service {
                                         .map(new Function<Pair<Long, Long>, FetchStatus>() {
                                             @Override
                                             public FetchStatus apply(@NonNull Pair<Long, Long> serverVersionPair) throws Exception {
-                                                ClientProcessor.getInstance(context).processClient(ecUpdater.allEvents(serverVersionPair.first - 1, serverVersionPair.second));
+                                                Log.e(TAG, "apply: proses data storage" );
+//                                                ClientProcessor.getInstance(context).processClient(ecUpdater.allEvents(serverVersionPair.first - 1, serverVersionPair.second));
+                                                BidanClientProcessor.getInstance(context).processClient(ecUpdater.allEvents(serverVersionPair.first - 1, serverVersionPair.second));
                                                 return FetchStatus.fetched;
                                             }
                                         });
@@ -263,54 +309,6 @@ public class SyncService extends Service {
         }
 
         sendSyncStatusBroadcastMessage(fetchStatus, true);
-    }
-
-    private void pushECToServer() {
-        Log.e(TAG, "pushECToServer: start " );
-        EventClientRepository db = BidanApplication.getInstance().eventClientRepository();
-        boolean keepSyncing = true;
-
-        while (keepSyncing) {
-            try {
-                Map<String, Object> pendingEvents = db.getUnSyncedEvents(EVENT_PUSH_LIMIT);
-
-                if (pendingEvents.isEmpty()) {
-                    return;
-                }
-
-                String baseUrl = BidanApplication.getInstance().context().configuration().dristhiBaseURL();
-                if (baseUrl.endsWith(context.getString(R.string.url_separator))) {
-                    baseUrl = baseUrl.substring(0, baseUrl.lastIndexOf(context.getString(R.string.url_separator)));
-                }
-                // create request body
-                JSONObject request = new JSONObject();
-                if (pendingEvents.containsKey(context.getString(R.string.clients_key))) {
-                    request.put(context.getString(R.string.clients_key), pendingEvents.get(context.getString(R.string.clients_key)));
-                }
-                if (pendingEvents.containsKey(context.getString(R.string.events_key))) {
-                    request.put(context.getString(R.string.events_key), pendingEvents.get(context.getString(R.string.events_key)));
-                }
-                String jsonPayload = request.toString();
-                Response<String> response = httpAgent.post(
-                        MessageFormat.format("{0}/{1}",
-                                baseUrl,
-                                EVENTS_SYNC_PATH),
-                        jsonPayload);
-                Log.e(TAG, "pushECToServer:response "+ baseUrl + " >> PATH "+EVENTS_SYNC_PATH );
-                Log.e(TAG, "pushECToServer:response "+ response.status() );
-                if (response.isFailure()) {
-                    Log.e(getClass().getName(), "Events sync failed.");
-                    return;
-                }
-                db.markEventsAsSynced(pendingEvents);
-                Log.i(getClass().getName(), "Events synced successfully.");
-            } catch (Exception e) {
-                Log.e(getClass().getName(), e.getMessage());
-            }
-        }
-        Log.e(TAG, "pushECToServer: end" );
-
-
     }
 
     private void sendSyncStatusBroadcastMessage(FetchStatus fetchStatus, boolean isComplete) {
@@ -388,6 +386,7 @@ public class SyncService extends Service {
         private ResponseParcel(JSONObject jsonObject, Pair<Long, Long> serverVersionPair) {
             this.jsonObject = jsonObject;
             this.serverVersionPair = serverVersionPair;
+            Log.e(TAG, "ResponseParcel: "+ jsonObject.toString() );
         }
 
         private JSONObject getJsonObject() {

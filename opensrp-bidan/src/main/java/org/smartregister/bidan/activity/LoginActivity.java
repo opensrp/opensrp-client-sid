@@ -27,6 +27,8 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.google.gson.Gson;
+
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.smartregister.Context;
@@ -35,7 +37,9 @@ import org.smartregister.bidan.R;
 import org.smartregister.bidan.application.BidanApplication;
 import org.smartregister.bidan.utils.AllConstantsINA;
 import org.smartregister.domain.LoginResponse;
+import org.smartregister.domain.jsonmapping.Location;
 import org.smartregister.domain.jsonmapping.LoginResponseData;
+import org.smartregister.domain.jsonmapping.util.TreeNode;
 import org.smartregister.event.Listener;
 import org.smartregister.repository.AllSharedPreferences;
 import org.smartregister.sync.DrishtiSyncScheduler;
@@ -47,7 +51,10 @@ import org.smartregister.view.ProgressIndicator;
 import java.io.IOException;
 import java.io.InputStream;
 import java.text.SimpleDateFormat;
+import java.util.Arrays;
 import java.util.Date;
+import java.util.Iterator;
+import java.util.LinkedHashMap;
 import java.util.Locale;
 import java.util.Properties;
 import java.util.zip.ZipEntry;
@@ -117,10 +124,11 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     private void debugApp() {
-        String uname = "demo_ec_vaksin", pwd = "Satu2345";
+        String uname = null, pwd = null;
         try {
             uname = getCredential("uname", getApplicationContext());
             pwd =  getCredential("pwd", getApplicationContext());
+
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -182,6 +190,7 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     public String getUserDefaultLocationId(String userInfo) {
+        Log.e(TAG, "getUserDefaultLocationId: "+ userInfo );
         try {
             JSONObject userLocationJSON = new JSONObject(userInfo);
             return userLocationJSON
@@ -377,7 +386,22 @@ public class LoginActivity extends AppCompatActivity {
         context.userService().remoteLogin(userName, password, userInfo);
         // LoginActivity.generator = new Generator(context, userName, password);
 
-        String locationId = getUserDefaultLocationId(userInfo.user.toString());
+        LinkedHashMap<String, TreeNode<String, Location>> abc = userInfo.locations.getLocationsHierarchy();
+        Gson gson = new Gson();
+
+        // Convert the ordered map into an ordered string.
+        String json = gson.toJson(abc, LinkedHashMap.class);
+        String locationId = "";
+        try {
+            JSONObject jsonObject = new JSONObject(json);
+            Iterator<String> keys = jsonObject.keys();
+            // get some_name_i_wont_know in str_Name
+            locationId = keys.next();
+
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        Log.e(TAG, "remoteLoginWith: location "+ locationId );
         Utils.writePreference(BidanApplication.getInstance().getApplicationContext(), PREF_TEAM_LOCATIONS, locationId);
 
         setDefaultLocationId(userName, locationId);

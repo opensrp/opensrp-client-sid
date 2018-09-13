@@ -23,7 +23,7 @@ public class FormSubmissionSyncService {
         try {
             ServiceTools.startService(context, SyncService.class);
 
-            Log.e(TAG, "sync: " );
+            Log.e(TAG, "sync: started" );
 
             return FetchStatus.fetched;
         } catch (Exception e) {

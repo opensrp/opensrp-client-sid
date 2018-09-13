@@ -8,6 +8,7 @@ import com.crashlytics.android.Crashlytics;
 import org.smartregister.Context;
 import org.smartregister.CoreLibrary;
 import org.smartregister.bidan.activity.LoginActivity;
+import org.smartregister.bidan.receiver.BidanSyncBroadcastReceiver;
 import org.smartregister.bidan.repository.BidanRepository;
 import org.smartregister.commonregistry.CommonFtsObject;
 import org.smartregister.repository.EventClientRepository;
@@ -106,7 +107,8 @@ public class BidanApplication extends DrishtiApplication {
 
         //Initialize Modules
         CoreLibrary.init(context());
-        DrishtiSyncScheduler.setReceiverClass(SyncBroadcastReceiver.class);
+//        DrishtiSyncScheduler.setReceiverClass(SyncBroadcastReceiver.class);
+        DrishtiSyncScheduler.setReceiverClass(BidanSyncBroadcastReceiver.class);
 
         applyUserLanguagePreference();
         cleanUpSyncState();
