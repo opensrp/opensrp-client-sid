@@ -1092,6 +1092,9 @@ public class BidanFormUtils {
                 AllSharedPreferences allSharedPreferences = new AllSharedPreferences(preferences);
                 if (saveClient) {
                     Client c = formEntityConverter.getClientFromFormSubmission(formSubmission);
+                    if (c.getGender() == null || c.getGender().isEmpty()){
+                        c.setGender("female");
+                    }
                     saveClient(c);
                 }
                 event = tagSyncMetadata(event);
