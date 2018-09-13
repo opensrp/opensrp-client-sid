@@ -255,6 +255,10 @@ public class BidanFormUtils {
     }
 
     private void saveClient(Client client) {
+        if (client.getGender() == null || client.getGender().isEmpty()){
+            client.setGender("female");
+        }
+
         Log.logDebug("============== CLIENT ================");
         Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSSZ").create();
         String clientJson = gson.toJson(client);
@@ -1092,9 +1096,6 @@ public class BidanFormUtils {
                 AllSharedPreferences allSharedPreferences = new AllSharedPreferences(preferences);
                 if (saveClient) {
                     Client c = formEntityConverter.getClientFromFormSubmission(formSubmission);
-                    if (c.getGender() == null || c.getGender().isEmpty()){
-                        c.setGender("female");
-                    }
                     saveClient(c);
                 }
                 event = tagSyncMetadata(event);
