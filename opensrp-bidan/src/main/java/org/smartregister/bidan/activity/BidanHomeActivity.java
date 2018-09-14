@@ -330,10 +330,9 @@ public class BidanHomeActivity extends SecuredActivity implements SyncStatusBroa
     }*/
     public void updateDataFromServer() {
         Log.e("Home", "updateDataFromServer: tombol update");
-        UpdateActionsTask updateActionsTask = new UpdateActionsTask(
-                this, context().actionService(), new FormSubmissionSyncService(context().applicationContext()), new SyncProgressIndicator(), context().allFormVersionSyncService());
+        UpdateActionsTask updateActionsTask = new UpdateActionsTask(this);
 //        FlurryFacade.logEvent("click_update_from_server");
-        updateActionsTask.updateFromServer(new SyncAfterFetchListener());
+        updateActionsTask.updateFromServer();
 
 //        if (LoginActivity.generator.uniqueIdController().needToRefillUniqueId(LoginActivity.generator.UNIQUE_ID_LIMIT))  // unique id part
 //            LoginActivity.generator.requestUniqueId();                                                                  // unique id part
