@@ -154,7 +154,7 @@ public class PNCSmartRegisterFragment extends BaseSmartRegisterFragment {
         clientsView.setVisibility(VISIBLE);
         clientsProgressView.setVisibility(INVISIBLE);
 //        list.setBackgroundColor(Color.RED);
-//        initializeQueries(getCriteria());
+        initializeQueries();
     }
 
     private String filterStringForAll() {
@@ -162,8 +162,8 @@ public class PNCSmartRegisterFragment extends BaseSmartRegisterFragment {
     }
 
     @TargetApi(Build.VERSION_CODES.KITKAT)
-    public void initializeQueries(String s) {
-        Log.d(TAG, "initializeQueries: key " + s);
+    public void initializeQueries() {
+//        Log.d(TAG, "initializeQueries: key " + s);
         try {
 //            PNCClientsProvider kiscp = new PNCClientsProvider(getActivity(), clientActionHandler, context().alertService());
             String tableEcPnc = "ec_pnc";
@@ -186,7 +186,7 @@ public class PNCSmartRegisterFragment extends BaseSmartRegisterFragment {
             queryBUilder.customJoin("LEFT JOIN ec_kartu_ibu on ec_kartu_ibu.id = ec_pnc.id LEFT JOIN ImageList imagelist ON ec_pnc.id=imagelist.entityID");
             mainSelect = queryBUilder.mainCondition("ec_kartu_ibu.is_closed = 0 and (keadaanIbu ='hidup' OR keadaanIbu IS NULL) ");
 
-            Sortqueries = kiSortByNameAZ();
+//            Sortqueries = kiSortByNameAZ();
 
             currentlimit = 20;
             currentoffset = 0;
@@ -222,7 +222,7 @@ public class PNCSmartRegisterFragment extends BaseSmartRegisterFragment {
 //        super.onResumption();
         getDefaultOptionsProvider();
         if (isPausedOrRefreshList()) {
-            initializeQueries("!");
+            initializeQueries();
         }
         updateSearchView();
     }

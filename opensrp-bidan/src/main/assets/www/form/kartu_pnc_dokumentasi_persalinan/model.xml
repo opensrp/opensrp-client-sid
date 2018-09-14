@@ -114,7 +114,7 @@
                 openmrs_entity_id="118744AAAAAAAAAAAAAAAAAAAAAAAAAA" />
             <high_risk_post-partum_vacum openmrs_entity="Concept"
                 openmrs_entity_id="159260AAAAAAAAAAAAAAAAAAAAAAAAAA" />
-            <high_risk_post-partum_forceps openmrs_entity="Concept" />
+            <high_risk_post-partum_forceps openmrs_entity="n/a" />
             <high_risk_post-partum_Sectio_Caesaria openmrs_entity="Concept"
                 openmrs_entity_id="159901AAAAAAAAAAAAAAAAAAAAAAAAAA" />
             <end openmrs_entity="encounter" openmrs_entity_id="encounter_end" />
