@@ -78,7 +78,7 @@ android {
 
         }
         debug {
-            resValue "string", 'opensrp_url', '"http://192.168.1.253:9090/opensrp"'
+            resValue "string", 'opensrp_url', '"http://178.128.88.118:8080/opensrp"'
             buildConfigField "int", "DATABASE_VERSION", '1'
             buildConfigField "boolean", "SYNC_WAIT", 'false'
             buildConfigField "boolean", "UNIQUE_ID", 'false'
