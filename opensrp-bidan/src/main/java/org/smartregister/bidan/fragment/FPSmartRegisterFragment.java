@@ -295,10 +295,8 @@ public class FPSmartRegisterFragment extends BaseSmartRegisterFragment {
                     startActivity(intent);
                     getActivity().finish();
                     break;
-                case R.id.ib_cm_edit:
+                case R.id.ib_fp_edit:
 //                    FlurryFacade.logEvent("click_visit_button_on_kohort_kb_dashboard");
-//                    showFragmentDialog(new EditDialogOptionModel(), view.getTag());
-//                    showFragmentDialog(new BaseRegisterActivity.EditDialogOptionModelNew(), view.getTag());
                     showFragmentDialog(((FPSmartRegisterActivity) getActivity()).new EditDialogOptionModelNew(), view.getTag());
                     break;
                 default:
