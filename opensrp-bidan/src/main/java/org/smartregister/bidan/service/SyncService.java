@@ -188,7 +188,7 @@ public class SyncService extends Service {
                             if (eCount < 0) {
                                 return Observable.just(FetchStatus.fetchedFailed);
                             } else if (eCount == 0) {
-                                return Observable.just(FetchStatus.nothingFetched);
+                                return Observable.just(FetchStatus.fetched);
                             } else {
                                 Pair<Long, Long> serverVersionPair = getMinMaxServerVersions(jsonObject);
                                 long lastServerVersion = serverVersionPair.second - 1;

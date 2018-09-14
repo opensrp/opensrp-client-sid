@@ -383,7 +383,7 @@ public class BidanHomeActivity extends SecuredActivity implements SyncStatusBroa
 
     @Override
     public void onSyncInProgress(FetchStatus fetchStatus) {
-        Toast.makeText(getApplicationContext(), fetchStatus.displayValue(), Toast.LENGTH_SHORT).show();
+
     }
 
     @Override
