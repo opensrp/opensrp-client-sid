@@ -311,7 +311,6 @@ public class SyncService extends Service {
         sendSyncStatusBroadcastMessage(fetchStatus, true);
     }
 
-
     private void sendSyncStatusBroadcastMessage(FetchStatus fetchStatus, boolean isComplete) {
         Intent intent = new Intent();
         intent.setAction(SyncStatusBroadcastReceiver.ACTION_SYNC_STATUS);

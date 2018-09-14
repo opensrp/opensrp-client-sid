@@ -283,6 +283,10 @@ public class EnketoFormUtils {
 //    }
 
     private void saveClient(Client client) {
+        if (client.getGender() == null || client.getGender().isEmpty()){
+            client.setGender("female");
+        }
+
         Log.logDebug("============== CLIENT ================");
         Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSSZ").create();
         String clientJson = gson.toJson(client);
