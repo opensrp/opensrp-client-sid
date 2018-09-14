@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 
+import org.smartregister.bidan.activity.BidanHomeActivity;
 import org.smartregister.domain.FetchStatus;
 
 import java.io.Serializable;
@@ -19,10 +20,10 @@ public class SyncStatusBroadcastReceiver extends BroadcastReceiver {
     public static final String EXTRA_FETCH_STATUS = "fetch_status";
     public static final String EXTRA_COMPLETE_STATUS = "complete_status";
 
-    private final ArrayList<SyncStatusListener> syncStatusListeners;
+    private final BidanHomeActivity syncStatusListeners;
 
-    public SyncStatusBroadcastReceiver() {
-        syncStatusListeners = new ArrayList<>();
+    public SyncStatusBroadcastReceiver(BidanHomeActivity bidanHomeActivity) {
+        syncStatusListeners = bidanHomeActivity;
     }
 
     @Override
@@ -48,21 +49,15 @@ public class SyncStatusBroadcastReceiver extends BroadcastReceiver {
     }
 
     private void started() {
-        for (SyncStatusListener syncStatusListener : syncStatusListeners) {
-            syncStatusListener.onSyncStart();
-        }
+        syncStatusListeners.onSyncStart();
     }
 
     private void inProgress(FetchStatus fetchStatus) {
-        for (SyncStatusListener syncStatusListener : syncStatusListeners) {
-            syncStatusListener.onSyncInProgress(fetchStatus);
-        }
+        syncStatusListeners.onSyncInProgress(fetchStatus);
     }
 
     private void complete(FetchStatus fetchStatus) {
-        for (SyncStatusListener syncStatusListener : syncStatusListeners) {
-            syncStatusListener.onSyncComplete(fetchStatus);
-        }
+        syncStatusListeners.onSyncComplete(fetchStatus);
     }
 
     /*private void startExtendedSyncAndAlarms(Context context) {

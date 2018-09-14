@@ -2,20 +2,16 @@ package org.smartregister.bidan.sync;
 
 import android.content.Context;
 import android.util.Log;
-import android.widget.Toast;
 
 import org.smartregister.bidan.service.FormSubmissionSyncService;
-import org.smartregister.domain.DownloadStatus;
-import org.smartregister.domain.FetchStatus;
+import org.smartregister.bidan.service.SyncService;
 import org.smartregister.service.ActionService;
 import org.smartregister.service.AllFormVersionSyncService;
 import org.smartregister.sync.AfterFetchListener;
-import org.smartregister.view.BackgroundAction;
+import org.smartregister.sync.SyncProgressIndicator;
 import org.smartregister.view.LockingBackgroundTask;
-import org.smartregister.view.ProgressIndicator;
 
-import static org.smartregister.domain.FetchStatus.fetched;
-import static org.smartregister.domain.FetchStatus.nothingFetched;
+import utils.ServiceTools;
 import static org.smartregister.util.Log.logInfo;
 
 public class UpdateActionsTask {
@@ -25,7 +21,7 @@ public class UpdateActionsTask {
     private FormSubmissionSyncService formSubmissionSyncService;
     private AllFormVersionSyncService allFormVersionSyncService;
 
-    public UpdateActionsTask(Context context, ActionService actionService, FormSubmissionSyncService formSubmissionSyncService, ProgressIndicator progressIndicator,
+    public UpdateActionsTask(Context context, ActionService actionService, FormSubmissionSyncService formSubmissionSyncService, SyncProgressIndicator progressIndicator,
                              AllFormVersionSyncService allFormVersionSyncService) {
         this.context = context;
         this.formSubmissionSyncService = formSubmissionSyncService;
@@ -39,44 +35,12 @@ public class UpdateActionsTask {
             return;
         }
 
-        task.doActionInBackground(new BackgroundAction<FetchStatus>() {
-            public FetchStatus actionToDoInBackgroundThread() {
+        try {
+            ServiceTools.startService(context, SyncService.class);
 
-                FetchStatus fetchStatusForForms = formSubmissionSyncService.sync();
-                Log.e(TAG, "updateFromServer:fetchStatusForForms "+fetchStatusForForms.toString() );
-
-                if (org.smartregister.Context.getInstance().configuration().shouldSyncForm()) {
-
-                    allFormVersionSyncService.verifyFormsInFolder();
-                    FetchStatus fetchVersionStatus = allFormVersionSyncService.pullFormDefinitionFromServer();
-                    DownloadStatus downloadStatus = allFormVersionSyncService.downloadAllPendingFormFromServer();
-                    Log.e(TAG,"actionToDoInBackgroundThread:downloadStatus "+ downloadStatus );
-
-                    if (downloadStatus == DownloadStatus.downloaded) {
-                        allFormVersionSyncService.unzipAllDownloadedFormFile();
-                    }
-
-                    if (fetchVersionStatus == fetched || downloadStatus == DownloadStatus.downloaded) {
-                        return fetched;
-                    }
-                } else {
-                    Log.e(TAG, "actionToDoInBackgroundThread: fetchStatusForForms " + fetchStatusForForms );
-                }
-
-
-                if (nothingFetched == fetched || fetchStatusForForms == fetched )
-                    return fetched;
-
-                return fetchStatusForForms;
-            }
-
-            @Override
-            public void postExecuteInUIThread(FetchStatus result) {
-                if (result != null && context != null && result != nothingFetched) {
-                    Toast.makeText(context, result.displayValue(), Toast.LENGTH_SHORT).show();
-                }
-                afterFetchListener.afterFetch(result);
-            }
-        });
+            Log.e(TAG, "sync: started" );
+        } catch (Exception e) {
+            Log.e(TAG, "sync: error" );
+        }
     }
 }

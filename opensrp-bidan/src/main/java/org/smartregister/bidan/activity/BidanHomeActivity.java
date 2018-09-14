@@ -15,12 +15,14 @@ import org.json.JSONObject;
 import org.smartregister.Context;
 import org.smartregister.bidan.R;
 import org.smartregister.bidan.controller.NavigationControllerINA;
+import org.smartregister.bidan.receiver.SyncStatusBroadcastReceiver;
 import org.smartregister.bidan.service.FormSubmissionSyncService;
 import org.smartregister.bidan.sync.UpdateActionsTask;
 import org.smartregister.bidan.utils.AllConstantsINA;
 import org.smartregister.bidan.utils.Support;
 import org.smartregister.bidan.utils.Tools;
 import org.smartregister.cursoradapter.SmartRegisterQueryBuilder;
+import org.smartregister.domain.FetchStatus;
 import org.smartregister.enketo.view.fragment.DisplayFormFragment;
 import org.smartregister.event.Listener;
 import org.smartregister.service.PendingFormSubmissionService;
@@ -43,43 +45,19 @@ import static org.smartregister.event.Event.SYNC_STARTED;
 //import java.util.HashMap;
 //import java.util.Map;
 
-public class BidanHomeActivity extends SecuredActivity {
+public class BidanHomeActivity extends SecuredActivity implements SyncStatusBroadcastReceiver.SyncStatusListener{
     private static final String TAG = BidanHomeActivity.class.getName();
     public static int kicount;
     //    SimpleDateFormat timer = new SimpleDateFormat("hh:mm:ss");
     private MenuItem updateMenuItem;
     private MenuItem remainingFormsToSyncMenuItem;
     private PendingFormSubmissionService pendingFormSubmissionService;
-    private Listener<Boolean> onSyncStartListener = new Listener<Boolean>() {
-        @Override
-        public void onEvent(Boolean data) {
-            Support.ONSYNC = true;
-            AllConstantsINA.TimeConstants.IDLE = false;
-            AllConstantsINA.TimeConstants.SLEEP_TIME = 15000;
-            if (updateMenuItem != null) {
-                updateMenuItem.setActionView(R.layout.progress);
-            }
-        }
-    };
+    private SyncStatusBroadcastReceiver syncStatusBroadcastReceiver;
     private TextView ecRegisterClientCountView;
     private TextView kartuIbuANCRegisterClientCountView;
     private TextView kartuIbuPNCRegisterClientCountView;
     private TextView anakRegisterClientCountView;
     private TextView kohortKbCountView;
-    private Listener<Boolean> onSyncCompleteListener = new Listener<Boolean>() {
-        @Override
-        public void onEvent(Boolean data) {
-            //#TODO: RemainingFormsToSyncCount cannot be updated from a back ground thread!!
-            updateRemainingFormsToSyncCount();
-            if (updateMenuItem != null) {
-                updateMenuItem.setActionView(null);
-            }
-            updateRegisterCounts();
-
-            flagActivator();
-
-        }
-    };
     private Listener<String> onFormSubmittedListener = new Listener<String>() {
         @Override
         public void onEvent(String instanceId) {
@@ -204,10 +182,10 @@ public class BidanHomeActivity extends SecuredActivity {
     private void initialize() {
         pendingFormSubmissionService = context().pendingFormSubmissionService();
 
-        SYNC_STARTED.addListener(onSyncStartListener);
-        SYNC_COMPLETED.addListener(onSyncCompleteListener);
         FORM_SUBMITTED.addListener(onFormSubmittedListener);
         ACTION_HANDLED.addListener(updateANMDetailsListener);
+
+        registerMyReceiver();
 
         //noinspection ConstantConditions
         getSupportActionBar().setTitle("");
@@ -219,6 +197,22 @@ public class BidanHomeActivity extends SecuredActivity {
 
 //        LoginActivity.setLanguage();
 //        getActionBar().setBackgroundDrawable(getResources().getDrawable(R.color.action_bar_background));
+    }
+
+    private void registerMyReceiver() {
+
+        try
+        {
+            syncStatusBroadcastReceiver = new SyncStatusBroadcastReceiver(this);
+            IntentFilter intentFilter = new IntentFilter();
+            intentFilter.addAction(SyncStatusBroadcastReceiver.ACTION_SYNC_STATUS);
+            registerReceiver(syncStatusBroadcastReceiver, intentFilter);
+        }
+        catch (Exception ex)
+        {
+            ex.printStackTrace();
+        }
+
     }
 
     @Override
@@ -350,8 +344,6 @@ public class BidanHomeActivity extends SecuredActivity {
     protected void onDestroy() {
         super.onDestroy();
 
-        SYNC_STARTED.removeListener(onSyncStartListener);
-        SYNC_COMPLETED.removeListener(onSyncCompleteListener);
         FORM_SUBMITTED.removeListener(onFormSubmittedListener);
         ACTION_HANDLED.removeListener(updateANMDetailsListener);
     }
@@ -379,4 +371,30 @@ public class BidanHomeActivity extends SecuredActivity {
         }
     }
 
+    @Override
+    public void onSyncStart() {
+        Support.ONSYNC = true;
+        AllConstantsINA.TimeConstants.IDLE = false;
+        AllConstantsINA.TimeConstants.SLEEP_TIME = 5000;
+        if (updateMenuItem != null) {
+            updateMenuItem.setActionView(R.layout.progress);
+        }
+    }
+
+    @Override
+    public void onSyncInProgress(FetchStatus fetchStatus) {
+        Toast.makeText(getApplicationContext(), fetchStatus.displayValue(), Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public void onSyncComplete(FetchStatus fetchStatus) {
+        Toast.makeText(getApplicationContext(), fetchStatus.displayValue(), Toast.LENGTH_SHORT).show();
+        updateRemainingFormsToSyncCount();
+        if (updateMenuItem != null) {
+            updateMenuItem.setActionView(null);
+        }
+        updateRegisterCounts();
+
+        flagActivator();
+    }
 }
