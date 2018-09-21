@@ -198,11 +198,11 @@ public class AnakSmartRegisterFragment extends BaseSmartRegisterFragment {
     }
 
     private String anakNameShort() {
-        return "namaBayi ASC";
+        return "namaBayi COLLATE NOCASE ASC";
     }
 
     private String anakNameShortR() {
-        return "namaBayi DESC";
+        return "namaBayi COLLATE NOCASE DESC";
     }
 
     @Override

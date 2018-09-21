@@ -233,25 +233,25 @@ public class FPSmartRegisterFragment extends BaseSmartRegisterFragment {
     }
 
 
-//    private String kiSortByNameAZ() {
-//        return "namalengkap ASC";
-//    }
-//
-//    private String kiSortByNameZA() {
-//        return "namalengkap DESC";
-//    }
-//
-//    private String kiSortByAge() {
-//        return "umur DESC";
-//    }
-//
-//    private String kiSortByNoIbu() {
-//        return "noIbu ASC";
-//    }
-//
-//    private String kiSortByEdd() {
-//        return "htp IS NULL, htp";
-//    }
+    protected String kiSortByNameAZ() {
+        return "namalengkap COLLATE NOCASE ASC";
+    }
+
+    protected String kiSortByNameZA() {
+        return "namalengkap COLLATE NOCASE DESC";
+    }
+
+    protected String kiSortByAge() {
+        return "umur DESC";
+    }
+
+    protected String kiSortByNoIbu() {
+        return "noIbu ASC";
+    }
+
+    protected String kiSortByEdd() {
+        return "htp IS NULL, htp";
+    }
 
     @Override
     protected void onResumption() {
