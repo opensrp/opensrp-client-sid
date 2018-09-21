@@ -13,7 +13,8 @@
             <span class="or-output" data-value=" /tambah_bayi_reviewed/Village "></span>
         </span>
         <span class="question-label "
-            data-itext-id="/tambah_bayi_reviewed/generated_note_name_13:label" lang="en">-
+            data-itext-id="/tambah_bayi_reviewed/generated_note_name_13:label" lang="en">Village :
+            <span class="or-output" data-value=" /tambah_bayi_reviewed/Village "></span>
         </span>
         <input name="/tambah_bayi_reviewed/generated_note_name_13" data-type-xml="string"
             readonly="readonly" type="text" />
@@ -24,7 +25,8 @@
             <span class="or-output" data-value=" /tambah_bayi_reviewed/Sub-village "></span>
         </span>
         <span class="question-label "
-            data-itext-id="/tambah_bayi_reviewed/generated_note_name_14:label" lang="en">-
+            data-itext-id="/tambah_bayi_reviewed/generated_note_name_14:label" lang="en">Sub Village :
+            <span class="or-output" data-value=" /tambah_bayi_reviewed/Sub-village "></span>
         </span>
         <input name="/tambah_bayi_reviewed/generated_note_name_14" data-type-xml="string"
             readonly="readonly" type="text" />

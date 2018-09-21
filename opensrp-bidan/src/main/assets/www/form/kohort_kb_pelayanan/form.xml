@@ -11,10 +11,11 @@
         <span class="question-label active"
             data-itext-id="/tambah_kb_reviewed/generated_note_name_13:label" lang="Bahasa">Nama Ibu
             :
-            <span class="or-output" data-value=" /tambah_kb_reviewed/namalengkap"/>
+            <span class="or-output" data-value=" /tambah_kb_reviewed/namalengkap"></span>
         </span>
         <span class="question-label "
-            data-itext-id="/tambah_kb_reviewed/generated_note_name_13:label" lang="en">-
+            data-itext-id="/tambah_kb_reviewed/generated_note_name_13:label" lang="en">Mother's Name :
+            <span class="or-output" data-value=" /tambah_kb_reviewed/namalengkap"></span>
         </span>
         <input name="/tambah_kb_reviewed/generated_note_name_13" data-type-xml="string"
             readonly="readonly" type="text" />
@@ -23,10 +24,11 @@
     <label class="note non-select ">
         <span class="question-label active"
             data-itext-id="/tambah_kb_reviewed/generated_note_name_13:label" lang="Bahasa">Desa :
-            <span class="or-output" data-value=" /tambah_kb_reviewed/Village"/>
+            <span class="or-output" data-value=" /tambah_kb_reviewed/Village"></span>
         </span>
         <span class="question-label "
-            data-itext-id="/tambah_kb_reviewed/generated_note_name_13:label" lang="en">-
+            data-itext-id="/tambah_kb_reviewed/generated_note_name_13:label" lang="en">Village :
+            <span class="or-output" data-value=" /tambah_kb_reviewed/Village"></span>
         </span>
         <input name="/tambah_kb_reviewed/generated_note_name_13" data-type-xml="string"
             readonly="readonly" type="text" />
@@ -34,10 +36,11 @@
     <label class="note non-select ">
         <span class="question-label active"
             data-itext-id="/tambah_kb_reviewed/generated_note_name_14:label" lang="Bahasa">Dusun :
-            <span class="or-output" data-value=" /tambah_kb_reviewed/Sub-district"/>
+            <span class="or-output" data-value=" /tambah_kb_reviewed/Sub-district"></span>
         </span>
         <span class="question-label "
-            data-itext-id="/tambah_kb_reviewed/generated_note_name_14:label" lang="en">-
+            data-itext-id="/tambah_kb_reviewed/generated_note_name_14:label" lang="en">Sub Village :
+            <span class="or-output" data-value=" /tambah_kb_reviewed/Sub-district"></span>
         </span>
         <input name="/tambah_kb_reviewed/generated_note_name_14" data-type-xml="string"
             readonly="readonly" type="text" />
@@ -45,10 +48,11 @@
     <label class="question non-select or-appearance-yes ">
         <span class="or-constraint-msg active"
             data-itext-id="/tambah_kb_reviewed/tanggal_periksa:jr:constraintMsg" lang="Bahasa">.&lt;=
-            <span class="or-output" data-value=" /tambah_kb_reviewed/today"/>
+            <span class="or-output" data-value=" /tambah_kb_reviewed/today"></span>
         </span>
         <span class="or-constraint-msg "
-            data-itext-id="/tambah_kb_reviewed/tanggal_periksa:jr:constraintMsg" lang="en">-
+            data-itext-id="/tambah_kb_reviewed/tanggal_periksa:jr:constraintMsg" lang="en">.&lt;=
+            <span class="or-output" data-value=" /tambah_kb_reviewed/today"></span>
         </span>
         <span class="question-label active"
             data-itext-id="/tambah_kb_reviewed/tanggal_periksa:label" lang="Bahasa">Tanggal

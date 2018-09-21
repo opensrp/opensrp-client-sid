@@ -16,7 +16,8 @@
         </span>
         <span class="question-label "
             data-itext-id="/kunjungan_anc_reviewed_integrasi/generated_note_name_13:label"
-            lang="en">-
+            lang="en">Village :
+            <span class="or-output" data-value=" /kunjungan_anc_reviewed_integrasi/Village "></span>
         </span>
         <input name="/kunjungan_anc_reviewed_integrasi/generated_note_name_13"
             data-type-xml="string" readonly="readonly" type="text" />
@@ -30,7 +31,9 @@
         </span>
         <span class="question-label "
             data-itext-id="/kunjungan_anc_reviewed_integrasi/generated_note_name_14:label"
-            lang="en">-
+            lang="en">Sub Village :
+            <span class="or-output"
+                data-value=" /kunjungan_anc_reviewed_integrasi/Sub-village "></span>
         </span>
         <input name="/kunjungan_anc_reviewed_integrasi/generated_note_name_14"
             data-type-xml="string" readonly="readonly" type="text" />
