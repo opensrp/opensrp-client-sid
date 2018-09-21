@@ -170,7 +170,7 @@ public class PNCSmartRegisterFragment extends BaseSmartRegisterFragment {
             clientAdapter = new SmartRegisterPaginatedCursorAdapter(getActivity(), null, new PNCClientsProvider(getActivity(), clientActionHandler, context().alertService()), new CommonRepository(tableEcPnc, new String[]{"ec_kartu_ibu.namalengkap", "ec_kartu_ibu.namaSuami"}));
             clientsView.setAdapter(clientAdapter);
 
-            setTablename(tableEcPnc);
+            setTablename("ec_kartu_ibu");
             SmartRegisterQueryBuilder countqueryBUilder = new SmartRegisterQueryBuilder();
             countqueryBUilder.SelectInitiateMainTableCounts(tableEcPnc);
             countqueryBUilder.customJoin("LEFT JOIN ec_kartu_ibu on ec_kartu_ibu.id = ec_pnc.id");
@@ -186,7 +186,7 @@ public class PNCSmartRegisterFragment extends BaseSmartRegisterFragment {
             queryBUilder.customJoin("LEFT JOIN ec_kartu_ibu on ec_kartu_ibu.id = ec_pnc.id LEFT JOIN ImageList imagelist ON ec_pnc.id=imagelist.entityID");
             mainSelect = queryBUilder.mainCondition("ec_kartu_ibu.is_closed = 0 and (keadaanIbu ='hidup' OR keadaanIbu IS NULL) ");
 
-//            Sortqueries = kiSortByNameAZ();
+            Sortqueries = kiSortByNameAZ();
 
             currentlimit = 20;
             currentoffset = 0;

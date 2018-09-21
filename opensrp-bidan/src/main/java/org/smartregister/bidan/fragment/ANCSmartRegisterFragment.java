@@ -150,7 +150,7 @@ public class ANCSmartRegisterFragment extends BaseSmartRegisterFragment {
                     new CommonRepository(tableEcIbu, new String[]{"ec_ibu.is_closed", "ec_kartu_ibu.namalengkap", "ec_kartu_ibu.namaSuami"}));
             clientsView.setAdapter(clientAdapter);
 
-            setTablename(tableEcIbu);
+            setTablename("ec_kartu_ibu");
             SmartRegisterQueryBuilder countQueryBuilder = new SmartRegisterQueryBuilder();
             countQueryBuilder.SelectInitiateMainTableCounts(tableEcIbu);
             countQueryBuilder.customJoin("LEFT JOIN ec_kartu_ibu on ec_kartu_ibu.id = ec_ibu.id");
@@ -166,8 +166,8 @@ public class ANCSmartRegisterFragment extends BaseSmartRegisterFragment {
             queryBuilder.SelectInitiateMainTable(tableEcIbu, new String[]{"ec_ibu.relationalid", "ec_ibu.is_closed", "ec_ibu.details", "ec_kartu_ibu.namalengkap", "ec_kartu_ibu.namaSuami", "imagelist.imageid"});
             queryBuilder.customJoin("LEFT JOIN ec_kartu_ibu on ec_kartu_ibu.id = ec_ibu.id LEFT JOIN ImageList imagelist ON ec_ibu.id=imagelist.entityID");
             mainSelect = queryBuilder.mainCondition("ec_kartu_ibu.is_closed = 0 AND namalengkap != '' AND namalengkap IS NOT NULL");
-            // TODO : sorting
-//            Sortqueries = kiSortByNameAZ();
+
+            Sortqueries = kiSortByNameAZ();
 
             currentlimit = 20;
             currentoffset = 0;
