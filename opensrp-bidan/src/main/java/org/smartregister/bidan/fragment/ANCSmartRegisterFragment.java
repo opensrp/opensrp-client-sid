@@ -133,6 +133,7 @@ public class ANCSmartRegisterFragment extends BaseSmartRegisterFragment {
         super.setupViews(view);
         view.findViewById(R.id.btn_report_month).setVisibility(INVISIBLE);
         view.findViewById(R.id.service_mode_selection).setVisibility(GONE);
+        view.findViewById(R.id.register_client).setVisibility(GONE);
         clientsView.setVisibility(VISIBLE);
         clientsProgressView.setVisibility(INVISIBLE);
         initializeQueries();
