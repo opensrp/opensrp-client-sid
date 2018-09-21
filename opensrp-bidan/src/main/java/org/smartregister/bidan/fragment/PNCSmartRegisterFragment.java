@@ -227,6 +227,12 @@ public class PNCSmartRegisterFragment extends BaseSmartRegisterFragment {
         updateSearchView();
     }
 
+    @Override
+    public void onResume() {
+        super.onResume();
+        initializeQueries();
+    }
+
     private void updateSearchView() {
         textWatcher(AllConstantsINA.Register.PNC);
     }

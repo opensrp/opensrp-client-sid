@@ -175,6 +175,12 @@ public class KISmartRegisterFragment extends BaseSmartRegisterFragment {
 
     }
 
+    @Override
+    public void onResume() {
+        super.onResume();
+        initializeQueries();
+    }
+
     protected String filterStringForAll() {
         return "";
     }

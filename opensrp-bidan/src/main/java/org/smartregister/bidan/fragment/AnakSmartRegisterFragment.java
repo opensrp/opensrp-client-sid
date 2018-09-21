@@ -144,14 +144,14 @@ public class AnakSmartRegisterFragment extends BaseSmartRegisterFragment {
         view.findViewById(R.id.service_mode_selection).setVisibility(GONE);
         clientsView.setVisibility(VISIBLE);
         clientsProgressView.setVisibility(INVISIBLE);
-        initializeQueries(getCriteria());
+        initializeQueries();
     }
 
     private String filterStringForAll() {
         return "";
     }
 
-    public void initializeQueries(String s) {
+    public void initializeQueries() {
         String tableName = CHILD_TABLE_NAME;
         ChildClientsProvider childClientsProvider = new ChildClientsProvider(getActivity(),
                 clientActionHandler, context().alertService(), context().commonrepository(tableName));
@@ -210,9 +210,15 @@ public class AnakSmartRegisterFragment extends BaseSmartRegisterFragment {
 //        super.onResumption();
         getDefaultOptionsProvider();
         if (isPausedOrRefreshList()) {
-            initializeQueries("!");
+            initializeQueries();
         }
 
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        initializeQueries();
     }
 
     private void updateSearchView() {

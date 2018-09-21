@@ -263,6 +263,12 @@ public class FPSmartRegisterFragment extends BaseSmartRegisterFragment {
 
     }
 
+    @Override
+    public void onResume() {
+        super.onResume();
+        initializeQueries();
+    }
+
     private void updateSearchView() {
         textWatcher(AllConstantsINA.Register.FP);
     }

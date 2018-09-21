@@ -213,6 +213,12 @@ public class ANCSmartRegisterFragment extends BaseSmartRegisterFragment {
         Log.e(TAG, "onResumption: " + getResources().getConfiguration().locale);
     }
 
+    @Override
+    public void onResume() {
+        super.onResume();
+        initializeQueries();
+    }
+
     private void updateSearchView() {
         textWatcher(AllConstantsINA.Register.ANC);
     }
