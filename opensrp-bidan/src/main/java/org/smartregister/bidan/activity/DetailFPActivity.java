@@ -188,7 +188,7 @@ public class DetailFPActivity extends Activity {
 
         jenisKontrasepsi.setText(String.format(": %s", humanize(kiclient.getDetails().get("jenisKontrasepsi") != null ? kiclient.getDetails().get("jenisKontrasepsi") : "-")));
         alkihb.setText(String.format(": %s", humanize(kiclient.getDetails().get("alkihb") != null ? kiclient.getDetails().get("alkihb") : "-")));
-        tdSistolik.setText(String.format(": %s", humanize(kiclient.getDetails().get("tdDiastolik") != null ? kiclient.getDetails().get("tdDiastolik") : "-")));
+        tdSistolik.setText(String.format(": %s", humanize(kiclient.getDetails().get("tdSistolik") != null ? kiclient.getDetails().get("tdSistolik") : "-")));
         td_diastolik.setText(String.format(": %s", humanize(kiclient.getDetails().get("tdDiastolik") != null ? kiclient.getDetails().get("tdDiastolik") : "-")));
         alkilila.setText(String.format(": %s", humanize(kiclient.getDetails().get("alkilila") != null ? kiclient.getDetails().get("alkilila") : "-")));
         alkiPenyakitIms.setText(String.format(": %s", humanize(kiclient.getDetails().get("alkiPenyakitIms") != null ? kiclient.getDetails().get("alkiPenyakitIms") : "-")));
