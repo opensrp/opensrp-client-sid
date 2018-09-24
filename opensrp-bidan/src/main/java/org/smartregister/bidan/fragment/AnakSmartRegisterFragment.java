@@ -163,7 +163,7 @@ public class AnakSmartRegisterFragment extends BaseSmartRegisterFragment {
         countqueryBuilder.SelectInitiateMainTableCounts(tableName);
         countqueryBuilder.customJoin("LEFT JOIN ec_ibu ON ec_ibu.id = ec_anak.relational_id");
 
-        mainCondition = "is_closed = 0";
+        mainCondition = "ec_anak.is_closed = 0";
 
         countSelect = countqueryBuilder.mainCondition(mainCondition);
         super.CountExecute();

@@ -215,7 +215,7 @@ public class FPSmartRegisterFragment extends BaseSmartRegisterFragment {
             queryBuilder.SelectInitiateMainTable("ec_kartu_ibu", new String[]{"ec_kartu_ibu.relationalid", "ec_kartu_ibu.is_closed", "ec_kartu_ibu.details", "ec_kartu_ibu.isOutOfArea", "namalengkap", "umur", "namaSuami", "imagelist.imageid"});
             queryBuilder.customJoin("LEFT JOIN ec_ibu on ec_kartu_ibu.id = ec_ibu.base_entity_id LEFT JOIN ImageList imagelist ON ec_ibu.base_entity_id=imagelist.entityID ");
 
-            mainSelect = queryBuilder.mainCondition("ec_kartu_ibu.is_closed != 0 and jenisKontrasepsi != 0 AND namalengkap != '' AND namalengkap IS NOT NULL");
+            mainSelect = queryBuilder.mainCondition("ec_kartu_ibu.is_closed = 0 and jenisKontrasepsi != 0 AND namalengkap != '' AND namalengkap IS NOT NULL");
             Log.e(TAG, "initializeQueries:mainSelect " + mainSelect);
             Sortqueries = kiSortByNameAZ();
 
@@ -283,7 +283,7 @@ public class FPSmartRegisterFragment extends BaseSmartRegisterFragment {
                 StringUtil.humanize(entry.getValue().getLabel());
                 String name = StringUtil.humanize(entry.getValue().getLabel());
                 String tableName = "ec_kartu_ibu";
-                dialogOptionslist.add(new MotherFilterOption(name, "location_name", name, tableName));
+                dialogOptionslist.add(new MotherFilterOption(name, "address1", name, tableName));
 
             }
         }

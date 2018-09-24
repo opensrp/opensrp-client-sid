@@ -2,7 +2,11 @@ package org.smartregister.bidan.fragment;
 
 import android.annotation.TargetApi;
 import android.content.Intent;
+import android.database.Cursor;
 import android.os.Build;
+import android.os.Bundle;
+import android.support.v4.content.CursorLoader;
+import android.support.v4.content.Loader;
 import android.util.Log;
 import android.view.View;
 
@@ -18,6 +22,7 @@ import org.smartregister.bidan.options.KIPNCOverviewServiceMode;
 import org.smartregister.bidan.options.MotherFilterOption;
 import org.smartregister.bidan.provider.PNCClientsProvider;
 import org.smartregister.bidan.utils.AllConstantsINA;
+import org.smartregister.bidan.utils.BidanSmartRegisterQueryBuilder;
 import org.smartregister.commonregistry.CommonPersonObjectClient;
 import org.smartregister.commonregistry.CommonRepository;
 import org.smartregister.cursoradapter.CursorCommonObjectFilterOption;
@@ -34,6 +39,7 @@ import org.smartregister.view.dialog.ServiceModeOption;
 import org.smartregister.view.dialog.SortOption;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 
 import static android.view.View.GONE;
@@ -170,7 +176,7 @@ public class PNCSmartRegisterFragment extends BaseSmartRegisterFragment {
             clientAdapter = new SmartRegisterPaginatedCursorAdapter(getActivity(), null, new PNCClientsProvider(getActivity(), clientActionHandler, context().alertService()), new CommonRepository(tableEcPnc, new String[]{"ec_kartu_ibu.namalengkap", "ec_kartu_ibu.namaSuami"}));
             clientsView.setAdapter(clientAdapter);
 
-            setTablename("ec_kartu_ibu");
+            setTablename("ec_pnc");
             SmartRegisterQueryBuilder countqueryBUilder = new SmartRegisterQueryBuilder();
             countqueryBUilder.SelectInitiateMainTableCounts(tableEcPnc);
             countqueryBUilder.customJoin("LEFT JOIN ec_kartu_ibu on ec_kartu_ibu.id = ec_pnc.id");
@@ -178,13 +184,13 @@ public class PNCSmartRegisterFragment extends BaseSmartRegisterFragment {
             mainCondition = "is_closed = 0 AND (keadaanIbu ='hidup' OR keadaanIbu IS NULL) AND namalengkap != '' AND namalengkap IS NOT NULL";
 
             joinTable = "";
-            countSelect = countqueryBUilder.mainCondition(mainCondition);
+            countSelect = countqueryBUilder.mainCondition("ec_pnc."+mainCondition);
             super.CountExecute();
 
             SmartRegisterQueryBuilder queryBUilder = new SmartRegisterQueryBuilder();
             queryBUilder.SelectInitiateMainTable(tableEcPnc, new String[]{"ec_pnc.relationalid", "ec_pnc.details", "ec_kartu_ibu.namalengkap", "ec_kartu_ibu.namaSuami", "imagelist.imageid"});
             queryBUilder.customJoin("LEFT JOIN ec_kartu_ibu on ec_kartu_ibu.id = ec_pnc.id LEFT JOIN ImageList imagelist ON ec_pnc.id=imagelist.entityID");
-            mainSelect = queryBUilder.mainCondition("ec_kartu_ibu.is_closed = 0 and (keadaanIbu ='hidup' OR keadaanIbu IS NULL) ");
+            mainSelect = queryBUilder.mainCondition("ec_pnc.is_closed = 0 and (keadaanIbu ='hidup' OR keadaanIbu IS NULL) ");
 
             Sortqueries = kiSortByNameAZ();
 
@@ -201,20 +207,74 @@ public class PNCSmartRegisterFragment extends BaseSmartRegisterFragment {
 
     }
 
+    private static final String COUNT = "count_execute";
+
+    @Override
+    public Loader<Cursor> onCreateLoader(int id, final Bundle args) {
+        switch (id) {
+            case LOADER_ID:
+                // Returns a new CursorLoader
+                return new CursorLoader(getActivity()) {
+                    @Override
+                    public Cursor loadInBackground() {
+                        // Count query
+                        if (args != null && args.getBoolean(COUNT)) {
+                            CountExecute();
+                        }
+
+                        // Select register query
+                        String query = filterandSortQuery();
+                        return commonRepository().rawCustomQueryForAdapter(query);
+                    }
+                };
+            default:
+                // An invalid id was passed in
+                return null;
+        }
+
+    }
+
+    private String filterandSortQuery() {
+        BidanSmartRegisterQueryBuilder sqb = new BidanSmartRegisterQueryBuilder(mainSelect);
+
+        String query = "";
+        try {
+            if (isValidFilterForFts(commonRepository())) {
+                String sql = sqb
+                        .searchQueryFts(tablename, joinTable, mainCondition, filters, Sortqueries,
+                                currentlimit, currentoffset);
+                List<String> ids = commonRepository().findSearchIds(sql);
+                query = sqb.toStringFts(ids, tablename, CommonRepository.ID_COLUMN,
+                        Sortqueries);
+
+                query = sqb.Endquery(query);
+            } else {
+                sqb.addCondition(filters);
+                query = sqb.orderbyCondition(Sortqueries);
+                query = sqb.Endquery(sqb.addlimitandOffset(query, currentlimit, currentoffset));
+
+            }
+        } catch (Exception e) {
+            Log.e(getClass().getName(), e.toString(), e);
+        }
+
+        return query;
+    }
+
     protected String kiSortByNameAZ() {
-        return " namalengkap COLLATE NOCASE ASC";
+        return "namalengkap COLLATE NOCASE ASC";
     }
 
     protected String kiSortByNameZA() {
-        return " namalengkap COLLATE NOCASE DESC";
+        return "namalengkap COLLATE NOCASE DESC";
     }
 
     protected String kiSortByAge() {
-        return " umur DESC";
+        return "umur DESC";
     }
 
     protected String kiSortByNoIbu() {
-        return " noIbu ASC";
+        return "noIbu ASC";
     }
 
     @Override
@@ -247,7 +307,7 @@ public class PNCSmartRegisterFragment extends BaseSmartRegisterFragment {
                 StringUtil.humanize(entry.getValue().getLabel());
                 String name = StringUtil.humanize(entry.getValue().getLabel());
                 String tableName = "ec_kartu_ibu";
-                dialogOptionslist.add(new MotherFilterOption(name, "location_name", name, tableName));
+                dialogOptionslist.add(new MotherFilterOption(name, "address1", name, tableName));
 
             }
         }
