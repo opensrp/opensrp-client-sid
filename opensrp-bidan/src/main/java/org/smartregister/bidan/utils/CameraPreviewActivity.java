@@ -5,12 +5,14 @@ import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
 import android.provider.MediaStore;
+import android.util.Log;
 
 /**
  * Created by sid-tech on 1/24/18
  */
 
 public class CameraPreviewActivity extends Activity {
+    private static final String TAG = CameraPreviewActivity.class.getName();
 //public class CameraPreviewActivity { implements PermissionHelper.PermissionCallback {
 
     public static final String REQUEST_TYPE = "org.nusabit.fbpkh.REQUEST_TYPE";
@@ -34,15 +36,14 @@ public class CameraPreviewActivity extends Activity {
 
     public void onBackPressed() {
         super.onBackPressed();
-//        overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right);
     }
 
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if (resultCode == -1 && requestCode != -1) {
             setResult(-1, data);
-            finish();
         }
+        finish();
     }
 
 //    public void onPermissionResult(String s, boolean success) {
