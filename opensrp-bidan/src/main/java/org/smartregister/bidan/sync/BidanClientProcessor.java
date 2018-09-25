@@ -13,7 +13,7 @@ import java.util.List;
 public class BidanClientProcessor extends ClientProcessor {
 
     public static final String[] CLIENT_EVENTS = {"Registrasi Bidan", "Child Registration", "Identitas Ibu",
-            "Dokumentasi Persalinan"};//, "Tambah Bayi", "Tambah KB"};
+            "Dokumentasi Persalinan","Edit Ibu","Edit Bayi"};//, "Tambah Bayi", "Tambah KB"};
     private static final String TAG = BidanClientProcessor.class.getName();
     private static BidanClientProcessor instance;
     private static final String EVENT_TYPE_KEY = "eventType";

@@ -1033,12 +1033,6 @@ public class BidanFormUtils {
         return fileContents;
     }
 
-    private List<String> EditClientFormNameList(){
-        List<String> formNames = new ArrayList<>();
-        formNames.add("child_edit");
-        return formNames;
-    }
-
     /*private void createNewEventDocument(org.smartregister.cloudant.models.Event event) {
         mCloudantDataHandler.createEventDocument(event);
     }
@@ -1116,11 +1110,15 @@ public class BidanFormUtils {
                         Client client = gson.fromJson(json.toString(), Client.class);
                         // client.addAttribute("anak", "anak");
                         saveClient(client);
-                    }
-                    else if (eventType.equals(EditClientFormNameList())) {
+                    } else if (eventType.equals(AllConstantsINA.FormNames.EC_EDIT)) {
                         JSONObject json = eventClientRepository.getClientByBaseEntityId(event.getBaseEntityId());
                         Client client = gson.fromJson(json.toString(), Client.class);
-                        client.addAttribute("edit", "edit");
+//                        client.addAttribute("edit", "edit");
+                        saveClient(client);
+                    } else if (eventType.equals(AllConstantsINA.FormNames.CHILD_EDIT)) {
+                        JSONObject json = eventClientRepository.getClientByBaseEntityId(event.getBaseEntityId());
+                        Client client = gson.fromJson(json.toString(), Client.class);
+//                        client.addAttribute("edit", "edit");
                         saveClient(client);
                     }
                 }
