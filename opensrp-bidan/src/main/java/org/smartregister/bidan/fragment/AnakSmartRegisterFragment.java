@@ -152,6 +152,7 @@ public class AnakSmartRegisterFragment extends BaseSmartRegisterFragment {
     }
 
     public void initializeQueries() {
+        Log.e(TAG, "initializeQueries: ");
         String tableName = CHILD_TABLE_NAME;
         ChildClientsProvider childClientsProvider = new ChildClientsProvider(getActivity(),
                 clientActionHandler, context().alertService(), context().commonrepository(tableName));
@@ -163,7 +164,7 @@ public class AnakSmartRegisterFragment extends BaseSmartRegisterFragment {
         countqueryBuilder.SelectInitiateMainTableCounts(tableName);
         countqueryBuilder.customJoin("LEFT JOIN ec_ibu ON ec_ibu.id = ec_anak.relational_id");
 
-        mainCondition = "ec_anak.is_closed = 0";
+        mainCondition = "is_closed = 0";
 
         countSelect = countqueryBuilder.mainCondition(mainCondition);
         super.CountExecute();
