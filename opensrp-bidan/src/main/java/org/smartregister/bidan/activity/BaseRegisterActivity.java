@@ -442,8 +442,6 @@ public class BaseRegisterActivity extends SecuredNativeSmartRegisterActivity imp
         public void onDialogOptionSelection(DialogOption option, Object tag) {
             CommonPersonObjectClient pc = (CommonPersonObjectClient) tag;
 
-//            android.util.Log.e(TAG, "onDialogOptionSelection:columnMap "+ pc.getColumnmaps() );
-//            android.util.Log.e(TAG, "onDialogOptionSelection:details "+ pc.getDetails() );
             DetailsRepository detailsRepository = Context.getInstance().detailsRepository();
 
             if (option.name().equalsIgnoreCase(getString(R.string.str_edit_ki_form))) {
@@ -468,30 +466,34 @@ public class BaseRegisterActivity extends SecuredNativeSmartRegisterActivity imp
                 }
 
                 FieldOverrides fo = new FieldOverrides(fieldOverrides.toString());
-                android.util.Log.e(TAG, "onDialogOptionSelection:fo "+ fo.getJSONString() );
                 onEditSelectionWithMetadata((EditOption) option, (SmartRegisterClient) tag, fo.getJSONString());
 
             } else if (option.name().equalsIgnoreCase(getString(R.string.str_anak_edit))) {
                 // Edit Form Ibu
                 Log.logError(TAG, "kohort_bayi_edit");
                 detailsRepository.updateDetails(pc);
-                String ibuCaseId = getValue(pc.getColumnmaps(), "_id", true).toLowerCase();
+                AllCommonsRepository childRepository = Context.getInstance().allCommonsRepositoryobjects("ec_anak");
+                CommonPersonObject childobject = childRepository.findByCaseID(pc.entityId());
+                AllCommonsRepository kirep = Context.getInstance().allCommonsRepositoryobjects("ec_kartu_ibu");
+                CommonPersonObject kiparent = kirep.findByCaseID(childobject.getColumnmaps().get("relational_id"));
+                detailsRepository.updateDetails(kiparent);
+
                 JSONObject fieldOverrides = new JSONObject();
 
                 try {
-                    fieldOverrides.put("Province", pc.getDetails().get("stateProvince"));
-                    fieldOverrides.put("District", pc.getDetails().get("countyDistrict"));
-                    fieldOverrides.put("Sub-district", pc.getDetails().get("address2"));
-                    fieldOverrides.put("Village", pc.getDetails().get("cityVillage"));
-                    fieldOverrides.put("Sub-village", pc.getDetails().get("address1"));
+                    fieldOverrides.put("Province", kiparent.getDetails().get("stateProvince"));
+                    fieldOverrides.put("District", kiparent.getDetails().get("countyDistrict"));
+                    fieldOverrides.put("Sub-district", kiparent.getDetails().get("address2"));
+                    fieldOverrides.put("Sub-village", kiparent.getDetails().get("address1"));
                     fieldOverrides.put("jenis_kelamin", pc.getDetails().get("gender"));
-                    fieldOverrides.put("ibuCaseId", ibuCaseId);
+                    fieldOverrides.put("ibu_entity_id", pc.getDetails().get("relational_id"));
+                    fieldOverrides.put("beratLahir", pc.getDetails().get("beratLahir"));
+                    fieldOverrides.put("namaBayi", pc.getDetails().get("namaBayi"));
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
 
                 FieldOverrides fo = new FieldOverrides(fieldOverrides.toString());
-                android.util.Log.e(TAG, "onDialogOptionSelection:fo.getJSONString() " + fo.getJSONString());
                 onEditSelectionWithMetadata((EditOption) option, (SmartRegisterClient) tag, fo.getJSONString());
 
             } else {

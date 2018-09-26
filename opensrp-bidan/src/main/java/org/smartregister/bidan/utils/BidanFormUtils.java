@@ -244,11 +244,7 @@ public class BidanFormUtils {
 
         Event e = formEntityConverter.getEventFromFormSubmission(v2FormSubmission);
 
-        if (Arrays.asList(CLIENT_EVENTS).contains(e.getEventType()))
-            org.smartregister.util.Utils.startAsyncTask(new SavePatientAsyncTask(v2FormSubmission, mContext, true, e), null);
-        else
-            org.smartregister.util.Utils.startAsyncTask(new SavePatientAsyncTask(v2FormSubmission, mContext, false, e), null);
-
+        org.smartregister.util.Utils.startAsyncTask(new SavePatientAsyncTask(v2FormSubmission, mContext, e), null);
     }
 
     private void saveClient(Client client) {
@@ -1053,13 +1049,11 @@ public class BidanFormUtils {
     class SavePatientAsyncTask extends android.os.AsyncTask<Void, Void, Void> {
         private final org.smartregister.clientandeventmodel.FormSubmission formSubmission;
         private Context context;
-        private boolean saveClient;
         private Event event;
 
-        public SavePatientAsyncTask(org.smartregister.clientandeventmodel.FormSubmission formSubmission, Context context, boolean hasClient, Event event) {
+        public SavePatientAsyncTask(org.smartregister.clientandeventmodel.FormSubmission formSubmission, Context context, Event event) {
             this.formSubmission = formSubmission;
             this.context = context;
-            this.saveClient = hasClient;
             this.event = event;
         }
 
@@ -1086,22 +1080,23 @@ public class BidanFormUtils {
             try {
                 SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(context);
                 AllSharedPreferences allSharedPreferences = new AllSharedPreferences(preferences);
-                if (saveClient) {
-                    Client c = formEntityConverter.getClientFromFormSubmission(formSubmission);
-                    saveClient(c);
-                }
+
                 event = tagSyncMetadata(event);
                 String eventType = event.getEventType();
                 saveEvent(event);
 
                 Gson gson = new GsonBuilder().create();
-                android.util.Log.e(TAG, "doInBackground: eventType "+ eventType );
-                if (eventType != null) {
+                if (Arrays.asList(CLIENT_EVENTS).contains(eventType)){
 
                     if (eventType.equals(AllConstantsINA.FormNames.KI_FORM_TITLE)) {
                         JSONObject json = eventClientRepository.getClientByBaseEntityId(event.getBaseEntityId());
                         Client client = gson.fromJson(json.toString(), Client.class);
                         // client.addAttribute("kartu_ibu", "kartu_ibu");
+                        saveClient(client);
+                    } else if (eventType.equals(AllConstantsINA.FormNames.DOKUMENTASI_PERSALINAN)) {
+                        JSONObject json = eventClientRepository.getClientByBaseEntityId(event.getBaseEntityId());
+                        Client client = gson.fromJson(json.toString(), Client.class);
+                        client.addRelationship("childId",event.getBaseEntityId());
                         saveClient(client);
                     } else if (eventType.equals(AllConstantsINA.FormNames.CHILD_FORM_TITLE)) {
                         JSONObject json = eventClientRepository.getClientByBaseEntityId(event.getBaseEntityId());
@@ -1109,14 +1104,13 @@ public class BidanFormUtils {
                         // client.addAttribute("anak", "anak");
                         saveClient(client);
                     } else if (eventType.equals(AllConstantsINA.FormNames.EC_EDIT)) {
-                        JSONObject json = eventClientRepository.getClientByBaseEntityId(event.getBaseEntityId());
-                        Client client = gson.fromJson(json.toString(), Client.class);
-//                        client.addAttribute("edit", "edit");
+                        Client client = formEntityConverter.getClientFromFormSubmission(formSubmission);
                         saveClient(client);
-                    } else if (eventType.equals(AllConstantsINA.FormNames.CHILD_EDIT)) {
-                        JSONObject json = eventClientRepository.getClientByBaseEntityId(event.getBaseEntityId());
-                        Client client = gson.fromJson(json.toString(), Client.class);
-//                        client.addAttribute("edit", "edit");
+                    }
+                    else if (eventType.equals(AllConstantsINA.FormNames.CHILD_EDIT)) {
+                        Client client = formEntityConverter.getClientFromFormSubmission(formSubmission);
+                        String ibuCaseId = formSubmission.instance().form().getField("ibuCaseId");
+                        client.addRelationship("ibuCaseId",ibuCaseId);
                         saveClient(client);
                     }
                 }
