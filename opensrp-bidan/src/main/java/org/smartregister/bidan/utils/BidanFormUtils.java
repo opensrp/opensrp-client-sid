@@ -16,7 +16,6 @@ import org.smartregister.CoreLibrary;
 import org.smartregister.bidan.activity.BaseRegisterActivity;
 import org.smartregister.bidan.activity.LoginActivity;
 import org.smartregister.bidan.application.BidanApplication;
-import org.smartregister.bidan.sync.BidanClientProcessor;
 import org.smartregister.clientandeventmodel.Client;
 import org.smartregister.clientandeventmodel.Event;
 import org.smartregister.clientandeventmodel.FormAttributeParser;
@@ -32,6 +31,7 @@ import org.smartregister.domain.form.SubForm;
 import org.smartregister.repository.AllSharedPreferences;
 import org.smartregister.repository.BaseRepository;
 import org.smartregister.repository.EventClientRepository;
+import org.smartregister.sync.ClientProcessor;
 import org.smartregister.util.AssetHandler;
 import org.smartregister.util.Log;
 import org.w3c.dom.Attr;
@@ -58,9 +58,10 @@ import java.util.UUID;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 
-import static org.smartregister.bidan.sync.BidanClientProcessor.CLIENT_EVENTS;
-
 public class BidanFormUtils {
+
+    public static final String[] CLIENT_EVENTS = {"Child Registration", "Identitas Ibu",
+            "Dokumentasi Persalinan","Edit Ibu","Edit Bayi"};
 
     public static final String TAG = "EnketoFormUtils";
     public static final String ecClientRelationships = "ec_client_relationships.json";
@@ -1131,8 +1132,7 @@ public class BidanFormUtils {
                 }
                 long lastSyncTimeStamp = allSharedPreferences.fetchLastUpdatedAtDate(0);
                 Date lastSyncDate = new Date(lastSyncTimeStamp);
-//                BidanOldClientProcessor.getInstance(context).processClient(eventClientRepository.getEvents(lastSyncDate, BaseRepository.TYPE_Unsynced));
-                BidanClientProcessor.getInstance(context).processClient(eventClientRepository.getEvents(lastSyncDate, BaseRepository.TYPE_Unsynced));
+                ClientProcessor.getInstance(context).processClient(eventClientRepository.getEvents(lastSyncDate, BaseRepository.TYPE_Unsynced));
                 allSharedPreferences.saveLastUpdatedAtDate(lastSyncDate.getTime());
             } catch (Exception e) {
                 android.util.Log.e(TAG, e.toString(), e);
