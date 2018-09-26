@@ -74,6 +74,7 @@ public class BaseRegisterActivity extends SecuredNativeSmartRegisterActivity imp
     protected FragmentPagerAdapter mPagerAdapter;
     protected DisplayFormFragment displayFormFragment;
     protected DisplayFormFragment formFragment;
+    protected BaseSmartRegisterFragment baseFragment;
     //    protected SimpleDateFormat timer = new SimpleDateFormat("hh:mm:ss");
     private int style = DateFormat.MEDIUM;
     //Also try with style = DateFormat.FULL and DateFormat.SHORT
@@ -94,6 +95,7 @@ public class BaseRegisterActivity extends SecuredNativeSmartRegisterActivity imp
         mPagerAdapter = new EnketoRegisterPagerAdapter(getSupportFragmentManager(), formNames.toArray(new String[formNames.size()]), mBaseFragment());
         mPager.setOffscreenPageLimit(formNames.size());
         mPager.setAdapter(mPagerAdapter);
+        baseFragment = (BaseSmartRegisterFragment) mPagerAdapter.getItem(0);
 //        mPager.setOnPageChangeListener(new ViewPager.SimpleOnPageChangeListener() {
 //            @Override
 //            public void onPageSelected(int position) {
@@ -226,13 +228,12 @@ public class BaseRegisterActivity extends SecuredNativeSmartRegisterActivity imp
     }
 
     public void switchToBaseFragment(final String data) {
-        android.util.Log.e(TAG, "switchToBaseFragment: " );
         final int prevPageIndex = currentPage;
         runOnUiThread(new Runnable() {
             @Override
             public void run() {
                 mPager.setCurrentItem(0, false);
-                SecuredNativeSmartRegisterFragment registerFragment = (SecuredNativeSmartRegisterFragment) findFragmentByPosition(0);
+                BaseSmartRegisterFragment registerFragment = baseFragment;
                 if (registerFragment != null && data != null) {
                     registerFragment.refreshListView();
                     android.util.Log.e(TAG, "run: refresh1" );
@@ -408,7 +409,7 @@ public class BaseRegisterActivity extends SecuredNativeSmartRegisterActivity imp
 
     public void refreshList(final FetchStatus fetchStatus) {
         if (Looper.myLooper() == Looper.getMainLooper()) {
-            BaseSmartRegisterFragment registerFragment = (BaseSmartRegisterFragment) findFragmentByPosition(0);
+            BaseSmartRegisterFragment registerFragment = baseFragment;
             if (registerFragment != null && fetchStatus.equals(FetchStatus.fetched)) {
                 registerFragment.refreshListView();
             }
@@ -417,7 +418,7 @@ public class BaseRegisterActivity extends SecuredNativeSmartRegisterActivity imp
             handler.post(new Runnable() {
                 @Override
                 public void run() {
-                    BaseSmartRegisterFragment registerFragment = (BaseSmartRegisterFragment) findFragmentByPosition(0);
+                    BaseSmartRegisterFragment registerFragment = baseFragment;
                     if (registerFragment != null && fetchStatus.equals(FetchStatus.fetched)) {
                         registerFragment.refreshListView();
                     }

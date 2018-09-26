@@ -87,10 +87,7 @@ public class BidanFormUtils {
     }
 
     public static BidanFormUtils getInstance(Context ctx) throws Exception {
-        if (instance == null) {
-            instance = new BidanFormUtils(ctx);
-        }
-
+        instance = new BidanFormUtils(ctx);
         return instance;
     }
 
