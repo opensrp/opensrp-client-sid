@@ -296,7 +296,8 @@ public class DetailMotherActivity extends Activity {
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent intent) {
-        if (requestCode == 201) {
+        Log.d(TAG, "onActivityResult: onActivityResult()");
+        if (requestCode == 201 && resultCode==-1) {
             Log.d(TAG, "onActivityResult: Process Photo");
             StringBuilder path = new StringBuilder();
             path.append(DrishtiApplication.getAppDir());
@@ -311,9 +312,8 @@ public class DetailMotherActivity extends Activity {
                 Tools.saveFile(Tools.scaleDown((Bitmap) intent.getExtras().get("data"), 400.0f, false), path.toString());
             }
 
-            finish();
         }
-
+        Log.d(TAG, "onActivityResult: getIntent() = "+getIntent().toString());
         finish();
         startActivity(getIntent());
 

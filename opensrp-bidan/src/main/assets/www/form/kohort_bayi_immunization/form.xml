@@ -13,7 +13,8 @@
             <span class="or-output" data-value=" /Baby_Immunization.xls/Village "></span>
         </span>
         <span class="question-label "
-            data-itext-id="/Baby_Immunization.xls/generated_note_name_12:label" lang="en">-
+            data-itext-id="/Baby_Immunization.xls/generated_note_name_12:label" lang="en">Village :
+            <span class="or-output" data-value=" /Baby_Immunization.xls/Village "></span>
         </span>
         <input name="/Baby_Immunization.xls/generated_note_name_12"
             data-calculate=" /Baby_Immunization.xls/Village " data-type-xml="string"
@@ -26,7 +27,8 @@
             <span class="or-output" data-value=" /Baby_Immunization.xls/Sub-village "></span>
         </span>
         <span class="question-label "
-            data-itext-id="/Baby_Immunization.xls/generated_note_name_13:label" lang="en">-
+            data-itext-id="/Baby_Immunization.xls/generated_note_name_13:label" lang="en">Sub Village :
+            <span class="or-output" data-value=" /Baby_Immunization.xls/Sub-village "></span>
         </span>
         <input name="/Baby_Immunization.xls/generated_note_name_13"
             data-calculate=" /Baby_Immunization.xls/Sub-district " data-type-xml="string"
@@ -39,7 +41,9 @@
                 data-value=" /Baby_Immunization.xls/child_existing_location "></span>
         </span>
         <span class="question-label "
-            data-itext-id="/Baby_Immunization.xls/generated_note_name_16:label" lang="en">-
+            data-itext-id="/Baby_Immunization.xls/generated_note_name_16:label" lang="en">
+            <span class="or-output"
+                data-value=" /Baby_Immunization.xls/child_existing_location "></span>
         </span>
         <input name="/Baby_Immunization.xls/generated_note_name_16" data-type-xml="string"
             readonly="readonly" type="text" />

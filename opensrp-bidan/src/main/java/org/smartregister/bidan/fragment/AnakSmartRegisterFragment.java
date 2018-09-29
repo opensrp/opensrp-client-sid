@@ -144,14 +144,15 @@ public class AnakSmartRegisterFragment extends BaseSmartRegisterFragment {
         view.findViewById(R.id.service_mode_selection).setVisibility(GONE);
         clientsView.setVisibility(VISIBLE);
         clientsProgressView.setVisibility(INVISIBLE);
-        initializeQueries(getCriteria());
+        initializeQueries();
     }
 
     private String filterStringForAll() {
         return "";
     }
 
-    public void initializeQueries(String s) {
+    public void initializeQueries() {
+        Log.e(TAG, "initializeQueries: ");
         String tableName = CHILD_TABLE_NAME;
         ChildClientsProvider childClientsProvider = new ChildClientsProvider(getActivity(),
                 clientActionHandler, context().alertService(), context().commonrepository(tableName));
@@ -198,11 +199,11 @@ public class AnakSmartRegisterFragment extends BaseSmartRegisterFragment {
     }
 
     private String anakNameShort() {
-        return "namaBayi ASC";
+        return "namaBayi COLLATE NOCASE ASC";
     }
 
     private String anakNameShortR() {
-        return "namaBayi DESC";
+        return "namaBayi COLLATE NOCASE DESC";
     }
 
     @Override
@@ -210,9 +211,15 @@ public class AnakSmartRegisterFragment extends BaseSmartRegisterFragment {
 //        super.onResumption();
         getDefaultOptionsProvider();
         if (isPausedOrRefreshList()) {
-            initializeQueries("!");
+            initializeQueries();
         }
 
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        initializeQueries();
     }
 
     private void updateSearchView() {

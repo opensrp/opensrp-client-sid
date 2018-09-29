@@ -16,7 +16,6 @@ import org.smartregister.CoreLibrary;
 import org.smartregister.bidan.activity.BaseRegisterActivity;
 import org.smartregister.bidan.activity.LoginActivity;
 import org.smartregister.bidan.application.BidanApplication;
-import org.smartregister.bidan.sync.BidanClientProcessor;
 import org.smartregister.clientandeventmodel.Client;
 import org.smartregister.clientandeventmodel.Event;
 import org.smartregister.clientandeventmodel.FormAttributeParser;
@@ -32,6 +31,7 @@ import org.smartregister.domain.form.SubForm;
 import org.smartregister.repository.AllSharedPreferences;
 import org.smartregister.repository.BaseRepository;
 import org.smartregister.repository.EventClientRepository;
+import org.smartregister.sync.ClientProcessor;
 import org.smartregister.util.AssetHandler;
 import org.smartregister.util.Log;
 import org.w3c.dom.Attr;
@@ -58,9 +58,10 @@ import java.util.UUID;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 
-import static org.smartregister.bidan.sync.BidanClientProcessor.CLIENT_EVENTS;
-
 public class BidanFormUtils {
+
+    public static final String[] CLIENT_EVENTS = {"Child Registration", "Identitas Ibu",
+            "Dokumentasi Persalinan","Edit Ibu","Edit Bayi"};
 
     public static final String TAG = "EnketoFormUtils";
     public static final String ecClientRelationships = "ec_client_relationships.json";
@@ -87,10 +88,7 @@ public class BidanFormUtils {
     }
 
     public static BidanFormUtils getInstance(Context ctx) throws Exception {
-        if (instance == null) {
-            instance = new BidanFormUtils(ctx);
-        }
-
+        instance = new BidanFormUtils(ctx);
         return instance;
     }
 
@@ -246,11 +244,7 @@ public class BidanFormUtils {
 
         Event e = formEntityConverter.getEventFromFormSubmission(v2FormSubmission);
 
-        if (Arrays.asList(CLIENT_EVENTS).contains(e.getEventType()))
-            org.smartregister.util.Utils.startAsyncTask(new SavePatientAsyncTask(v2FormSubmission, mContext, true, e), null);
-        else
-            org.smartregister.util.Utils.startAsyncTask(new SavePatientAsyncTask(v2FormSubmission, mContext, false, e), null);
-
+        org.smartregister.util.Utils.startAsyncTask(new SavePatientAsyncTask(v2FormSubmission, mContext, e), null);
     }
 
     private void saveClient(Client client) {
@@ -362,7 +356,7 @@ public class BidanFormUtils {
             String sql =
                     "select * from " + ec_bind_path + " where base_entity_id='" + entityId + "'";
             Map<String, String> dbEntity = theAppContext.formDataRepository().
-                    getMapFromSQLQuery(sql);
+                    getMapFromSQLQuery(sql,null);
             Map<String, String> detailsMap = theAppContext.detailsRepository().
                     getAllDetailsForClient(entityId);
             detailsMap.putAll(dbEntity);
@@ -466,7 +460,7 @@ public class BidanFormUtils {
                             String sql = "select * from '" + childTableName + "' where "
                                     + "relational_id = '" + entityId + "'";
                             String childRecordsString = theAppContext.formDataRepository().
-                                    queryList(sql);
+                                    queryList(sql,null);
                             JSONArray childRecords = new JSONArray(childRecordsString);
 
                             JSONArray fieldsArray = subFormDefinition.getJSONArray("fields");
@@ -719,7 +713,7 @@ public class BidanFormUtils {
             throws Exception {
         String bindPath = fieldsDefinition.getString("bind_type");
         String sql = "select * from " + bindPath + " where id='" + entityId + "'";
-        String dbEntity = theAppContext.formDataRepository().queryUniqueResult(sql);
+        String dbEntity = theAppContext.formDataRepository().queryUniqueResult(sql,null);
 
         JSONObject entityJson = new JSONObject();
 
@@ -844,7 +838,7 @@ public class BidanFormUtils {
                 String sql =
                         "select * from " + childTable + " where " + joinField + "='" + val + "'";
                 Log.logInfo(sql);
-                String dbEntity = theAppContext.formDataRepository().queryUniqueResult(sql);
+                String dbEntity = theAppContext.formDataRepository().queryUniqueResult(sql,null);
                 JSONObject linkedEntityJson = new JSONObject();
 
                 if (dbEntity != null && !dbEntity.isEmpty()) {
@@ -1033,12 +1027,6 @@ public class BidanFormUtils {
         return fileContents;
     }
 
-    private List<String> EditClientFormNameList(){
-        List<String> formNames = new ArrayList<>();
-        formNames.add("child_edit");
-        return formNames;
-    }
-
     /*private void createNewEventDocument(org.smartregister.cloudant.models.Event event) {
         mCloudantDataHandler.createEventDocument(event);
     }
@@ -1061,13 +1049,11 @@ public class BidanFormUtils {
     class SavePatientAsyncTask extends android.os.AsyncTask<Void, Void, Void> {
         private final org.smartregister.clientandeventmodel.FormSubmission formSubmission;
         private Context context;
-        private boolean saveClient;
         private Event event;
 
-        public SavePatientAsyncTask(org.smartregister.clientandeventmodel.FormSubmission formSubmission, Context context, boolean hasClient, Event event) {
+        public SavePatientAsyncTask(org.smartregister.clientandeventmodel.FormSubmission formSubmission, Context context, Event event) {
             this.formSubmission = formSubmission;
             this.context = context;
-            this.saveClient = hasClient;
             this.event = event;
         }
 
@@ -1094,33 +1080,37 @@ public class BidanFormUtils {
             try {
                 SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(context);
                 AllSharedPreferences allSharedPreferences = new AllSharedPreferences(preferences);
-                if (saveClient) {
-                    Client c = formEntityConverter.getClientFromFormSubmission(formSubmission);
-                    saveClient(c);
-                }
+
                 event = tagSyncMetadata(event);
                 String eventType = event.getEventType();
                 saveEvent(event);
 
                 Gson gson = new GsonBuilder().create();
-                android.util.Log.e(TAG, "doInBackground: eventType "+ eventType );
-                if (eventType != null) {
+                if (Arrays.asList(CLIENT_EVENTS).contains(eventType)){
 
                     if (eventType.equals(AllConstantsINA.FormNames.KI_FORM_TITLE)) {
                         JSONObject json = eventClientRepository.getClientByBaseEntityId(event.getBaseEntityId());
                         Client client = gson.fromJson(json.toString(), Client.class);
                         // client.addAttribute("kartu_ibu", "kartu_ibu");
                         saveClient(client);
+                    } else if (eventType.equals(AllConstantsINA.FormNames.DOKUMENTASI_PERSALINAN)) {
+                        JSONObject json = eventClientRepository.getClientByBaseEntityId(event.getBaseEntityId());
+                        Client client = gson.fromJson(json.toString(), Client.class);
+                        client.addRelationship("childId",event.getBaseEntityId());
+                        saveClient(client);
                     } else if (eventType.equals(AllConstantsINA.FormNames.CHILD_FORM_TITLE)) {
                         JSONObject json = eventClientRepository.getClientByBaseEntityId(event.getBaseEntityId());
                         Client client = gson.fromJson(json.toString(), Client.class);
                         // client.addAttribute("anak", "anak");
                         saveClient(client);
+                    } else if (eventType.equals(AllConstantsINA.FormNames.EC_EDIT)) {
+                        Client client = formEntityConverter.getClientFromFormSubmission(formSubmission);
+                        saveClient(client);
                     }
-                    else if (eventType.equals(EditClientFormNameList())) {
-                        JSONObject json = eventClientRepository.getClientByBaseEntityId(event.getBaseEntityId());
-                        Client client = gson.fromJson(json.toString(), Client.class);
-                        client.addAttribute("edit", "edit");
+                    else if (eventType.equals(AllConstantsINA.FormNames.CHILD_EDIT)) {
+                        Client client = formEntityConverter.getClientFromFormSubmission(formSubmission);
+                        String ibuCaseId = formSubmission.instance().form().getField("ibuCaseId");
+                        client.addRelationship("ibuCaseId",ibuCaseId);
                         saveClient(client);
                     }
                 }
@@ -1136,8 +1126,7 @@ public class BidanFormUtils {
                 }
                 long lastSyncTimeStamp = allSharedPreferences.fetchLastUpdatedAtDate(0);
                 Date lastSyncDate = new Date(lastSyncTimeStamp);
-//                BidanOldClientProcessor.getInstance(context).processClient(eventClientRepository.getEvents(lastSyncDate, BaseRepository.TYPE_Unsynced));
-                BidanClientProcessor.getInstance(context).processClient(eventClientRepository.getEvents(lastSyncDate, BaseRepository.TYPE_Unsynced));
+                ClientProcessor.getInstance(context).processClient(eventClientRepository.getEvents(lastSyncDate, BaseRepository.TYPE_Unsynced));
                 allSharedPreferences.saveLastUpdatedAtDate(lastSyncDate.getTime());
             } catch (Exception e) {
                 android.util.Log.e(TAG, e.toString(), e);

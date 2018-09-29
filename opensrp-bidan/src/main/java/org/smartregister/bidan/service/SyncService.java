@@ -21,7 +21,6 @@ import org.smartregister.bidan.R;
 import org.smartregister.bidan.activity.LoginActivity;
 import org.smartregister.bidan.application.BidanApplication;
 import org.smartregister.bidan.receiver.SyncStatusBroadcastReceiver;
-import org.smartregister.bidan.sync.BidanClientProcessor;
 import org.smartregister.bidan.sync.ECSyncUpdater;
 import org.smartregister.domain.FetchStatus;
 import org.smartregister.domain.Response;
@@ -188,7 +187,7 @@ public class SyncService extends Service {
                             if (eCount < 0) {
                                 return Observable.just(FetchStatus.fetchedFailed);
                             } else if (eCount == 0) {
-                                return Observable.just(FetchStatus.nothingFetched);
+                                return Observable.just(FetchStatus.fetched);
                             } else {
                                 Pair<Long, Long> serverVersionPair = getMinMaxServerVersions(jsonObject);
                                 long lastServerVersion = serverVersionPair.second - 1;
@@ -254,7 +253,7 @@ public class SyncService extends Service {
                                             public FetchStatus apply(@NonNull Pair<Long, Long> serverVersionPair) throws Exception {
                                                 Log.e(TAG, "apply: proses data storage" );
 //                                                ClientProcessor.getInstance(context).processClient(ecUpdater.allEvents(serverVersionPair.first - 1, serverVersionPair.second));
-                                                BidanClientProcessor.getInstance(context).processClient(ecUpdater.allEvents(serverVersionPair.first - 1, serverVersionPair.second));
+                                                ClientProcessor.getInstance(context).processClient(ecUpdater.allEvents(serverVersionPair.first - 1, serverVersionPair.second));
                                                 return FetchStatus.fetched;
                                             }
                                         });

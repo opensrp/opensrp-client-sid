@@ -398,7 +398,7 @@
             "English": "Gender"
           },
           "instance": {
-            "openmrs_entity_id": "birthdate",
+            "openmrs_entity_id": "gender",
             "openmrs_entity": "person"
           },
           "type": "select one",

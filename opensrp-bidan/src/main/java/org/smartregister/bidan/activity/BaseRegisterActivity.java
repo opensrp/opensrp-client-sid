@@ -17,7 +17,6 @@ import org.smartregister.Context;
 import org.smartregister.adapter.SmartRegisterPaginatedAdapter;
 import org.smartregister.bidan.R;
 import org.smartregister.bidan.fragment.BaseSmartRegisterFragment;
-import org.smartregister.bidan.sync.BidanClientProcessor;
 import org.smartregister.bidan.utils.BidanFormUtils;
 import org.smartregister.commonregistry.AllCommonsRepository;
 import org.smartregister.commonregistry.CommonPersonObject;
@@ -30,6 +29,7 @@ import org.smartregister.enketo.listener.DisplayFormListener;
 import org.smartregister.enketo.view.fragment.DisplayFormFragment;
 import org.smartregister.provider.SmartRegisterClientsProvider;
 import org.smartregister.repository.DetailsRepository;
+import org.smartregister.sync.ClientProcessor;
 import org.smartregister.util.Log;
 import org.smartregister.view.activity.SecuredNativeSmartRegisterActivity;
 import org.smartregister.view.contract.SmartRegisterClient;
@@ -74,6 +74,7 @@ public class BaseRegisterActivity extends SecuredNativeSmartRegisterActivity imp
     protected FragmentPagerAdapter mPagerAdapter;
     protected DisplayFormFragment displayFormFragment;
     protected DisplayFormFragment formFragment;
+    protected BaseSmartRegisterFragment baseFragment;
     //    protected SimpleDateFormat timer = new SimpleDateFormat("hh:mm:ss");
     private int style = DateFormat.MEDIUM;
     //Also try with style = DateFormat.FULL and DateFormat.SHORT
@@ -94,6 +95,7 @@ public class BaseRegisterActivity extends SecuredNativeSmartRegisterActivity imp
         mPagerAdapter = new EnketoRegisterPagerAdapter(getSupportFragmentManager(), formNames.toArray(new String[formNames.size()]), mBaseFragment());
         mPager.setOffscreenPageLimit(formNames.size());
         mPager.setAdapter(mPagerAdapter);
+        baseFragment = (BaseSmartRegisterFragment) mPagerAdapter.getItem(0);
 //        mPager.setOnPageChangeListener(new ViewPager.SimpleOnPageChangeListener() {
 //            @Override
 //            public void onPageSelected(int position) {
@@ -226,13 +228,12 @@ public class BaseRegisterActivity extends SecuredNativeSmartRegisterActivity imp
     }
 
     public void switchToBaseFragment(final String data) {
-        android.util.Log.e(TAG, "switchToBaseFragment: " );
         final int prevPageIndex = currentPage;
         runOnUiThread(new Runnable() {
             @Override
             public void run() {
                 mPager.setCurrentItem(0, false);
-                SecuredNativeSmartRegisterFragment registerFragment = (SecuredNativeSmartRegisterFragment) findFragmentByPosition(0);
+                BaseSmartRegisterFragment registerFragment = baseFragment;
                 if (registerFragment != null && data != null) {
                     registerFragment.refreshListView();
                     android.util.Log.e(TAG, "run: refresh1" );
@@ -357,7 +358,7 @@ public class BaseRegisterActivity extends SecuredNativeSmartRegisterActivity imp
             BidanFormUtils formUtils = BidanFormUtils.getInstance(this);
             FormSubmission submission = formUtils.generateFormSubmisionFromXMLString(id, formSubmission, formName, fieldOverrides);
 
-            BidanClientProcessor.getInstance(this).processClient();
+            ClientProcessor.getInstance(this).processClient();
 
             android.util.Log.e(TAG, "saveFormSubmission: "+ formName );
 //            android.util.Log.e(TAG, "saveFormSubmission: "+ submission.toString() );
@@ -408,7 +409,7 @@ public class BaseRegisterActivity extends SecuredNativeSmartRegisterActivity imp
 
     public void refreshList(final FetchStatus fetchStatus) {
         if (Looper.myLooper() == Looper.getMainLooper()) {
-            BaseSmartRegisterFragment registerFragment = (BaseSmartRegisterFragment) findFragmentByPosition(0);
+            BaseSmartRegisterFragment registerFragment = baseFragment;
             if (registerFragment != null && fetchStatus.equals(FetchStatus.fetched)) {
                 registerFragment.refreshListView();
             }
@@ -417,7 +418,7 @@ public class BaseRegisterActivity extends SecuredNativeSmartRegisterActivity imp
             handler.post(new Runnable() {
                 @Override
                 public void run() {
-                    BaseSmartRegisterFragment registerFragment = (BaseSmartRegisterFragment) findFragmentByPosition(0);
+                    BaseSmartRegisterFragment registerFragment = baseFragment;
                     if (registerFragment != null && fetchStatus.equals(FetchStatus.fetched)) {
                         registerFragment.refreshListView();
                     }
@@ -441,8 +442,6 @@ public class BaseRegisterActivity extends SecuredNativeSmartRegisterActivity imp
         public void onDialogOptionSelection(DialogOption option, Object tag) {
             CommonPersonObjectClient pc = (CommonPersonObjectClient) tag;
 
-//            android.util.Log.e(TAG, "onDialogOptionSelection:columnMap "+ pc.getColumnmaps() );
-//            android.util.Log.e(TAG, "onDialogOptionSelection:details "+ pc.getDetails() );
             DetailsRepository detailsRepository = Context.getInstance().detailsRepository();
 
             if (option.name().equalsIgnoreCase(getString(R.string.str_edit_ki_form))) {
@@ -467,30 +466,34 @@ public class BaseRegisterActivity extends SecuredNativeSmartRegisterActivity imp
                 }
 
                 FieldOverrides fo = new FieldOverrides(fieldOverrides.toString());
-                android.util.Log.e(TAG, "onDialogOptionSelection:fo "+ fo.getJSONString() );
                 onEditSelectionWithMetadata((EditOption) option, (SmartRegisterClient) tag, fo.getJSONString());
 
             } else if (option.name().equalsIgnoreCase(getString(R.string.str_anak_edit))) {
                 // Edit Form Ibu
                 Log.logError(TAG, "kohort_bayi_edit");
                 detailsRepository.updateDetails(pc);
-                String ibuCaseId = getValue(pc.getColumnmaps(), "_id", true).toLowerCase();
+                AllCommonsRepository childRepository = Context.getInstance().allCommonsRepositoryobjects("ec_anak");
+                CommonPersonObject childobject = childRepository.findByCaseID(pc.entityId());
+                AllCommonsRepository kirep = Context.getInstance().allCommonsRepositoryobjects("ec_kartu_ibu");
+                CommonPersonObject kiparent = kirep.findByCaseID(childobject.getColumnmaps().get("relational_id"));
+                detailsRepository.updateDetails(kiparent);
+
                 JSONObject fieldOverrides = new JSONObject();
 
                 try {
-                    fieldOverrides.put("Province", pc.getDetails().get("stateProvince"));
-                    fieldOverrides.put("District", pc.getDetails().get("countyDistrict"));
-                    fieldOverrides.put("Sub-district", pc.getDetails().get("address2"));
-                    fieldOverrides.put("Village", pc.getDetails().get("cityVillage"));
-                    fieldOverrides.put("Sub-village", pc.getDetails().get("address1"));
+                    fieldOverrides.put("Province", kiparent.getDetails().get("stateProvince"));
+                    fieldOverrides.put("District", kiparent.getDetails().get("countyDistrict"));
+                    fieldOverrides.put("Sub-district", kiparent.getDetails().get("address2"));
+                    fieldOverrides.put("Sub-village", kiparent.getDetails().get("address1"));
                     fieldOverrides.put("jenis_kelamin", pc.getDetails().get("gender"));
-                    fieldOverrides.put("ibuCaseId", ibuCaseId);
+                    fieldOverrides.put("ibu_entity_id", pc.getDetails().get("relational_id"));
+                    fieldOverrides.put("beratLahir", pc.getDetails().get("beratLahir"));
+                    fieldOverrides.put("namaBayi", pc.getDetails().get("namaBayi"));
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
 
                 FieldOverrides fo = new FieldOverrides(fieldOverrides.toString());
-                android.util.Log.e(TAG, "onDialogOptionSelection:fo.getJSONString() " + fo.getJSONString());
                 onEditSelectionWithMetadata((EditOption) option, (SmartRegisterClient) tag, fo.getJSONString());
 
             } else {

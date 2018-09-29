@@ -54,13 +54,11 @@
       },
       {
         "name": "Village",
-        "bind": "/model/instance/Kartu_ibu/Village",
-        "shouldLoadValue": true
+        "bind": "/model/instance/Kartu_ibu/Village"
       },
       {
         "name": "Province",
-        "bind": "/model/instance/Kartu_ibu/Province",
-        "shouldLoadValue": true
+        "bind": "/model/instance/Kartu_ibu/Province"
       },
       {
         "name": "nik",
@@ -69,18 +67,15 @@
       },
       {
         "name": "Sub-district",
-        "bind": "/model/instance/Kartu_ibu/Sub-district",
-        "shouldLoadValue": true
+        "bind": "/model/instance/Kartu_ibu/Sub-district"
       },
       {
         "name": "District",
-        "bind": "/model/instance/Kartu_ibu/District",
-        "shouldLoadValue": true
+        "bind": "/model/instance/Kartu_ibu/District"
       },
       {
         "name": "Sub-village",
-        "bind": "/model/instance/Kartu_ibu/Sub-village",
-        "shouldLoadValue": true
+        "bind": "/model/instance/Kartu_ibu/Sub-village"
       },
       {
         "name": "dusun",

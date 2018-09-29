@@ -35,6 +35,7 @@ import org.smartregister.view.dialog.ServiceModeOption;
 import org.smartregister.view.dialog.SortOption;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 
 import static android.view.View.GONE;
@@ -175,6 +176,12 @@ public class KISmartRegisterFragment extends BaseSmartRegisterFragment {
 
     }
 
+    @Override
+    public void onResume() {
+        super.onResume();
+        initializeQueries();
+    }
+
     protected String filterStringForAll() {
         return "";
     }
@@ -218,25 +225,25 @@ public class KISmartRegisterFragment extends BaseSmartRegisterFragment {
 
     }
 
-//    private String kiSortByNameAZ() {
-//        return "namalengkap ASC";
-//    }
-//
-//    private String kiSortByNameZA() {
-//        return "namalengkap DESC";
-//    }
-//
-//    private String kiSortByAge() {
-//        return "umur DESC";
-//    }
-//
-//    private String kiSortByNoIbu() {
-//        return "noIbu ASC";
-//    }
-//
-//    private String kiSortByEdd() {
-//        return "htp IS NULL, htp";
-//    }
+    protected String kiSortByNameAZ() {
+        return "namalengkap COLLATE NOCASE ASC";
+    }
+
+    protected String kiSortByNameZA() {
+        return "namalengkap COLLATE NOCASE DESC";
+    }
+
+    protected String kiSortByAge() {
+        return "umur DESC";
+    }
+
+    protected String kiSortByNoIbu() {
+        return "noIbu ASC";
+    }
+
+    protected String kiSortByEdd() {
+        return "htp IS NULL, htp";
+    }
 
     public void updateSearchView() {
         textWatcher(AllConstantsINA.Register.KI);
@@ -251,7 +258,7 @@ public class KISmartRegisterFragment extends BaseSmartRegisterFragment {
             } else {
                 StringUtil.humanize(entry.getValue().getLabel());
                 String name = StringUtil.humanize(entry.getValue().getLabel());
-                dialogOptionslist.add(new MotherFilterOption(name, "location_name", name, "ec_kartu_ibu"));
+                dialogOptionslist.add(new MotherFilterOption(name, "address1", name, "ec_kartu_ibu"));
 
             }
         }

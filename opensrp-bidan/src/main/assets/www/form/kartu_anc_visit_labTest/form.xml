@@ -15,7 +15,8 @@
         </span>
         <span class="question-label "
             data-itext-id="/kunjungan_anc_reviewed_Lab_test/generated_note_name_13:label" lang="en">
-            -
+            Village :
+            <span class="or-output" data-value=" /kunjungan_anc_reviewed_Lab_test/Village "></span>
         </span>
         <input name="/kunjungan_anc_reviewed_Lab_test/generated_note_name_13" data-type-xml="string"
             readonly="readonly" type="text" />
@@ -29,7 +30,9 @@
         </span>
         <span class="question-label "
             data-itext-id="/kunjungan_anc_reviewed_Lab_test/generated_note_name_14:label" lang="en">
-            -
+            Sub Village :
+            <span class="or-output"
+                data-value=" /kunjungan_anc_reviewed_Lab_test/Sub-village "></span>
         </span>
         <input name="/kunjungan_anc_reviewed_Lab_test/generated_note_name_14" data-type-xml="string"
             readonly="readonly" type="text" />

@@ -39,6 +39,7 @@ import org.smartregister.bidan.utils.AllConstantsINA;
 import org.smartregister.domain.LoginResponse;
 import org.smartregister.domain.jsonmapping.Location;
 import org.smartregister.domain.jsonmapping.LoginResponseData;
+import org.smartregister.domain.jsonmapping.util.TeamLocation;
 import org.smartregister.domain.jsonmapping.util.TreeNode;
 import org.smartregister.event.Listener;
 import org.smartregister.repository.AllSharedPreferences;
@@ -119,7 +120,7 @@ public class LoginActivity extends AppCompatActivity {
         }
         setLanguage();
 
-        debugApp();
+//        debugApp();
 
     }
 
@@ -384,27 +385,15 @@ public class LoginActivity extends AppCompatActivity {
 
     private void remoteLoginWith(String userName, String password, LoginResponseData userInfo) {
         context.userService().remoteLogin(userName, password, userInfo);
-        // LoginActivity.generator = new Generator(context, userName, password);
 
-        LinkedHashMap<String, TreeNode<String, Location>> abc = userInfo.locations.getLocationsHierarchy();
-        Gson gson = new Gson();
+        Iterator<TeamLocation> teamLocationIterator = userInfo.team.location.iterator();
+        TeamLocation teamLocation = teamLocationIterator.next();
 
-        // Convert the ordered map into an ordered string.
-        String json = gson.toJson(abc, LinkedHashMap.class);
-        String locationId = "";
-        try {
-            JSONObject jsonObject = new JSONObject(json);
-            Iterator<String> keys = jsonObject.keys();
-            // get some_name_i_wont_know in str_Name
-            locationId = keys.next();
+        Log.e(TAG, "remoteLoginWith: location "+ teamLocation.uuid );
 
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
-        Log.e(TAG, "remoteLoginWith: location "+ locationId );
-        Utils.writePreference(BidanApplication.getInstance().getApplicationContext(), PREF_TEAM_LOCATIONS, locationId);
+        Utils.writePreference(BidanApplication.getInstance().getApplicationContext(), PREF_TEAM_LOCATIONS, teamLocation.uuid);
 
-        setDefaultLocationId(userName, locationId);
+        setDefaultLocationId(userName, teamLocation.uuid);
         goToHome();
         DrishtiSyncScheduler.startOnlyIfConnectedToNetwork(getApplicationContext());
     }

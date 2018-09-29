@@ -9,10 +9,11 @@
     <label class="question note non-select ">
         <span class="question-label active" data-itext-id="/Kartu_ibu/generated_note_name_13:label"
             lang="Bahasa">Desa :
-            <span class="or-output" data-value=" /Kartu_ibu/Village"/>
+            <span class="or-output" data-value=" /Kartu_ibu/Village"></span>
         </span>
         <span class="question-label " data-itext-id="/Kartu_ibu/generated_note_name_13:label"
-            lang="en">-
+            lang="en">Village :
+            <span class="or-output" data-value=" /Kartu_ibu/Village"></span>
         </span>
         <input name="/Kartu_ibu/generated_note_name_13" data-type-xml="string" readonly="readonly"
             type="text" />
@@ -20,10 +21,11 @@
     <label class="question note non-select ">
         <span class="question-label active" data-itext-id="/Kartu_ibu/generated_note_name_14:label"
             lang="Bahasa">Dusun :
-            <span class="or-output" data-value=" /Kartu_ibu/Sub-district"/>
+            <span class="or-output" data-value=" /Kartu_ibu/Sub-village"></span>
         </span>
         <span class="question-label " data-itext-id="/Kartu_ibu/generated_note_name_14:label"
-            lang="en">-
+            lang="en">Sub Village :
+            <span class="or-output" data-value=" /Kartu_ibu/Sub-village"></span>
         </span>
         <input name="/Kartu_ibu/generated_note_name_14" data-type-xml="string" readonly="readonly"
             type="text" />
@@ -266,11 +268,11 @@
     <label class="question note non-select ">
         <span class="question-label active" data-itext-id="/Kartu_ibu/generated_note_name_32:label"
             lang="Bahasa">Unique ID:
-            <span class="or-output" data-value=" /Kartu_ibu/unique_id"/>
+            <span class="or-output" data-value=" /Kartu_ibu/unique_id"></span>
         </span>
         <span class="question-label " data-itext-id="/Kartu_ibu/generated_note_name_32:label"
             lang="en">Unique ID:
-            <span class="or-output" data-value=" /Kartu_ibu/unique_id"/>
+            <span class="or-output" data-value=" /Kartu_ibu/unique_id"></span>
         </span>
         <input name="/Kartu_ibu/generated_note_name_32" data-type-xml="string" readonly="readonly"
             type="text" />

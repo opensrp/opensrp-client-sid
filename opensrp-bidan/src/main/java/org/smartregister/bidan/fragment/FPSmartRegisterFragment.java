@@ -215,7 +215,7 @@ public class FPSmartRegisterFragment extends BaseSmartRegisterFragment {
             queryBuilder.SelectInitiateMainTable("ec_kartu_ibu", new String[]{"ec_kartu_ibu.relationalid", "ec_kartu_ibu.is_closed", "ec_kartu_ibu.details", "ec_kartu_ibu.isOutOfArea", "namalengkap", "umur", "namaSuami", "imagelist.imageid"});
             queryBuilder.customJoin("LEFT JOIN ec_ibu on ec_kartu_ibu.id = ec_ibu.base_entity_id LEFT JOIN ImageList imagelist ON ec_ibu.base_entity_id=imagelist.entityID ");
 
-            mainSelect = queryBuilder.mainCondition("ec_kartu_ibu.is_closed != 0 and jenisKontrasepsi != 0 AND namalengkap != '' AND namalengkap IS NOT NULL");
+            mainSelect = queryBuilder.mainCondition("ec_kartu_ibu.is_closed = 0 and jenisKontrasepsi != 0 AND namalengkap != '' AND namalengkap IS NOT NULL");
             Log.e(TAG, "initializeQueries:mainSelect " + mainSelect);
             Sortqueries = kiSortByNameAZ();
 
@@ -233,25 +233,25 @@ public class FPSmartRegisterFragment extends BaseSmartRegisterFragment {
     }
 
 
-//    private String kiSortByNameAZ() {
-//        return "namalengkap ASC";
-//    }
-//
-//    private String kiSortByNameZA() {
-//        return "namalengkap DESC";
-//    }
-//
-//    private String kiSortByAge() {
-//        return "umur DESC";
-//    }
-//
-//    private String kiSortByNoIbu() {
-//        return "noIbu ASC";
-//    }
-//
-//    private String kiSortByEdd() {
-//        return "htp IS NULL, htp";
-//    }
+    protected String kiSortByNameAZ() {
+        return "namalengkap COLLATE NOCASE ASC";
+    }
+
+    protected String kiSortByNameZA() {
+        return "namalengkap COLLATE NOCASE DESC";
+    }
+
+    protected String kiSortByAge() {
+        return "umur DESC";
+    }
+
+    protected String kiSortByNoIbu() {
+        return "noIbu ASC";
+    }
+
+    protected String kiSortByEdd() {
+        return "htp IS NULL, htp";
+    }
 
     @Override
     protected void onResumption() {
@@ -261,6 +261,12 @@ public class FPSmartRegisterFragment extends BaseSmartRegisterFragment {
         }
         Log.e(TAG, "onResumption: ");
 
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        initializeQueries();
     }
 
     private void updateSearchView() {
@@ -277,7 +283,7 @@ public class FPSmartRegisterFragment extends BaseSmartRegisterFragment {
                 StringUtil.humanize(entry.getValue().getLabel());
                 String name = StringUtil.humanize(entry.getValue().getLabel());
                 String tableName = "ec_kartu_ibu";
-                dialogOptionslist.add(new MotherFilterOption(name, "location_name", name, tableName));
+                dialogOptionslist.add(new MotherFilterOption(name, "address1", name, tableName));
 
             }
         }
@@ -295,10 +301,8 @@ public class FPSmartRegisterFragment extends BaseSmartRegisterFragment {
                     startActivity(intent);
                     getActivity().finish();
                     break;
-                case R.id.ib_cm_edit:
+                case R.id.ib_fp_edit:
 //                    FlurryFacade.logEvent("click_visit_button_on_kohort_kb_dashboard");
-//                    showFragmentDialog(new EditDialogOptionModel(), view.getTag());
-//                    showFragmentDialog(new BaseRegisterActivity.EditDialogOptionModelNew(), view.getTag());
                     showFragmentDialog(((FPSmartRegisterActivity) getActivity()).new EditDialogOptionModelNew(), view.getTag());
                     break;
                 default:

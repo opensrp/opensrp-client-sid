@@ -1,27 +1,50 @@
 <model>
     <instance>
-        <tambah_bayi_reviewed encounter_type="Edit Bayi" id="tambah_bayi" version="201511160646">
+        <edit_bayi encounter_type="Edit Bayi" id="edit_bayi"
+            version="201809260239">
             <formhub>
                 <uuid />
             </formhub>
-            <start />
-            <today />
+            <start openmrs_entity="encounter" openmrs_entity_id="encounter_start" />
+            <today openmrs_entity="encounter" openmrs_entity_id="encounter_date" />
             <deviceid />
             <simserial />
             <phonenumber />
-            <tanggal_pendaftaran />
-            <nama_ibu />
-            <alamat />
-            <no_bayi />
-            <nama_bayi />
-            <tanggal_lahir_anak />
-            <jenis_kelamin />
-            <kepemilikan_buku_kia />
-            <berat_lahir />
-            <end />
+            <Province />
+            <District />
+            <Sub-district />
+            <Village />
+            <Sub-village />
+            <generated_note_name_13 />
+            <generated_note_name_14 />
+            <existing_location openmrs_entity="encounter" openmrs_entity_id="location_id" />
+            <provinsi openmrs_entity="person_address" openmrs_entity_id="stateProvince"
+                openmrs_entity_parent="usual_residence" />
+            <kabupaten openmrs_entity="person_address" openmrs_entity_id="countyDistrict"
+                openmrs_entity_parent="usual_residence" />
+            <desa openmrs_entity="person_address" openmrs_entity_id="cityVillage"
+                openmrs_entity_parent="usual_residence" />
+            <dusun openmrs_entity="person_address" openmrs_entity_id="address1"
+                openmrs_entity_parent="usual_residence" />
+            <kecamatan openmrs_entity="person_address" openmrs_entity_id="address2"
+                openmrs_entity_parent="usual_residence" />
+            <desa_anak openmrs_entity="Concept"
+                openmrs_entity_id="160632AAAAAAAAAAAAAAAAAAAAAAAAAA"
+                openmrs_entity_parent="cityVillage" />
+            <generated_note_name_61 />
+            <child_existing_location openmrs_entity="encounter"
+                openmrs_entity_id="location_id" />
+            <nama_bayi openmrs_entity="Concept"
+                openmrs_entity_id="1586AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA" />
+            <jenis_kelamin openmrs_entity="person" openmrs_entity_id="gender" />
+            <tanggal_lahir openmrs_entity="person" openmrs_entity_id="birthdate" />
+            <berat_badan_saat_lahir openmrs_entity="concept"
+                openmrs_entity_id="5916AAAAAAAAAAAAAAAAAAAAAAAAAAAA" />
+            <ibu_entity_id openmrs_entity="person_relationship" openmrs_entity_id="ibuCaseId" />
+            <end openmrs_entity="encounter" openmrs_entity_id="encounter_end" />
             <meta>
                 <instanceID />
             </meta>
-        </tambah_bayi_reviewed>
+        </edit_bayi>
     </instance>
 </model>

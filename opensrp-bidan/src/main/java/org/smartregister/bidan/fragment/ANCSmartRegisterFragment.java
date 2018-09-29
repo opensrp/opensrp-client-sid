@@ -1,9 +1,14 @@
 package org.smartregister.bidan.fragment;
 
 import android.content.Intent;
+import android.database.Cursor;
+import android.os.Bundle;
+import android.support.v4.content.CursorLoader;
+import android.support.v4.content.Loader;
 import android.util.Log;
 import android.view.View;
 
+import org.apache.commons.lang3.StringUtils;
 import org.opensrp.api.domain.Location;
 import org.opensrp.api.util.EntityUtils;
 import org.opensrp.api.util.LocationTree;
@@ -16,6 +21,7 @@ import org.smartregister.bidan.options.KIANCOverviewServiceMode;
 import org.smartregister.bidan.options.MotherFilterOption;
 import org.smartregister.bidan.provider.ANCClientsProvider;
 import org.smartregister.bidan.utils.AllConstantsINA;
+import org.smartregister.bidan.utils.BidanSmartRegisterQueryBuilder;
 import org.smartregister.commonregistry.CommonPersonObjectClient;
 import org.smartregister.commonregistry.CommonRepository;
 import org.smartregister.cursoradapter.CursorCommonObjectFilterOption;
@@ -32,6 +38,7 @@ import org.smartregister.view.dialog.ServiceModeOption;
 import org.smartregister.view.dialog.SortOption;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 
 import static android.view.View.GONE;
@@ -133,6 +140,7 @@ public class ANCSmartRegisterFragment extends BaseSmartRegisterFragment {
         super.setupViews(view);
         view.findViewById(R.id.btn_report_month).setVisibility(INVISIBLE);
         view.findViewById(R.id.service_mode_selection).setVisibility(GONE);
+        view.findViewById(R.id.register_client).setVisibility(GONE);
         clientsView.setVisibility(VISIBLE);
         clientsProgressView.setVisibility(INVISIBLE);
         initializeQueries();
@@ -150,10 +158,10 @@ public class ANCSmartRegisterFragment extends BaseSmartRegisterFragment {
                     new CommonRepository(tableEcIbu, new String[]{"ec_ibu.is_closed", "ec_kartu_ibu.namalengkap", "ec_kartu_ibu.namaSuami"}));
             clientsView.setAdapter(clientAdapter);
 
-            setTablename(tableEcIbu);
+            setTablename("ec_ibu");
             SmartRegisterQueryBuilder countQueryBuilder = new SmartRegisterQueryBuilder();
             countQueryBuilder.SelectInitiateMainTableCounts(tableEcIbu);
-            countQueryBuilder.customJoin("LEFT JOIN ec_kartu_ibu on ec_kartu_ibu.id = ec_ibu.id");
+            countQueryBuilder.customJoin("LEFT JOIN ec_ibu on ec_kartu_ibu.id = ec_ibu.id");
 
 //            mainCondition = "is_closed = 0";
             mainCondition = "is_closed = 0 AND namalengkap != '' AND namalengkap IS NOT NULL";
@@ -165,9 +173,9 @@ public class ANCSmartRegisterFragment extends BaseSmartRegisterFragment {
             SmartRegisterQueryBuilder queryBuilder = new SmartRegisterQueryBuilder();
             queryBuilder.SelectInitiateMainTable(tableEcIbu, new String[]{"ec_ibu.relationalid", "ec_ibu.is_closed", "ec_ibu.details", "ec_kartu_ibu.namalengkap", "ec_kartu_ibu.namaSuami", "imagelist.imageid"});
             queryBuilder.customJoin("LEFT JOIN ec_kartu_ibu on ec_kartu_ibu.id = ec_ibu.id LEFT JOIN ImageList imagelist ON ec_ibu.id=imagelist.entityID");
-            mainSelect = queryBuilder.mainCondition("ec_kartu_ibu.is_closed = 0 AND namalengkap != '' AND namalengkap IS NOT NULL");
-            // TODO : sorting
-//            Sortqueries = kiSortByNameAZ();
+            mainSelect = queryBuilder.mainCondition("ec_ibu.is_closed = 0 AND namalengkap != '' AND namalengkap IS NOT NULL");
+
+            Sortqueries = kiSortByNameAZ();
 
             currentlimit = 20;
             currentoffset = 0;
@@ -184,25 +192,79 @@ public class ANCSmartRegisterFragment extends BaseSmartRegisterFragment {
 
     }
 
-//    private String kiSortByNameAZ() {
-//        return "namalengkap ASC";
-//    }
-//
-//    private String kiSortByNameZA() {
-//        return "namalengkap DESC";
-//    }
-//
-//    private String kiSortByAge() {
-//        return "umur DESC";
-//    }
-//
-//    private String kiSortByNoIbu() {
-//        return "noIbu ASC";
-//    }
-//
-//    private String kiSortByEdd() {
-//        return "htp IS NULL, htp";
-//    }
+    private static final String COUNT = "count_execute";
+
+    @Override
+    public Loader<Cursor> onCreateLoader(int id, final Bundle args) {
+        switch (id) {
+            case LOADER_ID:
+                // Returns a new CursorLoader
+                return new CursorLoader(getActivity()) {
+                    @Override
+                    public Cursor loadInBackground() {
+                        // Count query
+                        if (args != null && args.getBoolean(COUNT)) {
+                            CountExecute();
+                        }
+
+                        // Select register query
+                        String query = filterandSortQuery();
+                        return commonRepository().rawCustomQueryForAdapter(query);
+                    }
+                };
+            default:
+                // An invalid id was passed in
+                return null;
+        }
+
+    }
+
+    private String filterandSortQuery() {
+        BidanSmartRegisterQueryBuilder sqb = new BidanSmartRegisterQueryBuilder(mainSelect);
+
+        String query = "";
+        try {
+            if (isValidFilterForFts(commonRepository())) {
+                String sql = sqb
+                        .searchQueryFts(tablename, joinTable, mainCondition, filters, Sortqueries,
+                                currentlimit, currentoffset);
+                List<String> ids = commonRepository().findSearchIds(sql);
+                query = sqb.toStringFts(ids, tablename, CommonRepository.ID_COLUMN,
+                        Sortqueries);
+
+                query = sqb.Endquery(query);
+            } else {
+                sqb.addCondition(filters);
+                query = sqb.orderbyCondition(Sortqueries);
+                query = sqb.Endquery(sqb.addlimitandOffset(query, currentlimit, currentoffset));
+
+            }
+        } catch (Exception e) {
+            Log.e(getClass().getName(), e.toString(), e);
+        }
+
+        return query;
+    }
+
+    protected String kiSortByNameAZ() {
+        return "namalengkap COLLATE NOCASE ASC";
+    }
+
+    protected String kiSortByNameZA() {
+        return "namalengkap COLLATE NOCASE DESC";
+    }
+
+    protected String kiSortByAge() {
+        return "umur DESC";
+    }
+
+    protected String kiSortByNoIbu() {
+        return "noIbu ASC";
+    }
+
+    protected String kiSortByEdd() {
+        return "htp IS NULL, htp";
+    }
 
     @Override
     protected void onResumption() {
@@ -211,6 +273,12 @@ public class ANCSmartRegisterFragment extends BaseSmartRegisterFragment {
             initializeQueries();
         }
         Log.e(TAG, "onResumption: " + getResources().getConfiguration().locale);
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        initializeQueries();
     }
 
     private void updateSearchView() {
@@ -226,7 +294,7 @@ public class ANCSmartRegisterFragment extends BaseSmartRegisterFragment {
             } else {
                 StringUtil.humanize(entry.getValue().getLabel());
                 String name = StringUtil.humanize(entry.getValue().getLabel());
-                dialogOptionslist.add(new MotherFilterOption(name, "location_name", name, ecKiTableName));
+                dialogOptionslist.add(new MotherFilterOption(name, "address1", name, ecKiTableName));
 
             }
         }

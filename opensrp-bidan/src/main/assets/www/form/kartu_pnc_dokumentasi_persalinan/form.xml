@@ -14,7 +14,8 @@
             <span class="or-output" data-value=" /dok_persalinan_reviewed/Village "></span>
         </span>
         <span class="question-label "
-            data-itext-id="/dok_persalinan_reviewed/generated_note_name_13:label" lang="en">-
+            data-itext-id="/dok_persalinan_reviewed/generated_note_name_13:label" lang="en">Village :
+            <span class="or-output" data-value=" /dok_persalinan_reviewed/Village "></span>
         </span>
         <input name="/dok_persalinan_reviewed/generated_note_name_13" data-type-xml="string"
             readonly="readonly" type="text" />
@@ -26,7 +27,8 @@
             <span class="or-output" data-value=" /dok_persalinan_reviewed/Sub-village "></span>
         </span>
         <span class="question-label "
-            data-itext-id="/dok_persalinan_reviewed/generated_note_name_14:label" lang="en">-
+            data-itext-id="/dok_persalinan_reviewed/generated_note_name_14:label" lang="en">Sub Village :
+            <span class="or-output" data-value=" /dok_persalinan_reviewed/Sub-village "></span>
         </span>
         <input name="/dok_persalinan_reviewed/generated_note_name_14" data-type-xml="string"
             readonly="readonly" type="text" />
@@ -56,7 +58,9 @@
         <span class="question-label "
             data-itext-id="/dok_persalinan_reviewed/usia_kehamilan_hpht:label" lang="en">Age of
             pregnancy
-            based on HPHT
+            based on HPHT:
+            <span class="or-output" data-value=" /dok_persalinan_reviewed/usiakehamilan "></span>
+            week
         </span>
         <input name="/dok_persalinan_reviewed/usia_kehamilan_hpht" data-constraint=".&gt;0"
             data-type-xml="string" readonly="readonly" type="text" />
