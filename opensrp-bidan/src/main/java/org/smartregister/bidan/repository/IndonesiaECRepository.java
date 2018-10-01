@@ -14,16 +14,14 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class IndonesiaEventClientRepository extends EventClientRepository {
-    private static final String TAG = IndonesiaEventClientRepository.class.getCanonicalName();
+public class IndonesiaECRepository extends EventClientRepository {
+    private static final String TAG = IndonesiaECRepository.class.getCanonicalName();
 
-    public IndonesiaEventClientRepository(Repository repository) {
+    public IndonesiaECRepository(Repository repository) {
         super(repository);
     }
 
     public int getUnSyncedEventsSize() {
-        Map<String, Object> result = new HashMap<>();
-        List<JSONObject> clients = new ArrayList<JSONObject>();
         List<JSONObject> events = new ArrayList<JSONObject>();
 
         String query = "select "
@@ -52,21 +50,7 @@ public class IndonesiaEventClientRepository extends EventClientRepository {
                 jsonEventStr = jsonEventStr.replaceAll("'", "");
                 JSONObject jsonObectEvent = new JSONObject(jsonEventStr);
                 events.add(jsonObectEvent);
-                if (jsonObectEvent.has(event_column.baseEntityId.name())) {
-                    String baseEntityId = jsonObectEvent.getString(event_column.baseEntityId.name
-                            ());
-                    JSONObject cl = getUnSyncedClientByBaseEntityId(baseEntityId);
-                    if (cl != null) {
-                        clients.add(cl);
-                    }
-                }
 
-            }
-            if (!clients.isEmpty()) {
-                result.put("clients", clients);
-            }
-            if (!events.isEmpty()) {
-                result.put("events", events);
             }
         } catch (Exception e) {
             Log.e(TAG, e.getMessage());
@@ -76,7 +60,7 @@ public class IndonesiaEventClientRepository extends EventClientRepository {
             }
         }
 
-        return result.size();
+        return events.size();
     }
 
 }

@@ -30,7 +30,9 @@ import org.smartregister.bidan.R;
 import org.smartregister.bidan.application.BidanApplication;
 import org.smartregister.bidan.controller.NavigationControllerINA;
 import org.smartregister.bidan.receiver.SyncStatusBroadcastReceiver;
+import org.smartregister.bidan.repository.IndonesiaECRepository;
 import org.smartregister.bidan.service.FormSubmissionSyncService;
+import org.smartregister.bidan.sync.ECSyncUpdater;
 import org.smartregister.bidan.sync.UpdateActionsTask;
 import org.smartregister.bidan.utils.AllConstantsINA;
 import org.smartregister.bidan.utils.Support;
@@ -46,6 +48,9 @@ import org.smartregister.view.activity.SecuredActivity;
 import org.smartregister.view.contract.HomeContext;
 import org.smartregister.view.controller.NativeAfterANMDetailsFetchListener;
 import org.smartregister.view.controller.NativeUpdateANMDetailsTask;
+
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 import static android.widget.Toast.LENGTH_SHORT;
 import static java.lang.String.valueOf;
@@ -64,8 +69,10 @@ public class BidanHomeActivity extends SecuredActivity implements SyncStatusBroa
     public static int kicount;
     //    SimpleDateFormat timer = new SimpleDateFormat("hh:mm:ss");
     private MenuItem updateMenuItem;
+    private MenuItem lastSyncMenuItem;
     private MenuItem remainingFormsToSyncMenuItem;
     private PendingFormSubmissionService pendingFormSubmissionService;
+    private IndonesiaECRepository indonesiaECRepository;
     private SyncStatusBroadcastReceiver syncStatusBroadcastReceiver;
     private TextView ecRegisterClientCountView;
     private TextView kartuIbuANCRegisterClientCountView;
@@ -203,6 +210,7 @@ public class BidanHomeActivity extends SecuredActivity implements SyncStatusBroa
 
     private void initialize() {
         pendingFormSubmissionService = context().pendingFormSubmissionService();
+        indonesiaECRepository = BidanApplication.getInstance().indonesiaECRepository();
 
         FORM_SUBMITTED.addListener(onFormSubmittedListener);
         ACTION_HANDLED.addListener(updateANMDetailsListener);
@@ -243,6 +251,7 @@ public class BidanHomeActivity extends SecuredActivity implements SyncStatusBroa
 
         updateRegisterCounts();
         updateSyncIndicator();
+        updateLastSyncTime();
         updateRemainingFormsToSyncCount();
         if (ContextCompat.checkSelfPermission(this,
                 Manifest.permission.ACCESS_FINE_LOCATION)
@@ -316,9 +325,11 @@ public class BidanHomeActivity extends SecuredActivity implements SyncStatusBroa
     public boolean onPrepareOptionsMenu(Menu menu) {
         super.onPrepareOptionsMenu(menu);
         updateMenuItem = menu.findItem(R.id.updateMenuItem);
+        lastSyncMenuItem = menu.findItem(R.id.lastSyncDate);
         remainingFormsToSyncMenuItem = menu.findItem(R.id.remainingFormsToSyncMenuItem);
 
         updateSyncIndicator();
+        updateLastSyncTime();
         updateRemainingFormsToSyncCount();
         return true;
     }
@@ -399,12 +410,28 @@ public class BidanHomeActivity extends SecuredActivity implements SyncStatusBroa
             return;
         }
 
-        long size = pendingFormSubmissionService.pendingFormSubmissionCount();
+        long size = BidanApplication.getInstance().getECRepository().getUnSyncedEventsSize();
         if (size > 0) {
             remainingFormsToSyncMenuItem.setTitle(valueOf(size) + " " + getString(R.string.unsynced_forms_count_message));
             remainingFormsToSyncMenuItem.setVisible(true);
         } else {
             remainingFormsToSyncMenuItem.setVisible(false);
+        }
+    }
+
+    private void updateLastSyncTime(){
+        if (lastSyncMenuItem == null) {
+            return;
+        }
+
+        long longLastSync = ECSyncUpdater.getInstance(getApplicationContext()).getLastCheckTimeStamp();
+        String lastSyncDate = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date(longLastSync));
+        if (longLastSync==0) {
+            lastSyncMenuItem.setTitle(getString(R.string.not_synced));
+            lastSyncMenuItem.setVisible(true);
+        } else {
+            lastSyncMenuItem.setTitle(getString(R.string.sync_last_date)+" "+lastSyncDate);
+            lastSyncMenuItem.setVisible(true);
         }
     }
 
@@ -426,6 +453,7 @@ public class BidanHomeActivity extends SecuredActivity implements SyncStatusBroa
     @Override
     public void onSyncComplete(FetchStatus fetchStatus) {
         Toast.makeText(getApplicationContext(), fetchStatus.displayValue(), Toast.LENGTH_SHORT).show();
+        updateLastSyncTime();
         updateRemainingFormsToSyncCount();
         if (updateMenuItem != null) {
             updateMenuItem.setActionView(null);

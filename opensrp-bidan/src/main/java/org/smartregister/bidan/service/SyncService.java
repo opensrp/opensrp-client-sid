@@ -24,7 +24,7 @@ import org.smartregister.bidan.receiver.SyncStatusBroadcastReceiver;
 import org.smartregister.bidan.sync.ECSyncUpdater;
 import org.smartregister.domain.FetchStatus;
 import org.smartregister.domain.Response;
-import org.smartregister.repository.EventClientRepository;
+import org.smartregister.bidan.repository.IndonesiaECRepository;
 import org.smartregister.service.HTTPAgent;
 import org.smartregister.sync.ClientProcessor;
 import org.smartregister.util.Utils;
@@ -118,7 +118,7 @@ public class SyncService extends Service {
     }
 
     private void pushECToServer() {
-        EventClientRepository db = BidanApplication.getInstance().eventClientRepository();
+        IndonesiaECRepository db = BidanApplication.getInstance().indonesiaECRepository();
         boolean keepSyncing = true;
 
         while (keepSyncing) {
@@ -302,7 +302,7 @@ public class SyncService extends Service {
     }
 
     private void complete(FetchStatus fetchStatus) {
-        if (fetchStatus.equals(FetchStatus.nothingFetched)) {
+        if (fetchStatus.equals(FetchStatus.fetched)) {
             ECSyncUpdater ecSyncUpdater = ECSyncUpdater.getInstance(context);
             ecSyncUpdater.updateLastCheckTimeStamp(Calendar.getInstance().getTimeInMillis());
         }

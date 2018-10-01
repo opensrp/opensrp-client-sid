@@ -11,7 +11,7 @@ import org.smartregister.bidan.activity.LoginActivity;
 import org.smartregister.bidan.receiver.BidanSyncBroadcastReceiver;
 import org.smartregister.bidan.repository.BidanRepository;
 import org.smartregister.commonregistry.CommonFtsObject;
-import org.smartregister.repository.EventClientRepository;
+import org.smartregister.bidan.repository.IndonesiaECRepository;
 import org.smartregister.repository.Repository;
 import org.smartregister.sync.DrishtiSyncScheduler;
 import org.smartregister.view.activity.DrishtiApplication;
@@ -29,7 +29,7 @@ public class BidanApplication extends DrishtiApplication {
 //    private static SettingsRepository settingsRepository;
 //    private UniqueIdRepository uniqueIdRepository;
 
-    private EventClientRepository eventClientRepository;
+    private IndonesiaECRepository indonesiaECRepository;
 
     private static String[] getFtsSearchFields(String tableName) {
         switch (tableName) {
@@ -188,7 +188,7 @@ public class BidanApplication extends DrishtiApplication {
             if (repository == null) {
                 repository = new BidanRepository(getInstance().getApplicationContext(), context());
                 uniqueIdRepository();
-//                eventClientRepository();
+//                indonesiaECRepository();
             }
         } catch (UnsatisfiedLinkError e) {
             logError("Error on getRepository: " + e);
@@ -212,18 +212,18 @@ public class BidanApplication extends DrishtiApplication {
         return context;
     }
 
-    public EventClientRepository getECRepository() {
-        if (eventClientRepository == null) {
-            eventClientRepository = new EventClientRepository(getRepository());
+    public IndonesiaECRepository getECRepository() {
+        if (indonesiaECRepository == null) {
+            indonesiaECRepository = new IndonesiaECRepository(getRepository());
         }
-        return eventClientRepository;
+        return indonesiaECRepository;
     }
 
-    public EventClientRepository eventClientRepository() {
-        if (eventClientRepository == null) {
-            eventClientRepository = new EventClientRepository(getRepository());
+    public IndonesiaECRepository indonesiaECRepository() {
+        if (indonesiaECRepository == null) {
+            indonesiaECRepository = new IndonesiaECRepository(getRepository());
         }
-        return eventClientRepository;
+        return indonesiaECRepository;
     }
 
 }

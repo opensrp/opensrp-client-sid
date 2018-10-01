@@ -30,7 +30,7 @@ import org.smartregister.domain.form.FormSubmission;
 import org.smartregister.domain.form.SubForm;
 import org.smartregister.repository.AllSharedPreferences;
 import org.smartregister.repository.BaseRepository;
-import org.smartregister.repository.EventClientRepository;
+import org.smartregister.bidan.repository.IndonesiaECRepository;
 import org.smartregister.sync.ClientProcessor;
 import org.smartregister.util.AssetHandler;
 import org.smartregister.util.Log;
@@ -74,7 +74,7 @@ public class BidanFormUtils {
     private org.smartregister.Context theAppContext;
     private SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSSZ");
     private Format formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-    private EventClientRepository eventClientRepository;
+    private IndonesiaECRepository indonesiaECRepository;
 //    private BidanFormEntityConverter formEntityConverter;
     private FormEntityConverter formEntityConverter;
 
@@ -84,7 +84,7 @@ public class BidanFormUtils {
         FormAttributeParser formAttributeParser = new FormAttributeParser(context);
 //        formEntityConverter = new BidanFormEntityConverter(formAttributeParser, mContext);
         formEntityConverter = new FormEntityConverter(formAttributeParser, mContext);
-        eventClientRepository = BidanApplication.getInstance().eventClientRepository();
+        indonesiaECRepository = BidanApplication.getInstance().indonesiaECRepository();
     }
 
     public static BidanFormUtils getInstance(Context ctx) throws Exception {
@@ -257,7 +257,7 @@ public class BidanFormUtils {
         String clientJson = gson.toJson(client);
         Log.logDebug(clientJson);
         try {
-            eventClientRepository.addorUpdateClient(client.getBaseEntityId(), new JSONObject(clientJson));
+            indonesiaECRepository.addorUpdateClient(client.getBaseEntityId(), new JSONObject(clientJson));
         } catch (JSONException e) {
             android.util.Log.e(TAG, e.toString(), e);
         }
@@ -271,7 +271,7 @@ public class BidanFormUtils {
         String eventJson = gson.toJson(event);
         Log.logDebug("event ==> "+eventJson);
         try {
-            eventClientRepository.addEvent(event.getBaseEntityId(), new JSONObject(eventJson));
+            indonesiaECRepository.addEvent(event.getBaseEntityId(), new JSONObject(eventJson));
         } catch (JSONException e) {
             android.util.Log.e(TAG, e.toString(), e);
         }
@@ -1094,12 +1094,12 @@ public class BidanFormUtils {
                         // client.addAttribute("kartu_ibu", "kartu_ibu");
                         saveClient(client);
                     } else if (eventType.equals(AllConstantsINA.FormNames.DOKUMENTASI_PERSALINAN)) {
-                        JSONObject json = eventClientRepository.getClientByBaseEntityId(event.getBaseEntityId());
+                        JSONObject json = indonesiaECRepository.getClientByBaseEntityId(event.getBaseEntityId());
                         Client client = gson.fromJson(json.toString(), Client.class);
                         client.addRelationship("childId",event.getBaseEntityId());
                         saveClient(client);
                     } else if (eventType.equals(AllConstantsINA.FormNames.CHILD_FORM_TITLE)) {
-                        JSONObject json = eventClientRepository.getClientByBaseEntityId(event.getBaseEntityId());
+                        JSONObject json = indonesiaECRepository.getClientByBaseEntityId(event.getBaseEntityId());
                         Client client = gson.fromJson(json.toString(), Client.class);
                         // client.addAttribute("anak", "anak");
                         saveClient(client);
@@ -1126,7 +1126,7 @@ public class BidanFormUtils {
                 }
                 long lastSyncTimeStamp = allSharedPreferences.fetchLastUpdatedAtDate(0);
                 Date lastSyncDate = new Date(lastSyncTimeStamp);
-                ClientProcessor.getInstance(context).processClient(eventClientRepository.getEvents(lastSyncDate, BaseRepository.TYPE_Unsynced));
+                ClientProcessor.getInstance(context).processClient(indonesiaECRepository.getEvents(lastSyncDate, BaseRepository.TYPE_Unsynced));
                 allSharedPreferences.saveLastUpdatedAtDate(lastSyncDate.getTime());
             } catch (Exception e) {
                 android.util.Log.e(TAG, e.toString(), e);

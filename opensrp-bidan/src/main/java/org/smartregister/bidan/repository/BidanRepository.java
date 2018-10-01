@@ -8,7 +8,7 @@ import net.sqlcipher.database.SQLiteDatabase;
 import org.smartregister.bidan.application.BidanApplication;
 import org.smartregister.bidan.utils.BidanConstants;
 import org.smartregister.configurableviews.repository.ConfigurableViewsRepository;
-import org.smartregister.repository.EventClientRepository;
+import org.smartregister.bidan.repository.IndonesiaECRepository;
 import org.smartregister.repository.Repository;
 
 /**
@@ -32,10 +32,10 @@ public class BidanRepository extends Repository {
     public void onCreate(SQLiteDatabase database) {
         super.onCreate(database);
         ConfigurableViewsRepository.createTable(database);
-        EventClientRepository.createTable(database, EventClientRepository.Table.client, EventClientRepository.client_column.values());
-//        EventClientRepository.createTable(database, EventClientRepository.Table.address, EventClientRepository.address_column.values());
-        EventClientRepository.createTable(database, EventClientRepository.Table.event, EventClientRepository.event_column.values());
-//        EventClientRepository.createTable(database, EventClientRepository.Table.obs, EventClientRepository.obs_column.values());
+        IndonesiaECRepository.createTable(database, IndonesiaECRepository.Table.client, IndonesiaECRepository.client_column.values());
+//        IndonesiaECRepository.createTable(database, IndonesiaECRepository.Table.address, IndonesiaECRepository.address_column.values());
+        IndonesiaECRepository.createTable(database, IndonesiaECRepository.Table.event, IndonesiaECRepository.event_column.values());
+//        IndonesiaECRepository.createTable(database, IndonesiaECRepository.Table.obs, IndonesiaECRepository.obs_column.values());
 //        ResultsRepository.createTable(database);
 //        ResultDetailsRepository.createTable(database);
 //        BMIRepository.createTable(database);
