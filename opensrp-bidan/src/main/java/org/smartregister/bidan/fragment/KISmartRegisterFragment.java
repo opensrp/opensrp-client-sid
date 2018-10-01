@@ -273,7 +273,6 @@ public class KISmartRegisterFragment extends BaseSmartRegisterFragment {
                     DetailMotherActivity.motherClient = (CommonPersonObjectClient) view.getTag();
                     Intent intent = new Intent(getActivity(), DetailMotherActivity.class);
                     startActivity(intent);
-                    getActivity().finish();
                     break;
 
                 case R.id.ib_cm_edit:

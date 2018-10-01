@@ -41,6 +41,8 @@
         cleared.
     </string>
     <string name="unsynced_forms_count_message">forms unsynced</string>
+    <string name="sync_last_date">Last sync:</string>
+    <string name="not_synced">Not yet synced</string>
     <string name="anc_visit_integrasi">Integrated ANC Visit</string>
     <string name="anc_visit_labtest">Lab Test ANC Visit</string>
     <string name="str_rencana_persalinan_anc_form">Delivery Planning</string>
@@ -127,6 +129,7 @@
     <string name="str_register_anc_close_form">ANC Close</string>
 
     <string name="str_reporting">Reporting</string>
+    <string name="str_map">Map</string>
     <string name="str_videos">Videos</string>
 
     <string name="child_register_title_in_short">Child</string>
@@ -383,6 +386,10 @@
     <string name="poor_household">Poor Household</string>
     <string name="insurance">Insurance</string>
     <string name="blodd_type">Blood Type</string>
+    <string name="cadre">Cadre</string>
+    <string name="dukun">Dukun</string>
+    <string name="out_of_area">From out of area</string>
+    <string name="out_of_area_date">Move in date</string>
     <string name="show_more_button">Show More Risks . . .</string>
     <!-- Risk detail-->
     <string name="highRiskPregnancyYoungMaternalAge">Pregnancy Young Maternal Age: &#160;</string>

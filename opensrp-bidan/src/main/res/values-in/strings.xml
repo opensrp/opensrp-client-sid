@@ -149,6 +149,8 @@
     </string>
     <string name="unsynced_forms_count_message">forms unsynced</string>
 
+    <string name="sync_last_date">Sinkronisasi terakhir:</string>
+    <string name="not_synced">Belum disinkronkan</string>
     <string name="str_next">"Next …"</string>
     <string name="str_previous">"… Previous"</string>
     <string name="str_page_info">Page {0} of {1}</string>
@@ -171,6 +173,7 @@
     <string name="no_complication">Tidak ada komplikasi</string>
 
     <string name="str_reporting">Reporting</string>
+    <string name="str_map">Peta</string>
     <string name="str_videos">Videos</string>
 
     <string name="child_register_title_in_short">Anak</string>
@@ -384,6 +387,10 @@
     <string name="poor_household">Gakin</string>
     <string name="insurance">Asuransi</string>
     <string name="blodd_type">Golongan Darah</string>
+    <string name="cadre">Cadre</string>
+    <string name="dukun">Dukun</string>
+    <string name="out_of_area">Pindahan</string>
+    <string name="out_of_area_date">Tanggal Pindah</string>
 
     <!-- Risk detail-->
     <string name="highRiskPregnancyOldMaternalAge">Ibu Terlalu Tua:  …</string>

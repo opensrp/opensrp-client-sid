@@ -233,9 +233,21 @@
             android:layout_weight="1"
             android:drawableLeft="@drawable/ic_reporting"
             android:drawablePadding="5dp"
-            android:paddingLeft="400dp"
-            android:paddingRight="400dp"
+            android:paddingLeft="150dp"
+            android:paddingRight="150dp"
             android:text="@string/str_reporting" />
+
+        <org.smartregister.view.customcontrols.CustomFontTextView
+            android:id="@+id/btn_map"
+            style="@style/CustomFontTextViewStyle.Home.Buttons"
+            android:layout_width="0dp"
+            android:layout_height="50dp"
+            android:layout_weight="1"
+            android:drawableLeft="@drawable/ic_menu_mapmode"
+            android:drawablePadding="5dp"
+            android:paddingLeft="150dp"
+            android:paddingRight="150dp"
+            android:text="@string/str_map" />
 
     </LinearLayout>
 

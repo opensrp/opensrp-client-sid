@@ -130,12 +130,12 @@ public class BidanHomeActivity extends SecuredActivity implements SyncStatusBroa
                 case R.id.btn_reporting:
                     navigationController.startReports();
                     break;
+                case R.id.btn_map:
+                    Intent intent = new Intent(BidanHomeActivity.this, MapActivity.class);
+                    startActivity(intent);
+                    break;
                 default:
                     break;
-
-//                case R.id.btn_videos:
-//                    navigationController.startVideos();
-//                    break;
             }
         }
     };
@@ -199,7 +199,7 @@ public class BidanHomeActivity extends SecuredActivity implements SyncStatusBroa
         findViewById(R.id.btn_kohort_kb_register).setOnClickListener(onRegisterStartListener);
 
         findViewById(R.id.btn_reporting).setOnClickListener(onButtonsClickListener);
-//        findViewById(R.id.btn_videos).setOnClickListener(onButtonsClickListener);
+        findViewById(R.id.btn_map).setOnClickListener(onButtonsClickListener);
 
         ecRegisterClientCountView = (TextView) findViewById(R.id.txt_kartu_ibu_register_client_count);
         kartuIbuANCRegisterClientCountView = (TextView) findViewById(R.id.txt_kartu_ibu_anc_register_client_count);
