@@ -27,6 +27,8 @@
                 openmrs_entity_parent="usual_residence" />
             <kecamatan openmrs_entity="person_address" openmrs_entity_id="address2"
                 openmrs_entity_parent="usual_residence" />
+            <gps openmrs_entity="person_address" openmrs_entity_id="gps"
+                openmrs_entity_parent="usual_residence" />
             <pasien_wilayah openmrs_entity="concept"
                 openmrs_entity_id="160637AAAAAAAAAAAAAAAAAAAAAAAAAA" />
             <pasien_pindahan openmrs_entity="concept"
@@ -68,8 +70,8 @@
                 openmrs_entity_id="162956AAAAAAAAAAAAAAAAAAAAAAAAAA" />
             <posyandu openmrs_entity="concept"
                 openmrs_entity_id="162724AAAAAAAAAAAAAAAAAAAAAAAAAA" />
-            <nama_kader openmrs_entity="person_identifier" openmrs_entity_id="Nama Kader" />
-            <nama_dukun openmrs_entity="person_identifier" openmrs_entity_id="Nama Dukun" />
+            <nama_kader openmrs_entity="person_attribute" openmrs_entity_id="NamaKader" />
+            <nama_dukun openmrs_entity="person_attribute" openmrs_entity_id="NamaDukun" />
             <asuransi_jiwa openmrs_entity="concept"
                 openmrs_entity_id="159356AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA" />
             <golongan_darah openmrs_entity="concept"

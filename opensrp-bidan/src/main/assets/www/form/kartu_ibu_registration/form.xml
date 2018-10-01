@@ -30,6 +30,13 @@
         <input name="/Kartu_ibu/generated_note_name_14" data-type-xml="string" readonly="readonly"
             type="text" />
     </label>
+    <label class="question non-select ">
+        <span lang="Bahasa" class="question-label active" data-itext-id="/Kartu_ibu/gps:label">GPS</span>
+        <span lang="en" class="question-label " data-itext-id="/Kartu_ibu/gps:label">GPS</span>
+        <span class="required">*</span>
+        <input type="text" name="/Kartu_ibu/gps" required="required" data-type-xml="geopoint"/>
+        <span class="or-required-msg active" lang="" data-i18n="constraint.required">This field is required</span>
+    </label>
     <fieldset class="question simple-select ">
         <fieldset>
             <legend>

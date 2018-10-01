@@ -1,8 +1,21 @@
 package org.smartregister.bidan.activity;
 
+import android.Manifest;
+import android.content.DialogInterface;
+import android.content.Intent;
+import android.content.IntentFilter;
+import android.content.pm.PackageManager;
 import android.database.Cursor;
+import android.location.Criteria;
+import android.location.Location;
+import android.location.LocationListener;
+import android.location.LocationManager;
+import android.os.Bundle;
 import android.os.StrictMode;
+import android.support.v4.app.ActivityCompat;
+import android.support.v4.content.ContextCompat;
 import android.support.v4.content.res.ResourcesCompat;
+import android.support.v7.app.AlertDialog;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -14,6 +27,7 @@ import android.widget.Toast;
 import org.json.JSONObject;
 import org.smartregister.Context;
 import org.smartregister.bidan.R;
+import org.smartregister.bidan.application.BidanApplication;
 import org.smartregister.bidan.controller.NavigationControllerINA;
 import org.smartregister.bidan.receiver.SyncStatusBroadcastReceiver;
 import org.smartregister.bidan.service.FormSubmissionSyncService;
@@ -45,7 +59,7 @@ import static org.smartregister.event.Event.SYNC_STARTED;
 //import java.util.HashMap;
 //import java.util.Map;
 
-public class BidanHomeActivity extends SecuredActivity implements SyncStatusBroadcastReceiver.SyncStatusListener{
+public class BidanHomeActivity extends SecuredActivity implements SyncStatusBroadcastReceiver.SyncStatusListener,LocationListener {
     private static final String TAG = BidanHomeActivity.class.getName();
     public static int kicount;
     //    SimpleDateFormat timer = new SimpleDateFormat("hh:mm:ss");
@@ -135,6 +149,8 @@ public class BidanHomeActivity extends SecuredActivity implements SyncStatusBroa
             }
         }.start();
     }
+    LocationManager locationManager;
+    String provider;
 
     @Override
     protected void onCreation() {
@@ -144,7 +160,12 @@ public class BidanHomeActivity extends SecuredActivity implements SyncStatusBroa
 //        Map<String, String> Home = new HashMap<>();
 //        Home.put("start", HomeStart);
 //        FlurryAgent.logEvent("home_dashboard", Home, true);
+        locationManager = (LocationManager) getSystemService(android.content.Context.LOCATION_SERVICE);
 
+        provider = locationManager.getBestProvider(new Criteria(), false);
+        if ( provider == null ) {
+            provider = LocationManager.GPS_PROVIDER;
+        }
         setContentView(R.layout.smart_registers_home_bidan);
         navigationController = new NavigationControllerINA(this, anmController, context());
         setupViews();
@@ -160,6 +181,7 @@ public class BidanHomeActivity extends SecuredActivity implements SyncStatusBroa
             //your codes here
 
         }
+        checkLocationPermission();
     }
 
     private void setupViews() {
@@ -222,7 +244,23 @@ public class BidanHomeActivity extends SecuredActivity implements SyncStatusBroa
         updateRegisterCounts();
         updateSyncIndicator();
         updateRemainingFormsToSyncCount();
+        if (ContextCompat.checkSelfPermission(this,
+                Manifest.permission.ACCESS_FINE_LOCATION)
+                == PackageManager.PERMISSION_GRANTED) {
 
+            locationManager.requestLocationUpdates(provider, 400, 1, this);
+        }
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        if (ContextCompat.checkSelfPermission(this,
+                Manifest.permission.ACCESS_FINE_LOCATION)
+                == PackageManager.PERMISSION_GRANTED) {
+
+            locationManager.removeUpdates(this);
+        }
     }
 
     private void updateRegisterCounts() {
@@ -395,5 +433,102 @@ public class BidanHomeActivity extends SecuredActivity implements SyncStatusBroa
         updateRegisterCounts();
 
         flagActivator();
+    }
+
+    public static final int MY_PERMISSIONS_REQUEST_LOCATION = 99;
+
+    public boolean checkLocationPermission() {
+        if (ContextCompat.checkSelfPermission(this,
+                Manifest.permission.ACCESS_FINE_LOCATION)
+                != PackageManager.PERMISSION_GRANTED) {
+
+            // Should we show an explanation?
+            if (ActivityCompat.shouldShowRequestPermissionRationale(this,
+                    Manifest.permission.ACCESS_FINE_LOCATION)) {
+
+                // Show an explanation to the user *asynchronously* -- don't block
+                // this thread waiting for the user's response! After the user
+                // sees the explanation, try again to request the permission.
+                new AlertDialog.Builder(this)
+                        .setTitle("Location Permission")
+                        .setMessage("This app need to access location")
+                        .setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialogInterface, int i) {
+                                //Prompt the user once explanation has been shown
+                                ActivityCompat.requestPermissions(BidanHomeActivity.this,
+                                        new String[]{Manifest.permission.ACCESS_FINE_LOCATION},
+                                        MY_PERMISSIONS_REQUEST_LOCATION);
+                            }
+                        })
+                        .create()
+                        .show();
+
+
+            } else {
+                // No explanation needed, we can request the permission.
+                ActivityCompat.requestPermissions(this,
+                        new String[]{Manifest.permission.ACCESS_FINE_LOCATION},
+                        MY_PERMISSIONS_REQUEST_LOCATION);
+            }
+            return false;
+        } else {
+            return true;
+        }
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode,
+                                           String permissions[], int[] grantResults) {
+        switch (requestCode) {
+            case MY_PERMISSIONS_REQUEST_LOCATION: {
+                // If request is cancelled, the result arrays are empty.
+                if (grantResults.length > 0
+                        && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+
+                    // permission was granted, yay! Do the
+                    // location-related task you need to do.
+                    if (ContextCompat.checkSelfPermission(this,
+                            Manifest.permission.ACCESS_FINE_LOCATION)
+                            == PackageManager.PERMISSION_GRANTED) {
+
+                        //Request location updates:
+                        locationManager.requestLocationUpdates(provider, 400, 1, this);
+                    }
+
+                } else {
+
+                    // permission denied, boo! Disable the
+                    // functionality that depends on this permission.
+
+                }
+                return;
+            }
+
+        }
+    }
+
+    @Override
+    public void onLocationChanged(Location location) {
+//        Double lat = location.getLatitude();
+//        Double lng = location.getLongitude();
+//
+//        Log.i("Location info: Lat", lat.toString());
+//        Log.i("Location info: Lng", lng.toString());
+    }
+
+    @Override
+    public void onStatusChanged(String s, int i, Bundle bundle) {
+
+    }
+
+    @Override
+    public void onProviderEnabled(String s) {
+
+    }
+
+    @Override
+    public void onProviderDisabled(String s) {
+
     }
 }

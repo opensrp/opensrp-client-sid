@@ -156,6 +156,18 @@
       }
     },
     {
+      "bind": {
+        "required": "yes"
+      },
+      "type": "geopoint",
+      "name": "gps",
+      "instance": {
+        "openmrs_entity_parent": "usual_residence",
+        "openmrs_entity_id": "gps",
+        "openmrs_entity": "person_address"
+      }
+    },
+    {
       "name": "pasien_wilayah",
       "bind": {
         "required": "yes"
@@ -842,8 +854,8 @@
     },
     {
       "instance": {
-        "openmrs_entity_id": "Nama Kader",
-        "openmrs_entity": "person_identifier"
+        "openmrs_entity_id": "NamaKader",
+        "openmrs_entity": "person_attribute"
       },
       "label": {
         "Bahasa": "Nama Kader",
@@ -858,8 +870,8 @@
     },
     {
       "instance": {
-        "openmrs_entity_id": "Nama Dukun",
-        "openmrs_entity": "person_identifier"
+        "openmrs_entity_id": "NamaDukun",
+        "openmrs_entity": "person_attribute"
       },
       "label": {
         "Bahasa": "Nama Dukun",

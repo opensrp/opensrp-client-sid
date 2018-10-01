@@ -33,6 +33,11 @@
         "shouldLoadValue": true
       },
       {
+        "name": "gps",
+        "bind": "/model/instance/Kartu_ibu/gps",
+        "shouldLoadValue": true
+      },
+      {
         "name": "pasienWilayah",
         "bind": "/model/instance/Kartu_ibu/pasien_wilayah",
         "shouldLoadValue": true
@@ -163,12 +168,12 @@
         "shouldLoadValue": true
       },
       {
-        "name": "namaKader",
+        "name": "NamaKader",
         "bind": "/model/instance/Kartu_ibu/nama_kader",
         "shouldLoadValue": true
       },
       {
-        "name": "namaDukun",
+        "name": "NamaDukun",
         "bind": "/model/instance/Kartu_ibu/nama_dukun",
         "shouldLoadValue": true
       },

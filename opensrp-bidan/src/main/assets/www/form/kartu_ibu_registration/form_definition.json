@@ -31,6 +31,10 @@
         "bind": "/model/instance/Kartu_ibu/lokasi_periksa"
       },
       {
+        "name": "gps",
+        "bind": "/model/instance/Kartu_ibu/gps"
+      },
+      {
         "name": "pasienWilayah",
         "bind": "/model/instance/Kartu_ibu/pasien_wilayah"
       },
@@ -145,11 +149,11 @@
         "bind": "/model/instance/Kartu_ibu/posyandu"
       },
       {
-        "name": "namaKader",
+        "name": "NamaKader",
         "bind": "/model/instance/Kartu_ibu/nama_kader"
       },
       {
-        "name": "namaDukun",
+        "name": "NamaDukun",
         "bind": "/model/instance/Kartu_ibu/nama_dukun"
       },
       {
