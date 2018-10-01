@@ -208,6 +208,10 @@ public class DetailMotherActivity extends Activity {
         ((TextView) findViewById(R.id.txt_gakin)).setText(getStrValue("gakinTidak"));
         ((TextView) findViewById(R.id.txt_blood)).setText(getStrValue("golonganDarah"));
         ((TextView) findViewById(R.id.txt_asuransi)).setText(getStrValue("asuransiJiwa"));
+        ((TextView) findViewById(R.id.txt_kader)).setText(getStrValue("NamaKader"));
+        ((TextView) findViewById(R.id.txt_dukun)).setText(getStrValue("NamaDukun"));
+        ((TextView) findViewById(R.id.txt_out_of_area)).setText(getStrValue("pasienPindahan"));
+        ((TextView) findViewById(R.id.txt_out_of_area_date)).setText(getStrValue("tglPindah"));
         // ========================================================================================|
         // Risks Detail                                                                            |
         // ========================================================================================|
