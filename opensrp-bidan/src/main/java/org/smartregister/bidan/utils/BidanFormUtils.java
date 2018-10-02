@@ -51,6 +51,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.UUID;
@@ -357,8 +358,10 @@ public class BidanFormUtils {
                     "select * from " + ec_bind_path + " where base_entity_id='" + entityId + "'";
             Map<String, String> dbEntity = theAppContext.formDataRepository().
                     getMapFromSQLQuery(sql,null);
-            Map<String, String> detailsMap = theAppContext.detailsRepository().
-                    getAllDetailsForClient(entityId);
+            Map<String, String> detailsMap = new HashMap<>();
+            if(entityId != null){
+                detailsMap = theAppContext.detailsRepository().getAllDetailsForClient(entityId);
+            }
             detailsMap.putAll(dbEntity);
 
             JSONObject entityJson = new JSONObject();
