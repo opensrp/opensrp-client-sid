@@ -22,8 +22,10 @@ public class ChildFilterOption implements CursorFilterOption {
 
     @Override
     public String filter() {
-        if (StringUtils.isNotBlank(fieldname) && !"location_name".equals(fieldname)) {
-            return "AND " + tablename + ".base_entity_id IN (SELECT DISTINCT base_entity_id FROM ec_details WHERE key LIKE '" + fieldname + "'  value LIKE '" + criteria + "') ";
+        if (StringUtils.isNotBlank(fieldname) && "location_name".equals(fieldname)) {
+            return "AND " + tablename + ".base_entity_id IN (SELECT DISTINCT base_entity_id FROM ec_details WHERE key LIKE '" + fieldname + "' AND value LIKE '" + criteria + "') ";
+        } else if (StringUtils.isNotBlank(fieldname)) {
+            return "AND " + tablename + ".base_entity_id IN (SELECT DISTINCT base_entity_id FROM ec_details WHERE key LIKE '" + fieldname + "' AND value LIKE '" + criteria + "') ";
         } else {
             return "AND " + tablename + ".base_entity_id IN (SELECT DISTINCT base_entity_id FROM ec_details WHERE value MATCH '" + criteria + "' ) ";
         }

@@ -1,6 +1,10 @@
 package org.smartregister.bidan.fragment;
 
 import android.content.Intent;
+import android.database.Cursor;
+import android.os.Bundle;
+import android.support.v4.content.CursorLoader;
+import android.support.v4.content.Loader;
 import android.util.Log;
 import android.view.View;
 
@@ -16,7 +20,9 @@ import org.smartregister.bidan.options.AnakOverviewServiceMode;
 import org.smartregister.bidan.options.ChildFilterOption;
 import org.smartregister.bidan.provider.ChildClientsProvider;
 import org.smartregister.bidan.utils.AllConstantsINA;
+import org.smartregister.bidan.utils.BidanSmartRegisterQueryBuilder;
 import org.smartregister.commonregistry.CommonPersonObjectClient;
+import org.smartregister.commonregistry.CommonRepository;
 import org.smartregister.cursoradapter.CursorCommonObjectFilterOption;
 import org.smartregister.cursoradapter.CursorCommonObjectSort;
 import org.smartregister.cursoradapter.SmartRegisterPaginatedCursorAdapter;
@@ -30,6 +36,7 @@ import org.smartregister.view.dialog.ServiceModeOption;
 import org.smartregister.view.dialog.SortOption;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 
 import static android.view.View.GONE;
@@ -162,11 +169,11 @@ public class AnakSmartRegisterFragment extends BaseSmartRegisterFragment {
         setTablename(tableName);
         SmartRegisterQueryBuilder countqueryBuilder = new SmartRegisterQueryBuilder();
         countqueryBuilder.SelectInitiateMainTableCounts(tableName);
-        countqueryBuilder.customJoin("LEFT JOIN ec_ibu ON ec_ibu.id = ec_anak.relational_id");
+        countqueryBuilder.customJoin("LEFT JOIN ec_kartu_ibu ON ec_kartu_ibu.id = ec_anak.relational_id");
 
         mainCondition = "is_closed = 0";
 
-        countSelect = countqueryBuilder.mainCondition(mainCondition);
+        countSelect = countqueryBuilder.mainCondition("ec_anak.is_closed = 0");
         super.CountExecute();
 
         SmartRegisterQueryBuilder queryBuilder = new SmartRegisterQueryBuilder();
@@ -180,11 +187,10 @@ public class AnakSmartRegisterFragment extends BaseSmartRegisterFragment {
                 tableName + ".namaBayi",
         });
 
-        queryBuilder.customJoin("LEFT JOIN ec_ibu ON ec_ibu.id = ec_anak.relational_id");
+        queryBuilder.customJoin("LEFT JOIN ec_kartu_ibu ON ec_kartu_ibu.id = ec_anak.relational_id");
 
 //        mainSelect = queryBuilder.mainCondition("ec_anak.is_closed = 0 and relationalid != ''");
-        mainSelect = queryBuilder.mainCondition(mainCondition);
-        mainCondition = "is_closed = 0";
+        mainSelect = queryBuilder.mainCondition("ec_anak.is_closed = 0");
 
         Sortqueries = anakNameShort();
 //        Sortqueries = ((CursorSortOption) getDefaultOptionsProvider().sortOption()).sort();
@@ -196,6 +202,98 @@ public class AnakSmartRegisterFragment extends BaseSmartRegisterFragment {
 
         updateSearchView();
         refresh();
+    }
+
+    private static final String COUNT = "count_execute";
+
+    @Override
+    public Loader<Cursor> onCreateLoader(int id, final Bundle args) {
+        switch (id) {
+            case LOADER_ID:
+                // Returns a new CursorLoader
+                return new CursorLoader(getActivity()) {
+                    @Override
+                    public Cursor loadInBackground() {
+                        // Count query
+                        if (args != null && args.getBoolean(COUNT)) {
+                            CountExecute();
+                        }
+
+                        // Select register query
+                        String query = filterandSortQuery();
+                        return commonRepository().rawCustomQueryForAdapter(query);
+                    }
+                };
+            default:
+                // An invalid id was passed in
+                return null;
+        }
+
+    }
+
+    public void CountExecute() {
+        Cursor c = null;
+
+        try {
+            BidanSmartRegisterQueryBuilder sqb = new BidanSmartRegisterQueryBuilder(countSelect);
+            String query = "";
+            if (isValidFilterForFts(commonRepository())) {
+                String sql = sqb.countQueryFts(tablename, joinTable, mainCondition, filters);
+                Log.i(getClass().getName(), query);
+
+                totalcount = commonRepository().countSearchIds(sql);
+                Log.v("total count here", "" + totalcount);
+
+
+            } else {
+                sqb.addCondition(filters);
+                query = sqb.orderbyCondition(Sortqueries);
+                query = sqb.Endquery(query);
+
+                Log.i(getClass().getName(), query);
+                c = commonRepository().rawCustomQueryForAdapter(query);
+                c.moveToFirst();
+                totalcount = c.getInt(0);
+                Log.v("total count here", "" + totalcount);
+            }
+
+            currentlimit = 20;
+            currentoffset = 0;
+
+        } catch (Exception e) {
+            Log.e(getClass().getName(), e.toString(), e);
+        } finally {
+            if (c != null) {
+                c.close();
+            }
+        }
+    }
+
+    private String filterandSortQuery() {
+        BidanSmartRegisterQueryBuilder sqb = new BidanSmartRegisterQueryBuilder(mainSelect);
+
+        String query = "";
+        try {
+            if (isValidFilterForFts(commonRepository())) {
+                String sql = sqb
+                        .searchQueryFts(tablename, joinTable, mainCondition, filters, Sortqueries,
+                                currentlimit, currentoffset);
+                List<String> ids = commonRepository().findSearchIds(sql);
+                query = sqb.toStringFts(ids, tablename, CommonRepository.ID_COLUMN,
+                        Sortqueries);
+
+                query = sqb.Endquery(query);
+            } else {
+                sqb.addCondition(filters);
+                query = sqb.orderbyCondition(Sortqueries);
+                query = sqb.Endquery(sqb.addlimitandOffset(query, currentlimit, currentoffset));
+
+            }
+        } catch (Exception e) {
+            Log.e(getClass().getName(), e.toString(), e);
+        }
+
+        return query;
     }
 
     private String anakNameShort() {
@@ -235,7 +333,7 @@ public class AnakSmartRegisterFragment extends BaseSmartRegisterFragment {
             } else {
                 StringUtil.humanize(entry.getValue().getLabel());
                 String name = StringUtil.humanize(entry.getValue().getLabel());
-                dialogOptionslist.add(new ChildFilterOption(name, "location_name", name, "ec_ibu"));
+                dialogOptionslist.add(new ChildFilterOption(name, "address1", name, "ec_kartu_ibu"));
 
             }
         }
