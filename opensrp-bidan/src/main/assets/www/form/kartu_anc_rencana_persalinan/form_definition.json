@@ -41,6 +41,10 @@
         "bind": "/model/instance/rencana_persalinan_reviewed/lokasi_periksa"
       },
       {
+        "name": "lokasiPeriksaOther",
+        "bind": "/model/instance/rencana_persalinan_reviewed/lokasi_periksa_other"
+      },
+      {
         "name": "rencanaPenolongPersalinan",
         "bind": "/model/instance/rencana_persalinan_reviewed/rencana_penolong_persalinan"
       },
