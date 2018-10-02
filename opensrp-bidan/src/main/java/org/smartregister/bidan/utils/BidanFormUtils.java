@@ -77,14 +77,14 @@ public class BidanFormUtils {
     private Format formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
     private IndonesiaECRepository indonesiaECRepository;
 //    private BidanFormEntityConverter formEntityConverter;
-    private FormEntityConverter formEntityConverter;
+    private BidanFormEntityConverter formEntityConverter;
 
     public BidanFormUtils(Context context) throws Exception {
         mContext = context;
         theAppContext = CoreLibrary.getInstance().context();
         FormAttributeParser formAttributeParser = new FormAttributeParser(context);
 //        formEntityConverter = new BidanFormEntityConverter(formAttributeParser, mContext);
-        formEntityConverter = new FormEntityConverter(formAttributeParser, mContext);
+        formEntityConverter = new BidanFormEntityConverter(formAttributeParser, mContext);
         indonesiaECRepository = BidanApplication.getInstance().indonesiaECRepository();
     }
 
