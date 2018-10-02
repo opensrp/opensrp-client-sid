@@ -470,4 +470,25 @@
     <string name="clients_key">clients</string>
     <string name="events_key">events</string>
 
+    <string name="txt_death">Dead</string>
+    <string name="death_reason">Death Reason</string>
+
+    <string name="sepsis">Sepsis</string>
+    <string name="asphyxia">Asphyxia</string>
+    <string name="lbw">Low Birth Weight (&lt; 2.5 kg)</string>
+    <string name="pneumonia">Pneumonia</string>
+    <string name="diarrhea">Diarrhea</string>
+    <string name="malnutrition">Malnutrition</string>
+    <string name="Infeksi_pernafasan_akut">Acute respiratory infections</string>
+    <string name="infeksi_pernapasan_atas">Upper respiratory tract infection</string>
+    <string name="malaria">Malaria</string>
+    <string name="tetanus_neonatorum">Tetanus Neonatorum</string>
+    <string name="ikterus">Ikterus</string>
+    <string name="demam_berdarah">Dengue fever</string>
+    <string name="congenital_abnormality">Congenital Abnormality</string>
+    <string name="kelainan_saluran_cerna">Gastrointestinal Disorders</string>
+    <string name="Kelainan_syaraf">Neurological Abnormality</string>
+    <string name="others">Others</string>
+    <string name="cause_not_identified">Unidentified cause</string>
+
 </resources>

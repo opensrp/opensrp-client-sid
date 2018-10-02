@@ -87,7 +87,7 @@
       },
       {
         "name": "lokasiPeriksa",
-        "bind": "/model/instance/tambah_kb_reviewed/Lokasi_periksa"
+        "bind": "/model/instance/tambah_kb_reviewed/lokasi_periksa"
       },
       {
         "name": "lokasiPeriksaOther",

@@ -28,7 +28,11 @@
       },
       {
         "name": "lokasiPeriksa",
-        "bind": "/model/instance/anc_registration/Lokasi_periksa"
+        "bind": "/model/instance/anc_registration/lokasi_periksa"
+      },
+      {
+        "name": "LokasiPeriksaOther",
+        "bind": "/model/instance/anc_registration/lokasi_periksa_other"
       },
       {
         "name": "cityVillage",

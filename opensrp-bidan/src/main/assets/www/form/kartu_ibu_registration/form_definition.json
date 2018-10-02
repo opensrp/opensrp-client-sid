@@ -31,6 +31,10 @@
         "bind": "/model/instance/Kartu_ibu/lokasi_periksa"
       },
       {
+        "name": "lokasiPeriksaOther",
+        "bind": "/model/instance/Kartu_ibu/lokasi_periksa_other"
+      },
+      {
         "name": "gps",
         "bind": "/model/instance/Kartu_ibu/gps"
       },

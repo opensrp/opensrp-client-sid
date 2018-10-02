@@ -23,6 +23,11 @@
         "shouldLoadValue": true
       },
       {
+        "name": "Sub-district",
+        "bind": "/model/instance/kohort_pelayanan_kb_reviewed/Sub-district",
+        "shouldLoadValue": true
+      },
+      {
         "name": "existing_location",
         "bind": "/model/instance/kohort_pelayanan_kb_reviewed/existing_location",
         "shouldLoadValue": true

@@ -229,7 +229,6 @@
     <string name="tt">TT</string>
     <string name="ifa">IFA</string>
     <string name="pentavalent">Pentavalent</string>
-    <string name="measles">Measles</string>
     <string name="opv_booster">OPV Booster</string>
     <string name="dpt_booster">DPT Booster</string>
     <string name="vitamin_a">Vitamin A</string>
@@ -449,4 +448,27 @@
     <string name="forminputerror">Silakan periksa formulir apakah ada kesalahan / masukan yang hilang yang ditandai dalam kotak Merah</string>
     <string name="highRiskPregnancyYoungMaternalAge">Usia Ibu Terlalu Muda: ...</string>
     <string name="visit_number"></string>
+
+
+    <string name="txt_death">Meninggal</string>
+    <string name="death_reason">Penyebab Meninggal</string>
+
+    <string name="sepsis">Sepsis</string>
+    <string name="asphyxia">Asfiksia</string>
+    <string name="lbw">berat lahir kurang (&lt; 2.5 kg)</string>
+    <string name="pneumonia">Pneumonia</string>
+    <string name="diarrhea">Diare</string>
+    <string name="measles">Campak</string>
+    <string name="malnutrition">Malnutrisi</string>
+    <string name="Infeksi_pernafasan_akut">Infeksi pernafasan akut</string>
+    <string name="infeksi_pernapasan_atas">Infeksi Saluran Pernapasan Atas</string>
+    <string name="malaria">Malaria</string>
+    <string name="tetanus_neonatorum">Tetanus Neonatorum</string>
+    <string name="ikterus">Ikterus</string>
+    <string name="demam_berdarah">Demam Berdarah</string>
+    <string name="congenital_abnormality">Kelainan Kongenital</string>
+    <string name="kelainan_saluran_cerna">Kelainan Saluran Cerna</string>
+    <string name="Kelainan_syaraf">Kelainan Syaraf</string>
+    <string name="others">Lainnya</string>
+    <string name="cause_not_identified">Penyebab tidak teridentifikasi</string>
 </resources>

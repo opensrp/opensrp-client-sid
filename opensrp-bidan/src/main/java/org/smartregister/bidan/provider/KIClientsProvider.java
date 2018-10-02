@@ -12,6 +12,10 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import org.apache.commons.lang3.StringUtils;
+import org.joda.time.LocalDate;
+import org.joda.time.Months;
+import org.joda.time.format.DateTimeFormat;
+import org.joda.time.format.DateTimeFormatter;
 import org.smartregister.bidan.R;
 import org.smartregister.bidan.utils.AllConstantsINA;
 import org.smartregister.bidan.utils.Support;
@@ -27,6 +31,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static android.view.ViewGroup.LayoutParams.MATCH_PARENT;
+import static org.joda.time.LocalDateTime.parse;
 import static org.smartregister.bidan.R.layout.smart_register_ki_client;
 
 public class KIClientsProvider extends BaseClientsProvider {
@@ -106,6 +111,7 @@ public class KIClientsProvider extends BaseClientsProvider {
         TextView visit_status = (TextView) convertView.findViewById(R.id.visit_status);
         TextView children_age_left = (TextView) convertView.findViewById(R.id.txt_children_age_left);
         TextView children_age_right = (TextView) convertView.findViewById(R.id.txt_children_age_right);
+        TextView children_age_bottom = (TextView) convertView.findViewById(R.id.txt_children_age_bottom);
 
         edd_due.setText("");
         anc_status_layout.setText("");
@@ -113,6 +119,32 @@ public class KIClientsProvider extends BaseClientsProvider {
         visit_status.setText("");
         children_age_left.setText("");
         children_age_right.setText("");
+
+        String edd = pc.getDetails().get("htp");
+        if (StringUtils.isNotBlank(pc.getDetails().get("htp"))) {
+            String _dueEdd = "";
+            DateTimeFormatter formatter = DateTimeFormat.forPattern("yyyy-MM-dd");
+            LocalDate date = parse(edd, formatter).toLocalDate();
+            LocalDate dateNow = LocalDate.now();
+            date = date.withDayOfMonth(1);
+            dateNow = dateNow.withDayOfMonth(1);
+            int months = Months.monthsBetween(dateNow, date).getMonths();
+            if (months >= 1) {
+                edd_due.setTextColor(mContext.getResources().getColor(R.color.alert_in_progress_blue));
+                _dueEdd = "" + months + " " + mContext.getString(R.string.months_away);
+            } else if (months == 0) {
+                edd_due.setTextColor(mContext.getResources().getColor(R.color.light_blue));
+                _dueEdd = mContext.getString(R.string.this_month);
+            } else if (months < 0) {
+                edd_due.setTextColor(mContext.getResources().getColor(R.color.alert_urgent_red));
+                _dueEdd = mContext.getString(R.string.edd_passed);
+            }
+
+            edd_due.setText(_dueEdd);
+
+        } else {
+            edd_due.setText("-");
+        }
 
         if (ibuparent != null) {
 
@@ -160,6 +192,19 @@ public class KIClientsProvider extends BaseClientsProvider {
         for (int i = 0; i < allchild.size(); i++) {
             CommonPersonObject commonPersonObject = allchild.get(i);
             detailsRepository.updateDetails(commonPersonObject);
+            if(commonPersonObject.getDetails().get("closeReason") != null){
+                Log.d(TAG, "getView: "+commonPersonObject.getDetails());
+                if("death_of_child".equals(commonPersonObject.getDetails().get("closeReason"))){
+                    children_age_left.setText(mContext.getString(R.string.txt_death));
+                    String cause = getDeathCause(commonPersonObject);
+                    children_age_right.setText(mContext.getString(R.string.death_reason)+" :");
+                    children_age_bottom.setText(cause);
+                    continue;
+                }
+                if("wrong_entry".equals(commonPersonObject.getDetails().get("closeReason"))){
+                    continue;
+                }
+            }
             children_age_left.setText(commonPersonObject.getColumnmaps().get("namaBayi") != null ? "Name : " + commonPersonObject.getColumnmaps().get("namaBayi") : "");
             children_age_right.setText(commonPersonObject.getColumnmaps().get("tanggalLahirAnak") != null ? "DOB : " + commonPersonObject.getColumnmaps().get("tanggalLahirAnak").substring(0, commonPersonObject.getColumnmaps().get("tanggalLahirAnak").indexOf("T")) : "");
         }
@@ -211,6 +256,48 @@ public class KIClientsProvider extends BaseClientsProvider {
 
     public View inflatelayoutForCursorAdapter() {
         return inflater().inflate(smart_register_ki_client, null);
+    }
+
+    private String getDeathCause(CommonPersonObject commonPersonObject){
+        String cause = "";
+        if("sepsis".equals(commonPersonObject.getDetails().get("childDeathCause")))
+            cause = mContext.getString(R.string.sepsis);
+        else if("asphyxia".equals(commonPersonObject.getDetails().get("childDeathCause")))
+            cause = mContext.getString(R.string.asphyxia);
+        else if("lbw".equals(commonPersonObject.getDetails().get("childDeathCause")))
+            cause = mContext.getString(R.string.lbw);
+        else if("pneumonia".equals(commonPersonObject.getDetails().get("childDeathCause")))
+            cause = mContext.getString(R.string.pneumonia);
+        else if("diarrhea".equals(commonPersonObject.getDetails().get("childDeathCause")))
+            cause = mContext.getString(R.string.diarrhea);
+        else if("measles".equals(commonPersonObject.getDetails().get("childDeathCause")))
+            cause = mContext.getString(R.string.measles);
+        else if("malnutrition".equals(commonPersonObject.getDetails().get("childDeathCause")))
+            cause = mContext.getString(R.string.malnutrition);
+        else if("Infeksi_pernafasan_akut".equals(commonPersonObject.getDetails().get("childDeathCause")))
+            cause = mContext.getString(R.string.Infeksi_pernafasan_akut);
+        else if("infeksi_pernapasan_atas".equals(commonPersonObject.getDetails().get("childDeathCause")))
+            cause = mContext.getString(R.string.infeksi_pernapasan_atas);
+        else if("malaria".equals(commonPersonObject.getDetails().get("childDeathCause")))
+            cause = mContext.getString(R.string.malaria);
+        else if("tetanus_neonatorum".equals(commonPersonObject.getDetails().get("childDeathCause")))
+            cause = mContext.getString(R.string.tetanus_neonatorum);
+        else if("ikterus".equals(commonPersonObject.getDetails().get("childDeathCause")))
+            cause = mContext.getString(R.string.ikterus);
+        else if("demam_berdarah".equals(commonPersonObject.getDetails().get("childDeathCause")))
+            cause = mContext.getString(R.string.demam_berdarah);
+        else if("congenital_abnormality".equals(commonPersonObject.getDetails().get("childDeathCause")))
+            cause = mContext.getString(R.string.congenital_abnormality);
+        else if("kelainan_saluran_cerna".equals(commonPersonObject.getDetails().get("childDeathCause")))
+            cause = mContext.getString(R.string.kelainan_saluran_cerna);
+        else if("Kelainan_syaraf".equals(commonPersonObject.getDetails().get("childDeathCause")))
+            cause = mContext.getString(R.string.Kelainan_syaraf);
+        else if("others".equals(commonPersonObject.getDetails().get("childDeathCause")))
+            cause = mContext.getString(R.string.others);
+        else if("cause_not_identified".equals(commonPersonObject.getDetails().get("childDeathCause")))
+            cause = mContext.getString(R.string.cause_not_identified);
+
+        return cause;
     }
 
 }

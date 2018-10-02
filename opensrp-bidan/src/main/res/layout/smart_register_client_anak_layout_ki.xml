@@ -25,5 +25,13 @@
         android:layout_below="@+id/txt_children_age_left"
         android:text="" />
 
+    <org.smartregister.view.customcontrols.CustomFontTextView
+        android:id="@+id/txt_children_age_bottom"
+        style="@style/CustomFontTextViewStyle.ListView.Small"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/txt_children_age_right"
+        android:text="" />
+
 
 </RelativeLayout>

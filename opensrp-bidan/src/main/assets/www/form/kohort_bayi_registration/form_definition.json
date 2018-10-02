@@ -48,7 +48,8 @@
       },
       {
         "name": "Sub-village",
-        "bind": "/model/instance/tambah_bayi_reviewed/Sub-village"
+        "bind": "/model/instance/tambah_bayi_reviewed/Sub-village",
+        "shouldLoadValue": true
       },
       {
         "name": "generated_note_name_13",
@@ -88,11 +89,11 @@
       },
       {
         "name": "lokasiPeriksa",
-        "bind": "/model/instance/tambah_bayi_reviewed/Lokasi_periksa"
+        "bind": "/model/instance/tambah_bayi_reviewed/lokasi_periksa"
       },
       {
-        "name": "LokasiPeriksaOther",
-        "bind": "/model/instance/tambah_bayi_reviewed/Lokasi_periksa_other"
+        "name": "lokasiPeriksaOther",
+        "bind": "/model/instance/tambah_bayi_reviewed/lokasi_periksa_other"
       },
       {
         "name": "tanggalPendaftaran",
