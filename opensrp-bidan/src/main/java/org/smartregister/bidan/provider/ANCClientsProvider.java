@@ -283,7 +283,8 @@ public class ANCClientsProvider extends BaseClientsProvider {
         String ancKe = pc.getDetails().get("ancKe") != null ? pc.getDetails().get("ancKe") : "-";
         String kunjunganKe = pc.getDetails().get("kunjunganKe") != null ? pc.getDetails().get("kunjunganKe") : "-";
 
-        ((TextView) convertView.findViewById(R.id.txt_tanggal_kunjungan_anc)).setText(String.format("%s%s", mContext.getString(R.string.last_visit_date), ancDate));
+        ((TextView) convertView.findViewById(R.id.txt_tanggal_kunjungan_anc)).setText(String.format("%s", mContext.getString(R.string.last_visit_date)));
+        ((TextView) convertView.findViewById(R.id.txt_date_tanggal_kunjungan_anc)).setText(String.format("%s", ancDate));
         ((TextView) convertView.findViewById(R.id.txt_anc_number)).setText(String.format("%s%s", mContext.getString(R.string.anc_ke), ancKe));
         ((TextView) convertView.findViewById(R.id.txt_kunjugan_ke)).setText(String.format("%s%s", mContext.getString(R.string.visit_number), kunjunganKe));
 
