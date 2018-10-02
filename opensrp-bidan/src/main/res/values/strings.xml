@@ -458,14 +458,16 @@
     <string name="lila">MUAC:</string>
     <string name="mother_weight">Mother Weight</string>
     <string name="usia">Umur</string>
-    <string name="last_visit_date">Tgl Kunjungan Terakhir</string>
-    <string name="visit_number">Kunjungan Ke</string>
+    <string name="last_visit_date">Last Visit Date</string>
+    <string name="visit_number">Visit Num: </string>
     <string name="ANC3">ANC 3</string>
     <string name="ANC2">ANC 2</string>
     <string name="ANC1">ANC</string>
     <string name="ANC4">ANC 4</string>
     <string name="followUpDue">Follow up due</string>
     <string name="yes_button_label">Yes</string>
+    <string name="standart">Standart</string>
+    <string name="non_standart">Non Standart</string>
 
     <string name="url_separator">/</string>
     <string name="clients_key">clients</string>
