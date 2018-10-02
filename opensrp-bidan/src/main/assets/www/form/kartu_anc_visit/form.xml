@@ -36,114 +36,118 @@
         <input name="/kunjungan_anc_reviewed_anc_visit/generated_note_name_14"
             data-type-xml="string" readonly="readonly" type="text" />
     </label>
-    <fieldset class="question simple-select or-appearance-yes ">
+    <fieldset class="question simple-select ">
         <fieldset>
             <legend>
-                <span class="question-label active"
-                    data-itext-id="/kunjungan_anc_reviewed_anc_visit/lokasi_periksa:label"
-                    lang="Bahasa">Lokasi
-                    Periksa
+                <span class="required">*</span>
+                <span class="question-label active" data-itext-id="/kunjungan_anc_reviewed_anc_visit/lokasi_periksa:label"
+                    lang="Bahasa">Lokasi Periksa
                 </span>
-                <span class="question-label "
-                    data-itext-id="/kunjungan_anc_reviewed_anc_visit/lokasi_periksa:label"
-                    lang="en">Location
-                    of Service
+                <span class="question-label " data-itext-id="/kunjungan_anc_reviewed_anc_visit/lokasi_periksa:label"
+                    lang="en">Location of Service
                 </span>
+
             </legend>
             <div class="option-wrapper">
                 <label class="">
-                    <input name="/kunjungan_anc_reviewed_anc_visit/lokasi_periksa"
-                        data-name="/kunjungan_anc_reviewed_anc_visit/lokasi_periksa"
-                        data-type-xml="select1" type="radio" value="Posyandu" />
+                    <input name="/kunjungan_anc_reviewed_anc_visit/lokasi_periksa" data-name="/kunjungan_anc_reviewed_anc_visit/lokasi_periksa"
+                        data-type-xml="select1" required="required" type="radio" value="Posyandu" />
                     <span class="option-label active"
-                        data-itext-id="/kunjungan_anc_reviewed_anc_visit/lokasi_periksa/Posyandu:label"
-                        lang="Bahasa">
+                        data-itext-id="/kunjungan_anc_reviewed_anc_visit/lokasi_periksa/Posyandu:label" lang="Bahasa">
                         Posyandu
                     </span>
                     <span class="option-label "
-                        data-itext-id="/kunjungan_anc_reviewed_anc_visit/lokasi_periksa/Posyandu:label"
-                        lang="en">
-                        Village Outreach Post
+                        data-itext-id="/kunjungan_anc_reviewed_anc_visit/lokasi_periksa/Posyandu:label" lang="en">Village
+                        Outreach
+                        Post
                     </span>
                 </label>
                 <label class="">
-                    <input name="/kunjungan_anc_reviewed_anc_visit/lokasi_periksa"
-                        data-name="/kunjungan_anc_reviewed_anc_visit/lokasi_periksa"
+                    <input name="/kunjungan_anc_reviewed_anc_visit/lokasi_periksa" data-name="/kunjungan_anc_reviewed_anc_visit/lokasi_periksa"
                         data-type-xml="select1" type="radio" value="Polindes" />
                     <span class="option-label active"
-                        data-itext-id="/kunjungan_anc_reviewed_anc_visit/lokasi_periksa/Polindes:label"
-                        lang="Bahasa">
+                        data-itext-id="/kunjungan_anc_reviewed_anc_visit/lokasi_periksa/Polindes:label" lang="Bahasa">
                         Polindes
                     </span>
                     <span class="option-label "
-                        data-itext-id="/kunjungan_anc_reviewed_anc_visit/lokasi_periksa/Polindes:label"
-                        lang="en">
-                        Maternal &amp; Child Health Post
+                        data-itext-id="/kunjungan_anc_reviewed_anc_visit/lokasi_periksa/Polindes:label" lang="en">Health
+                        Clinic Post
                     </span>
                 </label>
                 <label class="">
-                    <input name="/kunjungan_anc_reviewed_anc_visit/lokasi_periksa"
-                        data-name="/kunjungan_anc_reviewed_anc_visit/lokasi_periksa"
+                    <input name="/kunjungan_anc_reviewed_anc_visit/lokasi_periksa" data-name="/kunjungan_anc_reviewed_anc_visit/lokasi_periksa"
                         data-type-xml="select1" type="radio" value="Puskesmas" />
                     <span class="option-label active"
-                        data-itext-id="/kunjungan_anc_reviewed_anc_visit/lokasi_periksa/Puskesmas:label"
-                        lang="Bahasa">
+                        data-itext-id="/kunjungan_anc_reviewed_anc_visit/lokasi_periksa/Puskesmas:label" lang="Bahasa">
                         Puskesmas
                     </span>
                     <span class="option-label "
-                        data-itext-id="/kunjungan_anc_reviewed_anc_visit/lokasi_periksa/Puskesmas:label"
-                        lang="en">
-                        Primary Health Center
+                        data-itext-id="/kunjungan_anc_reviewed_anc_visit/lokasi_periksa/Puskesmas:label" lang="en">Health
+                        Facility
                     </span>
                 </label>
                 <label class="">
-                    <input name="/kunjungan_anc_reviewed_anc_visit/lokasi_periksa"
-                        data-name="/kunjungan_anc_reviewed_anc_visit/lokasi_periksa"
+                    <input name="/kunjungan_anc_reviewed_anc_visit/lokasi_periksa" data-name="/kunjungan_anc_reviewed_anc_visit/lokasi_periksa"
                         data-type-xml="select1" type="radio" value="Rumah_Ibu" />
                     <span class="option-label active"
-                        data-itext-id="/kunjungan_anc_reviewed_anc_visit/lokasi_periksa/Rumah_Ibu:label"
-                        lang="Bahasa">
+                        data-itext-id="/kunjungan_anc_reviewed_anc_visit/lokasi_periksa/Rumah_Ibu:label" lang="Bahasa">
                         Rumah Ibu
                     </span>
                     <span class="option-label "
-                        data-itext-id="/kunjungan_anc_reviewed_anc_visit/lokasi_periksa/Rumah_Ibu:label"
-                        lang="en">
-                        Mother House
+                        data-itext-id="/kunjungan_anc_reviewed_anc_visit/lokasi_periksa/Rumah_Ibu:label" lang="en">Mother
+                        House
                     </span>
                 </label>
                 <label class="">
-                    <input name="/kunjungan_anc_reviewed_anc_visit/lokasi_periksa"
-                        data-name="/kunjungan_anc_reviewed_anc_visit/lokasi_periksa"
+                    <input name="/kunjungan_anc_reviewed_anc_visit/lokasi_periksa" data-name="/kunjungan_anc_reviewed_anc_visit/lokasi_periksa"
                         data-type-xml="select1" type="radio" value="Rumah_Sakit" />
                     <span class="option-label active"
-                        data-itext-id="/kunjungan_anc_reviewed_anc_visit/lokasi_periksa/Rumah_Sakit:label"
-                        lang="Bahasa">
+                        data-itext-id="/kunjungan_anc_reviewed_anc_visit/lokasi_periksa/Rumah_Sakit:label" lang="Bahasa">
                         Rumah Sakit
                     </span>
                     <span class="option-label "
-                        data-itext-id="/kunjungan_anc_reviewed_anc_visit/lokasi_periksa/Rumah_Sakit:label"
-                        lang="en">
+                        data-itext-id="/kunjungan_anc_reviewed_anc_visit/lokasi_periksa/Rumah_Sakit:label" lang="en">
                         Hospital
                     </span>
                 </label>
                 <label class="">
-                    <input name="/kunjungan_anc_reviewed_anc_visit/lokasi_periksa"
-                        data-name="/kunjungan_anc_reviewed_anc_visit/lokasi_periksa"
+                    <input name="/kunjungan_anc_reviewed_anc_visit/lokasi_periksa" data-name="/kunjungan_anc_reviewed_anc_visit/lokasi_periksa"
                         data-type-xml="select1" type="radio" value="Lainnya" />
                     <span class="option-label active"
-                        data-itext-id="/kunjungan_anc_reviewed_anc_visit/lokasi_periksa/Lainnya:label"
-                        lang="Bahasa">
+                        data-itext-id="/kunjungan_anc_reviewed_anc_visit/lokasi_periksa/Lainnya:label" lang="Bahasa">
                         Lainnya
                     </span>
                     <span class="option-label "
-                        data-itext-id="/kunjungan_anc_reviewed_anc_visit/lokasi_periksa/Lainnya:label"
-                        lang="en">
-                        Other
+                        data-itext-id="/kunjungan_anc_reviewed_anc_visit/lokasi_periksa/Lainnya:label" lang="en">Other
                     </span>
                 </label>
             </div>
         </fieldset>
+        <span class="or-required-msg active" data-i18n="constraint.required" lang="">This field is
+            required
+        </span>
     </fieldset>
+    <label class="question or-branch pre-init non-select ">
+        <span class="question-label active" data-itext-id="/kunjungan_anc_reviewed_anc_visit/lokasi_periksa_other:label"
+            lang="Bahasa">Lainnya
+        </span>
+        <span class="question-label " data-itext-id="/kunjungan_anc_reviewed_anc_visit/lokasi_periksa_other:label"
+            lang="en">Other
+        </span>
+        <span class="required">*</span>
+        <span class="or-hint active" data-itext-id="/kunjungan_anc_reviewed_anc_visit/lokasi_periksa_other:hint"
+            lang="Bahasa">Lainnya
+        </span>
+        <span class="or-hint " data-itext-id="/kunjungan_anc_reviewed_anc_visit/lokasi_periksa_other:hint" lang="en">Write
+            other location
+        </span>
+        <input name="/kunjungan_anc_reviewed_anc_visit/lokasi_periksa_other"
+            data-relevant=" /kunjungan_anc_reviewed_anc_visit/lokasi_periksa ='Lainnya'" data-type-xml="string"
+            type="text" required="required" />
+        <span class="or-required-msg active" data-i18n="constraint.required" lang="">This field is
+            required
+        </span>
+    </label>
     <fieldset class="question simple-select ">
         <fieldset>
             <legend>

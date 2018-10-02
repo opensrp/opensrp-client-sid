@@ -28,13 +28,22 @@
         "shouldLoadValue": true
       },
       {
+        "name": "Sub-village",
+        "bind": "/model/instance/kunjungan_anc_reviewed_Lab_test/Sub-village",
+        "shouldLoadValue": true
+      },
+      {
         "name": "existing_location",
         "bind": "/model/instance/kunjungan_anc_reviewed_Lab_test/existing_location",
         "shouldLoadValue": true
       },
       {
         "name": "lokasiPeriksa",
-        "bind": "/model/instance/kunjungan_anc_reviewed_Lab_test/Lokasi_periksa"
+        "bind": "/model/instance/kunjungan_anc_reviewed_Lab_test/lokasi_periksa"
+      },
+      {
+        "name": "lokasiPeriksaOther",
+        "bind": "/model/instance/kunjungan_anc_reviewed_Lab_test/lokasi_periksa_other"
       },
       {
         "name": "referenceDate",

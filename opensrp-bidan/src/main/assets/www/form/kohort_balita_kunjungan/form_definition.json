@@ -33,7 +33,11 @@
       },
       {
         "name": "lokasiPeriksa",
-        "bind": "/model/instance/kunjungan_balita_reviewed/Lokasi_periksa"
+        "bind": "/model/instance/kunjungan_balita_reviewed/lokasi_periksa"
+      },
+      {
+        "name": "lokasiPeriksaOther",
+        "bind": "/model/instance/kunjungan_balita_reviewed/lokasi_periksa_other"
       },
       {
         "name": "babyAge",

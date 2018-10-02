@@ -15,7 +15,7 @@
       },
       {
         "name": "lokasiPeriksa",
-        "bind": "/model/instance/register_pnc_reviewed/Lokasi_periksa"
+        "bind": "/model/instance/register_pnc_reviewed/lokasi_periksa"
       },
       {
         "name": "childId",

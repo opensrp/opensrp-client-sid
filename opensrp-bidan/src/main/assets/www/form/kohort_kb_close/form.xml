@@ -675,11 +675,12 @@
                     Family Planning Closure?
                 </span>
             </legend>
+            <span class="required">*</span>
             <div class="option-wrapper">
                 <label class="">
                     <input name="/penutupan_kb_reviewed/confirm_kb_close"
                         data-name="/penutupan_kb_reviewed/confirm_kb_close" data-type-xml="select1"
-                        type="radio" value="yes" />
+                        type="radio" value="yes" required="required" />
                     <span class="option-label active"
                         data-itext-id="/penutupan_kb_reviewed/confirm_kb_close/yes:label"
                         lang="Bahasa">Ya

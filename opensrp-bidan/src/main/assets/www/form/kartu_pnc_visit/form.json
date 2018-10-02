@@ -156,7 +156,7 @@
       }
     },
     {
-      "name": "Lokasi_periksa",
+      "name": "lokasi_periksa",
       "bind": {
         "relevant": "yes"
       },

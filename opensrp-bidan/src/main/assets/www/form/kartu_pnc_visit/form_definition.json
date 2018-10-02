@@ -33,13 +33,22 @@
         "shouldLoadValue": true
       },
       {
+        "name": "Sub-village",
+        "bind": "/model/instance/PNC_visit_reviewed/Sub-village",
+        "shouldLoadValue": true
+      },
+      {
         "name": "existing_location",
         "bind": "/model/instance/PNC_visit_reviewed/existing_location",
         "shouldLoadValue": true
       },
       {
         "name": "lokasiPeriksa",
-        "bind": "/model/instance/PNC_visit_reviewed/Lokasi_periksa"
+        "bind": "/model/instance/PNC_visit_reviewed/lokasi_periksa"
+      },
+      {
+        "name": "lokasiPeriksaOther",
+        "bind": "/model/instance/PNC_visit_reviewed/lokasi_periksa_other"
       },
       {
         "name": "Nik",

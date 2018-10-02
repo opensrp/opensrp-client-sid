@@ -23,8 +23,8 @@
         "shouldLoadValue": true
       },
       {
-        "name": "Sub-district",
-        "bind": "/model/instance/kohort_pelayanan_kb_reviewed/Sub-district",
+        "name": "Sub-village",
+        "bind": "/model/instance/kohort_pelayanan_kb_reviewed/Sub-village",
         "shouldLoadValue": true
       },
       {
@@ -34,7 +34,7 @@
       },
       {
         "name": "lokasiPeriksa",
-        "bind": "/model/instance/kohort_pelayanan_kb_reviewed/Lokasi_periksa"
+        "bind": "/model/instance/kohort_pelayanan_kb_reviewed/lokasi_periksa"
       },
       {
         "name": "tanggalkunjungan",

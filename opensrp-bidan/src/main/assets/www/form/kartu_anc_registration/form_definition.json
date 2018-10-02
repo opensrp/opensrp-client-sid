@@ -31,7 +31,7 @@
         "bind": "/model/instance/anc_registration/lokasi_periksa"
       },
       {
-        "name": "LokasiPeriksaOther",
+        "name": "lokasiPeriksaOther",
         "bind": "/model/instance/anc_registration/lokasi_periksa_other"
       },
       {

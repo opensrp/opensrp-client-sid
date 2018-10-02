@@ -10,7 +10,7 @@
       },
       {
         "name": "lokasiPeriksa",
-        "bind": "/model/instance/balita_kunjungan/Lokasi_periksa"
+        "bind": "/model/instance/balita_kunjungan/lokasi_periksa"
       },
       {
         "name": "tanggalKunjunganBayiPerbulan",

@@ -79,7 +79,11 @@
       },
       {
         "name": "lokasiPeriksa",
-        "bind": "/model/instance/kunjungan_anc_reviewed_anc_visit/Lokasi_periksa"
+        "bind": "/model/instance/kunjungan_anc_reviewed_anc_visit/lokasi_periksa"
+      },
+      {
+        "name": "lokasiPeriksaOther",
+        "bind": "/model/instance/kunjungan_anc_reviewed_anc_visit/lokasi_periksa_other"
       },
       {
         "name": "nomorTelpon",

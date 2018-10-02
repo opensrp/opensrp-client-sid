@@ -190,7 +190,7 @@
       "control": {
         "appearance": "yes"
       },
-      "name": "Lokasi_periksa",
+      "name": "lokasi_periksa",
       "label": {
         "Bahasa": "Lokasi Periksa",
         "English": "Location of Service"
@@ -308,7 +308,7 @@
         "English": "Other"
       },
       "type": "text",
-      "name": "Lokasi_periksa_other",
+      "name": "lokasi_periksa_other",
       "hint": {
         "Bahasa": "Lainnya",
         "English": "Write other location"

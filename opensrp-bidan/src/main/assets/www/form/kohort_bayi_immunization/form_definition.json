@@ -23,13 +23,18 @@
         "shouldLoadValue": true
       },
       {
+        "name": "Sub-village",
+        "bind": "/model/instance/Baby_Immunization.xls/Sub-village",
+        "shouldLoadValue": true
+      },
+      {
         "name": "child_existing_location",
         "bind": "/model/instance/Baby_Immunization.xls/child_existing_location",
         "shouldLoadValue": true
       },
       {
         "name": "lokasiPeriksa",
-        "bind": "/model/instance/Baby_Immunization.xls/Lokasi_periksa"
+        "bind": "/model/instance/Baby_Immunization.xls/lokasi_periksa"
       },
       {
         "name": "hb0",

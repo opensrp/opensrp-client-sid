@@ -44,7 +44,7 @@
       },
       {
         "name": "lokasiPeriksa",
-        "bind": "/model/instance/tambah_kb_oa_reviewed/Lokasi_periksa"
+        "bind": "/model/instance/tambah_kb_oa_reviewed/lokasi_periksa"
       },
       {
         "name": "nik",

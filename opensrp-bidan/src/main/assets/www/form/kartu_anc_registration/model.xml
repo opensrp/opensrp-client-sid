@@ -35,7 +35,7 @@
             <pptest openmrs_entity="concept" openmrs_entity_id="45AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA" />
             <lokasi_periksa_other openmrs_entity="concept"
                 openmrs_entity_id="160632AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
-                openmrs_entity_parent="Location of event - 161010AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA" />
+                openmrs_entity_parent="161010AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA" />
             <jamkesmas openmrs_entity_id="1493AAAAAAAAAAAAAAAAAAAAAAAAAAAA" />
             <generated_note_name_30 />
             <gravida openmrs_entity="concept"
