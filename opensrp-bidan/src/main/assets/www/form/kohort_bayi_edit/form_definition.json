@@ -18,11 +18,6 @@
         "bind": "/model/instance/edit_bayi/end"
       },
       {
-        "name": "cityVillage",
-        "bind": "/model/instance/edit_bayi/Village",
-        "shouldLoadValue": true
-      },
-      {
         "name": "existing_location",
         "bind": "/model/instance/edit_bayi/existing_location",
         "shouldLoadValue": true

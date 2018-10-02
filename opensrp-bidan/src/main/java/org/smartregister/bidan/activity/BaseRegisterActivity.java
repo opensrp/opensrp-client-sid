@@ -485,10 +485,34 @@ public class BaseRegisterActivity extends SecuredNativeSmartRegisterActivity imp
                     fieldOverrides.put("District", kiparent.getDetails().get("countyDistrict"));
                     fieldOverrides.put("Sub-district", kiparent.getDetails().get("address2"));
                     fieldOverrides.put("Sub-village", kiparent.getDetails().get("address1"));
+                    fieldOverrides.put("Village", kiparent.getDetails().get("cityVillage"));
                     fieldOverrides.put("jenis_kelamin", pc.getDetails().get("gender"));
                     fieldOverrides.put("ibu_entity_id", pc.getDetails().get("relational_id"));
                     fieldOverrides.put("beratLahir", pc.getDetails().get("beratLahir"));
                     fieldOverrides.put("namaBayi", pc.getDetails().get("namaBayi"));
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+
+                FieldOverrides fo = new FieldOverrides(fieldOverrides.toString());
+                onEditSelectionWithMetadata((EditOption) option, (SmartRegisterClient) tag, fo.getJSONString());
+
+            } else if (option.name().equalsIgnoreCase(getString(R.string.str_anak_bayi_visit))
+                    ||option.name().equalsIgnoreCase(getString(R.string.str_anak_balita_visit))
+                    ||option.name().equalsIgnoreCase(getString(R.string.str_child_immunizations))
+                    ||option.name().equalsIgnoreCase(getString(R.string.str_child_close))
+                    ||option.name().equalsIgnoreCase(getString(R.string.str_anak_neonatal))) {
+                detailsRepository.updateDetails(pc);
+                AllCommonsRepository childRepository = Context.getInstance().allCommonsRepositoryobjects("ec_anak");
+                CommonPersonObject childobject = childRepository.findByCaseID(pc.entityId());
+                AllCommonsRepository kirep = Context.getInstance().allCommonsRepositoryobjects("ec_kartu_ibu");
+                CommonPersonObject kiparent = kirep.findByCaseID(childobject.getColumnmaps().get("relational_id"));
+                detailsRepository.updateDetails(kiparent);
+
+                JSONObject fieldOverrides = new JSONObject();
+
+                try {
+                    fieldOverrides.put("Sub-village", kiparent.getDetails().get("address1"));
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
