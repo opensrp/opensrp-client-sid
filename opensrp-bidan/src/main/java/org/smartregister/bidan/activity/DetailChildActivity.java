@@ -180,25 +180,24 @@ public class DetailChildActivity extends Activity {
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent intent) {
-//        refresh
-        if (requestCode == 201) {
-
+        Log.d(TAG, "onActivityResult: onActivityResult()");
+        if (requestCode == 201 && resultCode==-1) {
+            Log.d(TAG, "onActivityResult: Process Photo");
             StringBuilder path = new StringBuilder();
             path.append(DrishtiApplication.getAppDir());
 
             File file = new File(path.toString());
             if (!file.exists()) {
-                boolean mkdir = file.mkdir();
-                Log.d(TAG, "onActivityResult: mkdir " + mkdir);
+                //noinspection ResultOfMethodCallIgnored
+                file.mkdir();
             }
-
             if (file.canWrite()) {
                 path.append(File.separator).append(userId).append(".jpg");
                 Tools.saveFile(Tools.scaleDown((Bitmap) intent.getExtras().get("data"), 400.0f, false), path.toString());
             }
 
-            finish();
         }
+        Log.d(TAG, "onActivityResult: getIntent() = "+getIntent().toString());
         finish();
         startActivity(getIntent());
 
