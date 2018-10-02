@@ -53,7 +53,7 @@
         "bind": "/model/instance/kohort_kunjungan_bayi_reviewed/kunjungan_bayi_ke"
       },
       {
-        "name": "panjang_bayi",
+        "name": "panjangBayi",
         "bind": "/model/instance/kohort_kunjungan_bayi_reviewed/panjang_bayi"
       },
       {
@@ -85,7 +85,7 @@
         "bind": "/model/instance/kohort_kunjungan_bayi_reviewed/pelayanan_vita"
       },
       {
-        "name": "statusSesehatanBayi",
+        "name": "statusKesehatanBayi",
         "bind": "/model/instance/kohort_kunjungan_bayi_reviewed/status_kesehatan_bayi"
       },
       {

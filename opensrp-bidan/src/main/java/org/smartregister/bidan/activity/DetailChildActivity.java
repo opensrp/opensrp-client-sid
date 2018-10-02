@@ -138,9 +138,9 @@ public class DetailChildActivity extends Activity {
         txt_noBayi.setText(String.format("%s: ", humanize(childclient.getDetails().get("noBayi") != null ? childclient.getDetails().get("noBayi") : "-")));
         txt_jenisKelamin.setText(String.format(": %s", humanize(childclient.getDetails().get("gender") != null ? childclient.getDetails().get("gender") : "-")));
         txt_beratLahir.setText(String.format(": %s", humanize(childclient.getDetails().get("beratLahir") != null ? childclient.getDetails().get("beratLahir") : "-")));
-        tinggi.setText(String.format(": %s", humanize(childclient.getDetails().get("hasilPengukuranTinggiBayihasilPengukuranTinggiBayi") != null ? childclient.getDetails().get("hasilPengukuranTinggiBayihasilPengukuranTinggiBayi") : "-")));
-        berat.setText(String.format(": %s", humanize(childclient.getDetails().get("indikatorBeratBedanBayi") != null ? childclient.getDetails().get("indikatorBeratBedanBayi") : "-")));
-        asi.setText(String.format(": %s", humanize(childclient.getDetails().get("pemberianAsiEksklusif") != null ? childclient.getDetails().get("pemberianAsiEksklusif") : "-")));
+        tinggi.setText(String.format(": %s", humanize(childclient.getDetails().get("panjangBayi") != null ? childclient.getDetails().get("panjangBayi") : "-")));
+        berat.setText(String.format(": %s", humanize(childclient.getDetails().get("beratBayi") != null ? childclient.getDetails().get("beratBayi") : "-")));
+        asi.setText(String.format(": %s", humanize(childclient.getDetails().get("AsiAksklusif") != null ? childclient.getDetails().get("AsiAksklusif") : "-")));
         status_gizi.setText(String.format(": %s", humanize(childclient.getDetails().get("statusGizi") != null ? childclient.getDetails().get("statusGizi") : "-")));
         kpsp.setText(String.format(": %s", humanize(childclient.getDetails().get("hasilDilakukannyaKPSP") != null ? childclient.getDetails().get("hasilDilakukannyaKPSP") : "-")));
         hb0.setText(String.format(": %s", humanize(childclient.getDetails().get("hb0") != null ? childclient.getDetails().get("hb0") : "-")));

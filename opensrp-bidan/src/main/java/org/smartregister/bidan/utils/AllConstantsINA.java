@@ -79,6 +79,9 @@ public class AllConstantsINA {
         public static final String EC_EDIT = "Edit Ibu";
         public static final String CHILD_EDIT = "Edit Bayi";
         public static final String DOKUMENTASI_PERSALINAN = "Dokumentasi Persalinan";
+        public static final String BAYI_NEONATAL_PERIOD_EVENT = "Kunjungan neonatal";
+        public static final String KOHORT_BAYI_KUNJUNGAN_EVENT = "Kohort Kunjungan Bayi Perbulan";
+        public static final String BALITA_KUNJUNGAN_EVENT = "Kunjungan Balita";
 //        public static final String ANC_INVESTIGATIONS = "anc_investigations";
 //        public static final String RECORD_ECPS = "record_ecps";
 //        public static final String FP_REFERRAL_FOLLOWUP = "fp_referral_followup";
