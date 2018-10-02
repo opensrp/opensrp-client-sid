@@ -340,6 +340,7 @@
     <string name="str_parity_full">Parity</string>
     <string name="str_abortus_full">Abortus</string>
     <string name="str_alive_full">Alive</string>
+    <string name="str_kb_edit">Edit FP</string>
     <string name="str_kb_update">Update FP</string>
     <string name="str_kb_close">Close FP</string>
     <string name="kb_register_title_in_short">FP</string>

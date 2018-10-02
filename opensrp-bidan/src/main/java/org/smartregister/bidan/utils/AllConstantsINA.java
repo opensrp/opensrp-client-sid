@@ -122,6 +122,7 @@ public class AllConstantsINA {
         public static final String KOHORT_KB_PELAYANAN="kohort_kb_pelayanan";
         public static final String KOHORT_KB_CLOSE="kohort_kb_close";
         public static final String KOHORT_KB_UPDATE="kohort_kb_update";
+        public static final String KOHORT_KB_EDIT="kohort_kb_pelayanan_edit";
         // public static final String KOHORT_KB_EDIT="kohort_kb_edit";
 
 //        public static final String FEEDBACK_BIDAN = "feedback_bidan";

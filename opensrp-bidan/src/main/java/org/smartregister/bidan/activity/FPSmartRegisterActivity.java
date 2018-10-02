@@ -11,6 +11,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static org.smartregister.bidan.utils.AllConstantsINA.FormNames.KOHORT_KB_CLOSE;
+import static org.smartregister.bidan.utils.AllConstantsINA.FormNames.KOHORT_KB_EDIT;
 import static org.smartregister.bidan.utils.AllConstantsINA.FormNames.KOHORT_KB_UPDATE;
 
 /**
@@ -31,7 +32,7 @@ public class FPSmartRegisterActivity extends BaseRegisterActivity {
     protected List<String> buildFormNameList() {
 
         List<String> formNames = new ArrayList<>();
-//        formNames.add(KOHORT_KB_REGISTER);
+        formNames.add(KOHORT_KB_EDIT);
         formNames.add(KOHORT_KB_UPDATE);
         formNames.add(KOHORT_KB_CLOSE);
 
@@ -40,6 +41,7 @@ public class FPSmartRegisterActivity extends BaseRegisterActivity {
 
     public DialogOption[] getEditOptions() {
         return new DialogOption[]{
+                new OpenFormOption(getString(R.string.str_kb_edit), KOHORT_KB_EDIT, formController),
                 new OpenFormOption(getString(R.string.str_kb_update), KOHORT_KB_UPDATE, formController),
                 new OpenFormOption(getString(R.string.str_kb_close), KOHORT_KB_CLOSE, formController),
         };

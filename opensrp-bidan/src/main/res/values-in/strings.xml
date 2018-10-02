@@ -99,6 +99,7 @@
     <string name="str_switch_language">Ubah Bahasa</string>
     <string name="str_edit_ki_form">Edit Kartu Ibu</string>
     <string name="str_close_ki_form">Tutup Kartu Ibu</string>
+    <string name="str_kb_edit">Edit KB</string>
     <string name="str_kb_update">Update KB</string>
     <string name="str_kb_close">Tutup KB</string>
 
