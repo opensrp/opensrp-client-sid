@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.content.res.Configuration;
 
 import com.crashlytics.android.Crashlytics;
+import com.github.johnkil.print.PrintConfig;
 
 import org.smartregister.Context;
 import org.smartregister.CoreLibrary;
@@ -98,6 +99,7 @@ public class BidanApplication extends DrishtiApplication {
     @Override
     public void onCreate() {
         super.onCreate();
+        PrintConfig.initDefault(getAssets(), "fonts/material-icon-font.ttf");
 
         mInstance = this;
 
