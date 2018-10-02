@@ -60,7 +60,7 @@ import javax.xml.parsers.DocumentBuilderFactory;
 
 public class BidanFormUtils {
 
-    public static final String[] CLIENT_EVENTS = {"Child Registration", "Identitas Ibu",
+    public static final String[] CLIENT_EVENTS = {"Tambah Bayi", "Identitas Ibu",
             "Dokumentasi Persalinan","Edit Ibu","Edit Bayi"};
 
     public static final String TAG = "EnketoFormUtils";
@@ -1094,12 +1094,36 @@ public class BidanFormUtils {
                     } else if (eventType.equals(AllConstantsINA.FormNames.DOKUMENTASI_PERSALINAN)) {
                         JSONObject json = indonesiaECRepository.getClientByBaseEntityId(event.getBaseEntityId());
                         Client client = gson.fromJson(json.toString(), Client.class);
-                        client.addRelationship("childId",event.getBaseEntityId());
+
+                        Map<String, Map<String, Object>> dep = formEntityConverter.
+                                getDependentClientsFromFormSubmission(formSubmission);
+                        for (Map<String, Object> cm : dep.values()) {
+                            Client cin = (Client) cm.get("client");
+                            saveClient(cin);
+                            Event evin = (Event) cm.get("event");
+                            evin = tagSyncMetadata(evin);
+                            saveEvent(evin);
+                            client.addRelationship("childId",evin.getBaseEntityId());
+                        }
+
                         saveClient(client);
                     } else if (eventType.equals(AllConstantsINA.FormNames.CHILD_FORM_TITLE)) {
                         JSONObject json = indonesiaECRepository.getClientByBaseEntityId(event.getBaseEntityId());
                         Client client = gson.fromJson(json.toString(), Client.class);
-                        // client.addAttribute("anak", "anak");
+                        Map<String, Map<String, Object>> dep = formEntityConverter.
+                                getDependentClientsFromFormSubmission(formSubmission);
+                        for (Map<String, Object> cm : dep.values()) {
+                            Client cin = (Client) cm.get("client");
+                            cin.setBaseEntityId(UUID.randomUUID().toString());
+                            saveClient(cin);
+                            Event evin = (Event) cm.get("event");
+                            evin.setBaseEntityId(cin.getBaseEntityId());
+                            evin = tagSyncMetadata(evin);
+                            saveEvent(evin);
+
+                            client.addRelationship("childId",evin.getBaseEntityId());
+                        }
+
                         saveClient(client);
                     } else if (eventType.equals(AllConstantsINA.FormNames.EC_EDIT)) {
                         Client client = formEntityConverter.getClientFromFormSubmission(formSubmission);
@@ -1113,15 +1137,6 @@ public class BidanFormUtils {
                     }
                 }
 
-                Map<String, Map<String, Object>> dep = formEntityConverter.
-                        getDependentClientsFromFormSubmission(formSubmission);
-                for (Map<String, Object> cm : dep.values()) {
-                    Client cin = (Client) cm.get("client");
-                    saveClient(cin);
-                    Event evin = (Event) cm.get("event");
-                    evin = tagSyncMetadata(evin);
-                    saveEvent(evin);
-                }
                 long lastSyncTimeStamp = allSharedPreferences.fetchLastUpdatedAtDate(0);
                 Date lastSyncDate = new Date(lastSyncTimeStamp);
                 ClientProcessor.getInstance(context).processClient(indonesiaECRepository.getEvents(lastSyncDate, BaseRepository.TYPE_Unsynced));

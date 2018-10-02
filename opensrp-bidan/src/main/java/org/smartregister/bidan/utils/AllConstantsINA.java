@@ -75,7 +75,7 @@ public class AllConstantsINA {
 //        public static final String VITAMIN_A = "vitamin_a";
 //        public static final String DELIVERY_PLAN = "delivery_plan";
         public static final String KI_FORM_TITLE = "Identitas Ibu";
-        public static final String CHILD_FORM_TITLE = "Child Registration";
+        public static final String CHILD_FORM_TITLE = "Tambah Bayi";
         public static final String EC_EDIT = "Edit Ibu";
         public static final String CHILD_EDIT = "Edit Bayi";
         public static final String DOKUMENTASI_PERSALINAN = "Dokumentasi Persalinan";
