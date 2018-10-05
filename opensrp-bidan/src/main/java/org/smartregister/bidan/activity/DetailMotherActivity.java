@@ -19,6 +19,7 @@ import org.smartregister.bidan.facial.domain.ProfileImage;
 import org.smartregister.bidan.facial.listener.FacialActionListener;
 import org.smartregister.bidan.facial.repository.ImageRepository;
 import org.smartregister.bidan.utils.BidanFormUtils;
+import org.smartregister.bidan.utils.CameraPreviewActivity;
 import org.smartregister.bidan.utils.Support;
 import org.smartregister.bidan.utils.Tools;
 import org.smartregister.commonregistry.CommonPersonObjectClient;
@@ -291,12 +292,12 @@ public class DetailMotherActivity extends Activity implements FacialActionListen
             public void onClick(View v) {
 //                entityid = motherClient.entityId();
 
-//                Intent intent = new Intent(DetailMotherActivity.this, CameraPreviewActivity.class);
-//                intent.putExtra(CameraPreviewActivity.REQUEST_TYPE, 201);
-//                startActivityForResult(intent, 201);
+                Intent intent = new Intent(DetailMotherActivity.this, CameraPreviewActivity.class);
+                intent.putExtra(CameraPreviewActivity.REQUEST_TYPE, 201);
+                startActivityForResult(intent, 201);
 
                 // Use SNAPDRAGON SDK
-                getOpenCameraActivity();
+//                getOpenCameraActivity();
 
             }
         });
