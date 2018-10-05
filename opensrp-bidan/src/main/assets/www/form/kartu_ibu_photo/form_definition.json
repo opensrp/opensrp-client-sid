@@ -1,0 +1,38 @@
+{
+  "form_data_definition_version": "3",
+  "form": {
+    "bind_type": "facials",
+    "ec_bind_type": "ec_kartu_ibu",
+    "default_bind_path": "/model/instance/update_photo/",
+    "fields": [
+      {
+        "name": "id",
+        "shouldLoadValue": true
+      },
+      {
+        "name": "face_vector",
+        "bind": "/model/instance/update_photo/face_vector",
+        "shouldLoadValue": true
+      },
+      {
+        "name": "cityVillage",
+        "bind": "/model/instance/update_photo/Village",
+        "shouldLoadValue": true
+      },
+      {
+        "name": "Sub-village",
+        "bind": "/model/instance/update_photo/Sub-village",
+        "shouldLoadValue": true
+      },
+      {
+        "name": "existing_location",
+        "bind": "/model/instance/update_photo/existing_location",
+        "shouldLoadValue": true
+      },
+      {
+        "name": "submissionDate",
+        "bind": "/model/instance/update_photo/today"
+      }
+    ]
+  }
+}

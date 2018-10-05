@@ -1,6 +1,5 @@
 package org.smartregister.bidan.activity;
 
-import android.app.ProgressDialog;
 import android.content.pm.ActivityInfo;
 import android.os.Bundle;
 import android.os.Handler;
@@ -36,7 +35,6 @@ import org.smartregister.view.contract.SmartRegisterClient;
 import org.smartregister.view.dialog.DialogOption;
 import org.smartregister.view.dialog.DialogOptionModel;
 import org.smartregister.view.dialog.EditOption;
-import org.smartregister.view.fragment.SecuredNativeSmartRegisterFragment;
 import org.smartregister.view.viewpager.OpenSRPViewPager;
 
 import java.text.DateFormat;

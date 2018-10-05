@@ -1,7 +1,6 @@
 package org.smartregister.bidan.activity;
 
 import android.Manifest;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.pm.PackageManager;
@@ -15,7 +14,6 @@ import android.os.StrictMode;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.content.res.ResourcesCompat;
-import android.support.v7.app.AlertDialog;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -31,7 +29,6 @@ import org.smartregister.bidan.application.BidanApplication;
 import org.smartregister.bidan.controller.NavigationControllerINA;
 import org.smartregister.bidan.receiver.SyncStatusBroadcastReceiver;
 import org.smartregister.bidan.repository.IndonesiaECRepository;
-import org.smartregister.bidan.service.FormSubmissionSyncService;
 import org.smartregister.bidan.sync.ECSyncUpdater;
 import org.smartregister.bidan.sync.UpdateActionsTask;
 import org.smartregister.bidan.utils.AllConstantsINA;
@@ -42,8 +39,6 @@ import org.smartregister.domain.FetchStatus;
 import org.smartregister.enketo.view.fragment.DisplayFormFragment;
 import org.smartregister.event.Listener;
 import org.smartregister.service.PendingFormSubmissionService;
-import org.smartregister.sync.SyncAfterFetchListener;
-import org.smartregister.sync.SyncProgressIndicator;
 import org.smartregister.view.activity.SecuredActivity;
 import org.smartregister.view.contract.HomeContext;
 import org.smartregister.view.controller.NativeAfterANMDetailsFetchListener;
@@ -56,8 +51,6 @@ import static android.widget.Toast.LENGTH_SHORT;
 import static java.lang.String.valueOf;
 import static org.smartregister.event.Event.ACTION_HANDLED;
 import static org.smartregister.event.Event.FORM_SUBMITTED;
-import static org.smartregister.event.Event.SYNC_COMPLETED;
-import static org.smartregister.event.Event.SYNC_STARTED;
 
 //import java.text.SimpleDateFormat;
 //import java.util.Date;
@@ -188,7 +181,9 @@ public class BidanHomeActivity extends SecuredActivity implements SyncStatusBroa
             //your codes here
 
         }
-        checkLocationPermission();
+        if(!hasPermissions(BidanApplication.getInstance(), PERMISSIONS)){
+            ActivityCompat.requestPermissions(this, PERMISSIONS, PERMISSION_ALL);
+        }
     }
 
     private void setupViews() {
@@ -233,7 +228,9 @@ public class BidanHomeActivity extends SecuredActivity implements SyncStatusBroa
 
         try
         {
-            syncStatusBroadcastReceiver = new SyncStatusBroadcastReceiver(this);
+            if(syncStatusBroadcastReceiver == null){
+                syncStatusBroadcastReceiver = new SyncStatusBroadcastReceiver(this);
+            }
             IntentFilter intentFilter = new IntentFilter();
             intentFilter.addAction(SyncStatusBroadcastReceiver.ACTION_SYNC_STATUS);
             registerReceiver(syncStatusBroadcastReceiver, intentFilter);
@@ -248,7 +245,7 @@ public class BidanHomeActivity extends SecuredActivity implements SyncStatusBroa
     @Override
     protected void onResumption() {
 //        LoginActivity.setLanguage();
-
+        registerMyReceiver();
         updateRegisterCounts();
         updateSyncIndicator();
         updateLastSyncTime();
@@ -264,6 +261,7 @@ public class BidanHomeActivity extends SecuredActivity implements SyncStatusBroa
     @Override
     protected void onPause() {
         super.onPause();
+        unregisterReceiver(syncStatusBroadcastReceiver);
         if (ContextCompat.checkSelfPermission(this,
                 Manifest.permission.ACCESS_FINE_LOCATION)
                 == PackageManager.PERMISSION_GRANTED) {
@@ -463,53 +461,30 @@ public class BidanHomeActivity extends SecuredActivity implements SyncStatusBroa
         flagActivator();
     }
 
-    public static final int MY_PERMISSIONS_REQUEST_LOCATION = 99;
+    final int PERMISSION_ALL = 1;
+    String[] PERMISSIONS = {
+            Manifest.permission.ACCESS_FINE_LOCATION,
+            Manifest.permission.WRITE_EXTERNAL_STORAGE,
+            Manifest.permission.CAMERA
+    };
 
-    public boolean checkLocationPermission() {
-        if (ContextCompat.checkSelfPermission(this,
-                Manifest.permission.ACCESS_FINE_LOCATION)
-                != PackageManager.PERMISSION_GRANTED) {
-
-            // Should we show an explanation?
-            if (ActivityCompat.shouldShowRequestPermissionRationale(this,
-                    Manifest.permission.ACCESS_FINE_LOCATION)) {
-
-                // Show an explanation to the user *asynchronously* -- don't block
-                // this thread waiting for the user's response! After the user
-                // sees the explanation, try again to request the permission.
-                new AlertDialog.Builder(this)
-                        .setTitle("Location Permission")
-                        .setMessage("This app need to access location")
-                        .setPositiveButton("OK", new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialogInterface, int i) {
-                                //Prompt the user once explanation has been shown
-                                ActivityCompat.requestPermissions(BidanHomeActivity.this,
-                                        new String[]{Manifest.permission.ACCESS_FINE_LOCATION},
-                                        MY_PERMISSIONS_REQUEST_LOCATION);
-                            }
-                        })
-                        .create()
-                        .show();
-
-
-            } else {
-                // No explanation needed, we can request the permission.
-                ActivityCompat.requestPermissions(this,
-                        new String[]{Manifest.permission.ACCESS_FINE_LOCATION},
-                        MY_PERMISSIONS_REQUEST_LOCATION);
+    public static boolean hasPermissions(android.content.Context context, String... permissions) {
+        if (context != null && permissions != null) {
+            for (String permission : permissions) {
+                if (ActivityCompat.checkSelfPermission(BidanApplication.getInstance(), permission) != PackageManager.PERMISSION_GRANTED) {
+                    return false;
+                }
             }
-            return false;
-        } else {
-            return true;
         }
+        return true;
     }
 
     @Override
     public void onRequestPermissionsResult(int requestCode,
                                            String permissions[], int[] grantResults) {
+        Log.d(TAG, "onRequestPermissionsResult: grantResults="+grantResults);
         switch (requestCode) {
-            case MY_PERMISSIONS_REQUEST_LOCATION: {
+            case PERMISSION_ALL: {
                 // If request is cancelled, the result arrays are empty.
                 if (grantResults.length > 0
                         && grantResults[0] == PackageManager.PERMISSION_GRANTED) {

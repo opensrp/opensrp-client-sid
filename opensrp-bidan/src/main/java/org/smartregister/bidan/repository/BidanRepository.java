@@ -6,6 +6,7 @@ import android.util.Log;
 import net.sqlcipher.database.SQLiteDatabase;
 
 import org.smartregister.bidan.application.BidanApplication;
+import org.smartregister.bidan.facial.repository.ImageRepository;
 import org.smartregister.bidan.utils.BidanConstants;
 import org.smartregister.configurableviews.repository.ConfigurableViewsRepository;
 import org.smartregister.bidan.repository.IndonesiaECRepository;
@@ -36,6 +37,7 @@ public class BidanRepository extends Repository {
 //        IndonesiaECRepository.createTable(database, IndonesiaECRepository.Table.address, IndonesiaECRepository.address_column.values());
         IndonesiaECRepository.createTable(database, IndonesiaECRepository.Table.event, IndonesiaECRepository.event_column.values());
 //        IndonesiaECRepository.createTable(database, IndonesiaECRepository.Table.obs, IndonesiaECRepository.obs_column.values());
+        ImageRepository.createTable(database);
 //        ResultsRepository.createTable(database);
 //        ResultDetailsRepository.createTable(database);
 //        BMIRepository.createTable(database);

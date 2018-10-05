@@ -1,0 +1,38 @@
+<model>
+    <instance>
+        <update_photo encounter_type="Update Photo" id="update_photo"
+            version="201610120923">
+            <formhub>
+                <uuid />
+            </formhub>
+            <start openmrs_entity="encounter" openmrs_entity_id="encounter_start" />
+            <today openmrs_entity="encounter" openmrs_entity_id="encounter_date" />
+            <face_vector />
+            <deviceid />
+            <simserial />
+            <phonenumber />
+            <Province />
+            <District />
+            <Sub-district />
+            <Village />
+            <Sub-village />
+            <generated_note_name_13 />
+            <generated_note_name_14 />
+            <existing_location openmrs_entity="encounter" openmrs_entity_id="location_id" />
+            <provinsi openmrs_entity="person_address" openmrs_entity_id="stateProvince"
+                openmrs_entity_parent="usual_residence" />
+            <kabupaten openmrs_entity="person_address" openmrs_entity_id="countyDistrict"
+                openmrs_entity_parent="usual_residence" />
+            <desa openmrs_entity="person_address" openmrs_entity_id="cityVillage"
+                openmrs_entity_parent="usual_residence" />
+            <dusun openmrs_entity="person_address" openmrs_entity_id="address1"
+                openmrs_entity_parent="usual_residence" />
+            <kecamatan openmrs_entity="person_address" openmrs_entity_id="address2"
+                openmrs_entity_parent="usual_residence" />
+            <end openmrs_entity="encounter" openmrs_entity_id="encounter_end" />
+            <meta>
+                <instanceID />
+            </meta>
+        </update_photo>
+    </instance>
+</model>

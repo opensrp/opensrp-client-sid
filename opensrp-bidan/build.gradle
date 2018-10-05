@@ -52,6 +52,8 @@ android {
         versionCode 7
         versionName "7.2"
         multiDexEnabled true
+        vectorDrawables.useSupportLibrary = true
+        ndk { abiFilters "armeabi" }
 
         buildConfigField "long", "MAX_SERVER_TIME_DIFFERENCE", "1800000l"
         buildConfigField "boolean", "TIME_CHECK", "false"
@@ -159,6 +161,10 @@ dependencies {
         transitive = true
     }
     implementation 'org.osmdroid:osmdroid-android:6.0.2'
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    implementation 'com.balysv.materialmenu:material-menu:2.0.0'
+    implementation 'com.loopj.android:android-async-http:1.4.9'
+    implementation 'com.squareup.okhttp3:okhttp:3.8.1'
 
     androidTestImplementation 'junit:junit:4.12'
 

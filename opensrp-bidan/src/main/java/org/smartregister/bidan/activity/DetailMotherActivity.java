@@ -9,16 +9,25 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import org.json.JSONObject;
 import org.smartregister.Context;
 import org.smartregister.bidan.R;
-import org.smartregister.bidan.utils.CameraPreviewActivity;
+import org.smartregister.bidan.application.BidanApplication;
+import org.smartregister.bidan.facial.activity.OpenCameraActivity;
+import org.smartregister.bidan.facial.domain.FacialWrapper;
+import org.smartregister.bidan.facial.domain.ProfileImage;
+import org.smartregister.bidan.facial.listener.FacialActionListener;
+import org.smartregister.bidan.facial.repository.ImageRepository;
+import org.smartregister.bidan.utils.BidanFormUtils;
 import org.smartregister.bidan.utils.Support;
 import org.smartregister.bidan.utils.Tools;
 import org.smartregister.commonregistry.CommonPersonObjectClient;
+import org.smartregister.domain.form.FieldOverrides;
 import org.smartregister.repository.DetailsRepository;
 import org.smartregister.view.activity.DrishtiApplication;
 
 import java.io.File;
+import java.util.Arrays;
 
 import static android.view.View.GONE;
 import static android.view.View.VISIBLE;
@@ -28,11 +37,13 @@ import static org.smartregister.util.StringUtil.humanize;
 /**
  * Created by SID
  */
-public class DetailMotherActivity extends Activity {
+public class DetailMotherActivity extends Activity implements FacialActionListener {
 
     //image retrieving
     private static final String TAG = DetailMotherActivity.class.getName();
     public static CommonPersonObjectClient motherClient;
+    private ProfileImage profileImage;
+    ImageRepository imageRepo = BidanApplication.getInstance().imageRepository();
 //    static String entityid;
     // Main Profile
 //    @Bind(R.id.tv_mother_detail_profile_view)
@@ -144,12 +155,21 @@ public class DetailMotherActivity extends Activity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-
+        userId = motherClient.getDetails().get("base_entity_id");
+        profileImage = imageRepo.findByBaseEntityId(userId);
+        if(profileImage==null){
+            profileImage = new ProfileImage();
+            profileImage.setBaseEntityId(userId);
+            profileImage.setContenttype("jpeg");
+            profileImage.setFilecategory("profilepic");
+            profileImage.setFilevector(Arrays.toString(new String[0]));
+            profileImage.setSyncStatus(String.valueOf(ImageRepository.TYPE_Unsynced));
+        }
         super.onCreate(savedInstanceState);
         setContentView(R.layout.ki_detail_activity);
 
 //        ButterKnife.bind(this);
-        userId = motherClient.getDetails().get("base_entity_id");
+
 
         findViewById(R.id.btn_back_to_home).setOnClickListener(new View.OnClickListener() {
             @Override
@@ -270,12 +290,29 @@ public class DetailMotherActivity extends Activity {
             @Override
             public void onClick(View v) {
 //                entityid = motherClient.entityId();
-                Intent intent = new Intent(DetailMotherActivity.this, CameraPreviewActivity.class);
-                intent.putExtra(CameraPreviewActivity.REQUEST_TYPE, 201);
-                startActivityForResult(intent, 201);
+
+//                Intent intent = new Intent(DetailMotherActivity.this, CameraPreviewActivity.class);
+//                intent.putExtra(CameraPreviewActivity.REQUEST_TYPE, 201);
+//                startActivityForResult(intent, 201);
+
+                // Use SNAPDRAGON SDK
+                getOpenCameraActivity();
 
             }
         });
+
+    }
+
+    public void getOpenCameraActivity() {
+        final ImageRepository imgRepo = BidanApplication.getInstance().imageRepository();
+        Long latestId = imgRepo.findLatestRecordId();
+        Intent intent = new Intent(DetailMotherActivity.this, OpenCameraActivity.class);
+        intent.putExtra("org.smartregister.bidan.facial.activity.OpenCameraActivity.updated", false);
+        intent.putExtra("org.smartregister.bidan.facial.activity.PhotoConfirmationActivity.id", userId);
+        intent.putExtra("org.smartregister.bidan.facial.activity.PhotoConfirmationActivity.identify", false);
+        intent.putExtra("org.smartregister.bidan.facial.activity.PhotoConfirmationActivity.origin", TAG);
+
+        startActivityForResult(intent, 0);
 
     }
 
@@ -308,6 +345,21 @@ public class DetailMotherActivity extends Activity {
                 file.mkdir();
             }
             if (file.canWrite()) {
+                Log.d(TAG, "onActivityResult: path="+path.toString());
+                profileImage.setFilepath(path.toString());
+                imageRepo.add(profileImage);
+                try {
+                    BidanFormUtils formUtils = BidanFormUtils.getInstance(this);
+                    JSONObject faceVector = new JSONObject();
+                    faceVector.put("face_vector",profileImage.getFaceVector());
+                    FieldOverrides fieldOverrides = new FieldOverrides(faceVector.toString());
+                    String data = formUtils.generateXMLInputForFormWithEntityId(userId, "kartu_ibu_photo", fieldOverrides.getJSONString());
+                    formUtils.generateFormSubmisionFromXMLString(userId, data, "kartu_ibu_photo", new JSONObject());
+                    Log.d(TAG, "onActivityResult: data="+data);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+
                 path.append(File.separator).append(userId).append(".jpg");
                 Tools.saveFile(Tools.scaleDown((Bitmap) intent.getExtras().get("data"), 400.0f, false), path.toString());
             }
@@ -317,5 +369,10 @@ public class DetailMotherActivity extends Activity {
         finish();
         startActivity(getIntent());
 
+    }
+
+    @Override
+    public void onFacialTaken(FacialWrapper tag) {
+        Log.d(TAG, "onFacialTaken: tag="+tag);
     }
 }
