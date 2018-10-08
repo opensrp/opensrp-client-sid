@@ -129,6 +129,13 @@ public class ImageRepository extends BaseRepository {
         return readAllFacials(cursor);
     }
 
+    public List<ProfileImage> getAllFaceVectorImages() {
+        Cursor cursor = getRepository().getReadableDatabase().query(
+                PHOTO_TABLE_NAME, PHOTO_TABLE_COLUMNS, FACE_VECTOR_COLUMN+"!='[]'", null, null, null, UPDATED_AT_COLUMN + COLLATE_NOCASE + " DESC", null);
+
+        return readAllFacials(cursor);
+    }
+
     public List<ProfileImage> getAllUnsyncImages() {
         Cursor cursor = getRepository().getReadableDatabase().query(
                 PHOTO_TABLE_NAME, PHOTO_TABLE_COLUMNS, SYNC_STATUS_COLUMN+"='"+TYPE_Unsynced+"'", null, null, null, UPDATED_AT_COLUMN + COLLATE_NOCASE + " DESC", null);

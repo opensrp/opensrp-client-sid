@@ -37,11 +37,11 @@ public class BitmapUtil {
     public void BitmapUtil(){
     }
 
-    public void saveAndClose(Context mContext, String uid, boolean updated, FacialProcessing objFace, int arrayPossition, Bitmap mBitmap, String str_origin_class) {
+    public void saveAndClose(Context mContext, String uid, boolean updated, FacialProcessing objFace, int arrayPossition, Bitmap mBitmap, String str_origin_class, ProfileImage tag) {
 
         if (saveToFile(mBitmap, uid)) {
             Log.e(TAG, "saveAndClose: " + "Saved File Success! uid= " + uid);
-            if (saveToDb(updated, uid, objFace)) Log.e(TAG, "saveAndClose: " + "Stored DB Success!");
+            if (saveToDb(updated, uid, objFace, tag)) Log.e(TAG, "saveAndClose: " + "Stored DB Success!");
 
         } else {
             Log.e(TAG, "saveAndClose: "+"Failed saved file!" );
@@ -91,7 +91,7 @@ public class BitmapUtil {
 
     }
 
-    private boolean saveToDb(boolean updatedMode, String uid, FacialProcessing objFace) {
+    private boolean saveToDb(boolean updatedMode, String uid, FacialProcessing objFace, ProfileImage tag) {
         final ImageRepository imageRepo = BidanApplication.getInstance().imageRepository();
 
         byte[] faceVector;
@@ -100,25 +100,45 @@ public class BitmapUtil {
         if (imageRepo != null) {
 
             if (!updatedMode){
-
+                Log.d(TAG, "saveToDb: not updatedMode");
+                ProfileImage profileImage = tag;
+                String personId = profileImage.getPersonId();
+                Log.d(TAG, "saveToDb: personId="+personId);
+                String[] faceVectorContent;
                 int result = objFace.addPerson(0);
                 faceVector = objFace.serializeRecogntionAlbum();
                 Log.d(TAG, "saveToDb: faceVector"+faceVector);
                 String albumBufferArr = Arrays.toString(faceVector);
-                String[] faceVectorContent = albumBufferArr.substring(1, albumBufferArr.length() - 1).split(", ");
+                faceVectorContent = albumBufferArr.substring(1, albumBufferArr.length() - 1).split(", ");
                 // Get Face Vector Content Only by removing Header
                 faceVectorContent = Arrays.copyOfRange(faceVectorContent, faceVector.length - 300, faceVector.length);
-
-                ProfileImage profileImage = new ProfileImage();
-
-                profileImage.setBaseEntityId(uid);
+                if (personId != null){
+                    faceVectorContent[0] = personId;
+                }
                 profileImage.setFaceVector(Arrays.toString(faceVectorContent));
                 profileImage.setSyncStatus(String.valueOf(ImageRepository.TYPE_Unsynced));
 
                 imageRepo.add(profileImage, uid);
 
             } else {
-                // TODO: Update existing record
+                Log.d(TAG, "saveToDb: updatedMode");
+                ProfileImage profileImage = tag;
+                int personId = Integer.valueOf(profileImage.getPersonId());
+                Log.d(TAG, "saveToDb: personId="+personId);
+                int result = objFace.addPerson(0);
+                faceVector = objFace.serializeRecogntionAlbum();
+                String albumBufferArr = Arrays.toString(faceVector);
+                String[] faceVectorContent = albumBufferArr.substring(1, albumBufferArr.length() - 1).split(", ");
+                // Get Face Vector Content Only by removing Header
+                faceVectorContent = Arrays.copyOfRange(faceVectorContent, faceVector.length - 300, faceVector.length);
+                faceVectorContent[0] = String.valueOf(personId);
+                Log.d(TAG, "saveToDb: faceVectorContent="+faceVectorContent);
+
+
+                profileImage.setFaceVector(Arrays.toString(faceVectorContent));
+                profileImage.setSyncStatus(String.valueOf(ImageRepository.TYPE_Unsynced));
+
+                imageRepo.add(profileImage);
             }
 
             return true;

@@ -1,6 +1,9 @@
 package org.smartregister.bidan.activity;
 
+import android.app.AlertDialog;
+import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -29,6 +32,36 @@ public class KISmartRegisterActivity extends BaseRegisterActivity implements Loc
 
     public static final String TAG = KISmartRegisterActivity.class.getName();
 
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+
+        Bundle extras = getIntent().getExtras();
+        if (extras != null){
+            boolean mode_face = extras.getBoolean("org.ei.opensrp.indonesia.face.face_mode");
+            String base_id = extras.getString("org.ei.opensrp.indonesia.face.base_id");
+
+            if (mode_face){
+                KISmartRegisterFragment nf = (KISmartRegisterFragment)mBaseFragment();
+                nf.setCriteria(base_id);
+
+                Log.e(TAG, "onCreate: id " + base_id);
+
+                showToast("id "+base_id);
+                AlertDialog.Builder builder= new AlertDialog.Builder(this);
+                builder.setTitle("Is it Right Person ?");
+//                builder.setTitle("Is it Right Clients ?" + base_id);
+//                builder.setTitle("Is it Right Clients ?"+ pc.getName());
+
+                // TODO : get name by base_id
+//                builder.setMessage("Process Time : " + proc_time + " s");
+
+                builder.setNegativeButton("CANCEL", listener);
+                builder.setPositiveButton("YES", listener);
+                builder.show();
+            }
+        }
+    }
 
     @Override
     protected Fragment mBaseFragment() {

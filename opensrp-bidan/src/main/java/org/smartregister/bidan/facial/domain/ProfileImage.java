@@ -13,6 +13,7 @@ public class ProfileImage {
     private String contenttype;
     private String filepath;
     private String filecategory;
+    private String personId;
 
 //    private static final String ID_COLUMN = "_id";
 //    private static final String BASE_ENTITY_ID_COLUMN = "base_entity_id";
@@ -118,5 +119,11 @@ public class ProfileImage {
     }
 
 
+    public String getPersonId() {
+        return personId;
+    }
 
+    public void setPersonId(String personId) {
+        this.personId = personId;
+    }
 }

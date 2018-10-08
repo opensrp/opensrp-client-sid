@@ -49,8 +49,8 @@ android {
         applicationId "org.smartregister.bidan"
         minSdkVersion 18
         targetSdkVersion 27
-        versionCode 7
-        versionName "7.2"
+        versionCode 8
+        versionName "8.0"
         multiDexEnabled true
         vectorDrawables.useSupportLibrary = true
         ndk { abiFilters "armeabi" }

@@ -36,8 +36,10 @@ import com.qualcomm.snapdragon.sdk.face.FacialProcessing;
 import com.qualcomm.snapdragon.sdk.face.FacialProcessing.PREVIEW_ROTATION_ANGLE;
 
 import org.smartregister.bidan.R;
+import org.smartregister.bidan.application.BidanApplication;
 import org.smartregister.bidan.facial.FacialRecognitionLibrary;
 import org.smartregister.bidan.facial.utils.FaceConstants;
+import org.smartregister.commonregistry.CommonPersonObjectClient;
 
 import java.util.HashMap;
 import java.util.Iterator;
@@ -46,6 +48,7 @@ import java.util.Map;
 public class OpenCameraActivity extends Activity implements PreviewCallback {
 
     private static final String TAG = OpenCameraActivity.class.getSimpleName();
+    public static CommonPersonObjectClient kidetail;
     public static FacialProcessing faceProc;
     private static boolean switchCamera = false;
     private static boolean settingsButtonPress;
@@ -99,6 +102,7 @@ public class OpenCameraActivity extends Activity implements PreviewCallback {
         super.onCreate(savedInstanceState);
 
         // GUI and Initial value
+        BidanApplication.getInstance().refreshFaceData();
         initGuiAndAnimation();
         initExtras();
         initializeFlags();
@@ -107,7 +111,8 @@ public class OpenCameraActivity extends Activity implements PreviewCallback {
 
         // Load Vector Data
 //        Tools.loadAlbum(getApplicationContext());
-//        hash = OpenCameraActivity.retrieveHash(getApplicationContext());
+        hash = OpenCameraActivity.retrieveHash(getApplicationContext());
+        Log.d(TAG, "onCreate: hash="+hash);
 
     }
 
@@ -528,6 +533,7 @@ public class OpenCameraActivity extends Activity implements PreviewCallback {
         entityId = extras.getString("org.smartregister.bidan.facial.activity.PhotoConfirmationActivity.id");
         identifyPerson = extras.getBoolean("org.smartregister.bidan.facial.activity.PhotoConfirmationActivity.identify");
         str_origin_class = extras.getString("org.smartregister.bidan.facial.activity.PhotoConfirmationActivity.origin");
+        kidetail = extras.getParcelable("org.smartregister.bidan.facial.activity.OpenCameraActivity.kidetail");
 
     }
 
