@@ -1,10 +1,16 @@
 package org.smartregister.bidan.fragment;
 
+import android.app.AlertDialog;
 import android.app.Fragment;
 import android.app.FragmentTransaction;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.os.Parcelable;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.View;
+import android.widget.EditText;
 
 import org.opensrp.api.domain.Location;
 import org.opensrp.api.util.EntityUtils;
@@ -14,6 +20,9 @@ import org.smartregister.Context;
 import org.smartregister.bidan.R;
 import org.smartregister.bidan.activity.BaseRegisterActivity;
 import org.smartregister.bidan.activity.DetailMotherActivity;
+import org.smartregister.bidan.activity.KISmartRegisterActivity;
+import org.smartregister.bidan.application.BidanApplication;
+import org.smartregister.bidan.facial.activity.OpenCameraActivity;
 import org.smartregister.bidan.options.AllKartuIbuServiceMode;
 import org.smartregister.bidan.options.MotherFilterOption;
 import org.smartregister.bidan.provider.KIClientsProvider;
@@ -35,7 +44,6 @@ import org.smartregister.view.dialog.ServiceModeOption;
 import org.smartregister.view.dialog.SortOption;
 
 import java.util.ArrayList;
-import java.util.List;
 import java.util.Map;
 
 import static android.view.View.GONE;
@@ -155,7 +163,7 @@ public class KISmartRegisterFragment extends BaseSmartRegisterFragment {
         view.findViewById(R.id.service_mode_selection).setVisibility(GONE);
         clientsView.setVisibility(VISIBLE);
         clientsProgressView.setVisibility(INVISIBLE);
-        initializeQueries();
+        initializeQueries(getCriteria());
 
 //        LoginActivity.setLanguage();
     }
@@ -165,7 +173,7 @@ public class KISmartRegisterFragment extends BaseSmartRegisterFragment {
         getDefaultOptionsProvider();
 
         if (isPausedOrRefreshList()) {
-            initializeQueries();
+            initializeQueries("");
         }
 
 //        try {
@@ -179,14 +187,26 @@ public class KISmartRegisterFragment extends BaseSmartRegisterFragment {
     @Override
     public void onResume() {
         super.onResume();
-        initializeQueries();
+        if (isPausedOrRefreshList()) {
+            initializeQueries("");
+        }
     }
 
     protected String filterStringForAll() {
         return "";
     }
 
-    public void initializeQueries() {
+    public static String criteria;
+
+    public void setCriteria(String criteria) {
+        KISmartRegisterFragment.criteria = criteria;
+    }
+
+    public static String getCriteria() {
+        return criteria;
+    }
+
+    public void initializeQueries(String s) {
 
         try {
             KIClientsProvider kiscp = new KIClientsProvider(getActivity(), clientActionHandler, context().alertService());
@@ -200,6 +220,12 @@ public class KISmartRegisterFragment extends BaseSmartRegisterFragment {
             countqueryBUilder.SelectInitiateMainTableCounts("ec_kartu_ibu");
 
             mainCondition = "is_closed = 0 AND namalengkap IS NOT NULL AND namalengkap != '' ";
+            if (s == null || s.equals("!")) {
+                mainCondition = "is_closed = 0 AND namalengkap IS NOT NULL AND namalengkap != '' ";
+            } else {
+                Log.e(TAG, "initializeQueries: id " + s);
+                mainCondition = "is_closed = 0 AND namalengkap IS NOT NULL AND namalengkap != '' AND object_id LIKE '%" + s + "%'";
+            }
 
             joinTable = "";
             countSelect = countqueryBUilder.mainCondition(mainCondition);
@@ -285,5 +311,94 @@ public class KISmartRegisterFragment extends BaseSmartRegisterFragment {
         }
 
     }
+
+    @Override
+    public void setupSearchView(final View view) {
+        searchView = (EditText) view.findViewById(R.id.edt_search);
+        if (BidanApplication.getInstance().isFRSupported()){
+            searchView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    CharSequence selections[] = new CharSequence[]{"Name", "Photo"};
+                    final AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+                    builder.setTitle("Please Choose one, Search by");
+                    builder.setItems(selections, new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int opt) {
+                            if (opt != 0) getFacialRecord(view);
+                            else searchTextChangeListener("");
+                        }
+                    });
+                    builder.show();
+                }
+            });
+        }else{
+            searchView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    searchTextChangeListener("");
+                }
+            });
+        }
+
+
+        searchCancelView = view.findViewById(R.id.btn_search_cancel);
+        searchCancelView.setOnClickListener(searchCancelHandler);
+    }
+
+    public void searchTextChangeListener(String s) {
+
+        if (s != null) {
+            filters = s;
+        } else {
+            searchView.addTextChangedListener(new TextWatcher() {
+                @Override
+                public void beforeTextChanged(CharSequence charSequence, int i, int i2, int i3) {
+                }
+
+                @Override
+                public void onTextChanged(final CharSequence cs, int start, int before, int count) {
+                    filters = cs.toString();
+                    CountExecute();
+                    filterandSortExecute();
+                }
+
+                @Override
+                public void afterTextChanged(Editable editable) {
+                }
+            });
+        }
+    }
+
+    public void getFacialRecord(View view) {
+
+//        FlurryAgent.logEvent(TAG + "search_by_face", true);
+        Log.d(TAG, "getFacialRecord: ");
+//        Log.e(TAG, "getFacialRecord: ");
+
+        OpenCameraActivity.kidetail = (CommonPersonObjectClient) view.getTag();
+
+        Intent intent = new Intent(getActivity(), OpenCameraActivity.class);
+        intent.putExtra("org.smartregister.bidan.facial.activity.PhotoConfirmationActivity.origin", TAG);
+        intent.putExtra("org.smartregister.bidan.facial.activity.PhotoConfirmationActivity.identify", true);
+        intent.putExtra("org.smartregister.bidan.facial.activity.OpenCameraActivity.kidetail", (Parcelable) OpenCameraActivity.kidetail);
+        startActivityForResult(intent, 2);
+    }
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data){
+        super.onActivityResult(requestCode, resultCode, data);
+
+        Intent myIntent = new Intent(getActivity(), KISmartRegisterActivity.class);
+        if (data != null) {
+            myIntent.putExtra("org.ei.opensrp.indonesia.face.face_mode", true);
+            myIntent.putExtra("org.ei.opensrp.indonesia.face.base_id", data.getStringExtra("org.ei.opensrp.indonesia.face.base_id"));
+        }else{
+            KISmartRegisterFragment.criteria = "!";
+        }
+        getActivity().startActivity(myIntent);
+        getActivity().finish();
+
+    }
+
 
 }

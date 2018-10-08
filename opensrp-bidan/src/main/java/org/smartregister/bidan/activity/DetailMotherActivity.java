@@ -292,12 +292,20 @@ public class DetailMotherActivity extends Activity implements FacialActionListen
             public void onClick(View v) {
 //                entityid = motherClient.entityId();
 
-                Intent intent = new Intent(DetailMotherActivity.this, CameraPreviewActivity.class);
-                intent.putExtra(CameraPreviewActivity.REQUEST_TYPE, 201);
-                startActivityForResult(intent, 201);
+                boolean useFR = BidanApplication.getInstance().isFRSupported();
 
-                // Use SNAPDRAGON SDK
-//                getOpenCameraActivity();
+                if (useFR){
+                    // Use SNAPDRAGON SDK
+                    getOpenCameraActivity();
+                }else{
+                    Intent intent = new Intent(DetailMotherActivity.this, CameraPreviewActivity.class);
+                    intent.putExtra(CameraPreviewActivity.REQUEST_TYPE, 201);
+                    startActivityForResult(intent, 201);
+                }
+
+
+
+
 
             }
         });
@@ -363,6 +371,19 @@ public class DetailMotherActivity extends Activity implements FacialActionListen
 
                 path.append(File.separator).append(userId).append(".jpg");
                 Tools.saveFile(Tools.scaleDown((Bitmap) intent.getExtras().get("data"), 400.0f, false), path.toString());
+            }
+
+        }else if (requestCode == 0 && resultCode==2){
+            profileImage = imageRepo.findByBaseEntityId(userId);
+            try {
+                BidanFormUtils formUtils = BidanFormUtils.getInstance(this);
+                JSONObject faceVector = new JSONObject();
+                faceVector.put("face_vector",profileImage.getFaceVector());
+                FieldOverrides fieldOverrides = new FieldOverrides(faceVector.toString());
+                String data = formUtils.generateXMLInputForFormWithEntityId(userId, "kartu_ibu_photo", fieldOverrides.getJSONString());
+                formUtils.generateFormSubmisionFromXMLString(userId, data, "kartu_ibu_photo", new JSONObject());
+            } catch (Exception e) {
+                e.printStackTrace();
             }
 
         }

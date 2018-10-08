@@ -27,6 +27,8 @@ import org.smartregister.Context;
 import org.smartregister.bidan.R;
 import org.smartregister.bidan.application.BidanApplication;
 import org.smartregister.bidan.controller.NavigationControllerINA;
+import org.smartregister.bidan.facial.repository.ImageRepository;
+import org.smartregister.bidan.fragment.KISmartRegisterFragment;
 import org.smartregister.bidan.receiver.SyncStatusBroadcastReceiver;
 import org.smartregister.bidan.repository.IndonesiaECRepository;
 import org.smartregister.bidan.sync.ECSyncUpdater;
@@ -66,6 +68,7 @@ public class BidanHomeActivity extends SecuredActivity implements SyncStatusBroa
     private MenuItem remainingFormsToSyncMenuItem;
     private PendingFormSubmissionService pendingFormSubmissionService;
     private IndonesiaECRepository indonesiaECRepository;
+    private ImageRepository imageRepository;
     private SyncStatusBroadcastReceiver syncStatusBroadcastReceiver;
     private TextView ecRegisterClientCountView;
     private TextView kartuIbuANCRegisterClientCountView;
@@ -90,6 +93,7 @@ public class BidanHomeActivity extends SecuredActivity implements SyncStatusBroa
         public void onClick(View view) {
             switch (view.getId()) {
                 case R.id.btn_kartu_ibu_register:
+                    KISmartRegisterFragment.criteria = "!";
                     navigationController.startECSmartRegistry();
                     break;
 
@@ -206,6 +210,7 @@ public class BidanHomeActivity extends SecuredActivity implements SyncStatusBroa
     private void initialize() {
         pendingFormSubmissionService = context().pendingFormSubmissionService();
         indonesiaECRepository = BidanApplication.getInstance().indonesiaECRepository();
+        imageRepository = BidanApplication.getInstance().imageRepository();
 
         FORM_SUBMITTED.addListener(onFormSubmittedListener);
         ACTION_HANDLED.addListener(updateANMDetailsListener);
@@ -457,7 +462,7 @@ public class BidanHomeActivity extends SecuredActivity implements SyncStatusBroa
             updateMenuItem.setActionView(null);
         }
         updateRegisterCounts();
-
+        if (BidanApplication.getInstance().isFRSupported()) BidanApplication.getInstance().refreshFaceData();
         flagActivator();
     }
 

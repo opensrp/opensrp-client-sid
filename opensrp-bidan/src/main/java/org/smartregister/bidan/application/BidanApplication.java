@@ -35,6 +35,8 @@ public class BidanApplication extends DrishtiApplication {
     private IndonesiaECRepository indonesiaECRepository;
     private ImageRepository imageRepository;
 
+    private boolean isFRSupported = false;
+
     private static String[] getFtsSearchFields(String tableName) {
         switch (tableName) {
             case "ec_kartu_ibu":
@@ -118,7 +120,7 @@ public class BidanApplication extends DrishtiApplication {
         applyUserLanguagePreference();
         cleanUpSyncState();
         Fabric.with(this, new Crashlytics());
-        FacialRecognitionLibrary.init(context, getRepository());
+        isFRSupported = FacialRecognitionLibrary.init(context, getRepository());
     }
 
     @Override
@@ -236,9 +238,19 @@ public class BidanApplication extends DrishtiApplication {
         if (imageRepository == null) {
             imageRepository = new ImageRepository(getRepository());
         }
-        Tools.setVectorsBuffered(context, imageRepository);
-        Tools.loadAlbum(context.applicationContext());
+        if (isFRSupported) refreshFaceData();
         return imageRepository;
+    }
+
+    public void refreshFaceData(){
+        Log.e(TAG, "imageRepository: Tools.setVectorsBuffered");
+        Tools.setVectorsBuffered(context, imageRepository);
+        Log.e(TAG, "imageRepository: Tools.loadAlbum");
+        Tools.loadAlbum(context.applicationContext());
+    }
+
+    public boolean isFRSupported() {
+        return isFRSupported;
     }
 
 }

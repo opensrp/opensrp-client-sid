@@ -1,5 +1,6 @@
 package org.smartregister.bidan.activity;
 
+import android.content.DialogInterface;
 import android.content.pm.ActivityInfo;
 import android.os.Bundle;
 import android.os.Handler;
@@ -353,6 +354,9 @@ public class BaseRegisterActivity extends SecuredNativeSmartRegisterActivity imp
     @Override
     public void saveFormSubmission(String formSubmission, String id, String formName, JSONObject fieldOverrides) {
         try {
+            android.util.Log.d(TAG, "saveFormSubmission: formSubmission="+formSubmission);
+            android.util.Log.d(TAG, "saveFormSubmission: id="+id);
+            android.util.Log.d(TAG, "saveFormSubmission: formName="+formName);
             BidanFormUtils formUtils = BidanFormUtils.getInstance(this);
             FormSubmission submission = formUtils.generateFormSubmisionFromXMLString(id, formSubmission, formName, fieldOverrides);
 
@@ -557,5 +561,26 @@ public class BaseRegisterActivity extends SecuredNativeSmartRegisterActivity imp
             // End Select Edit or Followup
         }
     }
+
+    Map<String, String> FS = new HashMap<>();
+
+    DialogInterface.OnClickListener listener = new DialogInterface.OnClickListener() {
+        @Override
+        public void onClick(DialogInterface dialog, int which) {
+            String face_end = timer.format(new Date());
+            FS.put("face_end", face_end);
+
+            if (which == -1 ){
+                currentPage = 0;
+                android.util.Log.e(TAG, "onClick: YES ");
+//                FlurryAgent.logEvent(TAG + "search_by_face OK", FS, true);
+
+            } else {
+                android.util.Log.e(TAG, "onClick: NO ");
+//                FlurryAgent.logEvent(TAG + "search_by_face NOK", FS, true);
+            }
+
+        }
+    };
 
 }

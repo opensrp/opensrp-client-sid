@@ -338,6 +338,7 @@ public class Tools {
         if (arrayOfString != null) {
 
             splitStringArray = arrayOfString.substring(1, arrayOfString.length() - 1).split(", ");
+            Log.e(TAG, "splitStringArray="+splitStringArray);
 
             albumArray = new byte[splitStringArray.length];
 
@@ -706,15 +707,19 @@ public class Tools {
             imageRepo = ImageRepository.getInstance();
         }
 
-        List<ProfileImage> vectorList = imageRepo.getAllVectorImages();
+        List<ProfileImage> vectorList = imageRepo.getAllFaceVectorImages();
+        Log.d(TAG, "setVectorsBuffered: vectorList="+vectorList);
+        Log.d(TAG, "setVectorsBuffered: vectorListSize="+vectorList.size());
 
         if (vectorList.size() != 0) {
 
             hash = retrieveHash(mContext.applicationContext().getApplicationContext());
 
+            Log.d(TAG, "setVectorsBuffered: hash="+hash);
+
             String[] albumBuffered = new String[0];
 
-            int i = 0;
+//            int i = 0;
             for (ProfileImage profileImage : vectorList) {
                 String[] vectorFace;
                 if (profileImage.getFilevector() != null) {
@@ -722,18 +727,18 @@ public class Tools {
                     vectorFace = profileImage.getFilevector().substring(1, profileImage.getFilevector().length() - 1).split(", ");
 
                     // First index value of Vector Body
-                    vectorFace[0] = String.valueOf(i);
+//                    vectorFace[0] = String.valueOf(i);
 
 //                    vectorFace[0] = String.valueOf((i%128) % 256 - 128);
 
                     albumBuffered = ArrayUtils.addAll(albumBuffered, vectorFace);
-                    hash.put(profileImage.getBaseEntityId(), String.valueOf(i));
+                    hash.put(profileImage.getBaseEntityId(), vectorFace[0]);
 
                 } else {
                     Log.e(TAG, "setVectorsBuffered: Profile Image Null");
                 }
-                i++;
-                if (i > 127) i = -128;
+//                i++;
+//                if (i > 127) i = -128;
 
             }
 
@@ -744,6 +749,7 @@ public class Tools {
              */
             saveAlbum(Arrays.toString(albumBuffered), mContext.applicationContext());
             saveHash(hash, mContext.applicationContext());
+            Log.d(TAG, "setVectorsBuffered: saveHash="+hash);
 
         } else {
             Log.e(TAG, "setVectorsBuffered: "+ "Multimedia Table Not ready" );

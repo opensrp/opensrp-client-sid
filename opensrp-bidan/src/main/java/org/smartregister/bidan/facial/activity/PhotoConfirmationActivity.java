@@ -2,6 +2,7 @@ package org.smartregister.bidan.facial.activity;
 
 import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Bitmap;
@@ -23,11 +24,17 @@ import android.widget.Toast;
 import com.qualcomm.snapdragon.sdk.face.FaceData;
 import com.qualcomm.snapdragon.sdk.face.FacialProcessing;
 
+import org.json.JSONException;
+import org.json.JSONObject;
 import org.smartregister.bidan.R;
+import org.smartregister.bidan.application.BidanApplication;
 import org.smartregister.bidan.facial.domain.FacialWrapper;
+import org.smartregister.bidan.facial.domain.ProfileImage;
 import org.smartregister.bidan.facial.listener.FacialActionListener;
+import org.smartregister.bidan.facial.repository.ImageRepository;
 import org.smartregister.bidan.facial.util.BitmapUtil;
 import org.smartregister.bidan.facial.utils.FaceConstants;
+import org.smartregister.bidan.repository.IndonesiaECRepository;
 
 import java.util.Arrays;
 import java.util.HashMap;
@@ -44,6 +51,7 @@ public class PhotoConfirmationActivity extends AppCompatActivity {
     ImageView confirmButton;
     ImageView trashButton;
     private String entityId;
+    private ProfileImage profileImage;
     private Rect[] rects;
     private boolean faceFlag = false;
     private boolean identifyPerson = false;
@@ -51,6 +59,7 @@ public class PhotoConfirmationActivity extends AppCompatActivity {
     private FaceData[] faceDatas;
     private int arrayPossition;
     HashMap<String, String> clientList;
+    HashMap<String, String> personIdList;
     private String selectedPersonName = "";
     private Parcelable[] kiclient;
 
@@ -68,6 +77,9 @@ public class PhotoConfirmationActivity extends AppCompatActivity {
     private FacialActionListener listener;
     private FacialWrapper tag;
 
+    private ImageRepository imageRepo;
+    private IndonesiaECRepository repository;
+
     public static final String WRAPPER_TAG = "tag";
 
     @Override
@@ -82,7 +94,7 @@ public class PhotoConfirmationActivity extends AppCompatActivity {
         init_gui();
 
         init_extras();
-
+        populateClientList();
 //        process_img();
 
         image_proc();
@@ -100,6 +112,36 @@ public class PhotoConfirmationActivity extends AppCompatActivity {
 //        }
 
         initListeners();
+    }
+
+    private void populateClientList(){
+        if (imageRepo == null) {
+            imageRepo = BidanApplication.getInstance().imageRepository();
+        }
+        if (repository == null) {
+            repository = BidanApplication.getInstance().indonesiaECRepository();
+        }
+        if (clientList == null){
+            clientList = new HashMap<>();
+        }
+        if (personIdList == null){
+            personIdList = OpenCameraActivity.retrieveHash(getApplicationContext());
+        }
+
+        Iterator<HashMap.Entry<String, String>> iter = personIdList.entrySet().iterator();
+        while (iter.hasNext()) {
+            try {
+                HashMap.Entry<String, String> entry = iter.next();
+                JSONObject client = repository.getClientByBaseEntityId(entry.getKey());
+                String name = client.getString("firstName");
+                clientList.put(name,entry.getValue());
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+        }
+        Log.d(TAG, "populateClientList: personIdList="+personIdList);
+        Log.d(TAG, "populateClientList: clientList="+clientList);
+
     }
 
     @Override
@@ -151,8 +193,8 @@ public class PhotoConfirmationActivity extends AppCompatActivity {
             public void onClick(View arg0) {
 
                 if (!identifyPerson) {
-
-                    mBitmapUtil.saveAndClose(getApplicationContext(), entityId, updated, objFace, arrayPossition, storedBitmap, str_origin_class);
+                    ProfileImage tag = (ProfileImage)arg0.getTag();
+                    mBitmapUtil.saveAndClose(getApplicationContext(), entityId, updated, objFace, arrayPossition, storedBitmap, str_origin_class, tag);
 
 //                    tag.setFaceVector("123");
 //                    listener.onFacialTaken(tag);
@@ -252,11 +294,13 @@ public class PhotoConfirmationActivity extends AppCompatActivity {
             Log.e(TAG, "image_proc: "+"success" );
             if (faceDatas != null){
                 rects = new Rect[faceDatas.length];
+                Log.e(TAG, "useSnapdragonSDK: faceDatas.length="+faceDatas.length);
                 for (int i = 0; i < faceDatas.length; i++) {
                     Rect rect = faceDatas[i].rect;
                     rects[i] = rect;
 
                     int matchRate = faceDatas[i].getRecognitionConfidence();
+                    Log.e(TAG, "useSnapdragonSDK: matchRate="+matchRate);
 
                     float pixelDensity = getResources().getDisplayMetrics().density; // 2.0
 
@@ -283,16 +327,49 @@ public class PhotoConfirmationActivity extends AppCompatActivity {
                         BitmapUtil.drawRectFace(rects[i], mutableBitmap, pixelDensity);
 
                         // Check Detected existing face
+                        Log.e(TAG, "useSnapdragonSDK: faceDatas[i].getPersonId()="+faceDatas[i].getPersonId());
                         if(faceDatas[i].getPersonId() < 0){
 
                             arrayPossition = i;
 
                         } else {
+                            String selectedPersonId = Integer.toString(faceDatas[i].getPersonId());
+                            Log.d(TAG, "useSnapdragonSDK: clientList="+clientList);
+                            Iterator<HashMap.Entry<String, String>> iter = clientList.entrySet().iterator();
+                            // Default name is the person is unknown
+                            selectedPersonName = "Unknown";
+                            Log.d(TAG, "useSnapdragonSDK: selectedPersonId="+selectedPersonId);
+                            while (iter.hasNext()) {
+                                HashMap.Entry<String, String> entry = iter.next();
+                                Log.d(TAG, "useSnapdragonSDK: entry.getValue()="+entry.getValue());
+                                Log.d(TAG, "useSnapdragonSDK: entry.getKey()="+entry.getKey());
 
+                                if (entry.getValue().equals(selectedPersonId)) {
+                                    selectedPersonName = entry.getKey();
+                                }
+                            }
+                            profileImage = imageRepo.findByBaseEntityId(entityId);
+                            profileImage.setPersonId(selectedPersonId);
                             showPersonInfo(matchRate);
 
                         }
+                        profileImage = imageRepo.findByBaseEntityId(entityId);
+                        if(profileImage==null){
+                            profileImage = new ProfileImage();
+                            profileImage.setBaseEntityId(entityId);
+                            profileImage.setContenttype("jpeg");
+                            profileImage.setFilecategory("profilepic");
+                        }
+                        if (personIdList.containsKey(entityId)){
+                            Log.d(TAG, "useSnapdragonSDK: personIdList.containsKey(entityId)");
+                            Log.d(TAG, "useSnapdragonSDK: personIdList.get(entityId)="+personIdList.get(entityId));
+                            profileImage.setPersonId(personIdList.get(entityId));
+                        }else{
+                            Log.d(TAG, "useSnapdragonSDK: profileImage.setPersonId(null)");
+                            profileImage.setPersonId(null);
+                        }
 
+                        confirmButton.setTag(profileImage);
                         // Face only
 //                        confirmationView.setImageBitmap(storedBitmap);
                         // Face and Rect
@@ -353,10 +430,25 @@ public class PhotoConfirmationActivity extends AppCompatActivity {
         AlertDialog.Builder builder= new AlertDialog.Builder(this);
 
         builder.setTitle("Are you Sure?");
-        builder.setMessage("Similar Face Found! : Confidence "+recognitionConfidence);
-        builder.setNegativeButton("CANCEL", null);
+        builder.setMessage("Similar Face Found! : Name: "+selectedPersonName+", Confidence "+recognitionConfidence);
+        builder.setPositiveButton("UPDATE", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                confirmButton.setTag(profileImage);
+                updated = true;
+                confirmButton.performClick();
+            }
+        });
+        builder.setNegativeButton("CANCEL", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                profileImage = null;
+                trashButton.performClick();
+            }
+        });
         builder.show();
         confirmButton.setVisibility(View.INVISIBLE);
+        trashButton.setVisibility(View.INVISIBLE);
 
     }
 

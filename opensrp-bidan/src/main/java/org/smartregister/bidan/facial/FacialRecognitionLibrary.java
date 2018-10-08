@@ -35,21 +35,21 @@ public class FacialRecognitionLibrary {
         this.repository = repository;
     }
 
-    public static void init(final Context context, Repository repository){
+    public static boolean init(final Context context, Repository repository){
         if (instance == null) instance = new FacialRecognitionLibrary(context, repository);
 
         // IF SNAPDRAGON
         int sdk_lib = 1;
 
         if (sdk_lib == 1){
-            snapdragonSDK();
+            return snapdragonSDK();
         } else if (sdk_lib == 2){
-            luxandSDK();
+            return luxandSDK();
         }
-
+        return false;
     }
 
-    private static void luxandSDK() {
+    private static boolean luxandSDK() {
 
         int res = FSDK.ActivateLibrary(ACTIVATION_KEY);
 
@@ -59,16 +59,17 @@ public class FacialRecognitionLibrary {
             Log.e(TAG, "onCreate: SUCCESS" );
             FSDK.Initialize();
         }
+        return false;
     }
 
-    private static void snapdragonSDK() {
+    private static boolean snapdragonSDK() {
 
         if (isDevCompat == null) isDevCompat = FacialProcessing.isFeatureSupported(FacialProcessing.FEATURE_LIST.FEATURE_FACIAL_RECOGNITION);
-
+        boolean isSupported = false;
         if (!activityStartedOnce) {
             activityStartedOnce = true;
             // Check if Facial Recognition feature is supported in the device
-            boolean isSupported = FacialProcessing
+            isSupported = FacialProcessing
                     .isFeatureSupported(FacialProcessing.FEATURE_LIST.FEATURE_FACIAL_RECOGNITION);
             if (isSupported) {
                 Log.d(TAG, "Feature Facial Recognition is supported");
@@ -97,7 +98,7 @@ public class FacialRecognitionLibrary {
 //                                }).show();
             }
         }
-
+        return isSupported;
     }
 
     public static FacialRecognitionLibrary getInstance(){
