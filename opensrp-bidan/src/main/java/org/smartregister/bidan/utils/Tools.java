@@ -9,6 +9,7 @@ import net.sqlcipher.Cursor;
 
 import org.apache.commons.io.FilenameUtils;
 import org.smartregister.Context;
+import org.smartregister.bidan.facial.repository.ImageRepository;
 import org.smartregister.view.activity.DrishtiApplication;
 
 import java.io.ByteArrayOutputStream;
@@ -36,15 +37,23 @@ public class Tools {
             String basename = FilenameUtils.getName(destinationFilename);
             // Create Thumbs
             String pathTh = DrishtiApplication.getAppDir() + File.separator + "th" + File.separator + basename;
-            FileOutputStream tfos = new FileOutputStream(pathTh);
-            final int THUMBSIZE = AllConstantsINA.THUMBSIZE;
+            File file = new File(pathTh.toString());
+            if (!file.exists()) {
+                //noinspection ResultOfMethodCallIgnored
+                file.mkdir();
+            }
+            if (file.canWrite()) {
+                FileOutputStream tfos = new FileOutputStream(pathTh);
+                final int THUMBSIZE = AllConstantsINA.THUMBSIZE;
 
-            Bitmap thumbImage = ThumbnailUtils.extractThumbnail(
-                    BitmapFactory.decodeFile(tfos.toString()), THUMBSIZE, THUMBSIZE);
-            if (thumbImage != null) thumbImage.compress(Bitmap.CompressFormat.PNG, 100, tfos);
-            else Log.e(TAG, "saveFile: ");
+                Bitmap thumbImage = ThumbnailUtils.extractThumbnail(
+                        BitmapFactory.decodeFile(tfos.toString()), THUMBSIZE, THUMBSIZE);
+                if (thumbImage != null) thumbImage.compress(Bitmap.CompressFormat.PNG, 100, tfos);
+                else Log.e(TAG, "saveFile: ");
 
-            tfos.close();
+                tfos.close();
+            }
+
         } catch (IOException e) {
             e.printStackTrace();
             Log.e(TAG, "saveFile: " + e.getCause());

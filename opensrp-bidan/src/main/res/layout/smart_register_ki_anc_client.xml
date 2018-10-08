@@ -182,7 +182,16 @@
 
 
             <org.smartregister.view.customcontrols.CustomFontTextView
-                android:id="@+id/txt_tanggal_kunjungan_anc"
+            android:id="@+id/txt_tanggal_kunjungan_anc"
+            style="@style/CustomFontTextViewStyle.ListView.Small"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="-2dp"
+            android:text=" "
+            android:textSize="14sp" />
+
+            <org.smartregister.view.customcontrols.CustomFontTextView
+                android:id="@+id/txt_date_tanggal_kunjungan_anc"
                 style="@style/CustomFontTextViewStyle.ListView.Small"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"

@@ -11,6 +11,8 @@
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <!-- Needed only if your app targets Android 5.0 (API level 21) or higher. -->
     <uses-feature android:name="android.hardware.location.gps" />
+    <uses-permission android:name="android.permission.CAMERA"/>
+    <uses-feature android:name="android.hardware.camera2"/>
 
     <application
         tools:replace="android:icon"
@@ -108,6 +110,12 @@
             />
         <activity android:name=".utils.CameraPreviewActivity" />
         <activity android:name=".activity.BaseRegisterActivity" />
+        <activity android:name=".facial.activity.OpenCameraActivity"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar.FullScreen"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".facial.activity.PhotoConfirmationActivity"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar.FullScreen"
+            android:screenOrientation="portrait"/>
         <!--<activity android:name=".utils.Camera2PreviewActivity" />-->
         <uses-library android:name="android.test.runner"/>
 

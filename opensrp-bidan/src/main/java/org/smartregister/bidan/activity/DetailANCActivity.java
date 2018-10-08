@@ -265,7 +265,7 @@ public class DetailANCActivity extends Activity {
         //   dob.setText(getResources().getString(R.string.dob)+ (ancClient.getDetails().get("tanggalLahir") != null ? ancClient.getDetails().get("tanggalLahir") : "-"));
         ((TextView) findViewById(R.id.tv_contact_phone_number)).setText(String.format("No HP: %s", ancClient.getDetails().get("NomorTelponHp") != null ? ancClient.getDetails().get("NomorTelponHp") : "-"));
 
-        ((TextView) findViewById(R.id.txt_keterangan_k1k4)).setText(getStrValue("Keterangan_k1k4"));
+        ((TextView) findViewById(R.id.txt_keterangan_k1k4)).setText(getStrValue("KeteranganK1k4Who")=="Ya"?String.format(": %s",getResources().getString(R.string.standart)):String.format(": %s",getResources().getString(R.string.non_standart)));
         ((TextView) findViewById(R.id.txt_tanggalHPHT)).setText(getStrValue("tanggalHPHT"));
         ((TextView) findViewById(R.id.txt_usiaKlinis_anc)).setText(getStrValue("usiaKlinis"));
         ((TextView) findViewById(R.id.txt_trimesterKe)).setText(getStrValue("trimesterKe"));
@@ -284,7 +284,7 @@ public class DetailANCActivity extends Activity {
         ((TextView) findViewById(R.id.txt_jumlahJanin)).setText(getStrValue("jumlahJanin"));
 
         ((TextView) findViewById(R.id.txt_statusImunisasiTT)).setText(getStrValue("statusImunisasitt"));
-        ((TextView) findViewById(R.id.txt_pelayananfe)).setText(getStrValue("pelayananfe"));
+        ((TextView) findViewById(R.id.txt_pelayananfe)).setText(getStrValue("pelayananFe"));
         ((TextView) findViewById(R.id.txt_komplikasiKehamilan)).setText(getStrValue("komplikasidalamKehamilan"));
         ((TextView) findViewById(R.id.txt_integrasiProgrampmtctvct)).setText(getStrValue("integrasiProgrampmtctvct"));
         ((TextView) findViewById(R.id.txt_integrasiProgrampmtctPeriksaDarah)).setText(getStrValue("integrasiProgrampmtctPeriksaDarah"));

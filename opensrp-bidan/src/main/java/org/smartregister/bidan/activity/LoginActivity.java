@@ -4,10 +4,8 @@ import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
-import android.content.res.AssetManager;
 import android.content.res.Resources;
 import android.os.Bundle;
 import android.support.v4.content.res.ResourcesCompat;
@@ -27,8 +25,6 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.google.gson.Gson;
-
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.smartregister.Context;
@@ -37,10 +33,8 @@ import org.smartregister.bidan.R;
 import org.smartregister.bidan.application.BidanApplication;
 import org.smartregister.bidan.utils.AllConstantsINA;
 import org.smartregister.domain.LoginResponse;
-import org.smartregister.domain.jsonmapping.Location;
 import org.smartregister.domain.jsonmapping.LoginResponseData;
 import org.smartregister.domain.jsonmapping.util.TeamLocation;
-import org.smartregister.domain.jsonmapping.util.TreeNode;
 import org.smartregister.event.Listener;
 import org.smartregister.repository.AllSharedPreferences;
 import org.smartregister.sync.DrishtiSyncScheduler;
@@ -49,17 +43,10 @@ import org.smartregister.view.BackgroundAction;
 import org.smartregister.view.LockingBackgroundTask;
 import org.smartregister.view.ProgressIndicator;
 
-import java.io.IOException;
-import java.io.InputStream;
 import java.text.SimpleDateFormat;
-import java.util.Arrays;
 import java.util.Date;
 import java.util.Iterator;
-import java.util.LinkedHashMap;
 import java.util.Locale;
-import java.util.Properties;
-import java.util.zip.ZipEntry;
-import java.util.zip.ZipFile;
 
 import static android.preference.PreferenceManager.getDefaultSharedPreferences;
 import static android.view.inputmethod.InputMethodManager.HIDE_NOT_ALWAYS;
@@ -125,14 +112,7 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     private void debugApp() {
-        String uname = null, pwd = null;
-        try {
-            uname = getCredential("uname", getApplicationContext());
-            pwd =  getCredential("pwd", getApplicationContext());
-
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        String uname = "demo_user3", pwd = "Demo@123";
 
         LayoutInflater layoutInflater = getLayoutInflater();
         View view = layoutInflater.inflate(R.layout.login, null);
@@ -143,15 +123,6 @@ public class LoginActivity extends AppCompatActivity {
             remoteLogin(view, uname, pwd);
         }
     }
-
-    public String getCredential(String acc, android.content.Context context) throws IOException {
-        Properties prop = new Properties();
-        AssetManager assetManager = context.getAssets();
-        InputStream inputStream = assetManager.open("config.properties");
-        prop.load(inputStream);
-        return prop.getProperty(acc);
-    }
-
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {

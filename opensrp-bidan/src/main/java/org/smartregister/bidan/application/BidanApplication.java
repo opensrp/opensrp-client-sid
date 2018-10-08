@@ -4,18 +4,21 @@ import android.content.Intent;
 import android.content.res.Configuration;
 
 import com.crashlytics.android.Crashlytics;
+import com.github.johnkil.print.PrintConfig;
 
 import org.smartregister.Context;
 import org.smartregister.CoreLibrary;
 import org.smartregister.bidan.activity.LoginActivity;
+import org.smartregister.bidan.facial.FacialRecognitionLibrary;
+import org.smartregister.bidan.facial.repository.ImageRepository;
+import org.smartregister.bidan.facial.utils.Tools;
 import org.smartregister.bidan.receiver.BidanSyncBroadcastReceiver;
 import org.smartregister.bidan.repository.BidanRepository;
-import org.smartregister.commonregistry.CommonFtsObject;
 import org.smartregister.bidan.repository.IndonesiaECRepository;
+import org.smartregister.commonregistry.CommonFtsObject;
 import org.smartregister.repository.Repository;
 import org.smartregister.sync.DrishtiSyncScheduler;
 import org.smartregister.view.activity.DrishtiApplication;
-import org.smartregister.view.receiver.SyncBroadcastReceiver;
 
 import java.util.Locale;
 
@@ -30,6 +33,7 @@ public class BidanApplication extends DrishtiApplication {
 //    private UniqueIdRepository uniqueIdRepository;
 
     private IndonesiaECRepository indonesiaECRepository;
+    private ImageRepository imageRepository;
 
     private static String[] getFtsSearchFields(String tableName) {
         switch (tableName) {
@@ -98,6 +102,7 @@ public class BidanApplication extends DrishtiApplication {
     @Override
     public void onCreate() {
         super.onCreate();
+        PrintConfig.initDefault(getAssets(), "fonts/material-icon-font.ttf");
 
         mInstance = this;
 
@@ -113,6 +118,7 @@ public class BidanApplication extends DrishtiApplication {
         applyUserLanguagePreference();
         cleanUpSyncState();
         Fabric.with(this, new Crashlytics());
+        FacialRecognitionLibrary.init(context, getRepository());
     }
 
     @Override
@@ -224,6 +230,15 @@ public class BidanApplication extends DrishtiApplication {
             indonesiaECRepository = new IndonesiaECRepository(getRepository());
         }
         return indonesiaECRepository;
+    }
+
+    public ImageRepository imageRepository() {
+        if (imageRepository == null) {
+            imageRepository = new ImageRepository(getRepository());
+        }
+        Tools.setVectorsBuffered(context, imageRepository);
+        Tools.loadAlbum(context.applicationContext());
+        return imageRepository;
     }
 
 }

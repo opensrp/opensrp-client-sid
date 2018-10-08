@@ -34,5 +34,11 @@
     <color name="action_bar_background">#2b475e</color>
 
     <!-- FaceR-->
+    <color name="green">#a3c639</color>
+    <color name="dark_green">#85a71d</color>
+    <color name="gray">#ccc</color>
+    <color name="yellow">#ff0</color>
+    <color name="pink">#e91e63</color>
+    <color name="white">#fff</color>
 
 </resources>
