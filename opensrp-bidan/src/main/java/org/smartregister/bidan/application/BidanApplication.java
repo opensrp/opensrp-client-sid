@@ -2,6 +2,7 @@ package org.smartregister.bidan.application;
 
 import android.content.Intent;
 import android.content.res.Configuration;
+import android.util.Log;
 
 import com.crashlytics.android.Crashlytics;
 import com.github.johnkil.print.PrintConfig;
@@ -28,6 +29,8 @@ import static org.smartregister.util.Log.logError;
 import static org.smartregister.util.Log.logInfo;
 
 public class BidanApplication extends DrishtiApplication {
+
+    private static final String TAG = BidanApplication.class.getName();
 
 //    private static SettingsRepository settingsRepository;
 //    private UniqueIdRepository uniqueIdRepository;
