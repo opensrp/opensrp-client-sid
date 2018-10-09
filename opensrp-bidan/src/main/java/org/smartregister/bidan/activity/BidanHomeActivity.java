@@ -3,6 +3,7 @@ package org.smartregister.bidan.activity;
 import android.Manifest;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.database.Cursor;
 import android.location.Criteria;
@@ -49,6 +50,7 @@ import org.smartregister.view.controller.NativeUpdateANMDetailsTask;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
+import static android.preference.PreferenceManager.getDefaultSharedPreferences;
 import static android.widget.Toast.LENGTH_SHORT;
 import static java.lang.String.valueOf;
 import static org.smartregister.event.Event.ACTION_HANDLED;
@@ -75,6 +77,7 @@ public class BidanHomeActivity extends SecuredActivity implements SyncStatusBroa
     private TextView kartuIbuPNCRegisterClientCountView;
     private TextView anakRegisterClientCountView;
     private TextView kohortKbCountView;
+    private SharedPreferences preferences;
     private Listener<String> onFormSubmittedListener = new Listener<String>() {
         @Override
         public void onEvent(String instanceId) {
@@ -164,6 +167,7 @@ public class BidanHomeActivity extends SecuredActivity implements SyncStatusBroa
 //        Map<String, String> Home = new HashMap<>();
 //        Home.put("start", HomeStart);
 //        FlurryAgent.logEvent("home_dashboard", Home, true);
+        preferences = getDefaultSharedPreferences(this);
         locationManager = (LocationManager) getSystemService(android.content.Context.LOCATION_SERVICE);
 
         provider = locationManager.getBestProvider(new Criteria(), false);
@@ -341,6 +345,7 @@ public class BidanHomeActivity extends SecuredActivity implements SyncStatusBroa
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.updateMenuItem:
+                updateLocation();
                 updateDataFromServer();
                 return true;
             case R.id.switchLanguageMenuItem:
@@ -501,7 +506,7 @@ public class BidanHomeActivity extends SecuredActivity implements SyncStatusBroa
                             == PackageManager.PERMISSION_GRANTED) {
 
                         //Request location updates:
-                        locationManager.requestLocationUpdates(provider, 400, 1, this);
+                        BidanApplication.getInstance().getLocationHelper().getLocation(this,BidanApplication.getInstance().getLocationHelper().locationResult);
                     }
 
                 } else {
@@ -516,13 +521,22 @@ public class BidanHomeActivity extends SecuredActivity implements SyncStatusBroa
         }
     }
 
+    public void updateLocation(){
+        Log.e(TAG, "updateLocation: Trying to update location");
+        if (ContextCompat.checkSelfPermission(this,
+                Manifest.permission.ACCESS_FINE_LOCATION)
+                == PackageManager.PERMISSION_GRANTED) {
+
+            //Request location updates:
+            BidanApplication.getInstance().getLocationHelper().getLocation(this,BidanApplication.getInstance().getLocationHelper().locationResult);
+        }
+    }
+
     @Override
     public void onLocationChanged(Location location) {
-//        Double lat = location.getLatitude();
-//        Double lng = location.getLongitude();
-//
-//        Log.i("Location info: Lat", lat.toString());
-//        Log.i("Location info: Lng", lng.toString());
+        String gps = String.valueOf(location.getLatitude())+" "+String.valueOf(location.getLongitude());
+        preferences.edit().putString("gpsCoordinates", gps).apply();
+
     }
 
     @Override

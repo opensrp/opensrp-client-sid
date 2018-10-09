@@ -1,29 +1,20 @@
 package org.smartregister.bidan.activity;
 
 import android.Manifest;
-import android.annotation.TargetApi;
-import android.app.Activity;
 import android.content.Context;
-import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.database.Cursor;
-import android.graphics.Color;
-import android.graphics.Paint;
 import android.location.Criteria;
 import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
-import android.os.Build;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.v4.content.ContextCompat;
 import android.util.Log;
-import android.view.View;
-import android.widget.Button;
 import android.widget.Toast;
 
-import org.osmdroid.api.IGeoPoint;
 import org.osmdroid.api.IMapController;
 import org.osmdroid.config.Configuration;
 import org.osmdroid.events.MapEventsReceiver;
@@ -36,21 +27,15 @@ import org.osmdroid.views.overlay.MapEventsOverlay;
 import org.osmdroid.views.overlay.Marker;
 import org.osmdroid.views.overlay.OverlayItem;
 import org.osmdroid.views.overlay.infowindow.InfoWindow;
-import org.osmdroid.views.overlay.simplefastpoint.LabelledGeoPoint;
-import org.osmdroid.views.overlay.simplefastpoint.SimpleFastPointOverlay;
-import org.osmdroid.views.overlay.simplefastpoint.SimpleFastPointOverlayOptions;
-import org.osmdroid.views.overlay.simplefastpoint.SimplePointTheme;
 import org.smartregister.bidan.R;
 import org.smartregister.bidan.utils.MyInfoWindow;
 import org.smartregister.commonregistry.CommonPersonObject;
 import org.smartregister.commonregistry.CommonPersonObjectClient;
 import org.smartregister.commonregistry.CommonRepository;
-import org.smartregister.cursoradapter.SmartRegisterQueryBuilder;
 import org.smartregister.view.activity.SecuredActivity;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 import java.util.Timer;
 import java.util.TimerTask;
@@ -81,7 +66,7 @@ public class MapActivity extends SecuredActivity implements MapEventsReceiver {
     boolean gps_enabled=false;
     boolean network_enabled=false;
     CommonRepository commonRepository;
-    @TargetApi(Build.VERSION_CODES.O)
+
     @Override
     public void onCreation() {
 
@@ -185,7 +170,7 @@ public class MapActivity extends SecuredActivity implements MapEventsReceiver {
 
     public void saveLocation(Location location){
         String gps = String.valueOf(location.getLatitude())+" "+String.valueOf(location.getLongitude());
-        preferences.edit().putString("gpsCoordinates", gps).commit();
+        preferences.edit().putString("gpsCoordinates", gps).apply();
     }
 
     public void showClientLocations(HashMap<String, String> gpses){
