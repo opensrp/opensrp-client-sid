@@ -108,7 +108,6 @@ public class BidanApplication extends DrishtiApplication {
 
     @Override
     public void onCreate() {
-        super.onCreate();
         PrintConfig.initDefault(getAssets(), "fonts/material-icon-font.ttf");
 
         mInstance = this;
@@ -119,6 +118,7 @@ public class BidanApplication extends DrishtiApplication {
 
         //Initialize Modules
         CoreLibrary.init(context());
+        super.onCreate();
 //        DrishtiSyncScheduler.setReceiverClass(SyncBroadcastReceiver.class);
         DrishtiSyncScheduler.setReceiverClass(BidanSyncBroadcastReceiver.class);
 

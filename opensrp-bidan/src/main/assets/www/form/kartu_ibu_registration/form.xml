@@ -314,7 +314,7 @@
         <span class="question-label " data-itext-id="/Kartu_ibu/no_ibu:label" lang="en">Mother's
             Number
         </span>
-        <input name="/Kartu_ibu/no_ibu" data-type-xml="int" type="number" />
+        <input name="/Kartu_ibu/no_ibu" data-type-xml="string" type="number" />
     </label>
     <label class="question non-select ">
         <span class="question-label active" data-itext-id="/Kartu_ibu/nik:label" lang="Bahasa">NIK
@@ -322,7 +322,7 @@
         <span class="question-label " data-itext-id="/Kartu_ibu/nik:label" lang="en">National Id
             Number
         </span>
-        <input name="/Kartu_ibu/nik" data-type-xml="int" type="number" />
+        <input name="/Kartu_ibu/nik" data-type-xml="string" type="number" />
     </label>
     <label class="question non-select ">
         <span class="question-label active" data-itext-id="/Kartu_ibu/nama_lengkap:label"

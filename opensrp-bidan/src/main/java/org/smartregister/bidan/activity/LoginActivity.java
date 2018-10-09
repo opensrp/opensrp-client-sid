@@ -88,14 +88,12 @@ public class LoginActivity extends AppCompatActivity {
         }
         setContentView(org.smartregister.R.layout.login);
         ImageView loginglogo = findViewById(R.id.login_logo);
-//        loginglogo.setImageDrawable(getResources().getDrawable(R.drawable.login_logo_bidan));
         loginglogo.setImageDrawable(ResourcesCompat.getDrawable(getResources(), R.drawable.login_logo_bidan, null));
-//        ContextCompat.getDrawable(getActivity(), R.drawable.login_logo_bidan);
         ResourcesCompat.getDrawable(getResources(), R.drawable.login_logo_bidan, null);
 
         context = Context.getInstance().updateApplicationContext(this.getApplicationContext());
 //        context = BidanApplication.getInstance().context();;
-
+        positionViews();
         initializeLoginFields();
         initializeBuildDetails();
         setDoneActionHandlerOnPasswordField();
@@ -111,8 +109,16 @@ public class LoginActivity extends AppCompatActivity {
 
     }
 
+    private void positionViews() {
+        ImageView loginglogo = findViewById(R.id.login_logo);
+        loginglogo.setImageDrawable(ResourcesCompat.getDrawable(getResources(), R.drawable.login_logo_bidan, null));
+        ResourcesCompat.getDrawable(getResources(), R.drawable.login_logo_bidan, null);
+
+    }
+
     private void debugApp() {
         String uname = "demo_user3", pwd = "Demo@123";
+        Log.e(TAG, "debugApp: uname="+uname+", pwd="+pwd);
 
         LayoutInflater layoutInflater = getLayoutInflater();
         View view = layoutInflater.inflate(R.layout.login, null);

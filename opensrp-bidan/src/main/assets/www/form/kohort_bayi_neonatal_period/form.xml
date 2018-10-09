@@ -352,7 +352,7 @@
                 <label class="">
                     <input name="/kunjungan_neonatal_reviewed/pemeriksaan_neonatal"
                         data-name="/kunjungan_neonatal_reviewed/pemeriksaan_neonatal"
-                        data-type-xml="select1" type="radio" value="pemeriksaan_infeksi" />
+                        data-type-xml="select" type="checkbox" value="pemeriksaan_infeksi" />
                     <span class="option-label active"
                         data-itext-id="/kunjungan_neonatal_reviewed/pemeriksaan_neonatal/pemeriksaan_infeksi:label"
                         lang="Bahasa">
@@ -367,7 +367,7 @@
                 <label class="">
                     <input name="/kunjungan_neonatal_reviewed/pemeriksaan_neonatal"
                         data-name="/kunjungan_neonatal_reviewed/pemeriksaan_neonatal"
-                        data-type-xml="select1" type="radio" value="pemeriksaan_diare" />
+                        data-type-xml="select" type="checkbox" value="pemeriksaan_diare" />
                     <span class="option-label active"
                         data-itext-id="/kunjungan_neonatal_reviewed/pemeriksaan_neonatal/pemeriksaan_diare:label"
                         lang="Bahasa">
@@ -382,7 +382,7 @@
                 <label class="">
                     <input name="/kunjungan_neonatal_reviewed/pemeriksaan_neonatal"
                         data-name="/kunjungan_neonatal_reviewed/pemeriksaan_neonatal"
-                        data-type-xml="select1" type="radio" value="pemeriksaan_ikterus" />
+                        data-type-xml="select" type="checkbox" value="pemeriksaan_ikterus" />
                     <span class="option-label active"
                         data-itext-id="/kunjungan_neonatal_reviewed/pemeriksaan_neonatal/pemeriksaan_ikterus:label"
                         lang="Bahasa">
@@ -397,7 +397,7 @@
                 <label class="">
                     <input name="/kunjungan_neonatal_reviewed/pemeriksaan_neonatal"
                         data-name="/kunjungan_neonatal_reviewed/pemeriksaan_neonatal"
-                        data-type-xml="select1" type="radio" value="pemeriksaan_asi" />
+                        data-type-xml="select" type="checkbox" value="pemeriksaan_asi" />
                     <span class="option-label active"
                         data-itext-id="/kunjungan_neonatal_reviewed/pemeriksaan_neonatal/pemeriksaan_asi:label"
                         lang="Bahasa">
@@ -412,7 +412,7 @@
                 <label class="">
                     <input name="/kunjungan_neonatal_reviewed/pemeriksaan_neonatal"
                         data-name="/kunjungan_neonatal_reviewed/pemeriksaan_neonatal"
-                        data-type-xml="select1" type="radio" value="pemeriksaan_vitk" />
+                        data-type-xml="select" type="checkbox" value="pemeriksaan_vitk" />
                     <span class="option-label active"
                         data-itext-id="/kunjungan_neonatal_reviewed/pemeriksaan_neonatal/pemeriksaan_vitk:label"
                         lang="Bahasa">
@@ -427,7 +427,7 @@
                 <label class="">
                     <input name="/kunjungan_neonatal_reviewed/pemeriksaan_neonatal"
                         data-name="/kunjungan_neonatal_reviewed/pemeriksaan_neonatal"
-                        data-type-xml="select1" type="radio" value="pemeriksaan_hb0" />
+                        data-type-xml="select" type="checkbox" value="pemeriksaan_hb0" />
                     <span class="option-label active"
                         data-itext-id="/kunjungan_neonatal_reviewed/pemeriksaan_neonatal/pemeriksaan_hb0:label"
                         lang="Bahasa">
@@ -442,7 +442,7 @@
                 <label class="">
                     <input name="/kunjungan_neonatal_reviewed/pemeriksaan_neonatal"
                         data-name="/kunjungan_neonatal_reviewed/pemeriksaan_neonatal"
-                        data-type-xml="select1" type="radio" value="pemeriksaan_keluhan_lain" />
+                        data-type-xml="select" type="checkbox" value="pemeriksaan_keluhan_lain" />
                     <span class="option-label active"
                         data-itext-id="/kunjungan_neonatal_reviewed/pemeriksaan_neonatal/pemeriksaan_keluhan_lain:label"
                         lang="Bahasa">
@@ -457,7 +457,7 @@
                 <label class="">
                     <input name="/kunjungan_neonatal_reviewed/pemeriksaan_neonatal"
                         data-name="/kunjungan_neonatal_reviewed/pemeriksaan_neonatal"
-                        data-type-xml="select1" type="radio" value="pemeriksaan_keluhan_ibu" />
+                        data-type-xml="select" type="checkbox" value="pemeriksaan_keluhan_ibu" />
                     <span class="option-label active"
                         data-itext-id="/kunjungan_neonatal_reviewed/pemeriksaan_neonatal/pemeriksaan_keluhan_ibu:label"
                         lang="Bahasa">
@@ -490,7 +490,7 @@
         <span class="question-label "
             data-itext-id="/kunjungan_neonatal_reviewed/panjang_bayi:label" lang="en">Length (cm)
         </span>
-        <input name="/kunjungan_neonatal_reviewed/panjang_bayi" data-type-xml="int" type="number" />
+        <input name="/kunjungan_neonatal_reviewed/panjang_bayi" data-type-xml="decimal" step="any" type="number" />
     </label>
     <label class="question non-select ">
         <span class="question-label active"

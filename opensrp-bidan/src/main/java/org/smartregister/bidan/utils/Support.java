@@ -208,7 +208,7 @@ public class Support {
             TextMonth.setText(_dueEdd);
         }*/
         else {
-            TextMonth.setText("-");
+            TextMonth.setText("");
         }
 
     }

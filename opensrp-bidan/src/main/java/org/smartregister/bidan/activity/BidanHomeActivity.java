@@ -63,7 +63,6 @@ import static org.smartregister.event.Event.FORM_SUBMITTED;
 
 public class BidanHomeActivity extends SecuredActivity implements SyncStatusBroadcastReceiver.SyncStatusListener,LocationListener {
     private static final String TAG = BidanHomeActivity.class.getName();
-    public static int kicount;
     //    SimpleDateFormat timer = new SimpleDateFormat("hh:mm:ss");
     private MenuItem updateMenuItem;
     private MenuItem lastSyncMenuItem;
@@ -288,7 +287,7 @@ public class BidanHomeActivity extends SecuredActivity implements SyncStatusBroa
                 SmartRegisterQueryBuilder sqb = new SmartRegisterQueryBuilder();
                 Cursor kiCountCursor = context().commonrepository("ec_kartu_ibu").rawCustomQueryForAdapter(sqb.queryForCountOnRegisters("ec_kartu_ibu_search", "ec_kartu_ibu_search.is_closed=0 AND namalengkap != '' AND namalengkap IS NOT NULL"));
                 kiCountCursor.moveToFirst();
-                kicount = kiCountCursor.getInt(0);
+                int kicount = kiCountCursor.getInt(0);
                 kiCountCursor.close();
 
                 Cursor kbCountCursor = context().commonrepository("ec_kartu_ibu").rawCustomQueryForAdapter(sqb.queryForCountOnRegisters("ec_kartu_ibu_search", "ec_kartu_ibu_search.is_closed=0 AND jenisKontrasepsi !='0' AND namalengkap != '' AND namalengkap IS NOT NULL"));

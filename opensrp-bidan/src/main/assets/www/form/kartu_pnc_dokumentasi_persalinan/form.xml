@@ -1291,7 +1291,7 @@
                     Baby's date of birth
                 </span>
                 <input name="/dok_persalinan_reviewed/child_registration/tanggal_lahir"
-                    data-constraint=".&lt; /dok_persalinan_reviewed/today " data-required="true()"
+                    data-constraint=".&lt;= /dok_persalinan_reviewed/today " data-required="true()"
                     data-type-xml="date" type="date" />
                 <span class="or-constraint-msg active" data-i18n="constraint.invalid" lang="">Value
                     not allowed

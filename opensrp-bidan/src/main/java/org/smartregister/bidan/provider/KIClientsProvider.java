@@ -105,7 +105,7 @@ public class KIClientsProvider extends BaseClientsProvider {
         ((TextView) convertView.findViewById(R.id.tv_number_of_alive)).setText(pc.getDetails().get("hidup") != null ? pc.getDetails().get("hidup") : "-");
         ((TextView) convertView.findViewById(R.id.txt_edd)).setText(pc.getDetails().get("htp") != null ? pc.getDetails().get("htp") : "");
 
-        TextView edd_due = (TextView) convertView.findViewById(R.id.txt_edd);
+        TextView edd_due = (TextView) convertView.findViewById(R.id.txt_edd_due);
         TextView anc_status_layout = (TextView) convertView.findViewById(R.id.mother_status);
         TextView date_status = (TextView) convertView.findViewById(R.id.last_visit_status);
         TextView visit_status = (TextView) convertView.findViewById(R.id.visit_status);
@@ -143,7 +143,7 @@ public class KIClientsProvider extends BaseClientsProvider {
             edd_due.setText(_dueEdd);
 
         } else {
-            edd_due.setText("-");
+            edd_due.setText("");
         }
 
         if (ibuparent != null) {
@@ -177,6 +177,9 @@ public class KIClientsProvider extends BaseClientsProvider {
                         checkLastVisit(pc.getDetails().get("PNCDate"), mContext.getString(R.string.pnc_ke) + " " + pc.getDetails().get("hariKeKF"), mContext.getString(R.string.service_pnc),
                                 anc_status_layout, date_status, visit_status);
                     }
+                }else{
+                    ((TextView) convertView.findViewById(R.id.txt_edd)).setText("");
+                    edd_due.setText("");
                 }
 
             }
