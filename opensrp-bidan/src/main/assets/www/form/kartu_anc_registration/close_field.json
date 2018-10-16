@@ -1,0 +1,342 @@
+{
+  "fields": [
+    {
+      "name": "pptest",
+      "bind": "/model/instance/anc_registration/pptest"
+    },
+    {
+      "name": "tanggalLahirAnakSebelumnya",
+      "bind": "/model/instance/anc_registration/tanggal_lahir_anak_sebelumnya"
+    },
+    {
+      "name": "referenceDate",
+      "bind": "/model/instance/anc_registration/tanggal_periksa",
+      "source": "kartu_ibu.ibu.referenceDate"
+    },
+    {
+      "name": "tanggalHPHT",
+      "bind": "/model/instance/anc_registration/hpht",
+      "source": "kartu_ibu.ibu.tanggalHPHT"
+    },
+    {
+      "name": "htp",
+      "bind": "/model/instance/anc_registration/htp"
+    },
+    {
+      "name": "usiaKlinis",
+      "bind": "/model/instance/anc_registration/usia_klinis"
+    },
+    {
+      "name": "trimesterKe",
+      "bind": "/model/instance/anc_registration/trimester_ke"
+    },
+    {
+      "name": "tanggalMemperolehBukuKia",
+      "bind": "/model/instance/anc_registration/tanggal_memperoleh_buku_kia",
+      "source": "kartu_ibu.ibu.tanggalMemperolehBukuKia"
+    },
+    {
+      "name": "tbCM",
+      "bind": "/model/instance/anc_registration/tb_cm",
+      "source": "kartu_ibu.ibu.tbCM"
+    },
+    {
+      "name": "bbKg",
+      "bind": "/model/instance/anc_registration/bb_kg",
+      "source": "kartu_ibu.ibu.bbKg"
+    },
+    {
+      "name": "hasilPemeriksaanLILA",
+      "bind": "/model/instance/anc_registration/lila_cm",
+      "source": "kartu_ibu.ibu.hasilPemeriksaanLILA"
+    },
+    {
+      "name": "tanggalKunjunganRencanaPersalinan",
+      "bind": "/model/instance/rencana_persalinan_reviewed/tanggal"
+    },
+    {
+      "name": "rencanaPenolongPersalinan",
+      "bind": "/model/instance/rencana_persalinan_reviewed/rencana_penolong_persalinan"
+    },
+    {
+      "name": "tempatRencanaPersalinan",
+      "bind": "/model/instance/rencana_persalinan_reviewed/tempat_rencana_persalinan"
+    },
+    {
+      "name": "rencanaPendampingPersalinan",
+      "bind": "/model/instance/rencana_persalinan_reviewed/rencana_pendamping_persalinan"
+    },
+    {
+      "name": "transportasi",
+      "bind": "/model/instance/rencana_persalinan_reviewed/transportasi"
+    },
+    {
+      "name": "pendonor",
+      "bind": "/model/instance/rencana_persalinan_reviewed/pendonor"
+    },
+    {
+      "name": "kondisiRumah",
+      "bind": "/model/instance/rencana_persalinan_reviewed/kondisi_rumah"
+    },
+    {
+      "name": "persediaanPerlengkapanPersalinan",
+      "bind": "/model/instance/rencana_persalinan_reviewed/persediaan_perlengkapan_persalinan"
+    },
+    {
+      "name": "KeteranganK1k4Who",
+      "bind": "/model/instance/kunjungan_anc_reviewed_anc_visit/Keterangan_k1k4_who"
+    },
+    {
+      "name": "ancDate",
+      "bind": "/model/instance/kunjungan_anc_reviewed_anc_visit/anc_date"
+    },
+    {
+      "name": "kunjunganKe",
+      "bind": "/model/instance/kunjungan_anc_reviewed_anc_visit/kunjungan_ke"
+    },
+    {
+      "name": "ancKe",
+      "bind": "/model/instance/kunjungan_anc_reviewed_anc_visit/anc_ke"
+    },
+    {
+      "name": "Jamkesmas",
+      "bind": "/model/instance/kunjungan_anc_reviewed_anc_visit/jamkesmas"
+    },
+    {
+      "name": "caraMasukTempatPelayanan",
+      "bind": "/model/instance/kunjungan_anc_reviewed_anc_visit/cara_masuk_tempat_pelayanan"
+    },
+    {
+      "name": "anamnesisIbu",
+      "bind": "/model/instance/kunjungan_anc_reviewed_anc_visit/anamnesis_ibu"
+    },
+    {
+      "name": "tandaVitalTDSistolik",
+      "bind": "/model/instance/kunjungan_anc_reviewed_anc_visit/td_sistolik"
+    },
+    {
+      "name": "tandaVitalTDDiastolik",
+      "bind": "/model/instance/kunjungan_anc_reviewed_anc_visit/td_diastolik"
+    },
+    {
+      "name": "hasilPemeriksaanLILA",
+      "bind": "/model/instance/kunjungan_anc_reviewed_anc_visit/lila_cm"
+    },
+    {
+      "name": "statusGiziibu",
+      "bind": "/model/instance/kunjungan_anc_reviewed_anc_visit/status_gizi_ibu"
+    },
+    {
+      "name": "tfu",
+      "bind": "/model/instance/kunjungan_anc_reviewed_anc_visit/tfu"
+    },
+    {
+      "name": "refleksPatelaIbu",
+      "bind": "/model/instance/kunjungan_anc_reviewed_anc_visit/refleks_patela_ibu"
+    },
+    {
+      "name": "djj",
+      "bind": "/model/instance/kunjungan_anc_reviewed_anc_visit/djj"
+    },
+    {
+      "name": "kepalaJaninTerhadapPAP",
+      "bind": "/model/instance/kunjungan_anc_reviewed_anc_visit/kepala_terhadap_janin_pap"
+    },
+    {
+      "name": "taksiranBeratJanin",
+      "bind": "/model/instance/kunjungan_anc_reviewed_anc_visit/taksiran_berat_janin"
+    },
+    {
+      "name": "persentasiJanin",
+      "bind": "/model/instance/kunjungan_anc_reviewed_anc_visit/persentasi_janin"
+    },
+    {
+      "name": "jumlahJanin",
+      "bind": "/model/instance/kunjungan_anc_reviewed_anc_visit/jumlah_janin"
+    },
+    {
+      "name": "pelayananCatatDiBukuKia",
+      "bind": "/model/instance/kunjungan_anc_reviewed_anc_visit/pelayanan_catat_buku_kia"
+    },
+    {
+      "name": "pelayananfe",
+      "bind": "/model/instance/kunjungan_anc_reviewed_anc_visit/pelayananfe"
+    },
+    {
+      "name": "pelayananFe",
+      "bind": "/model/instance/kunjungan_anc_reviewed_anc_visit/jumlah_fe"
+    },
+    {
+      "name": "komplikasidalamKehamilan",
+      "bind": "/model/instance/kunjungan_anc_reviewed_anc_visit/komplikasi_dalam_kehamilan"
+    },
+    {
+      "name": "komplikasiLain",
+      "bind": "/model/instance/kunjungan_anc_reviewed_anc_visit/komplikasi_lain"
+    },
+    {
+      "name": "treatment",
+      "bind": "/model/instance/kunjungan_anc_reviewed_anc_visit/treatment"
+    },
+    {
+      "name": "treatmentText",
+      "bind": "/model/instance/kunjungan_anc_reviewed_anc_visit/treatment_text"
+    },
+    {
+      "name": "rujukan",
+      "bind": "/model/instance/kunjungan_anc_reviewed_anc_visit/dirujuk"
+    },
+    {
+      "name": "dirujukKe",
+      "bind": "/model/instance/kunjungan_anc_reviewed_anc_visit/dirujuk_ke"
+    },
+    {
+      "name": "lainLain",
+      "bind": "/model/instance/kunjungan_anc_reviewed_anc_visit/dirujuk_keL"
+    },
+    {
+      "name": "keadaanIbusaatTiba",
+      "bind": "/model/instance/kunjungan_anc_reviewed_anc_visit/keadaan_ibu_saat_tiba"
+    },
+    {
+      "name": "keadaanIbusaatPulang",
+      "bind": "/model/instance/kunjungan_anc_reviewed_anc_visit/keadaan_ibu_saat_pulang"
+    },
+    {
+      "name": "keterangan",
+      "bind": "/model/instance/kunjungan_anc_reviewed_anc_visit/keterangan"
+    },
+    {
+      "name": "highRiskPregnancyProteinEnergyMalnutrition",
+      "bind": "/model/instance/kunjungan_anc_reviewed_anc_visit/High_Risk_Pregnancy_Protein_energy_Malnutrition"
+    },
+    {
+      "name": "highRiskPregnancyPIH",
+      "bind": "/model/instance/kunjungan_anc_reviewed_anc_visit/High_Risk_Pregnancy_PIH"
+    },
+    {
+      "name": "highRisklabourFetusNumber",
+      "bind": "/model/instance/kunjungan_anc_reviewed_anc_visit/High_Risk_Labour_fetus_number"
+    },
+    {
+      "name": "highRiskLabourFetusSize",
+      "bind": "/model/instance/kunjungan_anc_reviewed_anc_visit/High_Risk_Labour_fetus_size"
+    },
+    {
+      "name": "highRiskLabourFetusMalpresentation",
+      "bind": "/model/instance/kunjungan_anc_reviewed_anc_visit/High_Risk_Labour_fetus_Malpresentation"
+    },
+    {
+      "name": "hiddenAncKe",
+      "bind": "/model/instance/kunjungan_anc_reviewed_anc_visit/hidden_anc_ke"
+    },
+    {
+      "name": "integrasiProgrampmtctvct",
+      "bind": "/model/instance/kunjungan_anc_reviewed_integrasi/integrasi_program_pmtct_vct"
+    },
+    {
+      "name": "integrasiProgrampmtctPeriksaDarah",
+      "bind": "/model/instance/kunjungan_anc_reviewed_integrasi/integrasi_program_pmtct_periksa_darah"
+    },
+    {
+      "name": "integrasiProgrampmtctSerologi",
+      "bind": "/model/instance/kunjungan_anc_reviewed_integrasi/integrasi_program_pmtct_serologi"
+    },
+    {
+      "name": "integrasiProgrampmtctarvProfilaksis",
+      "bind": "/model/instance/kunjungan_anc_reviewed_integrasi/integrasi_program_pmtct_arv"
+    },
+    {
+      "name": "integrasiProgramMalariaPeriksaDarah",
+      "bind": "/model/instance/kunjungan_anc_reviewed_integrasi/integrasi_program_malaria_periksa_darah"
+    },
+    {
+      "name": "integrasiProgramMalariaObat",
+      "bind": "/model/instance/kunjungan_anc_reviewed_integrasi/integrasi_program_malaria_obat"
+    },
+    {
+      "name": "integrasiProgramMalariaKelambuBerinsektisida",
+      "bind": "/model/instance/kunjungan_anc_reviewed_integrasi/integrasi_program_malaria_kelambu"
+    },
+    {
+      "name": "integrasiProgramtbDahak",
+      "bind": "/model/instance/kunjungan_anc_reviewed_integrasi/integrasi_program_tb_dahak"
+    },
+    {
+      "name": "integrasiProgramtbObat",
+      "bind": "/model/instance/kunjungan_anc_reviewed_integrasi/integrasi_program_tb_obat"
+    },
+    {
+      "name": "High_Risk_TBC",
+      "bind": "/model/instance/kunjungan_anc_reviewed_integrasi/High_Risk_TBC",
+      "source": "ibu.kartu_ibu.tbcRisk"
+    },
+    {
+      "name": "High_Risk_malaria",
+      "bind": "/model/instance/kunjungan_anc_reviewed_integrasi/High_Risk_malaria",
+      "source": "ibu.kartu_ibu.malariaRisk"
+    },
+    {
+      "name": "laboratoriumPeriksaHbHasil",
+      "bind": "/model/instance/kunjungan_anc_reviewed_Lab_test/laboratorium_periksa_hb_hasil"
+    },
+    {
+      "name": "laboratoriumPeriksaHbAnemia",
+      "bind": "/model/instance/kunjungan_anc_reviewed_Lab_test/laboratorium_periksa_hb_anemia"
+    },
+    {
+      "name": "treatmentAnemiaTxt",
+      "bind": "/model/instance/kunjungan_anc_reviewed_Lab_test/treatment_anemia_txt"
+    },
+    {
+      "name": "laboratoriumProteinUria",
+      "bind": "/model/instance/kunjungan_anc_reviewed_Lab_test/laboratorium_protein_uria"
+    },
+    {
+      "name": "treatmentProturinTxt",
+      "bind": "/model/instance/kunjungan_anc_reviewed_Lab_test/treatment_proturin_txt"
+    },
+    {
+      "name": "laboratoriumGulaDarah",
+      "bind": "/model/instance/kunjungan_anc_reviewed_Lab_test/laboratorium_gula_darah"
+    },
+    {
+      "name": "treatmentDiabetesTxt",
+      "bind": "/model/instance/kunjungan_anc_reviewed_Lab_test/treatment_diabetes_txt"
+    },
+    {
+      "name": "laboratoriumThalasemia",
+      "bind": "/model/instance/kunjungan_anc_reviewed_Lab_test/laboratorium_thalasemia"
+    },
+    {
+      "name": "treatmentThalasemiaTxt",
+      "bind": "/model/instance/kunjungan_anc_reviewed_Lab_test/treatment_thalasemia_txt"
+    },
+    {
+      "name": "laboratoriumSifilis",
+      "bind": "/model/instance/kunjungan_anc_reviewed_Lab_test/laboratorium_sifilis"
+    },
+    {
+      "name": "treatmentSifilisTxt",
+      "bind": "/model/instance/kunjungan_anc_reviewed_Lab_test/treatment_sifilis_txt"
+    },
+    {
+      "name": "laboratoriumHbsAg",
+      "bind": "/model/instance/kunjungan_anc_reviewed_Lab_test/laboratorium_hbsag"
+    },
+    {
+      "name": "treatmentHbsagTxt",
+      "bind": "/model/instance/kunjungan_anc_reviewed_Lab_test/treatment_hbsag_txt"
+    },
+    {
+      "name": "highRiskPregnancyAnemia",
+      "bind": "/model/instance/kunjungan_anc_reviewed_Lab_test/High_Risk_Pregnancy_anemia",
+      "source": "ibu.kartu_ibu.anemiaRisk"
+    },
+    {
+      "name": "highRiskPregnancyDiabetes",
+      "bind": "/model/instance/kunjungan_anc_reviewed_Lab_test/High_Risk_Pregnancy_diabetes",
+      "source": "ibu.kartu_ibu.diabetesRisk"
+    }
+  ]
+}

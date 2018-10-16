@@ -176,6 +176,9 @@ public class KIClientsProvider extends BaseClientsProvider {
                         edd_due.setText(deliver);
                         checkLastVisit(pc.getDetails().get("PNCDate"), mContext.getString(R.string.pnc_ke) + " " + pc.getDetails().get("hariKeKF"), mContext.getString(R.string.service_pnc),
                                 anc_status_layout, date_status, visit_status);
+                    }else{
+                        ((TextView) convertView.findViewById(R.id.txt_edd)).setText("");
+                        edd_due.setText("");
                     }
                 }else{
                     ((TextView) convertView.findViewById(R.id.txt_edd)).setText("");

@@ -131,7 +131,7 @@ public class LocationHelper {
     class GetLastLocation extends TimerTask {
         @Override
         public void run() {
-            if(getLastLocationTask.getStatus() != AsyncTask.Status.RUNNING){
+            if(getLastLocationTask.getStatus() == AsyncTask.Status.FINISHED){
                 getLastLocationTask.execute();
             }
 

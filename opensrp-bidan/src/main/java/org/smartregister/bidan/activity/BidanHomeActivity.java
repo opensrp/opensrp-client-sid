@@ -23,6 +23,7 @@ import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import org.json.JSONException;
 import org.json.JSONObject;
 import org.smartregister.Context;
 import org.smartregister.bidan.R;
@@ -42,13 +43,18 @@ import org.smartregister.domain.FetchStatus;
 import org.smartregister.enketo.view.fragment.DisplayFormFragment;
 import org.smartregister.event.Listener;
 import org.smartregister.service.PendingFormSubmissionService;
+import org.smartregister.bidan.sync.ClientProcessor;
+import org.smartregister.util.AssetHandler;
+import org.smartregister.util.Utils;
 import org.smartregister.view.activity.SecuredActivity;
 import org.smartregister.view.contract.HomeContext;
 import org.smartregister.view.controller.NativeAfterANMDetailsFetchListener;
 import org.smartregister.view.controller.NativeUpdateANMDetailsTask;
 
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
+import java.util.List;
 
 import static android.preference.PreferenceManager.getDefaultSharedPreferences;
 import static android.widget.Toast.LENGTH_SHORT;
@@ -345,6 +351,12 @@ public class BidanHomeActivity extends SecuredActivity implements SyncStatusBroa
         switch (item.getItemId()) {
             case R.id.updateMenuItem:
                 updateLocation();
+                String isLocal = Utils.getPreference(BidanApplication.getInstance().getApplicationContext(), "LOCAL_DEBUG", "False");
+                if (isLocal.equals("True")){
+                    loadDummyData();
+                    Toast.makeText(this, "You are working in local", LENGTH_SHORT).show();
+                    return true;
+                }
                 updateDataFromServer();
                 return true;
             case R.id.switchLanguageMenuItem:
@@ -366,6 +378,23 @@ public class BidanHomeActivity extends SecuredActivity implements SyncStatusBroa
                 return true;
             default:
                 return super.onOptionsItemSelected(item);
+        }
+    }
+
+    private void loadDummyData(){
+        final ECSyncUpdater ecUpdater = ECSyncUpdater.getInstance(getApplicationContext());
+        final String dummy_data = AssetHandler.readFileFromAssetsFolder("dummy_data.json", getApplicationContext());
+        try {
+            JSONObject jsonObject = new JSONObject(dummy_data);
+            ecUpdater.saveAllClientsAndEvents(jsonObject);
+            Long now = Calendar.getInstance().getTimeInMillis();
+            List<JSONObject> allEvents = ecUpdater.allEvents(0, now);
+            Log.d(TAG, "loadDummyData: allEvents="+allEvents);
+            ClientProcessor.getInstance(getApplicationContext()).processClient(allEvents);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        } catch (Exception e) {
+            e.printStackTrace();
         }
     }
 

@@ -188,6 +188,14 @@
             "field": "obs.fieldCode",
             "concept": "1576AAAAAAAAAAAAAAAAAAAAAAAAAAAA"
           }
+        },
+        {
+          "column_name": "childId",
+          "type": "Event",
+          "json_mapping": {
+            "field": "obs.fieldCode",
+            "concept": "1576AAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+          }
         }
       ]
     },
