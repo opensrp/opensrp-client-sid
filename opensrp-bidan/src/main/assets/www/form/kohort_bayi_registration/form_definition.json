@@ -47,7 +47,7 @@
         "shouldLoadValue": true
       },
       {
-        "name": "Sub-village",
+        "name": "address1",
         "bind": "/model/instance/tambah_bayi_reviewed/Sub-village",
         "shouldLoadValue": true
       },

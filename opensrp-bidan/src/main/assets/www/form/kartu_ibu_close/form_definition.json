@@ -15,7 +15,7 @@
         "shouldLoadValue": true
       },
       {
-        "name": "Sub-village",
+        "name": "address1",
         "bind": "/model/instance/penutupan_ibu_reviewed/Sub-village",
         "shouldLoadValue": true
       },

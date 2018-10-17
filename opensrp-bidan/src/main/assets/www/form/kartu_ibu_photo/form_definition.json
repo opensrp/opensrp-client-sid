@@ -20,7 +20,7 @@
         "shouldLoadValue": true
       },
       {
-        "name": "Sub-village",
+        "name": "address1",
         "bind": "/model/instance/update_photo/Sub-village",
         "shouldLoadValue": true
       },

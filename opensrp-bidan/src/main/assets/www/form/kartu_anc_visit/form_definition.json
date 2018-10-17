@@ -23,6 +23,11 @@
         "source": "ibu.kartu_ibu.id"
       },
       {
+        "name": "ancId",
+        "bind": "/model/instance/kunjungan_anc_reviewed_anc_visit/ancId",
+        "shouldLoadValue": true
+      },
+      {
         "name": "existing_location",
         "bind": "/model/instance/kunjungan_anc_reviewed_anc_visit/existing_location",
         "shouldLoadValue": true
@@ -48,7 +53,7 @@
         "shouldLoadValue": true
       },
       {
-        "name": "Sub-village",
+        "name": "address1",
         "bind": "/model/instance/kunjungan_anc_reviewed_anc_visit/Sub-village",
         "shouldLoadValue": true
       },

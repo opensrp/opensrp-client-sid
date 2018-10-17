@@ -45,6 +45,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
+import java.util.UUID;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -554,6 +555,21 @@ public class BaseRegisterActivity extends SecuredNativeSmartRegisterActivity imp
                             return;
                         }
                     }
+                    detailsRepository.updateDetails(pc);
+                    JSONObject fieldOverrides = new JSONObject();
+
+                    try {
+                        String uuid = UUID.randomUUID().toString();
+                        fieldOverrides.put("anc_id", uuid);
+                        fieldOverrides.put("ancId", uuid);
+
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+
+                    FieldOverrides fo = new FieldOverrides(fieldOverrides.toString());
+                    onEditSelectionWithMetadata((EditOption) option, (SmartRegisterClient) tag, fo.getJSONString());
+                    return;
 
                 }
                 onEditSelection((EditOption) option, (SmartRegisterClient) tag);

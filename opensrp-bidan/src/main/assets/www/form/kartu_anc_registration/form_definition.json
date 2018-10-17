@@ -88,6 +88,15 @@
         "source": "kartu_ibu.ibu.id"
       },
       {
+        "name": "anc_id",
+        "bind": "/model/instance/anc_registration/anc_id",
+        "shouldLoadValue": true
+      },
+      {
+        "name": "ancId",
+        "bind": "/model/instance/anc_registration/ancId"
+      },
+      {
         "name": "referenceDate",
         "bind": "/model/instance/anc_registration/tanggal_periksa",
         "source": "kartu_ibu.ibu.referenceDate"

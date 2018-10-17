@@ -1091,6 +1091,12 @@ public class BidanFormUtils {
                 if (eventType.equals(AllConstantsINA.FormNames.KI_FORM_TITLE)) {
                     Client client = formEntityConverter.getClientFromFormSubmission(formSubmission);
                     saveClient(client);
+                } else if (eventType.equals(AllConstantsINA.FormNames.ANC_REGISTRATION)) {
+                    JSONObject json = indonesiaECRepository.getClientByBaseEntityId(event.getBaseEntityId());
+                    Client client = gson.fromJson(json.toString(), Client.class);
+                    Client cin = formEntityConverter.getClientFromFormSubmission(formSubmission);
+                    client.addAttribute("anc_id",cin.getAttributes().get("anc_id"));
+                    saveClient(client);
                 } else if (eventType.equals(AllConstantsINA.FormNames.DOKUMENTASI_PERSALINAN)) {
                     JSONObject json = indonesiaECRepository.getClientByBaseEntityId(event.getBaseEntityId());
                     Client client = gson.fromJson(json.toString(), Client.class);

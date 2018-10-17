@@ -90,6 +90,13 @@
           }
         },
         {
+          "column_name": "anc_id",
+          "type": "Client",
+          "json_mapping": {
+            "field": "attributes.anc_id"
+          }
+        },
+        {
           "column_name": "kartuIbuId",
           "type": "Client",
           "json_mapping": {
@@ -155,6 +162,13 @@
           "type": "Client",
           "json_mapping": {
             "field": "baseEntityId"
+          }
+        },
+        {
+          "column_name": "anc_id",
+          "type": "Client",
+          "json_mapping": {
+            "field": "attributes.anc_id"
           }
         },
         {

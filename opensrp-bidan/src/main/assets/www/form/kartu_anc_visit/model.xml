@@ -131,6 +131,7 @@
             <High_Risk_Labour_fetus_Malpresentation openmrs_entity="concept"
                 openmrs_entity_id="115939AAAAAAAAAAAAAAAAAAAAAAAAAA" />
             <end openmrs_entity="encounter" openmrs_entity_id="encounter_end" />
+            <ancId />
             <meta>
                 <instanceID />
             </meta>

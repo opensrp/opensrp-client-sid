@@ -15,6 +15,7 @@
             <Sub-district />
             <Village />
             <Sub-village />
+            <ancId />
             <generated_note_name_13 />
             <generated_note_name_14 />
             <existing_location openmrs_entity="encounter" openmrs_entity_id="location_id" />
