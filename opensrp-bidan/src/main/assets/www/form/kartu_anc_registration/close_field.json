@@ -5,6 +5,10 @@
       "bind": "/model/instance/anc_registration/pptest"
     },
     {
+      "name": "anc_id",
+      "bind": "/model/instance/anc_registration/anc_id"
+    },
+    {
       "name": "tanggalLahirAnakSebelumnya",
       "bind": "/model/instance/anc_registration/tanggal_lahir_anak_sebelumnya"
     },
