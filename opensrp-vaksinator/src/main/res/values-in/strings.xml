@@ -489,4 +489,7 @@
     <string name="url_separator">/</string>
     <string name="clients_key">clients</string>
     <string name="events_key">events</string>
+
+    <string name="sync_last_date">Sinkronisasi terakhir:</string>
+    <string name="not_synced">Belum disinkronkan</string>
 </resources>

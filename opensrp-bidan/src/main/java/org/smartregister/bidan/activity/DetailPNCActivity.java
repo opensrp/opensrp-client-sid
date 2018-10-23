@@ -180,10 +180,6 @@ public class DetailPNCActivity extends Activity {
         ((TextView) findViewById(R.id.txt_pelayananfe)).setText(String.format(": %s", humanize(pncclient.getDetails().get("pelayananfe") != null ? pncclient.getDetails().get("pelayananfe") : "-")));
         ((TextView) findViewById(R.id.txt_vitaminA2jamPP)).setText(String.format(": %s", humanize(pncclient.getDetails().get("vitaminA2jamPP") != null ? pncclient.getDetails().get("vitaminA2jamPP") : "-")));
         ((TextView) findViewById(R.id.txt_vitaminA24jamPP)).setText(String.format(": %s", humanize(pncclient.getDetails().get("vitaminA24jamPP") != null ? pncclient.getDetails().get("vitaminA24jamPP") : "-")));
-        ((TextView) findViewById(R.id.txt_integrasiProgramAntiMalaria)).setText(String.format(": %s", humanize(pncclient.getDetails().get("integrasiProgramAntiMalaria") != null ? pncclient.getDetails().get("integrasiProgramAntiMalaria") : "-")));
-        ((TextView) findViewById(R.id.txt_integrasiProgramantitb)).setText(String.format(": %s", humanize(pncclient.getDetails().get("integrasiProgramantitb") != null ? pncclient.getDetails().get("integrasiProgramantitb") : "-")));
-
-        ((TextView) findViewById(R.id.txt_integrasiProgramFotoThorax)).setText(String.format(": %s", humanize(pncclient.getDetails().get("integrasiProgramFotoThorax") != null ? pncclient.getDetails().get("integrasiProgramFotoThorax") : "-")));
         ((TextView) findViewById(R.id.txt_komplikasi)).setText(String.format(": %s", humanize(pncclient.getDetails().get("komplikasi") != null ? pncclient.getDetails().get("komplikasi") : "-")));
         ((TextView) findViewById(R.id.txt_daruratNifas)).setText(String.format(": %s", humanize(pncclient.getDetails().get("daruratNifas") != null ? pncclient.getDetails().get("daruratNifas") : "-")));
         ((TextView) findViewById(R.id.txt_penangananNifas)).setText(String.format(": %s", humanize(pncclient.getDetails().get("penangananNifas") != null ? pncclient.getDetails().get("penangananNifas") : "-")));
@@ -216,6 +212,7 @@ public class DetailPNCActivity extends Activity {
         final CommonPersonObject ibuparent = iburep.findByCaseID(kiobject.getColumnmaps().get("base_entity_id"));
 
         detailsRepository.updateDetails(ibuparent);
+        detailsRepository.updateDetails(kiobject);
         // Set Image
 //        DrishtiApplication.getCachedImageLoaderInstance().getImageByClientId(ibuparent.getCaseId(), OpenSRPImageLoader.getStaticImageListener(kiview, R.mipmap.woman_placeholder, R.mipmap.woman_placeholder));
 
@@ -223,7 +220,10 @@ public class DetailPNCActivity extends Activity {
                 pncclient.getDetails().get("base_entity_id"),
                 kiview, R.mipmap.woman_placeholder);
 
-        ((TextView) findViewById(R.id.txt_hariKeKF)).setText(String.format(": %s", humanizeAndDoUPPERCASE(kiobject.getColumnmaps().get("hariKeKF") != null ? kiobject.getColumnmaps().get("hariKeKF") : "-")));
+        ((TextView) findViewById(R.id.txt_hariKeKF)).setText(String.format(": %s", humanizeAndDoUPPERCASE(kiobject.getDetails().get("hariKeKF") != null ? kiobject.getDetails().get("hariKeKF") : "-")));
+        ((TextView) findViewById(R.id.txt_integrasiProgramAntiMalaria)).setText(String.format(": %s", humanize(pncclient.getDetails().get("integrasiProgramAntiMalaria") != null ? pncclient.getDetails().get("integrasiProgramAntiMalaria") : "-")));
+        ((TextView) findViewById(R.id.txt_integrasiProgramantitb)).setText(String.format(": %s", humanize(pncclient.getDetails().get("integrasiProgramantitb") != null ? pncclient.getDetails().get("integrasiProgramantitb") : "-")));
+        ((TextView) findViewById(R.id.txt_integrasiProgramFotoThorax)).setText(String.format(": %s", humanize(pncclient.getDetails().get("integrasiProgramFotoThorax") != null ? pncclient.getDetails().get("integrasiProgramFotoThorax") : "-")));
 
         txt_tandaVitalTDSistolik.setText(String.format(": %s", humanize(ibuparent.getDetails().get("tandaVitalTDSistolik") != null ? ibuparent.getDetails().get("tandaVitalTDSistolik") : "-")));
         txt_tandaVitalTDDiastolik.setText(String.format(": %s", humanize(ibuparent.getDetails().get("tandaVitalTDDiastolik") != null ? ibuparent.getDetails().get("tandaVitalTDDiastolik") : "-")));

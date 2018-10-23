@@ -19,7 +19,7 @@
       },
       {
         "name": "ancId",
-        "bind": "/model/instance/rencana_persalinan_reviewed/ancId"
+        "bind": "/model/instance/rencana_persalinan_reviewed/ancId",
         "shouldLoadValue": true
       },
       {

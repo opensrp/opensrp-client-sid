@@ -385,4 +385,7 @@
     <string name="lfa_string">Panjang per Umur</string>
     <string name="hfa_string">Tinggi per Umur</string>
 
+    <string name="sync_last_date">Sinkronisasi terakhir:</string>
+    <string name="not_synced">Belum disinkronkan</string>
+
 </resources>

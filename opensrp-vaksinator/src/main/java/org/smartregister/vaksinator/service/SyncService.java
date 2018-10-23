@@ -15,20 +15,29 @@ import android.util.Pair;
 
 import org.apache.commons.lang3.StringUtils;
 import org.json.JSONArray;
+import org.json.JSONException;
 import org.json.JSONObject;
 import org.smartregister.AllConstants;
 import org.smartregister.domain.FetchStatus;
 import org.smartregister.domain.Response;
-import org.smartregister.repository.EventClientRepository;
 import org.smartregister.service.HTTPAgent;
+import org.smartregister.sync.ClientProcessor;
 import org.smartregister.util.Utils;
 import org.smartregister.vaksinator.R;
 import org.smartregister.vaksinator.activity.LoginActivity;
 import org.smartregister.vaksinator.application.VaksinatorApplication;
+import org.smartregister.vaksinator.facial.domain.ProfileImage;
+import org.smartregister.vaksinator.facial.repository.ImageRepository;
 import org.smartregister.vaksinator.receiver.SyncStatusBroadcastReceiver;
+import org.smartregister.vaksinator.repository.IndonesiaECRepository;
 import org.smartregister.vaksinator.sync.ECSyncUpdater;
-import org.smartregister.vaksinator.sync.VaksinClientProcessor;
+import org.smartregister.view.activity.DrishtiApplication;
 
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.InputStream;
+import java.net.HttpURLConnection;
+import java.net.URL;
 import java.text.MessageFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -45,17 +54,19 @@ import io.reactivex.schedulers.Schedulers;
 import util.NetworkUtils;
 
 public class SyncService extends Service {
+    private static final String TAG = SyncService.class.getName();
+    public static final int EVENT_PULL_LIMIT = 100;
     private static final String EVENTS_SYNC_PATH = "/rest/event/add";
-
+    private static final String PHOTO_UPLOAD_PATH = "/multimedia/upload";
+    private static final String PHOTO_DOWNLOAD_PATH = "/multimedia/profileimage";
+    private static final int EVENT_PUSH_LIMIT = 50;
     private Context context;
     private HTTPAgent httpAgent;
-
-    public static final int EVENT_PULL_LIMIT = 100;
-    private static final int EVENT_PUSH_LIMIT = 50;
-
     private volatile HandlerThread mHandlerThread;
     private ServiceHandler mServiceHandler;
     private List<Observable<?>> observables;
+    private Long startSync = 0L;
+    private Long endSync = 0L;
 
     @Override
     public void onCreate() {
@@ -90,7 +101,6 @@ public class SyncService extends Service {
     }
 
     protected void handleSync() {
-
         sendSyncStatusBroadcastMessage(FetchStatus.fetchStarted);
         if (VaksinatorApplication.getInstance().context().IsUserLoggedOut()) {
             drishtiLogInfo("Not updating from server as user is not logged in.");
@@ -107,7 +117,8 @@ public class SyncService extends Service {
         }
 
         try {
-            pushToServer();
+            pushECToServer();
+            pushPhotoToServer();
             pullECFromServer();
 
         } catch (Exception e) {
@@ -116,13 +127,88 @@ public class SyncService extends Service {
         }
     }
 
+    private void pushECToServer() {
+        IndonesiaECRepository db = VaksinatorApplication.getInstance().indonesiaECRepository();
+        boolean keepSyncing = true;
+
+        while (keepSyncing) {
+            try {
+                Map<String, Object> pendingEvents = db.getUnSyncedEvents(EVENT_PUSH_LIMIT);
+
+                if (pendingEvents.isEmpty()) {
+                    return;
+                }
+
+                String baseUrl = VaksinatorApplication.getInstance().context().configuration().dristhiBaseURL();
+                if (baseUrl.endsWith(context.getString(R.string.url_separator))) {
+                    baseUrl = baseUrl.substring(0, baseUrl.lastIndexOf(context.getString(R.string.url_separator)));
+                }
+                // create request body
+                JSONObject request = new JSONObject();
+                if (pendingEvents.containsKey(context.getString(R.string.clients_key))) {
+                    request.put(context.getString(R.string.clients_key), pendingEvents.get(context.getString(R.string.clients_key)));
+                }
+                if (pendingEvents.containsKey(context.getString(R.string.events_key))) {
+                    request.put(context.getString(R.string.events_key), pendingEvents.get(context.getString(R.string.events_key)));
+                }
+
+                String jsonPayload = request.toString();
+                Log.e(TAG, "pushECToServer: "+ jsonPayload );
+                Response<String> response = httpAgent.post(
+                        MessageFormat.format("{0}/{1}", baseUrl, EVENTS_SYNC_PATH), jsonPayload);
+
+                if (response.isFailure()) {
+                    Log.e(getClass().getName(), "Events sync failed.");
+                    return;
+                }
+                db.markEventsAsSynced(pendingEvents);
+                Log.i(getClass().getName(), "Events synced successfully.");
+            } catch (Exception e) {
+                Log.e(getClass().getName(), e.getMessage());
+            }
+        }
+
+    }
+
+    private void pushPhotoToServer(){
+        String baseUrl = VaksinatorApplication.getInstance().context().configuration().dristhiBaseURL();
+        if (baseUrl.endsWith(context.getString(R.string.url_separator))) {
+            baseUrl = baseUrl.substring(0, baseUrl.lastIndexOf(context.getString(R.string.url_separator)));
+        }
+        List<ProfileImage> pendingImages = VaksinatorApplication.getInstance().imageRepository().getAllUnsyncImages();
+        String path = DrishtiApplication.getAppDir();
+        for (ProfileImage image : pendingImages){
+            String fullPath = path + File.separator + image.getBaseEntityId() + ".jpg";
+            Log.d(TAG, "pushPhotoToServer: baseEntityId="+image.getBaseEntityId());
+            Log.d(TAG, "pushPhotoToServer: path="+fullPath);
+            org.smartregister.domain.ProfileImage image1 =
+                    new org.smartregister.domain.ProfileImage(
+                            String.valueOf(image.getId()),
+                            "",
+                            image.getBaseEntityId(),
+                            image.getContenttype(),
+                            fullPath,
+                            image.getSyncStatus(),
+                            image.getFilecategory());
+            image1.setAnmId(VaksinatorApplication.getInstance().context().allSharedPreferences().fetchRegisteredANM());
+            String response = httpAgent.httpImagePost(MessageFormat.format("{0}/{1}", baseUrl, PHOTO_UPLOAD_PATH),image1);
+            Log.d(TAG, "pushPhotoToServer: response="+response);
+            if(response.equals("\"fail\"")){
+                Log.d(TAG, "pushPhotoToServer: failed");
+                return;
+            }
+
+            image.setSyncStatus(ImageRepository.TYPE_Synced);
+            VaksinatorApplication.getInstance().imageRepository().add(image);
+        }
+    }
+
     private void pullECFromServer() {
+        Log.e(TAG, "pullECFromServer: start" );
         final ECSyncUpdater ecUpdater = ECSyncUpdater.getInstance(context);
 
         // Fetch locations
-
         String locations = Utils.getPreference(context, LoginActivity.PREF_TEAM_LOCATIONS, "");
-        org.smartregister.util.Log.logInfo("SYNCLOKASI"+locations);
         if (StringUtils.isBlank(locations)) {
             sendSyncStatusBroadcastMessage(FetchStatus.fetchedFailed, true);
             return;
@@ -144,7 +230,7 @@ public class SyncService extends Service {
                             if (eCount < 0) {
                                 return Observable.just(FetchStatus.fetchedFailed);
                             } else if (eCount == 0) {
-                                return Observable.just(FetchStatus.nothingFetched);
+                                return Observable.just(FetchStatus.fetched);
                             } else {
                                 Pair<Long, Long> serverVersionPair = getMinMaxServerVersions(jsonObject);
                                 long lastServerVersion = serverVersionPair.second - 1;
@@ -190,7 +276,62 @@ public class SyncService extends Service {
                 });
     }
 
+    private void pullPhotoFromServer(){
+        ImageRepository imageRepo = VaksinatorApplication.getInstance().imageRepository();
+        String baseUrl = VaksinatorApplication.getInstance().context().configuration().dristhiBaseURL();
+        if (baseUrl.endsWith(context.getString(R.string.url_separator))) {
+            baseUrl = baseUrl.substring(0, baseUrl.lastIndexOf(context.getString(R.string.url_separator)));
+        }
+        final ECSyncUpdater ecUpdater = ECSyncUpdater.getInstance(context);
+        List<JSONObject> events = ecUpdater.allEvents(startSync, endSync);
+        try {
+            for (JSONObject event : events){
+                if(event.getString("eventType").equals("Update Photo")){
+                    Log.d(TAG, "pullPhotoFromServer: event="+event);
+                    Long version = event.getLong("version");
+                    JSONArray jsonDataSegment = event.getJSONArray("obs");
+                    int len = jsonDataSegment.length();
+                    String faceVector = "[]";
+                    for (int i = 0; i < len; i++) {
+                        JSONObject seg = jsonDataSegment.getJSONObject(i);
+                        if(seg.getString("fieldCode").equals("face_vector")){
+                            JSONArray fcValue = seg.getJSONArray("values");
+                            faceVector = fcValue.getString(0);
+                            Log.d(TAG, "pullPhotoFromServer: faceVector="+faceVector);
+                            break;
+                        }
+                    }
+                    Log.d(TAG, "pullPhotoFromServer: jsonDataSegment"+jsonDataSegment);
+                    String baseEntityId = event.getString("baseEntityId");
+                    int responseCode = downloadPhoto(MessageFormat.format("{0}/{1}/{2}", baseUrl, PHOTO_DOWNLOAD_PATH, baseEntityId),DrishtiApplication.getAppDir());
+                    Log.d(TAG, "pullPhotoFromServer: responseCode="+responseCode);
+                    if (responseCode == 200) {
+                        ProfileImage profileImage = imageRepo.findByBaseEntityId(baseEntityId);
+                        if(profileImage==null){
+                            profileImage = new ProfileImage();
+                        }
+                        profileImage.setBaseEntityId(baseEntityId);
+                        profileImage.setContenttype("jpeg");
+                        profileImage.setFilecategory("profilepic");
+                        profileImage.setFilevector(faceVector);
+                        profileImage.setCreatedAt(version);
+                        profileImage.setUpdatedAt(version);
+                        profileImage.setSyncStatus(String.valueOf(ImageRepository.TYPE_Synced));
+                        imageRepo.add(profileImage);
+                    }
+                }
+
+            }
+        } catch (JSONException e) {
+            e.printStackTrace();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+    }
+
     private void saveResponseParcel(final ResponseParcel responseParcel) {
+        Log.e(TAG, "saveResponseParcel: " );
         final ECSyncUpdater ecUpdater = ECSyncUpdater.getInstance(context);
         final Observable<FetchStatus> observable = Observable.just(responseParcel)
                 .observeOn(AndroidSchedulers.from(mHandlerThread.getLooper()))
@@ -207,7 +348,9 @@ public class SyncService extends Service {
                                         .map(new Function<Pair<Long, Long>, FetchStatus>() {
                                             @Override
                                             public FetchStatus apply(@NonNull Pair<Long, Long> serverVersionPair) throws Exception {
-                                                VaksinClientProcessor.getInstance(context).processClient(ecUpdater.allEvents(serverVersionPair.first - 1, serverVersionPair.second));
+                                                startSync = serverVersionPair.first - 1;
+                                                endSync = serverVersionPair.second;
+                                                ClientProcessor.getInstance(context).processClient(ecUpdater.allEvents(serverVersionPair.first - 1, serverVersionPair.second));
                                                 return FetchStatus.fetched;
                                             }
                                         });
@@ -256,62 +399,12 @@ public class SyncService extends Service {
     }
 
     private void complete(FetchStatus fetchStatus) {
-        if (fetchStatus.equals(FetchStatus.nothingFetched)) {
+        if (fetchStatus.equals(FetchStatus.fetched)) {
             ECSyncUpdater ecSyncUpdater = ECSyncUpdater.getInstance(context);
             ecSyncUpdater.updateLastCheckTimeStamp(Calendar.getInstance().getTimeInMillis());
         }
-
+        pullPhotoFromServer();
         sendSyncStatusBroadcastMessage(fetchStatus, true);
-    }
-
-// PUSH TO SERVER
-
-    private void pushToServer() {
-        pushECToServer();
-    }
-
-    private void pushECToServer() {
-        EventClientRepository db = VaksinatorApplication.getInstance().eventClientRepository();
-        boolean keepSyncing = true;
-
-        while (keepSyncing) {
-            try {
-                Map<String, Object> pendingEvents = db.getUnSyncedEvents(EVENT_PUSH_LIMIT);
-
-                if (pendingEvents.isEmpty()) {
-                    return;
-                }
-
-                String baseUrl = VaksinatorApplication.getInstance().context().configuration().dristhiBaseURL();
-                if (baseUrl.endsWith(context.getString(R.string.url_separator))) {
-                    baseUrl = baseUrl.substring(0, baseUrl.lastIndexOf(context.getString(R.string.url_separator)));
-                }
-                // create request body
-                JSONObject request = new JSONObject();
-                if (pendingEvents.containsKey(context.getString(R.string.clients_key))) {
-                    request.put(context.getString(R.string.clients_key), pendingEvents.get(context.getString(R.string.clients_key)));
-                }
-                if (pendingEvents.containsKey(context.getString(R.string.events_key))) {
-                    request.put(context.getString(R.string.events_key), pendingEvents.get(context.getString(R.string.events_key)));
-                }
-                String jsonPayload = request.toString();
-                Response<String> response = httpAgent.post(
-                        MessageFormat.format("{0}/{1}",
-                                baseUrl,
-                                EVENTS_SYNC_PATH),
-                        jsonPayload);
-                if (response.isFailure()) {
-                    Log.e(getClass().getName(), "Events sync failed.");
-                    return;
-                }
-                db.markEventsAsSynced(pendingEvents);
-                Log.i(getClass().getName(), "Events synced successfully.");
-            } catch (Exception e) {
-                Log.e(getClass().getName(), e.getMessage());
-            }
-        }
-
-
     }
 
     private void sendSyncStatusBroadcastMessage(FetchStatus fetchStatus, boolean isComplete) {
@@ -389,6 +482,7 @@ public class SyncService extends Service {
         private ResponseParcel(JSONObject jsonObject, Pair<Long, Long> serverVersionPair) {
             this.jsonObject = jsonObject;
             this.serverVersionPair = serverVersionPair;
+            Log.e(TAG, "ResponseParcel: "+ jsonObject.toString() );
         }
 
         private JSONObject getJsonObject() {
@@ -399,5 +493,70 @@ public class SyncService extends Service {
             return serverVersionPair;
         }
     }
+
+    private int downloadPhoto(String fileURL, String saveDir) throws Exception {
+        final int BUFFER_SIZE = 4096;
+
+        URL obj = new URL(fileURL);
+        HttpURLConnection httpConn = (HttpURLConnection) obj.openConnection();
+
+        // optional default is GET
+        httpConn.setRequestMethod("GET");
+
+        //add request header
+        httpConn.setRequestProperty("username",VaksinatorApplication.getInstance().context().allSharedPreferences().fetchRegisteredANM());
+        httpConn.setRequestProperty("password",VaksinatorApplication.getInstance().context().allSettings().fetchANMPassword());
+
+        int responseCode = httpConn.getResponseCode();
+        // always check HTTP response code first
+        if (responseCode == HttpURLConnection.HTTP_OK) {
+            String fileName = "";
+            String disposition = httpConn.getHeaderField("Content-Disposition");
+            String contentType = httpConn.getContentType();
+            int contentLength = httpConn.getContentLength();
+
+            if (disposition != null) {
+                // extracts file name from header field
+                int index = disposition.indexOf("filename=");
+                if (index > 0) {
+                    fileName = disposition.substring(index + 10,
+                            disposition.length() - 1);
+                }
+            } else {
+                // extracts file name from URL
+                fileName = fileURL.substring(fileURL.lastIndexOf("/") + 1, fileURL.length());
+            }
+
+            Log.d(TAG, "sendGet: Content-Type = " + contentType);
+            Log.d(TAG, "sendGet: Content-Disposition = " + disposition);
+            Log.d(TAG, "sendGet: contentLength = " + contentLength);
+            Log.d(TAG, "sendGet: fileName = " + fileName);
+
+            // opens input stream from the HTTP connection
+            InputStream inputStream = httpConn.getInputStream();
+            String saveFilePath = saveDir + File.separator + fileName;
+
+            Log.d(TAG, "sendGet: saveFilePath = " + saveFilePath);
+
+            // opens an output stream to save into file
+            FileOutputStream outputStream = new FileOutputStream(saveFilePath);
+
+            int bytesRead = -1;
+            byte[] buffer = new byte[BUFFER_SIZE];
+            while ((bytesRead = inputStream.read(buffer)) != -1) {
+                outputStream.write(buffer, 0, bytesRead);
+            }
+
+            outputStream.close();
+            inputStream.close();
+
+            Log.d(TAG, "sendGet: File downloaded");
+        } else {
+            Log.e(TAG, "sendGet: No file to download. Server replied HTTP code: +"+ responseCode);
+        }
+        httpConn.disconnect();
+        return responseCode;
+    }
+
 
 }

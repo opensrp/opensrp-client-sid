@@ -448,7 +448,7 @@
     <string name="ANC2">ANC 2</string>
     <string name="forminputerror">Silakan periksa formulir apakah ada kesalahan / masukan yang hilang yang ditandai dalam kotak Merah</string>
     <string name="highRiskPregnancyYoungMaternalAge">Usia Ibu Terlalu Muda: ...</string>
-    <string name="visit_number"></string>
+    <string name="visit_number">Kunjungan Ke: </string>
     <string name="standart">Standar</string>
     <string name="non_standart">Non Standar</string>
 

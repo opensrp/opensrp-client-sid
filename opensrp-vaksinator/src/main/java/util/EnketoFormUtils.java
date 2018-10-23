@@ -82,7 +82,7 @@ public class EnketoFormUtils {
         formEntityConverter = new VaksinatorFormEntityConverter(formAttributeParser, mContext);
         // Protect creation of static variable.
       //  mCloudantDataHandler = CloudantDataHandler.getInstance(context.getApplicationContext());
-        eventClientRepository = VaksinatorApplication.getInstance().eventClientRepository();
+        eventClientRepository = VaksinatorApplication.getInstance().indonesiaECRepository();
     }
 
     public static EnketoFormUtils getInstance(Context ctx) throws Exception {
@@ -400,7 +400,7 @@ public class EnketoFormUtils {
             String sql =
                     "select * from " + ec_bind_path + " where base_entity_id='" + entityId + "'";
             Map<String, String> dbEntity = theAppContext.formDataRepository().
-                    getMapFromSQLQuery(sql);
+                    getMapFromSQLQuery(sql, null);
             Map<String, String> detailsMap = theAppContext.detailsRepository().
                     getAllDetailsForClient(entityId);
             detailsMap.putAll(dbEntity);
@@ -503,7 +503,7 @@ public class EnketoFormUtils {
                             String sql = "select * from '" + childTableName + "' where "
                                     + "relational_id = '" + entityId + "'";
                             String childRecordsString = theAppContext.formDataRepository().
-                                    queryList(sql);
+                                    queryList(sql,null);
                             JSONArray childRecords = new JSONArray(childRecordsString);
 
                             JSONArray fieldsArray = subFormDefinition.getJSONArray("fields");
@@ -767,7 +767,7 @@ public class EnketoFormUtils {
             throws Exception {
         String bindPath = fieldsDefinition.getString("bind_type");
         String sql = "select * from " + bindPath + " where id='" + entityId + "'";
-        String dbEntity = theAppContext.formDataRepository().queryUniqueResult(sql);
+        String dbEntity = theAppContext.formDataRepository().queryUniqueResult(sql,null);
 
         JSONObject entityJson = new JSONObject();
 
@@ -890,7 +890,7 @@ public class EnketoFormUtils {
                 String sql =
                         "select * from " + childTable + " where " + joinField + "='" + val + "'";
                 Log.logInfo(sql);
-                String dbEntity = theAppContext.formDataRepository().queryUniqueResult(sql);
+                String dbEntity = theAppContext.formDataRepository().queryUniqueResult(sql,null);
                 JSONObject linkedEntityJson = new JSONObject();
 
                 if (dbEntity != null && !dbEntity.isEmpty()) {

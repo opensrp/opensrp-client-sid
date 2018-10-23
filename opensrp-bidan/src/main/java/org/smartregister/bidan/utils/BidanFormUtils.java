@@ -206,6 +206,7 @@ public class BidanFormUtils {
 
         String clientVersion = String.valueOf(new Date().getTime());
         String instance = formDefinition.toString();
+        android.util.Log.d(TAG, "generateFormSubmisionFromXMLString: instance="+instance);
         FormSubmission fs = new FormSubmission(instanceId, entityId, formName, instance,
                 clientVersion, SyncStatus.PENDING, formDefinitionVersionString);
 
@@ -241,7 +242,13 @@ public class BidanFormUtils {
                 instanceId, formName, entityId, clientVersion, formDataDefinitionVersion,
                 formInstance, clientVersion);
 
+        android.util.Log.d(TAG, "generateClientAndEventModelsForFormSubmission: v2FormSubmission="+v2FormSubmission);
+        android.util.Log.d(TAG, "generateClientAndEventModelsForFormSubmission: getInstanceId="+v2FormSubmission.getInstanceId());
+        android.util.Log.d(TAG, "generateClientAndEventModelsForFormSubmission: entityId="+v2FormSubmission.entityId());
+
         Event e = formEntityConverter.getEventFromFormSubmission(v2FormSubmission);
+
+        android.util.Log.d(TAG, "generateClientAndEventModelsForFormSubmission: Event="+e);
 
         org.smartregister.util.Utils.startAsyncTask(new SavePatientAsyncTask(v2FormSubmission, mContext, e), null);
     }
@@ -371,6 +378,7 @@ public class BidanFormUtils {
             String formModelString = readFileFromAssetsFolder(
                     "www/form/" + formName + "/model" + ".xml").replaceAll("\n", " ")
                     .replaceAll("\r", " ");
+            android.util.Log.d(TAG, "generateXMLInputForFormWithEntityId: formModelString="+formModelString);
             InputStream is = new ByteArrayInputStream(formModelString.getBytes());
             DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
             dbf.setValidating(false);
@@ -416,8 +424,10 @@ public class BidanFormUtils {
                           JSONObject formDefinition, JSONObject entityJson, String parentId) {
         try {
             String nodeName = node.getNodeName();
+            android.util.Log.d(TAG, "writeXML: nodeName="+nodeName);
             String entityId =
                     entityJson.has("id") ? entityJson.getString("id") : generateRandomUUIDString();
+            android.util.Log.d(TAG, "writeXML: entityId="+entityId);
             String relationalId =
                     entityJson.has(relationalIdKey) ? entityJson.getString(relationalIdKey)
                             : parentId;
@@ -446,6 +456,7 @@ public class BidanFormUtils {
                 if (entries.item(i) instanceof Element) {
                     Element child = (Element) entries.item(i);
                     String fieldName = child.getNodeName();
+                    android.util.Log.d(TAG, "writeXML: fieldName="+fieldName);
 
                     // its a subform element process it
                     if (!subFormNames.isEmpty() && subFormNames.contains(fieldName)) {
@@ -495,6 +506,7 @@ public class BidanFormUtils {
                                 formDefinition);
                         // write the node value
 
+                        android.util.Log.d(TAG, "writeXML: value="+value);
 
                         // overwrite the node value with contents from overrides map
                         if (fieldOverrides.has(fieldName)) {

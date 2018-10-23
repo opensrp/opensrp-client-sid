@@ -6,6 +6,7 @@ import android.util.Log;
 import net.sqlcipher.database.SQLiteDatabase;
 
 import org.smartregister.gizi.application.GiziApplication;
+import org.smartregister.gizi.facial.repository.ImageRepository;
 import org.smartregister.repository.EventClientRepository;
 import org.smartregister.repository.Repository;
 
@@ -25,10 +26,10 @@ public class GiziRepository extends Repository {
     public void onCreate(SQLiteDatabase database) {
         super.onCreate(database);
         EventClientRepository.createTable(database, EventClientRepository.Table.client, EventClientRepository.client_column.values());
-        EventClientRepository.createTable(database, EventClientRepository.Table.address, EventClientRepository.address_column.values());
+//        EventClientRepository.createTable(database, EventClientRepository.Table.address, EventClientRepository.address_column.values());
         EventClientRepository.createTable(database, EventClientRepository.Table.event, EventClientRepository.event_column.values());
-        EventClientRepository.createTable(database, EventClientRepository.Table.obs, EventClientRepository.obs_column.values());
-
+//        EventClientRepository.createTable(database, EventClientRepository.Table.obs, EventClientRepository.obs_column.values());
+        ImageRepository.createTable(database);
         onUpgrade(database, 1, GiziConstants.DATABASE_VERSION);
 
     }

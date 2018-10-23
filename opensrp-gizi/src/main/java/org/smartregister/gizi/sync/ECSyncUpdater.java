@@ -8,8 +8,8 @@ import org.json.JSONArray;
 import org.json.JSONObject;
 import org.smartregister.domain.Response;
 import org.smartregister.gizi.application.GiziApplication;
+import org.smartregister.gizi.repository.IndonesiaECRepository;
 import org.smartregister.gizi.service.SyncService;
-import org.smartregister.repository.EventClientRepository;
 import org.smartregister.service.HTTPAgent;
 import org.smartregister.util.Utils;
 
@@ -22,13 +22,14 @@ public class ECSyncUpdater {
 
     private static final String LAST_SYNC_TIMESTAMP = "LAST_SYNC_TIMESTAMP";
     private static final String LAST_CHECK_TIMESTAMP = "LAST_SYNC_CHECK_TIMESTAMP";
+    private static final String TAG = ECSyncUpdater.class.getName();
     private static ECSyncUpdater instance;
-    private final EventClientRepository db;
+    private final IndonesiaECRepository db;
     private final Context context;
 
     private ECSyncUpdater(Context context) {
         this.context = context;
-        db = GiziApplication.getInstance().eventClientRepository();
+        db = GiziApplication.getInstance().indonesiaECRepository();
     }
 
     public static ECSyncUpdater getInstance(Context context) {
@@ -107,6 +108,10 @@ public class ECSyncUpdater {
 
     public void updateLastCheckTimeStamp(long lastSyncTimeStamp) {
         Utils.writePreference(context, LAST_CHECK_TIMESTAMP, lastSyncTimeStamp + "");
+    }
+
+    public long getLastCheckTimeStamp() {
+        return Long.parseLong(Utils.getPreference(context, LAST_CHECK_TIMESTAMP, "0"));
     }
 
     public void batchSave(JSONArray events, JSONArray clients) throws Exception {

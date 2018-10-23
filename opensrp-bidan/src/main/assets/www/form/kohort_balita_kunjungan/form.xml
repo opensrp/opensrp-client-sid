@@ -247,7 +247,7 @@
             in the child's height on the check-up
         </span>
         <input name="/kunjungan_balita_reviewed/hasil_pengukuran_tinggi_anak_balita"
-            data-constraint=".&gt;0" data-type-xml="decimal" step="any" type="number" />
+            data-constraint=".&gt;0" data-type-xml="text" step="any" type="number" />
     </label>
     <fieldset class="question ">
         <fieldset>
