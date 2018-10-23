@@ -294,7 +294,7 @@
             Indicating mother's temperature
         </span>
         <input name="/PNC_visit_reviewed/tanda_vital_suhu" data-constraint=".&gt;0 and .&lt;1000"
-            data-type-xml="decimal" step="any" type="number" />
+            data-type-xml="text" step="any" type="number" />
         <span class="or-constraint-msg active"
             data-itext-id="/PNC_visit_reviewed/tanda_vital_suhu:jr:constraintMsg" lang="Bahasa">
             Nilai yang
