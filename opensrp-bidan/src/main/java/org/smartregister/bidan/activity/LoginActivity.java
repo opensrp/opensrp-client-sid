@@ -116,7 +116,7 @@ public class LoginActivity extends AppCompatActivity {
         }
         setLanguage();
 
-        debugApp();
+//        debugApp();
 
     }
 
