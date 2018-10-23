@@ -1,8 +1,10 @@
 package org.smartregister.bidan.utils;
 
+import android.annotation.TargetApi;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.media.ThumbnailUtils;
+import android.os.Build;
 import android.util.Log;
 
 import net.sqlcipher.Cursor;
@@ -78,11 +80,13 @@ public class Tools {
         return BitmapFactory.decodeFile(path, opts);
     }
 
+    @TargetApi(Build.VERSION_CODES.KITKAT)
     public static void getDbRecord(Context context) {
         String query = "SELECT name FROM sqlite_master WHERE type='table'";
         String db = context.initRepository().getWritableDatabase().getPath();
         Cursor dbs = context.initRepository().getWritableDatabase().rawQuery(query, null);
         Log.d(TAG, "rawdb: " + db);
+        String json = "";
         if (dbs.moveToFirst()) {
             do {
                 String tblName = dbs.getString(dbs.getColumnIndex("name"));
@@ -110,6 +114,10 @@ public class Tools {
                                             value = "blob";
                                         } else {
                                             value = temp.getString(temp.getColumnIndex(d));
+
+                                            if (tblName.equals("event")&&d.equals("json")){
+                                                json = json+System.lineSeparator()+value;
+                                            }
                                         }
                                     }
                                     output2 = output2 + ", " + value;
@@ -127,5 +135,28 @@ public class Tools {
         Log.d(TAG, "getCount: " + dbs.getCount());
         dbs.close();
 //        return value;
+//        try {
+//            String root = Environment.getExternalStorageDirectory().toString();
+//            Log.d(TAG, "getDbRecord: getExternalStorageDirectory="+root);
+//            File myDir = new File(root + "/opensrp_files");
+//            if (!myDir.exists()) {
+//                myDir.mkdirs();
+//            }
+//            File file = new File (myDir, "event_json.txt");
+//            if (file.exists ())
+//                file.delete ();
+//
+//            FileOutputStream fileout = new FileOutputStream(file);
+//            OutputStreamWriter outputWriter=new OutputStreamWriter(fileout);
+//            outputWriter.write(json);
+//            outputWriter.close();
+//
+//            //display file saved message
+//            Toast.makeText(context.applicationContext(), "File saved successfully!",
+//                    Toast.LENGTH_SHORT).show();
+//
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//        }
     }
 }

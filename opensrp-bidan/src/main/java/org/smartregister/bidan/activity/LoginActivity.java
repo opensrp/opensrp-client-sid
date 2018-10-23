@@ -38,6 +38,7 @@ import org.smartregister.domain.jsonmapping.util.TeamLocation;
 import org.smartregister.event.Listener;
 import org.smartregister.repository.AllSharedPreferences;
 import org.smartregister.sync.DrishtiSyncScheduler;
+import org.smartregister.util.AssetHandler;
 import org.smartregister.util.Utils;
 import org.smartregister.view.BackgroundAction;
 import org.smartregister.view.LockingBackgroundTask;
@@ -52,6 +53,16 @@ import static android.preference.PreferenceManager.getDefaultSharedPreferences;
 import static android.view.inputmethod.InputMethodManager.HIDE_NOT_ALWAYS;
 import static org.smartregister.domain.LoginResponse.NO_INTERNET_CONNECTIVITY;
 import static org.smartregister.domain.LoginResponse.SUCCESS;
+import static org.smartregister.domain.LoginResponse.SUCCESS_WITHOUT_TEAM_DETAILS;
+import static org.smartregister.domain.LoginResponse.SUCCESS_WITHOUT_TEAM_LOCATION;
+import static org.smartregister.domain.LoginResponse.SUCCESS_WITHOUT_TEAM_LOCATION_UUID;
+import static org.smartregister.domain.LoginResponse.SUCCESS_WITHOUT_TEAM_NAME;
+import static org.smartregister.domain.LoginResponse.SUCCESS_WITHOUT_TEAM_UUID;
+import static org.smartregister.domain.LoginResponse.SUCCESS_WITHOUT_USER_DETAILS;
+import static org.smartregister.domain.LoginResponse.SUCCESS_WITHOUT_USER_LOCATION;
+import static org.smartregister.domain.LoginResponse.SUCCESS_WITHOUT_USER_PREFERREDNAME;
+import static org.smartregister.domain.LoginResponse.SUCCESS_WITHOUT_USER_USERNAME;
+import static org.smartregister.domain.LoginResponse.SUCCESS_WITH_EMPTY_RESPONSE;
 import static org.smartregister.domain.LoginResponse.UNAUTHORIZED;
 import static org.smartregister.domain.LoginResponse.UNKNOWN_RESPONSE;
 import static org.smartregister.util.Log.logError;
@@ -105,7 +116,7 @@ public class LoginActivity extends AppCompatActivity {
         }
         setLanguage();
 
-//        debugApp();
+        debugApp();
 
     }
 
@@ -128,6 +139,123 @@ public class LoginActivity extends AppCompatActivity {
         } else {
             remoteLogin(view, uname, pwd);
         }
+    }
+
+    private void remoteLoginDebug(final View view, final String userName, final String password) {
+        tryRemoteLoginDebug(userName, password, new Listener<LoginResponse>() {
+            public void onEvent(LoginResponse loginResponse) {
+//                ErrorReportingFacade.setUsername("", userName);
+//                FlurryAgent.setUserId(userName);
+                if (loginResponse == SUCCESS) {
+                    Utils.writePreference(BidanApplication.getInstance().getApplicationContext(), "LOCAL_DEBUG", "True");
+                    remoteLoginWith(userName, password, loginResponse.payload());
+                    getOpenSRPContext().allSharedPreferences().saveForceRemoteLogin(false);
+
+                } else {
+                    if (loginResponse == null) {
+                        showErrorDialog("Login failed. Unknown reason. Try Again");
+                    } else {
+                        Log.e(TAG, "onEvent: "+ loginResponse.message() );
+                        if (loginResponse == NO_INTERNET_CONNECTIVITY) {
+                            showErrorDialog(getResources().getString(R.string.no_internet_connectivity));
+                        } else if (loginResponse == UNKNOWN_RESPONSE) {
+                            showErrorDialog(getResources().getString(R.string.unknown_response));
+                        } else if (loginResponse == UNAUTHORIZED) {
+                            showErrorDialog(getResources().getString(R.string.unauthorized));
+                        }
+//                        showErrorDialog(loginResponse.message());
+                    }
+                    view.setClickable(true);
+                }
+            }
+        });
+    }
+
+    private void tryRemoteLoginDebug(final String userName, final String password, final Listener<LoginResponse> afterLoginCheck) {
+        LockingBackgroundTask task = new LockingBackgroundTask(new ProgressIndicator() {
+            @Override
+            public void setVisible() {
+                progressDialog.show();
+            }
+
+            @Override
+            public void setInvisible() {
+                progressDialog.dismiss();
+            }
+        });
+
+
+
+        task.doActionInBackground(new BackgroundAction<LoginResponse>() {
+            public LoginResponse actionToDoInBackgroundThread() {
+                String responseString = AssetHandler.readFileFromAssetsFolder("dummy_loc.json", context.applicationContext());
+                Log.e(TAG, "actionToDoInBackgroundThread: responseString="+responseString);
+                LoginResponseData responseData = AssetHandler.jsonStringToJava(responseString, LoginResponseData.class);
+                LoginResponse result = retrieveResponse(responseData);
+                return result;
+            }
+
+            public void postExecuteInUIThread(LoginResponse result) {
+                afterLoginCheck.onEvent(result);
+            }
+        });
+    }
+
+    private LoginResponse retrieveResponse(LoginResponseData responseData) {
+        Log.d(TAG, "retrieveResponse: responseData="+responseData);
+        Log.d(TAG, "retrieveResponse: responseData.team="+responseData.team);
+        Log.d(TAG, "retrieveResponse: responseData.user="+responseData.user);
+        Log.d(TAG, "retrieveResponse: responseData.locations="+responseData.locations);
+        Log.d(TAG, "retrieveResponse: responseData.time="+responseData.time);
+        if (responseData == null) {
+            logError("Empty Response using " + SUCCESS_WITH_EMPTY_RESPONSE.name());
+            return SUCCESS_WITH_EMPTY_RESPONSE;
+        }
+
+        if (responseData.team == null || responseData.team.team == null) {
+            logError("Empty Response in " + SUCCESS_WITHOUT_TEAM_DETAILS.name());
+            return SUCCESS_WITHOUT_TEAM_DETAILS.withPayload(responseData);
+        } else if (responseData.team.team.location == null) {
+            logError("Empty Response in " + SUCCESS_WITHOUT_TEAM_LOCATION.name());
+            return SUCCESS_WITHOUT_TEAM_LOCATION.withPayload(responseData);
+        } else if (responseData.team.team.location.uuid == null) {
+            logError("Empty Response in " + SUCCESS_WITHOUT_TEAM_LOCATION_UUID.name());
+            return SUCCESS_WITHOUT_TEAM_LOCATION_UUID.withPayload(responseData);
+        } else if (responseData.team.team.uuid == null) {
+            logError("Empty Response in " + SUCCESS_WITHOUT_TEAM_UUID.name());
+            return SUCCESS_WITHOUT_TEAM_UUID.withPayload(responseData);
+        } else if (responseData.team.team.teamName == null) {
+            logError("Empty Response in " + SUCCESS_WITHOUT_TEAM_NAME.name());
+            return SUCCESS_WITHOUT_TEAM_NAME.withPayload(responseData);
+        }
+
+        if (responseData.user == null) {
+            logError("Empty Response in " + SUCCESS_WITHOUT_USER_DETAILS.name());
+            return SUCCESS_WITHOUT_USER_DETAILS.withPayload(responseData);
+        } else if (responseData.user.getUsername() == null) {
+            logError("Empty Response in " + SUCCESS_WITHOUT_USER_USERNAME.name());
+            return SUCCESS_WITHOUT_USER_USERNAME.withPayload(responseData);
+        } else if (responseData.user.getPreferredName() == null) {
+            logError("Empty Response in " + SUCCESS_WITHOUT_USER_PREFERREDNAME.name());
+            return SUCCESS_WITHOUT_USER_PREFERREDNAME.withPayload(responseData);
+        }
+
+        if (responseData.locations == null) {
+            logError("Empty Response in " + SUCCESS_WITHOUT_USER_LOCATION.name());
+            return SUCCESS_WITHOUT_USER_LOCATION.withPayload(responseData);
+        }
+//        if (responseData.time == null) {
+//            logError("Empty Response in " + SUCCESS_WITHOUT_TIME_DETAILS.name());
+//            return SUCCESS_WITHOUT_TIME_DETAILS.withPayload(responseData);
+//        } else if (responseData.time.getTime() == null) {
+//            logError("Empty Response in " + SUCCESS_WITHOUT_TIME.name());
+//            return SUCCESS_WITHOUT_TIME.withPayload(responseData);
+//        } else if (responseData.time.getTimeZone() == null) {
+//            logError("Empty Response in " + SUCCESS_WITHOUT_TIME_ZONE.name());
+//            return SUCCESS_WITHOUT_TIME_ZONE.withPayload(responseData);
+//        }
+
+        return SUCCESS.withPayload(responseData);
     }
 
     @Override

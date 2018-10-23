@@ -36,11 +36,11 @@
     <label class="note non-select ">
         <span class="question-label active"
             data-itext-id="/tambah_kb_reviewed/generated_note_name_14:label" lang="Bahasa">Dusun :
-            <span class="or-output" data-value=" /tambah_kb_reviewed/Sub-district"></span>
+            <span class="or-output" data-value=" /tambah_kb_reviewed/Sub-village"></span>
         </span>
         <span class="question-label "
             data-itext-id="/tambah_kb_reviewed/generated_note_name_14:label" lang="en">Sub Village :
-            <span class="or-output" data-value=" /tambah_kb_reviewed/Sub-district"></span>
+            <span class="or-output" data-value=" /tambah_kb_reviewed/Sub-village"></span>
         </span>
         <input name="/tambah_kb_reviewed/generated_note_name_14" data-type-xml="string"
             readonly="readonly" type="text" />
