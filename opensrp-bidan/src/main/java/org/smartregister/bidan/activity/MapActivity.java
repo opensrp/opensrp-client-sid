@@ -119,10 +119,14 @@ public class MapActivity extends SecuredActivity implements MapEventsReceiver {
                 iDs.add(value);
             }while (kiCursor.moveToNext());
         }
-        String ids = "("+implode(",",iDs.toArray(new String[0]))+")";
+        String ids = "()";
+        if (iDs.size()>0){
+            ids = "('"+implode("','",iDs.toArray(new String[0]))+"')";
+        }
+
         kiCursor.close();
 
-        kiCursor = context().initRepository().getWritableDatabase().rawQuery("SELECT * FROM ec_details WHERE key='gps' AND value!='' AND base_entity_id IN ('"+implode("','",iDs.toArray(new String[0]))+"')", null);
+        kiCursor = context().initRepository().getWritableDatabase().rawQuery("SELECT * FROM ec_details WHERE key='gps' AND value!='' AND base_entity_id IN "+ids, null);
         HashMap<String, String> gpses = new HashMap<>();
         if (kiCursor.moveToFirst()) {
             do {
