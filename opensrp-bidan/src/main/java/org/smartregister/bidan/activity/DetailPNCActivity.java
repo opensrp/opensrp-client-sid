@@ -152,9 +152,10 @@ public class DetailPNCActivity extends Activity {
 //        TextView highRiskPostPartumDistosia = (TextView) findViewById(R.id.txt_hrpp_Distosia);
 //        TextView txt_highRiskHIVAIDS = (TextView) findViewById(R.id.txt_highRiskHIVAIDS);
 
-        AllCommonsRepository childrep = Context.getInstance().allCommonsRepositoryobjects("ec_anak");
-        final CommonPersonObject child = childrep.findByCaseID(pncclient.getDetails().get("child_id"));
         DetailsRepository detailsRepository = Context.getInstance().detailsRepository();
+        detailsRepository.updateDetails(pncclient);
+        AllCommonsRepository childrep = Context.getInstance().allCommonsRepositoryobjects("ec_anak");
+        final CommonPersonObject child = childrep.findByCaseID(pncclient.getDetails().get("childId"));
         detailsRepository.updateDetails(child);
 
 

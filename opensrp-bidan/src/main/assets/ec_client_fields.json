@@ -205,10 +205,9 @@
         },
         {
           "column_name": "childId",
-          "type": "Event",
+          "type": "Client",
           "json_mapping": {
-            "field": "obs.fieldCode",
-            "concept": "1576AAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+            "field": "relationships.childId"
           }
         }
       ]
