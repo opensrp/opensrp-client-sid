@@ -15,8 +15,18 @@
         "source": "ibu.kartu_ibu.id"
       },
       {
+        "name": "ancId",
+        "bind": "/model/instance/penutupan_pnc_reviewed/ancId",
+        "shouldLoadValue": true
+      },
+      {
         "name": "cityVillage",
         "bind": "/model/instance/penutupan_pnc_reviewed/Village",
+        "shouldLoadValue": true
+      },
+      {
+        "name": "address1",
+        "bind": "/model/instance/penutupan_pnc_reviewed/Sub-village",
         "shouldLoadValue": true
       },
       {

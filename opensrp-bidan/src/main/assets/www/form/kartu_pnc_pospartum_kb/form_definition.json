@@ -10,6 +10,11 @@
         "shouldLoadValue": true
       },
       {
+        "name": "ancId",
+        "bind": "/model/instance/postpartum_kb_reviewed/ancId",
+        "shouldLoadValue": true
+      },
+      {
         "name": "existing_location",
         "bind": "/model/instance/postpartum_kb_reviewed/existing_location",
         "shouldLoadValue": true
@@ -20,7 +25,7 @@
         "shouldLoadValue": true
       },
       {
-        "name": "Sub-village",
+        "name": "address1",
         "bind": "/model/instance/postpartum_kb_reviewed/Sub-village",
         "shouldLoadValue": true
       },

@@ -29,7 +29,7 @@ import org.smartregister.enketo.listener.DisplayFormListener;
 import org.smartregister.enketo.view.fragment.DisplayFormFragment;
 import org.smartregister.provider.SmartRegisterClientsProvider;
 import org.smartregister.repository.DetailsRepository;
-import org.smartregister.sync.ClientProcessor;
+import org.smartregister.bidan.sync.ClientProcessor;
 import org.smartregister.util.Log;
 import org.smartregister.view.activity.SecuredNativeSmartRegisterActivity;
 import org.smartregister.view.contract.SmartRegisterClient;
@@ -45,6 +45,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
+import java.util.UUID;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -357,6 +358,7 @@ public class BaseRegisterActivity extends SecuredNativeSmartRegisterActivity imp
             android.util.Log.d(TAG, "saveFormSubmission: formSubmission="+formSubmission);
             android.util.Log.d(TAG, "saveFormSubmission: id="+id);
             android.util.Log.d(TAG, "saveFormSubmission: formName="+formName);
+            android.util.Log.d(TAG, "saveFormSubmission: fieldOverrides="+fieldOverrides);
             BidanFormUtils formUtils = BidanFormUtils.getInstance(this);
             FormSubmission submission = formUtils.generateFormSubmisionFromXMLString(id, formSubmission, formName, fieldOverrides);
 
@@ -553,6 +555,21 @@ public class BaseRegisterActivity extends SecuredNativeSmartRegisterActivity imp
                             return;
                         }
                     }
+                    detailsRepository.updateDetails(pc);
+                    JSONObject fieldOverrides = new JSONObject();
+
+                    try {
+                        String uuid = UUID.randomUUID().toString();
+                        fieldOverrides.put("anc_id", uuid);
+                        fieldOverrides.put("ancId", uuid);
+
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+
+                    FieldOverrides fo = new FieldOverrides(fieldOverrides.toString());
+                    onEditSelectionWithMetadata((EditOption) option, (SmartRegisterClient) tag, fo.getJSONString());
+                    return;
 
                 }
                 onEditSelection((EditOption) option, (SmartRegisterClient) tag);

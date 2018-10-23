@@ -16,6 +16,7 @@ import org.smartregister.bidan.facial.utils.Tools;
 import org.smartregister.bidan.receiver.BidanSyncBroadcastReceiver;
 import org.smartregister.bidan.repository.BidanRepository;
 import org.smartregister.bidan.repository.IndonesiaECRepository;
+import org.smartregister.bidan.utils.LocationHelper;
 import org.smartregister.commonregistry.CommonFtsObject;
 import org.smartregister.repository.Repository;
 import org.smartregister.sync.DrishtiSyncScheduler;
@@ -37,6 +38,7 @@ public class BidanApplication extends DrishtiApplication {
 
     private IndonesiaECRepository indonesiaECRepository;
     private ImageRepository imageRepository;
+    private LocationHelper locationHelper;
 
     private boolean isFRSupported = false;
 
@@ -106,7 +108,6 @@ public class BidanApplication extends DrishtiApplication {
 
     @Override
     public void onCreate() {
-        super.onCreate();
         PrintConfig.initDefault(getAssets(), "fonts/material-icon-font.ttf");
 
         mInstance = this;
@@ -117,6 +118,7 @@ public class BidanApplication extends DrishtiApplication {
 
         //Initialize Modules
         CoreLibrary.init(context());
+        super.onCreate();
 //        DrishtiSyncScheduler.setReceiverClass(SyncBroadcastReceiver.class);
         DrishtiSyncScheduler.setReceiverClass(BidanSyncBroadcastReceiver.class);
 
@@ -256,4 +258,10 @@ public class BidanApplication extends DrishtiApplication {
         return isFRSupported;
     }
 
+    public LocationHelper getLocationHelper() {
+        if (locationHelper == null){
+            locationHelper = new LocationHelper(BidanApplication.getInstance().getApplicationContext());
+        }
+        return locationHelper;
+    }
 }

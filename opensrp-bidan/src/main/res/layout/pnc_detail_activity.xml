@@ -17,7 +17,7 @@
     <LinearLayout
         android:id="@+id/linearLayout"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="32dp"
         android:orientation="horizontal"
         android:weightSum="4">
 
@@ -31,10 +31,10 @@
             android:layout_marginBottom="2dp"
             android:layout_marginLeft="5dp"
             android:layout_marginTop="2dp"
-            android:layout_weight="2"
+            android:layout_weight="1.5"
             android:text="Basic Information"
             android:textColor="@color/alert_urgent_red"
-            android:textSize="14sp"
+            android:textSize="16sp"
             android:textStyle="bold" />
 
 
@@ -46,10 +46,25 @@
             android:layout_gravity="left"
             android:layout_marginLeft="5dp"
             android:layout_marginTop="2dp"
-            android:layout_weight="2"
+            android:layout_weight="1.5"
             android:text="Risk:"
             android:textColor="@color/light_blue"
-            android:textSize="14sp"
+            android:textSize="16sp"
+            android:textStyle="bold" />
+
+
+        <org.smartregister.view.customcontrols.CustomFontTextView
+            android:id="@+id/tv_detail_history"
+            style="@style/CustomFontTextViewStyle.ListView.Medium"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_gravity="left"
+            android:layout_marginLeft="5dp"
+            android:layout_marginTop="2dp"
+            android:layout_weight="1"
+            android:text="History"
+            android:textColor="@color/pnc_circle_yellow"
+            android:textSize="16sp"
             android:textStyle="bold" />
     </LinearLayout>
 

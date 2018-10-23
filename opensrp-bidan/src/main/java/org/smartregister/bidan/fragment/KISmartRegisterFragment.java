@@ -137,7 +137,7 @@ public class KISmartRegisterFragment extends BaseSmartRegisterFragment {
 //            Toast.makeText(getActivity(), "no unique id", Toast.LENGTH_LONG).show();
 //            return;
 //        }
-
+        BidanApplication.getInstance().getLocationHelper().getLocation(this.getActivity(),BidanApplication.getInstance().getLocationHelper().locationResult);
         FragmentTransaction ft = getActivity().getFragmentManager().beginTransaction();
         String locationDialogTAG = "locationDialogTAG";
         Fragment prev = getActivity().getFragmentManager().findFragmentByTag(locationDialogTAG);

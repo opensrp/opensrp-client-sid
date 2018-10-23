@@ -156,6 +156,13 @@
       }
     },
     {
+      "type": "hidden",
+      "name": "ancId",
+      "hint": {
+        "Bahasa": "Inject from app"
+      }
+    },
+    {
       "type": "note",
       "name": "generated_note_name_24",
       "label": {

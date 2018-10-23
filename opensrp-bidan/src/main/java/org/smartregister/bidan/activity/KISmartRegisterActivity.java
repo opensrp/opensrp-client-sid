@@ -17,6 +17,7 @@ import org.smartregister.view.dialog.OpenFormOption;
 import java.util.ArrayList;
 import java.util.List;
 
+import static android.preference.PreferenceManager.getDefaultSharedPreferences;
 import static org.smartregister.bidan.utils.AllConstantsINA.FormNames.ANAK_BAYI_REGISTRATION;
 import static org.smartregister.bidan.utils.AllConstantsINA.FormNames.KARTU_IBU_ANC_REGISTRATION;
 import static org.smartregister.bidan.utils.AllConstantsINA.FormNames.KARTU_IBU_CLOSE;
@@ -99,6 +100,8 @@ public class KISmartRegisterActivity extends BaseRegisterActivity implements Loc
         try {
 
             combined = new JSONObject(locationJSONString);
+            String gps = getDefaultSharedPreferences(this).getString("gpsCoordinates", "").trim();
+            combined.put("gps",gps);
 
         } catch (JSONException e) {
             e.printStackTrace();

@@ -9,7 +9,6 @@ import net.sqlcipher.Cursor;
 
 import org.apache.commons.io.FilenameUtils;
 import org.smartregister.Context;
-import org.smartregister.bidan.facial.repository.ImageRepository;
 import org.smartregister.view.activity.DrishtiApplication;
 
 import java.io.ByteArrayOutputStream;

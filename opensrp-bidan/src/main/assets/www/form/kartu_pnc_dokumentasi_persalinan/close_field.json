@@ -1,0 +1,136 @@
+{
+  "fields": [
+    {
+      "name": "keadaanIbu",
+      "bind": "/model/instance/dok_persalinan_reviewed/keadaan_ibu"
+    },
+    {
+      "name": "keadaanBayi",
+      "bind": "/model/instance/dok_persalinan_reviewed/keadaan_bayi"
+    },
+    {
+      "name": "persalinan",
+      "bind": "/model/instance/dok_persalinan_reviewed/persalinan"
+    },
+    {
+      "name": "tanggalKalaIAktif",
+      "bind": "/model/instance/dok_persalinan_reviewed/tanggal__kala_i_aktif"
+    },
+    {
+      "name": "jamKalaIAktif",
+      "bind": "/model/instance/dok_persalinan_reviewed/jam__kala_i_aktif"
+    },
+    {
+      "name": "tanggalKalaII",
+      "bind": "/model/instance/dok_persalinan_reviewed/tanggal__kala_ii"
+    },
+    {
+      "name": "jamKalaII",
+      "bind": "/model/instance/dok_persalinan_reviewed/jam__kala_ii"
+    },
+    {
+      "name": "tanggalPlasentaLahir",
+      "bind": "/model/instance/dok_persalinan_reviewed/tanggal__plasenta_lahir"
+    },
+    {
+      "name": "jamPlasentaLahir",
+      "bind": "/model/instance/dok_persalinan_reviewed/jam__plasenta_lahir"
+    },
+    {
+      "name": "perdarahanKalaIV2JamPostpartum",
+      "bind": "/model/instance/dok_persalinan_reviewed/perdarahan_kala_iv_2_jam_postpartum"
+    },
+    {
+      "name": "persentasi",
+      "bind": "/model/instance/dok_persalinan_reviewed/persentasi"
+    },
+    {
+      "name": "tempatBersalin",
+      "bind": "/model/instance/dok_persalinan_reviewed/tempat"
+    },
+    {
+      "name": "penolong",
+      "bind": "/model/instance/dok_persalinan_reviewed/penolong"
+    },
+    {
+      "name": "penolongLainLain",
+      "bind": "/model/instance/dok_persalinan_reviewed/penolong_lain_lain"
+    },
+    {
+      "name": "caraPersalinanIbu",
+      "bind": "/model/instance/dok_persalinan_reviewed/cara_persalinan_ibu"
+    },
+    {
+      "name": "manajemenAktifKalaIII",
+      "bind": "/model/instance/dok_persalinan_reviewed/manajemen_aktif_kala_iii"
+    },
+    {
+      "name": "pelayanan",
+      "bind": "/model/instance/dok_persalinan_reviewed/pelayanan"
+    },
+    {
+      "name": "integrasiProgram",
+      "bind": "/model/instance/dok_persalinan_reviewed/integrasi_program"
+    },
+    {
+      "name": "komplikasi",
+      "bind": "/model/instance/dok_persalinan_reviewed/komplikasi"
+    },
+    {
+      "name": "komplikasiLainLain",
+      "bind": "/model/instance/dok_persalinan_reviewed/komplikasi_lain_lain"
+    },
+    {
+      "name": "dirujukKe",
+      "bind": "/model/instance/dok_persalinan_reviewed/dirujuk_ke"
+    },
+    {
+      "name": "dirujukKeLainLain",
+      "bind": "/model/instance/dok_persalinan_reviewed/dirujuk_kelain-lain"
+    },
+    {
+      "name": "alamatBersalin",
+      "bind": "/model/instance/dok_persalinan_reviewed/alamat_bersalin"
+    },
+    {
+      "name": "highRiskPostPartumDistosia",
+      "bind": "/model/instance/dok_persalinan_reviewed/high_risk_post-partum_distosia"
+    },
+    {
+      "name": "highRiskPostPartumPIH",
+      "bind": "/model/instance/dok_persalinan_reviewed/high_risk_post-partum_PIH"
+    },
+    {
+      "name": "highRiskPostPartumHemorrhage",
+      "bind": "/model/instance/dok_persalinan_reviewed/high_risk_post-partum_Hemorrhage"
+    },
+    {
+      "name": "highRiskPostPartumInfection",
+      "bind": "/model/instance/dok_persalinan_reviewed/high_risk_post-partum_infection"
+    },
+    {
+      "name": "highRiskPostPartumMaternalSepsis",
+      "bind": "/model/instance/dok_persalinan_reviewed/high_risk_post-partum_maternal_sepsis"
+    },
+    {
+      "name": "highRiskPostPartumPreEclampsiaEclampsia",
+      "bind": "/model/instance/dok_persalinan_reviewed/high_risk_post-partum_Pre-eclampsia"
+    },
+    {
+      "name": "highRiskPostPartumVacum",
+      "bind": "/model/instance/dok_persalinan_reviewed/high_risk_post-partum_Eclampsia"
+    },
+    {
+      "name": "highRiskPostPartumForceps",
+      "bind": "/model/instance/dok_persalinan_reviewed/high_risk_post-partum_vacum"
+    },
+    {
+      "name": "highRiskPostPartumSectioCaesaria",
+      "bind": "/model/instance/dok_persalinan_reviewed/high_risk_post-partum_forceps"
+    },
+    {
+      "name": "highRiskPostPartumSectioCaesaria",
+      "bind": "/model/instance/dok_persalinan_reviewed/high_risk_post-partum_Sectio_Caesaria"
+    }
+  ]
+}

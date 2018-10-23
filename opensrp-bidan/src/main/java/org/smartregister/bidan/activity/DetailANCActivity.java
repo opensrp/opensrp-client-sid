@@ -381,7 +381,8 @@ public class DetailANCActivity extends Activity {
                 //FlurryFacade.logEvent("click_risk_detail");
                 findViewById(R.id.id1).setVisibility(GONE);
                 findViewById(R.id.id2).setVisibility(VISIBLE);
-                findViewById(R.id.id3).setVisibility(VISIBLE);
+                findViewById(R.id.id3).setVisibility(GONE);
+                findViewById(R.id.id4).setVisibility(GONE);
                 //  findViewById(R.id.show_more_detail).setVisibility(VISIBLE);
                 // findViewById(R.id.show_more).setVisibility(GONE);
             }
@@ -392,7 +393,8 @@ public class DetailANCActivity extends Activity {
             public void onClick(View v) {
                 findViewById(R.id.id1).setVisibility(VISIBLE);
                 findViewById(R.id.id2).setVisibility(GONE);
-                findViewById(R.id.id3).setVisibility(VISIBLE);
+                findViewById(R.id.id3).setVisibility(GONE);
+                findViewById(R.id.id4).setVisibility(GONE);
                 //  findViewById(R.id.show_more).setVisibility(VISIBLE);
                 //  findViewById(R.id.show_more_detail).setVisibility(GONE);
             }
@@ -404,6 +406,18 @@ public class DetailANCActivity extends Activity {
                 findViewById(R.id.id1).setVisibility(GONE);
                 findViewById(R.id.id2).setVisibility(GONE);
                 findViewById(R.id.id3).setVisibility(VISIBLE);
+                findViewById(R.id.id4).setVisibility(GONE);
+                // mother_summary.setText("Birth Plan Summary");
+            }
+        });
+
+        findViewById(R.id.tv_detail_history).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                findViewById(R.id.id1).setVisibility(GONE);
+                findViewById(R.id.id2).setVisibility(GONE);
+                findViewById(R.id.id3).setVisibility(GONE);
+                findViewById(R.id.id4).setVisibility(VISIBLE);
                 // mother_summary.setText("Birth Plan Summary");
             }
         });

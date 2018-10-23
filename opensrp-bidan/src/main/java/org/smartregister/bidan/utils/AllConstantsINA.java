@@ -82,6 +82,9 @@ public class AllConstantsINA {
         public static final String BAYI_NEONATAL_PERIOD_EVENT = "Kunjungan neonatal";
         public static final String KOHORT_BAYI_KUNJUNGAN_EVENT = "Kohort Kunjungan Bayi Perbulan";
         public static final String BALITA_KUNJUNGAN_EVENT = "Kunjungan Balita";
+        public static final String ANC_REGISTRATION = "Tambah ANC";
+        public static final String ANC_CLOSE = "Penutupan ANC";
+        public static final String CHILD_REGISTRATION = "Child Registration";
 //        public static final String ANC_INVESTIGATIONS = "anc_investigations";
 //        public static final String RECORD_ECPS = "record_ecps";
 //        public static final String FP_REFERRAL_FOLLOWUP = "fp_referral_followup";

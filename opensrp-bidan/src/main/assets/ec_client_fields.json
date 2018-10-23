@@ -90,6 +90,13 @@
           }
         },
         {
+          "column_name": "anc_id",
+          "type": "Client",
+          "json_mapping": {
+            "field": "attributes.anc_id"
+          }
+        },
+        {
           "column_name": "kartuIbuId",
           "type": "Client",
           "json_mapping": {
@@ -158,6 +165,13 @@
           }
         },
         {
+          "column_name": "anc_id",
+          "type": "Client",
+          "json_mapping": {
+            "field": "attributes.anc_id"
+          }
+        },
+        {
           "column_name": "keadaanIbu",
           "type": "Event",
           "json_mapping": {
@@ -187,6 +201,13 @@
           "json_mapping": {
             "field": "obs.fieldCode",
             "concept": "1576AAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+          }
+        },
+        {
+          "column_name": "childId",
+          "type": "Client",
+          "json_mapping": {
+            "field": "relationships.childId"
           }
         }
       ]

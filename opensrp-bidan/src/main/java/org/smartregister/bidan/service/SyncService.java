@@ -29,7 +29,7 @@ import org.smartregister.bidan.sync.ECSyncUpdater;
 import org.smartregister.domain.FetchStatus;
 import org.smartregister.domain.Response;
 import org.smartregister.service.HTTPAgent;
-import org.smartregister.sync.ClientProcessor;
+import org.smartregister.bidan.sync.ClientProcessor;
 import org.smartregister.util.Utils;
 import org.smartregister.view.activity.DrishtiApplication;
 
@@ -194,6 +194,7 @@ public class SyncService extends Service {
                             fullPath,
                             image.getSyncStatus(),
                             image.getFilecategory());
+            image1.setAnmId(BidanApplication.getInstance().context().allSharedPreferences().fetchRegisteredANM());
             String response = httpAgent.httpImagePost(MessageFormat.format("{0}/{1}", baseUrl, PHOTO_UPLOAD_PATH),image1);
             Log.d(TAG, "pushPhotoToServer: response="+response);
             if(response.equals("\"fail\"")){
@@ -507,8 +508,8 @@ public class SyncService extends Service {
         httpConn.setRequestMethod("GET");
 
         //add request header
-        httpConn.setRequestProperty("username","demo_user3");
-        httpConn.setRequestProperty("password","Demo@123");
+        httpConn.setRequestProperty("username",BidanApplication.getInstance().context().allSharedPreferences().fetchRegisteredANM());
+        httpConn.setRequestProperty("password",BidanApplication.getInstance().context().allSettings().fetchANMPassword());
 
         int responseCode = httpConn.getResponseCode();
         // always check HTTP response code first
