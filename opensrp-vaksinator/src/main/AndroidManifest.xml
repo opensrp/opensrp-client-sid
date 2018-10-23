@@ -3,6 +3,17 @@
     xmlns:tools="http://schemas.android.com/tools"
     package="org.smartregister.vaksinator">
 
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION " />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <!-- Needed only if your app targets Android 5.0 (API level 21) or higher. -->
+    <uses-feature android:name="android.hardware.location.gps" />
+    <uses-permission android:name="android.permission.CAMERA"/>
+    <uses-feature android:name="android.hardware.camera2"/>
+
     <application
         android:name=".application.VaksinatorApplication"
         android:allowBackup="true"
@@ -46,6 +57,12 @@
             android:theme="@style/AppThemeNoActionBarAndTitle"
             android:windowSoftInputMode="adjustResize"
             android:screenOrientation="landscape"/>
+        <activity android:name=".facial.activity.OpenCameraActivity"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar.FullScreen"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".facial.activity.PhotoConfirmationActivity"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar.FullScreen"
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".activity.SettingsActivity"
             android:theme="@style/BidanAppTheme"
@@ -60,6 +77,4 @@
             android:value="b74c58c94d8965151212e8ecf1f4fdfbf5b7f4e4" />
         <service android:name=".service.SyncService" />
     </application>
-
-    <uses-permission android:name="android.permission.INTERNET" />
 </manifest>

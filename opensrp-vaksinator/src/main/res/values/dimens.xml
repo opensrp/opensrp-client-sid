@@ -17,9 +17,8 @@
     <dimen name="list_delivery_info_view_width">0dp</dimen>
 
     <dimen name="list_item_height">82dp</dimen>
-    <dimen name="image_thumbnail_spacing">1dp</dimen>
     <dimen name="client_profile_pic_width">80dp</dimen>
-    <dimen name="client_profile_pic_height">70dp</dimen>
+    <dimen name="client_profile_pic_height">75dp</dimen>
     <dimen name="client_profile_pic_margin_left">5dp</dimen>
     <dimen name="client_profile_pic_margin_right">5dp</dimen>
     <dimen name="client_profile_pic_margin_top">5dp</dimen>
@@ -61,6 +60,8 @@
     <dimen name="gplsa_item_width">22dp</dimen>
     <dimen name="fp_register_gplsa_item_width">22dp</dimen>
     <dimen name="fp_modal_header_text_height">45dp</dimen>
+    <dimen name="obsetri_item_width">60dp</dimen>
+
 
     <dimen name="anc_list_hb_ifa_service_mode_hb_details_indicator_view_width">15dp</dimen>
     <dimen name="anc_list_hb_ifa_service_mode_hb_details_indicator_view_height">10dp</dimen>
@@ -68,12 +69,9 @@
     <dimen name="anc_list_delivery_plan_service_mode_tick_view_height">25dp</dimen>
     <dimen name="anc_list_delivery_plan_service_mode_tick_view_width">25dp</dimen>
 
+    <!--BPM-->
     <dimen name="activity_horizontal_margin">16dp</dimen>
     <dimen name="activity_vertical_margin">16dp</dimen>
     <dimen name="fab_margin">16dp</dimen>
 
-    <dimen name="card_elevation">2dp</dimen>
-    <dimen name="card_view_corner_radius">3dp</dimen>
-    <dimen name="activity_sub_title_size">14sp</dimen>
-    <dimen name="card_category_horizontal_margin">10dp</dimen>
 </resources>

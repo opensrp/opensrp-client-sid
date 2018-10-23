@@ -2,7 +2,7 @@
 <resources>
     <integer name="ec_list_item_weight_count">1000</integer>
     <integer name="ec_list_profile_box_weight">244</integer>
-    <integer name="ec_list_ec_no_view_weight">75</integer>
+    <integer name="ec_list_ec_no_view_weight">80</integer>
     <integer name="ec_list_gplsa_view_weight">125</integer>
     <integer name="ec_list_fp_view_weight">109</integer>
     <integer name="ec_list_children_view_weight">160</integer>
@@ -15,7 +15,6 @@
     <integer name="child_list_service_mode_views_section_weight">60</integer>
     <integer name="child_list_dob_view_weight">12</integer>
     <integer name="child_list_last_service_view_weight">15</integer>
-    <integer name="child_list_sick_status_view_weight">23</integer>
     <integer name="child_list_edit_icon_view_weight">10</integer>
 
     <integer name="child_list_bcg_view_weight">15</integer>
@@ -64,12 +63,24 @@
     <integer name="anc_list_hb_ifa_service_mode_hb_alert_view_weight">15</integer>
     <integer name="anc_list_hb_ifa_service_mode_ifa_alert_view_weight">14</integer>
     <integer name="anc_list_delivery_plan_service_mode_delivery_plan_alert_view_weight">58</integer>
-    <integer name="anc_list_delivery_plan_service_mode_delivery_plan_service_provided_delivery_at_view_weight">9</integer>
-    <integer name="anc_list_delivery_plan_service_mode_delivery_plan_service_provided_transport_view_weight">9</integer>
-    <integer name="anc_list_delivery_plan_service_mode_delivery_plan_service_provided_has_companion_view_weight">11</integer>
-    <integer name="anc_list_delivery_plan_service_mode_delivery_plan_service_provided_asha_phone_number_view_weight">9</integer>
-    <integer name="anc_list_delivery_plan_service_mode_delivery_plan_service_provided_contact_phone_number_view_weight">9</integer>
-    <integer name="anc_list_delivery_plan_service_mode_delivery_plan_service_provided_risks_reviewed_view_weight">9</integer>
+    <integer name="anc_list_delivery_plan_service_mode_delivery_plan_service_provided_delivery_at_view_weight">
+        9
+    </integer>
+    <integer name="anc_list_delivery_plan_service_mode_delivery_plan_service_provided_transport_view_weight">
+        9
+    </integer>
+    <integer name="anc_list_delivery_plan_service_mode_delivery_plan_service_provided_has_companion_view_weight">
+        11
+    </integer>
+    <integer name="anc_list_delivery_plan_service_mode_delivery_plan_service_provided_asha_phone_number_view_weight">
+        9
+    </integer>
+    <integer name="anc_list_delivery_plan_service_mode_delivery_plan_service_provided_contact_phone_number_view_weight">
+        9
+    </integer>
+    <integer name="anc_list_delivery_plan_service_mode_delivery_plan_service_provided_risks_reviewed_view_weight">
+        9
+    </integer>
 
     <integer name="pnc_list_item_weight_count">100</integer>
     <integer name="pnc_list_profile_box_weight">24</integer>
@@ -88,6 +99,6 @@
     <integer name="pnc_list_days_pp_view_weight">7</integer>
 
     <integer name="stroke_width">4</integer>
-    <integer name="heart_animation_duration">300</integer>
+
 
 </resources>

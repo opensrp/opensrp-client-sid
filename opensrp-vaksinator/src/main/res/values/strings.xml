@@ -728,4 +728,7 @@
 
 <string name="Nutrition_status">Status Gizi:</string>
 <string name="mother_already_registered_in_fp">Mother already registered</string>
+
+    <string name="sync_last_date">Last sync:</string>
+    <string name="not_synced">Not yet synced</string>
 </resources>
