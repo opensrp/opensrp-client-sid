@@ -122,7 +122,7 @@
 
         <meta-data
             android:name="io.fabric.ApiKey"
-            android:value="5bda8a6293b5b89b510a53e5d297d42bdf427e10" />
+            android:value="5e99cd365cdfb535eaa9e800af657fce3da3da03" />
         <service android:name=".service.SyncService" />
 
     </application>
