@@ -121,14 +121,20 @@ public class KIClientsProvider extends BaseClientsProvider {
         children_age_right.setText("");
 
         String edd = pc.getDetails().get("htp");
-        if (StringUtils.isNotBlank(pc.getDetails().get("htp"))) {
+        if (StringUtils.isNotBlank(pc.getDetails().get("htp")) || StringUtils.isNotBlank(pc.getDetails().get("usiaKlinis"))) {
             String _dueEdd = "";
-            DateTimeFormatter formatter = DateTimeFormat.forPattern("yyyy-MM-dd");
-            LocalDate date = parse(edd, formatter).toLocalDate();
-            LocalDate dateNow = LocalDate.now();
-            date = date.withDayOfMonth(1);
-            dateNow = dateNow.withDayOfMonth(1);
-            int months = Months.monthsBetween(dateNow, date).getMonths();
+            int months = 0;
+            if (StringUtils.isNotBlank(pc.getDetails().get("htp"))) {
+                DateTimeFormatter formatter = DateTimeFormat.forPattern("yyyy-MM-dd");
+                LocalDate date = parse(edd, formatter).toLocalDate();
+                LocalDate dateNow = LocalDate.now();
+                date = date.withDayOfMonth(1);
+                dateNow = dateNow.withDayOfMonth(1);
+                months = Months.monthsBetween(dateNow, date).getMonths();
+            } else if (StringUtils.isNotBlank(pc.getDetails().get("usiaKlinis"))) {
+                int usiaKlinis = Integer.parseInt(pc.getDetails().get("usiaKlinis"));
+                months = ((9 * 4) - usiaKlinis) / 4;
+            }
             if (months >= 1) {
                 edd_due.setTextColor(mContext.getResources().getColor(R.color.alert_in_progress_blue));
                 _dueEdd = "" + months + " " + mContext.getString(R.string.months_away);
@@ -141,7 +147,6 @@ public class KIClientsProvider extends BaseClientsProvider {
             }
 
             edd_due.setText(_dueEdd);
-
         } else {
             edd_due.setText("");
         }
@@ -153,7 +158,7 @@ public class KIClientsProvider extends BaseClientsProvider {
             //check anc  status
             if (anc_isclosed == 0) {
                 detailsRepository.updateDetails(ibuparent);
-                if (pc.getDetails().get("htp") == null) {
+                if (pc.getDetails().get("htp") == null && pc.getDetails().get("usiaKlinis") == null) {
 
                     Support.checkMonth(mContext, pc.getDetails().get("htp"), edd_due);
 
