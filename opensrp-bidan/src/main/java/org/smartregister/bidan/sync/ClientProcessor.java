@@ -629,7 +629,7 @@ public class ClientProcessor {
                 Long id = executeInsertStatement(contentValues, clientType);
                 updateFTSsearch(clientType, baseEntityId, contentValues);
                 Long timestamp = getEventDate(event.get("eventDate"));
-                addContentValuesToDetailsTable(contentValues, timestamp);
+                addContentValuesToDetailsTable(contentValues, timestamp, clientType);
                 updateClientDetailsTable(event, client);
             }
 
@@ -648,15 +648,26 @@ public class ClientProcessor {
      * @param values
      * @param eventDate
      */
-    protected void addContentValuesToDetailsTable(ContentValues values, Long eventDate) {
+    protected void addContentValuesToDetailsTable(ContentValues values, Long eventDate, String clientType) {
         try {
             Log.d(TAG, "Trace: from addContentValuesToDetailsTable");
             Log.d(TAG, "addContentValuesToDetailsTable: "+values);
+            Log.d(TAG, "clientType: "+clientType);
             String baseEntityId = values.getAsString("base_entity_id");
+            String ec_kartu_ibu = new String("ec_kartu_ibu");
+            String htp = new String("htp");
 
             for (String key : values.keySet()) {
-                String value = values.getAsString(key);
-                saveClientDetails(baseEntityId, key, value, eventDate);
+                Log.d(TAG, "key: "+key);
+                if (ec_kartu_ibu.equals(clientType) && htp.equals(key)){
+
+
+                    //baypass htp null saat edit ec kartu ibu
+                    Log.d(TAG, "baypass key: "+key);
+                } else {
+                    String value = values.getAsString(key);
+                    saveClientDetails(baseEntityId, key, value, eventDate);
+                }
             }
         } catch (Exception e) {
             Log.e(TAG, e.toString(), e);
