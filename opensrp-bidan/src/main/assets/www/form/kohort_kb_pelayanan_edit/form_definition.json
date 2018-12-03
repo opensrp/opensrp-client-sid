@@ -1,0 +1,165 @@
+{
+  "form_data_definition_version": "2",
+  "form": {
+    "bind_type": "kartu_ibu",
+    "ec_bind_type": "ec_kartu_ibu",
+    "default_bind_path": "/model/instance/tambah_kb_reviewed/",
+    "fields": [
+      {
+        "name": "id",
+        "shouldLoadValue": true
+      },
+      {
+        "name": "start",
+        "bind": "/model/instance/tambah_kb_reviewed/start"
+      },
+      {
+        "name": "end",
+        "bind": "/model/instance/tambah_kb_reviewed/end"
+      },
+      {
+        "name": "namalengkap",
+        "bind": "/model/instance/tambah_kb_reviewed/namalengkap",
+        "shouldLoadValue": true
+      },
+      {
+        "name": "existing_location",
+        "bind": "/model/instance/tambah_kb_reviewed/existing_location",
+        "shouldLoadValue": true
+      },
+      {
+        "name": "cityVillage",
+        "bind": "/model/instance/tambah_kb_reviewed/Village",
+        "shouldLoadValue": true
+      },
+      {
+        "name": "Province",
+        "bind": "/model/instance/tambah_kb_reviewed/Province",
+        "shouldLoadValue": true
+      },
+      {
+        "name": "Sub-district",
+        "bind": "/model/instance/tambah_kb_reviewed/Sub-district",
+        "shouldLoadValue": true
+      },
+      {
+        "name": "District",
+        "bind": "/model/instance/tambah_kb_reviewed/District",
+        "shouldLoadValue": true
+      },
+      {
+        "name": "address1",
+        "bind": "/model/instance/tambah_kb_reviewed/Sub-village",
+        "shouldLoadValue": true
+      },
+      {
+        "name": "dusun",
+        "bind": "/model/instance/tambah_kb_reviewed/dusun",
+        "shouldLoadValue": true
+      },
+      {
+        "name": "provinsi",
+        "bind": "/model/instance/tambah_kb_reviewed/provinsi",
+        "shouldLoadValue": true
+      },
+      {
+        "name": "kabupaten",
+        "bind": "/model/instance/tambah_kb_reviewed/kabupaten",
+        "shouldLoadValue": true
+      },
+      {
+        "name": "kecamatan",
+        "bind": "/model/instance/tambah_kb_reviewed/kecamatan",
+        "shouldLoadValue": true
+      },
+      {
+        "name": "desa",
+        "bind": "/model/instance/tambah_kb_reviewed/desa",
+        "shouldLoadValue": true
+      },
+      {
+        "name": "tanggalkunjungan",
+        "bind": "/model/instance/tambah_kb_reviewed/tanggal_kunjungan",
+        "shouldLoadValue": true
+      },
+      {
+        "name": "tanggalPeriksa",
+        "bind": "/model/instance/tambah_kb_reviewed/tanggal_periksa",
+        "shouldLoadValue": true
+      },
+      {
+        "name": "lokasiPeriksa",
+        "bind": "/model/instance/tambah_kb_reviewed/lokasi_periksa",
+        "shouldLoadValue": true
+      },
+      {
+        "name": "lokasiPeriksaOther",
+        "bind": "/model/instance/tambah_kb_reviewed/lokasi_periksa_other",
+        "shouldLoadValue": true
+      },
+      {
+        "name": "tanggalLahir",
+        "bind": "/model/instance/tambah_kb_reviewed/tanggal_lahir_ibu",
+        "shouldLoadValue": true
+      },
+      {
+        "name": "umur",
+        "bind": "/model/instance/tambah_kb_reviewed/umur"
+      },
+      {
+        "name": "tdSistolik",
+        "bind": "/model/instance/tambah_kb_reviewed/td_sistolik",
+        "shouldLoadValue": true
+      },
+      {
+        "name": "tdDiastolik",
+        "bind": "/model/instance/tambah_kb_reviewed/td_diastolik",
+        "shouldLoadValue": true
+      },
+      {
+        "name": "paritas",
+        "bind": "/model/instance/tambah_kb_reviewed/paritas",
+        "shouldLoadValue": true
+      },
+      {
+        "name": "alkihb",
+        "bind": "/model/instance/tambah_kb_reviewed/alki_hb",
+        "shouldLoadValue": true
+      },
+      {
+        "name": "alkilila",
+        "bind": "/model/instance/tambah_kb_reviewed/alki_lila",
+        "shouldLoadValue": true
+      },
+      {
+        "name": "alkiPenyakitKronis",
+        "bind": "/model/instance/tambah_kb_reviewed/alki_penyakit_kronis",
+        "shouldLoadValue": true
+      },
+      {
+        "name": "alkiPenyakitIms",
+        "bind": "/model/instance/tambah_kb_reviewed/alki_penyakit_ims",
+        "shouldLoadValue": true
+      },
+      {
+        "name": "keteranganTentangPesertaKB",
+        "bind": "/model/instance/tambah_kb_reviewed/keterangan_tentang_peserta_kb",
+        "shouldLoadValue": true
+      },
+      {
+        "name": "jenisKontrasepsi",
+        "bind": "/model/instance/tambah_kb_reviewed/jenis_kontrasepsi",
+        "shouldLoadValue": true
+      },
+      {
+        "name": "submissionDate",
+        "bind": "/model/instance/tambah_kb_reviewed/today"
+      },
+      {
+        "name": "registrationDate",
+        "bind": "/model/instance/tambah_kb_reviewed/reg_date",
+        "shouldLoadValue": true
+      }
+    ]
+  }
+}

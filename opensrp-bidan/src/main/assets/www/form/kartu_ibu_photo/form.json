@@ -1,0 +1,191 @@
+{
+  "name": "update_photo",
+  "title": "Update Photo",
+  "sms_keyword": "update_photo",
+  "default_language": "Bahasa",
+  "instance": {
+    "encounter_type": "Update Photo"
+  },
+  "version": "201610120923",
+  "id_string": "update_photo",
+  "type": "survey",
+  "children": [
+    {
+      "instance": {
+        "openmrs_entity_id": "encounter_start",
+        "openmrs_entity": "encounter"
+      },
+      "type": "start",
+      "name": "start"
+    },
+    {
+      "instance": {
+        "openmrs_entity_id": "encounter_date",
+        "openmrs_entity": "encounter"
+      },
+      "type": "today",
+      "name": "today"
+    },
+    {
+      "type": "hidden",
+      "name": "face_vector",
+      "hint": {
+        "Bahasa": "Inject from app"
+      }
+    },
+    {
+      "type": "deviceid",
+      "name": "deviceid"
+    },
+    {
+      "type": "simserial",
+      "name": "simserial"
+    },
+    {
+      "type": "phonenumber",
+      "name": "phonenumber"
+    },
+    {
+      "type": "hidden",
+      "name": "Province"
+    },
+    {
+      "type": "hidden",
+      "name": "District",
+      "hint": {
+        "Bahasa": "Inject from app"
+      }
+    },
+    {
+      "type": "hidden",
+      "name": "Sub-district",
+      "hint": {
+        "Bahasa": "Inject from app"
+      }
+    },
+    {
+      "type": "hidden",
+      "name": "Village",
+      "hint": {
+        "Bahasa": "Inject from app"
+      }
+    },
+    {
+      "type": "hidden",
+      "name": "Sub-village",
+      "hint": {
+        "Bahasa": "Inject from app"
+      }
+    },
+    {
+      "type": "note",
+      "name": "generated_note_name_13",
+      "label": {
+        "Bahasa": "Desa : ${Village}"
+      }
+    },
+    {
+      "type": "note",
+      "name": "generated_note_name_14",
+      "label": {
+        "Bahasa": "Dusun : ${Sub-village}"
+      }
+    },
+    {
+      "bind": {
+        "calculate": "${Village}"
+      },
+      "type": "hidden",
+      "name": "existing_location",
+      "instance": {
+        "openmrs_entity_id": "location_id",
+        "openmrs_entity": "encounter"
+      }
+    },
+    {
+      "bind": {
+        "calculate": "${Province}"
+      },
+      "type": "calculate",
+      "name": "provinsi",
+      "instance": {
+        "openmrs_entity": "person_address",
+        "openmrs_entity_id": "stateProvince",
+        "openmrs_entity_parent": "usual_residence"
+      }
+    },
+    {
+      "bind": {
+        "calculate": "${District}"
+      },
+      "type": "calculate",
+      "name": "kabupaten",
+      "instance": {
+        "openmrs_entity": "person_address",
+        "openmrs_entity_id": "countyDistrict",
+        "openmrs_entity_parent": "usual_residence"
+      }
+    },
+    {
+      "bind": {
+        "calculate": "${Village}"
+      },
+      "type": "calculate",
+      "name": "desa",
+      "instance": {
+        "openmrs_entity": "person_address",
+        "openmrs_entity_id": "cityVillage",
+        "openmrs_entity_parent": "usual_residence"
+      }
+    },
+    {
+      "bind": {
+        "calculate": "${Sub-village}"
+      },
+      "type": "calculate",
+      "name": "dusun",
+      "instance": {
+        "openmrs_entity": "person_address",
+        "openmrs_entity_id": "address1",
+        "openmrs_entity_parent": "usual_residence"
+      }
+    },
+    {
+      "bind": {
+        "calculate": "${Sub-district}"
+      },
+      "type": "calculate",
+      "name": "kecamatan",
+      "instance": {
+        "openmrs_entity": "person_address",
+        "openmrs_entity_id": "address2",
+        "openmrs_entity_parent": "usual_residence"
+      }
+    },
+    {
+      "instance": {
+        "openmrs_entity_id": "encounter_end",
+        "openmrs_entity": "encounter"
+      },
+      "type": "end",
+      "name": "end"
+    },
+    {
+      "control": {
+        "bodyless": true
+      },
+      "type": "group",
+      "children": [
+        {
+          "bind": {
+            "readonly": "true()",
+            "calculate": "concat('uuid:', uuid())"
+          },
+          "type": "calculate",
+          "name": "instanceID"
+        }
+      ],
+      "name": "meta"
+    }
+  ]
+}

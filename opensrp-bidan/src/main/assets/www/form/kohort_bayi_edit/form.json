@@ -1,0 +1,318 @@
+{
+  "name": "edit_bayi",
+  "title": "Edit Bayi",
+  "sms_keyword": "edit_bayi",
+  "default_language": "Bahasa",
+  "instance": {
+    "encounter_type": "Edit Bayi"
+  },
+  "version": "201809260239",
+  "id_string": "edit_bayi",
+  "type": "survey",
+  "children": [
+    {
+      "instance": {
+        "openmrs_entity_id": "encounter_start",
+        "openmrs_entity": "encounter"
+      },
+      "type": "start",
+      "name": "start"
+    },
+    {
+      "instance": {
+        "openmrs_entity_id": "encounter_date",
+        "openmrs_entity": "encounter"
+      },
+      "type": "today",
+      "name": "today"
+    },
+    {
+      "type": "deviceid",
+      "name": "deviceid"
+    },
+    {
+      "type": "simserial",
+      "name": "simserial"
+    },
+    {
+      "type": "phonenumber",
+      "name": "phonenumber"
+    },
+    {
+      "type": "hidden",
+      "name": "Province"
+    },
+    {
+      "type": "hidden",
+      "name": "District",
+      "hint": {
+        "Bahasa": "Inject from app"
+      }
+    },
+    {
+      "type": "hidden",
+      "name": "Sub-district",
+      "hint": {
+        "Bahasa": "Inject from app"
+      }
+    },
+    {
+      "type": "hidden",
+      "name": "Village",
+      "hint": {
+        "Bahasa": "Inject from app"
+      }
+    },
+    {
+      "type": "hidden",
+      "name": "Sub-village",
+      "hint": {
+        "Bahasa": "Inject from app"
+      }
+    },
+    {
+      "type": "note",
+      "name": "generated_note_name_13",
+      "label": {
+        "Bahasa": "Desa : ${Village}"
+      }
+    },
+    {
+      "type": "note",
+      "name": "generated_note_name_14",
+      "label": {
+        "Bahasa": "Dusun : ${Sub-village}"
+      }
+    },
+    {
+      "instance": {
+        "openmrs_entity_id": "location_id",
+        "openmrs_entity": "encounter"
+      },
+      "type": "hidden",
+      "name": "existing_location",
+      "bind": {
+        "calculate": "${Village}"
+      }
+    },
+    {
+      "instance": {
+        "openmrs_entity_parent": "usual_residence",
+        "openmrs_entity_id": "stateProvince",
+        "openmrs_entity": "person_address"
+      },
+      "type": "calculate",
+      "name": "provinsi",
+      "bind": {
+        "calculate": "${Province}"
+      }
+    },
+    {
+      "instance": {
+        "openmrs_entity_parent": "usual_residence",
+        "openmrs_entity_id": "countyDistrict",
+        "openmrs_entity": "person_address"
+      },
+      "type": "calculate",
+      "name": "kabupaten",
+      "bind": {
+        "calculate": "${District}"
+      }
+    },
+    {
+      "instance": {
+        "openmrs_entity_parent": "usual_residence",
+        "openmrs_entity_id": "cityVillage",
+        "openmrs_entity": "person_address"
+      },
+      "type": "calculate",
+      "name": "desa",
+      "bind": {
+        "calculate": "${Village}"
+      }
+    },
+    {
+      "instance": {
+        "openmrs_entity_parent": "usual_residence",
+        "openmrs_entity_id": "address1",
+        "openmrs_entity": "person_address"
+      },
+      "type": "calculate",
+      "name": "dusun",
+      "bind": {
+        "calculate": "${Sub-village}"
+      }
+    },
+    {
+      "instance": {
+        "openmrs_entity_parent": "usual_residence",
+        "openmrs_entity_id": "address2",
+        "openmrs_entity": "person_address"
+      },
+      "type": "calculate",
+      "name": "kecamatan",
+      "bind": {
+        "calculate": "${Sub-district}"
+      }
+    },
+    {
+      "instance": {
+        "openmrs_entity_parent": "cityVillage",
+        "openmrs_entity_id": "160632AAAAAAAAAAAAAAAAAAAAAAAAAA",
+        "openmrs_entity": "Concept"
+      },
+      "type": "calculate",
+      "name": "desa_anak",
+      "bind": {
+        "calculate": "${Village}"
+      }
+    },
+    {
+      "type": "note",
+      "name": "generated_note_name_61",
+      "label": {
+        "Bahasa": "Desa : ${desa_anak}"
+      }
+    },
+    {
+      "instance": {
+        "openmrs_entity_id": "location_id",
+        "openmrs_entity": "encounter"
+      },
+      "type": "hidden",
+      "name": "child_existing_location",
+      "bind": {
+        "calculate": "${Village}"
+      }
+    },
+    {
+      "name": "nama_bayi",
+      "hint": {
+        "Bahasa": "Nama Bayi yang diberikan Imunisasi",
+        "English": "Name of Baby Receiving Immunization"
+      },
+      "bind": {
+        "required": "yes"
+      },
+      "label": {
+        "Bahasa": "Nama Bayi",
+        "English": "Baby's Name"
+      },
+      "instance": {
+        "openmrs_entity_id": "1586AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+        "openmrs_entity": "Concept"
+      },
+      "type": "text"
+    },
+    {
+      "name": "jenis_kelamin",
+      "hint": {
+        "Bahasa": "Jenis Kelamin Bayi/Balita Yang diberikan Imunisasi",
+        "English": "Gender of Baby Receiving Immunization"
+      },
+      "bind": {
+        "required": "yes"
+      },
+      "label": {
+        "Bahasa": "Jenis Kelamin",
+        "English": "Gender"
+      },
+      "instance": {
+        "openmrs_entity_id": "gender",
+        "openmrs_entity": "person"
+      },
+      "type": "select one",
+      "children": [
+        {
+          "instance": {
+            "openmrs_code": "1534AAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+          },
+          "name": "male",
+          "label": {
+            "Bahasa": "Laki-Laki (L)",
+            "English": "Male (M)"
+          }
+        },
+        {
+          "instance": {
+            "openmrs_code": "1535AAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+          },
+          "name": "female",
+          "label": {
+            "Bahasa": "Perempuan ( P)",
+            "English": "Female (F)"
+          }
+        }
+      ]
+    },
+    {
+      "name": "tanggal_lahir",
+      "hint": {
+        "Bahasa": "Tanggal lahir Bayi",
+        "English": "Baby's date of birth"
+      },
+      "bind": {
+        "required": "yes",
+        "constraint": ".<${today}"
+      },
+      "label": {
+        "Bahasa": "Tanggal lahir",
+        "English": "DOB"
+      },
+      "instance": {
+        "openmrs_entity_id": "birthdate",
+        "openmrs_entity": "person"
+      },
+      "type": "date"
+    },
+    {
+      "instance": {
+        "openmrs_entity_id": "5916AAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+        "openmrs_entity": "concept"
+      },
+      "label": {
+        "Bahasa": "Berat badan saat Lahir",
+        "English": "Baby's birth weight"
+      },
+      "type": "integer",
+      "name": "berat_badan_saat_lahir",
+      "hint": {
+        "Bahasa": "Berat badan lahir bayi",
+        "English": "Baby's birth weight"
+      }
+    },
+    {
+      "instance": {
+        "openmrs_entity_id": "ibuCaseId",
+        "openmrs_entity": "person_relationship"
+      },
+      "type": "hidden",
+      "name": "ibu_entity_id"
+    },
+    {
+      "instance": {
+        "openmrs_entity_id": "encounter_end",
+        "openmrs_entity": "encounter"
+      },
+      "type": "end",
+      "name": "end"
+    },
+    {
+      "control": {
+        "bodyless": true
+      },
+      "type": "group",
+      "children": [
+        {
+          "bind": {
+            "readonly": "true()",
+            "calculate": "concat('uuid:', uuid())"
+          },
+          "type": "calculate",
+          "name": "instanceID"
+        }
+      ],
+      "name": "meta"
+    }
+  ]
+}

@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    package="org.smartregister.gizi">
+
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION " />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <!-- Needed only if your app targets Android 5.0 (API level 21) or higher. -->
+    <uses-feature android:name="android.hardware.location.gps" />
+    <uses-permission android:name="android.permission.CAMERA"/>
+    <uses-feature android:name="android.hardware.camera2"/>
+
+    <application
+        tools:replace="android:icon"
+        android:name=".application.GiziApplication"
+        android:allowBackup="true"
+        android:icon="@mipmap/ic_opensrp_logo"
+        >
+         <meta-data
+            android:name="io.fabric.ApiKey"
+            android:value="b74c58c94d8965151212e8ecf1f4fdfbf5b7f4e4" />
+
+        <activity
+            android:name=".activity.LoginActivity"
+            android:label="@string/app_name"
+            android:theme="@style/BidanAppTheme"
+            android:screenOrientation="landscape"
+            android:windowSoftInputMode="stateAlwaysHidden|adjustResize"
+            >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity android:name=".activity.GiziHomeActivity"
+            android:theme="@style/AppTheme"
+            android:screenOrientation="landscape"/>
+        <activity android:name=".activity.GiziSmartRegisterActivity"
+            android:configChanges="keyboardHidden|orientation|screenSize"
+            android:theme="@style/AppThemeNoActionBarAndTitle"
+            android:windowSoftInputMode="adjustResize"
+            android:screenOrientation="landscape"/>
+        <activity android:name=".activity.GiziDetailActivity"
+            android:configChanges="keyboardHidden|orientation|screenSize"
+            android:theme="@style/AppThemeNoActionBarAndTitle"
+            android:windowSoftInputMode="adjustResize"
+            android:screenOrientation="landscape"/>
+        <activity android:name=".activity.GiziGrowthChartActivity"
+            android:configChanges="keyboardHidden|orientation|screenSize"
+            android:theme="@style/AppThemeNoActionBarAndTitle"
+            android:windowSoftInputMode="adjustResize"
+            android:screenOrientation="landscape"/>
+        <activity android:name=".activity.GiziZScoreChartActivity"
+            android:configChanges="keyboardHidden|orientation|screenSize"
+            android:theme="@style/AppThemeNoActionBarAndTitle"
+            android:windowSoftInputMode="adjustResize"
+            android:screenOrientation="landscape"/>
+        <activity android:name=".activity.IbuSmartRegisterActivity"
+            android:configChanges="keyboardHidden|orientation|screenSize"
+            android:theme="@style/AppThemeNoActionBarAndTitle"
+            android:windowSoftInputMode="adjustResize"
+            android:screenOrientation="landscape"/>
+        <activity android:name=".activity.SettingsActivity"
+            android:screenOrientation="landscape"
+            android:label="@string/action_settings"/>
+        <activity android:name=".utils.CameraPreviewActivity" />
+        <activity android:name=".facial.activity.OpenCameraActivity"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar.FullScreen"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".facial.activity.PhotoConfirmationActivity"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar.FullScreen"
+            android:screenOrientation="portrait"/>
+
+        <service android:name=".service.SyncService" />
+      <!--  <activity android:name=".face.camera.SmartShutterActivity" android:noHistory="true" />
+        <activity android:name=".face.camera.ImageConfirmation" android:noHistory="true" />
+
+        <activity android:name=".face.camera.ClientsList" />
+-->
+    </application>
+
+</manifest>
