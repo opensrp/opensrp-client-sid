@@ -278,7 +278,8 @@ public class PhotoConfirmationActivity extends AppCompatActivity {
         Bitmap scaled = Bitmap.createScaledBitmap(mutableBitmap, screenWidth/2, screenHeight/2, false);
         confirmationView.setImageBitmap(scaled);
 
-        useSnapdragonSDK();
+        //hasep: turn off facial recognition
+//        useSnapdragonSDK();
 
     }
 

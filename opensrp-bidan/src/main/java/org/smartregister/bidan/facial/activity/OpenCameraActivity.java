@@ -79,7 +79,7 @@ public class OpenCameraActivity extends Activity implements PreviewCallback {
     private ImageView menu;
     private ImageView settingsButton, faceEyesMouthBtn, perfectPhotoButton, galleryButton, flashButton;
 
-    private boolean isDevCompat;
+    private boolean isDevCompat = false;
     private int displayAngle;
     private boolean smileFlag;
     private boolean blinkFlag;
@@ -407,7 +407,9 @@ public class OpenCameraActivity extends Activity implements PreviewCallback {
     private void initCamera() {
 
         // Check to see if the FacialProc feature is supported in the device or no.
-        isDevCompat = FacialRecognitionLibrary.getDevCompat();
+
+        //hasep: turn off facial recognition
+//        isDevCompat = FacialRecognitionLibrary.getDevCompat();
 
         if (isDevCompat && faceProc != null) {
             Log.e(TAG, "Feature is supported");
@@ -416,6 +418,7 @@ public class OpenCameraActivity extends Activity implements PreviewCallback {
 //            faceProc.setRecognitionConfidence(Tools.CONFIDENCE_VALUE);
 
         } else if (!isDevCompat && !activityStartedOnce) {
+            /* //hasep: turn off facial recognition popup warning
             Log.e(TAG, "Feature is NOT supported");
             AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(OpenCameraActivity.this);
 
@@ -437,6 +440,7 @@ public class OpenCameraActivity extends Activity implements PreviewCallback {
 
             // show it
             alertDialog.show();
+            */
             activityStartedOnce = true;
         }
 
