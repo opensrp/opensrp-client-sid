@@ -31,6 +31,7 @@ buildscript {
         google()
         mavenCentral()
         jcenter()
+        maven { url 'https://dl.google.com/' }
     }
     dependencies {
         classpath 'com.android.tools.build:gradle:3.1.2'
@@ -58,6 +59,7 @@ subprojects {
     repositories {
         jcenter()
         mavenCentral()
+        maven { url 'https://dl.google.com/' }
         maven { url 'https://jitpack.io' }
         maven { url "${projectDir}/libs/" }
         maven { url "http://nexus.motechproject.org/content/repositories/drishti" }
@@ -99,6 +101,7 @@ allprojects {
     repositories {
         google()
         jcenter()
+        maven { url 'https://dl.google.com/' }
     }
 }
 

@@ -3,6 +3,7 @@ buildscript {
         google()
         jcenter()
         maven { url 'https://maven.fabric.io/public' }
+        maven { url 'https://dl.google.com/' }
 
     }
     dependencies {
@@ -20,6 +21,7 @@ repositories {
     mavenCentral()
     maven { url 'https://oss.sonatype.org/content/repositories/snapshots/' }
     maven { url 'https://maven.fabric.io/public' }
+    maven { url 'https://dl.google.com/' }
     mavenLocal()
 }
 
@@ -41,10 +43,16 @@ jacoco {
 //}
 
 android {
-
+    signingConfigs {
+        config {
+            keyAlias 'sid'
+            keyPassword 'sid'
+            storeFile file('sid')
+            storePassword 'sid'
+        }
+    }
     compileSdkVersion 27
     buildToolsVersion "27.0.3"
-
     defaultConfig {
         applicationId "org.smartregister.bidan"
         minSdkVersion 18
@@ -66,11 +74,9 @@ android {
             }
         }
     }
-
     dexOptions {
         javaMaxHeapSize "4g"
     }
-
     buildTypes {
         release {
             minifyEnabled false
@@ -88,7 +94,6 @@ android {
 
         }
     }
-
     packagingOptions {
         exclude 'META-INF/DEPENDENCIES.txt'
         exclude 'META-INF/LICENSE.txt'
@@ -102,17 +107,14 @@ android {
         exclude 'META-INF/LGPL2.1'
         exclude 'LICENSE.txt'
     }
-
     lintOptions {
         disable 'MissingTranslation', 'ExtraTranslation'
 //        lintConfig file("lint.xml")
         abortOnError false
     }
-
     configurations.all {
         resolutionStrategy.force 'com.google.code.findbugs:jsr305:1.3.9'
     }
-
     testOptions {
         unitTests {
             returnDefaultValues = true
@@ -132,15 +134,12 @@ dependencies {
         exclude group: 'com.github.bmelnychuk', module: 'atv'
         exclude group: 'com.google.guava', module: 'guava'
     }
-
     implementation('org.smartregister:opensrp-client-enketo:1.1.0-SNAPSHOT@aar') {
         transitive = true
     }
-
     implementation('org.smartregister:opensrp-client-configurable-views:1.1.1-SNAPSHOT@aar') {
         transitive = true
     }
-
     implementation 'com.android.support:design:27.1.1'
     implementation 'com.google.code.gson:gson:2.8.2'
     implementation 'com.android.support:appcompat-v7:27.1.1'
@@ -148,26 +147,22 @@ dependencies {
     implementation 'org.greenrobot:eventbus:3.1.1'
     annotationProcessor 'org.greenrobot:eventbus-annotation-processor:3.1.1'
     annotationProcessor 'com.jakewharton:butterknife:7.0.0'
-
     implementation 'com.google.guava:guava:20.0'
     implementation 'io.reactivex.rxjava2:rxandroid:2.0.1'
     // Because RxAndroid releases are few and far between, it is recommended you also
     // explicitly depend on RxJava's latest version for bug fixes and new features.
     implementation 'io.reactivex.rxjava2:rxjava:2.1.5'
     implementation 'com.github.lecho:hellocharts-android:v1.5.8'
-
     implementation files('libs/FlurryAnalytics-6.0.0.jar')
     implementation('com.crashlytics.sdk.android:crashlytics:2.8.0@aar') {
         transitive = true
     }
     implementation 'org.osmdroid:osmdroid-android:6.0.2'
-    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    implementation fileTree(include: ['*.jar'], dir: 'libs')
     implementation 'com.balysv.materialmenu:material-menu:2.0.0'
     implementation 'com.loopj.android:android-async-http:1.4.9'
     implementation 'com.squareup.okhttp3:okhttp:3.8.1'
-
     androidTestImplementation 'junit:junit:4.12'
-
     testImplementation 'junit:junit:4.12'
     testImplementation 'org.apache.maven:maven-ant-tasks:2.1.3'
     testImplementation('com.squareup:fest-android:1.0.8') { exclude module: 'support-v4' }
@@ -179,7 +174,6 @@ dependencies {
     testImplementation "org.powermock:powermock-module-junit4-rule:$powerMockVersion"
     testImplementation "org.powermock:powermock-api-mockito2:$powerMockVersion"
     testImplementation "org.powermock:powermock-classloading-xstream:$powerMockVersion"
-
     androidTestImplementation('com.android.support.test:runner:0.5') {
         exclude module: 'support-annotations'
     }
@@ -189,7 +183,6 @@ dependencies {
     compile('com.crashlytics.sdk.android:crashlytics-ndk:2.0.5@aar') {
         transitive = true;
     }
-
 }
 
 //task jacocoTestReport(type: JacocoReport, dependsOn: ['testDebugUnitTest']) {

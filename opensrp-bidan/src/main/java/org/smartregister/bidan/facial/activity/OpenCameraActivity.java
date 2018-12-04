@@ -138,6 +138,7 @@ public class OpenCameraActivity extends Activity implements PreviewCallback {
 
     @Override
     public void onPreviewFrame(byte[] data, Camera camera) {
+        Log.e(TAG, "hasep:onPreviewFrame: onPreviewFrame()");
 
         setFlagsTrue();
         int dRotation = display.getRotation();
@@ -210,20 +211,29 @@ public class OpenCameraActivity extends Activity implements PreviewCallback {
 
             // Number of Face in the frame.
             numFaces = faceProc.getNumFaces();
+            Log.e(TAG,"numFaces: "+numFaces);
 
             if (numFaces == 0) {
                 // No Face Detected on Frame
-//                Log.e(TAG, "No Face Detected");
+                Log.e(TAG, "onPreviewFrame: No Face Detected");
                 smile.setChecked(false);
+                Log.e(TAG, "onPreviewFrame: smile: false");
                 eyeBlink.setChecked(false);
+                Log.e(TAG, "onPreviewFrame: eyeBlink: false");
                 gazeAngle.setChecked(false);
+                Log.e(TAG, "onPreviewFrame: gazeAngle: false");
 
                 if (drawView != null) {
+                    Log.e(TAG, "onPreviewFrame: drawView:1"+drawView);
                     preview.removeView(drawView);
+                    Log.e(TAG, "onPreviewFrame: drawView:2");
                     drawView = new PaintFaceView(this, null, false);
+                    Log.e(TAG, "onPreviewFrame: drawView:3");
                     preview.addView(drawView);
+                    Log.e(TAG, "onPreviewFrame: drawView:4");
                 }
 
+                Log.e(TAG, "onPreviewFrame: numface: end");
             } else {
 //                Log.e(TAG, "Face Detected");
                 faceArray = faceProc.getFaceData();
@@ -360,6 +370,7 @@ public class OpenCameraActivity extends Activity implements PreviewCallback {
                 }
             }
         }
+        Log.e(TAG, "hasep:onPreviewFrame: END");
     }
 
     @Override
