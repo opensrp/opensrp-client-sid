@@ -129,18 +129,18 @@ public class ANCClientsProvider extends BaseClientsProvider {
         AllCommonsRepository allancRepository = Context.getInstance().allCommonsRepositoryobjects("ec_ibu");
         CommonPersonObject ancobject = allancRepository.findByCaseID(pc.entityId());
         DetailsRepository detailsRepository = Context.getInstance().detailsRepository();
-        detailsRepository.updateDetails(ancobject);
+        if(ancobject != null) {
+            detailsRepository.updateDetails(ancobject);
 
-        Log.e(TAG, "getView: client : " + ancobject.getColumnmaps().toString());
-        Log.e(TAG, "getView: event : " + ancobject.getDetails().toString());
+            Log.e(TAG, "getView: client : " + ancobject.getColumnmaps().toString());
+            Log.e(TAG, "getView: event : " + ancobject.getDetails().toString());
 
-        Map<String, String> details = detailsRepository.getAllDetailsForClient(pc.entityId());
-        details.putAll(ancobject.getColumnmaps());
+            Map<String, String> details = detailsRepository.getAllDetailsForClient(pc.entityId());
+            details.putAll(ancobject.getColumnmaps());
 
-        if (pc.getDetails() != null) pc.getDetails().putAll(details);
-        else pc.setDetails(details);
-
-
+            if (pc.getDetails() != null) pc.getDetails().putAll(details);
+            else pc.setDetails(details);
+        }
         // ========================================================================================
         // Set Value
         // ========================================================================================
