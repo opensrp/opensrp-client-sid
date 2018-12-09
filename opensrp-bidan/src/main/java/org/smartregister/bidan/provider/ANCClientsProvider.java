@@ -38,6 +38,9 @@ import static android.view.View.VISIBLE;
 import static android.view.ViewGroup.LayoutParams.MATCH_PARENT;
 import static org.joda.time.LocalDateTime.parse;
 
+import org.joda.time.*;
+//import java.time.*;
+
 /**
  * Created by Dimas Ciputra on 2/16/15
  */
@@ -243,8 +246,12 @@ public class ANCClientsProvider extends BaseClientsProvider {
 //        village_name.setText(pc.getDetails().get("address1") != null ? pc.getDetails().get("address1") : "");
 //        wife_age.setText(pc.getDetails().get("umur") != null ? pc.getDetails().get("umur") : "");
 //        no_ibu.setText(pc.getDetails().get("noIbu") != null ? pc.getDetails().get("noIbu") : "");
+
+        String ageWeek = getAgeWeek(pc.getDetails().get("htp"));
+
         ((TextView) convertView.findViewById(R.id.unique_id)).setText(pc.getDetails().get(AllConstantsINA.CommonFormFields.UNIQUE_ID) != null ? pc.getDetails().get(AllConstantsINA.CommonFormFields.UNIQUE_ID) : "");
-        ((TextView) convertView.findViewById(R.id.txt_usia_klinis)).setText(pc.getDetails().get("usiaKlinis") != null ? mContext.getString(R.string.usia) + pc.getDetails().get("usiaKlinis") + mContext.getString(R.string.str_weeks) : "-");
+//        ((TextView) convertView.findViewById(R.id.txt_usia_klinis)).setText(pc.getDetails().get("usiaKlinis") != null ? mContext.getString(R.string.usia) +" "+ pc.getDetails().get("usiaKlinis") + mContext.getString(R.string.str_weeks) : "-");
+        ((TextView) convertView.findViewById(R.id.txt_usia_klinis)).setText(ageWeek != "" ? mContext.getString(R.string.usia) +": "+ ageWeek + mContext.getString(R.string.str_weeks) : "-");
         ((TextView) convertView.findViewById(R.id.txt_htpt)).setText(pc.getDetails().get("htp") != null ? pc.getDetails().get("htp") : "-");
 
         TextView edd_due = (TextView) convertView.findViewById(R.id.txt_edd_due);
@@ -427,6 +434,22 @@ public class ANCClientsProvider extends BaseClientsProvider {
 
         convertView.setLayoutParams(clientViewLayoutParams);
 
+    }
+
+    //hasep: used for get week ages based on htp
+    private String getAgeWeek(String htp){
+        if(htp != null ) {
+            Log.e(TAG, "getAgeWeek: " + htp);
+
+            DateTimeFormatter datePattern = DateTimeFormat.forPattern("yyyy-MM-dd");
+            DateTime HTP = datePattern.parseDateTime(htp);
+            DateTime now = DateTime.now();
+            int days = Days.daysBetween(now.toLocalDate(), HTP.toLocalDate()).getDays();
+            int weeks = Math.round(days / 7);
+            return weeks+"";
+        }
+
+        return "";
     }
 
     @Override
