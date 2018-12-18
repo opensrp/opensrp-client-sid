@@ -656,19 +656,22 @@ public class ClientProcessor {
             String baseEntityId = values.getAsString("base_entity_id");
             String ec_kartu_ibu = new String("ec_kartu_ibu");
             String htp = new String("htp");
+            String relationalid = new String("relationalid");
 
             for (String key : values.keySet()) {
                 Log.d(TAG, "key: "+key);
-                if (ec_kartu_ibu.equals(clientType) && htp.equals(key)){
-                    //baypass htp null saat edit ec kartu ibu
-                    Log.d(TAG, "bypass key: "+key);
-
+                String value = values.getAsString(key);
+                if (ec_kartu_ibu.equals(clientType) && value == null) {
+                    //get previous value if current value null
+                    Log.d(TAG, "get previous " + key + " value");
                     Map<String, String> clientDetail = getClientDetails(baseEntityId);
-                    Log.d(TAG, "old htp value: "+clientDetail.get("htp"));
-
-                    saveClientDetails(baseEntityId, key, clientDetail.get("htp"), eventDate);
+                    if (clientDetail.get(key) != null) {
+                        saveClientDetails(baseEntityId, key, clientDetail.get(key), eventDate);
+                    }else{
+                        Log.d(TAG, "previous value " + key + " is null");
+                        Log.d(TAG,clientDetail.toString());
+                    }
                 } else {
-                    String value = values.getAsString(key);
                     saveClientDetails(baseEntityId, key, value, eventDate);
                 }
             }

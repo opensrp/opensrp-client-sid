@@ -53,7 +53,7 @@ android {
         versionName "4.0.1"
         multiDexEnabled true
         vectorDrawables.useSupportLibrary = true
-        ndk { abiFilters "armeabi" }
+        ndk { abiFilters "armeabi", "armeabi-v7a", "x86" }
 
         buildConfigField "long", "MAX_SERVER_TIME_DIFFERENCE", "1800000l"
         buildConfigField "boolean", "TIME_CHECK", "false"
@@ -76,11 +76,11 @@ android {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
             buildConfigField "int", "DATABASE_VERSION", '1'
-            resValue "string", 'opensrp_url', '"http://118.91.130.18:9090/opensrp"'
+            resValue "string", 'opensrp_url', '"http://149.129.219.205:9094/opensrp"'
 
         }
         debug {
-            resValue "string", 'opensrp_url', '"http://178.128.88.118:8080/opensrp"'
+            resValue "string", 'opensrp_url', '"http://149.129.219.205:9094/opensrp"'
             buildConfigField "int", "DATABASE_VERSION", '1'
             buildConfigField "boolean", "SYNC_WAIT", 'false'
             buildConfigField "boolean", "UNIQUE_ID", 'false'

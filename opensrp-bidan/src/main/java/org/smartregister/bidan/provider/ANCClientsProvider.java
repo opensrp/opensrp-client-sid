@@ -311,8 +311,7 @@ public class ANCClientsProvider extends BaseClientsProvider {
 
         String[] alertObject = getAlertStatus(textStatusDate);
 
-        alert_status.setText("sdfs");
-        Log.e(TAG,"alertObjectalertObjectalertObject "+alertObject[0]+" "+alertObject[1]);
+        alert_status.setText("");
 
         if (alertObject != null && alertObject.length == 2){
             alert_status.setText(alertObject[0]);
@@ -327,20 +326,40 @@ public class ANCClientsProvider extends BaseClientsProvider {
             }
         }
 
-        if ("-".equals(ancKe) || "".equals(ancKe)) {
-            status_type.setText(R.string.ANC1);
+        if ("-".equals(kunjunganKe) || "".equals(kunjunganKe)) {
+            status_type.setText(R.string.Visit1);
         }
 
-        if ("1".equals(ancKe)) {
-            status_type.setText(R.string.ANC2);
+        if ("1".equals(kunjunganKe)) {
+            status_type.setText(R.string.Visit2);
         }
 
-        if ("2".equals(ancKe)) {
-            status_type.setText(R.string.ANC3);
+        if ("2".equals(kunjunganKe)) {
+            status_type.setText(R.string.Visit3);
         }
 
-        if ("3".equals(ancKe)) {
-            status_type.setText(R.string.ANC4);
+        if ("3".equals(kunjunganKe)) {
+            status_type.setText(R.string.Visit4);
+        }
+
+        if ("4".equals(kunjunganKe)) {
+            status_type.setText(R.string.Visit5);
+        }
+
+        if ("5".equals(kunjunganKe)) {
+            status_type.setText(R.string.Visit6);
+        }
+
+        if ("6".equals(kunjunganKe)) {
+            status_type.setText(R.string.Visit7);
+        }
+
+        if ("7".equals(kunjunganKe)) {
+            status_type.setText(R.string.Visit8);
+        }
+
+        if ("8".equals(kunjunganKe)) {
+            status_type.setText(R.string.Visit9);
         }
 
         convertView.setLayoutParams(clientViewLayoutParams);
@@ -394,15 +413,15 @@ public class ANCClientsProvider extends BaseClientsProvider {
             if(DATE.isAfter(nextWeek)){
                 Duration duration = new Duration(now, DATE);
                 long days = duration.getStandardDays();
-                ret[0] = "ANC in "+ days +" days";
+                ret[0] = "Visit in "+ days +" days";
                 ret[1] = "blue";
             }
             if(DATE.isAfter(now) && DATE.isBefore(nextWeek)){
-                ret[0] = "AMC within 1 week";
+                ret[0] = "Visit in 1 weeks";
                 ret[1] = "yellow";
             }
             if(DATE.isBefore(now)){
-                ret[0] = "ANC date passed";
+                ret[0] = "Visit passed";
                 ret[1] = "red";
             }
         }
