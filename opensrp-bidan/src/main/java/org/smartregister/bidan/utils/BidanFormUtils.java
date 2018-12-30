@@ -17,6 +17,7 @@ import org.smartregister.bidan.activity.BaseRegisterActivity;
 import org.smartregister.bidan.activity.LoginActivity;
 import org.smartregister.bidan.application.BidanApplication;
 import org.smartregister.bidan.repository.IndonesiaECRepository;
+import org.smartregister.bidan.sync.ClientProcessor;
 import org.smartregister.clientandeventmodel.Client;
 import org.smartregister.clientandeventmodel.Event;
 import org.smartregister.clientandeventmodel.FormAttributeParser;
@@ -30,7 +31,6 @@ import org.smartregister.domain.form.FormSubmission;
 import org.smartregister.domain.form.SubForm;
 import org.smartregister.repository.AllSharedPreferences;
 import org.smartregister.repository.BaseRepository;
-import org.smartregister.sync.ClientProcessor;
 import org.smartregister.util.AssetHandler;
 import org.smartregister.util.Log;
 import org.w3c.dom.Attr;
@@ -1099,11 +1099,21 @@ public class BidanFormUtils {
                             getDependentClientsFromFormSubmission(formSubmission);
                     for (Map<String, Object> cm : dep.values()) {
                         Client cin = (Client) cm.get("client");
+                        String uuid = UUID.randomUUID().toString();
+                        cin.setBaseEntityId(uuid);
                         saveClient(cin);
                         Event evin = (Event) cm.get("event");
                         evin = tagSyncMetadata(evin);
+                        evin.setBaseEntityId(uuid);
                         saveEvent(evin);
-                        client.addRelationship("childId",evin.getBaseEntityId());
+                        List<String> childs = client.findRelatives("childId");
+                        if (childs == null){
+                            childs = new ArrayList<>();
+                        }
+                        childs.add(0,uuid);
+                        Map<String, List<String>> relationships = new HashMap<>();
+                        relationships.put("childId",childs);
+                        client.withRelationships(relationships);
                     }
 
                     saveClient(client);
@@ -1114,14 +1124,21 @@ public class BidanFormUtils {
                             getDependentClientsFromFormSubmission(formSubmission);
                     for (Map<String, Object> cm : dep.values()) {
                         Client cin = (Client) cm.get("client");
-                        cin.setBaseEntityId(UUID.randomUUID().toString());
+                        String uuid = UUID.randomUUID().toString();
+                        cin.setBaseEntityId(uuid);
                         saveClient(cin);
                         Event evin = (Event) cm.get("event");
-                        evin.setBaseEntityId(cin.getBaseEntityId());
                         evin = tagSyncMetadata(evin);
+                        evin.setBaseEntityId(uuid);
                         saveEvent(evin);
-
-                        client.addRelationship("childId",evin.getBaseEntityId());
+                        List<String> childs = client.findRelatives("childId");
+                        if (childs == null){
+                            childs = new ArrayList<>();
+                        }
+                        childs.add(0,uuid);
+                        Map<String, List<String>> relationships = new HashMap<>();
+                        relationships.put("childId",childs);
+                        client.withRelationships(relationships);
                     }
 
                     saveClient(client);

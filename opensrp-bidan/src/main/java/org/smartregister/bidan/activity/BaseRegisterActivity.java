@@ -29,7 +29,7 @@ import org.smartregister.enketo.listener.DisplayFormListener;
 import org.smartregister.enketo.view.fragment.DisplayFormFragment;
 import org.smartregister.provider.SmartRegisterClientsProvider;
 import org.smartregister.repository.DetailsRepository;
-import org.smartregister.sync.ClientProcessor;
+import org.smartregister.bidan.sync.ClientProcessor;
 import org.smartregister.util.Log;
 import org.smartregister.view.activity.SecuredNativeSmartRegisterActivity;
 import org.smartregister.view.contract.SmartRegisterClient;
@@ -357,6 +357,7 @@ public class BaseRegisterActivity extends SecuredNativeSmartRegisterActivity imp
             android.util.Log.d(TAG, "saveFormSubmission: formSubmission="+formSubmission);
             android.util.Log.d(TAG, "saveFormSubmission: id="+id);
             android.util.Log.d(TAG, "saveFormSubmission: formName="+formName);
+            android.util.Log.d(TAG, "saveFormSubmission: fieldOverrides="+fieldOverrides);
             BidanFormUtils formUtils = BidanFormUtils.getInstance(this);
             FormSubmission submission = formUtils.generateFormSubmisionFromXMLString(id, formSubmission, formName, fieldOverrides);
 

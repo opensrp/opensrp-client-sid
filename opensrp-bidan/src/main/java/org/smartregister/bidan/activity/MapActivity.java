@@ -53,6 +53,7 @@ public class MapActivity extends SecuredActivity implements MapEventsReceiver {
     LocationResult locationResult = new LocationResult(){
         @Override
         public void gotLocation(Location location){
+            if (location == null) return;
             saveLocation(location);
             //Got the location!
             Double lat = location.getLatitude();

@@ -29,7 +29,7 @@ import org.smartregister.bidan.sync.ECSyncUpdater;
 import org.smartregister.domain.FetchStatus;
 import org.smartregister.domain.Response;
 import org.smartregister.service.HTTPAgent;
-import org.smartregister.sync.ClientProcessor;
+import org.smartregister.bidan.sync.ClientProcessor;
 import org.smartregister.util.Utils;
 import org.smartregister.view.activity.DrishtiApplication;
 
