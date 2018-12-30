@@ -160,6 +160,7 @@ public class PNCSmartRegisterFragment extends BaseSmartRegisterFragment {
         clientsView.setVisibility(VISIBLE);
         clientsProgressView.setVisibility(INVISIBLE);
 //        list.setBackgroundColor(Color.RED);
+        Log.e(TAG, "hasep: I ");
         initializeQueries();
     }
 
@@ -173,8 +174,11 @@ public class PNCSmartRegisterFragment extends BaseSmartRegisterFragment {
         try {
 //            PNCClientsProvider kiscp = new PNCClientsProvider(getActivity(), clientActionHandler, context().alertService());
             String tableEcPnc = "ec_pnc";
+            Log.e(TAG, "hasep: abc ");
             clientAdapter = new SmartRegisterPaginatedCursorAdapter(getActivity(), null, new PNCClientsProvider(getActivity(), clientActionHandler, context().alertService()), new CommonRepository(tableEcPnc, new String[]{"ec_kartu_ibu.namalengkap", "ec_kartu_ibu.namaSuami"}));
+            Log.e(TAG, "hasep: def ");
             clientsView.setAdapter(clientAdapter);
+            Log.e(TAG, "hasep: ghi ");
 
             setTablename("ec_pnc");
             SmartRegisterQueryBuilder countqueryBUilder = new SmartRegisterQueryBuilder();
@@ -186,21 +190,28 @@ public class PNCSmartRegisterFragment extends BaseSmartRegisterFragment {
             joinTable = "";
             countSelect = countqueryBUilder.mainCondition("ec_pnc."+mainCondition);
             super.CountExecute();
+            Log.e(TAG, "hasep: jkl ");
 
             SmartRegisterQueryBuilder queryBUilder = new SmartRegisterQueryBuilder();
             queryBUilder.SelectInitiateMainTable(tableEcPnc, new String[]{"ec_pnc.relationalid", "ec_pnc.details", "ec_kartu_ibu.namalengkap", "ec_kartu_ibu.namaSuami", "imagelist.imageid"});
             queryBUilder.customJoin("LEFT JOIN ec_kartu_ibu on ec_kartu_ibu.id = ec_pnc.id LEFT JOIN ImageList imagelist ON ec_pnc.id=imagelist.entityID");
             mainSelect = queryBUilder.mainCondition("ec_pnc.is_closed = 0 and (keadaanIbu ='hidup' OR keadaanIbu IS NULL) ");
-
+            Log.e(TAG, "hasep: mno ");
             Sortqueries = kiSortByNameAZ();
 
+            Log.e(TAG, "hasep: pqr ");
             currentlimit = 20;
             currentoffset = 0;
 
             super.filterandSortInInitializeQueries();
+            Log.e(TAG, "hasep: stu ");
             CountExecute();
+            Log.e(TAG, "hasep: stu - 1 ");
             updateSearchView();
+            Log.e(TAG, "hasep: stu - 2 ");
             refresh();
+            Log.e(TAG, "hasep: vwx ");
+
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -282,6 +293,7 @@ public class PNCSmartRegisterFragment extends BaseSmartRegisterFragment {
 //        super.onResumption();
         getDefaultOptionsProvider();
         if (isPausedOrRefreshList()) {
+            Log.e(TAG, "hasep: II ");
             initializeQueries();
         }
         updateSearchView();
@@ -290,6 +302,7 @@ public class PNCSmartRegisterFragment extends BaseSmartRegisterFragment {
     @Override
     public void onResume() {
         super.onResume();
+        Log.e(TAG, "hasep: III ");
         initializeQueries();
     }
 
