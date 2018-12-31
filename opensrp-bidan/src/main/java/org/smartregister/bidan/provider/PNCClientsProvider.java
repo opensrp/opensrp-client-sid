@@ -107,6 +107,7 @@ public class PNCClientsProvider extends BaseClientsProvider {
         Log.e(TAG, "PNCClientsProvider: "+ alertService );
 
         clientViewLayoutParams = new AbsListView.LayoutParams(MATCH_PARENT, (int) context.getResources().getDimension(R.dimen.list_item_height));
+        Log.e(TAG, "hasep: 123 ");
 //        LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 
 //        int txtColorBlack = context.getResources().getColor(R.color.text_black);
@@ -127,6 +128,9 @@ public class PNCClientsProvider extends BaseClientsProvider {
         // ========================================================================================
         CommonPersonObjectClient pc = (CommonPersonObjectClient) smartRegisterClient;
         AllCommonsRepository allancRepository = Context.getInstance().allCommonsRepositoryobjects("ec_pnc");
+
+        Log.e(TAG, "hasep-entityId: " + pc.entityId());
+
         CommonPersonObject pncobject = allancRepository.findByCaseID(pc.entityId());
 
         DetailsRepository detailsRepository = Context.getInstance().detailsRepository();
@@ -212,6 +216,7 @@ public class PNCClientsProvider extends BaseClientsProvider {
 
     @Override
     public void getView(Cursor cursor, SmartRegisterClient smartRegisterClient, View view) {
+        Log.e(TAG, "hasep: getView ");
         LoginActivity.setLanguage();
         getView(smartRegisterClient, view);
     }
@@ -224,7 +229,7 @@ public class PNCClientsProvider extends BaseClientsProvider {
         return text.toLowerCase().contains("dak_ada_kompli") ? mContext.getString(R.string.no_complication) : text;
     }
 
-//    public void risk(String risk1, String risk2, String risk3, String risk4, String risk5, String risk6, String risk7, String risk8, String risk9, String risk10, ImageView riskview) {
+//    public void risk(String risk1, String risk2, String risk3, String risk4,getView String risk5, String risk6, String risk7, String risk8, String risk9, String risk10, ImageView riskview) {
 //        if (risk1 != null && risk1.equals("yes")
 //                || risk2 != null && risk2.equals("yes")
 //                || risk3 != null && risk3.equals("yes")

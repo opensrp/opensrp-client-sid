@@ -464,6 +464,15 @@
     <string name="ANC2">ANC 2</string>
     <string name="ANC1">ANC</string>
     <string name="ANC4">ANC 4</string>
+    <string name="Visit1">Visit 1</string>
+    <string name="Visit2">Visit 2</string>
+    <string name="Visit3">Visit 3</string>
+    <string name="Visit4">Visit 4</string>
+    <string name="Visit5">Visit 5</string>
+    <string name="Visit6">Visit 6</string>
+    <string name="Visit7">Visit 7</string>
+    <string name="Visit8">Visit 8</string>
+    <string name="Visit9">Visit 9</string>
     <string name="followUpDue">Follow up due</string>
     <string name="yes_button_label">Yes</string>
     <string name="standart">Standart</string>
