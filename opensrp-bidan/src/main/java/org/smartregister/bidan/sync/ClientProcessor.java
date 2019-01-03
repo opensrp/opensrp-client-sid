@@ -120,10 +120,13 @@ public class ClientProcessor {
         if (!events.isEmpty()) {
             for (JSONObject event : events) {
 
-                if (event.getString("eventType").equals(ANC_REGISTRATION)){
-                    removePncData(event.getString("baseEntityId"));
-                    removeAncData(event.getString("baseEntityId"));
-                }
+
+                Log.d(TAG, "HASEP :" + event.getString("eventType"));
+
+//                if (event.getString("eventType").equals(ANC_REGISTRATION)){
+//                    removePncData(event.getString("baseEntityId"));
+//                    removeAncData(event.getString("baseEntityId"));
+//                }
 
                 JSONObject clientClassificationJson = new JSONObject(clientClassificationStr);
                 if (isNullOrEmptyJSONObject(clientClassificationJson)) {
@@ -135,9 +138,9 @@ public class ClientProcessor {
                     processEvent(event, event.getJSONObject("client"), clientClassificationJson);
                 }
 
-                if (event.getString("eventType").equals(ANC_CLOSE)){
-                    removeAncData(event.getString("baseEntityId"));
-                }
+//                if (event.getString("eventType").equals(ANC_CLOSE)){
+//                    removeAncData(event.getString("baseEntityId"));
+//                }
             }
         }
 
@@ -448,7 +451,7 @@ public class ClientProcessor {
 
     public Boolean processCaseModel(JSONObject event, JSONObject client, JSONArray createsCase) {
         Log.d(TAG, "Trace: from processCaseModel");
-        Log.d(TAG, "processCaseModel: event="+event);
+        Log.d(TAG, "processCaseModel: event= hasep-hasep "+event+" hasep-hasep");
         Log.d(TAG, "processCaseModel: client="+client);
         Log.d(TAG, "processCaseModel: createsCase="+createsCase);
         try {
