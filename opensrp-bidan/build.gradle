@@ -6,7 +6,7 @@ buildscript {
 
     }
     dependencies {
-        classpath "com.android.tools.build:gradle:3.1.2"
+        classpath 'com.android.tools.build:gradle:3.1.2'
         classpath 'org.kt3k.gradle.plugin:coveralls-gradle-plugin:2.8.2'
         classpath 'io.fabric.tools:gradle:1.+'
 //        classpath 'org.robolectric:robolectric-gradle-plugin:1.1.0'
@@ -50,10 +50,10 @@ android {
         minSdkVersion 18
         targetSdkVersion 27
         versionCode 8
-        versionName "8.1"
+        versionName "8.3.2"
         multiDexEnabled true
         vectorDrawables.useSupportLibrary = true
-        ndk { abiFilters "armeabi" }
+        ndk { abiFilters "armeabi", "armeabi-v7a", "x86" }
 
         buildConfigField "long", "MAX_SERVER_TIME_DIFFERENCE", "1800000l"
         buildConfigField "boolean", "TIME_CHECK", "false"
@@ -76,11 +76,11 @@ android {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
             buildConfigField "int", "DATABASE_VERSION", '1'
-            resValue "string", 'opensrp_url', '"http://118.91.130.18:9090/opensrp"'
+            resValue "string", 'opensrp_url', '"http://149.129.219.205:9094/opensrp"'
 
         }
         debug {
-            resValue "string", 'opensrp_url', '"http://178.128.88.118:8080/opensrp"'
+            resValue "string", 'opensrp_url', '"http://149.129.219.205:9094/opensrp"'
             buildConfigField "int", "DATABASE_VERSION", '1'
             buildConfigField "boolean", "SYNC_WAIT", 'false'
             buildConfigField "boolean", "UNIQUE_ID", 'false'

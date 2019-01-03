@@ -99,47 +99,48 @@ public class BitmapUtil {
 
         if (imageRepo != null) {
 
-            if (!updatedMode){
-                Log.d(TAG, "saveToDb: not updatedMode");
-                ProfileImage profileImage = tag;
-                String personId = profileImage.getPersonId();
-                Log.d(TAG, "saveToDb: personId="+personId);
-                String[] faceVectorContent;
-                int result = objFace.addPerson(0);
-                faceVector = objFace.serializeRecogntionAlbum();
-                Log.d(TAG, "saveToDb: faceVector"+faceVector);
-                String albumBufferArr = Arrays.toString(faceVector);
-                faceVectorContent = albumBufferArr.substring(1, albumBufferArr.length() - 1).split(", ");
-                // Get Face Vector Content Only by removing Header
-                faceVectorContent = Arrays.copyOfRange(faceVectorContent, faceVector.length - 300, faceVector.length);
-                if (personId != null){
-                    faceVectorContent[0] = personId;
-                }
-                profileImage.setFaceVector(Arrays.toString(faceVectorContent));
-                profileImage.setSyncStatus(String.valueOf(ImageRepository.TYPE_Unsynced));
+            //hasep: turn off facial recognition
+//            if (!updatedMode){
+//                Log.d(TAG, "saveToDb: not updatedMode");
+//                ProfileImage profileImage = tag;
+//                String personId = profileImage.getPersonId();
+//                Log.d(TAG, "saveToDb: personId="+personId);
+//                String[] faceVectorContent;
+//                int result = objFace.addPerson(0);
+//                faceVector = objFace.serializeRecogntionAlbum();
+//                Log.d(TAG, "saveToDb: faceVector"+faceVector);
+//                String albumBufferArr = Arrays.toString(faceVector);
+//                faceVectorContent = albumBufferArr.substring(1, albumBufferArr.length() - 1).split(", ");
+//                // Get Face Vector Content Only by removing Header
+//                faceVectorContent = Arrays.copyOfRange(faceVectorContent, faceVector.length - 300, faceVector.length);
+//                if (personId != null){
+//                    faceVectorContent[0] = personId;
+//                }
+//                profileImage.setFaceVector(Arrays.toString(faceVectorContent));
+//                profileImage.setSyncStatus(String.valueOf(ImageRepository.TYPE_Unsynced));
+//
+//                imageRepo.add(profileImage, uid);
 
-                imageRepo.add(profileImage, uid);
-
-            } else {
-                Log.d(TAG, "saveToDb: updatedMode");
-                ProfileImage profileImage = tag;
-                int personId = Integer.valueOf(profileImage.getPersonId());
-                Log.d(TAG, "saveToDb: personId="+personId);
-                int result = objFace.addPerson(0);
-                faceVector = objFace.serializeRecogntionAlbum();
-                String albumBufferArr = Arrays.toString(faceVector);
-                String[] faceVectorContent = albumBufferArr.substring(1, albumBufferArr.length() - 1).split(", ");
-                // Get Face Vector Content Only by removing Header
-                faceVectorContent = Arrays.copyOfRange(faceVectorContent, faceVector.length - 300, faceVector.length);
-                faceVectorContent[0] = String.valueOf(personId);
-                Log.d(TAG, "saveToDb: faceVectorContent="+faceVectorContent);
-
-
-                profileImage.setFaceVector(Arrays.toString(faceVectorContent));
-                profileImage.setSyncStatus(String.valueOf(ImageRepository.TYPE_Unsynced));
-
-                imageRepo.add(profileImage);
-            }
+//            } else {
+//                Log.d(TAG, "saveToDb: updatedMode");
+//                ProfileImage profileImage = tag;
+//                int personId = Integer.valueOf(profileImage.getPersonId());
+//                Log.d(TAG, "saveToDb: personId="+personId);
+//                int result = objFace.addPerson(0);
+//                faceVector = objFace.serializeRecogntionAlbum();
+//                String albumBufferArr = Arrays.toString(faceVector);
+//                String[] faceVectorContent = albumBufferArr.substring(1, albumBufferArr.length() - 1).split(", ");
+//                // Get Face Vector Content Only by removing Header
+//                faceVectorContent = Arrays.copyOfRange(faceVectorContent, faceVector.length - 300, faceVector.length);
+//                faceVectorContent[0] = String.valueOf(personId);
+//                Log.d(TAG, "saveToDb: faceVectorContent="+faceVectorContent);
+//
+//
+//                profileImage.setFaceVector(Arrays.toString(faceVectorContent));
+//                profileImage.setSyncStatus(String.valueOf(ImageRepository.TYPE_Unsynced));
+//
+//                imageRepo.add(profileImage);
+//            }
 
             return true;
         }

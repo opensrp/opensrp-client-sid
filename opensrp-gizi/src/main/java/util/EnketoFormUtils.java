@@ -25,10 +25,10 @@ import org.smartregister.domain.form.FormSubmission;
 import org.smartregister.domain.form.SubForm;
 import org.smartregister.gizi.activity.LoginActivity;
 import org.smartregister.gizi.application.GiziApplication;
+import org.smartregister.gizi.repository.IndonesiaECRepository;
 import org.smartregister.gizi.sync.GiziClientProcessor;
 import org.smartregister.repository.AllSharedPreferences;
 import org.smartregister.repository.BaseRepository;
-import org.smartregister.repository.EventClientRepository;
 import org.smartregister.util.AssetHandler;
 import org.smartregister.util.Log;
 import org.w3c.dom.Attr;
@@ -74,7 +74,7 @@ public class EnketoFormUtils {
     private SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSSZ");
     private Format formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
     private GiziFormEntityConverter formEntityConverter;
-    private EventClientRepository eventClientRepository;
+    private IndonesiaECRepository eventClientRepository;
 
     public EnketoFormUtils(Context context) throws Exception {
         mContext = context;
@@ -83,7 +83,7 @@ public class EnketoFormUtils {
         formEntityConverter = new GiziFormEntityConverter(formAttributeParser, mContext);
         // Protect creation of static variable.
       //  mCloudantDataHandler = CloudantDataHandler.getInstance(context.getApplicationContext());
-        eventClientRepository = GiziApplication.getInstance().eventClientRepository();
+        eventClientRepository = GiziApplication.getInstance().indonesiaECRepository();
     }
 
     public static EnketoFormUtils getInstance(Context ctx) throws Exception {
@@ -362,7 +362,7 @@ public class EnketoFormUtils {
             String sql =
                     "select * from " + ec_bind_path + " where base_entity_id='" + entityId + "'";
             Map<String, String> dbEntity = theAppContext.formDataRepository().
-                    getMapFromSQLQuery(sql);
+                    getMapFromSQLQuery(sql,null);
             Map<String, String> detailsMap = theAppContext.detailsRepository().
                     getAllDetailsForClient(entityId);
             detailsMap.putAll(dbEntity);
@@ -466,7 +466,7 @@ public class EnketoFormUtils {
                             String sql = "select * from '" + childTableName + "' where "
                                     + "relational_id = '" + entityId + "'";
                             String childRecordsString = theAppContext.formDataRepository().
-                                    queryList(sql);
+                                    queryList(sql,null);
                             JSONArray childRecords = new JSONArray(childRecordsString);
 
                             JSONArray fieldsArray = subFormDefinition.getJSONArray("fields");
@@ -719,7 +719,7 @@ public class EnketoFormUtils {
             throws Exception {
         String bindPath = fieldsDefinition.getString("bind_type");
         String sql = "select * from " + bindPath + " where id='" + entityId + "'";
-        String dbEntity = theAppContext.formDataRepository().queryUniqueResult(sql);
+        String dbEntity = theAppContext.formDataRepository().queryUniqueResult(sql,null);
 
         JSONObject entityJson = new JSONObject();
 
@@ -844,7 +844,7 @@ public class EnketoFormUtils {
                 String sql =
                         "select * from " + childTable + " where " + joinField + "='" + val + "'";
                 Log.logInfo(sql);
-                String dbEntity = theAppContext.formDataRepository().queryUniqueResult(sql);
+                String dbEntity = theAppContext.formDataRepository().queryUniqueResult(sql,null);
                 JSONObject linkedEntityJson = new JSONObject();
 
                 if (dbEntity != null && !dbEntity.isEmpty()) {

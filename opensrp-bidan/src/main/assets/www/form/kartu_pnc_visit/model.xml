@@ -15,6 +15,7 @@
             <Sub-district />
             <Village />
             <Sub-village />
+            <ancId />
             <generated_note_name_13 />
             <generated_note_name_14 />
             <existing_location openmrs_entity="encounter" openmrs_entity_id="location_id" />
@@ -75,9 +76,9 @@
                 openmrs_entity_id="164155AAAAAAAAAAAAAAAAAAAAAAAAAA" />
             <ProgramIntegration openmrs_entity="n/a" />
             <integrasi_program_cd4 openmrs_entity="n/a" />
-            <integrasi_program_anti_malaria openmrs_entity="n/a" />
-            <integrasi_program_anti_tb openmrs_entity="n/a" />
-            <integrasi_program_foto_thorax openmrs_entity="n/a" />
+            <integrasi_program_anti_malaria />
+            <integrasi_program_anti_tb />
+            <integrasi_program_foto_thorax />
             <komplikasi openmrs_entity="Concept"
                 openmrs_entity_id="120194AAAAAAAAAAAAAAAAAAAAAAAAAA" />
             <komplikasi_lainnya openmrs_entity="Concept"

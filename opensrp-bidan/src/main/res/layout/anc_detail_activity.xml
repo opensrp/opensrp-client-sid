@@ -67,6 +67,20 @@
             android:textSize="16sp"
             android:textStyle="bold" />
 
+        <org.smartregister.view.customcontrols.CustomFontTextView
+            android:id="@+id/tv_detail_history"
+            style="@style/CustomFontTextViewStyle.ListView.Medium"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_gravity="center_vertical"
+            android:layout_marginLeft="5dp"
+            android:layout_marginTop="2dp"
+            android:layout_weight="0.98"
+            android:text="History"
+            android:textColor="@color/pnc_circle_yellow"
+            android:textSize="16sp"
+            android:textStyle="bold" />
+
     </LinearLayout>
 
     <ImageView
@@ -123,4 +137,10 @@
         android:id="@+id/id3"
         layout="@layout/anc_birthplan_detail_layout"
         android:visibility="gone" />
+
+    <include
+        android:id="@+id/id4"
+        layout="@layout/anc_history_layout"
+        android:visibility="gone" />
+
 </LinearLayout>

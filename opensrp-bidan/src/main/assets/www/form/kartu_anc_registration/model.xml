@@ -16,6 +16,7 @@
             <Sub-village />
             <generated_note_name_13 />
             <generated_note_name_14 />
+            <generated_note_name_15 />
             <kartuIbuId openmrs_entity="person_relationship" openmrs_entity_id="kartuIbuId" />
             <existing_location openmrs_entity="encounter" openmrs_entity_id="location_id" />
             <provinsi openmrs_entity="person_address" openmrs_entity_id="stateProvince"
@@ -106,6 +107,8 @@
             <end openmrs_entity="encounter" openmrs_entity_id="encounter_end" />
             <type>anc</type>
             <motherId />
+            <anc_id openmrs_entity="person_attribute" openmrs_entity_id="anc_id" />
+            <ancId />
             <meta>
                 <instanceID />
             </meta>

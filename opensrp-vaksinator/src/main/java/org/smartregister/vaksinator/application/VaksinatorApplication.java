@@ -6,12 +6,15 @@ import android.content.res.Configuration;
 import org.smartregister.Context;
 import org.smartregister.CoreLibrary;
 import org.smartregister.commonregistry.CommonFtsObject;
-import org.smartregister.repository.EventClientRepository;
 import org.smartregister.repository.Repository;
 import org.smartregister.vaksinator.activity.LoginActivity;
-import org.smartregister.vaksinator.receiver.VaksinSyncBroadcastReceiver;
+import org.smartregister.vaksinator.facial.FacialRecognitionLibrary;
+import org.smartregister.vaksinator.facial.repository.ImageRepository;
+import org.smartregister.vaksinator.facial.utils.Tools;
+import org.smartregister.vaksinator.repository.IndonesiaECRepository;
 import org.smartregister.vaksinator.repository.VaksinatorRepository;
-import org.smartregister.vaksinator.sync.DrishtiSyncScheduler;
+import org.smartregister.sync.DrishtiSyncScheduler;
+import org.smartregister.vaksinator.utils.LocationHelper;
 import org.smartregister.view.activity.DrishtiApplication;
 
 import java.util.Locale;
@@ -19,13 +22,14 @@ import java.util.Locale;
 import static org.smartregister.util.Log.logError;
 import static org.smartregister.util.Log.logInfo;
 
-/**
- * Created by koros on 1/22/16
- */
-
 public class VaksinatorApplication extends DrishtiApplication {
 
-    private EventClientRepository eventClientRepository;
+    private IndonesiaECRepository indonesiaECRepository;
+    private ImageRepository imageRepository;
+    private LocationHelper locationHelper;
+
+    private boolean isFRSupported = false;
+
     @Override
     public void onCreate() {
 
@@ -39,7 +43,7 @@ public class VaksinatorApplication extends DrishtiApplication {
 
 
         //  DrishtiSyncScheduler.setReceiverClass(SyncBroadcastReceiver.class);
-        DrishtiSyncScheduler.setReceiverClass(VaksinSyncBroadcastReceiver.class);
+//        DrishtiSyncScheduler.setReceiverClass(VaksinSyncBroadcastReceiver.class);
         super.onCreate();
         //  ACRA.init(this);
         //   DrishtiSyncScheduler.setReceiverClass(SyncBroadcastReceiver.class);
@@ -52,6 +56,7 @@ public class VaksinatorApplication extends DrishtiApplication {
         context.updateCommonFtsObject(createCommonFtsObject());
         applyUserLanguagePreference();
         cleanUpSyncState();
+        isFRSupported = FacialRecognitionLibrary.init(context, getRepository());
     }
     public static synchronized VaksinatorApplication getInstance() {
         return (VaksinatorApplication) mInstance;
@@ -69,7 +74,7 @@ public class VaksinatorApplication extends DrishtiApplication {
         try {
             if (repository == null) {
                 repository = new VaksinatorRepository(getInstance().getApplicationContext(), context());
-                eventClientRepository();
+                indonesiaECRepository();
             }
         } catch (UnsatisfiedLinkError e) {
             logError("Error on getRepository: " + e);
@@ -77,6 +82,7 @@ public class VaksinatorApplication extends DrishtiApplication {
         }
         return repository;
     }
+
     @Override
     public void logoutCurrentUser(){
         Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
@@ -168,10 +174,38 @@ public class VaksinatorApplication extends DrishtiApplication {
         return commonFtsObject;
     }
 
-    public EventClientRepository eventClientRepository() {
-        if (eventClientRepository == null) {
-            eventClientRepository = new EventClientRepository(getRepository());
+    public IndonesiaECRepository indonesiaECRepository() {
+        if (indonesiaECRepository == null) {
+            indonesiaECRepository = new IndonesiaECRepository(getRepository());
         }
-        return eventClientRepository;
+        return indonesiaECRepository;
+    }
+
+
+
+    public ImageRepository imageRepository() {
+        if (imageRepository == null) {
+            imageRepository = new ImageRepository(getRepository());
+        }
+        if (isFRSupported) refreshFaceData();
+        return imageRepository;
+    }
+
+
+
+    public void refreshFaceData(){
+        Tools.setVectorsBuffered(context, imageRepository);
+        Tools.loadAlbum(context.applicationContext());
+    }
+
+    public LocationHelper getLocationHelper() {
+        if (locationHelper == null){
+            locationHelper = new LocationHelper(VaksinatorApplication.getInstance().getApplicationContext());
+        }
+        return locationHelper;
+    }
+
+    public boolean isFRSupported() {
+        return isFRSupported;
     }
 }

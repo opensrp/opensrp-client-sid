@@ -23,12 +23,17 @@
         "source": "ibu.kartu_ibu.id"
       },
       {
+        "name": "ancId",
+        "bind": "/model/instance/kunjungan_anc_reviewed_Lab_test/ancId",
+        "shouldLoadValue": true
+      },
+      {
         "name": "cityVillage",
         "bind": "/model/instance/kunjungan_anc_reviewed_Lab_test/Village",
         "shouldLoadValue": true
       },
       {
-        "name": "Sub-village",
+        "name": "address1",
         "bind": "/model/instance/kunjungan_anc_reviewed_Lab_test/Sub-village",
         "shouldLoadValue": true
       },

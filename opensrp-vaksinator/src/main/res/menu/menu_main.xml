@@ -8,6 +8,11 @@
         android:orderInCategory="100"
         android:visible="false"/>
     <item
+        android:id="@+id/lastSyncDate"
+        android:orderInCategory="100"
+        android:visible="false"
+        app:showAsAction="ifRoom" />
+    <item
         android:id="@+id/updateMenuItem"
         android:icon="@drawable/refresh"
         app:showAsAction="always"

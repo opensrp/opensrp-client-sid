@@ -39,7 +39,7 @@ public class ECSyncUpdater {
 
     private ECSyncUpdater(Context context) {
         this.context = context;
-        db = VaksinatorApplication.getInstance().eventClientRepository();
+        db = VaksinatorApplication.getInstance().indonesiaECRepository();
     }
     
     public JSONObject fetchAsJsonObject(String filter, String filterValue) throws JSONException {
@@ -148,14 +148,6 @@ public class ECSyncUpdater {
     public void addEvent(String baseEntityId, JSONObject jsonObject) {
         try {
             db.addEvent(baseEntityId, jsonObject);
-        } catch (Exception e) {
-            Log.e(getClass().getName(), "Exception", e);
-        }
-    }
-
-    public void addReport(JSONObject jsonObject) {
-        try {
-            db.addReport(jsonObject);
         } catch (Exception e) {
             Log.e(getClass().getName(), "Exception", e);
         }
