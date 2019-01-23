@@ -652,7 +652,7 @@
             </option>
             <option value="Jamsostek">Jaminan Sosial dan Ketenagakerjaan (Jamsostek)</option>
             <option value="Jaminan_Kesehatan_Daerah">Jaminan Kesehatan Daerah (Jamkesda)</option>
-            <option value="Asuransi_Kesehatan">Asuransi Kesehatan (Askes)</option>
+            <option value="Asuransi_Kesehatan">BPJS</option>
             <option value="Jaminan_Persalinan">Jaminan Persalinan (Jampersal)</option>
             <option value="Tidak_Ada_Asuransi">Tidak memiliki asuransi/pembiayaan</option>
         </select>
@@ -675,7 +675,7 @@
             <span data-option-value="Jaminan_Kesehatan_Daerah" lang="en">Regional Health Insurance
                 for the Poor
             </span>
-            <span data-option-value="Asuransi_Kesehatan" lang="Bahasa">Asuransi Kesehatan (Askes)
+            <span data-option-value="Asuransi_Kesehatan" lang="Bahasa">BPJS
             </span>
             <span data-option-value="Asuransi_Kesehatan" lang="en">Health Insurance for Civil
                 Servants and Retired Armed Forces Personnel

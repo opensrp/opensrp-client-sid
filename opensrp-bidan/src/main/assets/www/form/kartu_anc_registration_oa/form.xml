@@ -950,7 +950,7 @@
             </option>
             <option value="Jamsostek">Jaminan Sosial dan Ketenagakerjaan (Jamsostek)</option>
             <option value="jaminan_kesehatan_daerah">Jaminan Kesehatan Daerah (Jamkesda)</option>
-            <option value="asuransi_kesehatan">Asuransi Kesehatan (Askes)</option>
+            <option value="asuransi_kesehatan">BPJS</option>
             <option value="jaminan_persalinan">Jaminan Persalinan (Jampersal)</option>
             <option value="tidak_ada_asuransi">Tidak memiliki asuransi/pembiayaan</option>
             <option value="jika_ya">Jika Ya (√)</option>
