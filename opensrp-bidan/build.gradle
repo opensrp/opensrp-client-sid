@@ -50,7 +50,7 @@ android {
         minSdkVersion 18
         targetSdkVersion 27
         versionCode 8
-        versionName "8.3.2"
+        versionName "8.3.3"
         multiDexEnabled true
         vectorDrawables.useSupportLibrary = true
         ndk { abiFilters "armeabi", "armeabi-v7a", "x86" }
