@@ -538,9 +538,10 @@ public class LoginActivity extends AppCompatActivity {
             localLoginWith(userName, password);
 
         } else {
-            Bugsnag.notify(new Exception(getString(org.smartregister.R.string.login_failed_dialog_message)));
-            showErrorDialog(getString(org.smartregister.R.string.login_failed_dialog_message));
-            view.setClickable(true);
+//            Bugsnag.notify(new Exception(getString(org.smartregister.R.string.login_failed_dialog_message)));
+//            showErrorDialog(getString(org.smartregister.R.string.login_failed_dialog_message));
+//            view.setClickable(true);
+            remoteLogin(view, userName, password);
         }
     }
 
