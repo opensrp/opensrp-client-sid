@@ -7,11 +7,13 @@ import android.content.Intent;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.content.res.Resources;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.content.res.ResourcesCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.text.InputType;
 import android.text.TextUtils;
+import android.util.Base64;
 import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.KeyEvent;
@@ -25,9 +27,13 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.bugsnag.android.Bugsnag;
+
 import org.json.JSONException;
 import org.json.JSONObject;
+import org.smartregister.AllConstants;
 import org.smartregister.Context;
+import org.smartregister.DristhiConfiguration;
 import org.smartregister.bidan.BuildConfig;
 import org.smartregister.bidan.R;
 import org.smartregister.bidan.application.BidanApplication;
@@ -37,17 +43,30 @@ import org.smartregister.domain.jsonmapping.LoginResponseData;
 import org.smartregister.domain.jsonmapping.util.TeamLocation;
 import org.smartregister.event.Listener;
 import org.smartregister.repository.AllSharedPreferences;
+import org.smartregister.repository.Repository;
 import org.smartregister.sync.DrishtiSyncScheduler;
 import org.smartregister.util.AssetHandler;
 import org.smartregister.util.Utils;
 import org.smartregister.view.BackgroundAction;
 import org.smartregister.view.LockingBackgroundTask;
 import org.smartregister.view.ProgressIndicator;
+import org.smartregister.view.activity.DrishtiApplication;
 
+import java.io.ByteArrayInputStream;
+import java.io.IOException;
+import java.security.KeyStore;
+import java.security.KeyStoreException;
+import java.security.NoSuchAlgorithmException;
+import java.security.cert.CertificateException;
+import java.security.interfaces.RSAPrivateKey;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.Iterator;
 import java.util.Locale;
+
+import javax.crypto.Cipher;
+import javax.crypto.CipherInputStream;
 
 import static android.preference.PreferenceManager.getDefaultSharedPreferences;
 import static android.view.inputmethod.InputMethodManager.HIDE_NOT_ALWAYS;
@@ -83,6 +102,8 @@ public class LoginActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        Bugsnag.init(this);
 
         logVerbose("Initializing ...");
         try {
@@ -403,6 +424,11 @@ public class LoginActivity extends AppCompatActivity {
         final String userName = userNameEditText.getText().toString();
         final String password = passwordEditText.getText().toString();
 
+        Bugsnag.setUserName(userName);
+
+        Bugsnag.leaveBreadcrumb("userName: " + userName);
+        Bugsnag.leaveBreadcrumb("password: " + password);
+
         if (!TextUtils.isEmpty(userName) && !TextUtils.isEmpty(password)) {
             if (localLogin) {
                 localLogin(view, userName, password);
@@ -415,11 +441,104 @@ public class LoginActivity extends AppCompatActivity {
         }
     }
 
+    private KeyStore.PrivateKeyEntry getUserKeyPair(KeyStore keyStore, final String username) throws Exception {
+        if (keyStore.containsAlias(username)) {
+            return (KeyStore.PrivateKeyEntry) keyStore.getEntry(username, null);
+        }
+
+        return null;
+    }
+
+    private static final String CIPHER = "RSA/ECB/PKCS1Padding";
+    private static final String CIPHER_PROVIDER = "AndroidOpenSSL";
+    private static final String CIPHER_TEXT_CHARACTER_CODE = "UTF-8";
+    private String decryptString(KeyStore.PrivateKeyEntry privateKeyEntry, String cipherText)
+            throws Exception {
+
+        Cipher output;
+        if (Build.VERSION.SDK_INT >= 23) {
+            output = Cipher.getInstance(CIPHER);
+            output.init(Cipher.DECRYPT_MODE, privateKeyEntry.getPrivateKey());
+        } else {
+            output = Cipher.getInstance(CIPHER, CIPHER_PROVIDER);
+            RSAPrivateKey privateKey = (RSAPrivateKey) privateKeyEntry.getPrivateKey();
+            output.init(Cipher.DECRYPT_MODE, privateKey);
+        }
+
+        CipherInputStream cipherInputStream = new CipherInputStream(
+                new ByteArrayInputStream(Base64.decode(cipherText, Base64.DEFAULT)), output);
+
+        ArrayList<Byte> values = new ArrayList<>();
+        int nextByte;
+        while ((nextByte = cipherInputStream.read()) != -1) {
+            values.add((byte) nextByte);
+        }
+
+        byte[] bytes = new byte[values.size()];
+        for (int i = 0; i < bytes.length; i++) {
+            bytes[i] = values.get(i);
+        }
+
+        return new String(bytes, 0, bytes.length, CIPHER_TEXT_CHARACTER_CODE);
+    }
+
+    public String getGroupId(AllSharedPreferences allSharedPreferences, String userName, KeyStore.PrivateKeyEntry privateKeyEntry) {
+        if (privateKeyEntry != null) {
+            String encryptedGroupId = allSharedPreferences.fetchEncryptedGroupId(userName);
+            if (encryptedGroupId != null) {
+                try {
+                    return decryptString(privateKeyEntry, encryptedGroupId);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+        return null;
+    }
+
+    private boolean isValidGroupId(String groupId) {
+        return Context.getInstance().initRepository().canUseThisPassword(groupId);
+    }
+
     private void localLogin(View view, String userName, String password) {
+        AllSharedPreferences allSharedPreferences = getOpenSRPContext().allSharedPreferences();
+        try {
+            KeyStore keyStore = KeyStore.getInstance("AndroidKeyStore");
+            keyStore.load(null);
+            if (keyStore == null) {
+                Bugsnag.leaveBreadcrumb("keystore null");
+            }
+            KeyStore.PrivateKeyEntry privateKeyEntry = getUserKeyPair(keyStore, userName);
+            if (privateKeyEntry == null) {
+                Bugsnag.leaveBreadcrumb("privateKeyEntry null");
+            }
+
+            String encryptedPassword = allSharedPreferences.
+                    fetchEncryptedPassword(userName);
+            String decryptedPassword = decryptString(privateKeyEntry, encryptedPassword);
+            if (!password.equals(decryptedPassword)) {
+                Bugsnag.leaveBreadcrumb("password not equal: " + password + " : " + decryptedPassword);
+            }
+
+            String groupId = getGroupId(allSharedPreferences, userName, privateKeyEntry);
+            if (groupId == null) {
+                Bugsnag.leaveBreadcrumb("groupId null");
+            }
+
+            boolean isValidGroupId = isValidGroupId(groupId);
+            Bugsnag.leaveBreadcrumb("isValidGroupId: " + isValidGroupId);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        boolean fetchForceRemoteLogin = allSharedPreferences.fetchForceRemoteLogin();
+        Bugsnag.leaveBreadcrumb("fetchForceRemoteLogin: " + fetchForceRemoteLogin);
+
         if (getOpenSRPContext().userService().isUserInValidGroup(userName, password)) {
             localLoginWith(userName, password);
 
         } else {
+            Bugsnag.notify(new Exception(getString(org.smartregister.R.string.login_failed_dialog_message)));
             showErrorDialog(getString(org.smartregister.R.string.login_failed_dialog_message));
             view.setClickable(true);
         }

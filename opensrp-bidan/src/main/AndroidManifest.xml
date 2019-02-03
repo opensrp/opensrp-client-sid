@@ -125,6 +125,10 @@
             android:value="5bda8a6293b5b89b510a53e5d297d42bdf427e10" />
         <service android:name=".service.SyncService" />
 
+        <meta-data
+            android:name="com.bugsnag.android.API_KEY"
+            android:value="7b6debabf8fd795c2561f6a7e5cd40f1"/>
+
     </application>
 
 </manifest>
