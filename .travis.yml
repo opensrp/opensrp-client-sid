@@ -4,6 +4,16 @@ language: android
 sudo: required
 jdk: oraclejdk8
 
+before_cache:
+  - rm -f  $HOME/.gradle/caches/modules-2/modules-2.lock
+  - rm -fr $HOME/.gradle/caches/*/plugin-resolution/
+
+cache:
+  directories:
+  - $HOME/.gradle/caches/
+  - $HOME/.gradle/wrapper/
+  - $HOME/.android/build-cache
+
 env:
   matrix:
     - ANDROID_TARGET=android-22 ANDROID_ABI=armeabi-v7a
@@ -17,14 +27,13 @@ android:
     # tools required
     - tools
     # The BuildTools version used by your project
-    - build-tools-26.0.1
+    - build-tools-27.0.3
     # The SDK version used to compile your projects
     - android-22
+    - android-27
     # Additional components
-    - extra-google-google_play_services
     - extra-google-m2repository
     - extra-android-m2repository
-    - addon-google_apis-google-19
     # Specify at least one system image,
     # if you need to run emulator(s) during your tests
     - sys-img-armeabi-v7a-android-22
@@ -46,13 +55,17 @@ script:
   - echo "Travis branch is in pull request $TRAVIS_PULL+REQUEST"
   - chmod 755 gradlew
   - ls -la
-  #- ./gradlew connectedAndroidTest
-  #Run All tests Unit and Instrumentation
-  - travis_wait ./gradlew opensrp-path:clean opensrp-path:jacocoTestReport coveralls --stacktrace
+#  - travis_wait ./gradlew clean assemble test --stacktrace
+  - travis_wait ./gradlew clean jacocoRootReport coveralls --stacktrace
 
 after_failure:
- - pandoc opensrp-path/build/reports/tests/index.html -t plain
+ - pandoc opensrp-bidan/build/reports/tests/index.html -t plain
+ - pandoc opensrp-vaksinator/build/reports/tests/index.html -t plain
+ - pandoc opensrp-gizi/build/reports/tests/index.html -t plain\
 
+#after_success:
+#  - ./gradlew jacocoTestReport coveralls
+#  - .buildscript/deploy_snapshot.sh
 
 notifications:
   slack:

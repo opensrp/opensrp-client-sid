@@ -1,9 +1,5 @@
 package org.smartregister.bidan.activity;
 
-/**
- * Created by sid on 10/16/17.
- */
-
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.EditTextPreference;
@@ -12,6 +8,7 @@ import android.preference.PreferenceActivity;
 import android.preference.PreferenceFragment;
 import android.preference.PreferenceManager;
 
+import org.smartregister.bidan.R;
 import org.smartregister.repository.AllSharedPreferences;
 
 import java.net.MalformedURLException;
@@ -19,8 +16,6 @@ import java.net.URL;
 
 import static org.smartregister.util.Log.logError;
 import static org.smartregister.util.Log.logInfo;
-
-import org.smartregister.bidan.R;
 
 public class SettingsActivity extends PreferenceActivity {
 
@@ -30,7 +25,6 @@ public class SettingsActivity extends PreferenceActivity {
 
         getFragmentManager().beginTransaction().replace(android.R.id.content, new MyPreferenceFragment()).commit();
     }
-
 
     public static class MyPreferenceFragment extends PreferenceFragment {
         @Override
@@ -51,6 +45,7 @@ public class SettingsActivity extends PreferenceActivity {
                     }
                 });
             }
+
         }
 
         private void updateUrl(String baseUrl) {
@@ -71,10 +66,12 @@ public class SettingsActivity extends PreferenceActivity {
 
                 logInfo("Saved URL: " + allSharedPreferences.fetchHost(""));
                 logInfo("Port: " + allSharedPreferences.fetchPort(0));
+
             } catch (MalformedURLException e) {
                 logError("Malformed Url: " + baseUrl);
             }
         }
+
     }
 
 }

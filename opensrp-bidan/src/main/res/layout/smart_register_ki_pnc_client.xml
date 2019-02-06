@@ -1,0 +1,246 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="@dimen/list_item_height"
+    android:orientation="horizontal"
+    android:weightSum="@integer/ec_list_item_weight_count">
+
+    <include
+        android:id="@+id/profile_info_layout"
+        layout="@layout/smart_register_client_profile_ki"
+        android:layout_width="0dp"
+        android:layout_height="fill_parent"
+        android:layout_weight="@integer/ec_list_profile_box_weight" />
+
+    <ImageView
+        android:layout_width="@dimen/smart_register_client_divider_height"
+        android:layout_height="fill_parent"
+        android:src="@color/smart_register_client_divider_color" />
+
+    <org.smartregister.view.customcontrols.CustomFontTextView
+        android:id="@+id/pnc_id"
+        style="@style/CustomFontTextViewStyle.ListView.Medium"
+        android:layout_width="@dimen/list_ec_no_view_width"
+        android:layout_height="fill_parent"
+        android:layout_marginTop="10dp"
+        android:layout_weight="@integer/ec_list_ec_no_view_weight" />
+
+    <ImageView
+        android:layout_width="@dimen/smart_register_client_divider_height"
+        android:layout_height="fill_parent"
+        android:src="@color/smart_register_client_divider_color" />
+
+    <RelativeLayout
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="125"
+        android:orientation="horizontal"
+        android:weightSum="1">
+
+        <org.smartregister.view.customcontrols.CustomFontTextView
+            android:id="@+id/tv_dok_tanggal_bersalin"
+            style="@style/CustomFontTextViewStyle.ListView.Small"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentTop="true"
+            android:layout_marginTop="5dp"
+            android:text="16/05/2015" />
+
+        <org.smartregister.view.customcontrols.CustomFontTextView
+            android:id="@+id/dok_tempat_persalinan"
+            style="@style/CustomFontTextViewStyle.ListView.Small"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_below="@id/tv_dok_tanggal_bersalin"
+            android:text="@string/place_place" />
+
+
+        <org.smartregister.view.customcontrols.CustomFontTextView
+            android:id="@+id/tv_tempat_persalinan"
+            style="@style/CustomFontTextViewStyle.ListView.Small"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_below="@id/dok_tempat_persalinan"
+            android:ellipsize="none"
+            android:maxLines="2"
+            android:scrollHorizontally="false"
+            android:singleLine="false" />
+
+        <org.smartregister.view.customcontrols.CustomFontTextView
+            android:id="@+id/dok_tipe"
+            style="@style/CustomFontTextViewStyle.ListView.Small"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_below="@id/tv_tempat_persalinan"
+            android:text="@string/plan_type" />
+
+        <org.smartregister.view.customcontrols.CustomFontTextView
+            android:id="@+id/tv_tipe"
+            style="@style/CustomFontTextViewStyle.ListView.Small.NoPadding"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/tv_tempat_persalinan"
+            android:layout_toRightOf="@+id/dok_tipe" />
+
+    </RelativeLayout>
+
+
+    <ImageView
+        android:layout_width="@dimen/smart_register_client_divider_height"
+        android:layout_height="fill_parent"
+        android:src="@color/smart_register_client_divider_color" />
+
+
+    <TextView
+        android:id="@+id/tv_komplikasi"
+        style="@style/CustomFontTextViewStyle.ListView.Medium.FourLine"
+        android:layout_width="@dimen/list_ec_no_view_width"
+        android:layout_height="fill_parent"
+        android:layout_marginTop="10dp"
+        android:layout_weight="150"
+        android:ellipsize="none"
+        android:maxLines="4"
+        android:paddingLeft="10dp"
+        android:scrollHorizontally="false"
+        android:singleLine="false" />
+
+
+    <ImageView
+        android:layout_width="@dimen/smart_register_client_divider_height"
+        android:layout_height="fill_parent"
+        android:src="@color/smart_register_client_divider_color" />
+
+
+    <RelativeLayout
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="125"
+        android:background="@color/status_bar_text_almost_white"
+        android:orientation="horizontal"
+        android:weightSum="1">
+
+
+        <org.smartregister.view.customcontrols.CustomFontTextView
+            android:id="@+id/tv_tgl_kunjungan_pnc"
+            style="@style/CustomFontTextViewStyle.ListView.Medium.FourLine"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="-2dp"
+            android:text="Something "
+            android:textSize="14sp" />
+
+        <org.smartregister.view.customcontrols.CustomFontTextView
+            android:id="@+id/tv_kf"
+            style="@style/CustomFontTextViewStyle.ListView.Medium.FourLine"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/tv_tgl_kunjungan_pnc"
+            android:layout_marginTop="-2dp"
+            android:text="Something "
+            android:textSize="14sp" />
+
+        <org.smartregister.view.customcontrols.CustomFontTextView
+            android:id="@+id/tv_vit_a"
+            style="@style/CustomFontTextViewStyle.ListView.Medium.FourLine"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/tv_kf"
+            android:layout_marginTop="-2dp"
+            android:text="Something "
+            android:textSize="14sp" />
+
+
+    </RelativeLayout>
+
+
+    <ImageView
+        android:layout_width="@dimen/smart_register_client_divider_height"
+        android:layout_height="fill_parent"
+        android:src="@color/smart_register_client_divider_color" />
+
+
+    <RelativeLayout
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="175"
+        android:orientation="horizontal"
+        android:weightSum="1">
+
+        <org.smartregister.view.customcontrols.CustomFontTextView
+            android:id="@+id/lbl_td_sistolik"
+            style="@style/CustomFontTextViewStyle.ListView.Normal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentTop="true"
+            android:text="TD (Sistolik) : " />
+
+        <org.smartregister.view.customcontrols.CustomFontTextView
+            android:id="@+id/lbl_td_diastolik"
+            style="@style/CustomFontTextViewStyle.ListView.Normal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_below="@id/lbl_td_sistolik"
+            android:text="TD (Diastolik) : " />
+
+
+        <org.smartregister.view.customcontrols.CustomFontTextView
+            android:id="@+id/lbl_td_suhu"
+            style="@style/CustomFontTextViewStyle.ListView.Normal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_below="@id/lbl_td_diastolik"
+            android:text="@string/temperature_lbl" />
+
+        <org.smartregister.view.customcontrols.CustomFontTextView
+            android:id="@+id/tv_td_sistolik"
+            style="@style/CustomFontTextViewStyle.ListView.Normal.NoPadding"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_toRightOf="@id/lbl_td_sistolik" />
+
+        <org.smartregister.view.customcontrols.CustomFontTextView
+            android:id="@+id/tv_td_diastolik"
+            style="@style/CustomFontTextViewStyle.ListView.Normal.NoPadding"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/tv_td_sistolik"
+            android:layout_toRightOf="@id/lbl_td_diastolik" />
+
+
+        <org.smartregister.view.customcontrols.CustomFontTextView
+            android:id="@+id/tv_td_suhu"
+            style="@style/CustomFontTextViewStyle.ListView.Normal.NoPadding"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/tv_td_diastolik"
+            android:layout_toRightOf="@id/lbl_td_suhu" />
+
+    </RelativeLayout>
+
+    <ImageView
+        android:layout_width="@dimen/smart_register_client_divider_height"
+        android:layout_height="fill_parent"
+        android:src="@color/smart_register_client_divider_color" />
+
+    <ImageButton
+        android:id="@+id/ib_pnc_edit"
+        android:layout_width="@dimen/list_edit_icon_view_width"
+        android:layout_height="fill_parent"
+        android:layout_margin="5dp"
+        android:layout_weight="105"
+        android:background="@drawable/edit_button_background"
+        android:clickable="true"
+        android:focusable="true"
+        android:gravity="center"
+        android:scaleType="center" />
+
+</LinearLayout>

@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="@dimen/list_item_height"
+    android:background="#ffffff"
+    android:orientation="horizontal"
+    android:weightSum="@integer/ec_list_item_weight_count">
+
+    <include layout="@layout/smart_register_client_profile_ki" />
+
+    <ImageView
+        android:layout_width="@dimen/smart_register_client_divider_height"
+        android:layout_height="fill_parent"
+        android:src="@color/smart_register_client_divider_color" />
+
+    <RelativeLayout
+        android:layout_width="0dp"
+        android:layout_height="fill_parent"
+        android:layout_weight="@integer/ec_list_ec_no_view_weight"
+        android:orientation="horizontal"
+        android:weightSum="1">
+
+        <org.smartregister.view.customcontrols.CustomFontTextView
+            android:id="@+id/label_no_ibu"
+            style="@style/CustomFontTextViewStyle.ListView.Small"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentTop="true"
+            android:layout_marginTop="5dp"
+            android:paddingLeft="5dp"
+            android:text="@string/header_no_ibu" />
+
+        <org.smartregister.view.customcontrols.CustomFontTextView
+            android:id="@+id/tv_no_ibu"
+            style="@style/CustomFontTextViewStyle.ListView.Small"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/label_no_ibu"
+            android:paddingLeft="5dp" />
+
+        <org.smartregister.view.customcontrols.CustomFontTextView
+            android:id="@+id/label_unique_id"
+            style="@style/CustomFontTextViewStyle.ListView.Small"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/tv_no_ibu"
+            android:paddingLeft="5dp"
+            android:text="Unique Id: " />
+
+        <org.smartregister.view.customcontrols.CustomFontTextView
+            android:id="@+id/unique_id"
+            style="@style/CustomFontTextViewStyle.ListView.Small"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/label_unique_id"
+            android:layout_weight="@integer/ec_list_ec_no_view_weight"
+            android:paddingLeft="5dp"
+            android:text="3123142"
+            android:textSize="10dp" />
+
+    </RelativeLayout>
+
+    <ImageView
+        android:layout_width="@dimen/smart_register_client_divider_height"
+        android:layout_height="fill_parent"
+        android:src="@color/smart_register_client_divider_color" />
+
+    <include layout="@layout/smart_register_client_obsetri_layout" />
+
+    <ImageView
+        android:layout_width="@dimen/smart_register_client_divider_height"
+        android:layout_height="fill_parent"
+        android:src="@color/smart_register_client_divider_color" />
+
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="fill_parent"
+        android:layout_weight="130"
+        android:padding="5dp">
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:background="@color/status_bar_text_almost_white"
+            android:orientation="vertical">
+
+            <org.smartregister.view.customcontrols.CustomFontTextView
+                android:id="@+id/txt_edd"
+                style="@style/CustomFontTextViewStyle.ListView.Medium.TwoLine"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:text="" />
+
+            <TextView
+                android:id="@+id/txt_edd_due"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingLeft="5dp"
+                android:text=""
+                android:textColor="@color/alert_urgent_red"
+                android:textSize="15sp"
+                android:textStyle="bold" />
+
+        </LinearLayout>
+
+
+    </LinearLayout>
+
+    <ImageView
+        android:layout_width="@dimen/smart_register_client_divider_height"
+        android:layout_height="fill_parent"
+        android:src="@color/smart_register_client_divider_color" />
+
+    <include layout="@layout/smart_register_client_anak_layout_ki" />
+
+    <ImageView
+        android:layout_width="@dimen/smart_register_client_divider_height"
+        android:layout_height="fill_parent"
+        android:src="@color/smart_register_client_divider_color" />
+
+    <include layout="@layout/smart_register_client_status_layout_ki" />
+
+    <ImageView
+        android:layout_width="@dimen/smart_register_client_divider_height"
+        android:layout_height="fill_parent"
+        android:src="@color/smart_register_client_divider_color" />
+
+    <ImageButton
+        android:id="@+id/ib_cm_edit"
+        android:layout_width="@dimen/list_edit_icon_view_width"
+        android:layout_height="fill_parent"
+        android:layout_margin="5dp"
+        android:layout_weight="80"
+        android:background="@drawable/edit_button_background"
+        android:clickable="true"
+        android:focusable="true"
+        android:gravity="center"
+        android:scaleType="center" />
+
+
+</LinearLayout>

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">Bidan OpenSRP OS</string>
+    <string name="app_name">Bidan OpenSRP</string>
     <string name="userNameEditText">Enter user name</string>
     <string name="passwordEditText">Enter password</string>
     <string name="login_text">Log In</string>
@@ -10,11 +10,8 @@
     <string name="loggin_in_dialog_message">Please wait</string>
     <string name="login_failed_dialog_title">Log in failed</string>
     <string name="login_failed_dialog_message">Please check the credentials</string>
-    <string name="mcareform_back_confirm_dialog_message">Are you sure you want to go back?</string>
-    <string name="mcareform_back_confirm_dialog_title">Confirm form close</string>
     <string name="mcareyes_button_label">Yes</string>
     <string name="mcareno_button_label">No</string>
-    <string name="home_hh_label">Household</string>
     <string name="home_ec_label">ELCO</string>
     <string name="home_fp_label">FP</string>
     <string name="home_anc_label">ANC</string>
@@ -25,18 +22,17 @@
     <string name="home_videos_label">Videos</string>
     <string name="header_anak">CHILD</string>
     <string name="header_nama">Name</string>
-    <string name="header_tgl_periksa">Check Date</string>
     <string name="header_edd">EDD</string>
-    <string name="header_kunjungan">VISIT</string>
-    <string name="header_no_ibu">No Ibu</string>
+    <string name="header_no_ibu">Cohort ID</string>
     <string name="header_status_b">STATUS</string>
     <string name="header_obsetri">OBSETRI</string>
-    <string name="mother_weight">Weight:</string>
     <string name="header_pemeriksaan">EXAMINATION</string>
-    <string name="header_resiko">Risk</string>
     <string name="videos_cannot_play_video_dialog_title">Cannot play video.</string>
     <string name="videos_IEC_not_installed_dialog_message">Please install IEC application to play the videos.
     </string>
+
+    <string name="cohort_mother">COHORT MOTHER</string>
+    <string name="cohort_fp">COHORT FP</string>
 
     <string name="sort_by_wife_age_label">Age</string>
     <string name="videos_unknown_error_dialog_message">Unable to play video due to technical error.</string>
@@ -45,21 +41,19 @@
         cleared.
     </string>
     <string name="unsynced_forms_count_message">forms unsynced</string>
-    <string name="anc_visit_integrasi">Kunjungan ANC Integrasi</string>
-    <string name="anc_visit_labtest">Kunjungan ANC Tes Lab</string>
-    <string name="str_rencana_persalinan_anc_form">Rencana Persalinan</string>
-    <string name="str_register_pnc_form">Daftar PNC</string>
-    <string name="anc_edit">Edit ANC</string>
-    <string name="pnc_edit">Edit PNC</string>
-    <string name="pnc_visit">PNC Visit</string>
-    <string name="pnc_pospartum_kb">Postpartum KB</string>
+    <string name="sync_last_date">Last sync:</string>
+    <string name="not_synced">Not yet synced</string>
+    <string name="anc_visit_integrasi">Integrated ANC Visit</string>
+    <string name="anc_visit_labtest">Lab Test ANC Visit</string>
+    <string name="str_rencana_persalinan_anc_form">Delivery Planning</string>
+    <string name="str_register_pnc_form">PNC Registration</string>
     <string name="str_next">"Next &gt;&gt;"</string>
     <string name="str_previous">"&lt;&lt; Previous"</string>
     <string name="str_page_info">Page {0} of {1}</string>
+    <string name="str_edit_ki_form">EC Edit</string>
 
 
     <string name="mother_already_registered">Mother already registered in ANC</string>
-    <string name="mother_already_registered_pnc">Mother already registered in PNC</string>
     <string name="header_history_anc">VISIT HISTORY</string>
     <string name="header_name">NAME</string>
     <string name="header_ec_no">EC NO.</string>
@@ -67,7 +61,7 @@
     <string name="header_fp">FP METHOD</string>
     <string name="header_children">CHILDREN</string>
     <string name="header_status">STATUS</string>
-    <string name="header_edit"></string>
+    <string name="header_edit">ACTIONS</string>
 
     <string name="couple_selection">All Eligible Couples</string>
     <string name="str_ec_search_hint">Search</string>
@@ -77,7 +71,7 @@
     <string name="label_sorted_by">Sorted By:</string>
     <string name="label_village">, Filtered By:</string>
     <string name="ec_register_wife_age">({0})</string>
-    <string name="ki_register_title_in_short">KI</string>
+    <string name="ki_register_title_in_short">CM</string>
     <string name="ec_register_male_child">Male\n{0}</string>
     <string name="ec_register_female_child">Female\n{0}</string>
     <string name="ec_register_no_fp">No FP</string>
@@ -121,6 +115,7 @@
     <string name="str_record_ecp_form">Record ECP</string>
     <string name="str_edit_ec_form">Edit EC</string>
     <string name="str_close_ec_form">Close EC</string>
+    <string name="str_close_ki_form">Close CM</string>
     <string name="report_month_sample_text">26/03 - 25/04</string>
     <string name="str_switch_language">Switch Language</string>
 
@@ -134,6 +129,7 @@
     <string name="str_register_anc_close_form">ANC Close</string>
 
     <string name="str_reporting">Reporting</string>
+    <string name="str_map">Map</string>
     <string name="str_videos">Videos</string>
 
     <string name="child_register_title_in_short">Child</string>
@@ -240,7 +236,6 @@
     <string name="header_delivery_complications">COMPLICATIONS</string>
     <string name="header_pp_fp">PP FP</string>
     <string name="header_child">CHILD</string>
-    <string name="header_days">&#160; DAYS</string>
     <string name="header_first_seven_days">FIRST 7 DAYS</string>
     <string name="header_pnc_visits">PNC VISITS</string>
     <string name="header_kb_method">CONTRACEPTION</string>
@@ -250,6 +245,7 @@
     <string name="str_pnc_visit_form">PNC Visit</string>
     <string name="str_pnc_postpartum_family_planning_form">Postpartum family planning</string>
     <string name="str_pnc_close_form">PNC Close</string>
+    <string name="no_complication">No complication</string>
 
     <string name="str_referred">Referred</string>
     <string name="str_referral">referral</string>
@@ -298,6 +294,7 @@
     <string name="str_contact">Contact:</string>
     <string name="str_risks_reviewed">Risks reviewed:</string>
     <string name="sort_by_edd_label">EDD</string>
+    <string name="temperature_lbl">Temperature: </string>
 
     <string name="sort_by_no_ibu_label">Mother Number</string>
     <string name="str_pnc_delivery_date">Date:</string>
@@ -326,126 +323,31 @@
     <string name="ic_keyboard_arrow_right">&#xe0c7;</string>
     <string name="ic_keyboard_arrow_up">&#xe0c8;</string>
 
-    <string name="hh_profile">PROFILE</string>
-    <string name="hh_no_of_mwra">NO. OF ELCO</string>
-    <string name="last_visit_date">Last Visit:&#160;</string>
-    <string name="hh_visit_due_date">HH VISIT DUE DATE</string>
-    <string name="hh_other_inhabitants">OTHER INHABITANTS</string>
-    <string name="hh_inhabitants_details">HH Details</string>
     <string name="household_entries">All Household Entries</string>
-    <string name="hh_register_title_in_short">HH</string>
 
-    <string name="elco_profile">PROFILE</string>
-    <string name="elco_unique_id">UNIQUE ID</string>
-    <string name="elco_lmp">LMP</string>
-    <string name="elco_psrf_due_date">PSRF DUE DATE</string>
-    <string name="sortoption">Filtered By:</string>
-    <string name="hh_alphabetical_sort">Alphabetical (HoH Name)</string>
-    <string name="hh_fwGobhhid_sort">HHID - Government</string>
-    <string name="hh_fwJivhhid_sort">HHID - JiVitA</string>
-    <string name="due_status">Due</string>
     <string name="hh_search_hint">Search</string>
-    <string name="hh_no_mwra">No ELCO</string>
-    <string name="hh_has_mwra">Has one or more ELCO</string>
-    <string name="elco_search_hint">Search</string>
-    <string name="elco_woman_details">ELCO Details</string>
     <string name="elco_details_summary">Summary</string>
-    <string name="elco_mwra_registration_date_label">Registration Date</string>
-    <string name="elco_last_psf_date_label">Last PSF Date</string>
-    <string name="all_eligible_couples">All Eligible Couples</string>
-    <string name="hhid_gob">HHID - Government:</string>
-    <string name="hhid_jivita">HHID - JiVitA:</string>
-    <string name="BRID">BRID:</string>
-    <string name="elco_details_husband_name_label">Husband Name:</string>
     <string name="elco_age_label">Age:</string>
-    <string name="hhiid_jivita_elco_label">HHID-JiVitA:</string>
-    <string name="hhid_gob_elco_label">HHID-Government:</string>
-    <string name="elco_details_mauza">Mauza:</string>
-    <string name="elco_alphabetical_sort">Alphabetical (Woman name)</string>
-    <string name="anc_nbnf_due_date">BNF DUE</string>
-    <string name="anc_reminder_status">ANC STATUS</string>
-    <string name="anc_edd_ga">EDD &amp; GA</string>
-    <string name="anc_reminder_due">ANC DUE</string>
-    <string name="take_nid_picture">Take Picture \n NID/BRID</string>
-    <string name="censusenrollmentform">Census New Woman Registration Form</string>
-    <string name="psrfform">Pregnancy Surveillance And Registration Form</string>
-    <string name="all_mcare_anc">All Pregnant Women</string>
-    <string name="history">History</string>
-    <string name="mcare_anc_woman_details">ANC Details</string>
-    <string name="nbnf">NBNF FORM</string>
-    <string name="anc4form">ANC visit 4 form</string>
-    <string name="anc3form">ANC visit 3 Form</string>
-    <string name="anc2form">ANC Visit 2 Form</string>
-    <string name="anc1form">ANC Visit 1 Form</string>
-    <string name="mcare_ANC_register_title_in_short">ANC</string>
     <string name="unauthorized">Please check the credentials</string>
     <string name="unknown_response">login failed. Try later</string>
     <string name="no_internet_connectivity">No internet connection. Please ensure data connectivity</string>
     <string name="forminputerror">Please check the form for any error/missing input marked in Red box</string>
     <string name="okforminputerror">ok</string>
-    <string name="pnc_outcome">OUTCOME</string>
-    <string name="pnc_date_of_outcome">DATE of OUTCOME</string>
-    <string name="pnc_details_date_of_outcome">Date of Outcome</string>
-    <string name="pnc_reminder_status">PNC STATUS</string>
-    <string name="pnc_reminder_due">PNC DUE</string>
-    <string name="mcare_PNC_register_title_in_short">PNC</string>
-    <string name="mcare_pnc_liveBirth">Live Birth</string>
-    <string name="mcare_pnc_Stillbirth">Still Birth</string>
-    <string name="all_mcare_pnc">Postnatal Women</string>
-    <string name="pnc3form">PNC visit 3 form</string>
-    <string name="pnc2form">PNC visit 2 form</string>
-    <string name="pnc1form">PNC visit 1 form</string>
-    <string name="mcarechild_dob">DOB</string>
-    <string name="encc_reminder_status">ENCC STATUS</string>
-    <string name="encc_due_date">ENCC DUE</string>
-    <string name="child_mother_unique_id">MOTHER\'S UNIQUE ID</string>
-    <string name="mcare_Child_register_title_in_short">Child</string>
-    <string name="encc3form">ENCC Visit Form 3</string>
-    <string name="encc2form">ENCC Visit Form 2</string>
-    <string name="encc1form">ENCC Visit Form 1</string>
-    <string name="NID">NID:</string>
-    <string name="sortbyLmp">LMP</string>
-    <string name="filter_by_anc1">ANCRV-1</string>
-    <string name="filter_by_anc2">ANCRV-2</string>
-    <string name="filter_by_anc3">ANCRV-3</string>
-    <string name="filter_by_anc4">ANCRV-4</string>
-    <string name="filter_by_pncrv1">PNCRV-1</string>
-    <string name="filter_by_pncrv2">PNCRV-2</string>
-    <string name="filter_by_pncrv3">PNCRV-3</string>
-    <string name="filter_by_encc1">ENCC-1</string>
-    <string name="filter_by_encc2">ENCC-2</string>
-    <string name="filter_by_encc3">ENCC-3</string>
-    <string name="mcare_pnc_woman_details">PNC Details</string>
     <string name="child_details_fathers_name_label">Father\'s name:&#160;</string>
-    <string name="norma_birth">Normal Birth</string>
-    <string name="Caeserian_section">Caeserian Section</string>
-    <string name="dont_know">Don\'t Know</string>
-    <string name="mcare_child_details">Child Details</string>
-    <string name="mis_elco">MIS ELCO form</string>
-    <string name="mis_elco_due">MIS ELCO DUE</string>
-    <string name="mis_census_label">MIS Census Form</string>
-    <string name="launch_mis_census_form">MIS Census</string>
-    <string name="pregnancy_outcome">Pregnancy Outcome</string>
-    <string name="pnc_typeofdelivery">Type of Delivery</string>
     <string name="date_of_birth">Date of Birth : </string>
     <string name="child_details_mothers_name_label">Mother\'s Name:&#160;</string>
-    <string name="pnc_Details_date_of_outcome">Date of Outcome</string>
     <string name="str_gravida_full">Gravida</string>
     <string name="str_parity_full">Parity</string>
     <string name="str_abortus_full">Abortus</string>
     <string name="str_alive_full">Alive</string>
-    <string name="str_kb_update">Update KB</string>
-    <string name="str_kb_edit">Edit KB</string>
-    <string name="str_kb_close">Tutup KB</string>
-    <string name="kb_register_title_in_short">KB</string>
-    <string name="tanggalkunjungan">Tanggal:</string>
-    <string name="ancke">ANC Ke:</string>
-    <string name="kunjunganke">Kunjungan Ke:</string>
+    <string name="str_kb_edit">Edit FP</string>
+    <string name="str_kb_update">Update FP</string>
+    <string name="str_kb_close">Close FP</string>
+    <string name="kb_register_title_in_short">FP</string>
     <string name="header_rencana">PLAN</string>
 
     <string name="header_komplikasi">COMPLICATION</string>
 
-    <string name="header_kontrasepsi">CONTRACEPTION</string>
     <string name="header_tanda_vital">VITAL SIGN</string>
     <string name="place_place">Place:</string>
     <string name="plan_type">Type:</string>
@@ -459,15 +361,14 @@
     <string name="birth_weight_title">B.Weight:</string>
     <string name="hari_ke_kf">KF:</string>
     <string name="str_anak_neonatal">Neonatal Visit</string>
-    <string name="str_header_neonatal">NEONATAL VISIT</string>
     <string name="str_anak_edit">Edit Child</string>
     <string name="str_anak_bayi_visit">Baby Visit</string>
     <string name="str_anak_balita_visit">Toddler Visit</string>
+    <string name="nutrition">Nutrition:</string>
     <string name="height">Height:</string>
     <string name="service_anc">Service Status: ANC</string>
     <string name="service_pnc">Service Status: PNC</string>
     <string name="anc_ke">ANC Number:&#160;</string>
-    <string name="visit_number">Visit Number:&#160;</string>
     <string name="name">NAME:&#160; </string>
     <string name="nik">NIK:&#160; </string>
     <string name="husband_name">Husband Name: &#160;</string>
@@ -486,6 +387,10 @@
     <string name="poor_household">Poor Household</string>
     <string name="insurance">Insurance</string>
     <string name="blodd_type">Blood Type</string>
+    <string name="cadre">Cadre</string>
+    <string name="dukun">Dukun</string>
+    <string name="out_of_area">From out of area</string>
+    <string name="out_of_area_date">Move in date</string>
     <string name="show_more_button">Show More Risks . . .</string>
     <!-- Risk detail-->
     <string name="highRiskPregnancyYoungMaternalAge">Pregnancy Young Maternal Age: &#160;</string>
@@ -493,8 +398,6 @@
     <string name="highRiskPregnancyProteinEnergyMalnutrition">Pregnancy Protein Energy Malnutrition: &#160;</string>
     <string name="HighRiskPregnancyAbortus">Pregnancy Abortus: &#160;</string>
     <string name="HighRiskLabourSectionCesareaRecord">Labour Section Cesarea Record: &#160;</string>
-
-    <string name="risk_summary">Risk Summary:</string>
 
     <string name="highRiskHIVAIDS">HighRisk HIV/AIDS</string>
     <string name="highRiskSTIBBVs">HighRisk STIBBVs</string>
@@ -521,7 +424,6 @@
     <string name="highRiskPostPartumHemorrhage">high Risk PostPartum Hemorrhage</string>
     <string name="highRiskPostPartumPIH">High Risk PostPartum PIH</string>
     <string name="highRiskPostPartumDistosia">High Risk PostPartum Distosia</string>
-    <string name="highRiskPostPartumSHectioCaesaria">High Risk PostPartum Sectio Caesaria</string>
     <string name="show_less_button">Show Less . . .</string>
     <string name="highRiskPostPartumSectioCaesaria">highRisk PostPartum Sectio Caesaria</string>
     <string name="contraseption">Contraception</string>
@@ -533,38 +435,75 @@
     <string name="alkiims">ALKI /Ims</string>
     <string name="kb_ket">FP Note</string>
     <string name="ganti_cara">Change FP</string>
-    <string name="header_tt_usia_klinis">Clinical Status</string>
-    <string name="usia">Clinical Age:&#160;</string>
     <string name="header_klinis">CLINCAL STATUS</string>
     <string name="sort_by_dob_label">Date Of Birth</string>
-    <string name="months_away" translatable="false">months away</string>
-    <string name="this_month" translatable="false">this month</string>
+    <string name="months_away">months away</string>
+    <string name="this_month">this month</string>
     <string name="delivered">delivered</string>
-    <string name="month">Month</string>
     <string name="service_fp">Service Status: FP </string>
-    <string name="str_pnc_delivery">Delivery Date:&#160;</string>
     <string name="edd_passed">EDD Passed</string>
     <string name="fe">FE:</string>
-    <string name="Nutrition_status">Nutrition Status:</string>
-    <string name="lila">MUAC:</string>
     <string name="mother_already_registered_in_fp">Mother already registered</string>
     <string name="pnc_ke">PNC Visit</string>
 
 
-    <string name="desc">Photo Confirmation</string>
-    <string name="desc_approval">Approval Desc</string>
-    <string name="desc_trash">Trash Description</string>
-
-    <string name="years_unit">yrs</string>
-    <string name="month_unit">mth</string>
-    <string name="hours_unit">hrs</string>
-    <string name="weight_unit">Kg</string>
-    <string name="length_unit">Cm</string>
-    <string name="x_axis_label">Month</string>
     <string name="chart_title">CHILD GROWTH CHART</string>
-    <string name="lfa_string">Length for Age</string>
-    <string name="hfa_string">Height for Age</string>
 
+
+    <string name="action_settings">Settings</string>
+
+    <string name="header_neonatal">NEONATAL VISIT</string>
+    <string name="header_immunizations">IMMUNIZATIONS</string>
+    <string name="str_month">Month</string>
+    <string name="lila">MUAC:</string>
+    <string name="mother_weight">Mother Weight</string>
+    <string name="usia">Umur</string>
+    <string name="last_visit_date">Last Visit Date</string>
+    <string name="visit_number">Visit Num: </string>
+    <string name="ANC3">ANC 3</string>
+    <string name="ANC2">ANC 2</string>
+    <string name="ANC1">ANC</string>
+    <string name="ANC4">ANC 4</string>
+    <string name="Visit1">Visit 1</string>
+    <string name="Visit2">Visit 2</string>
+    <string name="Visit3">Visit 3</string>
+    <string name="Visit4">Visit 4</string>
+    <string name="Visit5">Visit 5</string>
+    <string name="Visit6">Visit 6</string>
+    <string name="Visit7">Visit 7</string>
+    <string name="Visit8">Visit 8</string>
+    <string name="Visit9">Visit 9</string>
+    <string name="followUpDue">Follow up due</string>
+    <string name="yes_button_label">Yes</string>
+    <string name="standart">Standart</string>
+    <string name="non_standart">Non Standart</string>
+
+    <string name="url_separator">/</string>
+    <string name="clients_key">clients</string>
+    <string name="events_key">events</string>
+
+    <string name="txt_death">Dead</string>
+    <string name="death_reason">Death Reason</string>
+
+    <string name="sepsis">Sepsis</string>
+    <string name="asphyxia">Asphyxia</string>
+    <string name="lbw">Low Birth Weight (&lt; 2.5 kg)</string>
+    <string name="pneumonia">Pneumonia</string>
+    <string name="diarrhea">Diarrhea</string>
+    <string name="malnutrition">Malnutrition</string>
+    <string name="Infeksi_pernafasan_akut">Acute respiratory infections</string>
+    <string name="infeksi_pernapasan_atas">Upper respiratory tract infection</string>
+    <string name="malaria">Malaria</string>
+    <string name="tetanus_neonatorum">Tetanus Neonatorum</string>
+    <string name="ikterus">Ikterus</string>
+    <string name="demam_berdarah">Dengue fever</string>
+    <string name="congenital_abnormality">Congenital Abnormality</string>
+    <string name="kelainan_saluran_cerna">Gastrointestinal Disorders</string>
+    <string name="Kelainan_syaraf">Neurological Abnormality</string>
+    <string name="others">Others</string>
+    <string name="cause_not_identified">Unidentified cause</string>
+
+    <string name="reset_album">Reset Album</string>
 
     <string name="path_circle">
         M 50,50
@@ -580,69 +519,22 @@
         a 7,7 0 1,0 14,0
       a 7,7 0 1,0 -14,0
   </string>
-  <string name="path_face_right_eye">
+    <string name="path_face_right_eye">
       M 65,40
       m -7,0
       a 7,7 0 1,0 14,0
       a 7,7 0 1,0 -14,0
   </string>
-  <string name="path_face_mouth_sad">
+    <string name="path_face_mouth_sad">
       M 30,75
       Q 50,55 70,75
   </string>
-  <string name="path_face_mouth_happy">
+    <string name="path_face_mouth_happy">
       M 30,65
       Q 50,85 70,65
   </string>
     <string name="groupCheckCross">Check Cross</string>
-    <string name="reset_album">Reset Album</string>
-    <string name="action_settings">Settings</string>
-    <string name="cell_phone">No. HP :</string>
-    <string name="dho_site">kia-report.sid-indonesia.org/login/auth</string>
 
-    <string name="sistole">Sistole</string>
-    <string name="diastole">Diastole</string>
+    <string name="last_5_face">LAST 5 FACES</string>
 
-    <string name="title_activity_abi">ABI</string>
-    <string name="title_activity_am3">AM3</string>
-    <string name="title_activity_am3_s">AM3S</string>
-    <string name="title_activity_am4">AM4</string>
-    <string name="title_activity_bg1">BG1</string>
-    <string name="title_activity_bg5">BG5</string>
-    <string name="title_activity_bp3_l">BP3L</string>
-    <string name="title_activity_bp3_m">BP3M</string>
-    <string name="title_activity_bp5">BP5</string>
-    <string name="title_activity_bp7">BP7</string>
-    <string name="title_activity_bp7_s">BP7S</string>
-    <string name="title_activity_bp550_bt">BP550BT</string>
-    <string name="title_activity_hs3">HS3</string>
-    <string name="title_activity_hs4">HS4</string>
-    <string name="title_activity_hs4_s">HS4S</string>
-    <string name="title_activity_hs5_bt">HS5BT</string>
-    <string name="title_activity_hs5_wifi">HS5WIFI</string>
-    <string name="title_activity_hs6">HS6</string>
-    <string name="title_activity_po3">PO3</string>
-    <string name="bluetooth_devicelist_dialog_ssid">SSID:</string>
-    <string name="bluetooth_devicelist_dialog_type">Type:</string>
-    <string name="bluetooth_devicelist_dialog_password">Password:</string>
-    <string name="bluetooth_devicelist_dialog_deviceKey">DeviceKey:</string>
-    <string name="bluetooth_setwifi_title">set Wi-Fi</string>
-    <string name="ok">ok</string>
-    <string name="cancel">cancel</string>
-    <string name="title_activity_btm">BTM</string>
-    <string name="title_activity_kd926">KD926</string>
-    <string name="title_activity_kd723">KD723</string>
-    <string name="title_activity_bg5l">BG5L</string>
-    <string name="title_activity_pb">PBActivity</string>
-    <string name="btn_done">Done</string>
-    <string name="sys">SYS</string>
-    <string name="dia">DIA</string>
-    <string name="stop">Stop</string>
-    <string name="start">Start</string>
-    <string name="str_enable_bt">Enable BT</string>
-    <string name="discovering">Discovering...</string>
-    <string name="discover_finish">Discovering end</string>
-    <string name="start_discovery">Start Discovery</string>
-    <string name="stop_discovery">Stop Discovery</string>
-    <string name="pulse">PULSE</string>
 </resources>

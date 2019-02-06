@@ -1,0 +1,105 @@
+{
+  "form_data_definition_version": "3",
+  "form": {
+    "bind_type": "anak",
+    "ec_bind_type": "ec_anak",
+    "default_bind_path": "/model/instance/edit_bayi/",
+    "fields": [
+      {
+        "name": "id",
+        "shouldLoadValue": true
+      },
+      {
+        "name": "start",
+        "bind": "/model/instance/edit_bayi/start"
+      },
+      {
+        "name": "end",
+        "bind": "/model/instance/edit_bayi/end"
+      },
+      {
+        "name": "existing_location",
+        "bind": "/model/instance/edit_bayi/existing_location",
+        "shouldLoadValue": true
+      },
+      {
+        "name": "type",
+        "value": "pnc",
+        "source": "ibu.type"
+      },
+      {
+        "name": "isOutOfArea",
+        "value": "false"
+      },
+      {
+        "name": "isClosed",
+        "value": "false"
+      },
+      {
+        "name": "isClosed",
+        "value": "false",
+        "source": "ibu.anak.isClosed"
+      },
+      {
+        "name": "submissionDate",
+        "bind": "/model/instance/edit_bayi/today"
+      },
+      {
+        "name": "referenceDate",
+        "bind": "/model/instance/edit_bayi/reference_date",
+        "source": "ibu.referenceDate"
+      },
+      {
+        "name": "relationalid",
+        "shouldLoadValue": true
+      },
+      {
+        "name": "injectedBaseEntityId",
+        "shouldLoadValue": true
+      },
+      {
+        "name": "ibuCaseId",
+        "bind": "/model/instance/edit_bayi/ibu_entity_id",
+        "shouldLoadValue": true
+      },
+      {
+        "name": "noBayi",
+        "bind": "/model/instance/edit_bayi/no_bayi"
+      },
+      {
+        "name": "namaBayi",
+        "bind": "/model/instance/edit_bayi/nama_bayi",
+        "shouldLoadValue": true
+      },
+      {
+        "name": "tanggalLahirAnak",
+        "bind": "/model/instance/edit_bayi/tanggal_lahir",
+        "shouldLoadValue": true
+      },
+      {
+        "name": "jenisKelamin",
+        "bind": "/model/instance/edit_bayi/jenis_kelamin",
+        "shouldLoadValue": true
+      },
+      {
+        "name": "kepemilikanBukuKia",
+        "bind": "/model/instance/edit_bayi/kepemilikan_buku_kia"
+      },
+      {
+        "name": "desa_anak",
+        "bind": "/model/instance/edit_bayi/desa_anak",
+        "shouldLoadValue": true
+      },
+      {
+        "name": "child_existing_location",
+        "bind": "/model/instance/edit_bayi/child_existing_location",
+        "shouldLoadValue": true
+      },
+      {
+        "name": "beratLahir",
+        "bind": "/model/instance/edit_bayi/berat_badan_saat_lahir",
+        "shouldLoadValue": true
+      }
+    ]
+  }
+}

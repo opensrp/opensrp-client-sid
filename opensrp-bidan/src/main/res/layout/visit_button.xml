@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<org.smartregister.view.customcontrols.CustomFontTextView xmlns:android="http://schemas.android.com/apk/res/android"
+    style="@style/CustomFontTextViewStyle.ListView.Medium"
+    android:layout_width="250dp"
+    android:layout_height="match_parent"
+    android:layout_gravity="center"
+    android:layout_marginBottom="2dp"
+    android:layout_marginLeft="5dp"
+    android:layout_marginTop="2dp"
+    android:text="Visit 1"
+    android:textColor="@color/button_material_dark"
+    android:textSize="16sp"
+    android:textStyle="bold"
+    />
