@@ -38,11 +38,16 @@ import java.io.FileOutputStream;
 import java.io.InputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.text.DateFormat;
 import java.text.MessageFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
+import java.util.TimeZone;
 
 import io.reactivex.Observable;
 import io.reactivex.ObservableSource;
@@ -131,6 +136,20 @@ public class SyncService extends Service {
         }
     }
 
+    public String dateTimeAdjuster (String originalDate) {
+        DateFormat format = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSSZ");
+        try {
+            Date updateLast = format.parse(originalDate);
+            TimeZone tz = TimeZone.getDefault();
+            int offset = tz.getRawOffset();
+            updateLast.setTime(updateLast.getTime() + offset);
+            return format.format(updateLast);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return originalDate;
+        }
+    }
+
     private void pushECToServer() {
         IndonesiaECRepository db = BidanApplication.getInstance().indonesiaECRepository();
         boolean keepSyncing = true;
@@ -150,7 +169,23 @@ public class SyncService extends Service {
                 // create request body
                 JSONObject request = new JSONObject();
                 if (pendingEvents.containsKey(context.getString(R.string.clients_key))) {
-                    request.put(context.getString(R.string.clients_key), pendingEvents.get(context.getString(R.string.clients_key)));
+                    // START: FIXING DOB
+                    // fixing DOB problem that changed to 1 day earlier
+                    // hour 00:00, will be converted to hour 17:00 the day before
+                    // I change the hour to 23:59, so it will be converted to any hour (depending location) at the same day
+                    JSONArray clients = new JSONArray(pendingEvents.get(context.getString(R.string.clients_key)).toString());
+                    for (int i = 0; i < clients.length(); i++) {
+                        JSONObject client = (JSONObject) clients.get(i);
+                        String birthdate = client.has("birthdate") ? client.getString("birthdate") : null;
+                        if (birthdate != null) {
+                            birthdate = dateTimeAdjuster(birthdate);
+                            client.put("birthdate", birthdate);
+                            clients.put(i, client);
+                        }
+                    }
+//                    request.put(context.getString(R.string.clients_key), pendingEvents.get(context.getString(R.string.clients_key)));
+                    request.put(context.getString(R.string.clients_key), clients);
+                    // END: FIXING DOB
                 }
                 if (pendingEvents.containsKey(context.getString(R.string.events_key))) {
                     request.put(context.getString(R.string.events_key), pendingEvents.get(context.getString(R.string.events_key)));
