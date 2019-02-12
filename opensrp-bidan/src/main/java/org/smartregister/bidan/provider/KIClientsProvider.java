@@ -113,7 +113,8 @@ public class KIClientsProvider extends BaseClientsProvider {
         TextView children_age_right = (TextView) convertView.findViewById(R.id.txt_children_age_right);
         TextView children_age_bottom = (TextView) convertView.findViewById(R.id.txt_children_age_bottom);
 
-        edd_due.setText("");
+//        edd_due.setText("");
+        String eddDueStr = "";
         anc_status_layout.setText("");
         date_status.setText("");
         visit_status.setText("");
@@ -140,10 +141,12 @@ public class KIClientsProvider extends BaseClientsProvider {
                 _dueEdd = mContext.getString(R.string.edd_passed);
             }
 
-            edd_due.setText(_dueEdd);
+//            edd_due.setText(_dueEdd);
+            eddDueStr = _dueEdd;
 
         } else {
-            edd_due.setText("");
+//            edd_due.setText("");
+            eddDueStr = "";
         }
 
         if (ibuparent != null) {
@@ -173,16 +176,19 @@ public class KIClientsProvider extends BaseClientsProvider {
                   /*  checkMonth("delivered",edd_due);*/
                         edd_due.setTextColor(mContext.getResources().getColor(R.color.alert_complete_green));
                         String deliver = mContext.getString(R.string.delivered);
-                        edd_due.setText(deliver);
+//                        edd_due.setText(deliver);
+                        eddDueStr = deliver;
                         checkLastVisit(pc.getDetails().get("PNCDate"), mContext.getString(R.string.pnc_ke) + " " + pc.getDetails().get("hariKeKF"), mContext.getString(R.string.service_pnc),
                                 anc_status_layout, date_status, visit_status);
                     }else{
                         ((TextView) convertView.findViewById(R.id.txt_edd)).setText("");
-                        edd_due.setText("");
+//                        edd_due.setText("");
+                        eddDueStr = "";
                     }
                 }else{
                     ((TextView) convertView.findViewById(R.id.txt_edd)).setText("");
-                    edd_due.setText("");
+//                    edd_due.setText("");
+                    eddDueStr = "";
                 }
 
             }
@@ -193,6 +199,7 @@ public class KIClientsProvider extends BaseClientsProvider {
                         mContext.getString(R.string.fp_methods) + ": " + pc.getDetails().get("jenisKontrasepsi"),
                         mContext.getString(R.string.service_fp), anc_status_layout, date_status, visit_status);
             }
+        edd_due.setText(eddDueStr);
 
         //anak
         for (int i = 0; i < allchild.size(); i++) {
