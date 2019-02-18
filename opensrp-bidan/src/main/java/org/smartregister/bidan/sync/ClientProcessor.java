@@ -119,8 +119,50 @@ public class ClientProcessor {
 
         if (!events.isEmpty()) {
             for (JSONObject event : events) {
-
                 if (event.getString("eventType").equals(ANC_REGISTRATION)){
+                    // START: find existing anc_id in ec_pnc (Dokumentasi Persalinan)
+                    // get obs of event
+                    JSONArray obs = event.has("obs") ? event.getJSONArray("obs") : null;
+                    if (obs != null) {
+                        // ANC ID is possible to be more than 1,
+                        // so we use List
+                        List<String> ancList = null;
+                        // get ANC ID list
+                        for (int i = 0; i < obs.length(); i++) {
+                            JSONObject ob = obs.getJSONObject(i);
+                            String fieldCode = ob.has("fieldCode") ? ob.getString("fieldCode") : null;
+                            // check whether the fieldCode is ancId
+                            if (fieldCode != null && fieldCode.equalsIgnoreCase("ancId")) {
+                                JSONArray values = ob.has("values") ? ob.getJSONArray("values") : null;
+                                // store values to ancList
+                                ancList = getValues(values);
+                                break;
+                            }
+                        }
+
+                        if (ancList != null) {
+                            // building question marks for query
+                            String inQuestionMarks = "?";
+                            for (int i = 2; i < ancList.size(); i++) {
+                                inQuestionMarks += ", ?";
+                            }
+
+                            // query, to get whether there is existing data in ec_pnc (Dokumentasi Persalinan)
+                            // that matches ANC ID list
+                            net.sqlcipher.Cursor temp = BidanApplication
+                                    .getInstance()
+                                    .getContext()
+                                    .initRepository()
+                                    .getWritableDatabase()
+                                    .rawQuery("SELECT * FROM ec_pnc WHERE anc_id IN ("+ inQuestionMarks +")", ancList.toArray(new String[ancList.size()]));
+                            // if yes, then skip both removePncData and removeAncData
+                            if (temp.getCount() > 0) {
+                                continue;
+                            }
+                        }
+                    }
+                    // END: find existing anc_id in ec_pnc (Dokumentasi Persalinan)
+
                     removePncData(event.getString("baseEntityId"));
                     removeAncData(event.getString("baseEntityId"));
                 }
