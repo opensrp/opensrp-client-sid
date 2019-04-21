@@ -88,6 +88,14 @@
         "bind": "/model/instance/PNC_visit_reviewed/tanda_vital_suhu"
       },
       {
+        "name": "tandaVitalNadi",
+        "bind": "/model/instance/PNC_visit_reviewed/tanda_vital_nadi"
+      },
+      {
+        "name": "tandaVitalPernafasan",
+        "bind": "/model/instance/PNC_visit_reviewed/tanda_vital_pernafasan"
+      },
+      {
         "name": "pelayananfe",
         "bind": "/model/instance/PNC_visit_reviewed/pelayananfe"
       },
