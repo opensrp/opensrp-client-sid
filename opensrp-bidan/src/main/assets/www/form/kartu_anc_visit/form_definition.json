@@ -212,12 +212,20 @@
         "bind": "/model/instance/kunjungan_anc_reviewed_anc_visit/jumlah_fe"
       },
       {
+        "name": "fe1Fe3",
+        "bind": "/model/instance/kunjungan_anc_reviewed_anc_visit/fe1_fe3"
+      },
+      {
         "name": "komplikasidalamKehamilan",
         "bind": "/model/instance/kunjungan_anc_reviewed_anc_visit/komplikasi_dalam_kehamilan"
       },
       {
         "name": "komplikasiLain",
         "bind": "/model/instance/kunjungan_anc_reviewed_anc_visit/komplikasi_lain"
+      },
+      {
+        "name": "resikoTerdeksiPertamaKali",
+        "bind": "/model/instance/kunjungan_anc_reviewed_anc_visit/resiko_terdeksi_pertama_kali"
       },
       {
         "name": "treatment",

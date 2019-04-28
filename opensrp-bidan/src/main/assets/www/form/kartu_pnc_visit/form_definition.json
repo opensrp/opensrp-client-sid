@@ -74,6 +74,10 @@
         "bind": "/model/instance/PNC_visit_reviewed/hari_ke__kf"
       },
       {
+        "name": "keadaanUmum",
+        "bind": "/model/instance/PNC_visit_reviewed/keadaan_umum"
+      },
+      {
         "name": "tandaVitalTDSistolik",
         "bind": "/model/instance/PNC_visit_reviewed/tanda_vital_td_sistolik",
         "source": "ibu.kartu_ibu.tandaVitalTDSistolik"
@@ -138,6 +142,58 @@
       {
         "name": "kondisiPascaTindakan",
         "bind": "/model/instance/PNC_visit_reviewed/kondisipascatindakan"
+      },
+      {
+        "name": "pembengkakanPayudara",
+        "bind": "/model/instance/PNC_visit_reviewed/pembengkakan_payudara"
+      },
+      {
+        "name": "produksiAsi",
+        "bind": "/model/instance/PNC_visit_reviewed/produksi_asi"
+      },
+      {
+        "name": "fundusUteri",
+        "bind": "/model/instance/PNC_visit_reviewed/fundus_uteri"
+      },
+      {
+        "name": "kontraksiUterus",
+        "bind": "/model/instance/PNC_visit_reviewed/kontraksi_uterus"
+      },
+      {
+        "name": "kandungKencing",
+        "bind": "/model/instance/PNC_visit_reviewed/kandung_kencing"
+      },
+      {
+        "name": "buangAirKecil",
+        "bind": "/model/instance/PNC_visit_reviewed/buang_air_kecil"
+      },
+      {
+        "name": "buangAirBesar",
+        "bind": "/model/instance/PNC_visit_reviewed/buang_air_besar"
+      },
+      {
+        "name": "lukaOperasi",
+        "bind": "/model/instance/PNC_visit_reviewed/luka_operasi"
+      },
+      {
+        "name": "lochia",
+        "bind": "/model/instance/PNC_visit_reviewed/lochia"
+      },
+      {
+        "name": "bleeding",
+        "bind": "/model/instance/PNC_visit_reviewed/bleeding"
+      },
+      {
+        "name": "lukaPerineum",
+        "bind": "/model/instance/PNC_visit_reviewed/luka_perineum"
+      },
+      {
+        "name": "pelayananCatatDiBukuKia",
+        "bind": "/model/instance/PNC_visit_reviewed/pelayanan_catat_di_buku_kia"
+      },
+      {
+        "name": "programIntegration",
+        "bind": "/model/instance/PNC_visit_reviewed/ProgramIntegration"
       },
       {
         "name": "treatment",

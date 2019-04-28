@@ -135,9 +135,14 @@ public class ChildClientsProvider implements SmartRegisterCLientsProviderForCurs
         fillValue((TextView) convertView.findViewById(R.id.tv_village_name), str_childAddress);
 
         //----------Child Deliver Information
-        str_birthPlace = kiparent.getDetails().get("tempatBersalin") != null ? kiparent.getDetails().get("tempatBersalin") : "";
-        String childBirthWeight = pc.getDetails().get("beratBayi") != null ? pc.getDetails().get("beratBayi") : pc.getDetails().get("beratLahir");
-        String childBirthType = kiparent.getDetails().get("caraPersalinanIbu") != null ? kiparent.getDetails().get("caraPersalinanIbu") : "";
+        String childBirthWeight = ""; String childBirthType = "";
+        try {
+            str_birthPlace = kiparent.getDetails().get("tempatBersalin") != null ? kiparent.getDetails().get("tempatBersalin") : "";
+            childBirthWeight = pc.getDetails().get("beratBayi") != null ? pc.getDetails().get("beratBayi") : pc.getDetails().get("beratLahir");
+            childBirthType = kiparent.getDetails().get("caraPersalinanIbu") != null ? kiparent.getDetails().get("caraPersalinanIbu") : "";
+        } catch (Exception e) {
+            str_birthPlace = "";
+        }
 
         fillValue((TextView) convertView.findViewById(R.id.tempat_lahir), str_birthPlace);
         fillValue((TextView) convertView.findViewById(R.id.anak_register_dob), str_birthDate);
