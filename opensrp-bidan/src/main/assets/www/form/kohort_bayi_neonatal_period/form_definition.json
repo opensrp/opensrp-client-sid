@@ -146,6 +146,18 @@
         "bind": "/model/instance/kunjungan_neonatal_reviewed/today"
       },
       {
+        "name": "lokasiPeriksa",
+        "bind": "/model/instance/kunjungan_neonatal_reviewed/lokasi_periksa"
+      },
+      {
+        "name": "lokasiPeriksaOther",
+        "bind": "/model/instance/kunjungan_neonatal_reviewed/lokasi_periksa_other"
+      },
+      {
+        "name": "pemeriksaanNeonatal",
+        "bind": "/model/instance/kunjungan_neonatal_reviewed/pemeriksaan_neonatal"
+      },
+      {
         "name": "registrationDate",
         "bind": "/model/instance/kunjungan_neonatal_reviewed/reg_date"
       }
