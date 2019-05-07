@@ -510,7 +510,10 @@ public class BaseRegisterActivity extends SecuredNativeSmartRegisterActivity imp
                 AllCommonsRepository childRepository = Context.getInstance().allCommonsRepositoryobjects("ec_anak");
                 CommonPersonObject childobject = childRepository.findByCaseID(pc.entityId());
                 AllCommonsRepository kirep = Context.getInstance().allCommonsRepositoryobjects("ec_kartu_ibu");
-                CommonPersonObject kiparent = kirep.findByCaseID(childobject.getColumnmaps().get("relational_id"));
+                CommonPersonObject kiparent = null;
+                try {
+                    kiparent = kirep.findByCaseID(childobject.getColumnmaps().get("relational_id"));
+                } catch (Exception e) {}
                 detailsRepository.updateDetails(kiparent);
 
                 JSONObject fieldOverrides = new JSONObject();
