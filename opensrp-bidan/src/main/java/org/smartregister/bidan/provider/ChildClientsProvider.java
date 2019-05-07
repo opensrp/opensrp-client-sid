@@ -88,7 +88,10 @@ public class ChildClientsProvider implements SmartRegisterCLientsProviderForCurs
         final CommonPersonObject kiparent = kirep.findByCaseID(relationalId);
 
         AllCommonsRepository iburep = org.smartregister.Context.getInstance().allCommonsRepositoryobjects("ec_ibu");
-        final CommonPersonObject ibuparent = iburep.findByCaseID(childobject.getColumnmaps().get("relational_id"));
+        CommonPersonObject ibuparent = null;
+        try {
+            ibuparent = iburep.findByCaseID(childobject.getColumnmaps().get("relational_id"));
+        } catch (Exception e) {}
 
         convertView.findViewById(R.id.ib_cm_edit).setTag(client);
         convertView.findViewById(R.id.ib_cm_edit).setOnClickListener(onClickListener);
