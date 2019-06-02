@@ -513,14 +513,16 @@ public class BaseRegisterActivity extends SecuredNativeSmartRegisterActivity imp
                 CommonPersonObject kiparent = null;
                 try {
                     kiparent = kirep.findByCaseID(childobject.getColumnmaps().get("relational_id"));
+                    detailsRepository.updateDetails(kiparent);
                 } catch (Exception e) {}
-                detailsRepository.updateDetails(kiparent);
 
                 JSONObject fieldOverrides = new JSONObject();
 
                 try {
                     fieldOverrides.put("Sub-village", kiparent.getDetails().get("address1"));
                 } catch (JSONException e) {
+                    e.printStackTrace();
+                } catch (Exception e) {
                     e.printStackTrace();
                 }
 
