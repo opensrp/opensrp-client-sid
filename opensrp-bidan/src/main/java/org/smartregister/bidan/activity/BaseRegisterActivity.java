@@ -208,7 +208,7 @@ public class BaseRegisterActivity extends SecuredNativeSmartRegisterActivity imp
     }
 
     private void switchToBaseFragment() {
-        android.util.Log.e(TAG, "switchToBaseFragment: " );
+        android.util.Log.e(TAG, "switchToBaseFragment: ");
         final int prevPageIndex = currentPage;
         runOnUiThread(new Runnable() {
             @Override
@@ -236,15 +236,15 @@ public class BaseRegisterActivity extends SecuredNativeSmartRegisterActivity imp
                 BaseSmartRegisterFragment registerFragment = baseFragment;
                 if (registerFragment != null && data != null) {
                     registerFragment.refreshListView();
-                    android.util.Log.e(TAG, "run: refresh1" );
+                    android.util.Log.e(TAG, "run: refresh1");
                     registerFragment.setRefreshList(true);
-                    android.util.Log.e(TAG, "run: refresh2" );
+                    android.util.Log.e(TAG, "run: refresh2");
 
                     //                final BaseRegisterActivity registerActivity = ((BaseRegisterActivity) context);
 //                registerActivity.refreshList(FetchStatus.fetched);
 //                registerActivity.hideProgressDialog();
                 } else {
-                    android.util.Log.e(TAG, "run: " );
+                    android.util.Log.e(TAG, "run: ");
                 }
 
                 //hack reset the form
@@ -315,15 +315,15 @@ public class BaseRegisterActivity extends SecuredNativeSmartRegisterActivity imp
             int formIndex = formNames.indexOf(formName) + 1;// add the offset
             if (entityId != null || metaData != null) {
                 //check if there is previously saved data for the form
-                if (metaData != null ) data = getPreviouslySavedDataForForm(formName, metaData, entityId);
-                android.util.Log.e(TAG, "startFormActivity: previous data "+ data );
+                if (metaData != null) data = getPreviouslySavedDataForForm(formName, metaData, entityId);
+                android.util.Log.e(TAG, "startFormActivity: previous data " + data);
 
                 if (data == null) {
 //                    data = EnketoFormUtils.getInstance(this)
 //                            .generateXMLInputForFormWithEntityId(entityId, formName, metaData);
                     data = BidanFormUtils.getInstance(this)
                             .generateXMLInputForFormWithEntityId(entityId, formName, metaData);
-                    android.util.Log.e(TAG, "startFormActivity: recent data "+ data );
+                    android.util.Log.e(TAG, "startFormActivity: recent data " + data);
                 }
 
                 displayFormFragment = getDisplayFormFragmentAtIndex(formIndex);
@@ -355,16 +355,16 @@ public class BaseRegisterActivity extends SecuredNativeSmartRegisterActivity imp
     @Override
     public void saveFormSubmission(String formSubmission, String id, String formName, JSONObject fieldOverrides) {
         try {
-            android.util.Log.d(TAG, "saveFormSubmission: formSubmission="+formSubmission);
-            android.util.Log.d(TAG, "saveFormSubmission: id="+id);
-            android.util.Log.d(TAG, "saveFormSubmission: formName="+formName);
-            android.util.Log.d(TAG, "saveFormSubmission: fieldOverrides="+fieldOverrides);
+            android.util.Log.d(TAG, "saveFormSubmission: formSubmission=" + formSubmission);
+            android.util.Log.d(TAG, "saveFormSubmission: id=" + id);
+            android.util.Log.d(TAG, "saveFormSubmission: formName=" + formName);
+            android.util.Log.d(TAG, "saveFormSubmission: fieldOverrides=" + fieldOverrides);
             BidanFormUtils formUtils = BidanFormUtils.getInstance(this);
             FormSubmission submission = formUtils.generateFormSubmisionFromXMLString(id, formSubmission, formName, fieldOverrides);
 
             ClientProcessor.getInstance(this).processClient();
 
-            android.util.Log.e(TAG, "saveFormSubmission: "+ formName );
+            android.util.Log.e(TAG, "saveFormSubmission: " + formName);
 //            android.util.Log.e(TAG, "saveFormSubmission: "+ submission.toString() );
 
             context().formSubmissionService().updateFTSsearch(submission);
@@ -431,6 +431,7 @@ public class BaseRegisterActivity extends SecuredNativeSmartRegisterActivity imp
         }
 
     }
+
     /**
      * Inner class for Edit and Followup
      */
@@ -479,33 +480,38 @@ public class BaseRegisterActivity extends SecuredNativeSmartRegisterActivity imp
                 AllCommonsRepository childRepository = Context.getInstance().allCommonsRepositoryobjects("ec_anak");
                 CommonPersonObject childobject = childRepository.findByCaseID(pc.entityId());
                 AllCommonsRepository kirep = Context.getInstance().allCommonsRepositoryobjects("ec_kartu_ibu");
+                List<String> relationIds = new ArrayList<>();
+                relationIds.add(childobject.getColumnmaps().get("relational_id"));
+                final List<CommonPersonObject> byRelationalIDs = kirep.findByRelationalIDs(relationIds);
                 CommonPersonObject kiparent = kirep.findByCaseID(childobject.getColumnmaps().get("relational_id"));
-                detailsRepository.updateDetails(kiparent);
+                if (kiparent != null) {
+                    detailsRepository.updateDetails(kiparent);
 
-                JSONObject fieldOverrides = new JSONObject();
+                    JSONObject fieldOverrides = new JSONObject();
 
-                try {
-                    fieldOverrides.put("Province", kiparent.getDetails().get("stateProvince"));
-                    fieldOverrides.put("District", kiparent.getDetails().get("countyDistrict"));
-                    fieldOverrides.put("Sub-district", kiparent.getDetails().get("address2"));
-                    fieldOverrides.put("Sub-village", kiparent.getDetails().get("address1"));
-                    fieldOverrides.put("Village", kiparent.getDetails().get("cityVillage"));
-                    fieldOverrides.put("jenis_kelamin", pc.getDetails().get("gender"));
-                    fieldOverrides.put("ibu_entity_id", pc.getDetails().get("relational_id"));
-                    fieldOverrides.put("beratLahir", pc.getDetails().get("beratLahir"));
-                    fieldOverrides.put("namaBayi", pc.getDetails().get("namaBayi"));
-                } catch (JSONException e) {
-                    e.printStackTrace();
+                    try {
+                        fieldOverrides.put("Province", kiparent.getDetails().get("stateProvince"));
+                        fieldOverrides.put("District", kiparent.getDetails().get("countyDistrict"));
+                        fieldOverrides.put("Sub-district", kiparent.getDetails().get("address2"));
+                        fieldOverrides.put("Sub-village", kiparent.getDetails().get("address1"));
+                        fieldOverrides.put("Village", kiparent.getDetails().get("cityVillage"));
+                        fieldOverrides.put("jenis_kelamin", pc.getDetails().get("gender"));
+                        fieldOverrides.put("ibu_entity_id", pc.getDetails().get("relational_id"));
+                        fieldOverrides.put("beratLahir", pc.getDetails().get("beratLahir"));
+                        fieldOverrides.put("namaBayi", pc.getDetails().get("namaBayi"));
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+
+                    FieldOverrides fo = new FieldOverrides(fieldOverrides.toString());
+                    onEditSelectionWithMetadata((EditOption) option, (SmartRegisterClient) tag, fo.getJSONString());
                 }
 
-                FieldOverrides fo = new FieldOverrides(fieldOverrides.toString());
-                onEditSelectionWithMetadata((EditOption) option, (SmartRegisterClient) tag, fo.getJSONString());
-
             } else if (option.name().equalsIgnoreCase(getString(R.string.str_anak_bayi_visit))
-                    ||option.name().equalsIgnoreCase(getString(R.string.str_anak_balita_visit))
-                    ||option.name().equalsIgnoreCase(getString(R.string.str_child_immunizations))
-                    ||option.name().equalsIgnoreCase(getString(R.string.str_child_close))
-                    ||option.name().equalsIgnoreCase(getString(R.string.str_anak_neonatal))) {
+                    || option.name().equalsIgnoreCase(getString(R.string.str_anak_balita_visit))
+                    || option.name().equalsIgnoreCase(getString(R.string.str_child_immunizations))
+                    || option.name().equalsIgnoreCase(getString(R.string.str_child_close))
+                    || option.name().equalsIgnoreCase(getString(R.string.str_anak_neonatal))) {
                 detailsRepository.updateDetails(pc);
                 AllCommonsRepository childRepository = Context.getInstance().allCommonsRepositoryobjects("ec_anak");
                 CommonPersonObject childobject = childRepository.findByCaseID(pc.entityId());
@@ -514,7 +520,8 @@ public class BaseRegisterActivity extends SecuredNativeSmartRegisterActivity imp
                 try {
                     kiparent = kirep.findByCaseID(childobject.getColumnmaps().get("relational_id"));
                     detailsRepository.updateDetails(kiparent);
-                } catch (Exception e) {}
+                } catch (Exception e) {
+                }
 
                 JSONObject fieldOverrides = new JSONObject();
 
@@ -592,7 +599,7 @@ public class BaseRegisterActivity extends SecuredNativeSmartRegisterActivity imp
             String face_end = timer.format(new Date());
             FS.put("face_end", face_end);
 
-            if (which == -1 ){
+            if (which == -1) {
                 currentPage = 0;
                 android.util.Log.e(TAG, "onClick: YES ");
 //                FlurryAgent.logEvent(TAG + "search_by_face OK", FS, true);

@@ -22,6 +22,9 @@ import org.smartregister.repository.DetailsRepository;
 import org.smartregister.view.activity.DrishtiApplication;
 
 import java.io.File;
+import java.util.HashMap;
+import java.util.LinkedHashMap;
+import java.util.Map;
 
 import static org.smartregister.util.StringUtil.humanize;
 
@@ -34,7 +37,7 @@ public class DetailChildActivity extends Activity {
 
     private static final String TAG = DetailChildActivity.class.getName();
     public static CommonPersonObjectClient childclient;
-//    private static String entityid;
+    //    private static String entityid;
 //    @Bind(R.id.childdetailprofileview)
 //    ImageView childview;
     private String userId;
@@ -128,11 +131,17 @@ public class DetailChildActivity extends Activity {
 
         AllCommonsRepository kirep = Context.getInstance().allCommonsRepositoryobjects("ec_kartu_ibu");
         final CommonPersonObject kiparent = kirep.findByCaseID(childobject.getColumnmaps().get("relational_id"));
-
+        //Fix aplikasi crash saat mengisi data pada kunjungan ANC dan saat membuka dan melihat dashboard anak pada kohort anak
+        Map<String, String> columnmaps = new HashMap<>();
+        if (kiparent != null) {
+            if (kiparent.getColumnmaps() != null) {
+                columnmaps = kiparent.getColumnmaps();
+            }
+        }
 
         nama.setText(String.format("%s%s", getResources().getString(R.string.name), humanize(childclient.getColumnmaps().get("namaBayi") != null ? childclient.getColumnmaps().get("namaBayi") : "-")));
-        mother.setText(String.format("%s%s", getResources().getString(R.string.child_details_mothers_name_label), humanize(kiparent.getColumnmaps().get("namalengkap") != null ? kiparent.getColumnmaps().get("namalengkap") : "-")));
-        father.setText(String.format("%s%s", getResources().getString(R.string.child_details_fathers_name_label), humanize(kiparent.getColumnmaps().get("namaSuami") != null ? kiparent.getColumnmaps().get("namaSuami") : "-")));
+        mother.setText(String.format("%s%s", getResources().getString(R.string.child_details_mothers_name_label), humanize(columnmaps.get("namalengkap") != null ? columnmaps.get("namalengkap") : "-")));
+        father.setText(String.format("%s%s", getResources().getString(R.string.child_details_fathers_name_label), humanize(columnmaps.get("namaSuami") != null ? columnmaps.get("namaSuami") : "-")));
         dob.setText(String.format("%s%s", getResources().getString(R.string.date_of_birth), humanize(childclient.getColumnmaps().get("tanggalLahirAnak") != null ? childclient.getColumnmaps().get("tanggalLahirAnak") : "-")));
 
         txt_noBayi.setText(String.format("%s: ", humanize(childclient.getDetails().get("noBayi") != null ? childclient.getDetails().get("noBayi") : "-")));
@@ -181,7 +190,7 @@ public class DetailChildActivity extends Activity {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent intent) {
         Log.d(TAG, "onActivityResult: onActivityResult()");
-        if (requestCode == 201 && resultCode==-1) {
+        if (requestCode == 201 && resultCode == -1) {
             Log.d(TAG, "onActivityResult: Process Photo");
             StringBuilder path = new StringBuilder();
             path.append(DrishtiApplication.getAppDir());
@@ -197,7 +206,7 @@ public class DetailChildActivity extends Activity {
             }
 
         }
-        Log.d(TAG, "onActivityResult: getIntent() = "+getIntent().toString());
+        Log.d(TAG, "onActivityResult: getIntent() = " + getIntent().toString());
         finish();
         startActivity(getIntent());
 
