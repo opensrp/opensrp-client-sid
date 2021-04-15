@@ -27,6 +27,7 @@ import org.smartregister.bidan.options.AllKartuIbuServiceMode;
 import org.smartregister.bidan.options.MotherFilterOption;
 import org.smartregister.bidan.provider.KIClientsProvider;
 import org.smartregister.bidan.utils.AllConstantsINA;
+import org.smartregister.bidan.utils.CustomLocationSelectorDialog;
 import org.smartregister.commonregistry.CommonPersonObjectClient;
 import org.smartregister.commonregistry.CommonRepository;
 import org.smartregister.cursoradapter.CursorCommonObjectFilterOption;
@@ -144,8 +145,11 @@ public class KISmartRegisterFragment extends BaseSmartRegisterFragment {
         if (prev != null) {
             ft.remove(prev);
         }
+//        atv.model.TreeNode tn = new atv.model.TreeNode();
+//        tn.getValue()
+
         ft.addToBackStack(null);
-        LocationSelectorDialogFragment
+        CustomLocationSelectorDialog
                 .newInstance((BaseRegisterActivity) getActivity(),
                         ((BaseRegisterActivity) getActivity()).new EditDialogOptionModelNew(),
                         context().anmLocationController().get(),
@@ -224,7 +228,7 @@ public class KISmartRegisterFragment extends BaseSmartRegisterFragment {
                 mainCondition = "is_closed = 0 AND namalengkap IS NOT NULL AND namalengkap != '' ";
             } else {
                 Log.e(TAG, "initializeQueries: id " + s);
-                mainCondition = "is_closed = 0 AND namalengkap IS NOT NULL AND namalengkap != '' AND object_id LIKE '%" + s + "%'";
+//                mainCondition = "is_closed = 0 AND namalengkap IS NOT NULL AND namalengkap != '' AND object_id LIKE '%" + s + "%'";
             }
 
             joinTable = "";

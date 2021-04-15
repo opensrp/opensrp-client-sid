@@ -304,12 +304,12 @@ public class LoginActivity extends AppCompatActivity {
             goToHome();
         }
 
-        if (BuildConfig.DEBUG) {
-            if (getOpenSRPContext().userService().hasARegisteredUser()) {
-                userNameEditText.setText(context.allSharedPreferences().fetchRegisteredANM());
-                userNameEditText.setEnabled(false);
-            }
-        }
+//        if (BuildConfig.DEBUG) {
+//            if (getOpenSRPContext().userService().hasARegisteredUser()) {
+//                userNameEditText.setText(context.allSharedPreferences().fetchRegisteredANM());
+//                userNameEditText.setEnabled(false);
+//            }
+//        }
     }
 
     public static Context getOpenSRPContext() {

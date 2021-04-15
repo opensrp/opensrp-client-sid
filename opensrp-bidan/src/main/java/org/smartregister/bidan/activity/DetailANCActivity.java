@@ -2,13 +2,16 @@ package org.smartregister.bidan.activity;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.ScrollView;
 import android.widget.TextView;
 
+import org.apache.commons.lang3.StringUtils;
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.smartregister.Context;
@@ -19,7 +22,9 @@ import org.smartregister.commonregistry.CommonPersonObjectClient;
 import org.smartregister.repository.DetailsRepository;
 import org.smartregister.view.customcontrols.CustomFontTextView;
 
-import java.util.List;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.*;
 
 import static android.view.View.GONE;
 import static android.view.View.VISIBLE;
@@ -270,9 +275,10 @@ public class DetailANCActivity extends Activity {
         String tgl_lahir = tgl.substring(0, tgl.indexOf("T"));
         ((TextView) findViewById(R.id.tv_dob)).setText(String.format("%s%s", getResources().getString(R.string.dob), tgl_lahir));
         //   dob.setText(getResources().getString(R.string.dob)+ (ancClient.getDetails().get("tanggalLahir") != null ? ancClient.getDetails().get("tanggalLahir") : "-"));
-        ((TextView) findViewById(R.id.tv_contact_phone_number)).setText(String.format("No HP: %s", ancClient.getDetails().get("NomorTelponHp") != null ? ancClient.getDetails().get("NomorTelponHp") : "-"));
+        ((TextView) findViewById(R.id.tv_contact_phone_number)).setText(String.format("No HP: %s", ancClient.getDetails().get("nomorHp") != null ? ancClient.getDetails().get("nomorHp") : "-"));
+        boolean k1Who = getStrValue("KeteranganK1k4Who").toLowerCase().contains("ya");
 
-        ((TextView) findViewById(R.id.txt_keterangan_k1k4)).setText(getStrValue("KeteranganK1k4Who")=="Ya"?String.format(": %s",getResources().getString(R.string.standart)):String.format(": %s",getResources().getString(R.string.non_standart)));
+        ((TextView) findViewById(R.id.txt_keterangan_k1k4)).setText(k1Who ? String.format(": %s", getResources().getString(R.string.standart)) : String.format(": %s", getResources().getString(R.string.non_standart)));
         ((TextView) findViewById(R.id.txt_tanggalHPHT)).setText(getStrValue("tanggalHPHT"));
         ((TextView) findViewById(R.id.txt_usiaKlinis_anc)).setText(getStrValue("usiaKlinis"));
         ((TextView) findViewById(R.id.txt_trimesterKe)).setText(getStrValue("trimesterKe"));
@@ -291,7 +297,29 @@ public class DetailANCActivity extends Activity {
         ((TextView) findViewById(R.id.txt_jumlahJanin)).setText(getStrValue("jumlahJanin"));
 
         ((TextView) findViewById(R.id.txt_statusImunisasiTT)).setText(getStrValue("statusImunisasitt"));
-        ((TextView) findViewById(R.id.txt_pelayananfe)).setText(getStrValue("pelayananFe"));
+        String fe = "-";
+String keyFe = "pelayananFe";
+        if (ancClient.getDetails().get(keyFe) != null) {
+            fe = ancClient.getDetails().get(keyFe);
+            String jmlhTab = "0";
+            if(StringUtils.isNumeric(ancClient.getDetails().get(keyFe).trim())){
+                fe = "YA";
+                jmlhTab = ancClient.getDetails().get(keyFe).trim();
+            }else{
+                if(ancClient.getDetails().containsKey("jumlah_fe") && ancClient.getDetails().get("jumlah_fe") != null){
+                    jmlhTab= ancClient.getDetails().get("jumlah_fe");
+                }
+            }
+            StringBuilder sbFe = new StringBuilder();
+
+            if (ancClient.getDetails().get("fe1Fe3") != null) {
+                sbFe.append("( ").append(ancClient.getDetails().get("fe1Fe3"));
+                sbFe.append(" - ").append(jmlhTab).append(" tab/botol");
+                sbFe.append(" )");
+                fe = fe + " " + sbFe.toString();
+            }
+        }
+        ((TextView) findViewById(R.id.txt_pelayananfe)).setText(": " + fe);
         ((TextView) findViewById(R.id.txt_komplikasiKehamilan)).setText(getStrValue("komplikasidalamKehamilan"));
         ((TextView) findViewById(R.id.txt_integrasiProgrampmtctvct)).setText(getStrValue("integrasiProgrampmtctvct"));
         ((TextView) findViewById(R.id.txt_integrasiProgrampmtctPeriksaDarah)).setText(getStrValue("integrasiProgrampmtctPeriksaDarah"));
@@ -342,7 +370,7 @@ public class DetailANCActivity extends Activity {
         if (ancClient.getDetails().get("highRiskPregnancyProteinEnergyMalnutrition") != null
                 || ancClient.getDetails().get("HighRiskPregnancyAbortus") != null
                 || ancClient.getDetails().get("HighRiskLabourSectionCesareaRecord") != null
-                ) {
+        ) {
             ((TextView) findViewById(R.id.tv_risk2)).setText(String.format("%s%s", getResources().getString(R.string.highRiskPregnancyProteinEnergyMalnutrition), humanize(ancClient.getDetails().get("highRiskPregnancyProteinEnergyMalnutrition"))));
             ((TextView) findViewById(R.id.tv_risk3)).setText(String.format("%s%s", getResources().getString(R.string.HighRiskPregnancyAbortus), humanize(ancClient.getDetails().get("HighRiskPregnancyAbortus"))));
             ((TextView) findViewById(R.id.tv_risk4)).setText(String.format("%s%s", getResources().getString(R.string.HighRiskLabourSectionCesareaRecord), humanize(ancClient.getDetails().get("HighRiskLabourSectionCesareaRecord"))));
@@ -430,46 +458,52 @@ public class DetailANCActivity extends Activity {
         });
 
         final List<JSONObject> ancEvents = EventRepository.getANCByBaseEntityId(ancClient.entityId());
+        final SimpleDateFormat defaultDateFormat = new SimpleDateFormat("yyyy-MM-dd");
+        Collections.sort(ancEvents, new Comparator<JSONObject>() {
+            @Override
+            public int compare(JSONObject o1, JSONObject o2) {
+                int compare = 0;
+                try {
+                    String dateString = o1.getString("ancDate");
+
+                    String dateString2 = o2.getString("ancDate");
+                    if (dateString != null && dateString2 != null) {
+                        Date d1 = defaultDateFormat.parse(dateString);
+                        Date d2 = defaultDateFormat.parse(dateString2);
+                        compare = Long.compare(d1.getTime(), d2.getTime());
+                    }
+                } catch (JSONException | ParseException e) {
+                    e.printStackTrace();
+                }
+                return compare;
+            }
+        });
 
         final LinearLayout history_button = findViewById(R.id.visit_history_button);
         int i = 1;
-        for (final JSONObject ancEvent:ancEvents) {
-            final CustomFontTextView btn = (CustomFontTextView) getLayoutInflater().inflate(R.layout.visit_button,null);
-            btn.setText(getResources().getString(R.string.visit_number)+i);
+        final ScrollView historyDetailView = findViewById(R.id.visit_history_detail);
+        if (ancEvents.size() > 0) {
+            historyDetailView.addView(buildDetailHistory(ancEvents.get(0)));
+        }
+
+        for (final JSONObject ancEvent : ancEvents) {
+            final CustomFontTextView btn = (CustomFontTextView) getLayoutInflater().inflate(R.layout.visit_button, null);
+            btn.setText(getResources().getString(R.string.visit_number) + i);
             btn.setWidth(500);
+            btn.setTag(buildDetailHistory(ancEvent));
+            btn.setSelected(false);
+
             btn.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    View history_view = findViewById(R.id.visit_history_detail);
-                    history_view.setVisibility(VISIBLE);
-                    try {
-                        String date = ancEvent.getString("ancDate");
-                        ((TextView)history_view.findViewById(R.id.txt_ancDate)).setText(date);
-                        ((TextView)history_view.findViewById(R.id.txt_ancKe)).setText(ancEvent.has("ancKe")?ancEvent.getString("ancKe"):"-");
-                        ((TextView)history_view.findViewById(R.id.txt_keterangan_k1k4)).setText(ancEvent.has("ancKe")?ancEvent.getString("KeteranganK1k4Who"):"-");
-                        ((TextView)history_view.findViewById(R.id.txt_kunjunganKe)).setText(ancEvent.has("kunjunganKe")?ancEvent.getString("kunjunganKe"):"-");
-                        ((TextView)history_view.findViewById(R.id.txt_lokasiPeriksa)).setText(ancEvent.has("lokasiPeriksa")?ancEvent.getString("lokasiPeriksa").equals("Lainnya")?ancEvent.getString("lokasiPeriksaOther"):ancEvent.getString("lokasiPeriksa"):"-");
-                        ((TextView)history_view.findViewById(R.id.txt_usiaKlinis_anc)).setText(ancEvent.has("usiaKlinis")?ancEvent.getString("usiaKlinis"):"-");
-                        ((TextView)history_view.findViewById(R.id.txt_trimesterKe)).setText(ancEvent.has("trimesterKe")?ancEvent.getString("trimesterKe"):"-");
-                        ((TextView)history_view.findViewById(R.id.txt_bbKg)).setText(ancEvent.has("bbKg")?ancEvent.getString("bbKg"):"-");
-                        ((TextView)history_view.findViewById(R.id.txt_tandaVitalTDSistolik)).setText(ancEvent.has("tandaVitalTDSistolik")?ancEvent.getString("tandaVitalTDSistolik"):"-");
-                        ((TextView)history_view.findViewById(R.id.txt_tandaVitalTDDiastolik)).setText(ancEvent.has("tandaVitalTDDiastolik")?ancEvent.getString("tandaVitalTDDiastolik"):"-");
-                        ((TextView)history_view.findViewById(R.id.txt_hasilPemeriksaanLILA)).setText(ancEvent.has("hasilPemeriksaanLILA")?ancEvent.getString("hasilPemeriksaanLILA"):"-");
-                        ((TextView)history_view.findViewById(R.id.txt_statusGiziibu)).setText(ancEvent.has("statusGiziibu")?ancEvent.getString("statusGiziibu"):"-");
-                        ((TextView)history_view.findViewById(R.id.txt_tfu)).setText(ancEvent.has("tfu")?ancEvent.getString("tfu"):"-");
-                        ((TextView)history_view.findViewById(R.id.txt_refleksPatelaIbu)).setText(ancEvent.has("refleksPatelaIbu")?ancEvent.getString("refleksPatelaIbu"):"-");
-                        ((TextView)history_view.findViewById(R.id.txt_djj)).setText(ancEvent.has("djj")?ancEvent.getString("djj"):"-");
-                        ((TextView)history_view.findViewById(R.id.txt_kepalaJaninTerhadapPAP)).setText(ancEvent.has("kepalaJaninTerhadapPAP")?ancEvent.getString("kepalaJaninTerhadapPAP"):"-");
-                        ((TextView)history_view.findViewById(R.id.txt_persentasiJanin)).setText(ancEvent.has("persentasiJanin")?ancEvent.getString("persentasiJanin"):"-");
-                        ((TextView)history_view.findViewById(R.id.txt_taksiranBeratJanin)).setText(ancEvent.has("taksiranBeratJanin")?ancEvent.getString("taksiranBeratJanin"):"-");
-                        ((TextView)history_view.findViewById(R.id.txt_jumlahJanin)).setText(ancEvent.has("jumlahJanin")?ancEvent.getString("jumlahJanin"):"-");
-
-                        ((TextView)history_view.findViewById(R.id.txt_statusImunisasiTT)).setText(ancEvent.has("statusImunisasitt")?ancEvent.getString("statusImunisasitt"):"-");
-                        ((TextView)history_view.findViewById(R.id.txt_pelayananfe)).setText(ancEvent.has("pelayananfe")?ancEvent.getString("pelayananfe"):"-");
-                        ((TextView)history_view.findViewById(R.id.txt_komplikasiKehamilan)).setText(ancEvent.has("komplikasidalamKehamilan")?ancEvent.getString("komplikasidalamKehamilan"):"-");
-                    } catch (JSONException e) {
-                        e.printStackTrace();
-                    }
+                    historyDetailView.removeAllViews();
+//                    for (int index = 0; index < history_button.getChildCount(); index++) {
+//                        CustomFontTextView v = (CustomFontTextView) history_button.getChildAt(index);
+//                        v.setTextColor(R.color.button_material_light);
+//                    }
+//                    CustomFontTextView tt = (CustomFontTextView) view;
+//                    tt.setTextColor(R.color.button_material_dark);
+                    historyDetailView.addView((View) view.getTag());
                 }
             });
             history_button.addView(btn);
@@ -478,8 +512,79 @@ public class DetailANCActivity extends Activity {
 
     }
 
+//    private void changeState()
+
+    private View buildDetailHistory(JSONObject ancEvent) {
+        View history_view = getLayoutInflater().inflate(R.layout.anc_history_layout_detail, null);
+
+        history_view.setVisibility(VISIBLE);
+        try {
+            String date = getStrValue(ancEvent, "ancDate");
+            ((TextView) history_view.findViewById(R.id.txt_ancDate)).setText(date);
+            ((TextView) history_view.findViewById(R.id.txt_ancKe)).setText(getStrValue(ancEvent, "ancKe"));
+            ((TextView) history_view.findViewById(R.id.txt_keterangan_k1k4)).setText(getStrValue(ancEvent, "KeteranganK1k4Who"));
+            ((TextView) history_view.findViewById(R.id.txt_kunjunganKe)).setText(getStrValue(ancEvent, "kunjunganKe"));
+            String lok = getStrValue(ancEvent, "lokasiPeriksa");
+            if (ancEvent.has("lokasiPeriksa")) {
+                if (ancEvent.getString("lokasiPeriksa").equals("Lainnya")) {
+                    lok = ancEvent.getString("lokasiPeriksaOther");
+                }
+            }
+            ((TextView) history_view.findViewById(R.id.txt_lokasiPeriksa)).setText(lok);
+            ((TextView) history_view.findViewById(R.id.txt_usiaKlinis_anc)).setText(getStrValue(ancEvent, "usiaKlinis"));
+            ((TextView) history_view.findViewById(R.id.txt_trimesterKe)).setText(getStrValue(ancEvent, "trimesterKe"));
+            ((TextView) history_view.findViewById(R.id.txt_bbKg)).setText(getStrValue(ancEvent, "bbKg"));
+            ((TextView) history_view.findViewById(R.id.txt_tandaVitalTDSistolik)).setText(getStrValue(ancEvent, "tandaVitalTDSistolik"));
+            ((TextView) history_view.findViewById(R.id.txt_tandaVitalTDDiastolik)).setText(getStrValue(ancEvent, "tandaVitalTDDiastolik"));
+            ((TextView) history_view.findViewById(R.id.txt_hasilPemeriksaanLILA)).setText(getStrValue(ancEvent, "hasilPemeriksaanLILA"));
+            ((TextView) history_view.findViewById(R.id.txt_statusGiziibu)).setText(getStrValue(ancEvent, "statusGiziibu"));
+            ((TextView) history_view.findViewById(R.id.txt_tfu)).setText(getStrValue(ancEvent, "tfu"));
+            ((TextView) history_view.findViewById(R.id.txt_refleksPatelaIbu)).setText(getStrValue(ancEvent, "refleksPatelaIbu"));
+            ((TextView) history_view.findViewById(R.id.txt_djj)).setText(getStrValue(ancEvent, "djj"));
+            ((TextView) history_view.findViewById(R.id.txt_kepalaJaninTerhadapPAP)).setText(getStrValue(ancEvent, "kepalaJaninTerhadapPAP"));
+            ((TextView) history_view.findViewById(R.id.txt_persentasiJanin)).setText(getStrValue(ancEvent, "persentasiJanin"));
+            ((TextView) history_view.findViewById(R.id.txt_taksiranBeratJanin)).setText(getStrValue(ancEvent, "taksiranBeratJanin"));
+            ((TextView) history_view.findViewById(R.id.txt_jumlahJanin)).setText(getStrValue(ancEvent, "jumlahJanin"));
+            String imunTT = getStrValue(ancEvent, "statusImunisasitt");
+            if (imunTT.endsWith("164134")) {
+                imunTT = ": lengkap";
+            }
+            ((TextView) history_view.findViewById(R.id.txt_statusImunisasiTT)).setText(imunTT);
+
+            String fe = getStrValue("pelayananfe");
+            if (ancEvent.has("pelayananfe") && ancEvent.get("pelayananfe") != null) {
+                if (ancEvent.get("fe1Fe3") != null) {
+//                    fe = fe + " (" + ancEvent.get("fe1Fe3") + ")";
+
+                    StringBuilder sbFe = new StringBuilder();
+
+                    sbFe.append("(").append(ancEvent.get("fe1Fe3"));
+                    if (ancEvent.has("pelayananFe") && ancEvent.get("pelayananFe") != null) {
+                        sbFe.append(" - ").append(ancEvent.get("pelayananFe")).append(" tab/botol");
+                    }
+                    sbFe.append(")");
+                    fe = fe + " " + sbFe.toString();
+                }
+            }
+            ((TextView) history_view.findViewById(R.id.txt_pelayananfe)).setText(fe);
+            ((TextView) history_view.findViewById(R.id.txt_komplikasiKehamilan)).setText(getStrValue("komplikasidalamKehamilan"));
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        history_view.setVisibility(VISIBLE);
+        return history_view;
+    }
+
     private String getStrValue(String str) {
-        return String.format(": %s", humanize(ancClient.getDetails().get(str) != null ? ancClient.getDetails().get(str) : "-"));
+        return getStrValue(ancClient.getDetails(), str);
+    }
+
+    private String getStrValue(Map<String, ?> data, String str) {
+        return String.format(": %s", humanize(data.containsKey(str) && data.get(str) != null ? (String) data.get(str) : "-"));
+    }
+
+    private String getStrValue(JSONObject data, String str) throws JSONException {
+        return String.format(": %s", humanize(data.has(str) && data.get(str) != null ? (String) data.get(str) : "-"));
     }
 
     @Override

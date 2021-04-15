@@ -41,7 +41,7 @@ public class UpdateActionsTaskTest extends BaseUnitTest {
     @Before
     public void setUp() throws Exception {
         MockitoAnnotations.initMocks(this);
-        UpdateActionsTask updateActionsTask = new UpdateActionsTask(RuntimeEnvironment.application, actionService, fss, pi, afvss);
+//        UpdateActionsTask updateActionsTask = new UpdateActionsTask(RuntimeEnvironment.application, actionService, fss, pi, afvss);
 //        updateActionsTask.updateFromServer(new SyncAfterFetchListener());
     }
 

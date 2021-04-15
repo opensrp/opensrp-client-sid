@@ -48,7 +48,7 @@ public class KIClientsProvider extends BaseClientsProvider {
         this.onClickListener = onClickListener;
         this.mContext = context;
         clientViewLayoutParams = new AbsListView.LayoutParams(MATCH_PARENT, (int) context.getResources().getDimension(org.smartregister.R.dimen.list_item_height));
-        Log.i(TAG, "KIClientsProvider:alertService "+ alertService);
+        Log.i(TAG, "KIClientsProvider:alertService " + alertService);
     }
 
     public void getView(SmartRegisterClient smartRegisterClient, View convertView) {
@@ -161,8 +161,15 @@ public class KIClientsProvider extends BaseClientsProvider {
                     Support.checkMonth(mContext, pc.getDetails().get("htp"), edd_due);
 
                 }
+                String ancKe = "-";
+
+                if (pc.getDetails().containsKey("ancKe")) {
+                    if (pc.getDetails().get("ancKe") != null) {
+                        ancKe = pc.getDetails().get("ancKe");
+                    }
+                }
                 checkLastVisit(pc.getDetails().get("ancDate"),
-                        mContext.getString(R.string.anc_ke) + ": " + pc.getDetails().get("ancKe"),
+                        mContext.getString(R.string.anc_ke) + ancKe,
                         mContext.getString(R.string.service_anc),
                         anc_status_layout, date_status, visit_status);
             }
@@ -173,19 +180,22 @@ public class KIClientsProvider extends BaseClientsProvider {
                     short pnc_isclosed = pncparent.getClosed();
                     if (pnc_isclosed == 0) {
                         detailsRepository.updateDetails(pncparent);
-                  /*  checkMonth("delivered",edd_due);*/
+                        /*  checkMonth("delivered",edd_due);*/
                         edd_due.setTextColor(mContext.getResources().getColor(R.color.alert_complete_green));
                         String deliver = mContext.getString(R.string.delivered);
 //                        edd_due.setText(deliver);
                         eddDueStr = deliver;
-                        checkLastVisit(pc.getDetails().get("PNCDate"), mContext.getString(R.string.pnc_ke) + " " + pc.getDetails().get("hariKeKF"), mContext.getString(R.string.service_pnc),
+                        String hariKeKF = pc.getDetails().get("hariKeKF");
+                        if (hariKeKF == null)
+                            hariKeKF = "-";
+                        checkLastVisit(pc.getDetails().get("PNCDate"), mContext.getString(R.string.pnc_ke) + " " + hariKeKF, mContext.getString(R.string.service_pnc),
                                 anc_status_layout, date_status, visit_status);
-                    }else{
+                    } else {
                         ((TextView) convertView.findViewById(R.id.txt_edd)).setText("");
 //                        edd_due.setText("");
                         eddDueStr = "";
                     }
-                }else{
+                } else {
                     ((TextView) convertView.findViewById(R.id.txt_edd)).setText("");
 //                    edd_due.setText("");
                     eddDueStr = "";
@@ -205,16 +215,16 @@ public class KIClientsProvider extends BaseClientsProvider {
         for (int i = 0; i < allchild.size(); i++) {
             CommonPersonObject commonPersonObject = allchild.get(i);
             detailsRepository.updateDetails(commonPersonObject);
-            if(commonPersonObject.getDetails().get("closeReason") != null){
-                Log.d(TAG, "getView: "+commonPersonObject.getDetails());
-                if("death_of_child".equals(commonPersonObject.getDetails().get("closeReason"))){
+            if (commonPersonObject.getDetails().get("closeReason") != null) {
+                Log.d(TAG, "getView: " + commonPersonObject.getDetails());
+                if ("death_of_child".equals(commonPersonObject.getDetails().get("closeReason"))) {
                     children_age_left.setText(mContext.getString(R.string.txt_death));
                     String cause = getDeathCause(commonPersonObject);
-                    children_age_right.setText(mContext.getString(R.string.death_reason)+" :");
+                    children_age_right.setText(mContext.getString(R.string.death_reason) + " :");
                     children_age_bottom.setText(cause);
                     continue;
                 }
-                if("wrong_entry".equals(commonPersonObject.getDetails().get("closeReason"))){
+                if ("wrong_entry".equals(commonPersonObject.getDetails().get("closeReason"))) {
                     continue;
                 }
             }
@@ -231,19 +241,19 @@ public class KIClientsProvider extends BaseClientsProvider {
         hrl_badge.setVisibility(View.INVISIBLE);
 
         //Risk flag
-        if ("yes".matches(pc.getDetails().get("highRiskSTIBBVs")+"||"+ pc.getDetails().get("highRiskEctopicPregnancy")+"||"+ pc.getDetails().get("highRiskCardiovascularDiseaseRecord")+"||"+
-                pc.getDetails().get("highRiskDidneyDisorder")+"||"+ pc.getDetails().get("highRiskHeartDisorder")+"||"+ pc.getDetails().get("highRiskAsthma")+"||"+
-                pc.getDetails().get("highRiskTuberculosis")+"||"+ pc.getDetails().get("highRiskMalaria")+"||"+ pc.getDetails().get("highRiskPregnancyYoungMaternalAge")+"||"+
+        if ("yes".matches(pc.getDetails().get("highRiskSTIBBVs") + "||" + pc.getDetails().get("highRiskEctopicPregnancy") + "||" + pc.getDetails().get("highRiskCardiovascularDiseaseRecord") + "||" +
+                pc.getDetails().get("highRiskDidneyDisorder") + "||" + pc.getDetails().get("highRiskHeartDisorder") + "||" + pc.getDetails().get("highRiskAsthma") + "||" +
+                pc.getDetails().get("highRiskTuberculosis") + "||" + pc.getDetails().get("highRiskMalaria") + "||" + pc.getDetails().get("highRiskPregnancyYoungMaternalAge") + "||" +
                 pc.getDetails().get("highRiskPregnancyOldMaternalAge")))
             hr_badge.setVisibility(View.VISIBLE);
 
-        if ("yes".matches(pc.getDetails().get("highRiskPregnancyPIH")+"||"+ pc.getDetails().get("highRiskPregnancyProteinEnergyMalnutrition")+"||"+
-                pc.getDetails().get("HighRiskPregnancyTooManyChildren")+"||"+
-                pc.getDetails().get("highRiskPregnancyDiabetes")+"||"+ pc.getDetails().get("highRiskPregnancyAnemia")))
+        if ("yes".matches(pc.getDetails().get("highRiskPregnancyPIH") + "||" + pc.getDetails().get("highRiskPregnancyProteinEnergyMalnutrition") + "||" +
+                pc.getDetails().get("HighRiskPregnancyTooManyChildren") + "||" +
+                pc.getDetails().get("highRiskPregnancyDiabetes") + "||" + pc.getDetails().get("highRiskPregnancyAnemia")))
             hrp_badge.setVisibility(View.VISIBLE);
 
-        if ("yes".matches(pc.getDetails().get("highRiskLabourFetusMalpresentation")+"||"+ pc.getDetails().get("highRiskLabourFetusSize")+"||"+
-                pc.getDetails().get("highRisklabourFetusNumber")+"||"+ pc.getDetails().get("HighRiskLabourSectionCesareaRecord")+"||"+
+        if ("yes".matches(pc.getDetails().get("highRiskLabourFetusMalpresentation") + "||" + pc.getDetails().get("highRiskLabourFetusSize") + "||" +
+                pc.getDetails().get("highRisklabourFetusNumber") + "||" + pc.getDetails().get("HighRiskLabourSectionCesareaRecord") + "||" +
                 pc.getDetails().get("highRiskLabourTBRisk")))
             hrl_badge.setVisibility(View.VISIBLE);
 
@@ -271,43 +281,43 @@ public class KIClientsProvider extends BaseClientsProvider {
         return inflater().inflate(smart_register_ki_client, null);
     }
 
-    private String getDeathCause(CommonPersonObject commonPersonObject){
+    private String getDeathCause(CommonPersonObject commonPersonObject) {
         String cause = "";
-        if("sepsis".equals(commonPersonObject.getDetails().get("childDeathCause")))
+        if ("sepsis".equals(commonPersonObject.getDetails().get("childDeathCause")))
             cause = mContext.getString(R.string.sepsis);
-        else if("asphyxia".equals(commonPersonObject.getDetails().get("childDeathCause")))
+        else if ("asphyxia".equals(commonPersonObject.getDetails().get("childDeathCause")))
             cause = mContext.getString(R.string.asphyxia);
-        else if("lbw".equals(commonPersonObject.getDetails().get("childDeathCause")))
+        else if ("lbw".equals(commonPersonObject.getDetails().get("childDeathCause")))
             cause = mContext.getString(R.string.lbw);
-        else if("pneumonia".equals(commonPersonObject.getDetails().get("childDeathCause")))
+        else if ("pneumonia".equals(commonPersonObject.getDetails().get("childDeathCause")))
             cause = mContext.getString(R.string.pneumonia);
-        else if("diarrhea".equals(commonPersonObject.getDetails().get("childDeathCause")))
+        else if ("diarrhea".equals(commonPersonObject.getDetails().get("childDeathCause")))
             cause = mContext.getString(R.string.diarrhea);
-        else if("measles".equals(commonPersonObject.getDetails().get("childDeathCause")))
+        else if ("measles".equals(commonPersonObject.getDetails().get("childDeathCause")))
             cause = mContext.getString(R.string.measles);
-        else if("malnutrition".equals(commonPersonObject.getDetails().get("childDeathCause")))
+        else if ("malnutrition".equals(commonPersonObject.getDetails().get("childDeathCause")))
             cause = mContext.getString(R.string.malnutrition);
-        else if("Infeksi_pernafasan_akut".equals(commonPersonObject.getDetails().get("childDeathCause")))
+        else if ("Infeksi_pernafasan_akut".equals(commonPersonObject.getDetails().get("childDeathCause")))
             cause = mContext.getString(R.string.Infeksi_pernafasan_akut);
-        else if("infeksi_pernapasan_atas".equals(commonPersonObject.getDetails().get("childDeathCause")))
+        else if ("infeksi_pernapasan_atas".equals(commonPersonObject.getDetails().get("childDeathCause")))
             cause = mContext.getString(R.string.infeksi_pernapasan_atas);
-        else if("malaria".equals(commonPersonObject.getDetails().get("childDeathCause")))
+        else if ("malaria".equals(commonPersonObject.getDetails().get("childDeathCause")))
             cause = mContext.getString(R.string.malaria);
-        else if("tetanus_neonatorum".equals(commonPersonObject.getDetails().get("childDeathCause")))
+        else if ("tetanus_neonatorum".equals(commonPersonObject.getDetails().get("childDeathCause")))
             cause = mContext.getString(R.string.tetanus_neonatorum);
-        else if("ikterus".equals(commonPersonObject.getDetails().get("childDeathCause")))
+        else if ("ikterus".equals(commonPersonObject.getDetails().get("childDeathCause")))
             cause = mContext.getString(R.string.ikterus);
-        else if("demam_berdarah".equals(commonPersonObject.getDetails().get("childDeathCause")))
+        else if ("demam_berdarah".equals(commonPersonObject.getDetails().get("childDeathCause")))
             cause = mContext.getString(R.string.demam_berdarah);
-        else if("congenital_abnormality".equals(commonPersonObject.getDetails().get("childDeathCause")))
+        else if ("congenital_abnormality".equals(commonPersonObject.getDetails().get("childDeathCause")))
             cause = mContext.getString(R.string.congenital_abnormality);
-        else if("kelainan_saluran_cerna".equals(commonPersonObject.getDetails().get("childDeathCause")))
+        else if ("kelainan_saluran_cerna".equals(commonPersonObject.getDetails().get("childDeathCause")))
             cause = mContext.getString(R.string.kelainan_saluran_cerna);
-        else if("Kelainan_syaraf".equals(commonPersonObject.getDetails().get("childDeathCause")))
+        else if ("Kelainan_syaraf".equals(commonPersonObject.getDetails().get("childDeathCause")))
             cause = mContext.getString(R.string.Kelainan_syaraf);
-        else if("others".equals(commonPersonObject.getDetails().get("childDeathCause")))
+        else if ("others".equals(commonPersonObject.getDetails().get("childDeathCause")))
             cause = mContext.getString(R.string.others);
-        else if("cause_not_identified".equals(commonPersonObject.getDetails().get("childDeathCause")))
+        else if ("cause_not_identified".equals(commonPersonObject.getDetails().get("childDeathCause")))
             cause = mContext.getString(R.string.cause_not_identified);
 
         return cause;

@@ -5,11 +5,14 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.util.Log;
 
+import org.apache.commons.lang3.StringUtils;
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.smartregister.bidan.R;
 import org.smartregister.bidan.fragment.KISmartRegisterFragment;
 import org.smartregister.domain.form.FieldOverrides;
+import org.smartregister.util.StringUtil;
 import org.smartregister.view.dialog.DialogOption;
 import org.smartregister.view.dialog.LocationSelectorDialogFragment;
 import org.smartregister.view.dialog.OpenFormOption;
@@ -38,18 +41,18 @@ public class KISmartRegisterActivity extends BaseRegisterActivity implements Loc
         super.onCreate(savedInstanceState);
 
         Bundle extras = getIntent().getExtras();
-        if (extras != null){
+        if (extras != null) {
             boolean mode_face = extras.getBoolean("org.ei.opensrp.indonesia.face.face_mode");
             String base_id = extras.getString("org.ei.opensrp.indonesia.face.base_id");
 
-            if (mode_face){
-                KISmartRegisterFragment nf = (KISmartRegisterFragment)mBaseFragment();
+            if (mode_face) {
+                KISmartRegisterFragment nf = (KISmartRegisterFragment) mBaseFragment();
                 nf.setCriteria(base_id);
 
                 Log.e(TAG, "onCreate: id " + base_id);
 
-                showToast("id "+base_id);
-                AlertDialog.Builder builder= new AlertDialog.Builder(this);
+                showToast("id " + base_id);
+                AlertDialog.Builder builder = new AlertDialog.Builder(this);
                 builder.setTitle("Is it Right Person ?");
 //                builder.setTitle("Is it Right Clients ?" + base_id);
 //                builder.setTitle("Is it Right Clients ?"+ pc.getName());
@@ -98,10 +101,11 @@ public class KISmartRegisterActivity extends BaseRegisterActivity implements Loc
         JSONObject combined = null;
 
         try {
-
             combined = new JSONObject(locationJSONString);
+
+
             String gps = getDefaultSharedPreferences(this).getString("gpsCoordinates", "").trim();
-            combined.put("gps",gps);
+            combined.put("gps", gps);
 
         } catch (JSONException e) {
             e.printStackTrace();
