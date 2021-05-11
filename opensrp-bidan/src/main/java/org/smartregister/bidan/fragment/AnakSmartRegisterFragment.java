@@ -239,7 +239,7 @@ public class AnakSmartRegisterFragment extends BaseSmartRegisterFragment {
             String query = "";
             if (isValidFilterForFts(commonRepository())) {
                 String sql = sqb.countQueryFts(tablename, joinTable, mainCondition, filters);
-                Log.i(getClass().getName(), query);
+//                Log.i(getClass().getName(), query);
 
                 totalcount = commonRepository().countSearchIds(sql);
                 Log.v("total count here", "" + totalcount);
@@ -250,7 +250,7 @@ public class AnakSmartRegisterFragment extends BaseSmartRegisterFragment {
                 query = sqb.orderbyCondition(Sortqueries);
                 query = sqb.Endquery(query);
 
-                Log.i(getClass().getName(), query);
+//                Log.i(getClass().getName(), query);
                 c = commonRepository().rawCustomQueryForAdapter(query);
                 c.moveToFirst();
                 totalcount = c.getInt(0);

@@ -76,7 +76,7 @@ public class BidanRepository extends Repository {
             }
             return readableDatabase;
         } catch (Exception e) {
-            Log.e(TAG, "Database Error. " + e.getMessage());
+//            Log.e(TAG, "Database Error. " + e.getMessage());
             return null;
         }
 

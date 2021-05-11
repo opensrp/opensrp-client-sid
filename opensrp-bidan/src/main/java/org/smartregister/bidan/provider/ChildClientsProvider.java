@@ -55,8 +55,8 @@ public class ChildClientsProvider implements SmartRegisterCLientsProviderForCurs
         this.context = context;
         this.inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 
-        Log.i(TAG, "ChildClientsProvider: alert "+ alertService);
-        Log.i(TAG, "ChildClientsProvider: repo "+ commonRepository.TABLE_NAME);
+//        Log.i(TAG, "ChildClientsProvider: alert "+ alertService);
+//        Log.i(TAG, "ChildClientsProvider: repo "+ commonRepository.TABLE_NAME);
 
 //        AbsListView.LayoutParams clientViewLayoutParams = new AbsListView.LayoutParams(MATCH_PARENT, (int) context.getResources().getDimension(org.smartregister.R.dimen.list_item_height));
     }
@@ -129,7 +129,7 @@ public class ChildClientsProvider implements SmartRegisterCLientsProviderForCurs
             Support.setImagetoHolderFromUri((Activity) context, pc.getDetails().get("base_entity_id"),
                     viewHolder.profilepic, "female".equals(pc.getDetails().get("gender")) ? R.drawable.child_girl_infant : R.drawable.child_boy_infant);
         } else {
-            Log.e(TAG, "getView: Gender is NOT SET");
+//            Log.e(TAG, "getView: Gender is NOT SET");
         }
 
         fillValue((TextView) convertView.findViewById(R.id.tv_child_name), str_firstName);
@@ -227,7 +227,7 @@ public class ChildClientsProvider implements SmartRegisterCLientsProviderForCurs
 
     @Override
     public void onServiceModeSelected(ServiceModeOption serviceModeOption) {
-        Log.i(TAG, "onServiceModeSelected: ");
+//        Log.i(TAG, "onServiceModeSelected: ");
 //        ServiceModeOption currentServiceModeOption = serviceModeOption;
 
     }

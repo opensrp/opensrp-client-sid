@@ -57,7 +57,7 @@ public class ClientProcessor {
         try {
             mCloudantDataHandler = CloudantDataHandler.getInstance(context);
         } catch (Exception e) {
-            Log.e(TAG, e.toString(), e);
+//            Log.e(TAG, e.toString(), e);
         }
 
     }
@@ -199,7 +199,7 @@ public class ClientProcessor {
             String baseEntityId = event.getString(baseEntityIdJSONKey);
 
             if (event.has("creator")) {
-                Log.i(TAG, "EVENT from openmrs");
+//                Log.i(TAG, "EVENT from openmrs");
             }
 
             // For data integrity check if a client exists, if not pull one from cloudant and
@@ -235,7 +235,7 @@ public class ClientProcessor {
 
             return true;
         } catch (Exception e) {
-            Log.e(TAG, e.toString(), e);
+//            Log.e(TAG, e.toString(), e);
 
             return null;
         }
@@ -247,7 +247,7 @@ public class ClientProcessor {
         try {
             String baseEntityId = event.getString(baseEntityIdJSONKey);
             if (event.has("creator")) {
-                Log.i(TAG, "EVENT from openmrs");
+//                Log.i(TAG, "EVENT from openmrs");
             }
             // For data integrity check if a client exists, if not pull one from cloudant and
             // insert in drishti sqlite db
@@ -283,7 +283,7 @@ public class ClientProcessor {
 
             return true;
         } catch (Exception e) {
-            Log.e(TAG, e.toString(), e);
+//            Log.e(TAG, e.toString(), e);
 
             return null;
         }
@@ -313,7 +313,7 @@ public class ClientProcessor {
             }
             return true;
         } catch (Exception e) {
-            Log.e(TAG, e.toString(), e);
+//            Log.e(TAG, e.toString(), e);
             return null;
         }
     }
@@ -397,7 +397,7 @@ public class ClientProcessor {
 
             return true;
         } catch (Exception e) {
-            Log.e(TAG, e.toString(), e);
+//            Log.e(TAG, e.toString(), e);
 
             return null;
         }
@@ -739,11 +739,11 @@ public class ClientProcessor {
      * @param client
      */
     public void updateClientDetailsTable(JSONObject event, JSONObject client) {
-        Log.d(TAG, "Trace: from updateClientDetailsTable");
-        Log.d(TAG, "updateClientDetailsTable: event=" + event);
-        Log.d(TAG, "updateClientDetailsTable: client=" + client);
+//        Log.d(TAG, "Trace: from updateClientDetailsTable");
+//        Log.d(TAG, "updateClientDetailsTable: event=" + event);
+//        Log.d(TAG, "updateClientDetailsTable: client=" + client);
         try {
-            Log.i(TAG, "Started updateClientDetailsTable");
+//            Log.i(TAG, "Started updateClientDetailsTable");
 
             String baseEntityId = client.getString(baseEntityIdJSONKey);
             Long timestamp = getEventDate(event.get("eventDate"));
@@ -762,10 +762,10 @@ public class ClientProcessor {
 
             event.put(detailsUpdated, true);
 
-            Log.i(TAG, "Finished updateClientDetailsTable");
+//            Log.i(TAG, "Finished updateClientDetailsTable");
             // save the other misc, client info date of birth...
         } catch (Exception e) {
-            Log.e(TAG, e.toString(), e);
+//            Log.e(TAG, e.toString(), e);
         }
     }
 
@@ -1064,7 +1064,7 @@ public class ClientProcessor {
     }
 
     public void updateFTSsearch(String tableName, String entityId, ContentValues contentValues) {
-        Log.i(TAG, "Starting updateFTSsearch table: " + tableName);
+//        Log.i(TAG, "Starting updateFTSsearch table: " + tableName);
         AllCommonsRepository allCommonsRepository = org.smartregister.CoreLibrary.getInstance().context().
                 allCommonsRepositoryobjects(tableName);
 
@@ -1073,14 +1073,14 @@ public class ClientProcessor {
             updateRegisterCount(entityId);
         }
 
-        Log.i(TAG, "Finished updateFTSsearch table: " + tableName);
+//        Log.i(TAG, "Finished updateFTSsearch table: " + tableName);
     }
 
     private JSONObject getClient(String baseEntityId) {
         try {
             return mCloudantDataHandler.getClientByBaseEntityId(baseEntityId);
         } catch (Exception e) {
-            Log.e(getClass().getName(), "", e);
+//            Log.e(getClass().getName(), "", e);
 
             return null;
         }

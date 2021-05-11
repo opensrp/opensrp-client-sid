@@ -5,13 +5,18 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
-import android.widget.ImageButton;
-import android.widget.ImageView;
-import android.widget.TextView;
+import android.widget.*;
 
+import com.fasterxml.jackson.core.type.TypeReference;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import org.json.JSONException;
+import org.json.JSONObject;
 import org.smartregister.Context;
 import org.smartregister.bidan.R;
+import org.smartregister.bidan.options.DetailHistory;
+import org.smartregister.bidan.repository.EventRepository;
 import org.smartregister.bidan.utils.CameraPreviewActivity;
 import org.smartregister.bidan.utils.Support;
 import org.smartregister.bidan.utils.Tools;
@@ -22,10 +27,12 @@ import org.smartregister.repository.DetailsRepository;
 import org.smartregister.view.activity.DrishtiApplication;
 
 import java.io.File;
-import java.util.HashMap;
-import java.util.LinkedHashMap;
-import java.util.Map;
+import java.io.IOException;
+import java.util.*;
+import java.util.concurrent.atomic.AtomicInteger;
 
+import static android.view.View.GONE;
+import static android.view.View.VISIBLE;
 import static org.smartregister.util.StringUtil.humanize;
 
 //import org.smartregister.bidan.lib.FlurryFacade;
@@ -37,6 +44,7 @@ public class DetailChildActivity extends Activity {
 
     private static final String TAG = DetailChildActivity.class.getName();
     public static CommonPersonObjectClient childclient;
+    private final String defaultJenisKunjungan = "Pilih Jenis Kunjungan";
     //    private static String entityid;
 //    @Bind(R.id.childdetailprofileview)
 //    ImageView childview;
@@ -52,6 +60,118 @@ public class DetailChildActivity extends Activity {
         setContentView(R.layout.anak_detail_activity);
 
         userId = childclient.getDetails().get("base_entity_id");
+        final TextView show_history = findViewById(R.id.tv_detail_history);
+        final TextView show_basic = findViewById(R.id.tv_child_detail_information);
+        final Spinner spinnerHistory = findViewById(R.id.history_ke);
+        Spinner spinnerChildType = findViewById(R.id.jenis_kunjungan);
+        final ArrayAdapter<String> jenisAdapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, new String[]{defaultJenisKunjungan, "Kunjungan neonatal", "Kunjungan Balita"});
+        spinnerChildType.setAdapter(jenisAdapter);
+
+        final ObjectMapper mapper = new ObjectMapper();
+        spinnerChildType.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                try {
+                    final String item = jenisAdapter.getItem(position);
+                    if (!item.equals(defaultJenisKunjungan)) {
+                        final List<JSONObject> detailEvents = EventRepository.getEventsByBaseIdAndEventType(item, userId);
+//                        List<DetailHistory> histories = new ArrayList<>();
+                        final ArrayAdapter<DetailHistory> data = new ArrayAdapter<>(DetailChildActivity.this, android.R.layout.simple_spinner_item);
+                        LinearLayout baseHistoryLayout = findViewById(R.id.history_detail);
+                        final TableLayout table = baseHistoryLayout.findViewById(R.id.base_tbl_history_detail_layout);
+                        final LayoutInflater inflater = LayoutInflater.from(DetailChildActivity.this);
+                        if (detailEvents.size() > 0) {
+                            data.add(new DetailHistory("Silahkan Pilih Tanggal"));
+
+                            String keyTanggalKunjungan = "tanggalKunjunganBayiPerbulan";
+                            int startField = 5;
+                            String formType = "kohort_bayi_kunjungan";
+                            if (item.toLowerCase().endsWith("balita")) {
+                                formType = "kohort_balita_kunjungan";
+                                startField = 6;
+                            }
+                            AtomicInteger integer = new AtomicInteger(1);
+                            for (final JSONObject detailEvent : detailEvents) {
+                                Map<String, Object> formDefinition = mapper.readValue(getAssets().open("www/form/" + formType + "/form_definition.json"), new TypeReference<Map<String, Object>>() {
+                                });
+                                Map<String, Object> detailForm = mapper.readValue(getAssets().open("www/form/" + formType + "/form.json"), new TypeReference<Map<String, Object>>() {
+                                });
+                                List<Map<String, Object>> detailChildrenForm = (List<Map<String, Object>>) detailForm.get("children");
+                                Map<String, Object> labelForm = new LinkedHashMap<>();
+                                for (Map<String, Object> f : detailChildrenForm) {
+                                    if (f.containsKey("label") && f.get("label") != null)
+                                        labelForm.put((String) f.get("name"), ((Map<String, Object>) f.get("label")).get("Bahasa"));
+                                }
+                                Map<String, Object> form = (Map<String, Object>) formDefinition.get("form");
+                                List<Map<String, Object>> fields = (List<Map<String, Object>>) form.get("fields");
+                                List<Map<String, Object>> results = new LinkedList<>();
+//                                final LinkedHashMap<String, Object> firstDetail = new LinkedHashMap<>();
+//                                firstDetail.put("id", keyTanggalKunjungan);
+//                                firstDetail.put("bind", keyTanggalKunjungan);
+//                                firstDetail.put("label", "Tanggal Kunjungan");
+//                                firstDetail.put("value", detailEvent.getString(keyTanggalKunjungan));
+//                                results.add(firstDetail);
+
+                                for (int i = startField; i < fields.size(); i++) {
+                                    Map<String, Object> field = fields.get(i);
+                                    String[] binds = ((String) field.get("bind")).split("/");
+                                    String bind = binds[binds.length - 1];
+                                    if (labelForm.get(bind) == null)
+                                        continue;
+                                    Map<String, Object> result = new LinkedHashMap<>();
+                                    String name = (String) field.get("name");
+                                    result.put("id", name);
+
+                                    result.put("bind", bind);
+                                    result.put("label", labelForm.get(bind));
+                                    result.put("value", "-");
+                                    if (detailEvent.has(name) && detailEvent.getString(name) != null && !detailEvent.getString(name).trim().isEmpty()) {
+                                        result.put("value", detailEvent.getString((String) field.get("name")));
+                                        results.add(result);
+                                    }
+
+                                }
+                                data.add(new DetailHistory("Kunjungan Ke " + integer.getAndIncrement() + " (" + detailEvent.getString(keyTanggalKunjungan) + ")", results));
+                            }
+                        } else {
+                            data.add(new DetailHistory("Tidak ada detail history " + item));
+                        }
+
+                        spinnerHistory.setAdapter(data);
+                        spinnerHistory.setSelection(0);
+                        spinnerHistory.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+                            @Override
+                            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                                final DetailHistory item = data.getItem(position);
+                                table.removeAllViews();
+                                for (Map<String, Object> result : item.getDetails()) {
+                                    final TableRow second = (TableRow) inflater.inflate(R.layout.row_history, null);
+                                    final TextView secondLabel = (TextView) second.getChildAt(0);
+                                    secondLabel.setText((String) result.get("label"));
+                                    final TextView secondValue = (TextView) second.getChildAt(1);
+                                    secondValue.setText((String) result.get("value"));
+                                    table.addView(second);
+                                }
+                            }
+
+                            @Override
+                            public void onNothingSelected(AdapterView<?> parent) {
+
+                            }
+                        });
+                    }
+                } catch (IOException ioException) {
+                    ioException.printStackTrace();
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
 
         final ImageView childview = (ImageView) findViewById(R.id.childdetailprofileview);
         //header
@@ -100,7 +220,21 @@ public class DetailChildActivity extends Activity {
                 overridePendingTransition(0, 0);
             }
         });
+        show_history.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                findViewById(R.id.id3).setVisibility(VISIBLE);
+                findViewById(R.id.id1).setVisibility(GONE);
+            }
+        });
 
+        show_basic.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                findViewById(R.id.id1).setVisibility(VISIBLE);
+                findViewById(R.id.id3).setVisibility(GONE);
+            }
+        });
         DetailsRepository detailsRepository = Context.getInstance().detailsRepository();
         detailsRepository.updateDetails(childclient);
 
@@ -130,12 +264,15 @@ public class DetailChildActivity extends Activity {
 //        final CommonPersonObject ibuparent = iburep.findByCaseID(childobject.getColumnmaps().get("relational_id"));
 
         AllCommonsRepository kirep = Context.getInstance().allCommonsRepositoryobjects("ec_kartu_ibu");
-        final CommonPersonObject kiparent = kirep.findByCaseID(childobject.getColumnmaps().get("relational_id"));
         //Fix aplikasi crash saat mengisi data pada kunjungan ANC dan saat membuka dan melihat dashboard anak pada kohort anak
+        final String relational_id = childobject.getColumnmaps().get("relational_id");
         Map<String, String> columnmaps = new HashMap<>();
-        if (kiparent != null) {
-            if (kiparent.getColumnmaps() != null) {
-                columnmaps = kiparent.getColumnmaps();
+        if (relational_id != null) {
+            final CommonPersonObject kiparent = kirep.findByCaseID(relational_id);
+            if (kiparent != null) {
+                if (kiparent.getColumnmaps() != null) {
+                    columnmaps = kiparent.getColumnmaps();
+                }
             }
         }
 

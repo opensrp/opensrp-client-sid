@@ -32,7 +32,7 @@ public class BaseSmartRegisterFragment extends SecuredNativeSmartRegisterCursorA
 //            filter(cs.toString(), "", "");
             filters = cs.toString();
             joinTable = "";
-            Log.e(TAG, "onTextChanged: " + customMainCondition);
+//            Log.e(TAG, "onTextChanged: " + customMainCondition);
             mainCondition = customMainCondition;
 
             getSearchCancelView().setVisibility(isEmpty(cs) ? INVISIBLE : VISIBLE);
@@ -114,7 +114,7 @@ public class BaseSmartRegisterFragment extends SecuredNativeSmartRegisterCursorA
     @Override
     protected void onResumption() {
         super.onResumption();
-        Log.e(TAG, "onResumption: " + getResources().getConfiguration().locale);
+//        Log.e(TAG, "onResumption: " + getResources().getConfiguration().locale);
 //        LoginActivity.setLanguage();
     }
 

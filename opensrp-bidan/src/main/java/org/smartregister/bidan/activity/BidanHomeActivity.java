@@ -156,7 +156,7 @@ public class BidanHomeActivity extends SecuredActivity implements SyncStatusBroa
                     }
                     Support.ONSYNC = false;
                 } catch (InterruptedException ie) {
-                    Log.e(TAG, "run: " + ie.getCause());
+//                    Log.e(TAG, "run: " + ie.getCause());
                 }
             }
         }.start();
@@ -289,7 +289,7 @@ public class BidanHomeActivity extends SecuredActivity implements SyncStatusBroa
         task.fetch(new NativeAfterANMDetailsFetchListener() {
             @Override
             public void afterFetch(HomeContext anmDetails) {
-                Log.d(TAG, "afterFetch: " + anmDetails);
+//                Log.d(TAG, "afterFetch: " + anmDetails);
                 SmartRegisterQueryBuilder sqb = new SmartRegisterQueryBuilder();
                 Cursor kiCountCursor = context().commonrepository("ec_kartu_ibu").rawCustomQueryForAdapter(sqb.queryForCountOnRegisters("ec_kartu_ibu_search", "ec_kartu_ibu_search.is_closed=0 AND namalengkap != '' AND namalengkap IS NOT NULL"));
                 kiCountCursor.moveToFirst();
@@ -389,7 +389,7 @@ public class BidanHomeActivity extends SecuredActivity implements SyncStatusBroa
             ecUpdater.saveAllClientsAndEvents(jsonObject);
             Long now = Calendar.getInstance().getTimeInMillis();
             List<JSONObject> allEvents = ecUpdater.allEvents(0, now);
-            Log.d(TAG, "loadDummyData: allEvents="+allEvents);
+//            Log.d(TAG, "loadDummyData: allEvents="+allEvents);
             ClientProcessor.getInstance(getApplicationContext()).processClient(allEvents);
         } catch (JSONException e) {
             e.printStackTrace();
@@ -414,7 +414,7 @@ public class BidanHomeActivity extends SecuredActivity implements SyncStatusBroa
 //            LoginActivity.generator.requestUniqueId();                                                                  // unique id part
     }*/
     public void updateDataFromServer() {
-        Log.e("Home", "updateDataFromServer: tombol update");
+//        Log.e("Home", "updateDataFromServer: tombol update");
         UpdateActionsTask updateActionsTask = new UpdateActionsTask(this);
 //        FlurryFacade.logEvent("click_update_from_server");
         updateActionsTask.updateFromServer();
@@ -520,7 +520,7 @@ public class BidanHomeActivity extends SecuredActivity implements SyncStatusBroa
     @Override
     public void onRequestPermissionsResult(int requestCode,
                                            String permissions[], int[] grantResults) {
-        Log.d(TAG, "onRequestPermissionsResult: grantResults="+grantResults);
+//        Log.d(TAG, "onRequestPermissionsResult: grantResults="+grantResults);
         switch (requestCode) {
             case PERMISSION_ALL: {
                 // If request is cancelled, the result arrays are empty.
@@ -550,7 +550,7 @@ public class BidanHomeActivity extends SecuredActivity implements SyncStatusBroa
     }
 
     public void updateLocation(){
-        Log.e(TAG, "updateLocation: Trying to update location");
+//        Log.e(TAG, "updateLocation: Trying to update location");
         if (ContextCompat.checkSelfPermission(this,
                 Manifest.permission.ACCESS_FINE_LOCATION)
                 == PackageManager.PERMISSION_GRANTED) {

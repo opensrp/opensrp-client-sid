@@ -128,8 +128,8 @@ public class KBClientsProvider extends BaseClientsProvider {
 //        System.out.println("client : " + pc.getColumnmaps().toString());
 //        System.out.println("event : " + pc.getDetails().toString());
 
-        Log.e(TAG, "getView: " + pc.getDetails().toString());
-        Log.e(TAG, "getView: " + pc.getColumnmaps().toString());
+//        Log.e(TAG, "getView: " + pc.getDetails().toString());
+//        Log.e(TAG, "getView: " + pc.getColumnmaps().toString());
 
         // ========================================================================================
         // Set Value
@@ -245,7 +245,7 @@ public class KBClientsProvider extends BaseClientsProvider {
 
     @Override
     public void getView(Cursor cursor, SmartRegisterClient smartRegisterClient, View view) {
-        Log.e(TAG, "getView: ");
+//        Log.e(TAG, "getView: ");
         LoginActivity.setLanguage();
         getView(smartRegisterClient, view);
     }

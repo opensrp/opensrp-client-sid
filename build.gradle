@@ -48,21 +48,22 @@ subprojects {
 
     group = 'org.smartregister'
 
-    ext.androidToolsBuildGradle     = '3.1.2'
-    ext.androidBuildToolsVersion    = '27.0.3'
-    ext.androidMinSdkVersion        = 16
-    ext.androidCompileSdkVersion    = 27
-    ext.androidTargetSdkVersion     = 27
+    ext.androidToolsBuildGradle = '3.1.2'
+    ext.androidBuildToolsVersion = '27.0.3'
+    ext.androidMinSdkVersion = 16
+    ext.androidCompileSdkVersion = 27
+    ext.androidTargetSdkVersion = 27
     ext.androidAnnotationsVersion = '3.0.1'
     ext.androidAnnotationsAPIVersion = '3.0.1'
 
     repositories {
         jcenter()
         mavenCentral()
+        mavenLocal()
         maven { url 'https://jitpack.io' }
         maven { url "${projectDir}/libs/" }
-        maven { url "http://nexus.motechproject.org/content/repositories/drishti" }
-        maven { url "http://nexus.motechproject.org/content/repositories/snapshots" }
+//        maven { url "http://nexus.motechproject.org/content/repositories/drishti" }
+//        maven { url "http://nexus.motechproject.org/content/repositories/snapshots" }
         maven { url "http://acra.googlecode.com/svn/repository/releases" }
         maven { url "https://repo.maven.apache.org/maven2" }
         maven { url "http://cloudant.github.io/cloudant-sync-eap/repository" }
@@ -76,7 +77,7 @@ subprojects {
     // Improve build server performance by allowing disabling of pre-dexing
     // (see http://tools.android.com/tech-docs/new-build-system/tips#TOC-Improving-Build-Server-performance.)
     project.plugins.whenPluginAdded { plugin ->
-        if("com.android.build.gradle.AppPlugin".equals(plugin.class.name)) {
+        if ("com.android.build.gradle.AppPlugin".equals(plugin.class.name)) {
             project.android.dexOptions.preDexLibraries = rootProject.ext.preDexLibs
         } else if ("com.android.build.gradle.LibraryPlugin".equals(plugin.class.name)) {
             project.android.dexOptions.preDexLibraries = rootProject.ext.preDexLibs
@@ -84,9 +85,9 @@ subprojects {
     }
 }
 
-apply plugin : 'java'
-apply plugin : 'build-dashboard'
-apply plugin : "com.github.kt3k.coveralls"
+apply plugin: 'java'
+apply plugin: 'build-dashboard'
+apply plugin: "com.github.kt3k.coveralls"
 
 buildDashboard {
     reports.html.setDestination(file("build/"))
@@ -121,7 +122,7 @@ subprojects { subProject ->
     }
 
     project.plugins.whenPluginAdded { plugin ->
-        if("com.android.build.gradle.AppPlugin".equals(plugin.class.name)) {
+        if ("com.android.build.gradle.AppPlugin".equals(plugin.class.name)) {
             project.android.dexOptions.preDexLibraries = rootProject.ext.preDexLibs
         } else if ("com.android.build.gradle.LibraryPlugin".equals(plugin.class.name)) {
             project.android.dexOptions.preDexLibraries = rootProject.ext.preDexLibs

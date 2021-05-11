@@ -26,9 +26,9 @@ public class UpdateActionsTask {
         try {
             ServiceTools.startService(context, SyncService.class);
 
-            Log.e(TAG, "sync: started" );
+//            Log.e(TAG, "sync: started" );
         } catch (Exception e) {
-            Log.e(TAG, "sync: error" );
+//            Log.e(TAG, "sync: error" );
         }
     }
 }

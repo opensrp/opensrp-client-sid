@@ -131,9 +131,9 @@ public class ClientsListActivity extends Activity{
     }
 
     private void saveAlbum() {
-        Log.e(TAG, "saveAlbum: "+"saving" );
+//        Log.e(TAG, "saveAlbum: "+"saving" );
         albumBuffer = OpenCameraActivity.faceProc.serializeRecogntionAlbum();
-        Log.e(TAG, "saveAlbum: "+albumBuffer.toString() );
+//        Log.e(TAG, "saveAlbum: "+albumBuffer.toString() );
         SharedPreferences settings = getSharedPreferences(FaceConstants.ALBUM_NAME, 0);
         SharedPreferences.Editor editor = settings.edit();
         editor.putString(FaceConstants.ALBUM_ARRAY, Arrays.toString(albumBuffer));

@@ -129,7 +129,7 @@ public class BaseRegisterActivity extends SecuredNativeSmartRegisterActivity imp
 
     @Override
     protected void setupViews() {
-        android.util.Log.d(TAG, "setupViews: Initialize NavBar");
+//        android.util.Log.d(TAG, "setupViews: Initialize NavBar");
 
     }
 
@@ -167,7 +167,7 @@ public class BaseRegisterActivity extends SecuredNativeSmartRegisterActivity imp
 
     @Override
     protected void onResumption() {
-        android.util.Log.e(TAG, "onResumption: ");
+//        android.util.Log.e(TAG, "onResumption: ");
         LoginActivity.setLanguage();
 
     }
@@ -208,7 +208,7 @@ public class BaseRegisterActivity extends SecuredNativeSmartRegisterActivity imp
     }
 
     private void switchToBaseFragment() {
-        android.util.Log.e(TAG, "switchToBaseFragment: ");
+//        android.util.Log.e(TAG, "switchToBaseFragment: ");
         final int prevPageIndex = currentPage;
         runOnUiThread(new Runnable() {
             @Override
@@ -236,15 +236,15 @@ public class BaseRegisterActivity extends SecuredNativeSmartRegisterActivity imp
                 BaseSmartRegisterFragment registerFragment = baseFragment;
                 if (registerFragment != null && data != null) {
                     registerFragment.refreshListView();
-                    android.util.Log.e(TAG, "run: refresh1");
+//                    android.util.Log.e(TAG, "run: refresh1");
                     registerFragment.setRefreshList(true);
-                    android.util.Log.e(TAG, "run: refresh2");
+//                    android.util.Log.e(TAG, "run: refresh2");
 
                     //                final BaseRegisterActivity registerActivity = ((BaseRegisterActivity) context);
 //                registerActivity.refreshList(FetchStatus.fetched);
 //                registerActivity.hideProgressDialog();
                 } else {
-                    android.util.Log.e(TAG, "run: ");
+//                    android.util.Log.e(TAG, "run: ");
                 }
 
                 //hack reset the form
@@ -316,14 +316,14 @@ public class BaseRegisterActivity extends SecuredNativeSmartRegisterActivity imp
             if (entityId != null || metaData != null) {
                 //check if there is previously saved data for the form
                 if (metaData != null) data = getPreviouslySavedDataForForm(formName, metaData, entityId);
-                android.util.Log.e(TAG, "startFormActivity: previous data " + data);
+//                android.util.Log.e(TAG, "startFormActivity: previous data " + data);
 
                 if (data == null) {
 //                    data = EnketoFormUtils.getInstance(this)
 //                            .generateXMLInputForFormWithEntityId(entityId, formName, metaData);
                     data = BidanFormUtils.getInstance(this)
                             .generateXMLInputForFormWithEntityId(entityId, formName, metaData);
-                    android.util.Log.e(TAG, "startFormActivity: recent data " + data);
+//                    android.util.Log.e(TAG, "startFormActivity: recent data " + data);
                 }
 
                 displayFormFragment = getDisplayFormFragmentAtIndex(formIndex);
@@ -335,14 +335,14 @@ public class BaseRegisterActivity extends SecuredNativeSmartRegisterActivity imp
                 }
             }
 
-            android.util.Log.e(TAG, "startFormActivity: formName " + formName);
-            android.util.Log.e(TAG, "startFormActivity: displayForm " + data);
+//            android.util.Log.e(TAG, "startFormActivity: formName " + formName);
+//            android.util.Log.e(TAG, "startFormActivity: displayForm " + data);
 
             mPager.setCurrentItem(formIndex, false); //Don't animate the view on orientation change the view disapears
 
         } catch (Exception e) {
             e.printStackTrace();
-            android.util.Log.e(TAG, "startFormActivity: " + e.getMessage());
+//            android.util.Log.e(TAG, "startFormActivity: " + e.getMessage());
         }
 
     }
@@ -364,7 +364,7 @@ public class BaseRegisterActivity extends SecuredNativeSmartRegisterActivity imp
 
             ClientProcessor.getInstance(this).processClient();
 
-            android.util.Log.e(TAG, "saveFormSubmission: " + formName);
+//            android.util.Log.e(TAG, "saveFormSubmission: " + formName);
 //            android.util.Log.e(TAG, "saveFormSubmission: "+ submission.toString() );
 
             context().formSubmissionService().updateFTSsearch(submission);
@@ -601,11 +601,11 @@ public class BaseRegisterActivity extends SecuredNativeSmartRegisterActivity imp
 
             if (which == -1) {
                 currentPage = 0;
-                android.util.Log.e(TAG, "onClick: YES ");
+//                android.util.Log.e(TAG, "onClick: YES ");
 //                FlurryAgent.logEvent(TAG + "search_by_face OK", FS, true);
 
             } else {
-                android.util.Log.e(TAG, "onClick: NO ");
+//                android.util.Log.e(TAG, "onClick: NO ");
 //                FlurryAgent.logEvent(TAG + "search_by_face NOK", FS, true);
             }
 

@@ -298,16 +298,16 @@ public class DetailANCActivity extends Activity {
 
         ((TextView) findViewById(R.id.txt_statusImunisasiTT)).setText(getStrValue("statusImunisasitt"));
         String fe = "-";
-String keyFe = "pelayananFe";
+        String keyFe = "pelayananfe";
         if (ancClient.getDetails().get(keyFe) != null) {
             fe = ancClient.getDetails().get(keyFe);
             String jmlhTab = "0";
-            if(StringUtils.isNumeric(ancClient.getDetails().get(keyFe).trim())){
+            if (StringUtils.isNumeric(ancClient.getDetails().get(keyFe).trim())) {
                 fe = "YA";
                 jmlhTab = ancClient.getDetails().get(keyFe).trim();
-            }else{
-                if(ancClient.getDetails().containsKey("jumlah_fe") && ancClient.getDetails().get("jumlah_fe") != null){
-                    jmlhTab= ancClient.getDetails().get("jumlah_fe");
+            } else {
+                if (ancClient.getDetails().containsKey("jumlah_fe") && ancClient.getDetails().get("jumlah_fe") != null) {
+                    jmlhTab = ancClient.getDetails().get("jumlah_fe");
                 }
             }
             StringBuilder sbFe = new StringBuilder();
@@ -589,7 +589,7 @@ String keyFe = "pelayananFe";
 
     @Override
     public void onBackPressed() {
-        Log.d(TAG, "onBackPressed: ");
+//        Log.d(TAG, "onBackPressed: ");
         finish();
         startActivity(new Intent(this, ANCSmartRegisterActivity.class));
         overridePendingTransition(0, 0);

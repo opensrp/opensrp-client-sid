@@ -107,7 +107,7 @@ public class Tools {
         File thumbs_photo = getOutputMediaFile(1, entityId);
 
         if (pictureFile == null || thumbs_photo == null) {
-            Log.e(TAG, "Error creating media file, check storage permissions!");
+//            Log.e(TAG, "Error creating media file, check storage permissions!");
             return false;
         }
 
@@ -115,10 +115,10 @@ public class Tools {
             FileOutputStream fos = new FileOutputStream(pictureFile);
             bitmap.compress(Bitmap.CompressFormat.PNG, 100, fos);
             fos.close();
-            Log.e(TAG, "Wrote image to " + pictureFile);
+//            Log.e(TAG, "Wrote image to " + pictureFile);
 
             String photoPath = pictureFile.toString();
-            Log.e(TAG, "Photo Path = " + photoPath);
+//            Log.e(TAG, "Photo Path = " + photoPath);
 
 //            Create Thumbs
             FileOutputStream tfos = new FileOutputStream(thumbs_photo);
@@ -128,7 +128,7 @@ public class Tools {
                     THUMBSIZE, THUMBSIZE);
             ThumbImage.compress(Bitmap.CompressFormat.PNG, 100, tfos);
             tfos.close();
-            Log.e(TAG, "Wrote Thumbs image to " + thumbs_photo);
+//            Log.e(TAG, "Wrote Thumbs image to " + thumbs_photo);
 
 //           FIXME File & Database Stored
             saveStaticImageToDisk(entityId, ThumbImage, Arrays.toString(faceVector), updated);
@@ -431,7 +431,7 @@ public class Tools {
      * @param facialRepository
      */
     public static void setVectorfromAPI(Context mContext, ImageRepository facialRepository) {
-        Log.i(TAG, "setVectorfromAPI: Start" );
+//        Log.i(TAG, "setVectorfromAPI: Start" );
         // Get URL Information
 //        String DRISTHI_BASE_URL = mContext.configuration().dristhiBaseURL();
 //        String user = mContext.allSharedPreferences().fetchRegisteredANM();
@@ -701,15 +701,15 @@ public class Tools {
 
 
     public static void setVectorsBuffered(Context mContext, ImageRepository imageRepo) {
-        Log.i(TAG, "setVectorsBuffered: Stored vector as Album xml file.");
+//        Log.i(TAG, "setVectorsBuffered: Stored vector as Album xml file.");
 
         if (imageRepo == null) {
             imageRepo = ImageRepository.getInstance();
         }
 
         List<ProfileImage> vectorList = imageRepo.getAllFaceVectorImages();
-        Log.d(TAG, "setVectorsBuffered: vectorList="+vectorList);
-        Log.d(TAG, "setVectorsBuffered: vectorListSize="+vectorList.size());
+//        Log.d(TAG, "setVectorsBuffered: vectorList="+vectorList);
+//        Log.d(TAG, "setVectorsBuffered: vectorListSize="+vectorList.size());
 
         if (vectorList.size() != 0) {
 
@@ -761,7 +761,7 @@ public class Tools {
 //        String headerNew = imageRepo.findByUserCount(n);
 //        return headerNew.substring(1, headerNew.length() -1).split(", ");
 
-        Log.i(TAG, "getHeaderBaseUserCount: Number User"+ i );
+//        Log.i(TAG, "getHeaderBaseUserCount: Number User"+ i );
 
 //        Init value
         int n = i-1;

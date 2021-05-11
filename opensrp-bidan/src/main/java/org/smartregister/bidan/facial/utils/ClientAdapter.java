@@ -63,7 +63,7 @@ public class ClientAdapter extends BaseAdapter {
         delete.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Log.e(TAG, "onClick: " );
+//                Log.e(TAG, "onClick: " );
                 AlertDialog.Builder builder = new AlertDialog.Builder(context);
                 builder.setMessage("Do you want to remove?");
                 builder.setCancelable(false);

@@ -131,7 +131,7 @@ public class SyncService extends Service {
             pullECFromServer();
 
         } catch (Exception e) {
-            Log.e(getClass().getName(), "", e);
+//            Log.e(getClass().getName(), "", e);
             sendSyncStatusBroadcastMessage(FetchStatus.fetchedFailed, true);
         }
     }
@@ -192,18 +192,18 @@ public class SyncService extends Service {
                 }
 
                 String jsonPayload = request.toString();
-                Log.e(TAG, "pushECToServer: "+ jsonPayload );
+//                Log.e(TAG, "pushECToServer: "+ jsonPayload );
                 Response<String> response = httpAgent.post(
                         MessageFormat.format("{0}/{1}", baseUrl, EVENTS_SYNC_PATH), jsonPayload);
 
                 if (response.isFailure()) {
-                    Log.e(getClass().getName(), "Events sync failed.");
+//                    Log.e(getClass().getName(), "Events sync failed.");
                     return;
                 }
                 db.markEventsAsSynced(pendingEvents);
-                Log.i(getClass().getName(), "Events synced successfully.");
+//                Log.i(getClass().getName(), "Events synced successfully.");
             } catch (Exception e) {
-                Log.e(getClass().getName(), e.getMessage());
+//                Log.e(getClass().getName(), e.getMessage());
             }
         }
 
@@ -243,7 +243,7 @@ public class SyncService extends Service {
     }
 
     private void pullECFromServer() {
-        Log.e(TAG, "pullECFromServer: start" );
+//        Log.e(TAG, "pullECFromServer: start" );
         final ECSyncUpdater ecUpdater = ECSyncUpdater.getInstance(context);
 
         // Fetch locations
@@ -370,7 +370,7 @@ public class SyncService extends Service {
     }
 
     private void saveResponseParcel(final ResponseParcel responseParcel) {
-        Log.e(TAG, "saveResponseParcel: " );
+//        Log.e(TAG, "saveResponseParcel: " );
         final ECSyncUpdater ecUpdater = ECSyncUpdater.getInstance(context);
         final Observable<FetchStatus> observable = Observable.just(responseParcel)
                 .observeOn(AndroidSchedulers.from(mHandlerThread.getLooper()))
@@ -417,7 +417,7 @@ public class SyncService extends Service {
             final int ONE_SECOND = 1000;
             Thread.sleep(ONE_SECOND);
         } catch (InterruptedException ie) {
-            Log.e(getClass().getName(), ie.getMessage());
+//            Log.e(getClass().getName(), ie.getMessage());
         }
 
         final ECSyncUpdater ecUpdater = ECSyncUpdater.getInstance(context);
@@ -426,7 +426,7 @@ public class SyncService extends Service {
             return ecUpdater.fetchAsJsonObject(AllConstants.SyncFilters.FILTER_LOCATION_ID, locations);
 
         } catch (Exception e) {
-            Log.e(getClass().getName(), e.getMessage());
+//            Log.e(getClass().getName(), e.getMessage());
             if (count >= 2) {
                 return null;
             } else {
@@ -495,7 +495,7 @@ public class SyncService extends Service {
                 return Pair.create(minServerVersion, maxServerVersion);
             }
         } catch (Exception e) {
-            Log.e(getClass().getName(), e.getMessage());
+//            Log.e(getClass().getName(), e.getMessage());
         }
         return Pair.create(0L, 0L);
     }
@@ -521,7 +521,7 @@ public class SyncService extends Service {
         private ResponseParcel(JSONObject jsonObject, Pair<Long, Long> serverVersionPair) {
             this.jsonObject = jsonObject;
             this.serverVersionPair = serverVersionPair;
-            Log.e(TAG, "ResponseParcel: "+ jsonObject.toString() );
+//            Log.e(TAG, "ResponseParcel: "+ jsonObject.toString() );
         }
 
         private JSONObject getJsonObject() {
@@ -591,7 +591,7 @@ public class SyncService extends Service {
 
             Log.d(TAG, "sendGet: File downloaded");
         } else {
-            Log.e(TAG, "sendGet: No file to download. Server replied HTTP code: +"+ responseCode);
+//            Log.e(TAG, "sendGet: No file to download. Server replied HTTP code: +"+ responseCode);
         }
         httpConn.disconnect();
         return responseCode;

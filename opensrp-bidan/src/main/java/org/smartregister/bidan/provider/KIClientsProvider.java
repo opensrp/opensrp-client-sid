@@ -48,7 +48,7 @@ public class KIClientsProvider extends BaseClientsProvider {
         this.onClickListener = onClickListener;
         this.mContext = context;
         clientViewLayoutParams = new AbsListView.LayoutParams(MATCH_PARENT, (int) context.getResources().getDimension(org.smartregister.R.dimen.list_item_height));
-        Log.i(TAG, "KIClientsProvider:alertService " + alertService);
+//        Log.i(TAG, "KIClientsProvider:alertService " + alertService);
     }
 
     public void getView(SmartRegisterClient smartRegisterClient, View convertView) {
