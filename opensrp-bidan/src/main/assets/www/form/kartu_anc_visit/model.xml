@@ -95,6 +95,9 @@
             <jumlah_fe openmrs_entity="concept"
                 openmrs_entity_id="1443AAAAAAAAAAAAAAAAAAAAAAAAAAAA" />
             <fe1_fe3 />
+            <other_supplement />
+            <other_supplement_describe openmrs_entity="concept"
+                             openmrs_entity_id="160632AAAAAAAAAAAAAAAAAAAAAAAAAA" />
             <komplikasi_dalam_kehamilan openmrs_entity="concept"
                 openmrs_entity_id="1576AAAAAAAAAAAAAAAAAAAAAAAAAAAA" />
             <komplikasi_lain openmrs_entity="concept"

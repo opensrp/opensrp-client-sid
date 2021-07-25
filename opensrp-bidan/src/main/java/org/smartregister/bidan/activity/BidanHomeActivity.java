@@ -1,9 +1,8 @@
 package org.smartregister.bidan.activity;
 
 import android.Manifest;
-import android.content.Intent;
-import android.content.IntentFilter;
-import android.content.SharedPreferences;
+import android.app.AlertDialog;
+import android.content.*;
 import android.content.pm.PackageManager;
 import android.database.Cursor;
 import android.location.Criteria;
@@ -11,6 +10,7 @@ import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
 import android.os.Bundle;
+import android.os.IBinder;
 import android.os.StrictMode;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
@@ -23,6 +23,7 @@ import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import org.apache.commons.lang3.StringUtils;
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.smartregister.Context;
@@ -33,6 +34,7 @@ import org.smartregister.bidan.facial.repository.ImageRepository;
 import org.smartregister.bidan.fragment.KISmartRegisterFragment;
 import org.smartregister.bidan.receiver.SyncStatusBroadcastReceiver;
 import org.smartregister.bidan.repository.IndonesiaECRepository;
+import org.smartregister.bidan.service.SyncService;
 import org.smartregister.bidan.sync.ECSyncUpdater;
 import org.smartregister.bidan.sync.UpdateActionsTask;
 import org.smartregister.bidan.utils.AllConstantsINA;
@@ -52,6 +54,7 @@ import org.smartregister.view.controller.NativeAfterANMDetailsFetchListener;
 import org.smartregister.view.controller.NativeUpdateANMDetailsTask;
 
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
@@ -67,7 +70,7 @@ import static org.smartregister.event.Event.FORM_SUBMITTED;
 //import java.util.HashMap;
 //import java.util.Map;
 
-public class BidanHomeActivity extends SecuredActivity implements SyncStatusBroadcastReceiver.SyncStatusListener,LocationListener {
+public class BidanHomeActivity extends SecuredActivity implements SyncStatusBroadcastReceiver.SyncStatusListener, LocationListener {
     private static final String TAG = BidanHomeActivity.class.getName();
     //    SimpleDateFormat timer = new SimpleDateFormat("hh:mm:ss");
     private MenuItem updateMenuItem;
@@ -161,6 +164,7 @@ public class BidanHomeActivity extends SecuredActivity implements SyncStatusBroa
             }
         }.start();
     }
+
     LocationManager locationManager;
     String provider;
 
@@ -176,7 +180,7 @@ public class BidanHomeActivity extends SecuredActivity implements SyncStatusBroa
         locationManager = (LocationManager) getSystemService(android.content.Context.LOCATION_SERVICE);
 
         provider = locationManager.getBestProvider(new Criteria(), false);
-        if ( provider == null ) {
+        if (provider == null) {
             provider = LocationManager.GPS_PROVIDER;
         }
         setContentView(R.layout.smart_registers_home_bidan);
@@ -194,9 +198,32 @@ public class BidanHomeActivity extends SecuredActivity implements SyncStatusBroa
             //your codes here
 
         }
-        if(!hasPermissions(BidanApplication.getInstance(), PERMISSIONS)){
+        if (!hasPermissions(BidanApplication.getInstance(), PERMISSIONS)) {
             ActivityCompat.requestPermissions(this, PERMISSIONS, PERMISSION_ALL);
         }
+
+
+    }
+
+    private void buildDialog() {
+        DialogInterface.OnClickListener dialogClickListener = new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                switch (which) {
+                    case DialogInterface.BUTTON_POSITIVE:
+                        doSync();
+                        break;
+
+                    case DialogInterface.BUTTON_NEGATIVE:
+                        //No button clicked
+                        break;
+                }
+            }
+        };
+
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setMessage("Ini pertama kali anda login.\nApakah anda ingin melakukan sinkronisasi data sekarang?").setPositiveButton("Ya", dialogClickListener)
+                .setNegativeButton("Tidak", dialogClickListener).show();
     }
 
     private void setupViews() {
@@ -240,25 +267,31 @@ public class BidanHomeActivity extends SecuredActivity implements SyncStatusBroa
 
     private void registerMyReceiver() {
 
-        try
-        {
-            if(syncStatusBroadcastReceiver == null){
+        try {
+            if (syncStatusBroadcastReceiver == null) {
                 syncStatusBroadcastReceiver = new SyncStatusBroadcastReceiver(this);
             }
             IntentFilter intentFilter = new IntentFilter();
             intentFilter.addAction(SyncStatusBroadcastReceiver.ACTION_SYNC_STATUS);
             registerReceiver(syncStatusBroadcastReceiver, intentFilter);
-        }
-        catch (Exception ex)
-        {
+        } catch (Exception ex) {
             ex.printStackTrace();
         }
 
     }
 
+    private void update() {
+        if (updateMenuItem != null && updateMenuItem.getActionView() == null) {
+            updateMenuItem.setActionView(R.layout.progress);
+        }
+    }
+
     @Override
     protected void onResumption() {
 //        LoginActivity.setLanguage();
+//        if (SyncService.isRunningSync()) {
+//        }
+
         registerMyReceiver();
         updateRegisterCounts();
         updateSyncIndicator();
@@ -346,19 +379,23 @@ public class BidanHomeActivity extends SecuredActivity implements SyncStatusBroa
         return true;
     }
 
+    private boolean doSync() {
+        updateLocation();
+        String isLocal = Utils.getPreference(BidanApplication.getInstance().getApplicationContext(), "LOCAL_DEBUG", "False");
+        if (isLocal.equals("True")) {
+            loadDummyData();
+            Toast.makeText(this, "You are working in local", LENGTH_SHORT).show();
+            return true;
+        }
+        updateDataFromServer();
+        return true;
+    }
+
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.updateMenuItem:
-                updateLocation();
-                String isLocal = Utils.getPreference(BidanApplication.getInstance().getApplicationContext(), "LOCAL_DEBUG", "False");
-                if (isLocal.equals("True")){
-                    loadDummyData();
-                    Toast.makeText(this, "You are working in local", LENGTH_SHORT).show();
-                    return true;
-                }
-                updateDataFromServer();
-                return true;
+                return doSync();
             case R.id.switchLanguageMenuItem:
                 String newLanguagePreference = LoginActivity.switchLanguagePreference();
                 LoginActivity.setLanguage();
@@ -381,7 +418,7 @@ public class BidanHomeActivity extends SecuredActivity implements SyncStatusBroa
         }
     }
 
-    private void loadDummyData(){
+    private void loadDummyData() {
         final ECSyncUpdater ecUpdater = ECSyncUpdater.getInstance(getApplicationContext());
         final String dummy_data = AssetHandler.readFileFromAssetsFolder("dummy_data.json", getApplicationContext());
         try {
@@ -413,11 +450,15 @@ public class BidanHomeActivity extends SecuredActivity implements SyncStatusBroa
 //        if(LoginActivity.generator.uniqueIdController().needToRefillUniqueId(LoginActivity.generator.UNIQUE_ID_LIMIT))  // unique id part
 //            LoginActivity.generator.requestUniqueId();                                                                  // unique id part
     }*/
+
     public void updateDataFromServer() {
 //        Log.e("Home", "updateDataFromServer: tombol update");
         UpdateActionsTask updateActionsTask = new UpdateActionsTask(this);
-//        FlurryFacade.logEvent("click_update_from_server");
+////        FlurryFacade.logEvent("click_update_from_server");
         updateActionsTask.updateFromServer();
+//        if (mBounded) {
+//            mSyncService.runSync();
+//        }
 
 //        if (LoginActivity.generator.uniqueIdController().needToRefillUniqueId(LoginActivity.generator.UNIQUE_ID_LIMIT))  // unique id part
 //            LoginActivity.generator.requestUniqueId();                                                                  // unique id part
@@ -432,10 +473,17 @@ public class BidanHomeActivity extends SecuredActivity implements SyncStatusBroa
         ACTION_HANDLED.removeListener(updateANMDetailsListener);
     }
 
+    //private void syncIndicator(){
+//
+//}
     private void updateSyncIndicator() {
         if (updateMenuItem != null) {
-            if (context().allSharedPreferences().fetchIsSyncInProgress()) {
+            Log.i("SYNC", SyncService.isRunningSync() + "");
+//            if (context().allSharedPreferences().fetchIsSyncInProgress()) {
+            if (SyncService.isRunningSync()) {
                 updateMenuItem.setActionView(R.layout.progress);
+                if (lastSyncMenuItem != null)
+                    lastSyncMenuItem.setTitle("Sync in progress, please don't close this apps");
             } else
                 updateMenuItem.setActionView(null);
         }
@@ -455,18 +503,22 @@ public class BidanHomeActivity extends SecuredActivity implements SyncStatusBroa
         }
     }
 
-    private void updateLastSyncTime(){
+    private void updateLastSyncTime() {
         if (lastSyncMenuItem == null) {
             return;
         }
-
+        if (SyncService.isRunningSync()) {
+            lastSyncMenuItem.setTitle("Sync in progress");
+            lastSyncMenuItem.setVisible(true);
+            return;
+        }
         long longLastSync = ECSyncUpdater.getInstance(getApplicationContext()).getLastCheckTimeStamp();
         String lastSyncDate = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date(longLastSync));
-        if (longLastSync==0) {
+        if (longLastSync == 0) {
             lastSyncMenuItem.setTitle(getString(R.string.not_synced));
             lastSyncMenuItem.setVisible(true);
         } else {
-            lastSyncMenuItem.setTitle(getString(R.string.sync_last_date)+" "+lastSyncDate);
+            lastSyncMenuItem.setTitle(getString(R.string.sync_last_date) + " " + lastSyncDate);
             lastSyncMenuItem.setVisible(true);
         }
     }
@@ -478,12 +530,16 @@ public class BidanHomeActivity extends SecuredActivity implements SyncStatusBroa
         AllConstantsINA.TimeConstants.SLEEP_TIME = 5000;
         if (updateMenuItem != null) {
             updateMenuItem.setActionView(R.layout.progress);
+            lastSyncMenuItem.setTitle("Sync in progress");
+            lastSyncMenuItem.setVisible(true);
         }
     }
 
     @Override
-    public void onSyncInProgress(FetchStatus fetchStatus) {
-
+    public void onSyncInProgress(FetchStatus fetchStatus, String... args) {
+        if (updateMenuItem != null && updateMenuItem.getActionView() == null) {
+            updateMenuItem.setActionView(R.layout.progress);
+        }
     }
 
     @Override
@@ -521,48 +577,48 @@ public class BidanHomeActivity extends SecuredActivity implements SyncStatusBroa
     public void onRequestPermissionsResult(int requestCode,
                                            String permissions[], int[] grantResults) {
 //        Log.d(TAG, "onRequestPermissionsResult: grantResults="+grantResults);
-        switch (requestCode) {
-            case PERMISSION_ALL: {
-                // If request is cancelled, the result arrays are empty.
-                if (grantResults.length > 0
-                        && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+        if (requestCode == PERMISSION_ALL) {// If request is cancelled, the result arrays are empty.
+            if (grantResults.length > 0
+                    && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
 
-                    // permission was granted, yay! Do the
-                    // location-related task you need to do.
-                    if (ContextCompat.checkSelfPermission(this,
-                            Manifest.permission.ACCESS_FINE_LOCATION)
-                            == PackageManager.PERMISSION_GRANTED) {
+                // permission was granted, yay! Do the
+                // location-related task you need to do.
+                if (ContextCompat.checkSelfPermission(this,
+                        Manifest.permission.ACCESS_FINE_LOCATION)
+                        == PackageManager.PERMISSION_GRANTED) {
 
-                        //Request location updates:
-                        BidanApplication.getInstance().getLocationHelper().getLocation(this,BidanApplication.getInstance().getLocationHelper().locationResult);
-                    }
-
-                } else {
-
-                    // permission denied, boo! Disable the
-                    // functionality that depends on this permission.
-
+                    //Request location updates:
+                    BidanApplication.getInstance().getLocationHelper().getLocation(this, BidanApplication.getInstance().getLocationHelper().locationResult);
                 }
-                return;
-            }
 
+            } else {
+
+                // permission denied, boo! Disable the
+                // functionality that depends on this permission.
+
+            }
+//            return;
+        }
+        long longLastSync = ECSyncUpdater.getInstance(getApplicationContext()).getLastCheckTimeStamp();
+        if (longLastSync == 0) {
+            buildDialog();
         }
     }
 
-    public void updateLocation(){
+    public void updateLocation() {
 //        Log.e(TAG, "updateLocation: Trying to update location");
         if (ContextCompat.checkSelfPermission(this,
                 Manifest.permission.ACCESS_FINE_LOCATION)
                 == PackageManager.PERMISSION_GRANTED) {
 
             //Request location updates:
-            BidanApplication.getInstance().getLocationHelper().getLocation(this,BidanApplication.getInstance().getLocationHelper().locationResult);
+            BidanApplication.getInstance().getLocationHelper().getLocation(this, BidanApplication.getInstance().getLocationHelper().locationResult);
         }
     }
 
     @Override
     public void onLocationChanged(Location location) {
-        String gps = String.valueOf(location.getLatitude())+" "+String.valueOf(location.getLongitude());
+        String gps = String.valueOf(location.getLatitude()) + " " + String.valueOf(location.getLongitude());
         preferences.edit().putString("gpsCoordinates", gps).apply();
 
     }

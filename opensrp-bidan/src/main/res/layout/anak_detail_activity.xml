@@ -86,19 +86,19 @@
                 android:textStyle="bold"/>
 
 
-        <org.smartregister.view.customcontrols.CustomFontTextView
-                android:id="@+id/tv_detail_today"
-                style="@style/CustomFontTextViewStyle.ListView.Medium"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_gravity="left"
-                android:layout_marginLeft="5dp"
-                android:layout_marginTop="2dp"
-                android:layout_weight="1.5"
-                android:text="Risk:"
-                android:textColor="@color/light_blue"
-                android:textSize="16sp"
-                android:textStyle="bold"/>
+        <!--        <org.smartregister.view.customcontrols.CustomFontTextView-->
+        <!--                android:id="@+id/tv_detail_today"-->
+        <!--                style="@style/CustomFontTextViewStyle.ListView.Medium"-->
+        <!--                android:layout_width="0dp"-->
+        <!--                android:layout_height="match_parent"-->
+        <!--                android:layout_gravity="left"-->
+        <!--                android:layout_marginLeft="5dp"-->
+        <!--                android:layout_marginTop="2dp"-->
+        <!--                android:layout_weight="1.5"-->
+        <!--                android:text="Risk:"-->
+        <!--                android:textColor="@color/light_blue"-->
+        <!--                android:textSize="16sp"-->
+        <!--                android:textStyle="bold"/>-->
 
 
         <org.smartregister.view.customcontrols.CustomFontTextView
@@ -112,6 +112,20 @@
                 android:layout_weight="1"
                 android:text="History"
                 android:textColor="@color/pnc_circle_yellow"
+                android:textSize="16sp"
+                android:textStyle="bold"/>
+
+        <org.smartregister.view.customcontrols.CustomFontTextView
+                android:id="@+id/tv_detail_chart"
+                style="@style/CustomFontTextViewStyle.ListView.Medium"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_gravity="left"
+                android:layout_marginLeft="5dp"
+                android:layout_marginTop="2dp"
+                android:layout_weight="1"
+                android:text="Chart"
+                android:textColor="@color/light_blue"
                 android:textSize="16sp"
                 android:textStyle="bold"/>
     </LinearLayout>
@@ -158,11 +172,18 @@
             android:src="@color/smart_register_client_divider_color"/>
 
     <include layout="@layout/anak_detail_layout" android:id="@+id/id1"/>
+
     <Spinner android:layout_width="wrap_content" android:layout_height="wrap_content" android:id="@+id/jenis_kunjungan"
              android:layout_marginLeft="10sp" android:spinnerMode="dropdown">
     </Spinner>
     <include
+            android:id="@+id/id_chart"
+            layout="@layout/child_chart_layout"
+            android:visibility="gone"/>
+    <include
             android:id="@+id/id3"
             layout="@layout/base_history_layout"
             android:visibility="gone"/>
+
+
 </LinearLayout>

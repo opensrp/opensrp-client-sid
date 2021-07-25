@@ -58,6 +58,18 @@ public class EventRepository {
         return getEventsByBaseIdAndEventType("Kunjungan ANC", baseEntityId);
     }
 
+    public static List<JSONObject> getHistoryANC(String baseEntityId, String type) {
+        return getEventsByBaseIdAndEventType(type.length() > 0 ? "Kunjungan ANC " + type : "Kunjungan ANC", baseEntityId);
+    }
+
+    public static List<JSONObject> getANCLabTestByBaseEntityId(String baseEntityId) {
+        return getHistoryANC(baseEntityId, "Lab Test");
+    }
+
+    public static List<JSONObject> getANCIntegrasiByBaseEntityId(String baseEntityId) {
+        return getHistoryANC(baseEntityId, "integrasi");
+    }
+
     public static List<JSONObject> getPNCByBaseEntityId(String baseEntityId) {
         return getEventsByBaseIdAndEventType("Kunjungan PNC", baseEntityId);
     }

@@ -3,18 +3,12 @@ package org.smartregister.bidan.activity;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
-import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.*;
 
-import com.fasterxml.jackson.core.type.TypeReference;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import org.json.JSONException;
-import org.json.JSONObject;
 import org.smartregister.Context;
 import org.smartregister.bidan.R;
-import org.smartregister.bidan.options.DetailHistory;
+import org.smartregister.bidan.options.HistoryDetailAdapter;
 import org.smartregister.bidan.repository.EventRepository;
 import org.smartregister.bidan.utils.Support;
 import org.smartregister.commonregistry.AllCommonsRepository;
@@ -22,9 +16,7 @@ import org.smartregister.commonregistry.CommonPersonObject;
 import org.smartregister.commonregistry.CommonPersonObjectClient;
 import org.smartregister.repository.DetailsRepository;
 
-import java.io.IOException;
 import java.util.*;
-import java.util.concurrent.atomic.AtomicInteger;
 
 import static android.view.View.GONE;
 import static android.view.View.VISIBLE;
@@ -69,7 +61,7 @@ public class DetailPNCActivity extends Activity {
 //        Detail.put("start", DetailStart);
         //FlurryAgent.logEvent("PNC_detail_view",Detail, true );
 
-        final ImageView kiview = (ImageView) findViewById(R.id.tv_mother_detail_profile_view);
+        final ImageView kiview = findViewById(R.id.tv_mother_detail_profile_view);
         //header
 //        TextView today = (TextView) findViewById(R.id.tv_detail_today);
 
@@ -228,88 +220,9 @@ public class DetailPNCActivity extends Activity {
         CommonPersonObject kiobject = kiRepository.findByCaseID(pncclient.entityId());
         AllCommonsRepository iburep = Context.getInstance().allCommonsRepositoryobjects("ec_kartu_ibu");
         final CommonPersonObject ibuparent = iburep.findByCaseID(kiobject.getColumnmaps().get("base_entity_id"));
-        try {
-            ObjectMapper mapper = new ObjectMapper();
-            final List<JSONObject> detailEvents = EventRepository.getPNCByBaseEntityId(kiobject.getColumnmaps().get("base_entity_id"));
-            List<DetailHistory> histories = new ArrayList<>();
-            histories.add(new DetailHistory("Silahkan Pilih Kunjungan"));
-            if (detailEvents.size() > 0) {
-                LinearLayout baseHistoryLayout = findViewById(R.id.history_detail);
-                final TableLayout table = baseHistoryLayout.findViewById(R.id.base_tbl_history_detail_layout);
-                final LayoutInflater inflater = LayoutInflater.from(this);
-                AtomicInteger integer = new AtomicInteger(1);
-                for (final JSONObject detailEvent : detailEvents) {
-
-                    Map<String, Object> formDefinition = mapper.readValue(getAssets().open("www/form/kartu_pnc_visit/form_definition.json"), new TypeReference<Map<String, Object>>() {
-                    });
-                    Map<String, Object> detailForm = mapper.readValue(getAssets().open("www/form/kartu_pnc_visit/form.json"), new TypeReference<Map<String, Object>>() {
-                    });
-                    List<Map<String, Object>> detailChildrenForm = (List<Map<String, Object>>) detailForm.get("children");
-                    Map<String, Object> labelForm = new LinkedHashMap<>();
-                    for (Map<String, Object> f : detailChildrenForm) {
-                        if (f.containsKey("label") && f.get("label") != null)
-                            labelForm.put((String) f.get("name"), ((Map<String, Object>) f.get("label")).get("Bahasa"));
-                    }
-                    Map<String, Object> form = (Map<String, Object>) formDefinition.get("form");
-                    List<Map<String, Object>> fields = (List<Map<String, Object>>) form.get("fields");
-                    List<Map<String, Object>> results = new LinkedList<>();
-                    results.add(new LinkedHashMap<String, Object>() {{
-                        put("id", "PNCDate");
-                        put("bind", "PNCDate");
-                        put("label", "Tanggal Kunjungan");
-                        put("value", detailEvent.getString("PNCDate"));
-                    }});
-
-                    for (int i = 9; i < fields.size(); i++) {
-                        Map<String, Object> field = fields.get(i);
-                        String[] binds = ((String) field.get("bind")).split("/");
-                        String bind = binds[binds.length - 1];
-                        if (labelForm.get(bind) == null)
-                            continue;
-                        Map<String, Object> result = new LinkedHashMap<>();
-                        String name = (String) field.get("name");
-                        result.put("id", name);
-
-                        result.put("bind", bind);
-                        result.put("label", labelForm.get(bind));
-                        result.put("value", "-");
-                        if (detailEvent.has(name) && detailEvent.getString(name) != null && !detailEvent.getString(name).trim().isEmpty()) {
-                            result.put("value", detailEvent.getString((String) field.get("name")));
-                            results.add(result);
-                        }
-
-                    }
-                    histories.add(new DetailHistory("Kunjungan Ke " + integer.getAndIncrement() + " (" + detailEvent.getString("PNCDate") + ")", results));
-                }
-                final ArrayAdapter<DetailHistory> data = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, histories);
-
-                spinnerHistory.setAdapter(data);
-                spinnerHistory.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-                    @Override
-                    public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                        final DetailHistory item = data.getItem(position);
-                        table.removeAllViews();
-                        for (Map<String, Object> result : item.getDetails()) {
-                            final TableRow second = (TableRow) inflater.inflate(R.layout.row_history, null);
-                            final TextView secondLabel = (TextView) second.getChildAt(0);
-                            secondLabel.setText((String) result.get("label"));
-                            final TextView secondValue = (TextView) second.getChildAt(1);
-                            secondValue.setText((String) result.get("value"));
-                            table.addView(second);
-                        }
-                    }
-
-                    @Override
-                    public void onNothingSelected(AdapterView<?> parent) {
-
-                    }
-                });
-            }
-        } catch (IOException ioException) {
-            ioException.printStackTrace();
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
+        HistoryDetailAdapter adapter = new HistoryDetailAdapter(this, EventRepository.getPNCByBaseEntityId(kiobject.getColumnmaps().get("base_entity_id")), "kartu_pnc_visit", 9, "PNCDate");
+        spinnerHistory.setAdapter(adapter);
+        spinnerHistory.setOnItemSelectedListener(adapter);
         detailsRepository.updateDetails(ibuparent);
         detailsRepository.updateDetails(kiobject);
         // Set Image

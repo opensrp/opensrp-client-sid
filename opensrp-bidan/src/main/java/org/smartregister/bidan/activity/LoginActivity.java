@@ -389,6 +389,9 @@ public class LoginActivity extends AppCompatActivity {
         userNameEditText.setRawInputType(InputType.TYPE_CLASS_TEXT);
         passwordEditText = findViewById(org.smartregister.R.id.login_passwordText);
         passwordEditText.setRawInputType(InputType.TYPE_CLASS_TEXT);
+
+        userNameEditText.setText("demo_magelang3");
+        passwordEditText.setText("Demo@123");
     }
 
     private void initializeBuildDetails() {

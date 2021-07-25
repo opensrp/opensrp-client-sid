@@ -50,8 +50,6 @@ public class ANCSmartRegisterFragment extends BaseSmartRegisterFragment {
     private static final String TAG = ANCSmartRegisterFragment.class.getName();
     //    private final ClientActionHandler clientActionHandler = new ClientActionHandler();
 //    private ANCClientsProvider kiSCP = new ANCClientsProvider(getActivity(), new ClientActionHandler(), context().alertService());
-    private String ecKiTableName = "ec_kartu_ibu";
-
     @Override
     protected SecuredNativeSmartRegisterActivity.DefaultOptionsProvider getDefaultOptionsProvider() {
         return new SecuredNativeSmartRegisterActivity.DefaultOptionsProvider() {
@@ -283,21 +281,6 @@ public class ANCSmartRegisterFragment extends BaseSmartRegisterFragment {
 
     private void updateSearchView() {
         textWatcher(AllConstantsINA.Register.ANC);
-    }
-
-    public void addChildToList(ArrayList<DialogOption> dialogOptionslist, Map<String, TreeNode<String, Location>> locationMap) {
-        for (Map.Entry<String, TreeNode<String, Location>> entry : locationMap.entrySet()) {
-
-            if (entry.getValue().getChildren() != null) {
-                addChildToList(dialogOptionslist, entry.getValue().getChildren());
-
-            } else {
-                StringUtil.humanize(entry.getValue().getLabel());
-                String name = StringUtil.humanize(entry.getValue().getLabel());
-                dialogOptionslist.add(new MotherFilterOption(name, "address1", name, ecKiTableName));
-
-            }
-        }
     }
 
     public class ClientActionHandler implements View.OnClickListener {

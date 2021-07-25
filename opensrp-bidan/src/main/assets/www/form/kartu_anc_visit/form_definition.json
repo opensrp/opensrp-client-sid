@@ -216,6 +216,14 @@
         "bind": "/model/instance/kunjungan_anc_reviewed_anc_visit/fe1_fe3"
       },
       {
+        "name": "other_supplement",
+        "bind": "/model/instance/kunjungan_anc_reviewed_anc_visit/other_supplement"
+      },
+      {
+        "name": "other_supplement_describe",
+        "bind": "/model/instance/kunjungan_anc_reviewed_anc_visit/other_supplement_describe"
+      },
+      {
         "name": "komplikasidalamKehamilan",
         "bind": "/model/instance/kunjungan_anc_reviewed_anc_visit/komplikasi_dalam_kehamilan"
       },

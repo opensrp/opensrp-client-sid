@@ -674,6 +674,76 @@
         <input name="/kunjungan_anc_reviewed_Lab_test/treatment_hbsag_txt" data-type-xml="string"
             type="text" />
     </label>
+    <fieldset class="question simple-select ">
+        <fieldset>
+            <legend>
+                <span class="question-label active"
+                      data-itext-id="/kunjungan_anc_reviewed_Lab_test/laboratorium_hiv:label"
+                      lang="Bahasa">HIV/AIDS
+                </span>
+                <span class="question-label "
+                      data-itext-id="/kunjungan_anc_reviewed_Lab_test/laboratorium_hiv:label"
+                      lang="en">HIV/AIDS
+                </span>
+                <span class="or-hint active"
+                      data-itext-id="/kunjungan_anc_reviewed_Lab_test/laboratorium_hiv:hint"
+                      lang="Bahasa">
+                    Menunjukkan apakah Ibu mengidap HIV/AIDS atau tidak
+                </span>
+                <span class="or-hint "
+                      data-itext-id="/kunjungan_anc_reviewed_Lab_test/laboratorium_hiv:hint"
+                      lang="en">
+                    Indicating whether mother suffers from HIV/AIDS
+                </span>
+            </legend>
+            <div class="option-wrapper">
+                <label class="">
+                    <input name="/kunjungan_anc_reviewed_Lab_test/laboratorium_hiv"
+                           data-name="/kunjungan_anc_reviewed_Lab_test/laboratorium_hiv"
+                           data-type-xml="select1" type="radio" value="positif" />
+                    <span class="option-label active"
+                          data-itext-id="/kunjungan_anc_reviewed_Lab_test/laboratorium_hiv/positif:label"
+                          lang="Bahasa">
+                        Positif (+)
+                    </span>
+                    <span class="option-label "
+                          data-itext-id="/kunjungan_anc_reviewed_Lab_test/laboratorium_hiv/positif:label"
+                          lang="en">
+                        Positive (+)
+                    </span>
+                </label>
+                <label class="">
+                    <input name="/kunjungan_anc_reviewed_Lab_test/laboratorium_hiv"
+                           data-name="/kunjungan_anc_reviewed_Lab_test/laboratorium_hiv"
+                           data-type-xml="select1" type="radio" value="negatif" />
+                    <span class="option-label active"
+                          data-itext-id="/kunjungan_anc_reviewed_Lab_test/laboratorium_hiv/negatif:label"
+                          lang="Bahasa">
+                        Negatif (-)
+                    </span>
+                    <span class="option-label "
+                          data-itext-id="/kunjungan_anc_reviewed_Lab_test/laboratorium_hiv/negatif:label"
+                          lang="en">
+                        Negative (-)
+                    </span>
+                </label>
+            </div>
+        </fieldset>
+    </fieldset>
+    <label class="question non-select ">
+        <span class="question-label active"
+              data-itext-id="/kunjungan_anc_reviewed_Lab_test/treatment_hiv_txt:label"
+              lang="Bahasa">Deskripsikan
+            penanganan yang diberikan
+        </span>
+        <span class="question-label "
+              data-itext-id="/kunjungan_anc_reviewed_Lab_test/treatment_hiv_txt:label" lang="en">
+            Describe the
+            treatment you give to the patient
+        </span>
+        <input name="/kunjungan_anc_reviewed_Lab_test/treatment_hiv_txt" data-type-xml="string"
+               type="text" />
+    </label>
     <fieldset style="display:none;" id="or-preload-items">
         <label class="calculation non-select ">
             <input name="/kunjungan_anc_reviewed_Lab_test/start" data-preload="timestamp"

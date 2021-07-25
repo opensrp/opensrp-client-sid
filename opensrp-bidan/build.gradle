@@ -76,12 +76,12 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
             buildConfigField "int", "DATABASE_VERSION", '1'
 //            resValue "string", 'opensrp_url', '"http://149.129.219.205:9094/opensrp"'
-            resValue "string", 'opensrp_url', '"http://sid.alcasha.com/opensrp"'
+            resValue "string", 'opensrp_url', '"http://149.129.218.51:9094/opensrp"'
 
         }
         debug {
 //            resValue "string", 'opensrp_url', '"http://149.129.219.205:9094/opensrp"'
-            resValue "string", 'opensrp_url', '"http://sid.alcasha.com/opensrp"'
+            resValue "string", 'opensrp_url', '"http://149.129.218.51:9094/opensrp"'
             buildConfigField "int", "DATABASE_VERSION", '1'
             buildConfigField "boolean", "SYNC_WAIT", 'false'
             buildConfigField "boolean", "UNIQUE_ID", 'false'

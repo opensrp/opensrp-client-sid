@@ -1278,6 +1278,60 @@
       "name": "fe1_fe3"
     },
     {
+      "name": "other_supplement",
+      "hint": {
+        "Bahasa": "Menunjukkan apakah Ibu mengidap HIV/AIDS atau tidak",
+        "English": "Indicating whether mother suffers from HIV/AIDS"
+      },
+      "label": {
+        "Bahasa": "Suplemen Lain",
+        "English": "Other Supplement"
+      },
+      "instance": {
+        "openmrs_entity_id": "184084AAAAAAAAAAAAAAAAAAAAAAAAAA",
+        "openmrs_entity": "concept"
+      },
+      "type": "select one",
+      "children": [
+        {
+          "instance": {
+            "openmrs_code": "713AAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+          },
+          "name": "Ya",
+          "label": {
+            "Bahasa": "Ya",
+            "English": "Yes"
+          }
+        },
+        {
+          "instance": {
+            "openmrs_code": "674AAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+          },
+          "name": "Tidak",
+          "label": {
+            "Bahasa": "Tidak",
+            "English": "No"
+          }
+        }
+      ]
+    },
+    {
+      "bind": {
+        "relevant": "${other_supplement}='Ya'"
+      },
+      "instance": {
+        "openmrs_entity_parent": "184084AAAAAAAAAAAAAAAAAAAAAAAAAA",
+        "openmrs_entity_id": "160632AAAAAAAAAAAAAAAAAAAAAAAAAA",
+        "openmrs_entity": "concept"
+      },
+      "type": "text",
+      "name": "other_supplement_describe",
+      "label": {
+        "Bahasa": "Sebutkan",
+        "English": "Describe it"
+      }
+    },
+    {
       "name": "komplikasi_dalam_kehamilan",
       "hint": {
         "Bahasa": "Menunjukkan komplikasi kehamilan pada Ibu",

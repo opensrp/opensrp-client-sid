@@ -4,10 +4,20 @@ import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
 
+import org.opensrp.api.domain.Location;
+import org.opensrp.api.util.TreeNode;
+import org.smartregister.bidan.options.ChildFilterOption;
+import org.smartregister.bidan.options.MotherFilterOption;
 import org.smartregister.bidan.utils.AllConstantsINA;
+import org.smartregister.cursoradapter.CursorFilterOption;
 import org.smartregister.cursoradapter.SecuredNativeSmartRegisterCursorAdapterFragment;
 import org.smartregister.provider.SmartRegisterClientsProvider;
+import org.smartregister.util.StringUtil;
 import org.smartregister.view.activity.SecuredNativeSmartRegisterActivity;
+import org.smartregister.view.dialog.DialogOption;
+
+import java.util.ArrayList;
+import java.util.Map;
 
 import static android.view.View.INVISIBLE;
 import static android.view.View.VISIBLE;
@@ -17,10 +27,11 @@ import static org.apache.commons.lang3.StringUtils.isEmpty;
  * Created by sid-tech on 11/29/17
  */
 
-public class BaseSmartRegisterFragment extends SecuredNativeSmartRegisterCursorAdapterFragment {
+public abstract class BaseSmartRegisterFragment extends SecuredNativeSmartRegisterCursorAdapterFragment {
     private static final String TAG = BaseSmartRegisterFragment.class.getName();
     private String customMainCondition;
-
+    protected final String tableName = "ec_kartu_ibu";
+    protected final String addressName = "";
     protected final TextWatcher textWatcher = new TextWatcher() {
         @Override
         public void beforeTextChanged(CharSequence charSequence, int i, int i2, int i3) {
@@ -136,6 +147,24 @@ public class BaseSmartRegisterFragment extends SecuredNativeSmartRegisterCursorA
 
     protected String kiSortByEdd() {
         return "htp IS NULL, htp";
+    }
+
+    protected CursorFilterOption defaultOptions(String name) {
+        return new MotherFilterOption(name, addressName, name, tableName);
+    }
+
+    protected void addChildToList(ArrayList<DialogOption> dialogOptionslist, Map<String, TreeNode<String, Location>> locationMap) {
+        for (Map.Entry<String, TreeNode<String, Location>> entry : locationMap.entrySet()) {
+
+            if (entry.getValue().getChildren() != null) {
+                addChildToList(dialogOptionslist, entry.getValue().getChildren());
+
+            } else {
+                StringUtil.humanize(entry.getValue().getLabel());
+                String name = StringUtil.humanize(entry.getValue().getLabel());
+                dialogOptionslist.add(defaultOptions(name));
+            }
+        }
     }
 
 }

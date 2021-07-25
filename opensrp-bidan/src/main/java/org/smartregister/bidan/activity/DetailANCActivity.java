@@ -2,28 +2,21 @@ package org.smartregister.bidan.activity;
 
 import android.app.Activity;
 import android.content.Intent;
-import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
-import android.widget.ImageView;
-import android.widget.LinearLayout;
-import android.widget.ScrollView;
-import android.widget.TextView;
+import android.widget.*;
 
 import org.apache.commons.lang3.StringUtils;
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.smartregister.Context;
 import org.smartregister.bidan.R;
+import org.smartregister.bidan.options.HistoryDetailAdapter;
 import org.smartregister.bidan.repository.EventRepository;
 import org.smartregister.bidan.utils.Support;
 import org.smartregister.commonregistry.CommonPersonObjectClient;
 import org.smartregister.repository.DetailsRepository;
-import org.smartregister.view.customcontrols.CustomFontTextView;
 
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.*;
 
 import static android.view.View.GONE;
@@ -235,6 +228,7 @@ public class DetailANCActivity extends Activity {
 //    @Bind(R.id.btn_back_to_home)
 //    private ImageButton back;
 
+    private Spinner spinnerJenisHistoryANC;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -246,7 +240,7 @@ public class DetailANCActivity extends Activity {
 
         findViewById(R.id.tv_show_more).setVisibility(GONE);
         findViewById(R.id.tv_show_more_detail).setVisibility(GONE);
-
+        spinnerJenisHistoryANC = findViewById(R.id.jenis_kunjungan);
         findViewById(R.id.btn_back_to_home).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -337,6 +331,7 @@ public class DetailANCActivity extends Activity {
         ((TextView) findViewById(R.id.txt_laboratoriumThalasemia)).setText(getStrValue("laboratoriumThalasemia"));
         ((TextView) findViewById(R.id.txt_laboratoriumSifilis)).setText(getStrValue("laboratoriumSifilis"));
         ((TextView) findViewById(R.id.txt_laboratoriumHbsAg)).setText(getStrValue("laboratoriumHbsAg"));
+        ((TextView) findViewById(R.id.txt_laboratoriumHiv)).setText(getStrValue("laboratoriumHiv"));
         // Risk detail
         ((TextView) findViewById(R.id.txt_hrl_FetusMalpresentation)).setText(getStrValue("highRiskLabourFetusMalpresentation"));
         ((TextView) findViewById(R.id.txt_hrl_FetusNumber)).setText(getStrValue("highRisklabourFetusNumber"));
@@ -456,59 +451,49 @@ public class DetailANCActivity extends Activity {
                 // mother_summary.setText("Birth Plan Summary");
             }
         });
+        final KunjunganANC[] kunjunganANCS = {
+                new KunjunganANC("ANC Visit", "ancDate", "kartu_anc_visit", 9),
+                new KunjunganANC("Lab Test", "referenceDate", "kartu_anc_visit_labTest", 1),
+                new KunjunganANC("integrasi", "referenceDate", "kartu_anc_visit_integrasi", 1),
+        };
+        final ArrayAdapter<String> jenisAdapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, new String[]{"Pilih Jenis Kunjungan", "ANC Visit", "Lab Test", "integrasi"});
+        spinnerJenisHistoryANC.setAdapter(jenisAdapter);
 
-        final List<JSONObject> ancEvents = EventRepository.getANCByBaseEntityId(ancClient.entityId());
-        final SimpleDateFormat defaultDateFormat = new SimpleDateFormat("yyyy-MM-dd");
-        Collections.sort(ancEvents, new Comparator<JSONObject>() {
+        spinnerJenisHistoryANC.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
-            public int compare(JSONObject o1, JSONObject o2) {
-                int compare = 0;
-                try {
-                    String dateString = o1.getString("ancDate");
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                final String item = jenisAdapter.getItem(position);
 
-                    String dateString2 = o2.getString("ancDate");
-                    if (dateString != null && dateString2 != null) {
-                        Date d1 = defaultDateFormat.parse(dateString);
-                        Date d2 = defaultDateFormat.parse(dateString2);
-                        compare = Long.compare(d1.getTime(), d2.getTime());
+                if (!item.equals("Pilih Jenis Kunjungan")) {
+                    KunjunganANC anc = null;
+                    for (KunjunganANC kunjunganANC : kunjunganANCS) {
+                        if (kunjunganANC.id.equals(item)) {
+                            anc = kunjunganANC;
+                            break;
+                        }
                     }
-                } catch (JSONException | ParseException e) {
-                    e.printStackTrace();
+                    if (anc != null) {
+                        String type = "";
+                        if (!anc.id.equals("ANC Visit"))
+                            type = anc.id;
+
+                        final List<JSONObject> ancEvents = EventRepository.getHistoryANC(ancClient.entityId(), type);
+                        final HistoryDetailAdapter adapter = new HistoryDetailAdapter(DetailANCActivity.this, ancEvents, anc.formType, anc.startField, anc.keyTanggalKunjungan);
+
+                        final Spinner spinnerHistory = findViewById(R.id.history_ke);
+                        spinnerHistory.setAdapter(adapter);
+                        spinnerHistory.setSelection(0);
+                        spinnerHistory.setOnItemSelectedListener(adapter);
+                    }
                 }
-                return compare;
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
             }
         });
 
-        final LinearLayout history_button = findViewById(R.id.visit_history_button);
-        int i = 1;
-        final ScrollView historyDetailView = findViewById(R.id.visit_history_detail);
-        if (ancEvents.size() > 0) {
-            historyDetailView.addView(buildDetailHistory(ancEvents.get(0)));
-        }
-
-        for (final JSONObject ancEvent : ancEvents) {
-            final CustomFontTextView btn = (CustomFontTextView) getLayoutInflater().inflate(R.layout.visit_button, null);
-            btn.setText(getResources().getString(R.string.visit_number) + i);
-            btn.setWidth(500);
-            btn.setTag(buildDetailHistory(ancEvent));
-            btn.setSelected(false);
-
-            btn.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    historyDetailView.removeAllViews();
-//                    for (int index = 0; index < history_button.getChildCount(); index++) {
-//                        CustomFontTextView v = (CustomFontTextView) history_button.getChildAt(index);
-//                        v.setTextColor(R.color.button_material_light);
-//                    }
-//                    CustomFontTextView tt = (CustomFontTextView) view;
-//                    tt.setTextColor(R.color.button_material_dark);
-                    historyDetailView.addView((View) view.getTag());
-                }
-            });
-            history_button.addView(btn);
-            i++;
-        }
 
     }
 
@@ -595,4 +580,15 @@ public class DetailANCActivity extends Activity {
         overridePendingTransition(0, 0);
     }
 
+    public static class KunjunganANC {
+        public final String id, keyTanggalKunjungan, formType;
+        public final int startField;
+
+        public KunjunganANC(String id, String keyTanggalKunjungan, String formType, int startField) {
+            this.id = id;
+            this.keyTanggalKunjungan = keyTanggalKunjungan;
+            this.formType = formType;
+            this.startField = startField;
+        }
+    }
 }

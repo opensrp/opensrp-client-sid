@@ -7,28 +7,20 @@ import org.smartregister.view.contract.SmartRegisterClient;
 /**
  * Created by Iq on 06/02/17
  */
-public class ChildFilterOption implements CursorFilterOption {
-    private final String criteria;
-    private final String fieldname;
+public class ChildFilterOption extends BaseFilterOption {
     private final String filterOptionName;
-    private final String tablename;
 
     public ChildFilterOption(String criteria, String fieldname, String filteroptionname, String tablename) {
-        this.criteria = criteria;
-        this.fieldname = fieldname;
+        super(criteria, fieldname, tablename);
         this.filterOptionName = filteroptionname;
-        this.tablename = tablename;
     }
 
     @Override
     public String filter() {
         if (StringUtils.isNotBlank(fieldname) && "location_name".equals(fieldname)) {
             return "AND " + tablename + ".base_entity_id IN (SELECT DISTINCT base_entity_id FROM ec_details WHERE key LIKE '" + fieldname + "' AND value LIKE '" + criteria + "') ";
-        } else if (StringUtils.isNotBlank(fieldname)) {
-            return "AND " + tablename + ".base_entity_id IN (SELECT DISTINCT base_entity_id FROM ec_details WHERE key LIKE '" + fieldname + "' AND value LIKE '" + criteria + "') ";
-        } else {
-            return "AND " + tablename + ".base_entity_id IN (SELECT DISTINCT base_entity_id FROM ec_details WHERE value MATCH '" + criteria + "' ) ";
-        }
+        } else
+            return super.filter();
     }
 
     @Override

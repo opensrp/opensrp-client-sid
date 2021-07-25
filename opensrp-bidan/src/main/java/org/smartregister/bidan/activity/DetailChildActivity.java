@@ -4,20 +4,29 @@ import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
+import android.util.AndroidException;
 import android.util.Log;
-import android.view.LayoutInflater;
 import android.view.View;
+import android.webkit.WebChromeClient;
+import android.webkit.WebSettings;
+import android.webkit.WebView;
+import android.webkit.WebViewClient;
 import android.widget.*;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import org.json.JSONException;
+import org.apache.commons.io.IOUtils;
+import org.apache.commons.lang3.RandomStringUtils;
+import org.jetbrains.annotations.NotNull;
 import org.json.JSONObject;
 import org.smartregister.Context;
 import org.smartregister.bidan.R;
-import org.smartregister.bidan.options.DetailHistory;
+import org.smartregister.bidan.options.HistoryDetailAdapter;
 import org.smartregister.bidan.repository.EventRepository;
 import org.smartregister.bidan.utils.CameraPreviewActivity;
+import org.smartregister.bidan.utils.ChartType;
 import org.smartregister.bidan.utils.Support;
 import org.smartregister.bidan.utils.Tools;
 import org.smartregister.commonregistry.AllCommonsRepository;
@@ -28,8 +37,8 @@ import org.smartregister.view.activity.DrishtiApplication;
 
 import java.io.File;
 import java.io.IOException;
+import java.nio.charset.Charset;
 import java.util.*;
-import java.util.concurrent.atomic.AtomicInteger;
 
 import static android.view.View.GONE;
 import static android.view.View.VISIBLE;
@@ -49,10 +58,144 @@ public class DetailChildActivity extends Activity {
 //    @Bind(R.id.childdetailprofileview)
 //    ImageView childview;
     private String userId;
+    private final ObjectMapper mapper = new ObjectMapper();
+    private WebView webview;
+    private Spinner spinnerChildType;
+    private List<ChartType> chartTypes;
+    Spinner spinnerHistory;
 
-//    public DetailChildActivity(String userId) {
+    //    public DetailChildActivity(String userId) {
 //        this.userId = userId;
 //    }
+    private void buildWebView(final ChartType type) throws IOException {
+        webview = findViewById(R.id.webview_chart);
+        final WebSettings webSettings = webview.getSettings();
+        webSettings.setJavaScriptEnabled(true);
+        webSettings.setBuiltInZoomControls(true);
+        webSettings.setSupportZoom(false);
+        webSettings.setDisplayZoomControls(false);
+        webSettings.setBuiltInZoomControls(true);
+        webSettings.setUseWideViewPort(true);
+        webview.setWebChromeClient(new WebChromeClient());
+        webview.setInitialScale(1);
+
+        // Load base html from the assets directory
+        webview.loadUrl("file:///android_asset/www/growth/index.html");
+        final List<List<Float>> data = getChartData(type);
+        webview.setWebViewClient(new WebViewClient() {
+            public void onPageFinished(WebView view, String url) {
+                renderChart(data, type);
+            }
+        });
+
+    }
+
+    private void renderChart(List<List<Float>> data, ChartType type) {
+        try {
+            int w = webview.getWidth();
+            int h = webview.getHeight();
+//            final String s = mapper.writeValueAsString(chartTypes);
+////            mapper.readValue(,)
+//            Log.i("JSON", s);
+            webview.loadUrl("javascript:init('" + mapper.writeValueAsString(data) + "','" + type.name() + "'," + w + "," + h + ")");
+        } catch (JsonProcessingException e) {
+            e.printStackTrace();
+        } catch (IOException ioException) {
+            ioException.printStackTrace();
+        }
+    }
+
+    private void renderChart(ChartType type) throws IOException {
+        renderChart(getChartData(type), type);
+    }
+
+    private List<List<Float>> getChartData(ChartType type) throws IOException {
+        List<List<Float>> o = mapper.readValue(getAssets().open("dummy_chart.json"), new TypeReference<List<List<Float>>>() {
+        });
+        float add = 4;
+        int bound = 2;
+        if (type.name().startsWith("lfa")) {
+            add = 50;
+            bound = 5;
+        } else if (type.name().startsWith("hcfa")) {
+            add = 36;
+            bound = 2;
+        }
+        Float lastFloat = add;
+        for (int i = 0; i < o.size(); i++) {
+            final List<Float> floats = o.get(i);
+            lastFloat = lastFloat + new Random().nextInt(bound);
+            floats.set(1, lastFloat);
+            o.set(i, floats);
+        }
+        return o;
+    }
+
+    final View.OnClickListener chartAction = new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            ((TextView) findViewById(R.id.tv_mother_summary)).setText("Child Growth Chart");
+            findViewById(R.id.id1).setVisibility(GONE);
+            findViewById(R.id.id_chart).setVisibility(VISIBLE);
+            findViewById(R.id.id3).setVisibility(GONE);
+            initSpinner();
+        }
+    };
+
+    private void initSpinner() {
+        if (findViewById(R.id.id_chart).getVisibility() == VISIBLE) {
+            final ArrayAdapter<ChartType> jenisChart = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, chartTypes);
+            spinnerChildType.setAdapter(jenisChart);
+            spinnerChildType.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+                @Override
+                public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                    ChartType type = (ChartType) parent.getAdapter().getItem(position);
+                    try {
+                        renderChart(type);
+                    } catch (IOException ioException) {
+                        ioException.printStackTrace();
+                    }
+                }
+
+                @Override
+                public void onNothingSelected(AdapterView<?> parent) {
+
+                }
+            });
+        } else {
+            final ArrayAdapter<String> jenisAdapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, new String[]{defaultJenisKunjungan, "Kunjungan neonatal", "Kunjungan Balita"});
+            spinnerChildType.setAdapter(jenisAdapter);
+
+            spinnerChildType.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+                @Override
+                public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                    final String item = jenisAdapter.getItem(position);
+
+                    if (!item.equals(defaultJenisKunjungan)) {
+                        String keyTanggalKunjungan = "tanggalKunjunganBayiPerbulan";
+                        int startField = 5;
+                        String formType = "kohort_bayi_kunjungan";
+                        if (item.toLowerCase().endsWith("balita")) {
+                            formType = "kohort_balita_kunjungan";
+                            startField = 6;
+                        }
+
+                        final List<JSONObject> detailEvents = EventRepository.getEventsByBaseIdAndEventType(item, userId);
+                        HistoryDetailAdapter data = new HistoryDetailAdapter(DetailChildActivity.this, detailEvents, formType, startField, keyTanggalKunjungan);
+
+                        spinnerHistory.setAdapter(data);
+                        spinnerHistory.setSelection(0);
+                        spinnerHistory.setOnItemSelectedListener(data);
+                    }
+                }
+
+                @Override
+                public void onNothingSelected(AdapterView<?> parent) {
+
+                }
+            });
+        }
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -60,118 +203,23 @@ public class DetailChildActivity extends Activity {
         setContentView(R.layout.anak_detail_activity);
 
         userId = childclient.getDetails().get("base_entity_id");
+
         final TextView show_history = findViewById(R.id.tv_detail_history);
         final TextView show_basic = findViewById(R.id.tv_child_detail_information);
-        final Spinner spinnerHistory = findViewById(R.id.history_ke);
-        Spinner spinnerChildType = findViewById(R.id.jenis_kunjungan);
-        final ArrayAdapter<String> jenisAdapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, new String[]{defaultJenisKunjungan, "Kunjungan neonatal", "Kunjungan Balita"});
-        spinnerChildType.setAdapter(jenisAdapter);
+        final TextView showChart = findViewById(R.id.tv_detail_chart);
+        spinnerHistory = findViewById(R.id.history_ke);
 
-        final ObjectMapper mapper = new ObjectMapper();
-        spinnerChildType.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                try {
-                    final String item = jenisAdapter.getItem(position);
-                    if (!item.equals(defaultJenisKunjungan)) {
-                        final List<JSONObject> detailEvents = EventRepository.getEventsByBaseIdAndEventType(item, userId);
-//                        List<DetailHistory> histories = new ArrayList<>();
-                        final ArrayAdapter<DetailHistory> data = new ArrayAdapter<>(DetailChildActivity.this, android.R.layout.simple_spinner_item);
-                        LinearLayout baseHistoryLayout = findViewById(R.id.history_detail);
-                        final TableLayout table = baseHistoryLayout.findViewById(R.id.base_tbl_history_detail_layout);
-                        final LayoutInflater inflater = LayoutInflater.from(DetailChildActivity.this);
-                        if (detailEvents.size() > 0) {
-                            data.add(new DetailHistory("Silahkan Pilih Tanggal"));
+        spinnerChildType = findViewById(R.id.jenis_kunjungan);
+        if ("female".equals(childclient.getDetails().get("gender")))
+            chartTypes = ChartType.femaleCharts();
+        else
+            chartTypes = ChartType.maleCharts();
+        try {
+            buildWebView(chartTypes.get(0));
+        } catch (IOException ioException) {
+            ioException.printStackTrace();
+        }
 
-                            String keyTanggalKunjungan = "tanggalKunjunganBayiPerbulan";
-                            int startField = 5;
-                            String formType = "kohort_bayi_kunjungan";
-                            if (item.toLowerCase().endsWith("balita")) {
-                                formType = "kohort_balita_kunjungan";
-                                startField = 6;
-                            }
-                            AtomicInteger integer = new AtomicInteger(1);
-                            for (final JSONObject detailEvent : detailEvents) {
-                                Map<String, Object> formDefinition = mapper.readValue(getAssets().open("www/form/" + formType + "/form_definition.json"), new TypeReference<Map<String, Object>>() {
-                                });
-                                Map<String, Object> detailForm = mapper.readValue(getAssets().open("www/form/" + formType + "/form.json"), new TypeReference<Map<String, Object>>() {
-                                });
-                                List<Map<String, Object>> detailChildrenForm = (List<Map<String, Object>>) detailForm.get("children");
-                                Map<String, Object> labelForm = new LinkedHashMap<>();
-                                for (Map<String, Object> f : detailChildrenForm) {
-                                    if (f.containsKey("label") && f.get("label") != null)
-                                        labelForm.put((String) f.get("name"), ((Map<String, Object>) f.get("label")).get("Bahasa"));
-                                }
-                                Map<String, Object> form = (Map<String, Object>) formDefinition.get("form");
-                                List<Map<String, Object>> fields = (List<Map<String, Object>>) form.get("fields");
-                                List<Map<String, Object>> results = new LinkedList<>();
-//                                final LinkedHashMap<String, Object> firstDetail = new LinkedHashMap<>();
-//                                firstDetail.put("id", keyTanggalKunjungan);
-//                                firstDetail.put("bind", keyTanggalKunjungan);
-//                                firstDetail.put("label", "Tanggal Kunjungan");
-//                                firstDetail.put("value", detailEvent.getString(keyTanggalKunjungan));
-//                                results.add(firstDetail);
-
-                                for (int i = startField; i < fields.size(); i++) {
-                                    Map<String, Object> field = fields.get(i);
-                                    String[] binds = ((String) field.get("bind")).split("/");
-                                    String bind = binds[binds.length - 1];
-                                    if (labelForm.get(bind) == null)
-                                        continue;
-                                    Map<String, Object> result = new LinkedHashMap<>();
-                                    String name = (String) field.get("name");
-                                    result.put("id", name);
-
-                                    result.put("bind", bind);
-                                    result.put("label", labelForm.get(bind));
-                                    result.put("value", "-");
-                                    if (detailEvent.has(name) && detailEvent.getString(name) != null && !detailEvent.getString(name).trim().isEmpty()) {
-                                        result.put("value", detailEvent.getString((String) field.get("name")));
-                                        results.add(result);
-                                    }
-
-                                }
-                                data.add(new DetailHistory("Kunjungan Ke " + integer.getAndIncrement() + " (" + detailEvent.getString(keyTanggalKunjungan) + ")", results));
-                            }
-                        } else {
-                            data.add(new DetailHistory("Tidak ada detail history " + item));
-                        }
-
-                        spinnerHistory.setAdapter(data);
-                        spinnerHistory.setSelection(0);
-                        spinnerHistory.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-                            @Override
-                            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                                final DetailHistory item = data.getItem(position);
-                                table.removeAllViews();
-                                for (Map<String, Object> result : item.getDetails()) {
-                                    final TableRow second = (TableRow) inflater.inflate(R.layout.row_history, null);
-                                    final TextView secondLabel = (TextView) second.getChildAt(0);
-                                    secondLabel.setText((String) result.get("label"));
-                                    final TextView secondValue = (TextView) second.getChildAt(1);
-                                    secondValue.setText((String) result.get("value"));
-                                    table.addView(second);
-                                }
-                            }
-
-                            @Override
-                            public void onNothingSelected(AdapterView<?> parent) {
-
-                            }
-                        });
-                    }
-                } catch (IOException ioException) {
-                    ioException.printStackTrace();
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                }
-            }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> parent) {
-
-            }
-        });
 
         final ImageView childview = (ImageView) findViewById(R.id.childdetailprofileview);
         //header
@@ -203,15 +251,7 @@ public class DetailChildActivity extends Activity {
         TextView growthChartButton = (TextView) findViewById(R.id.chart_label);
         ImageButton back = (ImageButton) findViewById(org.smartregister.R.id.btn_back_to_home);
 
-        growthChartButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                finish();
-//                DetailChildActivity.childclient = childclient;
-                startActivity(new Intent(DetailChildActivity.this, DetailChildActivity.class));
-                overridePendingTransition(0, 0);
-            }
-        });
+        growthChartButton.setOnClickListener(chartAction);
         back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -223,18 +263,26 @@ public class DetailChildActivity extends Activity {
         show_history.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                ((TextView) findViewById(R.id.tv_mother_summary)).setText("SUMMARY");
                 findViewById(R.id.id3).setVisibility(VISIBLE);
+                findViewById(R.id.id_chart).setVisibility(GONE);
                 findViewById(R.id.id1).setVisibility(GONE);
+                initSpinner();
             }
         });
 
         show_basic.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                ((TextView) findViewById(R.id.tv_mother_summary)).setText("SUMMARY");
                 findViewById(R.id.id1).setVisibility(VISIBLE);
+                findViewById(R.id.id_chart).setVisibility(GONE);
                 findViewById(R.id.id3).setVisibility(GONE);
+                initSpinner();
             }
         });
+
+        showChart.setOnClickListener(chartAction);
         DetailsRepository detailsRepository = Context.getInstance().detailsRepository();
         detailsRepository.updateDetails(childclient);
 

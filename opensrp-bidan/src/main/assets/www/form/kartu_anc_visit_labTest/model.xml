@@ -69,6 +69,11 @@
             <treatment_hbsag_txt openmrs_entity="concept"
                 openmrs_entity_id="160632AAAAAAAAAAAAAAAAAAAAAAAAAA"
                 openmrs_entity_parent="159430AAAAAAAAAAAAAAAAAAAAAAAAAA" />
+            <laboratorium_hiv openmrs_entity="concept"
+                                openmrs_entity_id="174084AAAAAAAAAAAAAAAAAAAAAAAAAA" />
+            <treatment_hiv_txt openmrs_entity="concept"
+                                 openmrs_entity_id="160632AAAAAAAAAAAAAAAAAAAAAAAAAA"
+                                 openmrs_entity_parent="174084AAAAAAAAAAAAAAAAAAAAAAAAAA" />
             <High_Risk_Pregnancy_anemia openmrs_entity="concept"
                 openmrs_entity_id="163397AAAAAAAAAAAAAAAAAAAAAAAAAA" />
             <High_Risk_Pregnancy_diabetes openmrs_entity="concept"
