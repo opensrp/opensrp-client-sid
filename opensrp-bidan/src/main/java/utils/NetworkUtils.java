@@ -21,7 +21,7 @@ public class NetworkUtils {
             return activeNetworkInfo != null && activeNetworkInfo.isConnected();
 
         } catch (Exception e) {
-            Log.e(TAG, Log.getStackTraceString(e));
+//            Log.e(TAG, Log.getStackTraceString(e));
         }
 
         return false;

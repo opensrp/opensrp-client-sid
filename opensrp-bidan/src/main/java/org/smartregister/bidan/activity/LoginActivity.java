@@ -150,7 +150,7 @@ public class LoginActivity extends AppCompatActivity {
 
     private void debugApp() {
         String uname = "demo_user3", pwd = "Demo@123";
-        Log.e(TAG, "debugApp: uname="+uname+", pwd="+pwd);
+//        Log.e(TAG, "debugApp: uname="+uname+", pwd="+pwd);
 
         LayoutInflater layoutInflater = getLayoutInflater();
         View view = layoutInflater.inflate(R.layout.login, null);
@@ -176,7 +176,7 @@ public class LoginActivity extends AppCompatActivity {
                     if (loginResponse == null) {
                         showErrorDialog("Login failed. Unknown reason. Try Again");
                     } else {
-                        Log.e(TAG, "onEvent: "+ loginResponse.message() );
+//                        Log.e(TAG, "onEvent: "+ loginResponse.message() );
                         if (loginResponse == NO_INTERNET_CONNECTIVITY) {
                             showErrorDialog(getResources().getString(R.string.no_internet_connectivity));
                         } else if (loginResponse == UNKNOWN_RESPONSE) {
@@ -210,7 +210,7 @@ public class LoginActivity extends AppCompatActivity {
         task.doActionInBackground(new BackgroundAction<LoginResponse>() {
             public LoginResponse actionToDoInBackgroundThread() {
                 String responseString = AssetHandler.readFileFromAssetsFolder("dummy_loc.json", context.applicationContext());
-                Log.e(TAG, "actionToDoInBackgroundThread: responseString="+responseString);
+//                Log.e(TAG, "actionToDoInBackgroundThread: responseString="+responseString);
                 LoginResponseData responseData = AssetHandler.jsonStringToJava(responseString, LoginResponseData.class);
                 LoginResponse result = retrieveResponse(responseData);
                 return result;
@@ -317,7 +317,7 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     public String getUserDefaultLocationId(String userInfo) {
-        Log.e(TAG, "getUserDefaultLocationId: "+ userInfo );
+//        Log.e(TAG, "getUserDefaultLocationId: "+ userInfo );
         try {
             JSONObject userLocationJSON = new JSONObject(userInfo);
             return userLocationJSON
@@ -380,7 +380,7 @@ public class LoginActivity extends AppCompatActivity {
 //        conf.locale = new Locale(BAHASA_LOCALE);
         conf.locale = new Locale(preferredLocale);
         res.updateConfiguration(conf, dm);
-        Log.e(TAG, "setLanguage: " + res.getConfiguration().locale.toString());
+//        Log.e(TAG, "setLanguage: " + res.getConfiguration().locale.toString());
 
     }
 
@@ -389,6 +389,9 @@ public class LoginActivity extends AppCompatActivity {
         userNameEditText.setRawInputType(InputType.TYPE_CLASS_TEXT);
         passwordEditText = findViewById(org.smartregister.R.id.login_passwordText);
         passwordEditText.setRawInputType(InputType.TYPE_CLASS_TEXT);
+
+        userNameEditText.setText("demo_magelang3");
+        passwordEditText.setText("Demo@123");
     }
 
     private void initializeBuildDetails() {
@@ -558,7 +561,7 @@ public class LoginActivity extends AppCompatActivity {
                     if (loginResponse == null) {
                         showErrorDialog("Login failed. Unknown reason. Try Again");
                     } else {
-                        Log.e(TAG, "onEvent: "+ loginResponse.message() );
+//                        Log.e(TAG, "onEvent: "+ loginResponse.message() );
                         if (loginResponse == NO_INTERNET_CONNECTIVITY) {
                             showErrorDialog(getResources().getString(R.string.no_internet_connectivity));
                         } else if (loginResponse == UNKNOWN_RESPONSE) {
@@ -614,7 +617,7 @@ public class LoginActivity extends AppCompatActivity {
         Iterator<TeamLocation> teamLocationIterator = userInfo.team.location.iterator();
         TeamLocation teamLocation = teamLocationIterator.next();
 
-        Log.e(TAG, "remoteLoginWith: location "+ teamLocation.uuid );
+//        Log.e(TAG, "remoteLoginWith: location "+ teamLocation.uuid );
 
         Utils.writePreference(BidanApplication.getInstance().getApplicationContext(), PREF_TEAM_LOCATIONS, teamLocation.uuid);
 

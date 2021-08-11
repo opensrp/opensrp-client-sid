@@ -273,22 +273,6 @@ public class FPSmartRegisterFragment extends BaseSmartRegisterFragment {
         textWatcher(AllConstantsINA.Register.FP);
     }
 
-    public void addChildToList(ArrayList<DialogOption> dialogOptionslist, Map<String, TreeNode<String, Location>> locationMap) {
-        for (Map.Entry<String, TreeNode<String, Location>> entry : locationMap.entrySet()) {
-
-            if (entry.getValue().getChildren() != null) {
-                addChildToList(dialogOptionslist, entry.getValue().getChildren());
-
-            } else {
-                StringUtil.humanize(entry.getValue().getLabel());
-                String name = StringUtil.humanize(entry.getValue().getLabel());
-                String tableName = "ec_kartu_ibu";
-                dialogOptionslist.add(new MotherFilterOption(name, "address1", name, tableName));
-
-            }
-        }
-    }
-
     private class ClientActionHandler implements View.OnClickListener {
 
         @Override

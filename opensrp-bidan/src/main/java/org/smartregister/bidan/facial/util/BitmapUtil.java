@@ -40,11 +40,11 @@ public class BitmapUtil {
     public void saveAndClose(Context mContext, String uid, boolean updated, FacialProcessing objFace, int arrayPossition, Bitmap mBitmap, String str_origin_class, ProfileImage tag) {
 
         if (saveToFile(mBitmap, uid)) {
-            Log.e(TAG, "saveAndClose: " + "Saved File Success! uid= " + uid);
-            if (saveToDb(updated, uid, objFace, tag)) Log.e(TAG, "saveAndClose: " + "Stored DB Success!");
+//            Log.e(TAG, "saveAndClose: " + "Saved File Success! uid= " + uid);
+//            if (saveToDb(updated, uid, objFace, tag)) Log.e(TAG, "saveAndClose: " + "Stored DB Success!");
 
         } else {
-            Log.e(TAG, "saveAndClose: "+"Failed saved file!" );
+//            Log.e(TAG, "saveAndClose: "+"Failed saved file!" );
         }
 
     }
@@ -57,7 +57,7 @@ public class BitmapUtil {
             FileOutputStream oriFos = new FileOutputStream(jpegId);
             mBitmap.compress(Bitmap.CompressFormat.PNG, 100, oriFos);
             oriFos.close();
-            Log.e(TAG, "Wrote Raw image to " + jpegId.getAbsolutePath());
+//            Log.e(TAG, "Wrote Raw image to " + jpegId.getAbsolutePath());
 
             // Thumbnail Image
             File thumbsFolder = new File(photoDirs[1]);
@@ -72,10 +72,11 @@ public class BitmapUtil {
                 Bitmap ThumbImage = ThumbnailUtils.extractThumbnail(BitmapFactory.decodeFile(jpegId.getAbsolutePath()), THUMBSIZE, THUMBSIZE);
                 if(ThumbImage.compress(Bitmap.CompressFormat.PNG, 100, thumbsFos)){
                     thumbsFos.close();
-                    Log.e(TAG, "Wrote Thumbs image to " + thumbId.getAbsolutePath());
-                } else Log.e(TAG, "saveToFile: Thumbs "+ "Failed" );
+//                    Log.e(TAG, "Wrote Thumbs image to " + thumbId.getAbsolutePath());
+                }
+//                else Log.e(TAG, "saveToFile: Thumbs "+ "Failed" );
             } else {
-                Log.e(TAG, "saveToFile: "+"Folder Thumbs failed Created!" );
+//                Log.e(TAG, "saveToFile: "+"Folder Thumbs failed Created!" );
             }
 
             return true;

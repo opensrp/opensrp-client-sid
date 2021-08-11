@@ -30,8 +30,8 @@ public class ImageRepository extends BaseRepository {
     private static final String SYNC_STATUS_COLUMN = "sync_status";
     private static final String CREATED_AT_COLUMN = "created_at";
     private static final String UPDATED_AT_COLUMN = "updated_at";
-    private static final String[] PHOTO_TABLE_COLUMNS = { ID_COLUMN, BASE_ENTITY_ID_COLUMN, FACE_VECTOR_COLUMN, SYNC_STATUS_COLUMN, CREATED_AT_COLUMN, UPDATED_AT_COLUMN};
-    private static final String PHOTO_SQL = "CREATE TABLE "+ PHOTO_TABLE_NAME +" (id INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT," +
+    private static final String[] PHOTO_TABLE_COLUMNS = {ID_COLUMN, BASE_ENTITY_ID_COLUMN, FACE_VECTOR_COLUMN, SYNC_STATUS_COLUMN, CREATED_AT_COLUMN, UPDATED_AT_COLUMN};
+    private static final String PHOTO_SQL = "CREATE TABLE " + PHOTO_TABLE_NAME + " (id INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT," +
             "base_entity_id VARCHAR NOT NULL, face_vector VARCHAR, sync_status VARCHAR, created_at DATETIME DEFAULT CURRENT_TIMESTAMP, updated_at DATETIME DEFAULT CURRENT_TIMESTAMP)";
     private static final String ENTITY_ID_INDEX =
             "CREATE INDEX " + PHOTO_TABLE_NAME + "_" + BASE_ENTITY_ID_COLUMN + "_index ON "
@@ -50,7 +50,7 @@ public class ImageRepository extends BaseRepository {
         super(repository);
     }
 
-    public static void createTable(SQLiteDatabase database){
+    public static void createTable(SQLiteDatabase database) {
         database.execSQL(PHOTO_SQL);
         database.execSQL(ENTITY_ID_INDEX);
     }
@@ -81,26 +81,26 @@ public class ImageRepository extends BaseRepository {
                 update(database, profileImage);
             }
 
-        } catch (Exception e){
-            Log.e(TAG, "add: "+ Log.getStackTraceString(e) );
+        } catch (Exception e) {
+//            Log.e(TAG, "add: "+ Log.getStackTraceString(e) );
         }
 
     }
 
     private void update(SQLiteDatabase database, ProfileImage profileImage) {
-        if (profileImage == null || profileImage.getId() == null){
+        if (profileImage == null || profileImage.getId() == null) {
             return;
         }
 
         try {
             SQLiteDatabase db;
-            db = (database == null)? getRepository().getWritableDatabase(): database;
+            db = (database == null) ? getRepository().getWritableDatabase() : database;
 
             String idSelection = BASE_ENTITY_ID_COLUMN + " = ?";
             int qr = db.update(PHOTO_TABLE_NAME, createValuesFor(profileImage), idSelection, new String[]{profileImage.getBaseEntityId()});
-            Log.e(TAG, "update: "+ qr );
-        } catch (Exception e){
-            Log.e(TAG, "update: "+ Log.getStackTraceString(e) );
+//            Log.e(TAG, "update: " + qr);
+        } catch (Exception e) {
+//            Log.e(TAG, "update: " + Log.getStackTraceString(e));
         }
     }
 
@@ -108,7 +108,8 @@ public class ImageRepository extends BaseRepository {
         ContentValues values = new ContentValues();
 
         long created_at;
-        if (profileImage.getCreatedAt() == null || profileImage.getCreatedAt() == 0) created_at = Calendar.getInstance().getTimeInMillis();
+        if (profileImage.getCreatedAt() == null || profileImage.getCreatedAt() == 0)
+            created_at = Calendar.getInstance().getTimeInMillis();
         else created_at = profileImage.getCreatedAt();
 
         values.put(ID_COLUMN, profileImage.getId());
@@ -116,11 +117,12 @@ public class ImageRepository extends BaseRepository {
         values.put(FACE_VECTOR_COLUMN, profileImage.getFaceVector());
         values.put(SYNC_STATUS_COLUMN, profileImage.getSyncStatus());
         values.put(CREATED_AT_COLUMN, created_at);
-        values.put(UPDATED_AT_COLUMN,Calendar.getInstance().getTimeInMillis());
+        values.put(UPDATED_AT_COLUMN, Calendar.getInstance().getTimeInMillis());
         return values;
     }
 
-    public void updateByEntityId(String entityId, String faceVector) {}
+    public void updateByEntityId(String entityId, String faceVector) {
+    }
 
     public List<ProfileImage> getAllVectorImages() {
         Cursor cursor = getRepository().getReadableDatabase().query(
@@ -131,14 +133,14 @@ public class ImageRepository extends BaseRepository {
 
     public List<ProfileImage> getAllFaceVectorImages() {
         Cursor cursor = getRepository().getReadableDatabase().query(
-                PHOTO_TABLE_NAME, PHOTO_TABLE_COLUMNS, FACE_VECTOR_COLUMN+"!='[]'", null, null, null, UPDATED_AT_COLUMN + COLLATE_NOCASE + " DESC", null);
+                PHOTO_TABLE_NAME, PHOTO_TABLE_COLUMNS, FACE_VECTOR_COLUMN + "!='[]'", null, null, null, UPDATED_AT_COLUMN + COLLATE_NOCASE + " DESC", null);
 
         return readAllFacials(cursor);
     }
 
     public List<ProfileImage> getAllUnsyncImages() {
         Cursor cursor = getRepository().getReadableDatabase().query(
-                PHOTO_TABLE_NAME, PHOTO_TABLE_COLUMNS, SYNC_STATUS_COLUMN+"='"+TYPE_Unsynced+"'", null, null, null, UPDATED_AT_COLUMN + COLLATE_NOCASE + " DESC", null);
+                PHOTO_TABLE_NAME, PHOTO_TABLE_COLUMNS, SYNC_STATUS_COLUMN + "='" + TYPE_Unsynced + "'", null, null, null, UPDATED_AT_COLUMN + COLLATE_NOCASE + " DESC", null);
 
         return readAllFacials(cursor);
     }
@@ -158,8 +160,8 @@ public class ImageRepository extends BaseRepository {
     private List<ProfileImage> readAllFacials(Cursor cursor) {
         List<ProfileImage> facials = new ArrayList<>();
         try {
-            if (cursor != null && cursor.getCount() > 0 && cursor.moveToFirst()){
-                while (!cursor.isAfterLast()){
+            if (cursor != null && cursor.getCount() > 0 && cursor.moveToFirst()) {
+                while (!cursor.isAfterLast()) {
                     facials.add(
                             new ProfileImage(
                                     cursor.getLong(cursor.getColumnIndex(ID_COLUMN)),
@@ -172,10 +174,10 @@ public class ImageRepository extends BaseRepository {
                     cursor.moveToNext();
                 }
             }
-        } catch (Exception e){
-            Log.e(TAG, "readAllFacials: "+ e.getMessage() );
+        } catch (Exception e) {
+//            Log.e(TAG, "readAllFacials: " + e.getMessage());
         } finally {
-            if (cursor != null){
+            if (cursor != null) {
                 cursor.close();
             }
         }
@@ -183,28 +185,28 @@ public class ImageRepository extends BaseRepository {
         return facials;
     }
 
-    public Long findLatestRecordId(){
+    public Long findLatestRecordId() {
         Cursor c = null;
         long abc = 0;
         try {
-            String sql = "SELECT max("+ID_COLUMN+") FROM "+PHOTO_TABLE_NAME;
+            String sql = "SELECT max(" + ID_COLUMN + ") FROM " + PHOTO_TABLE_NAME;
             c = getRepository().getReadableDatabase().rawQuery(sql, null);
-            if (c !=null){
+            if (c != null) {
                 c.moveToFirst();
                 abc = c.getInt(0);
             }
 
 //            abc = ((c != null && c.getCount() > 0))? c.getLong(c.getColumnIndex(ID_COLUMN)) : 0L ;
 
-        } catch (Exception e){
-            Log.e(TAG, "findLatestRecordId: "+ e.getMessage() );
+        } catch (Exception e) {
+//            Log.e(TAG, "findLatestRecordId: " + e.getMessage());
         } finally {
             if (c != null) c.close();
         }
         return abc;
     }
 
-    public ProfileImage find(Long caseId){
+    public ProfileImage find(Long caseId) {
         ProfileImage profileImage = null;
         Cursor cursor = null;
         try {
@@ -212,15 +214,15 @@ public class ImageRepository extends BaseRepository {
             List<ProfileImage> profileImages = readAllFacials(cursor);
             if (!profileImages.isEmpty()) profileImage = profileImages.get(0);
 
-        } catch (Exception e){
-            Log.e(TAG, "find: "+Log.getStackTraceString(e) );
+        } catch (Exception e) {
+//            Log.e(TAG, "find: " + Log.getStackTraceString(e));
         } finally {
             if (cursor != null) cursor.close();
         }
         return profileImage;
     }
 
-    public ProfileImage findByBaseEntityId(String baseEntityId){
+    public ProfileImage findByBaseEntityId(String baseEntityId) {
         ProfileImage profileImage = null;
         Cursor cursor = null;
         try {
@@ -228,8 +230,8 @@ public class ImageRepository extends BaseRepository {
             List<ProfileImage> profileImages = readAllFacials(cursor);
             if (!profileImages.isEmpty()) profileImage = profileImages.get(0);
 
-        } catch (Exception e){
-            Log.e(TAG, "find: "+Log.getStackTraceString(e) );
+        } catch (Exception e) {
+//            Log.e(TAG, "find: " + Log.getStackTraceString(e));
         } finally {
             if (cursor != null) cursor.close();
         }

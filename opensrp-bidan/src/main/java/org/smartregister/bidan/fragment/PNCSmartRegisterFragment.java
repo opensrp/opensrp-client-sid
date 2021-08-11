@@ -184,7 +184,7 @@ public class PNCSmartRegisterFragment extends BaseSmartRegisterFragment {
             mainCondition = "is_closed = 0 AND (keadaanIbu ='hidup' OR keadaanIbu IS NULL) AND namalengkap != '' AND namalengkap IS NOT NULL";
 
             joinTable = "";
-            countSelect = countqueryBUilder.mainCondition("ec_pnc."+mainCondition);
+            countSelect = countqueryBUilder.mainCondition("ec_pnc." + mainCondition);
             super.CountExecute();
 
             SmartRegisterQueryBuilder queryBUilder = new SmartRegisterQueryBuilder();
@@ -295,22 +295,6 @@ public class PNCSmartRegisterFragment extends BaseSmartRegisterFragment {
 
     private void updateSearchView() {
         textWatcher(AllConstantsINA.Register.PNC);
-    }
-
-    public void addChildToList(ArrayList<DialogOption> dialogOptionslist, Map<String, TreeNode<String, Location>> locationMap) {
-        for (Map.Entry<String, TreeNode<String, Location>> entry : locationMap.entrySet()) {
-
-            if (entry.getValue().getChildren() != null) {
-                addChildToList(dialogOptionslist, entry.getValue().getChildren());
-
-            } else {
-                StringUtil.humanize(entry.getValue().getLabel());
-                String name = StringUtil.humanize(entry.getValue().getLabel());
-                String tableName = "ec_kartu_ibu";
-                dialogOptionslist.add(new MotherFilterOption(name, "address1", name, tableName));
-
-            }
-        }
     }
 
     private class ClientActionHandler implements View.OnClickListener {

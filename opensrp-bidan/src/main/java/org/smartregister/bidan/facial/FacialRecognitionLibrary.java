@@ -54,9 +54,9 @@ public class FacialRecognitionLibrary {
         int res = FSDK.ActivateLibrary(ACTIVATION_KEY);
 
         if (res != FSDK.FSDKE_OK) {
-            Log.e(TAG, "onCreate: FAILED" );
+//            Log.e(TAG, "onCreate: FAILED" );
         } else {
-            Log.e(TAG, "onCreate: SUCCESS" );
+//            Log.e(TAG, "onCreate: SUCCESS" );
             FSDK.Initialize();
         }
         return false;
@@ -84,7 +84,7 @@ public class FacialRecognitionLibrary {
                 }
 
             } else {
-                Log.e(TAG, "Feature Facial Recognition is NOT supported");
+//                Log.e(TAG, "Feature Facial Recognition is NOT supported");
 //                new AlertDialog.Builder(this)
 //                        .setMessage(
 //                                "Your device does NOT support Qualcomm's Facial Recognition feature. ")
@@ -121,7 +121,8 @@ public class FacialRecognitionLibrary {
     }
 
     public Repository getRepository() {
-        if (repository == null) Log.e(TAG, "getRepository: "+ null );
+//        if (repository == null)
+//            Log.e(TAG, "getRepository: "+ null );
         return repository;
     }
 

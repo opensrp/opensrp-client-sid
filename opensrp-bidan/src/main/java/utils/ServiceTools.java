@@ -26,7 +26,6 @@ public class ServiceTools {
         if (context == null || serviceClass == null) {
             return;
         }
-
         if (!isServiceRunning(serviceClass)) {
             Intent intent = new Intent(context, serviceClass);
             BidanApplication.getInstance().startService(intent);

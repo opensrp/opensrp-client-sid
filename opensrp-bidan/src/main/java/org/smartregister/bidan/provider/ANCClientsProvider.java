@@ -137,8 +137,8 @@ public class ANCClientsProvider extends BaseClientsProvider {
         if(ancobject != null) {
             detailsRepository.updateDetails(ancobject);
 
-            Log.e(TAG, "getView: client : " + ancobject.getColumnmaps().toString());
-            Log.e(TAG, "getView: event : " + ancobject.getDetails().toString());
+//            Log.e(TAG, "getView: client : " + ancobject.getColumnmaps().toString());
+//            Log.e(TAG, "getView: event : " + ancobject.getDetails().toString());
 
             Map<String, String> details = detailsRepository.getAllDetailsForClient(pc.entityId());
             details.putAll(ancobject.getColumnmaps());
@@ -369,7 +369,7 @@ public class ANCClientsProvider extends BaseClientsProvider {
     //hasep: used for get week ages based on htp
     private String getAgeWeek(String htp){
         if(htp != null ) {
-            Log.e(TAG, "getAgeWeek: " + htp);
+//            Log.e(TAG, "getAgeWeek: " + htp);
 
             DateTimeFormatter datePattern = DateTimeFormat.forPattern("yyyy-MM-dd");
             DateTime HTP = datePattern.parseDateTime(htp);
@@ -384,7 +384,7 @@ public class ANCClientsProvider extends BaseClientsProvider {
 
     private String getNextMonth(String date){
         if(date != null && date != "-" ) {
-            Log.e(TAG, "getNextMonth: " + date);
+//            Log.e(TAG, "getNextMonth: " + date);
             DateTimeFormatter datePattern = DateTimeFormat.forPattern("yyyy-MM-dd");
             DateTime DATE = datePattern.parseDateTime(date);
             DateTime nextMonth = DATE.plusMonths(1);
@@ -404,7 +404,7 @@ public class ANCClientsProvider extends BaseClientsProvider {
         Matcher matcher = pattern.matcher(date);
 
         if(date != null && matcher.find()) {
-            Log.e(TAG, "getAlertStatus: " + date);
+//            Log.e(TAG, "getAlertStatus: " + date);
             DateTimeFormatter datePattern = DateTimeFormat.forPattern("yyyy-MM-dd");
             DateTime DATE = datePattern.parseDateTime(date);
             DateTime now = DateTime.now();

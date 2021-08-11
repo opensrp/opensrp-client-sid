@@ -337,7 +337,7 @@ public class BidanFormEntityConverter {
             try {
                 bde = Integer.parseInt(aproxbd);
             } catch (Exception e) {
-                Log.e(TAG, e.toString(), e);
+//                Log.e(TAG, e.toString(), e);
             }
             birthdateApprox = bde > 0;
         }
@@ -348,7 +348,7 @@ public class BidanFormEntityConverter {
             try {
                 dde = Integer.parseInt(aproxdd);
             } catch (Exception e) {
-                Log.e(TAG, e.toString(), e);
+//                Log.e(TAG, e.toString(), e);
             }
             deathdateApprox = dde > 0;
         }
@@ -400,7 +400,7 @@ public class BidanFormEntityConverter {
             try {
                 bde = Integer.parseInt(aproxbd);
             } catch (Exception e) {
-                Log.e(TAG, e.toString(), e);
+//                Log.e(TAG, e.toString(), e);
             }
             birthdateApprox = bde > 0;
         }
@@ -411,7 +411,7 @@ public class BidanFormEntityConverter {
             try {
                 dde = Integer.parseInt(aproxdd);
             } catch (Exception e) {
-                Log.e(TAG, e.toString(), e);
+//                Log.e(TAG, e.toString(), e);
             }
             deathdateApprox = dde > 0;
         }
@@ -452,7 +452,7 @@ public class BidanFormEntityConverter {
                 }
             }
         } catch (Exception e) {
-            Log.e(TAG, e.toString(), e);
+//            Log.e(TAG, e.toString(), e);
         }
     }
 
@@ -500,7 +500,7 @@ public class BidanFormEntityConverter {
             return map;
         } catch (JsonIOException | JsonSyntaxException | XPathExpressionException |
                 ParserConfigurationException | SAXException | IOException | ParseException e) {
-            Log.e(TAG, e.toString(), e);
+//            Log.e(TAG, e.toString(), e);
             throw new IllegalStateException(e);
         }
     }

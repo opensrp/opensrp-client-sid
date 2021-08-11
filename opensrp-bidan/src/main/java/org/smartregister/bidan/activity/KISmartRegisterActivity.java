@@ -49,7 +49,7 @@ public class KISmartRegisterActivity extends BaseRegisterActivity implements Loc
                 KISmartRegisterFragment nf = (KISmartRegisterFragment) mBaseFragment();
                 nf.setCriteria(base_id);
 
-                Log.e(TAG, "onCreate: id " + base_id);
+//                Log.e(TAG, "onCreate: id " + base_id);
 
                 showToast("id " + base_id);
                 AlertDialog.Builder builder = new AlertDialog.Builder(this);

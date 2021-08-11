@@ -611,6 +611,57 @@
       }
     },
     {
+      "name": "laboratorium_hiv",
+      "hint": {
+        "Bahasa": "Menunjukkan apakah Ibu mengidap HIV/AIDS atau tidak",
+        "English": "Indicating whether mother suffers from HIV/AIDS"
+      },
+      "label": {
+        "Bahasa": "HIV/AIDS",
+        "English": "HIV/AIDS"
+      },
+      "instance": {
+        "openmrs_entity_id": "174084AAAAAAAAAAAAAAAAAAAAAAAAAA",
+        "openmrs_entity": "concept"
+      },
+      "type": "select one",
+      "children": [
+        {
+          "instance": {
+            "openmrs_code": "703AAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+          },
+          "name": "positif",
+          "label": {
+            "Bahasa": "Positif (+)",
+            "English": "Positive (+)"
+          }
+        },
+        {
+          "instance": {
+            "openmrs_code": "664AAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+          },
+          "name": "negatif",
+          "label": {
+            "Bahasa": "Negatif (-)",
+            "English": "Negative (-)"
+          }
+        }
+      ]
+    },
+    {
+      "instance": {
+        "openmrs_entity_parent": "174084AAAAAAAAAAAAAAAAAAAAAAAAAA",
+        "openmrs_entity_id": "160632AAAAAAAAAAAAAAAAAAAAAAAAAA",
+        "openmrs_entity": "concept"
+      },
+      "type": "text",
+      "name": "treatment_hiv_txt",
+      "label": {
+        "Bahasa": "Deskripsikan penanganan yang diberikan",
+        "English": "Describe the treatment you give to the patient"
+      }
+    },
+    {
       "bind": {
         "calculate": "if(${laboratorium_gula_darah} = '>_140_mg_dl', 'yes', 'no')"
       },

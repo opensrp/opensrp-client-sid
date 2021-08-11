@@ -107,6 +107,14 @@
         "bind": "/model/instance/kunjungan_anc_reviewed_Lab_test/treatment_hbsag_txt"
       },
       {
+        "name": "laboratoriumHiv",
+        "bind": "/model/instance/kunjungan_anc_reviewed_Lab_test/laboratorium_hiv"
+      },
+      {
+        "name": "treatmentHivTxt",
+        "bind": "/model/instance/kunjungan_anc_reviewed_Lab_test/treatment_hiv_txt"
+      },
+      {
         "name": "highRiskPregnancyAnemia",
         "bind": "/model/instance/kunjungan_anc_reviewed_Lab_test/High_Risk_Pregnancy_anemia",
         "source": "ibu.kartu_ibu.anemiaRisk"

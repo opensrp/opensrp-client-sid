@@ -31,34 +31,34 @@ public class LocationHelper {
     Context context;
     GetLastLocationTask getLastLocationTask;
 
-    public LocationResult locationResult = new LocationResult(){
+    public LocationResult locationResult = new LocationResult() {
         @Override
-        public void gotLocation(Location location){
+        public void gotLocation(Location location) {
             saveLocation(location);
         }
     };
 
-    boolean gps_enabled=false;
-    boolean network_enabled=false;
+    boolean gps_enabled = false;
+    boolean network_enabled = false;
     CommonRepository commonRepository;
 
-    public LocationHelper(Context context){
+    public LocationHelper(Context context) {
         this.context = context;
         init();
     }
 
-    public void init(){
+    public void init() {
         Configuration.getInstance().load(context, PreferenceManager.getDefaultSharedPreferences(context));
         preferences = getDefaultSharedPreferences(context);
 
         locationManager = (LocationManager) context.getSystemService(android.content.Context.LOCATION_SERVICE);
 
         provider = locationManager.getBestProvider(new Criteria(), false);
-        if ( provider == null ) {
+        if (provider == null) {
             provider = LocationManager.GPS_PROVIDER;
         }
         getLastLocationTask = new GetLastLocationTask();
-        getLocation(context,locationResult);
+        getLocation(context, locationResult);
     }
 
     public static String implode(String separator, String... data) {
@@ -74,40 +74,45 @@ public class LocationHelper {
         return sb.toString();
     }
 
-    public Location getSavedLocation(){
+    public Location getSavedLocation() {
         String gps = preferences.getString("gpsCoordinates", "").trim();
-        if("".equals(gps)){
+        if ("".equals(gps)) {
             return null;
         }
-        String [] latlon = gps.split(" ");
+        String[] latlon = gps.split(" ");
         Location location = new Location("");
         location.setLatitude(Double.valueOf(latlon[0]));
         location.setLongitude(Double.valueOf(latlon[1]));
         return location;
     }
 
-    public void saveLocation(Location location){
-        String gps = String.valueOf(location.getLatitude())+" "+String.valueOf(location.getLongitude());
+    public void saveLocation(Location location) {
+        String gps = String.valueOf(location.getLatitude()) + " " + String.valueOf(location.getLongitude());
         preferences.edit().putString("gpsCoordinates", gps).apply();
-        Log.d(TAG, "saveLocation: location saved : "+gps);
+        Log.d(TAG, "saveLocation: location saved : " + gps);
     }
 
-    public boolean getLocation(Context context, LocationResult result)
-    {
+    public boolean getLocation(Context context, LocationResult result) {
         //I use LocationResult callback class to pass location value from MyLocation to user code.
-        locationResult=result;
-        if(locationManager==null)
+        locationResult = result;
+        if (locationManager == null)
             locationManager = (LocationManager) context.getSystemService(Context.LOCATION_SERVICE);
 
         //exceptions will be thrown if provider is not permitted.
-        try{gps_enabled=locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER);}catch(Exception ex){}
-        try{network_enabled=locationManager.isProviderEnabled(LocationManager.NETWORK_PROVIDER);}catch(Exception ex){}
+        try {
+            gps_enabled = locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER);
+        } catch (Exception ex) {
+        }
+        try {
+            network_enabled = locationManager.isProviderEnabled(LocationManager.NETWORK_PROVIDER);
+        } catch (Exception ex) {
+        }
 
         //don't start listeners if no provider is enabled
-        if(!gps_enabled && !network_enabled)
+        if (!gps_enabled && !network_enabled)
             return false;
 
-        if(gps_enabled){
+        if (gps_enabled) {
             if (ContextCompat.checkSelfPermission(context,
                     Manifest.permission.ACCESS_FINE_LOCATION)
                     == PackageManager.PERMISSION_GRANTED) {
@@ -115,7 +120,7 @@ public class LocationHelper {
             }
         }
 
-        if(network_enabled){
+        if (network_enabled) {
             if (ContextCompat.checkSelfPermission(context,
                     Manifest.permission.ACCESS_FINE_LOCATION)
                     == PackageManager.PERMISSION_GRANTED) {
@@ -123,7 +128,7 @@ public class LocationHelper {
             }
         }
 
-        timer1=new Timer();
+        timer1 = new Timer();
         timer1.schedule(new LocationHelper.GetLastLocation(), 20000);
         return true;
     }
@@ -131,7 +136,7 @@ public class LocationHelper {
     class GetLastLocation extends TimerTask {
         @Override
         public void run() {
-            if(getLastLocationTask.getStatus() == AsyncTask.Status.FINISHED){
+            if (getLastLocationTask.getStatus() == AsyncTask.Status.FINISHED) {
                 getLastLocationTask.execute();
             }
 
@@ -145,9 +150,15 @@ public class LocationHelper {
             locationManager.removeUpdates(this);
             locationManager.removeUpdates(locationListenerNetwork);
         }
-        public void onProviderDisabled(String provider) {}
-        public void onProviderEnabled(String provider) {}
-        public void onStatusChanged(String provider, int status, Bundle extras) {}
+
+        public void onProviderDisabled(String provider) {
+        }
+
+        public void onProviderEnabled(String provider) {
+        }
+
+        public void onStatusChanged(String provider, int status, Bundle extras) {
+        }
     };
 
     LocationListener locationListenerNetwork = new LocationListener() {
@@ -157,12 +168,18 @@ public class LocationHelper {
             locationManager.removeUpdates(this);
             locationManager.removeUpdates(locationListenerGps);
         }
-        public void onProviderDisabled(String provider) {}
-        public void onProviderEnabled(String provider) {}
-        public void onStatusChanged(String provider, int status, Bundle extras) {}
+
+        public void onProviderDisabled(String provider) {
+        }
+
+        public void onProviderEnabled(String provider) {
+        }
+
+        public void onStatusChanged(String provider, int status, Bundle extras) {
+        }
     };
 
-    public static abstract class LocationResult{
+    public static abstract class LocationResult {
         public abstract void gotLocation(Location location);
     }
 
@@ -174,40 +191,40 @@ public class LocationHelper {
             locationManager.removeUpdates(locationListenerGps);
             locationManager.removeUpdates(locationListenerNetwork);
 
-            Location net_loc=null, gps_loc=null;
-            if(gps_enabled){
+            Location net_loc = null, gps_loc = null;
+            if (gps_enabled) {
                 if (ContextCompat.checkSelfPermission(context,
                         Manifest.permission.ACCESS_FINE_LOCATION)
                         == PackageManager.PERMISSION_GRANTED) {
                     Log.d(TAG, "onCreate: location permission granted, getting location");
-                    gps_loc=locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER);
+                    gps_loc = locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER);
                 }
             }
 
-            if(network_enabled){
+            if (network_enabled) {
                 if (ContextCompat.checkSelfPermission(context,
                         Manifest.permission.ACCESS_FINE_LOCATION)
                         == PackageManager.PERMISSION_GRANTED) {
                     Log.d(TAG, "onCreate: location permission granted, getting location");
-                    net_loc=locationManager.getLastKnownLocation(LocationManager.NETWORK_PROVIDER);
+                    net_loc = locationManager.getLastKnownLocation(LocationManager.NETWORK_PROVIDER);
                 }
             }
 
 
             //if there are both values use the latest one
-            if(gps_loc!=null && net_loc!=null){
-                if(gps_loc.getTime()>net_loc.getTime())
+            if (gps_loc != null && net_loc != null) {
+                if (gps_loc.getTime() > net_loc.getTime())
                     locationResult.gotLocation(gps_loc);
                 else
                     locationResult.gotLocation(net_loc);
                 return null;
             }
 
-            if(gps_loc!=null){
+            if (gps_loc != null) {
                 locationResult.gotLocation(gps_loc);
                 return null;
             }
-            if(net_loc!=null){
+            if (net_loc != null) {
                 locationResult.gotLocation(net_loc);
                 return null;
             }

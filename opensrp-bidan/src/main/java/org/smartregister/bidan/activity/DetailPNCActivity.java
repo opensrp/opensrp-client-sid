@@ -3,24 +3,26 @@ package org.smartregister.bidan.activity;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
-import android.widget.ImageButton;
-import android.widget.ImageView;
-import android.widget.TextView;
+import android.widget.*;
 
 import org.smartregister.Context;
 import org.smartregister.bidan.R;
+import org.smartregister.bidan.options.HistoryDetailAdapter;
+import org.smartregister.bidan.repository.EventRepository;
 import org.smartregister.bidan.utils.Support;
 import org.smartregister.commonregistry.AllCommonsRepository;
 import org.smartregister.commonregistry.CommonPersonObject;
 import org.smartregister.commonregistry.CommonPersonObjectClient;
 import org.smartregister.repository.DetailsRepository;
 
+import java.util.*;
+
 import static android.view.View.GONE;
 import static android.view.View.VISIBLE;
 import static org.smartregister.util.StringUtil.humanize;
 import static org.smartregister.util.StringUtil.humanizeAndDoUPPERCASE;
+
 /**
  * Created by sid-tech on 11/30/17
  */
@@ -29,7 +31,7 @@ public class DetailPNCActivity extends Activity {
 
     //image retrieving
     private static final String TAG = DetailPNCActivity.class.getName();
-//    private static final String IMAGE_CACHE_DIR = "thumbs";
+    //    private static final String IMAGE_CACHE_DIR = "thumbs";
     public static CommonPersonObjectClient pncclient;
     //  private static KmsCalc  kmsCalc;
 //    private static int mImageThumbSize;
@@ -59,7 +61,7 @@ public class DetailPNCActivity extends Activity {
 //        Detail.put("start", DetailStart);
         //FlurryAgent.logEvent("PNC_detail_view",Detail, true );
 
-        final ImageView kiview = (ImageView) findViewById(R.id.tv_mother_detail_profile_view);
+        final ImageView kiview = findViewById(R.id.tv_mother_detail_profile_view);
         //header
 //        TextView today = (TextView) findViewById(R.id.tv_detail_today);
 
@@ -118,8 +120,10 @@ public class DetailPNCActivity extends Activity {
 //        TextView txt_daruratNifas = (TextView) findViewById(R.id.txt_daruratNifas);
 //        TextView txt_penangananNifas = (TextView) findViewById(R.id.txt_penangananNifas);
 
-        final TextView show_risk = (TextView) findViewById(R.id.tv_show_more);
-        final TextView show_detail = (TextView) findViewById(R.id.tv_show_more_detail);
+        final TextView show_risk = findViewById(R.id.tv_show_more);
+        final TextView show_detail = findViewById(R.id.tv_show_more_detail);
+        final TextView show_history = findViewById(R.id.tv_detail_history);
+        final TextView show_basic = findViewById(R.id.tv_child_detail_information);
 
         //detail RISK
 //        TextView highRiskSTIBBVs = (TextView) findViewById(R.id.txt_highRiskSTIBBVs);
@@ -152,17 +156,22 @@ public class DetailPNCActivity extends Activity {
 //        TextView highRiskPostPartumDistosia = (TextView) findViewById(R.id.txt_hrpp_Distosia);
 //        TextView txt_highRiskHIVAIDS = (TextView) findViewById(R.id.txt_highRiskHIVAIDS);
 
+
         DetailsRepository detailsRepository = Context.getInstance().detailsRepository();
         detailsRepository.updateDetails(pncclient);
         AllCommonsRepository childrep = Context.getInstance().allCommonsRepositoryobjects("ec_anak");
-        final CommonPersonObject child = childrep.findByCaseID(pncclient.getDetails().get("childId"));
-        detailsRepository.updateDetails(child);
+        Map<String, String> childDetails = new LinkedHashMap<>();
+        if (pncclient.getDetails().get("childId") != null) {
+            CommonPersonObject child = childrep.findByCaseID(pncclient.getDetails().get("childId"));
+            detailsRepository.updateDetails(child);
+            if (child.getDetails() != null && child.getDetails().size() > 0)
+                childDetails = child.getDetails();
+        }
 
-
-
+        Spinner spinnerHistory = findViewById(R.id.history_ke);
         ((TextView) findViewById(R.id.txt_keadaanIbu)).setText(String.format(": %s", humanize(pncclient.getDetails().get("keadaanIbu") != null ? pncclient.getDetails().get("keadaanIbu") : "-")));
         ((TextView) findViewById(R.id.txt_keadaanBayi)).setText(String.format(": %s", humanize(pncclient.getDetails().get("keadaanBayi") != null ? pncclient.getDetails().get("keadaanBayi") : "-")));
-        ((TextView) findViewById(R.id.txt_beratLahir)).setText(String.format(": %s", humanize(child.getDetails().get("beratLahir") != null ? child.getDetails().get("beratLahir") : "-")));
+        ((TextView) findViewById(R.id.txt_beratLahir)).setText(String.format(": %s", humanize(childDetails.get("beratLahir") != null ? childDetails.get("beratLahir") : "-")));
         ((TextView) findViewById(R.id.txt_persalinan)).setText(String.format(": %s", humanize(pncclient.getDetails().get("persalinan") != null ? pncclient.getDetails().get("persalinan") : "-")));
         ((TextView) findViewById(R.id.txt_jamKalaIAktif)).setText(String.format(": %s", humanize(pncclient.getDetails().get("jamKalaIAktif") != null ? pncclient.getDetails().get("jamKalaIAktif") : "-")));
         ((TextView) findViewById(R.id.txt_jamKalaII)).setText(String.format(": %s", humanize(pncclient.getDetails().get("jamKalaII") != null ? pncclient.getDetails().get("jamKalaII") : "-")));
@@ -172,9 +181,9 @@ public class DetailPNCActivity extends Activity {
         ((TextView) findViewById(R.id.txt_tempatBersalin)).setText(String.format(": %s", humanize(pncclient.getDetails().get("tempatBersalin") != null ? pncclient.getDetails().get("tempatBersalin") : "-")));
         ((TextView) findViewById(R.id.txt_penolong)).setText(String.format(": %s", humanize(pncclient.getDetails().get("penolong") != null ? pncclient.getDetails().get("penolong") : "-")));
         ((TextView) findViewById(R.id.txt_caraPersalinanIbu)).setText(String.format(": %s", humanize(pncclient.getDetails().get("caraPersalinanIbu") != null ? pncclient.getDetails().get("caraPersalinanIbu") : "-")));
-        ((TextView) findViewById(R.id.txt_namaBayi)).setText(String.format(": %s", humanize(child.getDetails().get("namaBayi") != null ? child.getDetails().get("namaBayi") : "-")));
-        ((TextView) findViewById(R.id.txt_jenisKelamin)).setText(String.format(": %s", humanize(child.getDetails().get("gender") != null ? child.getDetails().get("gender") : "-")));
-        ((TextView) findViewById(R.id.txt_tanggalLahirAnak)).setText(String.format(": %s", humanize(child.getDetails().get("tanggalLahirAnak") != null ? child.getDetails().get("tanggalLahirAnak").substring(0, child.getDetails().get("tanggalLahirAnak").indexOf("T")) : "-")));
+        ((TextView) findViewById(R.id.txt_namaBayi)).setText(String.format(": %s", humanize(childDetails.get("namaBayi") != null ? childDetails.get("namaBayi") : "-")));
+        ((TextView) findViewById(R.id.txt_jenisKelamin)).setText(String.format(": %s", humanize(childDetails.get("gender") != null ? childDetails.get("gender") : "-")));
+        ((TextView) findViewById(R.id.txt_tanggalLahirAnak)).setText(String.format(": %s", humanize(childDetails.get("tanggalLahirAnak") != null ? childDetails.get("tanggalLahirAnak").substring(0, childDetails.get("tanggalLahirAnak").indexOf("T")) : "-")));
 
         ((TextView) findViewById(R.id.txt_tandaVitalSuhu)).setText(String.format(": %s", humanize(pncclient.getDetails().get("tandaVitalSuhu") != null ? pncclient.getDetails().get("tandaVitalSuhu") : "-")));
         ((TextView) findViewById(R.id.txt_pelayananfe)).setText(String.format(": %s", humanize(pncclient.getDetails().get("pelayananfe") != null ? pncclient.getDetails().get("pelayananfe") : "-")));
@@ -183,6 +192,7 @@ public class DetailPNCActivity extends Activity {
         ((TextView) findViewById(R.id.txt_komplikasi)).setText(String.format(": %s", humanize(pncclient.getDetails().get("komplikasi") != null ? pncclient.getDetails().get("komplikasi") : "-")));
         ((TextView) findViewById(R.id.txt_daruratNifas)).setText(String.format(": %s", humanize(pncclient.getDetails().get("daruratNifas") != null ? pncclient.getDetails().get("daruratNifas") : "-")));
         ((TextView) findViewById(R.id.txt_penangananNifas)).setText(String.format(": %s", humanize(pncclient.getDetails().get("penangananNifas") != null ? pncclient.getDetails().get("penangananNifas") : "-")));
+        ((TextView) findViewById(R.id.txt_tanggalKunjunganPNC)).setText(String.format(": %s", humanize(pncclient.getDetails().get("tanggalkunjungan") != null ? pncclient.getDetails().get("tanggalkunjungan") : "-")));
 
         // High Risk detail
         // 1. LABOUR
@@ -210,7 +220,9 @@ public class DetailPNCActivity extends Activity {
         CommonPersonObject kiobject = kiRepository.findByCaseID(pncclient.entityId());
         AllCommonsRepository iburep = Context.getInstance().allCommonsRepositoryobjects("ec_kartu_ibu");
         final CommonPersonObject ibuparent = iburep.findByCaseID(kiobject.getColumnmaps().get("base_entity_id"));
-
+        HistoryDetailAdapter adapter = new HistoryDetailAdapter(this, EventRepository.getPNCByBaseEntityId(kiobject.getColumnmaps().get("base_entity_id")), "kartu_pnc_visit", 9, "PNCDate");
+        spinnerHistory.setAdapter(adapter);
+        spinnerHistory.setOnItemSelectedListener(adapter);
         detailsRepository.updateDetails(ibuparent);
         detailsRepository.updateDetails(kiobject);
         // Set Image
@@ -228,10 +240,10 @@ public class DetailPNCActivity extends Activity {
         txt_tandaVitalTDSistolik.setText(String.format(": %s", humanize(ibuparent.getDetails().get("tandaVitalTDSistolik") != null ? ibuparent.getDetails().get("tandaVitalTDSistolik") : "-")));
         txt_tandaVitalTDDiastolik.setText(String.format(": %s", humanize(ibuparent.getDetails().get("tandaVitalTDDiastolik") != null ? ibuparent.getDetails().get("tandaVitalTDDiastolik") : "-")));
 
-        ((TextView)findViewById(R.id.tv_wife_name)).setText(String.format("%s%s", getResources().getString(R.string.name), humanize(ibuparent.getColumnmaps().get("namalengkap") != null ? ibuparent.getColumnmaps().get("namalengkap") : "-")));
-        ((TextView)findViewById(R.id.tv_nik)).setText(String.format("%s%s", getResources().getString(R.string.nik), humanize(ibuparent.getDetails().get("nik") != null ? ibuparent.getDetails().get("nik") : "-")));
-        ((TextView)findViewById(R.id.tv_husband_name)).setText(String.format("%s%s", getResources().getString(R.string.husband_name), humanize(ibuparent.getColumnmaps().get("namaSuami") != null ? ibuparent.getColumnmaps().get("namaSuami") : "-")));
-        ((TextView)findViewById(R.id.tv_contact_phone_number)).setText(String.format("No HP: %s", ibuparent.getDetails().get("NomorTelponHp") != null ? ibuparent.getDetails().get("NomorTelponHp") : "-"));
+        ((TextView) findViewById(R.id.tv_wife_name)).setText(String.format("%s%s", getResources().getString(R.string.name), humanize(ibuparent.getColumnmaps().get("namalengkap") != null ? ibuparent.getColumnmaps().get("namalengkap") : "-")));
+        ((TextView) findViewById(R.id.tv_nik)).setText(String.format("%s%s", getResources().getString(R.string.nik), humanize(ibuparent.getDetails().get("nik") != null ? ibuparent.getDetails().get("nik") : "-")));
+        ((TextView) findViewById(R.id.tv_husband_name)).setText(String.format("%s%s", getResources().getString(R.string.husband_name), humanize(ibuparent.getColumnmaps().get("namaSuami") != null ? ibuparent.getColumnmaps().get("namaSuami") : "-")));
+        ((TextView) findViewById(R.id.tv_contact_phone_number)).setText(String.format("No HP: %s", ibuparent.getDetails().get("NomorTelponHp") != null ? ibuparent.getDetails().get("NomorTelponHp") : "-"));
 
         String tgl = ibuparent.getDetails().get("tanggalLahir") != null ? ibuparent.getDetails().get("tanggalLahir") : "-";
 //        String tgl_lahir = tgl.substring(0, tgl.indexOf("T"));
@@ -239,22 +251,22 @@ public class DetailPNCActivity extends Activity {
         if (tgl != null && !tgl.isEmpty()) {
             tgl_lahir = tgl.substring(0, tgl.indexOf("T"));
         }
-        ((TextView)findViewById(R.id.tv_dob)).setText(String.format("%s%s", getResources().getString(R.string.dob), tgl_lahir));
+        ((TextView) findViewById(R.id.tv_dob)).setText(String.format("%s%s", getResources().getString(R.string.dob), tgl_lahir));
 
         // Risks
         if (ibuparent.getDetails().get("highRiskPregnancyYoungMaternalAge") != null) {
-            ((TextView)findViewById(R.id.tv_risk1)).setText(String.format("%s%s", getResources().getString(R.string.highRiskPregnancyYoungMaternalAge), humanize(kiobject.getDetails().get("highRiskPregnancyYoungMaternalAge"))));
+            ((TextView) findViewById(R.id.tv_risk1)).setText(String.format("%s%s", getResources().getString(R.string.highRiskPregnancyYoungMaternalAge), humanize(kiobject.getDetails().get("highRiskPregnancyYoungMaternalAge"))));
         }
         if (ibuparent.getDetails().get("highRiskPregnancyOldMaternalAge") != null) {
-            ((TextView)findViewById(R.id.tv_risk1)).setText(String.format("%s%s", getResources().getString(R.string.highRiskPregnancyOldMaternalAge), humanize(kiobject.getDetails().get("highRiskPregnancyYoungMaternalAge"))));
+            ((TextView) findViewById(R.id.tv_risk1)).setText(String.format("%s%s", getResources().getString(R.string.highRiskPregnancyOldMaternalAge), humanize(kiobject.getDetails().get("highRiskPregnancyYoungMaternalAge"))));
         }
         if (ibuparent.getDetails().get("highRiskPregnancyProteinEnergyMalnutrition") != null
                 || ibuparent.getDetails().get("HighRiskPregnancyAbortus") != null
                 || ibuparent.getDetails().get("HighRiskLabourSectionCesareaRecord") != null
-                ) {
-            ((TextView)findViewById(R.id.tv_risk2)).setText(String.format("%s%s", getResources().getString(R.string.highRiskPregnancyProteinEnergyMalnutrition), humanize(ibuparent.getDetails().get("highRiskPregnancyProteinEnergyMalnutrition"))));
-            ((TextView)findViewById(R.id.tv_risk3)).setText(String.format("%s%s", getResources().getString(R.string.HighRiskPregnancyAbortus), humanize(ibuparent.getDetails().get("HighRiskPregnancyAbortus"))));
-            ((TextView)findViewById(R.id.tv_risk4)).setText(String.format("%s%s", getResources().getString(R.string.HighRiskLabourSectionCesareaRecord), humanize(ibuparent.getDetails().get("HighRiskLabourSectionCesareaRecord"))));
+        ) {
+            ((TextView) findViewById(R.id.tv_risk2)).setText(String.format("%s%s", getResources().getString(R.string.highRiskPregnancyProteinEnergyMalnutrition), humanize(ibuparent.getDetails().get("highRiskPregnancyProteinEnergyMalnutrition"))));
+            ((TextView) findViewById(R.id.tv_risk3)).setText(String.format("%s%s", getResources().getString(R.string.HighRiskPregnancyAbortus), humanize(ibuparent.getDetails().get("HighRiskPregnancyAbortus"))));
+            ((TextView) findViewById(R.id.tv_risk4)).setText(String.format("%s%s", getResources().getString(R.string.HighRiskLabourSectionCesareaRecord), humanize(ibuparent.getDetails().get("HighRiskLabourSectionCesareaRecord"))));
 
         }
         ((TextView) findViewById(R.id.txt_highRiskLabourTBRisk)).setText(humanize(ibuparent.getDetails().get("highRiskLabourTBRisk") != null ? ibuparent.getDetails().get("highRiskLabourTBRisk") : "-"));
@@ -297,6 +309,24 @@ public class DetailPNCActivity extends Activity {
             }
         });
 
+        show_history.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                findViewById(R.id.id3).setVisibility(VISIBLE);
+                findViewById(R.id.id2).setVisibility(GONE);
+                findViewById(R.id.id1).setVisibility(GONE);
+            }
+        });
+
+        show_basic.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                findViewById(R.id.id1).setVisibility(VISIBLE);
+                findViewById(R.id.id2).setVisibility(GONE);
+                findViewById(R.id.id3).setVisibility(GONE);
+            }
+        });
+
         txt_tandaVitalTDSistolik.setOnClickListener(bpmListener);
         txt_tandaVitalTDDiastolik.setOnClickListener(bpmListener);
 
@@ -311,7 +341,7 @@ public class DetailPNCActivity extends Activity {
 //                Map<String, String> Detail = new HashMap<>();
 //                Detail.put("end", DetailEnd);
                 //FlurryAgent.logEvent("PNC_detail_view", Detail, true);
-                Log.i(TAG, "onClick: Back Pressed");
+//                Log.i(TAG, "onClick: Back Pressed");
             }
         });
 

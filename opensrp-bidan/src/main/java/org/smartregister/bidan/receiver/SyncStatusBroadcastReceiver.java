@@ -19,6 +19,7 @@ public class SyncStatusBroadcastReceiver extends BroadcastReceiver {
     public static final String ACTION_SYNC_STATUS = "sync_status";
     public static final String EXTRA_FETCH_STATUS = "fetch_status";
     public static final String EXTRA_COMPLETE_STATUS = "complete_status";
+    public static final String EXTRA_ARGS = "extra_args";
 
     private final BidanHomeActivity syncStatusListeners;
 
@@ -31,6 +32,8 @@ public class SyncStatusBroadcastReceiver extends BroadcastReceiver {
         Bundle data = intent.getExtras();
         if (data != null) {
             Serializable fetchStatusSerializable = data.getSerializable(EXTRA_FETCH_STATUS);
+            final String[] stringArray = data.getStringArray(EXTRA_ARGS);
+
             if (fetchStatusSerializable != null && fetchStatusSerializable instanceof FetchStatus) {
                 FetchStatus fetchStatus = (FetchStatus) fetchStatusSerializable;
                 if (fetchStatus.equals(FetchStatus.fetchStarted)) {
@@ -41,6 +44,10 @@ public class SyncStatusBroadcastReceiver extends BroadcastReceiver {
                         complete(fetchStatus);
                         //  startExtendedSyncAndAlarms(context);
                     } else {
+                        if (stringArray != null) {
+
+                            inProgress(fetchStatus, stringArray);
+                        }
                         inProgress(fetchStatus);
                     }
                 }
@@ -52,8 +59,8 @@ public class SyncStatusBroadcastReceiver extends BroadcastReceiver {
         syncStatusListeners.onSyncStart();
     }
 
-    private void inProgress(FetchStatus fetchStatus) {
-        syncStatusListeners.onSyncInProgress(fetchStatus);
+    private void inProgress(FetchStatus fetchStatus, String... args) {
+        syncStatusListeners.onSyncInProgress(fetchStatus, args);
     }
 
     private void complete(FetchStatus fetchStatus) {
@@ -76,7 +83,7 @@ public class SyncStatusBroadcastReceiver extends BroadcastReceiver {
     public interface SyncStatusListener {
         void onSyncStart();
 
-        void onSyncInProgress(FetchStatus fetchStatus);
+        void onSyncInProgress(FetchStatus fetchStatus, String... args);
 
         void onSyncComplete(FetchStatus fetchStatus);
     }

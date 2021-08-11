@@ -248,9 +248,9 @@ public class BidanApplication extends DrishtiApplication {
     }
 
     public void refreshFaceData(){
-        Log.e(TAG, "imageRepository: Tools.setVectorsBuffered");
+//        Log.e(TAG, "imageRepository: Tools.setVectorsBuffered");
         Tools.setVectorsBuffered(context, imageRepository);
-        Log.e(TAG, "imageRepository: Tools.loadAlbum");
+//        Log.e(TAG, "imageRepository: Tools.loadAlbum");
         Tools.loadAlbum(context.applicationContext());
     }
 
