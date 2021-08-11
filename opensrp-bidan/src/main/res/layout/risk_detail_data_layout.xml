@@ -1,715 +1,720 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:orientation="horizontal"
-    android:weightSum="2">
-
-    <TableLayout
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:layout_weight="1"
-        android:background="@drawable/listview_background_rounded">
-
-        <TableRow>
-
-            <org.smartregister.view.customcontrols.CustomFontTextView
-                style="@style/CustomFontTextViewStyle.ListView.Medium"
-                android:layout_width="wrap_content"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:weightSum="2">
+    <LinearLayout android:layout_width="match_parent"
+                  android:layout_height="wrap_content"
+                  android:orientation="horizontal"
+                  android:weightSum="2">
+        <TableLayout
+                android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
-                android:layout_margin="5dp"
-                android:text="@string/highRiskHIVAIDS"
-                android:textAppearance="?android:attr/textAppearanceLarge"
-                android:textColor="@color/text_black"
-                android:textSize="14sp" />
+                android:layout_weight="1"
+                android:background="@drawable/listview_background_rounded">
 
-            <org.smartregister.view.customcontrols.CustomFontTextView
-                android:id="@+id/txt_highRiskHIVAIDS"
-                style="@style/CustomFontTextViewStyle.ListView.Medium"
-                android:layout_width="wrap_content"
+            <TableRow>
+
+                <org.smartregister.view.customcontrols.CustomFontTextView
+                        style="@style/CustomFontTextViewStyle.ListView.Medium"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="5dp"
+                        android:text="@string/highRiskHIVAIDS"
+                        android:textAppearance="?android:attr/textAppearanceLarge"
+                        android:textColor="@color/text_black"
+                        android:textSize="14sp"/>
+
+                <org.smartregister.view.customcontrols.CustomFontTextView
+                        android:id="@+id/txt_highRiskHIVAIDS"
+                        style="@style/CustomFontTextViewStyle.ListView.Medium"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="5dp"
+                        android:text="N/A "
+                        android:textAppearance="?android:attr/textAppearanceLarge"
+                        android:textColor="@color/text_black"
+                        android:textSize="14sp"/>
+
+
+            </TableRow>
+
+            <TableRow>
+
+                <org.smartregister.view.customcontrols.CustomFontTextView
+                        style="@style/CustomFontTextViewStyle.ListView.Medium"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="5dp"
+                        android:text="@string/highRiskSTIBBVs"
+                        android:textAppearance="?android:attr/textAppearanceLarge"
+                        android:textColor="@color/text_black"
+                        android:textSize="14sp"/>
+
+                <org.smartregister.view.customcontrols.CustomFontTextView
+                        android:id="@+id/txt_highRiskSTIBBVs"
+                        style="@style/CustomFontTextViewStyle.ListView.Medium"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="5dp"
+                        android:text="N/A "
+                        android:textAppearance="?android:attr/textAppearanceLarge"
+                        android:textColor="@color/text_black"
+                        android:textSize="14sp"/>
+
+
+            </TableRow>
+
+            <TableRow>
+
+                <org.smartregister.view.customcontrols.CustomFontTextView
+                        style="@style/CustomFontTextViewStyle.ListView.Medium"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="5dp"
+                        android:text="@string/highRiskEctopicPregnancy"
+                        android:textAppearance="?android:attr/textAppearanceLarge"
+                        android:textColor="@color/text_black"
+                        android:textSize="14sp"/>
+
+                <org.smartregister.view.customcontrols.CustomFontTextView
+                        android:id="@+id/txt_highRiskEctopicPregnancy"
+                        style="@style/CustomFontTextViewStyle.ListView.Medium"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="5dp"
+                        android:text="N/A"
+                        android:textAppearance="?android:attr/textAppearanceLarge"
+                        android:textColor="@color/text_black"
+                        android:textSize="14sp"/>
+
+            </TableRow>
+
+            <TableRow>
+
+                <org.smartregister.view.customcontrols.CustomFontTextView
+                        style="@style/CustomFontTextViewStyle.ListView.Medium"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="5dp"
+                        android:text="@string/highRiskCardiovascularDiseaseRecord"
+                        android:textAppearance="?android:attr/textAppearanceLarge"
+                        android:textColor="@color/text_black"
+                        android:textSize="14sp"/>
+
+                <org.smartregister.view.customcontrols.CustomFontTextView
+                        android:id="@+id/txt_highRiskCardiovascularDiseaseRecord"
+                        style="@style/CustomFontTextViewStyle.ListView.Medium"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="5dp"
+                        android:text="N/A"
+                        android:textAppearance="?android:attr/textAppearanceLarge"
+                        android:textColor="@color/text_black"
+                        android:textSize="14sp"/>
+
+            </TableRow>
+
+            <TableRow>
+
+
+                <org.smartregister.view.customcontrols.CustomFontTextView
+                        style="@style/CustomFontTextViewStyle.ListView.Medium"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="5dp"
+                        android:text="@string/highRiskDidneyDisorder"
+                        android:textAppearance="?android:attr/textAppearanceLarge"
+                        android:textColor="@color/text_black"
+                        android:textSize="14sp"/>
+
+
+                <org.smartregister.view.customcontrols.CustomFontTextView
+                        android:id="@+id/txt_highRiskDidneyDisorder"
+                        style="@style/CustomFontTextViewStyle.ListView.Medium"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="5dp"
+                        android:text="N/A"
+                        android:textAppearance="?android:attr/textAppearanceLarge"
+                        android:textColor="@color/text_black"
+                        android:textSize="14sp"/>
+
+            </TableRow>
+
+            <TableRow>
+
+
+                <org.smartregister.view.customcontrols.CustomFontTextView
+                        style="@style/CustomFontTextViewStyle.ListView.Medium"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="5dp"
+                        android:text="@string/highRiskHeartDisorder"
+                        android:textAppearance="?android:attr/textAppearanceLarge"
+                        android:textColor="@color/text_black"
+                        android:textSize="14sp"/>
+
+
+                <org.smartregister.view.customcontrols.CustomFontTextView
+                        android:id="@+id/txt_highRiskHeartDisorder"
+                        style="@style/CustomFontTextViewStyle.ListView.Medium"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="5dp"
+                        android:text="N/A"
+                        android:textAppearance="?android:attr/textAppearanceLarge"
+                        android:textColor="@color/text_black"
+                        android:textSize="14sp"/>
+
+            </TableRow>
+
+            <TableRow>
+
+                <org.smartregister.view.customcontrols.CustomFontTextView
+                        style="@style/CustomFontTextViewStyle.ListView.Medium"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="5dp"
+                        android:text="@string/highRiskAsthma"
+                        android:textAppearance="?android:attr/textAppearanceLarge"
+                        android:textColor="@color/text_black"
+                        android:textSize="14sp"/>
+
+                <org.smartregister.view.customcontrols.CustomFontTextView
+                        android:id="@+id/txt_highRiskAsthma"
+                        style="@style/CustomFontTextViewStyle.ListView.Medium"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="5dp"
+                        android:text="N/A"
+                        android:textAppearance="?android:attr/textAppearanceLarge"
+                        android:textColor="@color/text_black"
+                        android:textSize="14sp"/>
+
+            </TableRow>
+
+            <TableRow>
+
+                <org.smartregister.view.customcontrols.CustomFontTextView
+                        style="@style/CustomFontTextViewStyle.ListView.Medium"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="5dp"
+                        android:text="@string/highRiskTuberculosis"
+                        android:textAppearance="?android:attr/textAppearanceLarge"
+                        android:textColor="@color/text_black"
+                        android:textSize="14sp"/>
+
+                <org.smartregister.view.customcontrols.CustomFontTextView
+                        android:id="@+id/txt_highRiskTuberculosis"
+                        style="@style/CustomFontTextViewStyle.ListView.Medium"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="5dp"
+                        android:text="N/A"
+                        android:textAppearance="?android:attr/textAppearanceLarge"
+                        android:textColor="@color/text_black"
+                        android:textSize="14sp"/>
+
+            </TableRow>
+
+            <TableRow>
+
+                <org.smartregister.view.customcontrols.CustomFontTextView
+                        style="@style/CustomFontTextViewStyle.ListView.Medium"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="5dp"
+                        android:text="@string/highRiskMalaria"
+                        android:textAppearance="?android:attr/textAppearanceLarge"
+                        android:textColor="@color/text_black"
+                        android:textSize="14sp"/>
+
+                <org.smartregister.view.customcontrols.CustomFontTextView
+                        android:id="@+id/txt_highRiskMalaria"
+                        style="@style/CustomFontTextViewStyle.ListView.Medium"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="5dp"
+                        android:text="N/A"
+                        android:textAppearance="?android:attr/textAppearanceLarge"
+                        android:textColor="@color/text_black"
+                        android:textSize="14sp"/>
+
+            </TableRow>
+
+            <TableRow>
+
+                <org.smartregister.view.customcontrols.CustomFontTextView
+                        style="@style/CustomFontTextViewStyle.ListView.Medium"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="5dp"
+                        android:text="@string/highRiskPregnancyPIH"
+                        android:textAppearance="?android:attr/textAppearanceLarge"
+                        android:textColor="@color/text_black"
+                        android:textSize="14sp"/>
+
+                <org.smartregister.view.customcontrols.CustomFontTextView
+                        android:id="@+id/txt_hrp_PIH"
+                        style="@style/CustomFontTextViewStyle.ListView.Medium"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="5dp"
+                        android:text="N/A"
+                        android:textAppearance="?android:attr/textAppearanceLarge"
+                        android:textColor="@color/text_black"
+                        android:textSize="14sp"/>
+
+            </TableRow>
+
+            <TableRow>
+
+                <org.smartregister.view.customcontrols.CustomFontTextView
+                        style="@style/CustomFontTextViewStyle.ListView.Medium"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="5dp"
+                        android:text="@string/highRiskPregnancyProteinEnergyMalnutrition"
+                        android:textAppearance="?android:attr/textAppearanceLarge"
+                        android:textColor="@color/text_black"
+                        android:textSize="14sp"/>
+
+                <org.smartregister.view.customcontrols.CustomFontTextView
+                        android:id="@+id/txt_hrp_PEM"
+                        style="@style/CustomFontTextViewStyle.ListView.Medium"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="5dp"
+                        android:text="N/A"
+                        android:textAppearance="?android:attr/textAppearanceLarge"
+                        android:textColor="@color/text_black"
+                        android:textSize="14sp"/>
+
+            </TableRow>
+
+            <TableRow>
+
+                <org.smartregister.view.customcontrols.CustomFontTextView
+                        style="@style/CustomFontTextViewStyle.ListView.Medium"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="5dp"
+                        android:text="@string/highRiskPregnancyDiabetes"
+                        android:textAppearance="?android:attr/textAppearanceLarge"
+                        android:textColor="@color/text_black"
+                        android:textSize="14sp"/>
+
+                <org.smartregister.view.customcontrols.CustomFontTextView
+                        android:id="@+id/txt_hrp_Diabetes"
+                        style="@style/CustomFontTextViewStyle.ListView.Medium"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="5dp"
+                        android:text="N/A"
+                        android:textAppearance="?android:attr/textAppearanceLarge"
+                        android:textColor="@color/text_black"
+                        android:textSize="14sp"/>
+
+            </TableRow>
+
+            <TableRow>
+
+                <org.smartregister.view.customcontrols.CustomFontTextView
+                        style="@style/CustomFontTextViewStyle.ListView.Medium"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="5dp"
+                        android:text="@string/highRiskPregnancyAnemia"
+                        android:textAppearance="?android:attr/textAppearanceLarge"
+                        android:textColor="@color/text_black"
+                        android:textSize="14sp"/>
+
+                <org.smartregister.view.customcontrols.CustomFontTextView
+                        android:id="@+id/txt_hrp_Anemia"
+                        style="@style/CustomFontTextViewStyle.ListView.Medium"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="5dp"
+                        android:text="N/A"
+                        android:textAppearance="?android:attr/textAppearanceLarge"
+                        android:textColor="@color/text_black"
+                        android:textSize="14sp"/>
+
+            </TableRow>
+
+            <TableRow>
+
+                <org.smartregister.view.customcontrols.CustomFontTextView
+                        style="@style/CustomFontTextViewStyle.ListView.Medium"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="5dp"
+                        android:text="@string/highRiskLabourFetusMalpresentation"
+                        android:textAppearance="?android:attr/textAppearanceLarge"
+                        android:textColor="@color/text_black"
+                        android:textSize="14sp"/>
+
+                <org.smartregister.view.customcontrols.CustomFontTextView
+                        android:id="@+id/txt_hrl_FetusMalpresentation"
+                        style="@style/CustomFontTextViewStyle.ListView.Medium"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="5dp"
+                        android:text="N/A"
+                        android:textAppearance="?android:attr/textAppearanceLarge"
+                        android:textColor="@color/text_black"
+                        android:textSize="14sp"/>
+
+            </TableRow>
+        </TableLayout>
+
+        <TableLayout
+                android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
-                android:layout_margin="5dp"
-                android:text="N/A "
-                android:textAppearance="?android:attr/textAppearanceLarge"
-                android:textColor="@color/text_black"
-                android:textSize="14sp" />
-
-
-        </TableRow>
-
-        <TableRow>
-
-            <org.smartregister.view.customcontrols.CustomFontTextView
-                style="@style/CustomFontTextViewStyle.ListView.Medium"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_margin="5dp"
-                android:text="@string/highRiskSTIBBVs"
-                android:textAppearance="?android:attr/textAppearanceLarge"
-                android:textColor="@color/text_black"
-                android:textSize="14sp" />
-
-            <org.smartregister.view.customcontrols.CustomFontTextView
-                android:id="@+id/txt_highRiskSTIBBVs"
-                style="@style/CustomFontTextViewStyle.ListView.Medium"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_margin="5dp"
-                android:text="N/A "
-                android:textAppearance="?android:attr/textAppearanceLarge"
-                android:textColor="@color/text_black"
-                android:textSize="14sp" />
-
-
-        </TableRow>
-
-        <TableRow>
-
-            <org.smartregister.view.customcontrols.CustomFontTextView
-                style="@style/CustomFontTextViewStyle.ListView.Medium"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_margin="5dp"
-                android:text="@string/highRiskEctopicPregnancy"
-                android:textAppearance="?android:attr/textAppearanceLarge"
-                android:textColor="@color/text_black"
-                android:textSize="14sp" />
-
-            <org.smartregister.view.customcontrols.CustomFontTextView
-                android:id="@+id/txt_highRiskEctopicPregnancy"
-                style="@style/CustomFontTextViewStyle.ListView.Medium"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_margin="5dp"
-                android:text="N/A"
-                android:textAppearance="?android:attr/textAppearanceLarge"
-                android:textColor="@color/text_black"
-                android:textSize="14sp" />
-
-        </TableRow>
-
-        <TableRow>
-
-            <org.smartregister.view.customcontrols.CustomFontTextView
-                style="@style/CustomFontTextViewStyle.ListView.Medium"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_margin="5dp"
-                android:text="@string/highRiskCardiovascularDiseaseRecord"
-                android:textAppearance="?android:attr/textAppearanceLarge"
-                android:textColor="@color/text_black"
-                android:textSize="14sp" />
-
-            <org.smartregister.view.customcontrols.CustomFontTextView
-                android:id="@+id/txt_highRiskCardiovascularDiseaseRecord"
-                style="@style/CustomFontTextViewStyle.ListView.Medium"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_margin="5dp"
-                android:text="N/A"
-                android:textAppearance="?android:attr/textAppearanceLarge"
-                android:textColor="@color/text_black"
-                android:textSize="14sp" />
-
-        </TableRow>
-
-        <TableRow>
-
-
-            <org.smartregister.view.customcontrols.CustomFontTextView
-                style="@style/CustomFontTextViewStyle.ListView.Medium"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_margin="5dp"
-                android:text="@string/highRiskDidneyDisorder"
-                android:textAppearance="?android:attr/textAppearanceLarge"
-                android:textColor="@color/text_black"
-                android:textSize="14sp" />
-
-
-            <org.smartregister.view.customcontrols.CustomFontTextView
-                android:id="@+id/txt_highRiskDidneyDisorder"
-                style="@style/CustomFontTextViewStyle.ListView.Medium"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_margin="5dp"
-                android:text="N/A"
-                android:textAppearance="?android:attr/textAppearanceLarge"
-                android:textColor="@color/text_black"
-                android:textSize="14sp" />
-
-        </TableRow>
-
-        <TableRow>
-
-
-            <org.smartregister.view.customcontrols.CustomFontTextView
-                style="@style/CustomFontTextViewStyle.ListView.Medium"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_margin="5dp"
-                android:text="@string/highRiskHeartDisorder"
-                android:textAppearance="?android:attr/textAppearanceLarge"
-                android:textColor="@color/text_black"
-                android:textSize="14sp" />
-
-
-            <org.smartregister.view.customcontrols.CustomFontTextView
-                android:id="@+id/txt_highRiskHeartDisorder"
-                style="@style/CustomFontTextViewStyle.ListView.Medium"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_margin="5dp"
-                android:text="N/A"
-                android:textAppearance="?android:attr/textAppearanceLarge"
-                android:textColor="@color/text_black"
-                android:textSize="14sp" />
-
-        </TableRow>
-
-        <TableRow>
-
-            <org.smartregister.view.customcontrols.CustomFontTextView
-                style="@style/CustomFontTextViewStyle.ListView.Medium"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_margin="5dp"
-                android:text="@string/highRiskAsthma"
-                android:textAppearance="?android:attr/textAppearanceLarge"
-                android:textColor="@color/text_black"
-                android:textSize="14sp" />
-
-            <org.smartregister.view.customcontrols.CustomFontTextView
-                android:id="@+id/txt_highRiskAsthma"
-                style="@style/CustomFontTextViewStyle.ListView.Medium"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_margin="5dp"
-                android:text="N/A"
-                android:textAppearance="?android:attr/textAppearanceLarge"
-                android:textColor="@color/text_black"
-                android:textSize="14sp" />
-
-        </TableRow>
-
-        <TableRow>
-
-            <org.smartregister.view.customcontrols.CustomFontTextView
-                style="@style/CustomFontTextViewStyle.ListView.Medium"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_margin="5dp"
-                android:text="@string/highRiskTuberculosis"
-                android:textAppearance="?android:attr/textAppearanceLarge"
-                android:textColor="@color/text_black"
-                android:textSize="14sp" />
-
-            <org.smartregister.view.customcontrols.CustomFontTextView
-                android:id="@+id/txt_highRiskTuberculosis"
-                style="@style/CustomFontTextViewStyle.ListView.Medium"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_margin="5dp"
-                android:text="N/A"
-                android:textAppearance="?android:attr/textAppearanceLarge"
-                android:textColor="@color/text_black"
-                android:textSize="14sp" />
-
-        </TableRow>
-
-        <TableRow>
-
-            <org.smartregister.view.customcontrols.CustomFontTextView
-                style="@style/CustomFontTextViewStyle.ListView.Medium"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_margin="5dp"
-                android:text="@string/highRiskMalaria"
-                android:textAppearance="?android:attr/textAppearanceLarge"
-                android:textColor="@color/text_black"
-                android:textSize="14sp" />
-
-            <org.smartregister.view.customcontrols.CustomFontTextView
-                android:id="@+id/txt_highRiskMalaria"
-                style="@style/CustomFontTextViewStyle.ListView.Medium"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_margin="5dp"
-                android:text="N/A"
-                android:textAppearance="?android:attr/textAppearanceLarge"
-                android:textColor="@color/text_black"
-                android:textSize="14sp" />
-
-        </TableRow>
-
-        <TableRow>
-
-            <org.smartregister.view.customcontrols.CustomFontTextView
-                style="@style/CustomFontTextViewStyle.ListView.Medium"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_margin="5dp"
-                android:text="@string/highRiskPregnancyPIH"
-                android:textAppearance="?android:attr/textAppearanceLarge"
-                android:textColor="@color/text_black"
-                android:textSize="14sp" />
-
-            <org.smartregister.view.customcontrols.CustomFontTextView
-                android:id="@+id/txt_hrp_PIH"
-                style="@style/CustomFontTextViewStyle.ListView.Medium"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_margin="5dp"
-                android:text="N/A"
-                android:textAppearance="?android:attr/textAppearanceLarge"
-                android:textColor="@color/text_black"
-                android:textSize="14sp" />
-
-        </TableRow>
-
-        <TableRow>
-
-            <org.smartregister.view.customcontrols.CustomFontTextView
-                style="@style/CustomFontTextViewStyle.ListView.Medium"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_margin="5dp"
-                android:text="@string/highRiskPregnancyProteinEnergyMalnutrition"
-                android:textAppearance="?android:attr/textAppearanceLarge"
-                android:textColor="@color/text_black"
-                android:textSize="14sp" />
-
-            <org.smartregister.view.customcontrols.CustomFontTextView
-                android:id="@+id/txt_hrp_PEM"
-                style="@style/CustomFontTextViewStyle.ListView.Medium"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_margin="5dp"
-                android:text="N/A"
-                android:textAppearance="?android:attr/textAppearanceLarge"
-                android:textColor="@color/text_black"
-                android:textSize="14sp" />
-
-        </TableRow>
-
-        <TableRow>
-
-            <org.smartregister.view.customcontrols.CustomFontTextView
-                style="@style/CustomFontTextViewStyle.ListView.Medium"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_margin="5dp"
-                android:text="@string/highRiskPregnancyDiabetes"
-                android:textAppearance="?android:attr/textAppearanceLarge"
-                android:textColor="@color/text_black"
-                android:textSize="14sp" />
-
-            <org.smartregister.view.customcontrols.CustomFontTextView
-                android:id="@+id/txt_hrp_Diabetes"
-                style="@style/CustomFontTextViewStyle.ListView.Medium"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_margin="5dp"
-                android:text="N/A"
-                android:textAppearance="?android:attr/textAppearanceLarge"
-                android:textColor="@color/text_black"
-                android:textSize="14sp" />
-
-        </TableRow>
-
-        <TableRow>
-
-            <org.smartregister.view.customcontrols.CustomFontTextView
-                style="@style/CustomFontTextViewStyle.ListView.Medium"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_margin="5dp"
-                android:text="@string/highRiskPregnancyAnemia"
-                android:textAppearance="?android:attr/textAppearanceLarge"
-                android:textColor="@color/text_black"
-                android:textSize="14sp" />
-
-            <org.smartregister.view.customcontrols.CustomFontTextView
-                android:id="@+id/txt_hrp_Anemia"
-                style="@style/CustomFontTextViewStyle.ListView.Medium"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_margin="5dp"
-                android:text="N/A"
-                android:textAppearance="?android:attr/textAppearanceLarge"
-                android:textColor="@color/text_black"
-                android:textSize="14sp" />
-
-        </TableRow>
-
-        <TableRow>
-
-            <org.smartregister.view.customcontrols.CustomFontTextView
-                style="@style/CustomFontTextViewStyle.ListView.Medium"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_margin="5dp"
-                android:text="@string/highRiskLabourFetusMalpresentation"
-                android:textAppearance="?android:attr/textAppearanceLarge"
-                android:textColor="@color/text_black"
-                android:textSize="14sp" />
-
-            <org.smartregister.view.customcontrols.CustomFontTextView
-                android:id="@+id/txt_hrl_FetusMalpresentation"
-                style="@style/CustomFontTextViewStyle.ListView.Medium"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_margin="5dp"
-                android:text="N/A"
-                android:textAppearance="?android:attr/textAppearanceLarge"
-                android:textColor="@color/text_black"
-                android:textSize="14sp" />
-
-        </TableRow>
-    </TableLayout>
-
-    <TableLayout
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:layout_weight="1"
-        android:background="@drawable/listview_background_rounded">
-
-        <TableRow>
-
-            <org.smartregister.view.customcontrols.CustomFontTextView
-                style="@style/CustomFontTextViewStyle.ListView.Medium"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_margin="5dp"
-                android:text="@string/highRiskLabourFetusSize"
-                android:textAppearance="?android:attr/textAppearanceLarge"
-                android:textColor="@color/text_black"
-                android:textSize="14sp" />
-
-            <org.smartregister.view.customcontrols.CustomFontTextView
-                android:id="@+id/txt_hrl_FetusSize"
-                style="@style/CustomFontTextViewStyle.ListView.Medium"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_margin="5dp"
-                android:text="N/A"
-                android:textAppearance="?android:attr/textAppearanceLarge"
-                android:textColor="@color/text_black"
-                android:textSize="14sp" />
-        </TableRow>
-
-        <TableRow>
-
-            <org.smartregister.view.customcontrols.CustomFontTextView
-                style="@style/CustomFontTextViewStyle.ListView.Medium"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_margin="5dp"
-                android:text="@string/highRisklabourFetusNumber"
-                android:textAppearance="?android:attr/textAppearanceLarge"
-                android:textColor="@color/text_black"
-                android:textSize="14sp" />
-
-            <org.smartregister.view.customcontrols.CustomFontTextView
-                android:id="@+id/txt_hrl_FetusNumber"
-                style="@style/CustomFontTextViewStyle.ListView.Medium"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_margin="5dp"
-                android:text="N/A"
-                android:textAppearance="?android:attr/textAppearanceLarge"
-                android:textColor="@color/text_black"
-                android:textSize="14sp" />
-        </TableRow>
-
-        <TableRow>
-
-            <org.smartregister.view.customcontrols.CustomFontTextView
-                style="@style/CustomFontTextViewStyle.ListView.Medium"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_margin="5dp"
-                android:text="@string/HighRiskLabourSectionCesareaRecord"
-                android:textAppearance="?android:attr/textAppearanceLarge"
-                android:textColor="@color/text_black"
-                android:textSize="14sp" />
-
-            <org.smartregister.view.customcontrols.CustomFontTextView
-                android:id="@+id/txt_HighRiskLabourSectionCesareaRecord"
-                style="@style/CustomFontTextViewStyle.ListView.Medium"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_margin="5dp"
-                android:text="N/A"
-                android:textAppearance="?android:attr/textAppearanceLarge"
-                android:textColor="@color/text_black"
-                android:textSize="14sp" />
-        </TableRow>
-
-        <TableRow>
-
-            <org.smartregister.view.customcontrols.CustomFontTextView
-                style="@style/CustomFontTextViewStyle.ListView.Medium"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_margin="5dp"
-                android:text="@string/highRiskLabourTBRisk"
-                android:textAppearance="?android:attr/textAppearanceLarge"
-                android:textColor="@color/text_black"
-                android:textSize="14sp" />
-
-            <org.smartregister.view.customcontrols.CustomFontTextView
-                android:id="@+id/txt_highRiskLabourTBRisk"
-                style="@style/CustomFontTextViewStyle.ListView.Medium"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_margin="5dp"
-                android:text="N/A"
-                android:textAppearance="?android:attr/textAppearanceLarge"
-                android:textColor="@color/text_black"
-                android:textSize="14sp" />
-        </TableRow>
-
-        <TableRow>
-
-            <org.smartregister.view.customcontrols.CustomFontTextView
-                style="@style/CustomFontTextViewStyle.ListView.Medium"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_margin="5dp"
-                android:text="@string/HighRiskPregnancyTooManyChildren"
-                android:textAppearance="?android:attr/textAppearanceLarge"
-                android:textColor="@color/text_black"
-                android:textSize="14sp" />
-
-            <org.smartregister.view.customcontrols.CustomFontTextView
-                android:id="@+id/txt_HighRiskPregnancyTooManyChildren"
-                style="@style/CustomFontTextViewStyle.ListView.Medium"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_margin="5dp"
-                android:text="N/A"
-                android:textAppearance="?android:attr/textAppearanceLarge"
-                android:textColor="@color/text_black"
-                android:textSize="14sp" />
-        </TableRow>
-
-        <TableRow>
-
-            <org.smartregister.view.customcontrols.CustomFontTextView
-                style="@style/CustomFontTextViewStyle.ListView.Medium"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_margin="5dp"
-                android:text="@string/highRiskPostPartumForceps"
-                android:textAppearance="?android:attr/textAppearanceLarge"
-                android:textColor="@color/text_black"
-                android:textSize="14sp" />
-
-            <org.smartregister.view.customcontrols.CustomFontTextView
-                android:id="@+id/txt_hrpp_Forceps"
-                style="@style/CustomFontTextViewStyle.ListView.Medium"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_margin="5dp"
-                android:text="N/A"
-                android:textAppearance="?android:attr/textAppearanceLarge"
-                android:textColor="@color/text_black"
-                android:textSize="14sp" />
-        </TableRow>
-
-        <TableRow>
-
-            <org.smartregister.view.customcontrols.CustomFontTextView
-                style="@style/CustomFontTextViewStyle.ListView.Medium"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_margin="5dp"
-                android:text="@string/highRiskPostPartumVacum"
-                android:textAppearance="?android:attr/textAppearanceLarge"
-                android:textColor="@color/text_black"
-                android:textSize="14sp" />
-
-            <org.smartregister.view.customcontrols.CustomFontTextView
-                android:id="@+id/txt_hrpp_Vacum"
-                style="@style/CustomFontTextViewStyle.ListView.Medium"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_margin="5dp"
-                android:text="N/A"
-                android:textAppearance="?android:attr/textAppearanceLarge"
-                android:textColor="@color/text_black"
-                android:textSize="14sp" />
-        </TableRow>
-
-        <TableRow>
-
-            <org.smartregister.view.customcontrols.CustomFontTextView
-                style="@style/CustomFontTextViewStyle.ListView.Medium"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_margin="5dp"
-                android:text="@string/highRiskPostPartumPreEclampsiaEclampsia"
-                android:textAppearance="?android:attr/textAppearanceLarge"
-                android:textColor="@color/text_black"
-                android:textSize="14sp" />
-
-            <org.smartregister.view.customcontrols.CustomFontTextView
-                android:id="@+id/txt_hrpp_PreEclampsia"
-                style="@style/CustomFontTextViewStyle.ListView.Medium"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_margin="5dp"
-                android:text="N/A"
-                android:textAppearance="?android:attr/textAppearanceLarge"
-                android:textColor="@color/text_black"
-                android:textSize="14sp" />
-        </TableRow>
-
-        <TableRow>
-
-            <org.smartregister.view.customcontrols.CustomFontTextView
-                style="@style/CustomFontTextViewStyle.ListView.Medium"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_margin="5dp"
-                android:text="@string/highRiskPostPartumMaternalSepsis"
-                android:textAppearance="?android:attr/textAppearanceLarge"
-                android:textColor="@color/text_black"
-                android:textSize="14sp" />
-
-            <org.smartregister.view.customcontrols.CustomFontTextView
-                android:id="@+id/txt_hrpp_MaternalSepsis"
-                style="@style/CustomFontTextViewStyle.ListView.Medium"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_margin="5dp"
-                android:text="N/A"
-                android:textAppearance="?android:attr/textAppearanceLarge"
-                android:textColor="@color/text_black"
-                android:textSize="14sp" />
-        </TableRow>
-
-        <TableRow>
-
-            <org.smartregister.view.customcontrols.CustomFontTextView
-                style="@style/CustomFontTextViewStyle.ListView.Medium"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_margin="5dp"
-                android:text="@string/highRiskPostPartumInfection"
-                android:textAppearance="?android:attr/textAppearanceLarge"
-                android:textColor="@color/text_black"
-                android:textSize="14sp" />
-
-            <org.smartregister.view.customcontrols.CustomFontTextView
-                android:id="@+id/txt_hrpp_Infection"
-                style="@style/CustomFontTextViewStyle.ListView.Medium"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_margin="5dp"
-                android:text="N/A"
-                android:textAppearance="?android:attr/textAppearanceLarge"
-                android:textColor="@color/text_black"
-                android:textSize="14sp" />
-        </TableRow>
-
-        <TableRow>
-
-            <org.smartregister.view.customcontrols.CustomFontTextView
-                style="@style/CustomFontTextViewStyle.ListView.Medium"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_margin="5dp"
-                android:text="@string/highRiskPostPartumHemorrhage"
-                android:textAppearance="?android:attr/textAppearanceLarge"
-                android:textColor="@color/text_black"
-                android:textSize="14sp" />
-
-            <org.smartregister.view.customcontrols.CustomFontTextView
-                android:id="@+id/txt_hrpp_Hemorrhage"
-                style="@style/CustomFontTextViewStyle.ListView.Medium"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_margin="5dp"
-                android:text="N/A"
-                android:textAppearance="?android:attr/textAppearanceLarge"
-                android:textColor="@color/text_black"
-                android:textSize="14sp" />
-        </TableRow>
-
-        <TableRow>
-
-            <org.smartregister.view.customcontrols.CustomFontTextView
-                style="@style/CustomFontTextViewStyle.ListView.Medium"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_margin="5dp"
-                android:text="@string/highRiskPostPartumPIH"
-                android:textAppearance="?android:attr/textAppearanceLarge"
-                android:textColor="@color/text_black"
-                android:textSize="14sp" />
-
-            <org.smartregister.view.customcontrols.CustomFontTextView
-                android:id="@+id/txt_hrpp_PIH"
-                style="@style/CustomFontTextViewStyle.ListView.Medium"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_margin="5dp"
-                android:text="N/A"
-                android:textAppearance="?android:attr/textAppearanceLarge"
-                android:textColor="@color/text_black"
-                android:textSize="14sp" />
-        </TableRow>
-
-        <TableRow>
-
-            <org.smartregister.view.customcontrols.CustomFontTextView
-                style="@style/CustomFontTextViewStyle.ListView.Medium"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_margin="5dp"
-                android:text="@string/highRiskPostPartumDistosia"
-                android:textAppearance="?android:attr/textAppearanceLarge"
-                android:textColor="@color/text_black"
-                android:textSize="14sp" />
-
-            <org.smartregister.view.customcontrols.CustomFontTextView
-                android:id="@+id/txt_hrpp_Distosia"
-                style="@style/CustomFontTextViewStyle.ListView.Medium"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_margin="5dp"
-                android:text="N/A"
-                android:textAppearance="?android:attr/textAppearanceLarge"
-                android:textColor="@color/text_black"
-                android:textSize="14sp" />
-        </TableRow>
-
-        <TableRow>
-
-            <org.smartregister.view.customcontrols.CustomFontTextView
-                style="@style/CustomFontTextViewStyle.ListView.Medium"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_margin="5dp"
-                android:text="@string/highRiskPostPartumSectioCaesaria"
-                android:textAppearance="?android:attr/textAppearanceLarge"
-                android:textColor="@color/text_black"
-                android:textSize="14sp" />
-
-            <org.smartregister.view.customcontrols.CustomFontTextView
-                android:id="@+id/txt_hrpp_SC"
-                style="@style/CustomFontTextViewStyle.ListView.Medium"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_margin="5dp"
-                android:text="N/A"
-                android:textAppearance="?android:attr/textAppearanceLarge"
-                android:textColor="@color/text_black"
-                android:textSize="14sp" />
-        </TableRow>
-    </TableLayout>
-
-
-</LinearLayout>
+                android:layout_weight="1"
+                android:background="@drawable/listview_background_rounded">
+
+            <TableRow>
+
+                <org.smartregister.view.customcontrols.CustomFontTextView
+                        style="@style/CustomFontTextViewStyle.ListView.Medium"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="5dp"
+                        android:text="@string/highRiskLabourFetusSize"
+                        android:textAppearance="?android:attr/textAppearanceLarge"
+                        android:textColor="@color/text_black"
+                        android:textSize="14sp"/>
+
+                <org.smartregister.view.customcontrols.CustomFontTextView
+                        android:id="@+id/txt_hrl_FetusSize"
+                        style="@style/CustomFontTextViewStyle.ListView.Medium"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="5dp"
+                        android:text="N/A"
+                        android:textAppearance="?android:attr/textAppearanceLarge"
+                        android:textColor="@color/text_black"
+                        android:textSize="14sp"/>
+            </TableRow>
+
+            <TableRow>
+
+                <org.smartregister.view.customcontrols.CustomFontTextView
+                        style="@style/CustomFontTextViewStyle.ListView.Medium"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="5dp"
+                        android:text="@string/highRisklabourFetusNumber"
+                        android:textAppearance="?android:attr/textAppearanceLarge"
+                        android:textColor="@color/text_black"
+                        android:textSize="14sp"/>
+
+                <org.smartregister.view.customcontrols.CustomFontTextView
+                        android:id="@+id/txt_hrl_FetusNumber"
+                        style="@style/CustomFontTextViewStyle.ListView.Medium"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="5dp"
+                        android:text="N/A"
+                        android:textAppearance="?android:attr/textAppearanceLarge"
+                        android:textColor="@color/text_black"
+                        android:textSize="14sp"/>
+            </TableRow>
+
+            <TableRow>
+
+                <org.smartregister.view.customcontrols.CustomFontTextView
+                        style="@style/CustomFontTextViewStyle.ListView.Medium"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="5dp"
+                        android:text="@string/HighRiskLabourSectionCesareaRecord"
+                        android:textAppearance="?android:attr/textAppearanceLarge"
+                        android:textColor="@color/text_black"
+                        android:textSize="14sp"/>
+
+                <org.smartregister.view.customcontrols.CustomFontTextView
+                        android:id="@+id/txt_HighRiskLabourSectionCesareaRecord"
+                        style="@style/CustomFontTextViewStyle.ListView.Medium"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="5dp"
+                        android:text="N/A"
+                        android:textAppearance="?android:attr/textAppearanceLarge"
+                        android:textColor="@color/text_black"
+                        android:textSize="14sp"/>
+            </TableRow>
+
+            <TableRow>
+
+                <org.smartregister.view.customcontrols.CustomFontTextView
+                        style="@style/CustomFontTextViewStyle.ListView.Medium"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="5dp"
+                        android:text="@string/highRiskLabourTBRisk"
+                        android:textAppearance="?android:attr/textAppearanceLarge"
+                        android:textColor="@color/text_black"
+                        android:textSize="14sp"/>
+
+                <org.smartregister.view.customcontrols.CustomFontTextView
+                        android:id="@+id/txt_highRiskLabourTBRisk"
+                        style="@style/CustomFontTextViewStyle.ListView.Medium"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="5dp"
+                        android:text="N/A"
+                        android:textAppearance="?android:attr/textAppearanceLarge"
+                        android:textColor="@color/text_black"
+                        android:textSize="14sp"/>
+            </TableRow>
+
+            <TableRow>
+
+                <org.smartregister.view.customcontrols.CustomFontTextView
+                        style="@style/CustomFontTextViewStyle.ListView.Medium"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="5dp"
+                        android:text="@string/HighRiskPregnancyTooManyChildren"
+                        android:textAppearance="?android:attr/textAppearanceLarge"
+                        android:textColor="@color/text_black"
+                        android:textSize="14sp"/>
+
+                <org.smartregister.view.customcontrols.CustomFontTextView
+                        android:id="@+id/txt_HighRiskPregnancyTooManyChildren"
+                        style="@style/CustomFontTextViewStyle.ListView.Medium"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="5dp"
+                        android:text="N/A"
+                        android:textAppearance="?android:attr/textAppearanceLarge"
+                        android:textColor="@color/text_black"
+                        android:textSize="14sp"/>
+            </TableRow>
+
+            <TableRow>
+
+                <org.smartregister.view.customcontrols.CustomFontTextView
+                        style="@style/CustomFontTextViewStyle.ListView.Medium"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="5dp"
+                        android:text="@string/highRiskPostPartumForceps"
+                        android:textAppearance="?android:attr/textAppearanceLarge"
+                        android:textColor="@color/text_black"
+                        android:textSize="14sp"/>
+
+                <org.smartregister.view.customcontrols.CustomFontTextView
+                        android:id="@+id/txt_hrpp_Forceps"
+                        style="@style/CustomFontTextViewStyle.ListView.Medium"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="5dp"
+                        android:text="N/A"
+                        android:textAppearance="?android:attr/textAppearanceLarge"
+                        android:textColor="@color/text_black"
+                        android:textSize="14sp"/>
+            </TableRow>
+
+            <TableRow>
+
+                <org.smartregister.view.customcontrols.CustomFontTextView
+                        style="@style/CustomFontTextViewStyle.ListView.Medium"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="5dp"
+                        android:text="@string/highRiskPostPartumVacum"
+                        android:textAppearance="?android:attr/textAppearanceLarge"
+                        android:textColor="@color/text_black"
+                        android:textSize="14sp"/>
+
+                <org.smartregister.view.customcontrols.CustomFontTextView
+                        android:id="@+id/txt_hrpp_Vacum"
+                        style="@style/CustomFontTextViewStyle.ListView.Medium"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="5dp"
+                        android:text="N/A"
+                        android:textAppearance="?android:attr/textAppearanceLarge"
+                        android:textColor="@color/text_black"
+                        android:textSize="14sp"/>
+            </TableRow>
+
+            <TableRow>
+
+                <org.smartregister.view.customcontrols.CustomFontTextView
+                        style="@style/CustomFontTextViewStyle.ListView.Medium"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="5dp"
+                        android:text="@string/highRiskPostPartumPreEclampsiaEclampsia"
+                        android:textAppearance="?android:attr/textAppearanceLarge"
+                        android:textColor="@color/text_black"
+                        android:textSize="14sp"/>
+
+                <org.smartregister.view.customcontrols.CustomFontTextView
+                        android:id="@+id/txt_hrpp_PreEclampsia"
+                        style="@style/CustomFontTextViewStyle.ListView.Medium"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="5dp"
+                        android:text="N/A"
+                        android:textAppearance="?android:attr/textAppearanceLarge"
+                        android:textColor="@color/text_black"
+                        android:textSize="14sp"/>
+            </TableRow>
+
+            <TableRow>
+
+                <org.smartregister.view.customcontrols.CustomFontTextView
+                        style="@style/CustomFontTextViewStyle.ListView.Medium"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="5dp"
+                        android:text="@string/highRiskPostPartumMaternalSepsis"
+                        android:textAppearance="?android:attr/textAppearanceLarge"
+                        android:textColor="@color/text_black"
+                        android:textSize="14sp"/>
+
+                <org.smartregister.view.customcontrols.CustomFontTextView
+                        android:id="@+id/txt_hrpp_MaternalSepsis"
+                        style="@style/CustomFontTextViewStyle.ListView.Medium"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="5dp"
+                        android:text="N/A"
+                        android:textAppearance="?android:attr/textAppearanceLarge"
+                        android:textColor="@color/text_black"
+                        android:textSize="14sp"/>
+            </TableRow>
+
+            <TableRow>
+
+                <org.smartregister.view.customcontrols.CustomFontTextView
+                        style="@style/CustomFontTextViewStyle.ListView.Medium"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="5dp"
+                        android:text="@string/highRiskPostPartumInfection"
+                        android:textAppearance="?android:attr/textAppearanceLarge"
+                        android:textColor="@color/text_black"
+                        android:textSize="14sp"/>
+
+                <org.smartregister.view.customcontrols.CustomFontTextView
+                        android:id="@+id/txt_hrpp_Infection"
+                        style="@style/CustomFontTextViewStyle.ListView.Medium"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="5dp"
+                        android:text="N/A"
+                        android:textAppearance="?android:attr/textAppearanceLarge"
+                        android:textColor="@color/text_black"
+                        android:textSize="14sp"/>
+            </TableRow>
+
+            <TableRow>
+
+                <org.smartregister.view.customcontrols.CustomFontTextView
+                        style="@style/CustomFontTextViewStyle.ListView.Medium"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="5dp"
+                        android:text="@string/highRiskPostPartumHemorrhage"
+                        android:textAppearance="?android:attr/textAppearanceLarge"
+                        android:textColor="@color/text_black"
+                        android:textSize="14sp"/>
+
+                <org.smartregister.view.customcontrols.CustomFontTextView
+                        android:id="@+id/txt_hrpp_Hemorrhage"
+                        style="@style/CustomFontTextViewStyle.ListView.Medium"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="5dp"
+                        android:text="N/A"
+                        android:textAppearance="?android:attr/textAppearanceLarge"
+                        android:textColor="@color/text_black"
+                        android:textSize="14sp"/>
+            </TableRow>
+
+            <TableRow>
+
+                <org.smartregister.view.customcontrols.CustomFontTextView
+                        style="@style/CustomFontTextViewStyle.ListView.Medium"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="5dp"
+                        android:text="@string/highRiskPostPartumPIH"
+                        android:textAppearance="?android:attr/textAppearanceLarge"
+                        android:textColor="@color/text_black"
+                        android:textSize="14sp"/>
+
+                <org.smartregister.view.customcontrols.CustomFontTextView
+                        android:id="@+id/txt_hrpp_PIH"
+                        style="@style/CustomFontTextViewStyle.ListView.Medium"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="5dp"
+                        android:text="N/A"
+                        android:textAppearance="?android:attr/textAppearanceLarge"
+                        android:textColor="@color/text_black"
+                        android:textSize="14sp"/>
+            </TableRow>
+
+            <TableRow>
+
+                <org.smartregister.view.customcontrols.CustomFontTextView
+                        style="@style/CustomFontTextViewStyle.ListView.Medium"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="5dp"
+                        android:text="@string/highRiskPostPartumDistosia"
+                        android:textAppearance="?android:attr/textAppearanceLarge"
+                        android:textColor="@color/text_black"
+                        android:textSize="14sp"/>
+
+                <org.smartregister.view.customcontrols.CustomFontTextView
+                        android:id="@+id/txt_hrpp_Distosia"
+                        style="@style/CustomFontTextViewStyle.ListView.Medium"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="5dp"
+                        android:text="N/A"
+                        android:textAppearance="?android:attr/textAppearanceLarge"
+                        android:textColor="@color/text_black"
+                        android:textSize="14sp"/>
+            </TableRow>
+
+            <TableRow>
+
+                <org.smartregister.view.customcontrols.CustomFontTextView
+                        style="@style/CustomFontTextViewStyle.ListView.Medium"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="5dp"
+                        android:text="@string/highRiskPostPartumSectioCaesaria"
+                        android:textAppearance="?android:attr/textAppearanceLarge"
+                        android:textColor="@color/text_black"
+                        android:textSize="14sp"/>
+
+                <org.smartregister.view.customcontrols.CustomFontTextView
+                        android:id="@+id/txt_hrpp_SC"
+                        style="@style/CustomFontTextViewStyle.ListView.Medium"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="5dp"
+                        android:text="N/A"
+                        android:textAppearance="?android:attr/textAppearanceLarge"
+                        android:textColor="@color/text_black"
+                        android:textSize="14sp"/>
+            </TableRow>
+        </TableLayout>
+
+    </LinearLayout>
+
+
+</ScrollView>

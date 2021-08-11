@@ -126,7 +126,7 @@ public class BidanFormUtils {
             }
 
         } catch (Exception e) {
-            android.util.Log.e(TAG, e.toString(), e);
+//            android.util.Log.e(TAG, e.toString(), e);
         }
 
         return false;
@@ -265,7 +265,7 @@ public class BidanFormUtils {
         try {
             indonesiaECRepository.addorUpdateClient(client.getBaseEntityId(), new JSONObject(clientJson));
         } catch (JSONException e) {
-            android.util.Log.e(TAG, e.toString(), e);
+//            android.util.Log.e(TAG, e.toString(), e);
         }
         Log.logDebug("====================================");
 
@@ -279,7 +279,7 @@ public class BidanFormUtils {
         try {
             indonesiaECRepository.addEvent(event.getBaseEntityId(), new JSONObject(eventJson));
         } catch (JSONException e) {
-            android.util.Log.e(TAG, e.toString(), e);
+//            android.util.Log.e(TAG, e.toString(), e);
         }
     }
 
@@ -415,7 +415,7 @@ public class BidanFormUtils {
             return xml;
 
         } catch (Exception e) {
-            android.util.Log.e(TAG, e.toString(), e);
+//            android.util.Log.e(TAG, e.toString(), e);
         }
         return "";
     }
@@ -545,7 +545,7 @@ public class BidanFormUtils {
                 }
             }
         } catch (Exception e) {
-            android.util.Log.e(TAG, e.toString(), e);
+//            android.util.Log.e(TAG, e.toString(), e);
         }
         return entityJson;
     }
@@ -570,7 +570,7 @@ public class BidanFormUtils {
                 }
             }
         } catch (Exception e) {
-            android.util.Log.e(TAG, e.toString(), e);
+//            android.util.Log.e(TAG, e.toString(), e);
         }
         return null;
     }
@@ -620,7 +620,7 @@ public class BidanFormUtils {
                 }
             }
         } catch (Exception e) {
-            android.util.Log.e(TAG, e.toString(), e);
+//            android.util.Log.e(TAG, e.toString(), e);
         }
 
         return "";
@@ -811,7 +811,7 @@ public class BidanFormUtils {
 
                     item.put("value", val);
                 } catch (Exception e) {
-                    android.util.Log.e(TAG, e.toString(), e);
+//                    android.util.Log.e(TAG, e.toString(), e);
                 }
             }
         }
@@ -868,7 +868,7 @@ public class BidanFormUtils {
             }
 
         } catch (Exception e) {
-            android.util.Log.e(TAG, e.toString(), e);
+//            android.util.Log.e(TAG, e.toString(), e);
         }
         return null;
     }
@@ -983,7 +983,7 @@ public class BidanFormUtils {
             }
 
         } catch (JSONException e) {
-            android.util.Log.e(TAG, e.toString(), e);
+//            android.util.Log.e(TAG, e.toString(), e);
         }
     }
 
@@ -1030,7 +1030,7 @@ public class BidanFormUtils {
             is.close();
             fileContents = new String(buffer, "UTF-8");
         } catch (IOException ex) {
-            android.util.Log.e(TAG, ex.toString(), ex);
+//            android.util.Log.e(TAG, ex.toString(), ex);
 
             return null;
         }
@@ -1073,7 +1073,7 @@ public class BidanFormUtils {
         @Override
         protected void onPostExecute(Void aVoid) {
 
-            android.util.Log.e(TAG, "onPostExecute: ");
+//            android.util.Log.e(TAG, "onPostExecute: ");
             if (context instanceof BaseRegisterActivity) {
                 final BaseRegisterActivity registerActivity = ((BaseRegisterActivity) context);
                 registerActivity.refreshList(FetchStatus.fetched);
@@ -1099,11 +1099,11 @@ public class BidanFormUtils {
                 saveEvent(event);
 
                 Gson gson = new GsonBuilder().create();
-                android.util.Log.i(TAG, "doInBackground: EVENT = " + eventType);
+//                android.util.Log.i(TAG, "doInBackground: EVENT = " + eventType);
                 if (eventType.equals(AllConstantsINA.FormNames.KI_FORM_TITLE)) {
                     Client client = formEntityConverter.getClientFromFormSubmission(formSubmission);
                     client.addAttribute("Location", event.getLocationId());
-                    android.util.Log.i(TAG, "doInBackground: " + gson.toJson(client));
+//                    android.util.Log.i(TAG, "doInBackground: " + gson.toJson(client));
                     saveClient(client);
                 } else if (eventType.equals(AllConstantsINA.FormNames.ANC_REGISTRATION)) {
                     JSONObject json = indonesiaECRepository.getClientByBaseEntityId(event.getBaseEntityId());
@@ -1178,7 +1178,7 @@ public class BidanFormUtils {
                 ClientProcessor.getInstance(context).processClient(indonesiaECRepository.getEvents(lastSyncDate, BaseRepository.TYPE_Unsynced));
                 allSharedPreferences.saveLastUpdatedAtDate(lastSyncDate.getTime());
             } catch (Exception e) {
-                android.util.Log.e(TAG, e.toString(), e);
+//                android.util.Log.e(TAG, e.toString(), e);
             }
             return null;
         }

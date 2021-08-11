@@ -3,11 +3,7 @@ package org.smartregister.bidan.service;
 import android.app.Service;
 import android.content.Context;
 import android.content.Intent;
-import android.os.Handler;
-import android.os.HandlerThread;
-import android.os.IBinder;
-import android.os.Looper;
-import android.os.Message;
+import android.os.*;
 import android.os.Process;
 import android.support.annotation.Nullable;
 import android.util.Log;
@@ -64,7 +60,8 @@ import utils.NetworkUtils;
 
 public class SyncService extends Service {
     private static final String TAG = SyncService.class.getName();
-    public static final int EVENT_PULL_LIMIT = 100;
+//    public static final int EVENT_PULL_LIMIT = 100;
+    public static final int EVENT_PULL_LIMIT = 100000;
     private static final String EVENTS_SYNC_PATH = "/rest/event/add";
     private static final String PHOTO_UPLOAD_PATH = "/multimedia/upload";
     private static final String PHOTO_DOWNLOAD_PATH = "/multimedia/profileimage";
@@ -76,6 +73,26 @@ public class SyncService extends Service {
     private List<Observable<?>> observables;
     private Long startSync = 0L;
     private Long endSync = 0L;
+    private boolean runningSync = false;
+    //    private IBinder binder = new SyncServiceBinder();
+    private static SyncService instance = null;
+
+    public static SyncService getInstance() {
+        return instance;
+    }
+
+    public static boolean isRunningSync() {
+        if (instance == null)
+            return false;
+        return instance.runningSync;
+    }
+
+//    public void runSync() {
+//        mHandlerThread = new HandlerThread("SyncService.HandlerThread", Process.THREAD_PRIORITY_BACKGROUND);
+//        mHandlerThread.start();
+//
+//        mServiceHandler = new ServiceHandler(mHandlerThread.getLooper());
+//    }
 
     @Override
     public void onCreate() {
@@ -87,6 +104,12 @@ public class SyncService extends Service {
 
         context = getBaseContext();
         httpAgent = BidanApplication.getInstance().context().getHttpAgent();
+        instance = this;
+    }
+
+    @Override
+    public boolean onUnbind(Intent intent) {
+        return super.onUnbind(intent);
     }
 
     @Override
@@ -126,17 +149,18 @@ public class SyncService extends Service {
         }
 
         try {
+            runningSync = true;
             pushECToServer();
             pushPhotoToServer();
             pullECFromServer();
 
         } catch (Exception e) {
-            Log.e(getClass().getName(), "", e);
+//            Log.e(getClass().getName(), "", e);
             sendSyncStatusBroadcastMessage(FetchStatus.fetchedFailed, true);
         }
     }
 
-    public String dateTimeAdjuster (String originalDate) {
+    public String dateTimeAdjuster(String originalDate) {
         DateFormat format = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSSZ");
         try {
             Date updateLast = format.parse(originalDate);
@@ -192,34 +216,34 @@ public class SyncService extends Service {
                 }
 
                 String jsonPayload = request.toString();
-                Log.e(TAG, "pushECToServer: "+ jsonPayload );
+//                Log.e(TAG, "pushECToServer: "+ jsonPayload );
                 Response<String> response = httpAgent.post(
                         MessageFormat.format("{0}/{1}", baseUrl, EVENTS_SYNC_PATH), jsonPayload);
 
                 if (response.isFailure()) {
-                    Log.e(getClass().getName(), "Events sync failed.");
+//                    Log.e(getClass().getName(), "Events sync failed.");
                     return;
                 }
                 db.markEventsAsSynced(pendingEvents);
-                Log.i(getClass().getName(), "Events synced successfully.");
+//                Log.i(getClass().getName(), "Events synced successfully.");
             } catch (Exception e) {
-                Log.e(getClass().getName(), e.getMessage());
+//                Log.e(getClass().getName(), e.getMessage());
             }
         }
 
     }
 
-    private void pushPhotoToServer(){
+    private void pushPhotoToServer() {
         String baseUrl = BidanApplication.getInstance().context().configuration().dristhiBaseURL();
         if (baseUrl.endsWith(context.getString(R.string.url_separator))) {
             baseUrl = baseUrl.substring(0, baseUrl.lastIndexOf(context.getString(R.string.url_separator)));
         }
         List<ProfileImage> pendingImages = BidanApplication.getInstance().imageRepository().getAllUnsyncImages();
         String path = DrishtiApplication.getAppDir();
-        for (ProfileImage image : pendingImages){
+        for (ProfileImage image : pendingImages) {
             String fullPath = path + File.separator + image.getBaseEntityId() + ".jpg";
-            Log.d(TAG, "pushPhotoToServer: baseEntityId="+image.getBaseEntityId());
-            Log.d(TAG, "pushPhotoToServer: path="+fullPath);
+            Log.d(TAG, "pushPhotoToServer: baseEntityId=" + image.getBaseEntityId());
+            Log.d(TAG, "pushPhotoToServer: path=" + fullPath);
             org.smartregister.domain.ProfileImage image1 =
                     new org.smartregister.domain.ProfileImage(
                             String.valueOf(image.getId()),
@@ -230,9 +254,9 @@ public class SyncService extends Service {
                             image.getSyncStatus(),
                             image.getFilecategory());
             image1.setAnmId(BidanApplication.getInstance().context().allSharedPreferences().fetchRegisteredANM());
-            String response = httpAgent.httpImagePost(MessageFormat.format("{0}/{1}", baseUrl, PHOTO_UPLOAD_PATH),image1);
-            Log.d(TAG, "pushPhotoToServer: response="+response);
-            if(response.equals("\"fail\"")){
+            String response = httpAgent.httpImagePost(MessageFormat.format("{0}/{1}", baseUrl, PHOTO_UPLOAD_PATH), image1);
+            Log.d(TAG, "pushPhotoToServer: response=" + response);
+            if (response.equals("\"fail\"")) {
                 Log.d(TAG, "pushPhotoToServer: failed");
                 return;
             }
@@ -243,7 +267,7 @@ public class SyncService extends Service {
     }
 
     private void pullECFromServer() {
-        Log.e(TAG, "pullECFromServer: start" );
+//        Log.e(TAG, "pullECFromServer: start" );
         final ECSyncUpdater ecUpdater = ECSyncUpdater.getInstance(context);
 
         // Fetch locations
@@ -315,7 +339,7 @@ public class SyncService extends Service {
                 });
     }
 
-    private void pullPhotoFromServer(){
+    private void pullPhotoFromServer() {
         ImageRepository imageRepo = BidanApplication.getInstance().imageRepository();
         String baseUrl = BidanApplication.getInstance().context().configuration().dristhiBaseURL();
         if (baseUrl.endsWith(context.getString(R.string.url_separator))) {
@@ -324,29 +348,29 @@ public class SyncService extends Service {
         final ECSyncUpdater ecUpdater = ECSyncUpdater.getInstance(context);
         List<JSONObject> events = ecUpdater.allEvents(startSync, endSync);
         try {
-            for (JSONObject event : events){
-                if(event.getString("eventType").equals("Update Photo")){
-                    Log.d(TAG, "pullPhotoFromServer: event="+event);
+            for (JSONObject event : events) {
+                if (event.getString("eventType").equals("Update Photo")) {
+                    Log.d(TAG, "pullPhotoFromServer: event=" + event);
                     Long version = event.getLong("version");
                     JSONArray jsonDataSegment = event.getJSONArray("obs");
                     int len = jsonDataSegment.length();
                     String faceVector = "[]";
                     for (int i = 0; i < len; i++) {
                         JSONObject seg = jsonDataSegment.getJSONObject(i);
-                        if(seg.getString("fieldCode").equals("face_vector")){
+                        if (seg.getString("fieldCode").equals("face_vector")) {
                             JSONArray fcValue = seg.getJSONArray("values");
                             faceVector = fcValue.getString(0);
-                            Log.d(TAG, "pullPhotoFromServer: faceVector="+faceVector);
+                            Log.d(TAG, "pullPhotoFromServer: faceVector=" + faceVector);
                             break;
                         }
                     }
-                    Log.d(TAG, "pullPhotoFromServer: jsonDataSegment"+jsonDataSegment);
+                    Log.d(TAG, "pullPhotoFromServer: jsonDataSegment" + jsonDataSegment);
                     String baseEntityId = event.getString("baseEntityId");
-                    int responseCode = downloadPhoto(MessageFormat.format("{0}/{1}/{2}", baseUrl, PHOTO_DOWNLOAD_PATH, baseEntityId),DrishtiApplication.getAppDir());
-                    Log.d(TAG, "pullPhotoFromServer: responseCode="+responseCode);
+                    int responseCode = downloadPhoto(MessageFormat.format("{0}/{1}/{2}", baseUrl, PHOTO_DOWNLOAD_PATH, baseEntityId), DrishtiApplication.getAppDir());
+                    Log.d(TAG, "pullPhotoFromServer: responseCode=" + responseCode);
                     if (responseCode == 200) {
                         ProfileImage profileImage = imageRepo.findByBaseEntityId(baseEntityId);
-                        if(profileImage==null){
+                        if (profileImage == null) {
                             profileImage = new ProfileImage();
                         }
                         profileImage.setBaseEntityId(baseEntityId);
@@ -370,7 +394,7 @@ public class SyncService extends Service {
     }
 
     private void saveResponseParcel(final ResponseParcel responseParcel) {
-        Log.e(TAG, "saveResponseParcel: " );
+//        Log.e(TAG, "saveResponseParcel: " );
         final ECSyncUpdater ecUpdater = ECSyncUpdater.getInstance(context);
         final Observable<FetchStatus> observable = Observable.just(responseParcel)
                 .observeOn(AndroidSchedulers.from(mHandlerThread.getLooper()))
@@ -413,12 +437,12 @@ public class SyncService extends Service {
 
     private JSONObject fetchRetry(String locations, int count) throws Exception {
         // Request spacing
-        try {
-            final int ONE_SECOND = 1000;
-            Thread.sleep(ONE_SECOND);
-        } catch (InterruptedException ie) {
-            Log.e(getClass().getName(), ie.getMessage());
-        }
+//        try {
+//            final int ONE_SECOND = 1000;
+//            Thread.sleep(ONE_SECOND);
+//        } catch (InterruptedException ie) {
+////            Log.e(getClass().getName(), ie.getMessage());
+//        }
 
         final ECSyncUpdater ecUpdater = ECSyncUpdater.getInstance(context);
 
@@ -426,7 +450,7 @@ public class SyncService extends Service {
             return ecUpdater.fetchAsJsonObject(AllConstants.SyncFilters.FILTER_LOCATION_ID, locations);
 
         } catch (Exception e) {
-            Log.e(getClass().getName(), e.getMessage());
+//            Log.e(getClass().getName(), e.getMessage());
             if (count >= 2) {
                 return null;
             } else {
@@ -443,14 +467,19 @@ public class SyncService extends Service {
             ecSyncUpdater.updateLastCheckTimeStamp(Calendar.getInstance().getTimeInMillis());
         }
         pullPhotoFromServer();
+
+        runningSync = false;
         sendSyncStatusBroadcastMessage(fetchStatus, true);
     }
 
-    private void sendSyncStatusBroadcastMessage(FetchStatus fetchStatus, boolean isComplete) {
+    private void sendSyncStatusBroadcastMessage(FetchStatus fetchStatus, boolean isComplete, String... args) {
         Intent intent = new Intent();
         intent.setAction(SyncStatusBroadcastReceiver.ACTION_SYNC_STATUS);
         intent.putExtra(SyncStatusBroadcastReceiver.EXTRA_FETCH_STATUS, fetchStatus);
         intent.putExtra(SyncStatusBroadcastReceiver.EXTRA_COMPLETE_STATUS, isComplete);
+        if (args != null && args.length > 0) {
+            intent.putExtra(SyncStatusBroadcastReceiver.EXTRA_ARGS, args);
+        }
         sendBroadcast(intent);
 
         if (isComplete) {
@@ -495,7 +524,7 @@ public class SyncService extends Service {
                 return Pair.create(minServerVersion, maxServerVersion);
             }
         } catch (Exception e) {
-            Log.e(getClass().getName(), e.getMessage());
+//            Log.e(getClass().getName(), e.getMessage());
         }
         return Pair.create(0L, 0L);
     }
@@ -521,7 +550,7 @@ public class SyncService extends Service {
         private ResponseParcel(JSONObject jsonObject, Pair<Long, Long> serverVersionPair) {
             this.jsonObject = jsonObject;
             this.serverVersionPair = serverVersionPair;
-            Log.e(TAG, "ResponseParcel: "+ jsonObject.toString() );
+//            Log.e(TAG, "ResponseParcel: "+ jsonObject.toString() );
         }
 
         private JSONObject getJsonObject() {
@@ -543,8 +572,8 @@ public class SyncService extends Service {
         httpConn.setRequestMethod("GET");
 
         //add request header
-        httpConn.setRequestProperty("username",BidanApplication.getInstance().context().allSharedPreferences().fetchRegisteredANM());
-        httpConn.setRequestProperty("password",BidanApplication.getInstance().context().allSettings().fetchANMPassword());
+        httpConn.setRequestProperty("username", BidanApplication.getInstance().context().allSharedPreferences().fetchRegisteredANM());
+        httpConn.setRequestProperty("password", BidanApplication.getInstance().context().allSettings().fetchANMPassword());
 
         int responseCode = httpConn.getResponseCode();
         // always check HTTP response code first
@@ -591,10 +620,15 @@ public class SyncService extends Service {
 
             Log.d(TAG, "sendGet: File downloaded");
         } else {
-            Log.e(TAG, "sendGet: No file to download. Server replied HTTP code: +"+ responseCode);
+//            Log.e(TAG, "sendGet: No file to download. Server replied HTTP code: +"+ responseCode);
         }
         httpConn.disconnect();
         return responseCode;
     }
 
+    public class SyncServiceBinder extends Binder {
+        public SyncService getSyncServiceInstance() {
+            return SyncService.this;
+        }
+    }
 }

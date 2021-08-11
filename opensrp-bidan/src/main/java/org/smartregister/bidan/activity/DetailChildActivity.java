@@ -4,15 +4,29 @@ import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
+import android.util.AndroidException;
 import android.util.Log;
 import android.view.View;
-import android.widget.ImageButton;
-import android.widget.ImageView;
-import android.widget.TextView;
+import android.webkit.WebChromeClient;
+import android.webkit.WebSettings;
+import android.webkit.WebView;
+import android.webkit.WebViewClient;
+import android.widget.*;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.core.type.TypeReference;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import org.apache.commons.io.IOUtils;
+import org.apache.commons.lang3.RandomStringUtils;
+import org.jetbrains.annotations.NotNull;
+import org.json.JSONObject;
 import org.smartregister.Context;
 import org.smartregister.bidan.R;
+import org.smartregister.bidan.options.HistoryDetailAdapter;
+import org.smartregister.bidan.repository.EventRepository;
 import org.smartregister.bidan.utils.CameraPreviewActivity;
+import org.smartregister.bidan.utils.ChartType;
 import org.smartregister.bidan.utils.Support;
 import org.smartregister.bidan.utils.Tools;
 import org.smartregister.commonregistry.AllCommonsRepository;
@@ -22,10 +36,12 @@ import org.smartregister.repository.DetailsRepository;
 import org.smartregister.view.activity.DrishtiApplication;
 
 import java.io.File;
-import java.util.HashMap;
-import java.util.LinkedHashMap;
-import java.util.Map;
+import java.io.IOException;
+import java.nio.charset.Charset;
+import java.util.*;
 
+import static android.view.View.GONE;
+import static android.view.View.VISIBLE;
 import static org.smartregister.util.StringUtil.humanize;
 
 //import org.smartregister.bidan.lib.FlurryFacade;
@@ -37,14 +53,147 @@ public class DetailChildActivity extends Activity {
 
     private static final String TAG = DetailChildActivity.class.getName();
     public static CommonPersonObjectClient childclient;
+    private final String defaultJenisKunjungan = "Pilih Jenis Kunjungan";
     //    private static String entityid;
 //    @Bind(R.id.childdetailprofileview)
 //    ImageView childview;
     private String userId;
+    private final ObjectMapper mapper = new ObjectMapper();
+    private WebView webview;
+    private Spinner spinnerChildType;
+    private List<ChartType> chartTypes;
+    Spinner spinnerHistory;
 
-//    public DetailChildActivity(String userId) {
+    //    public DetailChildActivity(String userId) {
 //        this.userId = userId;
 //    }
+    private void buildWebView(final ChartType type) throws IOException {
+        webview = findViewById(R.id.webview_chart);
+        final WebSettings webSettings = webview.getSettings();
+        webSettings.setJavaScriptEnabled(true);
+        webSettings.setBuiltInZoomControls(true);
+        webSettings.setSupportZoom(false);
+        webSettings.setDisplayZoomControls(false);
+        webSettings.setBuiltInZoomControls(true);
+        webSettings.setUseWideViewPort(true);
+        webview.setWebChromeClient(new WebChromeClient());
+        webview.setInitialScale(1);
+
+        // Load base html from the assets directory
+        webview.loadUrl("file:///android_asset/www/growth/index.html");
+        final List<List<Float>> data = getChartData(type);
+        webview.setWebViewClient(new WebViewClient() {
+            public void onPageFinished(WebView view, String url) {
+                renderChart(data, type);
+            }
+        });
+
+    }
+
+    private void renderChart(List<List<Float>> data, ChartType type) {
+        try {
+            int w = webview.getWidth();
+            int h = webview.getHeight();
+//            final String s = mapper.writeValueAsString(chartTypes);
+////            mapper.readValue(,)
+//            Log.i("JSON", s);
+            webview.loadUrl("javascript:init('" + mapper.writeValueAsString(data) + "','" + type.name() + "'," + w + "," + h + ")");
+        } catch (JsonProcessingException e) {
+            e.printStackTrace();
+        }
+    }
+
+    private void renderChart(ChartType type) throws IOException {
+        renderChart(getChartData(type), type);
+    }
+
+    private List<List<Float>> getChartData(ChartType type) throws IOException {
+        List<List<Float>> o = mapper.readValue(getAssets().open("dummy_chart.json"), new TypeReference<List<List<Float>>>() {
+        });
+        float add = 4;
+        int bound = 2;
+        if (type.name().startsWith("lfa")) {
+            add = 50;
+            bound = 5;
+        } else if (type.name().startsWith("hcfa")) {
+            add = 36;
+            bound = 2;
+        }
+        Float lastFloat = add;
+        for (int i = 0; i < o.size(); i++) {
+            final List<Float> floats = o.get(i);
+            lastFloat = lastFloat + new Random().nextInt(bound);
+            floats.set(1, lastFloat);
+            o.set(i, floats);
+        }
+        return o;
+    }
+
+    final View.OnClickListener chartAction = new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            ((TextView) findViewById(R.id.tv_mother_summary)).setText("Child Growth Chart");
+            findViewById(R.id.id1).setVisibility(GONE);
+            findViewById(R.id.id_chart).setVisibility(VISIBLE);
+            findViewById(R.id.id3).setVisibility(GONE);
+            initSpinner();
+        }
+    };
+
+    private void initSpinner() {
+        if (findViewById(R.id.id_chart).getVisibility() == VISIBLE) {
+            final ArrayAdapter<ChartType> jenisChart = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, chartTypes);
+            spinnerChildType.setAdapter(jenisChart);
+            spinnerChildType.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+                @Override
+                public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                    ChartType type = (ChartType) parent.getAdapter().getItem(position);
+                    try {
+                        renderChart(type);
+                    } catch (IOException ioException) {
+                        ioException.printStackTrace();
+                    }
+                }
+
+                @Override
+                public void onNothingSelected(AdapterView<?> parent) {
+
+                }
+            });
+        } else {
+            final ArrayAdapter<String> jenisAdapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, new String[]{defaultJenisKunjungan, "Kunjungan neonatal", "Kunjungan Balita"});
+            spinnerChildType.setAdapter(jenisAdapter);
+
+            spinnerChildType.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+                @Override
+                public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                    final String item = jenisAdapter.getItem(position);
+
+                    if (!item.equals(defaultJenisKunjungan)) {
+                        String keyTanggalKunjungan = "tanggalKunjunganBayiPerbulan";
+                        int startField = 5;
+                        String formType = "kohort_bayi_kunjungan";
+                        if (item.toLowerCase().endsWith("balita")) {
+                            formType = "kohort_balita_kunjungan";
+                            startField = 6;
+                        }
+
+                        final List<JSONObject> detailEvents = EventRepository.getEventsByBaseIdAndEventType(item, userId);
+                        HistoryDetailAdapter data = new HistoryDetailAdapter(DetailChildActivity.this, detailEvents, formType, startField, keyTanggalKunjungan);
+
+                        spinnerHistory.setAdapter(data);
+                        spinnerHistory.setSelection(0);
+                        spinnerHistory.setOnItemSelectedListener(data);
+                    }
+                }
+
+                @Override
+                public void onNothingSelected(AdapterView<?> parent) {
+
+                }
+            });
+        }
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,6 +201,23 @@ public class DetailChildActivity extends Activity {
         setContentView(R.layout.anak_detail_activity);
 
         userId = childclient.getDetails().get("base_entity_id");
+
+        final TextView show_history = findViewById(R.id.tv_detail_history);
+        final TextView show_basic = findViewById(R.id.tv_child_detail_information);
+        final TextView showChart = findViewById(R.id.tv_detail_chart);
+        spinnerHistory = findViewById(R.id.history_ke);
+
+        spinnerChildType = findViewById(R.id.jenis_kunjungan);
+        if ("female".equals(childclient.getDetails().get("gender")))
+            chartTypes = ChartType.femaleCharts();
+        else
+            chartTypes = ChartType.maleCharts();
+        try {
+            buildWebView(chartTypes.get(0));
+        } catch (IOException ioException) {
+            ioException.printStackTrace();
+        }
+
 
         final ImageView childview = (ImageView) findViewById(R.id.childdetailprofileview);
         //header
@@ -83,15 +249,7 @@ public class DetailChildActivity extends Activity {
         TextView growthChartButton = (TextView) findViewById(R.id.chart_label);
         ImageButton back = (ImageButton) findViewById(org.smartregister.R.id.btn_back_to_home);
 
-        growthChartButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                finish();
-//                DetailChildActivity.childclient = childclient;
-                startActivity(new Intent(DetailChildActivity.this, DetailChildActivity.class));
-                overridePendingTransition(0, 0);
-            }
-        });
+        growthChartButton.setOnClickListener(chartAction);
         back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -100,7 +258,29 @@ public class DetailChildActivity extends Activity {
                 overridePendingTransition(0, 0);
             }
         });
+        show_history.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                ((TextView) findViewById(R.id.tv_mother_summary)).setText("SUMMARY");
+                findViewById(R.id.id3).setVisibility(VISIBLE);
+                findViewById(R.id.id_chart).setVisibility(GONE);
+                findViewById(R.id.id1).setVisibility(GONE);
+                initSpinner();
+            }
+        });
 
+        show_basic.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                ((TextView) findViewById(R.id.tv_mother_summary)).setText("SUMMARY");
+                findViewById(R.id.id1).setVisibility(VISIBLE);
+                findViewById(R.id.id_chart).setVisibility(GONE);
+                findViewById(R.id.id3).setVisibility(GONE);
+                initSpinner();
+            }
+        });
+
+        showChart.setOnClickListener(chartAction);
         DetailsRepository detailsRepository = Context.getInstance().detailsRepository();
         detailsRepository.updateDetails(childclient);
 
@@ -130,12 +310,15 @@ public class DetailChildActivity extends Activity {
 //        final CommonPersonObject ibuparent = iburep.findByCaseID(childobject.getColumnmaps().get("relational_id"));
 
         AllCommonsRepository kirep = Context.getInstance().allCommonsRepositoryobjects("ec_kartu_ibu");
-        final CommonPersonObject kiparent = kirep.findByCaseID(childobject.getColumnmaps().get("relational_id"));
         //Fix aplikasi crash saat mengisi data pada kunjungan ANC dan saat membuka dan melihat dashboard anak pada kohort anak
+        final String relational_id = childobject.getColumnmaps().get("relational_id");
         Map<String, String> columnmaps = new HashMap<>();
-        if (kiparent != null) {
-            if (kiparent.getColumnmaps() != null) {
-                columnmaps = kiparent.getColumnmaps();
+        if (relational_id != null) {
+            final CommonPersonObject kiparent = kirep.findByCaseID(relational_id);
+            if (kiparent != null) {
+                if (kiparent.getColumnmaps() != null) {
+                    columnmaps = kiparent.getColumnmaps();
+                }
             }
         }
 

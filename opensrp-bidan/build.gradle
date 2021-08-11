@@ -76,12 +76,12 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
             buildConfigField "int", "DATABASE_VERSION", '1'
 //            resValue "string", 'opensrp_url', '"http://149.129.219.205:9094/opensrp"'
-            resValue "string", 'opensrp_url', '"http://sid.alcasha.com/opensrp"'
+            resValue "string", 'opensrp_url', '"http://149.129.218.51:9094/opensrp"'
 
         }
         debug {
 //            resValue "string", 'opensrp_url', '"http://149.129.219.205:9094/opensrp"'
-            resValue "string", 'opensrp_url', '"http://sid.alcasha.com/opensrp"'
+            resValue "string", 'opensrp_url', '"http://149.129.218.51:9094/opensrp"'
             buildConfigField "int", "DATABASE_VERSION", '1'
             buildConfigField "boolean", "SYNC_WAIT", 'false'
             buildConfigField "boolean", "UNIQUE_ID", 'false'
@@ -141,7 +141,7 @@ dependencies {
     implementation('org.smartregister:opensrp-client-configurable-views:1.1.1-SNAPSHOT@aar') {
         transitive = true
     }
-
+    implementation 'org.ei.drishti:drishti-interface:0.1-SNAPSHOT'
     implementation 'com.android.support:design:27.1.1'
     implementation 'com.google.code.gson:gson:2.8.2'
     implementation 'com.android.support:appcompat-v7:27.1.1'
@@ -155,7 +155,7 @@ dependencies {
     // Because RxAndroid releases are few and far between, it is recommended you also
     // explicitly depend on RxJava's latest version for bug fixes and new features.
     implementation 'io.reactivex.rxjava2:rxjava:2.1.5'
-    implementation 'com.github.lecho:hellocharts-android:v1.5.8'
+//    implementation 'com.github.lecho:hellocharts-android:v1.5.8'
 
     implementation files('libs/FlurryAnalytics-6.0.0.jar')
     implementation('com.crashlytics.sdk.android:crashlytics:2.8.0@aar') {

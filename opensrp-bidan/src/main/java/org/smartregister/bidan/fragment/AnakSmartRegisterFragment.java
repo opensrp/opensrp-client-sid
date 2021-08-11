@@ -23,10 +23,7 @@ import org.smartregister.bidan.utils.AllConstantsINA;
 import org.smartregister.bidan.utils.BidanSmartRegisterQueryBuilder;
 import org.smartregister.commonregistry.CommonPersonObjectClient;
 import org.smartregister.commonregistry.CommonRepository;
-import org.smartregister.cursoradapter.CursorCommonObjectFilterOption;
-import org.smartregister.cursoradapter.CursorCommonObjectSort;
-import org.smartregister.cursoradapter.SmartRegisterPaginatedCursorAdapter;
-import org.smartregister.cursoradapter.SmartRegisterQueryBuilder;
+import org.smartregister.cursoradapter.*;
 import org.smartregister.util.StringUtil;
 import org.smartregister.view.activity.SecuredNativeSmartRegisterActivity;
 import org.smartregister.view.dialog.AllClientsFilter;
@@ -239,7 +236,7 @@ public class AnakSmartRegisterFragment extends BaseSmartRegisterFragment {
             String query = "";
             if (isValidFilterForFts(commonRepository())) {
                 String sql = sqb.countQueryFts(tablename, joinTable, mainCondition, filters);
-                Log.i(getClass().getName(), query);
+//                Log.i(getClass().getName(), query);
 
                 totalcount = commonRepository().countSearchIds(sql);
                 Log.v("total count here", "" + totalcount);
@@ -250,7 +247,7 @@ public class AnakSmartRegisterFragment extends BaseSmartRegisterFragment {
                 query = sqb.orderbyCondition(Sortqueries);
                 query = sqb.Endquery(query);
 
-                Log.i(getClass().getName(), query);
+//                Log.i(getClass().getName(), query);
                 c = commonRepository().rawCustomQueryForAdapter(query);
                 c.moveToFirst();
                 totalcount = c.getInt(0);
@@ -324,19 +321,9 @@ public class AnakSmartRegisterFragment extends BaseSmartRegisterFragment {
         textWatcher(AllConstantsINA.Register.CHILD);
     }
 
-    public void addChildToList(ArrayList<DialogOption> dialogOptionslist, Map<String, TreeNode<String, Location>> locationMap) {
-        for (Map.Entry<String, TreeNode<String, Location>> entry : locationMap.entrySet()) {
-
-            if (entry.getValue().getChildren() != null) {
-                addChildToList(dialogOptionslist, entry.getValue().getChildren());
-
-            } else {
-                StringUtil.humanize(entry.getValue().getLabel());
-                String name = StringUtil.humanize(entry.getValue().getLabel());
-                dialogOptionslist.add(new ChildFilterOption(name, "address1", name, "ec_kartu_ibu"));
-
-            }
-        }
+    @Override
+    protected CursorFilterOption defaultOptions(String name) {
+        return new ChildFilterOption(name, addressName, name, tableName);
     }
 
     //    WD
@@ -417,7 +404,7 @@ public class AnakSmartRegisterFragment extends BaseSmartRegisterFragment {
                     showFragmentDialog(((AnakSmartRegisterActivity) getActivity()).new EditDialogOptionModelNew(), view.getTag());
                     break;
                 default:
-                    Log.e(TAG, "onClick: Default options " );
+                    Log.e(TAG, "onClick: Default options ");
                     break;
             }
         }
