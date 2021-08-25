@@ -16,6 +16,7 @@ import org.smartregister.bidan.repository.EventRepository;
 import org.smartregister.bidan.utils.Support;
 import org.smartregister.commonregistry.CommonPersonObjectClient;
 import org.smartregister.repository.DetailsRepository;
+import org.smartregister.view.customcontrols.CustomFontTextView;
 
 import java.util.*;
 
@@ -403,6 +404,12 @@ public class DetailANCActivity extends Activity {
         ((TextView) findViewById(R.id.tv_b_blood)).setText(getStrValue("pendonor"));
         ((TextView) findViewById(R.id.tv_b_houser)).setText(getStrValue("kondisiRumah"));
         ((TextView) findViewById(R.id.tv_b_stock)).setText(getStrValue("persediaanPerlengkapanPersalinan"));
+        TableLayout layoutA = findViewById(R.id.table_layout_anc_a);
+        TableRow row = new TableRow(this);
+        CustomFontTextView label = new CustomFontTextView(this);
+        label.setText("Angka Kumulatif");
+
+        TableLayout layoutB = findViewById(R.id.table_layout_anc_b);
 
 
         findViewById(R.id.tv_detail_today).setOnClickListener(new View.OnClickListener() {
