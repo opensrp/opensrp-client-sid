@@ -213,7 +213,7 @@ public class ANCClientsProvider extends BaseClientsProvider {
                 pc.getDetails().get("highRiskTuberculosis")+"||"+ pc.getDetails().get("highRiskMalaria")+"||"+ pc.getDetails().get("highRiskPregnancyYoungMaternalAge")+"||"+
                 pc.getDetails().get("highRiskPregnancyOldMaternalAge"))) hr_badge.setVisibility(VISIBLE);
 
-        if ("yes".matches(pc.getDetails().get("highRisksSTIBBVs")+ "||" +
+        if (("yes".matches(pc.getDetails().get("highRisksSTIBBVs")+ "||" +
                 pc.getDetails().get("highRiskEctopicPregnancy")+ "||" +
                 pc.getDetails().get("highRiskCardiovascularDiseaseRecord")+ "||" +
                 pc.getDetails().get("highRiskDidneyDisorder")+ "||" +
@@ -222,14 +222,19 @@ public class ANCClientsProvider extends BaseClientsProvider {
                 pc.getDetails().get("highRiskTuberculosis")+ "||" +
                 pc.getDetails().get("highRiskMalaria")+ "||" +
                 pc.getDetails().get("highRiskPregnancyYoungMaternalAge")+ "||" +
-                pc.getDetails().get("highRiskPregnancyOldMaternalAge"))) hr_badge.setVisibility(VISIBLE);
+                pc.getDetails().get("highRiskPregnancyOldMaternalAge")))
+        ) hr_badge.setVisibility(VISIBLE);
 
 
         if ("yes".matches(pc.getDetails().get("highRiskPregnancyPIH")+ "||" +
                 pc.getDetails().get("highRiskPregnancyProteinEnergyMalnutrition")+ "||" +
                 pc.getDetails().get("HighRiskPregnancyTooManyChildren")+ "||" +
                 pc.getDetails().get("highRiskPregnancyDiabetes")+ "||" +
-                pc.getDetails().get("highRiskPregnancyAnemia")))
+                pc.getDetails().get("highRiskPregnancyAnemia"))
+
+                || pc.getDetails().get("alkiPenyakitKronis").equalsIgnoreCase("Lainnya")
+//                || pc.getDetails().get("tanggalLahir")
+        )
                 hrp_badge.setVisibility(VISIBLE);
 
         if ("yes".matches(pc.getDetails().get("highRiskLabourFetusMalpresentation")+ "||" +
