@@ -6,6 +6,12 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.*;
 
+import com.jayway.jsonpath.Configuration;
+import com.jayway.jsonpath.JsonPath;
+import org.apache.commons.lang3.StringUtils;
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 import org.smartregister.Context;
 import org.smartregister.bidan.R;
 import org.smartregister.bidan.options.HistoryDetailAdapter;
@@ -16,10 +22,12 @@ import org.smartregister.commonregistry.CommonPersonObject;
 import org.smartregister.commonregistry.CommonPersonObjectClient;
 import org.smartregister.repository.DetailsRepository;
 
+import java.io.IOException;
 import java.util.*;
 
 import static android.view.View.GONE;
 import static android.view.View.VISIBLE;
+import static java.util.Collections.EMPTY_MAP;
 import static org.smartregister.util.StringUtil.humanize;
 import static org.smartregister.util.StringUtil.humanizeAndDoUPPERCASE;
 
@@ -284,7 +292,18 @@ public class DetailPNCActivity extends Activity {
         ((TextView) findViewById(R.id.txt_HighRiskPregnancyTooManyChildren)).setText(humanize(ibuparent.getDetails().get("HighRiskPregnancyTooManyChildren") != null ? ibuparent.getDetails().get("HighRiskPregnancyTooManyChildren") : "-"));
 
         ((TextView) findViewById(R.id.txt_highRiskHIVAIDS)).setText(humanize(pncclient.getDetails().get("highRiskHIVAIDS") != null ? pncclient.getDetails().get("highRiskHIVAIDS") : "-"));
-
+        Map<String, List<String>> kf = getKF();
+        List<String> kumulatif = new ArrayList<String>();
+        Map<String, String> details = pncclient.getDetails();
+        if (details.get("penolong") != null && !details.get("penolong").trim().isEmpty()) {
+            kumulatif.add("- Penolong " + details.get("penolong").replaceAll("[^a-zA-Z0-9]", ""));
+        }
+        if (kf.keySet().size() >= 4) {
+            kumulatif.add("- KF Lengkap");
+        }
+        if (kumulatif.size() > 0) {
+            ((TextView) findViewById(R.id.txt_kumulatif)).setText(": " + StringUtils.join(kumulatif, "\n"));
+        }
         show_risk.setText(getResources().getString(R.string.show_more_button));
         show_detail.setText(getResources().getString(R.string.show_less_button));
 
@@ -348,4 +367,44 @@ public class DetailPNCActivity extends Activity {
 
     }
 
+    private Map<String, List<String>> getKF() {
+        List<JSONObject> ancs = EventRepository.getPNCByBaseEntityId(pncclient.entityId());
+        if (ancs.size() > 0) {
+            Map<String, List<String>> results = new LinkedHashMap<>();
+            for (JSONObject anc : ancs) {
+                try {
+                    if (anc.has("hariKeKF")) {
+                        String hariKeKF = anc.getString("hariKeKF");
+                        if (!hariKeKF.trim().isEmpty()) {
+                            Integer kfInt = Integer.parseInt(hariKeKF.trim());
+                            if (kfInt >= 0 && kfInt <= 2) {
+                                buildKf(results, 1, hariKeKF);
+                            } else if (kfInt >= 3 && kfInt <= 7)
+                                buildKf(results, 2, hariKeKF);
+                            else if (kfInt >= 8 && kfInt <= 28)
+                                buildKf(results, 3, hariKeKF);
+                            else if (kfInt >= 29 && kfInt <= 42)
+                                buildKf(results, 4, hariKeKF);
+                        }
+                    }
+                } catch (JSONException ex) {
+
+                }
+            }
+            return results;
+        }
+        return new LinkedHashMap<>();
+    }
+
+    public void buildKf(Map<String, List<String>> results, int key, String hariKeKF) {
+        if (!hariKeKF.trim().isEmpty()) {
+            List<String> s = new ArrayList<>();
+            if (results.containsKey("kf_" + key)) {
+                s = results.get("kf_" + key);
+            }
+            s.add(hariKeKF);
+            results.put("kf_" + key, s);
+        }
+//        return results;
+    }
 }

@@ -10,7 +10,9 @@ import org.smartregister.bidan.application.BidanApplication;
 import org.smartregister.repository.Repository;
 
 import java.util.ArrayList;
+import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Map;
 
 public class EventRepository {
     private static final String TAG = EventRepository.class.getCanonicalName();
@@ -72,5 +74,37 @@ public class EventRepository {
 
     public static List<JSONObject> getPNCByBaseEntityId(String baseEntityId) {
         return getEventsByBaseIdAndEventType("Kunjungan PNC", baseEntityId);
+    }
+
+    public static List<Map<String, Object>> getAllChildByMotherId(String baseEntityId) {
+        Cursor cursor = null;
+        List<Map<String, Object>> results = new ArrayList<>();
+        try {
+            Repository repository = BidanApplication.getInstance().getRepository();
+            cursor = repository.getReadableDatabase().rawQuery("select ec_ibu.base_entity_id,namaBayi,tanggalLahirAnak from ec_ibu\n" +
+                    "left join ec_anak ea on ec_ibu.base_entity_id = ea.relational_id\n" +
+                    "where ec_ibu.base_entity_id = ?\n" +
+                    "order by\n" +
+                    "ec_ibu.base_entity_id asc,\n" +
+                    "tanggalLahirAnak desc", new String[]{baseEntityId});
+            while (cursor.moveToNext()) {
+                Map<String, Object> data = new LinkedHashMap<>();
+                for (int i = 0; i < cursor.getColumnCount(); i++) {
+                    data.put(cursor.getColumnName(i), cursor.getString(i));
+                }
+                results.add(data);
+            }
+
+        } catch (Exception ex) {
+
+        }
+        return results;
+    }
+
+    public static Map<String, Object> getLastChild(String baseEntityId) {
+        List<Map<String, Object>> allChildByMotherId = getAllChildByMotherId(baseEntityId);
+        if (allChildByMotherId.isEmpty())
+            return null;
+        return allChildByMotherId.get(0);
     }
 }

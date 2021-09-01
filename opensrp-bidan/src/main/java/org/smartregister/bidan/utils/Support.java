@@ -8,6 +8,7 @@ import android.widget.TextView;
 import org.apache.commons.lang3.StringUtils;
 import org.joda.time.LocalDate;
 import org.joda.time.Months;
+import org.joda.time.Years;
 import org.joda.time.format.DateTimeFormat;
 import org.joda.time.format.DateTimeFormatter;
 import org.smartregister.bidan.R;
@@ -17,6 +18,8 @@ import org.smartregister.util.Log;
 import org.smartregister.view.activity.DrishtiApplication;
 
 import java.io.File;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 
 import static org.joda.time.LocalDateTime.parse;
 
@@ -26,6 +29,7 @@ import static org.joda.time.LocalDateTime.parse;
 public class Support {
 
     public static boolean ONSYNC = false;
+    private static final SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'");
 
     public static String[] replace(String[] data, String target, String replacement) {
         for (int i = 0; i < data.length; i++) {
@@ -55,25 +59,25 @@ public class Support {
 
     public static String getColumnmaps(CommonPersonObjectClient person, String values) {
         if (person.getColumnmaps().get(values) != null && person.getColumnmaps().get(values).length() > 0)
-                return person.getColumnmaps().get(values);
+            return person.getColumnmaps().get(values);
         return "-";
     }
 
     public static String getColumnmaps(CommonPersonObject person, String values) {
         if (person.getColumnmaps().get(values) != null && person.getColumnmaps().get(values).length() > 0)
-                return person.getColumnmaps().get(values);
+            return person.getColumnmaps().get(values);
         return "-";
     }
 
     public static String getDetails(CommonPersonObjectClient person, String values) {
         if (person.getDetails().get(values) != null && person.getDetails().get(values).length() > 0)
-                return person.getDetails().get(values);
+            return person.getDetails().get(values);
         return "-";
     }
 
     public static String getDetails(CommonPersonObject person, String values) {
         if (person.getDetails().get(values) != null && person.getDetails().get(values).length() > 0)
-                return person.getDetails().get(values);
+            return person.getDetails().get(values);
         return "-";
     }
 
@@ -170,12 +174,20 @@ public class Support {
         }
     }
 
-//    public static int monthAges(String lastVisitDate, String currentDate) {
+    //    public static int monthAges(String lastVisitDate, String currentDate) {
 //        int tahun = Integer.parseInt(currentDate.substring(0, 4)) - Integer.parseInt(lastVisitDate.substring(0, 4));
 //        int bulan = Integer.parseInt(currentDate.substring(5, 7)) - Integer.parseInt(lastVisitDate.substring(5, 7));
 //        int hari = Integer.parseInt(currentDate.substring(8)) - Integer.parseInt(lastVisitDate.substring(8));
 //        return (tahun * 12 + bulan + (int) (hari / 30));
 //    }
+    public static Integer getAge(String date) {
+        try {
+            return Years.yearsBetween(LocalDate.fromDateFields(sdf.parse(date)), LocalDate.now()).getYears();
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        return 0;
+    }
 
     public static void checkMonth(Context context, String htp, TextView TextMonth) {
         String edd = htp;

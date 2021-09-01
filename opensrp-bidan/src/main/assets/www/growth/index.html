@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<meta charset="utf-8">
+<link rel="stylesheet" type="text/css" media="all" href="growthchart.css"/>
+<body>
+<script src="chart-data.js"></script>
+<script src="d3.min.js"></script>
+<script src="jquery.min.js"></script>
+<script src="growthchart.js"></script>
+<script>
+    var width = 800;
+    var height = 300;
+
+    function init(data, type, w, h) {
+        // width = w;
+        display_growth_chart(JSON.parse(data), 'body', type);
+    }
+</script>
+</body>
+</html>

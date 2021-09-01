@@ -20,6 +20,7 @@ import org.joda.time.format.DateTimeFormatter;
 import org.smartregister.Context;
 import org.smartregister.bidan.R;
 import org.smartregister.bidan.activity.LoginActivity;
+import org.smartregister.bidan.repository.EventRepository;
 import org.smartregister.bidan.utils.AllConstantsINA;
 import org.smartregister.bidan.utils.Support;
 import org.smartregister.commonregistry.AllCommonsRepository;
@@ -31,6 +32,7 @@ import org.smartregister.repository.DetailsRepository;
 import org.smartregister.service.AlertService;
 import org.smartregister.view.contract.SmartRegisterClient;
 
+import java.text.SimpleDateFormat;
 import java.util.List;
 import java.util.Map;
 
@@ -40,6 +42,7 @@ import static android.view.ViewGroup.LayoutParams.MATCH_PARENT;
 import static org.joda.time.LocalDateTime.parse;
 
 import org.joda.time.*;
+
 import java.util.regex.Pattern;
 import java.util.regex.Matcher;
 
@@ -54,7 +57,7 @@ public class ANCClientsProvider extends BaseClientsProvider {
     private final AbsListView.LayoutParams clientViewLayoutParams;
     protected CommonPersonObjectController controller;
 
-//    @Bind(R.id.profile_info_layout)
+    //    @Bind(R.id.profile_info_layout)
 //    private LinearLayout profilelayout;
 //    @Bind(R.id.iv_mother_photo)
 //    private ImageView profilepic;
@@ -107,6 +110,7 @@ public class ANCClientsProvider extends BaseClientsProvider {
 //    @Bind(R.id.btn_anc_edit)
 //    private ImageButton follow_up;
     private AlertService alertService;
+    private final SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'");
 
     public ANCClientsProvider(android.content.Context context, View.OnClickListener onClickListener, AlertService alertService) {
         super(context);
@@ -134,7 +138,7 @@ public class ANCClientsProvider extends BaseClientsProvider {
         AllCommonsRepository allancRepository = Context.getInstance().allCommonsRepositoryobjects("ec_ibu");
         CommonPersonObject ancobject = allancRepository.findByCaseID(pc.entityId());
         DetailsRepository detailsRepository = Context.getInstance().detailsRepository();
-        if(ancobject != null) {
+        if (ancobject != null) {
             detailsRepository.updateDetails(ancobject);
 
 //            Log.e(TAG, "getView: client : " + ancobject.getColumnmaps().toString());
@@ -208,41 +212,59 @@ public class ANCClientsProvider extends BaseClientsProvider {
         hrl_badge.setVisibility(INVISIBLE); // High Risk Liabirth
 
         //Risk flag
-        if ("yes".matches(pc.getDetails().get("highRiskSTIBBVs")+"||"+ pc.getDetails().get("highRiskEctopicPregnancy")+"||"+ pc.getDetails().get("highRiskCardiovascularDiseaseRecord")+"||"+
-                pc.getDetails().get("highRiskDidneyDisorder")+"||"+ pc.getDetails().get("highRiskHeartDisorder")+"||"+ pc.getDetails().get("highRiskAsthma")+"||"+
-                pc.getDetails().get("highRiskTuberculosis")+"||"+ pc.getDetails().get("highRiskMalaria")+"||"+ pc.getDetails().get("highRiskPregnancyYoungMaternalAge")+"||"+
+        if ("yes".matches(pc.getDetails().get("highRiskSTIBBVs") + "||" + pc.getDetails().get("highRiskEctopicPregnancy") + "||" + pc.getDetails().get("highRiskCardiovascularDiseaseRecord") + "||" +
+                pc.getDetails().get("highRiskDidneyDisorder") + "||" + pc.getDetails().get("highRiskHeartDisorder") + "||" + pc.getDetails().get("highRiskAsthma") + "||" +
+                pc.getDetails().get("highRiskTuberculosis") + "||" + pc.getDetails().get("highRiskMalaria") + "||" + pc.getDetails().get("highRiskPregnancyYoungMaternalAge") + "||" +
                 pc.getDetails().get("highRiskPregnancyOldMaternalAge"))) hr_badge.setVisibility(VISIBLE);
 
-        if (("yes".matches(pc.getDetails().get("highRisksSTIBBVs")+ "||" +
-                pc.getDetails().get("highRiskEctopicPregnancy")+ "||" +
-                pc.getDetails().get("highRiskCardiovascularDiseaseRecord")+ "||" +
-                pc.getDetails().get("highRiskDidneyDisorder")+ "||" +
-                pc.getDetails().get("highRiskHeartDisorder")+ "||" +
-                pc.getDetails().get("highRiskAsthma")+ "||" +
-                pc.getDetails().get("highRiskTuberculosis")+ "||" +
-                pc.getDetails().get("highRiskMalaria")+ "||" +
-                pc.getDetails().get("highRiskPregnancyYoungMaternalAge")+ "||" +
+        if (("yes".matches(pc.getDetails().get("highRisksSTIBBVs") + "||" +
+                pc.getDetails().get("highRiskEctopicPregnancy") + "||" +
+                pc.getDetails().get("highRiskCardiovascularDiseaseRecord") + "||" +
+                pc.getDetails().get("highRiskDidneyDisorder") + "||" +
+                pc.getDetails().get("highRiskHeartDisorder") + "||" +
+                pc.getDetails().get("highRiskAsthma") + "||" +
+                pc.getDetails().get("highRiskTuberculosis") + "||" +
+                pc.getDetails().get("highRiskMalaria") + "||" +
+                pc.getDetails().get("highRiskPregnancyYoungMaternalAge") + "||" +
                 pc.getDetails().get("highRiskPregnancyOldMaternalAge")))
         ) hr_badge.setVisibility(VISIBLE);
 
 
-        if ("yes".matches(pc.getDetails().get("highRiskPregnancyPIH")+ "||" +
-                pc.getDetails().get("highRiskPregnancyProteinEnergyMalnutrition")+ "||" +
-                pc.getDetails().get("HighRiskPregnancyTooManyChildren")+ "||" +
-                pc.getDetails().get("highRiskPregnancyDiabetes")+ "||" +
+        if ("yes".matches(pc.getDetails().get("highRiskPregnancyPIH") + "||" +
+                pc.getDetails().get("highRiskPregnancyProteinEnergyMalnutrition") + "||" +
+                pc.getDetails().get("HighRiskPregnancyTooManyChildren") + "||" +
+                pc.getDetails().get("highRiskPregnancyDiabetes") + "||" +
                 pc.getDetails().get("highRiskPregnancyAnemia"))
 
-                || pc.getDetails().get("alkiPenyakitKronis").equalsIgnoreCase("Lainnya")
-//                || pc.getDetails().get("tanggalLahir")
+                || (pc.getDetails().containsKey("alkiPenyakitKronis") && pc.getDetails().get("alkiPenyakitKronis") != null && pc.getDetails().get("alkiPenyakitKronis").equalsIgnoreCase("Lainnya"))
+                || Support.getAge(pc.getDetails().get("tanggalLahir")) < 20
         )
-                hrp_badge.setVisibility(VISIBLE);
-
-        if ("yes".matches(pc.getDetails().get("highRiskLabourFetusMalpresentation")+ "||" +
-                pc.getDetails().get("highRiskLabourFetusSize")+ "||" +
-                pc.getDetails().get("highRisklabourFetusNumber")+ "||" +
-                pc.getDetails().get("HighRiskLabourSectionCesareaRecord")+ "||" +
-                pc.getDetails().get("highRiskLabourTBRisk")))
-                hrl_badge.setVisibility(VISIBLE);
+            hrp_badge.setVisibility(VISIBLE);
+        boolean hasChild = false;
+        boolean isToFarPregnancy = false;
+        boolean isToFastPregnancy = false;
+        boolean hasChildMoreThan4 = false;
+        List<Map<String, Object>> allChilds = EventRepository.getAllChildByMotherId(pc.getDetails().get("base_entity_id"));
+        if (!allChilds.isEmpty()) {
+            hasChild = true;
+            Map<String, Object> lastChild = allChilds.get(0);
+            if (lastChild.containsKey("tanggalLahirAnak") && lastChild.get("tanggalLahirAnak") != null) {
+                isToFarPregnancy = Support.getAge((String) allChilds.get(0).get("tanggalLahirAnak")) > 10;
+                isToFastPregnancy = Support.getAge((String) allChilds.get(0).get("tanggalLahirAnak")) < 2;
+            }
+            hasChildMoreThan4 = allChilds.size() > 4;
+        }
+        if ("yes".matches(pc.getDetails().get("highRiskLabourFetusMalpresentation") + "||" +
+                pc.getDetails().get("highRiskLabourFetusSize") + "||" +
+                pc.getDetails().get("highRisklabourFetusNumber") + "||" +
+                pc.getDetails().get("HighRiskLabourSectionCesareaRecord") + "||" +
+                pc.getDetails().get("highRiskLabourTBRisk"))
+                || Support.getAge(pc.getDetails().get("tanggalLahir")) > 35
+                || isToFarPregnancy
+                || isToFastPregnancy
+                || hasChildMoreThan4
+        )
+            hrl_badge.setVisibility(VISIBLE);
 
         //start profile image
         profilePic.setTag(R.id.entity_id, pc.getColumnmaps().get("_id"));//required when saving file to disk
@@ -258,7 +280,7 @@ public class ANCClientsProvider extends BaseClientsProvider {
 
         ((TextView) convertView.findViewById(R.id.unique_id)).setText(pc.getDetails().get(AllConstantsINA.CommonFormFields.UNIQUE_ID) != null ? pc.getDetails().get(AllConstantsINA.CommonFormFields.UNIQUE_ID) : "");
 //        ((TextView) convertView.findViewById(R.id.txt_usia_klinis)).setText(pc.getDetails().get("usiaKlinis") != null ? mContext.getString(R.string.usia) +" "+ pc.getDetails().get("usiaKlinis") + mContext.getString(R.string.str_weeks) : "-");
-        ((TextView) convertView.findViewById(R.id.txt_usia_klinis)).setText(ageWeek != "" ? mContext.getString(R.string.usia) +": "+ ageWeek + mContext.getString(R.string.str_weeks) : "-");
+        ((TextView) convertView.findViewById(R.id.txt_usia_klinis)).setText(ageWeek != "" ? mContext.getString(R.string.usia) + ": " + ageWeek + mContext.getString(R.string.str_weeks) : "-");
         ((TextView) convertView.findViewById(R.id.txt_htpt)).setText(pc.getDetails().get("htp") != null ? pc.getDetails().get("htp") : "-");
 
         TextView edd_due = (TextView) convertView.findViewById(R.id.txt_edd_due);
@@ -318,15 +340,15 @@ public class ANCClientsProvider extends BaseClientsProvider {
 
         alert_status.setText("");
 
-        if (alertObject != null && alertObject.length == 2){
+        if (alertObject != null && alertObject.length == 2) {
             alert_status.setText(alertObject[0]);
-            if (alertObject[1] == "blue"){
+            if (alertObject[1] == "blue") {
                 alert_status.setTextColor(mContext.getResources().getColor(org.smartregister.R.color.alert_in_progress_blue));
             }
-            if (alertObject[1] == "yellow"){
+            if (alertObject[1] == "yellow") {
                 alert_status.setTextColor(mContext.getResources().getColor(org.smartregister.R.color.pnc_circle_yellow));
             }
-            if (alertObject[1] == "red"){
+            if (alertObject[1] == "red") {
                 alert_status.setTextColor(mContext.getResources().getColor(org.smartregister.R.color.alert_urgent_red));
             }
         }
@@ -372,8 +394,8 @@ public class ANCClientsProvider extends BaseClientsProvider {
     }
 
     //hasep: used for get week ages based on htp
-    private String getAgeWeek(String htp){
-        if(htp != null ) {
+    private String getAgeWeek(String htp) {
+        if (htp != null) {
 //            Log.e(TAG, "getAgeWeek: " + htp);
 
             DateTimeFormatter datePattern = DateTimeFormat.forPattern("yyyy-MM-dd");
@@ -381,14 +403,14 @@ public class ANCClientsProvider extends BaseClientsProvider {
             DateTime now = DateTime.now();
             int days = Days.daysBetween(now.toLocalDate(), HTP.toLocalDate()).getDays();
             int weeks = Math.round(days / 7);
-            return weeks+"";
+            return weeks + "";
         }
 
         return "";
     }
 
-    private String getNextMonth(String date){
-        if(date != null && date != "-" ) {
+    private String getNextMonth(String date) {
+        if (date != null && date != "-") {
 //            Log.e(TAG, "getNextMonth: " + date);
             DateTimeFormatter datePattern = DateTimeFormat.forPattern("yyyy-MM-dd");
             DateTime DATE = datePattern.parseDateTime(date);
@@ -401,31 +423,31 @@ public class ANCClientsProvider extends BaseClientsProvider {
         return "";
     }
 
-    private String[] getAlertStatus(String date){
+    private String[] getAlertStatus(String date) {
         String[] ret = new String[2];
 
         String patternString1 = "\\d+-\\d+-\\d+";
         Pattern pattern = Pattern.compile(patternString1);
         Matcher matcher = pattern.matcher(date);
 
-        if(date != null && matcher.find()) {
+        if (date != null && matcher.find()) {
 //            Log.e(TAG, "getAlertStatus: " + date);
             DateTimeFormatter datePattern = DateTimeFormat.forPattern("yyyy-MM-dd");
             DateTime DATE = datePattern.parseDateTime(date);
             DateTime now = DateTime.now();
             DateTime nextWeek = now.plusWeeks(1);
 
-            if(DATE.isAfter(nextWeek)){
+            if (DATE.isAfter(nextWeek)) {
                 Duration duration = new Duration(now, DATE);
                 long days = duration.getStandardDays();
-                ret[0] = "Visit in "+ days +" days";
+                ret[0] = "Visit in " + days + " days";
                 ret[1] = "blue";
             }
-            if(DATE.isAfter(now) && DATE.isBefore(nextWeek)){
+            if (DATE.isAfter(now) && DATE.isBefore(nextWeek)) {
                 ret[0] = "Visit in 1 weeks";
                 ret[1] = "yellow";
             }
-            if(DATE.isBefore(now)){
+            if (DATE.isBefore(now)) {
                 ret[0] = "Visit passed";
                 ret[1] = "red";
             }
@@ -433,7 +455,7 @@ public class ANCClientsProvider extends BaseClientsProvider {
         return ret;
     }
 
-    private void oldStatusText(CommonPersonObjectClient pc, String ancKe, TextView status_type, RelativeLayout status_layout, TextView status_date, TextView alert_status){
+    private void oldStatusText(CommonPersonObjectClient pc, String ancKe, TextView status_type, RelativeLayout status_layout, TextView status_date, TextView alert_status) {
 
         if ("-".equals(ancKe) || "".equals(ancKe)) {
             status_type.setText(R.string.ANC1);

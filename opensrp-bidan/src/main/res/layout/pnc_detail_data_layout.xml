@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="horizontal"
-    android:weightSum="2">
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal"
+            android:weightSum="2">
 
     <LinearLayout android:layout_width="match_parent" android:layout_height="match_parent"
                   android:orientation="horizontal"
@@ -25,7 +25,7 @@
                         android:text="Tanggal Kunjungan : "
                         android:textAppearance="?android:attr/textAppearanceLarge"
                         android:textColor="@color/text_black"
-                        android:textSize="16sp" />
+                        android:textSize="16sp"/>
 
                 <org.smartregister.view.customcontrols.CustomFontTextView
                         android:id="@+id/txt_tanggalKunjunganPNC"
@@ -36,7 +36,7 @@
                         android:text="N/A "
                         android:textAppearance="?android:attr/textAppearanceLarge"
                         android:textColor="@color/text_black"
-                        android:textSize="16sp" />
+                        android:textSize="16sp"/>
 
 
             </TableRow>
@@ -51,7 +51,7 @@
                         android:text="Keadaan Ibu : "
                         android:textAppearance="?android:attr/textAppearanceLarge"
                         android:textColor="@color/text_black"
-                        android:textSize="16sp" />
+                        android:textSize="16sp"/>
 
                 <org.smartregister.view.customcontrols.CustomFontTextView
                         android:id="@+id/txt_keadaanIbu"
@@ -62,7 +62,7 @@
                         android:text="N/A "
                         android:textAppearance="?android:attr/textAppearanceLarge"
                         android:textColor="@color/text_black"
-                        android:textSize="16sp" />
+                        android:textSize="16sp"/>
 
 
             </TableRow>
@@ -77,7 +77,7 @@
                         android:text="Keadaan Bayi : "
                         android:textAppearance="?android:attr/textAppearanceLarge"
                         android:textColor="@color/text_black"
-                        android:textSize="14sp" />
+                        android:textSize="14sp"/>
 
                 <org.smartregister.view.customcontrols.CustomFontTextView
                         android:id="@+id/txt_keadaanBayi"
@@ -88,7 +88,7 @@
                         android:text="N/A"
                         android:textAppearance="?android:attr/textAppearanceLarge"
                         android:textColor="@color/text_black"
-                        android:textSize="14sp" />
+                        android:textSize="14sp"/>
 
             </TableRow>
 
@@ -102,7 +102,7 @@
                         android:text="Berat Lahir : "
                         android:textAppearance="?android:attr/textAppearanceLarge"
                         android:textColor="@color/text_black"
-                        android:textSize="14sp" />
+                        android:textSize="14sp"/>
 
                 <org.smartregister.view.customcontrols.CustomFontTextView
                         android:id="@+id/txt_beratLahir"
@@ -113,7 +113,7 @@
                         android:text="N/A"
                         android:textAppearance="?android:attr/textAppearanceLarge"
                         android:textColor="@color/text_black"
-                        android:textSize="14sp" />
+                        android:textSize="14sp"/>
 
             </TableRow>
 
@@ -128,7 +128,7 @@
                         android:text="Persalinan"
                         android:textAppearance="?android:attr/textAppearanceLarge"
                         android:textColor="@color/text_black"
-                        android:textSize="14sp" />
+                        android:textSize="14sp"/>
 
 
                 <org.smartregister.view.customcontrols.CustomFontTextView
@@ -140,7 +140,7 @@
                         android:text="N/A"
                         android:textAppearance="?android:attr/textAppearanceLarge"
                         android:textColor="@color/text_black"
-                        android:textSize="14sp" />
+                        android:textSize="14sp"/>
 
             </TableRow>
 
@@ -155,7 +155,7 @@
                         android:text="Jam Kala I Aktif"
                         android:textAppearance="?android:attr/textAppearanceLarge"
                         android:textColor="@color/text_black"
-                        android:textSize="14sp" />
+                        android:textSize="14sp"/>
 
 
                 <org.smartregister.view.customcontrols.CustomFontTextView
@@ -167,7 +167,7 @@
                         android:text="N/A"
                         android:textAppearance="?android:attr/textAppearanceLarge"
                         android:textColor="@color/text_black"
-                        android:textSize="14sp" />
+                        android:textSize="14sp"/>
 
             </TableRow>
 
@@ -181,7 +181,7 @@
                         android:text="Jam Kala II"
                         android:textAppearance="?android:attr/textAppearanceLarge"
                         android:textColor="@color/text_black"
-                        android:textSize="14sp" />
+                        android:textSize="14sp"/>
 
                 <org.smartregister.view.customcontrols.CustomFontTextView
                         android:id="@+id/txt_jamKalaII"
@@ -192,7 +192,7 @@
                         android:text="N/A"
                         android:textAppearance="?android:attr/textAppearanceLarge"
                         android:textColor="@color/text_black"
-                        android:textSize="14sp" />
+                        android:textSize="14sp"/>
 
             </TableRow>
 
@@ -206,7 +206,7 @@
                         android:text="Jam Plasenta Lahir"
                         android:textAppearance="?android:attr/textAppearanceLarge"
                         android:textColor="@color/text_black"
-                        android:textSize="14sp" />
+                        android:textSize="14sp"/>
 
                 <org.smartregister.view.customcontrols.CustomFontTextView
                         android:id="@+id/txt_jamPlasentaLahir"
@@ -217,7 +217,7 @@
                         android:text="N/A"
                         android:textAppearance="?android:attr/textAppearanceLarge"
                         android:textColor="@color/text_black"
-                        android:textSize="14sp" />
+                        android:textSize="14sp"/>
 
             </TableRow>
 
@@ -231,7 +231,7 @@
                         android:text="Perdarahan Postpartum"
                         android:textAppearance="?android:attr/textAppearanceLarge"
                         android:textColor="@color/text_black"
-                        android:textSize="14sp" />
+                        android:textSize="14sp"/>
 
                 <org.smartregister.view.customcontrols.CustomFontTextView
                         android:id="@+id/txt_perdarahanKalaIV2JamPostpartum"
@@ -242,7 +242,7 @@
                         android:text="N/A"
                         android:textAppearance="?android:attr/textAppearanceLarge"
                         android:textColor="@color/text_black"
-                        android:textSize="14sp" />
+                        android:textSize="14sp"/>
 
             </TableRow>
 
@@ -256,7 +256,7 @@
                         android:text="Persentasi"
                         android:textAppearance="?android:attr/textAppearanceLarge"
                         android:textColor="@color/text_black"
-                        android:textSize="14sp" />
+                        android:textSize="14sp"/>
 
                 <org.smartregister.view.customcontrols.CustomFontTextView
                         android:id="@+id/txt_persentasi"
@@ -267,7 +267,7 @@
                         android:text="N/A"
                         android:textAppearance="?android:attr/textAppearanceLarge"
                         android:textColor="@color/text_black"
-                        android:textSize="14sp" />
+                        android:textSize="14sp"/>
 
             </TableRow>
 
@@ -281,7 +281,7 @@
                         android:text="Tempat Bersalin"
                         android:textAppearance="?android:attr/textAppearanceLarge"
                         android:textColor="@color/text_black"
-                        android:textSize="14sp" />
+                        android:textSize="14sp"/>
 
                 <org.smartregister.view.customcontrols.CustomFontTextView
                         android:id="@+id/txt_tempatBersalin"
@@ -292,7 +292,7 @@
                         android:text="N/A"
                         android:textAppearance="?android:attr/textAppearanceLarge"
                         android:textColor="@color/text_black"
-                        android:textSize="14sp" />
+                        android:textSize="14sp"/>
 
             </TableRow>
 
@@ -306,7 +306,7 @@
                         android:text="Penolong"
                         android:textAppearance="?android:attr/textAppearanceLarge"
                         android:textColor="@color/text_black"
-                        android:textSize="14sp" />
+                        android:textSize="14sp"/>
 
                 <org.smartregister.view.customcontrols.CustomFontTextView
                         android:id="@+id/txt_penolong"
@@ -317,7 +317,7 @@
                         android:text="N/A"
                         android:textAppearance="?android:attr/textAppearanceLarge"
                         android:textColor="@color/text_black"
-                        android:textSize="14sp" />
+                        android:textSize="14sp"/>
 
             </TableRow>
 
@@ -331,7 +331,7 @@
                         android:text="Cara Persalinan Ibu"
                         android:textAppearance="?android:attr/textAppearanceLarge"
                         android:textColor="@color/text_black"
-                        android:textSize="14sp" />
+                        android:textSize="14sp"/>
 
                 <org.smartregister.view.customcontrols.CustomFontTextView
                         android:id="@+id/txt_caraPersalinanIbu"
@@ -342,7 +342,7 @@
                         android:text="N/A"
                         android:textAppearance="?android:attr/textAppearanceLarge"
                         android:textColor="@color/text_black"
-                        android:textSize="14sp" />
+                        android:textSize="14sp"/>
 
             </TableRow>
 
@@ -356,7 +356,7 @@
                         android:text="Nama Bayi"
                         android:textAppearance="?android:attr/textAppearanceLarge"
                         android:textColor="@color/text_black"
-                        android:textSize="14sp" />
+                        android:textSize="14sp"/>
 
                 <org.smartregister.view.customcontrols.CustomFontTextView
                         android:id="@+id/txt_namaBayi"
@@ -367,7 +367,7 @@
                         android:text="N/A"
                         android:textAppearance="?android:attr/textAppearanceLarge"
                         android:textColor="@color/text_black"
-                        android:textSize="14sp" />
+                        android:textSize="14sp"/>
 
             </TableRow>
 
@@ -381,7 +381,7 @@
                         android:text="Jenis Kelamin : "
                         android:textAppearance="?android:attr/textAppearanceLarge"
                         android:textColor="@color/text_black"
-                        android:textSize="14sp" />
+                        android:textSize="14sp"/>
 
                 <org.smartregister.view.customcontrols.CustomFontTextView
                         android:id="@+id/txt_jenisKelamin"
@@ -392,7 +392,7 @@
                         android:text="N/A"
                         android:textAppearance="?android:attr/textAppearanceLarge"
                         android:textColor="@color/text_black"
-                        android:textSize="14sp" />
+                        android:textSize="14sp"/>
 
             </TableRow>
         </TableLayout>
@@ -413,7 +413,7 @@
                         android:text="Tanggal Lahir Anak : "
                         android:textAppearance="?android:attr/textAppearanceLarge"
                         android:textColor="@color/text_black"
-                        android:textSize="16sp" />
+                        android:textSize="16sp"/>
 
                 <org.smartregister.view.customcontrols.CustomFontTextView
                         android:id="@+id/txt_tanggalLahirAnak"
@@ -424,7 +424,7 @@
                         android:text="N/A "
                         android:textAppearance="?android:attr/textAppearanceLarge"
                         android:textColor="@color/text_black"
-                        android:textSize="16sp" />
+                        android:textSize="16sp"/>
 
 
             </TableRow>
@@ -439,7 +439,7 @@
                         android:text="Hari Ke KF : "
                         android:textAppearance="?android:attr/textAppearanceLarge"
                         android:textColor="@color/text_black"
-                        android:textSize="14sp" />
+                        android:textSize="14sp"/>
 
                 <org.smartregister.view.customcontrols.CustomFontTextView
                         android:id="@+id/txt_hariKeKF"
@@ -450,7 +450,7 @@
                         android:text="N/A"
                         android:textAppearance="?android:attr/textAppearanceLarge"
                         android:textColor="@color/text_black"
-                        android:textSize="14sp" />
+                        android:textSize="14sp"/>
 
             </TableRow>
 
@@ -464,7 +464,7 @@
                         android:text="Diastolik : "
                         android:textAppearance="?android:attr/textAppearanceLarge"
                         android:textColor="@color/text_black"
-                        android:textSize="14sp" />
+                        android:textSize="14sp"/>
 
                 <org.smartregister.view.customcontrols.CustomFontTextView
                         android:id="@+id/txt_tandaVitalTDDiastolik"
@@ -475,7 +475,7 @@
                         android:text="N/A"
                         android:textAppearance="?android:attr/textAppearanceLarge"
                         android:textColor="@color/text_black"
-                        android:textSize="14sp" />
+                        android:textSize="14sp"/>
 
             </TableRow>
 
@@ -490,7 +490,7 @@
                         android:text="Sistolik"
                         android:textAppearance="?android:attr/textAppearanceLarge"
                         android:textColor="@color/text_black"
-                        android:textSize="14sp" />
+                        android:textSize="14sp"/>
 
 
                 <org.smartregister.view.customcontrols.CustomFontTextView
@@ -502,7 +502,7 @@
                         android:text="N/A"
                         android:textAppearance="?android:attr/textAppearanceLarge"
                         android:textColor="@color/text_black"
-                        android:textSize="14sp" />
+                        android:textSize="14sp"/>
 
             </TableRow>
 
@@ -517,7 +517,7 @@
                         android:text="SUHU"
                         android:textAppearance="?android:attr/textAppearanceLarge"
                         android:textColor="@color/text_black"
-                        android:textSize="14sp" />
+                        android:textSize="14sp"/>
 
 
                 <org.smartregister.view.customcontrols.CustomFontTextView
@@ -529,7 +529,7 @@
                         android:text="N/A"
                         android:textAppearance="?android:attr/textAppearanceLarge"
                         android:textColor="@color/text_black"
-                        android:textSize="14sp" />
+                        android:textSize="14sp"/>
 
             </TableRow>
 
@@ -543,7 +543,7 @@
                         android:text="Pelayanan FE"
                         android:textAppearance="?android:attr/textAppearanceLarge"
                         android:textColor="@color/text_black"
-                        android:textSize="14sp" />
+                        android:textSize="14sp"/>
 
                 <org.smartregister.view.customcontrols.CustomFontTextView
                         android:id="@+id/txt_pelayananfe"
@@ -554,7 +554,7 @@
                         android:text="N/A"
                         android:textAppearance="?android:attr/textAppearanceLarge"
                         android:textColor="@color/text_black"
-                        android:textSize="14sp" />
+                        android:textSize="14sp"/>
 
             </TableRow>
 
@@ -568,7 +568,7 @@
                         android:text="Vitamin A 2 JamPP"
                         android:textAppearance="?android:attr/textAppearanceLarge"
                         android:textColor="@color/text_black"
-                        android:textSize="14sp" />
+                        android:textSize="14sp"/>
 
                 <org.smartregister.view.customcontrols.CustomFontTextView
                         android:id="@+id/txt_vitaminA2jamPP"
@@ -579,7 +579,7 @@
                         android:text="N/A"
                         android:textAppearance="?android:attr/textAppearanceLarge"
                         android:textColor="@color/text_black"
-                        android:textSize="14sp" />
+                        android:textSize="14sp"/>
 
             </TableRow>
 
@@ -593,7 +593,7 @@
                         android:text="Vitamin A 24 JamPP"
                         android:textAppearance="?android:attr/textAppearanceLarge"
                         android:textColor="@color/text_black"
-                        android:textSize="14sp" />
+                        android:textSize="14sp"/>
 
                 <org.smartregister.view.customcontrols.CustomFontTextView
                         android:id="@+id/txt_vitaminA24jamPP"
@@ -604,7 +604,7 @@
                         android:text="N/A"
                         android:textAppearance="?android:attr/textAppearanceLarge"
                         android:textColor="@color/text_black"
-                        android:textSize="14sp" />
+                        android:textSize="14sp"/>
 
             </TableRow>
 
@@ -618,7 +618,7 @@
                         android:text="Integrasi Program AntiMalaria"
                         android:textAppearance="?android:attr/textAppearanceLarge"
                         android:textColor="@color/text_black"
-                        android:textSize="14sp" />
+                        android:textSize="14sp"/>
 
                 <org.smartregister.view.customcontrols.CustomFontTextView
                         android:id="@+id/txt_integrasiProgramAntiMalaria"
@@ -629,7 +629,7 @@
                         android:text="N/A"
                         android:textAppearance="?android:attr/textAppearanceLarge"
                         android:textColor="@color/text_black"
-                        android:textSize="14sp" />
+                        android:textSize="14sp"/>
 
             </TableRow>
 
@@ -643,7 +643,7 @@
                         android:text="Integrasi Program titb"
                         android:textAppearance="?android:attr/textAppearanceLarge"
                         android:textColor="@color/text_black"
-                        android:textSize="14sp" />
+                        android:textSize="14sp"/>
 
                 <org.smartregister.view.customcontrols.CustomFontTextView
                         android:id="@+id/txt_integrasiProgramantitb"
@@ -654,7 +654,7 @@
                         android:text="N/A"
                         android:textAppearance="?android:attr/textAppearanceLarge"
                         android:textColor="@color/text_black"
-                        android:textSize="14sp" />
+                        android:textSize="14sp"/>
 
             </TableRow>
 
@@ -668,7 +668,7 @@
                         android:text="Integrasi Program Foro Thorax : "
                         android:textAppearance="?android:attr/textAppearanceLarge"
                         android:textColor="@color/text_black"
-                        android:textSize="14sp" />
+                        android:textSize="14sp"/>
 
                 <org.smartregister.view.customcontrols.CustomFontTextView
                         android:id="@+id/txt_integrasiProgramFotoThorax"
@@ -679,7 +679,7 @@
                         android:text="N/A"
                         android:textAppearance="?android:attr/textAppearanceLarge"
                         android:textColor="@color/text_black"
-                        android:textSize="14sp" />
+                        android:textSize="14sp"/>
 
             </TableRow>
 
@@ -693,7 +693,7 @@
                         android:text="Komplikasi"
                         android:textAppearance="?android:attr/textAppearanceLarge"
                         android:textColor="@color/text_black"
-                        android:textSize="14sp" />
+                        android:textSize="14sp"/>
 
                 <org.smartregister.view.customcontrols.CustomFontTextView
                         android:id="@+id/txt_komplikasi"
@@ -704,7 +704,7 @@
                         android:text="N/A"
                         android:textAppearance="?android:attr/textAppearanceLarge"
                         android:textColor="@color/text_black"
-                        android:textSize="14sp" />
+                        android:textSize="14sp"/>
 
             </TableRow>
 
@@ -718,7 +718,7 @@
                         android:text="Darurat Nifas"
                         android:textAppearance="?android:attr/textAppearanceLarge"
                         android:textColor="@color/text_black"
-                        android:textSize="14sp" />
+                        android:textSize="14sp"/>
 
                 <org.smartregister.view.customcontrols.CustomFontTextView
                         android:id="@+id/txt_daruratNifas"
@@ -729,7 +729,7 @@
                         android:text="N/A"
                         android:textAppearance="?android:attr/textAppearanceLarge"
                         android:textColor="@color/text_black"
-                        android:textSize="14sp" />
+                        android:textSize="14sp"/>
 
             </TableRow>
 
@@ -743,7 +743,7 @@
                         android:text="Penaganan Nifas"
                         android:textAppearance="?android:attr/textAppearanceLarge"
                         android:textColor="@color/text_black"
-                        android:textSize="14sp" />
+                        android:textSize="14sp"/>
 
                 <org.smartregister.view.customcontrols.CustomFontTextView
                         android:id="@+id/txt_penangananNifas"
@@ -754,7 +754,32 @@
                         android:text="N/A"
                         android:textAppearance="?android:attr/textAppearanceLarge"
                         android:textColor="@color/text_black"
-                        android:textSize="14sp" />
+                        android:textSize="14sp"/>
+
+            </TableRow>
+
+            <TableRow>
+
+                <org.smartregister.view.customcontrols.CustomFontTextView
+                        style="@style/CustomFontTextViewStyle.ListView.Medium"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="5dp"
+                        android:text="Kumulatif "
+                        android:textAppearance="?android:attr/textAppearanceLarge"
+                        android:textColor="@color/text_black"
+                        android:textSize="14sp"/>
+
+                <org.smartregister.view.customcontrols.CustomFontTextView
+                        android:id="@+id/txt_kumulatif"
+                        style="@style/CustomFontTextViewStyle.ListView.Medium"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="5dp"
+                        android:text="N/A"
+                        android:textAppearance="?android:attr/textAppearanceLarge"
+                        android:textColor="@color/text_black"
+                        android:textSize="14sp"/>
 
             </TableRow>
         </TableLayout>

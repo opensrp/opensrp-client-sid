@@ -6,7 +6,12 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.*;
 
+import com.jayway.jsonpath.Configuration;
+import com.jayway.jsonpath.DocumentContext;
+import com.jayway.jsonpath.JsonPath;
+import com.jayway.jsonpath.ReadContext;
 import org.apache.commons.lang3.StringUtils;
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.smartregister.Context;
@@ -387,7 +392,26 @@ public class DetailANCActivity extends Activity {
 
         ((TextView) findViewById(R.id.txt_highRiskHIVAIDS)).setText(getStrValue("highRiskHIVAIDS"));
 
-
+        List<String> kumulatif = new ArrayList<String>();
+        if (getStrValue("trimesterKe").trim().equals("1"))
+            kumulatif.add("- K1");
+        final List<JSONObject> ancEvents = EventRepository.getANCByBaseEntityId(ancClient.entityId());
+        boolean hasK4 = false;
+        if (ancEvents.size() >= 4) {
+            List obsAnc = getObsAnc("?(@.trimesterKe=='1')");
+            hasK4 = obsAnc.size() == 1;
+            hasK4 = hasK4 && getObsAnc("?(@.trimesterKe=='2')").size() == 1;
+            hasK4 = hasK4 && getObsAnc("?(@.trimesterKe=='3')").size() == 2;
+        }
+        if (hasK4) {
+            kumulatif.add("- K4");
+        }
+        if (getStrValue("penolong") != null && !getStrValue("penolong").trim().isEmpty()) {
+            kumulatif.add("- Penolong " + getStrValue("penolong").replaceAll("[^a-zA-Z0-9]", ""));
+        }
+        if (kumulatif.size() > 0) {
+            ((TextView) findViewById(R.id.txt_kumulatif)).setText(": " + StringUtils.join(kumulatif, "\n"));
+        }
         //  TextView details = (TextView) findViewById(R.id.child_detail_information));
         //  TextView risk = (TextView) findViewById(R.id.detail_today));
         //  TextView plan = (TextView) findViewById(R.id.detail_l));
@@ -565,6 +589,24 @@ public class DetailANCActivity extends Activity {
         }
         history_view.setVisibility(VISIBLE);
         return history_view;
+    }
+
+    private List getObsAnc(String key) {
+        List<JSONObject> ancs = EventRepository.getANCByBaseEntityId(ancClient.entityId());
+        JSONArray array = new JSONArray();
+        if (ancs.size() > 0) {
+            for (JSONObject anc : ancs) {
+                array.put(anc);
+            }
+            String eval = "$.[" + key + "]";
+            String jsonString = array.toString();
+            Object document = Configuration.defaultConfiguration().jsonProvider().parse(jsonString);
+            List ctx = JsonPath.parse(array.toString()).read(eval, List.class);
+
+            return ctx;
+        }
+
+        return Collections.emptyList();
     }
 
     private String getStrValue(String str) {

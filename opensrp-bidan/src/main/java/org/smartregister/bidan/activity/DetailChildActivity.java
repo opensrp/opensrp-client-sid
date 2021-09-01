@@ -20,6 +20,12 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang3.RandomStringUtils;
 import org.jetbrains.annotations.NotNull;
+import org.joda.time.DateTime;
+import org.joda.time.Months;
+import org.joda.time.chrono.ISOChronology;
+import org.joda.time.format.DateTimeFormat;
+import org.joda.time.format.DateTimeFormatter;
+import org.json.JSONException;
 import org.json.JSONObject;
 import org.smartregister.Context;
 import org.smartregister.bidan.R;
@@ -63,6 +69,8 @@ public class DetailChildActivity extends Activity {
     private Spinner spinnerChildType;
     private List<ChartType> chartTypes;
     Spinner spinnerHistory;
+    private DateTime tanggalLahir = null;
+    List<Map<Integer, Map<String, Float>>> chartData = new ArrayList<>();
 
     //    public DetailChildActivity(String userId) {
 //        this.userId = userId;
@@ -108,25 +116,20 @@ public class DetailChildActivity extends Activity {
     }
 
     private List<List<Float>> getChartData(ChartType type) throws IOException {
-        List<List<Float>> o = mapper.readValue(getAssets().open("dummy_chart.json"), new TypeReference<List<List<Float>>>() {
-        });
-        float add = 4;
-        int bound = 2;
-        if (type.name().startsWith("lfa")) {
-            add = 50;
-            bound = 5;
-        } else if (type.name().startsWith("hcfa")) {
-            add = 36;
-            bound = 2;
+        String tipe = "beratBayi";
+        if (type.getTitle().toLowerCase().contains("tinggi")) {
+            tipe = "panjangBayi";
         }
-        Float lastFloat = add;
-        for (int i = 0; i < o.size(); i++) {
-            final List<Float> floats = o.get(i);
-            lastFloat = lastFloat + new Random().nextInt(bound);
-            floats.set(1, lastFloat);
-            o.set(i, floats);
+        List<List<Float>> data = new ArrayList<>();
+        for (Map<Integer, Map<String, Float>> chartDatum : chartData) {
+            for (Map.Entry<Integer, Map<String, Float>> ch : chartDatum.entrySet()) {
+                List<Float> s = new ArrayList<>();
+                s.add(ch.getKey().floatValue());
+                s.add(ch.getValue().get(tipe));
+                data.add(s);
+            }
         }
-        return o;
+        return data;
     }
 
     final View.OnClickListener chartAction = new View.OnClickListener() {
@@ -195,17 +198,59 @@ public class DetailChildActivity extends Activity {
         }
     }
 
+    private Map<Integer, Map<String, Float>> buildChart(String key) {
+        Map<Integer, Map<String, Float>> data = new TreeMap<>();
+        List<JSONObject> kunjungan_neonatal = EventRepository.getEventsByBaseIdAndEventType(key, userId);
+        if (kunjungan_neonatal.size() > 0) {
+            for (JSONObject kun : kunjungan_neonatal) {
+                try {
+                    DateTime tanggalKunjunganBayiPerbulan = DateTimeFormat.forPattern("yyyy-MM-dd")
+                            .parseDateTime(kun.getString("tanggalKunjunganBayiPerbulan"));
+                    int months = Months.monthsBetween(tanggalLahir, tanggalKunjunganBayiPerbulan).getMonths();
+                    Float panjangBayi = Float.parseFloat(kun.getString("panjangBayi"));
+                    Float beratBayi = Float.parseFloat(kun.getString("beratBayi"));
+                    if (beratBayi > 1000)
+                        beratBayi = beratBayi / 1000;
+                    Map<String, Float> chart = new LinkedHashMap<>();
+                    chart.put("panjangBayi", panjangBayi);
+                    chart.put("beratBayi", beratBayi);
+                    data.put(months, chart);
+                } catch (JSONException ex) {
+
+                }
+            }
+        }
+        return data;
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.anak_detail_activity);
 
         userId = childclient.getDetails().get("base_entity_id");
-
+        DateTimeFormatter formatter = DateTimeFormat.forPattern("yyyy-MM-dd'T'HH:mm:ss.SSSZZ")
+                .withLocale(Locale.ROOT)
+                .withChronology(ISOChronology.getInstanceUTC());
+        tanggalLahir = formatter.parseDateTime(childclient.getDetails().get("tanggalLahirAnak"));
         final TextView show_history = findViewById(R.id.tv_detail_history);
         final TextView show_basic = findViewById(R.id.tv_child_detail_information);
         final TextView showChart = findViewById(R.id.tv_detail_chart);
         spinnerHistory = findViewById(R.id.history_ke);
+        chartData = new ArrayList<>();
+        Map<String, Float> charts = new LinkedHashMap<>();
+        Float beratBayi = Float.parseFloat(childclient.getDetails().get("beratLahir"));
+        beratBayi = beratBayi / 1000;
+        charts.put("beratBayi", beratBayi);
+        charts.put("panjangBayi", Float.parseFloat(childclient.getDetails().get("panjangBayi")));
+        Map<Integer, Map<String, Float>> chart = new TreeMap<>();
+
+        chart.put(0, charts);
+        chartData.add(chart);
+        Map<Integer, Map<String, Float>> neonatal = buildChart("Kunjungan neonatal");
+
+        chartData.add(neonatal);
+        chartData.add(buildChart("Kunjungan Balita"));
 
         spinnerChildType = findViewById(R.id.jenis_kunjungan);
         if ("female".equals(childclient.getDetails().get("gender")))

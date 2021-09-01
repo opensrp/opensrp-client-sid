@@ -142,6 +142,9 @@
     <!--        android:id="@+id/id4"-->
     <!--        layout="@layout/anc_history_layout"-->
     <!--        android:visibility="gone" />-->
+    <Spinner android:layout_width="wrap_content" android:layout_height="wrap_content" android:id="@+id/jenis_kunjungan"
+             android:layout_marginLeft="10sp" android:spinnerMode="dropdown">
+    </Spinner>
     <include
             android:id="@+id/id4"
             layout="@layout/base_history_layout"
