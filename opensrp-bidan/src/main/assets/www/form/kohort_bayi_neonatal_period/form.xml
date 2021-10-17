@@ -480,7 +480,7 @@
         <span class="question-label " data-itext-id="/kunjungan_neonatal_reviewed/berat_bayi:label"
             lang="en">Weight (kg)
         </span>
-        <input name="/kunjungan_neonatal_reviewed/berat_bayi" data-type-xml="int" type="number" />
+        <input name="/kunjungan_neonatal_reviewed/berat_bayi" data-type-xml="decimal" type="number" />
     </label>
     <label class="question non-select ">
         <span class="question-label active"

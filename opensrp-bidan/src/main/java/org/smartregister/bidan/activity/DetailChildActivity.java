@@ -48,6 +48,7 @@ import java.util.*;
 
 import static android.view.View.GONE;
 import static android.view.View.VISIBLE;
+import static org.smartregister.bidan.utils.AllConstantsINA.FormNames.*;
 import static org.smartregister.util.StringUtil.humanize;
 
 //import org.smartregister.bidan.lib.FlurryFacade;
@@ -164,7 +165,7 @@ public class DetailChildActivity extends Activity {
                 }
             });
         } else {
-            final ArrayAdapter<String> jenisAdapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, new String[]{defaultJenisKunjungan, "Kunjungan neonatal", "Kunjungan Balita"});
+            final ArrayAdapter<String> jenisAdapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, new String[]{defaultJenisKunjungan, "Kunjungan neonatal", "Kohort Kunjungan Bayi Perbulan", "Kunjungan Balita"});
             spinnerChildType.setAdapter(jenisAdapter);
 
             spinnerChildType.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
@@ -175,10 +176,13 @@ public class DetailChildActivity extends Activity {
                     if (!item.equals(defaultJenisKunjungan)) {
                         String keyTanggalKunjungan = "tanggalKunjunganBayiPerbulan";
                         int startField = 5;
-                        String formType = "kohort_bayi_kunjungan";
+                        String formType = KOHORT_BAYI_KUNJUNGAN;
                         if (item.toLowerCase().endsWith("balita")) {
-                            formType = "kohort_balita_kunjungan";
+                            formType = BALITA_KUNJUNGAN;
                             startField = 6;
+                        } else if (item.toLowerCase().contains("neonatal")) {
+                            formType = BAYI_NEONATAL_PERIOD;
+                            startField = 7;
                         }
 
                         final List<JSONObject> detailEvents = EventRepository.getEventsByBaseIdAndEventType(item, userId);
@@ -204,8 +208,9 @@ public class DetailChildActivity extends Activity {
         if (kunjungan_neonatal.size() > 0) {
             for (JSONObject kun : kunjungan_neonatal) {
                 try {
-                    DateTime tanggalKunjunganBayiPerbulan = DateTimeFormat.forPattern("yyyy-MM-dd")
-                            .parseDateTime(kun.getString("tanggalKunjunganBayiPerbulan"));
+//                    DateTime tanggalKunjunganBayiPerbulan = DateTimeFormat.forPattern("yyyy-MM-dd")
+//                            .parseDateTime(kun.getString("tanggalKunjunganBayiPerbulan"));
+                    DateTime tanggalKunjunganBayiPerbulan = DateTimeFormat.forPattern("yyyy-MM-dd'T'HH:mm:ss.SSSZZ").parseDateTime(kun.getString("eventDate"));
                     int months = Months.monthsBetween(tanggalLahir, tanggalKunjunganBayiPerbulan).getMonths();
                     Float panjangBayi = Float.parseFloat(kun.getString("panjangBayi"));
                     Float beratBayi = Float.parseFloat(kun.getString("beratBayi"));
@@ -239,10 +244,18 @@ public class DetailChildActivity extends Activity {
         spinnerHistory = findViewById(R.id.history_ke);
         chartData = new ArrayList<>();
         Map<String, Float> charts = new LinkedHashMap<>();
-        Float beratBayi = Float.parseFloat(childclient.getDetails().get("beratLahir"));
-        beratBayi = beratBayi / 1000;
+        String beratLahir = childclient.getDetails().get("beratLahir");
+        if (beratLahir == null)
+            beratLahir = "0";
+        Float beratBayi = Float.parseFloat(beratLahir);
+        if (beratBayi > 0) {
+            beratBayi = beratBayi / 1000;
+        }
         charts.put("beratBayi", beratBayi);
-        charts.put("panjangBayi", Float.parseFloat(childclient.getDetails().get("panjangBayi")));
+        String panjangBayi = childclient.getDetails().get("panjangBayi");
+        if (panjangBayi == null)
+            panjangBayi = "0";
+        charts.put("panjangBayi", Float.parseFloat(panjangBayi));
         Map<Integer, Map<String, Float>> chart = new TreeMap<>();
 
         chart.put(0, charts);
@@ -250,6 +263,7 @@ public class DetailChildActivity extends Activity {
         Map<Integer, Map<String, Float>> neonatal = buildChart("Kunjungan neonatal");
 
         chartData.add(neonatal);
+        chartData.add(buildChart("Kohort Kunjungan Bayi Perbulan"));
         chartData.add(buildChart("Kunjungan Balita"));
 
         spinnerChildType = findViewById(R.id.jenis_kunjungan);

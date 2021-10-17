@@ -2234,43 +2234,52 @@
             </div>
         </fieldset>
     </fieldset>
-    <fieldset class="question or-branch pre-init ">
-        <fieldset>
-            <legend>
-                <span class="question-label active"
-                    data-itext-id="/Register_ANC/laboratorium_gula_darah:label" lang="Bahasa">Gula
-                    Darah
-                </span>
-                <span class="or-hint active" lang="">Menunjukkan tingkat gula darah Ibu apakah &gt;140
-                    mg/dl atau &lt; 140 mg/dl
-                </span>
-            </legend>
-            <div class="option-wrapper">
-                <label class="">
-                    <input name="/Register_ANC/laboratorium_gula_darah"
-                        data-name="/Register_ANC/laboratorium_gula_darah"
-                        data-relevant=" /Register_ANC/Labcheck ='Ya'" data-type-xml="select1"
-                        type="radio" value="&gt;_140_mg_dl" />
-                    <span class="option-label active"
-                        data-itext-id="/Register_ANC/laboratorium_gula_darah/&gt;_140_mg_dl:label"
-                        lang="Bahasa">
-                        &gt; 140 mg/dl (+)
-                    </span>
-                </label>
-                <label class="">
-                    <input name="/Register_ANC/laboratorium_gula_darah"
-                        data-name="/Register_ANC/laboratorium_gula_darah"
-                        data-relevant=" /Register_ANC/Labcheck ='Ya'" data-type-xml="select1"
-                        type="radio" value="&lt;_140_mg_dl" />
-                    <span class="option-label active"
-                        data-itext-id="/Register_ANC/laboratorium_gula_darah/&lt;_140_mg_dl:label"
-                        lang="Bahasa">
-                        &lt; 140 mg/dl (-)
-                    </span>
-                </label>
-            </div>
-        </fieldset>
-    </fieldset>
+<!--    <fieldset class="question or-branch pre-init ">-->
+<!--        <fieldset>-->
+<!--            <legend>-->
+<!--                <span class="question-label active"-->
+<!--                    data-itext-id="/Register_ANC/laboratorium_gula_darah:label" lang="Bahasa">Gula-->
+<!--                    Darah-->
+<!--                </span>-->
+<!--                <span class="or-hint active" lang="">Menunjukkan tingkat gula darah Ibu apakah &gt;140-->
+<!--                    mg/dl atau &lt; 140 mg/dl-->
+<!--                </span>-->
+<!--            </legend>-->
+<!--            <div class="option-wrapper">-->
+<!--                <label class="">-->
+<!--                    <input name="/Register_ANC/laboratorium_gula_darah"-->
+<!--                        data-name="/Register_ANC/laboratorium_gula_darah"-->
+<!--                        data-relevant=" /Register_ANC/Labcheck ='Ya'" data-type-xml="select1"-->
+<!--                        type="radio" value="&gt;_140_mg_dl" />-->
+<!--                    <span class="option-label active"-->
+<!--                        data-itext-id="/Register_ANC/laboratorium_gula_darah/&gt;_140_mg_dl:label"-->
+<!--                        lang="Bahasa">-->
+<!--                        &gt; 140 mg/dl (+)-->
+<!--                    </span>-->
+<!--                </label>-->
+<!--                <label class="">-->
+<!--                    <input name="/Register_ANC/laboratorium_gula_darah"-->
+<!--                        data-name="/Register_ANC/laboratorium_gula_darah"-->
+<!--                        data-relevant=" /Register_ANC/Labcheck ='Ya'" data-type-xml="select1"-->
+<!--                        type="radio" value="&lt;_140_mg_dl" />-->
+<!--                    <span class="option-label active"-->
+<!--                        data-itext-id="/Register_ANC/laboratorium_gula_darah/&lt;_140_mg_dl:label"-->
+<!--                        lang="Bahasa">-->
+<!--                        &lt; 140 mg/dl (-)-->
+<!--                    </span>-->
+<!--                </label>-->
+<!--            </div>-->
+<!--        </fieldset>-->
+<!--    </fieldset>-->
+    <label class="question non-select ">
+        <span class="question-label active"
+              data-itext-id="/Register_ANC/laboratorium_gula_darah:label" lang="Bahasa">Gula Darah (mg/dl)
+        </span>
+        <span class="question-label " data-itext-id="/Register_ANC/laboratorium_gula_darah:label"
+              lang="en">Blood Sugar (mg/dl)
+        </span>
+        <input name="/Register_ANC/laboratorium_gula_darah" placeholder="e.g. 140 mg/dl" data-type-xml="int" type="text" />
+    </label>
     <fieldset class="question or-branch pre-init ">
         <fieldset>
             <legend>
