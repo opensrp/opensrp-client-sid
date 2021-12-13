@@ -6,6 +6,7 @@ import android.view.View;
 import android.widget.*;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import org.apache.commons.lang3.StringUtils;
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.smartregister.bidan.R;
@@ -47,11 +48,32 @@ public class HistoryDetailAdapter extends ArrayAdapter<HistoryDetailAdapter.Hist
         });
     }
 
+    private String getTanggalKunjungan(JSONObject val) {
+        String result = "";
+        try {
+            if (val.getString(keyTanggalKunjungan) != null && !val.getString(keyTanggalKunjungan).trim().isEmpty()) {
+                result = val.getString(keyTanggalKunjungan);
+            }
+            if (val.has("kunjunganKe") && val.getString("kunjunganKe") != null) {
+                result = StringUtils.leftPad(val.getString("kunjunganKe"), 2, '0') + result;
+            }
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        return result;
+    }
+
     private void init() {
         try {
             if (detailEvents.size() > 0) {
                 add(new HistoryDetailData("Silahkan Pilih Kunjungan"));
                 AtomicInteger integer = new AtomicInteger(1);
+                Collections.sort(detailEvents, new Comparator<JSONObject>() {
+                    @Override
+                    public int compare(JSONObject o1, JSONObject o2) {
+                        return getTanggalKunjungan(o1).compareTo(getTanggalKunjungan(o2));
+                    }
+                });
                 for (final JSONObject detailEvent : detailEvents) {
 
                     Map<String, Object> formDefinition = open("form_definition");
@@ -102,7 +124,12 @@ public class HistoryDetailAdapter extends ArrayAdapter<HistoryDetailAdapter.Hist
                         }
 
                     }
-                    add(new HistoryDetailData("Kunjungan Ke " + integer.getAndIncrement() + " (" + detailEvent.getString(keyTanggalKunjungan) + ")", results));
+                    Integer kunjKe = integer.getAndIncrement();
+                    if (detailEvent.has("kunjunganKe") && detailEvent.getString("kunjunganKe") != null && !detailEvent.getString("kunjunganKe").trim().isEmpty()) {
+                        kunjKe = Integer.parseInt(detailEvent.getString("kunjunganKe"));
+                        integer.set(kunjKe);
+                    }
+                    add(new HistoryDetailData("Kunjungan Ke " + kunjKe + " (" + detailEvent.getString(keyTanggalKunjungan) + ")", results));
                 }
             } else {
                 add(new HistoryDetailData("Tidak ada detail history"));

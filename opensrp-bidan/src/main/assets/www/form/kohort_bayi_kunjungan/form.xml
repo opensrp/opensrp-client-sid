@@ -194,7 +194,7 @@
             data-itext-id="/kohort_kunjungan_bayi_reviewed/panjang_bayi:label" lang="en">Baby's
             Length (cm)
         </span>
-        <input name="/kohort_kunjungan_bayi_reviewed/panjang_bayi" data-type-xml="int"
+        <input name="/kohort_kunjungan_bayi_reviewed/panjang_bayi" data-type-xml="decimal"
             type="number" />
     </label>
     <label class="question non-select ">
