@@ -102,6 +102,10 @@
         "source": "kartu_ibu.ibu.referenceDate"
       },
       {
+        "name": "pengingat_whatsapp",
+        "bind": "/model/instance/anc_registration/pengingat_whatsapp"
+      },
+      {
         "name": "gravida",
         "bind": "/model/instance/anc_registration/gravida",
         "shouldLoadValue": true

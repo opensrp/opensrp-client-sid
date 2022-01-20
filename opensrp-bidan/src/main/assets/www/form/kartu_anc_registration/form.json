@@ -201,6 +201,43 @@
       "type": "date"
     },
     {
+      "name": "pengingat_whatsapp",
+      "hint": {
+        "Bahasa": "Apakah Ibu bersedia untuk dikirimi pesan pengingat kehamilan melalui WhatsApp?",
+        "English": "Does mother willing to send a pregnancy reminder message via WhatsApp?"
+      },
+      "label": {
+        "Bahasa": "Pengingat Kehamilan lewat WhatsApp",
+        "English": "Pregnancy Reminder via WhatsApp"
+      },
+      "instance": {
+        "openmrs_entity_id": "1494AAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+      },
+      "type": "select one",
+      "children": [
+        {
+          "instance": {
+            "openmrs_code": "1066AAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+          },
+          "name": "Ya",
+          "label": {
+            "Bahasa": "Ya",
+            "English": "Yes"
+          }
+        },
+        {
+          "instance": {
+            "openmrs_code": "1067AAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+          },
+          "name": "Tidak",
+          "label": {
+            "Bahasa": "Tidak",
+            "English": "No"
+          }
+        }
+      ]
+    },
+    {
       "control": {
         "appearance": "yes"
       },
